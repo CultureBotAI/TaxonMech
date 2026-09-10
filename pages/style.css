@@ -1,0 +1,123 @@
+/* TaxonMech — the shared Mech look.
+   Brand pastel pair: periwinkle (A) + mint (B), indigo accent.
+   The landing (templates/index.html) is standalone and carries its own copy of
+   these tokens; this file styles every generated page that extends base.html. */
+
+:root{
+  --pastel-a:#D6DAF7;      /* pastel periwinkle */
+  --pastel-b:#CFEDD9;      /* pastel mint */
+  --accent:#5257C9;
+  --ink:#1a1a1a;
+  --muted:#555;
+  --card:#ffffff;
+  --line:rgba(0,0,0,.10);
+  --code:rgba(0,0,0,.05);
+  --surface:rgba(255,255,255,.55);
+  /* Aliases for rules written against the earlier token names, so a stylesheet
+     rule added elsewhere keeps resolving instead of silently falling back. */
+  --fg:var(--ink);
+  --bg:var(--card);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+     color:var(--ink);background:var(--pastel-b)}
+a{color:var(--accent)}
+a:hover{text-decoration:underline}
+
+header{position:relative;display:flex;justify-content:space-between;align-items:center;
+       gap:1rem;flex-wrap:wrap;padding:.75rem 1.2rem;
+       background:linear-gradient(135deg,var(--pastel-a),var(--pastel-b));
+       border-bottom:1px solid var(--line)}
+header .brand{font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+header nav a{margin-left:1rem;color:var(--muted);text-decoration:none}
+header nav a:hover{color:var(--accent)}
+
+main{max-width:1000px;margin:0 auto;padding:1.4rem 1.2rem 3rem}
+h1{letter-spacing:-.02em;margin:.2em 0 .35em}
+h2{font-size:1.35rem;margin:1.6em 0 .3em;padding-bottom:.2em;
+   border-bottom:2px solid var(--accent);display:inline-block}
+
+footer{border-top:1px solid var(--line);background:var(--surface);
+       padding:26px 24px;text-align:center;font-size:.88rem;color:var(--muted)}
+footer .fam{margin:.25em 0}
+footer .fam a{margin:0 .3em;white-space:nowrap}
+footer .fam .self{margin:0 .3em;white-space:nowrap;font-weight:600;color:var(--ink)}
+footer strong{color:var(--ink)}
+
+code{font-size:.9em;background:var(--code);padding:0 .25em;border-radius:3px}
+
+table{border-collapse:collapse;width:100%;margin:.5rem 0 1rem;font-size:.93rem;
+      background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{text-align:left;vertical-align:top;padding:.4rem .6rem;border-bottom:1px solid var(--line)}
+th{background:var(--pastel-a);font-weight:700}
+tbody tr:hover{background:rgba(82,87,201,.06)}
+
+.cards{list-style:none;padding:0;display:grid;
+       grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+.cards li{background:var(--card);border:1px solid var(--line);border-radius:14px;
+          padding:.9rem 1.1rem;box-shadow:0 1px 3px rgba(0,0,0,.05);
+          transition:transform .15s ease,box-shadow .15s ease}
+.cards li:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.10)}
+.cards a{text-decoration:none;color:var(--ink)}
+.cards a:hover strong{color:var(--accent)}
+.cards .count{color:var(--muted);font-weight:400}
+
+.meta,.source{color:var(--muted)}
+.status{font-weight:600}
+.definition{font-size:1.05rem}
+.evidence{margin:.2rem 0 0;padding-left:1.1rem;font-size:.88rem;color:var(--muted)}
+.history{font-size:.9rem}
+q{font-style:italic}
+
+
+/* ---- Dark theme (OS default; superseded by the toggle) ---- */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --pastel-a:#1d2136;
+    --pastel-b:#121320;
+    --accent:#8b8fe8;
+    --ink:#e9eaf6;
+    --muted:#a0a3ba;
+    --card:#1c1e2e;
+    --line:#2c2f45;
+    --code:rgba(255,255,255,.08);
+    --surface:rgba(255,255,255,.04);
+  }
+  /* Brand pastel pair kept in dark: darkened-pair fill + vivid-pair top edge. */
+  :root:not([data-theme="light"]) header{
+    background:linear-gradient(135deg,#4D4F61,#4B5458)}
+  :root:not([data-theme="light"]) header::before{
+    content:"";position:absolute;inset:0 0 auto 0;height:3px;
+    background:linear-gradient(90deg,#D6DAF7,#CFEDD9)}
+  :root:not([data-theme="light"]) tbody tr:hover{background:rgba(139,143,232,.10)}
+}
+:root[data-theme="dark"]{
+  --pastel-a:#1d2136;
+  --pastel-b:#121320;
+  --accent:#8b8fe8;
+  --ink:#e9eaf6;
+  --muted:#a0a3ba;
+  --card:#1c1e2e;
+  --line:#2c2f45;
+  --code:rgba(255,255,255,.08);
+  --surface:rgba(255,255,255,.04);
+}
+:root[data-theme="dark"] header{background:linear-gradient(135deg,#4D4F61,#4B5458)}
+:root[data-theme="dark"] header::before{
+  content:"";position:absolute;inset:0 0 auto 0;height:3px;
+  background:linear-gradient(90deg,#D6DAF7,#CFEDD9)}
+:root[data-theme="dark"] tbody tr:hover{background:rgba(139,143,232,.10)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important;animation:none!important}
+  .cards li:hover{transform:none}
+}
+
+.lineage{font-size:.95rem}
+.lineage a{color:var(--ink);text-decoration:none}
+.lineage a:hover{color:var(--accent)}
+.name-block{border-left:3px solid var(--accent);padding:.1rem .9rem;margin:.6rem 0}
+.name-block p{margin:.25rem 0}

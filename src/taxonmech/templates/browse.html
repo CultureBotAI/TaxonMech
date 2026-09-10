@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{{ page_title | default("Browse") }} · TaxonMech{% endblock %}
+{% block content %}
+<h1>{{ heading | default("All records") }}</h1>
+{% if lede %}
+<p class="lede">{{ lede }}</p>
+{% endif %}
+<table>
+<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>Genomes</th><th>Status</th></tr></thead>
+<tbody>
+{% for r in records %}
+<tr><td><a href="{{ root }}{{ r.page }}"><em>{{ r.label }}</em></a></td><td><code>{{ r.identifier }}</code></td><td>{{ r.rank or "" }}</td><td>{{ r.domain }}</td><td>{{ r.sources | length }}</td><td>{{ r.strain_count }}</td><td>{{ r.genomes }}</td><td>{{ r.status }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

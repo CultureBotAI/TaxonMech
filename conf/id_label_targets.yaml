@@ -1,0 +1,60 @@
+# Targets for scripts/validate_id_label_correspondence.py (vendored from claw).
+#
+# Declares which TaxonMech surfaces carry ontology (id, label) pairs and how
+# strictly the label must correspond to the ontology label.
+#
+# A CURIE prefix is handled three ways:
+#   * in `adapters`          → looked up against that OAK ontology.
+#   * in `ignored_prefixes`  → legitimate non-OAK id; SKIPPED_NO_ADAPTER.
+#   * neither                → UNKNOWN_PREFIX (ERROR) — a typo or an unexpected
+#                              new prefix that must be triaged.
+#
+# Record identifiers are NCBITaxon CURIEs. The NCBITaxon semantic-sql build is
+# over 14 GB, so it is not resolved through OAK here: id<->label agreement for
+# taxa is enforced instead by `just verify-corpus`, which rebuilds every record
+# from the committed NCBI inventory and fails on any drift. This gate therefore
+# covers only the ontology-grounded nodes a curator adds to causal graphs.
+
+adapters:
+  GO: sqlite:obo:go
+  CHEBI: sqlite:obo:chebi
+  ENVO: sqlite:obo:envo
+  UBERON: sqlite:obo:uberon
+  PATO: sqlite:obo:pato
+  RO: sqlite:obo:ro
+  UO: sqlite:obo:uo
+
+ignored_prefixes:
+  - taxonmech           # minted ids
+  - NCBITaxon           # checked by verify-corpus against data/raw/ncbitaxon_taxa.tsv
+  - TAXRANK
+  - GTDB
+  - lpsn
+  - kgmicrobe.strain
+  - bacdive
+  - ncbi.assembly
+  - mediadive.medium
+  - gold
+  - INSDC
+  - GC_ID
+  - METPO               # TraitMech's ontology (not in OAK semsql)
+  - traitmech
+  - habitatmech
+  - PMID
+  - DOI
+  - biolink
+  - rdfs
+  - skos
+
+synonym_scope: exact
+
+targets:
+  # Causal-graph nodes: (grounding, label).
+  - name: grounded_nodes
+    kind: yaml
+    glob: "data/taxa/**/*.yaml"
+    policy: canonical_or_synonym
+    pairs:
+      - [grounding, label]
+    exclude_keys: [lineage, synonyms, nomenclature, taxonomy_mappings, strains,
+                   source_attestations, curation_history, discussions, datasets, evidence]

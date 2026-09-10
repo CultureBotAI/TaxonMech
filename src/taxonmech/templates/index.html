@@ -1,0 +1,209 @@
+{# The landing is deliberately standalone: it does NOT extend base.html.
+   Every Mech's landing carries the same self-contained design so the sites
+   read as one family; base.html styles the generated record pages. #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TaxonMech — microbial taxa and strains</title>
+<meta name="description" content="Microbial taxa identified by NCBI Taxonomy and harmonized with GTDB, LPSN and BacDive: rank, lineage, nomenclature, type strains and culture-collection strains, seeded from kg-microbe.">
+<style>
+  :root{
+    --pastel-a:#D6DAF7;      /* pastel periwinkle */
+    --pastel-b:#CFEDD9;      /* pastel mint */
+    --accent:#5257C9;
+    --ink:#1a1a1a;
+    --muted:#555;
+    --card:#ffffff;
+    --line:rgba(0,0,0,.10);
+    /* Text on the accent fill. A token because it flips with the theme;
+       it was a literal in three places, which the stylesheet contract
+       could not see until its regex was de-anchored (#95). */
+    --on-accent:#fff;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       color:var(--ink);background:var(--pastel-b);line-height:1.55}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .hero{position:relative;background:linear-gradient(135deg,var(--pastel-a),var(--pastel-b));
+        padding:64px 24px 52px;text-align:center;border-bottom:1px solid var(--line)}
+  .hero h1{margin:0 0 .2em;font-size:2.7rem;letter-spacing:-.02em}
+  .hero .tagline{margin:0 auto;max-width:680px;font-size:1.15rem}
+  .stats{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:30px}
+  .stat{background:rgba(255,255,255,.6);border:1px solid var(--line);border-radius:12px;
+        padding:12px 20px;min-width:110px;text-decoration:none;color:inherit}
+  a.stat:hover{background:rgba(255,255,255,.85);text-decoration:none}
+  a.stat:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+  .stat b{display:block;font-size:1.6rem;line-height:1.1}
+  .stat span{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .wrap{max-width:980px;margin:0 auto;padding:48px 24px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px}
+  .card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:16px;
+        padding:28px;box-shadow:0 1px 3px rgba(0,0,0,.05);
+        transition:transform .15s ease,box-shadow .15s ease}
+  .card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.10)}
+  .card .actions{margin:.55em 0 .9em;display:flex;flex-wrap:wrap;gap:.5em}
+  .card h2{margin:.1em 0 .35em;font-size:1.25rem}
+  .card p{margin:0;color:var(--muted);font-size:.95rem}
+  .btn{display:inline-block;background:var(--accent);color:var(--on-accent);padding:.5em 1.15em;
+       border-radius:999px;font-size:.9rem;font-weight:600}
+  .btn:hover{filter:brightness(.93);text-decoration:none}
+  section.block{margin-top:52px}
+  section.block > h2{font-size:1.5rem;margin:0 0 .3em;padding-bottom:.25em;
+                     border-bottom:2px solid var(--accent);display:inline-block}
+  section.block > p{color:var(--muted);max-width:760px}
+  .tbl-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px;
+              background:var(--card);margin-top:1em}
+  table{border-collapse:collapse;width:100%;font-size:.9rem}
+  th,td{text-align:left;padding:.5em .8em;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{background:var(--pastel-a);font-weight:700}
+  td:last-child,th:last-child{color:var(--muted)}
+  table code{background:rgba(0,0,0,.05);padding:.05em .35em;border-radius:4px;font-size:.85em}
+  tbody tr:hover{background:rgba(82,87,201,.07)}
+  footer{border-top:1px solid var(--line);background:rgba(255,255,255,.45);
+         padding:30px 24px;text-align:center;font-size:.9rem;color:var(--muted);margin-top:56px}
+  footer .fam{margin:.25em 0}
+  footer .fam a{margin:0 .3em;white-space:nowrap}
+  footer .fam .self{margin:0 .3em;white-space:nowrap;font-weight:600;color:var(--ink)}
+  footer strong{color:var(--ink)}
+
+  /* ---- Dark theme (OS default; superseded by the toggle) ---- */
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --pastel-a:#1d2136;
+      --pastel-b:#121320;
+      --on-accent:#121320;
+      --accent:#8b8fe8;
+      --ink:#e9eaf6;
+      --muted:#a0a3ba;
+      --card:#1c1e2e;
+      --line:#2c2f45;
+    }
+    :root:not([data-theme="light"]) .stat{background:rgba(255,255,255,.05)}
+    :root:not([data-theme="light"]) a.stat:hover{background:rgba(255,255,255,.09)}
+    :root:not([data-theme="light"]) footer{background:rgba(255,255,255,.04)}
+    :root:not([data-theme="light"]) table code{background:rgba(255,255,255,.08)}
+    :root:not([data-theme="light"]) tbody tr:hover{background:rgba(139,143,232,.10)}
+    /* brand pastel pair in dark: darkened-pair hero fill + vivid-pair top edge */
+    :root:not([data-theme="light"]) .hero{background:linear-gradient(135deg,#4D4F61,#4B5458)}
+    :root:not([data-theme="light"]) .hero::before{
+      content:"";position:absolute;inset:0 0 auto 0;height:4px;
+      background:linear-gradient(90deg,#D6DAF7,#CFEDD9)}
+    :root:not([data-theme="light"]) .card::before{
+      content:"";position:absolute;inset:0 0 auto 0;height:2px;border-radius:16px 16px 0 0;
+      background:linear-gradient(90deg,#D6DAF7,#CFEDD9);opacity:.55}
+  }
+  :root[data-theme="dark"]{
+    --pastel-a:#1d2136;
+    --pastel-b:#121320;
+    --accent:#8b8fe8;
+    --ink:#e9eaf6;
+    --muted:#a0a3ba;
+    --card:#1c1e2e;
+    --line:#2c2f45;
+    --on-accent:#121320;
+}
+  :root[data-theme="dark"] .stat{background:rgba(255,255,255,.05)}
+  :root[data-theme="dark"] a.stat:hover{background:rgba(255,255,255,.09)}
+  :root[data-theme="dark"] footer{background:rgba(255,255,255,.04)}
+  :root[data-theme="dark"] table code{background:rgba(255,255,255,.08)}
+  :root[data-theme="dark"] tbody tr:hover{background:rgba(139,143,232,.10)}
+  :root[data-theme="dark"] .hero{background:linear-gradient(135deg,#4D4F61,#4B5458)}
+  :root[data-theme="dark"] .hero::before{
+    content:"";position:absolute;inset:0 0 auto 0;height:4px;
+    background:linear-gradient(90deg,#D6DAF7,#CFEDD9)}
+  :root[data-theme="dark"] .card::before{
+    content:"";position:absolute;inset:0 0 auto 0;height:2px;border-radius:16px 16px 0 0;
+    background:linear-gradient(90deg,#D6DAF7,#CFEDD9);opacity:.55}
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{transition:none!important;animation:none!important}
+    .card:hover{transform:none}
+  }
+</style>
+<script src="theme-toggle.js"></script>
+</head>
+<body>
+
+<div class="hero">
+  <h1>TaxonMech</h1>
+  <p class="tagline">
+    Microbial taxa and the strains behind them — NCBI Taxonomy identity,
+    GTDB genomes, LPSN nomenclature and BacDive culture-collection strains,
+    harmonized into one record per taxon from kg-microbe's transforms.
+  </p>
+  <div class="stats">
+    <a class="stat" href="browse.html"><b>{{ total }}</b><span>taxon records</span></a>
+    <a class="stat" href="browse.html"><b>{{ strains }}</b><span>BacDive strains</span></a>
+    <a class="stat" href="type-strains.html"><b>{{ with_type }}</b><span>with a type strain</span></a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="cards">
+    <div class="card">
+      <div class="actions"><a class="btn" href="browse.html">Browse records</a></div>
+      <h2>Record browser</h2>
+      <p>Every taxon in the corpus, with its rank, domain, attesting sources,
+         strain count and genome count, in one table.</p>
+    </div>
+    <div class="card">
+      <div class="actions">
+        {% for d in domains %}
+        <a class="btn" href="{{ d.page }}">{{ d.name | capitalize }}</a>
+        {% endfor %}
+      </div>
+      <h2>By domain</h2>
+      <p>The corpus is organised by the NCBI domain each taxon sits under.</p>
+    </div>
+    <div class="card">
+      <div class="actions">
+        <a class="btn" href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
+      </div>
+      <h2>Source and schema</h2>
+      <p>Records are LinkML-validated YAML under <code>data/taxa/</code>, seeded
+         from committed inventories of kg-microbe's transforms. The schema,
+         curation history and pipeline all live in the repository.</p>
+    </div>
+  </div>
+
+  <section class="block" id="domains">
+    <h2>Domains</h2>
+    <p>What each domain bucket covers, and how many records currently sit in it.</p>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Domain</th><th>Records</th><th>Covers</th></tr></thead>
+        <tbody>
+        {% for d in domains %}
+          <tr>
+            <td><a href="{{ d.page }}">{{ d.name | capitalize }}</a></td>
+            <td>{{ d.count }}</td>
+            <td>{{ d.blurb }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p><strong>TaxonMech</strong> · CC0-1.0 · generated by <code>scripts/render_pages.py</code></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p class="fam">
+    <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
+    <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·
+    <a href="https://gtdb.ecogenomic.org/">GTDB</a> ·
+    <a href="https://lpsn.dsmz.de/">LPSN</a> ·
+    <a href="https://bacdive.dsmz.de/">BacDive</a>
+  </p>
+</footer>
+
+</body>
+</html>

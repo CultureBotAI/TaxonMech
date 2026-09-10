@@ -1,0 +1,825 @@
+id: https://w3id.org/taxonmech
+name: taxonmech
+title: TaxonMech - Microbial Taxon and Strain Schema
+description: |
+  LinkML schema for microbial taxa and the strains that stand behind them.
+  Each TaxonRecord is one taxon — "Escherichia coli", "Abditibacterium
+  utsteinense", "Methanococcus" — identified by its NCBI Taxonomy CURIE and
+  harmonized across the taxonomic and strain sources that kg-microbe
+  transforms:
+
+    * NCBI Taxonomy (the identity backbone: label, rank, lineage, synonyms),
+    * GTDB (genome-based species and their assemblies, mapped to NCBI taxa),
+    * LPSN (nomenclature: validly published names, correct-name status,
+      authorities, type strain designations),
+    * BacDive (strain records with culture-collection deposits),
+    * MediaDive, JGI GOLD, Madin et al. and BactoTraits (what else is known
+      about the taxon, as assertion counts that say how much data sits behind it).
+
+  The harmonization is the point. A species is called `NCBITaxon:562` by NCBI,
+  `GTDB:s__Escherichia_coli` by GTDB and `lpsn:776057` by LPSN; BacDive holds
+  thousands of its strains under culture-collection numbers. A TaxonRecord
+  carries all of these as `taxonomy_mappings`, `nomenclature`, `strains` and
+  `source_attestations` on one NCBI-grounded concept.
+
+  Records are seeded from the inventories in `data/raw/` (extracted from a
+  kg-microbe checkout by `scripts/extract_source_inventory.py`) and curated
+  incrementally, mirroring the dismech / HabitatMech / TraitMech workflow:
+  one YAML per taxon, an append-only curation trail, closed-schema validation
+  via `just validate-all`.
+
+  The "Mech" half is `causal_graphs`: evidence-backed mechanism sketches
+  linking a taxon to the traits, habitats and processes that characterise it.
+  Unlike the seeded descriptive fields, every causal edge must carry a
+  citation.
+
+license: https://creativecommons.org/publicdomain/zero/1.0/
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  taxonmech: https://w3id.org/taxonmech/
+  biolink: https://w3id.org/biolink/vocab/
+  # Identity and taxonomy
+  NCBITaxon: http://purl.obolibrary.org/obo/NCBITaxon_
+  TAXRANK: http://purl.obolibrary.org/obo/TAXRANK_
+  GTDB: https://gtdb.ecogenomic.org/taxon?name=
+  lpsn: https://lpsn.dsmz.de/
+  # Strains, genomes, media and organisms — CURIE-shaped local ids as
+  # kg-microbe emits them
+  kgmicrobe.strain: https://w3id.org/kg-microbe/strain/
+  bacdive: https://bacdive.dsmz.de/strain/
+  ncbi.assembly: https://www.ncbi.nlm.nih.gov/datasets/genome/
+  mediadive.medium: https://mediadive.dsmz.de/medium/
+  gold: https://gold.jgi.doe.gov/organism?id=
+  INSDC: https://www.ncbi.nlm.nih.gov/nuccore/
+  GC_ID: https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi#SG
+  # Sibling Mech vocabularies and ontologies used by mechanism graphs
+  METPO: https://w3id.org/metpo/
+  ENVO: http://purl.obolibrary.org/obo/ENVO_
+  UBERON: http://purl.obolibrary.org/obo/UBERON_
+  CHEBI: http://purl.obolibrary.org/obo/CHEBI_
+  GO: http://purl.obolibrary.org/obo/GO_
+  PATO: http://purl.obolibrary.org/obo/PATO_
+  RO: http://purl.obolibrary.org/obo/RO_
+  UO: http://purl.obolibrary.org/obo/UO_
+  traitmech: https://w3id.org/traitmech/
+  habitatmech: https://w3id.org/habitatmech/
+  # Provenance
+  PMID: http://www.ncbi.nlm.nih.gov/pubmed/
+  DOI: https://doi.org/
+  dcterms: http://purl.org/dc/terms/
+  skos: http://www.w3.org/2004/02/skos/core#
+  oboInOwl: http://www.geneontology.org/formats/oboInOwl#
+
+default_prefix: taxonmech
+default_range: string
+
+imports:
+  - linkml:types
+  # Shared, byte-identical Mech module: Discussion (knowledge gaps) + Dataset.
+  # Vendored from culturebotai-claw at scripts/.vendored_canon_ref and checked
+  # byte-for-byte by `just vendored-check`. Do not edit this copy in isolation.
+  - mech_shared
+
+# ================================================================
+# ROOT CLASS — one YAML file per TaxonRecord
+# ================================================================
+
+classes:
+
+  TaxonRecord:
+    class_uri: taxonmech:TaxonRecord
+    tree_root: true
+    description: >-
+      A single taxon, identified by its NCBI Taxonomy CURIE and harmonized
+      across GTDB, LPSN, BacDive and the other kg-microbe sources that speak
+      about it. One YAML per record.
+    attributes:
+      identifier:
+        description: >-
+          Stable CURIE for this taxon. Records grounded in NCBI Taxonomy use
+          the NCBITaxon CURIE directly (NCBITaxon:562). A taxon known only to
+          another source (a GTDB placeholder species with no NCBI counterpart)
+          gets a minted `taxonmech:` CURIE so it remains citable and can be
+          re-grounded later without breaking references.
+        identifier: true
+        required: true
+        range: string
+        pattern: "^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$"
+
+      label:
+        description: >-
+          Scientific name. For NCBI-grounded records this is NCBI Taxonomy's
+          rdfs:label, so the record and the term agree.
+        required: true
+        range: string
+
+      rank:
+        description: NCBI taxonomic rank of the taxon (NCBITaxon has_rank).
+        range: TaxonRankEnum
+        recommended: true
+
+      taxon_domain:
+        description: >-
+          Coarse-grained bucket derived from the lineage, used for filesystem
+          layout and reporting: which of NCBI's top-level domains the taxon
+          sits under.
+        range: TaxonDomainEnum
+        recommended: true
+
+      definition:
+        description: >-
+          Textual description of the taxon. NCBI Taxonomy carries none; a
+          curator can supply one with `definition_source`.
+        range: string
+
+      definition_source:
+        description: >-
+          Citation or provenance for the definition (PMID:..., DOI:..., or
+          "LPSN" when taken from the nomenclatural record).
+        range: string
+
+      parent_taxon:
+        description: Direct parent in NCBI Taxonomy (rdfs:subClassOf).
+        range: string
+        pattern: "^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$"
+
+      lineage:
+        description: >-
+          Ancestors from the root down to the direct parent, each with its
+          label and rank, so the record is readable without the ontology at
+          hand. Seeded from NCBI Taxonomy's subclass edges.
+        multivalued: true
+        inlined_as_list: true
+        range: LineageEntry
+
+      synonyms:
+        description: >-
+          Alternate names. Seeded records carry NCBI Taxonomy's exact and
+          related synonyms, LPSN's synonymous names, and GTDB's spelling when
+          it differs, each with its source.
+        multivalued: true
+        inlined_as_list: true
+        range: TaxonSynonym
+
+      xrefs:
+        description: >-
+          Equivalent identifiers in other resources (an LPSN name id, a GTDB
+          species that closely matches). Use only for true equivalences;
+          broader/narrower relations go in `taxonomy_mappings` with the
+          appropriate `mapping_predicate`.
+        multivalued: true
+        range: string
+        pattern: "^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$"
+
+      genetic_code:
+        description: NCBI genetic code table id (GC_ID xref on the taxon).
+        range: integer
+
+      nomenclature:
+        description: >-
+          Nomenclatural records for this taxon from LPSN: name id, authority,
+          validly-published and correct-name status, type strain
+          designations. Usually one entry; several when LPSN distinguishes
+          names NCBI merges.
+        multivalued: true
+        inlined_as_list: true
+        range: NomenclatureEntry
+
+      taxonomy_mappings:
+        description: >-
+          How other taxonomies map onto this taxon — a GTDB species that is
+          narrower than, or close to, this NCBI taxon, with the predicate
+          kg-microbe assigned and the number of genome assemblies behind it.
+        multivalued: true
+        inlined_as_list: true
+        range: TaxonomyMapping
+
+      strain_count:
+        description: >-
+          How many BacDive strain records are classified under this taxon —
+          for a species or subspecies, including strains filed under its
+          descendant NCBI taxa. Recorded separately from `strains` because
+          the listing is capped: the count is always the full number.
+        range: integer
+
+      strains:
+        description: >-
+          Strains classified under this taxon, from BacDive, with their
+          culture-collection deposits and whether they are the type strain.
+          Listed up to a per-record cap (type strains first); `strain_count`
+          gives the true total and `data/raw/bacdive_strains.tsv` the full
+          inventory.
+        multivalued: true
+        inlined_as_list: true
+        range: StrainEntry
+
+      source_attestations:
+        description: >-
+          Per-source evidence that this taxon is a real, used concept, and
+          the bridge back to each upstream resource. One record may carry an
+          NCBI identity, a GTDB species, an LPSN name, a BacDive strain count,
+          a GOLD organism count and a MediaDive medium count, each with its
+          own assertion count and unit. A record attested by several sources
+          is better corroborated than one seen only once.
+        multivalued: true
+        inlined_as_list: true
+        range: SourceAttestation
+
+      evidence:
+        description: >-
+          Optional record-level citations, populated when a curator backs the
+          taxon with literature beyond its source provenance. Not required
+          (compare CausalEdge.evidence): a seeded record's provenance is its
+          `source_attestations`.
+        multivalued: true
+        inlined_as_list: true
+        range: EvidenceItem
+
+      grounding_status:
+        description: >-
+          How well this record's `identifier` grounds the underlying concept.
+          Kept separate from `mapping_status` (curatorial review) because the
+          two are independent.
+        range: GroundingStatusEnum
+        recommended: true
+
+      mapping_status:
+        description: >-
+          Curation lifecycle. SEEDED rows came straight from the inventories
+          in data/raw/; REVIEWED rows have curator sign-off; DEPRECATED rows
+          are retained for traceability but superseded.
+        range: MappingStatusEnum
+
+      replaces:
+        description: >-
+          dcterms:replaces — CURIEs of records this one supersedes. The
+          replaced record stays in place with mapping_status DEPRECATED.
+        multivalued: true
+        range: string
+        pattern: "^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$"
+
+      contributors:
+        description: Curators who have edited this record.
+        multivalued: true
+        range: string
+
+      curation_history:
+        description: Append-only audit trail.
+        multivalued: true
+        inlined_as_list: true
+        range: CurationEvent
+
+      causal_graphs:
+        description: >-
+          Evidence-backed mechanism graphs explaining how this taxon's
+          traits, habitats and metabolism connect. Nodes span taxa, traits,
+          habitats, processes, genes/proteins and chemicals. Every edge must
+          carry evidence.
+        multivalued: true
+        inlined_as_list: true
+        range: CausalGraph
+
+      discussions:
+        description: >-
+          Open questions, knowledge gaps, controversies and curation todos
+          attached to this taxon (shared Discussion supertype; anchor
+          `attaches_to` into e.g. `strains#<strain_id>` or
+          `causal_graphs#<graph_id>`).
+        multivalued: true
+        inlined_as_list: true
+        range: Discussion
+
+      datasets:
+        description: Public datasets (genomes, phenotypes, omics) for this taxon.
+        multivalued: true
+        inlined_as_list: true
+        range: Dataset
+
+  # --------------------------------------------------------------
+  # Identity layer
+  # --------------------------------------------------------------
+
+  LineageEntry:
+    description: One ancestor of the taxon, root-first.
+    attributes:
+      taxon_id:
+        required: true
+        range: string
+        pattern: "^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$"
+      taxon_label:
+        required: true
+        range: string
+      rank:
+        range: TaxonRankEnum
+
+  TaxonSynonym:
+    description: An alternate name with its scope and provenance.
+    attributes:
+      synonym_text:
+        required: true
+        range: string
+      synonym_type:
+        range: SynonymTypeEnum
+      source:
+        description: >-
+          Where the synonym came from — "NCBITaxon", "LPSN", "GTDB", or a
+          citation.
+        range: string
+      source_id:
+        description: >-
+          Identifier of the synonymous name in its source, when it has one
+          (an LPSN name id for a heterotypic synonym).
+        range: string
+        pattern: "^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$"
+
+  NomenclatureEntry:
+    description: >-
+      What LPSN says about a name for this taxon: its authority, whether it
+      is validly published and legitimate, whether it is the correct name or a
+      synonym, and the culture-collection numbers of its type strain.
+    attributes:
+      source:
+        required: true
+        range: TaxonSourceEnum
+      name_id:
+        description: The LPSN name identifier (lpsn:776057).
+        required: true
+        range: string
+        pattern: "^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$"
+      name:
+        description: The name as LPSN spells it.
+        required: true
+        range: string
+      rank:
+        range: TaxonRankEnum
+      authority:
+        description: >-
+          Author citation — "(Migula 1895) Castellani and Chalmers 1919
+          (Approved Lists 1980)".
+        range: string
+      nomenclatural_status:
+        description: >-
+          LPSN's status line, verbatim ("validly published under the ICNP;
+          correct name"). Kept as text because the vocabulary is LPSN's and
+          open-ended; the two booleans below are parsed from it.
+        range: string
+      validly_published:
+        range: boolean
+      legitimate:
+        range: boolean
+      is_correct_name:
+        description: True when LPSN lists this name as the correct name rather than a synonym.
+        range: boolean
+      url:
+        range: uri
+      type_strain_designations:
+        description: >-
+          Culture-collection numbers LPSN gives for the type strain, as
+          kg-microbe strain CURIEs (kgmicrobe.strain:DSM-30083). The local
+          part is the deposit number verbatim, which can contain "/",
+          parentheses and non-ASCII letters, so only the prefix is
+          constrained.
+        multivalued: true
+        range: string
+        pattern: "^kgmicrobe\\.strain:\\S+$"
+      publications:
+        description: DOIs and PMIDs LPSN cites for the name (DOI:..., PMID:...).
+        multivalued: true
+        range: string
+        pattern: "^(DOI|PMID):\\S+$"
+      sequence_accessions:
+        description: INSDC accessions LPSN links (typically the type strain's 16S rRNA gene).
+        multivalued: true
+        range: string
+        pattern: "^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$"
+      notes:
+        range: string
+
+  TaxonomyMapping:
+    description: >-
+      A taxon in another taxonomy that kg-microbe maps to this record, with
+      the mapping predicate and the data volume behind the source taxon.
+    attributes:
+      source:
+        required: true
+        range: TaxonSourceEnum
+      source_id:
+        required: true
+        range: string
+        pattern: "^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$"
+      source_label:
+        range: string
+      mapping_predicate:
+        description: >-
+          How the source taxon relates to this record's `identifier`, from
+          the source taxon's side: skos:closeMatch when the two denote the
+          same species, skos:broadMatch when this record is broader than the
+          source taxon (GTDB splits a species NCBI keeps whole).
+        range: string
+      genome_count:
+        description: Genome assemblies the source classifies under the source taxon.
+        range: integer
+      notes:
+        range: string
+
+  StrainEntry:
+    description: One strain classified under this taxon.
+    attributes:
+      strain_id:
+        description: The kg-microbe strain CURIE (kgmicrobe.strain:bacdive_100253).
+        required: true
+        range: string
+        pattern: "^kgmicrobe\\.strain:\\S+$"
+      source:
+        required: true
+        range: TaxonSourceEnum
+      source_id:
+        description: The strain's identifier in its source (bacdive:100253).
+        range: string
+        pattern: "^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$"
+      designation:
+        description: The strain designation as the source gives it ("K12 UT5600").
+        range: string
+      classified_as:
+        description: >-
+          The NCBI taxon the source files this strain under, when it is a
+          descendant of this record's taxon rather than the taxon itself.
+          BacDive files many type strains under strain-level NCBI taxa
+          ("Acinetobacter baumannii ATCC 19606 = CIP 70.34"), so a species
+          record gathers strains from its subtree and says where each came
+          from.
+        range: string
+        pattern: "^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$"
+      culture_collection_ids:
+        description: >-
+          Culture-collection deposits of this strain, as kg-microbe strain
+          CURIEs (kgmicrobe.strain:DSM-30083); local parts are deposit
+          numbers verbatim, so only the prefix is constrained.
+        multivalued: true
+        range: string
+        pattern: "^kgmicrobe\\.strain:\\S+$"
+      is_type_strain:
+        description: >-
+          True when one of the strain's deposits is a type strain designation
+          LPSN lists for a name of this taxon.
+        range: boolean
+      medium_count:
+        description: Growth media MediaDive links to this strain.
+        range: integer
+      notes:
+        range: string
+
+  # --------------------------------------------------------------
+  # Harmonization layer
+  # --------------------------------------------------------------
+
+  SourceAttestation:
+    description: >-
+      One upstream resource's assertion of this taxon, with the volume of
+      data behind it and how the upstream identifier relates to this record.
+    attributes:
+      source:
+        required: true
+        range: TaxonSourceEnum
+      source_id:
+        description: >-
+          Identifier in the source (an LPSN name id, a GTDB species, or the
+          NCBITaxon CURIE itself).
+        range: string
+      source_label:
+        description: Verbatim label in the source.
+        required: true
+        range: string
+      mapping_predicate:
+        description: >-
+          How the source concept relates to this record's `identifier`
+          (skos:exactMatch, skos:closeMatch, skos:broadMatch). Absent when
+          the record IS the source concept.
+        range: string
+      assertion_count:
+        description: >-
+          How many upstream records the source classifies under this taxon.
+          Comparable only within a source: BacDive counts strains, GTDB
+          genomes, GOLD organisms, MediaDive media, Madin and BactoTraits
+          trait assertions.
+        range: integer
+      assertion_unit:
+        description: What `assertion_count` counts, so cross-source sums are not taken naively.
+        range: AssertionUnitEnum
+      notes:
+        range: string
+
+  EvidenceItem:
+    description: A literature or database citation supporting a claim in this record.
+    attributes:
+      reference:
+        description: PMID:..., DOI:..., or an opaque URL.
+        required: true
+        range: string
+      snippet:
+        description: Verbatim quote from the source supporting the claim.
+        range: string
+      notes:
+        range: string
+
+  # --------------------------------------------------------------
+  # Mechanism layer
+  # --------------------------------------------------------------
+
+  CausalGraph:
+    description: >-
+      A directed mechanism graph associated with a taxon — typically "trait X
+      of this taxon is conferred by Y and selected for in habitat Z".
+    attributes:
+      graph_id:
+        description: Stable local graph identifier within the TaxonRecord.
+        identifier: true
+        required: true
+        range: string
+      title:
+        range: string
+      description:
+        description: Short scope note for the graph.
+        range: string
+      nodes:
+        required: true
+        multivalued: true
+        inlined_as_list: true
+        range: CausalNode
+      edges:
+        required: true
+        multivalued: true
+        inlined_as_list: true
+        range: CausalEdge
+
+  CausalNode:
+    description: A node in a taxon mechanism graph.
+    attributes:
+      node_id:
+        description: Stable local node identifier referenced by edges.
+        identifier: true
+        required: true
+        range: string
+      label:
+        required: true
+        range: string
+      node_type:
+        description: Broad semantic category, used for rendering and curation.
+        required: true
+        range: CausalNodeTypeEnum
+      grounding:
+        description: >-
+          Preferred ontology or database CURIE for the node. Label-only draft
+          nodes are permitted in v1.
+        range: string
+        pattern: "^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$"
+      xrefs:
+        multivalued: true
+        range: string
+        pattern: "^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$"
+      description:
+        range: string
+
+  CausalEdge:
+    description: An evidence-backed directed relationship in a taxon mechanism graph.
+    attributes:
+      edge_id:
+        description: Stable local edge identifier within the CausalGraph.
+        identifier: true
+        required: true
+        range: string
+        pattern: "^[A-Za-z][A-Za-z0-9_-]*$"
+      subject:
+        description: Local node_id of the upstream node.
+        required: true
+        range: string
+      predicate:
+        description: Human-readable predicate label or relation CURIE.
+        required: true
+        range: string
+      predicate_id:
+        description: Optional ontology CURIE grounding the predicate.
+        range: string
+        pattern: "^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$"
+      object:
+        description: Local node_id of the downstream node.
+        required: true
+        range: string
+      description:
+        range: string
+      evidence:
+        description: >-
+          Edge-level support. Required, in contrast to TaxonRecord.evidence:
+          a taxon's existence is attested by its sources, but a mechanism
+          claim is curator-asserted and nothing upstream backs it.
+        required: true
+        multivalued: true
+        inlined_as_list: true
+        range: EvidenceItem
+
+  CurationEvent:
+    description: A timestamped curator action on a TaxonRecord.
+    attributes:
+      timestamp:
+        range: datetime
+        required: true
+        # Deterministic year guard, shared across the Mech repos: rejects the
+        # 2206-for-2026 class of typo without consulting the wall clock.
+        pattern: "^20[0-9]{2}-"
+      curator:
+        range: string
+      action:
+        range: string
+      changes:
+        range: string
+      llm_assisted:
+        range: boolean
+
+# ================================================================
+# ENUMS
+# ================================================================
+
+enums:
+
+  TaxonSourceEnum:
+    description: Upstream resource an attestation, mapping, name or strain comes from.
+    permissible_values:
+      NCBITAXON:
+        description: NCBI Taxonomy, via kg-microbe's ncbitaxon transform and raw semantic-sql build.
+      GTDB:
+        description: Genome Taxonomy Database species and genome assemblies.
+      LPSN:
+        description: List of Prokaryotic names with Standing in Nomenclature (DSMZ).
+      BACDIVE:
+        description: DSMZ BacDive strain records.
+      MEDIADIVE:
+        description: DSMZ MediaDive growth-medium links to strains and taxa.
+      GOLD:
+        description: JGI GOLD organism records.
+      MADIN:
+        description: Madin et al. prokaryotic phenotypic trait compilation.
+      BACTOTRAITS:
+        description: BactoTraits functional trait database.
+      CURATOR:
+        description: Curator-introduced, with no upstream source attestation.
+
+  AssertionUnitEnum:
+    description: >-
+      What a `SourceAttestation.assertion_count` counts. Recorded explicitly
+      because the sources count different things and the numbers are not
+      summable across sources.
+    permissible_values:
+      NAME:
+        description: A nomenclatural or taxonomic name record (NCBI, LPSN).
+      STRAIN:
+        description: BacDive strain records.
+      GENOME:
+        description: Genome assemblies (GTDB).
+      ORGANISM:
+        description: GOLD organism records.
+      MEDIUM:
+        description: Growth media the taxon or its strains are recorded as growing in.
+      TRAIT_ASSERTION:
+        description: Individual trait assertions about the taxon (Madin, BactoTraits).
+
+  TaxonDomainEnum:
+    description: >-
+      Coarse bucket for filesystem layout, from the top-level NCBI domain in
+      the lineage.
+    permissible_values:
+      BACTERIA:
+      ARCHAEA:
+      EUKARYOTA:
+      VIRUSES:
+      OTHER:
+        description: Not under any of the four, or lineage unavailable.
+
+  TaxonRankEnum:
+    description: >-
+      NCBI Taxonomy ranks as of the 2026 release (has_rank values), upper-cased,
+      plus NO_RANK for taxa NCBI leaves unranked.
+    permissible_values:
+      ACELLULAR_ROOT:
+      BIOTYPE:
+      CELLULAR_ROOT:
+      CLADE:
+      CLASS:
+      COHORT:
+      DOMAIN:
+      FAMILY:
+      FORMA:
+      FORMA_SPECIALIS:
+      GENOTYPE:
+      GENUS:
+      INFRACLASS:
+      INFRAORDER:
+      ISOLATE:
+      KINGDOM:
+      MORPH:
+      ORDER:
+      PARVORDER:
+      PATHOGROUP:
+      PHYLUM:
+      REALM:
+      SECTION:
+      SERIES:
+      SEROGROUP:
+      SEROTYPE:
+      SPECIES:
+      SPECIES_GROUP:
+      SPECIES_SUBGROUP:
+      STRAIN:
+      SUBCLASS:
+      SUBCOHORT:
+      SUBFAMILY:
+      SUBGENUS:
+      SUBKINGDOM:
+      SUBORDER:
+      SUBPHYLUM:
+      SUBSECTION:
+      SUBSPECIES:
+      SUBTRIBE:
+      SUBVARIETY:
+      SUPERCLASS:
+      SUPERFAMILY:
+      SUPERORDER:
+      SUPERPHYLUM:
+      TRIBE:
+      VARIETAS:
+      NO_RANK:
+
+  GroundingStatusEnum:
+    description: >-
+      Quality of the link between this record's `identifier` and the concept
+      it harmonizes.
+    permissible_values:
+      EXACT:
+        description: The identifier is an exact match for the concept (an NCBI taxon).
+      CLOSE:
+        description: Close but not exact.
+      UNGROUNDED:
+        description: >-
+          No NCBI taxon; the record carries a minted `taxonmech:` identifier.
+      NOT_APPLICABLE:
+        description: The source concept is not a taxon.
+
+  MappingStatusEnum:
+    description: Curation lifecycle for a record.
+    permissible_values:
+      SEEDED:
+        description: >-
+          Generated from the source inventories in data/raw/ by
+          scripts/seed_from_sources.py; not yet curator-reviewed.
+      PROPOSED:
+        description: Curator-proposed taxon not present in any source.
+      REVIEWED:
+        description: Curator has signed off on identity, nomenclature and mappings.
+      DEPRECATED:
+        description: Superseded by another TaxonRecord; see `replaces` on the successor.
+
+  SynonymTypeEnum:
+    permissible_values:
+      EXACT_SYNONYM:
+      NARROW_SYNONYM:
+      BROAD_SYNONYM:
+      RELATED_SYNONYM:
+
+  CausalNodeTypeEnum:
+    description: >-
+      Broad categories for nodes in taxon mechanism graphs — a superset of
+      TraitMech's and HabitatMech's enums so graphs stay comparable across
+      the Mech repos.
+    permissible_values:
+      TAXON:
+        description: An organism, strain or clade.
+      TRAIT:
+        description: A microbial trait (a TraitMech or METPO term).
+      HABITAT:
+        description: A habitat or environmental context (a HabitatMech or ENVO term).
+      ENVIRONMENTAL_PARAMETER:
+        description: A physicochemical axis of a habitat (salinity, pH, temperature).
+      PATHWAY:
+        description: A pathway or pathway-like mechanism.
+      ENVIRONMENTAL_FACTOR:
+        description: An environmental exposure or stressor that is not a measured parameter.
+      EXPERIMENTAL_FACTOR:
+        description: An assay, perturbation, or experimental condition.
+      GENE_OR_PROTEIN:
+        description: A gene, protein, gene product, or protein complex.
+      CHEMICAL:
+        description: A chemical entity.
+      CELLULAR_LOCALIZATION:
+        description: A cellular component or localization.
+      MOLECULAR_FUNCTION:
+        description: A molecular activity or function.
+      BIOLOGICAL_PROCESS:
+        description: A biological process.
+      STATE:
+        description: A bioenergetic or molecular state of the cell mediating a mechanism.
+      QUALITY:
+        description: A measurable attribute of a cellular component that modulates the mechanism.
+      CAPACITY:
+        description: A metabolic or functional capacity.
+      COMMUNITY_PROCESS:
+        description: A process at the community rather than the cell level.

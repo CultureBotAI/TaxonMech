@@ -1,0 +1,39 @@
+history_version: 1
+target:
+  kind: infrastructure
+  path: src/taxonmech/seed.py
+  slug: scaffold
+session:
+  id: 2026-09-10T204535Z-claude-code-f91ce0
+  timestamp: '2026-09-10T20:45:35Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-fable-5-1
+    agent_tool: claude-code
+events:
+- type: CREATE
+  outcome: changed
+  sections:
+  - schema
+  - extract
+  - seed
+  - scope
+  - site
+  - tests
+  summary: Scaffold TaxonMech on the Mech-repo pattern and seed the first 100 taxa from kg-microbe
+  details: 'Created the repository from the Mech pattern (dismech via HabitatMech and CellStructureMech):
+    LinkML schema with TaxonRecord as the single root, claw-governed files vendored byte-identically
+    at the fleet''s pinned commit, closed-schema write gate, append-only history, generated
+    site. Wrote scripts/extract_source_inventory.py, which reads kg-microbe''s NCBITaxon,
+    GTDB, LPSN, LPSN-API, BacDive, MediaDive, GOLD, Madin and BactoTraits transforms plus
+    the raw NCBITaxon semantic-sql build (for rank and typed synonyms) and emits nine inventories
+    under data/raw/ with a hashed MANIFEST.yaml; and scripts/seed_from_sources.py, which builds
+    one record per taxon in curation/seed_scope.tsv. The scope was proposed by scripts/propose_scope.py
+    with the core rule (species with a BacDive strain, an LPSN correct name naming a type
+    strain, and a GTDB identity mapping), top 100 by attestation breadth and strain count.
+    Canaries before each fan-out found and fixed three defects: kg-microbe strain ids with
+    ''/'' and non-ASCII characters rejected by the CURIE pattern; GTDB broadMatch pooling
+    putting unrelated species first and summing their genomes; and type strains filed by BacDive
+    under strain-level NCBI taxa, which species records now gather from their subtree. Validated
+    with just qc.'
