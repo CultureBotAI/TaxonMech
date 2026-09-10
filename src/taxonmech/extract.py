@@ -302,6 +302,7 @@ def extract_lpsn(kgm: Path) -> dict[str, dict[str, Any]]:
             "gtdb_ids": set(),
             "type_strain_ids": set(),
             "synonym_of": set(),
+            "synonyms": set(),
             "publications": set(),
             "sequence_accessions": set(),
         }
@@ -320,7 +321,12 @@ def extract_lpsn(kgm: Path) -> dict[str, dict[str, Any]]:
             elif obj.startswith("kgmicrobe.strain:"):
                 entry["type_strain_ids"].add(obj)
         elif predicate == "biolink:same_as" and obj.startswith("lpsn:"):
+            # kg-microbe emits same_as from the deprecated name to the correct
+            # one, so the correct name only learns its synonyms from the
+            # reverse index (#3).
             entry["synonym_of"].add(obj)
+            if obj in names:
+                names[obj]["synonyms"].add(subject)
     # The API transform adds status, publications and sequence accessions.
     api_nodes = kgm / "data/transformed/lpsn_api/nodes.tsv"
     api_edges = kgm / "data/transformed/lpsn_api/edges.tsv"
@@ -336,13 +342,20 @@ def extract_lpsn(kgm: Path) -> dict[str, dict[str, Any]]:
             entry["is_correct_name"] = "1" if "correct name" in status else "0"
         for row in read_tsv(api_edges):
             entry = names.get(row["subject"])
-            if entry is None or row["predicate"] != "biolink:close_match":
+            if entry is None:
                 continue
             obj = row["object"]
-            if obj.startswith(("doi:", "PMID:")):
-                entry["publications"].add(obj)
-            elif obj.startswith("INSDC:"):
-                entry["sequence_accessions"].add(obj)
+            if row["predicate"] == "biolink:close_match":
+                if obj.startswith(("doi:", "PMID:")):
+                    entry["publications"].add(obj)
+                elif obj.startswith("INSDC:"):
+                    entry["sequence_accessions"].add(obj)
+            elif row["predicate"] == "biolink:same_as" and obj in names:
+                # The API transform carries same_as pairs the main transform
+                # lacks; a target the main transform does not name cannot
+                # supply a synonym label and is skipped (#3).
+                entry["synonym_of"].add(obj)
+                names[obj]["synonyms"].add(row["subject"])
     return names
 
 
@@ -391,6 +404,35 @@ def describe_input(kgm: Path, relative: str) -> dict[str, Any]:
         .strftime("%Y-%m-%dT%H:%M:%SZ"),
         "sha256": sha256_of(path),
     }
+
+
+def _unhashed_input(kgm: Path, relative: str) -> dict[str, Any]:
+    path = kgm / relative
+    stat = path.stat()
+    return {
+        "path": relative, "bytes": stat.st_size,
+        "mtime": datetime.datetime.fromtimestamp(stat.st_mtime, datetime.timezone.utc)
+        .strftime("%Y-%m-%dT%H:%M:%SZ"),
+    }
+
+
+def _extracted_at(previous_manifest: Path, inputs: list[dict[str, Any]]) -> str:
+    """The data's timestamp, not the run's.
+
+    Every record's seed event is stamped with this value, so a wall-clock
+    stamp turns a re-extraction of unchanged data into a corpus-wide diff
+    (#4). When the previous manifest hashed the same inputs to the same
+    digests, the data has not changed and neither does its timestamp.
+    """
+    now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    if not previous_manifest.exists() or any("sha256" not in i for i in inputs):
+        return now
+    previous = yaml.safe_load(previous_manifest.read_text(encoding="utf-8")) or {}
+    old = {(i.get("path"), i.get("sha256")) for i in previous.get("inputs", []) if i.get("sha256")}
+    new = {(i["path"], i["sha256"]) for i in inputs}
+    if old == new and previous.get("extracted_at"):
+        return str(previous["extracted_at"])
+    return now
 
 
 def describe_output(path: Path) -> dict[str, Any]:
@@ -492,7 +534,11 @@ def main(argv: list[str] | None = None) -> int:
         attested[tid].add("madin_etal")
     for tid in bacto:
         attested[tid].add("bactotraits")
+    dropped_rows: list[dict[str, Any]] = []
     unknown = sorted(t for t in attested if t not in nodes)
+    for t in unknown:
+        dropped_rows.append({"kind": "attested_taxon", "id": t,
+                             "reason": "not in the NCBITaxon transform (removed or merged id)"})
     if unknown:
         print(f"  WARNING: {len(unknown)} attested taxa are not in the NCBI transform "
               f"(e.g. {unknown[:3]}); they are dropped", file=sys.stderr)
@@ -551,6 +597,7 @@ def main(argv: list[str] | None = None) -> int:
             "is_correct_name": e["is_correct_name"], "parent_lpsn_id": e["parent_lpsn_id"],
             "ncbitaxon_ids": joined(e["ncbitaxon_ids"]), "gtdb_ids": joined(e["gtdb_ids"]),
             "type_strain_ids": joined(e["type_strain_ids"]), "synonym_of": joined(e["synonym_of"]),
+            "synonyms": joined(e["synonyms"]),
             "publications": joined(e["publications"]),
             "sequence_accessions": joined(e["sequence_accessions"]),
         })
@@ -559,6 +606,9 @@ def main(argv: list[str] | None = None) -> int:
     for sid in sorted(strains, key=lambda s: int(strains[s]["bacdive_id"])):
         s = strains[sid]
         if not s["taxon_ids"] & universe:
+            dropped_rows.append({"kind": "bacdive_strain", "id": sid,
+                                 "reason": ("no NCBI parent" if not s["taxon_ids"] else
+                                            "NCBI parent not in the transform: " + joined(s["taxon_ids"]))})
             continue
         strain_rows.append({
             "strain_id": sid, "bacdive_id": s["bacdive_id"], "designation": s["designation"],
@@ -582,8 +632,8 @@ def main(argv: list[str] | None = None) -> int:
                                "genome_count"], mapping_rows),
         ("lpsn_names.tsv", ["lpsn_id", "name", "rank", "authority", "url", "deprecated", "status",
                             "validly_published", "legitimate", "is_correct_name", "parent_lpsn_id",
-                            "ncbitaxon_ids", "gtdb_ids", "type_strain_ids", "synonym_of", "publications",
-                            "sequence_accessions"], lpsn_rows),
+                            "ncbitaxon_ids", "gtdb_ids", "type_strain_ids", "synonym_of", "synonyms",
+                            "publications", "sequence_accessions"], lpsn_rows),
         ("bacdive_strains.tsv", ["strain_id", "bacdive_id", "designation", "taxon_ids", "lpsn_ids",
                                  "culture_collection_ids", "medium_count"], strain_rows),
         ("culture_collection_strains.tsv", ["strain_id", "taxon_ids"], cc_rows),
@@ -591,6 +641,9 @@ def main(argv: list[str] | None = None) -> int:
         ("gold_organisms.tsv", ["taxon_id", "organism_count"], gold_rows),
         ("madin_taxa.tsv", ["taxon_id", "assertion_count"], madin_rows),
         ("bactotraits_taxa.tsv", ["taxon_id", "assertion_count"], bacto_rows),
+        # What extraction refused, item by item, so a kg-microbe regression
+        # that unlinks thousands of strains cannot pass silently (#6).
+        ("dropped.tsv", ["kind", "id", "reason"], dropped_rows),
     ]
     print("\n=== inventories ===")
     for name, _fields, rows in outputs:
@@ -605,8 +658,10 @@ def main(argv: list[str] | None = None) -> int:
         write_tsv(args.out / name, fields, rows)
         print(f"wrote {args.out / name}")
 
+    inputs = [describe_input(kgm, r) if not args.skip_input_hashes else _unhashed_input(kgm, r)
+              for r in INPUTS]
     manifest: dict[str, Any] = {
-        "extracted_at": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "extracted_at": _extracted_at(args.out / MANIFEST_NAME, inputs),
         "kg_microbe_source": git_head(kgm),
         "universe": {
             "attested_taxa": len(core),
@@ -615,21 +670,11 @@ def main(argv: list[str] | None = None) -> int:
             # Attested by a source but absent from kg-microbe's NCBITaxon
             # transform (a removed or merged id); they get no record.
             "dropped_attested_taxa": dropped_attested,
+            "dropped_bacdive_strains": sum(1 for r in dropped_rows if r["kind"] == "bacdive_strain"),
         },
-        "inputs": [],
+        "inputs": inputs,
         "outputs": [describe_output(args.out / name) for name, _f, _r in outputs],
     }
-    for relative in INPUTS:
-        if args.skip_input_hashes:
-            path = kgm / relative
-            stat = path.stat()
-            manifest["inputs"].append({
-                "path": relative, "bytes": stat.st_size,
-                "mtime": datetime.datetime.fromtimestamp(stat.st_mtime, datetime.timezone.utc)
-                .strftime("%Y-%m-%dT%H:%M:%SZ"),
-            })
-        else:
-            manifest["inputs"].append(describe_input(kgm, relative))
     header = (
         "# Provenance for the inventories in data/raw/.\n"
         "# Regenerate with: just extract-inventory\n"

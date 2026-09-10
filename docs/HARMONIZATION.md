@@ -76,6 +76,15 @@ listing every strain of every species is noise, and the count would be
 meaningless. The `BACDIVE` attestation counts what the record gathered and
 notes how many strains came from descendants.
 
+This gathering is deliberately asymmetric: the `GOLD`, `MEDIADIVE`, `MADIN`
+and `BACTOTRAITS` counts remain what each source files *directly* under the
+record's taxon, and say so in their `notes`. *Escherichia coli* therefore
+reports 1,861 strains gathered from nine descendant taxa but only the GOLD
+organisms filed under `NCBITaxon:562` itself. Strains are gathered because a
+species record without its type strain is wrong; whether the other counts
+should be summed over the subtree is a modelling decision tracked in the
+issues, not something to do silently.
+
 ## Type strains
 
 BacDive itself does not flag type strains in the transform. LPSN does list the
@@ -92,9 +101,9 @@ will be missed.
 Extraction inventories every NCBI taxon that BacDive, LPSN, MediaDive, GOLD,
 Madin or BactoTraits attests, plus every ancestor, so a record's lineage is
 always resolvable from the committed data. GTDB is deliberately not an
-attesting source for the universe: it maps 322,000 species to NCBI taxa, most
-of them strain-level taxa nothing else mentions, and inventorying those would
-triple the data for no gain. GTDB mappings are kept where they land inside the
+attesting source for the universe: its 199,923 species carry 322,327 mapping
+edges to NCBI taxa, most of them strain-level taxa nothing else mentions, and
+inventorying those would triple the data for no gain. GTDB mappings are kept where they land inside the
 universe.
 
 The **corpus** is the subset of the universe listed in
@@ -113,7 +122,9 @@ compares byte-for-byte with what is on disk, so a hand edit, a bad merge, or a
 seeder change that was not re-applied all fail `just qc`.
 
 The seed timestamp on every record is the manifest's `extracted_at`, not the
-wall clock, so a re-seed of unchanged data is a no-op diff.
+wall clock, and the extractor carries the previous `extracted_at` forward when
+every input hashes the same, so neither a re-seed nor a re-extraction of
+unchanged data produces a diff.
 
 ## Strain listings
 

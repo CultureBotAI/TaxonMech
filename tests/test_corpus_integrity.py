@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import csv
 from collections import Counter
 
 from taxonmech.seed import PATHS_LOCKFILE, load_lockfile
@@ -49,12 +50,25 @@ def test_lineage_ends_at_the_parent(records):
     assert not bad, f"lineage does not end at parent_taxon: {bad}"
 
 
-def test_gathered_strains_name_a_descendant_of_the_record(records):
-    """`classified_as` must be a taxon below this record — the lineage of the
-    gathered strain's taxon is not in the record, so check the cheap
-    invariant: it is never the record itself."""
-    bad = [f"{p.name}:{s['strain_id']}" for p, d in records for s in d.get("strains") or []
-           if s.get("classified_as") == d["identifier"]]
+def test_gathered_strains_name_a_descendant_of_the_record(records, repo_root):
+    """`classified_as` must be a taxon strictly below this record in the
+    committed NCBI inventory (#9)."""
+    parents = {}
+    with (repo_root / "data" / "raw" / "ncbitaxon_taxa.tsv").open(newline="", encoding="utf-8") as fh:
+        for row in csv.DictReader(fh, delimiter="\t"):
+            parents[row["taxon_id"]] = row["parent_id"]
+
+    def is_ancestor(ancestor: str, taxon: str) -> bool:
+        cur = parents.get(taxon)
+        while cur:
+            if cur == ancestor:
+                return True
+            cur = parents.get(cur)
+        return False
+
+    bad = [f"{p.name}:{s['strain_id']}:{s['classified_as']}" for p, d in records
+           for s in d.get("strains") or []
+           if s.get("classified_as") and not is_ancestor(d["identifier"], s["classified_as"])]
     assert not bad, bad
 
 

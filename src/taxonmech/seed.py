@@ -108,6 +108,14 @@ def split(value: str) -> list[str]:
     return [v for v in (value or "").split("|") if v]
 
 
+def id_key(identifier: str) -> tuple[str, int, str]:
+    """Sort CURIEs by prefix, then numerically where the local part is a
+    number, then lexically — so a minted ``taxonmech:`` id sorts instead of
+    crashing an ``int()`` (#11)."""
+    prefix, _, local = identifier.partition(":")
+    return (prefix, int(local) if local.isdigit() else sys.maxsize, local)
+
+
 def slugify(text: str, maxlen: int = 72) -> str:
     slug = re.sub(r"[^a-z0-9]+", "_", text.lower()).strip("_")
     return (slug or "taxon")[:maxlen].rstrip("_")
@@ -343,10 +351,14 @@ def build_document(concept: Concept, inv: Inventory) -> dict[str, Any]:
         nomenclature.append(entry)
         if name.get("is_correct_name") == "1" and name.get("deprecated") != "1":
             xrefs.add(lid)
+        current = name.get("is_correct_name") == "1" and name.get("deprecated") != "1"
         if name["name"] != concept.label:
-            add_syn(name["name"], "EXACT_SYNONYM", "LPSN", lid)
-        # Heterotypic / homotypic synonyms LPSN links with same_as.
-        for other in split(name.get("synonym_of", "")):
+            # A name LPSN lists as a synonym is usually heterotypic (a
+            # different type strain), which is not an exact synonym (#7).
+            add_syn(name["name"], "EXACT_SYNONYM" if current else "RELATED_SYNONYM", "LPSN", lid)
+        # Names LPSN links with same_as, in either direction: kg-microbe
+        # points the edge from the synonym to the correct name (#3).
+        for other in split(name.get("synonyms", "")) + split(name.get("synonym_of", "")):
             other_row = inv.lpsn.get(other)
             if other_row and other_row["name"]:
                 add_syn(other_row["name"], "RELATED_SYNONYM", "LPSN", other)
@@ -496,38 +508,25 @@ def build_document(concept: Concept, inv: Inventory) -> dict[str, Any]:
             "assertion_unit": "STRAIN",
             **({"notes": " ".join(notes)} if notes else {}),
         })
-    if tid in inv.media:
-        attestations.append({
-            "source": "MEDIADIVE",
-            "source_id": tid,
-            "source_label": concept.label,
-            "assertion_count": int(inv.media[tid]["medium_count"]),
-            "assertion_unit": "MEDIUM",
-        })
-    if tid in inv.gold:
-        attestations.append({
-            "source": "GOLD",
-            "source_id": tid,
-            "source_label": concept.label,
-            "assertion_count": inv.gold[tid],
-            "assertion_unit": "ORGANISM",
-        })
-    if tid in inv.madin:
-        attestations.append({
-            "source": "MADIN",
-            "source_id": tid,
-            "source_label": concept.label,
-            "assertion_count": inv.madin[tid],
-            "assertion_unit": "TRAIT_ASSERTION",
-        })
-    if tid in inv.bacto:
-        attestations.append({
-            "source": "BACTOTRAITS",
-            "source_id": tid,
-            "source_label": concept.label,
-            "assertion_count": inv.bacto[tid],
-            "assertion_unit": "TRAIT_ASSERTION",
-        })
+    # These counts are direct-only: unlike strains, records filed under
+    # descendant taxa are not gathered (#8; see docs/HARMONIZATION.md).
+    direct = ({"notes": "Records filed directly under this taxon; descendant taxa are not gathered."}
+              if concept.rank in SUBTREE_STRAIN_RANKS and inv.descendants(tid) else {})
+    for source, table, unit, value in (
+        ("MEDIADIVE", inv.media, "MEDIUM", lambda r: int(r["medium_count"])),
+        ("GOLD", inv.gold, "ORGANISM", lambda n: n),
+        ("MADIN", inv.madin, "TRAIT_ASSERTION", lambda n: n),
+        ("BACTOTRAITS", inv.bacto, "TRAIT_ASSERTION", lambda n: n),
+    ):
+        if tid in table:
+            attestations.append({
+                "source": source,
+                "source_id": tid,
+                "source_label": concept.label,
+                "assertion_count": value(table[tid]),
+                "assertion_unit": unit,
+                **direct,
+            })
     doc["source_attestations"] = attestations
 
     sources = sorted({a["source"] for a in attestations})
@@ -650,10 +649,9 @@ def build_corpus(*, everything: bool = False) -> Corpus:
     inv = load_inventory()
     scope = load_scope()
     if everything:
-        identifiers = sorted((t for t, r in inv.taxa.items() if r.get("attested_by")),
-                             key=lambda t: int(t.split(":")[1]))
+        identifiers = sorted((t for t, r in inv.taxa.items() if r.get("attested_by")), key=id_key)
     else:
-        identifiers = sorted(scope, key=lambda t: int(t.split(":")[1]))
+        identifiers = sorted(scope, key=id_key)
     concepts = build_concepts(inv, identifiers)
     for c in concepts:
         c.scope_reason = scope.get(c.identifier, {}).get("reason", "")

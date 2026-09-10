@@ -29,7 +29,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
-from taxonmech.seed import load_inventory, load_scope, split  # noqa: E402
+from taxonmech.seed import SCOPE_PATH, load_inventory, load_scope, split  # noqa: E402
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -62,11 +62,14 @@ def main(argv: list[str] | None = None) -> int:
         strain_count = len(inv.strains.get(tid, []))
         if args.rule == "core" and not (strain_count and correct_typed and has_gtdb):
             continue
-        n_sources = len(sources) + (1 if has_gtdb else 0)
+        # NCBI itself, the attesting sources, and GTDB when it maps (#5).
+        n_sources = 1 + len(sources) + (1 if has_gtdb else 0)
         candidates.append((-n_sources, -strain_count, int(tid.split(":")[1]), tid, row["label"], n_sources,
                            strain_count))
     candidates.sort()
-    if not args.append:
+    # A headerless append onto a missing or empty scope file would make the
+    # first data row the header (#10).
+    if not args.append or not SCOPE_PATH.exists() or SCOPE_PATH.stat().st_size == 0:
         print("identifier\tadded\treason")
     for _a, _b, _c, tid, label, n_sources, strain_count in candidates[: args.top]:
         reason = (f"{args.rule} rule: {label}, {n_sources} sources incl. NCBI, "

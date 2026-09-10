@@ -43,13 +43,16 @@ def _inventory() -> seed.Inventory:
                             "parent_lpsn_id": "lpsn:515602", "ncbitaxon_ids": "NCBITaxon:562",
                             "gtdb_ids": "GTDB:s__Escherichia_coli",
                             "type_strain_ids": "kgmicrobe.strain:DSM-30083|kgmicrobe.strain:ATCC-11775",
-                            "synonym_of": "lpsn:4361", "publications": "doi:10.1099/00207713-30-1-225",
+                            # kg-microbe points same_as from the synonym to the correct name.
+                            "synonym_of": "", "synonyms": "lpsn:4361",
+                            "publications": "doi:10.1099/00207713-30-1-225",
                             "sequence_accessions": "INSDC:AB681728"},
             "lpsn:4361": {"lpsn_id": "lpsn:4361", "name": "Bacterium coli", "rank": "SPECIES",
                           "authority": "", "url": "", "deprecated": "1", "status": "",
                           "validly_published": "", "legitimate": "", "is_correct_name": "",
                           "parent_lpsn_id": "", "ncbitaxon_ids": "", "gtdb_ids": "", "type_strain_ids": "",
-                          "synonym_of": "", "publications": "", "sequence_accessions": ""}}
+                          "synonym_of": "lpsn:776057", "synonyms": "", "publications": "",
+                          "sequence_accessions": ""}}
     strains = {
         "NCBITaxon:562": [
             {"strain_id": "kgmicrobe.strain:bacdive_10", "bacdive_id": "10", "designation": "K-12",
@@ -96,6 +99,9 @@ def test_build_document_is_valid_and_ordered():
     assert doc["nomenclature"][0]["is_correct_name"] is True
     assert doc["nomenclature"][0]["publications"] == ["DOI:10.1099/00207713-30-1-225"]
     assert {s["synonym_text"] for s in doc["synonyms"]} >= {"E. coli", "Bacterium coli"}
+    lpsn_syn = [s for s in doc["synonyms"] if s["source"] == "LPSN"]
+    assert lpsn_syn == [{"synonym_text": "Bacterium coli", "synonym_type": "RELATED_SYNONYM",
+                         "source": "LPSN", "source_id": "lpsn:4361"}]
     assert "lpsn:776057" in doc["xrefs"]
     # The LPSN-linked GTDB species is the identity mapping: first, an xref,
     # a synonym, and the genome count the attestation reports. The pooled
@@ -166,6 +172,12 @@ def test_assign_paths_pins_and_disambiguates():
     paths, assignments = seed.assign_paths([a, b], {})
     assert assignments["NCBITaxon:562"] == "escherichia_coli"
     assert assignments["NCBITaxon:9999"].startswith("escherichia_coli__")
+
+
+def test_id_key_tolerates_minted_identifiers():
+    ids = ["NCBITaxon:562", "taxonmech:candidatus_x", "NCBITaxon:54", "taxonmech:a"]
+    assert sorted(ids, key=seed.id_key) == ["NCBITaxon:54", "NCBITaxon:562", "taxonmech:a",
+                                            "taxonmech:candidatus_x"]
 
 
 def test_slugify_is_filesystem_safe():
