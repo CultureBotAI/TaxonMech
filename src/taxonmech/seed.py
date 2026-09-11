@@ -162,6 +162,7 @@ class Inventory:
     gold: dict[str, int]
     madin: dict[str, int]
     bacto: dict[str, int]
+    strain_assemblies: dict[str, list[dict[str, str]]] = field(default_factory=dict)
 
     def parent(self, tid: str) -> str:
         return (self.taxa.get(tid) or {}).get("parent_id", "")
@@ -239,7 +240,11 @@ def load_inventory() -> Inventory:
     gold = {r["taxon_id"]: int(r["organism_count"]) for r in read_tsv("gold_organisms.tsv")}
     madin = {r["taxon_id"]: int(r["assertion_count"]) for r in read_tsv("madin_taxa.tsv")}
     bacto = {r["taxon_id"]: int(r["assertion_count"]) for r in read_tsv("bactotraits_taxa.tsv")}
-    return Inventory(taxa, gtdb, lpsn, lpsn_by_taxon, strains, cc_strains, media, gold, madin, bacto)
+    strain_assemblies: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for r in read_tsv("strain_assemblies.tsv"):
+        strain_assemblies[r["strain_id"]].append(r)
+    return Inventory(taxa, gtdb, lpsn, lpsn_by_taxon, strains, cc_strains, media, gold, madin, bacto,
+                     strain_assemblies)
 
 
 # ---------------------------------------------------------------------------
@@ -472,6 +477,12 @@ def build_document(concept: Concept, inv: Inventory) -> dict[str, Any]:
             entry["is_type_strain"] = True
         if s.get("medium_count") and int(s["medium_count"]):
             entry["medium_count"] = int(s["medium_count"])
+        assemblies = inv.strain_assemblies.get(s["strain_id"], [])
+        if assemblies:
+            entry["genome_assemblies"] = [
+                {key: value for key, value in assembly.items() if key != "strain_id" and value}
+                for assembly in assemblies
+            ]
         entries.append(entry)
     # Type strains first, then the best-deposited, then by BacDive id.
     entries.sort(key=lambda e: (

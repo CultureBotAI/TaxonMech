@@ -1,0 +1,34 @@
+history_version: 1
+target:
+  kind: infrastructure
+  path: src/taxonmech/extract.py
+  slug: strain-genome-links
+session:
+  id: 2026-09-11T074053Z-claude-code-e84a70
+  timestamp: '2026-09-11T07:40:53Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: gpt-6
+    agent_tool: codex
+links:
+  issues:
+  - https://github.com/CultureBotAI/TaxonMech/issues/17
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - strains
+  - genome_assemblies
+  summary: Import explicit BacDive strain-to-NCBI-assembly relationships with source provenance
+  details: 'Read the kg-microbe BacDive raw JSON and preserved 21,279 direct strain-to-assembly
+    assertions across 16,575 strains, recording 80 excluded links in dropped.tsv. Retained
+    supplied accession versions, source record and reference, assembly description, assembly
+    level and source taxon. Did not infer assemblies through species membership, pair GenBank
+    and RefSeq accessions, or turn marker sequences into genome links. A separate adversarial
+    review reproduced silent empty output for malformed source JSON; nine regressions failed
+    before the source-structure guard was added. All 67 focused extraction, seeding and write-gate
+    tests passed after the fix. Ran the seed dry run and inspected the Escherichia coli canary:
+    the type strain has six source-asserted assembly links, and other canary fields were unchanged
+    apart from the seed timestamp. Schema, complete inventory, generated record listings,
+    page templates and documentation were updated together.'

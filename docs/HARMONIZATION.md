@@ -38,16 +38,16 @@ the disagreement visible.
 | NCBI Taxonomy | `ontologies/ncbitaxon_{nodes,edges}.tsv`; ranks and typed synonyms from `data/raw/ncbitaxon.db` | `label`, `rank`, `parent_taxon`, `lineage`, `synonyms`, `genetic_code`, the `NCBITAXON` attestation |
 | LPSN | `lpsn/{nodes,edges}.tsv`, `lpsn_api/{nodes,edges}.tsv` | `nomenclature` (authority, status, type strain designations, publications, 16S accessions), `synonyms` from `same_as`, an `xref` to the correct name, the `LPSN` attestation |
 | GTDB | `gtdb/{nodes,edges}.tsv` | `taxonomy_mappings` with the predicate and genome count, an `xref` when the match is `closeMatch`, a synonym for GTDB's spelling, the `GTDB` attestation counting genomes |
-| BacDive | `bacdive/{nodes,edges}.tsv` | `strains` (designation, deposits, `is_type_strain`), `strain_count`, the `BACDIVE` attestation |
+| BacDive | `bacdive/{nodes,edges}.tsv`; `data/raw/bacdive_strains.json` | `strains` (designation, deposits, `is_type_strain`, explicit `genome_assemblies`), `strain_count`, the `BACDIVE` attestation |
 | MediaDive | `mediadive/edges.tsv` | `medium_count` per strain and the `MEDIADIVE` attestation counting media |
 | GOLD | `gold/edges.tsv` | the `GOLD` attestation counting organisms |
 | Madin et al., BactoTraits | `madin_etal/edges.tsv`, `bactotraits/edges.tsv` | attestations counting trait assertions |
 
-Rank is the one field taken from a **raw** rather than transformed kg-microbe
-input: the KGX transform of NCBITaxon does not carry `has_rank`, and a taxon
-record without a rank is hard to read. The semantic-sql build kg-microbe keeps
-for its own transform is queried directly, and listed in the manifest like any
-other input.
+Two raw inputs restore information absent from the KGX transforms: NCBI's
+semantic-sql build supplies rank and typed synonyms, and BacDive's JSON
+supplies direct strain-to-assembly assertions. Both are hashed in the
+manifest. Genome links are joined by BacDive strain ID, never by shared
+species membership or strain-name matching; see [STRAIN_GENOMES.md](STRAIN_GENOMES.md).
 
 ## Mapping predicates
 
@@ -145,3 +145,8 @@ then the strains with the most culture-collection deposits, then by BacDive
 id. `strain_count` always gives the full number, and
 `data/raw/bacdive_strains.tsv` holds every strain with its taxon. The cap is a
 readability decision; the data is not lost.
+
+`data/raw/strain_assemblies.tsv` likewise keeps every imported assembly link
+for the inventoried strains. Join it to `bacdive_strains.tsv` on `strain_id`
+for the complete mapping to culture-collection identifiers. Listing caps do
+not truncate either inventory.

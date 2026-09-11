@@ -23,6 +23,8 @@ Sources read (all under the kg-microbe checkout):
   cited publications and INSDC sequence accessions per name.
 * ``data/transformed/bacdive/{nodes,edges}.tsv`` — BacDive strains, their
   NCBI and LPSN parents, and their culture-collection deposits.
+* ``data/raw/bacdive_strains.json`` — strain-to-assembly assertions that
+  the BacDive KGX transform does not carry.
 * ``data/transformed/mediadive/edges.tsv`` — growth media per taxon / strain.
 * ``data/transformed/gold/edges.tsv`` — GOLD organisms per taxon.
 * ``data/transformed/madin_etal/edges.tsv``, ``bactotraits/edges.tsv`` —
@@ -56,6 +58,7 @@ from collections.abc import Iterator
 from pathlib import Path
 from typing import Any
 
+import ijson
 import yaml
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -79,6 +82,11 @@ ATTESTING_SOURCES = ("bacdive", "lpsn", "mediadive", "gold", "madin_etal", "bact
 
 _STRAIN_NAME = re.compile(r"^bacdive_(?P<id>\d+) (?:as (?P<designation>.+?) of|strain of) NCBITaxon:\d+$")
 _LPSN_URL_RANK = re.compile(r"^https://lpsn\.dsmz\.de/(?P<rank>[a-z]+)/")
+_ASSEMBLY_ACCESSION = re.compile(r"GC[AF]_[0-9]{9}(?:\.[1-9][0-9]*)?")
+ASSEMBLY_FIELDS = [
+    "strain_id", "assembly_id", "source", "source_id", "source_reference_id",
+    "assembly_level", "assembly_name", "taxon_id",
+]
 
 
 # csv's default field-size limit (128 KiB) is smaller than some kg-microbe
@@ -154,8 +162,8 @@ def load_ranks_and_synonyms(db_path: Path) -> tuple[dict[str, str], dict[str, di
     """Read has_rank and typed synonyms from the semantic-sql NCBITaxon build.
 
     The KGX transform carries neither rank nor synonym scope, and both are what
-    make a taxon record readable, so this is the one raw (non-transformed)
-    kg-microbe input the extractor touches.
+    make a taxon record readable, so these fields come directly from the raw
+    (non-transformed) kg-microbe input.
     """
     if not db_path.exists():
         raise FileNotFoundError(
@@ -202,6 +210,77 @@ def ancestors_of(taxa: set[str], parents: dict[str, str]) -> set[str]:
 # ---------------------------------------------------------------------------
 # Attesting sources
 # ---------------------------------------------------------------------------
+
+def extract_bacdive_assemblies(
+    path: Path, strain_ids: set[str],
+) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
+    """Keep explicit BacDive strain-to-NCBI-assembly assertions, without inference.
+
+    Read only ``Genome sequences``; 16S accessions, chromosome sequences,
+    WGS projects, PATRIC and IMG identifiers are not NCBI assembly IDs.
+    Keep missing versions missing, and never manufacture a GCF from a GCA.
+    A row is an assertion by BacDive, not proof of identical isolates or an
+    equivalence between the assembly and the strain's culture deposits.
+    """
+    rows: dict[tuple[str, ...], dict[str, str]] = {}
+    dropped = []
+    with path.open("rb") as fh:
+        events = ijson.parse(fh)
+        if next(events, None) != ("", "start_array", None):
+            raise ValueError("BacDive source must be a JSON array of strain records")
+        for record in ijson.items(events, "item"):
+            if not isinstance(record, dict):
+                raise ValueError("BacDive strain record must be an object")
+            sequences = record.get("Sequence information")
+            if sequences is None:
+                continue
+            if not isinstance(sequences, dict):
+                raise ValueError("BacDive Sequence information must be an object")
+            genomes = sequences.get("Genome sequences")
+            if genomes is None:
+                continue
+            if isinstance(genomes, dict):
+                genomes = [genomes]
+            if not isinstance(genomes, list) or any(not isinstance(g, dict) for g in genomes):
+                raise ValueError("BacDive Genome sequences must contain genome objects")
+            for genome in genomes:
+                accession = str(genome.get("accession") or "").strip()
+                if not accession.startswith(("GCA_", "GCF_")):
+                    continue
+                bid = str((record.get("General") or {}).get("BacDive-ID") or "")
+                if not bid.isdigit():
+                    raise ValueError(f"assembly {accession}: missing or invalid BacDive-ID {bid!r}")
+                sid = f"kgmicrobe.strain:bacdive_{bid}"
+                reason = ""
+                if not _ASSEMBLY_ACCESSION.fullmatch(accession):
+                    reason = "malformed NCBI assembly accession in BacDive Genome sequences"
+                elif sid not in strain_ids:
+                    reason = "BacDive strain absent from bacdive_strains.tsv"
+                if reason:
+                    dropped.append({"kind": "bacdive_assembly", "id": f"{sid}/{accession}",
+                                    "reason": reason})
+                    continue
+                taxon = str(genome.get("NCBI tax ID") or "")
+                ref = str(genome.get("@ref") or "")
+                if taxon and not taxon.isdigit():
+                    raise ValueError(f"{sid}/{accession}: invalid NCBI tax ID {taxon!r}")
+                if ref and not ref.isdigit():
+                    raise ValueError(f"{sid}/{accession}: invalid BacDive reference ID {ref!r}")
+                row = {
+                    "strain_id": sid,
+                    "assembly_id": f"ncbi.assembly:{accession}",
+                    "source": "BACDIVE",
+                    "source_id": f"bacdive:{bid}",
+                    "source_reference_id": ref,
+                    "assembly_level": str(genome.get("assembly level") or ""),
+                    "assembly_name": str(genome.get("description") or ""),
+                    "taxon_id": f"NCBITaxon:{taxon}" if taxon else "",
+                }
+                # Deduplicate only identical assertions. Distinct references,
+                # versions and conflicting source metadata remain visible.
+                rows[tuple(row[field] for field in ASSEMBLY_FIELDS)] = row
+    return [rows[key] for key in sorted(rows)], sorted(dropped, key=lambda r: (r["id"], r["reason"]))
+
 
 def extract_bacdive(kgm: Path) -> tuple[dict[str, dict[str, Any]], dict[str, set[str]]]:
     """Return (strains, cc_parents).
@@ -467,6 +546,7 @@ INPUTS = [
     "data/transformed/lpsn_api/edges.tsv",
     "data/transformed/bacdive/nodes.tsv",
     "data/transformed/bacdive/edges.tsv",
+    "data/raw/bacdive_strains.json",
     "data/transformed/mediadive/edges.tsv",
     "data/transformed/gold/edges.tsv",
     "data/transformed/madin_etal/edges.tsv",
@@ -619,6 +699,12 @@ def main(argv: list[str] | None = None) -> int:
     cc_rows = [{"strain_id": cc, "taxon_ids": joined(tids)}
                for cc, tids in sorted(cc_parents.items()) if tids & universe]
 
+    print("reading BacDive strain-to-assembly links ...", flush=True)
+    assembly_rows, assembly_drops = extract_bacdive_assemblies(
+        kgm / "data/raw/bacdive_strains.json", {r["strain_id"] for r in strain_rows},
+    )
+    dropped_rows.extend(assembly_drops)
+
     media_rows = [{"taxon_id": t, "medium_count": len(m), "media_ids": joined(m)}
                   for t, m in sorted(taxon_media.items()) if t in universe]
     gold_rows = [{"taxon_id": t, "organism_count": n} for t, n in sorted(gold.items()) if t in universe]
@@ -636,6 +722,7 @@ def main(argv: list[str] | None = None) -> int:
                             "publications", "sequence_accessions"], lpsn_rows),
         ("bacdive_strains.tsv", ["strain_id", "bacdive_id", "designation", "taxon_ids", "lpsn_ids",
                                  "culture_collection_ids", "medium_count"], strain_rows),
+        ("strain_assemblies.tsv", ASSEMBLY_FIELDS, assembly_rows),
         ("culture_collection_strains.tsv", ["strain_id", "taxon_ids"], cc_rows),
         ("mediadive_taxa.tsv", ["taxon_id", "medium_count", "media_ids"], media_rows),
         ("gold_organisms.tsv", ["taxon_id", "organism_count"], gold_rows),

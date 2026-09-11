@@ -92,7 +92,13 @@ a curator's job is to say so in a discussion, not to pick one silently.
 
 A strain entry is an identity — the BacDive id, the designation, the
 culture-collection deposits, and `classified_as` when BacDive files it under
-a descendant taxon — and one derived flag, `is_type_strain`. Nothing
+a descendant taxon — with explicit `genome_assemblies` and one derived flag,
+`is_type_strain`. Strain-to-genome relationships are a primary curation
+priority: retain the source record asserting each link, multiple assemblies,
+and source-supplied accession versions. A shared species name or taxon ID
+does not establish a link. Assemblies, BioSamples, marker-gene sequences and
+culture deposits denote different things; see [STRAIN_GENOMES.md](STRAIN_GENOMES.md).
+Nothing
 about the strain's phenotype, medium or isolation source lives here; those
 belong to the sibling repositories that model them. `medium_count` is kept
 because it says how well characterised the strain is, which is what a reader
