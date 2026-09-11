@@ -57,13 +57,22 @@ SEED_CURATOR = "seed_from_sources"
 # record. Type strains come first.
 STRAIN_LISTING_CAP = 200
 
-# Ranks whose records gather strains from their NCBI subtree. BacDive files a
-# type strain under a strain-level taxon ("Acinetobacter baumannii ATCC 19606
-# = CIP 70.34") at least as often as under the species, so a species record
-# that looked only at strains filed directly under NCBITaxon:470 would miss
-# its own type strain. Higher ranks do not gather: a genus record listing
-# every strain of every species would be noise.
-SUBTREE_STRAIN_RANKS = {"SPECIES", "SUBSPECIES"}
+# REPOSITORY RULE: TaxonMech records are species-level and below. A record is
+# a species, or an infraspecific taxon (subspecies, strain, serotype, ...), or
+# an unranked NCBI taxon that sits under a species. Genera and higher ranks
+# are never records: they appear only as lineage entries, carried verbatim
+# from NCBI Taxonomy. TaxonMech does not reconcile the NCBI, GTDB and LPSN
+# hierarchies with one another, does not resolve conflicts between them, and
+# never infers a placement. The lineage is NCBI's, as NCBI states it.
+INFRASPECIFIC_RANKS = {
+    "SUBSPECIES", "STRAIN", "VARIETAS", "SUBVARIETY", "FORMA", "FORMA_SPECIALIS",
+    "SEROTYPE", "SEROGROUP", "BIOTYPE", "GENOTYPE", "ISOLATE", "MORPH", "PATHOGROUP",
+}
+RECORD_RANKS = {"SPECIES"} | INFRASPECIFIC_RANKS
+# These entries need ancestry to establish their level. The inventory has
+# CLADE entries beneath species; an explicitly higher rank must never use
+# this fallback, even if an upstream parent assignment is inconsistent.
+ANCESTRY_DEPENDENT_RANKS = {"", "NO_RANK", "CLADE"}
 
 DOMAIN_ROOTS = {
     "NCBITaxon:2": "BACTERIA",
@@ -191,6 +200,16 @@ class Inventory:
             cur = self.parent(cur)
         return list(reversed(chain))
 
+    def is_species_or_below(self, tid: str) -> bool:
+        """The repository rule: a record is a species, an infraspecific taxon,
+        or an unranked/clade taxon with a species above it."""
+        rank = (self.taxa.get(tid) or {}).get("rank", "")
+        if rank in RECORD_RANKS:
+            return True
+        if rank not in ANCESTRY_DEPENDENT_RANKS:
+            return False
+        return any((self.taxa.get(a) or {}).get("rank") == "SPECIES" for a in self.lineage(tid))
+
     def domain(self, tid: str) -> str:
         for ancestor in [tid, *self.lineage(tid)]:
             if ancestor in DOMAIN_ROOTS:
@@ -265,6 +284,12 @@ def build_concepts(inv: Inventory, identifiers: list[str]) -> list[Concept]:
         row = inv.taxa.get(tid)
         if row is None:
             raise SystemExit(f"{tid} is not in data/raw/ncbitaxon_taxa.tsv; re-extract or fix the scope")
+        if not inv.is_species_or_below(tid):
+            raise SystemExit(
+                f"{tid} ({row['label']}, rank {row['rank'] or 'NO_RANK'}) is above species level. "
+                "TaxonMech records are species and strains only; higher taxa appear as lineage entries. "
+                "Remove it from curation/seed_scope.tsv."
+            )
         c = Concept(tid, row["label"], row["rank"] or "NO_RANK", inv.domain(tid), row)
         c.sources = set(split(row["attested_by"]))
         if inv.gtdb.get(tid):
@@ -412,14 +437,17 @@ def build_document(concept: Concept, inv: Inventory) -> dict[str, Any]:
         doc["genetic_code"] = int(row["genetic_code"])
 
     # --- strains (BacDive) ------------------------------------------------------
+    # BacDive files a type strain under a strain-level taxon ("Acinetobacter
+    # baumannii ATCC 19606 = CIP 70.34") at least as often as under the
+    # species, so a record gathers the strains of its whole NCBI subtree.
+    # Every record is species-level or below, so the subtree is small.
     strain_sources: list[tuple[str, dict[str, str]]] = [(tid, s) for s in inv.strains.get(tid, [])]
     descendant_taxa: list[str] = []
-    if concept.rank in SUBTREE_STRAIN_RANKS:
-        for desc in inv.descendants(tid):
-            rows = inv.strains.get(desc, [])
-            if rows:
-                descendant_taxa.append(desc)
-                strain_sources.extend((desc, s) for s in rows)
+    for desc in inv.descendants(tid):
+        rows = inv.strains.get(desc, [])
+        if rows:
+            descendant_taxa.append(desc)
+            strain_sources.extend((desc, s) for s in rows)
     seen_strains: set[str] = set()
     strain_rows = []
     entries = []
@@ -511,7 +539,7 @@ def build_document(concept: Concept, inv: Inventory) -> dict[str, Any]:
     # These counts are direct-only: unlike strains, records filed under
     # descendant taxa are not gathered (#8; see docs/HARMONIZATION.md).
     direct = ({"notes": "Records filed directly under this taxon; descendant taxa are not gathered."}
-              if concept.rank in SUBTREE_STRAIN_RANKS and inv.descendants(tid) else {})
+              if inv.descendants(tid) else {})
     for source, table, unit, value in (
         ("MEDIADIVE", inv.media, "MEDIUM", lambda r: int(r["medium_count"])),
         ("GOLD", inv.gold, "ORGANISM", lambda n: n),
@@ -649,7 +677,8 @@ def build_corpus(*, everything: bool = False) -> Corpus:
     inv = load_inventory()
     scope = load_scope()
     if everything:
-        identifiers = sorted((t for t, r in inv.taxa.items() if r.get("attested_by")), key=id_key)
+        identifiers = sorted((t for t, r in inv.taxa.items()
+                              if r.get("attested_by") and inv.is_species_or_below(t)), key=id_key)
     else:
         identifiers = sorted(scope, key=id_key)
     concepts = build_concepts(inv, identifiers)
@@ -671,7 +700,8 @@ def main(argv: list[str] | None = None) -> int:
                              "Use for the one-record canary before a bulk run.")
     parser.add_argument("--limit", type=int, help="Seed at most N records (after sorting by identifier).")
     parser.add_argument("--all", action="store_true",
-                        help="Seed every attested taxon in the inventory, not just curation/seed_scope.tsv.")
+                        help="Seed every attested species-or-below taxon in the inventory, "
+                             "not just curation/seed_scope.tsv.")
     args = parser.parse_args(argv)
 
     corpus = build_corpus(everything=args.all)

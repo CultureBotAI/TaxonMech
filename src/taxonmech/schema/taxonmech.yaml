@@ -3,10 +3,12 @@ name: taxonmech
 title: TaxonMech - Microbial Taxon and Strain Schema
 description: |
   LinkML schema for microbial taxa and the strains that stand behind them.
-  Each TaxonRecord is one taxon — "Escherichia coli", "Abditibacterium
-  utsteinense", "Methanococcus" — identified by its NCBI Taxonomy CURIE and
-  harmonized across the taxonomic and strain sources that kg-microbe
-  transforms:
+  Each TaxonRecord is one species-level or lower taxon — "Escherichia coli",
+  "Abditibacterium utsteinense", "Escherichia coli K-12" — identified by its
+  NCBI Taxonomy CURIE and harmonized across the taxonomic and strain sources
+  that kg-microbe transforms. Higher taxa are never records; they appear only
+  as lineage entries carried verbatim from NCBI, which TaxonMech does not
+  reconcile with GTDB or LPSN and never infers. The sources:
 
     * NCBI Taxonomy (the identity backbone: label, rank, lineage, synonyms),
     * GTDB (genome-based species and their assemblies, mapped to NCBI taxa),

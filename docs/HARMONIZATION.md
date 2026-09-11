@@ -20,6 +20,17 @@ the seeder does not mint: doing so would need a rule for when two sources'
 unmapped taxa are the same taxon, and that rule should be argued for on real
 examples first.
 
+## Scope and lineage
+
+Records are species-level and below; see [CURATION.md](CURATION.md). The
+consequence for harmonization is that TaxonMech never has to place a taxon:
+every record's `lineage` is NCBI's parent chain as the inventory carries it,
+root first. GTDB's tree and LPSN's parent names are not merged into it,
+conflicts between the three are not resolved, and no placement is inferred
+for a taxon a source leaves unplaced. Where the trees disagree, the record
+shows NCBI's lineage and the other sources' mappings side by side and leaves
+the disagreement visible.
+
 ## What each source contributes
 
 | Source | kg-microbe input | Contribution to the record |
@@ -69,12 +80,12 @@ type strain that is often a strain-level taxon of its own: the type strain of
 *Acinetobacter baumannii* is filed under `NCBITaxon:575584` "Acinetobacter
 baumannii ATCC 19606 = CIP 70.34", not under the species. A species record
 that looked only at strains filed directly under its own id would miss its
-type strain. So a **species or subspecies** record gathers every BacDive
-strain filed under its NCBI subtree, and each gathered strain says where it
-came from in `classified_as`. Records above species do not gather: a genus
-listing every strain of every species is noise, and the count would be
-meaningless. The `BACDIVE` attestation counts what the record gathered and
-notes how many strains came from descendants.
+type strain. So a record gathers every BacDive strain filed under its NCBI
+subtree, and each gathered strain says where it came from in
+`classified_as`. Because every record is species-level or below, that
+subtree is small and the count is meaningful. The `BACDIVE` attestation
+counts what the record gathered and notes how many strains came from
+descendants.
 
 This gathering is deliberately asymmetric: the `GOLD`, `MEDIADIVE`, `MADIN`
 and `BACTOTRAITS` counts remain what each source files *directly* under the
