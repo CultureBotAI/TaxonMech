@@ -43,44 +43,58 @@ def test_lockfile_has_no_entries_without_a_record(records):
 def test_every_record_is_species_level_or_below(records):
     """Repository rule: TaxonMech records are species and strains. A record
     above species level is a scope error; higher taxa live in `lineage`."""
-    from taxonmech.seed import RECORD_RANKS
+    from taxonmech.seed import ANCESTRY_DEPENDENT_RANKS, RECORD_RANKS
 
     bad = []
     for path, doc in records:
         if doc.get("rank") in RECORD_RANKS:
             continue
-        if any(a.get("rank") == "SPECIES" for a in doc.get("lineage") or []):
+        if doc.get("rank") in ANCESTRY_DEPENDENT_RANKS and any(
+            a.get("rank") == "SPECIES" for a in doc.get("lineage") or []
+        ):
             continue
         bad.append(f"{path.name}: rank {doc.get('rank')}")
     assert not bad, bad
 
 
-def _ncbi_parents(repo_root):
-    parents = {}
+def _ncbi_taxa(repo_root):
     with (repo_root / "data" / "raw" / "ncbitaxon_taxa.tsv").open(newline="", encoding="utf-8") as fh:
-        for row in csv.DictReader(fh, delimiter="\t"):
-            parents[row["taxon_id"]] = row["parent_id"]
-    return parents
+        return {row["taxon_id"]: row for row in csv.DictReader(fh, delimiter="\t")}
+
+
+def _ncbi_parents(repo_root):
+    return {tid: row["parent_id"] for tid, row in _ncbi_taxa(repo_root).items()}
 
 
 def test_lineage_is_a_single_chain_carried_from_ncbi(records, repo_root):
-    """Lineage is carried verbatim: root first, each entry the NCBI parent of
-    the next, ending at parent_taxon, which is the record's own NCBI parent.
-    TaxonMech never reconciles or infers it (#14)."""
-    parents = _ncbi_parents(repo_root)
+    """Compare the full lineage with an independent inventory walk, including
+    labels and ranks. Missing ancestry cannot bypass this check (#14, #15)."""
+    taxa = _ncbi_taxa(repo_root)
     bad = []
     for path, doc in records:
-        lineage = [a["taxon_id"] for a in doc.get("lineage") or []]
-        if not lineage:
+        row = taxa.get(doc["identifier"])
+        if row is None:
+            bad.append(f"{path.name}: identifier is absent from the NCBI inventory")
             continue
-        if lineage[0] != "NCBITaxon:1":
-            bad.append(f"{path.name}: lineage does not start at root")
-        chain = [*lineage, doc["identifier"]]
-        for parent, child in zip(chain, chain[1:], strict=False):
-            if parents.get(child) != parent:
-                bad.append(f"{path.name}: {parent} is not NCBI's parent of {child}")
-        if doc.get("parent_taxon") != lineage[-1]:
-            bad.append(f"{path.name}: parent_taxon is not the last lineage entry")
+        if doc.get("parent_taxon") != row["parent_id"]:
+            bad.append(f"{path.name}: parent_taxon differs from NCBI")
+        expected = []
+        cur = row["parent_id"]
+        seen = {doc["identifier"]}
+        while cur:
+            if cur in seen or cur not in taxa:
+                bad.append(f"{path.name}: broken NCBI parent chain at {cur}")
+                break
+            seen.add(cur)
+            ancestor = taxa[cur]
+            expected.append({"taxon_id": cur, "taxon_label": ancestor["label"],
+                             "rank": ancestor["rank"] or "NO_RANK"})
+            cur = ancestor["parent_id"]
+        expected.reverse()
+        if not expected or expected[0]["taxon_id"] != "NCBITaxon:1":
+            bad.append(f"{path.name}: NCBI ancestry does not reach root")
+        if doc.get("lineage") != expected:
+            bad.append(f"{path.name}: lineage differs from NCBI identifiers, labels, or ranks")
     assert not bad, bad
 
 

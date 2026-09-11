@@ -14,6 +14,10 @@ rank are never records; they appear only as `lineage` entries. The seeder
 refuses a higher taxon in the scope and `tests/test_corpus_integrity.py`
 enforces it on the corpus.
 
+Ancestry determines eligibility only for `NO_RANK` (including an empty
+inventory rank) and `CLADE` entries. An explicitly higher rank remains out
+of scope even if its inventory parent chain contains a species.
+
 **Lineage is carried, not curated.** `lineage` is NCBI Taxonomy's parent
 chain, verbatim. TaxonMech does not reconcile the NCBI, GTDB and LPSN
 hierarchies, does not resolve disagreements between them, and never infers a

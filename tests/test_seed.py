@@ -149,6 +149,40 @@ def test_strain_level_and_unranked_taxa_under_a_species_are_records():
     assert [c.rank for c in concepts] == ["STRAIN", "NO_RANK"]
 
 
+@pytest.mark.parametrize("rank", ["GENUS", "FAMILY", "DOMAIN", "SPECIES_GROUP", "SPECIES_SUBGROUP"])
+def test_species_ancestor_does_not_admit_a_higher_rank(rank):
+    inv = _inventory()
+    inv.taxa["NCBITaxon:83333"]["rank"] = rank
+    assert not inv.is_species_or_below("NCBITaxon:83333")
+    with pytest.raises(SystemExit, match="above species level"):
+        seed.build_concepts(inv, ["NCBITaxon:83333"])
+
+
+@pytest.mark.parametrize("rank", ["NO_RANK", "", "CLADE"])
+def test_position_dependent_ranks_need_a_species_ancestor(rank):
+    inv = _inventory()
+    inv.taxa["NCBITaxon:83333"]["rank"] = rank
+    assert inv.is_species_or_below("NCBITaxon:83333")
+    inv.taxa["NCBITaxon:83333"]["parent_id"] = "NCBITaxon:2"
+    assert not inv.is_species_or_below("NCBITaxon:83333")
+
+
+def test_all_scope_and_proposals_exclude_higher_ranks_under_species(monkeypatch, capsys):
+    from scripts import propose_scope
+
+    inv = _inventory()
+    inv.taxa["NCBITaxon:83333"]["rank"] = "GENUS"
+    monkeypatch.setattr(seed, "load_inventory", lambda: inv)
+    monkeypatch.setattr(seed, "load_scope", dict)
+    monkeypatch.setattr(seed, "load_lockfile", dict)
+    assert [c.identifier for c in seed.build_corpus(everything=True).concepts] == ["NCBITaxon:562"]
+
+    monkeypatch.setattr(propose_scope, "load_inventory", lambda: inv)
+    assert propose_scope.main(["--rule", "attested", "--rank", ""]) == 0
+    proposed = capsys.readouterr().out.splitlines()
+    assert [line.split("\t")[0] for line in proposed[1:]] == ["NCBITaxon:562"]
+
+
 def test_build_document_is_deterministic():
     inv = _inventory()
     concept = seed.build_concepts(inv, ["NCBITaxon:562"])[0]

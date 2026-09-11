@@ -69,6 +69,10 @@ INFRASPECIFIC_RANKS = {
     "SEROTYPE", "SEROGROUP", "BIOTYPE", "GENOTYPE", "ISOLATE", "MORPH", "PATHOGROUP",
 }
 RECORD_RANKS = {"SPECIES"} | INFRASPECIFIC_RANKS
+# These entries need ancestry to establish their level. The inventory has
+# CLADE entries beneath species; an explicitly higher rank must never use
+# this fallback, even if an upstream parent assignment is inconsistent.
+ANCESTRY_DEPENDENT_RANKS = {"", "NO_RANK", "CLADE"}
 
 DOMAIN_ROOTS = {
     "NCBITaxon:2": "BACTERIA",
@@ -198,10 +202,12 @@ class Inventory:
 
     def is_species_or_below(self, tid: str) -> bool:
         """The repository rule: a record is a species, an infraspecific taxon,
-        or an unranked taxon with a species above it."""
+        or an unranked/clade taxon with a species above it."""
         rank = (self.taxa.get(tid) or {}).get("rank", "")
         if rank in RECORD_RANKS:
             return True
+        if rank not in ANCESTRY_DEPENDENT_RANKS:
+            return False
         return any((self.taxa.get(a) or {}).get("rank") == "SPECIES" for a in self.lineage(tid))
 
     def domain(self, tid: str) -> str:
