@@ -38,6 +38,10 @@ def summarize(records: list[tuple[Path, dict]]) -> dict:
                                  for _, d in records)
     strain_total = sum(d.get("strain_count") or 0 for _, d in records)
     strains_listed = sum(len(d.get("strains") or []) for _, d in records)
+    # Listed strain coverage only. Deduplicate when a strain occurs in both
+    # a species and a descendant record, or the source cites it twice.
+    assembly_pairs = {(s["strain_id"], a["assembly_id"]) for _, d in records
+                      for s in d.get("strains") or [] for a in s.get("genome_assemblies") or []}
     with_type_strain = sum(1 for _, d in records
                            if any(s.get("is_type_strain") for s in d.get("strains") or []))
     with_lpsn = sum(1 for _, d in records if d.get("nomenclature"))
@@ -60,6 +64,9 @@ def summarize(records: list[tuple[Path, dict]]) -> dict:
         "sources_per_record": dict(sorted(sources_per_record.items())),
         "strain_total": strain_total,
         "strains_listed": strains_listed,
+        "listed_strains_with_assemblies": len({sid for sid, _ in assembly_pairs}),
+        "listed_strain_assembly_links": len(assembly_pairs),
+        "listed_assemblies": len({aid for _, aid in assembly_pairs}),
         "records_with_capped_listing": capped,
         "with_type_strain": with_type_strain,
         "with_lpsn": with_lpsn,
@@ -101,6 +108,11 @@ def main(argv: list[str] | None = None) -> int:
         f"\nStrains: {s['strain_total']} classified, {s['strains_listed']} listed "
         f"({s['records_with_capped_listing']} records capped); "
         f"{s['with_type_strain']} records list a type strain"
+    )
+    print(
+        f"Listed strain-to-assembly links: {s['listed_strain_assembly_links']} pairs, "
+        f"{s['listed_strains_with_assemblies']} strains, {s['listed_assemblies']} assembly identifiers "
+        "(deduplicated; full inventory in data/raw/strain_assemblies.tsv)"
     )
     print(
         f"LPSN: {s['with_lpsn']} records carry nomenclature, {s['with_correct_name']} with a correct name   "

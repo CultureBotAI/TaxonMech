@@ -11,6 +11,14 @@ GOLD, Madin et al. and BactoTraits. One generated YAML record lives under
 inventories in `data/raw/` and the scope in `curation/seed_scope.tsv` are the
 reproducible inputs.
 
+**A primary use case is strain identifier to genome identifier relationships.**
+Prioritize evidence-backed links from BacDive and culture-collection strain
+identifiers to genome assemblies, including multiple assemblies per strain.
+Keep strain identity, taxon classification and assembly identity distinct;
+shared taxonomy or a matching strain name is not evidence of an assembly
+link. Preserve source provenance and supplied accession versions. See
+[docs/STRAIN_GENOMES.md](docs/STRAIN_GENOMES.md).
+
 Read these before changing domain behavior:
 
 - [README.md](README.md) — public model and generated current statistics.

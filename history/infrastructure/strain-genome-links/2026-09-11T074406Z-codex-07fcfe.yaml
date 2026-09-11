@@ -1,0 +1,36 @@
+history_version: 1
+target:
+  kind: infrastructure
+  path: src/taxonmech/extract.py
+  slug: strain-genome-links
+session:
+  id: 2026-09-11T074406Z-codex-07fcfe
+  timestamp: '2026-09-11T07:44:06Z'
+  actors:
+  - type: ai_agent
+    name: codex
+    model: gpt-6
+    agent_tool: codex
+links:
+  issues:
+  - https://github.com/CultureBotAI/TaxonMech/issues/17
+  - https://github.com/CultureBotAI/TaxonMech/issues/18
+events:
+- type: REVIEW
+  outcome: changed
+  sections:
+  - strains
+  - genome_assemblies
+  summary: Adversarial review and validation of strain-to-assembly import
+  details: 'Correction to history/infrastructure/strain-genome-links/2026-09-11T074053Z-claude-code-e84a70.yaml:
+    the actor name claude-code was an unmodified scaffolder default. Codex, using model gpt-6
+    and agent_tool codex, performed that work and this review. The original record is preserved.
+    Full just qc passed with 227 tests passed and 3 skipped. The hardened extractor reproduced
+    21,279 committed assembly assertions and 80 documented exclusions. All 100 corpus records
+    retained their prior fields apart from added assembly links and the seed event timestamp;
+    98 records contain links, with 1,288 distinct strain-assembly pairs for 622 listed strains.
+    The E. coli HTML contains all 118 assembly links in its record and preserves source references
+    and the unspecified-version explanation. A further review found BacDive 299 has PATRIC
+    genome 1353889.4 but no imported NCBI assembly link, so the page empty state and documentation
+    now explicitly describe NCBI import coverage. Neither absence of an imported link nor
+    shared taxonomy is treated as a biological genome assertion.'

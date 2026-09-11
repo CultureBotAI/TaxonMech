@@ -49,9 +49,14 @@
 {% if r.strain_count %}
 <h2>Strains</h2>
 <p><small>{{ r.strain_count }} BacDive strain{{ "" if r.strain_count == 1 else "s" }} classified here{% if r.strains and r.strains | length < r.strain_count %}; the {{ r.strains | length }} listed are the type strains and the best-deposited, see <code>data/raw/bacdive_strains.tsv</code> for all{% endif %}.</small></p>
-<table><thead><tr><th>Strain</th><th>Designation</th><th>Culture collections</th><th>Type</th><th>Media</th></tr></thead><tbody>
+<p><small>These NCBI genome assemblies are linked by BacDive to each strain. Versions are shown as supplied; accessions without a version suffix have unspecified version. A source link may include a substrain. Genome IDs from other databases are not yet imported. The <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/data/raw/strain_assemblies.tsv">complete strain-to-NCBI-assembly inventory</a> includes strains omitted from this listing.</small></p>
+<table><thead><tr><th>Strain</th><th>Designation</th><th>Culture collections</th><th>Type</th><th>Media</th><th>NCBI genome assemblies</th></tr></thead><tbody>
 {% for s in r.strains %}
-<tr id="strains-{{ s.strain_id | replace(':', '-') }}"><td>{{ curie(s.source_id) }}</td><td>{{ s.designation or "" }}</td><td>{% for c in s.culture_collection_ids or [] %}<code>{{ c | replace("kgmicrobe.strain:", "") | replace("-", " ") }}</code>{% if not loop.last %}, {% endif %}{% endfor %}</td><td>{% if s.is_type_strain %}<strong>type strain</strong>{% endif %}</td><td>{{ s.medium_count or "" }}</td></tr>
+<tr id="strains-{{ s.strain_id | replace(':', '-') }}"><td>{{ curie(s.source_id) }}</td><td>{{ s.designation or "" }}</td><td>{% for c in s.culture_collection_ids or [] %}<code>{{ c | replace("kgmicrobe.strain:", "") | replace("-", " ") }}</code>{% if not loop.last %}, {% endif %}{% endfor %}</td><td>{% if s.is_type_strain %}<strong>type strain</strong>{% endif %}</td><td>{{ s.medium_count or "" }}</td><td>
+{% if s.genome_assemblies %}<details><summary>{{ s.genome_assemblies | map(attribute='assembly_id') | unique | list | length }} assembly identifier(s)</summary><ul>
+{% for a in s.genome_assemblies %}<li>{{ curie(a.assembly_id) }}{% if a.assembly_level %} · {{ a.assembly_level }}{% endif %}{% if a.assembly_name %}<br>{{ a.assembly_name }}{% endif %}<br><small>Source: {{ curie(a.source_id) }}{% if a.source_reference_id %}, reference {{ a.source_reference_id }}{% endif %}{% if a.taxon_id %}; assembly taxon: {{ curie(a.taxon_id) }}{% endif %}</small></li>{% endfor %}
+</ul></details>{% else %}<small>No NCBI assembly link imported</small>{% endif %}
+</td></tr>
 {% endfor %}
 </tbody></table>
 {% endif %}

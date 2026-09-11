@@ -14,7 +14,8 @@ description: |
     * GTDB (genome-based species and their assemblies, mapped to NCBI taxa),
     * LPSN (nomenclature: validly published names, correct-name status,
       authorities, type strain designations),
-    * BacDive (strain records with culture-collection deposits),
+    * BacDive (strain records with culture-collection deposits and explicit
+      links to genome assemblies),
     * MediaDive, JGI GOLD, Madin et al. and BactoTraits (what else is known
       about the taxon, as assertion counts that say how much data sits behind it).
 
@@ -426,7 +427,7 @@ classes:
         range: string
 
   StrainEntry:
-    description: One strain classified under this taxon.
+    description: One strain classified under this taxon, with its deposits and source-reported assemblies.
     attributes:
       strain_id:
         description: The kg-microbe strain CURIE (kgmicrobe.strain:bacdive_100253).
@@ -469,8 +470,59 @@ classes:
       medium_count:
         description: Growth media MediaDive links to this strain.
         range: integer
+      genome_assemblies:
+        description: >-
+          Explicit source assertions linking this strain to NCBI genome
+          assemblies. Multiple assemblies per strain and multiple strains
+          per assembly are allowed. Sharing a taxon is not link evidence.
+        multivalued: true
+        inlined_as_list: true
+        range: GenomeAssemblyLink
       notes:
         range: string
+
+  GenomeAssemblyLink:
+    description: >-
+      A source-reported strain-to-assembly relationship. This is neither
+      taxonomic classification nor identifier equivalence. It does not
+      establish that every culture deposit has identical sequence. BacDive
+      may associate assemblies of substrains with one strain record.
+    attributes:
+      assembly_id:
+        description: >-
+          NCBI GenBank (GCA) or RefSeq (GCF) assembly accession. Preserve the
+          supplied version; an accession without a suffix has unspecified
+          version. Never infer a paired GCA/GCF accession or version.
+        required: true
+        range: string
+        pattern: '^ncbi\.assembly:GC[AF]_[0-9]{9}(\.[1-9][0-9]*)?$'
+      source:
+        description: The resource asserting the strain-to-assembly relationship.
+        required: true
+        range: TaxonSourceEnum
+      source_id:
+        description: The source record containing the assertion (currently a BacDive strain).
+        required: true
+        range: string
+        pattern: '^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$'
+      source_reference_id:
+        description: >-
+          Reference number within the source record (BacDive @ref), when
+          supplied; interpreted together with source and source_id.
+        range: string
+      assembly_name:
+        description: Assembly description exactly as supplied by the source.
+        range: string
+      assembly_level:
+        description: Assembly level exactly as supplied by the source.
+        range: string
+      taxon_id:
+        description: >-
+          NCBI taxon attached to this assembly assertion by the source.
+          It may differ from the strain's classified_as and never overrides
+          the strain classification or the record's NCBI lineage.
+        range: string
+        pattern: '^NCBITaxon:[0-9]+$'
 
   # --------------------------------------------------------------
   # Harmonization layer
