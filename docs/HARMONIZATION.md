@@ -38,16 +38,20 @@ the disagreement visible.
 | NCBI Taxonomy | `ontologies/ncbitaxon_{nodes,edges}.tsv`; ranks and typed synonyms from `data/raw/ncbitaxon.db` | `label`, `rank`, `parent_taxon`, `lineage`, `synonyms`, `genetic_code`, the `NCBITAXON` attestation |
 | LPSN | `lpsn/{nodes,edges}.tsv`, `lpsn_api/{nodes,edges}.tsv` | `nomenclature` (authority, status, type strain designations, publications, 16S accessions), `synonyms` from `same_as`, an `xref` to the correct name, the `LPSN` attestation |
 | GTDB | `gtdb/{nodes,edges}.tsv` | `taxonomy_mappings` with the predicate and genome count, an `xref` when the match is `closeMatch`, a synonym for GTDB's spelling, the `GTDB` attestation counting genomes |
-| BacDive | `bacdive/{nodes,edges}.tsv`; `data/raw/bacdive_strains.json` | `strains` (designation, deposits, `is_type_strain`, explicit `genome_assemblies`), `strain_count`, the `BACDIVE` attestation |
+| BacDive | `bacdive/{nodes,edges}.tsv`; `data/raw/bacdive_strains.json` | `strains` (designation, deposits, `is_type_strain`, explicit NCBI `genome_assemblies` and BV-BRC / PATRIC and IMG `genome_records`), `strain_count`, the `BACDIVE` attestation |
 | MediaDive | `mediadive/edges.tsv` | `medium_count` per strain and the `MEDIADIVE` attestation counting media |
 | GOLD | `gold/edges.tsv` | the `GOLD` attestation counting organisms |
 | Madin et al., BactoTraits | `madin_etal/edges.tsv`, `bactotraits/edges.tsv` | attestations counting trait assertions |
 
 Two raw inputs restore information absent from the KGX transforms: NCBI's
 semantic-sql build supplies rank and typed synonyms, and BacDive's JSON
-supplies direct strain-to-assembly assertions. Both are hashed in the
-manifest. Genome links are joined by BacDive strain ID, never by shared
-species membership or strain-name matching; see [STRAIN_GENOMES.md](STRAIN_GENOMES.md).
+supplies direct strain-to-genome assertions. Both are hashed in the manifest.
+NCBI assemblies are the primary genome identifiers; BV-BRC / PATRIC and IMG
+genome-record identifiers retain their own types and source provenance.
+Genome links are joined by BacDive strain ID, never by shared species
+membership or strain-name matching. Multiple genome identifiers listed by
+one BacDive record remain separate assertions; co-occurrence does not supply
+a cross-database equivalence mapping. See [STRAIN_GENOMES.md](STRAIN_GENOMES.md).
 
 ## Mapping predicates
 
@@ -146,7 +150,10 @@ id. `strain_count` always gives the full number, and
 `data/raw/bacdive_strains.tsv` holds every strain with its taxon. The cap is a
 readability decision; the data is not lost.
 
-`data/raw/strain_assemblies.tsv` likewise keeps every imported assembly link
-for the inventoried strains. Join it to `bacdive_strains.tsv` on `strain_id`
-for the complete mapping to culture-collection identifiers. Listing caps do
-not truncate either inventory.
+`data/raw/strain_assemblies.tsv` keeps every imported NCBI assembly link for
+the inventoried strains; `data/raw/strain_genome_records.tsv` adds BV-BRC /
+PATRIC and IMG genome-record links. Join either to `bacdive_strains.tsv` on
+`strain_id` for the complete mapping to culture-collection identifiers.
+Listing caps do not truncate these inventories. Corpus reports count linked
+identifiers and strain-identifier pairs per database; their sum is not a
+count of unique biological genomes across resources.

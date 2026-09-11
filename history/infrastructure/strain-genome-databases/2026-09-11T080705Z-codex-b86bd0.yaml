@@ -1,0 +1,41 @@
+history_version: 1
+target:
+  kind: infrastructure
+  path: src/taxonmech/extract.py
+  slug: strain-genome-databases
+session:
+  id: 2026-09-11T080705Z-codex-b86bd0
+  timestamp: '2026-09-11T08:07:05Z'
+  actors:
+  - type: ai_agent
+    name: codex
+    model: gpt-6
+    agent_tool: codex
+links:
+  issues:
+  - https://github.com/CultureBotAI/TaxonMech/issues/20
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - strains
+  - genome_records
+  summary: Prioritize NCBI assemblies and include source-reported PATRIC and IMG genome identifiers
+  details: 'Imported 17,128 PATRIC/BV-BRC and 11,738 IMG strain-to-genome assertions from
+    the provenance-pinned BacDive snapshot. The 21,279 NCBI assembly assertions and every
+    existing inventory except the exclusion audit remain byte-identical; 92 additional links
+    to uninventoried strains are recorded as exclusions. The combined inventories cover 17,528
+    strains, including 953 without an imported NCBI assembly assertion. PATRIC dotted IDs
+    and IMG IDs retain distinct namespaces, source database labels, references, source NCBI
+    taxonomy and source-reported plasmid or assembly scope. No cross-database genome equivalence
+    is inferred. Ran extraction dry run, seed dry run and the Bacillus subtilis NCBITaxon:1423
+    canary; inspected BacDive 1003 with patric:224308.261 and patric:224308.262 before regenerating
+    all 100 records. Comparing every regenerated record to the previous version after removing
+    genome_records showed all existing fields unchanged. The listed corpus gains 1,673 links
+    across 98 records; regenerated site and documentation present NCBI first. Independent
+    adversarial review found database labels could disagree with identifier namespaces (issue
+    #20); conditional schema rules now reject both mismatch directions in the write validator
+    and exported JSON Schema. Four regression cases failed before the fix; all 78 focused
+    genome-link and schema tests passed after it. The documented culture-collection lookup
+    example was executed against the inventories and returned six NCBI, five IMG and five
+    PATRIC links for DSM-30083.'

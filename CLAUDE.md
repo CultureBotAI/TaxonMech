@@ -12,11 +12,14 @@ inventories in `data/raw/` and the scope in `curation/seed_scope.tsv` are the
 reproducible inputs.
 
 **A primary use case is strain identifier to genome identifier relationships.**
-Prioritize evidence-backed links from BacDive and culture-collection strain
-identifiers to genome assemblies, including multiple assemblies per strain.
-Keep strain identity, taxon classification and assembly identity distinct;
-shared taxonomy or a matching strain name is not evidence of an assembly
-link. Preserve source provenance and supplied accession versions. See
+Prioritize NCBI GenBank/RefSeq assemblies and include other genome databases
+when the source explicitly links them to BacDive and culture-collection
+strain identifiers. Keep NCBI links in `genome_assemblies` and typed BV-BRC /
+PATRIC and IMG links in `genome_records`, including multiple links per strain.
+Keep strain identity, taxon classification and genome-record identity distinct;
+shared taxonomy, a matching strain name or co-occurrence on a BacDive record
+does not establish genome equivalence. Preserve source provenance, supplied
+accession versions and each database's identifier syntax. See
 [docs/STRAIN_GENOMES.md](docs/STRAIN_GENOMES.md).
 
 Read these before changing domain behavior:

@@ -14,8 +14,8 @@ description: |
     * GTDB (genome-based species and their assemblies, mapped to NCBI taxa),
     * LPSN (nomenclature: validly published names, correct-name status,
       authorities, type strain designations),
-    * BacDive (strain records with culture-collection deposits and explicit
-      links to genome assemblies),
+    * BacDive (strain records with culture-collection deposits, primary NCBI
+      genome assembly links, and PATRIC/BV-BRC and IMG genome record links),
     * MediaDive, JGI GOLD, Madin et al. and BactoTraits (what else is known
       about the taxon, as assertion counts that say how much data sits behind it).
 
@@ -52,6 +52,8 @@ prefixes:
   kgmicrobe.strain: https://w3id.org/kg-microbe/strain/
   bacdive: https://bacdive.dsmz.de/strain/
   ncbi.assembly: https://www.ncbi.nlm.nih.gov/datasets/genome/
+  patric: https://www.bv-brc.org/view/Genome/
+  img.taxon: https://img.jgi.doe.gov/cgi-bin/m/main.cgi?section=TaxonDetail&page=taxonDetail&taxon_oid=
   mediadive.medium: https://mediadive.dsmz.de/medium/
   gold: https://gold.jgi.doe.gov/organism?id=
   INSDC: https://www.ncbi.nlm.nih.gov/nuccore/
@@ -478,8 +480,82 @@ classes:
         multivalued: true
         inlined_as_list: true
         range: GenomeAssemblyLink
+      genome_records:
+        description: >-
+          Additional source-reported genome records from PATRIC/BV-BRC and
+          IMG, alongside the primary NCBI genome_assemblies. Co-occurrence
+          on a strain does not establish equivalence between genome IDs.
+        multivalued: true
+        inlined_as_list: true
+        range: GenomeRecordLink
       notes:
         range: string
+
+  GenomeRecordLink:
+    description: >-
+      A source-reported link to a genome database record. This record can
+      describe a plasmid or another source-labeled scope; it is not necessarily
+      a complete cellular genome or an NCBI assembly. Each namespace retains
+      its own identity, independent of source NCBI taxon metadata.
+    rules:
+      - preconditions:
+          slot_conditions:
+            source_database:
+              equals_string: patric
+        postconditions:
+          slot_conditions:
+            genome_id:
+              pattern: '^patric:[0-9]+\.[0-9]+$'
+      - preconditions:
+          slot_conditions:
+            source_database:
+              equals_string: img
+        postconditions:
+          slot_conditions:
+            genome_id:
+              pattern: '^img\.taxon:[0-9]+$'
+    attributes:
+      genome_id:
+        description: >-
+          PATRIC/BV-BRC or IMG genome record identifier. Preserve PATRIC's
+          complete dotted identifier as text; its suffix is not interpreted
+          as an NCBI assembly version. IMG taxon_oid denotes an IMG genome
+          record, not an NCBI taxon.
+        required: true
+        range: string
+        pattern: '^(patric:[0-9]+\.[0-9]+|img\.taxon:[0-9]+)$'
+      source_database:
+        description: The database label supplied in the BacDive genome assertion.
+        required: true
+        range: string
+        pattern: '^(patric|img)$'
+      source:
+        description: The resource asserting the strain-to-genome relationship.
+        required: true
+        range: TaxonSourceEnum
+      source_id:
+        description: The source record containing the assertion (currently a BacDive strain).
+        required: true
+        range: string
+        pattern: '^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$'
+      source_reference_id:
+        description: Reference number within the source record (BacDive @ref), when supplied.
+        range: string
+      genome_name:
+        description: Genome record description exactly as supplied by the source.
+        range: string
+      assembly_level:
+        description: >-
+          Source-reported scope or assembly level, including plasmid, wgs,
+          draft and complete. These labels retain the source's meaning.
+        range: string
+      taxon_id:
+        description: >-
+          NCBI taxon attached to this assertion by the source. It is never
+          derived from the PATRIC identifier prefix or the IMG identifier,
+          and does not override strain classification or NCBI lineage.
+        range: string
+        pattern: '^NCBITaxon:[0-9]+$'
 
   GenomeAssemblyLink:
     description: >-

@@ -42,6 +42,20 @@ def summarize(records: list[tuple[Path, dict]]) -> dict:
     # a species and a descendant record, or the source cites it twice.
     assembly_pairs = {(s["strain_id"], a["assembly_id"]) for _, d in records
                       for s in d.get("strains") or [] for a in s.get("genome_assemblies") or []}
+    genome_record_pairs = {(s["strain_id"], g["genome_id"]) for _, d in records
+                           for s in d.get("strains") or [] for g in s.get("genome_records") or []}
+    # NCBI first. These are identifier counts within each database; records
+    # in different databases are not collapsed into biological genomes.
+    pairs_by_database = {
+        "NCBI": assembly_pairs,
+        "PATRIC": {(sid, gid) for sid, gid in genome_record_pairs if gid.startswith("patric:")},
+        "IMG": {(sid, gid) for sid, gid in genome_record_pairs if gid.startswith("img.taxon:")},
+    }
+    genome_coverage = {
+        database: {"strain_links": len(pairs), "strains": len({sid for sid, _ in pairs}),
+                   "identifiers": len({gid for _, gid in pairs})}
+        for database, pairs in pairs_by_database.items()
+    }
     with_type_strain = sum(1 for _, d in records
                            if any(s.get("is_type_strain") for s in d.get("strains") or []))
     with_lpsn = sum(1 for _, d in records if d.get("nomenclature"))
@@ -67,6 +81,11 @@ def summarize(records: list[tuple[Path, dict]]) -> dict:
         "listed_strains_with_assemblies": len({sid for sid, _ in assembly_pairs}),
         "listed_strain_assembly_links": len(assembly_pairs),
         "listed_assemblies": len({aid for _, aid in assembly_pairs}),
+        "listed_genome_record_links": len(genome_record_pairs),
+        "listed_genome_records": len({gid for _, gid in genome_record_pairs}),
+        "listed_strains_with_genome_records": len({sid for sid, _ in genome_record_pairs}),
+        "listed_genome_links_by_database": genome_coverage,
+        "listed_strains_with_any_genome": len({sid for sid, _ in assembly_pairs | genome_record_pairs}),
         "records_with_capped_listing": capped,
         "with_type_strain": with_type_strain,
         "with_lpsn": with_lpsn,
@@ -114,6 +133,15 @@ def main(argv: list[str] | None = None) -> int:
         f"{s['listed_strains_with_assemblies']} strains, {s['listed_assemblies']} assembly identifiers "
         "(deduplicated; full inventory in data/raw/strain_assemblies.tsv)"
     )
+    print(
+        f"Additional genome-record links: {s['listed_genome_record_links']} pairs, "
+        f"{s['listed_strains_with_genome_records']} strains, {s['listed_genome_records']} identifiers "
+        "(full inventory in data/raw/strain_genome_records.tsv)"
+    )
+    for database, coverage in s["listed_genome_links_by_database"].items():
+        print(f"  {database}: {coverage['strain_links']} strain-identifier pairs, "
+              f"{coverage['identifiers']} identifiers, {coverage['strains']} strains")
+    print("Counts are database identifiers, not unique biological genomes across databases.")
     print(
         f"LPSN: {s['with_lpsn']} records carry nomenclature, {s['with_correct_name']} with a correct name   "
         f"GTDB: {s['with_gtdb']} records mapped, {s['genomes']} genomes"
