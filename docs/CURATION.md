@@ -92,17 +92,21 @@ a curator's job is to say so in a discussion, not to pick one silently.
 
 A strain entry is an identity — the BacDive id, the designation, the
 culture-collection deposits, and `classified_as` when BacDive files it under
-a descendant taxon — with explicit `genome_assemblies` and one derived flag,
-`is_type_strain`. Strain-to-genome relationships are a primary curation
-priority: retain the source record asserting each link, multiple assemblies,
-and source-supplied accession versions. A shared species name or taxon ID
-does not establish a link. Assemblies, BioSamples, marker-gene sequences and
-culture deposits denote different things; see [STRAIN_GENOMES.md](STRAIN_GENOMES.md).
-Nothing
-about the strain's phenotype, medium or isolation source lives here; those
-belong to the sibling repositories that model them. `medium_count` is kept
-because it says how well characterised the strain is, which is what a reader
-choosing a strain wants to know.
+a descendant taxon — with explicit `genome_assemblies` and `genome_records`
+and one derived flag, `is_type_strain`. Strain-to-genome relationships are a
+primary curation priority. Prioritize NCBI assemblies and include typed
+BV-BRC / PATRIC and IMG genome records with their source evidence. Retain
+multiple links, source-supplied accession versions and descriptions such as
+`plasmid` or `wgs`; an imported link need not represent a complete assembly.
+
+A shared species name or taxon ID does not establish a strain-to-genome link.
+Co-occurrence on one BacDive record does not establish that two database
+identifiers denote the same genome. Assemblies, genome records, BioSamples,
+marker-gene sequences and culture deposits denote different things; see
+[STRAIN_GENOMES.md](STRAIN_GENOMES.md). Strain phenotypes, media and isolation
+sources belong to the sibling repositories that model them. `medium_count`
+is kept because it says how well characterised the strain is, which is what
+a reader choosing a strain wants to know.
 
 ## Discussions
 

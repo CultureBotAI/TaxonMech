@@ -42,6 +42,8 @@ PREFIX_URL = {
     "bacdive": "https://bacdive.dsmz.de/strain/",
     "mediadive.medium": "https://mediadive.dsmz.de/medium/",
     "ncbi.assembly": "https://www.ncbi.nlm.nih.gov/datasets/genome/",
+    "patric": "https://www.bv-brc.org/view/Genome/",
+    "img.taxon": "https://img.jgi.doe.gov/cgi-bin/m/main.cgi?section=TaxonDetail&page=taxonDetail&taxon_oid=",
     "INSDC": "https://www.ncbi.nlm.nih.gov/nuccore/",
     "PMID": "https://pubmed.ncbi.nlm.nih.gov/",
     "DOI": "https://doi.org/",

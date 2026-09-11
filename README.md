@@ -5,10 +5,11 @@ per taxon, identified by NCBI Taxonomy and harmonized with GTDB, LPSN, BacDive
 and the other taxon-bearing sources that
 [kg-microbe](https://github.com/Knowledge-Graph-Hub/kg-microbe) transforms.
 
-A primary focus is **linking strain identifiers to genome identifiers**:
-which genome assemblies a source associates with a BacDive strain and its
-culture-collection deposits. These links preserve the source's evidence and
-accession versions. Multiple assemblies can belong to one strain; sharing a
+A primary focus is **linking strain identifiers to genome identifiers**,
+prioritizing NCBI GenBank/RefSeq assemblies while including BV-BRC / PATRIC
+and IMG genome records. The links associate a source's genome identifiers
+with its BacDive strain and culture-collection deposits, preserving evidence
+and supplied accession versions. A strain can have multiple links; sharing a
 species does not establish a strain-to-genome link.
 
 TaxonMech is the taxonomic counterpart of
@@ -58,20 +59,24 @@ is one record that carries the lineage, the LPSN nomenclature with type strain
 designations, the GTDB species mapping with its genome count, and the strains
 with their deposits — type strains first.
 
-## Strain identifiers to genome assemblies
+## Strain identifiers to genome identifiers
 
 Each `strains[].genome_assemblies[]` entry carries a GenBank (`GCA_`) or
 RefSeq (`GCF_`) assembly identifier, the source record asserting the link,
 and the source's reference number, description, assembly level and taxon
-when supplied. The first import reads BacDive's explicit genome links from
-kg-microbe's raw BacDive snapshot; its KGX transform drops these relationships.
+when supplied. Additional `strains[].genome_records[]` entries carry typed
+BV-BRC / PATRIC (`patric:`) and IMG (`img.taxon:`) identifiers with the same
+source provenance. The extractor reads these explicit links from kg-microbe's
+raw BacDive snapshot; its KGX transform drops these relationships.
 
-The complete [strain-to-assembly inventory](data/raw/strain_assemblies.tsv)
-is uncapped and joins to [strain identifiers and deposits](data/raw/bacdive_strains.tsv)
+The primary [NCBI assembly inventory](data/raw/strain_assemblies.tsv) and
+additional [genome-record inventory](data/raw/strain_genome_records.tsv) are
+uncapped and join to [strain identifiers and deposits](data/raw/bacdive_strains.tsv)
 on `strain_id`. Species records and pages show links for their listed strains.
-An absent entry means no NCBI assembly link was imported for that strain;
-the source may have genome identifiers from other databases. It does not
-mean the strain has never been sequenced. See [the relationship model and evidence rules](docs/STRAIN_GENOMES.md).
+Identifiers from different databases remain separate assertions, even when
+BacDive lists them together. An absent entry means no link of that kind was
+imported for that strain; it does not mean the strain has never been
+sequenced. See [the relationship model and evidence rules](docs/STRAIN_GENOMES.md).
 
 ## Current corpus
 
@@ -92,7 +97,15 @@ mean the strain has never been sequenced. See [the relationship model and eviden
 
 15,096 BacDive strains are classified under these taxa (9,602 listed in records; 17 records cap their listing). 100 records list a type strain, 100 carry an LPSN correct name, 100 map to GTDB (186,716 genomes), and 0 carry causal graphs (0 evidence-backed edges).
 
-The listed strains carry **1,288 strain-to-assembly pairs** across 622 distinct strains and 1,288 assembly identifiers. These counts are deduplicated across records and exclude unlisted strains; the full inventory is `data/raw/strain_assemblies.tsv`.
+**697 listed strains have genome identifier links.** Coverage below is deduplicated across records, with NCBI assemblies first:
+
+| Database | Strain–identifier pairs | Distinct identifiers | Distinct strains |
+|---|---:|---:|---:|
+| NCBI | 1,288 | 1,288 | 622 |
+| PATRIC | 1,242 | 1,242 | 623 |
+| IMG | 431 | 431 | 299 |
+
+These are database identifier counts, not unique biological genomes across databases. Unlisted strains remain in the complete inventories: `data/raw/strain_assemblies.tsv` and `data/raw/strain_genome_records.tsv`.
 
 **0 records are `REVIEWED`;** the remaining 100 are `SEEDED` or `PROPOSED`.
 <!-- END GENERATED CORPUS STATS -->
@@ -173,8 +186,9 @@ file; [docs/SCHEMA.md](docs/SCHEMA.md) walks through it.
 - **`strains`** and **`strain_count`** — BacDive strains classified under
   the taxon or, for species, its NCBI subtree (`classified_as` says where),
   with culture-collection deposits and `is_type_strain` derived from LPSN's
-  designations, plus explicit `genome_assemblies` links. The listing is capped at 200 per record, type strains first;
-  the count is always the full number.
+  designations, plus explicit NCBI `genome_assemblies` and additional
+  `genome_records` links. The listing is capped at 200 per record, type
+  strains first; the count is always the full number.
 - **`source_attestations`** — the harmonization layer: one entry per upstream
   resource with `source_id`, `mapping_predicate`, `assertion_count` and
   `assertion_unit` (BacDive counts strains, GTDB genomes, GOLD organisms,
@@ -206,10 +220,13 @@ tracked in the issues. See [docs/CURATION.md](docs/CURATION.md) and
 - **Strain listings are capped**, and strain-level data (phenotypes, media,
   isolation sources) is deliberately left to TraitMech, CultureMech and
   HabitatMech; a strain entry here holds identifiers, deposits and genome links.
-- **Genome links currently come from BacDive's NCBI assembly assertions.**
-  Unversioned accessions remain unversioned. RefSeq pairing, BioSample,
-  IMG/BV-BRC identifiers and assembly status verification need their own
-  source evidence; species-level GTDB mappings do not supply it.
+- **Genome links currently come from BacDive's assertions** about NCBI
+  assemblies, BV-BRC / PATRIC and IMG records. Source labels such as `plasmid`
+  and `wgs` are preserved; a link does not imply a complete genome assembly.
+  Unversioned NCBI accessions remain unversioned. RefSeq pairing, BioSample
+  relationships, cross-database equivalence and current assembly status
+  verification need their own evidence; species-level GTDB mappings do not
+  supply it.
 - **NCBI rank comes from kg-microbe's raw semantic-sql build**, not from the
   KGX transform, which drops it. The extractor records that input in the
   manifest like any other.

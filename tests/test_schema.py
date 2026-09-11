@@ -52,6 +52,7 @@ def test_corpus_uses_only_declared_enum_values(schema_path, records):
          + [m.get("source") for m in d.get("taxonomy_mappings") or []]
          + [s.get("source") for s in d.get("strains") or []]
          + [g.get("source") for s in d.get("strains") or [] for g in s.get("genome_assemblies") or []]
+         + [g.get("source") for s in d.get("strains") or [] for g in s.get("genome_records") or []]
          + [n.get("source") for n in d.get("nomenclature") or []]),
         ("assertion_unit", "AssertionUnitEnum",
          lambda d: [a.get("assertion_unit") for a in d.get("source_attestations") or []]),
@@ -111,6 +112,10 @@ def test_schema_prefixes_cover_every_curie_in_the_corpus(schema_path, records):
             add(s.get("source_id"))
             for g in s.get("genome_assemblies") or []:
                 add(g.get("assembly_id"))
+                add(g.get("source_id"))
+                add(g.get("taxon_id"))
+            for g in s.get("genome_records") or []:
+                add(g.get("genome_id"))
                 add(g.get("source_id"))
                 add(g.get("taxon_id"))
             for c in s.get("culture_collection_ids") or []:

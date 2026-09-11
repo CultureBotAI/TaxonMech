@@ -50,10 +50,18 @@ def render_block() -> str:
         f"({s['genomes']:,} genomes), and {s['with_graphs']} carry causal graphs "
         f"({s['edges']} evidence-backed edges).",
         "",
-        f"The listed strains carry **{s['listed_strain_assembly_links']:,} strain-to-assembly pairs** "
-        f"across {s['listed_strains_with_assemblies']:,} distinct strains and "
-        f"{s['listed_assemblies']:,} assembly identifiers. These counts are deduplicated across records "
-        "and exclude unlisted strains; the full inventory is `data/raw/strain_assemblies.tsv`.",
+        f"**{s['listed_strains_with_any_genome']:,} listed strains have genome identifier links.** "
+        "Coverage below is deduplicated across records, with NCBI assemblies first:",
+        "",
+        "| Database | Strain–identifier pairs | Distinct identifiers | Distinct strains |",
+        "|---|---:|---:|---:|",
+        *[f"| {database} | {coverage['strain_links']:,} | {coverage['identifiers']:,} | "
+          f"{coverage['strains']:,} |"
+          for database, coverage in s["listed_genome_links_by_database"].items()],
+        "",
+        "These are database identifier counts, not unique biological genomes across databases. "
+        "Unlisted strains remain in the complete inventories: `data/raw/strain_assemblies.tsv` "
+        "and `data/raw/strain_genome_records.tsv`.",
         "",
         f"**{s['by_status'].get('REVIEWED', 0)} records are `REVIEWED`;** the remaining "
         f"{s['total'] - s['by_status'].get('REVIEWED', 0)} are `SEEDED` or `PROPOSED`.",

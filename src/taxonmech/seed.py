@@ -163,6 +163,7 @@ class Inventory:
     madin: dict[str, int]
     bacto: dict[str, int]
     strain_assemblies: dict[str, list[dict[str, str]]] = field(default_factory=dict)
+    strain_genome_records: dict[str, list[dict[str, str]]] = field(default_factory=dict)
 
     def parent(self, tid: str) -> str:
         return (self.taxa.get(tid) or {}).get("parent_id", "")
@@ -243,8 +244,11 @@ def load_inventory() -> Inventory:
     strain_assemblies: dict[str, list[dict[str, str]]] = defaultdict(list)
     for r in read_tsv("strain_assemblies.tsv"):
         strain_assemblies[r["strain_id"]].append(r)
+    strain_genome_records: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for r in read_tsv("strain_genome_records.tsv"):
+        strain_genome_records[r["strain_id"]].append(r)
     return Inventory(taxa, gtdb, lpsn, lpsn_by_taxon, strains, cc_strains, media, gold, madin, bacto,
-                     strain_assemblies)
+                     strain_assemblies, strain_genome_records)
 
 
 # ---------------------------------------------------------------------------
@@ -482,6 +486,12 @@ def build_document(concept: Concept, inv: Inventory) -> dict[str, Any]:
             entry["genome_assemblies"] = [
                 {key: value for key, value in assembly.items() if key != "strain_id" and value}
                 for assembly in assemblies
+            ]
+        genome_records = inv.strain_genome_records.get(s["strain_id"], [])
+        if genome_records:
+            entry["genome_records"] = [
+                {key: value for key, value in genome.items() if key != "strain_id" and value}
+                for genome in genome_records
             ]
         entries.append(entry)
     # Type strains first, then the best-deposited, then by BacDive id.
