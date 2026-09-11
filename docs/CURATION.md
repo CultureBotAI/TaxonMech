@@ -6,16 +6,25 @@ text explains the judgements.
 
 ## What is a record
 
-A record is **one taxon in NCBI Taxonomy**, at any rank, that at least one
-strain-bearing source attests. Species dominate because that is what LPSN
-names, GTDB delimits and BacDive files strains under; genera and higher ranks
-appear as records when a source attests them directly, and always appear as
-`lineage` entries.
+A record is **one species-level or lower taxon in NCBI Taxonomy** that at
+least one strain-bearing source attests: a species, a subspecies, a
+strain-level or other infraspecific taxon, or an unranked taxon under a
+species. **This is a repository rule.** Genera, families and every higher
+rank are never records; they appear only as `lineage` entries. The seeder
+refuses a higher taxon in the scope and `tests/test_corpus_integrity.py`
+enforces it on the corpus.
+
+**Lineage is carried, not curated.** `lineage` is NCBI Taxonomy's parent
+chain, verbatim. TaxonMech does not reconcile the NCBI, GTDB and LPSN
+hierarchies, does not resolve disagreements between them, and never infers a
+placement. A curator who finds NCBI's placement wrong reports it upstream; a
+curator who wants GTDB's placement finds it in `taxonomy_mappings`.
 
 | Thing | Record? |
 |---|---|
-| A species, subspecies, genus or higher taxon with an NCBI id | **Yes**, when in scope |
-| A strain | **No** — a `strains` entry on its taxon's record, identified by its kg-microbe strain id and deposits |
+| A species, subspecies, strain-level or unranked-under-species NCBI taxon | **Yes**, when in scope |
+| A genus, family or any higher taxon | **No** — a `lineage` entry, never a record |
+| A BacDive strain | **No** — a `strains` entry on its taxon's record, identified by its kg-microbe strain id and deposits |
 | A GTDB species with no NCBI counterpart | **Not yet** — see the identity discussion in [HARMONIZATION.md](HARMONIZATION.md) |
 | A trait, habitat, medium or phenotype of the taxon | **No** — TraitMech, HabitatMech and CultureMech own those; a TaxonMech record carries only the attestation count |
 

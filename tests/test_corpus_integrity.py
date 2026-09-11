@@ -40,6 +40,35 @@ def test_lockfile_has_no_entries_without_a_record(records):
     assert not orphans, f"PATHS.tsv pins identifiers with no record: {orphans[:10]}"
 
 
+def test_every_record_is_species_level_or_below(records):
+    """Repository rule: TaxonMech records are species and strains. A record
+    above species level is a scope error; higher taxa live in `lineage`."""
+    from taxonmech.seed import RECORD_RANKS
+
+    bad = []
+    for path, doc in records:
+        if doc.get("rank") in RECORD_RANKS:
+            continue
+        if any(a.get("rank") == "SPECIES" for a in doc.get("lineage") or []):
+            continue
+        bad.append(f"{path.name}: rank {doc.get('rank')}")
+    assert not bad, bad
+
+
+def test_lineage_is_a_single_chain_carried_from_ncbi(records):
+    """Lineage is carried verbatim: root first, each entry the parent of the
+    next, ending at parent_taxon. TaxonMech never reconciles or infers it."""
+    bad = []
+    for path, doc in records:
+        lineage = doc.get("lineage") or []
+        if lineage and lineage[0]["taxon_id"] != "NCBITaxon:1":
+            bad.append(f"{path.name}: lineage does not start at root")
+        ids = [a["taxon_id"] for a in lineage]
+        if len(ids) != len(set(ids)):
+            bad.append(f"{path.name}: repeated lineage entry")
+    assert not bad, bad
+
+
 def test_lineage_ends_at_the_parent(records):
     bad = []
     for path, doc in records:

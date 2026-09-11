@@ -124,16 +124,29 @@ def test_build_document_is_valid_and_ordered():
     assert bacdive["assertion_count"] == 2
     assert "1 strains are filed under 1 descendant" in bacdive["notes"]
     assert "1 further culture-collection deposit" in bacdive["notes"]
+    assert doc["curation_history"][0]["action"] == "SEEDED_FROM_SOURCES"
 
 
-def test_higher_ranks_do_not_gather_subtree_strains():
+def test_taxa_above_species_are_refused():
+    """Repository rule: records are species and strains; a genus or domain in
+    the scope is an error, not a record without strains."""
     inv = _inventory()
     inv.taxa["NCBITaxon:2"]["attested_by"] = "bacdive"
-    concept = seed.build_concepts(inv, ["NCBITaxon:2"])[0]
-    doc = seed.build_document(concept, inv)
-    assert doc["strain_count"] == 0
-    assert "strains" not in doc
-    assert doc["curation_history"][0]["action"] == "SEEDED_FROM_SOURCES"
+    with pytest.raises(SystemExit, match="above species level"):
+        seed.build_concepts(inv, ["NCBITaxon:2"])
+
+
+def test_strain_level_and_unranked_taxa_under_a_species_are_records():
+    inv = _inventory()
+    inv.taxa["NCBITaxon:1234"] = {"taxon_id": "NCBITaxon:1234", "label": "Escherichia coli O157",
+                                  "rank": "NO_RANK", "parent_id": "NCBITaxon:562", "genetic_code": "11",
+                                  "exact_synonyms": "", "related_synonyms": "", "broad_synonyms": "",
+                                  "attested_by": "gold"}
+    assert inv.is_species_or_below("NCBITaxon:83333")
+    assert inv.is_species_or_below("NCBITaxon:1234")
+    assert not inv.is_species_or_below("NCBITaxon:2")
+    concepts = seed.build_concepts(inv, ["NCBITaxon:83333", "NCBITaxon:1234"])
+    assert [c.rank for c in concepts] == ["STRAIN", "NO_RANK"]
 
 
 def test_build_document_is_deterministic():

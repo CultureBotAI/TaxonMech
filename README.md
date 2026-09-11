@@ -21,6 +21,17 @@ incrementally with an append-only audit trail.
 
 **[Browse the corpus online →](https://culturebotai.github.io/TaxonMech/)**
 
+## Scope: species and strains, lineage as given
+
+TaxonMech records are **species-level and below** — species, subspecies,
+strains and other infraspecific taxa, and unranked NCBI taxa under a species.
+Higher taxa are never records; they appear only in a record's `lineage`,
+which is NCBI Taxonomy's parent chain carried verbatim. TaxonMech does not
+reconcile NCBI, GTDB and LPSN hierarchies, resolve conflicts between them, or
+infer placements: GTDB and LPSN are recorded as mappings and nomenclature on
+the taxon they concern. The seeder refuses higher taxa and a test enforces
+the rule.
+
 ## The problem it solves
 
 The same organism is a different thing in each resource that describes it:

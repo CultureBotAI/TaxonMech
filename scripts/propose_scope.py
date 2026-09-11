@@ -38,7 +38,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--rule", choices=("core", "attested"), default="core")
     parser.add_argument("--top", type=int, default=100)
     parser.add_argument("--rank", default="SPECIES",
-                        help="Restrict to this NCBI rank (default SPECIES; '' for any).")
+                        help="Restrict to this NCBI rank (default SPECIES; '' for any rank at or below "
+                             "species). Taxa above species are never proposed.")
     parser.add_argument("--append", action="store_true", help="Omit identifiers already in the scope file.")
     parser.add_argument("--date", default=datetime.date.today().isoformat())
     args = parser.parse_args(argv)
@@ -49,6 +50,8 @@ def main(argv: list[str] | None = None) -> int:
     for tid, row in inv.taxa.items():
         sources = set(split(row.get("attested_by", "")))
         if not sources or tid in existing:
+            continue
+        if not inv.is_species_or_below(tid):
             continue
         if args.rank and row.get("rank") != args.rank:
             continue

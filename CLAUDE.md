@@ -59,6 +59,21 @@ just seed-apply --force
 just seed-apply --force --prune  # only when files that left the scope should be removed
 ```
 
+## Scope rule: species and strains only
+
+**TaxonMech records are species-level and below** — species, subspecies,
+strains and other infraspecific taxa, and unranked NCBI taxa that sit under a
+species. Genera, families and every higher rank are **never records**; they
+appear only as `lineage` entries. The seeder refuses a higher taxon in the
+scope, `just propose-scope` never proposes one, and a corpus test enforces it.
+
+**Lineage is carried, not curated.** A record's `lineage` is NCBI Taxonomy's
+parent chain, verbatim. TaxonMech does not reconcile NCBI with GTDB or LPSN
+hierarchies, does not resolve disagreements between them, and never infers a
+placement. GTDB and LPSN appear as `taxonomy_mappings` and `nomenclature` on
+the record they concern, nothing more. Work that needs a reconciled or
+inferred taxonomy belongs upstream (kg-microbe, NCBI, GTDB, LPSN), not here.
+
 ## Fact-based answers only
 
 Verify counts, statuses and identifiers with a live command (`just report`,
