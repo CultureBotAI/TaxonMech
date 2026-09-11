@@ -55,17 +55,32 @@ def test_every_record_is_species_level_or_below(records):
     assert not bad, bad
 
 
-def test_lineage_is_a_single_chain_carried_from_ncbi(records):
-    """Lineage is carried verbatim: root first, each entry the parent of the
-    next, ending at parent_taxon. TaxonMech never reconciles or infers it."""
+def _ncbi_parents(repo_root):
+    parents = {}
+    with (repo_root / "data" / "raw" / "ncbitaxon_taxa.tsv").open(newline="", encoding="utf-8") as fh:
+        for row in csv.DictReader(fh, delimiter="\t"):
+            parents[row["taxon_id"]] = row["parent_id"]
+    return parents
+
+
+def test_lineage_is_a_single_chain_carried_from_ncbi(records, repo_root):
+    """Lineage is carried verbatim: root first, each entry the NCBI parent of
+    the next, ending at parent_taxon, which is the record's own NCBI parent.
+    TaxonMech never reconciles or infers it (#14)."""
+    parents = _ncbi_parents(repo_root)
     bad = []
     for path, doc in records:
-        lineage = doc.get("lineage") or []
-        if lineage and lineage[0]["taxon_id"] != "NCBITaxon:1":
+        lineage = [a["taxon_id"] for a in doc.get("lineage") or []]
+        if not lineage:
+            continue
+        if lineage[0] != "NCBITaxon:1":
             bad.append(f"{path.name}: lineage does not start at root")
-        ids = [a["taxon_id"] for a in lineage]
-        if len(ids) != len(set(ids)):
-            bad.append(f"{path.name}: repeated lineage entry")
+        chain = [*lineage, doc["identifier"]]
+        for parent, child in zip(chain, chain[1:], strict=False):
+            if parents.get(child) != parent:
+                bad.append(f"{path.name}: {parent} is not NCBI's parent of {child}")
+        if doc.get("parent_taxon") != lineage[-1]:
+            bad.append(f"{path.name}: parent_taxon is not the last lineage entry")
     assert not bad, bad
 
 
@@ -82,10 +97,7 @@ def test_lineage_ends_at_the_parent(records):
 def test_gathered_strains_name_a_descendant_of_the_record(records, repo_root):
     """`classified_as` must be a taxon strictly below this record in the
     committed NCBI inventory (#9)."""
-    parents = {}
-    with (repo_root / "data" / "raw" / "ncbitaxon_taxa.tsv").open(newline="", encoding="utf-8") as fh:
-        for row in csv.DictReader(fh, delimiter="\t"):
-            parents[row["taxon_id"]] = row["parent_id"]
+    parents = _ncbi_parents(repo_root)
 
     def is_ancestor(ancestor: str, taxon: str) -> bool:
         cur = parents.get(taxon)
