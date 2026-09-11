@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{{ domain.name }} · TaxonMech{% endblock %}
+{% block content %}
+<h1>{{ domain.name | capitalize }}</h1>
+<p>{{ domain.blurb }}</p>
+<table>
+<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Sources</th><th>Strains</th><th>Genomes</th><th>Status</th></tr></thead>
+<tbody>
+{% for r in records %}
+<tr><td><a href="{{ root }}{{ r.page }}"><em>{{ r.label }}</em></a></td><td><code>{{ r.identifier }}</code></td><td>{{ r.rank or "" }}</td><td>{{ r.sources | join(", ") }}</td><td>{{ r.strain_count }}</td><td>{{ r.genomes }}</td><td>{{ r.status }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

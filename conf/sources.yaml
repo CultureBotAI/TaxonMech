@@ -1,0 +1,55 @@
+# Where the upstream source data lives.
+#
+# TaxonMech does not vendor kg-microbe's KGX dumps (they are multi-gigabyte).
+# scripts/extract_source_inventory.py reads them from a local kg-microbe
+# checkout and emits the small, reviewable inventories under data/raw/, which
+# ARE committed. Only re-extraction needs this path; seeding, validation and
+# tests run entirely off data/raw/.
+#
+# Resolution order: --kg-microbe flag > KG_MICROBE_ROOT env var > this file.
+kg_microbe_root: ~/Documents/VIMSS/ontology/KG-Hub/KG-Microbe/kg-microbe
+
+# Upstream provenance for the inventories, recorded so a reader can tell which
+# resource each committed TSV came from. The per-file bytes/mtime/sha256 of the
+# actual inputs are captured in data/raw/MANIFEST.yaml at extraction time.
+sources:
+  ncbitaxon:
+    name: NCBI Taxonomy (labels, parents, synonyms)
+    url: https://www.ncbi.nlm.nih.gov/taxonomy
+    via: kg-microbe data/transformed/ontologies/ncbitaxon_{nodes,edges}.tsv
+  ncbitaxon_ranks:
+    name: NCBI Taxonomy ranks (has_rank), not carried by the KGX transform
+    url: https://www.ncbi.nlm.nih.gov/taxonomy
+    via: kg-microbe data/raw/ncbitaxon.db (semantic-sql build of ncbitaxon.owl)
+  gtdb:
+    name: Genome Taxonomy Database species, genomes and NCBI mappings
+    url: https://gtdb.ecogenomic.org/
+    via: kg-microbe data/transformed/gtdb/{nodes,edges}.tsv
+  lpsn:
+    name: LPSN names, authorities, type strains and mappings
+    url: https://lpsn.dsmz.de/
+    via: kg-microbe data/transformed/lpsn/{nodes,edges}.tsv
+  lpsn_api:
+    name: LPSN API nomenclatural status, publications and sequence accessions
+    url: https://api.lpsn.dsmz.de/
+    via: kg-microbe data/transformed/lpsn_api/{nodes,edges}.tsv
+  bacdive:
+    name: BacDive strains and culture-collection deposits
+    url: https://bacdive.dsmz.de/
+    via: kg-microbe data/transformed/bacdive/{nodes,edges}.tsv
+  mediadive:
+    name: MediaDive growth-medium links
+    url: https://mediadive.dsmz.de/
+    via: kg-microbe data/transformed/mediadive/edges.tsv
+  gold:
+    name: JGI GOLD organisms
+    url: https://gold.jgi.doe.gov/
+    via: kg-microbe data/transformed/gold/edges.tsv
+  madin_etal:
+    name: Madin et al. prokaryotic phenotypic trait compilation
+    url: https://doi.org/10.1038/s41597-020-0497-4
+    via: kg-microbe data/transformed/madin_etal/edges.tsv
+  bactotraits:
+    name: BactoTraits functional trait database
+    url: https://doi.org/10.1016/j.ecolind.2021.108047
+    via: kg-microbe data/transformed/bactotraits/edges.tsv

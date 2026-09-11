@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}{{ r.label }} · TaxonMech{% endblock %}
+{% macro curie(c) %}{% set u = c | curie_url %}{% if u %}<a href="{{ u }}"><code>{{ c }}</code></a>{% else %}<code>{{ c }}</code>{% endif %}{% endmacro %}
+{% macro evid(items) %}{% if items %}<ul class="evidence">{% for e in items %}<li>{{ curie(e.reference) }}{% if e.snippet %} — <q>{{ e.snippet }}</q>{% endif %}{% if e.notes %} <small>{{ e.notes }}</small>{% endif %}</li>{% endfor %}</ul>{% endif %}{% endmacro %}
+{% block content %}
+<h1><em>{{ r.label }}</em></h1>
+<p class="meta">{{ curie(r.identifier) }} · {{ r.rank }} · {{ r.taxon_domain }} · <span class="status">{{ r.mapping_status }}</span>{% if r.grounding_status %} · grounding {{ r.grounding_status }}{% endif %}</p>
+{% if r.definition %}<p class="definition">{{ r.definition }}{% if r.definition_source %} <small>[{{ curie(r.definition_source) }}]</small>{% endif %}</p>{% endif %}
+
+{% if r.lineage %}
+<p class="lineage"><strong>Lineage:</strong>
+{% for a in r.lineage %}<a href="{{ a.taxon_id | curie_url }}" title="{{ a.rank }}">{{ a.taxon_label }}</a>{% if not loop.last %} › {% endif %}{% endfor %}
+</p>
+{% endif %}
+{% if r.synonyms %}<p><strong>Synonyms:</strong> {% for s in r.synonyms %}{{ s.synonym_text }} <small>({{ s.source }})</small>{% if not loop.last %}; {% endif %}{% endfor %}</p>{% endif %}
+{% if r.xrefs %}<p><strong>Xrefs:</strong> {% for c in r.xrefs %}{{ curie(c) }} {% endfor %}</p>{% endif %}
+{% if r.genetic_code %}<p><strong>Genetic code:</strong> {{ r.genetic_code }}</p>{% endif %}
+
+<h2>Source attestations</h2>
+<table><thead><tr><th>Source</th><th>Identifier</th><th>Label</th><th>Predicate</th><th>Count</th><th>Unit</th><th>Notes</th></tr></thead><tbody>
+{% for a in r.source_attestations %}
+<tr><td>{{ a.source }}</td><td>{{ curie(a.source_id) if a.source_id else "" }}</td><td>{{ a.source_label }}</td><td>{{ a.mapping_predicate or "" }}</td><td>{{ a.assertion_count if a.assertion_count is not none else "" }}</td><td>{{ a.assertion_unit or "" }}</td><td>{{ a.notes or "" }}</td></tr>
+{% endfor %}
+</tbody></table>
+
+{% if r.nomenclature %}
+<h2>Nomenclature (LPSN)</h2>
+{% for n in r.nomenclature %}
+<div class="name-block">
+<p><strong>{% if n.url %}<a href="{{ n.url }}">{{ n.name }}</a>{% else %}{{ n.name }}{% endif %}</strong> {% if n.authority %}{{ n.authority }}{% endif %} <small>{{ curie(n.name_id) }}{% if n.rank %} · {{ n.rank }}{% endif %}</small></p>
+{% if n.nomenclatural_status %}<p class="meta">{{ n.nomenclatural_status }}{% if n.is_correct_name %} · <strong>correct name</strong>{% endif %}</p>{% endif %}
+{% if n.type_strain_designations %}<p><strong>Type strain:</strong> {% for t in n.type_strain_designations %}<code>{{ t | replace("kgmicrobe.strain:", "") | replace("-", " ") }}</code>{% if not loop.last %} = {% endif %}{% endfor %}</p>{% endif %}
+{% if n.publications %}<p><strong>Publications:</strong> {% for p in n.publications %}{{ curie(p) }} {% endfor %}</p>{% endif %}
+{% if n.sequence_accessions %}<p><strong>Sequences:</strong> {% for p in n.sequence_accessions %}{{ curie(p) }} {% endfor %}</p>{% endif %}
+{% if n.notes %}<p><small>{{ n.notes }}</small></p>{% endif %}
+</div>
+{% endfor %}
+{% endif %}
+
+{% if r.taxonomy_mappings %}
+<h2>Taxonomy mappings</h2>
+<table><thead><tr><th>Source</th><th>Taxon</th><th>Predicate</th><th>Genomes</th><th>Notes</th></tr></thead><tbody>
+{% for m in r.taxonomy_mappings %}
+<tr><td>{{ m.source }}</td><td>{{ curie(m.source_id) }} {{ m.source_label }}</td><td>{{ m.mapping_predicate or "" }}</td><td>{{ m.genome_count if m.genome_count is not none else "" }}</td><td>{{ m.notes or "" }}</td></tr>
+{% endfor %}
+</tbody></table>
+{% endif %}
+
+{% if r.strain_count %}
+<h2>Strains</h2>
+<p><small>{{ r.strain_count }} BacDive strain{{ "" if r.strain_count == 1 else "s" }} classified here{% if r.strains and r.strains | length < r.strain_count %}; the {{ r.strains | length }} listed are the type strains and the best-deposited, see <code>data/raw/bacdive_strains.tsv</code> for all{% endif %}.</small></p>
+<table><thead><tr><th>Strain</th><th>Designation</th><th>Culture collections</th><th>Type</th><th>Media</th></tr></thead><tbody>
+{% for s in r.strains %}
+<tr id="strains-{{ s.strain_id | replace(':', '-') }}"><td>{{ curie(s.source_id) }}</td><td>{{ s.designation or "" }}</td><td>{% for c in s.culture_collection_ids or [] %}<code>{{ c | replace("kgmicrobe.strain:", "") | replace("-", " ") }}</code>{% if not loop.last %}, {% endif %}{% endfor %}</td><td>{% if s.is_type_strain %}<strong>type strain</strong>{% endif %}</td><td>{{ s.medium_count or "" }}</td></tr>
+{% endfor %}
+</tbody></table>
+{% endif %}
+
+{% if r.causal_graphs %}
+<h2>Causal graphs</h2>
+{% for g in r.causal_graphs %}
+<h3 id="causal_graphs-{{ g.graph_id }}">{{ g.title or g.graph_id }}</h3>
+{% if g.description %}<p>{{ g.description }}</p>{% endif %}
+<table><thead><tr><th>Subject</th><th>Predicate</th><th>Object</th><th>Evidence</th></tr></thead><tbody>
+{% set nodes = {} %}{% for n in g.nodes %}{% set _ = nodes.update({n.node_id: n}) %}{% endfor %}
+{% for e in g.edges %}
+<tr><td>{{ nodes[e.subject].label if e.subject in nodes else e.subject }}</td><td>{{ e.predicate }}</td><td>{{ nodes[e.object].label if e.object in nodes else e.object }}</td><td>{{ evid(e.evidence) }}</td></tr>
+{% endfor %}
+</tbody></table>
+{% endfor %}
+{% endif %}
+
+{% if r.discussions %}
+<h2>Discussions</h2>
+<ul>{% for d in r.discussions %}<li id="discussions-{{ d.discussion_id }}"><strong>{{ d.kind or "DISCUSSION" }}</strong> ({{ d.status or "OPEN" }}): {{ d.prompt }}{% if d.rationale %} — <small>{{ d.rationale }}</small>{% endif %}</li>{% endfor %}</ul>
+{% endif %}
+
+{% if r.datasets %}
+<h2>Datasets</h2>
+<ul>{% for d in r.datasets %}<li>{% if d.url %}<a href="{{ d.url }}">{{ d.accession or d.title }}</a>{% else %}{{ d.accession or d.title }}{% endif %}{% if d.title and d.accession %} — {{ d.title }}{% endif %}{% if d.repository %} <small>({{ d.repository }})</small>{% endif %}</li>{% endfor %}</ul>
+{% endif %}
+
+{% if r.evidence %}
+<h2>Evidence</h2>
+{{ evid(r.evidence) }}
+{% endif %}
+
+<h2>Curation history</h2>
+<ul class="history">{% for h in r.curation_history %}<li>{{ h.timestamp }} · {{ h.curator }} · {{ h.action }}{% if h.changes %} — {{ h.changes }}{% endif %}{% if h.llm_assisted %} <small>(LLM-assisted)</small>{% endif %}</li>{% endfor %}</ul>
+<p class="source">Source: <code>{{ source_path }}</code></p>
+{% endblock %}
