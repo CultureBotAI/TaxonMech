@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Seed TaxonRecords from the inventories in data/raw/.
+"""Seed TaxonRecords from the inventories in data/raw/ and data/atb/.
 
 Reads the committed inventories (``scripts/extract_source_inventory.py``
 output), builds one harmonized concept per taxon in scope, and writes
@@ -28,6 +28,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import datetime
 import hashlib
 import re
 import sys
@@ -36,9 +37,12 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+import yaml
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
+from taxonmech import atb  # noqa: E402
 from taxonmech.curate.curation_event import record_curation_event  # noqa: E402
 from taxonmech.validation.write_validated import (  # noqa: E402
     ValidationFailedError,
@@ -46,6 +50,7 @@ from taxonmech.validation.write_validated import (  # noqa: E402
 )
 
 RAW_DIR = REPO_ROOT / "data" / "raw"
+ATB_DIR = REPO_ROOT / "data" / "atb"
 TAXA_DIR = REPO_ROOT / "data" / "taxa"
 SCOPE_PATH = REPO_ROOT / "curation" / "seed_scope.tsv"
 PATHS_LOCKFILE = TAXA_DIR / "PATHS.tsv"
@@ -133,17 +138,22 @@ def slugify(text: str, maxlen: int = 72) -> str:
 def _seed_timestamp() -> str:
     """When the data this corpus is built from was extracted.
 
-    Taken from data/raw/MANIFEST.yaml rather than now(): the corpus must be
+    Taken from the newest raw or ATB manifest rather than now(): the corpus must be
     byte-reproducible, so a wall-clock stamp would make every re-seed a
     corpus-wide diff. The manifest's extracted_at is the honest answer to
     "when is this data from", and it changes only when the data does.
     """
-    manifest = RAW_DIR / "MANIFEST.yaml"
-    if manifest.exists():
-        for line in manifest.read_text(encoding="utf-8").splitlines():
-            if line.startswith("extracted_at:"):
-                return line.split(":", 1)[1].strip().strip("'\"")
-    return "1970-01-01T00:00:00Z"
+    timestamps = [datetime.datetime(1970, 1, 1, tzinfo=datetime.timezone.utc)]
+    for manifest in (RAW_DIR / "MANIFEST.yaml", ATB_DIR / "MANIFEST.yaml"):
+        if not manifest.exists():
+            continue
+        data = yaml.safe_load(manifest.read_text(encoding="utf-8")) or {}
+        if value := data.get("extracted_at"):
+            timestamp = datetime.datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+            if timestamp.tzinfo is None:
+                raise ValueError(f"source manifest timestamp lacks timezone: {manifest}")
+            timestamps.append(timestamp)
+    return max(timestamps).astimezone(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 # ---------------------------------------------------------------------------
@@ -163,7 +173,7 @@ class Inventory:
     madin: dict[str, int]
     bacto: dict[str, int]
     strain_assemblies: dict[str, list[dict[str, str]]] = field(default_factory=dict)
-    strain_genome_records: dict[str, list[dict[str, str]]] = field(default_factory=dict)
+    strain_genome_records: dict[str, list[dict[str, Any]]] = field(default_factory=dict)
     strain_related_records: dict[str, list[dict[str, str]]] = field(default_factory=dict)
 
     def parent(self, tid: str) -> str:
@@ -245,9 +255,11 @@ def load_inventory() -> Inventory:
     strain_assemblies: dict[str, list[dict[str, str]]] = defaultdict(list)
     for r in read_tsv("strain_assemblies.tsv"):
         strain_assemblies[r["strain_id"]].append(r)
-    strain_genome_records: dict[str, list[dict[str, str]]] = defaultdict(list)
+    strain_genome_records: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for r in read_tsv("strain_genome_records.tsv"):
         strain_genome_records[r["strain_id"]].append(r)
+    for strain_id, records in atb.genome_records(ATB_DIR).items():
+        strain_genome_records[strain_id].extend(records)
     strain_related_records: dict[str, list[dict[str, str]]] = defaultdict(list)
     for r in read_tsv("strain_related_records.tsv"):
         strain_related_records[r["strain_id"]].append(r)
@@ -594,7 +606,7 @@ def build_document(concept: Concept, inv: Inventory) -> dict[str, Any]:
         curator=SEED_CURATOR,
         action="SEEDED_FROM_SOURCES",
         changes=(
-            f"Seeded from data/raw/ inventories; attested by {', '.join(sources)}. "
+            f"Seeded from data/raw/ and data/atb/ inventories; attested by {', '.join(sources)}. "
             + (f"In scope: {concept.scope_reason}" if concept.scope_reason else "In scope: --all.")
         ),
         timestamp=SEED_TIMESTAMP,

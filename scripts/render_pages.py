@@ -13,6 +13,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import csv
 import filecmp
 import json
 import shutil
@@ -20,12 +21,15 @@ import sys
 import tempfile
 from collections import defaultdict
 from pathlib import Path
+from urllib.parse import urlsplit
 
 from corpus import REPO_ROOT, TAXA_DIR, load_records
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 TEMPLATES_DIR = REPO_ROOT / "src" / "taxonmech" / "templates"
 PAGES_DIR = REPO_ROOT / "pages"
+ATB_DIR = REPO_ROOT / "data" / "atb"
+STRAINS_TSV = REPO_ROOT / "data" / "raw" / "bacdive_strains.tsv"
 
 DOMAIN_BLURB = {
     "BACTERIA": "Taxa under NCBITaxon:2 — the bulk of the cultured, named prokaryotes.",
@@ -44,6 +48,7 @@ PREFIX_URL = {
     "ncbi.assembly": "https://www.ncbi.nlm.nih.gov/datasets/genome/",
     "gtdb.genome": "https://gtdb.ecogenomic.org/genome?gid=",
     "biosample": "https://www.ncbi.nlm.nih.gov/biosample/",
+    "ena.analysis": "https://www.ebi.ac.uk/ena/browser/view/",
     "bioproject": "https://www.ncbi.nlm.nih.gov/bioproject/",
     "patric": "https://www.bv-brc.org/view/Genome/",
     "img.taxon": "https://img.jgi.doe.gov/cgi-bin/m/main.cgi?section=TaxonDetail&page=taxonDetail&taxon_oid=",
@@ -60,10 +65,12 @@ PREFIX_URL = {
 }
 
 
-def curie_url(curie: str) -> str | None:
+def curie_url(curie: str, root: str = "") -> str | None:
     if not isinstance(curie, str) or ":" not in curie:
         return None
     prefix, local = curie.split(":", 1)
+    if prefix == "atb.assembly":
+        return f"{root}atb.html#{curie}"
     base = PREFIX_URL.get(prefix)
     if prefix == "gtdb.genome" and local.startswith(("RS_", "GB_")):
         local = local[3:]
@@ -85,10 +92,129 @@ def page_name(path: Path) -> str:
     return "/".join(rel.parts)
 
 
+def external_url(value: str | None) -> str | None:
+    """Source metadata may supply download URLs, but never executable schemes."""
+    if not value:
+        return None
+    try:
+        parsed = urlsplit(value)
+        return value if parsed.scheme in {"http", "https"} and parsed.netloc else None
+    except ValueError:
+        return None
+
+
+def _tsv(path: Path) -> list[dict]:
+    csv.field_size_limit(min(sys.maxsize, 2**31 - 1))
+    with path.open(encoding="utf-8", newline="") as handle:
+        return list(csv.DictReader(handle, delimiter="\t"))
+
+
+def build_atb_index(records: list[tuple[Path, dict]], atb_dir: Path,
+                    strains_tsv: Path) -> dict:
+    """Read the committed overlap only; strain_links defines eligible assemblies.
+
+    Genome crosslinks retain their original evidence, not a Cartesian product
+    of all identifiers listed under the same strain or taxon.
+    """
+    import yaml
+
+    from taxonmech.atb_catalog import assembly_id
+
+    if not atb_dir.exists():
+        return {"release": None, "manifest": {}, "assemblies": []}
+    manifest = yaml.safe_load((atb_dir / "MANIFEST.yaml").read_text(encoding="utf-8"))
+    release = manifest.get("release") or manifest.get("source", {}).get("release")
+    links = _tsv(atb_dir / "strain_links.tsv")
+    eligible = {row["atb_id"] for row in links}
+    assemblies = {}
+    for row in _tsv(atb_dir / "assemblies.tsv"):
+        if ";" in row["sample_accession"]:
+            continue
+        identifier = row.get("atb_id") or assembly_id(row.get("release") or release,
+                                                    row["sample_accession"])
+        if identifier in eligible:
+            if identifier in assemblies:
+                raise ValueError(f"Duplicate ATB metadata: {identifier}")
+            assemblies[identifier] = {
+                "atb_id": identifier, "release": row.get("release") or release,
+                "sample_id": f"biosample:{row['sample_accession']}",
+                "metadata": row, "strains": [], "genome_links": [],
+            }
+    if eligible - assemblies.keys():
+        raise ValueError("ATB strain links reference missing assembly metadata")
+    wanted_strains = {row["strain_id"] for row in links}
+    source_strains = {row["strain_id"]: row for row in _tsv(strains_tsv)
+                      if row["strain_id"] in wanted_strains}
+    listed: dict[str, list[dict]] = defaultdict(list)
+    for path, doc in records:
+        for strain in doc.get("strains") or []:
+            sid = strain["strain_id"]
+            if sid in wanted_strains:
+                listed[sid].append({"label": doc["label"], "taxon_id": doc["identifier"],
+                                    "page": f"taxa/{page_name(path)}.html#strains-{sid.replace(':', '-')}"})
+    for link in links:
+        strain = source_strains[link["strain_id"]]
+        entry = assemblies[link["atb_id"]]
+        if link["sample_id"] != entry["sample_id"]:
+            raise ValueError("ATB strain link disagrees with source BioSample")
+        entry["strains"].append({
+            "strain_id": link["strain_id"], "source_id": f"bacdive:{strain['bacdive_id']}",
+            "designation": strain["designation"],
+            "culture_collection_ids": strain["culture_collection_ids"].split("|")
+                                      if strain["culture_collection_ids"] else [],
+            "taxon_pages": listed[link["strain_id"]],
+            "sample_evidence": json.loads(link["sample_evidence_json"]),
+        })
+    eligible_pairs = {(row["atb_id"], row["strain_id"]) for row in links}
+    for link in _tsv(atb_dir / "genome_links.tsv"):
+        if ((link["atb_id"], link["strain_id"]) not in eligible_pairs
+                or link["relationship"] != "shares_biosample"
+                or link["sample_id"] != assemblies[link["atb_id"]]["sample_id"]):
+            raise ValueError("ATB genome link has no matching eligible strain/sample association")
+        assemblies[link["atb_id"]]["genome_links"].append({
+            key: value for key, value in link.items() if key != "source_evidence_json"
+        } | {"url": curie_url(link["genome_id"]),
+             "source_evidence": json.loads(link["source_evidence_json"])})
+    for entry in assemblies.values():
+        entry["strains"].sort(key=lambda strain: strain["strain_id"])
+        entry["genome_links"].sort(key=lambda link: (
+            not link["genome_id"].startswith("ncbi.assembly:"), link["genome_id"], link["strain_id"]))
+    return {"release": release, "manifest": manifest,
+            "assemblies": [assemblies[key] for key in sorted(assemblies)]}
+
+
+def write_atb_browser_data(atb: dict, out_dir: Path) -> None:
+    """Keep initial search small; fetch full evidence in deterministic batches."""
+    details_dir = out_dir / "atb-details"
+    details_dir.mkdir(exist_ok=True)
+    search = []
+    for offset in range(0, len(atb["assemblies"]), 100):
+        batch = atb["assemblies"][offset:offset + 100]
+        detail_path = f"atb-details/{offset // 100:04d}.json"
+        (out_dir / detail_path).write_text(
+            json.dumps(batch, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
+        for entry in batch:
+            search.append({key: entry[key] for key in ("atb_id", "release", "sample_id")} | {
+                "detail_path": detail_path,
+                "metadata": {key: entry["metadata"].get(key, "") for key in (
+                    "assembly_accession", "scientific_name", "sylph_species",
+                    "asm_pipe_filter", "hq_filter")},
+                "strains": [{key: strain[key] for key in (
+                    "strain_id", "source_id", "designation", "culture_collection_ids")}
+                            for strain in entry["strains"]],
+                "genome_links": [{"genome_id": gid} for gid in dict.fromkeys(
+                    link["genome_id"] for link in entry["genome_links"])],
+            })
+    (out_dir / "atb-index.json").write_text(json.dumps(
+        {"release": atb["release"], "assemblies": search},
+        ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
+
+
 def render(out_dir: Path) -> None:
     env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)), autoescape=select_autoescape(["html"]),
                       trim_blocks=True, lstrip_blocks=True)
     env.filters["curie_url"] = curie_url
+    env.filters["external_url"] = external_url
 
     records = load_records()
     by_domain: dict[str, list[dict]] = defaultdict(list)
@@ -117,6 +243,11 @@ def render(out_dir: Path) -> None:
     # Vendored byte-identical across the Mech sites: reads localStorage
     # "mech-theme", sets data-theme before paint, injects the toggle button.
     shutil.copy(TEMPLATES_DIR / "theme-toggle.js", out_dir / "theme-toggle.js")
+    shutil.copy(TEMPLATES_DIR / "atb-browser.js", out_dir / "atb-browser.js")
+    atb = build_atb_index(records, ATB_DIR, STRAINS_TSV)
+    write_atb_browser_data(atb, out_dir)
+    (out_dir / "atb.html").write_text(
+        env.get_template("atb.html").render(atb=atb, root=""), encoding="utf-8")
 
     domains = [
         {"name": d, "count": len(v), "blurb": DOMAIN_BLURB.get(d, ""), "page": f"domain/{d.lower()}.html"}

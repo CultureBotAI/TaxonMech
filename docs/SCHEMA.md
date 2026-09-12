@@ -12,7 +12,7 @@ root. One YAML per record.
 | Mappings | `TaxonomyMapping` | A GTDB species mapped here, with `mapping_predicate` (from the source taxon's side) and `genome_count` |
 | Strains | `StrainEntry` | BacDive strain id, designation, `culture_collection_ids`, `is_type_strain`, `medium_count`, `genome_assemblies`, `genome_records`, `related_records`; capped at 200 per record, `strain_count` gives the total |
 | NCBI assembly links (primary) | `GenomeAssemblyLink` | `assembly_id` (GCA/GCF, supplied version preserved), required `source` and `source_id`; optional `source_reference_id`, `assembly_name`, `assembly_level`, `taxon_id` as asserted by the source |
-| Other genome-record links | `GenomeRecordLink` | `genome_id` (`patric:<digits>.<digits>`, `img.taxon:<digits>` or `gtdb.genome:RS_GCF_…` / `gtdb.genome:GB_GCA_…`), required `source_database`, `source` and `source_id`; optional `source_reference_id`, `genome_name`, `assembly_level`, `taxon_id` as asserted by the source |
+| Other genome-record links | `GenomeRecordLink` | `genome_id` (`patric:<digits>.<digits>`, `img.taxon:<digits>`, `gtdb.genome:RS_GCF_…` / `gtdb.genome:GB_GCA_…` or `atb.assembly:202505.SAM…`), required `source_database`, `source` and `source_id`; optional `source_reference_id`, `genome_name`, `assembly_level`, `taxon_id` as asserted by the source |
 | Related sample, project and organism links | `GenomeRelatedRecordLink` | `record_id`, `record_type` (`BIOSAMPLE`, `BIOPROJECT`, `GOLD_ORGANISM`, `GOLD_PROJECT` or `GOLD_ANALYSIS`), source provenance, optional `record_name` and `taxon_id`; these are excluded from genome counts |
 | Strain-link evidence | `StrainLinkEvidence` | Shared `source_field`, `matched_strain_id` (an existing culture-deposit CURIE), `source_strain_field` and verbatim `source_strain_identifiers`; GOLD chains also retain `source_organism_id` and `source_project_id` |
 | Harmonization | `SourceAttestation` | One per source: `source_id`, `mapping_predicate`, `assertion_count`, `assertion_unit` (`AssertionUnitEnum`: NAME, STRAIN, GENOME, ORGANISM, MEDIUM, TRAIT_ASSERTION) |
@@ -35,6 +35,19 @@ they are distinct from GTDB species identifiers in `taxonomy_mappings`.
 `wgs`, rather than claiming a complete assembly. The suffix of a PATRIC ID
 is kept as part of its opaque identifier, not interpreted as an NCBI assembly
 version.
+
+AllTheBacteria genome records use `source_database: allthebacteria` and
+`source: ALLTHEBACTERIA`, with the same local snapshot-scoped assembly ID
+in `genome_id` and `source_id`. Their nested `atb_evidence`
+(`AtbAssemblyEvidence`) retains `release`, `sample_id`, optional `ena_analysis_id`, `run_accessions`,
+`assembly_seqkit_sum`, `dataset`, `assembly_filter`, `hq_filter`,
+`download_url`, `archive_url`, `archive_filename` and optional `sylph_species`.
+`sample_links` uses `AtbSampleLink`, a BIOSAMPLE-only specialization of
+`GenomeRelatedRecordLink` with GTDB or GOLD source evidence. It preserves the
+complete prior assertions, including culture-match and organism/project chains.
+A shared sample establishes an association rather than identical assemblies.
+The uncapped ATB overlap and its supported genome crosslinks are in
+`data/atb/`; see [ALLTHEBACTERIA.md](ALLTHEBACTERIA.md).
 
 `matched_strain_id` preserves the existing `kgmicrobe.strain:` identifier,
 including suffix characters such as `/` or `+`. Its syntactic validity does

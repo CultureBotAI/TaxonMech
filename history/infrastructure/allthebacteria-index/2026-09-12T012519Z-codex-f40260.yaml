@@ -1,0 +1,48 @@
+history_version: 1
+target:
+  kind: infrastructure
+  path: src/taxonmech/atb.py
+  slug: allthebacteria-index
+session:
+  id: 2026-09-12T012519Z-codex-f40260
+  timestamp: '2026-09-12T01:25:19Z'
+  actors:
+  - type: ai_agent
+    name: codex
+    model: gpt-6
+    agent_tool: codex
+links:
+  issues:
+  - https://github.com/CultureBotAI/TaxonMech/issues/29
+  - https://github.com/CultureBotAI/TaxonMech/issues/30
+  - https://github.com/CultureBotAI/TaxonMech/issues/31
+  - https://github.com/CultureBotAI/TaxonMech/issues/32
+  - https://github.com/CultureBotAI/TaxonMech/issues/33
+  urls:
+  - https://allthebacteria.org/docs/metadata_sqlite/
+  - https://osf.io/4kjh7/
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - schema
+  - strains
+  - provenance
+  - site
+  summary: Index AllTheBacteria assemblies and preserve exact BioSample evidence for strain
+    and genome crosslinks
+  details: 'Pinned the primary AllTheBacteria 2025-05 assembly metadata TSV (SHA256 f0130062cb9e1d9b024eb4ca48dfedb2e612784aa808cbe2dd805ab4da00156f;
+    CC-BY-4.0). Built a local SQLite catalogue preserving all 3,227,665 source rows, including
+    2,763,297 available assemblies. Committed the 8,184-row overlap and evidence-preserving
+    crosswalks: 4,928 eligible snapshot assembly identifiers, 4,941 strain links across 4,561
+    strains, and 17,205 distinct ATB/genome associations. Shared BioSample never asserts genome
+    equivalence. Preserved 708 non-HQ assemblies and three available assemblies without ENA
+    analysis IDs; recorded 3,256 excluded overlapping samples. Added closed LinkML evidence
+    types, deterministic seeding, exact indexed queries, and a browser with lazy evidence
+    detail batches. Ran the full-source dry build, applied the index, inspected the Escherichia
+    coli canary, and regenerated all 100 records through the validated seeder. Independent
+    review compared every committed metadata row with the primary snapshot and every one of
+    28,549 genome/sample assertion pairs with original source inventories and matching GTDB
+    or GOLD source paths. Adversarial findings 29-33 cover unsafe conversion, snapshot integrity,
+    destination collisions, nullable evidence and stale query dependencies; fixes include
+    regression tests. Full QC and CI results are recorded on the associated pull request.'

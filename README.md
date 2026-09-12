@@ -7,8 +7,8 @@ and the other taxon-bearing sources that
 
 A primary focus is **linking strain identifiers to genome identifiers**,
 prioritizing NCBI GenBank/RefSeq assemblies while including GTDB, BV-BRC /
-PATRIC and IMG genome records. Coverage expands to available identifier
-systems when their strain links have source evidence. The links preserve
+PATRIC, IMG and AllTheBacteria genome records. Coverage expands to available
+identifier systems when their strain links have source evidence. The links preserve
 source records, culture-deposit matches and supplied accession versions. A
 strain can have multiple links; sharing a species does not establish a
 strain-to-genome link.
@@ -66,9 +66,9 @@ Each `strains[].genome_assemblies[]` entry carries a GenBank (`GCA_`) or
 RefSeq (`GCF_`) assembly identifier, the source record asserting the link,
 and the source's reference number, description, assembly level and taxon
 when supplied. Additional `strains[].genome_records[]` entries carry typed
-GTDB (`gtdb.genome:`), BV-BRC / PATRIC (`patric:`) and IMG (`img.taxon:`)
-identifiers. BacDive supplies direct strain assertions; GTDB metadata adds
-links through whole culture-deposit identifiers whose authority and accession
+GTDB (`gtdb.genome:`), BV-BRC / PATRIC (`patric:`), IMG (`img.taxon:`)
+and AllTheBacteria (`atb.assembly:`) identifiers. BacDive supplies direct strain
+assertions; GTDB metadata adds links through whole culture-deposit identifiers whose authority and accession
 format match the pinned collection registry, with the matched ID and
 verbatim source field retained. GOLD's primary workbook adds NCBI and IMG
 links through explicit organism, sequencing-project and analysis-project
@@ -86,6 +86,15 @@ Identifiers from different databases remain separate assertions, even when
 BacDive lists them together. An absent entry means no link of that kind was
 imported for that strain; it does not mean the strain has never been
 sequenced. See [the relationship model and evidence rules](docs/STRAIN_GENOMES.md).
+
+[Browse AllTheBacteria assemblies](https://culturebotai.github.io/TaxonMech/atb.html)
+by sample, ENA analysis, strain, deposit or genome ID. Its snapshot-scoped
+assembly IDs join through existing BioSample evidence; a shared sample does
+not establish genome equivalence. The browser includes eligible assemblies
+for unlisted strains and exposes FASTA/archive links, source flags and the
+original evidence. The [ATB inventories](data/atb) are uncapped; the
+[full catalog and query guide](docs/ALLTHEBACTERIA.md) explains broader
+snapshot searches and source attribution.
 
 ## Current corpus
 
@@ -114,8 +123,9 @@ sequenced. See [the relationship model and evidence rules](docs/STRAIN_GENOMES.m
 | GTDB | 769 | 769 | 427 |
 | PATRIC | 1,242 | 1,242 | 623 |
 | IMG | 728 | 724 | 413 |
+| AllTheBacteria | 233 | 233 | 191 |
 
-These are database identifier counts, not unique biological genomes across databases. Unlisted strains remain in the complete inventories: `data/raw/strain_assemblies.tsv` and `data/raw/strain_genome_records.tsv`.
+These are database identifier counts, not unique biological genomes across databases. Unlisted strains remain in the complete inventories: `data/raw/strain_assemblies.tsv` and `data/raw/strain_genome_records.tsv`, plus `data/atb/strain_links.tsv` for AllTheBacteria assemblies linked through BioSample evidence.
 
 Related records are counted separately from genomes:
 
@@ -152,6 +162,8 @@ Re-seeding is only needed when the upstream data or the scope changes:
 ```bash
 just extract-inventory-dry          # what extraction would produce (no writes)
 just extract-inventory              # refresh data/raw/ from a kg-microbe checkout
+just atb-fetch                     # fetch pinned ATB metadata if not cached
+just atb-index --apply             # refresh ATB crosslinks against current inventories
 just seed                           # dry-run: scope report, no writes
 just seed-canary NCBITaxon:562      # write ONE record and check it, first
 just seed-apply --force             # rewrite the scoped corpus
@@ -165,7 +177,8 @@ just seed-apply --force --prune     # ...and clean up files that left the scope
 `data/source_snapshots/goldData.xlsx`. Use `GOLD_WORKBOOK` or
 `just extract-inventory --gold-workbook /path/to/goldData.xlsx` to select
 another copy. The derived inventories in
-`data/raw/` are committed, so seeding, validation and tests run without it.
+`data/raw/` and `data/atb/` are committed, so seeding, validation and tests
+run without upstream downloads or the full ATB SQLite catalog.
 `data/raw/MANIFEST.yaml` records the kg-microbe commit and the byte hash of
 every input and output.
 
@@ -248,12 +261,13 @@ tracked in the issues. See [docs/CURATION.md](docs/CURATION.md) and
   isolation sources) is deliberately left to TraitMech, CultureMech and
   HabitatMech; a strain entry here holds identifiers, deposits and genome links.
 - **Genome coverage depends on source assertions and explicit identifiers.**
-  BacDive links, GTDB culture-deposit matches and GOLD project chains preserve
-  the source's descriptions and versions; a link does not imply a complete
+  BacDive links, GTDB culture-deposit matches, GOLD project chains and ATB
+  sample associations preserve source evidence; a link does not imply a complete
   genome or confirm its current status. Unversioned NCBI accessions remain
   unversioned.
   RefSeq pairing and cross-database equivalence require explicit metadata;
-  species-level GTDB mappings do not supply it.
+  species-level GTDB mappings do not supply it. ATB IDs are local to their
+  metadata snapshot, and shared samples do not equate assemblies.
 - **Cross-source deposit matching requires a registered authority and valid accession format.**
   BacDive's deposit field also contains bare strain aliases. Aliases and
   formats unsupported by the pinned registry remain in source records but
@@ -272,10 +286,12 @@ tracked in the issues. See [docs/CURATION.md](docs/CURATION.md) and
 ```
 TaxonMech/
 ├── conf/sources.yaml                     # where kg-microbe lives; source provenance
+├── conf/allthebacteria.yaml              # pinned ATB snapshot and local cache paths
 ├── conf/id_label_targets.yaml            # id<->label gate targets (vendored gate)
 ├── curation/seed_scope.tsv               # which taxa are records, and why
 ├── data/
 │   ├── raw/                              # inventories + MANIFEST.yaml provenance
+│   ├── atb/                              # ATB metadata overlap, crosslinks and provenance
 │   └── taxa/
 │       ├── PATHS.tsv                     # identifier -> slug, pins filenames
 │       └── <domain>/<slug>.yaml          # generated TaxonRecords
@@ -300,6 +316,9 @@ TaxonMech/
 ## Sources
 
 - **NCBI Taxonomy** — [ncbi.nlm.nih.gov/taxonomy](https://www.ncbi.nlm.nih.gov/taxonomy)
+- **AllTheBacteria** — [assembly metadata](https://allthebacteria.org/docs/metadata_sqlite/),
+  [snapshot source](https://osf.io/4kjh7/), CC-BY-4.0; cite
+  [AllTheBacteria](https://doi.org/10.1101/2024.03.08.584059).
 - **GTDB** — [Genome Taxonomy Database](https://gtdb.ecogenomic.org/)
 - **LPSN** — [List of Prokaryotic names with Standing in Nomenclature](https://lpsn.dsmz.de/)
 - **BacDive** — [DSMZ BacDive](https://bacdive.dsmz.de/)

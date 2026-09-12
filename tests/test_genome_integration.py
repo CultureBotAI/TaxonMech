@@ -127,6 +127,7 @@ def test_both_primary_sources_survive_inventory_seed_validation_and_pair_counts(
         "GTDB": {"strain_links": 1, "strains": 1, "identifiers": 1},
         "PATRIC": {"strain_links": 0, "strains": 0, "identifiers": 0},
         "IMG": {"strain_links": 1, "strains": 1, "identifiers": 1},
+        "AllTheBacteria": {"strain_links": 0, "strains": 0, "identifiers": 0},
     }
     assert stats["listed_related_records_by_type"]["GOLD_ANALYSIS"]["identifiers"] == 1
     assert stats["listed_related_records_by_type"]["BIOSAMPLE"]["identifiers"] == 2
@@ -172,6 +173,7 @@ def test_pages_show_typed_urls_and_provenance_without_counting_related_as_genome
 ):
     monkeypatch.syspath_prepend(str(repo_root / "scripts"))
     renderer = importlib.import_module("render_pages")
+    monkeypatch.setattr(renderer, "ATB_DIR", tmp_path / "no-atb-bundle")
     document, _ = _document(tmp_path)
     path = renderer.TAXA_DIR / "bacteria" / "genome-integration.yaml"
     monkeypatch.setattr(renderer, "load_records", lambda: [(path, document)])

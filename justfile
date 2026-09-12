@@ -27,6 +27,19 @@ extract-inventory *args:
 extract-inventory-dry:
     uv run python scripts/extract_source_inventory.py --dry-run --skip-input-hashes
 
+# Download and verify only the pinned AllTheBacteria metadata, not genome FASTAs.
+atb-fetch *args:
+    uv run python scripts/atb.py fetch {{args}}
+
+# Build a full local SQLite catalogue and compact source-evidenced crosswalks.
+# Dry-run by default; --apply publishes the index and data/atb inventories.
+atb-index *args:
+    uv run python scripts/atb.py index {{args}}
+
+# Indexed lookup by sample, ENA analysis, strain, exact genome identifier or source species.
+atb-query *args:
+    uv run python scripts/query_atb.py {{args}}
+
 # Rank candidate taxa for curation/seed_scope.tsv. Prints; never writes the file.
 propose-scope *args:
     uv run python scripts/propose_scope.py {{args}}
@@ -85,7 +98,7 @@ docs-stats:
 docs-check:
     uv run python scripts/check_docs.py --check
 
-# Verify every committed raw TSV is covered by the manifest and matches it.
+# Verify raw inventories and the ATB crosswalk against their source manifests.
 provenance-check:
     uv run python scripts/check_provenance.py
 

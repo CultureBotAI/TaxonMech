@@ -61,7 +61,8 @@ def render_block() -> str:
         "",
         "These are database identifier counts, not unique biological genomes across databases. "
         "Unlisted strains remain in the complete inventories: `data/raw/strain_assemblies.tsv` "
-        "and `data/raw/strain_genome_records.tsv`.",
+        "and `data/raw/strain_genome_records.tsv`, plus `data/atb/strain_links.tsv` for "
+        "AllTheBacteria assemblies linked through BioSample evidence.",
         "",
         "Related records are counted separately from genomes:",
         "",

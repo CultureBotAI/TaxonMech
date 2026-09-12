@@ -55,6 +55,9 @@ prefixes:
   bacdive: https://bacdive.dsmz.de/strain/
   ncbi.assembly: https://www.ncbi.nlm.nih.gov/datasets/genome/
   gtdb.genome: https://gtdb.ecogenomic.org/genome?gid=
+  # TaxonMech-local snapshot keys; these are not BioSample accessions.
+  atb.assembly: 'https://culturebotai.github.io/TaxonMech/atb.html#atb.assembly:'
+  ena.analysis: https://www.ebi.ac.uk/ena/browser/view/
   biosample: https://www.ncbi.nlm.nih.gov/biosample/
   bioproject: https://www.ncbi.nlm.nih.gov/bioproject/
   patric: https://www.bv-brc.org/view/Genome/
@@ -487,8 +490,8 @@ classes:
         range: GenomeAssemblyLink
       genome_records:
         description: >-
-          Additional source-reported genome records from GTDB, PATRIC/BV-BRC
-          and IMG, alongside the primary NCBI genome_assemblies. Co-occurrence
+          Additional source-reported genome records from GTDB, PATRIC/BV-BRC,
+          IMG and AllTheBacteria, alongside the primary NCBI genome_assemblies. Co-occurrence
           on a strain does not establish equivalence between genome IDs.
         multivalued: true
         inlined_as_list: true
@@ -565,22 +568,56 @@ classes:
           slot_conditions:
             genome_id:
               pattern: '^gtdb\.genome:(RS_GCF|GB_GCA)_[0-9]{9}\.[1-9][0-9]*$'
+      - preconditions:
+          slot_conditions:
+            source_database:
+              equals_string: allthebacteria
+        postconditions:
+          slot_conditions:
+            genome_id:
+              pattern: '^atb\.assembly:[0-9]{4}(0[1-9]|1[0-2])\.SAM[NED][A-Z]?[0-9]+$'
+            source:
+              equals_string: ALLTHEBACTERIA
+            source_id:
+              pattern: '^atb\.assembly:[0-9]{4}(0[1-9]|1[0-2])\.SAM[NED][A-Z]?[0-9]+$'
+            atb_evidence:
+              required: true
+              all_of:
+                - range: AtbAssemblyEvidence
+      - preconditions:
+          slot_conditions:
+            source:
+              equals_string: ALLTHEBACTERIA
+        postconditions:
+          slot_conditions:
+            source_database:
+              equals_string: allthebacteria
+      - preconditions:
+          slot_conditions:
+            atb_evidence:
+              value_presence: PRESENT
+        postconditions:
+          slot_conditions:
+            source_database:
+              equals_string: allthebacteria
     attributes:
       genome_id:
         description: >-
-          GTDB, PATRIC/BV-BRC or IMG genome record identifier. Preserve PATRIC's
+          GTDB, PATRIC/BV-BRC, IMG or AllTheBacteria genome record identifier. Preserve PATRIC's
           complete dotted identifier as text; its suffix is not interpreted
           as an NCBI assembly version. IMG taxon_oid denotes an IMG genome
           record, not an NCBI taxon. GTDB genome accessions retain their
           RS_ or GB_ wrapper and version, distinct from GTDB species identifiers.
+          AllTheBacteria keys are local identifiers scoped to an aggregate
+          release and sample; a shared sample does not establish genome equivalence.
         required: true
         range: string
-        pattern: '^(patric:[0-9]+\.[0-9]+|img\.taxon:[0-9]+|gtdb\.genome:(RS_GCF|GB_GCA)_[0-9]{9}\.[1-9][0-9]*)$'
+        pattern: '^(patric:[0-9]+\.[0-9]+|img\.taxon:[0-9]+|gtdb\.genome:(RS_GCF|GB_GCA)_[0-9]{9}\.[1-9][0-9]*|atb\.assembly:[0-9]{4}(0[1-9]|1[0-2])\.SAM[NED][A-Z]?[0-9]+)$'
       source_database:
         description: The database identifying this genome record.
         required: true
         range: string
-        pattern: '^(patric|img|gtdb)$'
+        pattern: '^(patric|img|gtdb|allthebacteria)$'
       source:
         description: The resource asserting the strain-to-genome relationship.
         required: true
@@ -596,6 +633,10 @@ classes:
       genome_name:
         description: Genome record description exactly as supplied by the source.
         range: string
+      atb_evidence:
+        description: Required release, artifact and exact BioSample matching evidence for AllTheBacteria.
+        range: AtbAssemblyEvidence
+        inlined: true
       assembly_level:
         description: >-
           Source-reported scope or assembly level, including plasmid, wgs,
@@ -608,6 +649,97 @@ classes:
           and does not override strain classification or NCBI lineage.
         range: string
         pattern: '^NCBITaxon:[0-9]+$'
+
+  AtbAssemblyEvidence:
+    description: >-
+      Evidence for an available assembly in a pinned AllTheBacteria aggregate.
+      BioSample references link through original strain assertions, without
+      equating ATB assemblies to NCBI, GTDB or IMG genomes. Source availability
+      and usable sample identity are checked during crosswalk generation;
+      an assembly need not pass the source's high-quality filters.
+    attributes:
+      release:
+        description: Aggregate metadata snapshot, independent of the original assembly dataset.
+        required: true
+        range: string
+        pattern: '^[0-9]{4}-(0[1-9]|1[0-2])$'
+      sample_id:
+        description: The exact single BioSample shared by the assembly and strain evidence.
+        required: true
+        range: string
+        pattern: '^biosample:SAM[NED][A-Z]?[0-9]+$'
+      dataset:
+        description: Original dataset label preserved from the ATB metadata row.
+        required: true
+        range: string
+        pattern: '^.+$'
+      run_accessions:
+        description: Source-reported comma-separated run accessions actually used for assembly.
+        required: true
+        range: string
+        pattern: '^[EDS]RR[0-9]+(,[EDS]RR[0-9]+)*$'
+      assembly_seqkit_sum:
+        description: >-
+          Source-supplied SeqKit sequence-content digest, including its method
+          prefix. This is not the MD5 checksum of a compressed download file.
+        required: true
+        range: string
+        pattern: '^seqkit\.v0\.1_DLS_k0_[a-f0-9]{32}$'
+      assembly_filter:
+        description: Source assembly pipeline flags, kept independently of availability and quality.
+        required: true
+        range: string
+        pattern: '^(PASS|(ASM_LEN|ENA_ASM_SUBMIT_ERR)(,(ASM_LEN|ENA_ASM_SUBMIT_ERR))*)$'
+      hq_filter:
+        description: Source high-quality filter results; a non-PASS value does not remove an available assembly.
+        required: true
+        range: string
+        pattern: '^.+$'
+      download_url:
+        description: Individual assembly FASTA URL supplied by the source, not downloaded during indexing.
+        required: true
+        range: string
+        pattern: '^https://allthebacteria-assemblies\.s3\.eu-west-2\.amazonaws\.com/SAM[NED][A-Z]?[0-9]+\.fa\.gz$'
+      archive_url:
+        description: Source-supplied OSF assembly archive URL.
+        required: true
+        range: string
+        pattern: '^https://osf\.io/download/[A-Za-z0-9]+/?$'
+      archive_filename:
+        description: Original source assembly archive filename.
+        required: true
+        range: string
+        pattern: '^[^/\\]+\.tar\.xz$'
+      ena_analysis_id:
+        description: Optional source-reported ENA analysis accession, distinct from NCBI assembly IDs.
+        range: string
+        pattern: '^ena\.analysis:ERZ[0-9]+$'
+      sylph_species:
+        description: Source species prediction retained as metadata, never used as a strain join key.
+        range: string
+      sample_links:
+        description: Original source assertions linking the strain to the exact BioSample.
+        required: true
+        minimum_cardinality: 1
+        multivalued: true
+        inlined_as_list: true
+        range: AtbSampleLink
+
+  AtbSampleLink:
+    description: >-
+      A BioSample-only source assertion from the existing GTDB or GOLD
+      strain inventories, retained in an AllTheBacteria evidence chain.
+      AllTheBacteria cannot supply circular evidence for its own strain match.
+    is_a: GenomeRelatedRecordLink
+    slot_usage:
+      record_type:
+        equals_string: BIOSAMPLE
+      record_id:
+        pattern: '^biosample:SAM[NED][A-Z]?[0-9]+$'
+      source:
+        equals_string_in:
+          - GTDB
+          - GOLD
 
   GenomeAssemblyLink:
     mixins:
@@ -919,6 +1051,8 @@ enums:
         description: NCBI Taxonomy, via kg-microbe's ncbitaxon transform and raw semantic-sql build.
       GTDB:
         description: Genome Taxonomy Database species and genome assemblies.
+      ALLTHEBACTERIA:
+        description: Pinned AllTheBacteria assemblies linked through explicit BioSample source evidence.
       LPSN:
         description: List of Prokaryotic names with Standing in Nomenclature (DSMZ).
       BACDIVE:

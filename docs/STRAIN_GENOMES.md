@@ -7,7 +7,8 @@ between experimental observations made on a strain and genomic data.
 
 **NCBI GenBank/RefSeq assemblies are the priority**, with all available genome
 identifier systems in scope when their strain links have evidence. GTDB,
-BV-BRC / PATRIC and IMG genome records retain their own identifier types.
+BV-BRC / PATRIC, IMG and AllTheBacteria genome records retain their own
+identifier types.
 BioSample, BioProject and GOLD organism/project references provide related
 context without being counted as genomes. Expanding database coverage does
 not replace an NCBI assembly ID or establish that identifiers from different
@@ -22,8 +23,8 @@ resources denote the same genome.
 | Source deposit or alias identifier | `strains[].culture_collection_ids[]` | Values carried from kg-microbe's BacDive transform; registered authority and authority-specific accession format are checked separately before a genome join |
 | NCBI genome assembly (primary) | `strains[].genome_assemblies[].assembly_id` | A GenBank or RefSeq assembly accession, with its version when supplied |
 | Strain-to-assembly assertion | `GenomeAssemblyLink` | A source explicitly associates this assembly with this strain record |
-| Other database genome record | `strains[].genome_records[].genome_id` | A typed GTDB, BV-BRC / PATRIC or IMG genome identifier |
-| Strain-to-genome-record assertion | `GenomeRecordLink` | A source explicitly associates this database record with this strain record |
+| Other database genome record | `strains[].genome_records[].genome_id` | A typed GTDB, BV-BRC / PATRIC, IMG or AllTheBacteria genome identifier |
+| Strain-to-genome-record assertion | `GenomeRecordLink` | An association to this database record, supported by direct source evidence or a retained sample chain |
 | Related sample, project or organism | `strains[].related_records[].record_id` | A BioSample, BioProject or GOLD organism/project identifier, classified by `record_type` |
 | Strain-to-related-record assertion | `GenomeRelatedRecordLink` | Source context attached to a strain, excluded from genome counts |
 
@@ -64,6 +65,7 @@ points to the source record within that snapshot.
 | BV-BRC / PATRIC | `patric:<digits>.<digits>` | PATRIC genome ID from BacDive in `genome_records`, linked to BV-BRC |
 | IMG | `img.taxon:<digits>` | IMG genome-record ID from BacDive or a primary GOLD analysis in `genome_records` |
 | GTDB genome | `gtdb.genome:RS_GCF_…` or `gtdb.genome:GB_GCA_…` | Original GTDB metadata accession and version in `genome_records`; separate from `GTDB:s__…` species mappings |
+| AllTheBacteria assembly | `atb.assembly:202505.SAM…` | Local snapshot-scoped assembly identifier in `genome_records`, associated through retained BioSample evidence |
 | BioSample | `biosample:SAM…` | `related_records` entry of type `BIOSAMPLE` |
 | BioProject | `bioproject:PRJ…` | `related_records` entry of type `BIOPROJECT` |
 | GOLD organism | `gold:Go…` | `related_records` entry of type `GOLD_ORGANISM` |
@@ -211,6 +213,25 @@ asserting the link. GOLD metadata retain their
 [source usage policy](https://gold.jgi.doe.gov/usagepolicy); the requested
 resource citation is [GOLD v.10](https://doi.org/10.1093/nar/gkae1000).
 
+## AllTheBacteria assembly metadata
+
+AllTheBacteria contributes assemblies through exact BioSample identifiers
+already supported by the strain's GTDB or GOLD evidence. Each link uses
+`source: ALLTHEBACTERIA`, `source_database: allthebacteria` and a local
+snapshot ID such as `atb.assembly:202505.SAMN…`. Its `atb_evidence` retains
+the sample, original BIOSAMPLE assertions, ENA analysis when available,
+source run accessions, filters, SeqKit sum and native FASTA/archive links.
+This adds an assembly identifier without counting the sample as a genome.
+
+The uncapped `data/atb/strain_links.tsv` covers eligible available assemblies,
+including strains omitted from taxon pages. `data/atb/genome_links.tsv`
+records `shares_biosample` crosslinks only where an existing genome assertion
+and sample assertion have matching source provenance. It never joins every
+genome listed under one strain. Neither shared sample nor matching species
+means the assemblies are identical. The full source catalog keeps all
+statuses; the browser uses only the committed linked overlap. See the
+[ATB catalog, flags and query guide](ALLTHEBACTERIA.md).
+
 ## Secondary crosswalk exclusions
 
 MicrobeDecoder's combined CSV contains GOLD and NCBI associations that
@@ -277,7 +298,8 @@ and GOLD organism/project references. Its `record_type` identifies the entity
 kind; these rows are never added to the genome crosswalk or genome counts.
 
 For example, this prints the complete genome crosswalk for a culture deposit,
-with NCBI assemblies first, using the committed inventories alone:
+with NCBI assemblies first and ATB sample associations last, using the
+committed inventories alone:
 
 ```python
 import csv
@@ -298,6 +320,10 @@ for inventory, identifier_field in (
         for row in csv.DictReader(handle, delimiter="\t"):
             if row["strain_id"] in strain_ids:
                 print(row["strain_id"], row[identifier_field], row["source_id"])
+with Path("data/atb/strain_links.tsv").open() as handle:
+    for row in csv.DictReader(handle, delimiter="\t"):
+        if row["strain_id"] in strain_ids:
+            print(row["strain_id"], row["atb_id"], row["sample_id"])
 ```
 
 Each generated taxon record embeds links only for its listed strains. The
