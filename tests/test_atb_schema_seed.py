@@ -177,12 +177,15 @@ def test_inventory_appends_atb_evidence_without_changing_primary_ncbi_links(tmp_
     }
     monkeypatch.setattr(seed, "read_tsv", lambda name: deepcopy(tables[name]))
     monkeypatch.setattr(seed, "ATB_DIR", _source(tmp_path))
+    # This fixture isolates ATB behavior; StrainInfo's own overlay has dedicated tests.
+    monkeypatch.setattr(seed.straininfo, "record_links", lambda directory: ({}, {}))
     inventory = seed.load_inventory()
     assert inventory.strain_assemblies[sid] == [ncbi]
     assert inventory.strain_genome_records[sid][0] == existing
     assert inventory.strain_genome_records[sid][1]["source_database"] == "allthebacteria"
     document = seed.build_document(seed.build_concepts(inventory, ["NCBITaxon:562"])[0], inventory)
-    assert "Seeded from data/raw/ and data/atb/ inventories" in document["curation_history"][0]["changes"]
+    assert ("Seeded from data/raw/, data/atb/ and data/straininfo/ inventories"
+            in document["curation_history"][0]["changes"])
     strain = document["strains"][0]
     assert list(strain).index("genome_assemblies") < list(strain).index("genome_records")
     assert strain["genome_assemblies"] == [{key: value for key, value in ncbi.items() if key != "strain_id"}]
@@ -203,6 +206,8 @@ def test_inventory_appends_atb_evidence_without_changing_primary_ncbi_links(tmp_
 def test_seed_timestamp_uses_newest_source_snapshot_deterministically(
     tmp_path, monkeypatch, raw_stamp, atb_stamp, expected,
 ):
+    # No StrainInfo source participates in these raw/ATB-only timestamp scenarios.
+    monkeypatch.setattr(seed, "STRAININFO_DIR", tmp_path / "unused-straininfo")
     for name, stamp in (("raw", raw_stamp), ("atb", atb_stamp)):
         directory = tmp_path / name
         directory.mkdir()

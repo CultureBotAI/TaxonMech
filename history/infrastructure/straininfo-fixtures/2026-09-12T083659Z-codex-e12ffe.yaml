@@ -1,0 +1,30 @@
+history_version: 1
+target:
+  kind: infrastructure
+  path: tests/test_atb_schema_seed.py
+  slug: straininfo-fixtures
+session:
+  id: 2026-09-12T083659Z-codex-e12ffe
+  timestamp: '2026-09-12T08:36:59Z'
+  actors:
+  - type: ai_agent
+    name: codex
+    model: gpt-6
+    agent_tool: codex
+links:
+  issues:
+  - https://github.com/CultureBotAI/TaxonMech/issues/43
+  prs:
+  - https://github.com/CultureBotAI/TaxonMech/pull/42
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - tests
+  - seeding
+  summary: Isolate legacy ATB fixtures from the mandatory StrainInfo source
+  details: The full integration suite exposed five ATB fixture failures caused by loading
+    real StrainInfo evidence and its capture timestamp. Added an explicit empty StrainInfo
+    fixture converter, isolated raw/ATB-only timestamp cases from the real StrainInfo manifest
+    and updated the expected seed curation phrase. Production validation remains mandatory.
+    The complete ATB and StrainInfo schema/seed test files pass all 306 tests; Ruff passes.
