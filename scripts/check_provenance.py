@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""Verify hashes and coverage for every committed data/raw inventory.
+"""Verify hashes and coverage for the committed source inventories.
 
 Every tracked TSV under data/raw/ must be listed in MANIFEST.yaml with matching
 row count, byte count and sha256, and every manifest output must be tracked.
 A committed inventory nobody can trace to an extraction is the failure this
 guards against.
+The ATB component additionally verifies its pinned source, raw dependencies,
+compact overlap and exact reproduction of the evidenced crosswalks.
 """
 
 from __future__ import annotations
@@ -96,12 +98,15 @@ def problems() -> list[str]:
 
 def main() -> int:
     failures = problems()
+    from taxonmech.atb import provenance_problems
+
+    failures.extend(provenance_problems(REPO_ROOT))
     if failures:
         print("provenance check failed:\n  " + "\n  ".join(failures), file=sys.stderr)
         return 1
     manifest = yaml.safe_load(MANIFEST.read_text(encoding="utf-8"))
     print(f"provenance current: {len(manifest.get('outputs', []))} committed inventories from "
-          f"{manifest.get('kg_microbe_source')}")
+          f"{manifest.get('kg_microbe_source')}; ATB snapshot and crosswalks verified")
     return 0
 
 

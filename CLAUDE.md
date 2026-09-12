@@ -6,18 +6,19 @@ Operational guidance for Claude Code and other editing agents in this repository
 
 TaxonMech is a LinkML knowledge base of microbial taxa and strains, seeded
 from kg-microbe's transforms of NCBI Taxonomy, GTDB, LPSN, BacDive, MediaDive,
-GOLD, Madin et al. and BactoTraits, supplemented by primary genome metadata
-and GOLD's public workbook. One generated YAML record lives under
+GOLD, Madin et al. and BactoTraits, supplemented by primary genome metadata,
+GOLD's public workbook and AllTheBacteria metadata. One generated YAML
+record lives under
 `data/taxa/<domain>/<slug>.yaml` for each taxon in scope. The committed
-inventories in `data/raw/` and the scope in `curation/seed_scope.tsv` are the
+inventories in `data/raw/` and `data/atb/` and the scope in `curation/seed_scope.tsv` are the
 reproducible inputs.
 
 **A primary use case is strain identifier to genome identifier relationships.**
 Prioritize NCBI GenBank/RefSeq assemblies and include all available genome
 identifier systems when source evidence links them to BacDive and
 culture-collection strain identifiers. Keep NCBI links in `genome_assemblies`
-and typed GTDB, BV-BRC / PATRIC and IMG links in `genome_records`, including
-multiple links per strain. Keep sample, project and GOLD organism references
+and typed GTDB, BV-BRC / PATRIC, IMG and AllTheBacteria links in
+`genome_records`, including multiple links per strain. Keep sample, project and GOLD organism references
 separate from genome identifiers and genome counts.
 
 GOLD genome links must follow primary organism, sequencing-project and
@@ -25,6 +26,20 @@ analysis-project identifiers. Preserve that chain and the culture-deposit
 match; analyses that refer to conflicting or unknown organisms do not supply
 strain-genome links. GOLD's `Go`, `Gp` and `Ga` IDs are related records,
 not genome identifiers.
+
+AllTheBacteria uses local snapshot identifiers `atb.assembly:202505.SAM…`.
+Join its whole sample accession to existing BIOSAMPLE evidence, preserving
+that evidence in `atb_evidence.sample_links`. Genome crosslinks additionally
+require the same explicit source chain; do not take a Cartesian product of
+all genomes and samples attached to a strain. Shared BioSample does not mean
+same assembly or sequence. Retain source filters, run IDs, SeqKit sums and
+provided download URLs; SeqKit sum is not MD5 and AWS URLs are mutable.
+The full catalog retains all statuses, but strain/genome links require an
+available FASTA without NO_RUNS, RUN_REMOVED, RMMS, META_FAIL or RUN_CHANGE.
+Non-HQ assemblies and available FASTAs lacking an ENA analysis remain eligible.
+Render the ATB browser from committed `data/atb/` inventories, not the full
+ignored SQLite catalog. Upstream metadata retain CC-BY-4.0 attribution.
+See [docs/ALLTHEBACTERIA.md](docs/ALLTHEBACTERIA.md).
 
 Keep strain identity, taxon classification and genome-record identity distinct;
 shared taxonomy, a matching strain name or co-occurrence on a BacDive record
@@ -86,6 +101,8 @@ For an upstream refresh:
 ```bash
 just extract-inventory-dry
 just extract-inventory
+just atb-fetch         # fetch pinned metadata if not already cached
+just atb-index --apply # rebuild ATB evidence against the refreshed inventories
 just seed
 just seed-canary NCBITaxon:562
 just seed-apply --force

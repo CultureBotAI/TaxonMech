@@ -98,7 +98,7 @@ typed `related_records` and one derived flag, `is_type_strain`.
 Strain-to-genome relationships are a primary curation priority. Prioritize
 NCBI assemblies and include all
 available genome identifier systems with source evidence, including GTDB,
-BV-BRC / PATRIC and IMG. Retain multiple links, source-supplied accession
+BV-BRC / PATRIC, IMG and AllTheBacteria. Retain multiple links, source-supplied accession
 versions and descriptions such as `plasmid` or `wgs`; an imported link need
 not represent a complete assembly.
 
@@ -120,6 +120,14 @@ organism record. Follow explicit organism and project IDs to the analysis,
 retain every step as provenance and reject ambiguous or conflicting chains.
 Only supported genome analyses supply NCBI or IMG genome identifiers; a
 sequencing or analysis project is itself a related record.
+AllTheBacteria links follow an exact BioSample accession already supported
+by a strain's source evidence. Keep the complete BIOSAMPLE assertion in
+`atb_evidence.sample_links`. A crosslink to another genome additionally
+requires matching genome/sample provenance; sharing a strain record alone
+is insufficient. Keep the local snapshot ID, filters, runs, SeqKit sum and
+native download/archive URLs. Eligible links require an available FASTA and
+no metadata-identity warning; non-HQ status alone does not exclude them.
+An ENA analysis accession is optional. See [ALLTHEBACTERIA.md](ALLTHEBACTERIA.md).
 Co-occurrence on one BacDive record does not establish that two database
 identifiers denote the same genome. Assemblies, genome records, BioSamples,
 marker-gene sequences, projects, GOLD organisms and culture deposits denote

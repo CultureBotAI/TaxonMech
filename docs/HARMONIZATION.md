@@ -41,6 +41,7 @@ the disagreement visible.
 | BacDive | `bacdive/{nodes,edges}.tsv`; `data/raw/bacdive_strains.json` | `strains` (designation, deposits, `is_type_strain`, explicit NCBI `genome_assemblies` and BV-BRC / PATRIC and IMG `genome_records`), `strain_count`, the `BACDIVE` attestation |
 | MediaDive | `mediadive/edges.tsv` | `medium_count` per strain and the `MEDIADIVE` attestation counting media |
 | GOLD | kg-microbe `gold/edges.tsv`; primary `data/source_snapshots/goldData.xlsx` | Taxon-level `GOLD` attestation from KGX; strain-linked NCBI/IMG identifiers and typed related records through the workbook's organism, sequencing-project and analysis-project IDs |
+| AllTheBacteria | Committed `data/atb/` overlap from the 2025-05 assembly metadata snapshot | Snapshot-scoped assembly links through existing BioSample evidence; genome crosslinks retain matching source chains |
 | Madin et al., BactoTraits | `madin_etal/edges.tsv`, `bactotraits/edges.tsv` | attestations counting trait assertions |
 
 Raw inputs restore information absent from the KGX transforms: NCBI's
@@ -48,8 +49,9 @@ semantic-sql build supplies rank and typed synonyms, BacDive's JSON supplies
 direct strain-to-genome assertions, and GTDB metadata supplies genome IDs
 with culture-deposit identifiers. GOLD's primary workbook supplies explicit
 organism and project relationships. The manifest hashes every input snapshot.
-NCBI assemblies are the primary genome identifiers; GTDB, BV-BRC / PATRIC
-and IMG genome-record identifiers retain their own types and provenance.
+NCBI assemblies are the primary genome identifiers; GTDB, BV-BRC / PATRIC,
+IMG and AllTheBacteria genome-record identifiers retain their own types and
+provenance.
 
 BacDive assertions are joined by BacDive strain ID. GTDB genome rows join
 through whole semicolon-delimited culture identifiers in
@@ -86,6 +88,16 @@ supplies strain-genome identifiers. Supported genome analyses contribute
 the explicit `AP IMG TAXON ID` and `AP GENBANK.assemblyAccession` fields.
 The organism and project IDs remain typed related records, with the full
 join chain preserved in provenance.
+
+AllTheBacteria's whole `sample_accession` joins to existing BIOSAMPLE
+assertions in `strain_related_records.tsv`. This preserves the prior GTDB or
+GOLD strain evidence without rejoining names, taxa or free-form designations.
+Crosslinks to NCBI, GTDB and IMG additionally require matching provenance:
+the GTDB metadata row or GOLD organism/project chain must connect that genome
+to that sample. They use `relationship: shares_biosample`, never `sameAs`.
+The committed `data/atb/strain_links.tsv` and `genome_links.tsv` preserve
+these chains as JSON evidence; the full catalog and eligibility boundary are
+specified in [ALLTHEBACTERIA.md](ALLTHEBACTERIA.md).
 
 ## Mapping predicates
 
@@ -187,8 +199,9 @@ readability decision; the data is not lost.
 
 `data/raw/strain_assemblies.tsv` keeps every imported NCBI assembly link for
 the inventoried strains; `data/raw/strain_genome_records.tsv` adds BV-BRC /
-PATRIC, IMG and GTDB genome-record links. Join either to `bacdive_strains.tsv`
-on `strain_id` for the complete mapping to culture-collection identifiers.
+PATRIC, IMG and GTDB genome-record links. `data/atb/strain_links.tsv` adds
+eligible AllTheBacteria associations through BioSample evidence. Join these
+to `bacdive_strains.tsv` on `strain_id` for the complete mapping to culture-collection identifiers.
 Listing caps do not truncate these inventories. Corpus reports count linked
 identifiers and strain-identifier pairs per database; their sum is not a
 count of unique biological genomes across resources.

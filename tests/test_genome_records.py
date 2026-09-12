@@ -222,12 +222,13 @@ def test_report_counts_database_identifiers_strain_pairs_and_evidence_separately
     assert stats["listed_strains_with_genome_records"] == 2
     assert stats["listed_strains_with_any_genome"] == 2
     coverage = stats["listed_genome_links_by_database"]
-    assert list(coverage) == ["NCBI", "GTDB", "PATRIC", "IMG"]
+    assert list(coverage) == ["NCBI", "GTDB", "PATRIC", "IMG", "AllTheBacteria"]
     assert coverage == {
         "NCBI": {"strain_links": 2, "strains": 1, "identifiers": 2},
         "GTDB": {"strain_links": 0, "strains": 0, "identifiers": 0},
         "PATRIC": {"strain_links": 3, "strains": 2, "identifiers": 2},
         "IMG": {"strain_links": 1, "strains": 1, "identifiers": 1},
+        "AllTheBacteria": {"strain_links": 0, "strains": 0, "identifiers": 0},
     }
 
 
@@ -274,6 +275,7 @@ def test_rendered_strain_links_prioritize_ncbi_and_preserve_other_database_ids(
 ):
     monkeypatch.syspath_prepend(str(repo_root / "scripts"))
     renderer = importlib.import_module("render_pages")
+    monkeypatch.setattr(renderer, "ATB_DIR", tmp_path / "no-atb-bundle")
     doc, _ = _document(tmp_path)
     patric = next(row for row in doc["strains"][0]["genome_records"] if row["source_database"] == "patric")
     patric["assembly_level"] = "plasmid"

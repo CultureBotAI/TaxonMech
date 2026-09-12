@@ -51,6 +51,8 @@ def summarize(records: list[tuple[Path, dict]]) -> dict:
         "GTDB": {(sid, gid) for sid, gid in genome_record_pairs if gid.startswith("gtdb.genome:")},
         "PATRIC": {(sid, gid) for sid, gid in genome_record_pairs if gid.startswith("patric:")},
         "IMG": {(sid, gid) for sid, gid in genome_record_pairs if gid.startswith("img.taxon:")},
+        "AllTheBacteria": {(sid, gid) for sid, gid in genome_record_pairs
+                          if gid.startswith("atb.assembly:")},
     }
     genome_coverage = {
         database: {"strain_links": len(pairs), "strains": len({sid for sid, _ in pairs}),
@@ -147,7 +149,7 @@ def main(argv: list[str] | None = None) -> int:
     print(
         f"Additional genome-record links: {s['listed_genome_record_links']} pairs, "
         f"{s['listed_strains_with_genome_records']} strains, {s['listed_genome_records']} identifiers "
-        "(full inventory in data/raw/strain_genome_records.tsv)"
+        "(full inventories in data/raw/strain_genome_records.tsv and data/atb/strain_links.tsv)"
     )
     for database, coverage in s["listed_genome_links_by_database"].items():
         print(f"  {database}: {coverage['strain_links']} strain-identifier pairs, "
