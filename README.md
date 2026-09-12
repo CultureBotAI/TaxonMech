@@ -334,6 +334,11 @@ TaxonMech/
   harmonized KGX inputs, BacDive and GTDB snapshots, and GTDB→NCBI and
   LPSN→NCBI mappings. The GOLD workbook is downloaded from its authority.
 
+## Merge queue
+
+See [the native merge-queue guide](docs/MERGE_QUEUE.md) for the reviewed merge workflow
+when queue enforcement is enabled on `main`.
+
 ## License
 
 CC0-1.0 for everything this project authored. Upstream resources keep their
