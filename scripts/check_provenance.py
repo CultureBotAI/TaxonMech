@@ -99,14 +99,16 @@ def problems() -> list[str]:
 def main() -> int:
     failures = problems()
     from taxonmech.atb import provenance_problems
+    from taxonmech.straininfo import provenance_problems as straininfo_problems
 
     failures.extend(provenance_problems(REPO_ROOT))
+    failures.extend(straininfo_problems(REPO_ROOT))
     if failures:
         print("provenance check failed:\n  " + "\n  ".join(failures), file=sys.stderr)
         return 1
     manifest = yaml.safe_load(MANIFEST.read_text(encoding="utf-8"))
     print(f"provenance current: {len(manifest.get('outputs', []))} committed inventories from "
-          f"{manifest.get('kg_microbe_source')}; ATB snapshot and crosswalks verified")
+          f"{manifest.get('kg_microbe_source')}; ATB and StrainInfo snapshots and crosswalks verified")
     return 0
 
 

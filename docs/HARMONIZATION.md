@@ -42,6 +42,7 @@ the disagreement visible.
 | MediaDive | `mediadive/edges.tsv` | `medium_count` per strain and the `MEDIADIVE` attestation counting media |
 | GOLD | kg-microbe `gold/edges.tsv`; primary `data/source_snapshots/goldData.xlsx` | Taxon-level `GOLD` attestation from KGX; strain-linked NCBI/IMG identifiers and typed related records through the workbook's organism, sequencing-project and analysis-project IDs |
 | AllTheBacteria | Committed `data/atb/` overlap from the 2025-05 assembly metadata snapshot | Snapshot-scoped assembly links through existing BioSample evidence; genome crosslinks retain matching source chains |
+| StrainInfo | Committed `data/straininfo/` API snapshot and deposit crosswalk | Explicit own-deposit NCBI assertions, SI-ID/SI-DP related records, strain-record DOIs and nucleotide references |
 | Madin et al., BactoTraits | `madin_etal/edges.tsv`, `bactotraits/edges.tsv` | attestations counting trait assertions |
 
 Raw inputs restore information absent from the KGX transforms: NCBI's
@@ -98,6 +99,18 @@ to that sample. They use `relationship: shares_biosample`, never `sameAs`.
 The committed `data/atb/strain_links.tsv` and `genome_links.tsv` preserve
 these chains as JSON evidence; the full catalog and eligibility boundary are
 specified in [ALLTHEBACTERIA.md](ALLTHEBACTERIA.md).
+
+StrainInfo rich source records supply a separate overlay, joined through
+whole eligible `deposits.designation` values under the same CAFI authority
+and full accession-template rule. SI-ID group membership and the source
+BacDive reference never supply the join. Each sequence must explicitly name
+the same matched SI-DP; no assembly transfers from another deposit in the
+group. The nested evidence retains both identities, source statuses, exact
+culture match, sequence deposit and record-version DOI. Alternative/archive
+metadata remain source context without asserting that strain groups or
+assemblies are equivalent. The browser exposes existing TaxonMech genome
+associations separately, preserving their earlier sources and ATB sample
+chains. See [STRAININFO.md](STRAININFO.md).
 
 ## Mapping predicates
 

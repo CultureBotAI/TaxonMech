@@ -71,6 +71,9 @@ points to the source record within that snapshot.
 | GOLD organism | `gold:Go…` | `related_records` entry of type `GOLD_ORGANISM` |
 | GOLD sequencing project | `gold:Gp…` | `related_records` entry of type `GOLD_PROJECT` |
 | GOLD analysis project | `gold:Ga…` | `related_records` entry of type `GOLD_ANALYSIS` |
+| StrainInfo strain | `straininfo.strain:…` | Source strain record, related type `STRAININFO_STRAIN`; distinct from its deposits and record-version DOI |
+| StrainInfo deposit | `straininfo.deposit:…` | Culture deposit, related type `STRAININFO_DEPOSIT`; sequence links require this exact deposit's assertion |
+| Source nucleotide sequence | `INSDC:…` | Related type `NUCLEOTIDE_SEQUENCE` for StrainInfo gene, rRNA operon or patent references; excluded from genome counts |
 
 ## BacDive assertions
 
@@ -232,6 +235,25 @@ means the assemblies are identical. The full source catalog keeps all
 statuses; the browser uses only the committed linked overlap. See the
 [ATB catalog, flags and query guide](ALLTHEBACTERIA.md).
 
+## StrainInfo deposit-specific assertions
+
+StrainInfo adds a separate, uncapped component in `data/straininfo/`. Match a
+rich source record's own eligible deposit designation through the pinned
+CAFI authority and full accession template. Preserve the matched culture,
+SI-ID strain record, SI-DP deposit, source statuses and strain record-version
+DOI. A genome or nucleotide accession must explicitly name that matched
+SI-DP in its source sequence record. Membership in the same SI-ID group,
+species names and source BacDive cross-references cannot transfer sequences
+between deposits.
+
+Explicit NCBI GCA/GCF accessions enter `genome_assemblies`, preserving supplied
+versions and leaving unversioned accessions unversioned. SI strain/deposit
+IDs and gene/rRNA/patent sequence accessions enter typed `related_records`,
+outside genome counts. StrainInfo is the asserting source; NCBI is the genome
+identifier database. The [StrainInfo browser and query guide](STRAININFO.md)
+exposes source deposit paths and separately labeled existing TaxonMech
+associations, including ATB, GTDB and IMG, with their original provenance.
+
 ## Secondary crosswalk exclusions
 
 MicrobeDecoder's combined CSV contains GOLD and NCBI associations that
@@ -297,9 +319,14 @@ culture identifier, match an exact element of the pipe-delimited
 and GOLD organism/project references. Its `record_type` identifies the entity
 kind; these rows are never added to the genome crosswalk or genome counts.
 
-For example, this prints the complete genome crosswalk for a culture deposit,
-with NCBI assemblies first and ATB sample associations last, using the
-committed inventories alone:
+`data/straininfo/assemblies.tsv` adds explicit source deposit-to-NCBI links;
+`data/straininfo/related_records.tsv.gz` adds its typed related references.
+The StrainInfo component is joined to the same local strain IDs, independently
+of the taxon listing cap.
+
+This prints genome associations for local BacDive strains carrying a culture
+deposit, with NCBI first and each additional source's matched deposit visible.
+StrainInfo assertions are restricted to the selected deposit:
 
 ```python
 import csv
@@ -313,13 +340,17 @@ with (raw / "bacdive_strains.tsv").open() as handle:
         if deposit in row["culture_collection_ids"].split("|")
     }
 for inventory, identifier_field in (
-    ("strain_assemblies.tsv", "assembly_id"),
-    ("strain_genome_records.tsv", "genome_id"),
+    (raw / "strain_assemblies.tsv", "assembly_id"),
+    (Path("data/straininfo/assemblies.tsv"), "assembly_id"),
+    (raw / "strain_genome_records.tsv", "genome_id"),
 ):
-    with (raw / inventory).open() as handle:
+    with inventory.open() as handle:
         for row in csv.DictReader(handle, delimiter="\t"):
+            if row["source"] == "STRAININFO" and row["matched_strain_id"] != deposit:
+                continue
             if row["strain_id"] in strain_ids:
-                print(row["strain_id"], row[identifier_field], row["source_id"])
+                print(row["strain_id"], row[identifier_field], row["source_id"],
+                      row.get("matched_strain_id", ""))
 with Path("data/atb/strain_links.tsv").open() as handle:
     for row in csv.DictReader(handle, delimiter="\t"):
         if row["strain_id"] in strain_ids:

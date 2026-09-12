@@ -62,7 +62,8 @@ def render_block() -> str:
         "These are database identifier counts, not unique biological genomes across databases. "
         "Unlisted strains remain in the complete inventories: `data/raw/strain_assemblies.tsv` "
         "and `data/raw/strain_genome_records.tsv`, plus `data/atb/strain_links.tsv` for "
-        "AllTheBacteria assemblies linked through BioSample evidence.",
+        "AllTheBacteria assemblies linked through BioSample evidence, and "
+        "`data/straininfo/assemblies.tsv` for StrainInfo's explicit deposit-to-NCBI assertions.",
         "",
         "Related records are counted separately from genomes:",
         "",
@@ -72,7 +73,9 @@ def render_block() -> str:
           f"{coverage['strains']:,} |"
           for kind, coverage in s["listed_related_records_by_type"].items()],
         "",
-        "The complete related-record inventory is `data/raw/strain_related_records.tsv`.",
+        "The complete related-record inventories are `data/raw/strain_related_records.tsv` "
+        "and `data/straininfo/related_records.tsv.gz`. StrainInfo strain/deposit IDs, record-version "
+        "DOIs and nucleotide sequence references are not counted as genomes.",
         "",
         f"**{s['by_status'].get('REVIEWED', 0)} records are `REVIEWED`;** the remaining "
         f"{s['total'] - s['by_status'].get('REVIEWED', 0)} are `SEEDED` or `PROPOSED`.",

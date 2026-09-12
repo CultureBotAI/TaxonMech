@@ -15,6 +15,7 @@ from __future__ import annotations
 import argparse
 import csv
 import filecmp
+import gzip
 import json
 import shutil
 import sys
@@ -29,6 +30,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 TEMPLATES_DIR = REPO_ROOT / "src" / "taxonmech" / "templates"
 PAGES_DIR = REPO_ROOT / "pages"
 ATB_DIR = REPO_ROOT / "data" / "atb"
+STRAININFO_DIR = REPO_ROOT / "data" / "straininfo"
 STRAINS_TSV = REPO_ROOT / "data" / "raw" / "bacdive_strains.tsv"
 
 DOMAIN_BLURB = {
@@ -53,6 +55,8 @@ PREFIX_URL = {
     "patric": "https://www.bv-brc.org/view/Genome/",
     "img.taxon": "https://img.jgi.doe.gov/cgi-bin/m/main.cgi?section=TaxonDetail&page=taxonDetail&taxon_oid=",
     "INSDC": "https://www.ncbi.nlm.nih.gov/nuccore/",
+    "straininfo.strain": "https://straininfo.dsmz.de/strain/",
+    "straininfo.deposit": "https://straininfo.dsmz.de/pass?pass=",
     "PMID": "https://pubmed.ncbi.nlm.nih.gov/",
     "DOI": "https://doi.org/",
     "GO": "http://purl.obolibrary.org/obo/GO_",
@@ -210,6 +214,86 @@ def write_atb_browser_data(atb: dict, out_dir: Path) -> None:
         ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
 
 
+def build_straininfo_index(records: list[tuple[Path, dict]], directory: Path,
+                          strains_tsv: Path, atb_dir: Path | None = None) -> dict:
+    """Expose the uncapped linked overlap, with source and local identities separate."""
+    from taxonmech.straininfo_query import load_overlap
+
+    overlap = load_overlap(directory, strains_tsv.parent, atb_dir)
+    listed: dict[str, list[dict]] = defaultdict(list)
+    for path, doc in records:
+        for strain in doc.get("strains") or []:
+            sid = strain["strain_id"]
+            listed[sid].append({"label": doc["label"], "taxon_id": doc["identifier"],
+                                "page": f"taxa/{page_name(path)}.html#strains-{sid.replace(':', '-')}"})
+    for group in overlap["records"]:
+        group["url"] = curie_url(group["straininfo_strain_id"])
+        group["doi_url"] = curie_url("DOI:" + group["strain_doi"].removeprefix("DOI:")) \
+            if group["strain_doi"] else None
+        for match in group["matches"]:
+            match["url"] = (group["url"] + "?SI-DP"
+                            + match["straininfo_deposit_id"].split(":")[1])
+            for field, key in (("assemblies", "assembly_id"), ("related_records", "record_id")):
+                for assertion in match[field]:
+                    assertion["url"] = curie_url(assertion[key])
+        for strain in group["strains"]:
+            strain["taxon_pages"] = listed[strain["strain_id"]]
+            for association in strain["existing_genome_associations"]:
+                association["url"] = curie_url(association["genome_id"])
+    return overlap
+
+
+def write_straininfo_browser_data(overlap: dict, out_dir: Path) -> None:
+    """Keep identifiers searchable while fetching source evidence on selection."""
+    (out_dir / "straininfo-details").mkdir(exist_ok=True)
+    search = []
+    batch, size, number = [], 3, 0
+    for group in overlap["records"]:
+        encoded = json.dumps(group, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+        if batch and (size + len(encoded) + 1 > 1_000_000 or len(batch) >= 100):
+            (out_dir / f"straininfo-details/{number:04d}.json").write_bytes(
+                b"[" + b",".join(batch) + b"]\n")
+            batch, size, number = [], 3, number + 1
+        detail_path = f"straininfo-details/{number:04d}.json"
+        batch.append(encoded)
+        size += len(encoded) + 1
+        search.append({key: group[key] for key in (
+            "straininfo_strain_id", "strain_doi", "strain_status")} | {
+            "detail_path": detail_path,
+            "matches": [{key: match[key] for key in (
+                "strain_id", "straininfo_deposit_id", "matched_strain_id", "deposit_designation")}
+                        for match in group["matches"]],
+            "assembly_ids": sorted({link["assembly_id"] for match in group["matches"]
+                                     for link in match["assemblies"]}),
+            "sequence_ids": sorted({link["record_id"] for match in group["matches"]
+                                     for link in match["related_records"]
+                                     if link["record_type"] == "NUCLEOTIDE_SEQUENCE"}),
+        })
+    if batch:
+        (out_dir / f"straininfo-details/{number:04d}.json").write_bytes(
+            b"[" + b",".join(batch) + b"]\n")
+    payload = (json.dumps(
+        {"source": overlap["manifest"].get("source", {}), "records": search},
+        ensure_ascii=False, separators=(",", ":")) + "\n").encode("utf-8")
+    (out_dir / "straininfo-index.json").write_bytes(payload)
+    with ((out_dir / "straininfo-index.json.gz").open("wb") as handle,
+          gzip.GzipFile(filename="", mode="wb", fileobj=handle, mtime=0) as compressed):
+        compressed.write(payload)
+
+
+def add_straininfo_context(atb: dict, overlap: dict) -> None:
+    """Link ATB strain cards to SI records; leave shared-sample crosslinks untouched."""
+    by_strain: dict[str, list[dict]] = defaultdict(list)
+    for group in overlap["records"]:
+        for sid in {match["strain_id"] for match in group["matches"]}:
+            by_strain[sid].append({"straininfo_strain_id": group["straininfo_strain_id"],
+                                   "url": "straininfo.html#" + group["straininfo_strain_id"]})
+    for assembly in atb["assemblies"]:
+        for strain in assembly["strains"]:
+            if strain["strain_id"] in by_strain:
+                strain["straininfo_context"] = by_strain[strain["strain_id"]]
+
+
 def render(out_dir: Path) -> None:
     env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)), autoescape=select_autoescape(["html"]),
                       trim_blocks=True, lstrip_blocks=True)
@@ -244,7 +328,13 @@ def render(out_dir: Path) -> None:
     # "mech-theme", sets data-theme before paint, injects the toggle button.
     shutil.copy(TEMPLATES_DIR / "theme-toggle.js", out_dir / "theme-toggle.js")
     shutil.copy(TEMPLATES_DIR / "atb-browser.js", out_dir / "atb-browser.js")
+    shutil.copy(TEMPLATES_DIR / "straininfo-browser.js", out_dir / "straininfo-browser.js")
+    straininfo = build_straininfo_index(records, STRAININFO_DIR, STRAINS_TSV, ATB_DIR)
+    write_straininfo_browser_data(straininfo, out_dir)
+    (out_dir / "straininfo.html").write_text(
+        env.get_template("straininfo.html").render(straininfo=straininfo, root=""), encoding="utf-8")
     atb = build_atb_index(records, ATB_DIR, STRAINS_TSV)
+    add_straininfo_context(atb, straininfo)
     write_atb_browser_data(atb, out_dir)
     (out_dir / "atb.html").write_text(
         env.get_template("atb.html").render(atb=atb, root=""), encoding="utf-8")

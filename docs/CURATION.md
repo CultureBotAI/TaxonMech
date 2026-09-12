@@ -128,6 +128,14 @@ is insufficient. Keep the local snapshot ID, filters, runs, SeqKit sum and
 native download/archive URLs. Eligible links require an available FASTA and
 no metadata-identity warning; non-HQ status alone does not exclude them.
 An ENA analysis accession is optional. See [ALLTHEBACTERIA.md](ALLTHEBACTERIA.md).
+StrainInfo likewise requires a whole registered culture accession from the
+source record's own eligible deposit. A source sequence must name that same
+SI-DP explicitly; another deposit in its SI-ID group cannot supply the link.
+Preserve source statuses, the matched deposit, any conflicting BacDive
+reference and the strain record-version DOI. The DOI identifies a version
+of the source strain record, not a deposit or publication. Keep unversioned
+NCBI accessions as supplied, and keep gene/rRNA/patent sequence references
+outside genome counts. See [STRAININFO.md](STRAININFO.md).
 Co-occurrence on one BacDive record does not establish that two database
 identifiers denote the same genome. Assemblies, genome records, BioSamples,
 marker-gene sequences, projects, GOLD organisms and culture deposits denote
