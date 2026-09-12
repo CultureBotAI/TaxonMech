@@ -87,7 +87,7 @@ BacDive lists them together. An absent entry means no link of that kind was
 imported for that strain; it does not mean the strain has never been
 sequenced. See [the relationship model and evidence rules](docs/STRAIN_GENOMES.md).
 
-[Browse AllTheBacteria assemblies](https://culturebotai.github.io/TaxonMech/atb.html)
+[Browse AllTheBacteria assemblies](https://culturebotai.github.io/TaxonMech/pages/atb.html)
 by sample, ENA analysis, strain, deposit or genome ID. Its snapshot-scoped
 assembly IDs join through existing BioSample evidence; a shared sample does
 not establish genome equivalence. The browser includes eligible assemblies

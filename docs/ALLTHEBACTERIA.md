@@ -1,7 +1,7 @@
 # AllTheBacteria assemblies and strain crosslinks
 
 TaxonMech prioritizes NCBI assemblies and adds AllTheBacteria assemblies
-through existing BioSample evidence. The [assembly browser](https://culturebotai.github.io/TaxonMech/atb.html)
+through existing BioSample evidence. The [assembly browser](https://culturebotai.github.io/TaxonMech/pages/atb.html)
 searches the linked overlap by ATB ID, sample, ENA analysis, strain, culture
 deposit, genome identifier or source species label. It includes strains
 outside taxon-page listings and links them to their BacDive source records.
@@ -118,7 +118,7 @@ full local SQLite catalog or downloading genome FASTAs.
 The culture deposit `kgmicrobe.strain:DSM-30083` leads to
 `kgmicrobe.strain:bacdive_4907` and the existing sample assertion
 `biosample:SAMN00718807`. The ATB snapshot reports that whole sample key for
-[assembly `atb.assembly:202505.SAMN00718807`](https://culturebotai.github.io/TaxonMech/atb.html#atb.assembly:202505.SAMN00718807),
+[assembly `atb.assembly:202505.SAMN00718807`](https://culturebotai.github.io/TaxonMech/pages/atb.html#atb.assembly:202505.SAMN00718807),
 with ENA analysis `ERZ9433419` and source scientific name
 *Escherichia coli DSM 30083 = JCM 1649 = ATCC 11775*.
 
