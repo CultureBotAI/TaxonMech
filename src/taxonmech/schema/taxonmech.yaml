@@ -11,12 +11,14 @@ description: |
   reconcile with GTDB or LPSN and never infers. The sources:
 
     * NCBI Taxonomy (the identity backbone: label, rank, lineage, synonyms),
-    * GTDB (genome-based species and their assemblies, mapped to NCBI taxa),
+    * GTDB (species mappings and genome metadata with explicit culture-deposit links),
     * LPSN (nomenclature: validly published names, correct-name status,
       authorities, type strain designations),
     * BacDive (strain records with culture-collection deposits, primary NCBI
       genome assembly links, and PATRIC/BV-BRC and IMG genome record links),
-    * MediaDive, JGI GOLD, Madin et al. and BactoTraits (what else is known
+    * JGI GOLD (culture-linked organism, sequencing-project and analysis records
+      with explicit IMG, NCBI assembly, BioSample and BioProject identifiers),
+    * MediaDive, Madin et al. and BactoTraits (what else is known
       about the taxon, as assertion counts that say how much data sits behind it).
 
   The harmonization is the point. A species is called `NCBITaxon:562` by NCBI,
@@ -52,6 +54,9 @@ prefixes:
   kgmicrobe.strain: https://w3id.org/kg-microbe/strain/
   bacdive: https://bacdive.dsmz.de/strain/
   ncbi.assembly: https://www.ncbi.nlm.nih.gov/datasets/genome/
+  gtdb.genome: https://gtdb.ecogenomic.org/genome?gid=
+  biosample: https://www.ncbi.nlm.nih.gov/biosample/
+  bioproject: https://www.ncbi.nlm.nih.gov/bioproject/
   patric: https://www.bv-brc.org/view/Genome/
   img.taxon: https://img.jgi.doe.gov/cgi-bin/m/main.cgi?section=TaxonDetail&page=taxonDetail&taxon_oid=
   mediadive.medium: https://mediadive.dsmz.de/medium/
@@ -482,16 +487,54 @@ classes:
         range: GenomeAssemblyLink
       genome_records:
         description: >-
-          Additional source-reported genome records from PATRIC/BV-BRC and
-          IMG, alongside the primary NCBI genome_assemblies. Co-occurrence
+          Additional source-reported genome records from GTDB, PATRIC/BV-BRC
+          and IMG, alongside the primary NCBI genome_assemblies. Co-occurrence
           on a strain does not establish equivalence between genome IDs.
         multivalued: true
         inlined_as_list: true
         range: GenomeRecordLink
+      related_records:
+        description: >-
+          Source-reported BioSample, BioProject and GOLD organism or project
+          relationships. These retain their own entity types and are not
+          counted as genome identifiers.
+        multivalued: true
+        inlined_as_list: true
+        range: GenomeRelatedRecordLink
       notes:
         range: string
 
+  StrainLinkEvidence:
+    mixin: true
+    description: Auditable source fields and the exact strain identifier used for a join.
+    attributes:
+      source_field:
+        description: The source column or field supplying this identifier.
+        range: string
+      matched_strain_id:
+        description: >-
+          Existing strain or culture-deposit identifier matched to the source.
+          A shared species or a strain-name substring is not matching evidence.
+        range: string
+        pattern: '^kgmicrobe\.strain:\S+$'
+      source_strain_identifiers:
+        description: Verbatim source strain-identifier field supporting the match.
+        range: string
+      source_strain_field:
+        description: The source column supplying the matched strain identifiers.
+        range: string
+      source_organism_id:
+        description: Explicit source organism key linking a genome or project to the matched strain.
+        range: string
+        pattern: '^gold:Go[0-9]+$'
+      source_project_id:
+        description: Explicit source sequencing-project key in the organism-to-analysis relationship.
+        range: string
+        pattern: '^gold:Gp[0-9]+$'
+
   GenomeRecordLink:
+    mixins:
+      - StrainLinkEvidence
     description: >-
       A source-reported link to a genome database record. This record can
       describe a plasmid or another source-labeled scope; it is not necessarily
@@ -514,27 +557,36 @@ classes:
           slot_conditions:
             genome_id:
               pattern: '^img\.taxon:[0-9]+$'
+      - preconditions:
+          slot_conditions:
+            source_database:
+              equals_string: gtdb
+        postconditions:
+          slot_conditions:
+            genome_id:
+              pattern: '^gtdb\.genome:(RS_GCF|GB_GCA)_[0-9]{9}\.[1-9][0-9]*$'
     attributes:
       genome_id:
         description: >-
-          PATRIC/BV-BRC or IMG genome record identifier. Preserve PATRIC's
+          GTDB, PATRIC/BV-BRC or IMG genome record identifier. Preserve PATRIC's
           complete dotted identifier as text; its suffix is not interpreted
           as an NCBI assembly version. IMG taxon_oid denotes an IMG genome
-          record, not an NCBI taxon.
+          record, not an NCBI taxon. GTDB genome accessions retain their
+          RS_ or GB_ wrapper and version, distinct from GTDB species identifiers.
         required: true
         range: string
-        pattern: '^(patric:[0-9]+\.[0-9]+|img\.taxon:[0-9]+)$'
+        pattern: '^(patric:[0-9]+\.[0-9]+|img\.taxon:[0-9]+|gtdb\.genome:(RS_GCF|GB_GCA)_[0-9]{9}\.[1-9][0-9]*)$'
       source_database:
-        description: The database label supplied in the BacDive genome assertion.
+        description: The database identifying this genome record.
         required: true
         range: string
-        pattern: '^(patric|img)$'
+        pattern: '^(patric|img|gtdb)$'
       source:
         description: The resource asserting the strain-to-genome relationship.
         required: true
         range: TaxonSourceEnum
       source_id:
-        description: The source record containing the assertion (currently a BacDive strain).
+        description: The source record containing the assertion.
         required: true
         range: string
         pattern: '^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$'
@@ -558,6 +610,8 @@ classes:
         pattern: '^NCBITaxon:[0-9]+$'
 
   GenomeAssemblyLink:
+    mixins:
+      - StrainLinkEvidence
     description: >-
       A source-reported strain-to-assembly relationship. This is neither
       taxonomic classification nor identifier equivalence. It does not
@@ -577,7 +631,7 @@ classes:
         required: true
         range: TaxonSourceEnum
       source_id:
-        description: The source record containing the assertion (currently a BacDive strain).
+        description: The source record containing the assertion.
         required: true
         range: string
         pattern: '^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$'
@@ -597,6 +651,79 @@ classes:
           NCBI taxon attached to this assembly assertion by the source.
           It may differ from the strain's classified_as and never overrides
           the strain classification or the record's NCBI lineage.
+        range: string
+        pattern: '^NCBITaxon:[0-9]+$'
+
+  GenomeRelatedRecordLink:
+    description: >-
+      A typed relationship to a sample, project or organism record associated
+      with a strain by the source. It is not a genome equivalence assertion.
+    mixins:
+      - StrainLinkEvidence
+    rules:
+      - preconditions:
+          slot_conditions:
+            record_type:
+              equals_string: BIOSAMPLE
+        postconditions:
+          slot_conditions:
+            record_id:
+              pattern: '^biosample:SAM[NED][A-Z]?[0-9]+$'
+      - preconditions:
+          slot_conditions:
+            record_type:
+              equals_string: BIOPROJECT
+        postconditions:
+          slot_conditions:
+            record_id:
+              pattern: '^bioproject:PRJ(NA|EA|EB|DA|DB)[0-9]+$'
+      - preconditions:
+          slot_conditions:
+            record_type:
+              equals_string: GOLD_ORGANISM
+        postconditions:
+          slot_conditions:
+            record_id:
+              pattern: '^gold:Go[0-9]+$'
+      - preconditions:
+          slot_conditions:
+            record_type:
+              equals_string: GOLD_PROJECT
+        postconditions:
+          slot_conditions:
+            record_id:
+              pattern: '^gold:Gp[0-9]+$'
+      - preconditions:
+          slot_conditions:
+            record_type:
+              equals_string: GOLD_ANALYSIS
+        postconditions:
+          slot_conditions:
+            record_id:
+              pattern: '^gold:Ga[0-9]+$'
+    attributes:
+      record_id:
+        required: true
+        range: string
+        pattern: '^(biosample:SAM[NED][A-Z]?[0-9]+|bioproject:PRJ(NA|EA|EB|DA|DB)[0-9]+|gold:G[opa][0-9]+)$'
+      record_type:
+        required: true
+        range: GenomeRelatedRecordTypeEnum
+      source:
+        required: true
+        range: TaxonSourceEnum
+      source_id:
+        required: true
+        range: string
+        pattern: '^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$'
+      record_name:
+        description: Name of the related record as supplied by the source.
+        range: string
+      source_reference_id:
+        description: A reference number within the asserting source record, when supplied.
+        range: string
+      taxon_id:
+        description: Source NCBI taxonomy metadata, without overriding strain classification.
         range: string
         pattern: '^NCBITaxon:[0-9]+$'
 
@@ -772,6 +899,19 @@ classes:
 
 enums:
 
+  GenomeRelatedRecordTypeEnum:
+    permissible_values:
+      BIOSAMPLE:
+        description: A biological sample record, not an assembly.
+      BIOPROJECT:
+        description: A research project that may contain many samples and genomes.
+      GOLD_ORGANISM:
+        description: A GOLD organism record, not a genome assembly.
+      GOLD_PROJECT:
+        description: A GOLD sequencing project, not an individual assembly.
+      GOLD_ANALYSIS:
+        description: A GOLD analysis project, which may describe genome or other analysis types.
+
   TaxonSourceEnum:
     description: Upstream resource an attestation, mapping, name or strain comes from.
     permissible_values:
@@ -786,7 +926,7 @@ enums:
       MEDIADIVE:
         description: DSMZ MediaDive growth-medium links to strains and taxa.
       GOLD:
-        description: JGI GOLD organism records.
+        description: JGI GOLD organism, sequencing-project and analysis-project records.
       MADIN:
         description: Madin et al. prokaryotic phenotypic trait compilation.
       BACTOTRAITS:

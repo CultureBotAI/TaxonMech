@@ -33,25 +33,59 @@ the disagreement visible.
 
 ## What each source contributes
 
-| Source | kg-microbe input | Contribution to the record |
+| Source | Input | Contribution to the record |
 |---|---|---|
 | NCBI Taxonomy | `ontologies/ncbitaxon_{nodes,edges}.tsv`; ranks and typed synonyms from `data/raw/ncbitaxon.db` | `label`, `rank`, `parent_taxon`, `lineage`, `synonyms`, `genetic_code`, the `NCBITAXON` attestation |
 | LPSN | `lpsn/{nodes,edges}.tsv`, `lpsn_api/{nodes,edges}.tsv` | `nomenclature` (authority, status, type strain designations, publications, 16S accessions), `synonyms` from `same_as`, an `xref` to the correct name, the `LPSN` attestation |
-| GTDB | `gtdb/{nodes,edges}.tsv` | `taxonomy_mappings` with the predicate and genome count, an `xref` when the match is `closeMatch`, a synonym for GTDB's spelling, the `GTDB` attestation counting genomes |
+| GTDB | `gtdb/{nodes,edges}.tsv`; `data/raw/gtdb/{bac120,ar53}_metadata.tsv.gz` | Species `taxonomy_mappings`, synonyms and attestations from KGX; strain-level NCBI assembly and GTDB genome links from explicit culture identifiers in metadata |
 | BacDive | `bacdive/{nodes,edges}.tsv`; `data/raw/bacdive_strains.json` | `strains` (designation, deposits, `is_type_strain`, explicit NCBI `genome_assemblies` and BV-BRC / PATRIC and IMG `genome_records`), `strain_count`, the `BACDIVE` attestation |
 | MediaDive | `mediadive/edges.tsv` | `medium_count` per strain and the `MEDIADIVE` attestation counting media |
-| GOLD | `gold/edges.tsv` | the `GOLD` attestation counting organisms |
+| GOLD | kg-microbe `gold/edges.tsv`; primary `data/source_snapshots/goldData.xlsx` | Taxon-level `GOLD` attestation from KGX; strain-linked NCBI/IMG identifiers and typed related records through the workbook's organism, sequencing-project and analysis-project IDs |
 | Madin et al., BactoTraits | `madin_etal/edges.tsv`, `bactotraits/edges.tsv` | attestations counting trait assertions |
 
-Two raw inputs restore information absent from the KGX transforms: NCBI's
-semantic-sql build supplies rank and typed synonyms, and BacDive's JSON
-supplies direct strain-to-genome assertions. Both are hashed in the manifest.
-NCBI assemblies are the primary genome identifiers; BV-BRC / PATRIC and IMG
-genome-record identifiers retain their own types and source provenance.
-Genome links are joined by BacDive strain ID, never by shared species
-membership or strain-name matching. Multiple genome identifiers listed by
-one BacDive record remain separate assertions; co-occurrence does not supply
-a cross-database equivalence mapping. See [STRAIN_GENOMES.md](STRAIN_GENOMES.md).
+Raw inputs restore information absent from the KGX transforms: NCBI's
+semantic-sql build supplies rank and typed synonyms, BacDive's JSON supplies
+direct strain-to-genome assertions, and GTDB metadata supplies genome IDs
+with culture-deposit identifiers. GOLD's primary workbook supplies explicit
+organism and project relationships. The manifest hashes every input snapshot.
+NCBI assemblies are the primary genome identifiers; GTDB, BV-BRC / PATRIC
+and IMG genome-record identifiers retain their own types and provenance.
+
+BacDive assertions are joined by BacDive strain ID. GTDB genome rows join
+through whole semicolon-delimited culture identifiers in
+`ncbi_strain_identifiers`, matched to existing `culture_collection_ids` only
+when the collection authority appears in the pinned CAFI registry and the
+complete accession satisfies its `regex_id.full` template. Prefix recognition
+alone is insufficient. Some existing source entries are bare strain aliases,
+so membership in that field alone does not make an identifier suitable for a
+genome join. The matcher
+normalizes only the recognized authority prefix's case and initial
+separator; suffix case, leading zeros and internal punctuation remain
+significant. It does not rewrite one collection prefix to another. Unknown
+authorities and unsupported accession formats remain unjoined, while their
+source values are retained. Each
+link records the matched deposit and verbatim source identifiers. Neither
+shared species membership nor a matching strain name establishes a link.
+Multiple genome identifiers listed by one strain record remain separate
+assertions; co-occurrence does not supply a cross-database equivalence
+mapping. See [STRAIN_GENOMES.md](STRAIN_GENOMES.md).
+
+The collection-authority register is the attributed CAFI snapshot in
+`src/taxonmech/data/cafi_acronyms.json`, with its pinned commit and byte hash
+in the accompanying metadata file. Recognized acronym synonyms are not
+rewritten to a common prefix. This limits the matching set without deleting
+the source's aliases or suppressing its direct BacDive genome assertions;
+see [the authority boundary](STRAIN_GENOMES.md#culture-collection-authorities).
+
+GOLD's organism sheet uses the same registered-authority and accession-format
+boundary for whole culture identifiers. Sequencing
+projects link by `ORGANISM GOLD ID`; analysis projects link through
+`AP PROJECT GOLD IDS` and, when supplied, `AP ORGANISM GOLD ID`. Every
+stated link must resolve to the same known organism before the analysis
+supplies strain-genome identifiers. Supported genome analyses contribute
+the explicit `AP IMG TAXON ID` and `AP GENBANK.assemblyAccession` fields.
+The organism and project IDs remain typed related records, with the full
+join chain preserved in provenance.
 
 ## Mapping predicates
 
@@ -130,7 +164,8 @@ reviewable diff rather than an emergent property of upstream refreshes.
 ## Reproducibility
 
 `data/raw/MANIFEST.yaml` records the kg-microbe commit and the byte hash of
-every input read and every inventory written. `scripts/check_provenance.py`
+every input read and every inventory written, including the direct GOLD
+workbook and its source URL. `scripts/check_provenance.py`
 verifies the committed inventories against it. `scripts/verify_corpus.py`
 rebuilds every in-scope record through the seeder's own `build_document` and
 compares byte-for-byte with what is on disk, so a hand edit, a bad merge, or a
@@ -152,8 +187,12 @@ readability decision; the data is not lost.
 
 `data/raw/strain_assemblies.tsv` keeps every imported NCBI assembly link for
 the inventoried strains; `data/raw/strain_genome_records.tsv` adds BV-BRC /
-PATRIC and IMG genome-record links. Join either to `bacdive_strains.tsv` on
-`strain_id` for the complete mapping to culture-collection identifiers.
+PATRIC, IMG and GTDB genome-record links. Join either to `bacdive_strains.tsv`
+on `strain_id` for the complete mapping to culture-collection identifiers.
 Listing caps do not truncate these inventories. Corpus reports count linked
 identifiers and strain-identifier pairs per database; their sum is not a
 count of unique biological genomes across resources.
+
+`data/raw/strain_related_records.tsv` uses the same strain join for typed
+BioSample, BioProject and GOLD organism/project references. These provide
+source context and are excluded from genome-identifier counts.

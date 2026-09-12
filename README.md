@@ -6,11 +6,12 @@ and the other taxon-bearing sources that
 [kg-microbe](https://github.com/Knowledge-Graph-Hub/kg-microbe) transforms.
 
 A primary focus is **linking strain identifiers to genome identifiers**,
-prioritizing NCBI GenBank/RefSeq assemblies while including BV-BRC / PATRIC
-and IMG genome records. The links associate a source's genome identifiers
-with its BacDive strain and culture-collection deposits, preserving evidence
-and supplied accession versions. A strain can have multiple links; sharing a
-species does not establish a strain-to-genome link.
+prioritizing NCBI GenBank/RefSeq assemblies while including GTDB, BV-BRC /
+PATRIC and IMG genome records. Coverage expands to available identifier
+systems when their strain links have source evidence. The links preserve
+source records, culture-deposit matches and supplied accession versions. A
+strain can have multiple links; sharing a species does not establish a
+strain-to-genome link.
 
 TaxonMech is the taxonomic counterpart of
 [TraitMech](https://github.com/CultureBotAI/TraitMech) (traits),
@@ -65,14 +66,22 @@ Each `strains[].genome_assemblies[]` entry carries a GenBank (`GCA_`) or
 RefSeq (`GCF_`) assembly identifier, the source record asserting the link,
 and the source's reference number, description, assembly level and taxon
 when supplied. Additional `strains[].genome_records[]` entries carry typed
-BV-BRC / PATRIC (`patric:`) and IMG (`img.taxon:`) identifiers with the same
-source provenance. The extractor reads these explicit links from kg-microbe's
-raw BacDive snapshot; its KGX transform drops these relationships.
+GTDB (`gtdb.genome:`), BV-BRC / PATRIC (`patric:`) and IMG (`img.taxon:`)
+identifiers. BacDive supplies direct strain assertions; GTDB metadata adds
+links through whole culture-deposit identifiers whose authority and accession
+format match the pinned collection registry, with the matched ID and
+verbatim source field retained. GOLD's primary workbook adds NCBI and IMG
+links through explicit organism, sequencing-project and analysis-project
+relationships. Species membership and strain-name matching never supply
+these links.
 
 The primary [NCBI assembly inventory](data/raw/strain_assemblies.tsv) and
 additional [genome-record inventory](data/raw/strain_genome_records.tsv) are
 uncapped and join to [strain identifiers and deposits](data/raw/bacdive_strains.tsv)
 on `strain_id`. Species records and pages show links for their listed strains.
+Related BioSample, BioProject and GOLD organism/project references have their
+own `related_records` field and [inventory](data/raw/strain_related_records.tsv);
+they are excluded from genome counts.
 Identifiers from different databases remain separate assertions, even when
 BacDive lists them together. An absent entry means no link of that kind was
 imported for that strain; it does not mean the strain has never been
@@ -97,15 +106,28 @@ sequenced. See [the relationship model and evidence rules](docs/STRAIN_GENOMES.m
 
 15,096 BacDive strains are classified under these taxa (9,602 listed in records; 17 records cap their listing). 100 records list a type strain, 100 carry an LPSN correct name, 100 map to GTDB (186,716 genomes), and 0 carry causal graphs (0 evidence-backed edges).
 
-**697 listed strains have genome identifier links.** Coverage below is deduplicated across records, with NCBI assemblies first:
+**765 listed strains have genome identifier links.** Coverage below is deduplicated across records, with NCBI assemblies first:
 
 | Database | Strain–identifier pairs | Distinct identifiers | Distinct strains |
 |---|---:|---:|---:|
-| NCBI | 1,288 | 1,288 | 622 |
+| NCBI | 3,119 | 3,112 | 753 |
+| GTDB | 769 | 769 | 427 |
 | PATRIC | 1,242 | 1,242 | 623 |
-| IMG | 431 | 431 | 299 |
+| IMG | 728 | 724 | 413 |
 
 These are database identifier counts, not unique biological genomes across databases. Unlisted strains remain in the complete inventories: `data/raw/strain_assemblies.tsv` and `data/raw/strain_genome_records.tsv`.
+
+Related records are counted separately from genomes:
+
+| Record type | Strain–record pairs | Distinct identifiers | Distinct strains |
+|---|---:|---:|---:|
+| BIOSAMPLE | 1,199 | 1,180 | 598 |
+| BIOPROJECT | 1,414 | 655 | 601 |
+| GOLD_ORGANISM | 9,135 | 9,117 | 5,321 |
+| GOLD_PROJECT | 1,045 | 1,015 | 500 |
+| GOLD_ANALYSIS | 880 | 876 | 491 |
+
+The complete related-record inventory is `data/raw/strain_related_records.tsv`.
 
 **0 records are `REVIEWED`;** the remaining 100 are `SEEDED` or `PROPOSED`.
 <!-- END GENERATED CORPUS STATS -->
@@ -138,7 +160,11 @@ just seed-apply --force --prune     # ...and clean up files that left the scope
 
 `just extract-inventory` is the only step that needs a local
 [kg-microbe](https://github.com/Knowledge-Graph-Hub/kg-microbe) checkout; point
-`KG_MICROBE_ROOT` or `conf/sources.yaml` at it. The derived inventories in
+`KG_MICROBE_ROOT` or `conf/sources.yaml` at it. Extraction also reads
+[GOLD's public workbook](https://gold.jgi.doe.gov/download?mode=site_excel) at
+`data/source_snapshots/goldData.xlsx`. Use `GOLD_WORKBOOK` or
+`just extract-inventory --gold-workbook /path/to/goldData.xlsx` to select
+another copy. The derived inventories in
 `data/raw/` are committed, so seeding, validation and tests run without it.
 `data/raw/MANIFEST.yaml` records the kg-microbe commit and the byte hash of
 every input and output.
@@ -187,8 +213,9 @@ file; [docs/SCHEMA.md](docs/SCHEMA.md) walks through it.
   the taxon or, for species, its NCBI subtree (`classified_as` says where),
   with culture-collection deposits and `is_type_strain` derived from LPSN's
   designations, plus explicit NCBI `genome_assemblies` and additional
-  `genome_records` links. The listing is capped at 200 per record, type
-  strains first; the count is always the full number.
+  `genome_records` links, with sample, project and organism references in
+  `related_records`. The listing is capped at 200 per record, type strains
+  first; the count is always the full number.
 - **`source_attestations`** — the harmonization layer: one entry per upstream
   resource with `source_id`, `mapping_predicate`, `assertion_count` and
   `assertion_unit` (BacDive counts strains, GTDB genomes, GOLD organisms,
@@ -220,19 +247,25 @@ tracked in the issues. See [docs/CURATION.md](docs/CURATION.md) and
 - **Strain listings are capped**, and strain-level data (phenotypes, media,
   isolation sources) is deliberately left to TraitMech, CultureMech and
   HabitatMech; a strain entry here holds identifiers, deposits and genome links.
-- **Genome links currently come from BacDive's assertions** about NCBI
-  assemblies, BV-BRC / PATRIC and IMG records. Source labels such as `plasmid`
-  and `wgs` are preserved; a link does not imply a complete genome assembly.
-  Unversioned NCBI accessions remain unversioned. RefSeq pairing, BioSample
-  relationships, cross-database equivalence and current assembly status
-  verification need their own evidence; species-level GTDB mappings do not
-  supply it.
+- **Genome coverage depends on source assertions and explicit identifiers.**
+  BacDive links, GTDB culture-deposit matches and GOLD project chains preserve
+  the source's descriptions and versions; a link does not imply a complete
+  genome or confirm its current status. Unversioned NCBI accessions remain
+  unversioned.
+  RefSeq pairing and cross-database equivalence require explicit metadata;
+  species-level GTDB mappings do not supply it.
+- **Cross-source deposit matching requires a registered authority and valid accession format.**
+  BacDive's deposit field also contains bare strain aliases. Aliases and
+  formats unsupported by the pinned registry remain in source records but
+  cannot establish GTDB or GOLD genome joins;
+  see [the authority boundary](docs/STRAIN_GENOMES.md#culture-collection-authorities).
+- **Secondary MicrobeDecoder associations need independent evidence.** Its
+  GOLD/NCBI columns contain verified organism mismatches, tracked in
+  [issue #25](https://github.com/CultureBotAI/TaxonMech/issues/25). The genome
+  import uses primary GTDB and GOLD records for those relationships.
 - **NCBI rank comes from kg-microbe's raw semantic-sql build**, not from the
   KGX transform, which drops it. The extractor records that input in the
   manifest like any other.
-- **TaxonMech is not yet registered as a claw consumer**, so the vendored-sync
-  workflow cannot pass until `CultureBotAI/culturebotai-claw` adds it to its
-  fleet manifest. The vendored files are byte-identical to the pinned commit.
 
 ## Layout
 
@@ -271,15 +304,23 @@ TaxonMech/
 - **LPSN** — [List of Prokaryotic names with Standing in Nomenclature](https://lpsn.dsmz.de/)
 - **BacDive** — [DSMZ BacDive](https://bacdive.dsmz.de/)
 - **MediaDive** — [DSMZ MediaDive](https://mediadive.dsmz.de/)
-- **GOLD** — [JGI Genomes OnLine Database](https://gold.jgi.doe.gov/)
+- **GOLD** — [JGI Genomes OnLine Database](https://gold.jgi.doe.gov/), including
+  its primary public workbook; [GOLD v.10 citation](https://doi.org/10.1093/nar/gkae1000)
 - **Madin et al.** — [prokaryotic phenotypic trait compilation](https://doi.org/10.1038/s41597-020-0497-4)
 - **BactoTraits** — [functional trait database](https://doi.org/10.1016/j.ecolind.2021.108047)
-- all via [kg-microbe](https://github.com/Knowledge-Graph-Hub/kg-microbe),
-  which supplies them in harmonized KGX form and contributes the GTDB→NCBI and
-  LPSN→NCBI mappings
+- **CAFI** — [DSMZ collection-acronym registry](https://github.com/LeibnizDSMZ/cafi),
+  the pinned authority and accession-template list used for cross-source
+  culture-deposit matching
+- [kg-microbe](https://github.com/Knowledge-Graph-Hub/kg-microbe) supplies the
+  harmonized KGX inputs, BacDive and GTDB snapshots, and GTDB→NCBI and
+  LPSN→NCBI mappings. The GOLD workbook is downloaded from its authority.
 
 ## License
 
 CC0-1.0 for everything this project authored. Upstream resources keep their
 own terms; the inventories in `data/raw/` are derived counts and identifiers,
-not redistributed source records. See [LICENSE](LICENSE).
+not redistributed source records. GOLD metadata remain subject to
+[GOLD's usage policy](https://gold.jgi.doe.gov/usagepolicy). The packaged CAFI
+register retains CC-BY-4.0 licensing and its
+[source attribution](src/taxonmech/data/cafi_acronyms.metadata.json).
+See [LICENSE](LICENSE).

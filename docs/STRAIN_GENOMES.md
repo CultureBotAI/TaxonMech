@@ -5,10 +5,13 @@ associates with a strain identifier**, and following a genome link back to the
 strain's BacDive record and culture-collection deposits. This enables links
 between experimental observations made on a strain and genomic data.
 
-**NCBI GenBank/RefSeq assemblies are the priority**, with BV-BRC / PATRIC and
-IMG genome records included as separately typed identifiers. Expanding
-database coverage does not replace an NCBI assembly ID or establish that
-identifiers from different resources denote the same genome.
+**NCBI GenBank/RefSeq assemblies are the priority**, with all available genome
+identifier systems in scope when their strain links have evidence. GTDB,
+BV-BRC / PATRIC and IMG genome records retain their own identifier types.
+BioSample, BioProject and GOLD organism/project references provide related
+context without being counted as genomes. Expanding database coverage does
+not replace an NCBI assembly ID or establish that identifiers from different
+resources denote the same genome.
 
 ## Relationship model
 
@@ -16,11 +19,13 @@ identifiers from different resources denote the same genome.
 |---|---|---|
 | Taxon | `TaxonRecord.identifier`, an NCBITaxon CURIE | Classification context for a species or lower taxon |
 | Strain | `strains[].strain_id`, with `source_id` and `designation` | A source's strain record |
-| Culture deposit | `strains[].culture_collection_ids[]` | Deposit identifiers associated with that strain by kg-microbe's BacDive transform |
+| Source deposit or alias identifier | `strains[].culture_collection_ids[]` | Values carried from kg-microbe's BacDive transform; registered authority and authority-specific accession format are checked separately before a genome join |
 | NCBI genome assembly (primary) | `strains[].genome_assemblies[].assembly_id` | A GenBank or RefSeq assembly accession, with its version when supplied |
 | Strain-to-assembly assertion | `GenomeAssemblyLink` | A source explicitly associates this assembly with this strain record |
-| Other database genome record | `strains[].genome_records[].genome_id` | A typed BV-BRC / PATRIC or IMG genome identifier |
+| Other database genome record | `strains[].genome_records[].genome_id` | A typed GTDB, BV-BRC / PATRIC or IMG genome identifier |
 | Strain-to-genome-record assertion | `GenomeRecordLink` | A source explicitly associates this database record with this strain record |
+| Related sample, project or organism | `strains[].related_records[].record_id` | A BioSample, BioProject or GOLD organism/project identifier, classified by `record_type` |
+| Strain-to-related-record assertion | `GenomeRelatedRecordLink` | Source context attached to a strain, excluded from genome counts |
 
 The relationship is many-to-many: one strain can have multiple genome links,
 and multiple source strain records can point to the same genome identifier.
@@ -30,12 +35,7 @@ has an identical sequence. BacDive can group assemblies of substrains under
 one strain record. Source descriptions remain visible so those distinctions
 can be reviewed.
 
-## First source: BacDive
-
-The extractor reads `Sequence information / Genome sequences` from
-kg-microbe's `data/raw/bacdive_strains.json`, which is recorded and hashed in
-`data/raw/MANIFEST.yaml`. The transformed BacDive graph supplies the strain
-IDs and deposits; the raw snapshot supplies the missing genome links.
+## Fields and provenance
 
 For each assertion, `GenomeAssemblyLink` requires `assembly_id`, `source` and
 `source_id`. It retains `source_reference_id` (BacDive's `@ref`),
@@ -43,17 +43,41 @@ For each assertion, `GenomeAssemblyLink` requires `assembly_id`, `source` and
 the source's classification of the assembly and may disagree with the
 strain's classification; it never changes the record's lineage.
 
-`GenomeRecordLink` requires `genome_id`, `source_database` (`patric` or `img`
-as supplied by BacDive), `source` and the asserting `source_id`. The current
-import uses `source: BACDIVE` and `source_id: bacdive:<digits>`. It retains
-`source_reference_id`, `genome_name`, `assembly_level` and `taxon_id` when
-present. The accepted identifier types are:
+`GenomeRecordLink` requires `genome_id`, `source_database`, `source` and the
+asserting `source_id`. It retains `source_reference_id`, `genome_name`,
+`assembly_level` and `taxon_id` when present. `GenomeRelatedRecordLink` carries
+`record_id` and `record_type` with source provenance and optional
+`record_name` and `taxon_id`.
+
+All three link classes share `StrainLinkEvidence`. When a source row is
+matched through a culture-deposit identifier, `matched_strain_id` records
+the existing deposit CURIE, `source_strain_identifiers` keeps the source
+value verbatim, `source_strain_field` names that strain column and
+`source_field` identifies the field supplying the linked identifier. GOLD
+chains also retain `source_organism_id` and `source_project_id` when present.
+The inventory manifest records the exact input file and byte hash; the link
+points to the source record within that snapshot.
 
 | Database | TaxonMech identifier | Source relationship |
 |---|---|---|
 | GenBank/RefSeq | `ncbi.assembly:GCA_…` or `ncbi.assembly:GCF_…` | NCBI assembly assertion in `genome_assemblies` |
 | BV-BRC / PATRIC | `patric:<digits>.<digits>` | PATRIC genome ID from BacDive in `genome_records`, linked to BV-BRC |
-| IMG | `img.taxon:<digits>` | IMG genome-record ID from BacDive in `genome_records` |
+| IMG | `img.taxon:<digits>` | IMG genome-record ID from BacDive or a primary GOLD analysis in `genome_records` |
+| GTDB genome | `gtdb.genome:RS_GCF_…` or `gtdb.genome:GB_GCA_…` | Original GTDB metadata accession and version in `genome_records`; separate from `GTDB:s__…` species mappings |
+| BioSample | `biosample:SAM…` | `related_records` entry of type `BIOSAMPLE` |
+| BioProject | `bioproject:PRJ…` | `related_records` entry of type `BIOPROJECT` |
+| GOLD organism | `gold:Go…` | `related_records` entry of type `GOLD_ORGANISM` |
+| GOLD sequencing project | `gold:Gp…` | `related_records` entry of type `GOLD_PROJECT` |
+| GOLD analysis project | `gold:Ga…` | `related_records` entry of type `GOLD_ANALYSIS` |
+
+## BacDive assertions
+
+The extractor reads `Sequence information / Genome sequences` from
+kg-microbe's `data/raw/bacdive_strains.json`, which is recorded and hashed in
+`data/raw/MANIFEST.yaml`. The transformed BacDive graph supplies the strain
+IDs and deposits; the raw snapshot supplies the missing genome links.
+BacDive assertions use `source: BACDIVE` and `source_id: bacdive:<digits>`;
+`source_database` retains `patric` or `img` for those genome-record links.
 
 BacDive distinguishes assembly accessions, other database genome IDs and
 16S sequences in its [field documentation](https://api.bacdive.dsmz.de/strain_fields_information).
@@ -68,10 +92,140 @@ all be described as complete genome assemblies. Chromosome and WGS sequence
 accessions in the snapshot do not become NCBI assembly or other database
 genome-record IDs.
 
-The extractor deduplicates byte-equivalent field values within an assertion;
+The extractor deduplicates identical assertions;
 different references, descriptions, accession versions and strain IDs remain
 separate. Malformed identifiers and links to strains excluded from the taxon
 inventory are recorded in `data/raw/dropped.tsv`.
+
+## Culture-collection authorities
+
+An entry in `culture_collection_ids` is not automatically a globally scoped
+deposit identifier. The BacDive transform also carries bare strain aliases
+such as `BR-17` and `Mu-3`; joining those across sources can associate genomes
+with unrelated organisms. The reproduced failures are recorded in
+[issue #27](https://github.com/CultureBotAI/TaxonMech/issues/27).
+
+GTDB and GOLD matching therefore requires both a collection authority
+recognized by DSMZ's CAFI registry and an accession that fully matches that
+authority's `regex_id.full` template. Prefix recognition alone is unsafe:
+`AS` is a registered historical collection acronym, but its accession format
+requires digits followed by a dot and more digits. Lab aliases such as
+`AS-8`, `AS-7` and `AS_2` fail that format and do not establish a join;
+`AS 1.2` has the supported form.
+TaxonMech packages a byte-identical copy of
+[the upstream register at `effeca350ac72faeb01d19c2c14830a905c5d116`](https://github.com/LeibnizDSMZ/cafi/blob/effeca350ac72faeb01d19c2c14830a905c5d116/src/cafi/data/acr_db.json)
+as `src/taxonmech/data/cafi_acronyms.json`. The source URL, hash, authors and
+CC-BY-4.0 attribution are recorded in
+[`cafi_acronyms.metadata.json`](../src/taxonmech/data/cafi_acronyms.metadata.json).
+
+CAFI's `acr` and `acr_synonym` fields recognize authority prefixes; the
+corresponding `regex_id.full` validates the complete accession, with case
+preserved. An explicit separator must divide the authority from its
+accession. Matching normalizes only the prefix's case and that separator.
+A valid accession retains its case, punctuation and leading zeros:
+`CCUG 123a` and `CCUG 123A` remain different keys. Historical collection
+aliases are recognized without being rewritten to another prefix; `IFO`
+does not become `NBRC`. Compound prefixes can use CAFI's colon spelling or
+the literal hyphen form, but those spellings also remain distinct keys.
+
+Unknown authorities and unsupported accession formats remain in the BacDive
+inventory and record listings but do not create cross-source genome joins.
+This deliberately limits coverage: a legitimate deposit spelling that the
+pinned templates do not support remains unjoined until its authority or
+format has evidence. It does not establish that an unmatched strain lacks a
+genome. Direct BacDive genome assertions do not depend on this cross-source
+matcher.
+
+## GTDB genome metadata
+
+The extractor reads kg-microbe's `data/raw/gtdb/bac120_metadata.tsv.gz` and
+`data/raw/gtdb/ar53_metadata.tsv.gz`. These are genome-level metadata inputs,
+separate from the transformed GTDB species mappings. GTDB describes its
+NCBI-based genome collection and metadata in its
+[FAQ](https://gtdb.ecogenomic.org/faq).
+
+Each semicolon-delimited token in `ncbi_strain_identifiers` is matched as a
+whole culture-deposit identifier against existing `culture_collection_ids`,
+subject to the [authority and accession-format rule](#culture-collection-authorities).
+Matching normalizes only recognized authority-prefix case and the initial
+separator, while preserving suffix case, leading zeros and internal
+punctuation. A bare designation, isolate name, species name,
+NCBITaxon ID or substring never establishes the join. If a row names several
+matching deposits, the matching evidence remains visible for each link.
+
+The resulting assertions use `source: GTDB` and retain the original metadata
+key as `source_id: gtdb.genome:RS_GCF_…` or `gtdb.genome:GB_GCA_…`, including
+its version. Removing the `RS_` or `GB_` wrapper yields the NCBI assembly
+accession carried by that key. An explicit
+`ncbi_genbank_assembly_accession` supplies an additional GenBank link when
+present; its version may differ and is preserved as reported. This does not
+infer RefSeq pairing by replacing an accession prefix.
+
+`ncbi_biosample` and `ncbi_bioproject` values are retained in
+`related_records`, with the same strain-match evidence. A sample or project
+link supplies context for the matched genome row; it is not another genome.
+The full metadata values and input hashes remain the evidence even if a
+newer GTDB release changes an accession or classification.
+
+## Primary GOLD organism and project metadata
+
+GOLD distinguishes an organism, the project that sequences it and the
+analysis that assembles or annotates the data. Those entities can supply
+genome links without becoming genome identifiers themselves. See
+[GOLD's terminology](https://gold.jgi.doe.gov/help).
+
+The extractor reads the primary
+[public workbook](https://gold.jgi.doe.gov/download?mode=site_excel), stored
+by default at `data/source_snapshots/goldData.xlsx`. `--gold-workbook` or
+`GOLD_WORKBOOK` can select another copy. The workbook is not committed;
+`data/raw/MANIFEST.yaml` records its URL and byte hash, and the derived
+inventories reproduce the corpus without requiring the workbook.
+
+The `Organism` sheet's `ORGANISM CULTURE COLLECTION ID` and `ORGANISM STRAIN`
+fields supply whole culture identifiers. Semicolon, comma and pipe separate
+tokens in these GOLD fields; the same authority and accession-format checks
+and prefix-only normalization used for GTDB apply. Matching never uses the organism name
+or taxonomy. The `Sequencing Project` sheet joins by `ORGANISM GOLD ID` and
+retains its `PROJECT GOLD ID`, NCBI BioSample and BioProject accessions.
+
+The `Analysis Project` sheet resolves `AP PROJECT GOLD IDS` through those
+sequencing projects. Every referenced project must resolve to the same known
+organism, and `AP ORGANISM GOLD ID`, when supplied, must agree. An analysis
+with a direct organism link can also be retained when no project IDs are
+supplied. Conflicting or unknown chains are recorded in `dropped.tsv` and do
+not supply strain-genome links.
+
+Supported genome analyses contribute `AP IMG TAXON ID` as an IMG genome
+identifier and exact `assemblyAccession` values from the `AP GENBANK` JSON
+as NCBI assembly links. Chromosome accessions elsewhere in that JSON are not
+assemblies. Other analysis types can supply a typed GOLD analysis reference
+without adding genome identifiers. Each assertion uses `source: GOLD` and
+retains its organism/project chain, matched deposit, source columns and
+verbatim strain-identifier field.
+
+GOLD's `Go`, `Gp` and `Ga` identifiers remain in `related_records` as
+`GOLD_ORGANISM`, `GOLD_PROJECT` and `GOLD_ANALYSIS`. NCBI and IMG identifiers
+from their explicit fields enter the corresponding genome inventories.
+They are counted by identifier database, independently of GOLD as the source
+asserting the link. GOLD metadata retain their
+[source usage policy](https://gold.jgi.doe.gov/usagepolicy); the requested
+resource citation is [GOLD v.10](https://doi.org/10.1093/nar/gkae1000).
+
+## Secondary crosswalk exclusions
+
+MicrobeDecoder's combined CSV contains GOLD and NCBI associations that
+conflict with primary organism records. For example:
+
+| MicrobeDecoder strain row | GOLD ID assigned in that row | Primary GOLD organism |
+|---|---|---|
+| `bacdive:159652`, *Abditibacterium utsteinense* | `gold:Go0006270` | *Cutibacterium acnes* HL103PA1 |
+
+The snapshot hashes, source rows and additional contradictions are recorded
+in [issue #25](https://github.com/CultureBotAI/TaxonMech/issues/25). These
+secondary associations are excluded. Primary GTDB culture-deposit matches
+and primary GOLD organism/project chains supply the import evidence;
+otherwise uncorroborated secondary IMG links remain unimported. Inclusion of
+an identifier system does not require accepting contradictory relationships.
 
 ## Accessions and evidence rules
 
@@ -80,6 +234,9 @@ inventory are recorded in `data/raw/dropped.tsv`.
   `.1` or resolve it to today's latest version.
 - Preserve a PATRIC genome ID as an opaque identifier, including its numeric
   suffix. Do not interpret that suffix as an NCBI assembly version.
+- Preserve the GTDB genome accession wrapper and version in `gtdb.genome:`.
+  A GTDB species identifier, including a placeholder name derived from an
+  accession, never substitutes for that genome identifier.
 - Never obtain a RefSeq ID by replacing `GCA` with `GCF`. NCBI versions the
   GenBank and RefSeq records separately, and a pair can have different
   versions. Pairing needs explicit NCBI metadata. See [NCBI assembly versioning](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/data-processing/policies-annotation/genome-processing/version-status/).
@@ -87,12 +244,12 @@ inventory are recorded in `data/raw/dropped.tsv`.
   insufficient evidence for a strain-to-genome link. GTDB species genome
   counts stay in `taxonomy_mappings` and never propagate to every strain.
 - Co-occurrence on one BacDive record does not pair GenBank with RefSeq or
-  establish equivalence between NCBI, BV-BRC / PATRIC and IMG identifiers.
+  establish equivalence between NCBI, GTDB, BV-BRC / PATRIC and IMG identifiers.
   A cross-database identity assertion needs its own source evidence.
 - Keep chromosome accessions, 16S marker accessions, BioSample accessions
   and project identifiers distinct from genome identifiers. LPSN's
-  `sequence_accessions` remain sequence identifiers; GOLD organism and GTDB
-  species identifiers remain their own entities.
+  `sequence_accessions` remain sequence identifiers; GOLD organisms,
+  sequencing projects and GTDB species remain their own entities.
 - An absent `genome_assemblies` entry means no NCBI assembly link was imported
   for this strain; an absent `genome_records` entry means no supported
   non-NCBI genome-record link was imported. Either kind can occur without the
@@ -107,13 +264,17 @@ inventory are recorded in `data/raw/dropped.tsv`.
 
 The primary `data/raw/strain_assemblies.tsv` contains NCBI assembly assertions;
 `data/raw/strain_genome_records.tsv` contains the additional BV-BRC / PATRIC
-and IMG assertions. Both include all imported links for the inventoried
-strains, including taxa outside the current corpus scope and strains omitted
-by the 200-entry listing cap. Join either inventory's `strain_id` to
-`data/raw/bacdive_strains.tsv` to obtain the BacDive ID, strain designation,
+and IMG assertions plus GTDB genome links. Both include all imported links
+for the inventoried strains, including taxa outside the current corpus scope
+and strains omitted by the 200-entry listing cap. Join either inventory's
+`strain_id` to `data/raw/bacdive_strains.tsv` to obtain the BacDive ID, strain designation,
 NCBI classifications and culture-collection identifiers. To start with a
 culture identifier, match an exact element of the pipe-delimited
 `culture_collection_ids` column, then join the resulting strain IDs.
+
+`data/raw/strain_related_records.tsv` uses the same join for sample, project
+and GOLD organism/project references. Its `record_type` identifies the entity
+kind; these rows are never added to the genome crosswalk or genome counts.
 
 For example, this prints the complete genome crosswalk for a culture deposit,
 with NCBI assemblies first, using the committed inventories alone:
@@ -148,10 +309,10 @@ with the number of strains that have direct genome links.
 
 ## Further sources
 
-Next priorities are explicit NCBI assembly-to-BioSample and isolate metadata,
-evidenced GenBank/RefSeq pairing, and authoritative cross-references between
-the imported database genome records. NCBI remains the first priority while
-other genome databases can be added when explicit strain relationships and
-identifier semantics are established. Each requires source-specific
-provenance and matching rules; name matching alone does not establish genome
-identity.
+Next priorities are direct NCBI assembly/isolate metadata, additional
+evidenced GenBank/RefSeq relationships and authoritative cross-references
+between the imported database genome records. NCBI remains the first
+priority while additional identifier systems can be added when explicit
+strain relationships and identifier semantics are established. Each requires
+source-specific provenance and matching rules; name matching alone does not
+establish genome identity.

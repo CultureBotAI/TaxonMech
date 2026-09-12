@@ -164,6 +164,7 @@ class Inventory:
     bacto: dict[str, int]
     strain_assemblies: dict[str, list[dict[str, str]]] = field(default_factory=dict)
     strain_genome_records: dict[str, list[dict[str, str]]] = field(default_factory=dict)
+    strain_related_records: dict[str, list[dict[str, str]]] = field(default_factory=dict)
 
     def parent(self, tid: str) -> str:
         return (self.taxa.get(tid) or {}).get("parent_id", "")
@@ -247,8 +248,11 @@ def load_inventory() -> Inventory:
     strain_genome_records: dict[str, list[dict[str, str]]] = defaultdict(list)
     for r in read_tsv("strain_genome_records.tsv"):
         strain_genome_records[r["strain_id"]].append(r)
+    strain_related_records: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for r in read_tsv("strain_related_records.tsv"):
+        strain_related_records[r["strain_id"]].append(r)
     return Inventory(taxa, gtdb, lpsn, lpsn_by_taxon, strains, cc_strains, media, gold, madin, bacto,
-                     strain_assemblies, strain_genome_records)
+                     strain_assemblies, strain_genome_records, strain_related_records)
 
 
 # ---------------------------------------------------------------------------
@@ -492,6 +496,12 @@ def build_document(concept: Concept, inv: Inventory) -> dict[str, Any]:
             entry["genome_records"] = [
                 {key: value for key, value in genome.items() if key != "strain_id" and value}
                 for genome in genome_records
+            ]
+        related_records = inv.strain_related_records.get(s["strain_id"], [])
+        if related_records:
+            entry["related_records"] = [
+                {key: value for key, value in related.items() if key != "strain_id" and value}
+                for related in related_records
             ]
         entries.append(entry)
     # Type strains first, then the best-deposited, then by BacDive id.

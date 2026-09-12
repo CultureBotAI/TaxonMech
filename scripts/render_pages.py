@@ -42,6 +42,9 @@ PREFIX_URL = {
     "bacdive": "https://bacdive.dsmz.de/strain/",
     "mediadive.medium": "https://mediadive.dsmz.de/medium/",
     "ncbi.assembly": "https://www.ncbi.nlm.nih.gov/datasets/genome/",
+    "gtdb.genome": "https://gtdb.ecogenomic.org/genome?gid=",
+    "biosample": "https://www.ncbi.nlm.nih.gov/biosample/",
+    "bioproject": "https://www.ncbi.nlm.nih.gov/bioproject/",
     "patric": "https://www.bv-brc.org/view/Genome/",
     "img.taxon": "https://img.jgi.doe.gov/cgi-bin/m/main.cgi?section=TaxonDetail&page=taxonDetail&taxon_oid=",
     "INSDC": "https://www.ncbi.nlm.nih.gov/nuccore/",
@@ -62,6 +65,15 @@ def curie_url(curie: str) -> str | None:
         return None
     prefix, local = curie.split(":", 1)
     base = PREFIX_URL.get(prefix)
+    if prefix == "gtdb.genome" and local.startswith(("RS_", "GB_")):
+        local = local[3:]
+    if prefix == "gold":
+        if local.startswith("Go"):
+            base = "https://gold.jgi.doe.gov/organism?id="
+        elif local.startswith("Gp"):
+            base = "https://gold.jgi.doe.gov/project?id="
+        elif local.startswith("Ga"):
+            base = "https://gold.jgi.doe.gov/analysis_project?id="
     if prefix == "lpsn":
         # LPSN name ids resolve through the search page; the record's own url is preferred.
         return None

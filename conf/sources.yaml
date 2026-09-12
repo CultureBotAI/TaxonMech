@@ -25,6 +25,14 @@ sources:
     name: Genome Taxonomy Database species, genomes and NCBI mappings
     url: https://gtdb.ecogenomic.org/
     via: kg-microbe data/transformed/gtdb/{nodes,edges}.tsv
+  gtdb_strain_genomes:
+    name: GTDB genome metadata with explicit culture-deposit identifiers
+    url: https://data.gtdb.ecogenomic.org/releases/latest/
+    via: kg-microbe data/raw/gtdb/{bac120,ar53}_metadata.tsv.gz
+  culture_collection_authorities:
+    name: DSMZ CAFI collection acronyms, synonyms and accession formats (validation only)
+    url: https://github.com/LeibnizDSMZ/cafi/tree/effeca350ac72faeb01d19c2c14830a905c5d116
+    via: src/taxonmech/data/cafi_acronyms.json (CC-BY-4.0; attribution in adjacent metadata JSON)
   lpsn:
     name: LPSN names, authorities, type strains and mappings
     url: https://lpsn.dsmz.de/
@@ -49,6 +57,10 @@ sources:
     name: JGI GOLD organisms
     url: https://gold.jgi.doe.gov/
     via: kg-microbe data/transformed/gold/edges.tsv
+  gold_strain_genomes:
+    name: GOLD primary organism, sequencing-project and analysis-project relationships
+    url: https://gold.jgi.doe.gov/download?mode=site_excel
+    via: data/source_snapshots/goldData.xlsx (direct public download; --gold-workbook or GOLD_WORKBOOK override)
   madin_etal:
     name: Madin et al. prokaryotic phenotypic trait compilation
     url: https://doi.org/10.1038/s41597-020-0497-4

@@ -222,9 +222,10 @@ def test_report_counts_database_identifiers_strain_pairs_and_evidence_separately
     assert stats["listed_strains_with_genome_records"] == 2
     assert stats["listed_strains_with_any_genome"] == 2
     coverage = stats["listed_genome_links_by_database"]
-    assert list(coverage) == ["NCBI", "PATRIC", "IMG"]
+    assert list(coverage) == ["NCBI", "GTDB", "PATRIC", "IMG"]
     assert coverage == {
         "NCBI": {"strain_links": 2, "strains": 1, "identifiers": 2},
+        "GTDB": {"strain_links": 0, "strains": 0, "identifiers": 0},
         "PATRIC": {"strain_links": 3, "strains": 2, "identifiers": 2},
         "IMG": {"strain_links": 1, "strains": 1, "identifiers": 1},
     }
@@ -285,7 +286,8 @@ def test_rendered_strain_links_prioritize_ncbi_and_preserve_other_database_ids(
     parsed = _StrainTableParser(SID)
     parsed.feed(html)
     assert parsed.headers.index("NCBI genome assemblies") < parsed.headers.index("Other genome records")
-    ncbi, other = parsed.cells[-2:]
+    ncbi, other, related = parsed.cells[-3:]
+    assert "No related record link imported" in related["text"]
     assert {
         "https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_000005845.2",
         "https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_000005845.3",
