@@ -6,7 +6,7 @@ import pytest
 import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
-REQUIRED_WORKFLOWS = {"main.yaml": ["qc (3.10)", "qc (3.12)"], "vendored-sync.yaml": ["vendored-sync"]}
+REQUIRED_WORKFLOWS = {"main.yaml": ["qc"], "vendored-sync.yaml": ["vendored-sync"]}
 
 
 @pytest.mark.parametrize("filename", REQUIRED_WORKFLOWS)

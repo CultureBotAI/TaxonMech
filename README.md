@@ -158,6 +158,10 @@ generated from the inventories, not yet read by a curator.
 
 ## Quick start
 
+Development uses Python 3.13 via `.python-version`; CI selects the same minor
+explicitly and runs the full quality gate once. The package compatibility
+floor remains declared in `pyproject.toml`.
+
 ```bash
 just install                        # uv sync --extra dev
 just report                         # corpus stats: domains, ranks, sources, strains
