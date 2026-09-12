@@ -84,6 +84,11 @@
       for (const taxon of strain.taxon_pages) item.append(link(taxon.label + " strain listing", taxon.page), " ");
       if (!strain.taxon_pages.length) item.append(element("p", "Not listed on a taxon page; the BacDive source and full inventory retain this strain."));
       item.append(sourceDetails("Inspect strain-to-BioSample evidence", strain.sample_evidence));
+      if (strain.straininfo_context?.length) {
+        const context = element("p", "StrainInfo context for this local strain: ");
+        for (const entry of strain.straininfo_context) context.append(link(entry.straininfo_strain_id, entry.url), " ");
+        item.append(context);
+      }
       strains.append(item);
     }
     detail.append(strains, element("h3", "Genome crosslinks — shared BioSample"),

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}StrainInfo strains and deposits · TaxonMech{% endblock %}
+{% block content %}
+<h1>StrainInfo strains and deposits</h1>
+<p class="definition">Follow a culture deposit to its StrainInfo record, record-version DOI and explicitly associated sequences.</p>
+<p>{{ straininfo.records | length }} linked StrainInfo strain records in the committed overlap, including BacDive strains omitted from taxon pages.
+SI-ID identifies a source strain record; SI-DP identifies a deposit. A DOI identifies a version of the strain record.</p>
+<p>NCBI assemblies appear first. Each imported sequence must explicitly name the matched SI-DP.
+Source grouping does not establish biological equivalence. Existing TaxonMech genome associations appear separately with their original evidence.</p>
+<form id="straininfo-search" role="search" class="atb-search">
+  <label for="straininfo-query">Search SI-ID, SI-DP, culture deposit, BacDive strain, record DOI or source accession</label>
+  <div><input id="straininfo-query" type="search" placeholder="For example: SI-ID14277, SI-DP847459, DSM 30083" autocomplete="off"><button type="submit">Search</button></div>
+</form>
+<p id="straininfo-status" role="status" aria-live="polite">Loading strain and deposit index…</p>
+<noscript><p>Interactive search requires JavaScript. Download the <a href="straininfo-index.json">search index</a> or use the <a href="https://github.com/CultureBotAI/TaxonMech/tree/main/data/straininfo">committed inventories</a>.</p></noscript>
+<section id="straininfo-detail" aria-label="Selected StrainInfo record" hidden></section>
+<div class="table-scroll"><table id="straininfo-results"><thead><tr><th>StrainInfo record</th><th>Matched deposits</th><th>Local strains</th><th>NCBI assembly identifiers</th><th>Source status</th></tr></thead><tbody></tbody></table></div>
+<div class="atb-pagination"><button id="straininfo-prev" type="button" disabled>Previous</button><span id="straininfo-page"></span><button id="straininfo-next" type="button" disabled>Next</button></div>
+<p class="source">Source: <a href="https://straininfo.dsmz.de/">StrainInfo, Leibniz Institute DSMZ</a>, CC-BY-4.0.
+Cite the <a href="https://doi.org/10.1093/database/baaf059">StrainInfo resource publication</a>.
+The <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/data/straininfo/MANIFEST.yaml">manifest</a> records the snapshot, API version, citation and checksums.
+See the <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/docs/STRAININFO.md">source, identity and query guide</a>.</p>
+<script src="straininfo-browser.js" defer></script>
+{% endblock %}

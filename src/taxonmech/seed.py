@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Seed TaxonRecords from the inventories in data/raw/ and data/atb/.
+"""Seed TaxonRecords from the raw, AllTheBacteria and StrainInfo inventories.
 
 Reads the committed inventories (``scripts/extract_source_inventory.py``
 output), builds one harmonized concept per taxon in scope, and writes
@@ -42,7 +42,7 @@ import yaml
 REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
-from taxonmech import atb  # noqa: E402
+from taxonmech import atb, straininfo  # noqa: E402
 from taxonmech.curate.curation_event import record_curation_event  # noqa: E402
 from taxonmech.validation.write_validated import (  # noqa: E402
     ValidationFailedError,
@@ -51,6 +51,7 @@ from taxonmech.validation.write_validated import (  # noqa: E402
 
 RAW_DIR = REPO_ROOT / "data" / "raw"
 ATB_DIR = REPO_ROOT / "data" / "atb"
+STRAININFO_DIR = REPO_ROOT / "data" / "straininfo"
 TAXA_DIR = REPO_ROOT / "data" / "taxa"
 SCOPE_PATH = REPO_ROOT / "curation" / "seed_scope.tsv"
 PATHS_LOCKFILE = TAXA_DIR / "PATHS.tsv"
@@ -138,13 +139,15 @@ def slugify(text: str, maxlen: int = 72) -> str:
 def _seed_timestamp() -> str:
     """When the data this corpus is built from was extracted.
 
-    Taken from the newest raw or ATB manifest rather than now(): the corpus must be
+    Taken from the newest source manifest rather than now(): the corpus must be
     byte-reproducible, so a wall-clock stamp would make every re-seed a
     corpus-wide diff. The manifest's extracted_at is the honest answer to
     "when is this data from", and it changes only when the data does.
     """
     timestamps = [datetime.datetime(1970, 1, 1, tzinfo=datetime.timezone.utc)]
-    for manifest in (RAW_DIR / "MANIFEST.yaml", ATB_DIR / "MANIFEST.yaml"):
+    for manifest in (
+        RAW_DIR / "MANIFEST.yaml", ATB_DIR / "MANIFEST.yaml", STRAININFO_DIR / "MANIFEST.yaml",
+    ):
         if not manifest.exists():
             continue
         data = yaml.safe_load(manifest.read_text(encoding="utf-8")) or {}
@@ -172,9 +175,9 @@ class Inventory:
     gold: dict[str, int]
     madin: dict[str, int]
     bacto: dict[str, int]
-    strain_assemblies: dict[str, list[dict[str, str]]] = field(default_factory=dict)
+    strain_assemblies: dict[str, list[dict[str, Any]]] = field(default_factory=dict)
     strain_genome_records: dict[str, list[dict[str, Any]]] = field(default_factory=dict)
-    strain_related_records: dict[str, list[dict[str, str]]] = field(default_factory=dict)
+    strain_related_records: dict[str, list[dict[str, Any]]] = field(default_factory=dict)
 
     def parent(self, tid: str) -> str:
         return (self.taxa.get(tid) or {}).get("parent_id", "")
@@ -252,7 +255,7 @@ def load_inventory() -> Inventory:
     gold = {r["taxon_id"]: int(r["organism_count"]) for r in read_tsv("gold_organisms.tsv")}
     madin = {r["taxon_id"]: int(r["assertion_count"]) for r in read_tsv("madin_taxa.tsv")}
     bacto = {r["taxon_id"]: int(r["assertion_count"]) for r in read_tsv("bactotraits_taxa.tsv")}
-    strain_assemblies: dict[str, list[dict[str, str]]] = defaultdict(list)
+    strain_assemblies: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for r in read_tsv("strain_assemblies.tsv"):
         strain_assemblies[r["strain_id"]].append(r)
     strain_genome_records: dict[str, list[dict[str, Any]]] = defaultdict(list)
@@ -260,9 +263,16 @@ def load_inventory() -> Inventory:
         strain_genome_records[r["strain_id"]].append(r)
     for strain_id, records in atb.genome_records(ATB_DIR).items():
         strain_genome_records[strain_id].extend(records)
-    strain_related_records: dict[str, list[dict[str, str]]] = defaultdict(list)
+    strain_related_records: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for r in read_tsv("strain_related_records.tsv"):
         strain_related_records[r["strain_id"]].append(r)
+    # The converter validates the committed overlay and requires its manifest;
+    # missing source evidence must not silently seed a partial production corpus.
+    si_assemblies, si_related = straininfo.record_links(STRAININFO_DIR)
+    for strain_id, records in si_assemblies.items():
+        strain_assemblies[strain_id].extend(records)
+    for strain_id, records in si_related.items():
+        strain_related_records[strain_id].extend(records)
     return Inventory(taxa, gtdb, lpsn, lpsn_by_taxon, strains, cc_strains, media, gold, madin, bacto,
                      strain_assemblies, strain_genome_records, strain_related_records)
 
@@ -606,7 +616,8 @@ def build_document(concept: Concept, inv: Inventory) -> dict[str, Any]:
         curator=SEED_CURATOR,
         action="SEEDED_FROM_SOURCES",
         changes=(
-            f"Seeded from data/raw/ and data/atb/ inventories; attested by {', '.join(sources)}. "
+            "Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; "
+            f"attested by {', '.join(sources)}. "
             + (f"In scope: {concept.scope_reason}" if concept.scope_reason else "In scope: --all.")
         ),
         timestamp=SEED_TIMESTAMP,

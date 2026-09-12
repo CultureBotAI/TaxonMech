@@ -65,7 +65,8 @@ def summarize(records: list[tuple[Path, dict]]) -> dict:
     related_coverage = {
         kind: {"strain_links": len(pairs), "strains": len({sid for sid, _ in pairs}),
                "identifiers": len({rid for _, rid in pairs})}
-        for kind in ("BIOSAMPLE", "BIOPROJECT", "GOLD_ORGANISM", "GOLD_PROJECT", "GOLD_ANALYSIS")
+        for kind in ("BIOSAMPLE", "BIOPROJECT", "GOLD_ORGANISM", "GOLD_PROJECT", "GOLD_ANALYSIS",
+                     "STRAININFO_STRAIN", "STRAININFO_DEPOSIT", "NUCLEOTIDE_SEQUENCE")
         if (pairs := {(sid, rid) for sid, record_type, rid in related_pairs if record_type == kind})
     }
     with_type_strain = sum(1 for _, d in records
@@ -144,7 +145,7 @@ def main(argv: list[str] | None = None) -> int:
     print(
         f"Listed strain-to-assembly links: {s['listed_strain_assembly_links']} pairs, "
         f"{s['listed_strains_with_assemblies']} strains, {s['listed_assemblies']} assembly identifiers "
-        "(deduplicated; full inventory in data/raw/strain_assemblies.tsv)"
+        "(deduplicated; inventories in data/raw/strain_assemblies.tsv and data/straininfo/assemblies.tsv)"
     )
     print(
         f"Additional genome-record links: {s['listed_genome_record_links']} pairs, "

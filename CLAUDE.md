@@ -7,10 +7,10 @@ Operational guidance for Claude Code and other editing agents in this repository
 TaxonMech is a LinkML knowledge base of microbial taxa and strains, seeded
 from kg-microbe's transforms of NCBI Taxonomy, GTDB, LPSN, BacDive, MediaDive,
 GOLD, Madin et al. and BactoTraits, supplemented by primary genome metadata,
-GOLD's public workbook and AllTheBacteria metadata. One generated YAML
+GOLD's public workbook, AllTheBacteria metadata and StrainInfo deposit evidence. One generated YAML
 record lives under
 `data/taxa/<domain>/<slug>.yaml` for each taxon in scope. The committed
-inventories in `data/raw/` and `data/atb/` and the scope in `curation/seed_scope.tsv` are the
+inventories in `data/raw/`, `data/atb/` and `data/straininfo/` and the scope in `curation/seed_scope.tsv` are the
 reproducible inputs.
 
 **A primary use case is strain identifier to genome identifier relationships.**
@@ -40,6 +40,17 @@ Non-HQ assemblies and available FASTAs lacking an ENA analysis remain eligible.
 Render the ATB browser from committed `data/atb/` inventories, not the full
 ignored SQLite catalog. Upstream metadata retain CC-BY-4.0 attribution.
 See [docs/ALLTHEBACTERIA.md](docs/ALLTHEBACTERIA.md).
+
+StrainInfo is a separate source overlay in `data/straininfo/`. SI-ID is a
+source strain record, SI-DP a deposit, and the DOI a version of the strain
+record. Match only the record's own eligible deposit through the pinned CAFI
+authority and full accession template. Every sequence must explicitly name
+that same SI-DP; source grouping, names and BacDive cross-references cannot
+transfer links. Preserve unversioned NCBI accessions without appending `.1`.
+Keep strain/deposit IDs and gene, rRNA operon and patent accessions in typed
+`related_records`, outside genome counts. The browser/query labels other
+resources as existing TaxonMech strain associations, preserving their source
+evidence without attributing them to StrainInfo. Read [docs/STRAININFO.md](docs/STRAININFO.md).
 
 Keep strain identity, taxon classification and genome-record identity distinct;
 shared taxonomy, a matching strain name or co-occurrence on a BacDive record
@@ -103,6 +114,7 @@ just extract-inventory-dry
 just extract-inventory
 just atb-fetch         # fetch pinned metadata if not already cached
 just atb-index --apply # rebuild ATB evidence against the refreshed inventories
+just straininfo-index --apply # requires a source snapshot pinned to current deposits
 just seed
 just seed-canary NCBITaxon:562
 just seed-apply --force

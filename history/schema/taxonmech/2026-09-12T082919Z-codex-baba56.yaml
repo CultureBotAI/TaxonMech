@@ -1,0 +1,33 @@
+history_version: 1
+target:
+  kind: schema
+  path: src/taxonmech/schema/taxonmech.yaml
+  slug: taxonmech
+session:
+  id: 2026-09-12T082919Z-codex-baba56
+  timestamp: '2026-09-12T08:29:19Z'
+  actors:
+  - type: ai_agent
+    name: codex
+    model: gpt-6
+    agent_tool: codex
+links:
+  issues:
+  - https://github.com/CultureBotAI/TaxonMech/issues/39
+  urls:
+  - https://straininfo.dsmz.de/doc
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - StrainInfoEvidence
+  - GenomeAssemblyLink
+  - RelatedRecordLink
+  summary: Represent StrainInfo strain, deposit and nucleotide evidence separately from genome
+    identifiers
+  details: Added StrainInfo SI-ID and SI-DP prefixes, related-record types, and required nested
+    source evidence. Assembly and nucleotide assertions retain the exact sequence deposit,
+    source statuses, original culture designation and optional record-version DOI. Existing
+    unversioned assembly accessions remain unmodified. Conditional schema and source-replay
+    tests reject incomplete evidence; mixed-source groups retain their own-deposit assertion
+    paths.

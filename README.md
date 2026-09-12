@@ -96,6 +96,14 @@ original evidence. The [ATB inventories](data/atb) are uncapped; the
 [full catalog and query guide](docs/ALLTHEBACTERIA.md) explains broader
 snapshot searches and source attribution.
 
+[Browse StrainInfo strain and deposit records](https://culturebotai.github.io/TaxonMech/pages/straininfo.html)
+by SI-ID, SI-DP, culture, BacDive strain, record-version DOI or NCBI accession.
+StrainInfo adds explicit deposit-to-NCBI assertions and typed strain/deposit
+and nucleotide references. A sequence must name the matched source deposit;
+sharing a StrainInfo group does not transfer genome links. The uncapped
+[StrainInfo component](data/straininfo) and [query guide](docs/STRAININFO.md)
+keep these source assertions separate from existing TaxonMech genome associations.
+
 ## Current corpus
 
 <!-- BEGIN GENERATED CORPUS STATS -->
@@ -115,17 +123,17 @@ snapshot searches and source attribution.
 
 15,096 BacDive strains are classified under these taxa (9,602 listed in records; 17 records cap their listing). 100 records list a type strain, 100 carry an LPSN correct name, 100 map to GTDB (186,716 genomes), and 0 carry causal graphs (0 evidence-backed edges).
 
-**765 listed strains have genome identifier links.** Coverage below is deduplicated across records, with NCBI assemblies first:
+**766 listed strains have genome identifier links.** Coverage below is deduplicated across records, with NCBI assemblies first:
 
 | Database | Strain–identifier pairs | Distinct identifiers | Distinct strains |
 |---|---:|---:|---:|
-| NCBI | 3,119 | 3,112 | 753 |
+| NCBI | 3,241 | 3,234 | 754 |
 | GTDB | 769 | 769 | 427 |
 | PATRIC | 1,242 | 1,242 | 623 |
 | IMG | 728 | 724 | 413 |
 | AllTheBacteria | 233 | 233 | 191 |
 
-These are database identifier counts, not unique biological genomes across databases. Unlisted strains remain in the complete inventories: `data/raw/strain_assemblies.tsv` and `data/raw/strain_genome_records.tsv`, plus `data/atb/strain_links.tsv` for AllTheBacteria assemblies linked through BioSample evidence.
+These are database identifier counts, not unique biological genomes across databases. Unlisted strains remain in the complete inventories: `data/raw/strain_assemblies.tsv` and `data/raw/strain_genome_records.tsv`, plus `data/atb/strain_links.tsv` for AllTheBacteria assemblies linked through BioSample evidence, and `data/straininfo/assemblies.tsv` for StrainInfo's explicit deposit-to-NCBI assertions.
 
 Related records are counted separately from genomes:
 
@@ -136,8 +144,11 @@ Related records are counted separately from genomes:
 | GOLD_ORGANISM | 9,135 | 9,117 | 5,321 |
 | GOLD_PROJECT | 1,045 | 1,015 | 500 |
 | GOLD_ANALYSIS | 880 | 876 | 491 |
+| STRAININFO_STRAIN | 7,730 | 7,670 | 7,691 |
+| STRAININFO_DEPOSIT | 12,159 | 12,137 | 7,691 |
+| NUCLEOTIDE_SEQUENCE | 5,403 | 5,391 | 765 |
 
-The complete related-record inventory is `data/raw/strain_related_records.tsv`.
+The complete related-record inventories are `data/raw/strain_related_records.tsv` and `data/straininfo/related_records.tsv.gz`. StrainInfo strain/deposit IDs, record-version DOIs and nucleotide sequence references are not counted as genomes.
 
 **0 records are `REVIEWED`;** the remaining 100 are `SEEDED` or `PROPOSED`.
 <!-- END GENERATED CORPUS STATS -->
@@ -164,6 +175,7 @@ just extract-inventory-dry          # what extraction would produce (no writes)
 just extract-inventory              # refresh data/raw/ from a kg-microbe checkout
 just atb-fetch                     # fetch pinned ATB metadata if not cached
 just atb-index --apply             # refresh ATB crosslinks against current inventories
+just straininfo-index --apply      # rebuild from a snapshot pinned to current deposits
 just seed                           # dry-run: scope report, no writes
 just seed-canary NCBITaxon:562      # write ONE record and check it, first
 just seed-apply --force             # rewrite the scoped corpus
@@ -177,7 +189,7 @@ just seed-apply --force --prune     # ...and clean up files that left the scope
 `data/source_snapshots/goldData.xlsx`. Use `GOLD_WORKBOOK` or
 `just extract-inventory --gold-workbook /path/to/goldData.xlsx` to select
 another copy. The derived inventories in
-`data/raw/` and `data/atb/` are committed, so seeding, validation and tests
+`data/raw/`, `data/atb/` and `data/straininfo/` are committed, so seeding, validation and tests
 run without upstream downloads or the full ATB SQLite catalog.
 `data/raw/MANIFEST.yaml` records the kg-microbe commit and the byte hash of
 every input and output.

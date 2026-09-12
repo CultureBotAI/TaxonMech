@@ -129,6 +129,14 @@ These are `shares_biosample` associations. Other genomes listed by the same
 BacDive strain remain outside this crosslink unless their own sample chain
 supports it. The browser exposes each original assertion for inspection.
 
+## StrainInfo context
+
+ATB browser strain cards also link to matched StrainInfo SI-ID records through
+the same local BacDive strain ID. These are separate strain/deposit context
+links. StrainInfo does not supply ATB's `shares_biosample` assertion, and its
+NCBI sequences require their own explicit SI-DP evidence. See
+[STRAININFO.md](STRAININFO.md).
+
 ## Attribution
 
 The AllTheBacteria metadata are supplied under **CC-BY-4.0**. Preserve the

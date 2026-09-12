@@ -89,6 +89,8 @@ def browser(tmp_path, repo_root, monkeypatch):
            "taxon_domain": "BACTERIA", "strain_count": 2, "mapping_status": "SEEDED",
            "strains": [{"strain_id": SID, "source_id": "bacdive:1", "designation": "Culture 1"}]}
     records = [(renderer.TAXA_DIR / "bacteria/fixture.yaml", doc)]
+    monkeypatch.setattr(renderer, "build_straininfo_index",
+                        lambda *_args: {"manifest": {}, "records": []})
     monkeypatch.setattr(renderer, "ATB_DIR", directory)
     monkeypatch.setattr(renderer, "STRAINS_TSV", strains)
     monkeypatch.setattr(renderer, "load_records", lambda: records)

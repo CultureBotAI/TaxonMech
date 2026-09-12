@@ -53,6 +53,8 @@ prefixes:
   # kg-microbe emits them
   kgmicrobe.strain: https://w3id.org/kg-microbe/strain/
   bacdive: https://bacdive.dsmz.de/strain/
+  straininfo.strain: https://straininfo.dsmz.de/strain/
+  straininfo.deposit: https://straininfo.dsmz.de/pass?pass=
   ncbi.assembly: https://www.ncbi.nlm.nih.gov/datasets/genome/
   gtdb.genome: https://gtdb.ecogenomic.org/genome?gid=
   # TaxonMech-local snapshot keys; these are not BioSample accessions.
@@ -498,9 +500,9 @@ classes:
         range: GenomeRecordLink
       related_records:
         description: >-
-          Source-reported BioSample, BioProject and GOLD organism or project
-          relationships. These retain their own entity types and are not
-          counted as genome identifiers.
+          Source-reported BioSample, BioProject, GOLD, StrainInfo strain and
+          deposit, and nucleotide sequence relationships. These retain their
+          own entity types and are not counted as genome identifiers.
         multivalued: true
         inlined_as_list: true
         range: GenomeRelatedRecordLink
@@ -534,6 +536,91 @@ classes:
         description: Explicit source sequencing-project key in the organism-to-analysis relationship.
         range: string
         pattern: '^gold:Gp[0-9]+$'
+      straininfo_evidence:
+        description: >-
+          The exact StrainInfo strain and collection deposit supporting the
+          assertion. A shared SI-ID does not transfer sequences between deposits.
+        range: StrainInfoEvidence
+        inlined: true
+
+  StrainInfoEvidence:
+    description: >-
+      An explicit match to one StrainInfo collection deposit within its parent
+      strain record. The strain DOI identifies a version of that strain record,
+      not a publication or a separate deposit. Biological consistency and exact
+      source/deposit equality are checked when converting the source snapshot.
+    attributes:
+      strain_id:
+        required: true
+        range: string
+        pattern: '^straininfo\.strain:[1-9][0-9]*$'
+      deposit_id:
+        required: true
+        range: string
+        pattern: '^straininfo\.deposit:[1-9][0-9]*$'
+      deposit_designation:
+        description: This deposit's own designation, as supplied by StrainInfo.
+        required: true
+        range: string
+        pattern: '\S'
+      strain_status:
+        required: true
+        range: StrainInfoStrainStatusEnum
+      deposit_status:
+        description: Source deposit availability status; it does not describe sequence quality.
+        required: true
+        range: string
+        pattern: '\S'
+      match_method:
+        required: true
+        range: string
+        equals_string: culture_identifier
+      strain_doi:
+        description: Versioned DOI of the asserting StrainInfo strain record.
+        range: string
+        pattern: '^DOI:10\.60712/SI-ID[1-9][0-9]*\.[1-9][0-9]*$'
+      source_bacdive_id:
+        description: >-
+          The strain-level BacDive reference supplied by StrainInfo, retained
+          as source metadata rather than substituted for the culture-deposit match.
+        range: string
+        pattern: '^bacdive:[1-9][0-9]*$'
+      bacdive_reference_conflict:
+        description: >-
+          True when the source strain's BacDive reference differs from the
+          BacDive strain matched through this deposit. The reference is not
+          a join key and does not override the explicit deposit assertion.
+        range: boolean
+      sequence_type:
+        description: Source sequence category, without promoting a marker to an assembly.
+        range: StrainInfoSequenceTypeEnum
+      sequence_deposit_id:
+        description: The explicit deposit on the source sequence assertion; must match deposit_id.
+        range: string
+        pattern: '^straininfo\.deposit:[1-9][0-9]*$'
+
+  StrainInfoAssemblyEvidence:
+    description: A genome-type source sequence explicitly assigned to the matched deposit.
+    is_a: StrainInfoEvidence
+    slot_usage:
+      sequence_type:
+        required: true
+        equals_string: genome
+      sequence_deposit_id:
+        required: true
+
+  StrainInfoSequenceEvidence:
+    description: A non-genome source sequence explicitly assigned to the matched deposit.
+    is_a: StrainInfoEvidence
+    slot_usage:
+      sequence_type:
+        required: true
+        equals_string_in:
+          - gene
+          - rrnaop
+          - patent
+      sequence_deposit_id:
+        required: true
 
   GenomeRecordLink:
     mixins:
@@ -544,6 +631,43 @@ classes:
       a complete cellular genome or an NCBI assembly. Each namespace retains
       its own identity, independent of source NCBI taxon metadata.
     rules:
+      - preconditions:
+          slot_conditions:
+            source:
+              equals_string: STRAININFO
+        postconditions:
+          slot_conditions:
+            source_id:
+              pattern: '^straininfo\.strain:[1-9][0-9]*$'
+            straininfo_evidence:
+              required: true
+              all_of:
+                - range: StrainInfoAssemblyEvidence
+            matched_strain_id:
+              required: true
+              all_of:
+                - range: string
+            source_field:
+              required: true
+              pattern: '\S'
+              all_of:
+                - range: string
+            source_strain_identifiers:
+              required: true
+              pattern: '\S'
+              all_of:
+                - range: string
+            source_strain_field:
+              required: true
+              equals_string: deposits.designation
+      - preconditions:
+          slot_conditions:
+            straininfo_evidence:
+              value_presence: PRESENT
+        postconditions:
+          slot_conditions:
+            source:
+              equals_string: STRAININFO
       - preconditions:
           slot_conditions:
             source_database:
@@ -749,6 +873,44 @@ classes:
       taxonomic classification nor identifier equivalence. It does not
       establish that every culture deposit has identical sequence. BacDive
       may associate assemblies of substrains with one strain record.
+    rules:
+      - preconditions:
+          slot_conditions:
+            source:
+              equals_string: STRAININFO
+        postconditions:
+          slot_conditions:
+            source_id:
+              pattern: '^straininfo\.strain:[1-9][0-9]*$'
+            straininfo_evidence:
+              required: true
+              all_of:
+                - range: StrainInfoAssemblyEvidence
+            matched_strain_id:
+              required: true
+              all_of:
+                - range: string
+            source_field:
+              required: true
+              pattern: '\S'
+              all_of:
+                - range: string
+            source_strain_identifiers:
+              required: true
+              pattern: '\S'
+              all_of:
+                - range: string
+            source_strain_field:
+              required: true
+              equals_string: deposits.designation
+      - preconditions:
+          slot_conditions:
+            straininfo_evidence:
+              value_presence: PRESENT
+        postconditions:
+          slot_conditions:
+            source:
+              equals_string: STRAININFO
     attributes:
       assembly_id:
         description: >-
@@ -788,8 +950,9 @@ classes:
 
   GenomeRelatedRecordLink:
     description: >-
-      A typed relationship to a sample, project or organism record associated
-      with a strain by the source. It is not a genome equivalence assertion.
+      A typed relationship to a sample, project, organism, external strain,
+      collection deposit or nucleotide sequence associated with a strain by
+      the source. It is not a genome equivalence assertion.
     mixins:
       - StrainLinkEvidence
     rules:
@@ -833,11 +996,87 @@ classes:
           slot_conditions:
             record_id:
               pattern: '^gold:Ga[0-9]+$'
+      - preconditions:
+          slot_conditions:
+            record_type:
+              equals_string: STRAININFO_STRAIN
+        postconditions:
+          slot_conditions:
+            record_id:
+              pattern: '^straininfo\.strain:[1-9][0-9]*$'
+            source:
+              equals_string: STRAININFO
+      - preconditions:
+          slot_conditions:
+            record_type:
+              equals_string: STRAININFO_DEPOSIT
+        postconditions:
+          slot_conditions:
+            record_id:
+              pattern: '^straininfo\.deposit:[1-9][0-9]*$'
+            source:
+              equals_string: STRAININFO
+      - preconditions:
+          slot_conditions:
+            record_type:
+              equals_string: NUCLEOTIDE_SEQUENCE
+        postconditions:
+          slot_conditions:
+            record_id:
+              pattern: '^INSDC:(?:[A-Z][0-9]{5}|[A-Z]{2}[0-9]{6}|[A-Z]{2}[0-9]{8}|[A-Z]{4}[0-9]{8,}|[A-Z]{6}[0-9]{9,}|[A-Z]{5}[0-9]{7}|(?:AC|NC|NG|NT|NW|NZ|NM|NR|XM|XR)_[0-9]+)(?:\.[1-9][0-9]*)?$'
+            source:
+              equals_string: STRAININFO
+            straininfo_evidence:
+              required: true
+              all_of:
+                - range: StrainInfoSequenceEvidence
+      - preconditions:
+          slot_conditions:
+            source:
+              equals_string: STRAININFO
+        postconditions:
+          slot_conditions:
+            source_id:
+              pattern: '^straininfo\.strain:[1-9][0-9]*$'
+            record_type:
+              equals_string_in:
+                - STRAININFO_STRAIN
+                - STRAININFO_DEPOSIT
+                - NUCLEOTIDE_SEQUENCE
+            straininfo_evidence:
+              required: true
+              all_of:
+                - range: StrainInfoEvidence
+            matched_strain_id:
+              required: true
+              all_of:
+                - range: string
+            source_field:
+              required: true
+              pattern: '\S'
+              all_of:
+                - range: string
+            source_strain_identifiers:
+              required: true
+              pattern: '\S'
+              all_of:
+                - range: string
+            source_strain_field:
+              required: true
+              equals_string: deposits.designation
+      - preconditions:
+          slot_conditions:
+            straininfo_evidence:
+              value_presence: PRESENT
+        postconditions:
+          slot_conditions:
+            source:
+              equals_string: STRAININFO
     attributes:
       record_id:
         required: true
         range: string
-        pattern: '^(biosample:SAM[NED][A-Z]?[0-9]+|bioproject:PRJ(NA|EA|EB|DA|DB)[0-9]+|gold:G[opa][0-9]+)$'
+        pattern: '^(biosample:SAM[NED][A-Z]?[0-9]+|bioproject:PRJ(NA|EA|EB|DA|DB)[0-9]+|gold:G[opa][0-9]+|straininfo\.(strain|deposit):[1-9][0-9]*|INSDC:(?:[A-Z][0-9]{5}|[A-Z]{2}[0-9]{6}|[A-Z]{2}[0-9]{8}|[A-Z]{4}[0-9]{8,}|[A-Z]{6}[0-9]{9,}|[A-Z]{5}[0-9]{7}|(?:AC|NC|NG|NT|NW|NZ|NM|NR|XM|XR)_[0-9]+)(?:\.[1-9][0-9]*)?)$'
       record_type:
         required: true
         range: GenomeRelatedRecordTypeEnum
@@ -1031,6 +1270,20 @@ classes:
 
 enums:
 
+  StrainInfoStrainStatusEnum:
+    description: Published source strain records eligible for explicit deposit matching.
+    permissible_values:
+      published online:
+      published offline:
+
+  StrainInfoSequenceTypeEnum:
+    description: StrainInfo's sequence category, preserved independently of accession syntax.
+    permissible_values:
+      genome:
+      gene:
+      rrnaop:
+      patent:
+
   GenomeRelatedRecordTypeEnum:
     permissible_values:
       BIOSAMPLE:
@@ -1043,6 +1296,12 @@ enums:
         description: A GOLD sequencing project, not an individual assembly.
       GOLD_ANALYSIS:
         description: A GOLD analysis project, which may describe genome or other analysis types.
+      STRAININFO_STRAIN:
+        description: A StrainInfo SI-ID strain identity, not a genome or an individual deposit.
+      STRAININFO_DEPOSIT:
+        description: A StrainInfo SI-DP collection deposit under one culture number.
+      NUCLEOTIDE_SEQUENCE:
+        description: A source-labeled gene, rRNA operon or patent sequence, not an assembly.
 
   TaxonSourceEnum:
     description: Upstream resource an attestation, mapping, name or strain comes from.
@@ -1057,6 +1316,8 @@ enums:
         description: List of Prokaryotic names with Standing in Nomenclature (DSMZ).
       BACDIVE:
         description: DSMZ BacDive strain records.
+      STRAININFO:
+        description: DSMZ StrainInfo strain identities, collection deposits and explicit sequence links.
       MEDIADIVE:
         description: DSMZ MediaDive growth-medium links to strains and taxa.
       GOLD:
