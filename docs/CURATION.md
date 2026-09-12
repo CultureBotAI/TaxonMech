@@ -34,8 +34,9 @@ curator who wants GTDB's placement finds it in `taxonomy_mappings`.
 
 ## Identifiers
 
-1. **The NCBITaxon CURIE is the identity.** `NCBITaxon:562`, never the LPSN
-   or GTDB id, which are `xrefs` and `taxonomy_mappings`.
+1. **The NCBITaxon CURIE is the taxon record's identity.** `NCBITaxon:562`,
+   never an LPSN name, GTDB species or genome identifier. Those are separate
+   source concepts represented in their corresponding fields.
 2. **Never reuse an identifier.** A superseded record stays in place with
    `mapping_status: DEPRECATED`; the successor names it in `replaces`.
 3. **Never guess a CURIE.** Every identifier in a seeded record came from an
@@ -92,18 +93,39 @@ a curator's job is to say so in a discussion, not to pick one silently.
 
 A strain entry is an identity — the BacDive id, the designation, the
 culture-collection deposits, and `classified_as` when BacDive files it under
-a descendant taxon — with explicit `genome_assemblies` and `genome_records`
-and one derived flag, `is_type_strain`. Strain-to-genome relationships are a
-primary curation priority. Prioritize NCBI assemblies and include typed
-BV-BRC / PATRIC and IMG genome records with their source evidence. Retain
-multiple links, source-supplied accession versions and descriptions such as
-`plasmid` or `wgs`; an imported link need not represent a complete assembly.
+a descendant taxon — with explicit `genome_assemblies`, `genome_records`,
+typed `related_records` and one derived flag, `is_type_strain`.
+Strain-to-genome relationships are a primary curation priority. Prioritize
+NCBI assemblies and include all
+available genome identifier systems with source evidence, including GTDB,
+BV-BRC / PATRIC and IMG. Retain multiple links, source-supplied accession
+versions and descriptions such as `plasmid` or `wgs`; an imported link need
+not represent a complete assembly.
 
 A shared species name or taxon ID does not establish a strain-to-genome link.
+GTDB metadata links require a whole culture-deposit token in
+`ncbi_strain_identifiers` matching an existing deposit ID whose collection
+authority is in the pinned CAFI registry and whose complete accession matches
+that authority's `regex_id.full` template. Recognizing the prefix alone is
+insufficient. The existing deposit field can also contain bare strain aliases;
+retaining an alias does not make it a genome-join key. Preserve the matched
+ID, source fields and verbatim
+identifiers. Normalize only the recognized authority prefix's case and
+initial separator; suffix case, leading zeros and internal punctuation stay
+significant. Do not translate aliases to another collection prefix. A bare
+strain designation, unknown authority, unsupported accession format or
+substring is insufficient. Excluded source values remain in the inventory.
+GOLD links likewise begin with a whole culture identifier in the primary
+organism record. Follow explicit organism and project IDs to the analysis,
+retain every step as provenance and reject ambiguous or conflicting chains.
+Only supported genome analyses supply NCBI or IMG genome identifiers; a
+sequencing or analysis project is itself a related record.
 Co-occurrence on one BacDive record does not establish that two database
 identifiers denote the same genome. Assemblies, genome records, BioSamples,
-marker-gene sequences and culture deposits denote different things; see
-[STRAIN_GENOMES.md](STRAIN_GENOMES.md). Strain phenotypes, media and isolation
+marker-gene sequences, projects, GOLD organisms and culture deposits denote
+different things. Related sample, project and organism references are never
+counted as genome identifiers; see [STRAIN_GENOMES.md](STRAIN_GENOMES.md).
+Strain phenotypes, media and isolation
 sources belong to the sibling repositories that model them. `medium_count`
 is kept because it says how well characterised the strain is, which is what
 a reader choosing a strain wants to know.

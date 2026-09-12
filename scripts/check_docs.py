@@ -63,6 +63,16 @@ def render_block() -> str:
         "Unlisted strains remain in the complete inventories: `data/raw/strain_assemblies.tsv` "
         "and `data/raw/strain_genome_records.tsv`.",
         "",
+        "Related records are counted separately from genomes:",
+        "",
+        "| Record type | Strain–record pairs | Distinct identifiers | Distinct strains |",
+        "|---|---:|---:|---:|",
+        *[f"| {kind} | {coverage['strain_links']:,} | {coverage['identifiers']:,} | "
+          f"{coverage['strains']:,} |"
+          for kind, coverage in s["listed_related_records_by_type"].items()],
+        "",
+        "The complete related-record inventory is `data/raw/strain_related_records.tsv`.",
+        "",
         f"**{s['by_status'].get('REVIEWED', 0)} records are `REVIEWED`;** the remaining "
         f"{s['total'] - s['by_status'].get('REVIEWED', 0)} are `SEEDED` or `PROPOSED`.",
         END,

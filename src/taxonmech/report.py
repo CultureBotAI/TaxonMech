@@ -48,6 +48,7 @@ def summarize(records: list[tuple[Path, dict]]) -> dict:
     # in different databases are not collapsed into biological genomes.
     pairs_by_database = {
         "NCBI": assembly_pairs,
+        "GTDB": {(sid, gid) for sid, gid in genome_record_pairs if gid.startswith("gtdb.genome:")},
         "PATRIC": {(sid, gid) for sid, gid in genome_record_pairs if gid.startswith("patric:")},
         "IMG": {(sid, gid) for sid, gid in genome_record_pairs if gid.startswith("img.taxon:")},
     }
@@ -55,6 +56,15 @@ def summarize(records: list[tuple[Path, dict]]) -> dict:
         database: {"strain_links": len(pairs), "strains": len({sid for sid, _ in pairs}),
                    "identifiers": len({gid for _, gid in pairs})}
         for database, pairs in pairs_by_database.items()
+    }
+    related_pairs = {(s["strain_id"], link["record_type"], link["record_id"])
+                     for _, d in records for s in d.get("strains") or []
+                     for link in s.get("related_records") or []}
+    related_coverage = {
+        kind: {"strain_links": len(pairs), "strains": len({sid for sid, _ in pairs}),
+               "identifiers": len({rid for _, rid in pairs})}
+        for kind in ("BIOSAMPLE", "BIOPROJECT", "GOLD_ORGANISM", "GOLD_PROJECT", "GOLD_ANALYSIS")
+        if (pairs := {(sid, rid) for sid, record_type, rid in related_pairs if record_type == kind})
     }
     with_type_strain = sum(1 for _, d in records
                            if any(s.get("is_type_strain") for s in d.get("strains") or []))
@@ -86,6 +96,7 @@ def summarize(records: list[tuple[Path, dict]]) -> dict:
         "listed_strains_with_genome_records": len({sid for sid, _ in genome_record_pairs}),
         "listed_genome_links_by_database": genome_coverage,
         "listed_strains_with_any_genome": len({sid for sid, _ in assembly_pairs | genome_record_pairs}),
+        "listed_related_records_by_type": related_coverage,
         "records_with_capped_listing": capped,
         "with_type_strain": with_type_strain,
         "with_lpsn": with_lpsn,
@@ -142,6 +153,9 @@ def main(argv: list[str] | None = None) -> int:
         print(f"  {database}: {coverage['strain_links']} strain-identifier pairs, "
               f"{coverage['identifiers']} identifiers, {coverage['strains']} strains")
     print("Counts are database identifiers, not unique biological genomes across databases.")
+    for kind, coverage in s["listed_related_records_by_type"].items():
+        print(f"  Related {kind}: {coverage['strain_links']} strain-record pairs, "
+              f"{coverage['identifiers']} identifiers, {coverage['strains']} strains (not genome counts)")
     print(
         f"LPSN: {s['with_lpsn']} records carry nomenclature, {s['with_correct_name']} with a correct name   "
         f"GTDB: {s['with_gtdb']} records mapped, {s['genomes']} genomes"

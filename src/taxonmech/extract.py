@@ -8,7 +8,7 @@ what each source says, and how much data sits behind it. Those TSVs are the
 seed input for ``scripts/seed_from_sources.py``; seeding, validation and tests
 run from them without kg-microbe present.
 
-Sources read (all under the kg-microbe checkout):
+Sources read under the kg-microbe checkout:
 
 * ``data/transformed/ontologies/ncbitaxon_{nodes,edges}.tsv`` — NCBI Taxonomy
   labels, parents (``biolink:subclass_of``) and the GC_ID genetic-code xref.
@@ -25,10 +25,17 @@ Sources read (all under the kg-microbe checkout):
   NCBI and LPSN parents, and their culture-collection deposits.
 * ``data/raw/bacdive_strains.json`` — strain-to-genome assertions that
   the BacDive KGX transform does not carry.
+* ``data/raw/gtdb/{bac120,ar53}_metadata.tsv.gz`` — genome and sample/project
+  identifiers linked by explicitly recorded culture deposits.
 * ``data/transformed/mediadive/edges.tsv`` — growth media per taxon / strain.
 * ``data/transformed/gold/edges.tsv`` — GOLD organisms per taxon.
 * ``data/transformed/madin_etal/edges.tsv``, ``bactotraits/edges.tsv`` —
   trait assertions per taxon.
+
+The official GOLD bulk workbook supplies organism → sequencing project →
+analysis relationships. A pinned DSMZ CAFI collection registry validates
+culture-deposit authorities and accession formats for GTDB and GOLD joins; both additional
+inputs are hashed in the manifest.
 
 The **universe** of taxa inventoried is every NCBI taxon that at least one of
 BacDive, LPSN, MediaDive, GOLD, Madin or BactoTraits attests, plus every
@@ -61,6 +68,9 @@ from typing import Any
 import ijson
 import yaml
 
+from taxonmech.genome_sources import CAFI_REGISTRY_PATH, extract_gtdb_strain_genomes
+from taxonmech.gold_genomes import extract_gold_genomes
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 RAW_DIR = REPO_ROOT / "data" / "raw"
 CONF_PATH = REPO_ROOT / "conf" / "sources.yaml"
@@ -83,14 +93,23 @@ ATTESTING_SOURCES = ("bacdive", "lpsn", "mediadive", "gold", "madin_etal", "bact
 _STRAIN_NAME = re.compile(r"^bacdive_(?P<id>\d+) (?:as (?P<designation>.+?) of|strain of) NCBITaxon:\d+$")
 _LPSN_URL_RANK = re.compile(r"^https://lpsn\.dsmz\.de/(?P<rank>[a-z]+)/")
 _ASSEMBLY_ACCESSION = re.compile(r"GC[AF]_[0-9]{9}(?:\.[1-9][0-9]*)?")
+LINK_EVIDENCE_FIELDS = [
+    "source_field", "matched_strain_id", "source_strain_identifiers", "source_strain_field",
+    "source_organism_id", "source_project_id",
+]
+GOLD_WORKBOOK_URL = "https://gold.jgi.doe.gov/download?mode=site_excel"
 ASSEMBLY_FIELDS = [
     "strain_id", "assembly_id", "source", "source_id", "source_reference_id",
     "assembly_level", "assembly_name", "taxon_id",
-]
+] + LINK_EVIDENCE_FIELDS
 GENOME_RECORD_FIELDS = [
     "strain_id", "genome_id", "source_database", "source", "source_id", "source_reference_id",
     "assembly_level", "genome_name", "taxon_id",
-]
+] + LINK_EVIDENCE_FIELDS
+RELATED_RECORD_FIELDS = [
+    "strain_id", "record_id", "record_type", "source", "source_id", "source_reference_id",
+    "taxon_id", "record_name",
+] + LINK_EVIDENCE_FIELDS
 GENOME_RECORD_DATABASES = {
     "patric": ("patric", re.compile(r"[0-9]+\.[0-9]+")),
     "img": ("img.taxon", re.compile(r"[0-9]+")),
@@ -303,7 +322,7 @@ def extract_bacdive_genomes(
                 # Deduplicate only identical assertions. Distinct references,
                 # versions and conflicting source metadata remain visible.
                 target, fields = (record_rows, GENOME_RECORD_FIELDS) if is_record else (rows, ASSEMBLY_FIELDS)
-                target[tuple(row[field] for field in fields)] = row
+                target[tuple(row.get(field, "") for field in fields)] = row
     return ([rows[key] for key in sorted(rows)], [record_rows[key] for key in sorted(record_rows)],
             sorted(dropped, key=lambda r: (r["id"], r["reason"])))
 
@@ -581,6 +600,8 @@ INPUTS = [
     "data/transformed/bacdive/nodes.tsv",
     "data/transformed/bacdive/edges.tsv",
     "data/raw/bacdive_strains.json",
+    "data/raw/gtdb/bac120_metadata.tsv.gz",
+    "data/raw/gtdb/ar53_metadata.tsv.gz",
     "data/transformed/mediadive/edges.tsv",
     "data/transformed/gold/edges.tsv",
     "data/transformed/madin_etal/edges.tsv",
@@ -593,6 +614,8 @@ def main(argv: list[str] | None = None) -> int:
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--kg-microbe", help="Path to a kg-microbe checkout.")
     parser.add_argument("--out", type=Path, default=RAW_DIR, help="Where to write the inventories.")
+    parser.add_argument("--gold-workbook", type=Path,
+                        help="Official GOLD bulk workbook; defaults to data/source_snapshots/goldData.xlsx.")
     parser.add_argument("--dry-run", action="store_true", help="Report counts without writing files.")
     parser.add_argument("--skip-input-hashes", action="store_true",
                         help="Do not sha256 the inputs (the 14 GB ncbitaxon.db takes a while). "
@@ -600,6 +623,12 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     kgm = resolve_kg_microbe(args.kg_microbe)
+    gold_workbook = (args.gold_workbook or Path(os.environ.get(
+        "GOLD_WORKBOOK", str(REPO_ROOT / "data/source_snapshots/goldData.xlsx"),
+    ))).expanduser().resolve()
+    if not gold_workbook.is_file():
+        raise SystemExit(f"missing GOLD source workbook: {gold_workbook}; download {GOLD_WORKBOOK_URL} "
+                         "and pass --gold-workbook or set GOLD_WORKBOOK")
     print(f"kg-microbe checkout: {kgm} ({git_head(kgm)})")
     for relative in INPUTS:
         if not (kgm / relative).exists():
@@ -739,6 +768,24 @@ def main(argv: list[str] | None = None) -> int:
     )
     dropped_rows.extend(genome_drops)
 
+    print("reading GTDB genome metadata and exact culture-deposit links ...", flush=True)
+    gtdb_assemblies, gtdb_records, related_rows, gtdb_drops = extract_gtdb_strain_genomes(
+        [kgm / "data/raw/gtdb/bac120_metadata.tsv.gz", kgm / "data/raw/gtdb/ar53_metadata.tsv.gz"],
+        strain_rows,
+    )
+    assembly_rows.extend(gtdb_assemblies)
+    genome_record_rows.extend(gtdb_records)
+    dropped_rows.extend(gtdb_drops)
+    print("reading GOLD culture, project and analysis relationships ...", flush=True)
+    gold_assemblies, gold_records, gold_related, gold_drops = extract_gold_genomes(gold_workbook, strain_rows)
+    assembly_rows.extend(gold_assemblies)
+    genome_record_rows.extend(gold_records)
+    related_rows.extend(gold_related)
+    dropped_rows.extend(gold_drops)
+    for rows, fields in ((assembly_rows, ASSEMBLY_FIELDS), (genome_record_rows, GENOME_RECORD_FIELDS),
+                         (related_rows, RELATED_RECORD_FIELDS)):
+        rows.sort(key=lambda row, fields=fields: tuple(row.get(field, "") for field in fields))
+
     media_rows = [{"taxon_id": t, "medium_count": len(m), "media_ids": joined(m)}
                   for t, m in sorted(taxon_media.items()) if t in universe]
     gold_rows = [{"taxon_id": t, "organism_count": n} for t, n in sorted(gold.items()) if t in universe]
@@ -758,6 +805,7 @@ def main(argv: list[str] | None = None) -> int:
                                  "culture_collection_ids", "medium_count"], strain_rows),
         ("strain_assemblies.tsv", ASSEMBLY_FIELDS, assembly_rows),
         ("strain_genome_records.tsv", GENOME_RECORD_FIELDS, genome_record_rows),
+        ("strain_related_records.tsv", RELATED_RECORD_FIELDS, related_rows),
         ("culture_collection_strains.tsv", ["strain_id", "taxon_ids"], cc_rows),
         ("mediadive_taxa.tsv", ["taxon_id", "medium_count", "media_ids"], media_rows),
         ("gold_organisms.tsv", ["taxon_id", "organism_count"], gold_rows),
@@ -782,6 +830,15 @@ def main(argv: list[str] | None = None) -> int:
 
     inputs = [describe_input(kgm, r) if not args.skip_input_hashes else _unhashed_input(kgm, r)
               for r in INPUTS]
+    gold_input = (describe_input(gold_workbook.parent, gold_workbook.name) if not args.skip_input_hashes
+                  else _unhashed_input(gold_workbook.parent, gold_workbook.name))
+    gold_input.update(source="GOLD", url=GOLD_WORKBOOK_URL, path="GOLD/goldData.xlsx")
+    inputs.append(gold_input)
+    cafi_input = (describe_input(CAFI_REGISTRY_PATH.parent, CAFI_REGISTRY_PATH.name)
+                  if not args.skip_input_hashes
+                  else _unhashed_input(CAFI_REGISTRY_PATH.parent, CAFI_REGISTRY_PATH.name))
+    cafi_input.update(source="DSMZ CAFI", path="src/taxonmech/data/cafi_acronyms.json")
+    inputs.append(cafi_input)
     manifest: dict[str, Any] = {
         "extracted_at": _extracted_at(args.out / MANIFEST_NAME, inputs),
         "kg_microbe_source": git_head(kgm),

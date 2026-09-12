@@ -6,20 +6,42 @@ Operational guidance for Claude Code and other editing agents in this repository
 
 TaxonMech is a LinkML knowledge base of microbial taxa and strains, seeded
 from kg-microbe's transforms of NCBI Taxonomy, GTDB, LPSN, BacDive, MediaDive,
-GOLD, Madin et al. and BactoTraits. One generated YAML record lives under
+GOLD, Madin et al. and BactoTraits, supplemented by primary genome metadata
+and GOLD's public workbook. One generated YAML record lives under
 `data/taxa/<domain>/<slug>.yaml` for each taxon in scope. The committed
 inventories in `data/raw/` and the scope in `curation/seed_scope.tsv` are the
 reproducible inputs.
 
 **A primary use case is strain identifier to genome identifier relationships.**
-Prioritize NCBI GenBank/RefSeq assemblies and include other genome databases
-when the source explicitly links them to BacDive and culture-collection
-strain identifiers. Keep NCBI links in `genome_assemblies` and typed BV-BRC /
-PATRIC and IMG links in `genome_records`, including multiple links per strain.
+Prioritize NCBI GenBank/RefSeq assemblies and include all available genome
+identifier systems when source evidence links them to BacDive and
+culture-collection strain identifiers. Keep NCBI links in `genome_assemblies`
+and typed GTDB, BV-BRC / PATRIC and IMG links in `genome_records`, including
+multiple links per strain. Keep sample, project and GOLD organism references
+separate from genome identifiers and genome counts.
+
+GOLD genome links must follow primary organism, sequencing-project and
+analysis-project identifiers. Preserve that chain and the culture-deposit
+match; analyses that refer to conflicting or unknown organisms do not supply
+strain-genome links. GOLD's `Go`, `Gp` and `Ga` IDs are related records,
+not genome identifiers.
+
 Keep strain identity, taxon classification and genome-record identity distinct;
 shared taxonomy, a matching strain name or co-occurrence on a BacDive record
 does not establish genome equivalence. Preserve source provenance, supplied
-accession versions and each database's identifier syntax. See
+accession versions and each database's identifier syntax. For GTDB metadata,
+match whole culture-deposit tokens from `ncbi_strain_identifiers` to existing
+deposit IDs only when their authority is in the pinned CAFI collection
+registry and the complete accession matches that authority's
+`regex_id.full` template. Prefix recognition alone is insufficient. Existing
+`culture_collection_ids` can contain bare aliases and do not establish a
+valid collection accession by themselves. Preserve the matched ID,
+verbatim source identifiers and source field. Normalize only recognized
+authority-prefix case and its initial separator; preserve suffix case,
+punctuation and leading zeros. Do not rewrite collection aliases to another
+prefix or join unknown authorities, unsupported accession formats, species,
+taxa, bare strain names or substrings. Retain excluded source values without
+using them as genome-join keys. See
 [docs/STRAIN_GENOMES.md](docs/STRAIN_GENOMES.md).
 
 Read these before changing domain behavior:
@@ -70,6 +92,12 @@ just seed-apply --force
 just seed-apply --force --prune  # only when files that left the scope should be removed
 ```
 
+Extraction requires the configured kg-microbe checkout and GOLD's public
+workbook at `data/source_snapshots/goldData.xlsx`, or a `GOLD_WORKBOOK` /
+`--gold-workbook` override. The workbook is an external source snapshot;
+committed inventories suffice for seeding and QC. See
+[docs/STRAIN_GENOMES.md](docs/STRAIN_GENOMES.md) for source provenance.
+
 ## Scope rule: species and strains only
 
 **TaxonMech records are species-level and below** — species, subspecies,
@@ -81,9 +109,11 @@ scope, `just propose-scope` never proposes one, and a corpus test enforces it.
 **Lineage is carried, not curated.** A record's `lineage` is NCBI Taxonomy's
 parent chain, verbatim. TaxonMech does not reconcile NCBI with GTDB or LPSN
 hierarchies, does not resolve disagreements between them, and never infers a
-placement. GTDB and LPSN appear as `taxonomy_mappings` and `nomenclature` on
-the record they concern, nothing more. Work that needs a reconciled or
-inferred taxonomy belongs upstream (kg-microbe, NCBI, GTDB, LPSN), not here.
+placement. GTDB classification and LPSN nomenclature appear as
+`taxonomy_mappings` and `nomenclature` on the record they concern. GTDB genome
+links on strains do not change that classification. Work that needs a
+reconciled or inferred taxonomy belongs upstream (kg-microbe, NCBI, GTDB,
+LPSN), not here.
 
 ## Fact-based answers only
 

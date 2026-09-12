@@ -1,0 +1,40 @@
+history_version: 1
+target:
+  kind: infrastructure
+  path: src/taxonmech/extract.py
+  slug: all_genome_identifiers
+session:
+  id: 2026-09-11T235932Z-codex-cc6284
+  timestamp: '2026-09-11T23:59:32Z'
+  actors:
+  - type: ai_agent
+    name: codex
+    model: gpt-6
+    agent_tool: codex
+links:
+  issues:
+  - https://github.com/CultureBotAI/TaxonMech/issues/25
+  - https://github.com/CultureBotAI/TaxonMech/issues/26
+  - https://github.com/CultureBotAI/TaxonMech/issues/27
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - schema
+  - strains
+  - provenance
+  - documentation
+  summary: Import primary GTDB and GOLD strain-to-genome relationships with typed related
+    records
+  details: Added source-provenanced GTDB genome and NCBI assembly links, primary GOLD organism-to-project-to-analysis
+    links to IMG and NCBI, and separately typed BioSample, BioProject, and GOLD references.
+    Rejected the demonstrated mismatched MicrobeDecoder crosswalk (issue 25). Independent
+    reviews reproduced and fixed deposit CURIE validation failures (issue 26), unqualified
+    alias collisions and CAFI accession-template violations (issue 27). The pinned attributed
+    DSMZ CAFI snapshot validates complete collection accessions without remapping suffixes
+    or historical acronyms. All 50,145 prior BacDive genome assertions and all nine other
+    derived inventories are preserved; the changed Madin upstream input hash leaves its derived
+    inventory byte-identical. Full-source extraction succeeded, 120 focused regressions passed,
+    the validated E. coli canary succeeded, and the documented DSM-30083 crosswalk executes
+    with NCBI, GTDB, IMG and PATRIC identifiers. Taxonomic classifications are not inferred
+    from genome metadata.
