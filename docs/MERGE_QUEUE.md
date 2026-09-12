@@ -18,7 +18,7 @@ queued changes. A failed candidate can remove the PR from the queue; inspect
 its timeline and failed checks, repair the branch, and obtain review before
 re-enqueuing. See [GitHub's merge-queue documentation](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue).
 
-Queue candidates run the Python 3.10 and 3.12 QC matrix and vendored integrity. QC includes corpus reproduction and generated-site drift, so resolve conflicts by regenerating outputs through the maintained commands.
+Queue candidates run the full QC gate once on Python 3.13 and check vendored integrity. QC includes corpus reproduction and generated-site drift, so resolve conflicts by regenerating outputs through the maintained commands.
 
 Confirm the PR reaches `MERGED`; an enqueue response alone does not establish
 that the change landed. This guide does not enable repository rules or grant
