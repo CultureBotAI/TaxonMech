@@ -52,6 +52,14 @@ straininfo-index *args:
 straininfo-query *args:
     uv run python scripts/query_straininfo.py {{args}}
 
+# Complete source catalogs: native identifier lookup without inferred identity.
+source-query *args:
+    uv run python scripts/query_sources.py "$@"
+
+# Project pinned primary inputs (--project) or rebuild the source census manifest.
+source-catalog *args:
+    uv run python scripts/build_source_catalog.py "$@"
+
 # Rank candidate taxa for curation/seed_scope.tsv. Prints; never writes the file.
 propose-scope *args:
     uv run python scripts/propose_scope.py "$@"

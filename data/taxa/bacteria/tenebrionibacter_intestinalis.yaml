@@ -63,6 +63,13 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 3
   notes: LPSN links this GTDB species to the taxon's name.
+synonyms:
+- synonym_text: Enterobacterales bacterium BIT-L3
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Tenebrionibacter intestinalis Hu and Yang 2022
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Tenebrionibacter_intestinalis
 - lpsn:26390
@@ -74,23 +81,84 @@ strains:
   source_id: bacdive:168247
   designation: BIT-L3
   culture_collection_ids:
-  - kgmicrobe.strain:CCTCC-AB-2020371T
-  - kgmicrobe.strain:LMG-32222T
-  - kgmicrobe.strain:TBRC-14825T
+  - kgmicrobe.strain:CCTCC-AB%202020371
+  - kgmicrobe.strain:LMG-32222
+  - kgmicrobe.strain:TBRC-14825
+  is_type_strain: true
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_016632365
     source: BACDIVE
     source_id: bacdive:168247
     source_reference_id: '66792'
     assembly_level: scaffold
-    assembly_name: Tenebrionibacter intestinalis BIT-L3
+    assembly_name: ASM1663236v1 assembly for Tenebrionibacter intestinalis BIT-L3
     taxon_id: NCBITaxon:2799638
+    source_field: Sequence information.Genome sequences.INSDC accession
+  genome_records:
+  - genome_id: img.taxon:8110023836
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:168247
+    source_reference_id: '66792'
+    assembly_level: scaffold
+    genome_name: ASM1663236v1 assembly for Tenebrionibacter intestinalis BIT-L3
+    taxon_id: NCBITaxon:2799638
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: patric:2799638.3
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:168247
+    source_reference_id: '66792'
+    assembly_level: scaffold
+    genome_name: ASM1663236v1 assembly for Tenebrionibacter intestinalis BIT-L3
+    taxon_id: NCBITaxon:2799638
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  related_records:
+  - record_id: straininfo.deposit:23048
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:368953
+    taxon_id: NCBITaxon:2799638
+    record_name: LMG 32222
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:LMG-32222
+    source_strain_identifiers: LMG 32222
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: LMG 32222
+      deposit_id: straininfo.deposit:23048
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:168247
+      strain_doi: DOI:10.60712/SI-ID368953.1
+      strain_id: straininfo.strain:368953
+      strain_status: published online
+  - record_id: straininfo.strain:368953
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:368953
+    taxon_id: NCBITaxon:2799638
+    record_name: LMG 32222
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:LMG-32222
+    source_strain_identifiers: LMG 32222
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: LMG 32222
+      deposit_id: straininfo.deposit:23048
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:168247
+      strain_doi: DOI:10.60712/SI-ID368953.1
+      strain_id: straininfo.strain:368953
+      strain_status: published online
 source_attestations:
 - source: NCBITAXON
   source_id: NCBITaxon:2799638
   source_label: Tenebrionibacter intestinalis
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:26390
   source_label: Tenebrionibacter intestinalis
@@ -114,7 +182,7 @@ source_attestations:
   assertion_count: 1
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

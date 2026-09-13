@@ -1,0 +1,27 @@
+history_version: 1
+target:
+  kind: infrastructure
+  path: tests/test_genome_records.py
+  slug: complete-prokaryote-render-regression
+session:
+  id: 2026-09-13T190545Z-Codex-ffe268
+  timestamp: '2026-09-13T19:05:45Z'
+  actors:
+  - type: ai_agent
+    name: Codex
+    model: GPT-6
+    agent_tool: Codex
+links:
+  issues:
+  - https://github.com/CultureBotAI/TaxonMech/issues/56
+  prs:
+  - https://github.com/CultureBotAI/TaxonMech/pull/54
+events:
+- type: EDIT
+  outcome: changed
+  summary: Inspect published taxon details in genome-link regression
+  details: Full QC and an isolated rerun reproduced FileNotFoundError because the genome-link
+    rendering regression still opened a fixture slug page. The test now uses the independent
+    published-detail reader and retains every assertion for NCBI-first ordering, accession
+    versions, BV-BRC and IMG links, escaping and marker-gene exclusion. All 34 tests in the
+    genome-record module pass, and Ruff passes.

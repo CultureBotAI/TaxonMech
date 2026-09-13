@@ -62,17 +62,29 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 3
 synonyms:
-- synonym_text: Asterococcus pulmonis
+- synonym_text: '"Asterococcus pulmonis" (Sabin 1941) Prevot 1961'
   synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Musculomyces histotropicus" Sabin 1941'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Mycoplasma histotropicus" (sic) (Sabin 1941) Tully 1965'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Mycoplasma mergenhagen" Grace et al. 1965'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Asterococcus pulmonis
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Musculomyces histotropicus
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Mycoplasma histotropicus
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Mycoplasma mergenhagen
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Mycoplasma pulmonis
   synonym_type: RELATED_SYNONYM
@@ -82,6 +94,9 @@ synonyms:
   synonym_type: EXACT_SYNONYM
   source: GTDB
   source_id: GTDB:s__Mycoplasmopsis_B_pulmonis
+- synonym_text: Mycoplasmopsis pulmonis (Sabin 1941) Gupta et al. 2018
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Mycoplasmopsis_B_pulmonis
 - lpsn:798621
@@ -96,7 +111,7 @@ strains:
   - kgmicrobe.strain:ATCC-19612
   - kgmicrobe.strain:CIP-75.26
   - kgmicrobe.strain:DSM-22144
-  - kgmicrobe.strain:IFO-now-NBRC-14896
+  - kgmicrobe.strain:IFO%20%28now%20NBRC%29%2014896
   - kgmicrobe.strain:NCTC-10139
   is_type_strain: true
   genome_assemblies:
@@ -105,8 +120,18 @@ strains:
     source_id: bacdive:8617
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Mycoplasmopsis pulmonis NCTC10139
+    assembly_name: 51342_D01-3 assembly for Mycoplasmopsis pulmonis NCTC10139
     taxon_id: NCBITaxon:2107
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900660575.1
+    source: BV_BRC
+    source_id: patric:2107.4
+    assembly_name: Mycoplasma pulmonis strain NCTC10139
+    taxon_id: NCBITaxon:2107
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10139
+    source_strain_identifiers: NCTC:10139
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_900660575.1
     source: GOLD
     source_id: gold:Ga0616115
@@ -152,6 +177,15 @@ strains:
   genome_records:
   - genome_id: img.taxon:8045959775
     source_database: img
+    source: BACDIVE
+    source_id: bacdive:8617
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: 51342_D01-3 assembly for Mycoplasmopsis pulmonis NCTC10139
+    taxon_id: NCBITaxon:2107
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:8045959775
+    source_database: img
     source: GOLD
     source_id: gold:Ga0616115
     genome_name: Mycoplasmopsis pulmonis NCTC 10139
@@ -180,9 +214,29 @@ strains:
     source_id: bacdive:8617
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: 51342_D01-3 assembly for Mycoplasmopsis pulmonis NCTC10139
+    taxon_id: NCBITaxon:2107
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:2107.4
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:2107.4
     genome_name: Mycoplasma pulmonis strain NCTC10139
     taxon_id: NCBITaxon:2107
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-10139
+    source_strain_identifiers: NCTC:10139
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:2107.4
+    taxon_id: NCBITaxon:2107
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10139
+    source_strain_identifiers: NCTC:10139
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
     source: GOLD
@@ -205,6 +259,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0611075
     source_project_id: gold:Gp0761153
+  - record_id: biosample:SAMEA4434529
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:2107.4
+    taxon_id: NCBITaxon:2107
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10139
+    source_strain_identifiers: NCTC:10139
+    source_strain_field: culture_collection
   - record_id: biosample:SAMEA4434529
     record_type: BIOSAMPLE
     source: GOLD
@@ -557,6 +620,7 @@ source_attestations:
   source_label: Mycoplasmopsis pulmonis
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:798621
   source_label: Mycoplasmopsis pulmonis
@@ -593,7 +657,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

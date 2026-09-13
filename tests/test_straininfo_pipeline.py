@@ -128,6 +128,24 @@ def _snapshot(tmp_path, *, declared_count=1, records=None):
     return root, snapshot, root / "data/straininfo", config
 
 
+def test_complete_census_overlay_rebuilds_against_changed_local_deposits(tmp_path):
+    root, snapshot, directory, config = _snapshot(tmp_path)
+    path = snapshot / "SNAPSHOT.json"
+    source = json.loads(path.read_text())
+    source.update(format_version=2, selection="all", inputs=[], catalog_count=1)
+    path.write_text(json.dumps(source))
+    config["snapshot_sha256"] = straininfo.sha256(path)
+    first = straininfo.generate(snapshot, directory, root, config, apply=True)
+    assert first["summary"]["source_records"] == 1
+    raw = root / straininfo.INPUT_PATHS[0]
+    raw.write_text(raw.read_text().replace("DSM-30083", "DSM-999999999"))
+    second = straininfo.generate(snapshot, directory, root, config, apply=True)
+    assert second["summary"]["source_records"] == 1
+    assert second["summary"]["deposit_matches"] == 0
+    assert first["inputs"] != second["inputs"]
+    assert straininfo.sha256(path) == config["snapshot_sha256"]
+
+
 def _published(tmp_path):
     fixture = _snapshot(tmp_path)
     root, snapshot, directory, config = fixture

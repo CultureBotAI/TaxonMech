@@ -65,6 +65,12 @@ synonyms:
   synonym_type: EXACT_SYNONYM
   source: GTDB
   source_id: GTDB:s__Lactobacillus_absianus
+- synonym_text: Lactobacillus porci Kim et al. 2018
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Lactobacillus sp. SG816
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Lactobacillus_absianus
 - lpsn:797898
@@ -77,7 +83,7 @@ strains:
   culture_collection_ids:
   - kgmicrobe.strain:KCTC-21090
   - kgmicrobe.strain:NBRC-112917
-  - kgmicrobe.strain:SG-816
+  - kgmicrobe.strain:SG%20816
   is_type_strain: true
 - strain_id: kgmicrobe.strain:bacdive_159650
   source: BACDIVE
@@ -91,8 +97,18 @@ strains:
     source_id: bacdive:159650
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Lactobacillus porci Bifido-178-WT-2B
+    assembly_name: ASM969598v1 assembly for Lactobacillus porci Bifido-178-WT-2B
     taxon_id: NCBITaxon:2012477
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_009695985.1
+    source: BV_BRC
+    source_id: patric:2012477.3
+    assembly_name: Lactobacillus porci strain Bifido-178-WT-2B
+    taxon_id: NCBITaxon:2012477
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-105804
+    source_strain_identifiers: DSM:105804
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_009695985.1
     source: GOLD
     source_id: gold:Ga0440759
@@ -105,6 +121,15 @@ strains:
     source_organism_id: gold:Go0540097
     source_project_id: gold:Gp0490939
   genome_records:
+  - genome_id: img.taxon:3004808570
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:159650
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: ASM969598v1 assembly for Lactobacillus porci Bifido-178-WT-2B
+    taxon_id: NCBITaxon:2012477
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:3004808570
     source_database: img
     source: GOLD
@@ -122,10 +147,30 @@ strains:
     source: BACDIVE
     source_id: bacdive:159650
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM969598v1 assembly for Lactobacillus porci Bifido-178-WT-2B
+    taxon_id: NCBITaxon:2012477
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:2012477.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:2012477.3
     genome_name: Lactobacillus porci strain Bifido-178-WT-2B
     taxon_id: NCBITaxon:2012477
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-105804
+    source_strain_identifiers: DSM:105804
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJNA561470
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:2012477.3
+    taxon_id: NCBITaxon:2012477
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-105804
+    source_strain_identifiers: DSM:105804
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA561470
     record_type: BIOPROJECT
     source: GOLD
@@ -137,6 +182,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0540097
     source_project_id: gold:Gp0490939
+  - record_id: biosample:SAMN12619150
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:2012477.3
+    taxon_id: NCBITaxon:2012477
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-105804
+    source_strain_identifiers: DSM:105804
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN12619150
     record_type: BIOSAMPLE
     source: GOLD
@@ -249,6 +303,7 @@ source_attestations:
   source_label: Lactobacillus porci
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:797898
   source_label: Lactobacillus porci
@@ -277,7 +332,7 @@ source_attestations:
   assertion_count: 1
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

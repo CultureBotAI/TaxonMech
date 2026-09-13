@@ -60,6 +60,22 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 14
   notes: LPSN links this GTDB species to the taxon's name.
+synonyms:
+- synonym_text: Enterobacter sp. ATCC 27982
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Enterobacter sp. ATCC 27989
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Phytobacter sp. CDC 1300-74
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Phytobacter sp. CDC 2214-72
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Phytobacter ursingii Pillonetto et al. 2018
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Phytobacter_ursingii
 - lpsn:797461
@@ -79,8 +95,9 @@ strains:
     source_id: bacdive:158583
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: 'Phytobacter ursingii type strain: ATCC27989'
+    assembly_name: 'PUATCC27989T assembly for Phytobacter ursingii type strain: ATCC27989'
     taxon_id: NCBITaxon:1972431
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_901456055.1
     source: GOLD
     source_id: gold:Ga0681589
@@ -119,9 +136,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:158583
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: 'Phytobacter ursingii strain type strain: ATCC27989 strain ATCC27989T'
+    assembly_level: contig
+    genome_name: 'PUATCC27989T assembly for Phytobacter ursingii type strain: ATCC27989'
     taxon_id: NCBITaxon:1972431
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: bioproject:PRJEB32294
     record_type: BIOPROJECT
@@ -381,7 +399,46 @@ strains:
   source: BACDIVE
   source_id: bacdive:156513
   culture_collection_ids:
-  - kgmicrobe.strain:CCUG-62284-B
+  - kgmicrobe.strain:CCUG-62284%20B
+  related_records:
+  - record_id: straininfo.deposit:915908
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:408450
+    taxon_id: NCBITaxon:1972431
+    record_name: CCUG 62284 B
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCUG-62284%20B
+    source_strain_identifiers: CCUG 62284 B
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 62284 B
+      deposit_id: straininfo.deposit:915908
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:156513
+      strain_doi: DOI:10.60712/SI-ID408450.2
+      strain_id: straininfo.strain:408450
+      strain_status: published online
+  - record_id: straininfo.strain:408450
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:408450
+    taxon_id: NCBITaxon:1972431
+    record_name: CCUG 62284 B
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCUG-62284%20B
+    source_strain_identifiers: CCUG 62284 B
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 62284 B
+      deposit_id: straininfo.deposit:915908
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:156513
+      strain_doi: DOI:10.60712/SI-ID408450.2
+      strain_id: straininfo.strain:408450
+      strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_156960
   source: BACDIVE
   source_id: bacdive:156960
@@ -432,6 +489,7 @@ source_attestations:
   source_label: Phytobacter ursingii
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:797461
   source_label: Phytobacter ursingii
@@ -455,7 +513,7 @@ source_attestations:
   assertion_count: 2
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

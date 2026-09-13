@@ -22,11 +22,11 @@ lineage:
 - taxon_id: NCBITaxon:183924
   taxon_label: Thermoprotei
   rank: CLASS
-- taxon_id: NCBITaxon:114380
-  taxon_label: Desulfurococcales
+- taxon_id: NCBITaxon:871006
+  taxon_label: Acidilobales
   rank: ORDER
-- taxon_id: NCBITaxon:2272
-  taxon_label: Desulfurococcaceae
+- taxon_id: NCBITaxon:871007
+  taxon_label: Acidilobaceae
   rank: FAMILY
 - taxon_id: NCBITaxon:56635
   taxon_label: Aeropyrum
@@ -63,6 +63,10 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 2
   notes: LPSN links this GTDB species to the taxon's name.
+synonyms:
+- synonym_text: Aeropyrum pernix Sako et al. 1996
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Aeropyrum_pernix
 - lpsn:772925
@@ -85,8 +89,9 @@ strains:
     source_id: bacdive:4195
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Aeropyrum pernix K1
+    assembly_name: ASM1112v1 assembly for Aeropyrum pernix K1
     taxon_id: NCBITaxon:272557
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_000011125.1
     source: GOLD
     source_id: gold:Ga0039428
@@ -105,8 +110,9 @@ strains:
     source_id: bacdive:4195
     source_reference_id: '66792'
     assembly_level: complete
-    genome_name: Aeropyrum pernix K1
+    genome_name: ASM1112v1 assembly for Aeropyrum pernix K1
     taxon_id: NCBITaxon:272557
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2923402010
     source_database: img
     source: GOLD
@@ -125,8 +131,19 @@ strains:
     source_id: bacdive:4195
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1112v1 assembly for Aeropyrum pernix K1
+    taxon_id: NCBITaxon:272557
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:272557.33
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:272557.33
     genome_name: Aeropyrum pernix K1
     taxon_id: NCBITaxon:272557
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NBRC-100138
+    source_strain_identifiers: NBRC:100138
+    source_strain_field: culture_collection
   related_records:
   - record_id: bioproject:PRJNA211
     record_type: BIOPROJECT
@@ -139,6 +156,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0000767
     source_project_id: gold:Gp0000767
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:272557.33
+    taxon_id: NCBITaxon:272557
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-100138
+    source_strain_identifiers: NBRC:100138
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA263076
     record_type: BIOPROJECT
     source: GOLD
@@ -172,6 +198,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0000767
     source_project_id: gold:Gp0225951
+  - record_id: biosample:SAMD00061092
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:272557.33
+    taxon_id: NCBITaxon:272557
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-100138
+    source_strain_identifiers: NBRC:100138
+    source_strain_field: culture_collection
   - record_id: biosample:SAMD00061092
     record_type: BIOSAMPLE
     source: GOLD
@@ -489,6 +524,7 @@ source_attestations:
   source_label: Aeropyrum pernix
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:772925
   source_label: Aeropyrum pernix
@@ -525,7 +561,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

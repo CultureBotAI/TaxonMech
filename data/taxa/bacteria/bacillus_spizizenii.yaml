@@ -29,7 +29,7 @@ lineage:
   taxon_label: Bacillaceae
   rank: FAMILY
 - taxon_id: NCBITaxon:1386
-  taxon_label: Bacillus <firmicutes>
+  taxon_label: Bacillus
   rank: GENUS
 - taxon_id: NCBITaxon:653685
   taxon_label: Bacillus subtilis group
@@ -82,7 +82,13 @@ taxonomy_mappings:
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 synonyms:
+- synonym_text: '"Bacillus intestinalis" Tetz and Tetz 2017'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: Bacillus intestinalis
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Bacillus spizizenii (Nakamura et al. 1999) Dunlap et al. 2020
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Bacillus subtilis spizizenii
@@ -90,13 +96,16 @@ synonyms:
   source: LPSN
   source_id: lpsn:773848
 - synonym_text: Bacillus subtilis subsp. spizizenii
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Bacillus subtilis subsp. spizizenii Nakamura et al. 1999
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 xrefs:
 - GTDB:s__Bacillus_spizizenii
 - lpsn:7856
 genetic_code: 11
-strain_count: 8
+strain_count: 10
 strains:
 - strain_id: kgmicrobe.strain:bacdive_1193
   source: BACDIVE
@@ -116,8 +125,9 @@ strains:
     source_id: bacdive:1193
     source_reference_id: '67770'
     assembly_level: complete
-    assembly_name: Bacillus spizizenii TU-B-10
+    assembly_name: ASM22746v1 assembly for Bacillus spizizenii TU-B-10
     taxon_id: NCBITaxon:1052585
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_000227465.1
     source: GOLD
     source_id: gold:Ga0009352
@@ -134,8 +144,18 @@ strains:
     source_id: bacdive:1193
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Bacillus spizizenii NBRC 101239
+    assembly_name: ASM798978v1 assembly for Bacillus spizizenii NBRC 101239
     taxon_id: NCBITaxon:96241
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_007989785.1
+    source: BV_BRC
+    source_id: patric:96241.37
+    assembly_name: Bacillus subtilis subsp. spizizenii strain NBRC 101239
+    taxon_id: NCBITaxon:96241
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-101239
+    source_strain_identifiers: NBRC 101239
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_007989785.1
     source: GOLD
     source_id: gold:Ga0681678
@@ -168,6 +188,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-101239
     source_strain_identifiers: NBRC 101239
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_007989785.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_007989785.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM798978v1
+    taxon_id: NCBITaxon:96241
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-101239
+    source_strain_identifiers: strain=NBRC 101239
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_007989785.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_007989785.1
@@ -178,6 +209,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-101239
     source_strain_identifiers: NBRC 101239
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_007989785.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_007989785.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM798978v1
+    taxon_id: NCBITaxon:96241
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-101239
+    source_strain_identifiers: strain=NBRC 101239
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_007989785
     source: STRAININFO
     source_id: straininfo.strain:14146
@@ -215,10 +257,11 @@ strains:
     source_database: img
     source: BACDIVE
     source_id: bacdive:1193
-    source_reference_id: '66792'
+    source_reference_id: '67770'
     assembly_level: complete
-    genome_name: Bacillus subtilis spizizenii TU-B-10, DSM 15029
+    genome_name: ASM22746v1 assembly for Bacillus spizizenii TU-B-10
     taxon_id: NCBITaxon:1052585
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2511231064
     source_database: img
     source: GOLD
@@ -231,15 +274,44 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0001022
     source_project_id: gold:Gp0001022
+  - genome_id: patric:1052585.4
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:1193
+    source_reference_id: '67770'
+    assembly_level: complete
+    genome_name: ASM22746v1 assembly for Bacillus spizizenii TU-B-10
+    taxon_id: NCBITaxon:1052585
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   - genome_id: patric:96241.37
     source_database: patric
     source: BACDIVE
     source_id: bacdive:1193
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM798978v1 assembly for Bacillus spizizenii NBRC 101239
+    taxon_id: NCBITaxon:96241
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:96241.37
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:96241.37
     genome_name: Bacillus subtilis subsp. spizizenii strain NBRC 101239
     taxon_id: NCBITaxon:96241
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NBRC-101239
+    source_strain_identifiers: NBRC 101239
+    source_strain_field: strain
   related_records:
+  - record_id: bioproject:PRJDB6113
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:96241.37
+    taxon_id: NCBITaxon:96241
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-101239
+    source_strain_identifiers: NBRC 101239
+    source_strain_field: strain
   - record_id: bioproject:PRJDB6113
     record_type: BIOPROJECT
     source: GOLD
@@ -262,6 +334,16 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0183685
     source_project_id: gold:Gp0854586
+  - record_id: bioproject:PRJDB6113
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_007989785.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:96241
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NBRC-101239
+    source_strain_identifiers: strain=NBRC 101239
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
     source: GTDB
@@ -271,6 +353,16 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-101239
     source_strain_identifiers: NBRC 101239
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_007989785.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:96241
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NBRC-101239
+    source_strain_identifiers: strain=NBRC 101239
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA68561
     record_type: BIOPROJECT
     source: GOLD
@@ -282,6 +374,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0001022
     source_project_id: gold:Gp0001022
+  - record_id: biosample:SAMD00166007
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:96241.37
+    taxon_id: NCBITaxon:96241
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-101239
+    source_strain_identifiers: NBRC 101239
+    source_strain_field: strain
   - record_id: biosample:SAMD00166007
     record_type: BIOSAMPLE
     source: GOLD
@@ -313,6 +414,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-101239
     source_strain_identifiers: NBRC 101239
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMD00166007
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_007989785.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:96241
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NBRC-101239
+    source_strain_identifiers: strain=NBRC 101239
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00166007
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_007989785.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:96241
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NBRC-101239
+    source_strain_identifiers: strain=NBRC 101239
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0009352
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -1177,19 +1298,19 @@ strains:
   source_id: bacdive:1187
   designation: 231, NRS-231
   culture_collection_ids:
-  - kgmicrobe.strain:AHU-1038
+  - kgmicrobe.strain:AHU%201038
   - kgmicrobe.strain:ATCC-6633
   - kgmicrobe.strain:BCRC-10447
-  - kgmicrobe.strain:BUCSAV-425
+  - kgmicrobe.strain:BUCSAV%20425
   - kgmicrobe.strain:CCM-1999
   - kgmicrobe.strain:CCUG-10779
   - kgmicrobe.strain:CECT-356
   - kgmicrobe.strain:CIP-52.62
-  - kgmicrobe.strain:CMCC-B-63501
+  - kgmicrobe.strain:CMCC%20%28B%29%2063501
   - kgmicrobe.strain:DSM-347
   - kgmicrobe.strain:IAM-1069
   - kgmicrobe.strain:IFO-3134
-  - kgmicrobe.strain:IID-506
+  - kgmicrobe.strain:IID%20506
   - kgmicrobe.strain:IMET-10880
   - kgmicrobe.strain:JCM-20035
   - kgmicrobe.strain:JCM-2499
@@ -1200,23 +1321,42 @@ strains:
   - kgmicrobe.strain:NCIB-8054
   - kgmicrobe.strain:NCIMB-8054
   - kgmicrobe.strain:NCTC-10400
-  - kgmicrobe.strain:NRIC-1022
-  - kgmicrobe.strain:NRIC-1521
+  - kgmicrobe.strain:NRIC%201022
+  - kgmicrobe.strain:NRIC%201521
   - kgmicrobe.strain:NRRL-B-209
   - kgmicrobe.strain:NRRL-B-354
-  - kgmicrobe.strain:OUT-8351
-  - kgmicrobe.strain:PCI-219
-  - kgmicrobe.strain:RIMD-0225013
+  - kgmicrobe.strain:OUT%208351
+  - kgmicrobe.strain:PCI%20219
+  - kgmicrobe.strain:RIMD%200225013
   - kgmicrobe.strain:VTT-E-85231
-  - kgmicrobe.strain:WDCM-00003
+  - kgmicrobe.strain:WDCM%2000003
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_000177595
     source: BACDIVE
     source_id: bacdive:1187
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Bacillus spizizenii ATCC 6633 = JCM 2499
+    assembly_name: ASM17759v1 assembly for Bacillus spizizenii ATCC 6633 = JCM 2499
     taxon_id: NCBITaxon:703612
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_000177595.1
+    source: BV_BRC
+    source_id: patric:703612.3
+    assembly_name: Bacillus subtilis subsp. spizizenii ATCC 6633
+    taxon_id: NCBITaxon:703612
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC 6633
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_000177595.1
+    source: BV_BRC
+    source_id: patric:703612.3
+    assembly_name: Bacillus subtilis subsp. spizizenii ATCC 6633
+    taxon_id: NCBITaxon:703612
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC 6633
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_000177595.1
     source: GOLD
     source_id: gold:Ga0027710
@@ -1249,13 +1389,43 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-6633
     source_strain_identifiers: ATCC 6633
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_000177595.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000177595.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM17759v1
+    taxon_id: NCBITaxon:703612
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: strain=ATCC 6633
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_001312785
     source: BACDIVE
     source_id: bacdive:1187
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Bacillus spizizenii ATCC 6633 = JCM 2499
+    assembly_name: ASM131278v1 assembly for Bacillus spizizenii ATCC 6633 = JCM 2499
     taxon_id: NCBITaxon:703612
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_001312785.1
+    source: BV_BRC
+    source_id: patric:1300158.3
+    assembly_name: Bacillus subtilis subsp. spizizenii JCM 2499
+    taxon_id: NCBITaxon:703612
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-2499
+    source_strain_identifiers: JCM 2499
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_001312785.1
+    source: BV_BRC
+    source_id: patric:1300158.3
+    assembly_name: Bacillus subtilis subsp. spizizenii JCM 2499
+    taxon_id: NCBITaxon:703612
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-2499
+    source_strain_identifiers: JCM:2499
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_001312785.1
     source: GOLD
     source_id: gold:Ga0128395
@@ -1298,13 +1468,60 @@ strains:
     matched_strain_id: kgmicrobe.strain:JCM-2499
     source_strain_identifiers: JCM 2499
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_001312785.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001312785.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM131278v1
+    taxon_id: NCBITaxon:703612
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-2499
+    source_strain_identifiers: strain=JCM 2499
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCA_005153965
+    source: BACDIVE
+    source_id: bacdive:1187
+    source_reference_id: '66792'
+    assembly_level: chromosome
+    assembly_name: ASM515396v1 assembly for Bacillus subtilis NRS 231
+    taxon_id: NCBITaxon:1423
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_005153965.1
+    source: BV_BRC
+    source_id: patric:1423.767
+    assembly_name: Bacillus subtilis strain NRS 231
+    taxon_id: NCBITaxon:1423
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC:6633
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_006094475
     source: BACDIVE
     source_id: bacdive:1187
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Bacillus spizizenii ATCC 6633 = JCM 2499
+    assembly_name: ASM609447v1 assembly for Bacillus spizizenii ATCC 6633 = JCM 2499
     taxon_id: NCBITaxon:703612
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_006094475.1
+    source: BV_BRC
+    source_id: patric:703612.22
+    assembly_name: Bacillus subtilis subsp. spizizenii ATCC 6633
+    taxon_id: NCBITaxon:703612
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC 6633
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_006094475.1
+    source: BV_BRC
+    source_id: patric:703612.22
+    assembly_name: Bacillus subtilis subsp. spizizenii ATCC 6633
+    taxon_id: NCBITaxon:703612
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC:6633
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_006094475.1
     source: GOLD
     source_id: gold:Ga0490424
@@ -1337,6 +1554,43 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-6633
     source_strain_identifiers: ATCC 6633
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_006094475.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_006094475.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM609447v1
+    taxon_id: NCBITaxon:703612
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: strain=ATCC 6633
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCA_031316495
+    source: BACDIVE
+    source_id: bacdive:1187
+    source_reference_id: '124043'
+    assembly_level: scaffold
+    assembly_name: ASM3131649v1 assembly for Bacillus spizizenii ATCC 6633 = JCM 2499
+    taxon_id: NCBITaxon:703612
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_031316495.1
+    source: BV_BRC
+    source_id: patric:703612.50
+    assembly_name: Bacillus spizizenii ATCC 6633 = JCM 2499
+    taxon_id: NCBITaxon:703612
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC 6633
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_031316495.1
+    source: BV_BRC
+    source_id: patric:703612.50
+    assembly_name: Bacillus spizizenii ATCC 6633 = JCM 2499
+    taxon_id: NCBITaxon:703612
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC:6633
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_031316495.1
     source: GOLD
     source_id: gold:Ga0667834
@@ -1369,6 +1623,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-6633
     source_strain_identifiers: ATCC 6633
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_031316495.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_031316495.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM3131649v1
+    taxon_id: NCBITaxon:703612
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: strain=ATCC 6633
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_052381035.1
     source: GTDB
     source_id: gtdb.genome:GB_GCA_052381035.1
@@ -1389,13 +1654,25 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-6633
     source_strain_identifiers: ATCC 6633
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_052381035.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_052381035.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM5238103v1
+    taxon_id: NCBITaxon:703612
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: strain=ATCC 6633
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_900445425
     source: BACDIVE
     source_id: bacdive:1187
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Bacillus spizizenii NCTC10400
+    assembly_name: 52087_D01 assembly for Bacillus spizizenii NCTC10400
     taxon_id: NCBITaxon:96241
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCF_000177595.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_000177595.1
@@ -1406,6 +1683,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-6633
     source_strain_identifiers: ATCC 6633
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_000177595.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000177595.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM17759v1
+    taxon_id: NCBITaxon:703612
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: strain=ATCC 6633
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_006094475.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_006094475.1
@@ -1416,6 +1704,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-6633
     source_strain_identifiers: ATCC 6633
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_006094475.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_006094475.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM609447v1
+    taxon_id: NCBITaxon:703612
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: strain=ATCC 6633
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_031316495.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_031316495.1
@@ -1426,6 +1725,28 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-6633
     source_strain_identifiers: ATCC 6633
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_031316495.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_031316495.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM3131649v1
+    taxon_id: NCBITaxon:703612
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: strain=ATCC 6633
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCF_052381035.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_052381035.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM5238103v1
+    taxon_id: NCBITaxon:703612
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: strain=ATCC 6633
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_000177595
     source: STRAININFO
     source_id: straininfo.strain:71774
@@ -1571,9 +1892,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:1187
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Bacillus subtilis spizizenii JCM 2499
-    taxon_id: NCBITaxon:1300158
+    assembly_level: contig
+    genome_name: ASM131278v1 assembly for Bacillus spizizenii ATCC 6633 = JCM 2499
+    taxon_id: NCBITaxon:703612
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2734481915
     source_database: img
     source: GOLD
@@ -1598,14 +1920,24 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0093295
     source_project_id: gold:Gp0093295
+  - genome_id: img.taxon:3006931050
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:1187
+    source_reference_id: '66792'
+    assembly_level: chromosome
+    genome_name: ASM515396v1 assembly for Bacillus subtilis NRS 231
+    taxon_id: NCBITaxon:1423
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:647000211
     source_database: img
     source: BACDIVE
     source_id: bacdive:1187
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Bacillus subtilis spizizenii ATCC 6633
+    assembly_level: contig
+    genome_name: ASM17759v1 assembly for Bacillus spizizenii ATCC 6633 = JCM 2499
     taxon_id: NCBITaxon:703612
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:647000211
     source_database: img
     source: GOLD
@@ -1632,6 +1964,15 @@ strains:
     source_project_id: gold:Gp0006396
   - genome_id: img.taxon:8110406609
     source_database: img
+    source: BACDIVE
+    source_id: bacdive:1187
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM609447v1 assembly for Bacillus spizizenii ATCC 6633 = JCM 2499
+    taxon_id: NCBITaxon:703612
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:8110406609
+    source_database: img
     source: GOLD
     source_id: gold:Ga0490424
     genome_name: Bacillus spizizenii ATCC 6633 = JCM 2499
@@ -1654,6 +1995,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0574232
     source_project_id: gold:Gp0548923
+  - genome_id: img.taxon:8119711767
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:1187
+    source_reference_id: '124043'
+    assembly_level: scaffold
+    genome_name: ASM3131649v1 assembly for Bacillus spizizenii ATCC 6633 = JCM 2499
+    taxon_id: NCBITaxon:703612
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:8119711767
     source_database: img
     source: GOLD
@@ -1683,41 +2033,145 @@ strains:
     source: BACDIVE
     source_id: bacdive:1187
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM131278v1 assembly for Bacillus spizizenii ATCC 6633 = JCM 2499
+    taxon_id: NCBITaxon:703612
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1300158.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1300158.3
     genome_name: Bacillus subtilis subsp. spizizenii JCM 2499
     taxon_id: NCBITaxon:703612
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-2499
+    source_strain_identifiers: JCM 2499
+    source_strain_field: strain
+  - genome_id: patric:1300158.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1300158.3
+    genome_name: Bacillus subtilis subsp. spizizenii JCM 2499
+    taxon_id: NCBITaxon:703612
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-2499
+    source_strain_identifiers: JCM:2499
+    source_strain_field: culture_collection
   - genome_id: patric:1423.767
     source_database: patric
     source: BACDIVE
     source_id: bacdive:1187
     source_reference_id: '66792'
-    assembly_level: complete
+    assembly_level: chromosome
+    genome_name: ASM515396v1 assembly for Bacillus subtilis NRS 231
+    taxon_id: NCBITaxon:1423
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1423.767
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1423.767
     genome_name: Bacillus subtilis strain NRS 231
     taxon_id: NCBITaxon:1423
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC:6633
+    source_strain_field: culture_collection
   - genome_id: patric:703612.22
     source_database: patric
     source: BACDIVE
     source_id: bacdive:1187
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM609447v1 assembly for Bacillus spizizenii ATCC 6633 = JCM 2499
+    taxon_id: NCBITaxon:703612
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:703612.22
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:703612.22
     genome_name: Bacillus subtilis subsp. spizizenii ATCC 6633
     taxon_id: NCBITaxon:703612
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC 6633
+    source_strain_field: strain
+  - genome_id: patric:703612.22
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:703612.22
+    genome_name: Bacillus subtilis subsp. spizizenii ATCC 6633
+    taxon_id: NCBITaxon:703612
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC:6633
+    source_strain_field: culture_collection
   - genome_id: patric:703612.3
     source_database: patric
     source: BACDIVE
     source_id: bacdive:1187
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM17759v1 assembly for Bacillus spizizenii ATCC 6633 = JCM 2499
+    taxon_id: NCBITaxon:703612
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:703612.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:703612.3
     genome_name: Bacillus subtilis subsp. spizizenii ATCC 6633
     taxon_id: NCBITaxon:703612
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC 6633
+    source_strain_field: culture_collection
+  - genome_id: patric:703612.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:703612.3
+    genome_name: Bacillus subtilis subsp. spizizenii ATCC 6633
+    taxon_id: NCBITaxon:703612
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC 6633
+    source_strain_field: strain
+  - genome_id: patric:703612.50
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:1187
+    source_reference_id: '124043'
+    assembly_level: scaffold
+    genome_name: ASM3131649v1 assembly for Bacillus spizizenii ATCC 6633 = JCM 2499
+    taxon_id: NCBITaxon:703612
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:703612.50
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:703612.50
+    genome_name: Bacillus spizizenii ATCC 6633 = JCM 2499
+    taxon_id: NCBITaxon:703612
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC 6633
+    source_strain_field: strain
+  - genome_id: patric:703612.50
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:703612.50
+    genome_name: Bacillus spizizenii ATCC 6633 = JCM 2499
+    taxon_id: NCBITaxon:703612
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC:6633
+    source_strain_field: culture_collection
   - genome_id: patric:96241.10
     source_database: patric
     source: BACDIVE
     source_id: bacdive:1187
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Bacillus subtilis subsp. spizizenii strain NCTC10400
+    assembly_level: contig
+    genome_name: 52087_D01 assembly for Bacillus spizizenii NCTC10400
     taxon_id: NCBITaxon:96241
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   - genome_id: atb.assembly:202505.SAMN10712292
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -1735,6 +2189,24 @@ strains:
       archive_url: https://osf.io/download/667155b965e1de5e8b893c9b/
       archive_filename: atb.assembly.r0.2.batch.96.tar.xz
       sample_links:
+      - matched_strain_id: kgmicrobe.strain:ATCC-6633
+        record_id: biosample:SAMN10712292
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:703612.22
+        source_strain_field: culture_collection
+        source_strain_identifiers: ATCC:6633
+        taxon_id: NCBITaxon:703612
+      - matched_strain_id: kgmicrobe.strain:ATCC-6633
+        record_id: biosample:SAMN10712292
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:703612.22
+        source_strain_field: strain
+        source_strain_identifiers: ATCC 6633
+        taxon_id: NCBITaxon:703612
       - matched_strain_id: kgmicrobe.strain:ATCC-6633
         record_id: biosample:SAMN10712292
         record_type: BIOSAMPLE
@@ -1766,9 +2238,47 @@ strains:
         source_strain_field: ncbi_strain_identifiers
         source_strain_identifiers: ATCC 6633
         taxon_id: NCBITaxon:703612
+      - matched_strain_id: kgmicrobe.strain:ATCC-6633
+        record_id: biosample:SAMN10712292
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_006094475.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=ATCC 6633
+        taxon_id: NCBITaxon:703612
+      - matched_strain_id: kgmicrobe.strain:ATCC-6633
+        record_id: biosample:SAMN10712292
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCF_006094475.1
+        source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=ATCC 6633
+        taxon_id: NCBITaxon:703612
       ena_analysis_id: ena.analysis:ERZ25527346
       sylph_species: Bacillus spizizenii
   related_records:
+  - record_id: bioproject:PRJDB894
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1300158.3
+    taxon_id: NCBITaxon:703612
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-2499
+    source_strain_identifiers: JCM 2499
+    source_strain_field: strain
+  - record_id: bioproject:PRJDB894
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1300158.3
+    taxon_id: NCBITaxon:703612
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-2499
+    source_strain_identifiers: JCM:2499
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJDB894
     record_type: BIOPROJECT
     source: GOLD
@@ -1800,6 +2310,16 @@ strains:
     matched_strain_id: kgmicrobe.strain:JCM-2499
     source_strain_identifiers: JCM 2499
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJDB894
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001312785.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:703612
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:JCM-2499
+    source_strain_identifiers: strain=JCM 2499
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA1231577
     record_type: BIOPROJECT
     source: GTDB
@@ -1809,6 +2329,16 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-6633
     source_strain_identifiers: ATCC 6633
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA1231577
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_052381035.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:703612
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: strain=ATCC 6633
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
     source: GTDB
@@ -1836,6 +2366,64 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-6633
     source_strain_identifiers: ATCC 6633
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000177595.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:703612
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: strain=ATCC 6633
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_006094475.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:703612
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: strain=ATCC 6633
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_031316495.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:703612
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: strain=ATCC 6633
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_052381035.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:703612
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: strain=ATCC 6633
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA43011
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:703612.3
+    taxon_id: NCBITaxon:703612
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC 6633
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA43011
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:703612.3
+    taxon_id: NCBITaxon:703612
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC 6633
+    source_strain_field: strain
   - record_id: bioproject:PRJNA43011
     record_type: BIOPROJECT
     source: GOLD
@@ -1858,6 +2446,43 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0006396
     source_project_id: gold:Gp0006396
+  - record_id: bioproject:PRJNA43011
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000177595.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:703612
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: strain=ATCC 6633
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA477598
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1423.767
+    taxon_id: NCBITaxon:1423
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC:6633
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA513392
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:703612.22
+    taxon_id: NCBITaxon:703612
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC 6633
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA513392
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:703612.22
+    taxon_id: NCBITaxon:703612
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC:6633
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA513392
     record_type: BIOPROJECT
     source: GOLD
@@ -1880,6 +2505,34 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0574232
     source_project_id: gold:Gp0548923
+  - record_id: bioproject:PRJNA513392
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_006094475.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:703612
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: strain=ATCC 6633
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA553198
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:703612.50
+    taxon_id: NCBITaxon:703612
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC 6633
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA553198
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:703612.50
+    taxon_id: NCBITaxon:703612
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC:6633
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA553198
     record_type: BIOPROJECT
     source: GOLD
@@ -1902,6 +2555,34 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0006396
     source_project_id: gold:Gp0818171
+  - record_id: bioproject:PRJNA553198
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_031316495.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:703612
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: strain=ATCC 6633
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00016832
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1300158.3
+    taxon_id: NCBITaxon:703612
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-2499
+    source_strain_identifiers: JCM 2499
+    source_strain_field: strain
+  - record_id: biosample:SAMD00016832
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1300158.3
+    taxon_id: NCBITaxon:703612
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-2499
+    source_strain_identifiers: JCM:2499
+    source_strain_field: culture_collection
   - record_id: biosample:SAMD00016832
     record_type: BIOSAMPLE
     source: GOLD
@@ -1933,6 +2614,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:JCM-2499
     source_strain_identifiers: JCM 2499
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMD00016832
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001312785.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:703612
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:JCM-2499
+    source_strain_identifiers: strain=JCM 2499
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02471820
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:703612.3
+    taxon_id: NCBITaxon:703612
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC 6633
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN02471820
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:703612.3
+    taxon_id: NCBITaxon:703612
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC 6633
+    source_strain_field: strain
   - record_id: biosample:SAMN02471820
     record_type: BIOSAMPLE
     source: GOLD
@@ -1964,6 +2673,53 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-6633
     source_strain_identifiers: ATCC 6633
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN02471820
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000177595.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:703612
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: strain=ATCC 6633
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02471820
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000177595.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:703612
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: strain=ATCC 6633
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN09475310
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1423.767
+    taxon_id: NCBITaxon:1423
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC:6633
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN10712292
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:703612.22
+    taxon_id: NCBITaxon:703612
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC 6633
+    source_strain_field: strain
+  - record_id: biosample:SAMN10712292
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:703612.22
+    taxon_id: NCBITaxon:703612
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC:6633
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN10712292
     record_type: BIOSAMPLE
     source: GOLD
@@ -1995,6 +2751,44 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-6633
     source_strain_identifiers: ATCC 6633
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN10712292
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_006094475.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:703612
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: strain=ATCC 6633
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN10712292
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_006094475.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:703612
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: strain=ATCC 6633
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN12236532
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:703612.50
+    taxon_id: NCBITaxon:703612
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC 6633
+    source_strain_field: strain
+  - record_id: biosample:SAMN12236532
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:703612.50
+    taxon_id: NCBITaxon:703612
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: ATCC:6633
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN12236532
     record_type: BIOSAMPLE
     source: GOLD
@@ -2026,6 +2820,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-6633
     source_strain_identifiers: ATCC 6633
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN12236532
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_031316495.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:703612
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: strain=ATCC 6633
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN12236532
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_031316495.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:703612
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: strain=ATCC 6633
+    source_strain_field: infraspecific_name
   - record_id: biosample:SAMN50764454
     record_type: BIOSAMPLE
     source: GTDB
@@ -2035,6 +2849,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-6633
     source_strain_identifiers: ATCC 6633
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN50764454
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_052381035.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:703612
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: strain=ATCC 6633
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN50764454
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_052381035.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:703612
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-6633
+    source_strain_identifiers: strain=ATCC 6633
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0027710
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -5350,6 +6184,180 @@ strains:
       strain_doi: DOI:10.60712/SI-ID60568.2
       strain_id: straininfo.strain:60568
       strain_status: published online
+- strain_id: kgmicrobe.strain:bacdive_1190
+  source: BACDIVE
+  source_id: bacdive:1190
+  designation: W23 2A2, 2A2
+  culture_collection_ids:
+  - kgmicrobe.strain:BGSC%202A2
+  - kgmicrobe.strain:DSM-6395
+  - kgmicrobe.strain:WB%20672
+  related_records:
+  - record_id: gold:Go0184808
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0184808
+    taxon_id: NCBITaxon:1423
+    record_name: Bacillus subtilis DSM 6395
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-6395
+    source_strain_identifiers: DSM 6395
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0184808
+  - record_id: gold:Go0184808
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0184808
+    taxon_id: NCBITaxon:1423
+    record_name: Bacillus subtilis DSM 6395
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-6395
+    source_strain_identifiers: DSM 6395
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0184808
+  - record_id: straininfo.deposit:160022
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:48181
+    taxon_id: NCBITaxon:96241
+    record_name: DSM 6395
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:DSM-6395
+    source_strain_identifiers: DSM 6395
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 6395
+      deposit_id: straininfo.deposit:160022
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:1190
+      strain_doi: DOI:10.60712/SI-ID48181.2
+      strain_id: straininfo.strain:48181
+      strain_status: published online
+  - record_id: straininfo.strain:48181
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:48181
+    taxon_id: NCBITaxon:96241
+    record_name: DSM 6395
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:DSM-6395
+    source_strain_identifiers: DSM 6395
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 6395
+      deposit_id: straininfo.deposit:160022
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:1190
+      strain_doi: DOI:10.60712/SI-ID48181.2
+      strain_id: straininfo.strain:48181
+      strain_status: published online
+- strain_id: kgmicrobe.strain:bacdive_138329
+  source: BACDIVE
+  source_id: bacdive:138329
+  designation: 2A2
+  culture_collection_ids:
+  - kgmicrobe.strain:CIP-106095
+  - kgmicrobe.strain:NRRL-B-14820
+  - kgmicrobe.strain:WB%20672
+  related_records:
+  - record_id: gold:Go0184788
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0184788
+    taxon_id: NCBITaxon:1423
+    record_name: Bacillus subtilis CIP 106095
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CIP-106095
+    source_strain_identifiers: CIP 106095
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0184788
+  - record_id: gold:Go0184788
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0184788
+    taxon_id: NCBITaxon:1423
+    record_name: Bacillus subtilis CIP 106095
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CIP-106095
+    source_strain_identifiers: CIP 106095
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0184788
+  - record_id: straininfo.deposit:149021
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:13134
+    record_name: CIP 106095
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CIP-106095
+    source_strain_identifiers: CIP 106095
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CIP 106095
+      deposit_id: straininfo.deposit:149021
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:138329
+      strain_doi: DOI:10.60712/SI-ID13134.2
+      strain_id: straininfo.strain:13134
+      strain_status: published online
+  - record_id: straininfo.deposit:49356
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:13134
+    taxon_id: NCBITaxon:96241
+    record_name: NRRL B-14820
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:NRRL-B-14820
+    source_strain_identifiers: NRRL B-14820
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NRRL B-14820
+      deposit_id: straininfo.deposit:49356
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:138329
+      strain_doi: DOI:10.60712/SI-ID13134.2
+      strain_id: straininfo.strain:13134
+      strain_status: published online
+  - record_id: straininfo.strain:13134
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:13134
+    record_name: CIP 106095
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CIP-106095
+    source_strain_identifiers: CIP 106095
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CIP 106095
+      deposit_id: straininfo.deposit:149021
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:138329
+      strain_doi: DOI:10.60712/SI-ID13134.2
+      strain_id: straininfo.strain:13134
+      strain_status: published online
+  - record_id: straininfo.strain:13134
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:13134
+    taxon_id: NCBITaxon:96241
+    record_name: NRRL B-14820
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:NRRL-B-14820
+    source_strain_identifiers: NRRL B-14820
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NRRL B-14820
+      deposit_id: straininfo.deposit:49356
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:138329
+      strain_doi: DOI:10.60712/SI-ID13134.2
+      strain_id: straininfo.strain:13134
+      strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_1188
   source: BACDIVE
   source_id: bacdive:1188
@@ -5497,80 +6505,12 @@ strains:
       strain_doi: DOI:10.60712/SI-ID13196.2
       strain_id: straininfo.strain:13196
       strain_status: published online
-- strain_id: kgmicrobe.strain:bacdive_1190
-  source: BACDIVE
-  source_id: bacdive:1190
-  designation: W23 2A2, 2A2
-  culture_collection_ids:
-  - kgmicrobe.strain:BGSC-2A2
-  - kgmicrobe.strain:DSM-6395
-  related_records:
-  - record_id: gold:Go0184808
-    record_type: GOLD_ORGANISM
-    source: GOLD
-    source_id: gold:Go0184808
-    taxon_id: NCBITaxon:1423
-    record_name: Bacillus subtilis DSM 6395
-    source_field: ORGANISM GOLD ID
-    matched_strain_id: kgmicrobe.strain:DSM-6395
-    source_strain_identifiers: DSM 6395
-    source_strain_field: ORGANISM CULTURE COLLECTION ID
-    source_organism_id: gold:Go0184808
-  - record_id: gold:Go0184808
-    record_type: GOLD_ORGANISM
-    source: GOLD
-    source_id: gold:Go0184808
-    taxon_id: NCBITaxon:1423
-    record_name: Bacillus subtilis DSM 6395
-    source_field: ORGANISM GOLD ID
-    matched_strain_id: kgmicrobe.strain:DSM-6395
-    source_strain_identifiers: DSM 6395
-    source_strain_field: ORGANISM STRAIN
-    source_organism_id: gold:Go0184808
-  - record_id: straininfo.deposit:160022
-    record_type: STRAININFO_DEPOSIT
-    source: STRAININFO
-    source_id: straininfo.strain:48181
-    taxon_id: NCBITaxon:96241
-    record_name: DSM 6395
-    source_field: deposits.siDP
-    matched_strain_id: kgmicrobe.strain:DSM-6395
-    source_strain_identifiers: DSM 6395
-    source_strain_field: deposits.designation
-    straininfo_evidence:
-      deposit_designation: DSM 6395
-      deposit_id: straininfo.deposit:160022
-      deposit_status: available
-      match_method: culture_identifier
-      source_bacdive_id: bacdive:1190
-      strain_doi: DOI:10.60712/SI-ID48181.2
-      strain_id: straininfo.strain:48181
-      strain_status: published online
-  - record_id: straininfo.strain:48181
-    record_type: STRAININFO_STRAIN
-    source: STRAININFO
-    source_id: straininfo.strain:48181
-    taxon_id: NCBITaxon:96241
-    record_name: DSM 6395
-    source_field: strain.siID
-    matched_strain_id: kgmicrobe.strain:DSM-6395
-    source_strain_identifiers: DSM 6395
-    source_strain_field: deposits.designation
-    straininfo_evidence:
-      deposit_designation: DSM 6395
-      deposit_id: straininfo.deposit:160022
-      deposit_status: available
-      match_method: culture_identifier
-      source_bacdive_id: bacdive:1190
-      strain_doi: DOI:10.60712/SI-ID48181.2
-      strain_id: straininfo.strain:48181
-      strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_1191
   source: BACDIVE
   source_id: bacdive:1191
   designation: SB 623
   culture_collection_ids:
-  - kgmicrobe.strain:BGSC-2A1
+  - kgmicrobe.strain:BGSC%202A1
   - kgmicrobe.strain:DSM-6399
   related_records:
   - record_id: gold:Go0184812
@@ -5638,7 +6578,7 @@ strains:
   source_id: bacdive:1192
   designation: W23 SR
   culture_collection_ids:
-  - kgmicrobe.strain:BGSC-2A3
+  - kgmicrobe.strain:BGSC%202A3
   - kgmicrobe.strain:DSM-6405
   related_records:
   - record_id: gold:Go0183688
@@ -5789,6 +6729,108 @@ strains:
       strain_doi: DOI:10.60712/SI-ID48184.2
       strain_id: straininfo.strain:48184
       strain_status: published online
+- strain_id: kgmicrobe.strain:bacdive_138330
+  source: BACDIVE
+  source_id: bacdive:138330
+  designation: RO-PP-2
+  culture_collection_ids:
+  - kgmicrobe.strain:CIP-106096
+  - kgmicrobe.strain:NRRL-B-23064
+  related_records:
+  - record_id: gold:Go0184779
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0184779
+    taxon_id: NCBITaxon:1423
+    record_name: Bacillus subtilis CIP 106096
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CIP-106096
+    source_strain_identifiers: CIP 106096
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0184779
+  - record_id: gold:Go0184779
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0184779
+    taxon_id: NCBITaxon:1423
+    record_name: Bacillus subtilis CIP 106096
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CIP-106096
+    source_strain_identifiers: CIP 106096
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0184779
+  - record_id: straininfo.deposit:149023
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:67450
+    record_name: CIP 106096
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CIP-106096
+    source_strain_identifiers: CIP 106096
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CIP 106096
+      deposit_id: straininfo.deposit:149023
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:138330
+      strain_doi: DOI:10.60712/SI-ID67450.2
+      strain_id: straininfo.strain:67450
+      strain_status: published online
+  - record_id: straininfo.deposit:149024
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:67450
+    record_name: NRRL B-23064
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:NRRL-B-23064
+    source_strain_identifiers: NRRL B-23064
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NRRL B-23064
+      deposit_id: straininfo.deposit:149024
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:138330
+      strain_doi: DOI:10.60712/SI-ID67450.2
+      strain_id: straininfo.strain:67450
+      strain_status: published online
+  - record_id: straininfo.strain:67450
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:67450
+    record_name: CIP 106096
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CIP-106096
+    source_strain_identifiers: CIP 106096
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CIP 106096
+      deposit_id: straininfo.deposit:149023
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:138330
+      strain_doi: DOI:10.60712/SI-ID67450.2
+      strain_id: straininfo.strain:67450
+      strain_status: published online
+  - record_id: straininfo.strain:67450
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:67450
+    record_name: NRRL B-23064
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:NRRL-B-23064
+    source_strain_identifiers: NRRL B-23064
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NRRL B-23064
+      deposit_id: straininfo.deposit:149024
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:138330
+      strain_doi: DOI:10.60712/SI-ID67450.2
+      strain_id: straininfo.strain:67450
+      strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_1189
   source: BACDIVE
   source_id: bacdive:1189
@@ -5862,6 +6904,7 @@ source_attestations:
   source_label: Bacillus spizizenii
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:7856
   source_label: Bacillus spizizenii
@@ -5878,7 +6921,7 @@ source_attestations:
 - source: BACDIVE
   source_id: NCBITaxon:96241
   source_label: Bacillus spizizenii
-  assertion_count: 8
+  assertion_count: 10
   assertion_unit: STRAIN
 - source: MEDIADIVE
   source_id: NCBITaxon:96241
@@ -5905,7 +6948,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

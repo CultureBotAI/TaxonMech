@@ -61,6 +61,12 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 1
 synonyms:
+- synonym_text: Bifidobacterium sp. Tam10B
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Bifidobacterium vansinderenii Duranti et al. 2017
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: Galliscardovia vansinderenii
   synonym_type: EXACT_SYNONYM
   source: GTDB
@@ -77,7 +83,7 @@ strains:
   designation: Tam10B
   culture_collection_ids:
   - kgmicrobe.strain:CCUG-70655
-  - kgmicrobe.strain:CCUG-70655-A
+  - kgmicrobe.strain:CCUG-70655%20A
   - kgmicrobe.strain:LMG-30126
   is_type_strain: true
   genome_assemblies:
@@ -86,17 +92,28 @@ strains:
     source_id: bacdive:141014
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Bifidobacterium vansinderenii Tam10B
+    assembly_name: BbifTam10Bv1 assembly for Bifidobacterium vansinderenii Tam10B
     taxon_id: NCBITaxon:1984871
+    source_field: Sequence information.Genome sequences.INSDC accession
   genome_records:
   - genome_id: img.taxon:2862017679
     source_database: img
     source: BACDIVE
     source_id: bacdive:141014
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Bifidobacterium vansinderenii Tam10B
+    assembly_level: contig
+    genome_name: BbifTam10Bv1 assembly for Bifidobacterium vansinderenii Tam10B
     taxon_id: NCBITaxon:1984871
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: patric:1984871.3
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:141014
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: BbifTam10Bv1 assembly for Bifidobacterium vansinderenii Tam10B
+    taxon_id: NCBITaxon:1984871
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: straininfo.deposit:22566
     record_type: STRAININFO_DEPOSIT
@@ -111,6 +128,44 @@ strains:
     straininfo_evidence:
       deposit_designation: LMG 30126
       deposit_id: straininfo.deposit:22566
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:141014
+      strain_doi: DOI:10.60712/SI-ID411017.3
+      strain_id: straininfo.strain:411017
+      strain_status: published online
+  - record_id: straininfo.deposit:918941
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:411017
+    taxon_id: NCBITaxon:1984871
+    record_name: CCUG 70655 A
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCUG-70655%20A
+    source_strain_identifiers: CCUG 70655 A
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 70655 A
+      deposit_id: straininfo.deposit:918941
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:141014
+      strain_doi: DOI:10.60712/SI-ID411017.3
+      strain_id: straininfo.strain:411017
+      strain_status: published online
+  - record_id: straininfo.strain:411017
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:411017
+    taxon_id: NCBITaxon:1984871
+    record_name: CCUG 70655 A
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCUG-70655%20A
+    source_strain_identifiers: CCUG 70655 A
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 70655 A
+      deposit_id: straininfo.deposit:918941
       deposit_status: available
       match_method: culture_identifier
       source_bacdive_id: bacdive:141014
@@ -142,6 +197,7 @@ source_attestations:
   source_label: Bifidobacterium vansinderenii
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:796035
   source_label: Bifidobacterium vansinderenii
@@ -165,7 +221,7 @@ source_attestations:
   assertion_count: 1
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

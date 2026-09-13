@@ -45,12 +45,19 @@ taxonomy_mappings:
   genome_count: 8
 synonyms:
 - synonym_text: Actinobacillus rossii
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Actinobacillus rossii Sneath and Stevens 1990 emend. Christensen et
+    al. 2005
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Exercitatus rossii
   synonym_type: EXACT_SYNONYM
   source: GTDB
   source_id: GTDB:s__Exercitatus_rossii
+- synonym_text: Pasteurellaceae gen. sp. JF1390
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Exercitatus_rossii
 genetic_code: 11
@@ -377,6 +384,23 @@ strains:
   - kgmicrobe.strain:CIP-102634
   - kgmicrobe.strain:NCTC-10801
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_900444965
+    source: BACDIVE
+    source_id: bacdive:173546
+    source_reference_id: '124043'
+    assembly_level: contig
+    assembly_name: 46338_E01 assembly for [Actinobacillus] rossii NCTC10801
+    taxon_id: NCBITaxon:123820
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900444965.1
+    source: BV_BRC
+    source_id: patric:123820.3
+    assembly_name: '"[Actinobacillus] rossii strain NCTC10801"'
+    taxon_id: NCBITaxon:123820
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10801
+    source_strain_identifiers: NCTC:10801
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_900444965.1
     source: GOLD
     source_id: gold:Ga0452929
@@ -423,6 +447,15 @@ strains:
   genome_records:
   - genome_id: img.taxon:2896164284
     source_database: img
+    source: BACDIVE
+    source_id: bacdive:173546
+    source_reference_id: '124043'
+    assembly_level: contig
+    genome_name: 46338_E01 assembly for [Actinobacillus] rossii NCTC10801
+    taxon_id: NCBITaxon:123820
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:2896164284
+    source_database: img
     source: GOLD
     source_id: gold:Ga0452929
     genome_name: Actinobacillus rossii NCTC 10801
@@ -445,7 +478,35 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0552240
     source_project_id: gold:Gp0504541
+  - genome_id: patric:123820.3
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:173546
+    source_reference_id: '124043'
+    assembly_level: contig
+    genome_name: 46338_E01 assembly for [Actinobacillus] rossii NCTC10801
+    taxon_id: NCBITaxon:123820
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:123820.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:123820.3
+    genome_name: '"[Actinobacillus] rossii strain NCTC10801"'
+    taxon_id: NCBITaxon:123820
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-10801
+    source_strain_identifiers: NCTC:10801
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:123820.3
+    taxon_id: NCBITaxon:123820
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10801
+    source_strain_identifiers: NCTC:10801
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
     source: GOLD
@@ -468,6 +529,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0552240
     source_project_id: gold:Gp0504541
+  - record_id: biosample:SAMEA3936796
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:123820.3
+    taxon_id: NCBITaxon:123820
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10801
+    source_strain_identifiers: NCTC:10801
+    source_strain_field: culture_collection
   - record_id: biosample:SAMEA3936796
     record_type: BIOSAMPLE
     source: GOLD
@@ -838,7 +908,7 @@ strains:
   source_id: bacdive:11675
   culture_collection_ids:
   - kgmicrobe.strain:DSM-17479
-  - kgmicrobe.strain:Ross-192
+  - kgmicrobe.strain:Ross%20192
   related_records:
   - record_id: gold:Go0628938
     record_type: GOLD_ORGANISM
@@ -907,7 +977,7 @@ strains:
   source_id: bacdive:149185
   culture_collection_ids:
   - kgmicrobe.strain:CCUG-37194
-  - kgmicrobe.strain:MCCM-02461
+  - kgmicrobe.strain:MCCM%2002461
   related_records:
   - record_id: straininfo.deposit:141453
     record_type: STRAININFO_DEPOSIT
@@ -1041,6 +1111,7 @@ source_attestations:
   source_label: '[Actinobacillus] rossii'
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: GTDB
   source_id: GTDB:s__Exercitatus_rossii
   source_label: s__Exercitatus_rossii
@@ -1073,7 +1144,7 @@ source_attestations:
   assertion_count: 1
   assertion_unit: TRAIT_ASSERTION
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

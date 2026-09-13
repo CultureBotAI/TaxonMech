@@ -60,6 +60,13 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 1
   notes: LPSN links this GTDB species to the taxon's name.
+synonyms:
+- synonym_text: Planifilum sp. JIR-001
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Polycladomyces abyssicola Tsubouchi et al. 2013
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Polycladomyces_abyssicola
 - lpsn:790889
@@ -73,6 +80,7 @@ strains:
   culture_collection_ids:
   - kgmicrobe.strain:BCC-72032
   - kgmicrobe.strain:CECT-8074
+  - kgmicrobe.strain:DSM-119241
   - kgmicrobe.strain:JCM-18147
   - kgmicrobe.strain:NBRC-109429
   is_type_strain: true
@@ -83,18 +91,94 @@ strains:
     source_id: bacdive:133878
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Polycladomyces abyssicola JIR-001
+    assembly_name: ASM1832642v1 assembly for Polycladomyces abyssicola JIR-001
     taxon_id: NCBITaxon:1125966
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_018326425.1
+    source: BV_BRC
+    source_id: patric:1125966.3
+    assembly_name: Polycladomyces abyssicola strain JIR-001
+    taxon_id: NCBITaxon:1125966
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-18147
+    source_strain_identifiers: JCM:18147
+    source_strain_field: culture_collection
   genome_records:
+  - genome_id: img.taxon:2993887206
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:133878
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM1832642v1 assembly for Polycladomyces abyssicola JIR-001
+    taxon_id: NCBITaxon:1125966
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: patric:1125966.3
     source_database: patric
     source: BACDIVE
     source_id: bacdive:133878
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1832642v1 assembly for Polycladomyces abyssicola JIR-001
+    taxon_id: NCBITaxon:1125966
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1125966.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1125966.3
     genome_name: Polycladomyces abyssicola strain JIR-001
     taxon_id: NCBITaxon:1125966
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-18147
+    source_strain_identifiers: JCM:18147
+    source_strain_field: culture_collection
+  - genome_id: atb.assembly:202505.SAMD00292782
+    source_database: allthebacteria
+    source: ALLTHEBACTERIA
+    source_id: atb.assembly:202505.SAMD00292782
+    genome_name: Polycladomyces abyssicola
+    atb_evidence:
+      release: 2025-05
+      sample_id: biosample:SAMD00292782
+      dataset: r0.2
+      run_accessions: DRR285172
+      assembly_seqkit_sum: seqkit.v0.1_DLS_k0_aa96b081cef058b2bfc70bef1e130c25
+      assembly_filter: PASS
+      hq_filter: PASS
+      download_url: https://allthebacteria-assemblies.s3.eu-west-2.amazonaws.com/SAMD00292782.fa.gz
+      archive_url: https://osf.io/download/rnqba/
+      archive_filename: atb.assembly.r0.2.batch.129.tar.xz
+      sample_links:
+      - matched_strain_id: kgmicrobe.strain:JCM-18147
+        record_id: biosample:SAMD00292782
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1125966.3
+        source_strain_field: culture_collection
+        source_strain_identifiers: JCM:18147
+        taxon_id: NCBITaxon:1125966
+      ena_analysis_id: ena.analysis:ERZ25433311
+      sylph_species: Polycladomyces abyssicola
   related_records:
+  - record_id: bioproject:PRJDB11450
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1125966.3
+    taxon_id: NCBITaxon:1125966
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-18147
+    source_strain_identifiers: JCM:18147
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMD00292782
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1125966.3
+    taxon_id: NCBITaxon:1125966
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-18147
+    source_strain_identifiers: JCM:18147
+    source_strain_field: culture_collection
   - record_id: straininfo.deposit:887363
     record_type: STRAININFO_DEPOSIT
     source: STRAININFO
@@ -177,6 +261,7 @@ source_attestations:
   source_label: Polycladomyces abyssicola
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:790889
   source_label: Polycladomyces abyssicola
@@ -205,7 +290,7 @@ source_attestations:
   assertion_count: 11
   assertion_unit: TRAIT_ASSERTION
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

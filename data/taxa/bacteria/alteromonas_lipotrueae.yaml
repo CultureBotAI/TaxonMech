@@ -61,6 +61,16 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 4
   notes: LPSN links this GTDB species to the taxon's name.
+synonyms:
+- synonym_text: Alteromonas lipotrueae Gago et al. 2021
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Alteromonas sp. MD_652
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Alteromonas sp. MD_674
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Alteromonas_lipotrueae
 - lpsn:19969
@@ -72,14 +82,55 @@ strains:
   source_id: bacdive:167002
   designation: MD_652T
   culture_collection_ids:
-  - kgmicrobe.strain:CCUG-75177T
-  - kgmicrobe.strain:CECT-30286-T
+  - kgmicrobe.strain:CCUG-75177
+  - kgmicrobe.strain:CECT-30286
+  is_type_strain: true
+  related_records:
+  - record_id: straininfo.deposit:917287
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:409615
+    taxon_id: NCBITaxon:2803814
+    record_name: CCUG 75177
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCUG-75177
+    source_strain_identifiers: CCUG 75177
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 75177
+      deposit_id: straininfo.deposit:917287
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:167002
+      strain_doi: DOI:10.60712/SI-ID409615.2
+      strain_id: straininfo.strain:409615
+      strain_status: published online
+  - record_id: straininfo.strain:409615
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:409615
+    taxon_id: NCBITaxon:2803814
+    record_name: CCUG 75177
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCUG-75177
+    source_strain_identifiers: CCUG 75177
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 75177
+      deposit_id: straininfo.deposit:917287
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:167002
+      strain_doi: DOI:10.60712/SI-ID409615.2
+      strain_id: straininfo.strain:409615
+      strain_status: published online
 source_attestations:
 - source: NCBITAXON
   source_id: NCBITaxon:2803814
   source_label: Alteromonas lipotrueae
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:19969
   source_label: Alteromonas lipotrueae
@@ -103,7 +154,7 @@ source_attestations:
   assertion_count: 2
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

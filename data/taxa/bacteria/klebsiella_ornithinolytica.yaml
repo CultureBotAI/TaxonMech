@@ -86,11 +86,21 @@ taxonomy_mappings:
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 synonyms:
+- synonym_text: Klebsiella ornithinolytica Sakazaki et al. 1989
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Klebsiella sp. Yangling I2
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: Raoultella ornithinolytica
   synonym_type: RELATED_SYNONYM
   source: LPSN
   source_id: lpsn:780331
 - synonym_text: Raoultella ornithinolytica
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Raoultella ornithinolytica (Sakazaki et al. 1989) Drancourt et al.
+    2001
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 xrefs:
@@ -102,7 +112,6 @@ strains:
 - strain_id: kgmicrobe.strain:bacdive_5102
   source: BACDIVE
   source_id: bacdive:5102
-  classified_as: NCBITaxon:1349784
   culture_collection_ids:
   - kgmicrobe.strain:ATCC-31898
   - kgmicrobe.strain:CCM-4873
@@ -113,7 +122,7 @@ strains:
   - kgmicrobe.strain:DSM-7464
   - kgmicrobe.strain:JCM-6096
   - kgmicrobe.strain:NBRC-105727
-  - kgmicrobe.strain:NIH-90-72
+  - kgmicrobe.strain:NIH%2090-72
   is_type_strain: true
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_001598295
@@ -121,8 +130,28 @@ strains:
     source_id: bacdive:5102
     source_reference_id: '67770'
     assembly_level: contig
+    assembly_name: ASM159829v1 assembly for Raoultella ornithinolytica NBRC 105727
+      = ATCC 31898
+    taxon_id: NCBITaxon:1349784
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_001598295.1
+    source: BV_BRC
+    source_id: patric:1349784.4
     assembly_name: Raoultella ornithinolytica NBRC 105727 = ATCC 31898
     taxon_id: NCBITaxon:1349784
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-105727
+    source_strain_identifiers: NBRC 105727
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_001598295.1
+    source: BV_BRC
+    source_id: patric:1349784.4
+    assembly_name: Raoultella ornithinolytica NBRC 105727 = ATCC 31898
+    taxon_id: NCBITaxon:1349784
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-105727
+    source_strain_identifiers: NBRC:105727
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_001598295.1
     source: GOLD
     source_id: gold:Ga0128662
@@ -155,6 +184,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-105727
     source_strain_identifiers: NBRC 105727
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_001598295.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001598295.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM159829v1
+    taxon_id: NCBITaxon:1349784
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-105727
+    source_strain_identifiers: strain=NBRC 105727
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_001598295.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_001598295.1
@@ -165,6 +205,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-105727
     source_strain_identifiers: NBRC 105727
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_001598295.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001598295.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM159829v1
+    taxon_id: NCBITaxon:1349784
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-105727
+    source_strain_identifiers: strain=NBRC 105727
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_001598295
     source: STRAININFO
     source_id: straininfo.strain:40240
@@ -200,6 +251,16 @@ strains:
     source_strain_field: ncbi_strain_identifiers
   - genome_id: img.taxon:2731957695
     source_database: img
+    source: BACDIVE
+    source_id: bacdive:5102
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: ASM159829v1 assembly for Raoultella ornithinolytica NBRC 105727 =
+      ATCC 31898
+    taxon_id: NCBITaxon:1349784
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:2731957695
+    source_database: img
     source: GOLD
     source_id: gold:Ga0128662
     genome_name: Raoultella ornithinolytica ATCC 31898
@@ -222,7 +283,55 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0033070
     source_project_id: gold:Gp0033070
+  - genome_id: patric:1349784.4
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:5102
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: ASM159829v1 assembly for Raoultella ornithinolytica NBRC 105727 =
+      ATCC 31898
+    taxon_id: NCBITaxon:1349784
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1349784.4
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1349784.4
+    genome_name: Raoultella ornithinolytica NBRC 105727 = ATCC 31898
+    taxon_id: NCBITaxon:1349784
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NBRC-105727
+    source_strain_identifiers: NBRC 105727
+    source_strain_field: strain
+  - genome_id: patric:1349784.4
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1349784.4
+    genome_name: Raoultella ornithinolytica NBRC 105727 = ATCC 31898
+    taxon_id: NCBITaxon:1349784
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NBRC-105727
+    source_strain_identifiers: NBRC:105727
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJDB1369
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1349784.4
+    taxon_id: NCBITaxon:1349784
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-105727
+    source_strain_identifiers: NBRC 105727
+    source_strain_field: strain
+  - record_id: bioproject:PRJDB1369
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1349784.4
+    taxon_id: NCBITaxon:1349784
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-105727
+    source_strain_identifiers: NBRC:105727
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJDB1369
     record_type: BIOPROJECT
     source: GOLD
@@ -245,6 +354,16 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0033070
     source_project_id: gold:Gp0033070
+  - record_id: bioproject:PRJDB1369
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001598295.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1349784
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NBRC-105727
+    source_strain_identifiers: strain=NBRC 105727
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA210925
     record_type: BIOPROJECT
     source: GOLD
@@ -276,6 +395,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-105727
     source_strain_identifiers: NBRC 105727
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001598295.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1349784
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NBRC-105727
+    source_strain_identifiers: strain=NBRC 105727
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00046738
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1349784.4
+    taxon_id: NCBITaxon:1349784
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-105727
+    source_strain_identifiers: NBRC 105727
+    source_strain_field: strain
+  - record_id: biosample:SAMD00046738
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1349784.4
+    taxon_id: NCBITaxon:1349784
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-105727
+    source_strain_identifiers: NBRC:105727
+    source_strain_field: culture_collection
   - record_id: biosample:SAMD00046738
     record_type: BIOSAMPLE
     source: GOLD
@@ -307,6 +454,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-105727
     source_strain_identifiers: NBRC 105727
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMD00046738
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001598295.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1349784
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NBRC-105727
+    source_strain_identifiers: strain=NBRC 105727
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00046738
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001598295.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1349784
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NBRC-105727
+    source_strain_identifiers: strain=NBRC 105727
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0128662
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -1577,7 +1744,6 @@ strains:
   source: BACDIVE
   source_id: bacdive:136222
   designation: LRA 061 11 91
-  classified_as: NCBITaxon:1349784
   culture_collection_ids:
   - kgmicrobe.strain:ATCC-31898
   - kgmicrobe.strain:CIP-103576
@@ -2251,7 +2417,7 @@ strains:
   source: BACDIVE
   source_id: bacdive:138818
   culture_collection_ids:
-  - kgmicrobe.strain:BR-35
+  - kgmicrobe.strain:BR%2035
   - kgmicrobe.strain:CIP-53.20
   related_records:
   - record_id: gold:Go0272590
@@ -2318,7 +2484,7 @@ strains:
   source: BACDIVE
   source_id: bacdive:139187
   culture_collection_ids:
-  - kgmicrobe.strain:BR-22
+  - kgmicrobe.strain:BR%2022
   - kgmicrobe.strain:CIP-53.7
   related_records:
   - record_id: straininfo.deposit:234090
@@ -2785,6 +2951,7 @@ source_attestations:
   source_label: Klebsiella ornithinolytica
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:777148
   source_label: Klebsiella ornithinolytica
@@ -2803,7 +2970,6 @@ source_attestations:
   source_label: Klebsiella ornithinolytica
   assertion_count: 10
   assertion_unit: STRAIN
-  notes: 2 strains are filed under 1 descendant NCBI taxa (see classified_as).
 - source: GOLD
   source_id: NCBITaxon:54291
   source_label: Klebsiella ornithinolytica
@@ -2817,7 +2983,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Source coverage · TaxonMech{% endblock %}
+{% block content %}
+<h1>Source coverage</h1>
+<p>Species, strains, deposits and assemblies are different kinds of records. These catalogs retain source identifiers and assertions even when they cannot be attached to an NCBI taxon.</p>
+<p>“Complete” describes the named snapshot. Crosslinks and external resources have narrower coverage, shown below. Catalog counts must not be added together as counts of distinct organisms.</p>
+<p><a href="https://github.com/CultureBotAI/TaxonMech/blob/main/docs/SOURCE_COVERAGE.md">Coverage and refresh guide</a> · <a href="https://raw.githubusercontent.com/CultureBotAI/TaxonMech/main/data/catalog/MANIFEST.json">Download the source manifest</a></p>
+<h2>Catalogs</h2>
+<table>
+<thead><tr><th>Source</th><th>Records</th><th>Coverage</th><th>Downloads</th></tr></thead>
+<tbody>{% for source in catalog.sources %}
+<tr id="{{ source.id }}"><td><a href="{{ source.url | external_url }}">{{ source.name }}</a></td>
+<td>{{ '{:,}'.format(source.rows) }}</td><td>{{ source.scope }}<br><small>{{ source.snapshot | default('') }}</small></td>
+<td><details><summary>{{ source.files | length }} file(s)</summary><ul>{% for file in source.files %}
+<li><a href="https://raw.githubusercontent.com/CultureBotAI/TaxonMech/main/{{ file.path }}">{{ file.path.split('/')[-1] }}</a> ({{ '{:,}'.format(file.rows) }} records)</li>
+{% endfor %}</ul></details></td></tr>{% endfor %}</tbody>
+</table>
+<h2>Coverage boundaries and other resources</h2>
+<p>Source audit: {{ catalog.coverage.audited }}.</p>
+<table><thead><tr><th>Resource</th><th>Included</th><th>Boundary</th></tr></thead><tbody>
+{% for source in catalog.coverage.sources %}<tr><td><a href="{{ source.url | external_url }}">{{ source.name }}</a><br><small>{{ source.status.replace('_', ' ') }}</small></td><td>{{ source.coverage }}</td><td>{{ source.limitation }}</td></tr>{% endfor %}
+</tbody></table>
+{% endblock %}

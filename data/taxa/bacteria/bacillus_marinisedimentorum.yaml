@@ -29,7 +29,7 @@ lineage:
   taxon_label: Bacillaceae
   rank: FAMILY
 - taxon_id: NCBITaxon:1386
-  taxon_label: Bacillus <firmicutes>
+  taxon_label: Bacillus
   rank: GENUS
 grounding_status: EXACT
 mapping_status: SEEDED
@@ -64,6 +64,12 @@ synonyms:
   synonym_type: EXACT_SYNONYM
   source: GTDB
   source_id: GTDB:s__Bacillus_BL_marinisedimentorum
+- synonym_text: Bacillus marinisedimentorum Guo et al. 2018
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Bacillus sp. NC2-31
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Bacillus_BL_marinisedimentorum
 - lpsn:797463
@@ -76,7 +82,7 @@ strains:
   designation: NC2-31
   culture_collection_ids:
   - kgmicrobe.strain:KCTC-33721
-  - kgmicrobe.strain:MCCC-1K01239
+  - kgmicrobe.strain:MCCC%201K01239
   is_type_strain: true
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_001644195
@@ -84,8 +90,9 @@ strains:
     source_id: bacdive:158585
     source_reference_id: '67771'
     assembly_level: contig
-    assembly_name: Bacillus marinisedimentorum NC2-31
+    assembly_name: ASM164419v2 assembly for Bacillus marinisedimentorum NC2-31
     taxon_id: NCBITaxon:1821260
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_001644195.1
     source: GOLD
     source_id: gold:Ga0133139
@@ -97,15 +104,25 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0144492
     source_project_id: gold:Gp0150104
+  - assembly_id: ncbi.assembly:GCA_001644195.2
+    source: BV_BRC
+    source_id: patric:1821260.6
+    assembly_name: Bacillus marinisedimentorum NC2-31
+    taxon_id: NCBITaxon:1821260
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:KCTC-33721
+    source_strain_identifiers: KCTC:33721
+    source_strain_field: culture_collection
   genome_records:
   - genome_id: img.taxon:2744054838
     source_database: img
     source: BACDIVE
     source_id: bacdive:158585
-    source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Bacillus marinisedimentorum NC2-31
+    source_reference_id: '67771'
+    assembly_level: contig
+    genome_name: ASM164419v2 assembly for Bacillus marinisedimentorum NC2-31
     taxon_id: NCBITaxon:1821260
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2744054838
     source_database: img
     source: GOLD
@@ -118,7 +135,35 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0144492
     source_project_id: gold:Gp0150104
+  - genome_id: patric:1821260.6
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:158585
+    source_reference_id: '67771'
+    assembly_level: contig
+    genome_name: ASM164419v2 assembly for Bacillus marinisedimentorum NC2-31
+    taxon_id: NCBITaxon:1821260
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1821260.6
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1821260.6
+    genome_name: Bacillus marinisedimentorum NC2-31
+    taxon_id: NCBITaxon:1821260
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:KCTC-33721
+    source_strain_identifiers: KCTC:33721
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJNA316553
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1821260.6
+    taxon_id: NCBITaxon:1821260
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:KCTC-33721
+    source_strain_identifiers: KCTC:33721
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA316553
     record_type: BIOPROJECT
     source: GOLD
@@ -130,6 +175,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0144492
     source_project_id: gold:Gp0150104
+  - record_id: biosample:SAMN04585482
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1821260.6
+    taxon_id: NCBITaxon:1821260
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:KCTC-33721
+    source_strain_identifiers: KCTC:33721
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN04585482
     record_type: BIOSAMPLE
     source: GOLD
@@ -182,6 +236,7 @@ source_attestations:
   source_label: Bacillus marinisedimentorum
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:797463
   source_label: Bacillus marinisedimentorum
@@ -205,7 +260,7 @@ source_attestations:
   assertion_count: 1
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

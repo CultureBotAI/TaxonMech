@@ -60,6 +60,16 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 2
   notes: LPSN links this GTDB species to the taxon's name.
+synonyms:
+- synonym_text: Thalassospira indica Liu et al. 2016
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Thalassospira sp. MCCC 1A01103
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Thalassospira sp. PB8B
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Thalassospira_indica
 - lpsn:794933
@@ -72,8 +82,27 @@ strains:
   designation: PB8B
   culture_collection_ids:
   - kgmicrobe.strain:LMG-29620
-  - kgmicrobe.strain:MCCC-1A01103
+  - kgmicrobe.strain:MCCC%201A01103
   is_type_strain: true
+  genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_003403095
+    source: BACDIVE
+    source_id: bacdive:133272
+    source_reference_id: '66792'
+    assembly_level: complete
+    assembly_name: ASM340309v1 assembly for Thalassospira indica PB8BT
+    taxon_id: NCBITaxon:1891279
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_003403095.1
+    source: BV_BRC
+    source_id: patric:1891279.4
+    assembly_name: Thalassospira indica strain PB8BT strain PB8BT (=MCCC 1A01103T=LMG
+      29620T)
+    taxon_id: NCBITaxon:1891279
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:LMG-29620
+    source_strain_identifiers: LMG:29620
+    source_strain_field: culture_collection
   genome_records:
   - genome_id: img.taxon:2840662270
     source_database: img
@@ -81,18 +110,48 @@ strains:
     source_id: bacdive:133272
     source_reference_id: '66792'
     assembly_level: complete
-    genome_name: Thalassospira indica PB8B
+    genome_name: ASM340309v1 assembly for Thalassospira indica PB8BT
     taxon_id: NCBITaxon:1891279
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: patric:1891279.4
     source_database: patric
     source: BACDIVE
     source_id: bacdive:133272
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM340309v1 assembly for Thalassospira indica PB8BT
+    taxon_id: NCBITaxon:1891279
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1891279.4
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1891279.4
     genome_name: Thalassospira indica strain PB8BT strain PB8BT (=MCCC 1A01103T=LMG
       29620T)
     taxon_id: NCBITaxon:1891279
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:LMG-29620
+    source_strain_identifiers: LMG:29620
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJNA485381
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1891279.4
+    taxon_id: NCBITaxon:1891279
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:LMG-29620
+    source_strain_identifiers: LMG:29620
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN09789051
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1891279.4
+    taxon_id: NCBITaxon:1891279
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:LMG-29620
+    source_strain_identifiers: LMG:29620
+    source_strain_field: culture_collection
   - record_id: straininfo.deposit:20883
     record_type: STRAININFO_DEPOSIT
     source: STRAININFO
@@ -137,6 +196,7 @@ source_attestations:
   source_label: Thalassospira indica
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:794933
   source_label: Thalassospira indica
@@ -160,7 +220,7 @@ source_attestations:
   assertion_count: 1
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

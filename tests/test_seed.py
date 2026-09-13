@@ -189,16 +189,16 @@ def test_build_document_is_deterministic():
     assert seed.build_document(concept, inv) == seed.build_document(concept, inv)
 
 
-def test_strain_listing_is_capped():
+def test_strain_listing_retains_every_inventoried_strain():
     inv = _inventory()
     many = [dict(inv.strains["NCBITaxon:562"][0], strain_id=f"kgmicrobe.strain:bacdive_{i}",
                  bacdive_id=str(i), culture_collection_ids="")
-            for i in range(100, 100 + seed.STRAIN_LISTING_CAP + 5)]
+            for i in range(100, 305)]
     inv.strains["NCBITaxon:562"] = inv.strains["NCBITaxon:562"] + many
     concept = seed.build_concepts(inv, ["NCBITaxon:562"])[0]
     doc = seed.build_document(concept, inv)
-    assert doc["strain_count"] == seed.STRAIN_LISTING_CAP + 7
-    assert len(doc["strains"]) == seed.STRAIN_LISTING_CAP
+    assert doc["strain_count"] == 207
+    assert len(doc["strains"]) == 207
     assert doc["strains"][0]["is_type_strain"] is True
 
 

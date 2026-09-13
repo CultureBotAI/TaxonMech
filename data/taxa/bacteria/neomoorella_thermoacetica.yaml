@@ -72,6 +72,10 @@ taxonomy_mappings:
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 synonyms:
 - synonym_text: Clostridium thermaceticum corrig.
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Clostridium thermaceticum corrig. Fontaine et al. 1942 (Approved Lists
+    1980)
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Clostridium thermautotrophicum
@@ -79,9 +83,12 @@ synonyms:
   source: LPSN
   source_id: lpsn:775002
 - synonym_text: Clostridium thermautotrophicum Wiegel et al. 1982
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Clostridium thermautotrophicum corrig.
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Clostridium thermautotrophicum corrig. Wiegel et al. 1982
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Clostridium thermoaceticum
@@ -89,13 +96,16 @@ synonyms:
   source: LPSN
   source_id: lpsn:783676
 - synonym_text: Clostridium thermoaceticum Fontaine et al. 1942 (Approved Lists 1980)
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Moorella thermoacetica
   synonym_type: RELATED_SYNONYM
   source: LPSN
   source_id: lpsn:778305
 - synonym_text: Moorella thermoacetica
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Moorella thermoacetica (Fontaine et al. 1942) Collins et al. 1994
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Moorella thermoautotrophica
@@ -103,6 +113,13 @@ synonyms:
   source: LPSN
   source_id: lpsn:778306
 - synonym_text: Moorella thermoautotrophica
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Moorella thermoautotrophica (Wiegel et al. 1982) Collins et al. 1994
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Neomoorella thermoacetica (Fontaine et al. 1942) Gtari and Ventura
+    2025
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 xrefs:
@@ -121,8 +138,9 @@ strains:
   - kgmicrobe.strain:DSM-521
   - kgmicrobe.strain:JCM-9319
   - kgmicrobe.strain:KCTC-5000
-  - kgmicrobe.strain:VPI-12954
-  - kgmicrobe.strain:VPI-12984
+  - kgmicrobe.strain:NBRC-117001
+  - kgmicrobe.strain:VPI%2012954
+  - kgmicrobe.strain:VPI%2012984
   is_type_strain: true
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_001267405
@@ -130,8 +148,9 @@ strains:
     source_id: bacdive:16811
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Moorella thermoacetica DSM 521
+    assembly_name: ASM126740v1 assembly for Neomoorella thermoacetica DSM 521
     taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_001267405.1
     source: GOLD
     source_id: gold:Ga0213631
@@ -164,13 +183,43 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-521
     source_strain_identifiers: DSM 521
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_001267405.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001267405.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM126740v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-521
+    source_strain_identifiers: strain=DSM 521
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_008121885
     source: BACDIVE
     source_id: bacdive:16811
     source_reference_id: '67770'
     assembly_level: contig
-    assembly_name: Moorella thermoacetica ATCC 35608
+    assembly_name: ASM812188v1 assembly for Neomoorella thermoacetica ATCC 35608
     taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_008121885.1
+    source: BV_BRC
+    source_id: patric:1525.21
+    assembly_name: Moorella thermoacetica strain ATCC 35608
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: ATCC 35608
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_008121885.1
+    source: BV_BRC
+    source_id: patric:1525.21
+    assembly_name: Moorella thermoacetica strain ATCC 35608
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: ATCC:35608
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_008121885.1
     source: GOLD
     source_id: gold:Ga0667704
@@ -203,6 +252,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-35608
     source_strain_identifiers: ATCC 35608
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_008121885.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_008121885.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM812188v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: strain=ATCC 35608
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_059569155.1
     source: GOLD
     source_id: gold:Ga0061124
@@ -225,6 +285,35 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0108305
     source_project_id: gold:Gp0108305
+  - assembly_id: ncbi.assembly:GCA_059569155.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_059569155.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM5956915v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-521
+    source_strain_identifiers: strain=DSM 521
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCF_001267405.1
+    source: BV_BRC
+    source_id: patric:1525.3
+    assembly_name: Moorella thermoacetica strain DSM 521
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-521
+    source_strain_identifiers: DSM 521
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCF_001267405.1
+    source: BV_BRC
+    source_id: patric:1525.3
+    assembly_name: Moorella thermoacetica strain DSM 521
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-521
+    source_strain_identifiers: DSM:521
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCF_001267405.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_001267405.1
@@ -235,6 +324,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-521
     source_strain_identifiers: DSM 521
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_001267405.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001267405.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM126740v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-521
+    source_strain_identifiers: strain=DSM 521
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_008121885.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_008121885.1
@@ -245,6 +345,28 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-35608
     source_strain_identifiers: ATCC 35608
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_008121885.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_008121885.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM812188v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: strain=ATCC 35608
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCF_059569155.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_059569155.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM5956915v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-521
+    source_strain_identifiers: strain=DSM 521
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_001267405
     source: STRAININFO
     source_id: straininfo.strain:41191
@@ -315,9 +437,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:16811
     source_reference_id: '66792'
-    assembly_level: draft
+    assembly_level: complete
     genome_name: Moorella thermoacetica DSM 521
     taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2596583675
     source_database: img
     source: GOLD
@@ -350,6 +473,7 @@ strains:
     assembly_level: complete
     genome_name: Moorella thermoacetica DSM 521
     taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2627853541
     source_database: img
     source: GOLD
@@ -380,8 +504,9 @@ strains:
     source_id: bacdive:16811
     source_reference_id: '66792'
     assembly_level: complete
-    genome_name: Moorella thermoacetica DSM 521
+    genome_name: ASM126740v1 assembly for Neomoorella thermoacetica DSM 521
     taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2834890540
     source_database: img
     source: GOLD
@@ -406,6 +531,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0115645
     source_project_id: gold:Gp0119877
+  - genome_id: img.taxon:8118214647
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:16811
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: ASM812188v1 assembly for Neomoorella thermoacetica ATCC 35608
+    taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:8118214647
     source_database: img
     source: GOLD
@@ -434,18 +568,60 @@ strains:
     source_database: patric
     source: BACDIVE
     source_id: bacdive:16811
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: ASM812188v1 assembly for Neomoorella thermoacetica ATCC 35608
+    taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1525.21
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1525.21
     genome_name: Moorella thermoacetica strain ATCC 35608
     taxon_id: NCBITaxon:1525
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: ATCC 35608
+    source_strain_field: strain
+  - genome_id: patric:1525.21
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1525.21
+    genome_name: Moorella thermoacetica strain ATCC 35608
+    taxon_id: NCBITaxon:1525
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: ATCC:35608
+    source_strain_field: culture_collection
   - genome_id: patric:1525.3
     source_database: patric
     source: BACDIVE
     source_id: bacdive:16811
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM126740v1 assembly for Neomoorella thermoacetica DSM 521
+    taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1525.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1525.3
     genome_name: Moorella thermoacetica strain DSM 521
     taxon_id: NCBITaxon:1525
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-521
+    source_strain_identifiers: DSM 521
+    source_strain_field: strain
+  - genome_id: patric:1525.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1525.3
+    genome_name: Moorella thermoacetica strain DSM 521
+    taxon_id: NCBITaxon:1525
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-521
+    source_strain_identifiers: DSM:521
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN04244577
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -485,6 +661,26 @@ strains:
         source_strain_field: ORGANISM STRAIN
         source_strain_identifiers: DSM 521
         taxon_id: NCBITaxon:1525
+      - matched_strain_id: kgmicrobe.strain:DSM-521
+        record_id: biosample:SAMN04244577
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_059569155.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=DSM 521
+        taxon_id: NCBITaxon:1525
+      - matched_strain_id: kgmicrobe.strain:DSM-521
+        record_id: biosample:SAMN04244577
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCF_059569155.1
+        source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=DSM 521
+        taxon_id: NCBITaxon:1525
       ena_analysis_id: ena.analysis:ERZ26861392
       sylph_species: Moorella thermoacetica
   related_records:
@@ -506,6 +702,54 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-35608
     source_strain_identifiers: ATCC 35608
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001267405.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-521
+    source_strain_identifiers: strain=DSM 521
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_008121885.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: strain=ATCC 35608
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_059569155.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-521
+    source_strain_identifiers: strain=DSM 521
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA292082
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1525.3
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-521
+    source_strain_identifiers: DSM 521
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA292082
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1525.3
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-521
+    source_strain_identifiers: DSM:521
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA292082
     record_type: BIOPROJECT
     source: GOLD
@@ -528,6 +772,16 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0115645
     source_project_id: gold:Gp0119877
+  - record_id: bioproject:PRJNA292082
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001267405.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-521
+    source_strain_identifiers: strain=DSM 521
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA297920
     record_type: BIOPROJECT
     source: GOLD
@@ -550,6 +804,34 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0108305
     source_project_id: gold:Gp0108305
+  - record_id: bioproject:PRJNA297920
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_059569155.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-521
+    source_strain_identifiers: strain=DSM 521
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA541809
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1525.21
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: ATCC 35608
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA541809
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1525.21
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: ATCC:35608
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA541809
     record_type: BIOPROJECT
     source: GOLD
@@ -572,6 +854,34 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0622974
     source_project_id: gold:Gp0818039
+  - record_id: bioproject:PRJNA541809
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_008121885.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: strain=ATCC 35608
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN03964770
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1525.3
+    taxon_id: NCBITaxon:1525
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-521
+    source_strain_identifiers: DSM 521
+    source_strain_field: strain
+  - record_id: biosample:SAMN03964770
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1525.3
+    taxon_id: NCBITaxon:1525
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-521
+    source_strain_identifiers: DSM:521
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN03964770
     record_type: BIOSAMPLE
     source: GOLD
@@ -603,6 +913,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-521
     source_strain_identifiers: DSM 521
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN03964770
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001267405.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-521
+    source_strain_identifiers: strain=DSM 521
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN03964770
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001267405.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-521
+    source_strain_identifiers: strain=DSM 521
+    source_strain_field: infraspecific_name
   - record_id: biosample:SAMN04244577
     record_type: BIOSAMPLE
     source: GOLD
@@ -625,6 +955,44 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0108305
     source_project_id: gold:Gp0108305
+  - record_id: biosample:SAMN04244577
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_059569155.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-521
+    source_strain_identifiers: strain=DSM 521
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN04244577
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_059569155.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-521
+    source_strain_identifiers: strain=DSM 521
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN11603701
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1525.21
+    taxon_id: NCBITaxon:1525
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: ATCC 35608
+    source_strain_field: strain
+  - record_id: biosample:SAMN11603701
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1525.21
+    taxon_id: NCBITaxon:1525
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: ATCC:35608
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN11603701
     record_type: BIOSAMPLE
     source: GOLD
@@ -656,6 +1024,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-35608
     source_strain_identifiers: ATCC 35608
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN11603701
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_008121885.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: strain=ATCC 35608
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN11603701
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_008121885.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: strain=ATCC 35608
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0061124
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -1248,8 +1636,9 @@ strains:
     source_id: bacdive:16812
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Moorella thermoacetica DSM 2955
+    assembly_name: ASM126743v1 assembly for Neomoorella thermoacetica DSM 2955
     taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_001267435.1
     source: GOLD
     source_id: gold:Ga0213635
@@ -1282,6 +1671,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-2955
     source_strain_identifiers: DSM 2955
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_001267435.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001267435.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM126743v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2955
+    source_strain_identifiers: strain=DSM 2955
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCA_008121885.1
+    source: BV_BRC
+    source_id: patric:1525.21
+    assembly_name: Moorella thermoacetica strain ATCC 35608
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: ATCC 35608
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_008121885.1
+    source: BV_BRC
+    source_id: patric:1525.21
+    assembly_name: Moorella thermoacetica strain ATCC 35608
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: ATCC:35608
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_008121885.1
     source: GOLD
     source_id: gold:Ga0667704
@@ -1314,6 +1732,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-35608
     source_strain_identifiers: ATCC 35608
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_008121885.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_008121885.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM812188v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: strain=ATCC 35608
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCF_001267435.1
+    source: BV_BRC
+    source_id: patric:1525.4
+    assembly_name: Moorella thermoacetica strain DSM 2955
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2955
+    source_strain_identifiers: DSM 2955
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCF_001267435.1
+    source: BV_BRC
+    source_id: patric:1525.4
+    assembly_name: Moorella thermoacetica strain DSM 2955
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2955
+    source_strain_identifiers: DSM:2955
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCF_001267435.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_001267435.1
@@ -1324,6 +1771,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-2955
     source_strain_identifiers: DSM 2955
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_001267435.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001267435.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM126743v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2955
+    source_strain_identifiers: strain=DSM 2955
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_008121885.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_008121885.1
@@ -1334,6 +1792,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-35608
     source_strain_identifiers: ATCC 35608
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_008121885.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_008121885.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM812188v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: strain=ATCC 35608
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_001267435
     source: STRAININFO
     source_id: straininfo.strain:41191
@@ -1409,6 +1878,7 @@ strains:
     assembly_level: complete
     genome_name: Moorella thermoacetica DSM 2955
     taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2627853542
     source_database: img
     source: GOLD
@@ -1439,8 +1909,9 @@ strains:
     source_id: bacdive:16812
     source_reference_id: '66792'
     assembly_level: complete
-    genome_name: Moorella thermoacetica DSM 2955
+    genome_name: ASM126743v1 assembly for Neomoorella thermoacetica DSM 2955
     taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2834887756
     source_database: img
     source: GOLD
@@ -1489,14 +1960,55 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0622974
     source_project_id: gold:Gp0818039
+  - genome_id: patric:1525.21
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1525.21
+    genome_name: Moorella thermoacetica strain ATCC 35608
+    taxon_id: NCBITaxon:1525
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: ATCC 35608
+    source_strain_field: strain
+  - genome_id: patric:1525.21
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1525.21
+    genome_name: Moorella thermoacetica strain ATCC 35608
+    taxon_id: NCBITaxon:1525
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: ATCC:35608
+    source_strain_field: culture_collection
   - genome_id: patric:1525.4
     source_database: patric
     source: BACDIVE
     source_id: bacdive:16812
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM126743v1 assembly for Neomoorella thermoacetica DSM 2955
+    taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1525.4
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1525.4
     genome_name: Moorella thermoacetica strain DSM 2955
     taxon_id: NCBITaxon:1525
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-2955
+    source_strain_identifiers: DSM 2955
+    source_strain_field: strain
+  - genome_id: patric:1525.4
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1525.4
+    genome_name: Moorella thermoacetica strain DSM 2955
+    taxon_id: NCBITaxon:1525
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-2955
+    source_strain_identifiers: DSM:2955
+    source_strain_field: culture_collection
   related_records:
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
@@ -1516,6 +2028,44 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-35608
     source_strain_identifiers: ATCC 35608
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001267435.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-2955
+    source_strain_identifiers: strain=DSM 2955
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_008121885.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: strain=ATCC 35608
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA292083
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1525.4
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2955
+    source_strain_identifiers: DSM 2955
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA292083
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1525.4
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2955
+    source_strain_identifiers: DSM:2955
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA292083
     record_type: BIOPROJECT
     source: GOLD
@@ -1538,6 +2088,34 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0115644
     source_project_id: gold:Gp0119876
+  - record_id: bioproject:PRJNA292083
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001267435.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-2955
+    source_strain_identifiers: strain=DSM 2955
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA541809
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1525.21
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: ATCC 35608
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA541809
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1525.21
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: ATCC:35608
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA541809
     record_type: BIOPROJECT
     source: GOLD
@@ -1560,6 +2138,34 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0622974
     source_project_id: gold:Gp0818039
+  - record_id: bioproject:PRJNA541809
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_008121885.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: strain=ATCC 35608
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN03964771
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1525.4
+    taxon_id: NCBITaxon:1525
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2955
+    source_strain_identifiers: DSM 2955
+    source_strain_field: strain
+  - record_id: biosample:SAMN03964771
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1525.4
+    taxon_id: NCBITaxon:1525
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2955
+    source_strain_identifiers: DSM:2955
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN03964771
     record_type: BIOSAMPLE
     source: GOLD
@@ -1591,6 +2197,44 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-2955
     source_strain_identifiers: DSM 2955
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN03964771
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001267435.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-2955
+    source_strain_identifiers: strain=DSM 2955
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN03964771
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001267435.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-2955
+    source_strain_identifiers: strain=DSM 2955
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN11603701
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1525.21
+    taxon_id: NCBITaxon:1525
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: ATCC 35608
+    source_strain_field: strain
+  - record_id: biosample:SAMN11603701
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1525.21
+    taxon_id: NCBITaxon:1525
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: ATCC:35608
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN11603701
     record_type: BIOSAMPLE
     source: GOLD
@@ -1622,6 +2266,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-35608
     source_strain_identifiers: ATCC 35608
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN11603701
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_008121885.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: strain=ATCC 35608
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN11603701
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_008121885.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-35608
+    source_strain_identifiers: strain=ATCC 35608
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0079396
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -1916,7 +2580,7 @@ strains:
   source: BACDIVE
   source_id: bacdive:136947
   culture_collection_ids:
-  - kgmicrobe.strain:AIP-98-04
+  - kgmicrobe.strain:AIP%2098-04
   - kgmicrobe.strain:ATCC-33924
   - kgmicrobe.strain:CIP-108447
   - kgmicrobe.strain:DSM-1974
@@ -1926,8 +2590,27 @@ strains:
     source_id: bacdive:136947
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Moorella thermoacetica ATCC 33924
+    assembly_name: ASM812189v1 assembly for Neomoorella thermoacetica ATCC 33924
     taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_008121895.1
+    source: BV_BRC
+    source_id: patric:1525.22
+    assembly_name: Moorella thermoacetica strain ATCC 33924
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-33924
+    source_strain_identifiers: ATCC 33924
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_008121895.1
+    source: BV_BRC
+    source_id: patric:1525.22
+    assembly_name: Moorella thermoacetica strain ATCC 33924
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-33924
+    source_strain_identifiers: ATCC:33924
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_008121895.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_008121895.1
@@ -1938,6 +2621,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-33924
     source_strain_identifiers: ATCC 33924
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_008121895.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_008121895.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM812189v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-33924
+    source_strain_identifiers: strain=ATCC 33924
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_008121895.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_008121895.1
@@ -1948,6 +2642,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-33924
     source_strain_identifiers: ATCC 33924
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_008121895.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_008121895.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM812189v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-33924
+    source_strain_identifiers: strain=ATCC 33924
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_008121895
     source: STRAININFO
     source_id: straininfo.strain:47518
@@ -1998,9 +2703,30 @@ strains:
     source: BACDIVE
     source_id: bacdive:136947
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM812189v1 assembly for Neomoorella thermoacetica ATCC 33924
+    taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1525.22
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1525.22
     genome_name: Moorella thermoacetica strain ATCC 33924
     taxon_id: NCBITaxon:1525
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-33924
+    source_strain_identifiers: ATCC 33924
+    source_strain_field: strain
+  - genome_id: patric:1525.22
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1525.22
+    genome_name: Moorella thermoacetica strain ATCC 33924
+    taxon_id: NCBITaxon:1525
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-33924
+    source_strain_identifiers: ATCC:33924
+    source_strain_field: culture_collection
   related_records:
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
@@ -2011,6 +2737,62 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-33924
     source_strain_identifiers: ATCC 33924
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_008121895.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-33924
+    source_strain_identifiers: strain=ATCC 33924
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA541827
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1525.22
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-33924
+    source_strain_identifiers: ATCC 33924
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA541827
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1525.22
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-33924
+    source_strain_identifiers: ATCC:33924
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA541827
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_008121895.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-33924
+    source_strain_identifiers: strain=ATCC 33924
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN11603708
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1525.22
+    taxon_id: NCBITaxon:1525
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-33924
+    source_strain_identifiers: ATCC 33924
+    source_strain_field: strain
+  - record_id: biosample:SAMN11603708
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1525.22
+    taxon_id: NCBITaxon:1525
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-33924
+    source_strain_identifiers: ATCC:33924
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN11603708
     record_type: BIOSAMPLE
     source: GTDB
@@ -2020,6 +2802,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-33924
     source_strain_identifiers: ATCC 33924
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN11603708
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_008121895.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-33924
+    source_strain_identifiers: strain=ATCC 33924
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN11603708
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_008121895.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-33924
+    source_strain_identifiers: strain=ATCC 33924
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0150925
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -2290,8 +3092,9 @@ strains:
     source_id: bacdive:16813
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Moorella thermoacetica DSM 6867
+    assembly_name: ASM187528v1 assembly for Neomoorella thermoacetica DSM 6867
     taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_001875285.1
     source: GOLD
     source_id: gold:Ga0338102
@@ -2324,13 +3127,43 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-6867
     source_strain_identifiers: DSM 6867
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_001875285.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001875285.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM187528v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-6867
+    source_strain_identifiers: strain=DSM 6867
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_008121905
     source: BACDIVE
     source_id: bacdive:16813
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Moorella thermoacetica ATCC 49707
+    assembly_name: ASM812190v1 assembly for Neomoorella thermoacetica ATCC 49707
     taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_008121905.1
+    source: BV_BRC
+    source_id: patric:1525.23
+    assembly_name: Moorella thermoacetica strain ATCC 49707
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-49707
+    source_strain_identifiers: ATCC 49707
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_008121905.1
+    source: BV_BRC
+    source_id: patric:1525.23
+    assembly_name: Moorella thermoacetica strain ATCC 49707
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-49707
+    source_strain_identifiers: ATCC:49707
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_008121905.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_008121905.1
@@ -2341,6 +3174,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-49707
     source_strain_identifiers: ATCC 49707
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_008121905.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_008121905.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM812190v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-49707
+    source_strain_identifiers: strain=ATCC 49707
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCF_001875285.1
+    source: BV_BRC
+    source_id: patric:1525.11
+    assembly_name: Moorella thermoacetica strain DSM 6867
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-6867
+    source_strain_identifiers: DSM 6867
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCF_001875285.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_001875285.1
@@ -2351,6 +3204,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-6867
     source_strain_identifiers: DSM 6867
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_001875285.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001875285.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM187528v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-6867
+    source_strain_identifiers: strain=DSM 6867
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_008121905.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_008121905.1
@@ -2361,6 +3225,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-49707
     source_strain_identifiers: ATCC 49707
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_008121905.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_008121905.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM812190v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-49707
+    source_strain_identifiers: strain=ATCC 49707
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_001875285
     source: STRAININFO
     source_id: straininfo.strain:42632
@@ -2431,9 +3306,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:16813
     source_reference_id: '66792'
-    assembly_level: draft
+    assembly_level: complete
     genome_name: Moorella thermoacetica ATCC 49707
     taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2703719209
     source_database: img
     source: GOLD
@@ -2463,9 +3339,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:16813
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Moorella thermoacetica DSM 6867
+    assembly_level: contig
+    genome_name: ASM187528v1 assembly for Neomoorella thermoacetica DSM 6867
     taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2837637149
     source_database: img
     source: GOLD
@@ -2495,17 +3372,49 @@ strains:
     source: BACDIVE
     source_id: bacdive:16813
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM187528v1 assembly for Neomoorella thermoacetica DSM 6867
+    taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1525.11
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1525.11
     genome_name: Moorella thermoacetica strain DSM 6867
     taxon_id: NCBITaxon:1525
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-6867
+    source_strain_identifiers: DSM 6867
+    source_strain_field: strain
   - genome_id: patric:1525.23
     source_database: patric
     source: BACDIVE
     source_id: bacdive:16813
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM812190v1 assembly for Neomoorella thermoacetica ATCC 49707
+    taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1525.23
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1525.23
     genome_name: Moorella thermoacetica strain ATCC 49707
     taxon_id: NCBITaxon:1525
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-49707
+    source_strain_identifiers: ATCC 49707
+    source_strain_field: strain
+  - genome_id: patric:1525.23
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1525.23
+    genome_name: Moorella thermoacetica strain ATCC 49707
+    taxon_id: NCBITaxon:1525
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-49707
+    source_strain_identifiers: ATCC:49707
+    source_strain_field: culture_collection
   related_records:
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
@@ -2525,6 +3434,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-49707
     source_strain_identifiers: ATCC 49707
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001875285.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-6867
+    source_strain_identifiers: strain=DSM 6867
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_008121905.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-49707
+    source_strain_identifiers: strain=ATCC 49707
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA330912
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1525.11
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-6867
+    source_strain_identifiers: DSM 6867
+    source_strain_field: strain
   - record_id: bioproject:PRJNA330912
     record_type: BIOPROJECT
     source: GOLD
@@ -2547,6 +3485,53 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0299775
     source_project_id: gold:Gp0365307
+  - record_id: bioproject:PRJNA330912
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001875285.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-6867
+    source_strain_identifiers: strain=DSM 6867
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA541826
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1525.23
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-49707
+    source_strain_identifiers: ATCC 49707
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA541826
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1525.23
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-49707
+    source_strain_identifiers: ATCC:49707
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA541826
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_008121905.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-49707
+    source_strain_identifiers: strain=ATCC 49707
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN05430239
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1525.11
+    taxon_id: NCBITaxon:1525
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-6867
+    source_strain_identifiers: DSM 6867
+    source_strain_field: strain
   - record_id: biosample:SAMN05430239
     record_type: BIOSAMPLE
     source: GOLD
@@ -2578,6 +3563,44 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-6867
     source_strain_identifiers: DSM 6867
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN05430239
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001875285.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-6867
+    source_strain_identifiers: strain=DSM 6867
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN05430239
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001875285.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-6867
+    source_strain_identifiers: strain=DSM 6867
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN11603707
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1525.23
+    taxon_id: NCBITaxon:1525
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-49707
+    source_strain_identifiers: ATCC 49707
+    source_strain_field: strain
+  - record_id: biosample:SAMN11603707
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1525.23
+    taxon_id: NCBITaxon:1525
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-49707
+    source_strain_identifiers: ATCC:49707
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN11603707
     record_type: BIOSAMPLE
     source: GTDB
@@ -2587,6 +3610,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-49707
     source_strain_identifiers: ATCC 49707
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN11603707
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_008121905.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-49707
+    source_strain_identifiers: strain=ATCC 49707
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN11603707
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_008121905.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-49707
+    source_strain_identifiers: strain=ATCC 49707
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0150929
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -2812,6 +3855,32 @@ strains:
   - kgmicrobe.strain:JCM-9320
   medium_count: 1
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_000013105
+    source: BACDIVE
+    source_id: bacdive:166021
+    source_reference_id: '66792'
+    assembly_level: complete
+    assembly_name: ASM1310v1 assembly for Moorella thermoacetica ATCC 39073
+    taxon_id: NCBITaxon:264732
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_000013105.1
+    source: BV_BRC
+    source_id: patric:264732.11
+    assembly_name: Moorella thermoacetica ATCC 39073
+    taxon_id: NCBITaxon:264732
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-39073
+    source_strain_identifiers: ATCC 39073
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_000013105.1
+    source: BV_BRC
+    source_id: patric:264732.11
+    assembly_name: Moorella thermoacetica ATCC 39073
+    taxon_id: NCBITaxon:264732
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-39073
+    source_strain_identifiers: ATCC 39073
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_000013105.1
     source: GOLD
     source_id: gold:Ga0029457
@@ -2834,15 +3903,59 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0000333
     source_project_id: gold:Gp0000333
+  - assembly_id: ncbi.assembly:GCA_006228565
+    source: BACDIVE
+    source_id: bacdive:166021
+    source_reference_id: '66792'
+    assembly_level: complete
+    assembly_name: ASM622856v1 assembly for Neomoorella thermoacetica 39073-HH
+    taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_006228565.1
+    source: BV_BRC
+    source_id: patric:1525.18
+    assembly_name: Moorella thermoacetica strain 39073-HH
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-39073
+    source_strain_identifiers: ATCC 39073
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_008124575
+    source: BACDIVE
+    source_id: bacdive:166021
+    source_reference_id: '66792'
+    assembly_level: contig
+    assembly_name: ASM812457v1 assembly for Neomoorella thermoacetica
+    taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_008124575.1
+    source: BV_BRC
+    source_id: patric:1525.24
+    assembly_name: Moorella thermoacetica strain ATCC 39073
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-39073
+    source_strain_identifiers: ATCC 39073
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_008124575.1
+    source: BV_BRC
+    source_id: patric:1525.24
+    assembly_name: Moorella thermoacetica strain ATCC 39073
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-39073
+    source_strain_identifiers: ATCC:39073
+    source_strain_field: culture_collection
   genome_records:
   - genome_id: img.taxon:2596583698
     source_database: img
     source: BACDIVE
     source_id: bacdive:166021
     source_reference_id: '66792'
-    assembly_level: draft
+    assembly_level: complete
     genome_name: Moorella thermoacetica ATCC 39073
     taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2596583698
     source_database: img
     source: GOLD
@@ -2873,8 +3986,9 @@ strains:
     source_id: bacdive:166021
     source_reference_id: '66792'
     assembly_level: complete
-    genome_name: Moorella thermoacetica ATCC 39073
-    taxon_id: NCBITaxon:1525
+    genome_name: ASM1310v1 assembly for Moorella thermoacetica ATCC 39073
+    taxon_id: NCBITaxon:264732
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:637000167
     source_database: img
     source: GOLD
@@ -2905,27 +4019,98 @@ strains:
     source_id: bacdive:166021
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM622856v1 assembly for Neomoorella thermoacetica 39073-HH
+    taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1525.18
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1525.18
     genome_name: Moorella thermoacetica strain 39073-HH
     taxon_id: NCBITaxon:1525
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-39073
+    source_strain_identifiers: ATCC 39073
+    source_strain_field: culture_collection
   - genome_id: patric:1525.24
     source_database: patric
     source: BACDIVE
     source_id: bacdive:166021
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM812457v1 assembly for Neomoorella thermoacetica
+    taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1525.24
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1525.24
     genome_name: Moorella thermoacetica strain ATCC 39073
     taxon_id: NCBITaxon:1525
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-39073
+    source_strain_identifiers: ATCC 39073
+    source_strain_field: strain
+  - genome_id: patric:1525.24
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1525.24
+    genome_name: Moorella thermoacetica strain ATCC 39073
+    taxon_id: NCBITaxon:1525
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-39073
+    source_strain_identifiers: ATCC:39073
+    source_strain_field: culture_collection
   - genome_id: patric:264732.11
     source_database: patric
     source: BACDIVE
     source_id: bacdive:166021
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1310v1 assembly for Moorella thermoacetica ATCC 39073
+    taxon_id: NCBITaxon:264732
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:264732.11
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:264732.11
     genome_name: Moorella thermoacetica ATCC 39073
     taxon_id: NCBITaxon:264732
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-39073
+    source_strain_identifiers: ATCC 39073
+    source_strain_field: culture_collection
+  - genome_id: patric:264732.11
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:264732.11
+    genome_name: Moorella thermoacetica ATCC 39073
+    taxon_id: NCBITaxon:264732
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-39073
+    source_strain_identifiers: ATCC 39073
+    source_strain_field: strain
   related_records:
   - record_id: bioproject:PRJNA10648
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:264732.11
+    taxon_id: NCBITaxon:264732
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-39073
+    source_strain_identifiers: ATCC 39073
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA10648
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:264732.11
+    taxon_id: NCBITaxon:264732
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-39073
+    source_strain_identifiers: ATCC 39073
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA10648
+    record_type: BIOPROJECT
     source: GOLD
     source_id: gold:Gp0000333
     taxon_id: NCBITaxon:1525
@@ -2948,6 +4133,24 @@ strains:
     source_project_id: gold:Gp0000333
   - record_id: bioproject:PRJNA262289
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1525.24
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-39073
+    source_strain_identifiers: ATCC 39073
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA262289
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1525.24
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-39073
+    source_strain_identifiers: ATCC:39073
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA262289
+    record_type: BIOPROJECT
     source: GOLD
     source_id: gold:Gp0103661
     taxon_id: NCBITaxon:1525
@@ -3012,6 +4215,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0000333
     source_project_id: gold:Gp0249156
+  - record_id: bioproject:PRJNA481002
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1525.18
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-39073
+    source_strain_identifiers: ATCC 39073
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA499255
     record_type: BIOPROJECT
     source: GOLD
@@ -3036,6 +4248,24 @@ strains:
     source_project_id: gold:Gp0345055
   - record_id: biosample:SAMN02598257
     record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:264732.11
+    taxon_id: NCBITaxon:264732
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-39073
+    source_strain_identifiers: ATCC 39073
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN02598257
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:264732.11
+    taxon_id: NCBITaxon:264732
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-39073
+    source_strain_identifiers: ATCC 39073
+    source_strain_field: strain
+  - record_id: biosample:SAMN02598257
+    record_type: BIOSAMPLE
     source: GOLD
     source_id: gold:Gp0000333
     taxon_id: NCBITaxon:1525
@@ -3056,6 +4286,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0000333
     source_project_id: gold:Gp0000333
+  - record_id: biosample:SAMN09654352
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1525.18
+    taxon_id: NCBITaxon:1525
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-39073
+    source_strain_identifiers: ATCC 39073
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN10342726
     record_type: BIOSAMPLE
     source: GOLD
@@ -3122,6 +4361,24 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0000333
     source_project_id: gold:Gp0345055
+  - record_id: biosample:SAMN12291974
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1525.24
+    taxon_id: NCBITaxon:1525
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-39073
+    source_strain_identifiers: ATCC 39073
+    source_strain_field: strain
+  - record_id: biosample:SAMN12291974
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1525.24
+    taxon_id: NCBITaxon:1525
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-39073
+    source_strain_identifiers: ATCC:39073
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN12291974
     record_type: BIOSAMPLE
     source: GOLD
@@ -3583,8 +4840,9 @@ strains:
     source_id: bacdive:16814
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Moorella thermoacetica DSM 11768
+    assembly_name: ASM187406v1 assembly for Neomoorella thermoacetica DSM 11768
     taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_001874065.1
     source: GOLD
     source_id: gold:Ga0150933
@@ -3617,6 +4875,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-11768
     source_strain_identifiers: DSM 11768
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_001874065.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001874065.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM187406v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-11768
+    source_strain_identifiers: strain=DSM 11768
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCF_001874065.1
+    source: BV_BRC
+    source_id: patric:1525.6
+    assembly_name: Moorella thermoacetica strain DSM 11768
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-11768
+    source_strain_identifiers: DSM 11768
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCF_001874065.1
+    source: BV_BRC
+    source_id: patric:1525.6
+    assembly_name: Moorella thermoacetica strain DSM 11768
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-11768
+    source_strain_identifiers: DSM:11768
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCF_001874065.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_001874065.1
@@ -3627,6 +4914,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-11768
     source_strain_identifiers: DSM 11768
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_001874065.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001874065.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM187406v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-11768
+    source_strain_identifiers: strain=DSM 11768
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_001874065
     source: STRAININFO
     source_id: straininfo.strain:49172
@@ -3665,9 +4963,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:16814
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Moorella thermoacetica DSM 11768
+    assembly_level: contig
+    genome_name: ASM187406v1 assembly for Neomoorella thermoacetica DSM 11768
     taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2703719213
     source_database: img
     source: GOLD
@@ -3697,9 +4996,30 @@ strains:
     source: BACDIVE
     source_id: bacdive:16814
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM187406v1 assembly for Neomoorella thermoacetica DSM 11768
+    taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1525.6
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1525.6
     genome_name: Moorella thermoacetica strain DSM 11768
     taxon_id: NCBITaxon:1525
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-11768
+    source_strain_identifiers: DSM 11768
+    source_strain_field: strain
+  - genome_id: patric:1525.6
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1525.6
+    genome_name: Moorella thermoacetica strain DSM 11768
+    taxon_id: NCBITaxon:1525
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-11768
+    source_strain_identifiers: DSM:11768
+    source_strain_field: culture_collection
   related_records:
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
@@ -3710,6 +5030,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-11768
     source_strain_identifiers: DSM 11768
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001874065.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-11768
+    source_strain_identifiers: strain=DSM 11768
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA330927
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1525.6
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-11768
+    source_strain_identifiers: DSM 11768
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA330927
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1525.6
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-11768
+    source_strain_identifiers: DSM:11768
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA330927
     record_type: BIOPROJECT
     source: GOLD
@@ -3732,6 +5080,34 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0108306
     source_project_id: gold:Gp0172353
+  - record_id: bioproject:PRJNA330927
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001874065.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-11768
+    source_strain_identifiers: strain=DSM 11768
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN05430243
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1525.6
+    taxon_id: NCBITaxon:1525
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-11768
+    source_strain_identifiers: DSM 11768
+    source_strain_field: strain
+  - record_id: biosample:SAMN05430243
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1525.6
+    taxon_id: NCBITaxon:1525
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-11768
+    source_strain_identifiers: DSM:11768
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN05430243
     record_type: BIOSAMPLE
     source: GOLD
@@ -3763,6 +5139,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-11768
     source_strain_identifiers: DSM 11768
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN05430243
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001874065.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-11768
+    source_strain_identifiers: strain=DSM 11768
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN05430243
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001874065.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-11768
+    source_strain_identifiers: strain=DSM 11768
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0150933
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -3883,8 +5279,9 @@ strains:
     source_id: bacdive:16815
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Moorella thermoacetica DSM 12797
+    assembly_name: ASM187408v1 assembly for Neomoorella thermoacetica DSM 12797
     taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_001874085.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_001874085.1
@@ -3895,6 +5292,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-12797
     source_strain_identifiers: DSM 12797
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_001874085.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001874085.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM187408v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-12797
+    source_strain_identifiers: strain=DSM 12797
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCF_001874085.1
+    source: BV_BRC
+    source_id: patric:1525.7
+    assembly_name: Moorella thermoacetica strain DSM 12797
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-12797
+    source_strain_identifiers: DSM 12797
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCF_001874085.1
+    source: BV_BRC
+    source_id: patric:1525.7
+    assembly_name: Moorella thermoacetica strain DSM 12797
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-12797
+    source_strain_identifiers: DSM:12797
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCF_001874085.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_001874085.1
@@ -3905,6 +5331,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-12797
     source_strain_identifiers: DSM 12797
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_001874085.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001874085.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM187408v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-12797
+    source_strain_identifiers: strain=DSM 12797
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_001874085
     source: STRAININFO
     source_id: straininfo.strain:49361
@@ -3943,9 +5380,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:16815
     source_reference_id: '66792'
-    assembly_level: draft
+    assembly_level: complete
     genome_name: Moorella thermoacetica DSM 12797
     taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2703719210
     source_database: img
     source: GOLD
@@ -3975,9 +5413,30 @@ strains:
     source: BACDIVE
     source_id: bacdive:16815
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM187408v1 assembly for Neomoorella thermoacetica DSM 12797
+    taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1525.7
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1525.7
     genome_name: Moorella thermoacetica strain DSM 12797
     taxon_id: NCBITaxon:1525
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-12797
+    source_strain_identifiers: DSM 12797
+    source_strain_field: strain
+  - genome_id: patric:1525.7
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1525.7
+    genome_name: Moorella thermoacetica strain DSM 12797
+    taxon_id: NCBITaxon:1525
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-12797
+    source_strain_identifiers: DSM:12797
+    source_strain_field: culture_collection
   related_records:
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
@@ -3988,6 +5447,62 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-12797
     source_strain_identifiers: DSM 12797
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001874085.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-12797
+    source_strain_identifiers: strain=DSM 12797
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA330919
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1525.7
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-12797
+    source_strain_identifiers: DSM 12797
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA330919
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1525.7
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-12797
+    source_strain_identifiers: DSM:12797
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA330919
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001874085.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-12797
+    source_strain_identifiers: strain=DSM 12797
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN05430240
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1525.7
+    taxon_id: NCBITaxon:1525
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-12797
+    source_strain_identifiers: DSM 12797
+    source_strain_field: strain
+  - record_id: biosample:SAMN05430240
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1525.7
+    taxon_id: NCBITaxon:1525
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-12797
+    source_strain_identifiers: DSM:12797
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN05430240
     record_type: BIOSAMPLE
     source: GTDB
@@ -3997,6 +5512,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-12797
     source_strain_identifiers: DSM 12797
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN05430240
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001874085.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-12797
+    source_strain_identifiers: strain=DSM 12797
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN05430240
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001874085.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-12797
+    source_strain_identifiers: strain=DSM 12797
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0150930
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -4117,8 +5652,9 @@ strains:
     source_id: bacdive:16816
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Moorella thermoacetica DSM 12993
+    assembly_name: ASM187524v1 assembly for Neomoorella thermoacetica DSM 12993
     taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_001875245.1
     source: GOLD
     source_id: gold:Ga0150932
@@ -4151,6 +5687,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-12993
     source_strain_identifiers: DSM 12993
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_001875245.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001875245.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM187524v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-12993
+    source_strain_identifiers: strain=DSM 12993
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_059569175.1
     source: GOLD
     source_id: gold:Ga0061126
@@ -4173,6 +5720,26 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0108307
     source_project_id: gold:Gp0108307
+  - assembly_id: ncbi.assembly:GCA_059569175.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_059569175.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM5956917v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-12993
+    source_strain_identifiers: strain=DSM 12993
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCF_001875245.1
+    source: BV_BRC
+    source_id: patric:1525.9
+    assembly_name: Moorella thermoacetica strain DSM 12993
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-12993
+    source_strain_identifiers: DSM 12993
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCF_001875245.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_001875245.1
@@ -4183,6 +5750,28 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-12993
     source_strain_identifiers: DSM 12993
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_001875245.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001875245.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM187524v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-12993
+    source_strain_identifiers: strain=DSM 12993
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCF_059569175.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_059569175.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM5956917v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-12993
+    source_strain_identifiers: strain=DSM 12993
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_001875245
     source: STRAININFO
     source_id: straininfo.strain:403443
@@ -4221,9 +5810,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:16816
     source_reference_id: '66792'
-    assembly_level: draft
+    assembly_level: complete
     genome_name: Moorella thermoacetica DSM 12993
     taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2596583676
     source_database: img
     source: GOLD
@@ -4253,9 +5843,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:16816
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Moorella thermoacetica DSM 12993
+    assembly_level: contig
+    genome_name: ASM187524v1 assembly for Neomoorella thermoacetica DSM 12993
     taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2703719212
     source_database: img
     source: GOLD
@@ -4285,9 +5876,20 @@ strains:
     source: BACDIVE
     source_id: bacdive:16816
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM187524v1 assembly for Neomoorella thermoacetica DSM 12993
+    taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1525.9
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1525.9
     genome_name: Moorella thermoacetica strain DSM 12993
     taxon_id: NCBITaxon:1525
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-12993
+    source_strain_identifiers: DSM 12993
+    source_strain_field: strain
   - genome_id: atb.assembly:202505.SAMN04244561
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -4327,6 +5929,26 @@ strains:
         source_strain_field: ORGANISM STRAIN
         source_strain_identifiers: DSM 12993
         taxon_id: NCBITaxon:1525
+      - matched_strain_id: kgmicrobe.strain:DSM-12993
+        record_id: biosample:SAMN04244561
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_059569175.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=DSM 12993
+        taxon_id: NCBITaxon:1525
+      - matched_strain_id: kgmicrobe.strain:DSM-12993
+        record_id: biosample:SAMN04244561
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCF_059569175.1
+        source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=DSM 12993
+        taxon_id: NCBITaxon:1525
       ena_analysis_id: ena.analysis:ERZ26862346
       sylph_species: Moorella thermoacetica
   related_records:
@@ -4339,6 +5961,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-12993
     source_strain_identifiers: DSM 12993
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001875245.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-12993
+    source_strain_identifiers: strain=DSM 12993
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_059569175.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-12993
+    source_strain_identifiers: strain=DSM 12993
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA297933
     record_type: BIOPROJECT
     source: GOLD
@@ -4361,6 +6003,25 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0108307
     source_project_id: gold:Gp0108307
+  - record_id: bioproject:PRJNA297933
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_059569175.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-12993
+    source_strain_identifiers: strain=DSM 12993
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA330926
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1525.9
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-12993
+    source_strain_identifiers: DSM 12993
+    source_strain_field: strain
   - record_id: bioproject:PRJNA330926
     record_type: BIOPROJECT
     source: GOLD
@@ -4383,6 +6044,16 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0108307
     source_project_id: gold:Gp0172352
+  - record_id: bioproject:PRJNA330926
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001875245.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-12993
+    source_strain_identifiers: strain=DSM 12993
+    source_strain_field: infraspecific_name
   - record_id: biosample:SAMN04244561
     record_type: BIOSAMPLE
     source: GOLD
@@ -4405,6 +6076,35 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0108307
     source_project_id: gold:Gp0108307
+  - record_id: biosample:SAMN04244561
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_059569175.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-12993
+    source_strain_identifiers: strain=DSM 12993
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN04244561
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_059569175.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-12993
+    source_strain_identifiers: strain=DSM 12993
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN05430242
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1525.9
+    taxon_id: NCBITaxon:1525
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-12993
+    source_strain_identifiers: DSM 12993
+    source_strain_field: strain
   - record_id: biosample:SAMN05430242
     record_type: BIOSAMPLE
     source: GOLD
@@ -4436,6 +6136,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-12993
     source_strain_identifiers: DSM 12993
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN05430242
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001875245.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-12993
+    source_strain_identifiers: strain=DSM 12993
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN05430242
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001875245.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-12993
+    source_strain_identifiers: strain=DSM 12993
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0061126
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -4626,8 +6346,9 @@ strains:
     source_id: bacdive:16819
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Moorella thermoacetica DSM 7417
+    assembly_name: ASM187526v1 assembly for Neomoorella thermoacetica DSM 7417
     taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_001875265.1
     source: GOLD
     source_id: gold:Ga0338103
@@ -4660,6 +6381,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-7417
     source_strain_identifiers: DSM 7417
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_001875265.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001875265.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM187526v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-7417
+    source_strain_identifiers: strain=DSM 7417
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCF_001875265.1
+    source: BV_BRC
+    source_id: patric:1525.10
+    assembly_name: Moorella thermoacetica strain DSM 7417
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-7417
+    source_strain_identifiers: DSM 7417
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCF_001875265.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_001875265.1
@@ -4670,6 +6411,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-7417
     source_strain_identifiers: DSM 7417
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_001875265.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001875265.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM187526v1
+    taxon_id: NCBITaxon:1525
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-7417
+    source_strain_identifiers: strain=DSM 7417
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_001875265
     source: STRAININFO
     source_id: straininfo.strain:48430
@@ -4720,9 +6472,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:16819
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Moorella thermoacetica DSM 7417
+    assembly_level: contig
+    genome_name: ASM187526v1 assembly for Neomoorella thermoacetica DSM 7417
     taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2838801710
     source_database: img
     source: GOLD
@@ -4752,9 +6505,20 @@ strains:
     source: BACDIVE
     source_id: bacdive:16819
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM187526v1 assembly for Neomoorella thermoacetica DSM 7417
+    taxon_id: NCBITaxon:1525
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1525.10
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1525.10
     genome_name: Moorella thermoacetica strain DSM 7417
     taxon_id: NCBITaxon:1525
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-7417
+    source_strain_identifiers: DSM 7417
+    source_strain_field: strain
   related_records:
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
@@ -4765,6 +6529,25 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-7417
     source_strain_identifiers: DSM 7417
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001875265.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-7417
+    source_strain_identifiers: strain=DSM 7417
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA330911
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1525.10
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-7417
+    source_strain_identifiers: DSM 7417
+    source_strain_field: strain
   - record_id: bioproject:PRJNA330911
     record_type: BIOPROJECT
     source: GOLD
@@ -4787,6 +6570,25 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0481634
     source_project_id: gold:Gp0365306
+  - record_id: bioproject:PRJNA330911
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001875265.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-7417
+    source_strain_identifiers: strain=DSM 7417
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN05430238
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1525.10
+    taxon_id: NCBITaxon:1525
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-7417
+    source_strain_identifiers: DSM 7417
+    source_strain_field: strain
   - record_id: biosample:SAMN05430238
     record_type: BIOSAMPLE
     source: GOLD
@@ -4818,6 +6620,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-7417
     source_strain_identifiers: DSM 7417
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN05430238
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001875265.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-7417
+    source_strain_identifiers: strain=DSM 7417
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN05430238
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001875265.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1525
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-7417
+    source_strain_identifiers: strain=DSM 7417
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0150926
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -4989,6 +6811,7 @@ source_attestations:
   source_label: Neomoorella thermoacetica
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:65477
   source_label: Neomoorella thermoacetica
@@ -5033,7 +6856,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

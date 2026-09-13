@@ -29,7 +29,7 @@ lineage:
   taxon_label: Paracoccaceae
   rank: FAMILY
 - taxon_id: NCBITaxon:265
-  taxon_label: Paracoccus <a-proteobacteria>
+  taxon_label: Paracoccus
   rank: GENUS
 grounding_status: EXACT
 mapping_status: SEEDED
@@ -61,6 +61,13 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 1
   notes: LPSN links this GTDB species to the taxon's name.
+synonyms:
+- synonym_text: Paracoccus sp. BM15
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Paracoccus tegillarcae Lee et al. 2019
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Paracoccus_tegillarcae
 - lpsn:5318
@@ -73,6 +80,7 @@ strains:
   designation: BM15
   culture_collection_ids:
   - kgmicrobe.strain:DSM-107723
+  - kgmicrobe.strain:DSM-108927
   - kgmicrobe.strain:JCM-33289
   - kgmicrobe.strain:KCTC-72032
   is_type_strain: true
@@ -82,8 +90,28 @@ strains:
     source_id: bacdive:160592
     source_reference_id: '68004'
     assembly_level: complete
-    assembly_name: Paracoccus tegillarcae BM15
+    assembly_name: ASM284730v1 assembly for Paracoccus tegillarcae BM15
     taxon_id: NCBITaxon:1529068
+    source_field: Sequence information.Genome sequences.INSDC accession
+  genome_records:
+  - genome_id: img.taxon:2775506982
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:160592
+    source_reference_id: '68004'
+    assembly_level: complete
+    genome_name: ASM284730v1 assembly for Paracoccus tegillarcae BM15
+    taxon_id: NCBITaxon:1529068
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: patric:1529068.3
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:160592
+    source_reference_id: '68004'
+    assembly_level: complete
+    genome_name: ASM284730v1 assembly for Paracoccus tegillarcae BM15
+    taxon_id: NCBITaxon:1529068
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: straininfo.deposit:914357
     record_type: STRAININFO_DEPOSIT
@@ -98,6 +126,25 @@ strains:
     straininfo_evidence:
       deposit_designation: DSM 107723
       deposit_id: straininfo.deposit:914357
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:160592
+      strain_doi: DOI:10.60712/SI-ID407014.3
+      strain_id: straininfo.strain:407014
+      strain_status: published online
+  - record_id: straininfo.deposit:915740
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:407014
+    taxon_id: NCBITaxon:1529068
+    record_name: DSM 108927
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:DSM-108927
+    source_strain_identifiers: DSM 108927
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 108927
+      deposit_id: straininfo.deposit:915740
       deposit_status: available
       match_method: culture_identifier
       source_bacdive_id: bacdive:160592
@@ -123,12 +170,32 @@ strains:
       strain_doi: DOI:10.60712/SI-ID407014.3
       strain_id: straininfo.strain:407014
       strain_status: published online
+  - record_id: straininfo.strain:407014
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:407014
+    taxon_id: NCBITaxon:1529068
+    record_name: DSM 108927
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:DSM-108927
+    source_strain_identifiers: DSM 108927
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 108927
+      deposit_id: straininfo.deposit:915740
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:160592
+      strain_doi: DOI:10.60712/SI-ID407014.3
+      strain_id: straininfo.strain:407014
+      strain_status: published online
 source_attestations:
 - source: NCBITAXON
   source_id: NCBITaxon:1529068
   source_label: Paracoccus tegillarcae
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:5318
   source_label: Paracoccus tegillarcae
@@ -157,7 +224,7 @@ source_attestations:
   assertion_count: 1
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

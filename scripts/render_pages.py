@@ -13,19 +13,19 @@ Usage:
 from __future__ import annotations
 
 import argparse
-import base64
 import csv
 import filecmp
 import gzip
 import hashlib
 import io
 import json
+import re
 import shutil
 import sys
 import tempfile
 from collections import defaultdict
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import unquote, urlsplit
 
 from corpus import REPO_ROOT, TAXA_DIR, load_records
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -47,7 +47,8 @@ def gzip_bytes(payload: bytes) -> bytes:
     return buffer.getvalue()
 
 DOMAIN_BLURB = {
-    "BACTERIA": "Taxa under NCBITaxon:2 — the bulk of the cultured, named prokaryotes.",
+    "BACTERIA": "Species and infraspecific taxa under NCBITaxon:2, "
+                "including uncultured and environmental taxa.",
     "ARCHAEA": "Taxa under NCBITaxon:2157.",
     "EUKARYOTA": "Eukaryotic taxa attested by the sources, including taxa without BacDive strains.",
     "VIRUSES": "Viral taxa the sources attest.",
@@ -109,6 +110,11 @@ def page_name(path: Path) -> str:
     return "/".join(rel.parts)
 
 
+def deposit_label(identifier: str) -> str:
+    """Display the CURIE's source accession without changing its punctuation."""
+    return unquote(identifier.removeprefix("kgmicrobe.strain:"), errors="strict")
+
+
 def external_url(value: str | None) -> str | None:
     """Source metadata may supply download URLs, but never executable schemes."""
     if not value:
@@ -163,12 +169,13 @@ def build_atb_index(records: list[tuple[Path, dict]], atb_dir: Path,
     source_strains = {row["strain_id"]: row for row in _tsv(strains_tsv)
                       if row["strain_id"] in wanted_strains}
     listed: dict[str, list[dict]] = defaultdict(list)
-    for path, doc in records:
+    for _path, doc in records:
         for strain in doc.get("strains") or []:
             sid = strain["strain_id"]
             if sid in wanted_strains:
                 listed[sid].append({"label": doc["label"], "taxon_id": doc["identifier"],
-                                    "page": f"taxa/{page_name(path)}.html#strains-{sid.replace(':', '-')}"})
+                                    "page": (f"taxon.html?id={doc['identifier']}"
+                                             f"#strains-{sid.replace(':', '-')}")})
     for link in links:
         strain = source_strains[link["strain_id"]]
         entry = assemblies[link["atb_id"]]
@@ -234,11 +241,11 @@ def build_straininfo_index(records: list[tuple[Path, dict]], directory: Path,
 
     overlap = load_overlap(directory, strains_tsv.parent, atb_dir)
     listed: dict[str, list[dict]] = defaultdict(list)
-    for path, doc in records:
+    for _path, doc in records:
         for strain in doc.get("strains") or []:
             sid = strain["strain_id"]
             listed[sid].append({"label": doc["label"], "taxon_id": doc["identifier"],
-                                "page": f"taxa/{page_name(path)}.html#strains-{sid.replace(':', '-')}"})
+                                "page": f"taxon.html?id={doc['identifier']}#strains-{sid.replace(':', '-')}"})
     for group in overlap["records"]:
         group["url"] = curie_url(group["straininfo_strain_id"])
         group["doi_url"] = curie_url("DOI:" + group["strain_doi"].removeprefix("DOI:")) \
@@ -312,14 +319,14 @@ def render(out_dir: Path) -> None:
                       trim_blocks=True, lstrip_blocks=True)
     env.filters["curie_url"] = curie_url
     env.filters["external_url"] = external_url
+    env.filters["deposit_label"] = deposit_label
     env.globals["script_version"] = hashlib.sha256(b"".join(
         path.read_bytes() for path in sorted(TEMPLATES_DIR.glob("*.js")))).hexdigest()[:16]
 
     records = load_records()
     by_domain: dict[str, list[dict]] = defaultdict(list)
     index = []
-    for path, doc in records:
-        name = page_name(path)
+    for _path, doc in records:
         sources = sorted({a["source"] for a in doc.get("source_attestations") or []})
         entry = {
             "identifier": doc["identifier"],
@@ -327,7 +334,7 @@ def render(out_dir: Path) -> None:
             "rank": doc.get("rank"),
             "domain": doc.get("taxon_domain"),
             "status": doc.get("mapping_status"),
-            "page": f"taxa/{name}.html",
+            "page": f"taxon.html?id={doc['identifier']}",
             "sources": sources,
             "strain_count": doc.get("strain_count") or 0,
             "has_type_strain": any(s.get("is_type_strain") for s in doc.get("strains") or []),
@@ -338,6 +345,9 @@ def render(out_dir: Path) -> None:
         index.append(entry)
 
     out_dir.mkdir(parents=True, exist_ok=True)
+    from taxonmech.source_catalog import load_manifest
+    (out_dir / "sources.html").write_text(env.get_template("sources.html").render(
+        catalog=load_manifest(), root=""), encoding="utf-8")
     (out_dir / ".nojekyll").write_text("")
     shutil.copy(TEMPLATES_DIR / "style.css", out_dir / "style.css")
     # Vendored byte-identical across the Mech sites: reads localStorage
@@ -347,6 +357,7 @@ def render(out_dir: Path) -> None:
     shutil.copy(TEMPLATES_DIR / "straininfo-browser.js", out_dir / "straininfo-browser.js")
     shutil.copy(TEMPLATES_DIR / "compressed-data.js", out_dir / "compressed-data.js")
     shutil.copy(TEMPLATES_DIR / "taxon-browser.js", out_dir / "taxon-browser.js")
+    shutil.copy(TEMPLATES_DIR / "taxon-viewer.js", out_dir / "taxon-viewer.js")
     shutil.copytree(TEMPLATES_DIR / "vendor", out_dir / "vendor", dirs_exist_ok=True)
     straininfo = build_straininfo_index(records, STRAININFO_DIR, STRAINS_TSV, ATB_DIR)
     write_straininfo_browser_data(straininfo, out_dir)
@@ -374,31 +385,87 @@ def render(out_dir: Path) -> None:
                        page_title="Taxa with a type strain", heading="Taxa with a type strain",
                        lede=f"{len(typed)} records list a BacDive strain whose deposit "
                             "LPSN names as the type strain.")
-    payload = (json.dumps(index, indent=1, ensure_ascii=False) + "\n").encode("utf-8")
-    (out_dir / "index.json").write_bytes(payload)
-    (out_dir / "index.json.gz").write_bytes(gzip_bytes(payload))
+    write_search_index(out_dir, index)
 
     for dom in domains:
         write_browse_pages(env, out_dir, f"domain/{dom['name'].lower()}", by_domain[dom["name"]],
                            root="../", domain=dom["name"], page_title=dom["name"].capitalize(),
                            heading=dom["name"].capitalize(), lede=dom["blurb"])
 
-    for path, doc in records:
-        name = page_name(path)
-        p = out_dir / "taxa" / f"{name}.html"
-        p.parent.mkdir(parents=True, exist_ok=True)
-        # The page sits at taxa/<domain>/<slug>.html; the directories below
-        # pages/ are taxa/ plus every part of `name` except the file itself.
-        depth = len(Path(name).parts)
-        root = "../" * depth
-        strains_html = env.get_template("taxon-strains.html").render(r=doc, root=root).encode("utf-8") \
-            if doc.get("strains") else b""
-        compressed = base64.b64encode(gzip_bytes(strains_html)).decode("ascii") \
-            if len(strains_html) > STRAIN_HTML_THRESHOLD else ""
-        p.write_text(
-            env.get_template("taxon.html").render(r=doc, root=root, compressed_strains=compressed,
-                                                  source_path=str(path.relative_to(REPO_ROOT))),
-            encoding="utf-8")
+    write_taxon_data(env, out_dir, records)
+    (out_dir / "taxon.html").write_text(
+        env.get_template("taxon-viewer.html").render(root=""), encoding="utf-8")
+    # Preserve every previously published taxon URL, including its strain anchor.
+    active = {entry["identifier"]: entry["domain"] for entry in index}
+    for row in _tsv(REPO_ROOT / "curation/legacy_page_paths.tsv"):
+        if row["identifier"] not in active:
+            continue
+        relative = Path(row["page"])
+        if relative.is_absolute() or ".." in relative.parts or relative.parts[0] != "taxa":
+            raise ValueError("legacy taxon route leaves the generated taxa directory")
+        target = "../" * (len(relative.parts) - 1) + "taxon.html?id=" + row["identifier"]
+        source = f"data/taxa/{active[row['identifier']].lower()}/{relative.stem}.yaml"
+        path = out_dir / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text('<!doctype html><meta charset="utf-8"><title>TaxonMech</title>'
+                        f'<a href="{target}">Open the taxon record</a>'
+                        '<p><a href="https://github.com/CultureBotAI/TaxonMech/blob/main/'
+                        f'{source}">Read the source YAML</a></p>'
+                        f'<script>location.replace({json.dumps(target)}+location.hash)</script>\n')
+    if hasattr(records, "close"):
+        records.close()
+
+
+def write_search_index(out_dir: Path, index: list[dict]) -> None:
+    """Publish the complete search data without an oversized plain JSON blob."""
+    payload = (json.dumps(index, separators=(",", ":"), ensure_ascii=False) + "\n").encode("utf-8")
+    compressed = gzip_bytes(payload)
+    (out_dir / "index.json.gz").write_bytes(compressed)
+    (out_dir / "index.json").write_text(json.dumps({
+        "format_version": 1, "format": "json.gz", "path": "index.json.gz", "records": len(index),
+        "bytes": len(compressed), "sha256": hashlib.sha256(compressed).hexdigest(),
+    }, sort_keys=True, indent=2) + "\n", encoding="utf-8")
+
+
+def taxon_payload(env: Environment, path: Path, doc: dict) -> dict:
+    env.filters.setdefault("deposit_label", deposit_label)
+    pages = []
+    strains = doc.get("strains") or []
+    for offset in range(0, len(strains), 200):
+        part = strains[offset:offset + 200]
+        pages.append({"html": env.get_template("taxon-strains.html").render(
+            r={**doc, "strains": part}, root=""),
+                      "anchors": ["strains-" + strain["strain_id"].replace(":", "-") for strain in part]})
+    return {"label": doc["label"], "html": env.get_template("taxon-content.html").render(
+        r=doc, root="", strain_page_count=len(pages), source_path=str(path.relative_to(REPO_ROOT))),
+        "strain_pages": pages}
+
+
+def write_taxon_data(env: Environment, out_dir: Path, records) -> None:
+    """Shard numerically, keeping at most 1,000 taxon records in memory."""
+    directory = out_dir / "taxon-details"
+    directory.mkdir(exist_ok=True)
+    ordered = records.by_identifier() if hasattr(records, "by_identifier") else sorted(
+        records, key=lambda item: int(item[1]["identifier"].split(":")[1]))
+    bucket, payload = None, {}
+
+    def flush():
+        if payload:
+            raw = (json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + "\n").encode("utf-8")
+            (directory / f"{bucket:04}.json.gz").write_bytes(gzip_bytes(raw))
+
+    for path, doc in ordered:
+        identifier = doc["identifier"]
+        if not re.fullmatch(r"NCBITaxon:[1-9][0-9]*", identifier):
+            raise ValueError("taxon viewer requires an explicit NCBI taxonomy identifier")
+        current = int(identifier.split(":")[1]) // 1000
+        if current != bucket:
+            flush()
+            bucket, payload = current, {}
+        if identifier in payload:
+            raise ValueError("duplicate taxon in publication shard")
+        payload[identifier] = taxon_payload(env, path, doc)
+    flush()
 
 
 def write_browse_pages(env: Environment, out_dir: Path, stem: str, entries: list[dict],

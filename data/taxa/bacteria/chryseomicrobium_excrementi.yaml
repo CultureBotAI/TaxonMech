@@ -61,6 +61,16 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 1
   notes: LPSN links this GTDB species to the taxon's name.
+synonyms:
+- synonym_text: Chryseomicrobium excrementi Saha et al. 2018
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Chryseomicrobium sp. ET03
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: bacterium ET3(2016)
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Chryseomicrobium_excrementi
 - lpsn:797806
@@ -75,7 +85,7 @@ strains:
   - kgmicrobe.strain:JCM-32415
   - kgmicrobe.strain:KCTC-33943
   - kgmicrobe.strain:LMG-30119
-  - kgmicrobe.strain:MCC-3378
+  - kgmicrobe.strain:MCC%203378
   is_type_strain: true
   medium_count: 1
   genome_assemblies:
@@ -84,8 +94,18 @@ strains:
     source_id: bacdive:159857
     source_reference_id: '67770'
     assembly_level: scaffold
-    assembly_name: Chryseomicrobium excrementi ET03
+    assembly_name: ASM279830v1 assembly for Chryseomicrobium excrementi ET03
     taxon_id: NCBITaxon:2041346
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_002798305.1
+    source: BV_BRC
+    source_id: patric:2041346.3
+    assembly_name: Chryseomicrobium sp. ET03
+    taxon_id: NCBITaxon:2041346
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:LMG-30119
+    source_strain_identifiers: LMG:30119
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_002798305.1
     source: GOLD
     source_id: gold:Ga0442201
@@ -102,10 +122,11 @@ strains:
     source_database: img
     source: BACDIVE
     source_id: bacdive:159857
-    source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Chryseomicrobium excrementi ET03
+    source_reference_id: '67770'
+    assembly_level: scaffold
+    genome_name: ASM279830v1 assembly for Chryseomicrobium excrementi ET03
     taxon_id: NCBITaxon:2041346
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2882380101
     source_database: img
     source: GOLD
@@ -122,11 +143,31 @@ strains:
     source_database: patric
     source: BACDIVE
     source_id: bacdive:159857
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '67770'
+    assembly_level: scaffold
+    genome_name: ASM279830v1 assembly for Chryseomicrobium excrementi ET03
+    taxon_id: NCBITaxon:2041346
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:2041346.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:2041346.3
     genome_name: Chryseomicrobium sp. ET03
     taxon_id: NCBITaxon:2041346
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:LMG-30119
+    source_strain_identifiers: LMG:30119
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJNA412966
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:2041346.3
+    taxon_id: NCBITaxon:2041346
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:LMG-30119
+    source_strain_identifiers: LMG:30119
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA412966
     record_type: BIOPROJECT
     source: GOLD
@@ -138,6 +179,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0544692
     source_project_id: gold:Gp0495613
+  - record_id: biosample:SAMN07733359
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:2041346.3
+    taxon_id: NCBITaxon:2041346
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:LMG-30119
+    source_strain_identifiers: LMG:30119
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN07733359
     record_type: BIOSAMPLE
     source: GOLD
@@ -190,6 +240,7 @@ source_attestations:
   source_label: Chryseomicrobium excrementi
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:797806
   source_label: Chryseomicrobium excrementi
@@ -213,7 +264,7 @@ source_attestations:
   assertion_count: 1
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

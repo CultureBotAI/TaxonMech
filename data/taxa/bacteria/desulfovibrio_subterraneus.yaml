@@ -61,12 +61,22 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 3
 synonyms:
+- synonym_text: '"Psychrodesulfovibrio subterraneus" (Ueno et al. 2021) Park et al.
+    2022'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Desulfovibrio sp. HN2
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Desulfovibrio subterraneus Ueno et al. 2021
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: Halodesulfovibrio subterraneus
   synonym_type: EXACT_SYNONYM
   source: GTDB
   source_id: GTDB:s__Halodesulfovibrio_subterraneus
 - synonym_text: Psychrodesulfovibrio subterraneus
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 xrefs:
 - GTDB:s__Halodesulfovibrio_subterraneus
@@ -88,18 +98,94 @@ strains:
     source_id: bacdive:160224
     source_reference_id: '66792'
     assembly_level: scaffold
-    assembly_name: Desulfovibrio subterraneus HN2
+    assembly_name: ASM1334028v1 assembly for Desulfovibrio subterraneus HN2
     taxon_id: NCBITaxon:2718620
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_013340285.1
+    source: BV_BRC
+    source_id: patric:2718620.3
+    assembly_name: Desulfovibrio sp. HN2
+    taxon_id: NCBITaxon:2718620
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-101010
+    source_strain_identifiers: DSM:101010
+    source_strain_field: culture_collection
   genome_records:
+  - genome_id: img.taxon:2995990613
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:160224
+    source_reference_id: '66792'
+    assembly_level: scaffold
+    genome_name: ASM1334028v1 assembly for Desulfovibrio subterraneus HN2
+    taxon_id: NCBITaxon:2718620
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: patric:2718620.3
     source_database: patric
     source: BACDIVE
     source_id: bacdive:160224
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: scaffold
+    genome_name: ASM1334028v1 assembly for Desulfovibrio subterraneus HN2
+    taxon_id: NCBITaxon:2718620
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:2718620.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:2718620.3
     genome_name: Desulfovibrio sp. HN2
     taxon_id: NCBITaxon:2718620
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-101010
+    source_strain_identifiers: DSM:101010
+    source_strain_field: culture_collection
+  - genome_id: atb.assembly:202505.SAMD00212906
+    source_database: allthebacteria
+    source: ALLTHEBACTERIA
+    source_id: atb.assembly:202505.SAMD00212906
+    genome_name: Desulfovibrio subterraneus
+    atb_evidence:
+      release: 2025-05
+      sample_id: biosample:SAMD00212906
+      dataset: r0.2
+      run_accessions: DRR218223
+      assembly_seqkit_sum: seqkit.v0.1_DLS_k0_2392ce9582394476d496f11c139aa78e
+      assembly_filter: PASS
+      hq_filter: PASS
+      download_url: https://allthebacteria-assemblies.s3.eu-west-2.amazonaws.com/SAMD00212906.fa.gz
+      archive_url: https://osf.io/download/66716a00d835c439cd4ce3a3/
+      archive_filename: atb.assembly.r0.2.batch.114.tar.xz
+      sample_links:
+      - matched_strain_id: kgmicrobe.strain:DSM-101010
+        record_id: biosample:SAMD00212906
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:2718620.3
+        source_strain_field: culture_collection
+        source_strain_identifiers: DSM:101010
+        taxon_id: NCBITaxon:2718620
+      ena_analysis_id: ena.analysis:ERZ25083736
+      sylph_species: Halodesulfovibrio subterraneus
   related_records:
+  - record_id: bioproject:PRJDB9471
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:2718620.3
+    taxon_id: NCBITaxon:2718620
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-101010
+    source_strain_identifiers: DSM:101010
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMD00212906
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:2718620.3
+    taxon_id: NCBITaxon:2718620
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-101010
+    source_strain_identifiers: DSM:101010
+    source_strain_field: culture_collection
   - record_id: INSDC:LC531930
     record_type: NUCLEOTIDE_SEQUENCE
     source: STRAININFO
@@ -165,6 +251,7 @@ source_attestations:
   source_label: Desulfovibrio subterraneus
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:18297
   source_label: Desulfovibrio subterraneus
@@ -193,7 +280,7 @@ source_attestations:
   assertion_count: 2
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

@@ -214,8 +214,8 @@ classes:
         description: >-
           How many BacDive strain records are classified under this taxon —
           for a species or subspecies, including strains filed under its
-          descendant NCBI taxa. Recorded separately from `strains` because
-          the listing is capped: the count is always the full number.
+          descendant NCBI taxa. All classified strains are listed in
+          `strains`; this field gives the full number.
         range: integer
 
       strains:
@@ -864,6 +864,8 @@ classes:
         equals_string_in:
           - GTDB
           - GOLD
+          - NCBI_ASSEMBLY
+          - BV_BRC
 
   GenomeAssemblyLink:
     mixins:
@@ -1307,9 +1309,13 @@ enums:
     description: Upstream resource an attestation, mapping, name or strain comes from.
     permissible_values:
       NCBITAXON:
-        description: NCBI Taxonomy, via kg-microbe's ncbitaxon transform and raw semantic-sql build.
+        description: NCBI Taxonomy primary complete taxonomy dump, with pinned retired-ID history.
+      NCBI_ASSEMBLY:
+        description: Primary NCBI GenBank/RefSeq assembly metadata linked through explicit registered culture identifiers.
       GTDB:
         description: Genome Taxonomy Database species and genome assemblies.
+      BV_BRC:
+        description: Primary BV-BRC public genome metadata linked through explicit registered culture identifiers.
       ALLTHEBACTERIA:
         description: Pinned AllTheBacteria assemblies linked through explicit BioSample source evidence.
       LPSN:

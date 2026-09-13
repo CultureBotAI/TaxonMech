@@ -1,8 +1,9 @@
 """Evidence-preserving links to ATB assemblies through exact BioSample IDs.
 
 Sharing a strain does not link every genome to every sample. Native genome
-assertions must first reach a sample through their own GTDB record or GOLD
-organism/project chain. The resulting association is never genome equivalence.
+assertions must first reach a sample through their own NCBI, BV-BRC or GTDB
+record or GOLD organism/project chain. The resulting association is never
+genome equivalence.
 """
 
 from __future__ import annotations
@@ -56,7 +57,7 @@ def _json(value: object) -> str:
 def _evidence_key(row: dict, *, sample: bool) -> tuple[str, ...] | None:
     """Return a source-specific assertion key; unsupported sources never join."""
     source = _text(row, "source")
-    if source not in {"GTDB", "GOLD"}:
+    if source not in {"GTDB", "GOLD", "NCBI_ASSEMBLY", "BV_BRC"}:
         return None
     # A direct GOLD organism/analysis link without a sequencing project does
     # not identify the project that asserted a BioSample.
@@ -71,6 +72,21 @@ def _evidence_key(row: dict, *, sample: bool) -> tuple[str, ...] | None:
     strain_text = _text(row, "source_strain_identifiers")
     key = (sid, source, deposit, strain_text, strain_field,
            row.get("taxon_id", ""), row.get("source_reference_id", ""))
+    if source == "NCBI_ASSEMBLY":
+        _require_pattern(source_id, _NCBI, "NCBI assembly source_id")
+        if strain_field != "infraspecific_name":
+            raise ValueError("NCBI assembly sample joins require the original infraspecific_name field")
+        if sample and row.get("source_field") != "biosample":
+            raise ValueError("NCBI assembly BioSample evidence must come from biosample")
+        return (*key, source_id)
+    if source == "BV_BRC":
+        if not re.fullmatch(r"patric:[0-9]+\.[0-9]+", source_id):
+            raise ValueError("BV-BRC sample joins require their own genome identifier")
+        if strain_field not in {"culture_collection", "strain"}:
+            raise ValueError("BV-BRC sample joins require an explicit culture-deposit field")
+        if sample and row.get("source_field") != "biosample_accession":
+            raise ValueError("BV-BRC BioSample evidence must come from biosample_accession")
+        return (*key, source_id)
     if source == "GTDB":
         _require_pattern(source_id, _GTDB, "GTDB source_id")
         if strain_field != "ncbi_strain_identifiers":
@@ -97,9 +113,12 @@ def _genome_id(row: dict, *, ncbi: bool) -> str:
     source, field = row["source"], row.get("source_field")
     if ncbi:
         _require_pattern(identifier, _NCBI, "NCBI assembly identifier")
-        permitted = {"accession", "ncbi_genbank_assembly_accession"} if source == "GTDB" else {
-            "AP GENBANK.assemblyAccession",
-        }
+        if source == "NCBI_ASSEMBLY":
+            if field != "assembly_accession" or identifier != row["source_id"]:
+                raise ValueError("NCBI assembly/sample evidence must describe its own accession")
+            return identifier
+        permitted = ({"accession", "ncbi_genbank_assembly_accession"} if source == "GTDB" else
+                     {"assembly_accession"} if source == "BV_BRC" else {"AP GENBANK.assemblyAccession"})
         if field not in permitted:
             raise ValueError("NCBI assembly evidence must name the source assembly field")
         if source == "GTDB":
@@ -108,6 +127,9 @@ def _genome_id(row: dict, *, ncbi: bool) -> str:
                 raise ValueError("GTDB primary assembly must retain its source accession")
             if field == "ncbi_genbank_assembly_accession" and not identifier.startswith("ncbi.assembly:GCA_"):
                 raise ValueError("GTDB GenBank assembly evidence must retain a GCA accession")
+    elif source == "BV_BRC":
+        if (row.get("source_database") != "patric" or identifier != row["source_id"] or field != "genome_id"):
+            raise ValueError("BV-BRC genome/sample evidence must describe its own genome ID")
     elif source == "GTDB":
         _require_pattern(identifier, _GTDB, "GTDB genome identifier")
         if (row.get("source_database") != "gtdb" or identifier != row["source_id"]

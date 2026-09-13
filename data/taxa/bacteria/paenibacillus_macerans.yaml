@@ -90,17 +90,35 @@ taxonomy_mappings:
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 synonyms:
-- synonym_text: Aerobacillus macerans
+- synonym_text: '"Aerobacillus macerans" (Schardinger 1905) Donker 1926'
   synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Bactrillum macerans" (Schardinger 1905) Pribram 1933'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Zymobacillus macerans" (Schardinger 1905) Kluyver and van Niel 1936'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Aerobacillus macerans
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Bacillus macerans
   synonym_type: RELATED_SYNONYM
   source: LPSN
   source_id: lpsn:773760
 - synonym_text: Bacillus macerans
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Bacillus macerans Schardinger 1905 (Approved Lists 1980)
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Bactrillum macerans
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Paenibacillus macerans (Schardinger 1905) Ash et al. 1994
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Paenibacillus sp. WP-1
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Paenibacillus thermophilus
@@ -108,15 +126,18 @@ synonyms:
   source: LPSN
   source_id: lpsn:790266
 - synonym_text: Paenibacillus thermophilus
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Paenibacillus thermophilus Zhou et al. 2013
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Zymobacillus macerans
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 xrefs:
 - lpsn:779082
 genetic_code: 11
-strain_count: 10
+strain_count: 11
 strains:
 - strain_id: kgmicrobe.strain:bacdive_11475
   source: BACDIVE
@@ -147,7 +168,7 @@ strains:
   - kgmicrobe.strain:NRRL-B-172
   - kgmicrobe.strain:NRRL-B-394
   - kgmicrobe.strain:NRRL-B-4267
-  - kgmicrobe.strain:NRS-888
+  - kgmicrobe.strain:NRS%20888
   - kgmicrobe.strain:VKM-B-506
   - kgmicrobe.strain:VTT-E-81138
   is_type_strain: true
@@ -157,8 +178,9 @@ strains:
     source_id: bacdive:11475
     source_reference_id: '66792'
     assembly_level: scaffold
-    assembly_name: Paenibacillus macerans ATCC 8244
+    assembly_name: BMM_2 assembly for Paenibacillus macerans ATCC 8244
     taxon_id: NCBITaxon:44252
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_000746875.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_000746875.1
@@ -169,13 +191,43 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-8244
     source_strain_identifiers: ATCC 8244
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_000746875.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000746875.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: BMM_2
+    taxon_id: NCBITaxon:44252
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-8244
+    source_strain_identifiers: strain=ATCC 8244
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_004000965
     source: BACDIVE
     source_id: bacdive:11475
     source_reference_id: '67770'
     assembly_level: contig
+    assembly_name: ASM400096v1 assembly for Paenibacillus macerans NBRC 15307
+    taxon_id: NCBITaxon:1349781
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_004000965.1
+    source: BV_BRC
+    source_id: patric:1349781.5
     assembly_name: Paenibacillus macerans NBRC 15307
     taxon_id: NCBITaxon:1349781
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-15307
+    source_strain_identifiers: NBRC 15307
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_004000965.1
+    source: BV_BRC
+    source_id: patric:1349781.5
+    assembly_name: Paenibacillus macerans NBRC 15307
+    taxon_id: NCBITaxon:1349781
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-15307
+    source_strain_identifiers: NBRC:15307
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_004000965.1
     source: GOLD
     source_id: gold:Ga0667566
@@ -208,6 +260,25 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-15307
     source_strain_identifiers: NBRC 15307
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_004000965.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_004000965.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM400096v1
+    taxon_id: NCBITaxon:1349781
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-15307
+    source_strain_identifiers: strain=NBRC 15307
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCA_050470865
+    source: BACDIVE
+    source_id: bacdive:11475
+    source_reference_id: '124043'
+    assembly_level: contig
+    assembly_name: ASM5047086v1 assembly for Paenibacillus macerans NRRL B-172
+    taxon_id: NCBITaxon:44252
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_050470865.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_050470865.1
@@ -218,13 +289,25 @@ strains:
     matched_strain_id: kgmicrobe.strain:NRRL-B-172
     source_strain_identifiers: NRRL B-172
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_050470865.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_050470865.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM5047086v1
+    taxon_id: NCBITaxon:44252
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NRRL-B-172
+    source_strain_identifiers: strain=NRRL B-172
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_900454495
     source: BACDIVE
     source_id: bacdive:11475
     source_reference_id: '67770'
     assembly_level: contig
-    assembly_name: Paenibacillus macerans NCTC6355
+    assembly_name: 49508_F02 assembly for Paenibacillus macerans NCTC6355
     taxon_id: NCBITaxon:44252
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_900454495.1
     source: GOLD
     source_id: gold:Ga0350754
@@ -257,6 +340,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-8244
     source_strain_identifiers: ATCC 8244
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_000746875.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000746875.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: BMM_2
+    taxon_id: NCBITaxon:44252
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-8244
+    source_strain_identifiers: strain=ATCC 8244
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_004000965.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_004000965.1
@@ -267,6 +361,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-15307
     source_strain_identifiers: NBRC 15307
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_004000965.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_004000965.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM400096v1
+    taxon_id: NCBITaxon:1349781
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-15307
+    source_strain_identifiers: strain=NBRC 15307
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_050470865.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_050470865.1
@@ -277,6 +382,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:NRRL-B-172
     source_strain_identifiers: NRRL B-172
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_050470865.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_050470865.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM5047086v1
+    taxon_id: NCBITaxon:44252
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NRRL-B-172
+    source_strain_identifiers: strain=NRRL B-172
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_000746875
     source: STRAININFO
     source_id: straininfo.strain:1147
@@ -374,14 +490,24 @@ strains:
     matched_strain_id: kgmicrobe.strain:NRRL-B-172
     source_strain_identifiers: NRRL B-172
     source_strain_field: ncbi_strain_identifiers
-  - genome_id: img.taxon:2904127458
+  - genome_id: img.taxon:2636416126
     source_database: img
     source: BACDIVE
     source_id: bacdive:11475
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Paenibacillus macerans NCTC 6355
+    assembly_level: scaffold
+    genome_name: BMM_2 assembly for Paenibacillus macerans ATCC 8244
     taxon_id: NCBITaxon:44252
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:2904127458
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:11475
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: 49508_F02 assembly for Paenibacillus macerans NCTC6355
+    taxon_id: NCBITaxon:44252
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2904127458
     source_database: img
     source: GOLD
@@ -406,6 +532,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0500128
     source_project_id: gold:Gp0384328
+  - genome_id: img.taxon:8117252117
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:11475
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: ASM400096v1 assembly for Paenibacillus macerans NBRC 15307
+    taxon_id: NCBITaxon:1349781
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:8117252117
     source_database: img
     source: GOLD
@@ -434,21 +569,90 @@ strains:
     source_database: patric
     source: BACDIVE
     source_id: bacdive:11475
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: ASM400096v1 assembly for Paenibacillus macerans NBRC 15307
+    taxon_id: NCBITaxon:1349781
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1349781.5
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1349781.5
     genome_name: Paenibacillus macerans NBRC 15307
     taxon_id: NCBITaxon:1349781
-  - genome_id: patric:44252.8
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NBRC-15307
+    source_strain_identifiers: NBRC 15307
+    source_strain_field: strain
+  - genome_id: patric:1349781.5
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1349781.5
+    genome_name: Paenibacillus macerans NBRC 15307
+    taxon_id: NCBITaxon:1349781
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NBRC-15307
+    source_strain_identifiers: NBRC:15307
+    source_strain_field: culture_collection
+  - genome_id: patric:44252.3
     source_database: patric
     source: BACDIVE
     source_id: bacdive:11475
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Paenibacillus macerans strain NCTC6355
+    assembly_level: scaffold
+    genome_name: BMM_2 assembly for Paenibacillus macerans ATCC 8244
     taxon_id: NCBITaxon:44252
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:44252.46
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:44252.46
+    genome_name: Paenibacillus macerans NRRL B-172
+    taxon_id: NCBITaxon:44252
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NRRL-B-172
+    source_strain_identifiers: NRRL B-172
+    source_strain_field: strain
+  - genome_id: patric:44252.46
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:44252.46
+    genome_name: Paenibacillus macerans NRRL B-172
+    taxon_id: NCBITaxon:44252
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NRRL-B-172
+    source_strain_identifiers: NRRL:B-172
+    source_strain_field: culture_collection
+  - genome_id: patric:44252.8
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:11475
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: 49508_F02 assembly for Paenibacillus macerans NCTC6355
+    taxon_id: NCBITaxon:44252
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: bioproject:PRJDB1366
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1349781.5
+    taxon_id: NCBITaxon:1349781
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-15307
+    source_strain_identifiers: NBRC 15307
+    source_strain_field: strain
+  - record_id: bioproject:PRJDB1366
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1349781.5
+    taxon_id: NCBITaxon:1349781
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-15307
+    source_strain_identifiers: NBRC:15307
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJDB1366
+    record_type: BIOPROJECT
     source: GOLD
     source_id: gold:Gp0075781
     taxon_id: NCBITaxon:1349781
@@ -469,6 +673,16 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0075781
     source_project_id: gold:Gp0075781
+  - record_id: bioproject:PRJDB1366
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_004000965.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1349781
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NBRC-15307
+    source_strain_identifiers: strain=NBRC 15307
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
     source: GOLD
@@ -491,6 +705,34 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0500128
     source_project_id: gold:Gp0384328
+  - record_id: bioproject:PRJNA1109761
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:44252.46
+    taxon_id: NCBITaxon:44252
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NRRL-B-172
+    source_strain_identifiers: NRRL B-172
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA1109761
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:44252.46
+    taxon_id: NCBITaxon:44252
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NRRL-B-172
+    source_strain_identifiers: NRRL:B-172
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA1109761
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_050470865.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:44252
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NRRL-B-172
+    source_strain_identifiers: strain=NRRL B-172
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
     source: GTDB
@@ -518,6 +760,64 @@ strains:
     matched_strain_id: kgmicrobe.strain:NRRL-B-172
     source_strain_identifiers: NRRL B-172
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000746875.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:44252
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-8244
+    source_strain_identifiers: strain=ATCC 8244
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_004000965.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1349781
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NBRC-15307
+    source_strain_identifiers: strain=NBRC 15307
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_050470865.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:44252
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NRRL-B-172
+    source_strain_identifiers: strain=NRRL B-172
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA243589
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000746875.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:44252
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-8244
+    source_strain_identifiers: strain=ATCC 8244
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00034171
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1349781.5
+    taxon_id: NCBITaxon:1349781
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-15307
+    source_strain_identifiers: NBRC 15307
+    source_strain_field: strain
+  - record_id: biosample:SAMD00034171
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1349781.5
+    taxon_id: NCBITaxon:1349781
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-15307
+    source_strain_identifiers: NBRC:15307
+    source_strain_field: culture_collection
   - record_id: biosample:SAMD00034171
     record_type: BIOSAMPLE
     source: GOLD
@@ -549,6 +849,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-15307
     source_strain_identifiers: NBRC 15307
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMD00034171
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_004000965.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1349781
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NBRC-15307
+    source_strain_identifiers: strain=NBRC 15307
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00034171
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_004000965.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1349781
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NBRC-15307
+    source_strain_identifiers: strain=NBRC 15307
+    source_strain_field: infraspecific_name
   - record_id: biosample:SAMEA4076714
     record_type: BIOSAMPLE
     source: GOLD
@@ -580,6 +900,44 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-8244
     source_strain_identifiers: ATCC 8244
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN02739344
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000746875.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:44252
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-8244
+    source_strain_identifiers: strain=ATCC 8244
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02739344
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000746875.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:44252
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-8244
+    source_strain_identifiers: strain=ATCC 8244
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN41397065
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:44252.46
+    taxon_id: NCBITaxon:44252
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NRRL-B-172
+    source_strain_identifiers: NRRL B-172
+    source_strain_field: strain
+  - record_id: biosample:SAMN41397065
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:44252.46
+    taxon_id: NCBITaxon:44252
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NRRL-B-172
+    source_strain_identifiers: NRRL:B-172
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN41397065
     record_type: BIOSAMPLE
     source: GTDB
@@ -589,6 +947,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:NRRL-B-172
     source_strain_identifiers: NRRL B-172
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN41397065
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_050470865.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:44252
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NRRL-B-172
+    source_strain_identifiers: strain=NRRL B-172
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN41397065
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_050470865.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:44252
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NRRL-B-172
+    source_strain_identifiers: strain=NRRL B-172
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0350754
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -2942,7 +3320,7 @@ strains:
   culture_collection_ids:
   - kgmicrobe.strain:CCM-1610
   - kgmicrobe.strain:CCUG-26009
-  - kgmicrobe.strain:CN-1013
+  - kgmicrobe.strain:CN%201013
   - kgmicrobe.strain:DSM-357
   - kgmicrobe.strain:LMG-6325
   related_records:
@@ -3193,7 +3571,7 @@ strains:
   - kgmicrobe.strain:CIP-52.82
   - kgmicrobe.strain:DSM-2892
   - kgmicrobe.strain:NCIMB-10443
-  - kgmicrobe.strain:NRRL--NRS-277
+  - kgmicrobe.strain:NRRL-NRS-277
   related_records:
   - record_id: gold:Go0290968
     record_type: GOLD_ORGANISM
@@ -3347,7 +3725,7 @@ strains:
     taxon_id: NCBITaxon:44252
     record_name: NRRL NRS-277
     source_field: deposits.siDP
-    matched_strain_id: kgmicrobe.strain:NRRL--NRS-277
+    matched_strain_id: kgmicrobe.strain:NRRL-NRS-277
     source_strain_identifiers: NRRL NRS-277
     source_strain_field: deposits.designation
     straininfo_evidence:
@@ -3461,7 +3839,7 @@ strains:
     taxon_id: NCBITaxon:44252
     record_name: NRRL NRS-277
     source_field: strain.siID
-    matched_strain_id: kgmicrobe.strain:NRRL--NRS-277
+    matched_strain_id: kgmicrobe.strain:NRRL-NRS-277
     source_strain_identifiers: NRRL NRS-277
     source_strain_field: deposits.designation
     straininfo_evidence:
@@ -3478,7 +3856,7 @@ strains:
   source_id: bacdive:11663
   designation: WP-1
   culture_collection_ids:
-  - kgmicrobe.strain:CCTCC-AB-2011115
+  - kgmicrobe.strain:CCTCC-AB%202011115
   - kgmicrobe.strain:CIP-110636
   - kgmicrobe.strain:DSM-24746
   - kgmicrobe.strain:JCM-17693
@@ -3488,8 +3866,27 @@ strains:
     source_id: bacdive:11663
     source_reference_id: '67770'
     assembly_level: scaffold
-    assembly_name: Paenibacillus macerans DSM 24746
+    assembly_name: ASM385110v1 assembly for Paenibacillus macerans DSM 24746
     taxon_id: NCBITaxon:44252
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_003851105.1
+    source: BV_BRC
+    source_id: patric:1181891.3
+    assembly_name: Paenibacillus thermophilus strain DSM 24746
+    taxon_id: NCBITaxon:44252
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-24746
+    source_strain_identifiers: DSM 24746
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_003851105.1
+    source: BV_BRC
+    source_id: patric:1181891.3
+    assembly_name: Paenibacillus thermophilus strain DSM 24746
+    taxon_id: NCBITaxon:44252
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-24746
+    source_strain_identifiers: DSM:24746
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_003851105.1
     source: GOLD
     source_id: gold:Ga0520735
@@ -3522,13 +3919,43 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-24746
     source_strain_identifiers: DSM 24746
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_003851105.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_003851105.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM385110v1
+    taxon_id: NCBITaxon:44252
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-24746
+    source_strain_identifiers: strain=DSM 24746
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_003864435
     source: BACDIVE
     source_id: bacdive:11663
     source_reference_id: '67770'
     assembly_level: scaffold
-    assembly_name: Paenibacillus macerans JCM 17693
+    assembly_name: ASM386443v1 assembly for Paenibacillus macerans JCM 17693
     taxon_id: NCBITaxon:44252
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_003864435.1
+    source: BV_BRC
+    source_id: patric:1181891.4
+    assembly_name: Paenibacillus thermophilus strain JCM 17693
+    taxon_id: NCBITaxon:44252
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-17693
+    source_strain_identifiers: JCM 17693
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_003864435.1
+    source: BV_BRC
+    source_id: patric:1181891.4
+    assembly_name: Paenibacillus thermophilus strain JCM 17693
+    taxon_id: NCBITaxon:44252
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-17693
+    source_strain_identifiers: JCM:17693
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_003864435.1
     source: GOLD
     source_id: gold:Ga0520736
@@ -3561,6 +3988,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:JCM-17693
     source_strain_identifiers: JCM 17693
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_003864435.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_003864435.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM386443v1
+    taxon_id: NCBITaxon:44252
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-17693
+    source_strain_identifiers: strain=JCM 17693
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_003851105.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_003851105.1
@@ -3571,6 +4009,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-24746
     source_strain_identifiers: DSM 24746
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_003851105.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_003851105.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM385110v1
+    taxon_id: NCBITaxon:44252
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-24746
+    source_strain_identifiers: strain=DSM 24746
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_003864435.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_003864435.1
@@ -3581,6 +4030,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:JCM-17693
     source_strain_identifiers: JCM 17693
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_003864435.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_003864435.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM386443v1
+    taxon_id: NCBITaxon:44252
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-17693
+    source_strain_identifiers: strain=JCM 17693
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_003851105
     source: STRAININFO
     source_id: straininfo.strain:406040
@@ -3627,6 +4087,15 @@ strains:
     source_strain_field: ncbi_strain_identifiers
   - genome_id: img.taxon:8112449450
     source_database: img
+    source: BACDIVE
+    source_id: bacdive:11663
+    source_reference_id: '67770'
+    assembly_level: scaffold
+    genome_name: ASM385110v1 assembly for Paenibacillus macerans DSM 24746
+    taxon_id: NCBITaxon:44252
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:8112449450
+    source_database: img
     source: GOLD
     source_id: gold:Ga0520735
     genome_name: Paenibacillus macerans DSM 24746
@@ -3649,6 +4118,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0593927
     source_project_id: gold:Gp0607872
+  - genome_id: img.taxon:8112456067
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:11663
+    source_reference_id: '67770'
+    assembly_level: scaffold
+    genome_name: ASM386443v1 assembly for Paenibacillus macerans JCM 17693
+    taxon_id: NCBITaxon:44252
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:8112456067
     source_database: img
     source: GOLD
@@ -3677,21 +4155,99 @@ strains:
     source_database: patric
     source: BACDIVE
     source_id: bacdive:11663
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '67770'
+    assembly_level: scaffold
+    genome_name: ASM385110v1 assembly for Paenibacillus macerans DSM 24746
+    taxon_id: NCBITaxon:44252
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1181891.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1181891.3
     genome_name: Paenibacillus thermophilus strain DSM 24746
     taxon_id: NCBITaxon:44252
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-24746
+    source_strain_identifiers: DSM 24746
+    source_strain_field: strain
+  - genome_id: patric:1181891.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1181891.3
+    genome_name: Paenibacillus thermophilus strain DSM 24746
+    taxon_id: NCBITaxon:44252
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-24746
+    source_strain_identifiers: DSM:24746
+    source_strain_field: culture_collection
   - genome_id: patric:1181891.4
     source_database: patric
     source: BACDIVE
     source_id: bacdive:11663
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '67770'
+    assembly_level: scaffold
+    genome_name: ASM386443v1 assembly for Paenibacillus macerans JCM 17693
+    taxon_id: NCBITaxon:44252
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1181891.4
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1181891.4
     genome_name: Paenibacillus thermophilus strain JCM 17693
     taxon_id: NCBITaxon:44252
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-17693
+    source_strain_identifiers: JCM 17693
+    source_strain_field: strain
+  - genome_id: patric:1181891.4
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1181891.4
+    genome_name: Paenibacillus thermophilus strain JCM 17693
+    taxon_id: NCBITaxon:44252
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-17693
+    source_strain_identifiers: JCM:17693
+    source_strain_field: culture_collection
   related_records:
   - record_id: bioproject:PRJDB6975
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1181891.3
+    taxon_id: NCBITaxon:44252
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-24746
+    source_strain_identifiers: DSM 24746
+    source_strain_field: strain
+  - record_id: bioproject:PRJDB6975
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1181891.3
+    taxon_id: NCBITaxon:44252
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-24746
+    source_strain_identifiers: DSM:24746
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJDB6975
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1181891.4
+    taxon_id: NCBITaxon:44252
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-17693
+    source_strain_identifiers: JCM 17693
+    source_strain_field: strain
+  - record_id: bioproject:PRJDB6975
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1181891.4
+    taxon_id: NCBITaxon:44252
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-17693
+    source_strain_identifiers: JCM:17693
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJDB6975
+    record_type: BIOPROJECT
     source: GOLD
     source_id: gold:Gp0607872
     taxon_id: NCBITaxon:44252
@@ -3734,6 +4290,26 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0593928
     source_project_id: gold:Gp0607873
+  - record_id: bioproject:PRJDB6975
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_003851105.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:44252
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-24746
+    source_strain_identifiers: strain=DSM 24746
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJDB6975
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_003864435.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:44252
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:JCM-17693
+    source_strain_identifiers: strain=JCM 17693
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
     source: GTDB
@@ -3752,6 +4328,44 @@ strains:
     matched_strain_id: kgmicrobe.strain:JCM-17693
     source_strain_identifiers: JCM 17693
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_003851105.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:44252
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-24746
+    source_strain_identifiers: strain=DSM 24746
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_003864435.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:44252
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:JCM-17693
+    source_strain_identifiers: strain=JCM 17693
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00117539
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1181891.4
+    taxon_id: NCBITaxon:44252
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-17693
+    source_strain_identifiers: JCM 17693
+    source_strain_field: strain
+  - record_id: biosample:SAMD00117539
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1181891.4
+    taxon_id: NCBITaxon:44252
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-17693
+    source_strain_identifiers: JCM:17693
+    source_strain_field: culture_collection
   - record_id: biosample:SAMD00117539
     record_type: BIOSAMPLE
     source: GOLD
@@ -3783,6 +4397,44 @@ strains:
     matched_strain_id: kgmicrobe.strain:JCM-17693
     source_strain_identifiers: JCM 17693
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMD00117539
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_003864435.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:44252
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:JCM-17693
+    source_strain_identifiers: strain=JCM 17693
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00117539
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_003864435.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:44252
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:JCM-17693
+    source_strain_identifiers: strain=JCM 17693
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00117540
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1181891.3
+    taxon_id: NCBITaxon:44252
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-24746
+    source_strain_identifiers: DSM 24746
+    source_strain_field: strain
+  - record_id: biosample:SAMD00117540
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1181891.3
+    taxon_id: NCBITaxon:44252
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-24746
+    source_strain_identifiers: DSM:24746
+    source_strain_field: culture_collection
   - record_id: biosample:SAMD00117540
     record_type: BIOSAMPLE
     source: GOLD
@@ -3814,6 +4466,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-24746
     source_strain_identifiers: DSM 24746
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMD00117540
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_003851105.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:44252
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-24746
+    source_strain_identifiers: strain=DSM 24746
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00117540
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_003851105.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:44252
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-24746
+    source_strain_identifiers: strain=DSM 24746
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0520735
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -4323,12 +4995,19 @@ strains:
   culture_collection_ids:
   - kgmicrobe.strain:JCM-13340
   medium_count: 1
+- strain_id: kgmicrobe.strain:bacdive_179135
+  source: BACDIVE
+  source_id: bacdive:179135
+  designation: IMET 10847
+  culture_collection_ids:
+  - kgmicrobe.strain:STI10847
 source_attestations:
 - source: NCBITAXON
   source_id: NCBITaxon:44252
   source_label: Paenibacillus macerans
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:779082
   source_label: Paenibacillus macerans
@@ -4345,7 +5024,7 @@ source_attestations:
 - source: BACDIVE
   source_id: NCBITaxon:44252
   source_label: Paenibacillus macerans
-  assertion_count: 10
+  assertion_count: 11
   assertion_unit: STRAIN
   notes: 1 strains are filed under 1 descendant NCBI taxa (see classified_as).
 - source: MEDIADIVE
@@ -4373,7 +5052,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

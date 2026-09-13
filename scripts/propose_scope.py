@@ -73,7 +73,7 @@ def main(argv: list[str] | None = None) -> int:
         if args.rule == "core" and not (strain_count and correct_typed and has_gtdb):
             continue
         # NCBI itself, the attesting sources, and GTDB when it maps (#5).
-        n_sources = 1 + len(sources) + (1 if has_gtdb else 0)
+        n_sources = len(sources | {"ncbitaxon"} | ({"gtdb"} if has_gtdb else set()))
         candidates.append((-n_sources, -strain_count, int(tid.split(":")[1]), tid, row["label"], n_sources,
                            strain_count))
     candidates.sort()

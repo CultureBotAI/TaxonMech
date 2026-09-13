@@ -1,0 +1,48 @@
+history_version: 1
+target:
+  kind: infrastructure
+  path: src/taxonmech
+  slug: complete-prokaryote-source-review
+session:
+  id: 2026-09-13T180646Z-Codex-b1a6aa
+  timestamp: '2026-09-13T18:06:46Z'
+  actors:
+  - type: ai_agent
+    name: Codex
+    model: GPT-6
+    agent_tool: Codex
+links:
+  issues:
+  - https://github.com/CultureBotAI/TaxonMech/issues/51
+  - https://github.com/CultureBotAI/TaxonMech/issues/52
+  - https://github.com/CultureBotAI/TaxonMech/issues/53
+events:
+- type: REVIEW
+  outcome: changed
+  summary: Address adversarial review of capture replay and taxonomy census accounting
+  details: Issues 51 and 52 record reproduced failures. BacDive, BV-BRC and SeqCode now validate
+    completed capture pins before touching published projection bytes and preserve timestamps
+    on unchanged replay; SeqCode pagination must retain its public-name filter. Four replay
+    regression tests pass. Corrected the taxonomy census to 647271 attested taxa, 3489 ancestors
+    and 7 retained retirement-context entries. Re-extraction proved all 16 inventory outputs,
+    source input pins and the extraction timestamp byte-identical. Full validation, reproduction,
+    rendering and reporting remain explicit QC gates; duplicate smoke checks are only deselected
+    inside that combined gate and still run under standalone pytest.
+- type: REVIEW
+  outcome: changed
+  summary: Reject malformed NCBI domain-root and universal-root parent chains
+  details: Issue 53 records three reproduced failures for cycles involving NCBITaxon 2,
+    2157 and 1. Require the universal root to be parentless and resolve domain-root ancestry
+    through the same cycle-checked traversal as every other node. All nine primary-taxonomy
+    tests pass after the fix. All 650767 retained taxonomy parent paths validate, with
+    identical membership for the 640842 retained prokaryotic inventory entries.
+- type: REVIEW
+  outcome: no_change
+  summary: Verify complete regenerated publication and real incoming strain anchors
+  details: The site contains 625960 records in 2909 compressed detail shards and retains
+    all 63699 legacy taxon routes. Its measured publication size is 615154335 bytes,
+    below the 950000000-byte budget. A temporary localhost server and the shipped JavaScript
+    loaded all 625960 search entries, verified the bacterial and archaeal counts, and
+    opened the final strain anchor in the complete 1975-strain Escherichia coli record.
+    A complete-inventory regression verifies every eligible bacterial and archaeal taxon
+    is included in the explicit scope. All 700110 tracked paths pass the 100 MiB file limit.

@@ -67,8 +67,8 @@ accession/type combinations are recorded as exclusions.
 ## Snapshot, inventories and queries
 
 The component is a dated, hash-pinned capture of the public API. The full
-ID/search census selects rich records whose culture designations overlap
-inventoried deposits. Source request URLs and response byte hashes remain in
+ID/search census is captured in full, together with every rich strain record,
+regardless of whether its culture designations overlap inventoried deposits. Source request URLs and response byte hashes remain in
 `SOURCE.json`. The compressed projection preserves original identity,
 relation, sequence, alternative and archive fields and relevant deposit
 metadata, omitting unrelated phenotype fields.
@@ -155,7 +155,8 @@ TaxonMech's CC0 license does not relicense upstream metadata.
 `just straininfo-fetch --help` describes capturing primary API evidence.
 `just straininfo-index` checks the configured snapshot in a dry run;
 `just straininfo-index --apply` publishes the component. After changing the
-BacDive deposit inventory or pinned CAFI registry, capture and pin a
-corresponding source snapshot before rebuilding. Then follow the seed dry
+BacDive deposit inventory or pinned CAFI registry, rebuild the overlay against
+the complete pinned source capture. Legacy overlap-selected captures must be
+refreshed when their selection inputs change. Then follow the seed dry
 run, canary, bulk seed, render and statistics workflow. Seeding and normal
 queries use committed evidence without fetching live records or genome FASTAs.

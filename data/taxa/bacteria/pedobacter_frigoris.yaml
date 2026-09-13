@@ -73,6 +73,13 @@ taxonomy_mappings:
   genome_count: 1
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
+synonyms:
+- synonym_text: Pedobacter frigoris Dahal et al. 2020
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Pedobacter sp. RP-3-15
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Pedobacter_frigoris
 - lpsn:7304
@@ -85,7 +92,7 @@ strains:
   designation: RP-3-15
   culture_collection_ids:
   - kgmicrobe.strain:KACC-21154
-  - kgmicrobe.strain:KEMB-9005-726
+  - kgmicrobe.strain:KEMB%209005-726
   - kgmicrobe.strain:NBRC-113834
   is_type_strain: true
   genome_assemblies:
@@ -94,8 +101,18 @@ strains:
     source_id: bacdive:168556
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Pedobacter frigoris RP-3-15
+    assembly_name: ASM511644v1 assembly for Pedobacter frigoris RP-3-15
     taxon_id: NCBITaxon:2571272
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_005116445.1
+    source: BV_BRC
+    source_id: patric:2571272.3
+    assembly_name: Pedobacter sp. RP-3-15
+    taxon_id: NCBITaxon:2571272
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:KACC-21154
+    source_strain_identifiers: KACC:21154
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_005116445.1
     source: GOLD
     source_id: gold:Ga0441588
@@ -108,6 +125,15 @@ strains:
     source_organism_id: gold:Go0540337
     source_project_id: gold:Gp0491180
   genome_records:
+  - genome_id: img.taxon:2899625774
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:168556
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: ASM511644v1 assembly for Pedobacter frigoris RP-3-15
+    taxon_id: NCBITaxon:2571272
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2899625774
     source_database: img
     source: GOLD
@@ -125,10 +151,30 @@ strains:
     source: BACDIVE
     source_id: bacdive:168556
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM511644v1 assembly for Pedobacter frigoris RP-3-15
+    taxon_id: NCBITaxon:2571272
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:2571272.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:2571272.3
     genome_name: Pedobacter sp. RP-3-15
     taxon_id: NCBITaxon:2571272
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:KACC-21154
+    source_strain_identifiers: KACC:21154
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJNA534132
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:2571272.3
+    taxon_id: NCBITaxon:2571272
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:KACC-21154
+    source_strain_identifiers: KACC:21154
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA534132
     record_type: BIOPROJECT
     source: GOLD
@@ -140,6 +186,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0540337
     source_project_id: gold:Gp0491180
+  - record_id: biosample:SAMN11478357
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:2571272.3
+    taxon_id: NCBITaxon:2571272
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:KACC-21154
+    source_strain_identifiers: KACC:21154
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN11478357
     record_type: BIOSAMPLE
     source: GOLD
@@ -192,6 +247,7 @@ source_attestations:
   source_label: Pedobacter frigoris
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:7304
   source_label: Pedobacter frigoris
@@ -216,7 +272,7 @@ source_attestations:
   assertion_count: 1
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

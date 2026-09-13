@@ -68,6 +68,13 @@ taxonomy_mappings:
   genome_count: 10
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
+synonyms:
+- synonym_text: Clostridiales bacterium 14
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Monoglobus pectinilyticus Kim et al. 2017
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Monoglobus_pectinilyticus
 - lpsn:796288
@@ -88,26 +95,94 @@ strains:
     source_id: bacdive:158306
     source_reference_id: '66792'
     assembly_level: chromosome
-    assembly_name: Monoglobus pectinilyticus 14
+    assembly_name: ASM287477v1 assembly for Monoglobus pectinilyticus 14
     taxon_id: NCBITaxon:1981510
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_002874775.1
+    source: BV_BRC
+    source_id: patric:1981510.4
+    assembly_name: Monoglobus pectinilyticus strain 14
+    taxon_id: NCBITaxon:1981510
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-104782
+    source_strain_identifiers: DSM 104782
+    source_strain_field: culture_collection
   genome_records:
   - genome_id: img.taxon:2833582041
     source_database: img
     source: BACDIVE
     source_id: bacdive:158306
     source_reference_id: '66792'
-    assembly_level: complete
-    genome_name: Monoglobus pectinilyticus 14
+    assembly_level: chromosome
+    genome_name: ASM287477v1 assembly for Monoglobus pectinilyticus 14
     taxon_id: NCBITaxon:1981510
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: patric:1981510.4
     source_database: patric
     source: BACDIVE
     source_id: bacdive:158306
     source_reference_id: '66792'
-    assembly_level: complete
+    assembly_level: chromosome
+    genome_name: ASM287477v1 assembly for Monoglobus pectinilyticus 14
+    taxon_id: NCBITaxon:1981510
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1981510.4
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1981510.4
     genome_name: Monoglobus pectinilyticus strain 14
     taxon_id: NCBITaxon:1981510
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-104782
+    source_strain_identifiers: DSM 104782
+    source_strain_field: culture_collection
+  - genome_id: atb.assembly:202505.SAMN06817956
+    source_database: allthebacteria
+    source: ALLTHEBACTERIA
+    source_id: atb.assembly:202505.SAMN06817956
+    genome_name: Monoglobus pectinilyticus
+    atb_evidence:
+      release: 2025-05
+      sample_id: biosample:SAMN06817956
+      dataset: 661k
+      run_accessions: SRR5468943,SRR5468944,SRR5468945
+      assembly_seqkit_sum: seqkit.v0.1_DLS_k0_75e0d5a17c885f66a67cf6bb06e0320d
+      assembly_filter: PASS
+      hq_filter: SYLPH_RESULTS_FAIL
+      download_url: https://allthebacteria-assemblies.s3.eu-west-2.amazonaws.com/SAMN06817956.fa.gz
+      archive_url: https://osf.io/download/667170ad65e1de5eb9893b76/
+      archive_filename: atb.assembly.r0.2.batch.122.tar.xz
+      sample_links:
+      - matched_strain_id: kgmicrobe.strain:DSM-104782
+        record_id: biosample:SAMN06817956
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1981510.4
+        source_strain_field: culture_collection
+        source_strain_identifiers: DSM 104782
+        taxon_id: NCBITaxon:1981510
+      ena_analysis_id: ena.analysis:ERZ5082055
+      sylph_species: unknown
   related_records:
+  - record_id: bioproject:PRJNA383867
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1981510.4
+    taxon_id: NCBITaxon:1981510
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-104782
+    source_strain_identifiers: DSM 104782
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN06817956
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1981510.4
+    taxon_id: NCBITaxon:1981510
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-104782
+    source_strain_identifiers: DSM 104782
+    source_strain_field: culture_collection
   - record_id: gold:Go0621134
     record_type: GOLD_ORGANISM
     source: GOLD
@@ -196,6 +271,7 @@ source_attestations:
   source_label: Monoglobus pectinilyticus
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:796288
   source_label: Monoglobus pectinilyticus
@@ -225,7 +301,7 @@ source_attestations:
   assertion_count: 3
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

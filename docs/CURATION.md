@@ -7,7 +7,7 @@ text explains the judgements.
 ## What is a record
 
 A record is **one species-level or lower taxon in NCBI Taxonomy** that at
-least one strain-bearing source attests: a species, a subspecies, a
+least one source attests, including the complete NCBI prokaryote backbone: a species, a subspecies, a
 strain-level or other infraspecific taxon, or an unranked taxon under a
 species. **This is a repository rule.** Genera, families and every higher
 rank are never records; they appear only as `lineage` entries. The seeder

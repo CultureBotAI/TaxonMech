@@ -75,11 +75,17 @@ taxonomy_mappings:
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 synonyms:
+- synonym_text: Pseudotamlana agarivorans (Yoon et al. 2008) Huang et al. 2025
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: Tamlana agarivorans
   synonym_type: RELATED_SYNONYM
   source: LPSN
   source_id: lpsn:787493
 - synonym_text: Tamlana agarivorans
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Tamlana agarivorans Yoon et al. 2008
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 xrefs:
@@ -102,8 +108,18 @@ strains:
     source_id: bacdive:134350
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Tamlana agarivorans JW-26
+    assembly_name: ASM164283v1 assembly for Pseudotamlana agarivorans JW-26
     taxon_id: NCBITaxon:481183
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_001642835.1
+    source: BV_BRC
+    source_id: patric:481183.3
+    assembly_name: Tamlana agarivorans strain JW-26
+    taxon_id: NCBITaxon:481183
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:KCTC-22176
+    source_strain_identifiers: KCTC:22176
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_001642835.1
     source: GOLD
     source_id: gold:Ga0133195
@@ -121,9 +137,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:134350
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Tamlana agarivorans JW-26
+    assembly_level: contig
+    genome_name: ASM164283v1 assembly for Pseudotamlana agarivorans JW-26
     taxon_id: NCBITaxon:481183
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2744054878
     source_database: img
     source: GOLD
@@ -141,10 +158,30 @@ strains:
     source: BACDIVE
     source_id: bacdive:134350
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM164283v1 assembly for Pseudotamlana agarivorans JW-26
+    taxon_id: NCBITaxon:481183
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:481183.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:481183.3
     genome_name: Tamlana agarivorans strain JW-26
     taxon_id: NCBITaxon:481183
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:KCTC-22176
+    source_strain_identifiers: KCTC:22176
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJNA318968
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:481183.3
+    taxon_id: NCBITaxon:481183
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:KCTC-22176
+    source_strain_identifiers: KCTC:22176
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA318968
     record_type: BIOPROJECT
     source: GOLD
@@ -156,6 +193,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0144714
     source_project_id: gold:Gp0150336
+  - record_id: biosample:SAMN04876002
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:481183.3
+    taxon_id: NCBITaxon:481183
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:KCTC-22176
+    source_strain_identifiers: KCTC:22176
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN04876002
     record_type: BIOSAMPLE
     source: GOLD
@@ -268,6 +314,7 @@ source_attestations:
   source_label: Pseudotamlana agarivorans
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:57964
   source_label: Pseudotamlana agarivorans
@@ -297,7 +344,7 @@ source_attestations:
   assertion_count: 6
   assertion_unit: TRAIT_ASSERTION
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

@@ -72,7 +72,7 @@ synonyms:
   source: LPSN
   source_id: lpsn:784335
 - synonym_text: Mycoplasmopsis californica (Jasper et al. 1981) Gupta et al. 2018
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 xrefs:
 - GTDB:s__Mycoplasmopsis_californica
@@ -85,7 +85,7 @@ strains:
   source_id: bacdive:8599
   designation: ST-6
   culture_collection_ids:
-  - kgmicrobe.strain:AMRC-C-1077
+  - kgmicrobe.strain:AMRC-C%201077
   - kgmicrobe.strain:ATCC-33461
   - kgmicrobe.strain:DSM-21477
   - kgmicrobe.strain:NCTC-10189
@@ -96,8 +96,9 @@ strains:
     source_id: bacdive:8599
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Mycoplasmopsis californica ST-6
+    assembly_name: ASM69583v1 assembly for Mycoplasmopsis californica ST-6
     taxon_id: NCBITaxon:2113
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_000695835.1
     source: GOLD
     source_id: gold:Ga0049650
@@ -114,8 +115,18 @@ strains:
     source_id: bacdive:8599
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Mycoplasmopsis californica NCTC10189
+    assembly_name: 56433_C01-3 assembly for Mycoplasmopsis californica NCTC10189
     taxon_id: NCBITaxon:2113
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900660595.1
+    source: BV_BRC
+    source_id: patric:2113.9
+    assembly_name: Mycoplasma californicum strain NCTC10189
+    taxon_id: NCBITaxon:2113
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10189
+    source_strain_identifiers: NCTC:10189
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_900660595.1
     source: GOLD
     source_id: gold:Ga0452993
@@ -165,8 +176,9 @@ strains:
     source_id: bacdive:8599
     source_reference_id: '66792'
     assembly_level: complete
-    genome_name: Mycoplasmopsis californica ST-6
+    genome_name: ASM69583v1 assembly for Mycoplasmopsis californica ST-6
     taxon_id: NCBITaxon:2113
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2576861462
     source_database: img
     source: GOLD
@@ -179,15 +191,44 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0091479
     source_project_id: gold:Gp0091479
+  - genome_id: patric:2113.3
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:8599
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM69583v1 assembly for Mycoplasmopsis californica ST-6
+    taxon_id: NCBITaxon:2113
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   - genome_id: patric:2113.9
     source_database: patric
     source: BACDIVE
     source_id: bacdive:8599
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: 56433_C01-3 assembly for Mycoplasmopsis californica NCTC10189
+    taxon_id: NCBITaxon:2113
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:2113.9
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:2113.9
     genome_name: Mycoplasma californicum strain NCTC10189
     taxon_id: NCBITaxon:2113
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-10189
+    source_strain_identifiers: NCTC:10189
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:2113.9
+    taxon_id: NCBITaxon:2113
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10189
+    source_strain_identifiers: NCTC:10189
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
     source: GOLD
@@ -221,6 +262,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0091479
     source_project_id: gold:Gp0091479
+  - record_id: biosample:SAMEA104200682
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:2113.9
+    taxon_id: NCBITaxon:2113
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10189
+    source_strain_identifiers: NCTC:10189
+    source_strain_field: culture_collection
   - record_id: biosample:SAMEA104200682
     record_type: BIOSAMPLE
     source: GOLD
@@ -540,6 +590,7 @@ source_attestations:
   source_label: Mycoplasmopsis californica
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:798565
   source_label: Mycoplasmopsis californica
@@ -577,7 +628,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

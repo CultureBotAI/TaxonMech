@@ -74,8 +74,10 @@ assembly identifiers. Exclusions are recorded in `data/atb/exclusions.tsv`.
 
 The website reads only the committed overlap. It does not download or scan
 the full source catalog. `data/atb/strain_links.tsv` joins on `strain_id` to
-`data/raw/bacdive_strains.tsv`, independently of the 200-strain taxon listing
-cap. Existing NCBI, GTDB, PATRIC and IMG inventories remain separate.
+`data/raw/bacdive_strains.tsv`. Taxon records retain the complete strain
+listing; the browser displays it in pages of 200. Existing NCBI, GTDB,
+PATRIC and IMG inventories remain separate. The full source metadata are
+also downloadable through the [source catalog](SOURCE_COVERAGE.md).
 
 Build the full local catalog and regenerate the overlap:
 

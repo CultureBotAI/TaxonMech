@@ -61,12 +61,15 @@ taxonomy_mappings:
   genome_count: 22
   notes: LPSN links this GTDB species to the taxon's name.
 synonyms:
+- synonym_text: Halanaerobium congolense Ravot et al. 1998
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: Haloanaerobium congolense
   synonym_type: RELATED_SYNONYM
   source: LPSN
   source_id: lpsn:776676
 - synonym_text: Haloanaerobium congolense
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 xrefs:
 - GTDB:s__Halanaerobium_congolense
@@ -79,9 +82,26 @@ strains:
   source_id: bacdive:5859
   culture_collection_ids:
   - kgmicrobe.strain:DSM-11287
-  - kgmicrobe.strain:SEBR-4224
+  - kgmicrobe.strain:SEBR%204224
   is_type_strain: true
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_004366375
+    source: BACDIVE
+    source_id: bacdive:5859
+    source_reference_id: '66792'
+    assembly_level: scaffold
+    assembly_name: ASM436637v1 assembly for Halanaerobium congolense DSMZ 11287
+    taxon_id: NCBITaxon:54121
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_004366375.1
+    source: BV_BRC
+    source_id: patric:54121.23
+    assembly_name: Halanaerobium congolense strain DSMZ 11287
+    taxon_id: NCBITaxon:54121
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-11287
+    source_strain_identifiers: DSM:11287
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_004366375.1
     source: GOLD
     source_id: gold:Ga0206404
@@ -110,9 +130,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:5859
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Halanaerobium congolense DSM 11287
+    assembly_level: scaffold
+    genome_name: ASM436637v1 assembly for Halanaerobium congolense DSMZ 11287
     taxon_id: NCBITaxon:54121
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2740892605
     source_database: img
     source: GOLD
@@ -142,9 +163,20 @@ strains:
     source: BACDIVE
     source_id: bacdive:5859
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: scaffold
+    genome_name: ASM436637v1 assembly for Halanaerobium congolense DSMZ 11287
+    taxon_id: NCBITaxon:54121
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:54121.23
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:54121.23
     genome_name: Halanaerobium congolense strain DSMZ 11287
     taxon_id: NCBITaxon:54121
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-11287
+    source_strain_identifiers: DSM:11287
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN08778209
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -162,6 +194,15 @@ strains:
       archive_url: https://osf.io/download/66716a00d835c439cd4ce3a3/
       archive_filename: atb.assembly.r0.2.batch.114.tar.xz
       sample_links:
+      - matched_strain_id: kgmicrobe.strain:DSM-11287
+        record_id: biosample:SAMN08778209
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:54121.23
+        source_strain_field: culture_collection
+        source_strain_identifiers: DSM:11287
+        taxon_id: NCBITaxon:54121
       - matched_strain_id: kgmicrobe.strain:DSM-11287
         record_id: biosample:SAMN08778209
         record_type: BIOSAMPLE
@@ -189,6 +230,15 @@ strains:
   related_records:
   - record_id: bioproject:PRJNA441675
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:54121.23
+    taxon_id: NCBITaxon:54121
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-11287
+    source_strain_identifiers: DSM:11287
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA441675
+    record_type: BIOPROJECT
     source: GOLD
     source_id: gold:Gp0224109
     taxon_id: NCBITaxon:54121
@@ -209,6 +259,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0383077
     source_project_id: gold:Gp0224109
+  - record_id: biosample:SAMN08778209
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:54121.23
+    taxon_id: NCBITaxon:54121
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-11287
+    source_strain_identifiers: DSM:11287
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN08778209
     record_type: BIOSAMPLE
     source: GOLD
@@ -388,6 +447,7 @@ source_attestations:
   source_label: Halanaerobium congolense
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:776662
   source_label: Halanaerobium congolense
@@ -426,7 +486,7 @@ source_attestations:
   assertion_count: 1
   assertion_unit: TRAIT_ASSERTION
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

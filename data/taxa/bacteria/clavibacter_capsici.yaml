@@ -81,11 +81,20 @@ taxonomy_mappings:
   genome_count: 7
   notes: LPSN links this GTDB species to the taxon's name.
 synonyms:
+- synonym_text: Clavibacter capsici (Oh et al. 2016) Li et al. 2018
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Clavibacter capsici (Oh et al. 2016) Nouioui et al. 2018
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: Clavibacter michiganensis capsici
   synonym_type: RELATED_SYNONYM
   source: LPSN
   source_id: lpsn:794623
 - synonym_text: Clavibacter michiganensis subsp. capsici
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Clavibacter michiganensis subsp. capsici Oh et al. 2016
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 xrefs:
@@ -102,16 +111,72 @@ strains:
   - kgmicrobe.strain:KACC-18448
   - kgmicrobe.strain:LMG-29047
   is_type_strain: true
+  genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_001280205
+    source: BACDIVE
+    source_id: bacdive:133135
+    source_reference_id: '66792'
+    assembly_level: complete
+    assembly_name: ASM128020v1 assembly for Clavibacter capsici PF008
+    taxon_id: NCBITaxon:28447
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCF_001280205.1
+    source: BV_BRC
+    source_id: patric:28447.7
+    assembly_name: Clavibacter michiganensis strain PF008
+    taxon_id: NCBITaxon:28447
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:KACC-18448
+    source_strain_identifiers: KACC:18448
+    source_strain_field: culture_collection
   genome_records:
+  - genome_id: img.taxon:2654588053
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:133135
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM128020v1 assembly for Clavibacter capsici PF008
+    taxon_id: NCBITaxon:28447
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: patric:28447.7
     source_database: patric
     source: BACDIVE
     source_id: bacdive:133135
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM128020v1 assembly for Clavibacter capsici PF008
+    taxon_id: NCBITaxon:28447
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:28447.7
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:28447.7
     genome_name: Clavibacter michiganensis strain PF008
     taxon_id: NCBITaxon:28447
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:KACC-18448
+    source_strain_identifiers: KACC:18448
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJNA290692
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:28447.7
+    taxon_id: NCBITaxon:28447
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:KACC-18448
+    source_strain_identifiers: KACC:18448
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN03896004
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:28447.7
+    taxon_id: NCBITaxon:28447
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:KACC-18448
+    source_strain_identifiers: KACC:18448
+    source_strain_field: culture_collection
   - record_id: INSDC:CP012573
     record_type: NUCLEOTIDE_SEQUENCE
     source: STRAININFO
@@ -177,6 +242,7 @@ source_attestations:
   source_label: Clavibacter capsici
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:798782
   source_label: Clavibacter capsici
@@ -200,7 +266,7 @@ source_attestations:
   assertion_count: 4
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

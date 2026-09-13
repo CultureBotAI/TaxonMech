@@ -53,6 +53,25 @@ def test_dry_run_is_read_only_and_replay_is_byte_identical(pipeline):
     assert atb.genome_records(out)[SID][0]["atb_evidence"]["sample_links"]
 
 
+@pytest.mark.parametrize("source", ["NCBI_ASSEMBLY", "BV_BRC"])
+def test_primary_sources_survive_full_atb_publication_and_conversion(pipeline, source):
+    _, _, out, raw, _ = pipeline
+    evidence = {"source": source,
+                "source_id": ncbi()["assembly_id"] if source == "NCBI_ASSEMBLY" else "patric:562.1",
+                "source_strain_field": "infraspecific_name" if source == "NCBI_ASSEMBLY" else "strain",
+                "source_strain_identifiers": "strain=DSM 30083" if source == "NCBI_ASSEMBLY" else "DSM 30083"}
+    write_tsv(raw / "strain_related_records.tsv", RELATED_RECORD_FIELDS,
+              [{**sample(), **evidence, "source_field":
+                "biosample" if source == "NCBI_ASSEMBLY" else "biosample_accession"}])
+    write_tsv(raw / "strain_assemblies.tsv", ASSEMBLY_FIELDS,
+              [{**ncbi(), **evidence, "source_field": "assembly_accession"}])
+    # The existing GTDB genome has a different source chain and must not join.
+    result = atb.generate(*pipeline, apply=True)
+    assert result["crosslinks"]["genome_pairs"] == 1
+    link = atb.genome_records(out)[SID][0]["atb_evidence"]["sample_links"][0]
+    assert link["source"] == source
+
+
 @pytest.mark.parametrize("corruption", [
     "unavailable", "identity_warning", "empty_evidence", "different_sample", "wrong_type",
     "empty_source", "missing_deposit", "malformed_taxon", "wrong_sample_prefix", "duplicate_assembly",

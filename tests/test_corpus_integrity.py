@@ -5,6 +5,8 @@ from __future__ import annotations
 import csv
 from collections import Counter
 
+import pytest
+
 from taxonmech.seed import PATHS_LOCKFILE, load_lockfile
 from taxonmech.validation.write_validated import validate_taxon
 
@@ -14,6 +16,7 @@ def test_identifiers_are_unique(records):
     assert not dupes, f"duplicate identifiers: {dupes}"
 
 
+@pytest.mark.qc_gate
 def test_every_record_validates_closed(records):
     bad = {str(p): [e.message[:120] for e in errs] for p, d in records if (errs := validate_taxon(d))}
     assert not bad, bad

@@ -369,7 +369,7 @@ def _sample_links(encoded: str, sid: str, sample: str) -> list[dict]:
         if (not isinstance(row, dict) or set(row) - allowed
                 or any(not isinstance(value, str) or not value for value in row.values())
                 or row.get("record_id") != sample or row.get("record_type") != "BIOSAMPLE"
-                or row.get("source") not in {"GTDB", "GOLD"}):
+                or row.get("source") not in {"GTDB", "GOLD", "NCBI_ASSEMBLY", "BV_BRC"}):
             raise ValueError("ATB sample evidence must contain typed assertions for the same BioSample")
         for field, pattern in (("taxon_id", r"NCBITaxon:[0-9]+"),
                                ("source_organism_id", r"gold:Go[0-9]+"),

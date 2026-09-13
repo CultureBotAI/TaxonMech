@@ -68,6 +68,13 @@ taxonomy_mappings:
   genome_count: 24
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
+synonyms:
+- synonym_text: Armatimonadia bacterium AX-7
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Capsulimonas corticalis Li et al. 2019
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Capsulimonas_corticalis
 - lpsn:798091
@@ -88,26 +95,103 @@ strains:
     source_id: bacdive:158453
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Capsulimonas corticalis AX-7
+    assembly_name: ASM357431v2 assembly for Capsulimonas corticalis AX-7
     taxon_id: NCBITaxon:2219043
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_003574315.1
+    source: BV_BRC
+    source_id: patric:2219043.3
+    assembly_name: Armatimonadia bacterium AX-7
+    taxon_id: NCBITaxon:2219043
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-113044
+    source_strain_identifiers: NBRC:113044
+    source_strain_field: culture_collection
   genome_records:
   - genome_id: img.taxon:2831870349
     source_database: img
     source: BACDIVE
     source_id: bacdive:158453
     source_reference_id: '66792'
-    assembly_level: draft
+    assembly_level: complete
     genome_name: Capsulimonas corticalis AX-7
     taxon_id: NCBITaxon:2219043
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:8001345439
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:158453
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM357431v2 assembly for Capsulimonas corticalis AX-7
+    taxon_id: NCBITaxon:2219043
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: patric:2219043.3
     source_database: patric
     source: BACDIVE
     source_id: bacdive:158453
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: complete
+    genome_name: ASM357431v2 assembly for Capsulimonas corticalis AX-7
+    taxon_id: NCBITaxon:2219043
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:2219043.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:2219043.3
     genome_name: Armatimonadia bacterium AX-7
     taxon_id: NCBITaxon:2219043
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NBRC-113044
+    source_strain_identifiers: NBRC:113044
+    source_strain_field: culture_collection
+  - genome_id: atb.assembly:202505.SAMD00134284
+    source_database: allthebacteria
+    source: ALLTHEBACTERIA
+    source_id: atb.assembly:202505.SAMD00134284
+    genome_name: Capsulimonas corticalis
+    atb_evidence:
+      release: 2025-05
+      sample_id: biosample:SAMD00134284
+      dataset: Incr_release.202505
+      run_accessions: DRR424562
+      assembly_seqkit_sum: seqkit.v0.1_DLS_k0_196ea203ef816e8f404d6974af175d81
+      assembly_filter: PASS
+      hq_filter: PASS
+      download_url: https://allthebacteria-assemblies.s3.eu-west-2.amazonaws.com/SAMD00134284.fa.gz
+      archive_url: https://osf.io/download/6852c0c0e21f0b3e85c89b1d/
+      archive_filename: atb.assembly.incr_release.202505.batch.25.tar.xz
+      sample_links:
+      - matched_strain_id: kgmicrobe.strain:NBRC-113044
+        record_id: biosample:SAMD00134284
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:2219043.3
+        source_strain_field: culture_collection
+        source_strain_identifiers: NBRC:113044
+        taxon_id: NCBITaxon:2219043
+      ena_analysis_id: ena.analysis:ERZ26906186
+      sylph_species: Capsulimonas corticalis
   related_records:
+  - record_id: bioproject:PRJDB7106
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:2219043.3
+    taxon_id: NCBITaxon:2219043
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-113044
+    source_strain_identifiers: NBRC:113044
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMD00134284
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:2219043.3
+    taxon_id: NCBITaxon:2219043
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-113044
+    source_strain_identifiers: NBRC:113044
+    source_strain_field: culture_collection
   - record_id: gold:Go0621526
     record_type: GOLD_ORGANISM
     source: GOLD
@@ -196,6 +280,7 @@ source_attestations:
   source_label: Capsulimonas corticalis
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:798091
   source_label: Capsulimonas corticalis
@@ -225,7 +310,7 @@ source_attestations:
   assertion_count: 4
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

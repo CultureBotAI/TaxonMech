@@ -90,6 +90,13 @@ taxonomy_mappings:
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 synonyms:
+- synonym_text: '"Streptomyces violaceoruber" Waksman in Kutzner and Waksman 1959'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Streptomyces violaceus-ruber" (sic) (Waksman and Curtis 1916) Pridham
+    1970'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: Actinopycnidium caeruleum
   synonym_type: RELATED_SYNONYM
   source: LPSN
@@ -123,16 +130,20 @@ synonyms:
   source_id: lpsn:782108
 - synonym_text: Streptomyces violaceoruber (Waksman and Curtis 1916) Pridham 1970
     (Approved Lists 1980)
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Streptomyces violaceoruber (Waksman and Curtis 1916) Pridham 1970
+    (Approved Lists 1980) emend. Komaki 2022
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Streptomyces violaceus-ruber
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 xrefs:
 - GTDB:s__Streptomyces_violaceoruber
 - lpsn:782110
 genetic_code: 11
-strain_count: 32
+strain_count: 21
 strains:
 - strain_id: kgmicrobe.strain:bacdive_16080
   source: BACDIVE
@@ -149,19 +160,37 @@ strains:
   - kgmicrobe.strain:ETH-9447
   - kgmicrobe.strain:IFO-12826
   - kgmicrobe.strain:IMRU-3030
-  - kgmicrobe.strain:ISP-5049
+  - kgmicrobe.strain:ISP%205049
   - kgmicrobe.strain:JCM-4423
-  - kgmicrobe.strain:KCC-S-0423
+  - kgmicrobe.strain:KCC%20S-0423
   - kgmicrobe.strain:KCTC-9787
   - kgmicrobe.strain:NBRC-12826
   - kgmicrobe.strain:NRRL-B-12594
   - kgmicrobe.strain:NRRL-B-2935
   - kgmicrobe.strain:NRRL-B-3025
   - kgmicrobe.strain:NRRL-B-3319
+  - kgmicrobe.strain:RIA-1096
   - kgmicrobe.strain:VKM-Ac-726
   - kgmicrobe.strain:VTT-E-991420
   is_type_strain: true
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_033406955
+    source: BACDIVE
+    source_id: bacdive:16080
+    source_reference_id: '124043'
+    assembly_level: complete
+    assembly_name: ASM3340695v1 assembly for Streptomyces violaceoruber CGMCC 4.1801
+    taxon_id: NCBITaxon:1935
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_033406955.1
+    source: BV_BRC
+    source_id: patric:1935.19
+    assembly_name: Streptomyces violaceoruber CGMCC 4.1801
+    taxon_id: NCBITaxon:1935
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:CGMCC-4.1801
+    source_strain_identifiers: CGMCC 4.1801
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_033406955.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_033406955.1
@@ -172,6 +201,43 @@ strains:
     matched_strain_id: kgmicrobe.strain:CGMCC-4.1801
     source_strain_identifiers: CGMCC 4.1801
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_033406955.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_033406955.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM3340695v1
+    taxon_id: NCBITaxon:1935
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:CGMCC-4.1801
+    source_strain_identifiers: strain=CGMCC 4.1801
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCA_039541755
+    source: BACDIVE
+    source_id: bacdive:16080
+    source_reference_id: '124043'
+    assembly_level: scaffold
+    assembly_name: ASM3954175v1 assembly for Streptomyces violaceoruber JCM 4423
+    taxon_id: NCBITaxon:1935
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_039541755.1
+    source: BV_BRC
+    source_id: patric:1935.22
+    assembly_name: Streptomyces violaceoruber JCM 4423
+    taxon_id: NCBITaxon:1935
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-4423
+    source_strain_identifiers: JCM 4423
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_039541755.1
+    source: BV_BRC
+    source_id: patric:1935.22
+    assembly_name: Streptomyces violaceoruber JCM 4423
+    taxon_id: NCBITaxon:1935
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-4423
+    source_strain_identifiers: JCM:4423
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_039541755.1
     source: GOLD
     source_id: gold:Ga0682166
@@ -214,6 +280,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:JCM-4423
     source_strain_identifiers: JCM 4423
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_039541755.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_039541755.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM3954175v1
+    taxon_id: NCBITaxon:1935
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-4423
+    source_strain_identifiers: strain=JCM 4423
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCA_042674805
+    source: BACDIVE
+    source_id: bacdive:16080
+    source_reference_id: '124043'
+    assembly_level: contig
+    assembly_name: ASM4267480v1 assembly for Streptomyces violaceoruber JCM 4423
+    taxon_id: NCBITaxon:1935
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_042674805.1
+    source: BV_BRC
+    source_id: patric:1935.28
+    assembly_name: Streptomyces violaceoruber JCM 4423
+    taxon_id: NCBITaxon:1935
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-4423
+    source_strain_identifiers: JCM 4423
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_042674805.1
     source: GTDB
     source_id: gtdb.genome:GB_GCA_042674805.1
@@ -234,6 +328,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:JCM-4423
     source_strain_identifiers: JCM 4423
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_042674805.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_042674805.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM4267480v1
+    taxon_id: NCBITaxon:1935
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-4423
+    source_strain_identifiers: strain=JCM 4423
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_033406955.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_033406955.1
@@ -244,6 +349,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:CGMCC-4.1801
     source_strain_identifiers: CGMCC 4.1801
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_033406955.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_033406955.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM3340695v1
+    taxon_id: NCBITaxon:1935
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:CGMCC-4.1801
+    source_strain_identifiers: strain=CGMCC 4.1801
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_033406955
     source: STRAININFO
     source_id: straininfo.strain:389370
@@ -299,7 +415,74 @@ strains:
     matched_strain_id: kgmicrobe.strain:CGMCC-4.1801
     source_strain_identifiers: CGMCC 4.1801
     source_strain_field: ncbi_strain_identifiers
+  - genome_id: patric:1935.19
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:16080
+    source_reference_id: '124043'
+    assembly_level: complete
+    genome_name: ASM3340695v1 assembly for Streptomyces violaceoruber CGMCC 4.1801
+    taxon_id: NCBITaxon:1935
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1935.19
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1935.19
+    genome_name: Streptomyces violaceoruber CGMCC 4.1801
+    taxon_id: NCBITaxon:1935
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:CGMCC-4.1801
+    source_strain_identifiers: CGMCC 4.1801
+    source_strain_field: strain
+  - genome_id: patric:1935.22
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1935.22
+    genome_name: Streptomyces violaceoruber JCM 4423
+    taxon_id: NCBITaxon:1935
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-4423
+    source_strain_identifiers: JCM 4423
+    source_strain_field: strain
+  - genome_id: patric:1935.22
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1935.22
+    genome_name: Streptomyces violaceoruber JCM 4423
+    taxon_id: NCBITaxon:1935
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-4423
+    source_strain_identifiers: JCM:4423
+    source_strain_field: culture_collection
+  - genome_id: patric:1935.28
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1935.28
+    genome_name: Streptomyces violaceoruber JCM 4423
+    taxon_id: NCBITaxon:1935
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-4423
+    source_strain_identifiers: JCM 4423
+    source_strain_field: strain
   related_records:
+  - record_id: bioproject:PRJDB10510
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1935.22
+    taxon_id: NCBITaxon:1935
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-4423
+    source_strain_identifiers: JCM 4423
+    source_strain_field: strain
+  - record_id: bioproject:PRJDB10510
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1935.22
+    taxon_id: NCBITaxon:1935
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-4423
+    source_strain_identifiers: JCM:4423
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJDB10510
     record_type: BIOPROJECT
     source: GOLD
@@ -331,6 +514,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:JCM-4423
     source_strain_identifiers: JCM 4423
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJDB10510
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_039541755.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1935
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:JCM-4423
+    source_strain_identifiers: strain=JCM 4423
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA1029468
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1935.19
+    taxon_id: NCBITaxon:1935
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:CGMCC-4.1801
+    source_strain_identifiers: CGMCC 4.1801
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA1029468
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_033406955.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1935
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:CGMCC-4.1801
+    source_strain_identifiers: strain=CGMCC 4.1801
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
     source: GTDB
@@ -340,6 +552,25 @@ strains:
     matched_strain_id: kgmicrobe.strain:CGMCC-4.1801
     source_strain_identifiers: CGMCC 4.1801
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_033406955.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1935
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:CGMCC-4.1801
+    source_strain_identifiers: strain=CGMCC 4.1801
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA595761
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1935.28
+    taxon_id: NCBITaxon:1935
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-4423
+    source_strain_identifiers: JCM 4423
+    source_strain_field: strain
   - record_id: bioproject:PRJNA595761
     record_type: BIOPROJECT
     source: GTDB
@@ -349,6 +580,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:JCM-4423
     source_strain_identifiers: JCM 4423
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA595761
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_042674805.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1935
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:JCM-4423
+    source_strain_identifiers: strain=JCM 4423
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00645745
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1935.22
+    taxon_id: NCBITaxon:1935
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-4423
+    source_strain_identifiers: JCM 4423
+    source_strain_field: strain
+  - record_id: biosample:SAMD00645745
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1935.22
+    taxon_id: NCBITaxon:1935
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-4423
+    source_strain_identifiers: JCM:4423
+    source_strain_field: culture_collection
   - record_id: biosample:SAMD00645745
     record_type: BIOSAMPLE
     source: GOLD
@@ -380,6 +639,25 @@ strains:
     matched_strain_id: kgmicrobe.strain:JCM-4423
     source_strain_identifiers: JCM 4423
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMD00645745
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_039541755.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1935
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:JCM-4423
+    source_strain_identifiers: strain=JCM 4423
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN37868432
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1935.19
+    taxon_id: NCBITaxon:1935
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:CGMCC-4.1801
+    source_strain_identifiers: CGMCC 4.1801
+    source_strain_field: strain
   - record_id: biosample:SAMN37868432
     record_type: BIOSAMPLE
     source: GTDB
@@ -389,6 +667,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:CGMCC-4.1801
     source_strain_identifiers: CGMCC 4.1801
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN37868432
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_033406955.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1935
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:CGMCC-4.1801
+    source_strain_identifiers: strain=CGMCC 4.1801
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN37868432
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_033406955.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1935
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:CGMCC-4.1801
+    source_strain_identifiers: strain=CGMCC 4.1801
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN43284545
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1935.28
+    taxon_id: NCBITaxon:1935
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-4423
+    source_strain_identifiers: JCM 4423
+    source_strain_field: strain
   - record_id: biosample:SAMN43284545
     record_type: BIOSAMPLE
     source: GTDB
@@ -398,6 +705,16 @@ strains:
     matched_strain_id: kgmicrobe.strain:JCM-4423
     source_strain_identifiers: JCM 4423
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN43284545
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_042674805.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1935
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:JCM-4423
+    source_strain_identifiers: strain=JCM 4423
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0682166
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -1774,6 +2091,2931 @@ strains:
       strain_doi: DOI:10.60712/SI-ID389370.2
       strain_id: straininfo.strain:389370
       strain_status: published online
+- strain_id: kgmicrobe.strain:bacdive_15103
+  source: BACDIVE
+  source_id: bacdive:15103
+  culture_collection_ids:
+  - kgmicrobe.strain:ATCC-19830
+  - kgmicrobe.strain:BCRC-16237
+  - kgmicrobe.strain:CBS-679.72
+  - kgmicrobe.strain:CGMCC-4.1594
+  - kgmicrobe.strain:DSM-40421
+  - kgmicrobe.strain:IFO-13378
+  - kgmicrobe.strain:INMI%2020-41
+  - kgmicrobe.strain:ISP%205421
+  - kgmicrobe.strain:JCM-4739
+  - kgmicrobe.strain:KCTC-19065
+  - kgmicrobe.strain:NBRC-13378
+  - kgmicrobe.strain:NCIMB-10042
+  - kgmicrobe.strain:NRRL-B-12348
+  - kgmicrobe.strain:RIA-1339
+  - kgmicrobe.strain:VKM-Ac-98
+  - kgmicrobe.strain:VTT-E-073027
+  genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_014650795
+    source: BACDIVE
+    source_id: bacdive:15103
+    source_reference_id: '67770'
+    assembly_level: scaffold
+    assembly_name: ASM1465079v1 assembly for Streptomyces anthocyanicus JCM 4739
+    taxon_id: NCBITaxon:68174
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_014650795.1
+    source: BV_BRC
+    source_id: patric:68189.4
+    assembly_name: Streptomyces coelescens strain JCM 4739
+    taxon_id: NCBITaxon:68174
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_014650795.1
+    source: BV_BRC
+    source_id: patric:68189.4
+    assembly_name: Streptomyces coelescens strain JCM 4739
+    taxon_id: NCBITaxon:68174
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM:4739
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_014650795.1
+    source: GOLD
+    source_id: gold:Ga0487158
+    assembly_name: Streptomyces anthocyanicus JCM 4739
+    taxon_id: NCBITaxon:68174
+    source_field: AP GENBANK.assemblyAccession
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0573335
+    source_project_id: gold:Gp0547980
+  - assembly_id: ncbi.assembly:GCA_014650795.1
+    source: GOLD
+    source_id: gold:Ga0487158
+    assembly_name: Streptomyces anthocyanicus JCM 4739
+    taxon_id: NCBITaxon:68174
+    source_field: AP GENBANK.assemblyAccession
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0573335
+    source_project_id: gold:Gp0547980
+  - assembly_id: ncbi.assembly:GCA_014650795.1
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_014650795.1
+    assembly_level: Scaffold
+    assembly_name: ASM1465079v1
+    taxon_id: NCBITaxon:68174
+    source_field: ncbi_genbank_assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_014650795.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_014650795.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM1465079v1
+    taxon_id: NCBITaxon:68174
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: strain=JCM 4739
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCF_014650795.1
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_014650795.1
+    assembly_level: Scaffold
+    assembly_name: ASM1465079v1
+    taxon_id: NCBITaxon:68174
+    source_field: accession
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_014650795.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_014650795.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM1465079v1
+    taxon_id: NCBITaxon:68174
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: strain=JCM 4739
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCA_014650795
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    assembly_level: scaffold
+    assembly_name: Streptomyces anthocyanicus JCM 4739
+    taxon_id: NCBITaxon:68174
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 4739
+      deposit_id: straininfo.deposit:180212
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:180212
+      sequence_type: genome
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  genome_records:
+  - genome_id: gtdb.genome:RS_GCF_014650795.1
+    source_database: gtdb
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_014650795.1
+    assembly_level: Scaffold
+    genome_name: Streptomyces anthocyanicus
+    taxon_id: NCBITaxon:68174
+    source_field: accession
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: ncbi_strain_identifiers
+  - genome_id: img.taxon:8109647708
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:15103
+    source_reference_id: '67770'
+    assembly_level: scaffold
+    genome_name: ASM1465079v1 assembly for Streptomyces anthocyanicus JCM 4739
+    taxon_id: NCBITaxon:68174
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:8109647708
+    source_database: img
+    source: GOLD
+    source_id: gold:Ga0487158
+    genome_name: Streptomyces anthocyanicus JCM 4739
+    taxon_id: NCBITaxon:68174
+    source_field: AP IMG TAXON ID
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0573335
+    source_project_id: gold:Gp0547980
+  - genome_id: img.taxon:8109647708
+    source_database: img
+    source: GOLD
+    source_id: gold:Ga0487158
+    genome_name: Streptomyces anthocyanicus JCM 4739
+    taxon_id: NCBITaxon:68174
+    source_field: AP IMG TAXON ID
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0573335
+    source_project_id: gold:Gp0547980
+  - genome_id: patric:68189.4
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:15103
+    source_reference_id: '67770'
+    assembly_level: scaffold
+    genome_name: ASM1465079v1 assembly for Streptomyces anthocyanicus JCM 4739
+    taxon_id: NCBITaxon:68174
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:68189.4
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:68189.4
+    genome_name: Streptomyces coelescens strain JCM 4739
+    taxon_id: NCBITaxon:68174
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: strain
+  - genome_id: patric:68189.4
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:68189.4
+    genome_name: Streptomyces coelescens strain JCM 4739
+    taxon_id: NCBITaxon:68174
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM:4739
+    source_strain_field: culture_collection
+  related_records:
+  - record_id: bioproject:PRJDB10510
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:68189.4
+    taxon_id: NCBITaxon:68174
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: strain
+  - record_id: bioproject:PRJDB10510
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:68189.4
+    taxon_id: NCBITaxon:68174
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM:4739
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJDB10510
+    record_type: BIOPROJECT
+    source: GOLD
+    source_id: gold:Gp0547980
+    taxon_id: NCBITaxon:68174
+    source_field: NCBI BIOPROJECT ACCESSION
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0573335
+    source_project_id: gold:Gp0547980
+  - record_id: bioproject:PRJDB10510
+    record_type: BIOPROJECT
+    source: GOLD
+    source_id: gold:Gp0547980
+    taxon_id: NCBITaxon:68174
+    source_field: NCBI BIOPROJECT ACCESSION
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0573335
+    source_project_id: gold:Gp0547980
+  - record_id: bioproject:PRJDB10510
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_014650795.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:68174
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: strain=JCM 4739
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_014650795.1
+    taxon_id: NCBITaxon:68174
+    source_field: ncbi_bioproject
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_014650795.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:68174
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: strain=JCM 4739
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00245508
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:68189.4
+    taxon_id: NCBITaxon:68174
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: strain
+  - record_id: biosample:SAMD00245508
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:68189.4
+    taxon_id: NCBITaxon:68174
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM:4739
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMD00245508
+    record_type: BIOSAMPLE
+    source: GOLD
+    source_id: gold:Gp0547980
+    taxon_id: NCBITaxon:68174
+    source_field: NCBI BIOSAMPLE ACCESSION
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0573335
+    source_project_id: gold:Gp0547980
+  - record_id: biosample:SAMD00245508
+    record_type: BIOSAMPLE
+    source: GOLD
+    source_id: gold:Gp0547980
+    taxon_id: NCBITaxon:68174
+    source_field: NCBI BIOSAMPLE ACCESSION
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0573335
+    source_project_id: gold:Gp0547980
+  - record_id: biosample:SAMD00245508
+    record_type: BIOSAMPLE
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_014650795.1
+    taxon_id: NCBITaxon:68174
+    source_field: ncbi_biosample
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMD00245508
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_014650795.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:68174
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: strain=JCM 4739
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00245508
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_014650795.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:68174
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: strain=JCM 4739
+    source_strain_field: infraspecific_name
+  - record_id: gold:Ga0487158
+    record_type: GOLD_ANALYSIS
+    source: GOLD
+    source_id: gold:Ga0487158
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces anthocyanicus JCM 4739
+    source_field: AP GOLD ID
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0573335
+    source_project_id: gold:Gp0547980
+  - record_id: gold:Ga0487158
+    record_type: GOLD_ANALYSIS
+    source: GOLD
+    source_id: gold:Ga0487158
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces anthocyanicus JCM 4739
+    source_field: AP GOLD ID
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0573335
+    source_project_id: gold:Gp0547980
+  - record_id: gold:Go0573335
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0573335
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces anthocyanicus JCM 4739
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0573335
+  - record_id: gold:Go0573335
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0573335
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces anthocyanicus JCM 4739
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0573335
+  - record_id: gold:Go0603179
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0603179
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces coelescens ATCC 19830
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:ATCC-19830
+    source_strain_identifiers: ATCC 19830
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0603179
+  - record_id: gold:Go0603179
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0603179
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces coelescens ATCC 19830
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:ATCC-19830
+    source_strain_identifiers: ATCC 19830
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0603179
+  - record_id: gold:Go0603180
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0603180
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces coelescens CBS 679.72
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CBS-679.72
+    source_strain_identifiers: CBS 679.72
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0603180
+  - record_id: gold:Go0603180
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0603180
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces coelescens CBS 679.72
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CBS-679.72
+    source_strain_identifiers: CBS 679.72
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0603180
+  - record_id: gold:Go0603181
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0603181
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces coelescens IFO 13378
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:IFO-13378
+    source_strain_identifiers: IFO 13378
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0603181
+  - record_id: gold:Go0603181
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0603181
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces coelescens IFO 13378
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:IFO-13378
+    source_strain_identifiers: IFO 13378
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0603181
+  - record_id: gold:Go0603184
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0603184
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces coelescens NBRC 13378
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:NBRC-13378
+    source_strain_identifiers: NBRC 13378
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0603184
+  - record_id: gold:Go0603184
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0603184
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces coelescens NBRC 13378
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:NBRC-13378
+    source_strain_identifiers: NBRC 13378
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0603184
+  - record_id: gold:Go0603185
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0603185
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces coelescens RIA 1339
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:RIA-1339
+    source_strain_identifiers: RIA 1339
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0603185
+  - record_id: gold:Go0603185
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0603185
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces coelescens RIA 1339
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:RIA-1339
+    source_strain_identifiers: RIA 1339
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0603185
+  - record_id: gold:Gp0547980
+    record_type: GOLD_PROJECT
+    source: GOLD
+    source_id: gold:Gp0547980
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces anthocyanicus JCM 4739
+    source_field: PROJECT GOLD ID
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0573335
+    source_project_id: gold:Gp0547980
+  - record_id: gold:Gp0547980
+    record_type: GOLD_PROJECT
+    source: GOLD
+    source_id: gold:Gp0547980
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces anthocyanicus JCM 4739
+    source_field: PROJECT GOLD ID
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0573335
+    source_project_id: gold:Gp0547980
+  - record_id: INSDC:AB184365
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: 'Streptomyces anthocyanicus gene for 16S rRNA, partial sequence,
+      strain: NBRC 13378'
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:NBRC-13378
+    source_strain_identifiers: NBRC 13378
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NBRC 13378
+      deposit_id: straininfo.deposit:334689
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:334689
+      sequence_type: rrnaop
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: INSDC:AF503496
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces coelescens 16S ribosomal RNA, partial sequence
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:DSM-40421
+    source_strain_identifiers: DSM 40421
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 40421
+      deposit_id: straininfo.deposit:165468
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:165468
+      sequence_type: rrnaop
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: INSDC:AY508508
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces coelescens strain DSM 40421 gyrB-gyrA intergenic spacer,
+      partial sequence; and GyrA (gyrA) gene, partial cds
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:DSM-40421
+    source_strain_identifiers: DSM 40421
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 40421
+      deposit_id: straininfo.deposit:165468
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:165468
+      sequence_type: gene
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: INSDC:AY999761
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces coelescens strain JCM 4739 16S ribosomal RNA gene, partial
+      sequence
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 4739
+      deposit_id: straininfo.deposit:180212
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:180212
+      sequence_type: rrnaop
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: INSDC:AY999786
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces coelescens strain NRRL B-12348 16S ribosomal RNA gene,
+      partial sequence
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:NRRL-B-12348
+    source_strain_identifiers: NRRL B-12348
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NRRL B-12348
+      deposit_id: straininfo.deposit:180215
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:180215
+      sequence_type: rrnaop
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: INSDC:D44323
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: 'Streptomyces anthocyanicus gene for 16S ribosomal RNA, partial sequence,
+      strain: JCM 4739'
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 4739
+      deposit_id: straininfo.deposit:180212
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:180212
+      sequence_type: rrnaop
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: INSDC:GU383132
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces coelescens strain DSM 40421 16S ribosomal RNA gene,
+      partial sequence
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:DSM-40421
+    source_strain_identifiers: DSM 40421
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 40421
+      deposit_id: straininfo.deposit:165468
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:165468
+      sequence_type: rrnaop
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: INSDC:GU383238
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces coelescens strain DSM 40421 argininosuccinate lyase
+      (argH) gene, partial cds
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:DSM-40421
+    source_strain_identifiers: DSM 40421
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 40421
+      deposit_id: straininfo.deposit:165468
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:165468
+      sequence_type: gene
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: INSDC:GU383344
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces coelescens strain DSM 40421 ATP synthase beta chain
+      (atpD) gene, partial cds
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:DSM-40421
+    source_strain_identifiers: DSM 40421
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 40421
+      deposit_id: straininfo.deposit:165468
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:165468
+      sequence_type: gene
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: INSDC:GU383450
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces coelescens strain DSM 40421 elongation factor P (efp)
+      gene, partial cds
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:DSM-40421
+    source_strain_identifiers: DSM 40421
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 40421
+      deposit_id: straininfo.deposit:165468
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:165468
+      sequence_type: gene
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: INSDC:GU383556
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces coelescens strain DSM 40421 phosphoenolpyruvate carboxylase
+      (ppc) gene, partial cds
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:DSM-40421
+    source_strain_identifiers: DSM 40421
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 40421
+      deposit_id: straininfo.deposit:165468
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:165468
+      sequence_type: gene
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: INSDC:GU383662
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces coelescens strain DSM 40421 ribosomal protein L3 (rplC)
+      gene, partial cds
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:DSM-40421
+    source_strain_identifiers: DSM 40421
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 40421
+      deposit_id: straininfo.deposit:165468
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:165468
+      sequence_type: gene
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: INSDC:GU383768
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces coelescens strain DSM 40421 RNA polymerase beta subunit
+      (rpoB) gene, partial cds
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:DSM-40421
+    source_strain_identifiers: DSM 40421
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 40421
+      deposit_id: straininfo.deposit:165468
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:165468
+      sequence_type: gene
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: INSDC:GU383874
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces coelescens strain DSM 40421 30S ribosomal protein S12
+      (rpsL) gene, partial cds
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:DSM-40421
+    source_strain_identifiers: DSM 40421
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 40421
+      deposit_id: straininfo.deposit:165468
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:165468
+      sequence_type: gene
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: INSDC:GU383980
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces coelescens strain DSM 40421 Fe-containing superoxide
+      dismutase (sodF) gene, partial cds
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:DSM-40421
+    source_strain_identifiers: DSM 40421
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 40421
+      deposit_id: straininfo.deposit:165468
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:165468
+      sequence_type: gene
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: INSDC:MT760605
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces anthocyanicus strain JCM 4739 16S ribosomal RNA gene,
+      partial sequence
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 4739
+      deposit_id: straininfo.deposit:180212
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:180212
+      sequence_type: rrnaop
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.deposit:100575
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: ATCC 19830
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:ATCC-19830
+    source_strain_identifiers: ATCC 19830
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: ATCC 19830
+      deposit_id: straininfo.deposit:100575
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.deposit:165468
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: DSM 40421
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:DSM-40421
+    source_strain_identifiers: DSM 40421
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 40421
+      deposit_id: straininfo.deposit:165468
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.deposit:165470
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: IFO 13378
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:IFO-13378
+    source_strain_identifiers: IFO 13378
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: IFO 13378
+      deposit_id: straininfo.deposit:165470
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.deposit:180212
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: JCM 4739
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 4739
+      deposit_id: straininfo.deposit:180212
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.deposit:180214
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: NCIMB 10042
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:NCIMB-10042
+    source_strain_identifiers: NCIMB 10042
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NCIMB 10042
+      deposit_id: straininfo.deposit:180214
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.deposit:180215
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: NRRL B-12348
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:NRRL-B-12348
+    source_strain_identifiers: NRRL B-12348
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NRRL B-12348
+      deposit_id: straininfo.deposit:180215
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.deposit:180216
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: VKM Ac-98
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:VKM-Ac-98
+    source_strain_identifiers: VKM Ac-98
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: VKM Ac-98
+      deposit_id: straininfo.deposit:180216
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.deposit:334689
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: NBRC 13378
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:NBRC-13378
+    source_strain_identifiers: NBRC 13378
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NBRC 13378
+      deposit_id: straininfo.deposit:334689
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.deposit:511874
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: BCRC 16237
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:BCRC-16237
+    source_strain_identifiers: BCRC 16237
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: BCRC 16237
+      deposit_id: straininfo.deposit:511874
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.deposit:556588
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: KCTC 19065
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:KCTC-19065
+    source_strain_identifiers: KCTC 19065
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: KCTC 19065
+      deposit_id: straininfo.deposit:556588
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.deposit:755179
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: CGMCC 4.1594
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CGMCC-4.1594
+    source_strain_identifiers: CGMCC 4.1594
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CGMCC 4.1594
+      deposit_id: straininfo.deposit:755179
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.deposit:797615
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: VTT E-073027
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:VTT-E-073027
+    source_strain_identifiers: VTT E-073027
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: VTT E-073027
+      deposit_id: straininfo.deposit:797615
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.deposit:837858
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:4954
+    record_name: CBS 679.72
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CBS-679.72
+    source_strain_identifiers: CBS 679.72
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CBS 679.72
+      deposit_id: straininfo.deposit:837858
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.strain:76171
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:4954
+    record_name: CBS 679.72
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CBS-679.72
+    source_strain_identifiers: CBS 679.72
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CBS 679.72
+      deposit_id: straininfo.deposit:837858
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.strain:76171
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: ATCC 19830
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:ATCC-19830
+    source_strain_identifiers: ATCC 19830
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: ATCC 19830
+      deposit_id: straininfo.deposit:100575
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.strain:76171
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: BCRC 16237
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:BCRC-16237
+    source_strain_identifiers: BCRC 16237
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: BCRC 16237
+      deposit_id: straininfo.deposit:511874
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.strain:76171
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: CGMCC 4.1594
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CGMCC-4.1594
+    source_strain_identifiers: CGMCC 4.1594
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CGMCC 4.1594
+      deposit_id: straininfo.deposit:755179
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.strain:76171
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: DSM 40421
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:DSM-40421
+    source_strain_identifiers: DSM 40421
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 40421
+      deposit_id: straininfo.deposit:165468
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.strain:76171
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: IFO 13378
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:IFO-13378
+    source_strain_identifiers: IFO 13378
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: IFO 13378
+      deposit_id: straininfo.deposit:165470
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.strain:76171
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: JCM 4739
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:JCM-4739
+    source_strain_identifiers: JCM 4739
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 4739
+      deposit_id: straininfo.deposit:180212
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.strain:76171
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: KCTC 19065
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:KCTC-19065
+    source_strain_identifiers: KCTC 19065
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: KCTC 19065
+      deposit_id: straininfo.deposit:556588
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.strain:76171
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: NBRC 13378
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:NBRC-13378
+    source_strain_identifiers: NBRC 13378
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NBRC 13378
+      deposit_id: straininfo.deposit:334689
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.strain:76171
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: NCIMB 10042
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:NCIMB-10042
+    source_strain_identifiers: NCIMB 10042
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NCIMB 10042
+      deposit_id: straininfo.deposit:180214
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.strain:76171
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: NRRL B-12348
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:NRRL-B-12348
+    source_strain_identifiers: NRRL B-12348
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NRRL B-12348
+      deposit_id: straininfo.deposit:180215
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.strain:76171
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: VKM Ac-98
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:VKM-Ac-98
+    source_strain_identifiers: VKM Ac-98
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: VKM Ac-98
+      deposit_id: straininfo.deposit:180216
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+  - record_id: straininfo.strain:76171
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:76171
+    taxon_id: NCBITaxon:68174
+    record_name: VTT E-073027
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:VTT-E-073027
+    source_strain_identifiers: VTT E-073027
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: VTT E-073027
+      deposit_id: straininfo.deposit:797615
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15103
+      strain_doi: DOI:10.60712/SI-ID76171.3
+      strain_id: straininfo.strain:76171
+      strain_status: published online
+- strain_id: kgmicrobe.strain:bacdive_15308
+  source: BACDIVE
+  source_id: bacdive:15308
+  designation: Ac6
+  culture_collection_ids:
+  - kgmicrobe.strain:ATCC-15719
+  - kgmicrobe.strain:ATCC-15812
+  - kgmicrobe.strain:CGMCC-4.1070
+  - kgmicrobe.strain:DSM-43030
+  - kgmicrobe.strain:IFM%201139
+  - kgmicrobe.strain:IFO-12244
+  - kgmicrobe.strain:IMET-43409
+  - kgmicrobe.strain:JCM-3037
+  - kgmicrobe.strain:KCC%20A-0037
+  - kgmicrobe.strain:KCTC-9116
+  - kgmicrobe.strain:NBIMCC-1032
+  - kgmicrobe.strain:NBRC-12244
+  - kgmicrobe.strain:NCIMB-10164
+  - kgmicrobe.strain:NRRL-B-3088
+  - kgmicrobe.strain:RIA-729
+  - kgmicrobe.strain:VKM-Ac-644
+  genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_014647695
+    source: BACDIVE
+    source_id: bacdive:15308
+    source_reference_id: '67770'
+    assembly_level: scaffold
+    assembly_name: ASM1464769v1 assembly for Streptomyces anthocyanicus JCM 3037
+    taxon_id: NCBITaxon:68174
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_014647695.1
+    source: BV_BRC
+    source_id: patric:66372.3
+    assembly_name: Streptomyces humiferus strain JCM 3037
+    taxon_id: NCBITaxon:68174
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_014647695.1
+    source: BV_BRC
+    source_id: patric:66372.3
+    assembly_name: Streptomyces humiferus strain JCM 3037
+    taxon_id: NCBITaxon:68174
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM:3037
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_014647695.1
+    source: GOLD
+    source_id: gold:Ga0487076
+    assembly_name: Streptomyces anthocyanicus JCM 3037
+    taxon_id: NCBITaxon:68174
+    source_field: AP GENBANK.assemblyAccession
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0573249
+    source_project_id: gold:Gp0547894
+  - assembly_id: ncbi.assembly:GCA_014647695.1
+    source: GOLD
+    source_id: gold:Ga0487076
+    assembly_name: Streptomyces anthocyanicus JCM 3037
+    taxon_id: NCBITaxon:68174
+    source_field: AP GENBANK.assemblyAccession
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0573249
+    source_project_id: gold:Gp0547894
+  - assembly_id: ncbi.assembly:GCA_014647695.1
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_014647695.1
+    assembly_level: Scaffold
+    assembly_name: ASM1464769v1
+    taxon_id: NCBITaxon:68174
+    source_field: ncbi_genbank_assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_014647695.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_014647695.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM1464769v1
+    taxon_id: NCBITaxon:68174
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: strain=JCM 3037
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCF_014647695.1
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_014647695.1
+    assembly_level: Scaffold
+    assembly_name: ASM1464769v1
+    taxon_id: NCBITaxon:68174
+    source_field: accession
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_014647695.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_014647695.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM1464769v1
+    taxon_id: NCBITaxon:68174
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: strain=JCM 3037
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCA_014647695
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    assembly_level: scaffold
+    assembly_name: Streptomyces anthocyanicus JCM 3037
+    taxon_id: NCBITaxon:68174
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 3037
+      deposit_id: straininfo.deposit:167599
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:167599
+      sequence_type: genome
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  genome_records:
+  - genome_id: gtdb.genome:RS_GCF_014647695.1
+    source_database: gtdb
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_014647695.1
+    assembly_level: Scaffold
+    genome_name: Streptomyces anthocyanicus
+    taxon_id: NCBITaxon:68174
+    source_field: accession
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: ncbi_strain_identifiers
+  - genome_id: img.taxon:8109737409
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:15308
+    source_reference_id: '67770'
+    assembly_level: scaffold
+    genome_name: ASM1464769v1 assembly for Streptomyces anthocyanicus JCM 3037
+    taxon_id: NCBITaxon:68174
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:8109737409
+    source_database: img
+    source: GOLD
+    source_id: gold:Ga0487076
+    genome_name: Streptomyces anthocyanicus JCM 3037
+    taxon_id: NCBITaxon:68174
+    source_field: AP IMG TAXON ID
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0573249
+    source_project_id: gold:Gp0547894
+  - genome_id: img.taxon:8109737409
+    source_database: img
+    source: GOLD
+    source_id: gold:Ga0487076
+    genome_name: Streptomyces anthocyanicus JCM 3037
+    taxon_id: NCBITaxon:68174
+    source_field: AP IMG TAXON ID
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0573249
+    source_project_id: gold:Gp0547894
+  - genome_id: patric:66372.3
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:15308
+    source_reference_id: '67770'
+    assembly_level: scaffold
+    genome_name: ASM1464769v1 assembly for Streptomyces anthocyanicus JCM 3037
+    taxon_id: NCBITaxon:68174
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:66372.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:66372.3
+    genome_name: Streptomyces humiferus strain JCM 3037
+    taxon_id: NCBITaxon:68174
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: strain
+  - genome_id: patric:66372.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:66372.3
+    genome_name: Streptomyces humiferus strain JCM 3037
+    taxon_id: NCBITaxon:68174
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM:3037
+    source_strain_field: culture_collection
+  related_records:
+  - record_id: bioproject:PRJDB10510
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:66372.3
+    taxon_id: NCBITaxon:68174
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: strain
+  - record_id: bioproject:PRJDB10510
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:66372.3
+    taxon_id: NCBITaxon:68174
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM:3037
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJDB10510
+    record_type: BIOPROJECT
+    source: GOLD
+    source_id: gold:Gp0547894
+    taxon_id: NCBITaxon:68174
+    source_field: NCBI BIOPROJECT ACCESSION
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0573249
+    source_project_id: gold:Gp0547894
+  - record_id: bioproject:PRJDB10510
+    record_type: BIOPROJECT
+    source: GOLD
+    source_id: gold:Gp0547894
+    taxon_id: NCBITaxon:68174
+    source_field: NCBI BIOPROJECT ACCESSION
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0573249
+    source_project_id: gold:Gp0547894
+  - record_id: bioproject:PRJDB10510
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_014647695.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:68174
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: strain=JCM 3037
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_014647695.1
+    taxon_id: NCBITaxon:68174
+    source_field: ncbi_bioproject
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_014647695.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:68174
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: strain=JCM 3037
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00245295
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:66372.3
+    taxon_id: NCBITaxon:68174
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: strain
+  - record_id: biosample:SAMD00245295
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:66372.3
+    taxon_id: NCBITaxon:68174
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM:3037
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMD00245295
+    record_type: BIOSAMPLE
+    source: GOLD
+    source_id: gold:Gp0547894
+    taxon_id: NCBITaxon:68174
+    source_field: NCBI BIOSAMPLE ACCESSION
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0573249
+    source_project_id: gold:Gp0547894
+  - record_id: biosample:SAMD00245295
+    record_type: BIOSAMPLE
+    source: GOLD
+    source_id: gold:Gp0547894
+    taxon_id: NCBITaxon:68174
+    source_field: NCBI BIOSAMPLE ACCESSION
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0573249
+    source_project_id: gold:Gp0547894
+  - record_id: biosample:SAMD00245295
+    record_type: BIOSAMPLE
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_014647695.1
+    taxon_id: NCBITaxon:68174
+    source_field: ncbi_biosample
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMD00245295
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_014647695.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:68174
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: strain=JCM 3037
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00245295
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_014647695.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:68174
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: strain=JCM 3037
+    source_strain_field: infraspecific_name
+  - record_id: gold:Ga0487076
+    record_type: GOLD_ANALYSIS
+    source: GOLD
+    source_id: gold:Ga0487076
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces anthocyanicus JCM 3037
+    source_field: AP GOLD ID
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0573249
+    source_project_id: gold:Gp0547894
+  - record_id: gold:Ga0487076
+    record_type: GOLD_ANALYSIS
+    source: GOLD
+    source_id: gold:Ga0487076
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces anthocyanicus JCM 3037
+    source_field: AP GOLD ID
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0573249
+    source_project_id: gold:Gp0547894
+  - record_id: gold:Go0573249
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0573249
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces anthocyanicus JCM 3037
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0573249
+  - record_id: gold:Go0573249
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0573249
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces anthocyanicus JCM 3037
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0573249
+  - record_id: gold:Go0604610
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0604610
+    taxon_id: NCBITaxon:68174
+    record_name: Actinopycnidium caeruleum ATCC 15719
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:ATCC-15719
+    source_strain_identifiers: ATCC 15719
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0604610
+  - record_id: gold:Go0604610
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0604610
+    taxon_id: NCBITaxon:68174
+    record_name: Actinopycnidium caeruleum ATCC 15719
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:ATCC-15719
+    source_strain_identifiers: ATCC 15719
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0604610
+  - record_id: gold:Go0604611
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0604611
+    taxon_id: NCBITaxon:68174
+    record_name: Actinopycnidium caeruleum IFO 12244
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:IFO-12244
+    source_strain_identifiers: IFO 12244
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0604611
+  - record_id: gold:Go0604611
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0604611
+    taxon_id: NCBITaxon:68174
+    record_name: Actinopycnidium caeruleum IFO 12244
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:IFO-12244
+    source_strain_identifiers: IFO 12244
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0604611
+  - record_id: gold:Go0604613
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0604613
+    taxon_id: NCBITaxon:68174
+    record_name: Actinopycnidium caeruleum NBRC 12244
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:NBRC-12244
+    source_strain_identifiers: NBRC 12244
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0604613
+  - record_id: gold:Go0604613
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0604613
+    taxon_id: NCBITaxon:68174
+    record_name: Actinopycnidium caeruleum NBRC 12244
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:NBRC-12244
+    source_strain_identifiers: NBRC 12244
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0604613
+  - record_id: gold:Gp0547894
+    record_type: GOLD_PROJECT
+    source: GOLD
+    source_id: gold:Gp0547894
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces anthocyanicus JCM 3037
+    source_field: PROJECT GOLD ID
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0573249
+    source_project_id: gold:Gp0547894
+  - record_id: gold:Gp0547894
+    record_type: GOLD_PROJECT
+    source: GOLD
+    source_id: gold:Gp0547894
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces anthocyanicus JCM 3037
+    source_field: PROJECT GOLD ID
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0573249
+    source_project_id: gold:Gp0547894
+  - record_id: INSDC:AB184070
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: 'Streptomyces anthocyanicus gene for 16S rRNA, partial sequence,
+      strain: NBRC 12244'
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:NBRC-12244
+    source_strain_identifiers: NBRC 12244
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NBRC 12244
+      deposit_id: straininfo.deposit:333292
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:333292
+      sequence_type: rrnaop
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: INSDC:AF503491
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces humiferus 16S ribosomal RNA, partial sequence
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:DSM-43030
+    source_strain_identifiers: DSM 43030
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 43030
+      deposit_id: straininfo.deposit:119531
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:119531
+      sequence_type: rrnaop
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: INSDC:AY508502
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces humiferus strain DSM 43030 gyrB-gyrA intergenic spacer,
+      partial sequence; and GyrA (gyrA) gene, partial cds
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:DSM-43030
+    source_strain_identifiers: DSM 43030
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 43030
+      deposit_id: straininfo.deposit:119531
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:119531
+      sequence_type: gene
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: INSDC:AY999724
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:285994
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces humiferus strain NRRL B-3088 16S ribosomal RNA gene,
+      partial sequence.
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:NRRL-B-3088
+    source_strain_identifiers: NRRL B-3088
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NRRL B-3088
+      deposit_id: straininfo.deposit:670481
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:670481
+      sequence_type: rrnaop
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID285994.2
+      strain_id: straininfo.strain:285994
+      strain_status: published offline
+  - record_id: INSDC:AY999818
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces humiferus strain KCTC 9116 16S ribosomal RNA gene, partial
+      sequence
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:KCTC-9116
+    source_strain_identifiers: KCTC 9116
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: KCTC 9116
+      deposit_id: straininfo.deposit:319347
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:319347
+      sequence_type: rrnaop
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: INSDC:D43972
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: 'Streptomyces anthocyanicus gene for 16S ribosomal RNA, partial sequence,
+      strain: JCM 3037'
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 3037
+      deposit_id: straininfo.deposit:167599
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:167599
+      sequence_type: rrnaop
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: INSDC:MT760387
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: Streptomyces anthocyanicus strain JCM 3037 16S ribosomal RNA gene,
+      partial sequence
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 3037
+      deposit_id: straininfo.deposit:167599
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:167599
+      sequence_type: rrnaop
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: straininfo.deposit:119529
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: ATCC 15719
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:ATCC-15719
+    source_strain_identifiers: ATCC 15719
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: ATCC 15719
+      deposit_id: straininfo.deposit:119529
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: straininfo.deposit:119531
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: DSM 43030
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:DSM-43030
+    source_strain_identifiers: DSM 43030
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 43030
+      deposit_id: straininfo.deposit:119531
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: straininfo.deposit:119532
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: IFO 12244
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:IFO-12244
+    source_strain_identifiers: IFO 12244
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: IFO 12244
+      deposit_id: straininfo.deposit:119532
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: straininfo.deposit:167599
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: JCM 3037
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 3037
+      deposit_id: straininfo.deposit:167599
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: straininfo.deposit:175643
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: IMET 43409
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:IMET-43409
+    source_strain_identifiers: IMET 43409
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: IMET 43409
+      deposit_id: straininfo.deposit:175643
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: straininfo.deposit:175644
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: NCIMB 10164
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:NCIMB-10164
+    source_strain_identifiers: NCIMB 10164
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NCIMB 10164
+      deposit_id: straininfo.deposit:175644
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: straininfo.deposit:175645
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: VKM Ac-644
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:VKM-Ac-644
+    source_strain_identifiers: VKM Ac-644
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: VKM Ac-644
+      deposit_id: straininfo.deposit:175645
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: straininfo.deposit:319347
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: KCTC 9116
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:KCTC-9116
+    source_strain_identifiers: KCTC 9116
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: KCTC 9116
+      deposit_id: straininfo.deposit:319347
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: straininfo.deposit:333292
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: NBRC 12244
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:NBRC-12244
+    source_strain_identifiers: NBRC 12244
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NBRC 12244
+      deposit_id: straininfo.deposit:333292
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: straininfo.deposit:560787
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: NBIMCC 1032
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:NBIMCC-1032
+    source_strain_identifiers: NBIMCC 1032
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NBIMCC 1032
+      deposit_id: straininfo.deposit:560787
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: straininfo.deposit:670481
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:285994
+    taxon_id: NCBITaxon:68174
+    record_name: NRRL B-3088
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:NRRL-B-3088
+    source_strain_identifiers: NRRL B-3088
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NRRL B-3088
+      deposit_id: straininfo.deposit:670481
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID285994.2
+      strain_id: straininfo.strain:285994
+      strain_status: published offline
+  - record_id: straininfo.deposit:751647
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: CGMCC 4.1070
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CGMCC-4.1070
+    source_strain_identifiers: CGMCC 4.1070
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CGMCC 4.1070
+      deposit_id: straininfo.deposit:751647
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: straininfo.deposit:98703
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: ATCC 15812
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:ATCC-15812
+    source_strain_identifiers: ATCC 15812
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: ATCC 15812
+      deposit_id: straininfo.deposit:98703
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: straininfo.strain:285994
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:285994
+    taxon_id: NCBITaxon:68174
+    record_name: NRRL B-3088
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:NRRL-B-3088
+    source_strain_identifiers: NRRL B-3088
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NRRL B-3088
+      deposit_id: straininfo.deposit:670481
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID285994.2
+      strain_id: straininfo.strain:285994
+      strain_status: published offline
+  - record_id: straininfo.strain:36948
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: ATCC 15719
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:ATCC-15719
+    source_strain_identifiers: ATCC 15719
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: ATCC 15719
+      deposit_id: straininfo.deposit:119529
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: straininfo.strain:36948
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: ATCC 15812
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:ATCC-15812
+    source_strain_identifiers: ATCC 15812
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: ATCC 15812
+      deposit_id: straininfo.deposit:98703
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: straininfo.strain:36948
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: CGMCC 4.1070
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CGMCC-4.1070
+    source_strain_identifiers: CGMCC 4.1070
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CGMCC 4.1070
+      deposit_id: straininfo.deposit:751647
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: straininfo.strain:36948
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: DSM 43030
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:DSM-43030
+    source_strain_identifiers: DSM 43030
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 43030
+      deposit_id: straininfo.deposit:119531
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: straininfo.strain:36948
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: IFO 12244
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:IFO-12244
+    source_strain_identifiers: IFO 12244
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: IFO 12244
+      deposit_id: straininfo.deposit:119532
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: straininfo.strain:36948
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: IMET 43409
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:IMET-43409
+    source_strain_identifiers: IMET 43409
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: IMET 43409
+      deposit_id: straininfo.deposit:175643
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: straininfo.strain:36948
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: JCM 3037
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:JCM-3037
+    source_strain_identifiers: JCM 3037
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 3037
+      deposit_id: straininfo.deposit:167599
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: straininfo.strain:36948
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: KCTC 9116
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:KCTC-9116
+    source_strain_identifiers: KCTC 9116
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: KCTC 9116
+      deposit_id: straininfo.deposit:319347
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: straininfo.strain:36948
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: NBIMCC 1032
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:NBIMCC-1032
+    source_strain_identifiers: NBIMCC 1032
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NBIMCC 1032
+      deposit_id: straininfo.deposit:560787
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: straininfo.strain:36948
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: NBRC 12244
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:NBRC-12244
+    source_strain_identifiers: NBRC 12244
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NBRC 12244
+      deposit_id: straininfo.deposit:333292
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: straininfo.strain:36948
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: NCIMB 10164
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:NCIMB-10164
+    source_strain_identifiers: NCIMB 10164
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NCIMB 10164
+      deposit_id: straininfo.deposit:175644
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+  - record_id: straininfo.strain:36948
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:36948
+    taxon_id: NCBITaxon:68174
+    record_name: VKM Ac-644
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:VKM-Ac-644
+    source_strain_identifiers: VKM Ac-644
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: VKM Ac-644
+      deposit_id: straininfo.deposit:175645
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15308
+      strain_doi: DOI:10.60712/SI-ID36948.3
+      strain_id: straininfo.strain:36948
+      strain_status: published online
+- strain_id: kgmicrobe.strain:bacdive_16337
+  source: BACDIVE
+  source_id: bacdive:16337
+  designation: FH 2454
+  culture_collection_ids:
+  - kgmicrobe.strain:CBS-102.34
+  - kgmicrobe.strain:CGMCC-4.1788
+  - kgmicrobe.strain:DSM-41703
+  - kgmicrobe.strain:ETH-16827
+  - kgmicrobe.strain:ETH-31566
+  - kgmicrobe.strain:IFO-15457
+  - kgmicrobe.strain:JCM-13861
+  - kgmicrobe.strain:JCM-4295
+  - kgmicrobe.strain:KCC%20S-0295
+  - kgmicrobe.strain:NBRC-101792
+  - kgmicrobe.strain:NBRC-15457
+  - kgmicrobe.strain:NRRL-B-1906
+  related_records:
+  - record_id: gold:Go0028304
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0028304
+    taxon_id: NCBITaxon:68277
+    record_name: Streptomyces roseodiastaticus NBRC 15457
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:NBRC-15457
+    source_strain_identifiers: NBRC 15457
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0028304
+  - record_id: gold:Go0028304
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0028304
+    taxon_id: NCBITaxon:68277
+    record_name: Streptomyces roseodiastaticus NBRC 15457
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:NBRC-15457
+    source_strain_identifiers: NBRC 15457
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0028304
+  - record_id: INSDC:AB184683
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:50057
+    taxon_id: NCBITaxon:68277
+    record_name: 'Streptomyces tricolor gene for 16S rRNA, partial sequence, strain:
+      NBRC 15457'
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:NBRC-15457
+    source_strain_identifiers: NBRC 15457
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NBRC 15457
+      deposit_id: straininfo.deposit:334306
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:334306
+      sequence_type: rrnaop
+      source_bacdive_id: bacdive:16337
+      strain_doi: DOI:10.60712/SI-ID50057.2
+      strain_id: straininfo.strain:50057
+      strain_status: published online
+  - record_id: INSDC:D44045
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:50057
+    taxon_id: NCBITaxon:68277
+    record_name: 'Streptomyces tricolor gene for 16S ribosomal RNA, partial sequence,
+      strain: JCM 4295'
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:JCM-4295
+    source_strain_identifiers: JCM 4295
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 4295
+      deposit_id: straininfo.deposit:167363
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:167363
+      sequence_type: rrnaop
+      source_bacdive_id: bacdive:16337
+      strain_doi: DOI:10.60712/SI-ID50057.2
+      strain_id: straininfo.strain:50057
+      strain_status: published online
+  - record_id: straininfo.deposit:167358
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:50057
+    taxon_id: NCBITaxon:68277
+    record_name: DSM 41703
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:DSM-41703
+    source_strain_identifiers: DSM 41703
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 41703
+      deposit_id: straininfo.deposit:167358
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:16337
+      strain_doi: DOI:10.60712/SI-ID50057.2
+      strain_id: straininfo.strain:50057
+      strain_status: published online
+  - record_id: straininfo.deposit:167362
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:50057
+    taxon_id: NCBITaxon:68277
+    record_name: IFO 15457
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:IFO-15457
+    source_strain_identifiers: IFO 15457
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: IFO 15457
+      deposit_id: straininfo.deposit:167362
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:16337
+      strain_doi: DOI:10.60712/SI-ID50057.2
+      strain_id: straininfo.strain:50057
+      strain_status: published online
+  - record_id: straininfo.deposit:167363
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:50057
+    taxon_id: NCBITaxon:68277
+    record_name: JCM 4295
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:JCM-4295
+    source_strain_identifiers: JCM 4295
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 4295
+      deposit_id: straininfo.deposit:167363
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:16337
+      strain_doi: DOI:10.60712/SI-ID50057.2
+      strain_id: straininfo.strain:50057
+      strain_status: published online
+  - record_id: straininfo.deposit:167365
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:50057
+    taxon_id: NCBITaxon:68277
+    record_name: NRRL B-1906
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:NRRL-B-1906
+    source_strain_identifiers: NRRL B-1906
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NRRL B-1906
+      deposit_id: straininfo.deposit:167365
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:16337
+      strain_doi: DOI:10.60712/SI-ID50057.2
+      strain_id: straininfo.strain:50057
+      strain_status: published online
+  - record_id: straininfo.deposit:230969
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:50057
+    taxon_id: NCBITaxon:68277
+    record_name: CBS 102.34
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CBS-102.34
+    source_strain_identifiers: CBS 102.34
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CBS 102.34
+      deposit_id: straininfo.deposit:230969
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:16337
+      strain_doi: DOI:10.60712/SI-ID50057.2
+      strain_id: straininfo.strain:50057
+      strain_status: published online
+  - record_id: straininfo.deposit:334306
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:50057
+    taxon_id: NCBITaxon:68277
+    record_name: NBRC 15457
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:NBRC-15457
+    source_strain_identifiers: NBRC 15457
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NBRC 15457
+      deposit_id: straininfo.deposit:334306
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:16337
+      strain_doi: DOI:10.60712/SI-ID50057.2
+      strain_id: straininfo.strain:50057
+      strain_status: published online
+  - record_id: straininfo.deposit:690532
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:50057
+    taxon_id: NCBITaxon:68277
+    record_name: JCM 13861
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:JCM-13861
+    source_strain_identifiers: JCM 13861
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 13861
+      deposit_id: straininfo.deposit:690532
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:16337
+      strain_doi: DOI:10.60712/SI-ID50057.2
+      strain_id: straininfo.strain:50057
+      strain_status: published online
+  - record_id: straininfo.deposit:699446
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:50057
+    taxon_id: NCBITaxon:68277
+    record_name: NBRC 101792
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:NBRC-101792
+    source_strain_identifiers: NBRC 101792
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NBRC 101792
+      deposit_id: straininfo.deposit:699446
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:16337
+      strain_doi: DOI:10.60712/SI-ID50057.2
+      strain_id: straininfo.strain:50057
+      strain_status: published online
+  - record_id: straininfo.deposit:753515
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:50057
+    taxon_id: NCBITaxon:68277
+    record_name: CGMCC 4.1788
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CGMCC-4.1788
+    source_strain_identifiers: CGMCC 4.1788
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CGMCC 4.1788
+      deposit_id: straininfo.deposit:753515
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:16337
+      strain_doi: DOI:10.60712/SI-ID50057.2
+      strain_id: straininfo.strain:50057
+      strain_status: published online
+  - record_id: straininfo.strain:50057
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:50057
+    taxon_id: NCBITaxon:68277
+    record_name: CBS 102.34
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CBS-102.34
+    source_strain_identifiers: CBS 102.34
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CBS 102.34
+      deposit_id: straininfo.deposit:230969
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:16337
+      strain_doi: DOI:10.60712/SI-ID50057.2
+      strain_id: straininfo.strain:50057
+      strain_status: published online
+  - record_id: straininfo.strain:50057
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:50057
+    taxon_id: NCBITaxon:68277
+    record_name: CGMCC 4.1788
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CGMCC-4.1788
+    source_strain_identifiers: CGMCC 4.1788
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CGMCC 4.1788
+      deposit_id: straininfo.deposit:753515
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:16337
+      strain_doi: DOI:10.60712/SI-ID50057.2
+      strain_id: straininfo.strain:50057
+      strain_status: published online
+  - record_id: straininfo.strain:50057
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:50057
+    taxon_id: NCBITaxon:68277
+    record_name: DSM 41703
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:DSM-41703
+    source_strain_identifiers: DSM 41703
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 41703
+      deposit_id: straininfo.deposit:167358
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:16337
+      strain_doi: DOI:10.60712/SI-ID50057.2
+      strain_id: straininfo.strain:50057
+      strain_status: published online
+  - record_id: straininfo.strain:50057
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:50057
+    taxon_id: NCBITaxon:68277
+    record_name: IFO 15457
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:IFO-15457
+    source_strain_identifiers: IFO 15457
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: IFO 15457
+      deposit_id: straininfo.deposit:167362
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:16337
+      strain_doi: DOI:10.60712/SI-ID50057.2
+      strain_id: straininfo.strain:50057
+      strain_status: published online
+  - record_id: straininfo.strain:50057
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:50057
+    taxon_id: NCBITaxon:68277
+    record_name: JCM 13861
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:JCM-13861
+    source_strain_identifiers: JCM 13861
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 13861
+      deposit_id: straininfo.deposit:690532
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:16337
+      strain_doi: DOI:10.60712/SI-ID50057.2
+      strain_id: straininfo.strain:50057
+      strain_status: published online
+  - record_id: straininfo.strain:50057
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:50057
+    taxon_id: NCBITaxon:68277
+    record_name: JCM 4295
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:JCM-4295
+    source_strain_identifiers: JCM 4295
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 4295
+      deposit_id: straininfo.deposit:167363
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:16337
+      strain_doi: DOI:10.60712/SI-ID50057.2
+      strain_id: straininfo.strain:50057
+      strain_status: published online
+  - record_id: straininfo.strain:50057
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:50057
+    taxon_id: NCBITaxon:68277
+    record_name: NBRC 101792
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:NBRC-101792
+    source_strain_identifiers: NBRC 101792
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NBRC 101792
+      deposit_id: straininfo.deposit:699446
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:16337
+      strain_doi: DOI:10.60712/SI-ID50057.2
+      strain_id: straininfo.strain:50057
+      strain_status: published online
+  - record_id: straininfo.strain:50057
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:50057
+    taxon_id: NCBITaxon:68277
+    record_name: NBRC 15457
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:NBRC-15457
+    source_strain_identifiers: NBRC 15457
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NBRC 15457
+      deposit_id: straininfo.deposit:334306
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:16337
+      strain_doi: DOI:10.60712/SI-ID50057.2
+      strain_id: straininfo.strain:50057
+      strain_status: published online
+  - record_id: straininfo.strain:50057
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:50057
+    taxon_id: NCBITaxon:68277
+    record_name: NRRL B-1906
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:NRRL-B-1906
+    source_strain_identifiers: NRRL B-1906
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NRRL B-1906
+      deposit_id: straininfo.deposit:167365
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:16337
+      strain_doi: DOI:10.60712/SI-ID50057.2
+      strain_id: straininfo.strain:50057
+      strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_16081
   source: BACDIVE
   source_id: bacdive:16081
@@ -1784,8 +5026,8 @@ strains:
   - kgmicrobe.strain:DSM-40783
   - kgmicrobe.strain:IFO-15732
   - kgmicrobe.strain:JCM-4979
-  - kgmicrobe.strain:KCC-S-0979
-  - kgmicrobe.strain:LBG-A-3128
+  - kgmicrobe.strain:KCC%20S-0979
+  - kgmicrobe.strain:LBG%20A%203128
   - kgmicrobe.strain:NBRC-15732
   related_records:
   - record_id: gold:Go0705811
@@ -2301,6 +5543,130 @@ strains:
       source_bacdive_id: bacdive:16081
       strain_doi: DOI:10.60712/SI-ID49796.2
       strain_id: straininfo.strain:49796
+      strain_status: published online
+- strain_id: kgmicrobe.strain:bacdive_163796
+  source: BACDIVE
+  source_id: bacdive:163796
+  culture_collection_ids:
+  - kgmicrobe.strain:ATCC-15720
+  - kgmicrobe.strain:INMI%2062
+  - kgmicrobe.strain:JCM-3044
+  - kgmicrobe.strain:NCIMB-10165
+  medium_count: 2
+  related_records:
+  - record_id: straininfo.deposit:175683
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:92824
+    taxon_id: NCBITaxon:68174
+    record_name: JCM 3044
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:JCM-3044
+    source_strain_identifiers: JCM 3044
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 3044
+      deposit_id: straininfo.deposit:175683
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:163796
+      strain_doi: DOI:10.60712/SI-ID92824.2
+      strain_id: straininfo.strain:92824
+      strain_status: published online
+  - record_id: straininfo.deposit:175685
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:92824
+    taxon_id: NCBITaxon:68174
+    record_name: NCIMB 10165
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:NCIMB-10165
+    source_strain_identifiers: NCIMB 10165
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NCIMB 10165
+      deposit_id: straininfo.deposit:175685
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:163796
+      strain_doi: DOI:10.60712/SI-ID92824.2
+      strain_id: straininfo.strain:92824
+      strain_status: published online
+  - record_id: straininfo.deposit:98584
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:92824
+    taxon_id: NCBITaxon:68174
+    record_name: ATCC 15720
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:ATCC-15720
+    source_strain_identifiers: ATCC 15720
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: ATCC 15720
+      deposit_id: straininfo.deposit:98584
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:163796
+      strain_doi: DOI:10.60712/SI-ID92824.2
+      strain_id: straininfo.strain:92824
+      strain_status: published online
+  - record_id: straininfo.strain:92824
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:92824
+    taxon_id: NCBITaxon:68174
+    record_name: ATCC 15720
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:ATCC-15720
+    source_strain_identifiers: ATCC 15720
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: ATCC 15720
+      deposit_id: straininfo.deposit:98584
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:163796
+      strain_doi: DOI:10.60712/SI-ID92824.2
+      strain_id: straininfo.strain:92824
+      strain_status: published online
+  - record_id: straininfo.strain:92824
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:92824
+    taxon_id: NCBITaxon:68174
+    record_name: JCM 3044
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:JCM-3044
+    source_strain_identifiers: JCM 3044
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 3044
+      deposit_id: straininfo.deposit:175683
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:163796
+      strain_doi: DOI:10.60712/SI-ID92824.2
+      strain_id: straininfo.strain:92824
+      strain_status: published online
+  - record_id: straininfo.strain:92824
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:92824
+    taxon_id: NCBITaxon:68174
+    record_name: NCIMB 10165
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:NCIMB-10165
+    source_strain_identifiers: NCIMB 10165
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NCIMB 10165
+      deposit_id: straininfo.deposit:175685
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:163796
+      strain_doi: DOI:10.60712/SI-ID92824.2
+      strain_id: straininfo.strain:92824
       strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_16085
   source: BACDIVE
@@ -2861,6 +6227,121 @@ strains:
       strain_doi: DOI:10.60712/SI-ID49863.2
       strain_id: straininfo.strain:49863
       strain_status: published online
+- strain_id: kgmicrobe.strain:bacdive_176653
+  source: BACDIVE
+  source_id: bacdive:176653
+  culture_collection_ids:
+  - kgmicrobe.strain:DSM-41013
+  - kgmicrobe.strain:IMRU-3047
+  medium_count: 3
+  genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_054863875.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_054863875.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM5486387v1
+    taxon_id: NCBITaxon:3458241
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-41013
+    source_strain_identifiers: strain=DSM 41013
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCF_054863875.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_054863875.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM5486387v1
+    taxon_id: NCBITaxon:3458241
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-41013
+    source_strain_identifiers: strain=DSM 41013
+    source_strain_field: infraspecific_name
+  related_records:
+  - record_id: bioproject:PRJNA1310497
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_054863875.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:3458241
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-41013
+    source_strain_identifiers: strain=DSM 41013
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_054863875.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:3458241
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-41013
+    source_strain_identifiers: strain=DSM 41013
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN50772890
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_054863875.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:3458241
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-41013
+    source_strain_identifiers: strain=DSM 41013
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN50772890
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_054863875.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:3458241
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-41013
+    source_strain_identifiers: strain=DSM 41013
+    source_strain_field: infraspecific_name
+- strain_id: kgmicrobe.strain:bacdive_176654
+  source: BACDIVE
+  source_id: bacdive:176654
+  culture_collection_ids:
+  - kgmicrobe.strain:DSM-41017
+  - kgmicrobe.strain:IMRU-3071
+  medium_count: 2
+  related_records:
+  - record_id: straininfo.deposit:56455
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:283548
+    taxon_id: NCBITaxon:68277
+    record_name: DSM 41017
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:DSM-41017
+    source_strain_identifiers: DSM 41017
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 41017
+      deposit_id: straininfo.deposit:56455
+      deposit_status: available
+      match_method: culture_identifier
+      strain_doi: DOI:10.60712/SI-ID283548.1
+      strain_id: straininfo.strain:283548
+      strain_status: published online
+  - record_id: straininfo.strain:283548
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:283548
+    taxon_id: NCBITaxon:68277
+    record_name: DSM 41017
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:DSM-41017
+    source_strain_identifiers: DSM 41017
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 41017
+      deposit_id: straininfo.deposit:56455
+      deposit_status: available
+      match_method: culture_identifier
+      strain_doi: DOI:10.60712/SI-ID283548.1
+      strain_id: straininfo.strain:283548
+      strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_16082
   source: BACDIVE
   source_id: bacdive:16082
@@ -3002,96 +6483,25 @@ strains:
   designation: ST033551(HKI), GT20051132
   culture_collection_ids:
   - kgmicrobe.strain:HKI-0475
-- strain_id: kgmicrobe.strain:bacdive_126475
+- strain_id: kgmicrobe.strain:bacdive_126516
   source: BACDIVE
-  source_id: bacdive:126475
-  designation: STH00187(ZIMET), ST 23830, GT19994026
-  culture_collection_ids:
-  - kgmicrobe.strain:HKI-0187
-- strain_id: kgmicrobe.strain:bacdive_126481
+  source_id: bacdive:126516
+  designation: ST026834(HKI), Lorenz Actino7, GT20024038
+- strain_id: kgmicrobe.strain:bacdive_126517
   source: BACDIVE
-  source_id: bacdive:126481
-  designation: STH00188(ZIMET), GT19994022, ST 23826
-  culture_collection_ids:
-  - kgmicrobe.strain:HKI-0188
-- strain_id: kgmicrobe.strain:bacdive_126468
+  source_id: bacdive:126517
+  designation: ST004038
+- strain_id: kgmicrobe.strain:bacdive_126518
   source: BACDIVE
-  source_id: bacdive:126468
-  designation: ST023940(HKI), GT19994050
-- strain_id: kgmicrobe.strain:bacdive_126469
-  source: BACDIVE
-  source_id: bacdive:126469
-  designation: ST024235(HKI), GT19984001
-- strain_id: kgmicrobe.strain:bacdive_126470
-  source: BACDIVE
-  source_id: bacdive:126470
-  designation: ST024237(HKI), GT19964004
-- strain_id: kgmicrobe.strain:bacdive_126471
-  source: BACDIVE
-  source_id: bacdive:126471
-  designation: ST024240(HKI), GT19954001
-- strain_id: kgmicrobe.strain:bacdive_126472
-  source: BACDIVE
-  source_id: bacdive:126472
-  designation: ST024360(HKI)
-- strain_id: kgmicrobe.strain:bacdive_126473
-  source: BACDIVE
-  source_id: bacdive:126473
-  designation: ST024382(HKI), GT20004001
-- strain_id: kgmicrobe.strain:bacdive_126474
-  source: BACDIVE
-  source_id: bacdive:126474
-  designation: ST030347(HKI)
-- strain_id: kgmicrobe.strain:bacdive_126476
-  source: BACDIVE
-  source_id: bacdive:126476
-  designation: ST026026(HKI), GT20014005
-- strain_id: kgmicrobe.strain:bacdive_126477
-  source: BACDIVE
-  source_id: bacdive:126477
-  designation: ST029660(HKI)
-- strain_id: kgmicrobe.strain:bacdive_126478
-  source: BACDIVE
-  source_id: bacdive:126478
-  designation: ST032224(HKI)
-- strain_id: kgmicrobe.strain:bacdive_126479
-  source: BACDIVE
-  source_id: bacdive:126479
-  designation: ST029746(HKI)
-- strain_id: kgmicrobe.strain:bacdive_126480
-  source: BACDIVE
-  source_id: bacdive:126480
-  designation: ST026428(HKI)
-- strain_id: kgmicrobe.strain:bacdive_126482
-  source: BACDIVE
-  source_id: bacdive:126482
-  designation: ST002707(HKI), GT19964003
-- strain_id: kgmicrobe.strain:bacdive_126483
-  source: BACDIVE
-  source_id: bacdive:126483
-  designation: ST024334(HKI), GT19964001
-- strain_id: kgmicrobe.strain:bacdive_126484
-  source: BACDIVE
-  source_id: bacdive:126484
-  designation: ST024335(HKI), GT19964002
-- strain_id: kgmicrobe.strain:bacdive_126485
-  source: BACDIVE
-  source_id: bacdive:126485
-  designation: ST002448(HKI), GT19954002
-- strain_id: kgmicrobe.strain:bacdive_126486
-  source: BACDIVE
-  source_id: bacdive:126486
-  designation: ST029742(HKI)
-- strain_id: kgmicrobe.strain:bacdive_126487
-  source: BACDIVE
-  source_id: bacdive:126487
-  designation: ST029745(HKI)
+  source_id: bacdive:126518
+  designation: ST002898
 source_attestations:
 - source: NCBITAXON
   source_id: NCBITaxon:1935
   source_label: Streptomyces violaceoruber
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:782110
   source_label: Streptomyces violaceoruber
@@ -3108,7 +6518,7 @@ source_attestations:
 - source: BACDIVE
   source_id: NCBITaxon:1935
   source_label: Streptomyces violaceoruber
-  assertion_count: 32
+  assertion_count: 21
   assertion_unit: STRAIN
 - source: MEDIADIVE
   source_id: NCBITaxon:1935
@@ -3131,7 +6541,7 @@ source_attestations:
   assertion_count: 5
   assertion_unit: TRAIT_ASSERTION
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

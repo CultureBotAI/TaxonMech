@@ -16,11 +16,11 @@ sources:
   ncbitaxon:
     name: NCBI Taxonomy (labels, parents, synonyms)
     url: https://www.ncbi.nlm.nih.gov/taxonomy
-    via: kg-microbe data/transformed/ontologies/ncbitaxon_{nodes,edges}.tsv
+    via: conf/ncbi_taxdump.yaml (complete primary new_taxdump.tar.gz)
   ncbitaxon_ranks:
-    name: NCBI Taxonomy ranks (has_rank), not carried by the KGX transform
+    name: NCBI Taxonomy ranks from the primary nodes table
     url: https://www.ncbi.nlm.nih.gov/taxonomy
-    via: kg-microbe data/raw/ncbitaxon.db (semantic-sql build of ncbitaxon.owl)
+    via: complete primary NCBI nodes.dmp and names.dmp
   gtdb:
     name: Genome Taxonomy Database species, genomes and NCBI mappings
     url: https://gtdb.ecogenomic.org/
@@ -44,11 +44,19 @@ sources:
   bacdive:
     name: BacDive strains and culture-collection deposits
     url: https://bacdive.dsmz.de/
-    via: kg-microbe data/transformed/bacdive/{nodes,edges}.tsv
+    via: data/bacdive/ (complete current v2 API capture; legacy LPSN links retained)
   bacdive_assemblies:
     name: BacDive strain-to-genome links (NCBI assemblies, PATRIC/BV-BRC and IMG records)
     url: https://bacdive.dsmz.de/
-    via: kg-microbe data/raw/bacdive_strains.json (Sequence information / Genome sequences)
+    via: data/bacdive/records.jsonl.gz (v2 Genome sequences, all supplied identifier systems)
+  ncbi_assemblies:
+    name: NCBI current and historical GenBank and RefSeq assembly summaries
+    url: https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/
+    via: conf/ncbi_assemblies.yaml (complete pinned primary summaries)
+  bvbrc:
+    name: BV-BRC public bacterial and archaeal genome census
+    url: https://www.bv-brc.org/api/genome/
+    via: data/bvbrc/ (complete identity, culture-deposit and genome metadata projection)
   mediadive:
     name: MediaDive growth-medium links
     url: https://mediadive.dsmz.de/

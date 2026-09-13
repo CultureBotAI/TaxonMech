@@ -61,14 +61,27 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 4
 synonyms:
+- synonym_text: '"Ectopseudomonas yangonensis" (Tohya et al. 2020) Rudra and Gupta
+    2024'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: Aquipseudomonas yangonensis
   synonym_type: EXACT_SYNONYM
   source: GTDB
   source_id: GTDB:s__Aquipseudomonas_yangonensis
 - synonym_text: Ectopseudomonas yangonensis
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Pseudomonas sp. MY101
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Pseudomonas sp. MY50
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Pseudomonas sp. MY63
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Pseudomonas yangonensis Tohya et al. 2020
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 xrefs:
@@ -91,23 +104,101 @@ strains:
     source_id: bacdive:164546
     source_reference_id: '67770'
     assembly_level: contig
-    assembly_name: Pseudomonas yangonensis MY50
+    assembly_name: ASM993272v1 assembly for Pseudomonas yangonensis MY50
     taxon_id: NCBITaxon:2579922
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_009932725.1
+    source: BV_BRC
+    source_id: patric:2579922.3
+    assembly_name: Pseudomonas sp. MY50
+    taxon_id: NCBITaxon:2579922
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-33396
+    source_strain_identifiers: JCM:33396
+    source_strain_field: culture_collection
   genome_records:
+  - genome_id: img.taxon:3007696059
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:164546
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: ASM993272v1 assembly for Pseudomonas yangonensis MY50
+    taxon_id: NCBITaxon:2579922
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: patric:2579922.3
     source_database: patric
     source: BACDIVE
     source_id: bacdive:164546
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: ASM993272v1 assembly for Pseudomonas yangonensis MY50
+    taxon_id: NCBITaxon:2579922
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:2579922.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:2579922.3
     genome_name: Pseudomonas sp. MY50
     taxon_id: NCBITaxon:2579922
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-33396
+    source_strain_identifiers: JCM:33396
+    source_strain_field: culture_collection
+  - genome_id: atb.assembly:202505.SAMD00171901
+    source_database: allthebacteria
+    source: ALLTHEBACTERIA
+    source_id: atb.assembly:202505.SAMD00171901
+    genome_name: Pseudomonas yangonensis
+    atb_evidence:
+      release: 2025-05
+      sample_id: biosample:SAMD00171901
+      dataset: r0.2
+      run_accessions: DRR178686
+      assembly_seqkit_sum: seqkit.v0.1_DLS_k0_4c297307795930170d9aa440194a5a16
+      assembly_filter: PASS
+      hq_filter: PASS
+      download_url: https://allthebacteria-assemblies.s3.eu-west-2.amazonaws.com/SAMD00171901.fa.gz
+      archive_url: https://osf.io/download/66717c396b6c8e345004ca6e/
+      archive_filename: atb.assembly.r0.2.batch.134.tar.xz
+      sample_links:
+      - matched_strain_id: kgmicrobe.strain:JCM-33396
+        record_id: biosample:SAMD00171901
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:2579922.3
+        source_strain_field: culture_collection
+        source_strain_identifiers: JCM:33396
+        taxon_id: NCBITaxon:2579922
+      ena_analysis_id: ena.analysis:ERZ25081161
+      sylph_species: Pseudomonas_E yangonensis
+  related_records:
+  - record_id: bioproject:PRJDB8321
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:2579922.3
+    taxon_id: NCBITaxon:2579922
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-33396
+    source_strain_identifiers: JCM:33396
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMD00171901
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:2579922.3
+    taxon_id: NCBITaxon:2579922
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-33396
+    source_strain_identifiers: JCM:33396
+    source_strain_field: culture_collection
 source_attestations:
 - source: NCBITAXON
   source_id: NCBITaxon:2579922
   source_label: Pseudomonas yangonensis
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:7920
   source_label: Pseudomonas yangonensis
@@ -131,7 +222,7 @@ source_attestations:
   assertion_count: 3
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

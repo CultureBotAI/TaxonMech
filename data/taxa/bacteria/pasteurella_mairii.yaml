@@ -49,12 +49,16 @@ synonyms:
   source: GTDB
   source_id: GTDB:s__Actinobacillus_B_mairii
 - synonym_text: Bisgaard taxon 19
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Pasteurella mairi
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Pasteurella mairii
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Pasteurella mairii corrig. Sneath and Stevens 1990 emend. Christensen
+    et al. 2005
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 xrefs:
@@ -71,7 +75,7 @@ strains:
   - kgmicrobe.strain:CCUG-27189
   - kgmicrobe.strain:CIP-103902
   - kgmicrobe.strain:DSM-17480
-  - kgmicrobe.strain:LPHL-5143/70
+  - kgmicrobe.strain:LPHL%205143%2F70
   - kgmicrobe.strain:NCTC-10699
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_900454475
@@ -79,8 +83,18 @@ strains:
     source_id: bacdive:11734
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: '[Pasteurella] mairii NCTC10699'
+    assembly_name: 44787_A01 assembly for [Pasteurella] mairii NCTC10699
     taxon_id: NCBITaxon:757
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900454475.1
+    source: BV_BRC
+    source_id: patric:757.3
+    assembly_name: '"[Pasteurella] mairii strain NCTC10699"'
+    taxon_id: NCBITaxon:757
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10699
+    source_strain_identifiers: NCTC:10699
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_900454475.1
     source: GOLD
     source_id: gold:Ga0350758
@@ -130,9 +144,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:11734
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Pasteurella mairii NCTC 10699
+    assembly_level: contig
+    genome_name: 44787_A01 assembly for [Pasteurella] mairii NCTC10699
     taxon_id: NCBITaxon:757
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2873991878
     source_database: img
     source: GOLD
@@ -162,10 +177,30 @@ strains:
     source: BACDIVE
     source_id: bacdive:11734
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: '[Pasteurella] mairii strain NCTC10699'
+    assembly_level: contig
+    genome_name: 44787_A01 assembly for [Pasteurella] mairii NCTC10699
     taxon_id: NCBITaxon:757
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:757.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:757.3
+    genome_name: '"[Pasteurella] mairii strain NCTC10699"'
+    taxon_id: NCBITaxon:757
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-10699
+    source_strain_identifiers: NCTC:10699
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:757.3
+    taxon_id: NCBITaxon:757
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10699
+    source_strain_identifiers: NCTC:10699
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
     source: GOLD
@@ -188,6 +223,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0500100
     source_project_id: gold:Gp0384300
+  - record_id: biosample:SAMEA3879494
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:757.3
+    taxon_id: NCBITaxon:757
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10699
+    source_strain_identifiers: NCTC:10699
+    source_strain_field: culture_collection
   - record_id: biosample:SAMEA3879494
     record_type: BIOSAMPLE
     source: GOLD
@@ -715,6 +759,7 @@ source_attestations:
   source_label: '[Pasteurella] mairii'
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: GTDB
   source_id: GTDB:s__Actinobacillus_B_mairii
   source_label: s__Actinobacillus_B_mairii
@@ -747,7 +792,7 @@ source_attestations:
   assertion_count: 1
   assertion_unit: TRAIT_ASSERTION
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

@@ -81,11 +81,17 @@ taxonomy_mappings:
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 synonyms:
+- synonym_text: Klebsiella planticola Bagley et al. 1982
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: Klebsiella trevisanii
   synonym_type: RELATED_SYNONYM
   source: LPSN
   source_id: lpsn:777158
 - synonym_text: Klebsiella trevisanii
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Klebsiella trevisanii Ferragut et al. 1983
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Raoultella planticola
@@ -93,6 +99,9 @@ synonyms:
   source: LPSN
   source_id: lpsn:780332
 - synonym_text: Raoultella planticola
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Raoultella planticola (Bagley et al. 1982) Drancourt et al. 2001
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 xrefs:
@@ -105,12 +114,11 @@ strains:
   source: BACDIVE
   source_id: bacdive:5097
   designation: CRCC 13986, V-236, 4245-72
-  classified_as: NCBITaxon:1005996
   culture_collection_ids:
   - kgmicrobe.strain:ATCC-33531
   - kgmicrobe.strain:BCRC-13986
   - kgmicrobe.strain:CCUG-15718
-  - kgmicrobe.strain:CDC-4245-72
+  - kgmicrobe.strain:CDC%204245-72
   - kgmicrobe.strain:CECT-843
   - kgmicrobe.strain:CIP-100751
   - kgmicrobe.strain:CRBIP28.102
@@ -129,8 +137,18 @@ strains:
     source_id: bacdive:5097
     source_reference_id: '67770'
     assembly_level: contig
+    assembly_name: GRPL_DRAFTv1 assembly for Raoultella planticola ATCC 33531
+    taxon_id: NCBITaxon:1005996
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_000735435.1
+    source: BV_BRC
+    source_id: patric:1005996.3
     assembly_name: Raoultella planticola ATCC 33531
     taxon_id: NCBITaxon:1005996
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-33531
+    source_strain_identifiers: ATCC 33531
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_000735435.1
     source: GOLD
     source_id: gold:Ga0058423
@@ -163,13 +181,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-33531
     source_strain_identifiers: ATCC 33531
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_000735435.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000735435.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: GRPL_DRAFTv1
+    taxon_id: NCBITaxon:1005996
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-33531
+    source_strain_identifiers: strain=ATCC 33531
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_900706865
     source: BACDIVE
     source_id: bacdive:5097
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Raoultella planticola NCTC12998
+    assembly_name: 28824_F01 assembly for Raoultella planticola NCTC12998
     taxon_id: NCBITaxon:575
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900706865.1
+    source: BV_BRC
+    source_id: patric:575.52
+    assembly_name: Raoultella planticola strain NCTC12998
+    taxon_id: NCBITaxon:575
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-12998
+    source_strain_identifiers: NCTC:12998
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_900706865.1
     source: GOLD
     source_id: gold:Ga0668051
@@ -202,6 +241,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-33531
     source_strain_identifiers: ATCC 33531
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_000735435.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000735435.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: GRPL_DRAFTv1
+    taxon_id: NCBITaxon:1005996
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-33531
+    source_strain_identifiers: strain=ATCC 33531
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_000735435
     source: STRAININFO
     source_id: straininfo.strain:92271
@@ -260,10 +310,11 @@ strains:
     source_database: img
     source: BACDIVE
     source_id: bacdive:5097
-    source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Raoultella planticola ATCC 33531
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: GRPL_DRAFTv1 assembly for Raoultella planticola ATCC 33531
     taxon_id: NCBITaxon:1005996
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2588253798
     source_database: img
     source: GOLD
@@ -292,19 +343,50 @@ strains:
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5097
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: GRPL_DRAFTv1 assembly for Raoultella planticola ATCC 33531
+    taxon_id: NCBITaxon:1005996
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1005996.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1005996.3
     genome_name: Raoultella planticola ATCC 33531
     taxon_id: NCBITaxon:1005996
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-33531
+    source_strain_identifiers: ATCC 33531
+    source_strain_field: strain
   - genome_id: patric:575.52
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5097
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: 28824_F01 assembly for Raoultella planticola NCTC12998
+    taxon_id: NCBITaxon:575
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:575.52
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:575.52
     genome_name: Raoultella planticola strain NCTC12998
     taxon_id: NCBITaxon:575
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-12998
+    source_strain_identifiers: NCTC:12998
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:575.52
+    taxon_id: NCBITaxon:575
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-12998
+    source_strain_identifiers: NCTC:12998
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
     source: GOLD
@@ -336,6 +418,25 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-33531
     source_strain_identifiers: ATCC 33531
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000735435.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1005996
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-33531
+    source_strain_identifiers: strain=ATCC 33531
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA65511
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1005996.3
+    taxon_id: NCBITaxon:1005996
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-33531
+    source_strain_identifiers: ATCC 33531
+    source_strain_field: strain
   - record_id: bioproject:PRJNA65511
     record_type: BIOPROJECT
     source: GOLD
@@ -358,6 +459,25 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0011628
     source_project_id: gold:Gp0011628
+  - record_id: bioproject:PRJNA65511
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000735435.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1005996
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-33531
+    source_strain_identifiers: strain=ATCC 33531
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMEA2580320
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:575.52
+    taxon_id: NCBITaxon:575
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-12998
+    source_strain_identifiers: NCTC:12998
+    source_strain_field: culture_collection
   - record_id: biosample:SAMEA2580320
     record_type: BIOSAMPLE
     source: GOLD
@@ -380,6 +500,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0277304
     source_project_id: gold:Gp0818756
+  - record_id: biosample:SAMN02743268
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1005996.3
+    taxon_id: NCBITaxon:1005996
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-33531
+    source_strain_identifiers: ATCC 33531
+    source_strain_field: strain
   - record_id: biosample:SAMN02743268
     record_type: BIOSAMPLE
     source: GOLD
@@ -411,6 +540,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-33531
     source_strain_identifiers: ATCC 33531
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN02743268
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000735435.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1005996
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-33531
+    source_strain_identifiers: strain=ATCC 33531
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02743268
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000735435.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1005996
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-33531
+    source_strain_identifiers: strain=ATCC 33531
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0058423
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -1759,7 +1908,7 @@ strains:
   source_id: bacdive:162725
   culture_collection_ids:
   - kgmicrobe.strain:ATCC-8329
-  - kgmicrobe.strain:CDC-1758-51
+  - kgmicrobe.strain:CDC%201758-51
   - kgmicrobe.strain:IAM-1133
   - kgmicrobe.strain:IFO-3317
   - kgmicrobe.strain:JCM-20069
@@ -2140,7 +2289,7 @@ strains:
   - kgmicrobe.strain:ATCC-33558
   - kgmicrobe.strain:CCUG-15719
   - kgmicrobe.strain:CIP-81.36
-  - kgmicrobe.strain:CUETM-78-120
+  - kgmicrobe.strain:CUETM%2078-120
   - kgmicrobe.strain:DSM-2688
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_004345285
@@ -2148,8 +2297,27 @@ strains:
     source_id: bacdive:5096
     source_reference_id: '66792'
     assembly_level: scaffold
-    assembly_name: Raoultella planticola DSM 2688
+    assembly_name: ASM434528v1 assembly for Raoultella planticola DSM 2688
     taxon_id: NCBITaxon:575
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_004345285.1
+    source: BV_BRC
+    source_id: patric:575.48
+    assembly_name: Raoultella planticola strain DSM 2688
+    taxon_id: NCBITaxon:575
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2688
+    source_strain_identifiers: DSM 2688
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_004345285.1
+    source: BV_BRC
+    source_id: patric:575.48
+    assembly_name: Raoultella planticola strain DSM 2688
+    taxon_id: NCBITaxon:575
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2688
+    source_strain_identifiers: DSM:2688
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_004345285.1
     source: GOLD
     source_id: gold:Ga0244648
@@ -2182,6 +2350,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-2688
     source_strain_identifiers: DSM 2688
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_004345285.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_004345285.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM434528v1
+    taxon_id: NCBITaxon:575
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2688
+    source_strain_identifiers: strain=DSM 2688
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_004345285.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_004345285.1
@@ -2192,6 +2371,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-2688
     source_strain_identifiers: DSM 2688
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_004345285.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_004345285.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM434528v1
+    taxon_id: NCBITaxon:575
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2688
+    source_strain_identifiers: strain=DSM 2688
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_004345285
     source: STRAININFO
     source_id: straininfo.strain:216840
@@ -2230,9 +2420,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:5096
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Raoultella planticola DSM 2688
+    assembly_level: scaffold
+    genome_name: ASM434528v1 assembly for Raoultella planticola DSM 2688
     taxon_id: NCBITaxon:575
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2788499846
     source_database: img
     source: GOLD
@@ -2262,9 +2453,30 @@ strains:
     source: BACDIVE
     source_id: bacdive:5096
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: scaffold
+    genome_name: ASM434528v1 assembly for Raoultella planticola DSM 2688
+    taxon_id: NCBITaxon:575
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:575.48
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:575.48
     genome_name: Raoultella planticola strain DSM 2688
     taxon_id: NCBITaxon:575
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-2688
+    source_strain_identifiers: DSM 2688
+    source_strain_field: strain
+  - genome_id: patric:575.48
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:575.48
+    genome_name: Raoultella planticola strain DSM 2688
+    taxon_id: NCBITaxon:575
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-2688
+    source_strain_identifiers: DSM:2688
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN10362885
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -2282,6 +2494,24 @@ strains:
       archive_url: https://osf.io/download/66d9a5a10ca25644d045a0ba/
       archive_filename: atb.assembly.incr_release.202408.batch.44.tar.xz
       sample_links:
+      - matched_strain_id: kgmicrobe.strain:DSM-2688
+        record_id: biosample:SAMN10362885
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:575.48
+        source_strain_field: culture_collection
+        source_strain_identifiers: DSM:2688
+        taxon_id: NCBITaxon:575
+      - matched_strain_id: kgmicrobe.strain:DSM-2688
+        record_id: biosample:SAMN10362885
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:575.48
+        source_strain_field: strain
+        source_strain_identifiers: DSM 2688
+        taxon_id: NCBITaxon:575
       - matched_strain_id: kgmicrobe.strain:DSM-2688
         record_id: biosample:SAMN10362885
         record_type: BIOSAMPLE
@@ -2313,6 +2543,26 @@ strains:
         source_strain_field: ncbi_strain_identifiers
         source_strain_identifiers: DSM 2688
         taxon_id: NCBITaxon:575
+      - matched_strain_id: kgmicrobe.strain:DSM-2688
+        record_id: biosample:SAMN10362885
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_004345285.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=DSM 2688
+        taxon_id: NCBITaxon:575
+      - matched_strain_id: kgmicrobe.strain:DSM-2688
+        record_id: biosample:SAMN10362885
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCF_004345285.1
+        source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=DSM 2688
+        taxon_id: NCBITaxon:575
       ena_analysis_id: ena.analysis:ERZ26401669
       sylph_species: Klebsiella planticola
   related_records:
@@ -2325,6 +2575,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-2688
     source_strain_identifiers: DSM 2688
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_004345285.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:575
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-2688
+    source_strain_identifiers: strain=DSM 2688
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA500331
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:575.48
+    taxon_id: NCBITaxon:575
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2688
+    source_strain_identifiers: DSM 2688
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA500331
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:575.48
+    taxon_id: NCBITaxon:575
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2688
+    source_strain_identifiers: DSM:2688
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA500331
     record_type: BIOPROJECT
     source: GOLD
@@ -2347,6 +2625,34 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0402656
     source_project_id: gold:Gp0290555
+  - record_id: bioproject:PRJNA500331
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_004345285.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:575
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-2688
+    source_strain_identifiers: strain=DSM 2688
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN10362885
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:575.48
+    taxon_id: NCBITaxon:575
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2688
+    source_strain_identifiers: DSM 2688
+    source_strain_field: strain
+  - record_id: biosample:SAMN10362885
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:575.48
+    taxon_id: NCBITaxon:575
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2688
+    source_strain_identifiers: DSM:2688
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN10362885
     record_type: BIOSAMPLE
     source: GOLD
@@ -2378,6 +2684,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-2688
     source_strain_identifiers: DSM 2688
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN10362885
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_004345285.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:575
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-2688
+    source_strain_identifiers: strain=DSM 2688
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN10362885
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_004345285.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:575
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-2688
+    source_strain_identifiers: strain=DSM 2688
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0244648
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -2819,7 +3145,7 @@ strains:
   source: BACDIVE
   source_id: bacdive:139235
   culture_collection_ids:
-  - kgmicrobe.strain:BR-25
+  - kgmicrobe.strain:BR%2025
   - kgmicrobe.strain:CIP-53.10
   related_records:
   - record_id: straininfo.deposit:234093
@@ -2872,8 +3198,18 @@ strains:
     source_id: bacdive:154664
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Raoultella planticola NCTC9528
+    assembly_name: 50712_D01 assembly for Raoultella planticola NCTC9528
     taxon_id: NCBITaxon:575
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900455785.1
+    source: BV_BRC
+    source_id: patric:575.51
+    assembly_name: Raoultella planticola strain NCTC9528
+    taxon_id: NCBITaxon:575
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-9528
+    source_strain_identifiers: NCTC:9528
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_900455785.1
     source: GOLD
     source_id: gold:Ga0317071
@@ -2902,9 +3238,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:154664
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Raoultella planticola NCTC 9528
+    assembly_level: contig
+    genome_name: 50712_D01 assembly for Raoultella planticola NCTC9528
     taxon_id: NCBITaxon:575
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2857980404
     source_database: img
     source: GOLD
@@ -2934,10 +3271,30 @@ strains:
     source: BACDIVE
     source_id: bacdive:154664
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: 50712_D01 assembly for Raoultella planticola NCTC9528
+    taxon_id: NCBITaxon:575
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:575.51
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:575.51
     genome_name: Raoultella planticola strain NCTC9528
     taxon_id: NCBITaxon:575
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-9528
+    source_strain_identifiers: NCTC:9528
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:575.51
+    taxon_id: NCBITaxon:575
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-9528
+    source_strain_identifiers: NCTC:9528
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
     source: GOLD
@@ -2960,6 +3317,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0468679
     source_project_id: gold:Gp0342292
+  - record_id: biosample:SAMEA4412704
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:575.51
+    taxon_id: NCBITaxon:575
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-9528
+    source_strain_identifiers: NCTC:9528
+    source_strain_field: culture_collection
   - record_id: biosample:SAMEA4412704
     record_type: BIOSAMPLE
     source: GOLD
@@ -3706,13 +4072,53 @@ strains:
   source: BACDIVE
   source_id: bacdive:156560
   culture_collection_ids:
-  - kgmicrobe.strain:CCUG-62696-Q
+  - kgmicrobe.strain:CCUG-62696%20Q
+  related_records:
+  - record_id: straininfo.deposit:916443
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:408906
+    taxon_id: NCBITaxon:575
+    record_name: CCUG 62696 Q
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCUG-62696%20Q
+    source_strain_identifiers: CCUG 62696 Q
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 62696 Q
+      deposit_id: straininfo.deposit:916443
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:156560
+      strain_doi: DOI:10.60712/SI-ID408906.2
+      strain_id: straininfo.strain:408906
+      strain_status: published offline
+  - record_id: straininfo.strain:408906
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:408906
+    taxon_id: NCBITaxon:575
+    record_name: CCUG 62696 Q
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCUG-62696%20Q
+    source_strain_identifiers: CCUG 62696 Q
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 62696 Q
+      deposit_id: straininfo.deposit:916443
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:156560
+      strain_doi: DOI:10.60712/SI-ID408906.2
+      strain_id: straininfo.strain:408906
+      strain_status: published offline
 source_attestations:
 - source: NCBITAXON
   source_id: NCBITaxon:575
   source_label: Klebsiella planticola
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:777150
   source_label: Klebsiella planticola
@@ -3731,7 +4137,6 @@ source_attestations:
   source_label: Klebsiella planticola
   assertion_count: 16
   assertion_unit: STRAIN
-  notes: 1 strains are filed under 1 descendant NCBI taxa (see classified_as).
 - source: MEDIADIVE
   source_id: NCBITaxon:575
   source_label: Klebsiella planticola
@@ -3757,7 +4162,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

@@ -86,6 +86,18 @@ def test_capture_retains_raw_bytes_and_replays_without_network(primary, monkeypa
     assert calls.count(BASE + "/service/all/strains") == 2
 
 
+def test_complete_capture_includes_strains_without_local_deposits(primary, monkeypatch):
+    root, directory, payloads, _calls = primary
+    payloads[BASE + "/v2/data/strain/max/9,5,20"] = [record(5, 1), record(9, 2), record(20, 99)]
+    payloads[BASE + "/service/search/strain/all/1"]["data"][1][1] = ["DSM 99"]
+    result = snapshot.capture(directory, root=root, all_records=True)
+    assert result["format_version"] == 2 and result["selection"] == "all"
+    assert result["inputs"] == [] and result["catalog_count"] == result["candidate_count"] == 3
+    (root / snapshot.INPUT_PATHS[0]).write_text("changed local inventory")
+    monkeypatch.setattr(snapshot, "_request", lambda _: pytest.fail("complete capture replays offline"))
+    assert snapshot.finalize(directory, root=root) == result
+
+
 def test_interrupted_capture_resumes_only_missing_requests(primary, monkeypatch):
     root, directory, _, calls = primary
     original = snapshot._request

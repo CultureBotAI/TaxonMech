@@ -150,7 +150,7 @@ taxonomy_mappings:
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 genetic_code: 11
-strain_count: 3
+strain_count: 4
 strains:
 - strain_id: kgmicrobe.strain:bacdive_2227
   source: BACDIVE
@@ -435,8 +435,18 @@ strains:
     source_id: bacdive:23823
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Sulfurospirillum diekertiae JPD-1
+    assembly_name: ASM230953v1 assembly for Sulfurospirillum diekertiae JPD-1
     taxon_id: NCBITaxon:1854492
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_002309535.1
+    source: BV_BRC
+    source_id: patric:220622.7
+    assembly_name: Sulfurospirillum sp. JPD-1
+    taxon_id: NCBITaxon:1854492
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-16452
+    source_strain_identifiers: DSM:16452
+    source_strain_field: culture_collection
   genome_records:
   - genome_id: img.taxon:2775506916
     source_database: img
@@ -444,17 +454,47 @@ strains:
     source_id: bacdive:23823
     source_reference_id: '66792'
     assembly_level: complete
-    genome_name: Sulfurospirillum sp. JPD-1
-    taxon_id: NCBITaxon:220622
+    genome_name: ASM230953v1 assembly for Sulfurospirillum diekertiae JPD-1
+    taxon_id: NCBITaxon:1854492
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: patric:220622.7
     source_database: patric
     source: BACDIVE
     source_id: bacdive:23823
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM230953v1 assembly for Sulfurospirillum diekertiae JPD-1
+    taxon_id: NCBITaxon:1854492
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:220622.7
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:220622.7
     genome_name: Sulfurospirillum sp. JPD-1
-    taxon_id: NCBITaxon:220622
+    taxon_id: NCBITaxon:1854492
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-16452
+    source_strain_identifiers: DSM:16452
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJNA340224
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:220622.7
+    taxon_id: NCBITaxon:1854492
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-16452
+    source_strain_identifiers: DSM:16452
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN07609062
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:220622.7
+    taxon_id: NCBITaxon:1854492
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-16452
+    source_strain_identifiers: DSM:16452
+    source_strain_field: culture_collection
   - record_id: straininfo.deposit:913710
     record_type: STRAININFO_DEPOSIT
     source: STRAININFO
@@ -492,6 +532,47 @@ strains:
       source_bacdive_id: bacdive:23823
       strain_doi: DOI:10.60712/SI-ID406411.2
       strain_id: straininfo.strain:406411
+      strain_status: published online
+- strain_id: kgmicrobe.strain:bacdive_2124
+  source: BACDIVE
+  source_id: bacdive:2124
+  designation: CreDm1
+  culture_collection_ids:
+  - kgmicrobe.strain:DSM-6526
+  related_records:
+  - record_id: straininfo.deposit:160141
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:48229
+    record_name: DSM 6526
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:DSM-6526
+    source_strain_identifiers: DSM 6526
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 6526
+      deposit_id: straininfo.deposit:160141
+      deposit_status: available
+      match_method: culture_identifier
+      strain_doi: DOI:10.60712/SI-ID48229.2
+      strain_id: straininfo.strain:48229
+      strain_status: published online
+  - record_id: straininfo.strain:48229
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:48229
+    record_name: DSM 6526
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:DSM-6526
+    source_strain_identifiers: DSM 6526
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 6526
+      deposit_id: straininfo.deposit:160141
+      deposit_status: available
+      match_method: culture_identifier
+      strain_doi: DOI:10.60712/SI-ID48229.2
+      strain_id: straininfo.strain:48229
       strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_158017
   source: BACDIVE
@@ -544,6 +625,7 @@ source_attestations:
   source_label: Sulfurospirillum sp.
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: GTDB
   source_id: GTDB:s__Sulfurospirillum_sp001548035
   source_label: s__Sulfurospirillum_sp001548035
@@ -554,7 +636,7 @@ source_attestations:
 - source: BACDIVE
   source_id: NCBITaxon:2053622
   source_label: Sulfurospirillum sp.
-  assertion_count: 3
+  assertion_count: 4
   assertion_unit: STRAIN
 - source: MEDIADIVE
   source_id: NCBITaxon:2053622
@@ -567,7 +649,7 @@ source_attestations:
   assertion_count: 2
   assertion_unit: TRAIT_ASSERTION
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

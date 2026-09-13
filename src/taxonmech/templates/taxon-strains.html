@@ -1,7 +1,7 @@
 {% from "taxon-macros.html" import curie, genome_evidence, atb_evidence with context %}
 <table><thead><tr><th>Strain</th><th>Designation</th><th>Culture collections</th><th>Type</th><th>Media</th><th>NCBI genome assemblies</th><th>Other genome records</th><th>Related records</th></tr></thead><tbody>
 {% for s in r.strains %}
-<tr id="strains-{{ s.strain_id | replace(':', '-') }}"><td>{{ curie(s.source_id) }}</td><td>{{ s.designation or "" }}</td><td>{% for c in s.culture_collection_ids or [] %}<code>{{ c | replace("kgmicrobe.strain:", "") | replace("-", " ") }}</code>{% if not loop.last %}, {% endif %}{% endfor %}</td><td>{% if s.is_type_strain %}<strong>type strain</strong>{% endif %}</td><td>{{ s.medium_count or "" }}</td><td>
+<tr id="strains-{{ s.strain_id | replace(':', '-') }}"><td>{{ curie(s.source_id) }}</td><td>{{ s.designation or "" }}</td><td>{% for c in s.culture_collection_ids or [] %}<code>{{ c | deposit_label }}</code>{% if not loop.last %}, {% endif %}{% endfor %}</td><td>{% if s.is_type_strain %}<strong>type strain</strong>{% endif %}</td><td>{{ s.medium_count or "" }}</td><td>
 {% if s.genome_assemblies %}<details><summary>{{ s.genome_assemblies | map(attribute='assembly_id') | unique | list | length }} assembly identifier(s)</summary><ul>
 {% for a in s.genome_assemblies %}<li>{{ curie(a.assembly_id) }}{% if a.assembly_level %} · {{ a.assembly_level }}{% endif %}{% if a.assembly_name %}<br>{{ a.assembly_name }}{% endif %}<br>{{ genome_evidence(a) }}</li>{% endfor %}
 </ul></details>{% else %}<small>No NCBI assembly link imported</small>{% endif %}

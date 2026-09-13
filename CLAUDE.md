@@ -13,6 +13,14 @@ record lives under
 inventories in `data/raw/`, `data/atb/` and `data/straininfo/` and the scope in `curation/seed_scope.tsv` are the
 reproducible inputs.
 
+The prokaryotic backbone now comes from the complete pinned NCBI primary dump.
+Complete native catalogs in `data/catalog/`, `data/bacdive/`, `data/bvbrc/`,
+`data/gold/`, `data/seqcode/` and `data/straininfo/` retain entries without an
+NCBI mapping. Read [docs/SOURCE_COVERAGE.md](docs/SOURCE_COVERAGE.md) before a
+refresh. Never describe an overlap crosswalk or an external directory link as
+a complete source census. Preserve all classified strains in taxon records;
+the site's pages of 200 are a presentation boundary, not a data cap.
+
 **A primary use case is strain identifier to genome identifier relationships.**
 Prioritize NCBI GenBank/RefSeq assemblies and include all available genome
 identifier systems when source evidence links them to BacDive and

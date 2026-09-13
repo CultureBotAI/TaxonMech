@@ -74,21 +74,43 @@ taxonomy_mappings:
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 synonyms:
-- synonym_text: Bacillus oedematis sporogenes
+- synonym_text: '"Bacillus oedematis sporogenes" Sordelli 1923'
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
+- synonym_text: Bacillus oedematis sporogenes
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
 - synonym_text: Bacillus sordelli
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Clostridium sordellii (Hall and Scott 1927) Prevot 1938 (Approved
     Lists 1980)
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Paeniclostridium sordellii
   synonym_type: RELATED_SYNONYM
   source: LPSN
   source_id: lpsn:793946
 - synonym_text: Paeniclostridium sordellii
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Paeniclostridium sordellii (Hall and Scott 1927) Sasi Jyothsna et
+    al. 2016
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Paraclostridium sordellii (Hall and Scott 1927) Bello et al. 2024
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Paraclostridium sp. LG56-02
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Paraclostridium sp. TM114-52
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Paraclostridium sp. TM114-53
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Paraclostridium sp. TM114-67
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 xrefs:
@@ -118,8 +140,18 @@ strains:
     source_id: bacdive:2666
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Paeniclostridium sordellii ATCC 9714
+    assembly_name: ASM44407v1 assembly for Paraclostridium sordellii ATCC 9714
     taxon_id: NCBITaxon:1292036
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_000444075.1
+    source: BV_BRC
+    source_id: patric:1292036.3
+    assembly_name: Clostridium sordellii ATCC 9714
+    taxon_id: NCBITaxon:1292036
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: ATCC 9714
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_000444075.1
     source: GOLD
     source_id: gold:Ga0024761
@@ -142,13 +174,60 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0032799
     source_project_id: gold:Gp0032799
+  - assembly_id: ncbi.assembly:GCA_000444075.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000444075.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM44407v1
+    taxon_id: NCBITaxon:1292036
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: strain=ATCC 9714
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCA_000953555
+    source: BACDIVE
+    source_id: bacdive:2666
+    source_reference_id: '66792'
+    assembly_level: chromosome
+    assembly_name: JGS6382 assembly for Paraclostridium sordellii JGS6382
+    taxon_id: NCBITaxon:1505
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_000953555.1
+    source: BV_BRC
+    source_id: patric:1505.56
+    assembly_name: Paeniclostridium sordellii strain JGS6382
+    taxon_id: NCBITaxon:1505
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: ATCC 9714
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_000953555.1
+    source: BV_BRC
+    source_id: patric:1505.7
+    assembly_name: '"[Clostridium] sordellii strain JGS6382"'
+    taxon_id: NCBITaxon:1505
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: ATCC 9714
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_000953675
     source: BACDIVE
     source_id: bacdive:2666
     source_reference_id: '66792'
     assembly_level: chromosome
-    assembly_name: Paeniclostridium sordellii ATCC 9714
+    assembly_name: ATCC9714_ assembly for Paraclostridium sordellii ATCC9714
     taxon_id: NCBITaxon:1505
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_000953675.1
+    source: BV_BRC
+    source_id: patric:1505.8
+    assembly_name: '"[Clostridium] sordellii strain ATCC9714"'
+    taxon_id: NCBITaxon:1505
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: ATCC 9714
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_000953675.1
     source: GOLD
     source_id: gold:Ga0098224
@@ -181,6 +260,40 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-9714
     source_strain_identifiers: ATCC 9714
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_900000185
+    source: BACDIVE
+    source_id: bacdive:2666
+    source_reference_id: '66792'
+    assembly_level: contig
+    assembly_name: JGS6364 assembly for Paraclostridium sordellii JGS6364
+    taxon_id: NCBITaxon:1505
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900000185.2
+    source: BV_BRC
+    source_id: patric:1505.66
+    assembly_name: Paeniclostridium sordellii strain JGS6364
+    taxon_id: NCBITaxon:1505
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: ATCC 9714
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_900000195
+    source: BACDIVE
+    source_id: bacdive:2666
+    source_reference_id: '66792'
+    assembly_level: contig
+    assembly_name: UMC2 assembly for Paraclostridium sordellii UMC2
+    taxon_id: NCBITaxon:1505
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900000195.2
+    source: BV_BRC
+    source_id: patric:1505.67
+    assembly_name: Paeniclostridium sordellii strain UMC2
+    taxon_id: NCBITaxon:1505
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: ATCC 9714
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCF_000953675.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_000953675.1
@@ -191,6 +304,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-9714
     source_strain_identifiers: ATCC 9714
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_000953675.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000953675.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Chromosome
+    assembly_name: ATCC9714_
+    taxon_id: NCBITaxon:1505
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: strain=ATCC 9714
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_000444075
     source: STRAININFO
     source_id: straininfo.strain:92518
@@ -250,9 +374,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:2666
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Paeniclostridium sordellii ATCC 9714
+    assembly_level: contig
+    genome_name: ASM44407v1 assembly for Paraclostridium sordellii ATCC 9714
     taxon_id: NCBITaxon:1292036
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2563367177
     source_database: img
     source: GOLD
@@ -282,9 +407,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:2666
     source_reference_id: '66792'
-    assembly_level: complete
-    genome_name: Paeniclostridium sordellii ATCC 9714
-    taxon_id: NCBITaxon:1292036
+    assembly_level: chromosome
+    genome_name: ATCC9714_ assembly for Paraclostridium sordellii ATCC9714
+    taxon_id: NCBITaxon:1505
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2651869763
     source_database: img
     source: GOLD
@@ -309,54 +435,213 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0117612
     source_project_id: gold:Gp0122555
+  - genome_id: img.taxon:2654587998
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:2666
+    source_reference_id: '66792'
+    assembly_level: chromosome
+    genome_name: JGS6382 assembly for Paraclostridium sordellii JGS6382
+    taxon_id: NCBITaxon:1505
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: patric:1292036.3
     source_database: patric
     source: BACDIVE
     source_id: bacdive:2666
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM44407v1 assembly for Paraclostridium sordellii ATCC 9714
+    taxon_id: NCBITaxon:1292036
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1292036.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1292036.3
     genome_name: Clostridium sordellii ATCC 9714
     taxon_id: NCBITaxon:1292036
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: ATCC 9714
+    source_strain_field: strain
   - genome_id: patric:1505.56
     source_database: patric
-    source: BACDIVE
-    source_id: bacdive:2666
-    source_reference_id: '66792'
-    assembly_level: plasmid
+    source: BV_BRC
+    source_id: patric:1505.56
     genome_name: Paeniclostridium sordellii strain JGS6382
     taxon_id: NCBITaxon:1505
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: ATCC 9714
+    source_strain_field: culture_collection
   - genome_id: patric:1505.66
     source_database: patric
     source: BACDIVE
     source_id: bacdive:2666
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: JGS6364 assembly for Paraclostridium sordellii JGS6364
+    taxon_id: NCBITaxon:1505
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1505.66
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1505.66
     genome_name: Paeniclostridium sordellii strain JGS6364
     taxon_id: NCBITaxon:1505
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: ATCC 9714
+    source_strain_field: culture_collection
   - genome_id: patric:1505.67
     source_database: patric
     source: BACDIVE
     source_id: bacdive:2666
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: UMC2 assembly for Paraclostridium sordellii UMC2
+    taxon_id: NCBITaxon:1505
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1505.67
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1505.67
     genome_name: Paeniclostridium sordellii strain UMC2
     taxon_id: NCBITaxon:1505
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: ATCC 9714
+    source_strain_field: culture_collection
   - genome_id: patric:1505.7
     source_database: patric
     source: BACDIVE
     source_id: bacdive:2666
     source_reference_id: '66792'
-    assembly_level: complete
-    genome_name: '[Clostridium] sordellii strain JGS6382'
+    assembly_level: chromosome
+    genome_name: JGS6382 assembly for Paraclostridium sordellii JGS6382
     taxon_id: NCBITaxon:1505
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1505.7
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1505.7
+    genome_name: '"[Clostridium] sordellii strain JGS6382"'
+    taxon_id: NCBITaxon:1505
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: ATCC 9714
+    source_strain_field: culture_collection
   - genome_id: patric:1505.8
     source_database: patric
     source: BACDIVE
     source_id: bacdive:2666
     source_reference_id: '66792'
-    assembly_level: complete
-    genome_name: '[Clostridium] sordellii strain ATCC9714'
+    assembly_level: chromosome
+    genome_name: ATCC9714_ assembly for Paraclostridium sordellii ATCC9714
     taxon_id: NCBITaxon:1505
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1505.8
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1505.8
+    genome_name: '"[Clostridium] sordellii strain ATCC9714"'
+    taxon_id: NCBITaxon:1505
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: ATCC 9714
+    source_strain_field: culture_collection
+  - genome_id: atb.assembly:202505.SAMEA1572077
+    source_database: allthebacteria
+    source: ALLTHEBACTERIA
+    source_id: atb.assembly:202505.SAMEA1572077
+    genome_name: Paraclostridium sordellii
+    atb_evidence:
+      release: 2025-05
+      sample_id: biosample:SAMEA1572077
+      dataset: 661k
+      run_accessions: ERR197373
+      assembly_seqkit_sum: seqkit.v0.1_DLS_k0_5ef2d7aad484f99dc24fe64f62ed6641
+      assembly_filter: PASS
+      hq_filter: PASS
+      download_url: https://allthebacteria-assemblies.s3.eu-west-2.amazonaws.com/SAMEA1572077.fa.gz
+      archive_url: https://osf.io/download/6671719165e1de5eb5893c28/
+      archive_filename: atb.assembly.r0.2.batch.127.tar.xz
+      sample_links:
+      - matched_strain_id: kgmicrobe.strain:ATCC-9714
+        record_id: biosample:SAMEA1572077
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1505.56
+        source_strain_field: culture_collection
+        source_strain_identifiers: ATCC 9714
+        taxon_id: NCBITaxon:1505
+      - matched_strain_id: kgmicrobe.strain:ATCC-9714
+        record_id: biosample:SAMEA1572077
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1505.7
+        source_strain_field: culture_collection
+        source_strain_identifiers: ATCC 9714
+        taxon_id: NCBITaxon:1505
+      ena_analysis_id: ena.analysis:ERZ3120179
+      sylph_species: Paraclostridium sordellii
+  - genome_id: atb.assembly:202505.SAMEA1572081
+    source_database: allthebacteria
+    source: ALLTHEBACTERIA
+    source_id: atb.assembly:202505.SAMEA1572081
+    genome_name: Paraclostridium sordellii
+    atb_evidence:
+      release: 2025-05
+      sample_id: biosample:SAMEA1572081
+      dataset: 661k
+      run_accessions: ERR197388
+      assembly_seqkit_sum: seqkit.v0.1_DLS_k0_f90b8fab9bd278b435512166626fae18
+      assembly_filter: PASS
+      hq_filter: PASS
+      download_url: https://allthebacteria-assemblies.s3.eu-west-2.amazonaws.com/SAMEA1572081.fa.gz
+      archive_url: https://osf.io/download/6671719165e1de5eb5893c28/
+      archive_filename: atb.assembly.r0.2.batch.127.tar.xz
+      sample_links:
+      - matched_strain_id: kgmicrobe.strain:ATCC-9714
+        record_id: biosample:SAMEA1572081
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1505.67
+        source_strain_field: culture_collection
+        source_strain_identifiers: ATCC 9714
+        taxon_id: NCBITaxon:1505
+      ena_analysis_id: ena.analysis:ERZ3120184
+      sylph_species: Paraclostridium sordellii
+  - genome_id: atb.assembly:202505.SAMEA1572086
+    source_database: allthebacteria
+    source: ALLTHEBACTERIA
+    source_id: atb.assembly:202505.SAMEA1572086
+    genome_name: Paraclostridium sordellii
+    atb_evidence:
+      release: 2025-05
+      sample_id: biosample:SAMEA1572086
+      dataset: 661k
+      run_accessions: ERR197397
+      assembly_seqkit_sum: seqkit.v0.1_DLS_k0_346ab60594541eb8b8c716fcdce0aa40
+      assembly_filter: PASS
+      hq_filter: PASS
+      download_url: https://allthebacteria-assemblies.s3.eu-west-2.amazonaws.com/SAMEA1572086.fa.gz
+      archive_url: https://osf.io/download/6671719165e1de5eb5893c28/
+      archive_filename: atb.assembly.r0.2.batch.127.tar.xz
+      sample_links:
+      - matched_strain_id: kgmicrobe.strain:ATCC-9714
+        record_id: biosample:SAMEA1572086
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1505.66
+        source_strain_field: culture_collection
+        source_strain_identifiers: ATCC 9714
+        taxon_id: NCBITaxon:1505
+      ena_analysis_id: ena.analysis:ERZ3120188
+      sylph_species: Paraclostridium sordellii
   - genome_id: atb.assembly:202505.SAMEA1572090
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -374,6 +659,15 @@ strains:
       archive_url: https://osf.io/download/6671719165e1de5eb5893c28/
       archive_filename: atb.assembly.r0.2.batch.127.tar.xz
       sample_links:
+      - matched_strain_id: kgmicrobe.strain:ATCC-9714
+        record_id: biosample:SAMEA1572090
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1505.8
+        source_strain_field: culture_collection
+        source_strain_identifiers: ATCC 9714
+        taxon_id: NCBITaxon:1505
       - matched_strain_id: kgmicrobe.strain:ATCC-9714
         record_id: biosample:SAMEA1572090
         record_type: BIOSAMPLE
@@ -405,11 +699,30 @@ strains:
         source_strain_field: ncbi_strain_identifiers
         source_strain_identifiers: ATCC 9714
         taxon_id: NCBITaxon:1505
+      - matched_strain_id: kgmicrobe.strain:ATCC-9714
+        record_id: biosample:SAMEA1572090
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCF_000953675.1
+        source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=ATCC 9714
+        taxon_id: NCBITaxon:1505
       ena_analysis_id: ena.analysis:ERZ3120193
       sylph_species: Paraclostridium sordellii
   related_records:
   - record_id: bioproject:PRJEB7738
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1505.8
+    taxon_id: NCBITaxon:1505
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: ATCC 9714
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJEB7738
+    record_type: BIOPROJECT
     source: GOLD
     source_id: gold:Gp0122555
     taxon_id: NCBITaxon:1292036
@@ -430,6 +743,51 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0117612
     source_project_id: gold:Gp0122555
+  - record_id: bioproject:PRJEB7739
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1505.66
+    taxon_id: NCBITaxon:1505
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: ATCC 9714
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJEB7740
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1505.67
+    taxon_id: NCBITaxon:1505
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: ATCC 9714
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJEB7741
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1505.56
+    taxon_id: NCBITaxon:1505
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: ATCC 9714
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJEB7741
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1505.7
+    taxon_id: NCBITaxon:1505
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: ATCC 9714
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA188695
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1292036.3
+    taxon_id: NCBITaxon:1292036
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: ATCC 9714
+    source_strain_field: strain
   - record_id: bioproject:PRJNA188695
     record_type: BIOPROJECT
     source: GOLD
@@ -452,6 +810,16 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0032799
     source_project_id: gold:Gp0032799
+  - record_id: bioproject:PRJNA188695
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000444075.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1292036
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: strain=ATCC 9714
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
     source: GTDB
@@ -461,6 +829,61 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-9714
     source_strain_identifiers: ATCC 9714
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000953675.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1505
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: strain=ATCC 9714
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMEA1572077
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1505.56
+    taxon_id: NCBITaxon:1505
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: ATCC 9714
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMEA1572077
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1505.7
+    taxon_id: NCBITaxon:1505
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: ATCC 9714
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMEA1572081
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1505.67
+    taxon_id: NCBITaxon:1505
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: ATCC 9714
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMEA1572086
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1505.66
+    taxon_id: NCBITaxon:1505
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: ATCC 9714
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMEA1572090
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1505.8
+    taxon_id: NCBITaxon:1505
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: ATCC 9714
+    source_strain_field: culture_collection
   - record_id: biosample:SAMEA1572090
     record_type: BIOSAMPLE
     source: GOLD
@@ -492,6 +915,25 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-9714
     source_strain_identifiers: ATCC 9714
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMEA1572090
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000953675.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1505
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: strain=ATCC 9714
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02470117
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1292036.3
+    taxon_id: NCBITaxon:1292036
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: ATCC 9714
+    source_strain_field: strain
   - record_id: biosample:SAMN02470117
     record_type: BIOSAMPLE
     source: GOLD
@@ -514,6 +956,16 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0032799
     source_project_id: gold:Gp0032799
+  - record_id: biosample:SAMN02470117
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000444075.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1292036
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-9714
+    source_strain_identifiers: strain=ATCC 9714
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0024761
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -1505,8 +1957,27 @@ strains:
     source_id: bacdive:130928
     source_reference_id: '66792'
     assembly_level: contig
+    assembly_name: ASM2462213v1 assembly for Paraclostridium sordellii DSM 29974
+    taxon_id: NCBITaxon:1505
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_024622135.1
+    source: BV_BRC
+    source_id: patric:1505.143
     assembly_name: Paeniclostridium sordellii DSM 29974
     taxon_id: NCBITaxon:1505
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29974
+    source_strain_identifiers: DSM 29974
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_024622135.1
+    source: BV_BRC
+    source_id: patric:1505.143
+    assembly_name: Paeniclostridium sordellii DSM 29974
+    taxon_id: NCBITaxon:1505
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29974
+    source_strain_identifiers: DSM:29974
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_024622135.1
     source: GOLD
     source_id: gold:Ga0595198
@@ -1539,6 +2010,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-29974
     source_strain_identifiers: DSM 29974
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_024622135.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_024622135.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM2462213v1
+    taxon_id: NCBITaxon:1505
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29974
+    source_strain_identifiers: strain=DSM 29974
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_024622135.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_024622135.1
@@ -1549,6 +2031,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-29974
     source_strain_identifiers: DSM 29974
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_024622135.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_024622135.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM2462213v1
+    taxon_id: NCBITaxon:1505
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29974
+    source_strain_identifiers: strain=DSM 29974
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_024622135
     source: STRAININFO
     source_id: straininfo.strain:398291
@@ -1582,6 +2075,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-29974
     source_strain_identifiers: DSM 29974
     source_strain_field: ncbi_strain_identifiers
+  - genome_id: patric:1505.143
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:130928
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: ASM2462213v1 assembly for Paraclostridium sordellii DSM 29974
+    taxon_id: NCBITaxon:1505
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1505.143
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1505.143
+    genome_name: Paeniclostridium sordellii DSM 29974
+    taxon_id: NCBITaxon:1505
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-29974
+    source_strain_identifiers: DSM 29974
+    source_strain_field: strain
+  - genome_id: patric:1505.143
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1505.143
+    genome_name: Paeniclostridium sordellii DSM 29974
+    taxon_id: NCBITaxon:1505
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-29974
+    source_strain_identifiers: DSM:29974
+    source_strain_field: culture_collection
   related_records:
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
@@ -1592,6 +2114,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-29974
     source_strain_identifiers: DSM 29974
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_024622135.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1505
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-29974
+    source_strain_identifiers: strain=DSM 29974
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA856830
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1505.143
+    taxon_id: NCBITaxon:1505
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29974
+    source_strain_identifiers: DSM 29974
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA856830
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1505.143
+    taxon_id: NCBITaxon:1505
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29974
+    source_strain_identifiers: DSM:29974
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA856830
     record_type: BIOPROJECT
     source: GOLD
@@ -1614,6 +2164,34 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0658966
     source_project_id: gold:Gp0703250
+  - record_id: bioproject:PRJNA856830
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_024622135.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1505
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-29974
+    source_strain_identifiers: strain=DSM 29974
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN29593155
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1505.143
+    taxon_id: NCBITaxon:1505
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29974
+    source_strain_identifiers: DSM 29974
+    source_strain_field: strain
+  - record_id: biosample:SAMN29593155
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1505.143
+    taxon_id: NCBITaxon:1505
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29974
+    source_strain_identifiers: DSM:29974
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN29593155
     record_type: BIOSAMPLE
     source: GOLD
@@ -1645,6 +2223,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-29974
     source_strain_identifiers: DSM 29974
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN29593155
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_024622135.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1505
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-29974
+    source_strain_identifiers: strain=DSM 29974
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN29593155
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_024622135.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1505
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-29974
+    source_strain_identifiers: strain=DSM 29974
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0595198
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -2024,6 +2622,7 @@ source_attestations:
   source_label: Paraclostridium sordellii
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:43374
   source_label: Paraclostridium sordellii
@@ -2068,7 +2667,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

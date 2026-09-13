@@ -8,6 +8,8 @@ and organism names never establish a strain or genome identity.
 
 from __future__ import annotations
 
+import gzip
+import hashlib
 import json
 import re
 from collections.abc import Iterator
@@ -51,6 +53,21 @@ def _text(value: object) -> str:
 
 
 def _rows(workbook, sheet: str) -> Iterator[dict[str, str]]:
+    if isinstance(workbook, Path):
+        source = json.loads((workbook / "SOURCE.json").read_text())
+        item = source["outputs"][sheet]
+        path = workbook / item["path"]
+        count = 0
+        with gzip.open(path, "rt", encoding="utf-8") as handle:
+            for line in handle:
+                row = json.loads(line)
+                if set(row) != set(_HEADERS[sheet]) or any(not isinstance(v, str) for v in row.values()):
+                    raise ValueError(f"GOLD {sheet}: malformed projected source row")
+                count += 1
+                yield row
+        if count != item["rows"]:
+            raise ValueError(f"GOLD {sheet}: projection row count differs from its pin")
+        return
     if sheet not in workbook.sheetnames:
         raise ValueError(f"GOLD workbook is missing sheet {sheet!r}")
     worksheet = workbook[sheet]
@@ -110,7 +127,11 @@ def extract_gold_genomes(
         related.append({**provenance, "record_id": identifier, "record_type": kind,
                         "source_field": field, "record_name": name})
 
-    workbook = load_workbook(path, read_only=True, data_only=True)
+    if path.is_dir():
+        validate_projection(path)
+        workbook = path
+    else:
+        workbook = load_workbook(path, read_only=True, data_only=True)
     try:
         for row in _rows(workbook, "Organism"):
             oid = row["ORGANISM GOLD ID"].strip()
@@ -222,5 +243,25 @@ def extract_gold_genomes(
                                        "source_field": "AP GENBANK.assemblyAccession", "assembly_level": "",
                                        "assembly_name": row["AP NAME"]})
     finally:
-        workbook.close()
+        if not isinstance(workbook, Path):
+            workbook.close()
     return tuple(_unique(rows) for rows in (assemblies, genomes, related, drops))
+
+
+def validate_projection(path: Path, workbook_sha256: str | None = None) -> dict:
+    source = json.loads((path / "SOURCE.json").read_text())
+    if (source.get("source") != "GOLD" or set(source.get("outputs", {})) != set(_HEADERS)
+            or (workbook_sha256 is not None and source.get("workbook_sha256") != workbook_sha256)):
+        raise ValueError("GOLD projection differs from its workbook pin")
+    for item in source["outputs"].values():
+        if Path(item["path"]).name != item["path"]:
+            raise ValueError("GOLD projection path leaves its source directory")
+        target = path / item["path"]
+        with target.open("rb") as handle:
+            _digest = hashlib.sha256()
+            for _chunk in iter(lambda: handle.read(1 << 20), b""):
+                _digest.update(_chunk)
+            digest = _digest.hexdigest()
+        if digest != item["sha256"] or target.stat().st_size != item["bytes"]:
+            raise ValueError("GOLD projection differs from its checksum")
+    return source

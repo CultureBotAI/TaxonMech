@@ -101,14 +101,23 @@ taxonomy_mappings:
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 synonyms:
-- synonym_text: Bacterium welchii
+- synonym_text: '"Bacterium welchii" Migula 1900'
   synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Clostridium plagarum" (Prevot 1938) Smith and Hobbs 1974'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Bacterium welchii
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Clostridium perfringens (Veillon and Zuber 1898) Hauduroy et al. 1937
     (Approved Lists 1980)
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Clostridium plagarum
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Clostridium sp. NCIM 2677
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: s__Sarcina perfringens
@@ -140,7 +149,7 @@ strains:
   - kgmicrobe.strain:NCIMB-6125
   - kgmicrobe.strain:NCTC-6125
   - kgmicrobe.strain:NCTC-8237
-  - kgmicrobe.strain:WDCM-00007
+  - kgmicrobe.strain:WDCM%2000007
   is_type_strain: true
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_000013285
@@ -148,8 +157,9 @@ strains:
     source_id: bacdive:2631
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Clostridium perfringens ATCC 13124
+    assembly_name: ASM1328v1 assembly for Clostridium perfringens ATCC 13124
     taxon_id: NCBITaxon:195103
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_000013285
     source: GOLD
     source_id: gold:Ga0028369
@@ -173,6 +183,24 @@ strains:
     source_organism_id: gold:Go0000322
     source_project_id: gold:Gp0000322
   - assembly_id: ncbi.assembly:GCA_000013285.1
+    source: BV_BRC
+    source_id: patric:195103.10
+    assembly_name: Clostridium perfringens ATCC 13124
+    taxon_id: NCBITaxon:195103
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13124
+    source_strain_identifiers: ATCC 13124
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_000013285.1
+    source: BV_BRC
+    source_id: patric:195103.10
+    assembly_name: Clostridium perfringens ATCC 13124
+    taxon_id: NCBITaxon:195103
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13124
+    source_strain_identifiers: ATCC 13124
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_000013285.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_000013285.1
     assembly_level: Complete Genome
@@ -182,6 +210,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13124
     source_strain_identifiers: ATCC 13124
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_000013285.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000013285.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM1328v1
+    taxon_id: NCBITaxon:195103
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13124
+    source_strain_identifiers: strain=ATCC 13124
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCA_016027375
+    source: BACDIVE
+    source_id: bacdive:2631
+    source_reference_id: '124043'
+    assembly_level: complete
+    assembly_name: ASM1602737v1 assembly for Clostridium perfringens FDAARGOS_903
+    taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_016027375.1
+    source: BV_BRC
+    source_id: patric:1502.1789
+    assembly_name: Clostridium perfringens strain FDAARGOS_903 strain Not applicable
+    taxon_id: NCBITaxon:1502
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-756
+    source_strain_identifiers: DSM:756
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_016027375.1
     source: GOLD
     source_id: gold:Ga0490831
@@ -203,6 +259,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13124
     source_strain_identifiers: ATCC 13124
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_000013285.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000013285.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM1328v1
+    taxon_id: NCBITaxon:195103
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13124
+    source_strain_identifiers: strain=ATCC 13124
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_000013285
     source: STRAININFO
     source_id: straininfo.strain:289341
@@ -242,8 +309,9 @@ strains:
     source_id: bacdive:2631
     source_reference_id: '66792'
     assembly_level: complete
-    genome_name: Clostridium perfringens ATCC 13124
+    genome_name: ASM1328v1 assembly for Clostridium perfringens ATCC 13124
     taxon_id: NCBITaxon:195103
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:637000077
     source_database: img
     source: GOLD
@@ -270,6 +338,15 @@ strains:
     source_project_id: gold:Gp0000322
   - genome_id: img.taxon:8122462554
     source_database: img
+    source: BACDIVE
+    source_id: bacdive:2631
+    source_reference_id: '124043'
+    assembly_level: complete
+    genome_name: ASM1602737v1 assembly for Clostridium perfringens FDAARGOS_903
+    taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:8122462554
+    source_database: img
     source: GOLD
     source_id: gold:Ga0490831
     genome_name: Clostridium perfringens FDAARGOS_903
@@ -284,18 +361,50 @@ strains:
     source_database: patric
     source: BACDIVE
     source_id: bacdive:2631
-    source_reference_id: '66792'
+    source_reference_id: '124043'
     assembly_level: complete
-    genome_name: Clostridium perfringens strain FDAARGOS_903
+    genome_name: ASM1602737v1 assembly for Clostridium perfringens FDAARGOS_903
     taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1502.1789
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1502.1789
+    genome_name: Clostridium perfringens strain FDAARGOS_903 strain Not applicable
+    taxon_id: NCBITaxon:1502
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-756
+    source_strain_identifiers: DSM:756
+    source_strain_field: culture_collection
   - genome_id: patric:195103.10
     source_database: patric
     source: BACDIVE
     source_id: bacdive:2631
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1328v1 assembly for Clostridium perfringens ATCC 13124
+    taxon_id: NCBITaxon:195103
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:195103.10
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:195103.10
     genome_name: Clostridium perfringens ATCC 13124
     taxon_id: NCBITaxon:195103
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13124
+    source_strain_identifiers: ATCC 13124
+    source_strain_field: culture_collection
+  - genome_id: patric:195103.10
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:195103.10
+    genome_name: Clostridium perfringens ATCC 13124
+    taxon_id: NCBITaxon:195103
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13124
+    source_strain_identifiers: ATCC 13124
+    source_strain_field: strain
   - genome_id: atb.assembly:202505.SAMN13450433
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -313,6 +422,15 @@ strains:
       archive_url: https://osf.io/download/6672fdd5d835c43cab4ce0f6/
       archive_filename: atb.assembly.r0.2.batch.545.tar.xz
       sample_links:
+      - matched_strain_id: kgmicrobe.strain:DSM-756
+        record_id: biosample:SAMN13450433
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1502.1789
+        source_strain_field: culture_collection
+        source_strain_identifiers: DSM:756
+        taxon_id: NCBITaxon:1502
       - matched_strain_id: kgmicrobe.strain:DSM-756
         record_id: biosample:SAMN13450433
         record_type: BIOSAMPLE
@@ -336,6 +454,25 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13124
     source_strain_identifiers: ATCC 13124
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000013285.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:195103
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-13124
+    source_strain_identifiers: strain=ATCC 13124
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA231221
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1502.1789
+    taxon_id: NCBITaxon:1502
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-756
+    source_strain_identifiers: DSM:756
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA231221
     record_type: BIOPROJECT
     source: GOLD
@@ -347,6 +484,24 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0575752
     source_project_id: gold:Gp0550481
+  - record_id: bioproject:PRJNA304
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:195103.10
+    taxon_id: NCBITaxon:195103
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13124
+    source_strain_identifiers: ATCC 13124
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA304
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:195103.10
+    taxon_id: NCBITaxon:195103
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13124
+    source_strain_identifiers: ATCC 13124
+    source_strain_field: strain
   - record_id: bioproject:PRJNA304
     record_type: BIOPROJECT
     source: GOLD
@@ -369,6 +524,34 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0000322
     source_project_id: gold:Gp0000322
+  - record_id: bioproject:PRJNA304
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000013285.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:195103
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-13124
+    source_strain_identifiers: strain=ATCC 13124
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02604008
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:195103.10
+    taxon_id: NCBITaxon:195103
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13124
+    source_strain_identifiers: ATCC 13124
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN02604008
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:195103.10
+    taxon_id: NCBITaxon:195103
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13124
+    source_strain_identifiers: ATCC 13124
+    source_strain_field: strain
   - record_id: biosample:SAMN02604008
     record_type: BIOSAMPLE
     source: GOLD
@@ -400,6 +583,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13124
     source_strain_identifiers: ATCC 13124
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN02604008
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000013285.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:195103
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-13124
+    source_strain_identifiers: strain=ATCC 13124
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02604008
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000013285.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:195103
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-13124
+    source_strain_identifiers: strain=ATCC 13124
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN13450433
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1502.1789
+    taxon_id: NCBITaxon:1502
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-756
+    source_strain_identifiers: DSM:756
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN13450433
     record_type: BIOSAMPLE
     source: GOLD
@@ -1450,8 +1662,25 @@ strains:
   - kgmicrobe.strain:DSM-798
   - kgmicrobe.strain:NCIB-8875
   - kgmicrobe.strain:NCIMB-8875
-  - kgmicrobe.strain:WDCM-00174
+  - kgmicrobe.strain:WDCM%2000174
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_016027155
+    source: BACDIVE
+    source_id: bacdive:2632
+    source_reference_id: '124043'
+    assembly_level: complete
+    assembly_name: ASM1602715v1 assembly for Clostridium perfringens FDAARGOS_904
+    taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_016027155.1
+    source: BV_BRC
+    source_id: patric:1502.1788
+    assembly_name: Clostridium perfringens strain FDAARGOS_904 strain Not applicable
+    taxon_id: NCBITaxon:1502
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-798
+    source_strain_identifiers: DSM:798
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_016027155.1
     source: GOLD
     source_id: gold:Ga0490885
@@ -1468,10 +1697,21 @@ strains:
     source_database: patric
     source: BACDIVE
     source_id: bacdive:2632
-    source_reference_id: '66792'
+    source_reference_id: '124043'
     assembly_level: complete
-    genome_name: Clostridium perfringens strain FDAARGOS_904
+    genome_name: ASM1602715v1 assembly for Clostridium perfringens FDAARGOS_904
     taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1502.1788
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1502.1788
+    genome_name: Clostridium perfringens strain FDAARGOS_904 strain Not applicable
+    taxon_id: NCBITaxon:1502
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-798
+    source_strain_identifiers: DSM:798
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN13450434
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -1492,6 +1732,15 @@ strains:
       - matched_strain_id: kgmicrobe.strain:DSM-798
         record_id: biosample:SAMN13450434
         record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1502.1788
+        source_strain_field: culture_collection
+        source_strain_identifiers: DSM:798
+        taxon_id: NCBITaxon:1502
+      - matched_strain_id: kgmicrobe.strain:DSM-798
+        record_id: biosample:SAMN13450434
+        record_type: BIOSAMPLE
         source: GOLD
         source_field: NCBI BIOSAMPLE ACCESSION
         source_id: gold:Gp0550482
@@ -1505,6 +1754,15 @@ strains:
   related_records:
   - record_id: bioproject:PRJNA231221
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1502.1788
+    taxon_id: NCBITaxon:1502
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-798
+    source_strain_identifiers: DSM:798
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA231221
+    record_type: BIOPROJECT
     source: GOLD
     source_id: gold:Gp0550482
     taxon_id: NCBITaxon:1502
@@ -1514,6 +1772,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0575753
     source_project_id: gold:Gp0550482
+  - record_id: biosample:SAMN13450434
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1502.1788
+    taxon_id: NCBITaxon:1502
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-798
+    source_strain_identifiers: DSM:798
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN13450434
     record_type: BIOSAMPLE
     source: GOLD
@@ -2183,7 +2450,7 @@ strains:
   - kgmicrobe.strain:JCM-5242
   - kgmicrobe.strain:NCIMB-13079
   - kgmicrobe.strain:NCTC-8238
-  - kgmicrobe.strain:WDCM-00080
+  - kgmicrobe.strain:WDCM%2000080
   medium_count: 2
   related_records:
   - record_id: gold:Go0244160
@@ -2555,15 +2822,16 @@ strains:
   - kgmicrobe.strain:CIP-111239
   - kgmicrobe.strain:DSM-100947
   - kgmicrobe.strain:NCTC-13170
-  - kgmicrobe.strain:WDCM-00201
+  - kgmicrobe.strain:WDCM%2000201
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_900475545
     source: BACDIVE
     source_id: bacdive:130925
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Clostridium perfringens NCTC13170
+    assembly_name: 44310_G02 assembly for Clostridium perfringens NCTC13170
     taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_900475545.1
     source: GOLD
     source_id: gold:Ga0316465
@@ -2593,8 +2861,9 @@ strains:
     source_id: bacdive:130925
     source_reference_id: '66792'
     assembly_level: complete
-    genome_name: Clostridium perfringens NCTC 13170
+    genome_name: 44310_G02 assembly for Clostridium perfringens NCTC13170
     taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2875113875
     source_database: img
     source: GOLD
@@ -2625,8 +2894,9 @@ strains:
     source_id: bacdive:130925
     source_reference_id: '66792'
     assembly_level: complete
-    genome_name: Clostridium perfringens strain NCTC13170
+    genome_name: 44310_G02 assembly for Clostridium perfringens NCTC13170
     taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
@@ -2834,8 +3104,18 @@ strains:
     source_id: bacdive:135929
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Clostridium perfringens NCTC8678
+    assembly_name: 44310_E02 assembly for Clostridium perfringens NCTC8678
     taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_901523095.1
+    source: BV_BRC
+    source_id: patric:1502.1073
+    assembly_name: Clostridium perfringens strain NCTC8678
+    taxon_id: NCBITaxon:1502
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8678
+    source_strain_identifiers: NCTC:8678
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_901523095.1
     source: GOLD
     source_id: gold:Ga0569718
@@ -2885,10 +3165,30 @@ strains:
     source: BACDIVE
     source_id: bacdive:135929
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: 44310_E02 assembly for Clostridium perfringens NCTC8678
+    taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1502.1073
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1502.1073
     genome_name: Clostridium perfringens strain NCTC8678
     taxon_id: NCBITaxon:1502
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-8678
+    source_strain_identifiers: NCTC:8678
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1502.1073
+    taxon_id: NCBITaxon:1502
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8678
+    source_strain_identifiers: NCTC:8678
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
     source: GOLD
@@ -2911,6 +3211,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0636139
     source_project_id: gold:Gp0653751
+  - record_id: biosample:SAMEA3867459
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1502.1073
+    taxon_id: NCBITaxon:1502
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8678
+    source_strain_identifiers: NCTC:8678
+    source_strain_field: culture_collection
   - record_id: biosample:SAMEA3867459
     record_type: BIOSAMPLE
     source: GOLD
@@ -3329,7 +3638,7 @@ strains:
   source: BACDIVE
   source_id: bacdive:136487
   culture_collection_ids:
-  - kgmicrobe.strain:AIP-10068
+  - kgmicrobe.strain:AIP%2010068
   - kgmicrobe.strain:ATCC-27324
   - kgmicrobe.strain:CCUG-44727
   - kgmicrobe.strain:CIP-106156
@@ -3657,8 +3966,9 @@ strains:
     source_id: bacdive:164823
     source_reference_id: '67770'
     assembly_level: contig
-    assembly_name: Clostridium perfringens B str. ATCC 3626
+    assembly_name: ASM17115v1 assembly for Clostridium perfringens B str. ATCC 3626
     taxon_id: NCBITaxon:451754
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_000171155
     source: GOLD
     source_id: gold:Ga0028370
@@ -3671,6 +3981,15 @@ strains:
     source_organism_id: gold:Go0001992
     source_project_id: gold:Gp0001992
   - assembly_id: ncbi.assembly:GCA_000171155.1
+    source: BV_BRC
+    source_id: patric:451754.5
+    assembly_name: Clostridium perfringens B str. ATCC 3626
+    taxon_id: NCBITaxon:451754
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-3626
+    source_strain_identifiers: ATCC 3626
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_000171155.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_000171155.1
     assembly_level: Contig
@@ -3680,13 +3999,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-3626
     source_strain_identifiers: ATCC 3626
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_000171155.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000171155.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM17115v1
+    taxon_id: NCBITaxon:451754
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-3626
+    source_strain_identifiers: strain=ATCC 3626
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_029393235
     source: BACDIVE
     source_id: bacdive:164823
     source_reference_id: '66792'
     assembly_level: complete
+    assembly_name: ASM2939323v1 assembly for Clostridium perfringens B ATCC 3626
+    taxon_id: NCBITaxon:451751
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_029393235.1
+    source: BV_BRC
+    source_id: patric:451751.6
     assembly_name: Clostridium perfringens B ATCC 3626
     taxon_id: NCBITaxon:451751
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-3626
+    source_strain_identifiers: ATCC 3626
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_029393235.1
     source: GOLD
     source_id: gold:Ga0609662
@@ -3708,6 +4048,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-3626
     source_strain_identifiers: ATCC 3626
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_029393235.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_029393235.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM2939323v1
+    taxon_id: NCBITaxon:451751
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-3626
+    source_strain_identifiers: strain=ATCC 3626
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_000171155.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_000171155.1
@@ -3718,6 +4069,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-3626
     source_strain_identifiers: ATCC 3626
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_000171155.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000171155.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM17115v1
+    taxon_id: NCBITaxon:451754
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-3626
+    source_strain_identifiers: strain=ATCC 3626
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_029393235.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_029393235.1
@@ -3728,6 +4090,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-3626
     source_strain_identifiers: ATCC 3626
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_029393235.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_029393235.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM2939323v1
+    taxon_id: NCBITaxon:451751
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-3626
+    source_strain_identifiers: strain=ATCC 3626
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_000171155
     source: STRAININFO
     source_id: straininfo.strain:1961
@@ -3797,10 +4170,11 @@ strains:
     source_database: img
     source: BACDIVE
     source_id: bacdive:164823
-    source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Clostridium perfringens type B - ATCC 3626
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: ASM17115v1 assembly for Clostridium perfringens B str. ATCC 3626
     taxon_id: NCBITaxon:451754
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:641736146
     source_database: img
     source: GOLD
@@ -3813,15 +4187,54 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0001992
     source_project_id: gold:Gp0001992
-  - genome_id: patric:451754.5
+  - genome_id: patric:451751.6
     source_database: patric
     source: BACDIVE
     source_id: bacdive:164823
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: complete
+    genome_name: ASM2939323v1 assembly for Clostridium perfringens B ATCC 3626
+    taxon_id: NCBITaxon:451751
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:451751.6
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:451751.6
+    genome_name: Clostridium perfringens B ATCC 3626
+    taxon_id: NCBITaxon:451751
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-3626
+    source_strain_identifiers: ATCC 3626
+    source_strain_field: strain
+  - genome_id: patric:451754.5
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:164823
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: ASM17115v1 assembly for Clostridium perfringens B str. ATCC 3626
+    taxon_id: NCBITaxon:451754
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:451754.5
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:451754.5
     genome_name: Clostridium perfringens B str. ATCC 3626
     taxon_id: NCBITaxon:451754
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-3626
+    source_strain_identifiers: ATCC 3626
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJNA20027
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:451754.5
+    taxon_id: NCBITaxon:451754
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-3626
+    source_strain_identifiers: ATCC 3626
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA20027
     record_type: BIOPROJECT
     source: GOLD
@@ -3833,6 +4246,16 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0001992
     source_project_id: gold:Gp0001992
+  - record_id: bioproject:PRJNA20027
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000171155.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:451754
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-3626
+    source_strain_identifiers: strain=ATCC 3626
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
     source: GTDB
@@ -3851,6 +4274,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-3626
     source_strain_identifiers: ATCC 3626
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000171155.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:451754
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-3626
+    source_strain_identifiers: strain=ATCC 3626
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_029393235.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:451751
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-3626
+    source_strain_identifiers: strain=ATCC 3626
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA925142
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:451751.6
+    taxon_id: NCBITaxon:451751
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-3626
+    source_strain_identifiers: ATCC 3626
+    source_strain_field: strain
   - record_id: bioproject:PRJNA925142
     record_type: BIOPROJECT
     source: GOLD
@@ -3862,6 +4314,25 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0001992
     source_project_id: gold:Gp0745194
+  - record_id: bioproject:PRJNA925142
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_029393235.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:451751
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-3626
+    source_strain_identifiers: strain=ATCC 3626
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02436295
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:451754.5
+    taxon_id: NCBITaxon:451754
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-3626
+    source_strain_identifiers: ATCC 3626
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN02436295
     record_type: BIOSAMPLE
     source: GOLD
@@ -3882,6 +4353,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-3626
     source_strain_identifiers: ATCC 3626
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN02436295
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000171155.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:451754
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-3626
+    source_strain_identifiers: strain=ATCC 3626
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02436295
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000171155.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:451754
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-3626
+    source_strain_identifiers: strain=ATCC 3626
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN32781891
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:451751.6
+    taxon_id: NCBITaxon:451751
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-3626
+    source_strain_identifiers: ATCC 3626
+    source_strain_field: strain
   - record_id: biosample:SAMN32781891
     record_type: BIOSAMPLE
     source: GOLD
@@ -3902,6 +4402,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-3626
     source_strain_identifiers: ATCC 3626
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN32781891
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_029393235.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:451751
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-3626
+    source_strain_identifiers: strain=ATCC 3626
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN32781891
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_029393235.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:451751
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-3626
+    source_strain_identifiers: strain=ATCC 3626
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0028370
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -4340,8 +4860,10 @@ strains:
     source_id: bacdive:138119
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Clostridium perfringens NCTC 8239 str. NCTC 8239
+    assembly_name: ASM17121v1 assembly for Clostridium perfringens NCTC 8239 str.
+      NCTC 8239
     taxon_id: NCBITaxon:451757
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_000171215
     source: GOLD
     source_id: gold:Ga0028375
@@ -4364,6 +4886,32 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0001999
     source_project_id: gold:Gp0001999
+  - assembly_id: ncbi.assembly:GCA_000171215.1
+    source: BV_BRC
+    source_id: patric:451757.5
+    assembly_name: Clostridium perfringens NCTC 8239 strain str. NCTC8239
+    taxon_id: NCBITaxon:451757
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_029874005
+    source: BACDIVE
+    source_id: bacdive:138119
+    source_reference_id: '124043'
+    assembly_level: contig
+    assembly_name: ASM2987400v1 assembly for Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_029874005.1
+    source: BV_BRC
+    source_id: patric:451757.24
+    assembly_name: Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_029874005.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_029874005.1
@@ -4374,13 +4922,115 @@ strains:
     matched_strain_id: kgmicrobe.strain:NCTC-8239
     source_strain_identifiers: NCTC 8239
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_029874005.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_029874005.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM2987400v1
+    taxon_id: NCBITaxon:451757
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: strain=NCTC 8239
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_900461415
     source: BACDIVE
     source_id: bacdive:138119
     source_reference_id: '66792'
     assembly_level: contig
+    assembly_name: 48450_C02 assembly for Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900461415.1
+    source: BV_BRC
+    source_id: patric:451757.16
     assembly_name: Clostridium perfringens NCTC 8239
     taxon_id: NCBITaxon:451757
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_900461415.1
+    source: BV_BRC
+    source_id: patric:451757.16
+    assembly_name: Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC:8239
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_900461415.1
+    source: BV_BRC
+    source_id: patric:451757.17
+    assembly_name: Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_900461415.1
+    source: BV_BRC
+    source_id: patric:451757.17
+    assembly_name: Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC:8239
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_900461415.1
+    source: BV_BRC
+    source_id: patric:451757.18
+    assembly_name: Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_900461415.1
+    source: BV_BRC
+    source_id: patric:451757.18
+    assembly_name: Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC:8239
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_900461415.1
+    source: BV_BRC
+    source_id: patric:451757.19
+    assembly_name: Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_900461415.1
+    source: BV_BRC
+    source_id: patric:451757.19
+    assembly_name: Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC:8239
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_900461415.1
+    source: BV_BRC
+    source_id: patric:451757.20
+    assembly_name: Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_900461415.1
+    source: BV_BRC
+    source_id: patric:451757.20
+    assembly_name: Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC:8239
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_900461415.1
     source: GOLD
     source_id: gold:Ga0571655
@@ -4418,8 +5068,9 @@ strains:
     source_id: bacdive:138119
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Clostridium perfringens NCTC 8239
+    assembly_name: NCTC8239 assembly for Clostridium perfringens NCTC 8239
     taxon_id: NCBITaxon:451757
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_902459515.1
     source: GOLD
     source_id: gold:Ga0523978
@@ -4452,6 +5103,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:NCTC-8239
     source_strain_identifiers: Clostridium perfringens;NCTC 8239
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_902459515.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_902459515.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: NCTC8239
+    taxon_id: NCBITaxon:451757
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: strain=NCTC 8239
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_029874005.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_029874005.1
@@ -4462,6 +5124,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:NCTC-8239
     source_strain_identifiers: NCTC 8239
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_029874005.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_029874005.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM2987400v1
+    taxon_id: NCBITaxon:451757
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: strain=NCTC 8239
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_900461415.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_900461415.1
@@ -4472,6 +5145,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:NCTC-8239
     source_strain_identifiers: NCTC 8239
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_900461415.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_900461415.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: 48450_C02
+    taxon_id: NCBITaxon:451757
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: strain=NCTC 8239
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_902459515.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_902459515.1
@@ -4482,6 +5166,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:NCTC-8239
     source_strain_identifiers: Clostridium perfringens;NCTC 8239
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_902459515.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_902459515.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: NCTC8239
+    taxon_id: NCBITaxon:451757
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: strain=NCTC 8239
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_000171215
     source: STRAININFO
     source_id: straininfo.strain:35683
@@ -4605,9 +5300,11 @@ strains:
     source: BACDIVE
     source_id: bacdive:138119
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Clostridium perfringens NCTC 8239
+    assembly_level: contig
+    genome_name: ASM17121v1 assembly for Clostridium perfringens NCTC 8239 str. NCTC
+      8239
     taxon_id: NCBITaxon:451757
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:641736152
     source_database: img
     source: GOLD
@@ -4632,6 +5329,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0001999
     source_project_id: gold:Gp0001999
+  - genome_id: img.taxon:8007360166
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:138119
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: 48450_C02 assembly for Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:8007360166
     source_database: img
     source: GOLD
@@ -4661,49 +5367,185 @@ strains:
     source: BACDIVE
     source_id: bacdive:138119
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: 48450_C02 assembly for Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:451757.16
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:451757.16
     genome_name: Clostridium perfringens NCTC 8239
     taxon_id: NCBITaxon:451757
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: strain
+  - genome_id: patric:451757.16
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:451757.16
+    genome_name: Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC:8239
+    source_strain_field: culture_collection
   - genome_id: patric:451757.17
     source_database: patric
     source: BACDIVE
     source_id: bacdive:138119
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
     genome_name: Clostridium perfringens NCTC 8239
     taxon_id: NCBITaxon:451757
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:451757.17
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:451757.17
+    genome_name: Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: strain
+  - genome_id: patric:451757.17
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:451757.17
+    genome_name: Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC:8239
+    source_strain_field: culture_collection
   - genome_id: patric:451757.18
     source_database: patric
     source: BACDIVE
     source_id: bacdive:138119
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
     genome_name: Clostridium perfringens NCTC 8239
     taxon_id: NCBITaxon:451757
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:451757.18
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:451757.18
+    genome_name: Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: strain
+  - genome_id: patric:451757.18
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:451757.18
+    genome_name: Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC:8239
+    source_strain_field: culture_collection
   - genome_id: patric:451757.19
     source_database: patric
     source: BACDIVE
     source_id: bacdive:138119
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
     genome_name: Clostridium perfringens NCTC 8239
     taxon_id: NCBITaxon:451757
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:451757.19
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:451757.19
+    genome_name: Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: strain
+  - genome_id: patric:451757.19
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:451757.19
+    genome_name: Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC:8239
+    source_strain_field: culture_collection
+  - genome_id: patric:451757.20
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:451757.20
+    genome_name: Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: strain
+  - genome_id: patric:451757.20
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:451757.20
+    genome_name: Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC:8239
+    source_strain_field: culture_collection
+  - genome_id: patric:451757.24
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:138119
+    source_reference_id: '124043'
+    assembly_level: contig
+    genome_name: ASM2987400v1 assembly for Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:451757.24
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:451757.24
+    genome_name: Clostridium perfringens NCTC 8239
+    taxon_id: NCBITaxon:451757
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: strain
   - genome_id: patric:451757.5
     source_database: patric
     source: BACDIVE
     source_id: bacdive:138119
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM17121v1 assembly for Clostridium perfringens NCTC 8239 str. NCTC
+      8239
+    taxon_id: NCBITaxon:451757
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:451757.5
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:451757.5
     genome_name: Clostridium perfringens NCTC 8239 strain str. NCTC8239
     taxon_id: NCBITaxon:451757
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: culture_collection
   - genome_id: patric:451757.9
     source_database: patric
     source: BACDIVE
     source_id: bacdive:138119
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Clostridium perfringens NCTC 8239 strain NCTC8239
+    assembly_level: contig
+    genome_name: NCTC8239 assembly for Clostridium perfringens NCTC 8239
     taxon_id: NCBITaxon:451757
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: bioproject:PRJEB25764
     record_type: BIOPROJECT
@@ -4727,6 +5569,106 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0593035
     source_project_id: gold:Gp0606980
+  - record_id: bioproject:PRJEB25764
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_902459515.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:451757
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: strain=NCTC 8239
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:451757.16
+    taxon_id: NCBITaxon:451757
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:451757.16
+    taxon_id: NCBITaxon:451757
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC:8239
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:451757.17
+    taxon_id: NCBITaxon:451757
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:451757.17
+    taxon_id: NCBITaxon:451757
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC:8239
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:451757.18
+    taxon_id: NCBITaxon:451757
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:451757.18
+    taxon_id: NCBITaxon:451757
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC:8239
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:451757.19
+    taxon_id: NCBITaxon:451757
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:451757.19
+    taxon_id: NCBITaxon:451757
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC:8239
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:451757.20
+    taxon_id: NCBITaxon:451757
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:451757.20
+    taxon_id: NCBITaxon:451757
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC:8239
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
     source: GOLD
@@ -4749,6 +5691,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0001999
     source_project_id: gold:Gp0653719
+  - record_id: bioproject:PRJNA20033
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:451757.5
+    taxon_id: NCBITaxon:451757
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA20033
     record_type: BIOPROJECT
     source: GOLD
@@ -4798,6 +5749,145 @@ strains:
     matched_strain_id: kgmicrobe.strain:NCTC-8239
     source_strain_identifiers: Clostridium perfringens;NCTC 8239
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_029874005.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:451757
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: strain=NCTC 8239
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_900461415.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:451757
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: strain=NCTC 8239
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_902459515.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:451757
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: strain=NCTC 8239
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA355074
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:451757.24
+    taxon_id: NCBITaxon:451757
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA355074
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_029874005.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:451757
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: strain=NCTC 8239
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMEA4063013
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:451757.16
+    taxon_id: NCBITaxon:451757
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: strain
+  - record_id: biosample:SAMEA4063013
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:451757.16
+    taxon_id: NCBITaxon:451757
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC:8239
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMEA4063013
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:451757.17
+    taxon_id: NCBITaxon:451757
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: strain
+  - record_id: biosample:SAMEA4063013
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:451757.17
+    taxon_id: NCBITaxon:451757
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC:8239
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMEA4063013
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:451757.18
+    taxon_id: NCBITaxon:451757
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: strain
+  - record_id: biosample:SAMEA4063013
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:451757.18
+    taxon_id: NCBITaxon:451757
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC:8239
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMEA4063013
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:451757.19
+    taxon_id: NCBITaxon:451757
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: strain
+  - record_id: biosample:SAMEA4063013
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:451757.19
+    taxon_id: NCBITaxon:451757
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC:8239
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMEA4063013
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:451757.20
+    taxon_id: NCBITaxon:451757
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: strain
+  - record_id: biosample:SAMEA4063013
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:451757.20
+    taxon_id: NCBITaxon:451757
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC:8239
+    source_strain_field: culture_collection
   - record_id: biosample:SAMEA4063013
     record_type: BIOSAMPLE
     source: GOLD
@@ -4829,6 +5919,16 @@ strains:
     matched_strain_id: kgmicrobe.strain:NCTC-8239
     source_strain_identifiers: NCTC 8239
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMEA4063013
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_900461415.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:451757
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: strain=NCTC 8239
+    source_strain_field: infraspecific_name
   - record_id: biosample:SAMEA5863110
     record_type: BIOSAMPLE
     source: GOLD
@@ -4860,6 +5960,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:NCTC-8239
     source_strain_identifiers: Clostridium perfringens;NCTC 8239
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMEA5863110
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_902459515.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:451757
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: strain=NCTC 8239
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMEA5863110
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_902459515.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:451757
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: strain=NCTC 8239
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02436239
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:451757.5
+    taxon_id: NCBITaxon:451757
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN02436239
     record_type: BIOSAMPLE
     source: GOLD
@@ -4884,6 +6013,15 @@ strains:
     source_project_id: gold:Gp0001999
   - record_id: biosample:SAMN06062034
     record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:451757.24
+    taxon_id: NCBITaxon:451757
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: NCTC 8239
+    source_strain_field: strain
+  - record_id: biosample:SAMN06062034
+    record_type: BIOSAMPLE
     source: GTDB
     source_id: gtdb.genome:RS_GCF_029874005.1
     taxon_id: NCBITaxon:451757
@@ -4891,6 +6029,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:NCTC-8239
     source_strain_identifiers: NCTC 8239
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN06062034
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_029874005.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:451757
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: strain=NCTC 8239
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN06062034
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_029874005.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:451757
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NCTC-8239
+    source_strain_identifiers: strain=NCTC 8239
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0028375
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -6306,8 +7464,18 @@ strains:
     source_id: bacdive:134571
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Clostridium perfringens NCTC8359
+    assembly_name: 50618_C02 assembly for Clostridium perfringens NCTC8359
     taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900461145.1
+    source: BV_BRC
+    source_id: patric:1502.1042
+    assembly_name: Clostridium perfringens strain NCTC8359
+    taxon_id: NCBITaxon:1502
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8359
+    source_strain_identifiers: NCTC:8359
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_900461145.1
     source: GOLD
     source_id: gold:Ga0317090
@@ -6354,6 +7522,15 @@ strains:
   genome_records:
   - genome_id: img.taxon:8053636987
     source_database: img
+    source: BACDIVE
+    source_id: bacdive:134571
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: 50618_C02 assembly for Clostridium perfringens NCTC8359
+    taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:8053636987
+    source_database: img
     source: GOLD
     source_id: gold:Ga0317090
     genome_name: Clostridium perfringens NCTC 8359
@@ -6381,10 +7558,30 @@ strains:
     source: BACDIVE
     source_id: bacdive:134571
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: 50618_C02 assembly for Clostridium perfringens NCTC8359
+    taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1502.1042
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1502.1042
     genome_name: Clostridium perfringens strain NCTC8359
     taxon_id: NCBITaxon:1502
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-8359
+    source_strain_identifiers: NCTC:8359
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1502.1042
+    taxon_id: NCBITaxon:1502
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8359
+    source_strain_identifiers: NCTC:8359
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
     source: GOLD
@@ -6407,6 +7604,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0244484
     source_project_id: gold:Gp0341859
+  - record_id: biosample:SAMEA4412683
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1502.1042
+    taxon_id: NCBITaxon:1502
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8359
+    source_strain_identifiers: NCTC:8359
+    source_strain_field: culture_collection
   - record_id: biosample:SAMEA4412683
     record_type: BIOSAMPLE
     source: GOLD
@@ -6661,7 +7867,7 @@ strains:
   source: BACDIVE
   source_id: bacdive:139291
   culture_collection_ids:
-  - kgmicrobe.strain:AIP-10201
+  - kgmicrobe.strain:AIP%2010201
   - kgmicrobe.strain:CIP-106157
   - kgmicrobe.strain:NCTC-8798
   genome_assemblies:
@@ -6670,8 +7876,9 @@ strains:
     source_id: bacdive:139291
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Clostridium perfringens NCTC8798
+    assembly_name: 51395_G01 assembly for Clostridium perfringens NCTC8798
     taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_900447105.1
     source: GOLD
     source_id: gold:Ga0317094
@@ -6721,9 +7928,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:139291
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Clostridium perfringens strain NCTC8798
+    assembly_level: contig
+    genome_name: 51395_G01 assembly for Clostridium perfringens NCTC8798
     taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
@@ -7116,8 +8324,9 @@ strains:
     source_id: bacdive:141460
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Clostridium perfringens D NCTC8346
+    assembly_name: ASM2939295v1 assembly for Clostridium perfringens D NCTC8346
     taxon_id: NCBITaxon:107819
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_029392955.1
     source: GOLD
     source_id: gold:Ga0609659
@@ -7150,6 +8359,16 @@ strains:
       strain_doi: DOI:10.60712/SI-ID52916.2
       strain_id: straininfo.strain:52916
       strain_status: published online
+  genome_records:
+  - genome_id: patric:107819.9
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:141460
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM2939295v1 assembly for Clostridium perfringens D NCTC8346
+    taxon_id: NCBITaxon:107819
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: bioproject:PRJNA925142
     record_type: BIOPROJECT
@@ -7835,7 +9054,7 @@ strains:
   source_id: bacdive:2644
   culture_collection_ids:
   - kgmicrobe.strain:DSM-25589
-  - kgmicrobe.strain:VPI-No.5
+  - kgmicrobe.strain:VPI%20No.5
   related_records:
   - record_id: straininfo.deposit:909275
     record_type: STRAININFO_DEPOSIT
@@ -7879,7 +9098,7 @@ strains:
   source: BACDIVE
   source_id: bacdive:136465
   culture_collection_ids:
-  - kgmicrobe.strain:AIP-667-76
+  - kgmicrobe.strain:AIP%20667-76
   - kgmicrobe.strain:CIP-105956
   related_records:
   - record_id: gold:Go0243465
@@ -7954,8 +9173,9 @@ strains:
     source_id: bacdive:141458
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Clostridium perfringens B NCTC3110
+    assembly_name: ASM2939307v1 assembly for Clostridium perfringens B NCTC3110
     taxon_id: NCBITaxon:451751
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_029393075.1
     source: GOLD
     source_id: gold:Ga0609661
@@ -8009,6 +9229,16 @@ strains:
       strain_doi: DOI:10.60712/SI-ID52914.2
       strain_id: straininfo.strain:52914
       strain_status: published online
+  genome_records:
+  - genome_id: patric:451751.5
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:141458
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM2939307v1 assembly for Clostridium perfringens B NCTC3110
+    taxon_id: NCBITaxon:451751
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: bioproject:PRJNA925142
     record_type: BIOPROJECT
@@ -8243,8 +9473,9 @@ strains:
     source_id: bacdive:141763
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Clostridium perfringens NCTC11144
+    assembly_name: 52191_G01 assembly for Clostridium perfringens NCTC11144
     taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_029874145
     source: STRAININFO
     source_id: straininfo.strain:52917
@@ -8293,9 +9524,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:141763
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Clostridium perfringens strain NCTC11144
+    assembly_level: contig
+    genome_name: 52191_G01 assembly for Clostridium perfringens NCTC11144
     taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: gold:Go0244763
     record_type: GOLD_ORGANISM
@@ -8424,6 +9656,23 @@ strains:
   culture_collection_ids:
   - kgmicrobe.strain:DSM-628
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_016026995
+    source: BACDIVE
+    source_id: bacdive:2630
+    source_reference_id: '124043'
+    assembly_level: complete
+    assembly_name: ASM1602699v1 assembly for Clostridium perfringens FDAARGOS_905
+    taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_016026995.1
+    source: BV_BRC
+    source_id: patric:1502.1787
+    assembly_name: Clostridium perfringens strain FDAARGOS_905 strain Not applicable
+    taxon_id: NCBITaxon:1502
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-628
+    source_strain_identifiers: DSM:628
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_016026995.1
     source: GOLD
     source_id: gold:Ga0491160
@@ -8440,10 +9689,21 @@ strains:
     source_database: patric
     source: BACDIVE
     source_id: bacdive:2630
-    source_reference_id: '66792'
+    source_reference_id: '124043'
     assembly_level: complete
-    genome_name: Clostridium perfringens strain FDAARGOS_905
+    genome_name: ASM1602699v1 assembly for Clostridium perfringens FDAARGOS_905
     taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1502.1787
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1502.1787
+    genome_name: Clostridium perfringens strain FDAARGOS_905 strain Not applicable
+    taxon_id: NCBITaxon:1502
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-628
+    source_strain_identifiers: DSM:628
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN13450435
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -8464,6 +9724,15 @@ strains:
       - matched_strain_id: kgmicrobe.strain:DSM-628
         record_id: biosample:SAMN13450435
         record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1502.1787
+        source_strain_field: culture_collection
+        source_strain_identifiers: DSM:628
+        taxon_id: NCBITaxon:1502
+      - matched_strain_id: kgmicrobe.strain:DSM-628
+        record_id: biosample:SAMN13450435
+        record_type: BIOSAMPLE
         source: GOLD
         source_field: NCBI BIOSAMPLE ACCESSION
         source_id: gold:Gp0550483
@@ -8477,6 +9746,15 @@ strains:
   related_records:
   - record_id: bioproject:PRJNA231221
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1502.1787
+    taxon_id: NCBITaxon:1502
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-628
+    source_strain_identifiers: DSM:628
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA231221
+    record_type: BIOPROJECT
     source: GOLD
     source_id: gold:Gp0550483
     taxon_id: NCBITaxon:1502
@@ -8486,6 +9764,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0575754
     source_project_id: gold:Gp0550483
+  - record_id: biosample:SAMN13450435
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1502.1787
+    taxon_id: NCBITaxon:1502
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-628
+    source_strain_identifiers: DSM:628
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN13450435
     record_type: BIOSAMPLE
     source: GOLD
@@ -8716,8 +10003,19 @@ strains:
     source_id: bacdive:2636
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Clostridium perfringens C12
+    assembly_name: ASM1623613v1 assembly for Clostridium perfringens C12
     taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.INSDC accession
+  genome_records:
+  - genome_id: patric:1502.1800
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:2636
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: ASM1623613v1 assembly for Clostridium perfringens C12
+    taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: gold:Go0244615
     record_type: GOLD_ORGANISM
@@ -9188,6 +10486,23 @@ strains:
   culture_collection_ids:
   - kgmicrobe.strain:DSM-30770
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_016117735
+    source: BACDIVE
+    source_id: bacdive:2643
+    source_reference_id: '124043'
+    assembly_level: chromosome
+    assembly_name: ASM1611773v1 assembly for Clostridium perfringens FDAARGOS_932
+    taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_016117735.1
+    source: BV_BRC
+    source_id: patric:1502.1790
+    assembly_name: Clostridium perfringens strain FDAARGOS_932 strain Not applicable
+    taxon_id: NCBITaxon:1502
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-30770
+    source_strain_identifiers: DSM:30770
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_016117735.1
     source: GOLD
     source_id: gold:Ga0490713
@@ -9204,10 +10519,21 @@ strains:
     source_database: patric
     source: BACDIVE
     source_id: bacdive:2643
-    source_reference_id: '66792'
-    assembly_level: complete
-    genome_name: Clostridium perfringens strain FDAARGOS_932
+    source_reference_id: '124043'
+    assembly_level: chromosome
+    genome_name: ASM1611773v1 assembly for Clostridium perfringens FDAARGOS_932
     taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1502.1790
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1502.1790
+    genome_name: Clostridium perfringens strain FDAARGOS_932 strain Not applicable
+    taxon_id: NCBITaxon:1502
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-30770
+    source_strain_identifiers: DSM:30770
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN13450462
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -9228,6 +10554,15 @@ strains:
       - matched_strain_id: kgmicrobe.strain:DSM-30770
         record_id: biosample:SAMN13450462
         record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1502.1790
+        source_strain_field: culture_collection
+        source_strain_identifiers: DSM:30770
+        taxon_id: NCBITaxon:1502
+      - matched_strain_id: kgmicrobe.strain:DSM-30770
+        record_id: biosample:SAMN13450462
+        record_type: BIOSAMPLE
         source: GOLD
         source_field: NCBI BIOSAMPLE ACCESSION
         source_id: gold:Gp0550489
@@ -9241,6 +10576,15 @@ strains:
   related_records:
   - record_id: bioproject:PRJNA231221
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1502.1790
+    taxon_id: NCBITaxon:1502
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-30770
+    source_strain_identifiers: DSM:30770
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA231221
+    record_type: BIOPROJECT
     source: GOLD
     source_id: gold:Gp0550489
     taxon_id: NCBITaxon:1502
@@ -9250,6 +10594,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0575760
     source_project_id: gold:Gp0550489
+  - record_id: biosample:SAMN13450462
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1502.1790
+    taxon_id: NCBITaxon:1502
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-30770
+    source_strain_identifiers: DSM:30770
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN13450462
     record_type: BIOSAMPLE
     source: GOLD
@@ -9341,6 +10694,23 @@ strains:
   culture_collection_ids:
   - kgmicrobe.strain:DSM-29991
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_016026675
+    source: BACDIVE
+    source_id: bacdive:130924
+    source_reference_id: '124043'
+    assembly_level: complete
+    assembly_name: ASM1602667v1 assembly for Clostridium perfringens FDAARGOS_931
+    taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_016026675.1
+    source: BV_BRC
+    source_id: patric:1502.1786
+    assembly_name: Clostridium perfringens strain FDAARGOS_931 strain Not applicable
+    taxon_id: NCBITaxon:1502
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29991
+    source_strain_identifiers: DSM:29991
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_016026675.1
     source: GOLD
     source_id: gold:Ga0490857
@@ -9357,8 +10727,27 @@ strains:
     source_id: bacdive:130924
     source_reference_id: '66792'
     assembly_level: contig
+    assembly_name: ASM2462284v1 assembly for Clostridium perfringens DSM 29991
+    taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_024622845.1
+    source: BV_BRC
+    source_id: patric:1502.2768
     assembly_name: Clostridium perfringens DSM 29991
     taxon_id: NCBITaxon:1502
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29991
+    source_strain_identifiers: DSM 29991
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_024622845.1
+    source: BV_BRC
+    source_id: patric:1502.2768
+    assembly_name: Clostridium perfringens DSM 29991
+    taxon_id: NCBITaxon:1502
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29991
+    source_strain_identifiers: DSM:29991
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_024622845.1
     source: GOLD
     source_id: gold:Ga0595233
@@ -9391,6 +10780,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-29991
     source_strain_identifiers: DSM 29991
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_024622845.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_024622845.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM2462284v1
+    taxon_id: NCBITaxon:1502
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29991
+    source_strain_identifiers: strain=DSM 29991
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_024622845.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_024622845.1
@@ -9401,6 +10801,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-29991
     source_strain_identifiers: DSM 29991
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_024622845.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_024622845.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM2462284v1
+    taxon_id: NCBITaxon:1502
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29991
+    source_strain_identifiers: strain=DSM 29991
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_024622845
     source: STRAININFO
     source_id: straininfo.strain:399924
@@ -9438,10 +10849,50 @@ strains:
     source_database: patric
     source: BACDIVE
     source_id: bacdive:130924
-    source_reference_id: '66792'
+    source_reference_id: '124043'
     assembly_level: complete
-    genome_name: Clostridium perfringens strain FDAARGOS_931
+    genome_name: ASM1602667v1 assembly for Clostridium perfringens FDAARGOS_931
     taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1502.1786
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1502.1786
+    genome_name: Clostridium perfringens strain FDAARGOS_931 strain Not applicable
+    taxon_id: NCBITaxon:1502
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-29991
+    source_strain_identifiers: DSM:29991
+    source_strain_field: culture_collection
+  - genome_id: patric:1502.2768
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:130924
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: ASM2462284v1 assembly for Clostridium perfringens DSM 29991
+    taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1502.2768
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1502.2768
+    genome_name: Clostridium perfringens DSM 29991
+    taxon_id: NCBITaxon:1502
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-29991
+    source_strain_identifiers: DSM 29991
+    source_strain_field: strain
+  - genome_id: patric:1502.2768
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1502.2768
+    genome_name: Clostridium perfringens DSM 29991
+    taxon_id: NCBITaxon:1502
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-29991
+    source_strain_identifiers: DSM:29991
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN13450461
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -9459,6 +10910,15 @@ strains:
       archive_url: https://osf.io/download/6672fdd5d835c43cab4ce0f6/
       archive_filename: atb.assembly.r0.2.batch.545.tar.xz
       sample_links:
+      - matched_strain_id: kgmicrobe.strain:DSM-29991
+        record_id: biosample:SAMN13450461
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1502.1786
+        source_strain_field: culture_collection
+        source_strain_identifiers: DSM:29991
+        taxon_id: NCBITaxon:1502
       - matched_strain_id: kgmicrobe.strain:DSM-29991
         record_id: biosample:SAMN13450461
         record_type: BIOSAMPLE
@@ -9482,6 +10942,25 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-29991
     source_strain_identifiers: DSM 29991
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_024622845.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1502
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-29991
+    source_strain_identifiers: strain=DSM 29991
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA231221
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1502.1786
+    taxon_id: NCBITaxon:1502
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29991
+    source_strain_identifiers: DSM:29991
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA231221
     record_type: BIOPROJECT
     source: GOLD
@@ -9493,6 +10972,24 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0575759
     source_project_id: gold:Gp0550488
+  - record_id: bioproject:PRJNA856830
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1502.2768
+    taxon_id: NCBITaxon:1502
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29991
+    source_strain_identifiers: DSM 29991
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA856830
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1502.2768
+    taxon_id: NCBITaxon:1502
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29991
+    source_strain_identifiers: DSM:29991
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA856830
     record_type: BIOPROJECT
     source: GOLD
@@ -9515,6 +11012,25 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0658940
     source_project_id: gold:Gp0703224
+  - record_id: bioproject:PRJNA856830
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_024622845.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1502
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-29991
+    source_strain_identifiers: strain=DSM 29991
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN13450461
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1502.1786
+    taxon_id: NCBITaxon:1502
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29991
+    source_strain_identifiers: DSM:29991
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN13450461
     record_type: BIOSAMPLE
     source: GOLD
@@ -9526,6 +11042,24 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0575759
     source_project_id: gold:Gp0550488
+  - record_id: biosample:SAMN29593115
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1502.2768
+    taxon_id: NCBITaxon:1502
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29991
+    source_strain_identifiers: DSM 29991
+    source_strain_field: strain
+  - record_id: biosample:SAMN29593115
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1502.2768
+    taxon_id: NCBITaxon:1502
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29991
+    source_strain_identifiers: DSM:29991
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN29593115
     record_type: BIOSAMPLE
     source: GOLD
@@ -9557,6 +11091,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-29991
     source_strain_identifiers: DSM 29991
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN29593115
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_024622845.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1502
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-29991
+    source_strain_identifiers: strain=DSM 29991
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN29593115
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_024622845.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1502
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-29991
+    source_strain_identifiers: strain=DSM 29991
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0490857
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -13631,12 +15185,134 @@ strains:
   source: BACDIVE
   source_id: bacdive:150859
   culture_collection_ids:
-  - kgmicrobe.strain:CCUG-42581-A
+  - kgmicrobe.strain:CCUG-42581%20A
+  related_records:
+  - record_id: gold:Go0243722
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0243722
+    taxon_id: NCBITaxon:1502
+    record_name: Clostridium perfringens CCUG 42581 A
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-42581%20A
+    source_strain_identifiers: CCUG 42581 A
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0243722
+  - record_id: gold:Go0243722
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0243722
+    taxon_id: NCBITaxon:1502
+    record_name: Clostridium perfringens CCUG 42581 A
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-42581%20A
+    source_strain_identifiers: CCUG 42581 A
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0243722
+  - record_id: straininfo.deposit:327920
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:109296
+    taxon_id: NCBITaxon:1502
+    record_name: CCUG 42581 A
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCUG-42581%20A
+    source_strain_identifiers: CCUG 42581 A
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 42581 A
+      deposit_id: straininfo.deposit:327920
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:150859
+      strain_doi: DOI:10.60712/SI-ID109296.2
+      strain_id: straininfo.strain:109296
+      strain_status: published online
+  - record_id: straininfo.strain:109296
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:109296
+    taxon_id: NCBITaxon:1502
+    record_name: CCUG 42581 A
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCUG-42581%20A
+    source_strain_identifiers: CCUG 42581 A
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 42581 A
+      deposit_id: straininfo.deposit:327920
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:150859
+      strain_doi: DOI:10.60712/SI-ID109296.2
+      strain_id: straininfo.strain:109296
+      strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_150860
   source: BACDIVE
   source_id: bacdive:150860
   culture_collection_ids:
-  - kgmicrobe.strain:CCUG-42581-B
+  - kgmicrobe.strain:CCUG-42581%20B
+  related_records:
+  - record_id: gold:Go0243724
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0243724
+    taxon_id: NCBITaxon:1502
+    record_name: Clostridium perfringens CCUG 42581 B
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-42581%20B
+    source_strain_identifiers: CCUG 42581 B
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0243724
+  - record_id: gold:Go0243724
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0243724
+    taxon_id: NCBITaxon:1502
+    record_name: Clostridium perfringens CCUG 42581 B
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-42581%20B
+    source_strain_identifiers: CCUG 42581 B
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0243724
+  - record_id: straininfo.deposit:327922
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:109297
+    taxon_id: NCBITaxon:1502
+    record_name: CCUG 42581 B
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCUG-42581%20B
+    source_strain_identifiers: CCUG 42581 B
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 42581 B
+      deposit_id: straininfo.deposit:327922
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:150860
+      strain_doi: DOI:10.60712/SI-ID109297.2
+      strain_id: straininfo.strain:109297
+      strain_status: published online
+  - record_id: straininfo.strain:109297
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:109297
+    taxon_id: NCBITaxon:1502
+    record_name: CCUG 42581 B
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCUG-42581%20B
+    source_strain_identifiers: CCUG 42581 B
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 42581 B
+      deposit_id: straininfo.deposit:327922
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:150860
+      strain_doi: DOI:10.60712/SI-ID109297.2
+      strain_id: straininfo.strain:109297
+      strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_150893
   source: BACDIVE
   source_id: bacdive:150893
@@ -14243,8 +15919,19 @@ strains:
     source_id: bacdive:158915
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Clostridium perfringens WCA-h-251-APC-2
+    assembly_name: ASM1284397v1 assembly for Clostridium perfringens WCA-h-251-APC-2
     taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.INSDC accession
+  genome_records:
+  - genome_id: patric:1502.1512
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:158915
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: ASM1284397v1 assembly for Clostridium perfringens WCA-h-251-APC-2
+    taxon_id: NCBITaxon:1502
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: INSDC:MN537509
     record_type: NUCLEOTIDE_SEQUENCE
@@ -14312,6 +15999,7 @@ source_attestations:
   source_label: Clostridium perfringens
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:774951
   source_label: Clostridium perfringens
@@ -14356,7 +16044,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

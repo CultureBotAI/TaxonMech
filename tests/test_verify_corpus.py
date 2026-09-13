@@ -15,6 +15,7 @@ def corpus_matches() -> int:
     return verify_corpus.main([])
 
 
+@pytest.mark.qc_gate
 def test_committed_corpus_reproduces_from_data_raw(corpus_matches):
     assert corpus_matches == 0, (
         "data/taxa/ is not what data/raw/ + curation/seed_scope.tsv produce. Re-seed with "

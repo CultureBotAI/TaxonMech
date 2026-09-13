@@ -82,6 +82,9 @@ taxonomy_mappings:
   genome_count: 1
   notes: LPSN links this GTDB species to the taxon's name.
 synonyms:
+- synonym_text: '"Parasedimentitalea marina" Ding et al. 2019'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: Parasedimentitalea maritima
   synonym_type: RELATED_SYNONYM
   source: LPSN
@@ -90,6 +93,9 @@ synonyms:
   synonym_type: RELATED_SYNONYM
   source: LPSN
   source_id: lpsn:5660
+- synonym_text: Sedimentitalea sp. W43
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Parasedimentitalea_marina
 - lpsn:11010
@@ -102,7 +108,7 @@ strains:
   designation: W43
   culture_collection_ids:
   - kgmicrobe.strain:KCTC-62635
-  - kgmicrobe.strain:MCCC-1K03532
+  - kgmicrobe.strain:MCCC%201K03532
   is_type_strain: true
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_004006175
@@ -110,8 +116,18 @@ strains:
     source_id: bacdive:166582
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Parasedimentitalea marina W43
+    assembly_name: ASM400617v1 assembly for Parasedimentitalea marina W43
     taxon_id: NCBITaxon:2483033
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_004006175.1
+    source: BV_BRC
+    source_id: patric:2483033.3
+    assembly_name: Sedimentitalea sp. W43
+    taxon_id: NCBITaxon:2483033
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:KCTC-62635
+    source_strain_identifiers: KCTC:62635
+    source_strain_field: culture_collection
   genome_records:
   - genome_id: patric:2483033.3
     source_database: patric
@@ -119,14 +135,45 @@ strains:
     source_id: bacdive:166582
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM400617v1 assembly for Parasedimentitalea marina W43
+    taxon_id: NCBITaxon:2483033
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:2483033.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:2483033.3
     genome_name: Sedimentitalea sp. W43
     taxon_id: NCBITaxon:2483033
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:KCTC-62635
+    source_strain_identifiers: KCTC:62635
+    source_strain_field: culture_collection
+  related_records:
+  - record_id: bioproject:PRJNA497983
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:2483033.3
+    taxon_id: NCBITaxon:2483033
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:KCTC-62635
+    source_strain_identifiers: KCTC:62635
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN10274220
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:2483033.3
+    taxon_id: NCBITaxon:2483033
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:KCTC-62635
+    source_strain_identifiers: KCTC:62635
+    source_strain_field: culture_collection
 source_attestations:
 - source: NCBITAXON
   source_id: NCBITaxon:2483033
   source_label: Parasedimentitalea marina
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:11010
   source_label: Parasedimentitalea marina
@@ -150,7 +197,7 @@ source_attestations:
   assertion_count: 3
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

@@ -38,7 +38,7 @@ grounding_status: EXACT
 mapping_status: SEEDED
 synonyms:
 - synonym_text: Streptomyces sp. ATCC10246
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 genetic_code: 11
 strain_count: 1
@@ -50,8 +50,9 @@ strains:
   - kgmicrobe.strain:ATCC-10246
   - kgmicrobe.strain:DSM-46445
   - kgmicrobe.strain:ETH-20198
-  - kgmicrobe.strain:HMGB-B-973
-  - kgmicrobe.strain:IAW-121
+  - kgmicrobe.strain:HMGB%20B%20973
+  - kgmicrobe.strain:IAW%20121
+  - kgmicrobe.strain:IMET-40374
   - kgmicrobe.strain:RIA-109
   related_records:
   - record_id: gold:Go0248044
@@ -109,6 +110,17 @@ strains:
     source_strain_identifiers: ETH 20198
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0248048
+  - record_id: gold:Go0248050
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0248050
+    taxon_id: NCBITaxon:1930
+    record_name: Streptomyces scabiei IMET 40374
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:IMET-40374
+    source_strain_identifiers: IMET 40374
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0248050
   - record_id: gold:Go0248052
     record_type: GOLD_ORGANISM
     source: GOLD
@@ -154,6 +166,25 @@ strains:
     straininfo_evidence:
       deposit_designation: DSM 46445
       deposit_id: straininfo.deposit:170324
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15996
+      strain_doi: DOI:10.60712/SI-ID35195.2
+      strain_id: straininfo.strain:35195
+      strain_status: published online
+  - record_id: straininfo.deposit:170326
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:35195
+    taxon_id: NCBITaxon:1930
+    record_name: IMET 40374
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:IMET-40374
+    source_strain_identifiers: IMET 40374
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: IMET 40374
+      deposit_id: straininfo.deposit:170326
       deposit_status: available
       match_method: culture_identifier
       source_bacdive_id: bacdive:15996
@@ -217,12 +248,32 @@ strains:
       strain_doi: DOI:10.60712/SI-ID35195.2
       strain_id: straininfo.strain:35195
       strain_status: published online
+  - record_id: straininfo.strain:35195
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:35195
+    taxon_id: NCBITaxon:1930
+    record_name: IMET 40374
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:IMET-40374
+    source_strain_identifiers: IMET 40374
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: IMET 40374
+      deposit_id: straininfo.deposit:170326
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:15996
+      strain_doi: DOI:10.60712/SI-ID35195.2
+      strain_id: straininfo.strain:35195
+      strain_status: published online
 source_attestations:
 - source: NCBITAXON
   source_id: NCBITaxon:74595
   source_label: Streptomyces sp. ATCC 10246
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: BACDIVE
   source_id: NCBITaxon:74595
   source_label: Streptomyces sp. ATCC 10246
@@ -234,7 +285,7 @@ source_attestations:
   assertion_count: 2
   assertion_unit: MEDIUM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

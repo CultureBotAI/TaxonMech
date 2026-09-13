@@ -70,6 +70,14 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 22
   notes: LPSN links this GTDB species to the taxon's name.
+synonyms:
+- synonym_text: Chryseobacterium arthrosphaerae Kampfer et al. 2010 emend. Jeong et
+    al. 2017
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Chryseobacterium sp. CC-VM-7
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Chryseobacterium_arthrosphaerae
 - lpsn:788697
@@ -84,6 +92,7 @@ strains:
   - kgmicrobe.strain:CCM-7645
   - kgmicrobe.strain:CCUG-57618
   - kgmicrobe.strain:CIP-110186
+  - kgmicrobe.strain:DSM-22218
   - kgmicrobe.strain:DSM-25208
   is_type_strain: true
   genome_assemblies:
@@ -92,17 +101,19 @@ strains:
     source_id: bacdive:23025
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Chryseobacterium arthrosphaerae CC-VM-7
+    assembly_name: ASM168496v1 assembly for Chryseobacterium arthrosphaerae CC-VM-7
     taxon_id: NCBITaxon:651561
+    source_field: Sequence information.Genome sequences.INSDC accession
   genome_records:
   - genome_id: img.taxon:2751185876
     source_database: img
     source: BACDIVE
     source_id: bacdive:23025
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Chryseobacterium arthrosphaerae CC-VM-7
+    assembly_level: contig
+    genome_name: ASM168496v1 assembly for Chryseobacterium arthrosphaerae CC-VM-7
     taxon_id: NCBITaxon:651561
+    source_field: Sequence information.Genome sequences.IMG accession
   related_records:
   - record_id: gold:Go0028179
     record_type: GOLD_ORGANISM
@@ -126,6 +137,28 @@ strains:
     source_strain_identifiers: CCUG 57618
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0028179
+  - record_id: gold:Go0611160
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0611160
+    taxon_id: NCBITaxon:1871047
+    record_name: Chryseobacterium sp. DSM 22218
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-22218
+    source_strain_identifiers: DSM 22218
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0611160
+  - record_id: gold:Go0611160
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0611160
+    taxon_id: NCBITaxon:1871047
+    record_name: Chryseobacterium sp. DSM 22218
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-22218
+    source_strain_identifiers: DSM 22218
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0611160
   - record_id: straininfo.deposit:855453
     record_type: STRAININFO_DEPOSIT
     source: STRAININFO
@@ -145,6 +178,25 @@ strains:
       strain_doi: DOI:10.60712/SI-ID370341.3
       strain_id: straininfo.strain:370341
       strain_status: published online
+  - record_id: straininfo.deposit:900250
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:370341
+    taxon_id: NCBITaxon:59732
+    record_name: DSM 22218
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:DSM-22218
+    source_strain_identifiers: DSM 22218
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 22218
+      deposit_id: straininfo.deposit:900250
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:23025
+      strain_doi: DOI:10.60712/SI-ID370341.3
+      strain_id: straininfo.strain:370341
+      strain_status: published online
   - record_id: straininfo.deposit:921399
     record_type: STRAININFO_DEPOSIT
     source: STRAININFO
@@ -158,6 +210,25 @@ strains:
     straininfo_evidence:
       deposit_designation: CIP 110186
       deposit_id: straininfo.deposit:921399
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:23025
+      strain_doi: DOI:10.60712/SI-ID370341.3
+      strain_id: straininfo.strain:370341
+      strain_status: published online
+  - record_id: straininfo.strain:370341
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:370341
+    taxon_id: NCBITaxon:59732
+    record_name: DSM 22218
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:DSM-22218
+    source_strain_identifiers: DSM 22218
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 22218
+      deposit_id: straininfo.deposit:900250
       deposit_status: available
       match_method: culture_identifier
       source_bacdive_id: bacdive:23025
@@ -252,6 +323,7 @@ source_attestations:
   source_label: Chryseobacterium arthrosphaerae
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:788697
   source_label: Chryseobacterium arthrosphaerae
@@ -280,7 +352,7 @@ source_attestations:
   assertion_count: 6
   assertion_unit: TRAIT_ASSERTION
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

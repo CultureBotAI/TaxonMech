@@ -61,6 +61,13 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 1
   notes: LPSN links this GTDB species to the taxon's name.
+synonyms:
+- synonym_text: Athalassotoga saccharophila Itoh et al. 2016
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Thermotogales bacterium NAS-01
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Athalassotoga_saccharophila
 - lpsn:793860
@@ -81,8 +88,18 @@ strains:
     source_id: bacdive:132416
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Athalassotoga saccharophila NAS-01
+    assembly_name: ASM993621v1 assembly for Athalassotoga saccharophila NAS-01
     taxon_id: NCBITaxon:1441386
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_009936215.1
+    source: BV_BRC
+    source_id: patric:1441386.9
+    assembly_name: Athalassotoga saccharophila strain NAS-01
+    taxon_id: NCBITaxon:1441386
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-19762
+    source_strain_identifiers: JCM:19762
+    source_strain_field: culture_collection
   genome_records:
   - genome_id: img.taxon:2883451585
     source_database: img
@@ -90,17 +107,75 @@ strains:
     source_id: bacdive:132416
     source_reference_id: '66792'
     assembly_level: complete
-    genome_name: Athalassotoga saccharophila NAS-01
+    genome_name: ASM993621v1 assembly for Athalassotoga saccharophila NAS-01
     taxon_id: NCBITaxon:1441386
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: patric:1441386.9
     source_database: patric
     source: BACDIVE
     source_id: bacdive:132416
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: complete
+    genome_name: ASM993621v1 assembly for Athalassotoga saccharophila NAS-01
+    taxon_id: NCBITaxon:1441386
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1441386.9
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1441386.9
     genome_name: Athalassotoga saccharophila strain NAS-01
     taxon_id: NCBITaxon:1441386
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-19762
+    source_strain_identifiers: JCM:19762
+    source_strain_field: culture_collection
+  - genome_id: atb.assembly:202505.SAMD00164671
+    source_database: allthebacteria
+    source: ALLTHEBACTERIA
+    source_id: atb.assembly:202505.SAMD00164671
+    genome_name: Athalassotoga saccharophila
+    atb_evidence:
+      release: 2025-05
+      sample_id: biosample:SAMD00164671
+      dataset: r0.2
+      run_accessions: DRR189933
+      assembly_seqkit_sum: seqkit.v0.1_DLS_k0_9adbbe081f9d8eed322547eb8712d7f7
+      assembly_filter: PASS
+      hq_filter: CHECKM2_MIN_COMPL
+      download_url: https://allthebacteria-assemblies.s3.eu-west-2.amazonaws.com/SAMD00164671.fa.gz
+      archive_url: https://osf.io/download/667155b965e1de5e8b893c9b/
+      archive_filename: atb.assembly.r0.2.batch.96.tar.xz
+      sample_links:
+      - matched_strain_id: kgmicrobe.strain:JCM-19762
+        record_id: biosample:SAMD00164671
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1441386.9
+        source_strain_field: culture_collection
+        source_strain_identifiers: JCM:19762
+        taxon_id: NCBITaxon:1441386
+      ena_analysis_id: ena.analysis:ERZ25080762
+      sylph_species: Athalassotoga saccharophila
   related_records:
+  - record_id: bioproject:PRJDB8084
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1441386.9
+    taxon_id: NCBITaxon:1441386
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-19762
+    source_strain_identifiers: JCM:19762
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMD00164671
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1441386.9
+    taxon_id: NCBITaxon:1441386
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-19762
+    source_strain_identifiers: JCM:19762
+    source_strain_field: culture_collection
   - record_id: gold:Go0618090
     record_type: GOLD_ORGANISM
     source: GOLD
@@ -189,6 +264,7 @@ source_attestations:
   source_label: Athalassotoga saccharophila
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:793860
   source_label: Athalassotoga saccharophila
@@ -222,7 +298,7 @@ source_attestations:
   assertion_count: 22
   assertion_unit: TRAIT_ASSERTION
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

@@ -117,6 +117,15 @@ def test_emit_is_stable_across_calls():
     assert emit_taxon_yaml(MINIMAL) == emit_taxon_yaml(MINIMAL)
 
 
+@pytest.mark.parametrize("text", ["Ω bacteria", "line one\nline two", "'quoted': strain",
+                                      " x ", "null", "yes", "x " * 100, "A\tB", "α → β", "🧬"])
+def test_safe_c_emitter_preserves_legacy_string_emission(text):
+    from taxonmech.validation.write_validated import EMIT_OPTS
+
+    doc = {**MINIMAL, "label": text, "synonyms": [{"synonym_text": text, "source": "NCBITAXON"}]}
+    assert emit_taxon_yaml(doc) == yaml.safe_dump(doc, **EMIT_OPTS)
+
+
 def test_every_record_round_trips_byte_identically(records):
     """Re-emitting the corpus through the helper must change nothing."""
     drifted = []

@@ -63,6 +63,16 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 1
   notes: LPSN links this GTDB species to the taxon's name.
+synonyms:
+- synonym_text: Bremerella alba Godinho et al. 2021
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Planctomyces sp. FF15
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Planctomycetes bacterium FF15
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Bremerella_alba
 - lpsn:19116
@@ -74,22 +84,82 @@ strains:
   source_id: bacdive:166808
   designation: FF15
   culture_collection_ids:
-  - kgmicrobe.strain:CECT-8078T
-  - kgmicrobe.strain:LMG-31936T
+  - kgmicrobe.strain:CECT-8078
+  - kgmicrobe.strain:LMG-31936
+  is_type_strain: true
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_013618625
     source: BACDIVE
     source_id: bacdive:166808
     source_reference_id: '66792'
     assembly_level: scaffold
-    assembly_name: Bremerella alba FF15
+    assembly_name: ASM1361862v1 assembly for Bremerella alba FF15
     taxon_id: NCBITaxon:980252
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_013618625.1
+    source: BV_BRC
+    source_id: patric:2737660.3
+    assembly_name: Planctomycetes bacterium FF15
+    taxon_id: NCBITaxon:980252
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:CECT-8078
+    source_strain_identifiers: CECT:8078
+    source_strain_field: culture_collection
+  genome_records:
+  - genome_id: img.taxon:2909546633
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:166808
+    source_reference_id: '66792'
+    assembly_level: scaffold
+    genome_name: ASM1361862v1 assembly for Bremerella alba FF15
+    taxon_id: NCBITaxon:980252
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: patric:2737660.3
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:166808
+    source_reference_id: '66792'
+    assembly_level: scaffold
+    genome_name: ASM1361862v1 assembly for Bremerella alba FF15
+    taxon_id: NCBITaxon:980252
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:2737660.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:2737660.3
+    genome_name: Planctomycetes bacterium FF15
+    taxon_id: NCBITaxon:980252
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:CECT-8078
+    source_strain_identifiers: CECT:8078
+    source_strain_field: culture_collection
+  related_records:
+  - record_id: bioproject:PRJNA633004
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:2737660.3
+    taxon_id: NCBITaxon:980252
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:CECT-8078
+    source_strain_identifiers: CECT:8078
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN14930176
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:2737660.3
+    taxon_id: NCBITaxon:980252
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:CECT-8078
+    source_strain_identifiers: CECT:8078
+    source_strain_field: culture_collection
 source_attestations:
 - source: NCBITAXON
   source_id: NCBITaxon:980252
   source_label: Bremerella alba
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:19116
   source_label: Bremerella alba
@@ -113,7 +183,7 @@ source_attestations:
   assertion_count: 1
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

@@ -109,16 +109,23 @@ taxonomy_mappings:
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 synonyms:
 - synonym_text: Streptococcus dentisani
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Streptococcus dentisani Camelo-Castillo et al. 2014
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Streptococcus mitis biovar 2
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Streptococcus mitis bv. 2
   synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Streptococcus mitis bv. II
   synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Streptococcus oralis subsp. dentisani (Camelo-Castillo et al. 2014)
+    Jensen et al. 2016
+  synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 genetic_code: 11
 strain_count: 2
@@ -138,8 +145,26 @@ strains:
     source_id: bacdive:24610
     source_reference_id: '66792'
     assembly_level: scaffold
-    assembly_name: Streptococcus oralis subsp. dentisani 7747 CECT 7747
+    assembly_name: ASM38282v1 assembly for Streptococcus oralis subsp. dentisani 7747
     taxon_id: NCBITaxon:1297857
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_016028175
+    source: BACDIVE
+    source_id: bacdive:24610
+    source_reference_id: '66792'
+    assembly_level: complete
+    assembly_name: ASM1602817v1 assembly for Streptococcus oralis FDAARGOS_886
+    taxon_id: NCBITaxon:1303
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_016028175.1
+    source: BV_BRC
+    source_id: patric:1303.919
+    assembly_name: Streptococcus oralis strain FDAARGOS_886 strain Not applicable
+    taxon_id: NCBITaxon:1303
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-27088
+    source_strain_identifiers: DSM:27088
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_016028175.1
     source: GOLD
     source_id: gold:Ga0491180
@@ -152,14 +177,43 @@ strains:
     source_organism_id: gold:Go0575748
     source_project_id: gold:Gp0550477
   genome_records:
+  - genome_id: img.taxon:2568526682
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:24610
+    source_reference_id: '66792'
+    assembly_level: scaffold
+    genome_name: ASM38282v1 assembly for Streptococcus oralis subsp. dentisani 7747
+    taxon_id: NCBITaxon:1297857
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: patric:1297857.3
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:24610
+    source_reference_id: '66792'
+    assembly_level: scaffold
+    genome_name: ASM38282v1 assembly for Streptococcus oralis subsp. dentisani 7747
+    taxon_id: NCBITaxon:1297857
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   - genome_id: patric:1303.919
     source_database: patric
     source: BACDIVE
     source_id: bacdive:24610
     source_reference_id: '66792'
     assembly_level: complete
-    genome_name: Streptococcus oralis strain FDAARGOS_886
+    genome_name: ASM1602817v1 assembly for Streptococcus oralis FDAARGOS_886
     taxon_id: NCBITaxon:1303
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1303.919
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1303.919
+    genome_name: Streptococcus oralis strain FDAARGOS_886 strain Not applicable
+    taxon_id: NCBITaxon:1303
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-27088
+    source_strain_identifiers: DSM:27088
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN13450416
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -180,6 +234,15 @@ strains:
       - matched_strain_id: kgmicrobe.strain:DSM-27088
         record_id: biosample:SAMN13450416
         record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1303.919
+        source_strain_field: culture_collection
+        source_strain_identifiers: DSM:27088
+        taxon_id: NCBITaxon:1303
+      - matched_strain_id: kgmicrobe.strain:DSM-27088
+        record_id: biosample:SAMN13450416
+        record_type: BIOSAMPLE
         source: GOLD
         source_field: NCBI BIOSAMPLE ACCESSION
         source_id: gold:Gp0550477
@@ -193,6 +256,15 @@ strains:
   related_records:
   - record_id: bioproject:PRJNA231221
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1303.919
+    taxon_id: NCBITaxon:1303
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-27088
+    source_strain_identifiers: DSM:27088
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA231221
+    record_type: BIOPROJECT
     source: GOLD
     source_id: gold:Gp0550477
     taxon_id: NCBITaxon:1303
@@ -202,6 +274,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0575748
     source_project_id: gold:Gp0550477
+  - record_id: biosample:SAMN13450416
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1303.919
+    taxon_id: NCBITaxon:1303
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-27088
+    source_strain_identifiers: DSM:27088
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN13450416
     record_type: BIOSAMPLE
     source: GOLD
@@ -480,6 +561,23 @@ strains:
   - kgmicrobe.strain:CECT-8313
   - kgmicrobe.strain:DSM-27089
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_016028255
+    source: BACDIVE
+    source_id: bacdive:24611
+    source_reference_id: '66792'
+    assembly_level: complete
+    assembly_name: ASM1602825v1 assembly for Streptococcus oralis FDAARGOS_885
+    taxon_id: NCBITaxon:1303
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_016028255.1
+    source: BV_BRC
+    source_id: patric:1303.918
+    assembly_name: Streptococcus oralis strain FDAARGOS_885 strain Not applicable
+    taxon_id: NCBITaxon:1303
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-27089
+    source_strain_identifiers: DSM:27089
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_016028255.1
     source: GOLD
     source_id: gold:Ga0490477
@@ -498,8 +596,19 @@ strains:
     source_id: bacdive:24611
     source_reference_id: '66792'
     assembly_level: complete
-    genome_name: Streptococcus oralis strain FDAARGOS_885
+    genome_name: ASM1602825v1 assembly for Streptococcus oralis FDAARGOS_885
     taxon_id: NCBITaxon:1303
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1303.918
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1303.918
+    genome_name: Streptococcus oralis strain FDAARGOS_885 strain Not applicable
+    taxon_id: NCBITaxon:1303
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-27089
+    source_strain_identifiers: DSM:27089
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN13450415
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -520,6 +629,15 @@ strains:
       - matched_strain_id: kgmicrobe.strain:DSM-27089
         record_id: biosample:SAMN13450415
         record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1303.918
+        source_strain_field: culture_collection
+        source_strain_identifiers: DSM:27089
+        taxon_id: NCBITaxon:1303
+      - matched_strain_id: kgmicrobe.strain:DSM-27089
+        record_id: biosample:SAMN13450415
+        record_type: BIOSAMPLE
         source: GOLD
         source_field: NCBI BIOSAMPLE ACCESSION
         source_id: gold:Gp0550476
@@ -533,6 +651,15 @@ strains:
   related_records:
   - record_id: bioproject:PRJNA231221
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1303.918
+    taxon_id: NCBITaxon:1303
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-27089
+    source_strain_identifiers: DSM:27089
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA231221
+    record_type: BIOPROJECT
     source: GOLD
     source_id: gold:Gp0550476
     taxon_id: NCBITaxon:1303
@@ -542,6 +669,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0575747
     source_project_id: gold:Gp0550476
+  - record_id: biosample:SAMN13450415
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1303.918
+    taxon_id: NCBITaxon:1303
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-27089
+    source_strain_identifiers: DSM:27089
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN13450415
     record_type: BIOSAMPLE
     source: GOLD
@@ -758,6 +894,7 @@ source_attestations:
   source_label: Streptococcus oralis subsp. dentisani
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: GTDB
   source_id: GTDB:s__Streptococcus_oralis_S
   source_label: s__Streptococcus_oralis_S
@@ -795,7 +932,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

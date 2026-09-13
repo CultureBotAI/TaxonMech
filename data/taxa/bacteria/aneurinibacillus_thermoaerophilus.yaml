@@ -67,11 +67,21 @@ taxonomy_mappings:
   genome_count: 12
   notes: LPSN links this GTDB species to the taxon's name.
 synonyms:
+- synonym_text: Aneurinibacillus thermoaerophilus (Meier-Stauffer et al. 1996) Heyndrickx
+    et al. 1997
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Bacillus brevis ATCC 12990
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: Bacillus thermoaerophilus
   synonym_type: RELATED_SYNONYM
   source: LPSN
   source_id: lpsn:773855
 - synonym_text: Bacillus thermoaerophilus
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Bacillus thermoaerophilus Meier-Stauffer et al. 1996
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 xrefs:
@@ -90,6 +100,24 @@ strains:
   - kgmicrobe.strain:LMG-17165
   is_type_strain: true
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_900099925
+    source: BACDIVE
+    source_id: bacdive:11398
+    source_reference_id: '66792'
+    assembly_level: scaffold
+    assembly_name: IMG-taxon 2634166356 annotated assembly for Aneurinibacillus thermoaerophilus
+      L 420-91
+    taxon_id: NCBITaxon:143495
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900099925.1
+    source: BV_BRC
+    source_id: patric:143495.3
+    assembly_name: Aneurinibacillus thermoaerophilus strain L 420-91
+    taxon_id: NCBITaxon:143495
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-10154
+    source_strain_identifiers: DSM 10154
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_900099925.1
     source: GOLD
     source_id: gold:Ga0074850
@@ -118,9 +146,11 @@ strains:
     source: BACDIVE
     source_id: bacdive:11398
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Aneurinibacillus thermoaerophilus DSM 10154
+    assembly_level: scaffold
+    genome_name: IMG-taxon 2634166356 annotated assembly for Aneurinibacillus thermoaerophilus
+      L 420-91
     taxon_id: NCBITaxon:143495
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2634166356
     source_database: img
     source: GOLD
@@ -150,9 +180,21 @@ strains:
     source: BACDIVE
     source_id: bacdive:11398
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: scaffold
+    genome_name: IMG-taxon 2634166356 annotated assembly for Aneurinibacillus thermoaerophilus
+      L 420-91
+    taxon_id: NCBITaxon:143495
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:143495.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:143495.3
     genome_name: Aneurinibacillus thermoaerophilus strain L 420-91
     taxon_id: NCBITaxon:143495
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-10154
+    source_strain_identifiers: DSM 10154
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN04489735
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -170,6 +212,15 @@ strains:
       archive_url: https://osf.io/download/667155b965e1de5e8b893c9b/
       archive_filename: atb.assembly.r0.2.batch.96.tar.xz
       sample_links:
+      - matched_strain_id: kgmicrobe.strain:DSM-10154
+        record_id: biosample:SAMN04489735
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:143495.3
+        source_strain_field: culture_collection
+        source_strain_identifiers: DSM 10154
+        taxon_id: NCBITaxon:143495
       - matched_strain_id: kgmicrobe.strain:DSM-10154
         record_id: biosample:SAMN04489735
         record_type: BIOSAMPLE
@@ -195,6 +246,15 @@ strains:
       ena_analysis_id: ena.analysis:ERZ26860302
       sylph_species: Aneurinibacillus thermoaerophilus
   related_records:
+  - record_id: bioproject:PRJEB15926
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:143495.3
+    taxon_id: NCBITaxon:143495
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-10154
+    source_strain_identifiers: DSM 10154
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA303743
     record_type: BIOPROJECT
     source: GOLD
@@ -217,6 +277,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0039831
     source_project_id: gold:Gp0116428
+  - record_id: biosample:SAMN04489735
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:143495.3
+    taxon_id: NCBITaxon:143495
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-10154
+    source_strain_identifiers: DSM 10154
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN04489735
     record_type: BIOSAMPLE
     source: GOLD
@@ -564,8 +633,8 @@ strains:
   source_id: bacdive:11385
   designation: '18'
   culture_collection_ids:
+  - kgmicrobe.strain:DSM%20ID%2087-100
   - kgmicrobe.strain:DSM-4410
-  - kgmicrobe.strain:DSM-ID-87-100
   related_records:
   - record_id: straininfo.deposit:158769
     record_type: STRAININFO_DEPOSIT
@@ -610,8 +679,8 @@ strains:
   source_id: bacdive:11386
   designation: '20'
   culture_collection_ids:
+  - kgmicrobe.strain:DSM%20ID%2087-102
   - kgmicrobe.strain:DSM-4411
-  - kgmicrobe.strain:DSM-ID-87-102
   related_records:
   - record_id: straininfo.deposit:158771
     record_type: STRAININFO_DEPOSIT
@@ -656,8 +725,8 @@ strains:
   source_id: bacdive:11387
   designation: '21'
   culture_collection_ids:
+  - kgmicrobe.strain:DSM%20ID%2087-103
   - kgmicrobe.strain:DSM-4412
-  - kgmicrobe.strain:DSM-ID-87-103
   related_records:
   - record_id: straininfo.deposit:158773
     record_type: STRAININFO_DEPOSIT
@@ -705,7 +774,16 @@ strains:
   designation: 513-3
   culture_collection_ids:
   - kgmicrobe.strain:DSM-5507
-  - kgmicrobe.strain:NRS-1405
+  - kgmicrobe.strain:NRS%201405
+  genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_037907245
+    source: BACDIVE
+    source_id: bacdive:11388
+    source_reference_id: '124043'
+    assembly_level: scaffold
+    assembly_name: ASM3790724v1 assembly for Aneurinibacillus thermoaerophilus NRS-1405
+    taxon_id: NCBITaxon:143495
+    source_field: Sequence information.Genome sequences.INSDC accession
   related_records:
   - record_id: straininfo.deposit:159224
     record_type: STRAININFO_DEPOSIT
@@ -751,7 +829,26 @@ strains:
   designation: 509-4
   culture_collection_ids:
   - kgmicrobe.strain:DSM-5508
-  - kgmicrobe.strain:NRS-1400
+  - kgmicrobe.strain:NRS%201400
+  genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_036208445
+    source: BACDIVE
+    source_id: bacdive:11389
+    source_reference_id: '124043'
+    assembly_level: scaffold
+    assembly_name: ASM3620844v1 assembly for Aneurinibacillus thermoaerophilus NRS-1400
+    taxon_id: NCBITaxon:143495
+    source_field: Sequence information.Genome sequences.INSDC accession
+  genome_records:
+  - genome_id: patric:143495.15
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:11389
+    source_reference_id: '124043'
+    assembly_level: scaffold
+    genome_name: ASM3620844v1 assembly for Aneurinibacillus thermoaerophilus NRS-1400
+    taxon_id: NCBITaxon:143495
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: straininfo.deposit:159226
     record_type: STRAININFO_DEPOSIT
@@ -797,7 +894,7 @@ strains:
   designation: 26-2
   culture_collection_ids:
   - kgmicrobe.strain:DSM-6341
-  - kgmicrobe.strain:NRS-1383
+  - kgmicrobe.strain:NRS%201383
   related_records:
   - record_id: straininfo.deposit:159957
     record_type: STRAININFO_DEPOSIT
@@ -843,7 +940,26 @@ strains:
   designation: 511-5
   culture_collection_ids:
   - kgmicrobe.strain:DSM-6349
-  - kgmicrobe.strain:NRS-1403
+  - kgmicrobe.strain:NRS%201403
+  genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_036208425
+    source: BACDIVE
+    source_id: bacdive:11391
+    source_reference_id: '124043'
+    assembly_level: scaffold
+    assembly_name: ASM3620842v1 assembly for Aneurinibacillus thermoaerophilus NRS-1403
+    taxon_id: NCBITaxon:143495
+    source_field: Sequence information.Genome sequences.INSDC accession
+  genome_records:
+  - genome_id: patric:143495.13
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:11391
+    source_reference_id: '124043'
+    assembly_level: scaffold
+    genome_name: ASM3620842v1 assembly for Aneurinibacillus thermoaerophilus NRS-1403
+    taxon_id: NCBITaxon:143495
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: straininfo.deposit:159967
     record_type: STRAININFO_DEPOSIT
@@ -889,7 +1005,26 @@ strains:
   designation: 25-4
   culture_collection_ids:
   - kgmicrobe.strain:DSM-6364
-  - kgmicrobe.strain:NRS-1380
+  - kgmicrobe.strain:NRS%201380
+  genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_036208505
+    source: BACDIVE
+    source_id: bacdive:11392
+    source_reference_id: '124043'
+    assembly_level: scaffold
+    assembly_name: ASM3620850v1 assembly for Aneurinibacillus thermoaerophilus NRS-1380
+    taxon_id: NCBITaxon:143495
+    source_field: Sequence information.Genome sequences.INSDC accession
+  genome_records:
+  - genome_id: patric:143495.17
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:11392
+    source_reference_id: '124043'
+    assembly_level: scaffold
+    genome_name: ASM3620850v1 assembly for Aneurinibacillus thermoaerophilus NRS-1380
+    taxon_id: NCBITaxon:143495
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: straininfo.deposit:159991
     record_type: STRAININFO_DEPOSIT
@@ -935,7 +1070,7 @@ strains:
   designation: '2'
   culture_collection_ids:
   - kgmicrobe.strain:DSM-6379
-  - kgmicrobe.strain:NRS-1436
+  - kgmicrobe.strain:NRS%201436
   related_records:
   - record_id: straininfo.deposit:160003
     record_type: STRAININFO_DEPOSIT
@@ -981,7 +1116,26 @@ strains:
   designation: 25-5
   culture_collection_ids:
   - kgmicrobe.strain:DSM-6406
-  - kgmicrobe.strain:NRS-1381
+  - kgmicrobe.strain:NRS%201381
+  genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_036208485
+    source: BACDIVE
+    source_id: bacdive:11394
+    source_reference_id: '124043'
+    assembly_level: scaffold
+    assembly_name: ASM3620848v1 assembly for Aneurinibacillus thermoaerophilus NRS-1381
+    taxon_id: NCBITaxon:143495
+    source_field: Sequence information.Genome sequences.INSDC accession
+  genome_records:
+  - genome_id: patric:143495.18
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:11394
+    source_reference_id: '124043'
+    assembly_level: scaffold
+    genome_name: ASM3620848v1 assembly for Aneurinibacillus thermoaerophilus NRS-1381
+    taxon_id: NCBITaxon:143495
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: straininfo.deposit:160038
     record_type: STRAININFO_DEPOSIT
@@ -1027,7 +1181,26 @@ strains:
   designation: 26-1
   culture_collection_ids:
   - kgmicrobe.strain:DSM-6458
-  - kgmicrobe.strain:NRS-1382
+  - kgmicrobe.strain:NRS%201382
+  genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_036208465
+    source: BACDIVE
+    source_id: bacdive:11395
+    source_reference_id: '124043'
+    assembly_level: contig
+    assembly_name: ASM3620846v1 assembly for Aneurinibacillus thermoaerophilus NRS-1382
+    taxon_id: NCBITaxon:143495
+    source_field: Sequence information.Genome sequences.INSDC accession
+  genome_records:
+  - genome_id: patric:143495.16
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:11395
+    source_reference_id: '124043'
+    assembly_level: contig
+    genome_name: ASM3620846v1 assembly for Aneurinibacillus thermoaerophilus NRS-1382
+    taxon_id: NCBITaxon:143495
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: straininfo.deposit:160089
     record_type: STRAININFO_DEPOSIT
@@ -1073,7 +1246,16 @@ strains:
   designation: '1'
   culture_collection_ids:
   - kgmicrobe.strain:DSM-6459
-  - kgmicrobe.strain:NRS-1435
+  - kgmicrobe.strain:NRS%201435
+  genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_050480985
+    source: BACDIVE
+    source_id: bacdive:11396
+    source_reference_id: '124043'
+    assembly_level: contig
+    assembly_name: ASM5048098v1 assembly for Aneurinibacillus thermoaerophilus NRS-1435
+    taxon_id: NCBITaxon:143495
+    source_field: Sequence information.Genome sequences.INSDC accession
   related_records:
   - record_id: straininfo.deposit:160091
     record_type: STRAININFO_DEPOSIT
@@ -1119,7 +1301,7 @@ strains:
   designation: 509-5
   culture_collection_ids:
   - kgmicrobe.strain:DSM-6460
-  - kgmicrobe.strain:NRS-1401
+  - kgmicrobe.strain:NRS%201401
   related_records:
   - record_id: straininfo.deposit:160093
     record_type: STRAININFO_DEPOSIT
@@ -1422,6 +1604,7 @@ source_attestations:
   source_label: Aneurinibacillus thermoaerophilus
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:773276
   source_label: Aneurinibacillus thermoaerophilus
@@ -1460,7 +1643,7 @@ source_attestations:
   assertion_count: 1
   assertion_unit: TRAIT_ASSERTION
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

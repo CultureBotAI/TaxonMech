@@ -60,8 +60,17 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 1
 synonyms:
-- synonym_text: Solimicrobium aquatica
+- synonym_text: '"Solimicrobium aquatica" (Felfoldi et al. 2020) Ma et al. 2023'
   synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Oxalobacteraceae bacterium SA-152
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Sapientia aquatica Felfoldi et al. 2020
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Solimicrobium aquatica
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Solimicrobium aquaticum
   synonym_type: EXACT_SYNONYM
@@ -79,8 +88,8 @@ strains:
   designation: SA-152
   culture_collection_ids:
   - kgmicrobe.strain:DSM-29805
+  - kgmicrobe.strain:NCAIM%20B.02613T
   - kgmicrobe.strain:NCAIM-B.02613
-  - kgmicrobe.strain:NCAIM-B.02613T
   is_type_strain: true
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_004358105
@@ -88,8 +97,18 @@ strains:
     source_id: bacdive:168376
     source_reference_id: '66792'
     assembly_level: scaffold
-    assembly_name: Sapientia aquatica SA-152
+    assembly_name: ASM435810v1 assembly for Sapientia aquatica SA-152
     taxon_id: NCBITaxon:1549640
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_004358105.1
+    source: BV_BRC
+    source_id: patric:1549640.3
+    assembly_name: Oxalobacteraceae bacterium SA-152
+    taxon_id: NCBITaxon:1549640
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29805
+    source_strain_identifiers: DSM:29805
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_004358105.1
     source: GOLD
     source_id: gold:Ga0442571
@@ -102,6 +121,15 @@ strains:
     source_organism_id: gold:Go0545096
     source_project_id: gold:Gp0496025
   genome_records:
+  - genome_id: img.taxon:2881109857
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:168376
+    source_reference_id: '66792'
+    assembly_level: scaffold
+    genome_name: ASM435810v1 assembly for Sapientia aquatica SA-152
+    taxon_id: NCBITaxon:1549640
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2881109857
     source_database: img
     source: GOLD
@@ -119,9 +147,20 @@ strains:
     source: BACDIVE
     source_id: bacdive:168376
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: scaffold
+    genome_name: ASM435810v1 assembly for Sapientia aquatica SA-152
+    taxon_id: NCBITaxon:1549640
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1549640.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1549640.3
     genome_name: Oxalobacteraceae bacterium SA-152
     taxon_id: NCBITaxon:1549640
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-29805
+    source_strain_identifiers: DSM:29805
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN11115936
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -142,6 +181,15 @@ strains:
       - matched_strain_id: kgmicrobe.strain:DSM-29805
         record_id: biosample:SAMN11115936
         record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1549640.3
+        source_strain_field: culture_collection
+        source_strain_identifiers: DSM:29805
+        taxon_id: NCBITaxon:1549640
+      - matched_strain_id: kgmicrobe.strain:DSM-29805
+        record_id: biosample:SAMN11115936
+        record_type: BIOSAMPLE
         source: GOLD
         source_field: NCBI BIOSAMPLE ACCESSION
         source_id: gold:Gp0496025
@@ -155,6 +203,15 @@ strains:
   related_records:
   - record_id: bioproject:PRJNA526854
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1549640.3
+    taxon_id: NCBITaxon:1549640
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29805
+    source_strain_identifiers: DSM:29805
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA526854
+    record_type: BIOPROJECT
     source: GOLD
     source_id: gold:Gp0496025
     taxon_id: NCBITaxon:1549640
@@ -164,6 +221,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0545096
     source_project_id: gold:Gp0496025
+  - record_id: biosample:SAMN11115936
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1549640.3
+    taxon_id: NCBITaxon:1549640
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29805
+    source_strain_identifiers: DSM:29805
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN11115936
     record_type: BIOSAMPLE
     source: GOLD
@@ -254,6 +320,7 @@ source_attestations:
   source_label: Sapientia aquatica
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:5635
   source_label: Sapientia aquatica
@@ -282,7 +349,7 @@ source_attestations:
   assertion_count: 1
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

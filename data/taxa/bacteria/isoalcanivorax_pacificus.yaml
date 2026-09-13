@@ -59,6 +59,12 @@ synonyms:
   source: LPSN
   source_id: lpsn:789261
 - synonym_text: Alcanivorax pacificus
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Alcanivorax pacificus Lai et al. 2011
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Isoalcanivorax pacificus (Lai et al. 2011) Rai et al. 2023
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 xrefs:
@@ -71,18 +77,19 @@ strains:
   source_id: bacdive:168928
   designation: W11-5
   culture_collection_ids:
-  - kgmicrobe.strain:CCTCC-AB-208236
+  - kgmicrobe.strain:CCTCC-AB%20208236
   - kgmicrobe.strain:LMG-25514
-  - kgmicrobe.strain:MCCC-1A00474
+  - kgmicrobe.strain:MCCC%201A00474
   is_type_strain: true
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_000299335
     source: BACDIVE
     source_id: bacdive:168928
     source_reference_id: '66792'
-    assembly_level: contig
-    assembly_name: Isoalcanivorax pacificus W11-5
+    assembly_level: complete
+    assembly_name: ASM29933v2 assembly for Isoalcanivorax pacificus W11-5
     taxon_id: NCBITaxon:391936
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_000299335
     source: GOLD
     source_id: gold:Ga0016356
@@ -94,7 +101,25 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0020576
     source_project_id: gold:Gp0020576
+  - assembly_id: ncbi.assembly:GCA_000299335.2
+    source: BV_BRC
+    source_id: patric:391936.16
+    assembly_name: Alcanivorax pacificus W11-5
+    taxon_id: NCBITaxon:391936
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:LMG-25514
+    source_strain_identifiers: LMG:25514
+    source_strain_field: culture_collection
   genome_records:
+  - genome_id: img.taxon:2537562047
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:168928
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM29933v2 assembly for Isoalcanivorax pacificus W11-5
+    taxon_id: NCBITaxon:391936
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2537562047
     source_database: img
     source: GOLD
@@ -107,15 +132,44 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0020576
     source_project_id: gold:Gp0020576
+  - genome_id: patric:391936.16
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:168928
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM29933v2 assembly for Isoalcanivorax pacificus W11-5
+    taxon_id: NCBITaxon:391936
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:391936.16
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:391936.16
+    genome_name: Alcanivorax pacificus W11-5
+    taxon_id: NCBITaxon:391936
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:LMG-25514
+    source_strain_identifiers: LMG:25514
+    source_strain_field: culture_collection
   - genome_id: patric:391936.3
     source_database: patric
     source: BACDIVE
     source_id: bacdive:168928
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
     genome_name: Alcanivorax pacificus W11-5
     taxon_id: NCBITaxon:391936
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
+  - record_id: bioproject:PRJNA88101
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:391936.16
+    taxon_id: NCBITaxon:391936
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:LMG-25514
+    source_strain_identifiers: LMG:25514
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA88101
     record_type: BIOPROJECT
     source: GOLD
@@ -127,6 +181,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0020576
     source_project_id: gold:Gp0020576
+  - record_id: biosample:SAMN02471159
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:391936.16
+    taxon_id: NCBITaxon:391936
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:LMG-25514
+    source_strain_identifiers: LMG:25514
+    source_strain_field: culture_collection
   - record_id: gold:Ga0016356
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -206,6 +269,7 @@ source_attestations:
   source_label: Isoalcanivorax pacificus
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:36023
   source_label: Isoalcanivorax pacificus
@@ -224,7 +288,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

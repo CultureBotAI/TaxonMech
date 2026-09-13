@@ -29,7 +29,7 @@ lineage:
   taxon_label: Yersiniaceae
   rank: FAMILY
 - taxon_id: NCBITaxon:629
-  taxon_label: Yersinia <enterobacteria>
+  taxon_label: Yersinia
   rank: GENUS
 grounding_status: EXACT
 mapping_status: SEEDED
@@ -94,7 +94,14 @@ taxonomy_mappings:
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 synonyms:
+- synonym_text: '"Bacterium enterocoliticum" Schleifstein and Coleman 1939'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: Bacterium enterocoliticum
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Yersinia enterocolitica (Schleifstein and Coleman 1939) Frederiksen
+    1964 (Approved Lists 1980)
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 xrefs:
@@ -116,16 +123,16 @@ strains:
   - kgmicrobe.strain:CCUG-12369
   - kgmicrobe.strain:CECT-4315
   - kgmicrobe.strain:CIP-80.27
-  - kgmicrobe.strain:CNY-161
+  - kgmicrobe.strain:CNY%20161
   - kgmicrobe.strain:DSM-4780
   - kgmicrobe.strain:ICMP-15678
   - kgmicrobe.strain:JCM-7577
   - kgmicrobe.strain:LMG-7899
   - kgmicrobe.strain:NBRC-105693
   - kgmicrobe.strain:NCTC-12982
-  - kgmicrobe.strain:NRIC-0819
+  - kgmicrobe.strain:NRIC%200819
   - kgmicrobe.strain:VTT-E-97838
-  - kgmicrobe.strain:WDCM-00038
+  - kgmicrobe.strain:WDCM%2000038
   is_type_strain: true
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_000755055
@@ -133,8 +140,9 @@ strains:
     source_id: bacdive:5210
     source_reference_id: '67770'
     assembly_level: scaffold
-    assembly_name: Yersinia enterocolitica ATCC 9610
+    assembly_name: YEG_1 assembly for Yersinia enterocolitica ATCC 9610
     taxon_id: NCBITaxon:630
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_000755055.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_000755055.1
@@ -145,13 +153,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-9610
     source_strain_identifiers: ATCC 9610
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_000755055.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000755055.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: YEG_1
+    taxon_id: NCBITaxon:630
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9610
+    source_strain_identifiers: strain=ATCC 9610
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_001598735
     source: BACDIVE
     source_id: bacdive:5210
     source_reference_id: '67770'
     assembly_level: contig
-    assembly_name: Yersinia enterocolitica subsp. enterocolitica NBRC 105693
+    assembly_name: ASM159873v1 assembly for Yersinia enterocolitica subsp. enterocolitica
+      NBRC 105693
     taxon_id: NCBITaxon:1218100
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_001598735.1
     source: GOLD
     source_id: gold:Ga0128683
@@ -184,13 +205,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-105693
     source_strain_identifiers: NBRC 105693
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_001598735.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001598735.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM159873v1
+    taxon_id: NCBITaxon:1218100
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-105693
+    source_strain_identifiers: strain=NBRC 105693
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_901472495
     source: BACDIVE
     source_id: bacdive:5210
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Yersinia enterocolitica subsp. enterocolitica NCTC12982
+    assembly_name: 32868_C01 assembly for Yersinia enterocolitica subsp. enterocolitica
+      NCTC12982
     taxon_id: NCBITaxon:150052
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_901472495.1
+    source: BV_BRC
+    source_id: patric:150052.14
+    assembly_name: Yersinia enterocolitica subsp. enterocolitica strain NCTC12982
+    taxon_id: NCBITaxon:150052
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-12982
+    source_strain_identifiers: NCTC:12982
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_901472495.1
     source: GOLD
     source_id: gold:Ga0668055
@@ -214,6 +257,24 @@ strains:
     source_organism_id: gold:Go0267136
     source_project_id: gold:Gp0818760
   - assembly_id: ncbi.assembly:GCF_000755055.1
+    source: BV_BRC
+    source_id: patric:630.33
+    assembly_name: Yersinia enterocolitica strain ATCC 9610
+    taxon_id: NCBITaxon:630
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9610
+    source_strain_identifiers: ATCC 9610
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCF_000755055.1
+    source: BV_BRC
+    source_id: patric:630.33
+    assembly_name: Yersinia enterocolitica strain ATCC 9610
+    taxon_id: NCBITaxon:630
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9610
+    source_strain_identifiers: ATCC:9610
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCF_000755055.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_000755055.1
     assembly_level: Scaffold
@@ -223,6 +284,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-9610
     source_strain_identifiers: ATCC 9610
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_000755055.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000755055.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: YEG_1
+    taxon_id: NCBITaxon:630
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9610
+    source_strain_identifiers: strain=ATCC 9610
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCF_001598735.1
+    source: BV_BRC
+    source_id: patric:1218100.3
+    assembly_name: Yersinia enterocolitica subsp. enterocolitica NBRC 105693
+    taxon_id: NCBITaxon:1218100
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-105693
+    source_strain_identifiers: NBRC 105693
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCF_001598735.1
+    source: BV_BRC
+    source_id: patric:1218100.3
+    assembly_name: Yersinia enterocolitica subsp. enterocolitica NBRC 105693
+    taxon_id: NCBITaxon:1218100
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-105693
+    source_strain_identifiers: NBRC:105693
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCF_001598735.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_001598735.1
@@ -233,6 +323,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-105693
     source_strain_identifiers: NBRC 105693
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_001598735.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001598735.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM159873v1
+    taxon_id: NCBITaxon:1218100
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-105693
+    source_strain_identifiers: strain=NBRC 105693
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_000755055
     source: STRAININFO
     source_id: straininfo.strain:10385
@@ -298,14 +399,25 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-105693
     source_strain_identifiers: NBRC 105693
     source_strain_field: ncbi_strain_identifiers
+  - genome_id: img.taxon:2609460127
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:5210
+    source_reference_id: '67770'
+    assembly_level: scaffold
+    genome_name: YEG_1 assembly for Yersinia enterocolitica ATCC 9610
+    taxon_id: NCBITaxon:630
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2731957712
     source_database: img
     source: BACDIVE
     source_id: bacdive:5210
-    source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Yersinia enterocolitica enterocolitica NBRC 105693
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: ASM159873v1 assembly for Yersinia enterocolitica subsp. enterocolitica
+      NBRC 105693
     taxon_id: NCBITaxon:1218100
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2731957712
     source_database: img
     source: GOLD
@@ -330,6 +442,16 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0024032
     source_project_id: gold:Gp0024032
+  - genome_id: img.taxon:8118010593
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:5210
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: 32868_C01 assembly for Yersinia enterocolitica subsp. enterocolitica
+      NCTC12982
+    taxon_id: NCBITaxon:150052
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:8118010593
     source_database: img
     source: GOLD
@@ -358,27 +480,100 @@ strains:
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5210
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: ASM159873v1 assembly for Yersinia enterocolitica subsp. enterocolitica
+      NBRC 105693
+    taxon_id: NCBITaxon:1218100
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1218100.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1218100.3
     genome_name: Yersinia enterocolitica subsp. enterocolitica NBRC 105693
     taxon_id: NCBITaxon:1218100
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NBRC-105693
+    source_strain_identifiers: NBRC 105693
+    source_strain_field: strain
+  - genome_id: patric:1218100.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1218100.3
+    genome_name: Yersinia enterocolitica subsp. enterocolitica NBRC 105693
+    taxon_id: NCBITaxon:1218100
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NBRC-105693
+    source_strain_identifiers: NBRC:105693
+    source_strain_field: culture_collection
   - genome_id: patric:150052.14
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5210
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: 32868_C01 assembly for Yersinia enterocolitica subsp. enterocolitica
+      NCTC12982
+    taxon_id: NCBITaxon:150052
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:150052.14
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:150052.14
     genome_name: Yersinia enterocolitica subsp. enterocolitica strain NCTC12982
     taxon_id: NCBITaxon:150052
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-12982
+    source_strain_identifiers: NCTC:12982
+    source_strain_field: culture_collection
   - genome_id: patric:630.33
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5210
-    source_reference_id: '66792'
-    assembly_level: complete
+    source_reference_id: '67770'
+    assembly_level: scaffold
+    genome_name: YEG_1 assembly for Yersinia enterocolitica ATCC 9610
+    taxon_id: NCBITaxon:630
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:630.33
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:630.33
     genome_name: Yersinia enterocolitica strain ATCC 9610
     taxon_id: NCBITaxon:630
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-9610
+    source_strain_identifiers: ATCC 9610
+    source_strain_field: strain
+  - genome_id: patric:630.33
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:630.33
+    genome_name: Yersinia enterocolitica strain ATCC 9610
+    taxon_id: NCBITaxon:630
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-9610
+    source_strain_identifiers: ATCC:9610
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJDB273
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1218100.3
+    taxon_id: NCBITaxon:1218100
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-105693
+    source_strain_identifiers: NBRC 105693
+    source_strain_field: strain
+  - record_id: bioproject:PRJDB273
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1218100.3
+    taxon_id: NCBITaxon:1218100
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-105693
+    source_strain_identifiers: NBRC:105693
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJDB273
     record_type: BIOPROJECT
     source: GOLD
@@ -401,6 +596,25 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0024032
     source_project_id: gold:Gp0024032
+  - record_id: bioproject:PRJDB273
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001598735.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1218100
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NBRC-105693
+    source_strain_identifiers: strain=NBRC 105693
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:150052.14
+    taxon_id: NCBITaxon:150052
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-12982
+    source_strain_identifiers: NCTC:12982
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
     source: GOLD
@@ -441,6 +655,72 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-105693
     source_strain_identifiers: NBRC 105693
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000755055.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:630
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-9610
+    source_strain_identifiers: strain=ATCC 9610
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001598735.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1218100
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NBRC-105693
+    source_strain_identifiers: strain=NBRC 105693
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA243535
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:630.33
+    taxon_id: NCBITaxon:630
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9610
+    source_strain_identifiers: ATCC 9610
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA243535
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:630.33
+    taxon_id: NCBITaxon:630
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9610
+    source_strain_identifiers: ATCC:9610
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA243535
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000755055.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:630
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-9610
+    source_strain_identifiers: strain=ATCC 9610
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00046906
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1218100.3
+    taxon_id: NCBITaxon:1218100
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-105693
+    source_strain_identifiers: NBRC 105693
+    source_strain_field: strain
+  - record_id: biosample:SAMD00046906
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1218100.3
+    taxon_id: NCBITaxon:1218100
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-105693
+    source_strain_identifiers: NBRC:105693
+    source_strain_field: culture_collection
   - record_id: biosample:SAMD00046906
     record_type: BIOSAMPLE
     source: GOLD
@@ -472,6 +752,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-105693
     source_strain_identifiers: NBRC 105693
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMD00046906
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001598735.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1218100
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NBRC-105693
+    source_strain_identifiers: strain=NBRC 105693
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00046906
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001598735.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1218100
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NBRC-105693
+    source_strain_identifiers: strain=NBRC 105693
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMEA2742606
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:150052.14
+    taxon_id: NCBITaxon:150052
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-12982
+    source_strain_identifiers: NCTC:12982
+    source_strain_field: culture_collection
   - record_id: biosample:SAMEA2742606
     record_type: BIOSAMPLE
     source: GOLD
@@ -496,6 +805,24 @@ strains:
     source_project_id: gold:Gp0818760
   - record_id: biosample:SAMN02887290
     record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:630.33
+    taxon_id: NCBITaxon:630
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9610
+    source_strain_identifiers: ATCC 9610
+    source_strain_field: strain
+  - record_id: biosample:SAMN02887290
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:630.33
+    taxon_id: NCBITaxon:630
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-9610
+    source_strain_identifiers: ATCC:9610
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN02887290
+    record_type: BIOSAMPLE
     source: GTDB
     source_id: gtdb.genome:RS_GCF_000755055.1
     taxon_id: NCBITaxon:630
@@ -503,6 +830,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-9610
     source_strain_identifiers: ATCC 9610
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN02887290
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000755055.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:630
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-9610
+    source_strain_identifiers: strain=ATCC 9610
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02887290
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000755055.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:630
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-9610
+    source_strain_identifiers: strain=ATCC 9610
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0128683
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -2342,13 +2689,52 @@ strains:
   - kgmicrobe.strain:CCUG-8233
   - kgmicrobe.strain:CECT-8206
   - kgmicrobe.strain:CIP-81.41
-  - kgmicrobe.strain:CNY-134
+  - kgmicrobe.strain:CNY%20134
   - kgmicrobe.strain:DSM-9676
-  - kgmicrobe.strain:IP-134
+  - kgmicrobe.strain:IP%20134
   - kgmicrobe.strain:LMG-15558
   - kgmicrobe.strain:NCTC-13629
-  - kgmicrobe.strain:WDCM-00039
+  - kgmicrobe.strain:WDCM%2000039
+  genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_900635745.1
+    source: BV_BRC
+    source_id: patric:150052.13
+    assembly_name: Yersinia enterocolitica subsp. enterocolitica strain NCTC13629
+    taxon_id: NCBITaxon:150052
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-13629
+    source_strain_identifiers: NCTC:13629
+    source_strain_field: culture_collection
+  genome_records:
+  - genome_id: patric:150052.13
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:150052.13
+    genome_name: Yersinia enterocolitica subsp. enterocolitica strain NCTC13629
+    taxon_id: NCBITaxon:150052
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-13629
+    source_strain_identifiers: NCTC:13629
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:150052.13
+    taxon_id: NCBITaxon:150052
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-13629
+    source_strain_identifiers: NCTC:13629
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMEA2742608
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:150052.13
+    taxon_id: NCBITaxon:150052
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-13629
+    source_strain_identifiers: NCTC:13629
+    source_strain_field: culture_collection
   - record_id: gold:Go0267255
     record_type: GOLD_ORGANISM
     source: GOLD
@@ -2693,10 +3079,10 @@ strains:
   - kgmicrobe.strain:ATCC-700823
   - kgmicrobe.strain:CECT-754
   - kgmicrobe.strain:CIP-81.42
-  - kgmicrobe.strain:CNY-383
+  - kgmicrobe.strain:CNY%20383
   - kgmicrobe.strain:DSM-9499
   - kgmicrobe.strain:NCTC-11174
-  - kgmicrobe.strain:WDCM-00215
+  - kgmicrobe.strain:WDCM%2000215
   related_records:
   - record_id: gold:Go0267600
     record_type: GOLD_ORGANISM
@@ -2984,7 +3370,7 @@ strains:
   - kgmicrobe.strain:CIP-111053
   - kgmicrobe.strain:DSM-27689
   - kgmicrobe.strain:NCTC-10598
-  - kgmicrobe.strain:WDCM-00160
+  - kgmicrobe.strain:WDCM%2000160
   related_records:
   - record_id: gold:Go0267278
     record_type: GOLD_ORGANISM
@@ -3214,15 +3600,17 @@ strains:
   - kgmicrobe.strain:CECT-9144
   - kgmicrobe.strain:CIP-106945
   - kgmicrobe.strain:DSM-13030
-  - kgmicrobe.strain:WDCM-00216
+  - kgmicrobe.strain:WDCM%2000216
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_000253175
     source: BACDIVE
     source_id: bacdive:5217
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Yersinia enterocolitica subsp. palearctica Y11
+    assembly_name: ASM25317v1 assembly for Yersinia enterocolitica subsp. palearctica
+      Y11
     taxon_id: NCBITaxon:930944
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_000253175.1
     source: GOLD
     source_id: gold:Ga0031538
@@ -3237,6 +3625,16 @@ strains:
   genome_records:
   - genome_id: img.taxon:651053079
     source_database: img
+    source: BACDIVE
+    source_id: bacdive:5217
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM25317v1 assembly for Yersinia enterocolitica subsp. palearctica
+      Y11
+    taxon_id: NCBITaxon:930944
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:651053079
+    source_database: img
     source: GOLD
     source_id: gold:Ga0031538
     genome_name: Yersinia enterocolitica palearctica sv. O:3 bt. 4 Y11
@@ -3247,22 +3645,16 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0009923
     source_project_id: gold:Gp0009923
-  - genome_id: patric:930944.24
-    source_database: patric
-    source: BACDIVE
-    source_id: bacdive:5217
-    source_reference_id: '66792'
-    assembly_level: plasmid
-    genome_name: Yersinia enterocolitica subsp. palearctica Y11
-    taxon_id: NCBITaxon:930944
   - genome_id: patric:930944.6
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5217
     source_reference_id: '66792'
     assembly_level: complete
-    genome_name: Yersinia enterocolitica subsp. palearctica Y11
+    genome_name: ASM25317v1 assembly for Yersinia enterocolitica subsp. palearctica
+      Y11
     taxon_id: NCBITaxon:930944
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: bioproject:PRJEA60483
     record_type: BIOPROJECT
@@ -3648,7 +4040,7 @@ strains:
   culture_collection_ids:
   - kgmicrobe.strain:ATCC-27729
   - kgmicrobe.strain:CCUG-33055
-  - kgmicrobe.strain:CIP-Ye-2705
+  - kgmicrobe.strain:CIP%20Ye%202705
   - kgmicrobe.strain:NCTC-10938
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_900706915
@@ -3656,8 +4048,18 @@ strains:
     source_id: bacdive:147209
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Yersinia enterocolitica NCTC10938
+    assembly_name: 32407_B01 assembly for Yersinia enterocolitica NCTC10938
     taxon_id: NCBITaxon:630
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900706915.1
+    source: BV_BRC
+    source_id: patric:630.253
+    assembly_name: Yersinia enterocolitica strain NCTC10938
+    taxon_id: NCBITaxon:630
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10938
+    source_strain_identifiers: NCTC:10938
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_900706915.1
     source: GOLD
     source_id: gold:Ga0566212
@@ -3707,10 +4109,30 @@ strains:
     source: BACDIVE
     source_id: bacdive:147209
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: 32407_B01 assembly for Yersinia enterocolitica NCTC10938
+    taxon_id: NCBITaxon:630
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:630.253
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:630.253
     genome_name: Yersinia enterocolitica strain NCTC10938
     taxon_id: NCBITaxon:630
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-10938
+    source_strain_identifiers: NCTC:10938
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:630.253
+    taxon_id: NCBITaxon:630
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10938
+    source_strain_identifiers: NCTC:10938
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
     source: GOLD
@@ -3733,6 +4155,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0636170
     source_project_id: gold:Gp0653782
+  - record_id: biosample:SAMEA2709014
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:630.253
+    taxon_id: NCBITaxon:630
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10938
+    source_strain_identifiers: NCTC:10938
+    source_strain_field: culture_collection
   - record_id: biosample:SAMEA2709014
     record_type: BIOSAMPLE
     source: GOLD
@@ -4250,7 +4681,7 @@ strains:
   source_id: bacdive:134634
   culture_collection_ids:
   - kgmicrobe.strain:CIP-107202
-  - kgmicrobe.strain:IP-102
+  - kgmicrobe.strain:IP%20102
   related_records:
   - record_id: gold:Go0267276
     record_type: GOLD_ORGANISM
@@ -4315,7 +4746,7 @@ strains:
   source_id: bacdive:137323
   culture_collection_ids:
   - kgmicrobe.strain:CIP-106676
-  - kgmicrobe.strain:IP-885
+  - kgmicrobe.strain:IP%20885
   related_records:
   - record_id: gold:Go0267108
     record_type: GOLD_ORGANISM
@@ -4454,8 +4885,18 @@ strains:
     source_id: bacdive:147414
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Yersinia enterocolitica NCTC10460
+    assembly_name: 42166_E01 assembly for Yersinia enterocolitica NCTC10460
     taxon_id: NCBITaxon:630
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900460595.1
+    source: BV_BRC
+    source_id: patric:630.238
+    assembly_name: Yersinia enterocolitica strain NCTC10460
+    taxon_id: NCBITaxon:630
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10460
+    source_strain_identifiers: NCTC:10460
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_900460595.1
     source: GOLD
     source_id: gold:Ga0353864
@@ -4502,6 +4943,15 @@ strains:
   genome_records:
   - genome_id: img.taxon:8020652478
     source_database: img
+    source: BACDIVE
+    source_id: bacdive:147414
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: 42166_E01 assembly for Yersinia enterocolitica NCTC10460
+    taxon_id: NCBITaxon:630
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:8020652478
+    source_database: img
     source: GOLD
     source_id: gold:Ga0353864
     genome_name: Yersinia enterocolitica sv. Biotype 3 NCTC 10460
@@ -4529,10 +4979,30 @@ strains:
     source: BACDIVE
     source_id: bacdive:147414
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: 42166_E01 assembly for Yersinia enterocolitica NCTC10460
+    taxon_id: NCBITaxon:630
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:630.238
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:630.238
     genome_name: Yersinia enterocolitica strain NCTC10460
     taxon_id: NCBITaxon:630
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-10460
+    source_strain_identifiers: NCTC:10460
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:630.238
+    taxon_id: NCBITaxon:630
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10460
+    source_strain_identifiers: NCTC:10460
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
     source: GOLD
@@ -4555,6 +5025,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0500098
     source_project_id: gold:Gp0384132
+  - record_id: biosample:SAMEA3597595
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:630.238
+    taxon_id: NCBITaxon:630
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10460
+    source_strain_identifiers: NCTC:10460
+    source_strain_field: culture_collection
   - record_id: biosample:SAMEA3597595
     record_type: BIOSAMPLE
     source: GOLD
@@ -4794,7 +5273,7 @@ strains:
   designation: CARE_00001
   culture_collection_ids:
   - kgmicrobe.strain:CIP-111957
-  - kgmicrobe.strain:IP-42547
+  - kgmicrobe.strain:IP%2042547
   related_records:
   - record_id: straininfo.deposit:921354
     record_type: STRAININFO_DEPOSIT
@@ -4840,7 +5319,7 @@ strains:
   designation: CARE_00002
   culture_collection_ids:
   - kgmicrobe.strain:CIP-111958
-  - kgmicrobe.strain:IP-41598
+  - kgmicrobe.strain:IP%2041598
   related_records:
   - record_id: straininfo.deposit:921819
     record_type: STRAININFO_DEPOSIT
@@ -4886,7 +5365,7 @@ strains:
   designation: CARE_00003
   culture_collection_ids:
   - kgmicrobe.strain:CIP-111959
-  - kgmicrobe.strain:IP-42863
+  - kgmicrobe.strain:IP%2042863
   related_records:
   - record_id: straininfo.deposit:922087
     record_type: STRAININFO_DEPOSIT
@@ -4932,7 +5411,7 @@ strains:
   designation: CARE_00004
   culture_collection_ids:
   - kgmicrobe.strain:CIP-111960
-  - kgmicrobe.strain:IP-39727
+  - kgmicrobe.strain:IP%2039727
   related_records:
   - record_id: straininfo.deposit:922468
     record_type: STRAININFO_DEPOSIT
@@ -4978,7 +5457,7 @@ strains:
   designation: CARE_00007
   culture_collection_ids:
   - kgmicrobe.strain:CIP-111963
-  - kgmicrobe.strain:IP-41365
+  - kgmicrobe.strain:IP%2041365
   related_records:
   - record_id: straininfo.deposit:920647
     record_type: STRAININFO_DEPOSIT
@@ -5024,7 +5503,7 @@ strains:
   designation: CARE_00008
   culture_collection_ids:
   - kgmicrobe.strain:CIP-111964
-  - kgmicrobe.strain:IP-42937
+  - kgmicrobe.strain:IP%2042937
   related_records:
   - record_id: straininfo.deposit:921660
     record_type: STRAININFO_DEPOSIT
@@ -5070,7 +5549,7 @@ strains:
   designation: CARE_00009
   culture_collection_ids:
   - kgmicrobe.strain:CIP-111965
-  - kgmicrobe.strain:IP-39720
+  - kgmicrobe.strain:IP%2039720
   related_records:
   - record_id: straininfo.deposit:921731
     record_type: STRAININFO_DEPOSIT
@@ -5116,7 +5595,7 @@ strains:
   designation: CARE_00010
   culture_collection_ids:
   - kgmicrobe.strain:CIP-111966
-  - kgmicrobe.strain:IP-43284
+  - kgmicrobe.strain:IP%2043284
   related_records:
   - record_id: straininfo.deposit:921686
     record_type: STRAININFO_DEPOSIT
@@ -5162,7 +5641,7 @@ strains:
   designation: CARE_00011
   culture_collection_ids:
   - kgmicrobe.strain:CIP-111967
-  - kgmicrobe.strain:IP-42251
+  - kgmicrobe.strain:IP%2042251
   related_records:
   - record_id: straininfo.deposit:920791
     record_type: STRAININFO_DEPOSIT
@@ -5208,7 +5687,7 @@ strains:
   designation: CARE_00012
   culture_collection_ids:
   - kgmicrobe.strain:CIP-111968
-  - kgmicrobe.strain:IP-39976
+  - kgmicrobe.strain:IP%2039976
   related_records:
   - record_id: straininfo.deposit:921194
     record_type: STRAININFO_DEPOSIT
@@ -5254,7 +5733,7 @@ strains:
   designation: CARE_00015
   culture_collection_ids:
   - kgmicrobe.strain:CIP-111971
-  - kgmicrobe.strain:IP-39285
+  - kgmicrobe.strain:IP%2039285
   related_records:
   - record_id: straininfo.deposit:921919
     record_type: STRAININFO_DEPOSIT
@@ -5300,7 +5779,7 @@ strains:
   designation: CARE_00013
   culture_collection_ids:
   - kgmicrobe.strain:CIP-111969
-  - kgmicrobe.strain:IP-42503
+  - kgmicrobe.strain:IP%2042503
   related_records:
   - record_id: straininfo.deposit:921846
     record_type: STRAININFO_DEPOSIT
@@ -5346,7 +5825,7 @@ strains:
   designation: CARE_00014
   culture_collection_ids:
   - kgmicrobe.strain:CIP-111970
-  - kgmicrobe.strain:IP-39890
+  - kgmicrobe.strain:IP%2039890
   related_records:
   - record_id: straininfo.deposit:921076
     record_type: STRAININFO_DEPOSIT
@@ -5392,7 +5871,7 @@ strains:
   designation: CARE_00016
   culture_collection_ids:
   - kgmicrobe.strain:CIP-111972
-  - kgmicrobe.strain:IP-05342
+  - kgmicrobe.strain:IP%2005342
   related_records:
   - record_id: straininfo.deposit:921149
     record_type: STRAININFO_DEPOSIT
@@ -5438,7 +5917,7 @@ strains:
   designation: CARE_00017
   culture_collection_ids:
   - kgmicrobe.strain:CIP-111973
-  - kgmicrobe.strain:IP-39779
+  - kgmicrobe.strain:IP%2039779
   related_records:
   - record_id: straininfo.deposit:921097
     record_type: STRAININFO_DEPOSIT
@@ -5484,7 +5963,7 @@ strains:
   designation: CARE_00021
   culture_collection_ids:
   - kgmicrobe.strain:CIP-111977
-  - kgmicrobe.strain:IP-35935
+  - kgmicrobe.strain:IP%2035935
   related_records:
   - record_id: straininfo.deposit:921775
     record_type: STRAININFO_DEPOSIT
@@ -5530,7 +6009,7 @@ strains:
   designation: CARE_00022
   culture_collection_ids:
   - kgmicrobe.strain:CIP-111978
-  - kgmicrobe.strain:IP-36813
+  - kgmicrobe.strain:IP%2036813
   related_records:
   - record_id: straininfo.deposit:920863
     record_type: STRAININFO_DEPOSIT
@@ -10152,6 +10631,7 @@ source_attestations:
   source_label: Yersinia enterocolitica
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:785221
   source_label: Yersinia enterocolitica
@@ -10190,7 +10670,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

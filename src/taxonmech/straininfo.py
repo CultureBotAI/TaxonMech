@@ -22,7 +22,7 @@ import yaml
 
 from taxonmech.atb import sha256
 from taxonmech.extract import describe_output, write_tsv
-from taxonmech.genome_sources import normalize_culture_identifier
+from taxonmech.genome_sources import culture_curie_key, normalize_culture_identifier
 from taxonmech.straininfo_links import (
     ASSEMBLY,
     ASSEMBLY_COLUMNS,
@@ -146,7 +146,7 @@ def output_info(path: Path) -> dict:
 
 def source_metadata(path: Path) -> dict:
     source = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(source, dict) or source.get("format_version") != 1:
+    if not isinstance(source, dict) or source.get("format_version") not in {1, 2}:
         raise ValueError("StrainInfo snapshot metadata has an unsupported format")
     stamp = source.get("captured_at")
     if not isinstance(stamp, str):
@@ -163,6 +163,11 @@ def source_metadata(path: Path) -> dict:
             raise ValueError(f"StrainInfo snapshot requires positive {key}")
     if source["candidate_count"] > source["catalog_count"]:
         raise ValueError("StrainInfo candidate count exceeds the complete search catalog")
+    if source["format_version"] == 2 and (
+        source.get("selection") != "all" or source.get("inputs") != []
+        or source["candidate_count"] != source["catalog_count"]
+    ):
+        raise ValueError("StrainInfo complete capture must cover the entire census without local selection")
     record = source.get("records")
     if (
         not isinstance(record, dict)
@@ -284,7 +289,7 @@ def generate(
     if sha256(source_path) != config["snapshot_sha256"]:
         raise ValueError("StrainInfo snapshot differs from the configured SHA256")
     source = source_metadata(source_path)
-    if source.get("inputs") != before:
+    if source["format_version"] == 1 and source.get("inputs") != before:
         raise ValueError("StrainInfo snapshot was selected against different strain/authority inventories")
     if {k: v for k, v in source["records"].items() if k != "rows"} != file_info(records_path):
         raise ValueError("StrainInfo projected source records differ from their pinned snapshot")
@@ -329,7 +334,7 @@ def _manifest(directory: Path) -> dict:
     if (
         manifest.get("extracted_at") != source["captured_at"]
         or manifest["source"].get("snapshot_sha256") != sha256(directory / "SOURCE.json")
-        or manifest.get("inputs") != source.get("inputs")
+        or (source["format_version"] == 1 and manifest.get("inputs") != source.get("inputs"))
     ):
         raise ValueError("StrainInfo manifest disagrees with its captured primary source")
     outputs = manifest.get("outputs")
@@ -416,7 +421,7 @@ def _link(row: dict, *, assembly: bool) -> tuple[str, dict]:
         or row["source_strain_identifiers"] != evidence["deposit_designation"]
         or not row["matched_strain_id"].startswith("kgmicrobe.strain:")
         or not (key := normalize_culture_identifier(evidence["deposit_designation"]))
-        or normalize_culture_identifier(row["matched_strain_id"].split(":", 1)[1]) != key
+        or culture_curie_key(row["matched_strain_id"]) != key
     ):
         raise ValueError("StrainInfo link has inconsistent strain/deposit evidence")
     if "bacdive_reference_conflict" in evidence and type(evidence["bacdive_reference_conflict"]) is not bool:

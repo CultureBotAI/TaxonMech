@@ -15,35 +15,44 @@ import sys
 from collections import Counter
 from pathlib import Path
 
+from taxonmech.corpus import load_records
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 TAXA_DIR = REPO_ROOT / "data" / "taxa"
 
 
-def load_records(root: Path = TAXA_DIR) -> list[tuple[Path, dict]]:
-    import yaml
-
-    out = []
-    for path in sorted(root.rglob("*.yaml")):
-        with path.open(encoding="utf-8") as fh:
-            out.append((path, yaml.load(fh, Loader=getattr(yaml, "CSafeLoader", yaml.SafeLoader))))
-    return out
-
-
 def summarize(records: list[tuple[Path, dict]]) -> dict:
-    by_domain = Counter(d.get("taxon_domain") for _, d in records)
-    by_rank = Counter(d.get("rank") for _, d in records)
-    by_status = Counter(d.get("mapping_status") for _, d in records)
-    by_source = Counter(a["source"] for _, d in records for a in d.get("source_attestations") or [])
-    sources_per_record = Counter(len({a["source"] for a in d.get("source_attestations") or []})
-                                 for _, d in records)
-    strain_total = sum(d.get("strain_count") or 0 for _, d in records)
-    strains_listed = sum(len(d.get("strains") or []) for _, d in records)
+    by_domain, by_rank, by_status, by_source, sources_per_record = (Counter() for _ in range(5))
+    strain_total = strains_listed = with_type_strain = with_lpsn = with_correct_name = 0
+    with_gtdb = genomes = with_graphs = edges = capped = total = 0
+    assembly_pairs, genome_record_pairs, related_pairs, distinct_strains = (set() for _ in range(4))
     # Listed strain coverage only. Deduplicate when a strain occurs in both
     # a species and a descendant record, or the source cites it twice.
-    assembly_pairs = {(s["strain_id"], a["assembly_id"]) for _, d in records
-                      for s in d.get("strains") or [] for a in s.get("genome_assemblies") or []}
-    genome_record_pairs = {(s["strain_id"], g["genome_id"]) for _, d in records
-                           for s in d.get("strains") or [] for g in s.get("genome_records") or []}
+    for _, doc in records:
+        total += 1
+        by_domain[doc.get("taxon_domain")] += 1
+        by_rank[doc.get("rank")] += 1
+        by_status[doc.get("mapping_status")] += 1
+        attestations, strains = doc.get("source_attestations") or [], doc.get("strains") or []
+        by_source.update(a["source"] for a in attestations)
+        sources_per_record[len({a["source"] for a in attestations})] += 1
+        strain_total += doc.get("strain_count") or 0
+        strains_listed += len(strains)
+        capped += (doc.get("strain_count") or 0) > len(strains)
+        with_type_strain += any(s.get("is_type_strain") for s in strains)
+        with_lpsn += bool(doc.get("nomenclature"))
+        with_correct_name += any(n.get("is_correct_name") for n in doc.get("nomenclature") or [])
+        with_gtdb += bool(doc.get("taxonomy_mappings"))
+        genomes += sum(a.get("assertion_count") or 0 for a in attestations if a.get("source") == "GTDB")
+        with_graphs += bool(doc.get("causal_graphs"))
+        edges += sum(len(g.get("edges") or []) for g in doc.get("causal_graphs") or [])
+        for strain in strains:
+            sid = strain["strain_id"]
+            distinct_strains.add(sid)
+            assembly_pairs.update((sid, a["assembly_id"]) for a in strain.get("genome_assemblies") or [])
+            genome_record_pairs.update((sid, g["genome_id"]) for g in strain.get("genome_records") or [])
+            related_pairs.update((sid, r["record_type"], r["record_id"])
+                                 for r in strain.get("related_records") or [])
     # NCBI first. These are identifier counts within each database; records
     # in different databases are not collapsed into biological genomes.
     pairs_by_database = {
@@ -59,9 +68,6 @@ def summarize(records: list[tuple[Path, dict]]) -> dict:
                    "identifiers": len({gid for _, gid in pairs})}
         for database, pairs in pairs_by_database.items()
     }
-    related_pairs = {(s["strain_id"], link["record_type"], link["record_id"])
-                     for _, d in records for s in d.get("strains") or []
-                     for link in s.get("related_records") or []}
     related_coverage = {
         kind: {"strain_links": len(pairs), "strains": len({sid for sid, _ in pairs}),
                "identifiers": len({rid for _, rid in pairs})}
@@ -69,21 +75,10 @@ def summarize(records: list[tuple[Path, dict]]) -> dict:
                      "STRAININFO_STRAIN", "STRAININFO_DEPOSIT", "NUCLEOTIDE_SEQUENCE")
         if (pairs := {(sid, rid) for sid, record_type, rid in related_pairs if record_type == kind})
     }
-    with_type_strain = sum(1 for _, d in records
-                           if any(s.get("is_type_strain") for s in d.get("strains") or []))
-    with_lpsn = sum(1 for _, d in records if d.get("nomenclature"))
-    with_correct_name = sum(1 for _, d in records
-                            if any(n.get("is_correct_name") for n in d.get("nomenclature") or []))
-    with_gtdb = sum(1 for _, d in records if d.get("taxonomy_mappings"))
     # The GTDB attestation carries the primary (identity) species' genomes; the
     # pooled broadMatch species in taxonomy_mappings belong to other taxa.
-    genomes = sum(a.get("assertion_count") or 0 for _, d in records
-                  for a in d.get("source_attestations") or [] if a.get("source") == "GTDB")
-    with_graphs = sum(1 for _, d in records if d.get("causal_graphs"))
-    edges = sum(len(g.get("edges") or []) for _, d in records for g in d.get("causal_graphs") or [])
-    capped = sum(1 for _, d in records if (d.get("strain_count") or 0) > len(d.get("strains") or []))
     return {
-        "total": len(records),
+        "total": total,
         "by_domain": dict(by_domain.most_common()),
         "by_rank": dict(by_rank.most_common()),
         "by_status": dict(by_status.most_common()),
@@ -91,7 +86,7 @@ def summarize(records: list[tuple[Path, dict]]) -> dict:
         "sources_per_record": dict(sorted(sources_per_record.items())),
         "strain_total": strain_total,
         "strains_listed": strains_listed,
-        "distinct_strains_listed": len({s["strain_id"] for _, d in records for s in d.get("strains") or []}),
+        "distinct_strains_listed": len(distinct_strains),
         "listed_strains_with_assemblies": len({sid for sid, _ in assembly_pairs}),
         "listed_strain_assembly_links": len(assembly_pairs),
         "listed_assemblies": len({aid for _, aid in assembly_pairs}),
@@ -185,6 +180,8 @@ def main(argv: list[str] | None = None) -> int:
                     sum(a.get("assertion_count") or 0 for a in d.get("source_attestations") or []
                         if a.get("source") == "GTDB"),
                 ])
+    if hasattr(records, "close"):
+        records.close()
     return 0
 
 

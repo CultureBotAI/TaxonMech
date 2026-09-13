@@ -67,6 +67,13 @@ taxonomy_mappings:
   genome_count: 17
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
+synonyms:
+- synonym_text: Ruegeria marisrubri Zhang et al. 2017
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Ruegeria sp. ZGT118
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Ruegeria_marisrubri
 - lpsn:796249
@@ -78,7 +85,7 @@ strains:
   source_id: bacdive:158547
   designation: ZGT118
   culture_collection_ids:
-  - kgmicrobe.strain:ACCC-19862
+  - kgmicrobe.strain:ACCC%2019862
   - kgmicrobe.strain:JCM-19519
   is_type_strain: true
   medium_count: 1
@@ -88,8 +95,18 @@ strains:
     source_id: bacdive:158547
     source_reference_id: '67770'
     assembly_level: contig
-    assembly_name: Ruegeria marisrubri ZGT118
+    assembly_name: ASM150759v1 assembly for Ruegeria marisrubri ZGT118
     taxon_id: NCBITaxon:1685379
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_001507595.1
+    source: BV_BRC
+    source_id: patric:1685379.3
+    assembly_name: Ruegeria sp. ZGT118
+    taxon_id: NCBITaxon:1685379
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-19519
+    source_strain_identifiers: JCM:19519
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_001507595.1
     source: GOLD
     source_id: gold:Ga0126115
@@ -106,10 +123,11 @@ strains:
     source_database: img
     source: BACDIVE
     source_id: bacdive:158547
-    source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Ruegeria marisrubri ZGT118
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: ASM150759v1 assembly for Ruegeria marisrubri ZGT118
     taxon_id: NCBITaxon:1685379
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2724679120
     source_database: img
     source: GOLD
@@ -126,11 +144,31 @@ strains:
     source_database: patric
     source: BACDIVE
     source_id: bacdive:158547
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: ASM150759v1 assembly for Ruegeria marisrubri ZGT118
+    taxon_id: NCBITaxon:1685379
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1685379.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1685379.3
     genome_name: Ruegeria sp. ZGT118
     taxon_id: NCBITaxon:1685379
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-19519
+    source_strain_identifiers: JCM:19519
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJNA307148
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1685379.3
+    taxon_id: NCBITaxon:1685379
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-19519
+    source_strain_identifiers: JCM:19519
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA307148
     record_type: BIOPROJECT
     source: GOLD
@@ -142,6 +180,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0139557
     source_project_id: gold:Gp0144638
+  - record_id: biosample:SAMN04376034
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1685379.3
+    taxon_id: NCBITaxon:1685379
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-19519
+    source_strain_identifiers: JCM:19519
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN04376034
     record_type: BIOSAMPLE
     source: GOLD
@@ -194,6 +241,7 @@ source_attestations:
   source_label: Ruegeria marisrubri
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:796249
   source_label: Ruegeria marisrubri
@@ -218,7 +266,7 @@ source_attestations:
   assertion_count: 2
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

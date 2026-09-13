@@ -15,6 +15,7 @@ from collections import defaultdict
 from collections.abc import Iterator
 from functools import lru_cache
 from pathlib import Path
+from urllib.parse import unquote
 
 GTDB_METADATA_FIELDS = (
     "accession", "ncbi_strain_identifiers", "ncbi_genbank_assembly_accession",
@@ -98,6 +99,23 @@ def normalize_culture_identifier(identifier: str) -> str:
     return f"{authority}-{accession}"
 
 
+def culture_curie_key(identifier: str) -> str:
+    """Decode CURIE escaping without changing any accession characters.
+
+    Source fields are not URI-decoded: a source's literal percent sign is
+    encoded as %25 in the inventory, distinct from an encoded space (%20).
+    """
+    if not identifier.startswith("kgmicrobe.strain:"):
+        return ""
+    local = identifier.split(":", 1)[1]
+    if re.search(r"%(?![0-9a-fA-F]{2})", local):
+        return ""
+    try:
+        return normalize_culture_identifier(unquote(local, errors="strict"))
+    except UnicodeError:
+        return ""
+
+
 def index_culture_identifiers(strain_rows: list[dict]) -> dict[str, set[tuple[str, str]]]:
     """Index normalized deposits to strain IDs and their exact source CURIEs."""
     deposits: dict[str, set[tuple[str, str]]] = defaultdict(set)
@@ -107,8 +125,7 @@ def index_culture_identifiers(strain_rows: list[dict]) -> dict[str, set[tuple[st
                 continue
             if not deposit.startswith("kgmicrobe.strain:") or not deposit.split(":", 1)[1]:
                 raise ValueError(f"invalid culture-collection CURIE in strain inventory: {deposit!r}")
-            local = deposit.split(":", 1)[1]
-            if key := normalize_culture_identifier(local):
+            if key := culture_curie_key(deposit):
                 deposits[key].add((strain["strain_id"], deposit))
     return dict(deposits)
 

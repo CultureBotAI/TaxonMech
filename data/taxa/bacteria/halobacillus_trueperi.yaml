@@ -70,6 +70,13 @@ taxonomy_mappings:
   genome_count: 3
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
+synonyms:
+- synonym_text: Halobacillus sp. D8
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Halobacillus trueperi Spring et al. 1996
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - lpsn:776699
 genetic_code: 11
@@ -84,6 +91,23 @@ strains:
   - kgmicrobe.strain:DSM-10404
   is_type_strain: true
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_003386945
+    source: BACDIVE
+    source_id: bacdive:1342
+    source_reference_id: '66792'
+    assembly_level: contig
+    assembly_name: ASM338694v1 assembly for Halobacillus trueperi KCTC 3686
+    taxon_id: NCBITaxon:156205
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_003386945.1
+    source: BV_BRC
+    source_id: patric:156205.9
+    assembly_name: Halobacillus trueperi strain KCTC 3686
+    taxon_id: NCBITaxon:156205
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-10404
+    source_strain_identifiers: DSM:10404
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_003386945.1
     source: GOLD
     source_id: gold:Ga0347929
@@ -107,6 +131,15 @@ strains:
     source_organism_id: gold:Go0027449
     source_project_id: gold:Gp0380498
   genome_records:
+  - genome_id: img.taxon:2837540175
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:1342
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: ASM338694v1 assembly for Halobacillus trueperi KCTC 3686
+    taxon_id: NCBITaxon:156205
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2837540175
     source_database: img
     source: GOLD
@@ -136,10 +169,30 @@ strains:
     source: BACDIVE
     source_id: bacdive:1342
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM338694v1 assembly for Halobacillus trueperi KCTC 3686
+    taxon_id: NCBITaxon:156205
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:156205.9
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:156205.9
     genome_name: Halobacillus trueperi strain KCTC 3686
     taxon_id: NCBITaxon:156205
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-10404
+    source_strain_identifiers: DSM:10404
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJNA484849
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:156205.9
+    taxon_id: NCBITaxon:156205
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-10404
+    source_strain_identifiers: DSM:10404
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA484849
     record_type: BIOPROJECT
     source: GOLD
@@ -162,6 +215,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0027449
     source_project_id: gold:Gp0380498
+  - record_id: biosample:SAMN09770327
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:156205.9
+    taxon_id: NCBITaxon:156205
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-10404
+    source_strain_identifiers: DSM:10404
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN09770327
     record_type: BIOSAMPLE
     source: GOLD
@@ -599,6 +661,7 @@ source_attestations:
   source_label: Halobacillus trueperi
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:776699
   source_label: Halobacillus trueperi
@@ -638,7 +701,7 @@ source_attestations:
   assertion_count: 32
   assertion_unit: TRAIT_ASSERTION
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested
