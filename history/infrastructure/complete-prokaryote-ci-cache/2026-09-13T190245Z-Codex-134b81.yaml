@@ -1,0 +1,29 @@
+history_version: 1
+target:
+  kind: infrastructure
+  path: .github/workflows/main.yaml
+  slug: complete-prokaryote-ci-cache
+session:
+  id: 2026-09-13T190245Z-Codex-134b81
+  timestamp: '2026-09-13T19:02:45Z'
+  actors:
+  - type: ai_agent
+    name: Codex
+    model: GPT-6
+    agent_tool: Codex
+links:
+  issues:
+  - https://github.com/CultureBotAI/TaxonMech/issues/55
+  prs:
+  - https://github.com/CultureBotAI/TaxonMech/pull/54
+  urls:
+  - https://github.com/CultureBotAI/TaxonMech/actions/runs/34776259823
+events:
+- type: EDIT
+  outcome: changed
+  summary: Bound CI cache discovery to the project lockfile
+  details: PR 54 CI reproduced a setup-uv call-stack overflow while its default recursive
+    dependency globs traversed the 700110-file checkout. The workflow now sets cache-dependency-glob
+    to the root uv.lock used by uv sync. This preserves dependency-based cache invalidation
+    and avoids corpus traversal. The complete CI run will verify the setup step and all quality
+    gates.
