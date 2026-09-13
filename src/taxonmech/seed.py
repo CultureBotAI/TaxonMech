@@ -13,8 +13,8 @@ thousands). The *committed corpus* is the subset named in
 it was added. That file is the reviewable, explicit answer to "which taxa are
 records", and ``scripts/verify_corpus.py`` proves the corpus is exactly what
 the inventories plus that scope produce. ``scripts/propose_scope.py`` ranks
-candidates for it. ``--all`` seeds the whole attested universe instead, for a
-future full corpus.
+candidates for it. ``--all`` bypasses the scope for exploratory runs; production
+expansion updates the scope first so the reproduction gate sees the same records.
 
 Usage
 -----

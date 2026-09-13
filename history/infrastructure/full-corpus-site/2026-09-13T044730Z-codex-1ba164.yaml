@@ -1,0 +1,35 @@
+history_version: 1
+target:
+  kind: infrastructure
+  path: scripts/render_pages.py
+  slug: full-corpus-site
+session:
+  id: 2026-09-13T044730Z-codex-1ba164
+  timestamp: '2026-09-13T04:47:30Z'
+  actors:
+  - type: ai_agent
+    name: codex
+    model: gpt-6
+    agent_tool: codex
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - rendering
+  - statistics
+  - publication
+  - tests
+  summary: Support complete-scope browsing within the Pages publication limit
+  details: Profiling every eligible record with the prior templates produced 1,332,132,591
+    bytes of taxon HTML before browser indexes and source-evidence assets, exceeding the GitHub
+    Pages published-site limit. Added 200-record static pages and complete-corpus search,
+    removed the quadratic type-strain lookup, compressed large autoescaped strain tables without
+    dropping assertions, and compressed StrainInfo detail batches. Vendored the fflate 0.8.2
+    UMD bundle and MIT license after verifying npm package integrity; native gzip and fallback
+    decoding, malformed data, deposit boundaries, escaped source labels and search beyond
+    the first page pass focused tests. The Pages workflow stages only the site and root redirect
+    after successful main QC, with a size gate and current-main check. Distinct listed strain
+    IDs are reported separately from repeated species/descendant occurrences. Retained safe
+    YAML parsing through the C loader when available. Verifier mutation tests now use isolated
+    generated fixtures and cover tampered, missing and extra records; the full-corpus reproduction
+    gate remains. Site link validation includes decompressed tables and fragment-bearing URLs.

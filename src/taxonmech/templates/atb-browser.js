@@ -47,7 +47,7 @@
       detail.append(element("p", "Loading assembly metadata and source evidence…"));
       try {
         if (!detailCache.has(row.detail_path)) {
-          const response = await fetch(row.detail_path);
+          const response = await fetch(row.detail_path, {cache: "no-cache"});
           if (!response.ok) throw new Error("Assembly detail request failed");
           detailCache.set(row.detail_path, await response.json());
         }
@@ -139,7 +139,7 @@
   previous.addEventListener("click", () => { page--; render(); });
   next.addEventListener("click", () => { page++; render(); });
   window.addEventListener("hashchange", selectHash);
-  fetch("atb-index.json").then(response => {
+  fetch("atb-index.json", {cache: "no-cache"}).then(response => {
     if (!response.ok) throw new Error("Index request failed");
     return response.json();
   }).then(data => {

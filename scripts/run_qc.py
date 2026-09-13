@@ -51,6 +51,11 @@ COMMANDS = [
         "The committed, published site must not drift from the corpus that generated it.",
     ),
     (
+        "site publication budget",
+        [sys.executable, "scripts/build_pages_artifact.py", "--check"],
+        "Publish only the site and reject artifacts beyond the GitHub Pages size budget.",
+    ),
+    (
         "corpus report",
         [sys.executable, "scripts/corpus_report.py"],
         "Exercise cross-corpus analyses and finish with the live curation summary.",

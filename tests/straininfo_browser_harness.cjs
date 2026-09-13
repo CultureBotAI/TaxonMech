@@ -3,6 +3,7 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const vm = require("node:vm");
 const path = require("node:path");
+const zlib = require("node:zlib");
 class Node {
   constructor(tag = "div") { this.tag = tag; this.children = []; this.events = {}; this.value = ""; }
   append(...items) { this.children.push(...items); }
@@ -14,23 +15,31 @@ class Node {
 }
 const nodes = new Map();
 const get = id => { if (!nodes.has(id)) nodes.set(id, new Node()); return nodes.get(id); };
-global.document = {getElementById: get, querySelector: get, createElement: tag => new Node(tag)};
+global.document = {getElementById: get, querySelector: get, querySelectorAll: () => [],
+  createElement: tag => new Node(tag)};
 const events = {};
 global.window = {location: {href: "https://example.org/TaxonMech/pages/straininfo.html", hash: ""},
   addEventListener: (name, fn) => { events[name] = fn; }};
 const compression = process.argv[4];
 if (compression !== "json") window.DecompressionStream = global.DecompressionStream;
+window.fflate = require(path.join(path.dirname(process.argv[2]), "vendor/fflate-0.8.2.js"));
 const data = JSON.parse(fs.readFileSync(process.argv[3], "utf8"));
 const fetched = [];
-global.fetch = async url => {
+global.fetch = async (url, options) => {
   fetched.push(url);
-  if (url.endsWith(".gz")) return new Response(compression === "broken_gzip" ? "corrupt" :
-    fs.readFileSync(path.join(path.dirname(process.argv[3]), url)));
-  if (url === "straininfo-index.json") return {ok: true, json: async () => data};
-  const batch = JSON.parse(fs.readFileSync(path.join(path.dirname(process.argv[3]), url), "utf8"));
+  // A returning browser has the previous index, whose plain detail files
+  // no longer exist after the format migration. Revalidation gets the new index.
+  const index = options?.cache === "no-cache" ? data : {...data, records: data.records.map(row => (
+    {...row, detail_path: row.detail_path.replace(/\.gz$/, "")}))};
+  if (url === "straininfo-index.json.gz") return new Response(compression === "broken_gzip" ? "corrupt" :
+    zlib.gzipSync(JSON.stringify(index)));
+  if (url === "straininfo-index.json") return {ok: true, json: async () => index};
+  assert.equal(options?.cache, "no-cache", "Detail requests must revalidate cached batches");
+  const batch = JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(path.dirname(process.argv[3]), url))));
   batch[1].url = "javascript:alert('unsafe')";
-  return {ok: true, json: async () => batch};
+  return new Response(zlib.gzipSync(JSON.stringify(batch)));
 };
+vm.runInThisContext(fs.readFileSync(path.join(path.dirname(process.argv[2]), "compressed-data.js"), "utf8"));
 vm.runInThisContext(fs.readFileSync(process.argv[2], "utf8"));
 function descendants(node) { return [node, ...node.children.filter(x => x instanceof Node).flatMap(descendants)]; }
 function search(value) { get("straininfo-query").value = value; get("straininfo-query").events.input(); }
@@ -54,6 +63,9 @@ setImmediate(async () => {
   events.hashchange();
   await settled();
   const detail = get("straininfo-detail");
+  for (let tries = 0; tries < 200 && !detail.textContent.includes("Record-version DOI"); tries++) {
+    await new Promise(resolve => setTimeout(resolve, 5));
+  }
   assert.match(detail.textContent, /Record-version DOI/);
   assert.match(detail.textContent, /Original <sequence>/);
   assert.match(detail.textContent, /Existing TaxonMech strain associations/);
@@ -74,7 +86,7 @@ setImmediate(async () => {
   assert(!descendants(detail).some(x => x.href && x.href.startsWith("javascript:")));
   const indexRequests = compression === "json" ? ["straininfo-index.json"] :
     compression === "gzip" ? ["straininfo-index.json.gz"] : ["straininfo-index.json.gz", "straininfo-index.json"];
-  assert.deepEqual(fetched, [...indexRequests, "straininfo-details/0000.json"]);
+  assert.deepEqual(fetched, [...indexRequests, "straininfo-details/0000.json.gz"]);
   window.location.hash = "#straininfo.strain:999";
   events.hashchange();
   assert.match(detail.textContent, /not in the linked snapshot browser/);

@@ -54,7 +54,7 @@ straininfo-query *args:
 
 # Rank candidate taxa for curation/seed_scope.tsv. Prints; never writes the file.
 propose-scope *args:
-    uv run python scripts/propose_scope.py {{args}}
+    uv run python scripts/propose_scope.py "$@"
 
 # Dry-run the seed: report the scope and what WOULD be written. No files touched.
 seed *args:

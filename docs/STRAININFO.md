@@ -85,7 +85,7 @@ metadata, omitting unrelated phenotype fields.
 | `data/straininfo/MANIFEST.yaml` | Source pin, input/output hashes, coverage and exclusion counts |
 | `pages/straininfo-index.json` | Search identifiers and pointers to detail batches |
 | `pages/straininfo-index.json.gz` | Deterministic compressed copy used by browsers with native stream decompression; plain JSON remains the fallback |
-| `pages/straininfo-details/*.json` | Lazy-loaded source assertions, native links and separately labeled existing TaxonMech genome associations |
+| `pages/straininfo-details/*.json.gz` | Losslessly compressed source assertions, native links and separately labeled existing TaxonMech genome associations, loaded on selection |
 
 The component joins existing strains by `strain_id`; it does not create
 BacDive strains or change taxonomic classification. Its inventories are

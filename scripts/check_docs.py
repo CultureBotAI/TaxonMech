@@ -43,11 +43,14 @@ def render_block() -> str:
         lines.append(f"| {d[0]} | {d[1]} | | {r[0]} | {r[1]} | | {c[0]} | {c[1]} |")
     lines += [
         "",
-        f"{s['strain_total']:,} BacDive strains are classified under these taxa "
-        f"({s['strains_listed']:,} listed in records; {s['records_with_capped_listing']} records cap their "
-        f"listing). {s['with_type_strain']} records list a type strain, "
+        f"These records contain {s['strain_total']:,} BacDive strain classifications "
+        f"and {s['strains_listed']:,} listed strain occurrences, representing "
+        f"{s['distinct_strains_listed']:,} distinct listed strains. Species and descendant records "
+        f"can list the same strain; {s['records_with_capped_listing']} records cap their "
+        f"listing. {s['with_type_strain']} records list a type strain, "
         f"{s['with_correct_name']} carry an LPSN correct name, {s['with_gtdb']} map to GTDB "
-        f"({s['genomes']:,} genomes), and {s['with_graphs']} carry causal graphs "
+        f"({s['genomes']:,} genomes summed across record attestations, not deduplicated), "
+        f"and {s['with_graphs']} carry causal graphs "
         f"({s['edges']} evidence-backed edges).",
         "",
         f"**{s['listed_strains_with_any_genome']:,} listed strains have genome identifier links.** "
