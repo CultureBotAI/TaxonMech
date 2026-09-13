@@ -12,6 +12,7 @@ import pytest
 from taxonmech import extract, seed
 from taxonmech.report import summarize
 from taxonmech.validation.write_validated import validate_taxon
+from tests.rendered_taxon import rendered_taxon
 from tests.test_seed import _inventory
 
 SID = "kgmicrobe.strain:bacdive_5"
@@ -286,7 +287,7 @@ def test_rendered_strain_links_prioritize_ncbi_and_preserve_other_database_ids(
     monkeypatch.setattr(renderer, "load_records", lambda: [(path, doc)])
     output = tmp_path / "site"
     renderer.render(output)
-    html = (output / "taxa" / "bacteria" / "fixture.html").read_text(encoding="utf-8")
+    html = rendered_taxon(output, doc["identifier"])
     parsed = _StrainTableParser(SID)
     parsed.feed(html)
     assert parsed.headers.index("NCBI genome assemblies") < parsed.headers.index("Other genome records")
