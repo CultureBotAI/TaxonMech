@@ -25,11 +25,16 @@ if (compression !== "json") window.DecompressionStream = global.DecompressionStr
 window.fflate = require(path.join(path.dirname(process.argv[2]), "vendor/fflate-0.8.2.js"));
 const data = JSON.parse(fs.readFileSync(process.argv[3], "utf8"));
 const fetched = [];
-global.fetch = async url => {
+global.fetch = async (url, options) => {
   fetched.push(url);
+  // A returning browser has the previous index, whose plain detail files
+  // no longer exist after the format migration. Revalidation gets the new index.
+  const index = options?.cache === "no-cache" ? data : {...data, records: data.records.map(row => (
+    {...row, detail_path: row.detail_path.replace(/\.gz$/, "")}))};
   if (url === "straininfo-index.json.gz") return new Response(compression === "broken_gzip" ? "corrupt" :
-    fs.readFileSync(path.join(path.dirname(process.argv[3]), url)));
-  if (url === "straininfo-index.json") return {ok: true, json: async () => data};
+    zlib.gzipSync(JSON.stringify(index)));
+  if (url === "straininfo-index.json") return {ok: true, json: async () => index};
+  assert.equal(options?.cache, "no-cache", "Detail requests must revalidate cached batches");
   const batch = JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(path.dirname(process.argv[3]), url))));
   batch[1].url = "javascript:alert('unsafe')";
   return new Response(zlib.gzipSync(JSON.stringify(batch)));

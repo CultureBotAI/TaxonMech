@@ -152,13 +152,13 @@
   async function loadIndex() {
     if (typeof window.DecompressionStream === "function") {
       try {
-        const response = await fetch("straininfo-index.json.gz");
+        const response = await fetch("straininfo-index.json.gz", {cache: "no-cache"});
         if (!response.ok || !response.body) throw new Error("Compressed index request failed");
         const stream = response.body.pipeThrough(new window.DecompressionStream("gzip"));
         return await new Response(stream).json();
       } catch (_) { /* Plain JSON also supports older browsers and incomplete deployments. */ }
     }
-    const response = await fetch("straininfo-index.json");
+    const response = await fetch("straininfo-index.json", {cache: "no-cache"});
     if (!response.ok) throw new Error("Index request failed");
     return response.json();
   }

@@ -1,0 +1,35 @@
+history_version: 1
+target:
+  kind: infrastructure
+  path: scripts/render_pages.py
+  slug: browser-cache-migration
+session:
+  id: 2026-09-13T050403Z-codex-b33f52
+  timestamp: '2026-09-13T05:04:03Z'
+  actors:
+  - type: ai_agent
+    name: codex
+    model: gpt-6
+    agent_tool: codex
+links:
+  issues:
+  - https://github.com/CultureBotAI/TaxonMech/issues/50
+  prs:
+  - https://github.com/CultureBotAI/TaxonMech/pull/45
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - rendering
+  - browser
+  - tests
+  summary: Revalidate browser data and version scripts across the gzip migration
+  details: 'A separate adversarial pass reproduced a returning-browser failure: the old StrainInfo
+    search index points SI-ID14277 at straininfo-details/0081.json, while the expanded build
+    places it in straininfo-details/0082.json.gz. The previous plain batch is absent. Added
+    a regression that supplies stale index pointers unless the fetch revalidates; all three
+    native/plain/broken-gzip cases failed before the fix. Browser data requests now use cache
+    no-cache, and generated script URLs carry a deterministic digest of browser code. This
+    refreshes decoder code and index pointers while retaining cache revalidation rather than
+    disabling storage. Added a digest-change regression. Original source assertions and generated
+    YAML are unchanged.'

@@ -17,6 +17,7 @@ import base64
 import csv
 import filecmp
 import gzip
+import hashlib
 import io
 import json
 import shutil
@@ -311,6 +312,8 @@ def render(out_dir: Path) -> None:
                       trim_blocks=True, lstrip_blocks=True)
     env.filters["curie_url"] = curie_url
     env.filters["external_url"] = external_url
+    env.globals["script_version"] = hashlib.sha256(b"".join(
+        path.read_bytes() for path in sorted(TEMPLATES_DIR.glob("*.js")))).hexdigest()[:16]
 
     records = load_records()
     by_domain: dict[str, list[dict]] = defaultdict(list)

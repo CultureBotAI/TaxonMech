@@ -238,6 +238,23 @@ def test_compressed_taxon_table_retains_anchors_and_escapes_source_text(componen
             'data/taxa/bacteria/fixture.yaml"') in page
 
 
+def test_generated_script_urls_change_when_browser_code_changes(component, tmp_path, monkeypatch):
+    import re
+
+    _, _, renderer, _ = component
+    templates = tmp_path / "templates"
+    shutil.copytree(renderer.TEMPLATES_DIR, templates)
+    monkeypatch.setattr(renderer, "TEMPLATES_DIR", templates)
+    renderer.render(tmp_path / "first")
+    script = templates / "compressed-data.js"
+    script.write_text(script.read_text() + "\n// Updated browser code.\n")
+    renderer.render(tmp_path / "second")
+    versions = [re.search(r'compressed-data.js\?v=([a-f0-9]{16})',
+                          (tmp_path / output / "taxa/bacteria/fixture.html").read_text()).group(1)
+                for output in ("first", "second")]
+    assert versions[0] != versions[1]
+
+
 def test_taxon_links_and_report_keep_record_types_separate(component, tmp_path):
     from tests.test_genome_records import _StrainTableParser
 

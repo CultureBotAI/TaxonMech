@@ -11,7 +11,7 @@
     return new TextDecoder("utf-8", {fatal: true}).decode(window.fflate.gunzipSync(bytes));
   }
   async function loadJSON(path) {
-    const response = await fetch(path);
+    const response = await fetch(path, {cache: "no-cache"});
     if (!response.ok) throw new Error("Data request failed: " + response.status);
     if (!path.endsWith(".gz")) return response.json();
     return JSON.parse(await decodeGzip(new Uint8Array(await response.arrayBuffer())));
