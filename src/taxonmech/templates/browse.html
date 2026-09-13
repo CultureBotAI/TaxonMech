@@ -5,12 +5,23 @@
 {% if lede %}
 <p class="lede">{{ lede }}</p>
 {% endif %}
-<table>
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>Genomes</th><th>Status</th></tr></thead>
+<section id="taxon-browser" data-domain="{{ pagination.domain }}" data-typed="{{ 'true' if pagination.typed else 'false' }}" data-page="{{ pagination.page }}" data-size="{{ pagination.size }}" data-root="{{ root }}">
+<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
+<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<p id="taxon-status" role="status">{{ pagination.total }} records · page {{ pagination.page }} of {{ pagination.pages }}.</p>
+<nav id="taxon-static-pages" aria-label="Record pages">
+{% if pagination.previous %}<a href="{{ pagination.previous }}">Previous</a>{% endif %}
+{% if pagination.next %}<a href="{{ pagination.next }}">Next</a>{% endif %}
+</nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<table id="taxon-results">
+<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
 <tbody>
 {% for r in records %}
 <tr><td><a href="{{ root }}{{ r.page }}"><em>{{ r.label }}</em></a></td><td><code>{{ r.identifier }}</code></td><td>{{ r.rank or "" }}</td><td>{{ r.domain }}</td><td>{{ r.sources | length }}</td><td>{{ r.strain_count }}</td><td>{{ r.genomes }}</td><td>{{ r.status }}</td></tr>
 {% endfor %}
 </tbody>
 </table>
+</section>
+<script defer src="{{ root }}taxon-browser.js"></script>
 {% endblock %}

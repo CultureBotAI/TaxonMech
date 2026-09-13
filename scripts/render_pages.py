@@ -13,9 +13,11 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import base64
 import csv
 import filecmp
 import gzip
+import io
 import json
 import shutil
 import sys
@@ -32,11 +34,21 @@ PAGES_DIR = REPO_ROOT / "pages"
 ATB_DIR = REPO_ROOT / "data" / "atb"
 STRAININFO_DIR = REPO_ROOT / "data" / "straininfo"
 STRAINS_TSV = REPO_ROOT / "data" / "raw" / "bacdive_strains.tsv"
+BROWSE_PAGE_SIZE = 200
+STRAIN_HTML_THRESHOLD = 32_000
+
+
+def gzip_bytes(payload: bytes) -> bytes:
+    """Deterministic gzip, including its header across supported Python versions."""
+    buffer = io.BytesIO()
+    with gzip.GzipFile(filename="", mode="wb", fileobj=buffer, mtime=0) as compressed:
+        compressed.write(payload)
+    return buffer.getvalue()
 
 DOMAIN_BLURB = {
     "BACTERIA": "Taxa under NCBITaxon:2 — the bulk of the cultured, named prokaryotes.",
     "ARCHAEA": "Taxa under NCBITaxon:2157.",
-    "EUKARYOTA": "Microbial eukaryotes with strain or name records in the sources.",
+    "EUKARYOTA": "Eukaryotic taxa attested by the sources, including taxa without BacDive strains.",
     "VIRUSES": "Viral taxa the sources attest.",
     "OTHER": "Taxa whose lineage places them under none of the four domains.",
 }
@@ -251,10 +263,10 @@ def write_straininfo_browser_data(overlap: dict, out_dir: Path) -> None:
     for group in overlap["records"]:
         encoded = json.dumps(group, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
         if batch and (size + len(encoded) + 1 > 1_000_000 or len(batch) >= 100):
-            (out_dir / f"straininfo-details/{number:04d}.json").write_bytes(
-                b"[" + b",".join(batch) + b"]\n")
+            (out_dir / f"straininfo-details/{number:04d}.json.gz").write_bytes(
+                gzip_bytes(b"[" + b",".join(batch) + b"]\n"))
             batch, size, number = [], 3, number + 1
-        detail_path = f"straininfo-details/{number:04d}.json"
+        detail_path = f"straininfo-details/{number:04d}.json.gz"
         batch.append(encoded)
         size += len(encoded) + 1
         search.append({key: group[key] for key in (
@@ -270,8 +282,8 @@ def write_straininfo_browser_data(overlap: dict, out_dir: Path) -> None:
                                      if link["record_type"] == "NUCLEOTIDE_SEQUENCE"}),
         })
     if batch:
-        (out_dir / f"straininfo-details/{number:04d}.json").write_bytes(
-            b"[" + b",".join(batch) + b"]\n")
+        (out_dir / f"straininfo-details/{number:04d}.json.gz").write_bytes(
+            gzip_bytes(b"[" + b",".join(batch) + b"]\n"))
     payload = (json.dumps(
         {"source": overlap["manifest"].get("source", {}), "records": search},
         ensure_ascii=False, separators=(",", ":")) + "\n").encode("utf-8")
@@ -315,6 +327,7 @@ def render(out_dir: Path) -> None:
             "page": f"taxa/{name}.html",
             "sources": sources,
             "strain_count": doc.get("strain_count") or 0,
+            "has_type_strain": any(s.get("is_type_strain") for s in doc.get("strains") or []),
             "genomes": sum(a.get("assertion_count") or 0 for a in doc.get("source_attestations") or []
                            if a.get("source") == "GTDB"),
         }
@@ -329,6 +342,9 @@ def render(out_dir: Path) -> None:
     shutil.copy(TEMPLATES_DIR / "theme-toggle.js", out_dir / "theme-toggle.js")
     shutil.copy(TEMPLATES_DIR / "atb-browser.js", out_dir / "atb-browser.js")
     shutil.copy(TEMPLATES_DIR / "straininfo-browser.js", out_dir / "straininfo-browser.js")
+    shutil.copy(TEMPLATES_DIR / "compressed-data.js", out_dir / "compressed-data.js")
+    shutil.copy(TEMPLATES_DIR / "taxon-browser.js", out_dir / "taxon-browser.js")
+    shutil.copytree(TEMPLATES_DIR / "vendor", out_dir / "vendor", dirs_exist_ok=True)
     straininfo = build_straininfo_index(records, STRAININFO_DIR, STRAINS_TSV, ATB_DIR)
     write_straininfo_browser_data(straininfo, out_dir)
     (out_dir / "straininfo.html").write_text(
@@ -343,30 +359,26 @@ def render(out_dir: Path) -> None:
         {"name": d, "count": len(v), "blurb": DOMAIN_BLURB.get(d, ""), "page": f"domain/{d.lower()}.html"}
         for d, v in sorted(by_domain.items())
     ]
-    strains = sum(e["strain_count"] for e in index)
-    with_type = sum(1 for _p, d in records if any(s.get("is_type_strain") for s in d.get("strains") or []))
+    strains = len({s["strain_id"] for _p, d in records for s in d.get("strains") or []})
+    typed = [e for e in index if e["has_type_strain"]]
+    with_type = len(typed)
     (out_dir / "index.html").write_text(
         env.get_template("index.html").render(domains=domains, total=len(index), strains=strains,
                                               with_type=with_type, root=""),
         encoding="utf-8")
-    (out_dir / "browse.html").write_text(env.get_template("browse.html").render(records=index, root=""),
-                                         encoding="utf-8")
-    typed = [e for e in index if any(s.get("is_type_strain") for _p, d in records
-                                     if d["identifier"] == e["identifier"] for s in d.get("strains") or [])]
-    (out_dir / "type-strains.html").write_text(
-        env.get_template("browse.html").render(
-            records=typed, root="", page_title="Taxa with a type strain", heading="Taxa with a type strain",
-            lede=f"{len(typed)} records list a BacDive strain whose deposit LPSN names as the type strain."),
-        encoding="utf-8")
-    (out_dir / "index.json").write_text(json.dumps(index, indent=1, ensure_ascii=False) + "\n",
-                                        encoding="utf-8")
+    write_browse_pages(env, out_dir, "browse", index)
+    write_browse_pages(env, out_dir, "type-strains", typed, typed=True,
+                       page_title="Taxa with a type strain", heading="Taxa with a type strain",
+                       lede=f"{len(typed)} records list a BacDive strain whose deposit "
+                            "LPSN names as the type strain.")
+    payload = (json.dumps(index, indent=1, ensure_ascii=False) + "\n").encode("utf-8")
+    (out_dir / "index.json").write_bytes(payload)
+    (out_dir / "index.json.gz").write_bytes(gzip_bytes(payload))
 
     for dom in domains:
-        p = out_dir / dom["page"]
-        p.parent.mkdir(parents=True, exist_ok=True)
-        p.write_text(
-            env.get_template("domain.html").render(domain=dom, records=by_domain[dom["name"]], root="../"),
-            encoding="utf-8")
+        write_browse_pages(env, out_dir, f"domain/{dom['name'].lower()}", by_domain[dom["name"]],
+                           root="../", domain=dom["name"], page_title=dom["name"].capitalize(),
+                           heading=dom["name"].capitalize(), lede=dom["blurb"])
 
     for path, doc in records:
         name = page_name(path)
@@ -375,10 +387,35 @@ def render(out_dir: Path) -> None:
         # The page sits at taxa/<domain>/<slug>.html; the directories below
         # pages/ are taxa/ plus every part of `name` except the file itself.
         depth = len(Path(name).parts)
+        root = "../" * depth
+        strains_html = env.get_template("taxon-strains.html").render(r=doc, root=root).encode("utf-8") \
+            if doc.get("strains") else b""
+        compressed = base64.b64encode(gzip_bytes(strains_html)).decode("ascii") \
+            if len(strains_html) > STRAIN_HTML_THRESHOLD else ""
         p.write_text(
-            env.get_template("taxon.html").render(r=doc, root="../" * depth,
+            env.get_template("taxon.html").render(r=doc, root=root, compressed_strains=compressed,
                                                   source_path=str(path.relative_to(REPO_ROOT))),
             encoding="utf-8")
+
+
+def write_browse_pages(env: Environment, out_dir: Path, stem: str, entries: list[dict],
+                       *, root: str = "", domain: str = "", typed: bool = False, **context) -> None:
+    """Bound static tables and retain a complete browse route without JavaScript."""
+    count = max(1, (len(entries) + BROWSE_PAGE_SIZE - 1) // BROWSE_PAGE_SIZE)
+
+    def name(number: int) -> str:
+        return f"{stem}{'-' + str(number) if number > 1 else ''}.html"
+
+    for number in range(1, count + 1):
+        path = out_dir / name(number)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        pagination = {"page": number, "pages": count, "total": len(entries),
+                      "previous": root + name(number - 1) if number > 1 else "",
+                      "next": root + name(number + 1) if number < count else "",
+                      "domain": domain, "typed": typed, "size": BROWSE_PAGE_SIZE}
+        path.write_text(env.get_template("browse.html").render(
+            records=entries[(number - 1) * BROWSE_PAGE_SIZE:number * BROWSE_PAGE_SIZE], root=root,
+            pagination=pagination, **context), encoding="utf-8")
 
 
 def _tree_differs(a: Path, b: Path) -> list[str]:

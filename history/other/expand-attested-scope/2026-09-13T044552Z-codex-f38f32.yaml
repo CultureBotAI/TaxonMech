@@ -1,0 +1,31 @@
+history_version: 1
+target:
+  kind: other
+  path: curation/seed_scope.tsv
+  slug: expand-attested-scope
+session:
+  id: 2026-09-13T044552Z-codex-f38f32
+  timestamp: '2026-09-13T04:45:52Z'
+  actors:
+  - type: ai_agent
+    name: codex
+    model: gpt-6
+    agent_tool: codex
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - scope
+  - identifiers
+  - strains
+  summary: Expand the explicit scope to every eligible attested inventory taxon
+  details: The user requested expansion beyond the original 100-species starter set. Retained
+    those original scope rows byte-for-byte and appended 63,599 candidates from the committed
+    inventories under the attested rule, including all eligible species-or-below ranks and
+    domains. The scope now contains 63,699 unique taxon identifiers; an independent inventory
+    ancestry walk reaches NCBITaxon:1 for every identifier. Added an uncapped proposal option
+    and preserved quoted empty rank arguments in the just recipe. The scope completeness test
+    passes. Ran the seed dry run, wrote and inspected the Lacticaseibacillus rhamnosus canary
+    through the closed-schema writer, then launched bulk generation. Original inventory assertions,
+    accession versions, strain identity rules and the 200-strain listing cap are retained.
+    Records remain SEEDED; this expansion is not human review of biological mappings.

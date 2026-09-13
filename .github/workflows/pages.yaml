@@ -1,0 +1,59 @@
+name: Publish Pages
+
+on:
+  workflow_run:
+    workflows: [Build and test]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (github.event_name == 'workflow_dispatch' ||
+       (github.event.workflow_run.conclusion == 'success' &&
+        github.event.workflow_run.event == 'push' &&
+        github.event.workflow_run.head_repository.full_name == github.repository))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+      - name: Publish only the current main commit
+        id: current
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          published_head=$(git rev-parse HEAD)
+          current_head=$(gh api "repos/$GITHUB_REPOSITORY/commits/main" --jq .sha)
+          if [ "$published_head" = "$current_head" ]; then
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Stage the site within the publication budget
+        if: steps.current.outputs.publish == 'true'
+        run: python3 scripts/build_pages_artifact.py --out "$RUNNER_TEMP/taxonmech-site"
+      - uses: actions/configure-pages@v5
+        if: steps.current.outputs.publish == 'true'
+      - uses: actions/upload-pages-artifact@v4
+        if: steps.current.outputs.publish == 'true'
+        with:
+          path: ${{ runner.temp }}/taxonmech-site
+      - uses: actions/deploy-pages@v4
+        if: steps.current.outputs.publish == 'true'
+        id: deployment

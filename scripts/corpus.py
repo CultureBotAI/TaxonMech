@@ -17,5 +17,5 @@ def load_records(root: Path = TAXA_DIR) -> list[tuple[Path, dict]]:
     out = []
     for path in sorted(root.rglob("*.yaml")):
         with path.open(encoding="utf-8") as fh:
-            out.append((path, yaml.safe_load(fh)))
+            out.append((path, yaml.load(fh, Loader=getattr(yaml, "CSafeLoader", yaml.SafeLoader))))
     return out

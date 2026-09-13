@@ -74,7 +74,7 @@ def validate_one(path: Path) -> list[dict]:
     validator = _get_validator()
     try:
         with path.open() as f:
-            instance = yaml.safe_load(f)
+            instance = yaml.load(f, Loader=getattr(yaml, "CSafeLoader", yaml.SafeLoader))
     except yaml.YAMLError as e:
         return [{"file": str(path), "category": "yaml_parse_error", "detail": "", "path": "",
                  "message": str(e).splitlines()[0][:300]}]

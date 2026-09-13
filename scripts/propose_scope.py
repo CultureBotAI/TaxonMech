@@ -17,6 +17,7 @@ Rules:
 
     python scripts/propose_scope.py --rule core --top 100 > curation/seed_scope.tsv
     python scripts/propose_scope.py --rule core --top 100 --append   # skip ids already in scope
+    python scripts/propose_scope.py --rule attested --rank '' --all --append
 """
 
 from __future__ import annotations
@@ -36,13 +37,19 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--rule", choices=("core", "attested"), default="core")
-    parser.add_argument("--top", type=int, default=100)
+    selection = parser.add_mutually_exclusive_group()
+    selection.add_argument("--top", type=int, default=100,
+                           help="Maximum candidates to propose (default: 100).")
+    selection.add_argument("--all", action="store_true",
+                           help="Propose every eligible candidate without a count limit.")
     parser.add_argument("--rank", default="SPECIES",
                         help="Restrict to this NCBI rank (default SPECIES; '' for any rank at or below "
                              "species). Taxa above species are never proposed.")
     parser.add_argument("--append", action="store_true", help="Omit identifiers already in the scope file.")
     parser.add_argument("--date", default=datetime.date.today().isoformat())
     args = parser.parse_args(argv)
+    if args.top < 1:
+        parser.error("--top must be positive; use --all for every eligible candidate")
 
     inv = load_inventory()
     existing = set(load_scope()) if args.append else set()
@@ -74,12 +81,13 @@ def main(argv: list[str] | None = None) -> int:
     # first data row the header (#10).
     if not args.append or not SCOPE_PATH.exists() or SCOPE_PATH.stat().st_size == 0:
         print("identifier\tadded\treason")
-    for _a, _b, _c, tid, label, n_sources, strain_count in candidates[: args.top]:
+    selected = candidates if args.all else candidates[:args.top]
+    for _a, _b, _c, tid, label, n_sources, strain_count in selected:
         reason = (f"{args.rule} rule: {label}, {n_sources} sources incl. NCBI, "
                   f"{strain_count} BacDive strains, LPSN correct name with type strain, GTDB mapping"
                   if args.rule == "core" else f"{args.rule} rule: {label}, {n_sources} sources incl. NCBI")
         print(f"{tid}\t{args.date}\t{reason}")
-    print(f"{min(len(candidates), args.top)} of {len(candidates)} candidates proposed", file=sys.stderr)
+    print(f"{len(selected)} of {len(candidates)} candidates proposed", file=sys.stderr)
     return 0
 
 

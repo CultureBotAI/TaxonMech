@@ -105,7 +105,7 @@ just validate-products # id<->label gate via OAK, for curator-added graph nodes
 
 `just qc` is authoritative: lint, README statistics, raw-data provenance,
 tests, history records, closed-schema validation, corpus reproduction,
-generated-site drift, corpus report. CI runs the same script.
+generated-site drift, publication size budget, corpus report. CI runs the same script.
 
 For an upstream refresh:
 

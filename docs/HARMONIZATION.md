@@ -182,9 +182,21 @@ universe.
 
 The **corpus** is the subset of the universe listed in
 `curation/seed_scope.tsv`. Every row carries the date and the rule or reason
-that put it there. `scripts/propose_scope.py` ranks candidates; a human
-decides what to append. This keeps "which taxa are records" an explicit,
+that put it there. The current scope includes every attested species-or-below
+taxon in the committed inventory, across domains and eligible ranks. The first
+100 starter entries retain their original dates and reasons; the expansion
+appends the remaining candidates under the `attested` rule.
+`just propose-scope --rule attested --rank '' --all --append` proposes all
+remaining eligible rows without a numeric cap. The list is reviewed before
+appending and regenerating. This keeps "which taxa are records" an explicit,
 reviewable diff rather than an emergent property of upstream refreshes.
+
+`seed-apply --all` alone does not update this scope and is not a production
+expansion workflow: the reproduction gate follows the committed scope file.
+Updating the scope first keeps generation, verification, reporting and the site
+on the same set of records. Species and descendant records can list the same
+strain; corpus strain occurrences are therefore reported separately from
+distinct listed strain identifiers.
 
 ## Reproducibility
 

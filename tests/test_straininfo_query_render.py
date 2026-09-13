@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import base64
 import gzip
 import importlib
 import json
@@ -200,7 +201,7 @@ def test_browser_is_uncapped_and_keeps_source_sequences_separate(component, tmp_
     assert index["records"][0]["assembly_ids"] == [
         "ncbi.assembly:GCA_000000001", "ncbi.assembly:GCA_000000002"]
     assert "GCA_000000009" not in json.dumps(index)
-    detail = json.loads((tmp_path / index["records"][0]["detail_path"]).read_text())
+    detail = json.loads(gzip.decompress((tmp_path / index["records"][0]["detail_path"]).read_bytes()))
     assert detail == overlap["records"]
     assert gzip.decompress((tmp_path / "straininfo-index.json.gz").read_bytes()) == (
         tmp_path / "straininfo-index.json").read_bytes()
@@ -215,8 +216,26 @@ def test_browser_detail_batches_respect_byte_limit(component, tmp_path):
     for group in overlap["records"]:
         group["source_metadata"]["large_description"] = "x" * 600_000
     renderer.write_straininfo_browser_data(overlap, tmp_path)
-    files = sorted((tmp_path / "straininfo-details").glob("*.json"))
-    assert len(files) == 2 and all(path.stat().st_size <= 1_000_000 for path in files)
+    files = sorted((tmp_path / "straininfo-details").glob("*.json.gz"))
+    assert len(files) == 2 and all(len(gzip.decompress(path.read_bytes())) <= 1_000_000 for path in files)
+
+
+def test_compressed_taxon_table_retains_anchors_and_escapes_source_text(component, tmp_path, monkeypatch):
+    import re
+
+    _, _, renderer, records = component
+    records[0][1]["strains"][0]["designation"] = "<script>alert(1)</script> Ω"
+    monkeypatch.setattr(renderer, "STRAIN_HTML_THRESHOLD", 0)
+    renderer.render(tmp_path / "site")
+    page = (tmp_path / "site/taxa/bacteria/fixture.html").read_text()
+    encoded = re.search(r'data-gzip-content="([^"]+)"', page).group(1)
+    table = gzip.decompress(base64.b64decode(encoded)).decode()
+    assert 'id="strains-kgmicrobe.strain-bacdive_1"' in table
+    assert "https://bacdive.dsmz.de/strain/1" in table
+    assert "&lt;script&gt;alert(1)&lt;/script&gt; Ω" in table
+    assert "<script>" not in table
+    assert ('href="https://github.com/CultureBotAI/TaxonMech/blob/main/'
+            'data/taxa/bacteria/fixture.yaml"') in page
 
 
 def test_taxon_links_and_report_keep_record_types_separate(component, tmp_path):

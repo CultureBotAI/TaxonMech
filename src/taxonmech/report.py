@@ -25,7 +25,7 @@ def load_records(root: Path = TAXA_DIR) -> list[tuple[Path, dict]]:
     out = []
     for path in sorted(root.rglob("*.yaml")):
         with path.open(encoding="utf-8") as fh:
-            out.append((path, yaml.safe_load(fh)))
+            out.append((path, yaml.load(fh, Loader=getattr(yaml, "CSafeLoader", yaml.SafeLoader))))
     return out
 
 
@@ -91,6 +91,7 @@ def summarize(records: list[tuple[Path, dict]]) -> dict:
         "sources_per_record": dict(sorted(sources_per_record.items())),
         "strain_total": strain_total,
         "strains_listed": strains_listed,
+        "distinct_strains_listed": len({s["strain_id"] for _, d in records for s in d.get("strains") or []}),
         "listed_strains_with_assemblies": len({sid for sid, _ in assembly_pairs}),
         "listed_strain_assembly_links": len(assembly_pairs),
         "listed_assemblies": len({aid for _, aid in assembly_pairs}),
@@ -138,8 +139,9 @@ def main(argv: list[str] | None = None) -> int:
     for k, v in s["sources_per_record"].items():
         print(f"  {k} source(s)      {v:6d}")
     print(
-        f"\nStrains: {s['strain_total']} classified, {s['strains_listed']} listed "
+        f"\nStrain occurrences across records: {s['strain_total']} classified, {s['strains_listed']} listed "
         f"({s['records_with_capped_listing']} records capped); "
+        f"{s['distinct_strains_listed']} distinct listed strains; "
         f"{s['with_type_strain']} records list a type strain"
     )
     print(
@@ -161,7 +163,8 @@ def main(argv: list[str] | None = None) -> int:
               f"{coverage['identifiers']} identifiers, {coverage['strains']} strains (not genome counts)")
     print(
         f"LPSN: {s['with_lpsn']} records carry nomenclature, {s['with_correct_name']} with a correct name   "
-        f"GTDB: {s['with_gtdb']} records mapped, {s['genomes']} genomes"
+        f"GTDB: {s['with_gtdb']} records mapped, {s['genomes']} genomes summed across "
+        "record attestations (not deduplicated)"
     )
     print(f"Causal graphs: {s['with_graphs']} records ({s['edges']} evidence-backed edges)")
 

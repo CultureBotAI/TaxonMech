@@ -2,10 +2,13 @@
 
 from __future__ import annotations
 
+import base64
+import gzip
 import re
 import subprocess
 import sys
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
@@ -45,10 +48,12 @@ def test_corpus_report_runs():
     assert "taxon records" in out.stdout
 
 
-def test_propose_scope_runs_and_proposes_only_unscoped_taxa(records):
+def test_propose_scope_runs_and_proposes_only_unscoped_taxa():
+    from taxonmech.seed import load_scope
+
     out = _run("scripts/propose_scope.py", "--rule", "core", "--top", "5", "--append")
     assert out.returncode == 0, out.stderr
-    in_scope = {d["identifier"] for _, d in records}
+    in_scope = set(load_scope())
     proposed = [line.split("\t")[0] for line in out.stdout.splitlines() if line.startswith("NCBITaxon:")]
     assert not set(proposed) & in_scope
 
@@ -61,12 +66,15 @@ def test_rendered_site_has_no_broken_local_links(tmp_path):
     assert res.returncode == 0, res.stderr
     broken = []
     for html in out.rglob("*.html"):
-        for m in re.finditer(r'(?:href|src)="([^"#]+)"', html.read_text(encoding="utf-8")):
-            url = m.group(1)
-            if url.startswith(("http://", "https://", "mailto:")):
+        text = html.read_text(encoding="utf-8")
+        for encoded in re.findall(r'data-gzip-content="([^"]+)"', text):
+            text += gzip.decompress(base64.b64decode(encoded)).decode("utf-8")
+        for m in re.finditer(r'(?:href|src)="([^"]+)"', text):
+            url = urlsplit(m.group(1))
+            if url.scheme or url.netloc or not url.path:
                 continue
-            if not (html.parent / url).resolve().exists():
-                broken.append(f"{html.relative_to(out)}: {url}")
+            if not (html.parent / unquote(url.path)).resolve().is_file():
+                broken.append(f"{html.relative_to(out)}: {m.group(1)}")
     assert not broken, broken
 
 

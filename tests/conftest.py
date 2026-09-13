@@ -12,6 +12,17 @@ TAXA_DIR = REPO_ROOT / "data" / "taxa"
 SCHEMA_PATH = REPO_ROOT / "src" / "taxonmech" / "schema" / "taxonmech.yaml"
 
 
+def pytest_collection_modifyitems(items):
+    """Run full-corpus subprocess/reproduction checks before caching parsed YAML.
+
+    Rendering the expanded site needs several GB on its own; retaining the
+    session corpus in the parent process simultaneously wastes runner memory.
+    Every test still runs, and the corpus is still parsed only once per session.
+    """
+    first = {"test_scripts.py", "test_verify_corpus.py"}
+    items.sort(key=lambda item: item.path.name not in first)
+
+
 @pytest.fixture(scope="session")
 def repo_root() -> Path:
     return REPO_ROOT
@@ -30,7 +41,7 @@ def records() -> list[tuple[Path, dict]]:
     out = []
     for path in sorted(TAXA_DIR.rglob("*.yaml")):
         with path.open(encoding="utf-8") as fh:
-            out.append((path, yaml.safe_load(fh)))
+            out.append((path, yaml.load(fh, Loader=getattr(yaml, "CSafeLoader", yaml.SafeLoader))))
     if not out:
         pytest.skip(f"corpus at {TAXA_DIR} is empty")
     return out

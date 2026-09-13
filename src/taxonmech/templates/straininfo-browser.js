@@ -44,9 +44,7 @@
     let row;
     try {
       if (!cache.has(index.detail_path)) {
-        const response = await fetch(index.detail_path);
-        if (!response.ok) throw new Error("Detail request failed");
-        cache.set(index.detail_path, await response.json());
+        cache.set(index.detail_path, await window.TaxonMechData.loadJSON(index.detail_path));
       }
       if (request !== selection) return;
       row = cache.get(index.detail_path).find(item => item.straininfo_strain_id === identifier);
