@@ -61,6 +61,13 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 1
   notes: LPSN links this GTDB species to the taxon's name.
+synonyms:
+- synonym_text: Litoreibacter roseus Kanamuro et al. 2021
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Litoreibacter sp. K6
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Litoreibacter_roseus
 - lpsn:18380
@@ -81,26 +88,94 @@ strains:
     source_id: bacdive:160005
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Litoreibacter roseus K6
+    assembly_name: ASM981179v1 assembly for Litoreibacter roseus K6
     taxon_id: NCBITaxon:2601869
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_009811795.1
+    source: BV_BRC
+    source_id: patric:2601869.3
+    assembly_name: Litoreibacter sp. K6
+    taxon_id: NCBITaxon:2601869
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-114114
+    source_strain_identifiers: NBRC:114114
+    source_strain_field: culture_collection
   genome_records:
   - genome_id: img.taxon:2890844935
     source_database: img
     source: BACDIVE
     source_id: bacdive:160005
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Litoreibacter roseus K6
+    assembly_level: contig
+    genome_name: ASM981179v1 assembly for Litoreibacter roseus K6
     taxon_id: NCBITaxon:2601869
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: patric:2601869.3
     source_database: patric
     source: BACDIVE
     source_id: bacdive:160005
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM981179v1 assembly for Litoreibacter roseus K6
+    taxon_id: NCBITaxon:2601869
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:2601869.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:2601869.3
     genome_name: Litoreibacter sp. K6
     taxon_id: NCBITaxon:2601869
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NBRC-114114
+    source_strain_identifiers: NBRC:114114
+    source_strain_field: culture_collection
+  - genome_id: atb.assembly:202505.SAMD00181890
+    source_database: allthebacteria
+    source: ALLTHEBACTERIA
+    source_id: atb.assembly:202505.SAMD00181890
+    genome_name: Litoreibacter roseus
+    atb_evidence:
+      release: 2025-05
+      sample_id: biosample:SAMD00181890
+      dataset: r0.2
+      run_accessions: DRR188129
+      assembly_seqkit_sum: seqkit.v0.1_DLS_k0_cbb1340b4b3f27d1bbf334ad68f3dcad
+      assembly_filter: PASS
+      hq_filter: PASS
+      download_url: https://allthebacteria-assemblies.s3.eu-west-2.amazonaws.com/SAMD00181890.fa.gz
+      archive_url: https://osf.io/download/66716ad865e1de5e998941cd/
+      archive_filename: atb.assembly.r0.2.batch.119.tar.xz
+      sample_links:
+      - matched_strain_id: kgmicrobe.strain:NBRC-114114
+        record_id: biosample:SAMD00181890
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:2601869.3
+        source_strain_field: culture_collection
+        source_strain_identifiers: NBRC:114114
+        taxon_id: NCBITaxon:2601869
+      ena_analysis_id: ena.analysis:ERZ25081945
+      sylph_species: Litoreibacter roseus
   related_records:
+  - record_id: bioproject:PRJDB8654
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:2601869.3
+    taxon_id: NCBITaxon:2601869
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-114114
+    source_strain_identifiers: NBRC:114114
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMD00181890
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:2601869.3
+    taxon_id: NCBITaxon:2601869
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-114114
+    source_strain_identifiers: NBRC:114114
+    source_strain_field: culture_collection
   - record_id: straininfo.deposit:913759
     record_type: STRAININFO_DEPOSIT
     source: STRAININFO
@@ -145,6 +220,7 @@ source_attestations:
   source_label: Litoreibacter roseus
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:18380
   source_label: Litoreibacter roseus
@@ -173,7 +249,7 @@ source_attestations:
   assertion_count: 1
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

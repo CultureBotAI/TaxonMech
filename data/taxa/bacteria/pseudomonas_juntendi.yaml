@@ -76,6 +76,13 @@ taxonomy_mappings:
   genome_count: 4
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
+synonyms:
+- synonym_text: Pseudomonas juntendi Tohya et al. 2019
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Pseudomonas sp. BML3
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - lpsn:5590
 genetic_code: 11
@@ -86,7 +93,7 @@ strains:
   source_id: bacdive:164545
   designation: BML3
   culture_collection_ids:
-  - kgmicrobe.strain:DMS-109244
+  - kgmicrobe.strain:DMS%20109244
   - kgmicrobe.strain:DSM-109244
   - kgmicrobe.strain:JCM-33395
   is_type_strain: true
@@ -96,18 +103,94 @@ strains:
     source_id: bacdive:164545
     source_reference_id: '68201'
     assembly_level: contig
-    assembly_name: Pseudomonas juntendi BML3
+    assembly_name: ASM993237v1 assembly for Pseudomonas juntendi BML3
     taxon_id: NCBITaxon:2666183
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_009932375.1
+    source: BV_BRC
+    source_id: patric:2666183.3
+    assembly_name: Pseudomonas juntendi strain BML3
+    taxon_id: NCBITaxon:2666183
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-33395
+    source_strain_identifiers: JCM:33395
+    source_strain_field: culture_collection
   genome_records:
+  - genome_id: img.taxon:8034925566
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:164545
+    source_reference_id: '68201'
+    assembly_level: contig
+    genome_name: ASM993237v1 assembly for Pseudomonas juntendi BML3
+    taxon_id: NCBITaxon:2666183
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: patric:2666183.3
     source_database: patric
     source: BACDIVE
     source_id: bacdive:164545
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '68201'
+    assembly_level: contig
+    genome_name: ASM993237v1 assembly for Pseudomonas juntendi BML3
+    taxon_id: NCBITaxon:2666183
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:2666183.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:2666183.3
     genome_name: Pseudomonas juntendi strain BML3
     taxon_id: NCBITaxon:2666183
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-33395
+    source_strain_identifiers: JCM:33395
+    source_strain_field: culture_collection
+  - genome_id: atb.assembly:202505.SAMD00166173
+    source_database: allthebacteria
+    source: ALLTHEBACTERIA
+    source_id: atb.assembly:202505.SAMD00166173
+    genome_name: Pseudomonas juntendi
+    atb_evidence:
+      release: 2025-05
+      sample_id: biosample:SAMD00166173
+      dataset: r0.2
+      run_accessions: DRR173014
+      assembly_seqkit_sum: seqkit.v0.1_DLS_k0_d83f93d5b21e3a24ce4d7148bd0b62d0
+      assembly_filter: PASS
+      hq_filter: SYLPH_RESULTS_FAIL
+      download_url: https://allthebacteria-assemblies.s3.eu-west-2.amazonaws.com/SAMD00166173.fa.gz
+      archive_url: https://osf.io/download/6ye9w/
+      archive_filename: atb.assembly.r0.2.batch.132.tar.xz
+      sample_links:
+      - matched_strain_id: kgmicrobe.strain:JCM-33395
+        record_id: biosample:SAMD00166173
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:2666183.3
+        source_strain_field: culture_collection
+        source_strain_identifiers: JCM:33395
+        taxon_id: NCBITaxon:2666183
+      ena_analysis_id: ena.analysis:ERZ25080768
+      sylph_species: unknown
   related_records:
+  - record_id: bioproject:PRJDB8113
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:2666183.3
+    taxon_id: NCBITaxon:2666183
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-33395
+    source_strain_identifiers: JCM:33395
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMD00166173
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:2666183.3
+    taxon_id: NCBITaxon:2666183
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-33395
+    source_strain_identifiers: JCM:33395
+    source_strain_field: culture_collection
   - record_id: straininfo.deposit:910063
     record_type: STRAININFO_DEPOSIT
     source: STRAININFO
@@ -152,6 +235,7 @@ source_attestations:
   source_label: Pseudomonas juntendi
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:5590
   source_label: Pseudomonas juntendi
@@ -181,7 +265,7 @@ source_attestations:
   assertion_count: 18
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

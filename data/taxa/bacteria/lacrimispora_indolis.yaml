@@ -68,6 +68,9 @@ synonyms:
   source: LPSN
   source_id: lpsn:774901
 - synonym_text: Clostridium indolis
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Clostridium indolis McClung and McCoy 1957 (Approved Lists 1980)
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Clostridium methoxybenzovorans
@@ -75,6 +78,12 @@ synonyms:
   source: LPSN
   source_id: lpsn:774931
 - synonym_text: Clostridium methoxybenzovorans
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Clostridium methoxybenzovorans Mechichi et al. 1999
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Lacrimispora indolis (McClung and McCoy 1957) Haas and Blanchard 2020
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Staphylococcus nepalensis
@@ -91,7 +100,7 @@ strains:
 - strain_id: kgmicrobe.strain:bacdive_2602
   source: BACDIVE
   source_id: bacdive:2602
-  designation: '7'
+  designation: 7, strain 7
   classified_as: NCBITaxon:1304881
   culture_collection_ids:
   - kgmicrobe.strain:ATCC-25771
@@ -103,7 +112,7 @@ strains:
   - kgmicrobe.strain:NCIB-9731
   - kgmicrobe.strain:NCIMB-9731
   - kgmicrobe.strain:NCTC-11811
-  - kgmicrobe.strain:VPI-4520
+  - kgmicrobe.strain:VPI%204520
   - kgmicrobe.strain:VTT-E-042445
   is_type_strain: true
   genome_assemblies:
@@ -112,8 +121,18 @@ strains:
     source_id: bacdive:2602
     source_reference_id: '67771'
     assembly_level: contig
-    assembly_name: '[Clostridium] indolis DSM 755'
+    assembly_name: ASM52699v1 assembly for Lacrimispora indolis DSM 755
     taxon_id: NCBITaxon:1304881
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_000526995.1
+    source: BV_BRC
+    source_id: patric:1304881.3
+    assembly_name: Clostridium indolis DSM 755
+    taxon_id: NCBITaxon:1304881
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-755
+    source_strain_identifiers: DSM 755
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_000526995.1
     source: GOLD
     source_id: gold:Ga0002389
@@ -146,13 +165,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-755
     source_strain_identifiers: DSM 755
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_000526995.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000526995.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM52699v1
+    taxon_id: NCBITaxon:1304881
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-755
+    source_strain_identifiers: strain=DSM 755
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_900618075
     source: BACDIVE
     source_id: bacdive:2602
     source_reference_id: '67771'
     assembly_level: contig
-    assembly_name: Lacrimispora indolis NCTC11811
+    assembly_name: NCTC11811 assembly for Lacrimispora indolis NCTC11811
     taxon_id: NCBITaxon:69825
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900618075.1
+    source: BV_BRC
+    source_id: patric:69825.3
+    assembly_name: '[Clostridium] indolis strain NCTC11811'
+    taxon_id: NCBITaxon:69825
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-11811
+    source_strain_identifiers: NCTC:11811
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_900618075.1
     source: GOLD
     source_id: gold:Ga0668100
@@ -185,6 +225,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-755
     source_strain_identifiers: DSM 755
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_000526995.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000526995.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM52699v1
+    taxon_id: NCBITaxon:1304881
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-755
+    source_strain_identifiers: strain=DSM 755
+    source_strain_field: infraspecific_name
   genome_records:
   - genome_id: gtdb.genome:RS_GCF_000526995.1
     source_database: gtdb
@@ -201,10 +252,11 @@ strains:
     source_database: img
     source: BACDIVE
     source_id: bacdive:2602
-    source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Clostridium indolis DSM 755
+    source_reference_id: '67771'
+    assembly_level: contig
+    genome_name: ASM52699v1 assembly for Lacrimispora indolis DSM 755
     taxon_id: NCBITaxon:1304881
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2524614838
     source_database: img
     source: GOLD
@@ -229,6 +281,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0032062
     source_project_id: gold:Gp0032062
+  - genome_id: img.taxon:8116823654
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:2602
+    source_reference_id: '67771'
+    assembly_level: contig
+    genome_name: NCTC11811 assembly for Lacrimispora indolis NCTC11811
+    taxon_id: NCBITaxon:69825
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:8116823654
     source_database: img
     source: GOLD
@@ -257,18 +318,40 @@ strains:
     source_database: patric
     source: BACDIVE
     source_id: bacdive:2602
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '67771'
+    assembly_level: contig
+    genome_name: ASM52699v1 assembly for Lacrimispora indolis DSM 755
+    taxon_id: NCBITaxon:1304881
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1304881.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1304881.3
     genome_name: Clostridium indolis DSM 755
     taxon_id: NCBITaxon:1304881
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-755
+    source_strain_identifiers: DSM 755
+    source_strain_field: strain
   - genome_id: patric:69825.3
     source_database: patric
     source: BACDIVE
     source_id: bacdive:2602
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '67771'
+    assembly_level: contig
+    genome_name: NCTC11811 assembly for Lacrimispora indolis NCTC11811
+    taxon_id: NCBITaxon:69825
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:69825.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:69825.3
     genome_name: '[Clostridium] indolis strain NCTC11811'
     taxon_id: NCBITaxon:69825
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-11811
+    source_strain_identifiers: NCTC:11811
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN02597187
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -286,6 +369,15 @@ strains:
       archive_url: https://osf.io/download/66716aa00f8c8017e73c917a/
       archive_filename: atb.assembly.r0.2.batch.116.tar.xz
       sample_links:
+      - matched_strain_id: kgmicrobe.strain:DSM-755
+        record_id: biosample:SAMN02597187
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1304881.3
+        source_strain_field: strain
+        source_strain_identifiers: DSM 755
+        taxon_id: NCBITaxon:1304881
       - matched_strain_id: kgmicrobe.strain:DSM-755
         record_id: biosample:SAMN02597187
         record_type: BIOSAMPLE
@@ -317,11 +409,40 @@ strains:
         source_strain_field: ncbi_strain_identifiers
         source_strain_identifiers: DSM 755
         taxon_id: NCBITaxon:1304881
+      - matched_strain_id: kgmicrobe.strain:DSM-755
+        record_id: biosample:SAMN02597187
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_000526995.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=DSM 755
+        taxon_id: NCBITaxon:1304881
+      - matched_strain_id: kgmicrobe.strain:DSM-755
+        record_id: biosample:SAMN02597187
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCF_000526995.1
+        source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=DSM 755
+        taxon_id: NCBITaxon:1304881
       ena_analysis_id: ena.analysis:ERZ4063366
       sylph_species: unknown
   related_records:
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:69825.3
+    taxon_id: NCBITaxon:69825
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-11811
+    source_strain_identifiers: NCTC:11811
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
     source: GOLD
     source_id: gold:Gp0818805
     taxon_id: NCBITaxon:69825
@@ -344,6 +465,15 @@ strains:
     source_project_id: gold:Gp0818805
   - record_id: bioproject:PRJNA195868
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1304881.3
+    taxon_id: NCBITaxon:1304881
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-755
+    source_strain_identifiers: DSM 755
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA195868
+    record_type: BIOPROJECT
     source: GOLD
     source_id: gold:Gp0032062
     taxon_id: NCBITaxon:1304881
@@ -364,6 +494,16 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0032062
     source_project_id: gold:Gp0032062
+  - record_id: bioproject:PRJNA195868
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000526995.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1304881
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-755
+    source_strain_identifiers: strain=DSM 755
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
     source: GTDB
@@ -373,6 +513,25 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-755
     source_strain_identifiers: DSM 755
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000526995.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1304881
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-755
+    source_strain_identifiers: strain=DSM 755
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMEA4364204
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:69825.3
+    taxon_id: NCBITaxon:69825
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-11811
+    source_strain_identifiers: NCTC:11811
+    source_strain_field: culture_collection
   - record_id: biosample:SAMEA4364204
     record_type: BIOSAMPLE
     source: GOLD
@@ -395,6 +554,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0700878
     source_project_id: gold:Gp0818805
+  - record_id: biosample:SAMN02597187
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1304881.3
+    taxon_id: NCBITaxon:1304881
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-755
+    source_strain_identifiers: DSM 755
+    source_strain_field: strain
   - record_id: biosample:SAMN02597187
     record_type: BIOSAMPLE
     source: GOLD
@@ -426,6 +594,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-755
     source_strain_identifiers: DSM 755
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN02597187
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000526995.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1304881
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-755
+    source_strain_identifiers: strain=DSM 755
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02597187
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000526995.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1304881
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-755
+    source_strain_identifiers: strain=DSM 755
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0002389
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -1107,6 +1295,14 @@ strains:
   - kgmicrobe.strain:ATCC-700855
   - kgmicrobe.strain:DSM-12182
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_000421505
+    source: BACDIVE
+    source_id: bacdive:168170
+    source_reference_id: '66792'
+    assembly_level: contig
+    assembly_name: ASM42150v1 assembly for Lacrimispora indolis SR3
+    taxon_id: NCBITaxon:1286820
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_000421505.1
     source: GOLD
     source_id: gold:Ga0002391
@@ -1118,6 +1314,32 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0032983
     source_project_id: gold:Gp0032983
+  - assembly_id: ncbi.assembly:GCA_017312465
+    source: BACDIVE
+    source_id: bacdive:168170
+    source_reference_id: '66792'
+    assembly_level: scaffold
+    assembly_name: ASM1731246v1 assembly for Lacrimispora indolis ATCC 700855
+    taxon_id: NCBITaxon:81424
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017312465.1
+    source: BV_BRC
+    source_id: patric:81424.3
+    assembly_name: '[Clostridium] methoxybenzovorans strain ATCC 700855'
+    taxon_id: NCBITaxon:69825
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-700855
+    source_strain_identifiers: ATCC 700855
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_017312465.1
+    source: BV_BRC
+    source_id: patric:81424.3
+    assembly_name: '[Clostridium] methoxybenzovorans strain ATCC 700855'
+    taxon_id: NCBITaxon:69825
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-700855
+    source_strain_identifiers: ATCC:700855
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_017312465.1
     source: GTDB
     source_id: gtdb.genome:GB_GCA_017312465.1
@@ -1138,6 +1360,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-700855
     source_strain_identifiers: ATCC 700855
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_017312465.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_017312465.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM1731246v1
+    taxon_id: NCBITaxon:69825
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-700855
+    source_strain_identifiers: strain=ATCC 700855
+    source_strain_field: infraspecific_name
   genome_records:
   - genome_id: gtdb.genome:GB_GCA_017312465.1
     source_database: gtdb
@@ -1150,6 +1383,15 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-700855
     source_strain_identifiers: ATCC 700855
     source_strain_field: ncbi_strain_identifiers
+  - genome_id: img.taxon:2526164529
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:168170
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: ASM42150v1 assembly for Lacrimispora indolis SR3
+    taxon_id: NCBITaxon:1286820
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2526164529
     source_database: img
     source: GOLD
@@ -1167,17 +1409,39 @@ strains:
     source: BACDIVE
     source_id: bacdive:168170
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Clostridium methoxybenzovorans SR3
+    assembly_level: contig
+    genome_name: ASM42150v1 assembly for Lacrimispora indolis SR3
     taxon_id: NCBITaxon:1286820
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   - genome_id: patric:81424.3
     source_database: patric
     source: BACDIVE
     source_id: bacdive:168170
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: '[Clostridium] methoxybenzovorans strain ATCC 700855'
+    assembly_level: scaffold
+    genome_name: ASM1731246v1 assembly for Lacrimispora indolis ATCC 700855
     taxon_id: NCBITaxon:81424
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:81424.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:81424.3
+    genome_name: '[Clostridium] methoxybenzovorans strain ATCC 700855'
+    taxon_id: NCBITaxon:69825
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-700855
+    source_strain_identifiers: ATCC 700855
+    source_strain_field: strain
+  - genome_id: patric:81424.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:81424.3
+    genome_name: '[Clostridium] methoxybenzovorans strain ATCC 700855'
+    taxon_id: NCBITaxon:69825
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-700855
+    source_strain_identifiers: ATCC:700855
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN02440585
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -1211,6 +1475,24 @@ strains:
   related_records:
   - record_id: bioproject:PRJDB10187
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:81424.3
+    taxon_id: NCBITaxon:69825
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-700855
+    source_strain_identifiers: ATCC 700855
+    source_strain_field: strain
+  - record_id: bioproject:PRJDB10187
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:81424.3
+    taxon_id: NCBITaxon:69825
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-700855
+    source_strain_identifiers: ATCC:700855
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJDB10187
+    record_type: BIOPROJECT
     source: GTDB
     source_id: gtdb.genome:GB_GCA_017312465.1
     taxon_id: NCBITaxon:81424
@@ -1218,6 +1500,16 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-700855
     source_strain_identifiers: ATCC 700855
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJDB10187
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_017312465.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:69825
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-700855
+    source_strain_identifiers: strain=ATCC 700855
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA187237
     record_type: BIOPROJECT
     source: GOLD
@@ -1231,6 +1523,24 @@ strains:
     source_project_id: gold:Gp0032983
   - record_id: biosample:SAMD00236746
     record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:81424.3
+    taxon_id: NCBITaxon:69825
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-700855
+    source_strain_identifiers: ATCC 700855
+    source_strain_field: strain
+  - record_id: biosample:SAMD00236746
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:81424.3
+    taxon_id: NCBITaxon:69825
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-700855
+    source_strain_identifiers: ATCC:700855
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMD00236746
+    record_type: BIOSAMPLE
     source: GTDB
     source_id: gtdb.genome:GB_GCA_017312465.1
     taxon_id: NCBITaxon:81424
@@ -1238,6 +1548,16 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-700855
     source_strain_identifiers: ATCC 700855
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMD00236746
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_017312465.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:69825
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-700855
+    source_strain_identifiers: strain=ATCC 700855
+    source_strain_field: infraspecific_name
   - record_id: biosample:SAMN02440585
     record_type: BIOSAMPLE
     source: GOLD
@@ -1409,6 +1729,7 @@ source_attestations:
   source_label: Lacrimispora indolis
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:5951
   source_label: Lacrimispora indolis
@@ -1440,7 +1761,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

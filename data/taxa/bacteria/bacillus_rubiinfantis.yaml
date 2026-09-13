@@ -29,7 +29,7 @@ lineage:
   taxon_label: Bacillaceae
   rank: FAMILY
 - taxon_id: NCBITaxon:1386
-  taxon_label: Bacillus <firmicutes>
+  taxon_label: Bacillus
   rank: GENUS
 grounding_status: EXACT
 mapping_status: SEEDED
@@ -40,6 +40,12 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 2
 synonyms:
+- synonym_text: '"Bacillus rubiinfantis" Tidjiani Alou et al. 2015'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Bacillus sp. mt2
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: Neobacillus rubiinfantis
   synonym_type: EXACT_SYNONYM
   source: GTDB
@@ -54,9 +60,17 @@ strains:
   source_id: bacdive:132495
   designation: MT2
   culture_collection_ids:
-  - kgmicrobe.strain:CSUR-P1141
+  - kgmicrobe.strain:CSUR%20P1141
   - kgmicrobe.strain:DSM-28615
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_000752035
+    source: BACDIVE
+    source_id: bacdive:132495
+    source_reference_id: '66792'
+    assembly_level: contig
+    assembly_name: Bacillus rubiinfantis assembly for Bacillus rubiinfantis
+    taxon_id: NCBITaxon:1499680
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_000752035.1
     source: GOLD
     source_id: gold:Ga0058649
@@ -74,9 +88,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:132495
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Bacillus rubiinfantis mt2
+    assembly_level: contig
+    genome_name: Bacillus rubiinfantis assembly for Bacillus rubiinfantis
     taxon_id: NCBITaxon:1499680
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2617271261
     source_database: img
     source: GOLD
@@ -89,6 +104,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0102011
     source_project_id: gold:Gp0102011
+  - genome_id: patric:1499680.3
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:132495
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: Bacillus rubiinfantis assembly for Bacillus rubiinfantis
+    taxon_id: NCBITaxon:1499680
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: bioproject:PRJEB6468
     record_type: BIOPROJECT
@@ -191,6 +215,7 @@ source_attestations:
   source_label: Bacillus rubiinfantis
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: GTDB
   source_id: GTDB:s__Neobacillus_rubiinfantis
   source_label: s__Neobacillus_rubiinfantis
@@ -213,7 +238,7 @@ source_attestations:
   assertion_count: 2
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

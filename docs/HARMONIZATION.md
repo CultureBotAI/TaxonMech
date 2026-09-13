@@ -5,16 +5,15 @@ corpus is seeded and kept reproducible.
 
 ## Identity
 
-**The identifier is the NCBI Taxonomy CURIE.** Every source kg-microbe
-transforms already maps its taxa onto NCBI: BacDive strains are
-`subclass_of` an NCBI taxon, GOLD organisms likewise, LPSN names and GTDB
-species carry `close_match` / `broad_match` edges to NCBI taxa, and MediaDive,
-Madin and BactoTraits assert about NCBI taxa directly. Choosing NCBI as the
-backbone therefore adds no mapping of this repository's own; it only decides
-which side of the existing mappings is the record.
+**A taxon record's identifier is the NCBI Taxonomy CURIE.** Source-supplied
+classifications and mappings attach evidence to that record. The complete
+NCBI prokaryote backbone supplies the record universe; native catalogs also
+retain every source entry without an NCBI mapping. Catalog inclusion itself
+does not assert a taxonomic or biological identity.
 
-A taxon that no NCBI id covers — a GTDB placeholder species with only
-`broad_match` edges, say — is not a record today. The schema allows a minted
+A taxon that no NCBI id covers remains a native source catalog entry.
+A GTDB `broad_match` is retained as the source's broader mapping, not as an
+equivalence. The schema allows a minted
 `taxonmech:` identifier with `grounding_status: UNGROUNDED` for that case, but
 the seeder does not mint: doing so would need a rule for when two sources'
 unmapped taxa are the same taxon, and that rule should be argued for on real
@@ -35,18 +34,21 @@ the disagreement visible.
 
 | Source | Input | Contribution to the record |
 |---|---|---|
-| NCBI Taxonomy | `ontologies/ncbitaxon_{nodes,edges}.tsv`; ranks and typed synonyms from `data/raw/ncbitaxon.db` | `label`, `rank`, `parent_taxon`, `lineage`, `synonyms`, `genetic_code`, the `NCBITAXON` attestation |
+| NCBI Taxonomy | Primary `new_taxdump.tar.gz`, pinned in `conf/ncbi_taxdump.yaml` | `label`, `rank`, `parent_taxon`, `lineage`, `synonyms`, `genetic_code`, the `NCBITAXON` attestation |
+| NCBI Assembly | All current and historical GenBank/RefSeq summary catalogs | Current explicit culture-deposit assembly/sample/project assertions; historical rows remain searchable in native catalogs |
+| BV-BRC / PATRIC | Complete public bacterial and archaeal genome census in `data/bvbrc/` | Exact culture-deposit genome, assembly and sample/project assertions; all native records remain searchable |
 | LPSN | `lpsn/{nodes,edges}.tsv`, `lpsn_api/{nodes,edges}.tsv` | `nomenclature` (authority, status, type strain designations, publications, 16S accessions), `synonyms` from `same_as`, an `xref` to the correct name, the `LPSN` attestation |
 | GTDB | `gtdb/{nodes,edges}.tsv`; `data/raw/gtdb/{bac120,ar53}_metadata.tsv.gz` | Species `taxonomy_mappings`, synonyms and attestations from KGX; strain-level NCBI assembly and GTDB genome links from explicit culture identifiers in metadata |
-| BacDive | `bacdive/{nodes,edges}.tsv`; `data/raw/bacdive_strains.json` | `strains` (designation, deposits, `is_type_strain`, explicit NCBI `genome_assemblies` and BV-BRC / PATRIC and IMG `genome_records`), `strain_count`, the `BACDIVE` attestation |
+| BacDive | Complete current `data/bacdive/` v2 projection; legacy LPSN links from KGX | `strains` (designation, deposits, `is_type_strain`, explicit NCBI `genome_assemblies` and BV-BRC / PATRIC and IMG `genome_records`), `strain_count`, the `BACDIVE` attestation |
 | MediaDive | `mediadive/edges.tsv` | `medium_count` per strain and the `MEDIADIVE` attestation counting media |
 | GOLD | kg-microbe `gold/edges.tsv`; primary `data/source_snapshots/goldData.xlsx` | Taxon-level `GOLD` attestation from KGX; strain-linked NCBI/IMG identifiers and typed related records through the workbook's organism, sequencing-project and analysis-project IDs |
 | AllTheBacteria | Committed `data/atb/` overlap from the 2025-05 assembly metadata snapshot | Snapshot-scoped assembly links through existing BioSample evidence; genome crosslinks retain matching source chains |
 | StrainInfo | Committed `data/straininfo/` API snapshot and deposit crosswalk | Explicit own-deposit NCBI assertions, SI-ID/SI-DP related records, strain-record DOIs and nucleotide references |
+| SeqCode | Complete public names and type-genome catalogs in `data/seqcode/` | Native names, statuses, classifications and type-genome identifiers; no name-based NCBI mapping |
 | Madin et al., BactoTraits | `madin_etal/edges.tsv`, `bactotraits/edges.tsv` | attestations counting trait assertions |
 
 Raw inputs restore information absent from the KGX transforms: NCBI's
-semantic-sql build supplies rank and typed synonyms, BacDive's JSON supplies
+complete primary dump supplies the backbone and names, BacDive v2 supplies
 direct strain-to-genome assertions, and GTDB metadata supplies genome IDs
 with culture-deposit identifiers. GOLD's primary workbook supplies explicit
 organism and project relationships. The manifest hashes every input snapshot.
@@ -73,6 +75,11 @@ Multiple genome identifiers listed by one strain record remain separate
 assertions; co-occurrence does not supply a cross-database equivalence
 mapping. See [STRAIN_GENOMES.md](STRAIN_GENOMES.md).
 
+Culture-deposit CURIEs percent-encode source whitespace and other reserved
+characters. The matcher decodes that representation before validating the
+full CAFI accession. Unsupported source spellings remain unjoined: for
+example, `ATCC BAA 1556` must not be rewritten into `ATCC BAA-1556`.
+
 The collection-authority register is the attributed CAFI snapshot in
 `src/taxonmech/data/cafi_acronyms.json`, with its pinned commit and byte hash
 in the accompanying metadata file. Recognized acronym synonyms are not
@@ -91,10 +98,10 @@ The organism and project IDs remain typed related records, with the full
 join chain preserved in provenance.
 
 AllTheBacteria's whole `sample_accession` joins to existing BIOSAMPLE
-assertions in `strain_related_records.tsv`. This preserves the prior GTDB or
-GOLD strain evidence without rejoining names, taxa or free-form designations.
+assertions in `strain_related_records.tsv`. This preserves NCBI Assembly,
+BV-BRC, GTDB or GOLD strain evidence without rejoining names, taxa or free-form designations.
 Crosslinks to NCBI, GTDB and IMG additionally require matching provenance:
-the GTDB metadata row or GOLD organism/project chain must connect that genome
+the same NCBI/BV-BRC/GTDB source row or GOLD organism/project chain must connect that genome
 to that sample. They use `relationship: shares_biosample`, never `sameAs`.
 The committed `data/atb/strain_links.tsv` and `genome_links.tsv` preserve
 these chains as JSON evidence; the full catalog and eligibility boundary are
@@ -172,13 +179,13 @@ will be missed.
 
 ## The universe and the scope
 
-Extraction inventories every NCBI taxon that BacDive, LPSN, MediaDive, GOLD,
-Madin or BactoTraits attests, plus every ancestor, so a record's lineage is
-always resolvable from the committed data. GTDB is deliberately not an
-attesting source for the universe: its 199,923 species carry 322,327 mapping
-edges to NCBI taxa, most of them strain-level taxa nothing else mentions, and
-inventorying those would triple the data for no gain. GTDB mappings are kept where they land inside the
-universe.
+Extraction includes the complete primary NCBI bacterial and archaeal backbone,
+every NCBI target attested by GTDB, BacDive, LPSN, MediaDive, GOLD, Madin or
+BactoTraits, and all ancestors. GTDB-only candidates are included. Full GTDB
+species/mapping inventories and every LPSN name are retained even when their
+source taxon cannot be attached to the pinned NCBI backbone. Complete primary
+strain and genome catalogs remain independently searchable; see
+[SOURCE_COVERAGE.md](SOURCE_COVERAGE.md).
 
 The **corpus** is the subset of the universe listed in
 `curation/seed_scope.tsv`. Every row carries the date and the rule or reason
@@ -215,12 +222,11 @@ unchanged data produces a diff.
 
 ## Strain listings
 
-A species like *Escherichia coli* has thousands of BacDive strains. A record
-lists at most 200 (`STRAIN_LISTING_CAP` in `seed.py`): type strains first,
-then the strains with the most culture-collection deposits, then by BacDive
-id. `strain_count` always gives the full number, and
-`data/raw/bacdive_strains.tsv` holds every strain with its taxon. The cap is a
-readability decision; the data is not lost.
+A species like *Escherichia coli* has thousands of BacDive strains. Every
+classified strain is retained: type strains first, then the strains with the
+most culture-collection deposits, then BacDive ID. `strain_count` gives the
+full number. The site displays strain tables in pages of 200 and preserves
+all strain anchors; the YAML and compressed record shards are complete.
 
 `data/raw/strain_assemblies.tsv` keeps every imported NCBI assembly link for
 the inventoried strains; `data/raw/strain_genome_records.tsv` adds BV-BRC /

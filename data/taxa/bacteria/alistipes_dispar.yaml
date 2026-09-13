@@ -67,6 +67,13 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 41
   notes: LPSN links this GTDB species to the taxon's name.
+synonyms:
+- synonym_text: Alistipes dispar Sakamoto et al. 2020
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Alistipes sp. 5CPEGH6
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Alistipes_dispar
 - lpsn:5708
@@ -87,8 +94,18 @@ strains:
     source_id: bacdive:159607
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Alistipes dispar 5CPEGH6
+    assembly_name: Adis_1.0 assembly for Alistipes dispar 5CPEGH6
     taxon_id: NCBITaxon:2585119
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_006542685.1
+    source: BV_BRC
+    source_id: patric:2585119.3
+    assembly_name: Alistipes sp. 5CPEGH6
+    taxon_id: NCBITaxon:2585119
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-32848
+    source_strain_identifiers: JCM:32848
+    source_strain_field: culture_collection
   genome_records:
   - genome_id: img.taxon:2884616749
     source_database: img
@@ -96,17 +113,75 @@ strains:
     source_id: bacdive:159607
     source_reference_id: '66792'
     assembly_level: complete
-    genome_name: Alistipes dispar 5CPEGH6
+    genome_name: Adis_1.0 assembly for Alistipes dispar 5CPEGH6
     taxon_id: NCBITaxon:2585119
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: patric:2585119.3
     source_database: patric
     source: BACDIVE
     source_id: bacdive:159607
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: Adis_1.0 assembly for Alistipes dispar 5CPEGH6
+    taxon_id: NCBITaxon:2585119
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:2585119.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:2585119.3
     genome_name: Alistipes sp. 5CPEGH6
     taxon_id: NCBITaxon:2585119
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-32848
+    source_strain_identifiers: JCM:32848
+    source_strain_field: culture_collection
+  - genome_id: atb.assembly:202505.SAMD00166232
+    source_database: allthebacteria
+    source: ALLTHEBACTERIA
+    source_id: atb.assembly:202505.SAMD00166232
+    genome_name: Alistipes dispar
+    atb_evidence:
+      release: 2025-05
+      sample_id: biosample:SAMD00166232
+      dataset: r0.2
+      run_accessions: DRR179479
+      assembly_seqkit_sum: seqkit.v0.1_DLS_k0_80d4b05c75b26cc660e29d9fc1aee002
+      assembly_filter: PASS
+      hq_filter: PASS
+      download_url: https://allthebacteria-assemblies.s3.eu-west-2.amazonaws.com/SAMD00166232.fa.gz
+      archive_url: https://osf.io/download/667155b86b6c8e341c04cdf0/
+      archive_filename: atb.assembly.r0.2.batch.95.tar.xz
+      sample_links:
+      - matched_strain_id: kgmicrobe.strain:JCM-32848
+        record_id: biosample:SAMD00166232
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:2585119.3
+        source_strain_field: culture_collection
+        source_strain_identifiers: JCM:32848
+        taxon_id: NCBITaxon:2585119
+      ena_analysis_id: ena.analysis:ERZ25080771
+      sylph_species: Alistipes dispar
   related_records:
+  - record_id: bioproject:PRJDB8150
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:2585119.3
+    taxon_id: NCBITaxon:2585119
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-32848
+    source_strain_identifiers: JCM:32848
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMD00166232
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:2585119.3
+    taxon_id: NCBITaxon:2585119
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-32848
+    source_strain_identifiers: JCM:32848
+    source_strain_field: culture_collection
   - record_id: gold:Go0622172
     record_type: GOLD_ORGANISM
     source: GOLD
@@ -195,6 +270,7 @@ source_attestations:
   source_label: Alistipes dispar
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:5708
   source_label: Alistipes dispar
@@ -223,7 +299,7 @@ source_attestations:
   assertion_count: 4
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

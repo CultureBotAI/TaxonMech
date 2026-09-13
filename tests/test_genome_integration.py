@@ -181,7 +181,8 @@ def test_pages_show_typed_urls_and_provenance_without_counting_related_as_genome
     monkeypatch.setattr(renderer, "load_records", lambda: [(path, document)])
     output = tmp_path / "site"
     renderer.render(output)
-    html = (output / "taxa/bacteria/genome-integration.html").read_text()
+    from tests.rendered_taxon import rendered_taxon
+    html = rendered_taxon(output, document["identifier"])
     parsed = _StrainTableParser("kgmicrobe.strain:bacdive_5")
     parsed.feed(html)
     ncbi, genomes, related = parsed.cells[5:8]

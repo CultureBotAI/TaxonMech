@@ -29,7 +29,7 @@ lineage:
   taxon_label: Yersiniaceae
   rank: FAMILY
 - taxon_id: NCBITaxon:613
-  taxon_label: Serratia <enterobacteria>
+  taxon_label: Serratia
   rank: GENUS
 grounding_status: EXACT
 mapping_status: SEEDED
@@ -144,7 +144,20 @@ taxonomy_mappings:
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 synonyms:
+- synonym_text: '"Bacillus marcescens" (Bizio 1823) Trevisan in de Toni and Trevisan
+    1889'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: Bacillus marcescens
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Enterobacteriaceae bacterium KO4
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Pantoea sp. NAB7
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Serratia marcescens Bizio 1823 (Approved Lists 1980)
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Serratia marcescens marcescens
@@ -156,16 +169,28 @@ synonyms:
   source: LPSN
   source_id: lpsn:780878
 - synonym_text: Serratia marcescens subsp. marcescens
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Serratia marcescens subsp. marcescens Bizio 1823 (Approved Lists 1980)
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Serratia marcescens subsp. sakuensis
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Serratia marcescens subsp. sakuensis Ajithkumar et al. 2003
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Serratia sp. NCIM 2919
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Serratia sp. UENF-22GI
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 xrefs:
 - GTDB:s__Serratia_marcescens
 - lpsn:780876
 genetic_code: 11
-strain_count: 103
+strain_count: 107
 strains:
 - strain_id: kgmicrobe.strain:bacdive_5165
   source: BACDIVE
@@ -176,7 +201,7 @@ strains:
   - kgmicrobe.strain:BCRC-10948
   - kgmicrobe.strain:CCM-303
   - kgmicrobe.strain:CCUG-1647
-  - kgmicrobe.strain:CDC-813-60
+  - kgmicrobe.strain:CDC%20813-60
   - kgmicrobe.strain:CECT-846
   - kgmicrobe.strain:CGMCC-1.2818
   - kgmicrobe.strain:CIP-103235
@@ -188,7 +213,7 @@ strains:
   - kgmicrobe.strain:KCTC-12457
   - kgmicrobe.strain:LMG-2792
   - kgmicrobe.strain:NBRC-102204
-  - kgmicrobe.strain:NCDC-813-60
+  - kgmicrobe.strain:NCDC%20813-60
   - kgmicrobe.strain:NCIB-9155
   - kgmicrobe.strain:NCIMB-9155
   - kgmicrobe.strain:NCTC-10211
@@ -202,8 +227,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '67770'
     assembly_level: contig
+    assembly_name: GSMA_DRAFTv1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_000735445.1
+    source: BV_BRC
+    source_id: patric:911022.4
     assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_000735445.1
     source: GOLD
     source_id: gold:Ga0058484
@@ -236,13 +272,33 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_000735445.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000735445.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: GSMA_DRAFTv1
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_000743395
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '67770'
     assembly_level: scaffold
-    assembly_name: Serratia marcescens CDC_813-60
+    assembly_name: SAS_1 assembly for Serratia marcescens CDC_813-60
     taxon_id: NCBITaxon:615
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_000751195
+    source: BACDIVE
+    source_id: bacdive:5165
+    source_reference_id: '124043'
+    assembly_level: scaffold
+    assembly_name: Serratia assembly for Serratia marcescens
+    taxon_id: NCBITaxon:615
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_000751195.1
     source: GOLD
     source_id: gold:Ga0058682
@@ -270,8 +326,28 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: scaffold
+    assembly_name: ASM289936v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_002899365.1
+    source: BV_BRC
+    source_id: patric:911022.27
     assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_002899365.1
+    source: BV_BRC
+    source_id: patric:911022.27
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC:13880
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_002899365.1
     source: GOLD
     source_id: gold:Ga0368256
@@ -304,13 +380,44 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_002899365.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_002899365.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM289936v1
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_003957875
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '67770'
     assembly_level: contig
+    assembly_name: ASM395787v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_003957875.1
+    source: BV_BRC
+    source_id: patric:911022.31
     assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_003957875.1
+    source: BV_BRC
+    source_id: patric:911022.31
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC:13880
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_003957875.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_003957875.1
@@ -321,13 +428,44 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_003957875.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_003957875.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM395787v1
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_006974205
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    assembly_name: ASM697420v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_006974205.1
+    source: BV_BRC
+    source_id: patric:911022.32
     assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_006974205.1
+    source: BV_BRC
+    source_id: patric:911022.32
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC:13880
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_006974205.1
     source: GOLD
     source_id: gold:Ga0559983
@@ -370,14 +508,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_006974205.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_006974205.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM697420v1
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_017298675
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S94_jyu2015
+    assembly_name: ASM1729867v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S94_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017298675.1
+    source: BV_BRC
+    source_id: patric:911022.41
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017298675.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298675.1
@@ -393,9 +552,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S79_jyu2015
+    assembly_name: ASM1729869v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S79_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017298695.1
+    source: BV_BRC
+    source_id: patric:911022.42
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017298695.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298695.1
@@ -411,9 +580,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S4_jyu2015
+    assembly_name: ASM1729871v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S4_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017298715.1
+    source: BV_BRC
+    source_id: patric:911022.43
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017298715.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298715.1
@@ -429,9 +608,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S60_jyu2015
+    assembly_name: ASM1729873v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S60_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017298735.1
+    source: BV_BRC
+    source_id: patric:911022.45
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017298735.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298735.1
@@ -447,9 +636,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S54_jyu2015
+    assembly_name: ASM1729875v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S54_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017298755.1
+    source: BV_BRC
+    source_id: patric:911022.44
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017298755.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298755.1
@@ -465,9 +664,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S68_jyu2015
+    assembly_name: ASM1729877v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S68_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017298775.1
+    source: BV_BRC
+    source_id: patric:911022.46
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017298775.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298775.1
@@ -483,9 +692,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S96_jyu2015
+    assembly_name: ASM1729879v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S96_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017298795.1
+    source: BV_BRC
+    source_id: patric:911022.47
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017298795.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298795.1
@@ -501,9 +720,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S97_jyu2015
+    assembly_name: ASM1729881v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S97_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017298815.1
+    source: BV_BRC
+    source_id: patric:911022.48
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017298815.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298815.1
@@ -519,9 +748,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S6_jyu2015
+    assembly_name: ASM1729883v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S6_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017298835.1
+    source: BV_BRC
+    source_id: patric:911022.49
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017298835.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298835.1
@@ -537,9 +776,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S71_jyu2015
+    assembly_name: ASM1729885v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S71_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017298855.1
+    source: BV_BRC
+    source_id: patric:911022.50
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017298855.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298855.1
@@ -555,9 +804,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S81_jyu2015
+    assembly_name: ASM1729887v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S81_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017298875.1
+    source: BV_BRC
+    source_id: patric:911022.51
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017298875.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298875.1
@@ -573,9 +832,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S89_jyu2015
+    assembly_name: ASM1729889v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S89_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017298895.1
+    source: BV_BRC
+    source_id: patric:911022.52
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017298895.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298895.1
@@ -591,9 +860,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S50_jyu2015
+    assembly_name: ASM1729891v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S50_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017298915.1
+    source: BV_BRC
+    source_id: patric:911022.53
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017298915.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298915.1
@@ -609,9 +888,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_SA_jyu2015
+    assembly_name: ASM1729893v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_SA_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017298935.1
+    source: BV_BRC
+    source_id: patric:911022.55
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017298935.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298935.1
@@ -627,9 +916,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S24_jyu2015
+    assembly_name: ASM1729895v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S24_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017298955.1
+    source: BV_BRC
+    source_id: patric:911022.57
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017298955.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298955.1
@@ -645,9 +944,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S65_jyu2015
+    assembly_name: ASM1729897v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S65_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017298975.1
+    source: BV_BRC
+    source_id: patric:911022.54
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017298975.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298975.1
@@ -663,9 +972,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S28_jyu2015
+    assembly_name: ASM1729899v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S28_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017298995.1
+    source: BV_BRC
+    source_id: patric:911022.56
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017298995.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298995.1
@@ -681,9 +1000,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S33_jyu2015
+    assembly_name: ASM1729901v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S33_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017299015.1
+    source: BV_BRC
+    source_id: patric:911022.58
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017299015.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017299015.1
@@ -699,9 +1028,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S22_jyu2015
+    assembly_name: ASM1729903v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S22_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017299035.1
+    source: BV_BRC
+    source_id: patric:911022.59
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017299035.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017299035.1
@@ -717,9 +1056,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S78_jyu2015
+    assembly_name: ASM1729917v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S78_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017299175.1
+    source: BV_BRC
+    source_id: patric:911022.60
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017299175.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017299175.1
@@ -735,9 +1084,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S67_jyu2015
+    assembly_name: ASM1729927v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S67_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017299275.1
+    source: BV_BRC
+    source_id: patric:911022.61
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017299275.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017299275.1
@@ -753,9 +1112,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S40_jyu2015
+    assembly_name: ASM1729931v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S40_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017299315.1
+    source: BV_BRC
+    source_id: patric:911022.62
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017299315.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017299315.1
@@ -771,9 +1140,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S95_jyu2015
+    assembly_name: ASM1729943v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S95_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017299435.1
+    source: BV_BRC
+    source_id: patric:911022.63
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017299435.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017299435.1
@@ -789,9 +1168,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S9_jyu2015
+    assembly_name: ASM1729953v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S9_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017299535.1
+    source: BV_BRC
+    source_id: patric:911022.64
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017299535.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017299535.1
@@ -807,9 +1196,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S64_jyu2015
+    assembly_name: ASM1729957v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S64_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017299575.1
+    source: BV_BRC
+    source_id: patric:911022.65
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017299575.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017299575.1
@@ -825,9 +1224,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S57_jyu2015
+    assembly_name: ASM1730125v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S57_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017301255.1
+    source: BV_BRC
+    source_id: patric:911022.66
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017301255.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017301255.1
@@ -843,9 +1252,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S13_jyu2015
+    assembly_name: ASM1730127v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S13_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017301275.1
+    source: BV_BRC
+    source_id: patric:911022.67
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017301275.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017301275.1
@@ -861,9 +1280,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S55_jyu2015
+    assembly_name: ASM1730129v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S55_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017301295.1
+    source: BV_BRC
+    source_id: patric:911022.69
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017301295.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017301295.1
@@ -879,9 +1308,19 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880 ATCC 13880 substr.
-      Sm_S37_jyu2015
+    assembly_name: ASM1730131v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880 ATCC 13880 substr. Sm_S37_jyu2015
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017301315.1
+    source: BV_BRC
+    source_id: patric:911022.68
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_017301315.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017301315.1
@@ -897,8 +1336,28 @@ strains:
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    assembly_name: ASM1765424v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_017654245.1
+    source: BV_BRC
+    source_id: patric:911022.70
     assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_017654245.1
+    source: BV_BRC
+    source_id: patric:911022.70
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC:13880
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_017654245.1
     source: GOLD
     source_id: gold:Ga0561527
@@ -931,6 +1390,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_017654245.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_017654245.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM1765424v1
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCA_034424255
+    source: BACDIVE
+    source_id: bacdive:5165
+    source_reference_id: '124043'
+    assembly_level: complete
+    assembly_name: ASM3442425v1 assembly for Serratia marcescens subsp. marcescens
+      ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_034424255.1
+    source: BV_BRC
+    source_id: patric:911022.80
+    assembly_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_034424255.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_034424255.1
@@ -941,13 +1429,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_034424255.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_034424255.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM3442425v1
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_900457055
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Serratia marcescens NCTC10211
+    assembly_name: 32117_E02 assembly for Serratia marcescens NCTC10211
     taxon_id: NCBITaxon:615
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900457055.1
+    source: BV_BRC
+    source_id: patric:615.738
+    assembly_name: Serratia marcescens strain NCTC10211
+    taxon_id: NCBITaxon:615
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10211
+    source_strain_identifiers: NCTC:10211
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_900457055.1
     source: GOLD
     source_id: gold:Ga0668136
@@ -980,6 +1489,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_000735445.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000735445.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: GSMA_DRAFTv1
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCF_000751195.1
+    source: BV_BRC
+    source_id: patric:615.100
+    assembly_name: Serratia marcescens strain NCTC 10211
+    taxon_id: NCBITaxon:615
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10211
+    source_strain_identifiers: NCTC 10211
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCF_002899365.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_002899365.1
@@ -990,6 +1519,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_002899365.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_002899365.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM289936v1
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_003957875.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_003957875.1
@@ -1000,6 +1540,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_003957875.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_003957875.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM395787v1
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_017298675.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298675.1
@@ -1300,6 +1851,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_017654245.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_017654245.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM1765424v1
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_034424255.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_034424255.1
@@ -1310,6 +1872,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_034424255.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_034424255.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM3442425v1
+    taxon_id: NCBITaxon:911022
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_000735445
     source: STRAININFO
     source_id: straininfo.strain:4950
@@ -2485,10 +3058,12 @@ strains:
     source_database: img
     source: BACDIVE
     source_id: bacdive:5165
-    source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Serratia marcescens marcescens BS 303, ATCC 13880
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: GSMA_DRAFTv1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880
     taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2588253790
     source_database: img
     source: GOLD
@@ -2513,38 +3088,58 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0009486
     source_project_id: gold:Gp0009486
+  - genome_id: img.taxon:2597490118
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:5165
+    source_reference_id: '67770'
+    assembly_level: scaffold
+    genome_name: SAS_1 assembly for Serratia marcescens CDC_813-60
+    taxon_id: NCBITaxon:615
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2617271293
     source_database: img
     source: BACDIVE
     source_id: bacdive:5165
+    source_reference_id: '124043'
+    assembly_level: scaffold
+    genome_name: Serratia assembly for Serratia marcescens
+    taxon_id: NCBITaxon:615
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:2617271293
+    source_database: img
+    source: GOLD
+    source_id: gold:Ga0058682
+    genome_name: Serratia marcescens NCTC 10211
+    taxon_id: NCBITaxon:615
+    source_field: AP IMG TAXON ID
+    matched_strain_id: kgmicrobe.strain:NCTC-10211
+    source_strain_identifiers: NCTC 10211
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0103437
+    source_project_id: gold:Gp0103437
+  - genome_id: img.taxon:2617271293
+    source_database: img
+    source: GOLD
+    source_id: gold:Ga0058682
+    genome_name: Serratia marcescens NCTC 10211
+    taxon_id: NCBITaxon:615
+    source_field: AP IMG TAXON ID
+    matched_strain_id: kgmicrobe.strain:NCTC-10211
+    source_strain_identifiers: NCTC 10211
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0103437
+    source_project_id: gold:Gp0103437
+  - genome_id: img.taxon:2937699850
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:5165
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Serratia marcescens NCTC 10211
-    taxon_id: NCBITaxon:615
-  - genome_id: img.taxon:2617271293
-    source_database: img
-    source: GOLD
-    source_id: gold:Ga0058682
-    genome_name: Serratia marcescens NCTC 10211
-    taxon_id: NCBITaxon:615
-    source_field: AP IMG TAXON ID
-    matched_strain_id: kgmicrobe.strain:NCTC-10211
-    source_strain_identifiers: NCTC 10211
-    source_strain_field: ORGANISM CULTURE COLLECTION ID
-    source_organism_id: gold:Go0103437
-    source_project_id: gold:Gp0103437
-  - genome_id: img.taxon:2617271293
-    source_database: img
-    source: GOLD
-    source_id: gold:Ga0058682
-    genome_name: Serratia marcescens NCTC 10211
-    taxon_id: NCBITaxon:615
-    source_field: AP IMG TAXON ID
-    matched_strain_id: kgmicrobe.strain:NCTC-10211
-    source_strain_identifiers: NCTC 10211
-    source_strain_field: ORGANISM STRAIN
-    source_organism_id: gold:Go0103437
-    source_project_id: gold:Gp0103437
+    assembly_level: scaffold
+    genome_name: ASM289936v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2937699850
     source_database: img
     source: GOLD
@@ -2571,6 +3166,16 @@ strains:
     source_project_id: gold:Gp0389891
   - genome_id: img.taxon:8004489118
     source_database: img
+    source: BACDIVE
+    source_id: bacdive:5165
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM697420v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:8004489118
+    source_database: img
     source: GOLD
     source_id: gold:Ga0559983
     genome_name: Serratia marcescens marcescens ATCC 13880
@@ -2595,6 +3200,16 @@ strains:
     source_project_id: gold:Gp0652957
   - genome_id: img.taxon:8004760261
     source_database: img
+    source: BACDIVE
+    source_id: bacdive:5165
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM1765424v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:8004760261
+    source_database: img
     source: GOLD
     source_id: gold:Ga0561527
     genome_name: Serratia marcescens marcescens ATCC 13880
@@ -2617,6 +3232,25 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0009486
     source_project_id: gold:Gp0650734
+  - genome_id: img.taxon:8119436985
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:5165
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM1729879v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S96_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:8119442041
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:5165
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: 32117_E02 assembly for Serratia marcescens NCTC10211
+    taxon_id: NCBITaxon:615
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:8119442041
     source_database: img
     source: GOLD
@@ -2645,290 +3279,780 @@ strains:
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '124043'
+    assembly_level: scaffold
+    genome_name: Serratia assembly for Serratia marcescens
+    taxon_id: NCBITaxon:615
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:615.100
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:615.100
     genome_name: Serratia marcescens strain NCTC 10211
     taxon_id: NCBITaxon:615
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-10211
+    source_strain_identifiers: NCTC 10211
+    source_strain_field: strain
   - genome_id: patric:615.738
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: 32117_E02 assembly for Serratia marcescens NCTC10211
+    taxon_id: NCBITaxon:615
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:615.738
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:615.738
     genome_name: Serratia marcescens strain NCTC10211
     taxon_id: NCBITaxon:615
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-10211
+    source_strain_identifiers: NCTC:10211
+    source_strain_field: culture_collection
   - genome_id: patric:911022.27
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: scaffold
+    genome_name: ASM289936v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.27
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.27
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - genome_id: patric:911022.27
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.27
+    genome_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC:13880
+    source_strain_field: culture_collection
   - genome_id: patric:911022.31
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: ASM395787v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.31
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.31
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - genome_id: patric:911022.31
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.31
+    genome_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC:13880
+    source_strain_field: culture_collection
   - genome_id: patric:911022.32
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM697420v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.32
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.32
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - genome_id: patric:911022.32
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.32
+    genome_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC:13880
+    source_strain_field: culture_collection
   - genome_id: patric:911022.4
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: GSMA_DRAFTv1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.4
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.4
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.41
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729867v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S94_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.41
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.41
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.42
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729869v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S79_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.42
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.42
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.43
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729871v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S4_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.43
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.43
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.44
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729875v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S54_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.44
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.44
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.45
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729873v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S60_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.45
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.45
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.46
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729877v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S68_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.46
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.46
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.47
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729879v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S96_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.47
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.47
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.48
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729881v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S97_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.48
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.48
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.49
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729883v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S6_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.49
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.49
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.50
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729885v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S71_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.50
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.50
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.51
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729887v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S81_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.51
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.51
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.52
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729889v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S89_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.52
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.52
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.53
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729891v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S50_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.53
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.53
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.54
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729897v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S65_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.54
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.54
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.55
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729893v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_SA_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.55
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.55
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.56
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729899v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S28_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.56
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.56
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.57
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729895v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S24_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.57
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.57
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.58
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729901v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S33_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.58
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.58
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.59
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729903v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S22_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.59
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.59
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.60
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729917v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S78_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.60
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.60
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.61
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729927v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S67_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.61
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.61
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.62
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729931v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S40_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.62
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.62
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.63
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729943v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S95_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.63
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.63
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.64
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729953v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S9_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.64
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.64
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.65
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1729957v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S64_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.65
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.65
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.66
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1730125v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S57_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.66
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.66
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.67
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1730127v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S13_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.67
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.67
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.68
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1730131v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S37_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.68
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.68
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.69
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1730129v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880 ATCC 13880 substr. Sm_S55_jyu2015
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.69
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.69
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: patric:911022.70
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5165
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1765424v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.70
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.70
     genome_name: Serratia marcescens subsp. marcescens ATCC 13880
     taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - genome_id: patric:911022.70
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.70
+    genome_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC:13880
+    source_strain_field: culture_collection
+  - genome_id: patric:911022.80
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:5165
+    source_reference_id: '124043'
+    assembly_level: complete
+    genome_name: ASM3442425v1 assembly for Serratia marcescens subsp. marcescens ATCC
+      13880
+    taxon_id: NCBITaxon:911022
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:911022.80
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:911022.80
+    genome_name: Serratia marcescens subsp. marcescens ATCC 13880
+    taxon_id: NCBITaxon:911022
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - genome_id: atb.assembly:202505.SAMN10518498
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -2949,11 +4073,49 @@ strains:
       - matched_strain_id: kgmicrobe.strain:ATCC-13880
         record_id: biosample:SAMN10518498
         record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:911022.31
+        source_strain_field: culture_collection
+        source_strain_identifiers: ATCC:13880
+        taxon_id: NCBITaxon:911022
+      - matched_strain_id: kgmicrobe.strain:ATCC-13880
+        record_id: biosample:SAMN10518498
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:911022.31
+        source_strain_field: strain
+        source_strain_identifiers: ATCC 13880
+        taxon_id: NCBITaxon:911022
+      - matched_strain_id: kgmicrobe.strain:ATCC-13880
+        record_id: biosample:SAMN10518498
+        record_type: BIOSAMPLE
         source: GTDB
         source_field: ncbi_biosample
         source_id: gtdb.genome:RS_GCF_003957875.1
         source_strain_field: ncbi_strain_identifiers
         source_strain_identifiers: ATCC 13880
+        taxon_id: NCBITaxon:911022
+      - matched_strain_id: kgmicrobe.strain:ATCC-13880
+        record_id: biosample:SAMN10518498
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_003957875.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=ATCC 13880
+        taxon_id: NCBITaxon:911022
+      - matched_strain_id: kgmicrobe.strain:ATCC-13880
+        record_id: biosample:SAMN10518498
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCF_003957875.1
+        source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=ATCC 13880
         taxon_id: NCBITaxon:911022
       ena_analysis_id: ena.analysis:ERZ25514458
       sylph_species: Serratia marcescens
@@ -2977,15 +4139,314 @@ strains:
       - matched_strain_id: kgmicrobe.strain:ATCC-13880
         record_id: biosample:SAMN38562723
         record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:911022.80
+        source_strain_field: strain
+        source_strain_identifiers: ATCC 13880
+        taxon_id: NCBITaxon:911022
+      - matched_strain_id: kgmicrobe.strain:ATCC-13880
+        record_id: biosample:SAMN38562723
+        record_type: BIOSAMPLE
         source: GTDB
         source_field: ncbi_biosample
         source_id: gtdb.genome:RS_GCF_034424255.1
         source_strain_field: ncbi_strain_identifiers
         source_strain_identifiers: ATCC 13880
         taxon_id: NCBITaxon:911022
+      - matched_strain_id: kgmicrobe.strain:ATCC-13880
+        record_id: biosample:SAMN38562723
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_034424255.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=ATCC 13880
+        taxon_id: NCBITaxon:911022
+      - matched_strain_id: kgmicrobe.strain:ATCC-13880
+        record_id: biosample:SAMN38562723
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCF_034424255.1
+        source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=ATCC 13880
+        taxon_id: NCBITaxon:911022
       ena_analysis_id: ena.analysis:ERZ26670535
       sylph_species: Serratia marcescens
   related_records:
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.41
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.42
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.43
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.44
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.45
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.46
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.47
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.48
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.49
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.50
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.51
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.52
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.53
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.54
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.55
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.56
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.57
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.58
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.59
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.60
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.61
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.62
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.63
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.64
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.65
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.66
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.67
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.68
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB40306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.69
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:615.738
+    taxon_id: NCBITaxon:615
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10211
+    source_strain_identifiers: NCTC:10211
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
     source: GOLD
@@ -3010,6 +4471,15 @@ strains:
     source_project_id: gold:Gp0818841
   - record_id: bioproject:PRJEB6931
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:615.100
+    taxon_id: NCBITaxon:615
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10211
+    source_strain_identifiers: NCTC 10211
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB6931
+    record_type: BIOPROJECT
     source: GOLD
     source_id: gold:Gp0103437
     taxon_id: NCBITaxon:615
@@ -3030,6 +4500,25 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0103437
     source_project_id: gold:Gp0103437
+  - record_id: bioproject:PRJNA1047486
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.80
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA1047486
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_034424255.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
     source: GTDB
@@ -3336,6 +4825,74 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000735445.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_002899365.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_003957875.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_017654245.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_034424255.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA430443
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.27
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA430443
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.27
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC:13880
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA430443
     record_type: BIOPROJECT
     source: GOLD
@@ -3358,6 +4915,62 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0009486
     source_project_id: gold:Gp0389891
+  - record_id: bioproject:PRJNA430443
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_002899365.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA494152
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.31
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA494152
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.31
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC:13880
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA494152
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_003957875.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA545524
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.32
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA545524
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.32
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC:13880
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA545524
     record_type: BIOPROJECT
     source: GOLD
@@ -3389,6 +5002,25 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA545524
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_006974205.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA59561
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.4
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - record_id: bioproject:PRJNA59561
     record_type: BIOPROJECT
     source: GOLD
@@ -3411,6 +5043,34 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0009486
     source_project_id: gold:Gp0009486
+  - record_id: bioproject:PRJNA59561
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000735445.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA716961
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.70
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA716961
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:911022.70
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC:13880
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA716961
     record_type: BIOPROJECT
     source: GOLD
@@ -3433,6 +5093,25 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0009486
     source_project_id: gold:Gp0650734
+  - record_id: bioproject:PRJNA716961
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_017654245.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:911022
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMEA2687580
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:615.100
+    taxon_id: NCBITaxon:615
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10211
+    source_strain_identifiers: NCTC 10211
+    source_strain_field: strain
   - record_id: biosample:SAMEA2687580
     record_type: BIOSAMPLE
     source: GOLD
@@ -3455,6 +5134,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0103437
     source_project_id: gold:Gp0103437
+  - record_id: biosample:SAMEA2689778
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:615.738
+    taxon_id: NCBITaxon:615
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10211
+    source_strain_identifiers: NCTC:10211
+    source_strain_field: culture_collection
   - record_id: biosample:SAMEA2689778
     record_type: BIOSAMPLE
     source: GOLD
@@ -3479,6 +5167,15 @@ strains:
     source_project_id: gold:Gp0818841
   - record_id: biosample:SAMEA7301478
     record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.68
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: biosample:SAMEA7301478
+    record_type: BIOSAMPLE
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017301315.1
     taxon_id: NCBITaxon:911022
@@ -3486,6 +5183,15 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMEA7301479
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.69
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - record_id: biosample:SAMEA7301479
     record_type: BIOSAMPLE
     source: GTDB
@@ -3497,6 +5203,15 @@ strains:
     source_strain_field: ncbi_strain_identifiers
   - record_id: biosample:SAMEA7301480
     record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.65
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: biosample:SAMEA7301480
+    record_type: BIOSAMPLE
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017299575.1
     taxon_id: NCBITaxon:911022
@@ -3504,6 +5219,15 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMEA7301481
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.64
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - record_id: biosample:SAMEA7301481
     record_type: BIOSAMPLE
     source: GTDB
@@ -3515,6 +5239,15 @@ strains:
     source_strain_field: ncbi_strain_identifiers
   - record_id: biosample:SAMEA7301482
     record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.67
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: biosample:SAMEA7301482
+    record_type: BIOSAMPLE
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017301275.1
     taxon_id: NCBITaxon:911022
@@ -3522,6 +5255,15 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMEA7301483
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.63
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - record_id: biosample:SAMEA7301483
     record_type: BIOSAMPLE
     source: GTDB
@@ -3533,6 +5275,15 @@ strains:
     source_strain_field: ncbi_strain_identifiers
   - record_id: biosample:SAMEA7301484
     record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.61
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: biosample:SAMEA7301484
+    record_type: BIOSAMPLE
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017299275.1
     taxon_id: NCBITaxon:911022
@@ -3540,6 +5291,15 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMEA7301485
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.62
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - record_id: biosample:SAMEA7301485
     record_type: BIOSAMPLE
     source: GTDB
@@ -3551,6 +5311,15 @@ strains:
     source_strain_field: ncbi_strain_identifiers
   - record_id: biosample:SAMEA7301486
     record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.60
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: biosample:SAMEA7301486
+    record_type: BIOSAMPLE
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017299175.1
     taxon_id: NCBITaxon:911022
@@ -3558,6 +5327,15 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMEA7301487
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.59
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - record_id: biosample:SAMEA7301487
     record_type: BIOSAMPLE
     source: GTDB
@@ -3569,6 +5347,15 @@ strains:
     source_strain_field: ncbi_strain_identifiers
   - record_id: biosample:SAMEA7301488
     record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.58
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: biosample:SAMEA7301488
+    record_type: BIOSAMPLE
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017299015.1
     taxon_id: NCBITaxon:911022
@@ -3576,6 +5363,15 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMEA7301489
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.56
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - record_id: biosample:SAMEA7301489
     record_type: BIOSAMPLE
     source: GTDB
@@ -3587,6 +5383,15 @@ strains:
     source_strain_field: ncbi_strain_identifiers
   - record_id: biosample:SAMEA7301490
     record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.66
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: biosample:SAMEA7301490
+    record_type: BIOSAMPLE
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017301255.1
     taxon_id: NCBITaxon:911022
@@ -3594,6 +5399,15 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMEA7301491
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.54
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - record_id: biosample:SAMEA7301491
     record_type: BIOSAMPLE
     source: GTDB
@@ -3605,6 +5419,15 @@ strains:
     source_strain_field: ncbi_strain_identifiers
   - record_id: biosample:SAMEA7301492
     record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.57
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: biosample:SAMEA7301492
+    record_type: BIOSAMPLE
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298955.1
     taxon_id: NCBITaxon:911022
@@ -3612,6 +5435,15 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMEA7301493
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.55
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - record_id: biosample:SAMEA7301493
     record_type: BIOSAMPLE
     source: GTDB
@@ -3623,6 +5455,15 @@ strains:
     source_strain_field: ncbi_strain_identifiers
   - record_id: biosample:SAMEA7301494
     record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.53
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: biosample:SAMEA7301494
+    record_type: BIOSAMPLE
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298915.1
     taxon_id: NCBITaxon:911022
@@ -3630,6 +5471,15 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMEA7301495
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.52
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - record_id: biosample:SAMEA7301495
     record_type: BIOSAMPLE
     source: GTDB
@@ -3641,6 +5491,15 @@ strains:
     source_strain_field: ncbi_strain_identifiers
   - record_id: biosample:SAMEA7301496
     record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.51
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: biosample:SAMEA7301496
+    record_type: BIOSAMPLE
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298875.1
     taxon_id: NCBITaxon:911022
@@ -3648,6 +5507,15 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMEA7301497
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.50
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - record_id: biosample:SAMEA7301497
     record_type: BIOSAMPLE
     source: GTDB
@@ -3659,6 +5527,15 @@ strains:
     source_strain_field: ncbi_strain_identifiers
   - record_id: biosample:SAMEA7301498
     record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.49
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: biosample:SAMEA7301498
+    record_type: BIOSAMPLE
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298835.1
     taxon_id: NCBITaxon:911022
@@ -3666,6 +5543,15 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMEA7301499
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.48
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - record_id: biosample:SAMEA7301499
     record_type: BIOSAMPLE
     source: GTDB
@@ -3677,6 +5563,15 @@ strains:
     source_strain_field: ncbi_strain_identifiers
   - record_id: biosample:SAMEA7301500
     record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.47
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: biosample:SAMEA7301500
+    record_type: BIOSAMPLE
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298795.1
     taxon_id: NCBITaxon:911022
@@ -3684,6 +5579,15 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMEA7301501
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.46
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - record_id: biosample:SAMEA7301501
     record_type: BIOSAMPLE
     source: GTDB
@@ -3695,6 +5599,15 @@ strains:
     source_strain_field: ncbi_strain_identifiers
   - record_id: biosample:SAMEA7301502
     record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.44
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: biosample:SAMEA7301502
+    record_type: BIOSAMPLE
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298755.1
     taxon_id: NCBITaxon:911022
@@ -3702,6 +5615,15 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMEA7301503
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.43
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - record_id: biosample:SAMEA7301503
     record_type: BIOSAMPLE
     source: GTDB
@@ -3713,6 +5635,15 @@ strains:
     source_strain_field: ncbi_strain_identifiers
   - record_id: biosample:SAMEA7301504
     record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.45
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: biosample:SAMEA7301504
+    record_type: BIOSAMPLE
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298735.1
     taxon_id: NCBITaxon:911022
@@ -3720,6 +5651,15 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMEA7301505
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.42
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - record_id: biosample:SAMEA7301505
     record_type: BIOSAMPLE
     source: GTDB
@@ -3731,6 +5671,15 @@ strains:
     source_strain_field: ncbi_strain_identifiers
   - record_id: biosample:SAMEA7301506
     record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.41
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: biosample:SAMEA7301506
+    record_type: BIOSAMPLE
     source: GTDB
     source_id: gtdb.genome:RS_GCF_017298675.1
     taxon_id: NCBITaxon:911022
@@ -3738,6 +5687,15 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN02743269
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.4
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - record_id: biosample:SAMN02743269
     record_type: BIOSAMPLE
     source: GOLD
@@ -3769,6 +5727,44 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN02743269
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000735445.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:911022
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02743269
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000735445.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:911022
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN08373109
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.27
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: biosample:SAMN08373109
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.27
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC:13880
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN08373109
     record_type: BIOSAMPLE
     source: GOLD
@@ -3800,6 +5796,44 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN08373109
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_002899365.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:911022
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN08373109
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_002899365.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:911022
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN10518498
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.31
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: biosample:SAMN10518498
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.31
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC:13880
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN10518498
     record_type: BIOSAMPLE
     source: GTDB
@@ -3809,6 +5843,44 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN10518498
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_003957875.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:911022
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN10518498
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_003957875.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:911022
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN11958783
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.32
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: biosample:SAMN11958783
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.32
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC:13880
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN11958783
     record_type: BIOSAMPLE
     source: GOLD
@@ -3840,6 +5912,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN11958783
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_006974205.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:911022
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN18473280
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.70
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
+  - record_id: biosample:SAMN18473280
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.70
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC:13880
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN18473280
     record_type: BIOSAMPLE
     source: GOLD
@@ -3871,6 +5971,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN18473280
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_017654245.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:911022
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN18473280
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_017654245.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:911022
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN38562723
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:911022.80
+    taxon_id: NCBITaxon:911022
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: ATCC 13880
+    source_strain_field: strain
   - record_id: biosample:SAMN38562723
     record_type: BIOSAMPLE
     source: GTDB
@@ -3880,6 +6009,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-13880
     source_strain_identifiers: ATCC 13880
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN38562723
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_034424255.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:911022
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN38562723
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_034424255.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:911022
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-13880
+    source_strain_identifiers: strain=ATCC 13880
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0058484
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -5903,8 +8052,27 @@ strains:
     source_id: bacdive:137060
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Serratia marcescens ATCC 274
+    assembly_name: ASM993629v1 assembly for Serratia marcescens ATCC 274
     taxon_id: NCBITaxon:615
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_009936295.1
+    source: BV_BRC
+    source_id: patric:615.1163
+    assembly_name: Serratia marcescens strain ATCC 274
+    taxon_id: NCBITaxon:615
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-274
+    source_strain_identifiers: ATCC 274
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_009936295.1
+    source: BV_BRC
+    source_id: patric:615.1163
+    assembly_name: Serratia marcescens strain ATCC 274
+    taxon_id: NCBITaxon:615
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-274
+    source_strain_identifiers: ATCC 274
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_009936295.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_009936295.1
@@ -5915,6 +8083,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-274
     source_strain_identifiers: ATCC 274
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_009936295.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_009936295.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM993629v1
+    taxon_id: NCBITaxon:615
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-274
+    source_strain_identifiers: strain=ATCC 274
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_009936295.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_009936295.1
@@ -5925,6 +8104,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-274
     source_strain_identifiers: ATCC 274
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_009936295.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_009936295.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM993629v1
+    taxon_id: NCBITaxon:615
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-274
+    source_strain_identifiers: strain=ATCC 274
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_009936295
     source: STRAININFO
     source_id: straininfo.strain:4951
@@ -5963,17 +8153,39 @@ strains:
     source: BACDIVE
     source_id: bacdive:137060
     source_reference_id: '66792'
-    assembly_level: draft
+    assembly_level: complete
     genome_name: Serratia marcescens ATCC 274
     taxon_id: NCBITaxon:615
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: patric:615.1163
     source_database: patric
     source: BACDIVE
     source_id: bacdive:137060
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM993629v1 assembly for Serratia marcescens ATCC 274
+    taxon_id: NCBITaxon:615
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:615.1163
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:615.1163
     genome_name: Serratia marcescens strain ATCC 274
     taxon_id: NCBITaxon:615
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-274
+    source_strain_identifiers: ATCC 274
+    source_strain_field: culture_collection
+  - genome_id: patric:615.1163
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:615.1163
+    genome_name: Serratia marcescens strain ATCC 274
+    taxon_id: NCBITaxon:615
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-274
+    source_strain_identifiers: ATCC 274
+    source_strain_field: strain
   - genome_id: atb.assembly:202505.SAMD00191436
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -5994,15 +8206,81 @@ strains:
       - matched_strain_id: kgmicrobe.strain:ATCC-274
         record_id: biosample:SAMD00191436
         record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:615.1163
+        source_strain_field: culture_collection
+        source_strain_identifiers: ATCC 274
+        taxon_id: NCBITaxon:615
+      - matched_strain_id: kgmicrobe.strain:ATCC-274
+        record_id: biosample:SAMD00191436
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:615.1163
+        source_strain_field: strain
+        source_strain_identifiers: ATCC 274
+        taxon_id: NCBITaxon:615
+      - matched_strain_id: kgmicrobe.strain:ATCC-274
+        record_id: biosample:SAMD00191436
+        record_type: BIOSAMPLE
         source: GTDB
         source_field: ncbi_biosample
         source_id: gtdb.genome:RS_GCF_009936295.1
         source_strain_field: ncbi_strain_identifiers
         source_strain_identifiers: ATCC 274
         taxon_id: NCBITaxon:615
+      - matched_strain_id: kgmicrobe.strain:ATCC-274
+        record_id: biosample:SAMD00191436
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_009936295.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=ATCC 274
+        taxon_id: NCBITaxon:615
+      - matched_strain_id: kgmicrobe.strain:ATCC-274
+        record_id: biosample:SAMD00191436
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCF_009936295.1
+        source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=ATCC 274
+        taxon_id: NCBITaxon:615
       ena_analysis_id: ena.analysis:ERZ25082267
       sylph_species: Serratia marcescens
   related_records:
+  - record_id: bioproject:PRJDB8907
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:615.1163
+    taxon_id: NCBITaxon:615
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-274
+    source_strain_identifiers: ATCC 274
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJDB8907
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:615.1163
+    taxon_id: NCBITaxon:615
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-274
+    source_strain_identifiers: ATCC 274
+    source_strain_field: strain
+  - record_id: bioproject:PRJDB8907
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_009936295.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:615
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-274
+    source_strain_identifiers: strain=ATCC 274
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
     source: GTDB
@@ -6012,6 +8290,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-274
     source_strain_identifiers: ATCC 274
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_009936295.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:615
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-274
+    source_strain_identifiers: strain=ATCC 274
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00191436
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:615.1163
+    taxon_id: NCBITaxon:615
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-274
+    source_strain_identifiers: ATCC 274
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMD00191436
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:615.1163
+    taxon_id: NCBITaxon:615
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-274
+    source_strain_identifiers: ATCC 274
+    source_strain_field: strain
   - record_id: biosample:SAMD00191436
     record_type: BIOSAMPLE
     source: GTDB
@@ -6021,6 +8327,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-274
     source_strain_identifiers: ATCC 274
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMD00191436
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_009936295.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:615
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-274
+    source_strain_identifiers: strain=ATCC 274
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00191436
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_009936295.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:615
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-274
+    source_strain_identifiers: strain=ATCC 274
+    source_strain_field: infraspecific_name
   - record_id: gold:Go0040086
     record_type: GOLD_ORGANISM
     source: GOLD
@@ -6538,7 +8864,7 @@ strains:
   - kgmicrobe.strain:CCUG-46356
   - kgmicrobe.strain:CIP-103716
   - kgmicrobe.strain:DSM-1636
-  - kgmicrobe.strain:PCI-1107
+  - kgmicrobe.strain:PCI%201107
   related_records:
   - record_id: gold:Go0227234
     record_type: GOLD_ORGANISM
@@ -6795,8 +9121,27 @@ strains:
     source_id: bacdive:5167
     source_reference_id: '67770'
     assembly_level: contig
-    assembly_name: Serratia marcescens DSM 17174
+    assembly_name: ASM468414v1 assembly for Serratia marcescens DSM 17174
     taxon_id: NCBITaxon:615
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_004684145.1
+    source: BV_BRC
+    source_id: patric:211760.18
+    assembly_name: Serratia marcescens subsp. sakuensis strain DSM 17174
+    taxon_id: NCBITaxon:615
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-17174
+    source_strain_identifiers: DSM 17174
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_004684145.1
+    source: BV_BRC
+    source_id: patric:211760.18
+    assembly_name: Serratia marcescens subsp. sakuensis strain DSM 17174
+    taxon_id: NCBITaxon:615
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-17174
+    source_strain_identifiers: DSM:17174
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_004684145.1
     source: GOLD
     source_id: gold:Ga0681273
@@ -6829,6 +9174,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-17174
     source_strain_identifiers: DSM 17174
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_004684145.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_004684145.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM468414v1
+    taxon_id: NCBITaxon:615
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-17174
+    source_strain_identifiers: strain=DSM 17174
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_004684145.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_004684145.1
@@ -6839,6 +9195,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-17174
     source_strain_identifiers: DSM 17174
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_004684145.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_004684145.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM468414v1
+    taxon_id: NCBITaxon:615
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-17174
+    source_strain_identifiers: strain=DSM 17174
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_004684145
     source: STRAININFO
     source_id: straininfo.strain:100951
@@ -6876,10 +9243,31 @@ strains:
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5167
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: ASM468414v1 assembly for Serratia marcescens DSM 17174
+    taxon_id: NCBITaxon:615
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:211760.18
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:211760.18
     genome_name: Serratia marcescens subsp. sakuensis strain DSM 17174
     taxon_id: NCBITaxon:615
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-17174
+    source_strain_identifiers: DSM 17174
+    source_strain_field: strain
+  - genome_id: patric:211760.18
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:211760.18
+    genome_name: Serratia marcescens subsp. sakuensis strain DSM 17174
+    taxon_id: NCBITaxon:615
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-17174
+    source_strain_identifiers: DSM:17174
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN11295457
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -6897,6 +9285,24 @@ strains:
       archive_url: https://osf.io/download/66717c8677ff4c5f82e044c8/
       archive_filename: atb.assembly.r0.2.batch.137.tar.xz
       sample_links:
+      - matched_strain_id: kgmicrobe.strain:DSM-17174
+        record_id: biosample:SAMN11295457
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:211760.18
+        source_strain_field: culture_collection
+        source_strain_identifiers: DSM:17174
+        taxon_id: NCBITaxon:615
+      - matched_strain_id: kgmicrobe.strain:DSM-17174
+        record_id: biosample:SAMN11295457
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:211760.18
+        source_strain_field: strain
+        source_strain_identifiers: DSM 17174
+        taxon_id: NCBITaxon:615
       - matched_strain_id: kgmicrobe.strain:DSM-17174
         record_id: biosample:SAMN11295457
         record_type: BIOSAMPLE
@@ -6928,6 +9334,26 @@ strains:
         source_strain_field: ncbi_strain_identifiers
         source_strain_identifiers: DSM 17174
         taxon_id: NCBITaxon:615
+      - matched_strain_id: kgmicrobe.strain:DSM-17174
+        record_id: biosample:SAMN11295457
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_004684145.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=DSM 17174
+        taxon_id: NCBITaxon:615
+      - matched_strain_id: kgmicrobe.strain:DSM-17174
+        record_id: biosample:SAMN11295457
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCF_004684145.1
+        source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=DSM 17174
+        taxon_id: NCBITaxon:615
       ena_analysis_id: ena.analysis:ERZ25562274
       sylph_species: Serratia marcescens
   related_records:
@@ -6940,6 +9366,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-17174
     source_strain_identifiers: DSM 17174
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_004684145.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:615
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-17174
+    source_strain_identifiers: strain=DSM 17174
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA530115
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:211760.18
+    taxon_id: NCBITaxon:615
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-17174
+    source_strain_identifiers: DSM 17174
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA530115
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:211760.18
+    taxon_id: NCBITaxon:615
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-17174
+    source_strain_identifiers: DSM:17174
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA530115
     record_type: BIOPROJECT
     source: GOLD
@@ -6962,6 +9416,34 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0711743
     source_project_id: gold:Gp0854169
+  - record_id: bioproject:PRJNA530115
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_004684145.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:615
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-17174
+    source_strain_identifiers: strain=DSM 17174
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN11295457
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:211760.18
+    taxon_id: NCBITaxon:615
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-17174
+    source_strain_identifiers: DSM 17174
+    source_strain_field: strain
+  - record_id: biosample:SAMN11295457
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:211760.18
+    taxon_id: NCBITaxon:615
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-17174
+    source_strain_identifiers: DSM:17174
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN11295457
     record_type: BIOSAMPLE
     source: GOLD
@@ -6993,6 +9475,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-17174
     source_strain_identifiers: DSM 17174
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN11295457
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_004684145.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:615
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-17174
+    source_strain_identifiers: strain=DSM 17174
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN11295457
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_004684145.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:615
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-17174
+    source_strain_identifiers: strain=DSM 17174
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0681273
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -7764,6 +10266,28 @@ strains:
     matched_strain_id: kgmicrobe.strain:NRRL-B-486
     source_strain_identifiers: NRRL B-486
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_050470725.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_050470725.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM5047072v1
+    taxon_id: NCBITaxon:458197
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NRRL-B-486
+    source_strain_identifiers: strain=NRRL B-486
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCF_050470725.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_050470725.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM5047072v1
+    taxon_id: NCBITaxon:458197
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NRRL-B-486
+    source_strain_identifiers: strain=NRRL B-486
+    source_strain_field: infraspecific_name
   genome_records:
   - genome_id: gtdb.genome:GB_GCA_050470725.1
     source_database: gtdb
@@ -7786,6 +10310,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:NRRL-B-486
     source_strain_identifiers: NRRL B-486
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA1109761
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_050470725.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:458197
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NRRL-B-486
+    source_strain_identifiers: strain=NRRL B-486
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_050470725.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:458197
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NRRL-B-486
+    source_strain_identifiers: strain=NRRL B-486
+    source_strain_field: infraspecific_name
   - record_id: biosample:SAMN41397072
     record_type: BIOSAMPLE
     source: GTDB
@@ -7795,6 +10339,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:NRRL-B-486
     source_strain_identifiers: NRRL B-486
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN41397072
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_050470725.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:458197
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NRRL-B-486
+    source_strain_identifiers: strain=NRRL B-486
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN41397072
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_050470725.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:458197
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NRRL-B-486
+    source_strain_identifiers: strain=NRRL B-486
+    source_strain_field: infraspecific_name
   - record_id: gold:Go0227256
     record_type: GOLD_ORGANISM
     source: GOLD
@@ -8446,7 +11010,7 @@ strains:
   culture_collection_ids:
   - kgmicrobe.strain:ATCC-15365
   - kgmicrobe.strain:DSM-50904
-  - kgmicrobe.strain:ICPB-2031
+  - kgmicrobe.strain:ICPB%202031
   related_records:
   - record_id: gold:Go0227404
     record_type: GOLD_ORGANISM
@@ -8771,8 +11335,9 @@ strains:
     source_id: bacdive:139473
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Serratia marcescens ATCC 14041
+    assembly_name: smgenome assembly for Serratia marcescens ATCC 14041
     taxon_id: NCBITaxon:615
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_000695485.1
     source: GOLD
     source_id: gold:Ga0051791
@@ -8805,6 +11370,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-14041
     source_strain_identifiers: ATCC 14041
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_000695485.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000695485.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: smgenome
+    taxon_id: NCBITaxon:615
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-14041
+    source_strain_identifiers: strain=ATCC 14041
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCF_000695485.1
+    source: BV_BRC
+    source_id: patric:615.95
+    assembly_name: Serratia marcescens strain ATCC 14041
+    taxon_id: NCBITaxon:615
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-14041
+    source_strain_identifiers: ATCC 14041
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCF_000695485.1
+    source: BV_BRC
+    source_id: patric:615.95
+    assembly_name: Serratia marcescens strain ATCC 14041
+    taxon_id: NCBITaxon:615
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-14041
+    source_strain_identifiers: ATCC:14041
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCF_000695485.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_000695485.1
@@ -8815,6 +11409,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-14041
     source_strain_identifiers: ATCC 14041
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_000695485.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000695485.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: smgenome
+    taxon_id: NCBITaxon:615
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-14041
+    source_strain_identifiers: strain=ATCC 14041
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_000695485
     source: STRAININFO
     source_id: straininfo.strain:35957
@@ -8853,9 +11458,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:139473
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Serratia marcescens ATCC 14041
+    assembly_level: contig
+    genome_name: smgenome assembly for Serratia marcescens ATCC 14041
     taxon_id: NCBITaxon:615
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2579778661
     source_database: img
     source: GOLD
@@ -8885,9 +11491,30 @@ strains:
     source: BACDIVE
     source_id: bacdive:139473
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: smgenome assembly for Serratia marcescens ATCC 14041
+    taxon_id: NCBITaxon:615
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:615.95
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:615.95
     genome_name: Serratia marcescens strain ATCC 14041
     taxon_id: NCBITaxon:615
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-14041
+    source_strain_identifiers: ATCC 14041
+    source_strain_field: strain
+  - genome_id: patric:615.95
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:615.95
+    genome_name: Serratia marcescens strain ATCC 14041
+    taxon_id: NCBITaxon:615
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-14041
+    source_strain_identifiers: ATCC:14041
+    source_strain_field: culture_collection
   related_records:
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
@@ -8898,6 +11525,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-14041
     source_strain_identifiers: ATCC 14041
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000695485.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:615
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-14041
+    source_strain_identifiers: strain=ATCC 14041
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA240624
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:615.95
+    taxon_id: NCBITaxon:615
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-14041
+    source_strain_identifiers: ATCC 14041
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA240624
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:615.95
+    taxon_id: NCBITaxon:615
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-14041
+    source_strain_identifiers: ATCC:14041
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA240624
     record_type: BIOPROJECT
     source: GOLD
@@ -8920,6 +11575,34 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0090155
     source_project_id: gold:Gp0090155
+  - record_id: bioproject:PRJNA240624
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000695485.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:615
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-14041
+    source_strain_identifiers: strain=ATCC 14041
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02678212
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:615.95
+    taxon_id: NCBITaxon:615
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-14041
+    source_strain_identifiers: ATCC 14041
+    source_strain_field: strain
+  - record_id: biosample:SAMN02678212
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:615.95
+    taxon_id: NCBITaxon:615
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-14041
+    source_strain_identifiers: ATCC:14041
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN02678212
     record_type: BIOSAMPLE
     source: GOLD
@@ -8951,6 +11634,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-14041
     source_strain_identifiers: ATCC 14041
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN02678212
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000695485.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:615
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-14041
+    source_strain_identifiers: strain=ATCC 14041
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02678212
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000695485.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:615
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-14041
+    source_strain_identifiers: strain=ATCC 14041
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0051791
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -9815,7 +12518,7 @@ strains:
   source: BACDIVE
   source_id: bacdive:134390
   culture_collection_ids:
-  - kgmicrobe.strain:CDC-4444-60
+  - kgmicrobe.strain:CDC%204444-60
   - kgmicrobe.strain:CIP-107243
   related_records:
   - record_id: gold:Go0227149
@@ -9880,7 +12583,7 @@ strains:
   source: BACDIVE
   source_id: bacdive:135226
   culture_collection_ids:
-  - kgmicrobe.strain:CDC-862-57
+  - kgmicrobe.strain:CDC%20862-57
   - kgmicrobe.strain:CIP-107235
   related_records:
   - record_id: gold:Go0227146
@@ -9947,7 +12650,7 @@ strains:
   source: BACDIVE
   source_id: bacdive:135728
   culture_collection_ids:
-  - kgmicrobe.strain:CDC-1604-55
+  - kgmicrobe.strain:CDC%201604-55
   - kgmicrobe.strain:CIP-107237
   related_records:
   - record_id: gold:Go0228593
@@ -12405,25 +15108,28 @@ strains:
     source_id: bacdive:131927
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Serratia marcescens PH1a
+    assembly_name: ASM63355v1 assembly for Serratia marcescens PH1a
     taxon_id: NCBITaxon:1416761
+    source_field: Sequence information.Genome sequences.INSDC accession
   genome_records:
   - genome_id: img.taxon:2582581008
     source_database: img
     source: BACDIVE
     source_id: bacdive:131927
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Serratia marcescens PH1a
+    assembly_level: contig
+    genome_name: ASM63355v1 assembly for Serratia marcescens PH1a
     taxon_id: NCBITaxon:1416761
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: patric:1416761.3
     source_database: patric
     source: BACDIVE
     source_id: bacdive:131927
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Serratia marcescens PH1a
+    assembly_level: contig
+    genome_name: ASM63355v1 assembly for Serratia marcescens PH1a
     taxon_id: NCBITaxon:1416761
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: straininfo.deposit:904260
     record_type: STRAININFO_DEPOSIT
@@ -14620,7 +17326,46 @@ strains:
   source: BACDIVE
   source_id: bacdive:155137
   culture_collection_ids:
-  - kgmicrobe.strain:CCUG-56562-A
+  - kgmicrobe.strain:CCUG-56562%20A
+  related_records:
+  - record_id: straininfo.deposit:915917
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:408458
+    taxon_id: NCBITaxon:615
+    record_name: CCUG 56562 A
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCUG-56562%20A
+    source_strain_identifiers: CCUG 56562 A
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 56562 A
+      deposit_id: straininfo.deposit:915917
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:155137
+      strain_doi: DOI:10.60712/SI-ID408458.2
+      strain_id: straininfo.strain:408458
+      strain_status: published online
+  - record_id: straininfo.strain:408458
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:408458
+    taxon_id: NCBITaxon:615
+    record_name: CCUG 56562 A
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCUG-56562%20A
+    source_strain_identifiers: CCUG 56562 A
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 56562 A
+      deposit_id: straininfo.deposit:915917
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:155137
+      strain_doi: DOI:10.60712/SI-ID408458.2
+      strain_id: straininfo.strain:408458
+      strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_155143
   source: BACDIVE
   source_id: bacdive:155143
@@ -15197,7 +17942,46 @@ strains:
   source: BACDIVE
   source_id: bacdive:156591
   culture_collection_ids:
-  - kgmicrobe.strain:CCUG-63177-B
+  - kgmicrobe.strain:CCUG-63177%20B
+  related_records:
+  - record_id: straininfo.deposit:918889
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:410975
+    taxon_id: NCBITaxon:615
+    record_name: CCUG 63177 B
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCUG-63177%20B
+    source_strain_identifiers: CCUG 63177 B
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 63177 B
+      deposit_id: straininfo.deposit:918889
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:156591
+      strain_doi: DOI:10.60712/SI-ID410975.2
+      strain_id: straininfo.strain:410975
+      strain_status: published online
+  - record_id: straininfo.strain:410975
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:410975
+    taxon_id: NCBITaxon:615
+    record_name: CCUG 63177 B
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCUG-63177%20B
+    source_strain_identifiers: CCUG 63177 B
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 63177 B
+      deposit_id: straininfo.deposit:918889
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:156591
+      strain_doi: DOI:10.60712/SI-ID410975.2
+      strain_id: straininfo.strain:410975
+      strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_156593
   source: BACDIVE
   source_id: bacdive:156593
@@ -15380,15 +18164,72 @@ strains:
   culture_collection_ids:
   - kgmicrobe.strain:JCM-15057
   medium_count: 1
+  genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_003967055
+    source: BACDIVE
+    source_id: bacdive:161565
+    source_reference_id: '66792'
+    assembly_level: complete
+    assembly_name: ASM396705v1 assembly for Serratia marcescens AS-1
+    taxon_id: NCBITaxon:615
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_003967055.1
+    source: BV_BRC
+    source_id: patric:615.831
+    assembly_name: Serratia marcescens strain AS-1
+    taxon_id: NCBITaxon:615
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-15057
+    source_strain_identifiers: JCM:15057
+    source_strain_field: culture_collection
   genome_records:
+  - genome_id: img.taxon:2869567588
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:161565
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM396705v1 assembly for Serratia marcescens AS-1
+    taxon_id: NCBITaxon:615
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: patric:615.831
     source_database: patric
     source: BACDIVE
     source_id: bacdive:161565
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: complete
+    genome_name: ASM396705v1 assembly for Serratia marcescens AS-1
+    taxon_id: NCBITaxon:615
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:615.831
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:615.831
     genome_name: Serratia marcescens strain AS-1
     taxon_id: NCBITaxon:615
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-15057
+    source_strain_identifiers: JCM:15057
+    source_strain_field: culture_collection
+  related_records:
+  - record_id: bioproject:PRJDB7525
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:615.831
+    taxon_id: NCBITaxon:615
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-15057
+    source_strain_identifiers: JCM:15057
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMD00143521
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:615.831
+    taxon_id: NCBITaxon:615
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-15057
+    source_strain_identifiers: JCM:15057
+    source_strain_field: culture_collection
 - strain_id: kgmicrobe.strain:bacdive_161999
   source: BACDIVE
   source_id: bacdive:161999
@@ -15446,16 +18287,43 @@ strains:
       strain_doi: DOI:10.60712/SI-ID400524.2
       strain_id: straininfo.strain:400524
       strain_status: published online
-- strain_id: kgmicrobe.strain:bacdive_100067
+- strain_id: kgmicrobe.strain:bacdive_177882
   source: BACDIVE
-  source_id: bacdive:100067
-  designation: STI08016(IMET)
+  source_id: bacdive:177882
+  designation: FSU-2746
+  culture_collection_ids:
+  - kgmicrobe.strain:SF002746
+- strain_id: kgmicrobe.strain:bacdive_177893
+  source: BACDIVE
+  source_id: bacdive:177893
+  designation: SG 135
+  culture_collection_ids:
+  - kgmicrobe.strain:SF002764
+- strain_id: kgmicrobe.strain:bacdive_179108
+  source: BACDIVE
+  source_id: bacdive:179108
+  designation: IMET 10766
+  culture_collection_ids:
+  - kgmicrobe.strain:STI10766
+- strain_id: kgmicrobe.strain:bacdive_179116
+  source: BACDIVE
+  source_id: bacdive:179116
+  designation: IMET 10797
+  culture_collection_ids:
+  - kgmicrobe.strain:STI10797
+- strain_id: kgmicrobe.strain:bacdive_179137
+  source: BACDIVE
+  source_id: bacdive:179137
+  designation: IMET 10854
+  culture_collection_ids:
+  - kgmicrobe.strain:STI10854
 source_attestations:
 - source: NCBITAXON
   source_id: NCBITaxon:615
   source_label: Serratia marcescens
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:780876
   source_label: Serratia marcescens
@@ -15472,7 +18340,7 @@ source_attestations:
 - source: BACDIVE
   source_id: NCBITaxon:615
   source_label: Serratia marcescens
-  assertion_count: 103
+  assertion_count: 107
   assertion_unit: STRAIN
 - source: MEDIADIVE
   source_id: NCBITaxon:615
@@ -15499,7 +18367,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

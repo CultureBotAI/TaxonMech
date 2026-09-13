@@ -69,6 +69,15 @@ taxonomy_mappings:
   notes: LPSN links this GTDB species to the taxon's name.
 synonyms:
 - synonym_text: '"Group II" Minett 1934'
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Streptococcus dysgalactiae" Diernhofer 1932'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Streptococcus pseudogalactiae" Plastridge and Hartsell 1937'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Streptococcus dysgalactiae (ex Diernhofer 1932) Garvie et al. 1983
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Streptococcus dysgalactiae dysgalactiae
@@ -76,7 +85,7 @@ synonyms:
   source: LPSN
   source_id: lpsn:781321
 - synonym_text: Streptococcus pseudogalactiae
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 xrefs:
 - GTDB:s__Streptococcus_dysgalactiae
@@ -98,6 +107,23 @@ strains:
   - kgmicrobe.strain:NCDO-2023
   is_type_strain: true
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_016724885
+    source: BACDIVE
+    source_id: bacdive:14799
+    source_reference_id: '124043'
+    assembly_level: complete
+    assembly_name: ASM1672488v1 assembly for Streptococcus dysgalactiae FDAARGOS_1157
+    taxon_id: NCBITaxon:1334
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_016724885.1
+    source: BV_BRC
+    source_id: patric:1334.232
+    assembly_name: Streptococcus dysgalactiae strain FDAARGOS_1157 strain Not applicable
+    taxon_id: NCBITaxon:1334
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-20662
+    source_strain_identifiers: DSM:20662
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_016724885.1
     source: GOLD
     source_id: gold:Ga0520127
@@ -114,10 +140,31 @@ strains:
     source_database: patric
     source: BACDIVE
     source_id: bacdive:14799
-    source_reference_id: '66792'
+    source_reference_id: '124043'
     assembly_level: complete
-    genome_name: Streptococcus dysgalactiae strain FDAARGOS_1157
+    genome_name: ASM1672488v1 assembly for Streptococcus dysgalactiae FDAARGOS_1157
     taxon_id: NCBITaxon:1334
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1334.232
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1334.232
+    genome_name: Streptococcus dysgalactiae strain FDAARGOS_1157 strain Not applicable
+    taxon_id: NCBITaxon:1334
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-20662
+    source_strain_identifiers: DSM:20662
+    source_strain_field: culture_collection
+  - genome_id: patric:99822.89
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:99822.89
+    genome_name: Streptococcus dysgalactiae subsp. dysgalactiae SS1346
+    taxon_id: NCBITaxon:99822
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-43078
+    source_strain_identifiers: ATCC:43078
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN16357326
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -138,6 +185,15 @@ strains:
       - matched_strain_id: kgmicrobe.strain:DSM-20662
         record_id: biosample:SAMN16357326
         record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1334.232
+        source_strain_field: culture_collection
+        source_strain_identifiers: DSM:20662
+        taxon_id: NCBITaxon:1334
+      - matched_strain_id: kgmicrobe.strain:DSM-20662
+        record_id: biosample:SAMN16357326
+        record_type: BIOSAMPLE
         source: GOLD
         source_field: NCBI BIOSAMPLE ACCESSION
         source_id: gold:Gp0608401
@@ -149,6 +205,24 @@ strains:
       ena_analysis_id: ena.analysis:ERZ25832476
       sylph_species: Streptococcus dysgalactiae
   related_records:
+  - record_id: bioproject:PRJNA1273177
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:99822.89
+    taxon_id: NCBITaxon:99822
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-43078
+    source_strain_identifiers: ATCC:43078
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA231221
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1334.232
+    taxon_id: NCBITaxon:1334
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-20662
+    source_strain_identifiers: DSM:20662
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA231221
     record_type: BIOPROJECT
     source: GOLD
@@ -162,6 +236,15 @@ strains:
     source_project_id: gold:Gp0608401
   - record_id: biosample:SAMN16357326
     record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1334.232
+    taxon_id: NCBITaxon:1334
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-20662
+    source_strain_identifiers: DSM:20662
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN16357326
+    record_type: BIOSAMPLE
     source: GOLD
     source_id: gold:Gp0608401
     taxon_id: NCBITaxon:1334
@@ -171,6 +254,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0594456
     source_project_id: gold:Gp0608401
+  - record_id: biosample:SAMN52092819
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:99822.89
+    taxon_id: NCBITaxon:99822
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-43078
+    source_strain_identifiers: ATCC:43078
+    source_strain_field: culture_collection
   - record_id: gold:Ga0520127
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -1330,9 +1422,18 @@ strains:
   - kgmicrobe.strain:DSM-23147
   - kgmicrobe.strain:LMG-16026
   - kgmicrobe.strain:NCFB-1356
-  - kgmicrobe.strain:NCIMB-701356-formerly-NCFB-1356
+  - kgmicrobe.strain:NCIMB%20701356%20%28formerly%20NCFB%201356%29
   - kgmicrobe.strain:NCTC-4540
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_000214575
+    source: BACDIVE
+    source_id: bacdive:14801
+    source_reference_id: '66792'
+    assembly_level: contig
+    assembly_name: ASM21457v2 assembly for Streptococcus dysgalactiae subsp. equisimilis
+      SK1249
+    taxon_id: NCBITaxon:1000589
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_000214575
     source: GOLD
     source_id: gold:Ga0013916
@@ -1344,6 +1445,32 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0009700
     source_project_id: gold:Gp0009700
+  - assembly_id: ncbi.assembly:GCA_000214575.2
+    source: BV_BRC
+    source_id: patric:1000589.3
+    assembly_name: Streptococcus dysgalactiae subsp. equisimilis SK1249
+    taxon_id: NCBITaxon:1000589
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:CCUG-36637
+    source_strain_identifiers: CCUG 36637
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_016128135
+    source: BACDIVE
+    source_id: bacdive:14801
+    source_reference_id: '66792'
+    assembly_level: complete
+    assembly_name: ASM1612813v1 assembly for Streptococcus dysgalactiae FDAARGOS_1016
+    taxon_id: NCBITaxon:1334
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_016128135.1
+    source: BV_BRC
+    source_id: patric:1334.230
+    assembly_name: Streptococcus dysgalactiae strain FDAARGOS_1016 strain Not applicable
+    taxon_id: NCBITaxon:1334
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-23147
+    source_strain_identifiers: DSM:23147
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_016128135.1
     source: GOLD
     source_id: gold:Ga0490140
@@ -1355,6 +1482,32 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0575721
     source_project_id: gold:Gp0550450
+  - assembly_id: ncbi.assembly:GCA_030812815
+    source: BACDIVE
+    source_id: bacdive:14801
+    source_reference_id: '66792'
+    assembly_level: contig
+    assembly_name: ASM3081281v1 assembly for Streptococcus dysgalactiae DSM 23147
+    taxon_id: NCBITaxon:1334
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_030812815.1
+    source: BV_BRC
+    source_id: patric:1334.308
+    assembly_name: Streptococcus dysgalactiae DSM 23147
+    taxon_id: NCBITaxon:1334
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-23147
+    source_strain_identifiers: DSM 23147
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_030812815.1
+    source: BV_BRC
+    source_id: patric:1334.308
+    assembly_name: Streptococcus dysgalactiae DSM 23147
+    taxon_id: NCBITaxon:1334
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-23147
+    source_strain_identifiers: DSM:23147
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_030812815.1
     source: GOLD
     source_id: gold:Ga0480508
@@ -1387,6 +1540,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-23147
     source_strain_identifiers: DSM 23147
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_030812815.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_030812815.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM3081281v1
+    taxon_id: NCBITaxon:1334
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-23147
+    source_strain_identifiers: strain=DSM 23147
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_030812815.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_030812815.1
@@ -1397,6 +1561,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-23147
     source_strain_identifiers: DSM 23147
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_030812815.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_030812815.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM3081281v1
+    taxon_id: NCBITaxon:1334
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-23147
+    source_strain_identifiers: strain=DSM 23147
+    source_strain_field: infraspecific_name
   genome_records:
   - genome_id: gtdb.genome:RS_GCF_030812815.1
     source_database: gtdb
@@ -1409,6 +1584,16 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-23147
     source_strain_identifiers: DSM 23147
     source_strain_field: ncbi_strain_identifiers
+  - genome_id: img.taxon:2529292875
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:14801
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: ASM21457v2 assembly for Streptococcus dysgalactiae subsp. equisimilis
+      SK1249
+    taxon_id: NCBITaxon:1000589
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2529292875
     source_database: img
     source: GOLD
@@ -1426,9 +1611,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:14801
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Streptococcus dysgalactiae DSM 23147
+    assembly_level: contig
+    genome_name: ASM3081281v1 assembly for Streptococcus dysgalactiae DSM 23147
     taxon_id: NCBITaxon:1334
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2926464969
     source_database: img
     source: GOLD
@@ -1458,17 +1644,79 @@ strains:
     source: BACDIVE
     source_id: bacdive:14801
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM21457v2 assembly for Streptococcus dysgalactiae subsp. equisimilis
+      SK1249
+    taxon_id: NCBITaxon:1000589
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1000589.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1000589.3
     genome_name: Streptococcus dysgalactiae subsp. equisimilis SK1249
     taxon_id: NCBITaxon:1000589
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:CCUG-36637
+    source_strain_identifiers: CCUG 36637
+    source_strain_field: culture_collection
+  - genome_id: patric:119602.2501
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:119602.2501
+    genome_name: Streptococcus dysgalactiae subsp. equisimilis SS1722
+    taxon_id: NCBITaxon:119602
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:CCUG-36637
+    source_strain_identifiers: CCUG:36637
+    source_strain_field: culture_collection
   - genome_id: patric:1334.230
     source_database: patric
     source: BACDIVE
     source_id: bacdive:14801
     source_reference_id: '66792'
     assembly_level: complete
-    genome_name: Streptococcus dysgalactiae strain FDAARGOS_1016
+    genome_name: ASM1612813v1 assembly for Streptococcus dysgalactiae FDAARGOS_1016
     taxon_id: NCBITaxon:1334
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1334.230
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1334.230
+    genome_name: Streptococcus dysgalactiae strain FDAARGOS_1016 strain Not applicable
+    taxon_id: NCBITaxon:1334
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-23147
+    source_strain_identifiers: DSM:23147
+    source_strain_field: culture_collection
+  - genome_id: patric:1334.308
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:14801
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: ASM3081281v1 assembly for Streptococcus dysgalactiae DSM 23147
+    taxon_id: NCBITaxon:1334
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1334.308
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1334.308
+    genome_name: Streptococcus dysgalactiae DSM 23147
+    taxon_id: NCBITaxon:1334
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-23147
+    source_strain_identifiers: DSM 23147
+    source_strain_field: strain
+  - genome_id: patric:1334.308
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1334.308
+    genome_name: Streptococcus dysgalactiae DSM 23147
+    taxon_id: NCBITaxon:1334
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-23147
+    source_strain_identifiers: DSM:23147
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN16357185
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -1489,6 +1737,15 @@ strains:
       - matched_strain_id: kgmicrobe.strain:DSM-23147
         record_id: biosample:SAMN16357185
         record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1334.230
+        source_strain_field: culture_collection
+        source_strain_identifiers: DSM:23147
+        taxon_id: NCBITaxon:1334
+      - matched_strain_id: kgmicrobe.strain:DSM-23147
+        record_id: biosample:SAMN16357185
+        record_type: BIOSAMPLE
         source: GOLD
         source_field: NCBI BIOSAMPLE ACCESSION
         source_id: gold:Gp0550450
@@ -1500,6 +1757,15 @@ strains:
       ena_analysis_id: ena.analysis:ERZ25831288
       sylph_species: Streptococcus dysgalactiae
   related_records:
+  - record_id: bioproject:PRJNA1273177
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:119602.2501
+    taxon_id: NCBITaxon:119602
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:CCUG-36637
+    source_strain_identifiers: CCUG:36637
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
     source: GTDB
@@ -1509,6 +1775,25 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-23147
     source_strain_identifiers: DSM 23147
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_030812815.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1334
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-23147
+    source_strain_identifiers: strain=DSM 23147
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA231221
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1334.230
+    taxon_id: NCBITaxon:1334
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-23147
+    source_strain_identifiers: DSM:23147
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA231221
     record_type: BIOPROJECT
     source: GOLD
@@ -1522,6 +1807,15 @@ strains:
     source_project_id: gold:Gp0550450
   - record_id: bioproject:PRJNA64681
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1000589.3
+    taxon_id: NCBITaxon:1000589
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:CCUG-36637
+    source_strain_identifiers: CCUG 36637
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA64681
+    record_type: BIOPROJECT
     source: GOLD
     source_id: gold:Gp0009700
     taxon_id: NCBITaxon:1000589
@@ -1531,6 +1825,24 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0009700
     source_project_id: gold:Gp0009700
+  - record_id: bioproject:PRJNA708417
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1334.308
+    taxon_id: NCBITaxon:1334
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-23147
+    source_strain_identifiers: DSM 23147
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA708417
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1334.308
+    taxon_id: NCBITaxon:1334
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-23147
+    source_strain_identifiers: DSM:23147
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA708417
     record_type: BIOPROJECT
     source: GOLD
@@ -1553,6 +1865,25 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0568361
     source_project_id: gold:Gp0539550
+  - record_id: bioproject:PRJNA708417
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_030812815.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1334
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-23147
+    source_strain_identifiers: strain=DSM 23147
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN00621722
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1000589.3
+    taxon_id: NCBITaxon:1000589
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:CCUG-36637
+    source_strain_identifiers: CCUG 36637
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN00621722
     record_type: BIOSAMPLE
     source: GOLD
@@ -1566,6 +1897,15 @@ strains:
     source_project_id: gold:Gp0009700
   - record_id: biosample:SAMN16357185
     record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1334.230
+    taxon_id: NCBITaxon:1334
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-23147
+    source_strain_identifiers: DSM:23147
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN16357185
+    record_type: BIOSAMPLE
     source: GOLD
     source_id: gold:Gp0550450
     taxon_id: NCBITaxon:1334
@@ -1575,6 +1915,24 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0575721
     source_project_id: gold:Gp0550450
+  - record_id: biosample:SAMN18243580
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1334.308
+    taxon_id: NCBITaxon:1334
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-23147
+    source_strain_identifiers: DSM 23147
+    source_strain_field: strain
+  - record_id: biosample:SAMN18243580
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1334.308
+    taxon_id: NCBITaxon:1334
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-23147
+    source_strain_identifiers: DSM:23147
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN18243580
     record_type: BIOSAMPLE
     source: GOLD
@@ -1606,6 +1964,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-23147
     source_strain_identifiers: DSM 23147
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN18243580
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_030812815.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1334
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-23147
+    source_strain_identifiers: strain=DSM 23147
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN18243580
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_030812815.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1334
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-23147
+    source_strain_identifiers: strain=DSM 23147
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN52092851
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:119602.2501
+    taxon_id: NCBITaxon:119602
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:CCUG-36637
+    source_strain_identifiers: CCUG:36637
+    source_strain_field: culture_collection
   - record_id: gold:Ga0013916
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -2653,6 +3040,23 @@ strains:
   - kgmicrobe.strain:LMG-15819
   - kgmicrobe.strain:NCTC-8543
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_016128095
+    source: BACDIVE
+    source_id: bacdive:14800
+    source_reference_id: '66792'
+    assembly_level: complete
+    assembly_name: ASM1612809v1 assembly for Streptococcus dysgalactiae FDAARGOS_1017
+    taxon_id: NCBITaxon:1334
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_016128095.1
+    source: BV_BRC
+    source_id: patric:1334.229
+    assembly_name: Streptococcus dysgalactiae strain FDAARGOS_1017 strain Not applicable
+    taxon_id: NCBITaxon:1334
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-6176
+    source_strain_identifiers: DSM:6176
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_016128095.1
     source: GOLD
     source_id: gold:Ga0491586
@@ -2669,8 +3073,10 @@ strains:
     source_id: bacdive:14800
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Streptococcus dysgalactiae subsp. equisimilis NCTC8543
+    assembly_name: 46514_B01 assembly for Streptococcus dysgalactiae subsp. equisimilis
+      NCTC8543
     taxon_id: NCBITaxon:119602
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_900460145.1
     source: GOLD
     source_id: gold:Ga0351780
@@ -2694,6 +3100,16 @@ strains:
     source_organism_id: gold:Go0298257
     source_project_id: gold:Gp0384137
   genome_records:
+  - genome_id: img.taxon:8034702643
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:14800
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: 46514_B01 assembly for Streptococcus dysgalactiae subsp. equisimilis
+      NCTC8543
+    taxon_id: NCBITaxon:119602
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:8034702643
     source_database: img
     source: GOLD
@@ -2720,6 +3136,15 @@ strains:
     source_project_id: gold:Gp0384137
   - genome_id: img.taxon:8120171100
     source_database: img
+    source: BACDIVE
+    source_id: bacdive:14800
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM1612809v1 assembly for Streptococcus dysgalactiae FDAARGOS_1017
+    taxon_id: NCBITaxon:1334
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:8120171100
+    source_database: img
     source: GOLD
     source_id: gold:Ga0491586
     genome_name: Streptococcus dysgalactiae FDAARGOS_1017
@@ -2735,17 +3160,30 @@ strains:
     source: BACDIVE
     source_id: bacdive:14800
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Streptococcus dysgalactiae subsp. equisimilis strain NCTC8543
+    assembly_level: contig
+    genome_name: 46514_B01 assembly for Streptococcus dysgalactiae subsp. equisimilis
+      NCTC8543
     taxon_id: NCBITaxon:119602
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   - genome_id: patric:1334.229
     source_database: patric
     source: BACDIVE
     source_id: bacdive:14800
     source_reference_id: '66792'
     assembly_level: complete
-    genome_name: Streptococcus dysgalactiae strain FDAARGOS_1017
+    genome_name: ASM1612809v1 assembly for Streptococcus dysgalactiae FDAARGOS_1017
     taxon_id: NCBITaxon:1334
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1334.229
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1334.229
+    genome_name: Streptococcus dysgalactiae strain FDAARGOS_1017 strain Not applicable
+    taxon_id: NCBITaxon:1334
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-6176
+    source_strain_identifiers: DSM:6176
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN16357186
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -2763,6 +3201,15 @@ strains:
       archive_url: https://osf.io/download/6672fc22b5a03601119ff31c/
       archive_filename: atb.assembly.r0.2.batch.596.tar.xz
       sample_links:
+      - matched_strain_id: kgmicrobe.strain:DSM-6176
+        record_id: biosample:SAMN16357186
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1334.229
+        source_strain_field: culture_collection
+        source_strain_identifiers: DSM:6176
+        taxon_id: NCBITaxon:1334
       - matched_strain_id: kgmicrobe.strain:DSM-6176
         record_id: biosample:SAMN16357186
         record_type: BIOSAMPLE
@@ -2801,6 +3248,15 @@ strains:
     source_project_id: gold:Gp0384137
   - record_id: bioproject:PRJNA231221
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1334.229
+    taxon_id: NCBITaxon:1334
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-6176
+    source_strain_identifiers: DSM:6176
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA231221
+    record_type: BIOPROJECT
     source: GOLD
     source_id: gold:Gp0550451
     taxon_id: NCBITaxon:1334
@@ -2832,6 +3288,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0298257
     source_project_id: gold:Gp0384137
+  - record_id: biosample:SAMN16357186
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1334.229
+    taxon_id: NCBITaxon:1334
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-6176
+    source_strain_identifiers: DSM:6176
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN16357186
     record_type: BIOSAMPLE
     source: GOLD
@@ -3684,7 +4149,7 @@ strains:
   culture_collection_ids:
   - kgmicrobe.strain:CCUG-27622
   - kgmicrobe.strain:CIP-105034
-  - kgmicrobe.strain:CNCTC-83/50
+  - kgmicrobe.strain:CNCTC%2083%2F50
   - kgmicrobe.strain:LMG-15823
   related_records:
   - record_id: gold:Go0298411
@@ -3872,7 +4337,7 @@ strains:
   - kgmicrobe.strain:ATCC-27957
   - kgmicrobe.strain:CIP-105452
   - kgmicrobe.strain:JCM-5673
-  - kgmicrobe.strain:NADC-Z-8
+  - kgmicrobe.strain:NADC%20Z-8
   medium_count: 2
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_000188315
@@ -3880,8 +4345,28 @@ strains:
     source_id: bacdive:138212
     source_reference_id: '66792'
     assembly_level: chromosome
+    assembly_name: ASM18831v1 assembly for Streptococcus dysgalactiae subsp. dysgalactiae
+      ATCC 27957
+    taxon_id: NCBITaxon:663952
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_000188315.1
+    source: BV_BRC
+    source_id: patric:663952.3
     assembly_name: Streptococcus dysgalactiae subsp. dysgalactiae ATCC 27957
     taxon_id: NCBITaxon:663952
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-27957
+    source_strain_identifiers: ATCC 27957
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_000188315.1
+    source: BV_BRC
+    source_id: patric:663952.3
+    assembly_name: Streptococcus dysgalactiae subsp. dysgalactiae ATCC 27957
+    taxon_id: NCBITaxon:663952
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-27957
+    source_strain_identifiers: ATCC 27957
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_000188315.1
     source: GOLD
     source_id: gold:Ga0018038
@@ -3924,6 +4409,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-27957
     source_strain_identifiers: ATCC 27957
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_000188315.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000188315.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Chromosome
+    assembly_name: ASM18831v1
+    taxon_id: NCBITaxon:663952
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-27957
+    source_strain_identifiers: strain=ATCC 27957
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_000188315
     source: STRAININFO
     source_id: straininfo.strain:39275
@@ -3962,9 +4458,11 @@ strains:
     source: BACDIVE
     source_id: bacdive:138212
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Streptococcus dysgalactiae dysgalactiae NADC Z-8, ATCC 27957
+    assembly_level: chromosome
+    genome_name: ASM18831v1 assembly for Streptococcus dysgalactiae subsp. dysgalactiae
+      ATCC 27957
     taxon_id: NCBITaxon:663952
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2545824515
     source_database: img
     source: GOLD
@@ -3994,10 +4492,50 @@ strains:
     source: BACDIVE
     source_id: bacdive:138212
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: chromosome
+    genome_name: ASM18831v1 assembly for Streptococcus dysgalactiae subsp. dysgalactiae
+      ATCC 27957
+    taxon_id: NCBITaxon:663952
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:663952.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:663952.3
     genome_name: Streptococcus dysgalactiae subsp. dysgalactiae ATCC 27957
     taxon_id: NCBITaxon:663952
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-27957
+    source_strain_identifiers: ATCC 27957
+    source_strain_field: culture_collection
+  - genome_id: patric:663952.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:663952.3
+    genome_name: Streptococcus dysgalactiae subsp. dysgalactiae ATCC 27957
+    taxon_id: NCBITaxon:663952
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-27957
+    source_strain_identifiers: ATCC 27957
+    source_strain_field: strain
   related_records:
+  - record_id: bioproject:PRJNA39781
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:663952.3
+    taxon_id: NCBITaxon:663952
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-27957
+    source_strain_identifiers: ATCC 27957
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA39781
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:663952.3
+    taxon_id: NCBITaxon:663952
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-27957
+    source_strain_identifiers: ATCC 27957
+    source_strain_field: strain
   - record_id: bioproject:PRJNA39781
     record_type: BIOPROJECT
     source: GOLD
@@ -4029,6 +4567,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-27957
     source_strain_identifiers: ATCC 27957
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA39781
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000188315.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:663952
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-27957
+    source_strain_identifiers: strain=ATCC 27957
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02428924
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:663952.3
+    taxon_id: NCBITaxon:663952
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-27957
+    source_strain_identifiers: ATCC 27957
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN02428924
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:663952.3
+    taxon_id: NCBITaxon:663952
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-27957
+    source_strain_identifiers: ATCC 27957
+    source_strain_field: strain
   - record_id: biosample:SAMN02428924
     record_type: BIOSAMPLE
     source: GTDB
@@ -4038,6 +4604,16 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-27957
     source_strain_identifiers: ATCC 27957
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN02428924
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000188315.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:663952
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-27957
+    source_strain_identifiers: strain=ATCC 27957
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0018038
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -4407,18 +4983,59 @@ strains:
     source_id: bacdive:141870
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Streptococcus dysgalactiae subsp. equisimilis NCTC9603
+    assembly_name: 42731_F02 assembly for Streptococcus dysgalactiae subsp. equisimilis
+      NCTC9603
     taxon_id: NCBITaxon:119602
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_901543655.1
+    source: BV_BRC
+    source_id: patric:119602.305
+    assembly_name: Streptococcus dysgalactiae subsp. equisimilis strain NCTC9603
+    taxon_id: NCBITaxon:119602
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-9603
+    source_strain_identifiers: NCTC:9603
+    source_strain_field: culture_collection
   genome_records:
   - genome_id: patric:119602.305
     source_database: patric
     source: BACDIVE
     source_id: bacdive:141870
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: 42731_F02 assembly for Streptococcus dysgalactiae subsp. equisimilis
+      NCTC9603
+    taxon_id: NCBITaxon:119602
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:119602.305
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:119602.305
     genome_name: Streptococcus dysgalactiae subsp. equisimilis strain NCTC9603
     taxon_id: NCBITaxon:119602
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-9603
+    source_strain_identifiers: NCTC:9603
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:119602.305
+    taxon_id: NCBITaxon:119602
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-9603
+    source_strain_identifiers: NCTC:9603
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMEA3662922
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:119602.305
+    taxon_id: NCBITaxon:119602
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-9603
+    source_strain_identifiers: NCTC:9603
+    source_strain_field: culture_collection
   - record_id: gold:Go0298557
     record_type: GOLD_ORGANISM
     source: GOLD
@@ -5052,8 +5669,19 @@ strains:
     source_id: bacdive:139680
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Streptococcus dysgalactiae subsp. equisimilis NCTC8546
+    assembly_name: 41825_F01 assembly for Streptococcus dysgalactiae subsp. equisimilis
+      NCTC8546
     taxon_id: NCBITaxon:119602
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_901542365.1
+    source: BV_BRC
+    source_id: patric:119602.291
+    assembly_name: Streptococcus dysgalactiae subsp. equisimilis strain NCTC8546
+    taxon_id: NCBITaxon:119602
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8546
+    source_strain_identifiers: NCTC:8546
+    source_strain_field: culture_collection
   genome_records:
   - genome_id: patric:119602.291
     source_database: patric
@@ -5061,9 +5689,39 @@ strains:
     source_id: bacdive:139680
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: 41825_F01 assembly for Streptococcus dysgalactiae subsp. equisimilis
+      NCTC8546
+    taxon_id: NCBITaxon:119602
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:119602.291
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:119602.291
     genome_name: Streptococcus dysgalactiae subsp. equisimilis strain NCTC8546
     taxon_id: NCBITaxon:119602
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-8546
+    source_strain_identifiers: NCTC:8546
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:119602.291
+    taxon_id: NCBITaxon:119602
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8546
+    source_strain_identifiers: NCTC:8546
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMEA3572421
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:119602.291
+    taxon_id: NCBITaxon:119602
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8546
+    source_strain_identifiers: NCTC:8546
+    source_strain_field: culture_collection
   - record_id: gold:Go0298851
     record_type: GOLD_ORGANISM
     source: GOLD
@@ -6392,7 +7050,7 @@ strains:
   classified_as: NCBITaxon:119602
   culture_collection_ids:
   - kgmicrobe.strain:CCUG-27621
-  - kgmicrobe.strain:CNCTC-7/49
+  - kgmicrobe.strain:CNCTC%207%2F49
   related_records:
   - record_id: gold:Go0297398
     record_type: GOLD_ORGANISM
@@ -13595,6 +14253,7 @@ source_attestations:
   source_label: Streptococcus dysgalactiae
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:781320
   source_label: Streptococcus dysgalactiae
@@ -13612,7 +14271,7 @@ source_attestations:
   source_label: Streptococcus dysgalactiae
   assertion_count: 72
   assertion_unit: STRAIN
-  notes: 49 strains are filed under 1 descendant NCBI taxa (see classified_as).
+  notes: 49 strains are filed under 2 descendant NCBI taxa (see classified_as).
 - source: MEDIADIVE
   source_id: NCBITaxon:1334
   source_label: Streptococcus dysgalactiae
@@ -13638,7 +14297,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

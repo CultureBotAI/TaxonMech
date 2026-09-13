@@ -62,6 +62,10 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 6
   notes: LPSN links this GTDB species to the taxon's name.
+synonyms:
+- synonym_text: Aeromonas simiae Harf-Monteil et al. 2004
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Aeromonas_simiae
 - lpsn:772918
@@ -75,7 +79,7 @@ strains:
   - kgmicrobe.strain:CCUG-47378
   - kgmicrobe.strain:CIP-107798
   - kgmicrobe.strain:DSM-16559
-  - kgmicrobe.strain:IBS-S6874
+  - kgmicrobe.strain:IBS%20S6874
   is_type_strain: true
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_000820125
@@ -83,8 +87,18 @@ strains:
     source_id: bacdive:261
     source_reference_id: '66792'
     assembly_level: scaffold
+    assembly_name: PRJEB7039 assembly for Aeromonas simiae CIP 107798
+    taxon_id: NCBITaxon:218936
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_000820125.1
+    source: BV_BRC
+    source_id: patric:218936.3
     assembly_name: Aeromonas simiae CIP 107798
     taxon_id: NCBITaxon:218936
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:CIP-107798
+    source_strain_identifiers: CIP 107798
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_000820125.1
     source: GOLD
     source_id: gold:Ga0098513
@@ -117,6 +131,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:CIP-107798
     source_strain_identifiers: CIP 107798
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_000820125.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000820125.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: PRJEB7039
+    taxon_id: NCBITaxon:218936
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:CIP-107798
+    source_strain_identifiers: strain=CIP 107798
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_000820125.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_000820125.1
@@ -127,6 +152,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:CIP-107798
     source_strain_identifiers: CIP 107798
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_000820125.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000820125.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: PRJEB7039
+    taxon_id: NCBITaxon:218936
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:CIP-107798
+    source_strain_identifiers: strain=CIP 107798
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_000820125
     source: STRAININFO
     source_id: straininfo.strain:131408
@@ -165,9 +201,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:261
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Aeromonas simiae CIP 107798
+    assembly_level: scaffold
+    genome_name: PRJEB7039 assembly for Aeromonas simiae CIP 107798
     taxon_id: NCBITaxon:218936
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2648501404
     source_database: img
     source: GOLD
@@ -197,9 +234,20 @@ strains:
     source: BACDIVE
     source_id: bacdive:261
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: scaffold
+    genome_name: PRJEB7039 assembly for Aeromonas simiae CIP 107798
+    taxon_id: NCBITaxon:218936
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:218936.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:218936.3
     genome_name: Aeromonas simiae CIP 107798
     taxon_id: NCBITaxon:218936
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:CIP-107798
+    source_strain_identifiers: CIP 107798
+    source_strain_field: strain
   - genome_id: atb.assembly:202505.SAMEA2752409
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -217,6 +265,15 @@ strains:
       archive_url: https://osf.io/download/66715576d835c439ba4cdfdf/
       archive_filename: atb.assembly.r0.2.batch.94.tar.xz
       sample_links:
+      - matched_strain_id: kgmicrobe.strain:CIP-107798
+        record_id: biosample:SAMEA2752409
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:218936.3
+        source_strain_field: strain
+        source_strain_identifiers: CIP 107798
+        taxon_id: NCBITaxon:218936
       - matched_strain_id: kgmicrobe.strain:CIP-107798
         record_id: biosample:SAMEA2752409
         record_type: BIOSAMPLE
@@ -248,9 +305,38 @@ strains:
         source_strain_field: ncbi_strain_identifiers
         source_strain_identifiers: CIP 107798
         taxon_id: NCBITaxon:218936
+      - matched_strain_id: kgmicrobe.strain:CIP-107798
+        record_id: biosample:SAMEA2752409
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_000820125.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=CIP 107798
+        taxon_id: NCBITaxon:218936
+      - matched_strain_id: kgmicrobe.strain:CIP-107798
+        record_id: biosample:SAMEA2752409
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCF_000820125.1
+        source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=CIP 107798
+        taxon_id: NCBITaxon:218936
       ena_analysis_id: ena.analysis:ERZ3216139
       sylph_species: Aeromonas simiae
   related_records:
+  - record_id: bioproject:PRJEB7039
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:218936.3
+    taxon_id: NCBITaxon:218936
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:CIP-107798
+    source_strain_identifiers: CIP 107798
+    source_strain_field: strain
   - record_id: bioproject:PRJEB7039
     record_type: BIOPROJECT
     source: GOLD
@@ -273,6 +359,16 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0117638
     source_project_id: gold:Gp0122584
+  - record_id: bioproject:PRJEB7039
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000820125.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:218936
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:CIP-107798
+    source_strain_identifiers: strain=CIP 107798
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
     source: GTDB
@@ -282,6 +378,25 @@ strains:
     matched_strain_id: kgmicrobe.strain:CIP-107798
     source_strain_identifiers: CIP 107798
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000820125.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:218936
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:CIP-107798
+    source_strain_identifiers: strain=CIP 107798
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMEA2752409
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:218936.3
+    taxon_id: NCBITaxon:218936
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:CIP-107798
+    source_strain_identifiers: CIP 107798
+    source_strain_field: strain
   - record_id: biosample:SAMEA2752409
     record_type: BIOSAMPLE
     source: GOLD
@@ -313,6 +428,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:CIP-107798
     source_strain_identifiers: CIP 107798
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMEA2752409
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000820125.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:218936
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:CIP-107798
+    source_strain_identifiers: strain=CIP 107798
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMEA2752409
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000820125.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:218936
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:CIP-107798
+    source_strain_identifiers: strain=CIP 107798
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0098513
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -941,7 +1076,7 @@ strains:
   culture_collection_ids:
   - kgmicrobe.strain:CCUG-47379
   - kgmicrobe.strain:CIP-107797
-  - kgmicrobe.strain:IBS-S6652
+  - kgmicrobe.strain:IBS%20S6652
   related_records:
   - record_id: straininfo.deposit:531498
     record_type: STRAININFO_DEPOSIT
@@ -1025,6 +1160,7 @@ source_attestations:
   source_label: Aeromonas simiae
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:772918
   source_label: Aeromonas simiae
@@ -1063,7 +1199,7 @@ source_attestations:
   assertion_count: 10
   assertion_unit: TRAIT_ASSERTION
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

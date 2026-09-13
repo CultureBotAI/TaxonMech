@@ -68,7 +68,13 @@ taxonomy_mappings:
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 synonyms:
+- synonym_text: '"Clostridium saudii" Angelakis et al. 2014'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: Clostridium saudiense corrig.
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Clostridium saudiense corrig. Angelakis et al. 2016
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Clostridium saudii
@@ -76,6 +82,9 @@ synonyms:
   source: LPSN
   source_id: lpsn:793456
 - synonym_text: Clostridium saudii
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Clostridium sp. JCC
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 xrefs:
@@ -89,7 +98,7 @@ strains:
   source_id: bacdive:131499
   designation: JCC
   culture_collection_ids:
-  - kgmicrobe.strain:CSUR-P697
+  - kgmicrobe.strain:CSUR%20P697
   - kgmicrobe.strain:DSM-27835
   is_type_strain: true
   genome_assemblies:
@@ -98,8 +107,9 @@ strains:
     source_id: bacdive:131499
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Clostridium saudiense JCC
+    assembly_name: JCC assembly for Clostridium saudiense JCC
     taxon_id: NCBITaxon:1414720
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_000577815.1
     source: GOLD
     source_id: gold:Ga0055385
@@ -117,9 +127,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:131499
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Clostridium saudiense JCC
+    assembly_level: contig
+    genome_name: JCC assembly for Clostridium saudiense JCC
     taxon_id: NCBITaxon:1414720
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2619619241
     source_database: img
     source: GOLD
@@ -132,6 +143,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0101177
     source_project_id: gold:Gp0101177
+  - genome_id: patric:1414720.3
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:131499
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: JCC assembly for Clostridium saudiense JCC
+    taxon_id: NCBITaxon:1414720
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: bioproject:PRJEB4942
     record_type: BIOPROJECT
@@ -388,6 +408,7 @@ source_attestations:
   source_label: Clostridium saudiense
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:794259
   source_label: Clostridium saudiense
@@ -422,7 +443,7 @@ source_attestations:
   assertion_count: 2
   assertion_unit: TRAIT_ASSERTION
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

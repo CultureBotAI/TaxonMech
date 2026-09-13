@@ -75,6 +75,10 @@ taxonomy_mappings:
   genome_count: 2
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
+synonyms:
+- synonym_text: Xanthomonas sacchari Vauterin et al. 1995
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - lpsn:786750
 genetic_code: 11
@@ -95,8 +99,18 @@ strains:
     source_id: bacdive:17610
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Xanthomonas sacchari CFBP4641
+    assembly_name: ASM294008v1 assembly for Xanthomonas sacchari CFBP4641
     taxon_id: NCBITaxon:56458
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_002940085.1
+    source: BV_BRC
+    source_id: patric:56458.17
+    assembly_name: Xanthomonas sacchari strain CFBP4641
+    taxon_id: NCBITaxon:56458
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:CFBP-4641
+    source_strain_identifiers: CFBP:4641
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_002940085.1
     source: GOLD
     source_id: gold:Ga0335867
@@ -178,9 +192,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:17610
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Xanthomonas sacchari CFBP4641
+    assembly_level: contig
+    genome_name: ASM294008v1 assembly for Xanthomonas sacchari CFBP4641
     taxon_id: NCBITaxon:56458
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2878102749
     source_database: img
     source: GOLD
@@ -198,9 +213,20 @@ strains:
     source: BACDIVE
     source_id: bacdive:17610
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM294008v1 assembly for Xanthomonas sacchari CFBP4641
+    taxon_id: NCBITaxon:56458
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:56458.17
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:56458.17
     genome_name: Xanthomonas sacchari strain CFBP4641
     taxon_id: NCBITaxon:56458
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:CFBP-4641
+    source_strain_identifiers: CFBP:4641
+    source_strain_field: culture_collection
   related_records:
   - record_id: bioproject:PRJNA1003886
     record_type: BIOPROJECT
@@ -213,6 +239,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0487281
     source_project_id: gold:Gp0854191
+  - record_id: bioproject:PRJNA338646
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:56458.17
+    taxon_id: NCBITaxon:56458
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:CFBP-4641
+    source_strain_identifiers: CFBP:4641
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA338646
     record_type: BIOPROJECT
     source: GOLD
@@ -235,6 +270,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0487281
     source_project_id: gold:Gp0854382
+  - record_id: biosample:SAMN05560313
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:56458.17
+    taxon_id: NCBITaxon:56458
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:CFBP-4641
+    source_strain_identifiers: CFBP:4641
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN05560313
     record_type: BIOSAMPLE
     source: GOLD
@@ -915,6 +959,7 @@ source_attestations:
   source_label: Xanthomonas sacchari
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:786750
   source_label: Xanthomonas sacchari
@@ -958,7 +1003,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

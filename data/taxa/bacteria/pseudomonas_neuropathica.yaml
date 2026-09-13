@@ -85,6 +85,13 @@ taxonomy_mappings:
   genome_count: 1
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
+synonyms:
+- synonym_text: Pseudomonas neuropathica Duman et al. 2021
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Pseudomonas sp. P155
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - lpsn:18689
 genetic_code: 11
@@ -95,22 +102,83 @@ strains:
   source_id: bacdive:166731
   designation: P155
   culture_collection_ids:
-  - kgmicrobe.strain:CCUG-74875-T
-  - kgmicrobe.strain:CECT-30178-T
+  - kgmicrobe.strain:CCUG-74875
+  - kgmicrobe.strain:CECT-30178
+  is_type_strain: true
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_015461835
     source: BACDIVE
     source_id: bacdive:166731
     source_reference_id: '66792'
     assembly_level: scaffold
-    assembly_name: Pseudomonas neuropathica P155
+    assembly_name: ASM1546183v1 assembly for Pseudomonas neuropathica P155
     taxon_id: NCBITaxon:2730425
+    source_field: Sequence information.Genome sequences.INSDC accession
+  genome_records:
+  - genome_id: img.taxon:8110218956
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:166731
+    source_reference_id: '66792'
+    assembly_level: scaffold
+    genome_name: ASM1546183v1 assembly for Pseudomonas neuropathica P155
+    taxon_id: NCBITaxon:2730425
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: patric:2730425.3
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:166731
+    source_reference_id: '66792'
+    assembly_level: scaffold
+    genome_name: ASM1546183v1 assembly for Pseudomonas neuropathica P155
+    taxon_id: NCBITaxon:2730425
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  related_records:
+  - record_id: straininfo.deposit:918416
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:410586
+    taxon_id: NCBITaxon:2730425
+    record_name: CCUG 74875
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCUG-74875
+    source_strain_identifiers: CCUG 74875
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 74875
+      deposit_id: straininfo.deposit:918416
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:166731
+      strain_doi: DOI:10.60712/SI-ID410586.3
+      strain_id: straininfo.strain:410586
+      strain_status: published online
+  - record_id: straininfo.strain:410586
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:410586
+    taxon_id: NCBITaxon:2730425
+    record_name: CCUG 74875
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCUG-74875
+    source_strain_identifiers: CCUG 74875
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 74875
+      deposit_id: straininfo.deposit:918416
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:166731
+      strain_doi: DOI:10.60712/SI-ID410586.3
+      strain_id: straininfo.strain:410586
+      strain_status: published online
 source_attestations:
 - source: NCBITAXON
   source_id: NCBITaxon:2730425
   source_label: Pseudomonas neuropathica
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:18689
   source_label: Pseudomonas neuropathica
@@ -135,7 +203,7 @@ source_attestations:
   assertion_count: 1
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

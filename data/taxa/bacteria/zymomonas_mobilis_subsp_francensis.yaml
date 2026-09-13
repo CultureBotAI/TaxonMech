@@ -36,6 +36,10 @@ lineage:
   rank: SPECIES
 grounding_status: EXACT
 mapping_status: SEEDED
+synonyms:
+- synonym_text: Zymomonas mobilis subsp. francensis Coton et al. 2006
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 genetic_code: 11
 strain_count: 1
 strains:
@@ -44,6 +48,7 @@ strains:
   source_id: bacdive:14290
   designation: AN0101
   culture_collection_ids:
+  - kgmicrobe.strain:CIP-108684
   - kgmicrobe.strain:DSM-18599
   - kgmicrobe.strain:LMG-22974
   genome_assemblies:
@@ -52,8 +57,9 @@ strains:
     source_id: bacdive:14290
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Zymomonas mobilis AN0101
+    assembly_name: ASM671597v1 assembly for Zymomonas mobilis AN0101
     taxon_id: NCBITaxon:542
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_006715975.1
     source: GOLD
     source_id: gold:Ga0314526
@@ -82,9 +88,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:14290
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Zymomonas mobilis francensis DSM 18599
+    assembly_level: contig
+    genome_name: ASM671597v1 assembly for Zymomonas mobilis AN0101
     taxon_id: NCBITaxon:542
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2811994955
     source_database: img
     source: GOLD
@@ -109,6 +116,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0032958
     source_project_id: gold:Gp0329358
+  - genome_id: patric:542.21
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:14290
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: ASM671597v1 assembly for Zymomonas mobilis AN0101
+    taxon_id: NCBITaxon:542
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: bioproject:PRJNA536320
     record_type: BIOPROJECT
@@ -200,6 +216,28 @@ strains:
     source_strain_identifiers: DSM 18599
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0032958
+  - record_id: gold:Go0256479
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0256479
+    taxon_id: NCBITaxon:542
+    record_name: Zymomonas mobilis CIP 108684
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CIP-108684
+    source_strain_identifiers: CIP 108684
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0256479
+  - record_id: gold:Go0256479
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0256479
+    taxon_id: NCBITaxon:542
+    record_name: Zymomonas mobilis CIP 108684
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CIP-108684
+    source_strain_identifiers: CIP 108684
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0256479
   - record_id: gold:Go0256481
     record_type: GOLD_ORGANISM
     source: GOLD
@@ -287,6 +325,24 @@ strains:
       strain_doi: DOI:10.60712/SI-ID356289.3
       strain_id: straininfo.strain:356289
       strain_status: published online
+  - record_id: straininfo.deposit:556135
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:356289
+    record_name: CIP 108684
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CIP-108684
+    source_strain_identifiers: CIP 108684
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CIP 108684
+      deposit_id: straininfo.deposit:556135
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:14290
+      strain_doi: DOI:10.60712/SI-ID356289.3
+      strain_id: straininfo.strain:356289
+      strain_status: published online
   - record_id: straininfo.deposit:691076
     record_type: STRAININFO_DEPOSIT
     source: STRAININFO
@@ -300,6 +356,24 @@ strains:
     straininfo_evidence:
       deposit_designation: DSM 18599
       deposit_id: straininfo.deposit:691076
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:14290
+      strain_doi: DOI:10.60712/SI-ID356289.3
+      strain_id: straininfo.strain:356289
+      strain_status: published online
+  - record_id: straininfo.strain:356289
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:356289
+    record_name: CIP 108684
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CIP-108684
+    source_strain_identifiers: CIP 108684
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CIP 108684
+      deposit_id: straininfo.deposit:556135
       deposit_status: available
       match_method: culture_identifier
       source_bacdive_id: bacdive:14290
@@ -350,6 +424,7 @@ source_attestations:
   source_label: Zymomonas mobilis subsp. francensis
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: BACDIVE
   source_id: NCBITaxon:325472
   source_label: Zymomonas mobilis subsp. francensis
@@ -366,7 +441,7 @@ source_attestations:
   assertion_count: 1
   assertion_unit: TRAIT_ASSERTION
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

@@ -62,15 +62,18 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 77
 synonyms:
-- synonym_text: Clostridium carnis (Klein 1904) Spray 1939 (Approved Lists 1980)
+- synonym_text: '"Plectridium carnis" (Klein 1904) Prevot 1938'
   synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Clostridium carnis (Klein 1904) Spray 1939 (Approved Lists 1980)
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Clostridium neonatale
   synonym_type: EXACT_SYNONYM
   source: GTDB
   source_id: GTDB:s__Clostridium_neonatale
 - synonym_text: Plectridium carnis
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 xrefs:
 - GTDB:s__Clostridium_neonatale
@@ -84,26 +87,50 @@ strains:
   designation: '10038'
   culture_collection_ids:
   - kgmicrobe.strain:ATCC-25777
-  - kgmicrobe.strain:CDC-KA-84
-  - kgmicrobe.strain:CDC-KA84
+  - kgmicrobe.strain:CDC%20KA%2084
+  - kgmicrobe.strain:CDC%20KA84
   - kgmicrobe.strain:CIP-104315
   - kgmicrobe.strain:DSM-1293
   - kgmicrobe.strain:JCM-1393
   - kgmicrobe.strain:NCIB-10670
   - kgmicrobe.strain:NCIMB-10670
   - kgmicrobe.strain:NCTC-13036
-  - kgmicrobe.strain:VPI-1635-B
-  - kgmicrobe.strain:VPI-1635B
+  - kgmicrobe.strain:VPI%201635%20B
+  - kgmicrobe.strain:VPI%201635B
   is_type_strain: true
+  genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_054657435.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_054657435.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM5465743v1
+    taxon_id: NCBITaxon:1530
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-1393
+    source_strain_identifiers: strain=JCM 1393
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCF_054657435.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_054657435.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM5465743v1
+    taxon_id: NCBITaxon:1530
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-1393
+    source_strain_identifiers: strain=JCM 1393
+    source_strain_field: infraspecific_name
   genome_records:
   - genome_id: img.taxon:2928353371
     source_database: img
     source: BACDIVE
     source_id: bacdive:2565
     source_reference_id: '66792'
-    assembly_level: draft
+    assembly_level: complete
     genome_name: Clostridium carnis DSM 1293
     taxon_id: NCBITaxon:1530
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2928353371
     source_database: img
     source: GOLD
@@ -128,7 +155,55 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0568266
     source_project_id: gold:Gp0538752
+  - genome_id: patric:1530.14
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1530.14
+    genome_name: Clostridium carnis JCM 1393
+    taxon_id: NCBITaxon:1530
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-1393
+    source_strain_identifiers: JCM 1393
+    source_strain_field: strain
+  - genome_id: patric:1530.14
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1530.14
+    genome_name: Clostridium carnis JCM 1393
+    taxon_id: NCBITaxon:1530
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-1393
+    source_strain_identifiers: JCM:1393
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJDB20344
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1530.14
+    taxon_id: NCBITaxon:1530
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-1393
+    source_strain_identifiers: JCM 1393
+    source_strain_field: strain
+  - record_id: bioproject:PRJDB20344
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1530.14
+    taxon_id: NCBITaxon:1530
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-1393
+    source_strain_identifiers: JCM:1393
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJDB20344
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_054657435.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1530
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:JCM-1393
+    source_strain_identifiers: strain=JCM 1393
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA1115556
     record_type: BIOPROJECT
     source: GOLD
@@ -151,6 +226,54 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0568266
     source_project_id: gold:Gp0538752
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_054657435.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1530
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:JCM-1393
+    source_strain_identifiers: strain=JCM 1393
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00887392
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1530.14
+    taxon_id: NCBITaxon:1530
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-1393
+    source_strain_identifiers: JCM 1393
+    source_strain_field: strain
+  - record_id: biosample:SAMD00887392
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1530.14
+    taxon_id: NCBITaxon:1530
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-1393
+    source_strain_identifiers: JCM:1393
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMD00887392
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_054657435.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1530
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:JCM-1393
+    source_strain_identifiers: strain=JCM 1393
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00887392
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_054657435.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1530
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:JCM-1393
+    source_strain_identifiers: strain=JCM 1393
+    source_strain_field: infraspecific_name
   - record_id: biosample:SAMN41513502
     record_type: BIOSAMPLE
     source: GOLD
@@ -756,6 +879,7 @@ source_attestations:
   source_label: Clostridium carnis
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:774848
   source_label: Clostridium carnis
@@ -794,7 +918,7 @@ source_attestations:
   assertion_count: 2
   assertion_unit: TRAIT_ASSERTION
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

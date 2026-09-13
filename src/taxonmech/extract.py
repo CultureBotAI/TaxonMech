@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Extract taxon and strain inventories from a kg-microbe checkout.
+"""Extract taxon and strain inventories from pinned primary sources and kg-microbe.
 
 TaxonMech does not vendor kg-microbe's multi-gigabyte KGX dumps. It vendors
 the *inventories* derived from them — small, reviewable TSVs under
@@ -10,10 +10,6 @@ run from them without kg-microbe present.
 
 Sources read under the kg-microbe checkout:
 
-* ``data/transformed/ontologies/ncbitaxon_{nodes,edges}.tsv`` — NCBI Taxonomy
-  labels, parents (``biolink:subclass_of``) and the GC_ID genetic-code xref.
-* ``data/raw/ncbitaxon.db`` — the semantic-sql build of ncbitaxon.owl, read
-  only for ``has_rank`` and typed synonyms, which the KGX transform drops.
 * ``data/transformed/gtdb/{nodes,edges}.tsv`` — GTDB species, the assemblies
   under them, and their ``close_match`` / ``broad_match`` edges to NCBI taxa.
 * ``data/transformed/lpsn/{nodes,edges}.tsv`` — LPSN names with authority and
@@ -21,10 +17,8 @@ Sources read under the kg-microbe checkout:
   ``same_as`` to synonymous names.
 * ``data/transformed/lpsn_api/{nodes,edges}.tsv`` — nomenclatural status,
   cited publications and INSDC sequence accessions per name.
-* ``data/transformed/bacdive/{nodes,edges}.tsv`` — BacDive strains, their
-  NCBI and LPSN parents, and their culture-collection deposits.
-* ``data/raw/bacdive_strains.json`` — strain-to-genome assertions that
-  the BacDive KGX transform does not carry.
+* ``data/transformed/bacdive/{nodes,edges}.tsv`` — legacy source LPSN links;
+  current identities and genomes come from the complete primary v2 capture.
 * ``data/raw/gtdb/{bac120,ar53}_metadata.tsv.gz`` — genome and sample/project
   identifiers linked by explicitly recorded culture deposits.
 * ``data/transformed/mediadive/edges.tsv`` — growth media per taxon / strain.
@@ -32,16 +26,19 @@ Sources read under the kg-microbe checkout:
 * ``data/transformed/madin_etal/edges.tsv``, ``bactotraits/edges.tsv`` —
   trait assertions per taxon.
 
+Pinned primary NCBI taxonomy and assembly files supply the full prokaryote
+backbone and exact culture-deposit assembly assertions. Complete BacDive v2
+and BV-BRC captures supply current strain identities and genome metadata.
 The official GOLD bulk workbook supplies organism → sequencing project →
 analysis relationships. A pinned DSMZ CAFI collection registry validates
 culture-deposit authorities and accession formats for GTDB and GOLD joins; both additional
 inputs are hashed in the manifest.
 
-The **universe** of taxa inventoried is every NCBI taxon that at least one of
-BacDive, LPSN, MediaDive, GOLD, Madin or BactoTraits attests, plus every
-ancestor of those. GTDB mappings are kept only where they land inside that
-universe: GTDB alone maps 322k species to strain-level NCBI taxa nothing else
-mentions, and inventorying those would triple the corpus for no attestation.
+The universe includes every primary NCBI bacterial and archaeal taxon,
+every target attested by the other sources (including GTDB), and ancestors.
+All GTDB mappings, all LPSN names and all current BacDive strains are retained;
+unmapped source entries remain native catalog records, without guessed identity.
+Primary NCBI and BV-BRC genome metadata supply exact culture-deposit assertions.
 
 Usage
 -----
@@ -54,7 +51,9 @@ from __future__ import annotations
 import argparse
 import csv
 import datetime
+import gzip
 import hashlib
+import json
 import os
 import re
 import sqlite3
@@ -68,8 +67,16 @@ from typing import Any
 import ijson
 import yaml
 
+from taxonmech.bacdive_v2 import genome_links as bacdive_genomes
+from taxonmech.bacdive_v2 import load_identities as bacdive_identities
+from taxonmech.bvbrc import extract_links as bvbrc_links
 from taxonmech.genome_sources import CAFI_REGISTRY_PATH, extract_gtdb_strain_genomes
 from taxonmech.gold_genomes import extract_gold_genomes
+from taxonmech.gold_genomes import validate_projection as validate_gold_projection
+from taxonmech.ncbi_assemblies import extract_links as ncbi_assembly_links
+from taxonmech.ncbi_assemblies import settings as assembly_settings
+from taxonmech.ncbi_taxdump import load_taxdump, prokaryote_taxa
+from taxonmech.ncbi_taxdump import settings as ncbi_settings
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 RAW_DIR = REPO_ROOT / "data" / "raw"
@@ -88,7 +95,7 @@ DOMAIN_ROOTS = {
     "NCBITaxon:10239": "VIRUSES",
 }
 
-ATTESTING_SOURCES = ("bacdive", "lpsn", "mediadive", "gold", "madin_etal", "bactotraits")
+ATTESTING_SOURCES = ("ncbitaxon", "gtdb", "bacdive", "lpsn", "mediadive", "gold", "madin_etal", "bactotraits")
 
 _STRAIN_NAME = re.compile(r"^bacdive_(?P<id>\d+) (?:as (?P<designation>.+?) of|strain of) NCBITaxon:\d+$")
 _LPSN_URL_RANK = re.compile(r"^https://lpsn\.dsmz\.de/(?P<rank>[a-z]+)/")
@@ -588,9 +595,6 @@ def resolve_kg_microbe(flag: str | None) -> Path:
 
 
 INPUTS = [
-    "data/transformed/ontologies/ncbitaxon_nodes.tsv",
-    "data/transformed/ontologies/ncbitaxon_edges.tsv",
-    "data/raw/ncbitaxon.db",
     "data/transformed/gtdb/nodes.tsv",
     "data/transformed/gtdb/edges.tsv",
     "data/transformed/lpsn/nodes.tsv",
@@ -599,7 +603,6 @@ INPUTS = [
     "data/transformed/lpsn_api/edges.tsv",
     "data/transformed/bacdive/nodes.tsv",
     "data/transformed/bacdive/edges.tsv",
-    "data/raw/bacdive_strains.json",
     "data/raw/gtdb/bac120_metadata.tsv.gz",
     "data/raw/gtdb/ar53_metadata.tsv.gz",
     "data/transformed/mediadive/edges.tsv",
@@ -618,7 +621,7 @@ def main(argv: list[str] | None = None) -> int:
                         help="Official GOLD bulk workbook; defaults to data/source_snapshots/goldData.xlsx.")
     parser.add_argument("--dry-run", action="store_true", help="Report counts without writing files.")
     parser.add_argument("--skip-input-hashes", action="store_true",
-                        help="Do not sha256 the inputs (the 14 GB ncbitaxon.db takes a while). "
+                        help="Do not sha256 the large upstream inputs. "
                              "The manifest then records bytes and mtime only; use for a dry-run.")
     args = parser.parse_args(argv)
 
@@ -635,13 +638,35 @@ def main(argv: list[str] | None = None) -> int:
             raise SystemExit(f"missing input: {kgm / relative}")
 
     print("reading NCBI Taxonomy ...", flush=True)
-    nodes, parents = load_ncbitaxon(kgm)
+    ncbi_config = ncbi_settings()
+    ncbi_path = REPO_ROOT / ncbi_config["path"]
+    nodes, parents, ranks, synonyms, redirects, type_material = load_taxdump(
+        ncbi_path, expected_sha256=ncbi_config["sha256"])
+    prokaryotes = prokaryote_taxa(parents, nodes)
+    # Retain retired identifiers from the preceding inventory as deprecated
+    # records. Their old source values remain pinned; IDs are never reused.
+    prior_path = REPO_ROOT / "data/ncbi/prior-taxonomy.tsv.gz"
+    prior_metadata = json.loads((REPO_ROOT / "data/ncbi/PRIOR_SOURCE.json").read_text())
+    if sha256_of(prior_path) != prior_metadata["sha256"]:
+        raise ValueError("prior NCBI taxonomy differs from its retirement-evidence pin")
+    with gzip.open(prior_path, "rt", encoding="utf-8") as handle:
+        retired = {row["taxon_id"]: row for row in csv.DictReader(handle, delimiter="\t")
+                   if row["taxon_id"] not in nodes}
+    for tid, row in retired.items():
+        nodes[tid] = {"label": row["label"], "genetic_code": row["genetic_code"]}
+        ranks[tid] = row["rank"]
+        if row["parent_id"]:
+            parents[tid] = row["parent_id"]
+        synonyms[tid] = {scope: row[column].split("|") for scope, column in (
+            ("EXACT_SYNONYM", "exact_synonyms"), ("RELATED_SYNONYM", "related_synonyms"),
+            ("BROAD_SYNONYM", "broad_synonyms")) if row[column]}
     print(f"  {len(nodes)} taxa, {len(parents)} subclass edges")
-    ranks, synonyms = load_ranks_and_synonyms(kgm / "data/raw/ncbitaxon.db")
     print(f"  {len(ranks)} ranks, {len(synonyms)} taxa with typed synonyms")
 
     print("reading BacDive ...", flush=True)
-    strains, cc_parents = extract_bacdive(kgm)
+    previous_strains, _previous_parents = extract_bacdive(kgm)
+    bacdive_dir = REPO_ROOT / "data/bacdive"
+    strains, cc_parents = bacdive_identities(bacdive_dir, previous_strains)
     print(f"  {len(strains)} BacDive strains, {len(cc_parents)} culture-collection ids with parents")
     print("reading MediaDive, GOLD, Madin, BactoTraits ...", flush=True)
     taxon_media, strain_media = extract_mediadive(kgm)
@@ -660,6 +685,12 @@ def main(argv: list[str] | None = None) -> int:
 
     # --- the universe -----------------------------------------------------
     attested: dict[str, set[str]] = defaultdict(set)
+    for tid in prokaryotes:
+        attested[tid].add("ncbitaxon")
+    for mapping in gtdb_mappings:
+        attested[mapping["ncbitaxon_id"]].add("gtdb")
+    for tid, row in retired.items():
+        attested[tid].update(row["attested_by"].split("|") if row["attested_by"] else [])
     for strain in strains.values():
         for tid in strain["taxon_ids"]:
             attested[tid].add("bacdive")
@@ -681,17 +712,19 @@ def main(argv: list[str] | None = None) -> int:
     unknown = sorted(t for t in attested if t not in nodes)
     for t in unknown:
         dropped_rows.append({"kind": "attested_taxon", "id": t,
-                             "reason": "not in the NCBITaxon transform (removed or merged id)"})
+                             "reason": "not in pinned NCBI taxonomy; retained in source inventory"})
     if unknown:
-        print(f"  WARNING: {len(unknown)} attested taxa are not in the NCBI transform "
-              f"(e.g. {unknown[:3]}); they are dropped", file=sys.stderr)
+        print(f"  WARNING: {len(unknown)} source taxon IDs are absent from pinned NCBI taxonomy "
+              f"(e.g. {unknown[:3]}); native assertions remain inventoried", file=sys.stderr)
         for t in unknown:
             attested.pop(t)
     dropped_attested = len(unknown)
-    core = set(attested)
-    lineage = ancestors_of(core, parents)
-    universe = core | lineage
-    print(f"\nuniverse: {len(core)} attested taxa + {len(lineage - core)} ancestors = {len(universe)}")
+    core = {tid for tid, sources in attested.items() if sources}
+    lineage = ancestors_of(core | set(retired), parents)
+    retired_context = set(retired) - core - lineage
+    universe = core | lineage | retired_context
+    print(f"\nuniverse: {len(core)} attested taxa + {len(lineage - core)} ancestors "
+          f"+ {len(retired_context)} retired context entries = {len(universe)}")
     for source in ATTESTING_SOURCES:
         print(f"  attested by {source:12s} {sum(1 for s in attested.values() if source in s):7d}")
 
@@ -709,12 +742,13 @@ def main(argv: list[str] | None = None) -> int:
             "related_synonyms": joined(syn.get("RELATED_SYNONYM", [])),
             "broad_synonyms": joined(syn.get("BROAD_SYNONYM", [])),
             "attested_by": "|".join(s for s in ATTESTING_SOURCES if s in attested.get(tid, ())),
+            "retired_into": redirects.get(tid, "deleted") if tid in retired else "",
+            "taxonomy_snapshot": (prior_metadata["extracted_at"] if tid in retired
+                                  else ncbi_config["snapshot"]),
         })
 
     mapping_rows = []
     for m in gtdb_mappings:
-        if m["ncbitaxon_id"] not in universe:
-            continue
         sp = gtdb_species[m["gtdb_id"]]
         mapping_rows.append({
             "gtdb_id": m["gtdb_id"], "gtdb_label": sp["label"], "gtdb_parent": sp["parent"],
@@ -724,7 +758,7 @@ def main(argv: list[str] | None = None) -> int:
 
     # LPSN names that map into the universe, plus the names they are
     # synonyms of / that are synonyms of them, so synonym labels resolve.
-    lpsn_keep = {lid for lid, e in lpsn.items() if e["ncbitaxon_ids"] & universe}
+    lpsn_keep = set(lpsn)
     for lid in list(lpsn_keep):
         lpsn_keep.update(lpsn[lid]["synonym_of"])
     for lid, e in lpsn.items():
@@ -751,8 +785,8 @@ def main(argv: list[str] | None = None) -> int:
         if not s["taxon_ids"] & universe:
             dropped_rows.append({"kind": "bacdive_strain", "id": sid,
                                  "reason": ("no NCBI parent" if not s["taxon_ids"] else
-                                            "NCBI parent not in the transform: " + joined(s["taxon_ids"]))})
-            continue
+                                            "NCBI parent not in pinned taxonomy; source retained: "
+                                            + joined(s["taxon_ids"]))})
         strain_rows.append({
             "strain_id": sid, "bacdive_id": s["bacdive_id"], "designation": s["designation"],
             "taxon_ids": joined(s["taxon_ids"]), "lpsn_ids": joined(s["lpsn_ids"]),
@@ -763,9 +797,7 @@ def main(argv: list[str] | None = None) -> int:
                for cc, tids in sorted(cc_parents.items()) if tids & universe]
 
     print("reading BacDive strain-to-genome links (NCBI, PATRIC, IMG) ...", flush=True)
-    assembly_rows, genome_record_rows, genome_drops = extract_bacdive_genomes(
-        kgm / "data/raw/bacdive_strains.json", {r["strain_id"] for r in strain_rows},
-    )
+    assembly_rows, genome_record_rows, genome_drops = bacdive_genomes(bacdive_dir)
     dropped_rows.extend(genome_drops)
 
     print("reading GTDB genome metadata and exact culture-deposit links ...", flush=True)
@@ -776,8 +808,24 @@ def main(argv: list[str] | None = None) -> int:
     assembly_rows.extend(gtdb_assemblies)
     genome_record_rows.extend(gtdb_records)
     dropped_rows.extend(gtdb_drops)
+    print("reading primary NCBI assembly summaries and explicit culture-deposit links ...", flush=True)
+    assembly_config = assembly_settings(REPO_ROOT / "conf/ncbi_assemblies.yaml", REPO_ROOT)
+    ncbi_assemblies, ncbi_related, ncbi_drops = ncbi_assembly_links(
+        [REPO_ROOT / entry["path"] for entry in assembly_config["sources"]], strain_rows, prokaryotes)
+    assembly_rows.extend(ncbi_assemblies)
+    related_rows.extend(ncbi_related)
+    dropped_rows.extend(ncbi_drops)
+    print("reading primary BV-BRC genome and culture-deposit metadata ...", flush=True)
+    bv_assemblies, bv_genomes, bv_related, bv_drops = bvbrc_links(REPO_ROOT / "data/bvbrc", strain_rows)
+    assembly_rows.extend(bv_assemblies)
+    genome_record_rows.extend(bv_genomes)
+    related_rows.extend(bv_related)
+    dropped_rows.extend(bv_drops)
     print("reading GOLD culture, project and analysis relationships ...", flush=True)
-    gold_assemblies, gold_records, gold_related, gold_drops = extract_gold_genomes(gold_workbook, strain_rows)
+    gold_projection = REPO_ROOT / "data/gold"
+    validate_gold_projection(gold_projection, sha256_of(gold_workbook))
+    gold_assemblies, gold_records, gold_related, gold_drops = extract_gold_genomes(
+        gold_projection, strain_rows)
     assembly_rows.extend(gold_assemblies)
     genome_record_rows.extend(gold_records)
     related_rows.extend(gold_related)
@@ -794,7 +842,16 @@ def main(argv: list[str] | None = None) -> int:
 
     outputs = [
         ("ncbitaxon_taxa.tsv", ["taxon_id", "label", "rank", "parent_id", "genetic_code", "exact_synonyms",
-                                "related_synonyms", "broad_synonyms", "attested_by"], taxa_rows),
+                                "related_synonyms", "broad_synonyms", "attested_by", "retired_into",
+                                "taxonomy_snapshot"], taxa_rows),
+        ("ncbi_type_material.tsv", ["taxon_id", "taxon_name", "type", "designation", "source_field"],
+         sorted((r for r in type_material if r["taxon_id"] in universe),
+                key=lambda r: tuple(r.values()))),
+        ("ncbi_merged_ids.tsv", ["old_taxon_id", "current_taxon_id"],
+         [{"old_taxon_id": old, "current_taxon_id": new} for old, new in sorted(redirects.items())]),
+        ("gtdb_species.tsv", ["gtdb_id", "label", "parent", "genome_count"],
+         [{"gtdb_id": gid, "label": sp["label"], "parent": sp["parent"], "genome_count": sp["genomes"]}
+          for gid, sp in sorted(gtdb_species.items())]),
         ("gtdb_mappings.tsv", ["gtdb_id", "gtdb_label", "gtdb_parent", "ncbitaxon_id", "predicate",
                                "genome_count"], mapping_rows),
         ("lpsn_names.tsv", ["lpsn_id", "name", "rank", "authority", "url", "deprecated", "status",
@@ -830,10 +887,28 @@ def main(argv: list[str] | None = None) -> int:
 
     inputs = [describe_input(kgm, r) if not args.skip_input_hashes else _unhashed_input(kgm, r)
               for r in INPUTS]
+    ncbi_input = describe_input(ncbi_path.parent, ncbi_path.name)
+    ncbi_input.update(source="NCBI Taxonomy", url=ncbi_config["url"],
+                      path=ncbi_config["path"], snapshot=ncbi_config["snapshot"])
+    inputs.append(ncbi_input)
+    for entry in assembly_config["sources"]:
+        item = describe_input(REPO_ROOT, entry["path"])
+        item.update(source="NCBI Assembly", url=entry["url"], snapshot=assembly_config["snapshot"])
+        inputs.append(item)
+    for relative in ("conf/ncbi_assemblies.yaml", "data/bacdive/SOURCE.json",
+                     "data/bacdive/records.jsonl.gz"):
+        inputs.append(describe_input(REPO_ROOT, relative))
+    for relative in ("conf/ncbi_taxdump.yaml", "data/ncbi/prior-taxonomy.tsv.gz",
+                     "data/ncbi/PRIOR_SOURCE.json"):
+        inputs.append(describe_input(REPO_ROOT, relative))
     gold_input = (describe_input(gold_workbook.parent, gold_workbook.name) if not args.skip_input_hashes
                   else _unhashed_input(gold_workbook.parent, gold_workbook.name))
     gold_input.update(source="GOLD", url=GOLD_WORKBOOK_URL, path="GOLD/goldData.xlsx")
     inputs.append(gold_input)
+    inputs.extend(describe_input(REPO_ROOT, str(path.relative_to(REPO_ROOT)))
+                  for path in sorted(gold_projection.iterdir()) if path.is_file())
+    inputs.extend(describe_input(REPO_ROOT, str(path.relative_to(REPO_ROOT)))
+                  for path in sorted((REPO_ROOT / "data/bvbrc").iterdir()) if path.is_file())
     cafi_input = (describe_input(CAFI_REGISTRY_PATH.parent, CAFI_REGISTRY_PATH.name)
                   if not args.skip_input_hashes
                   else _unhashed_input(CAFI_REGISTRY_PATH.parent, CAFI_REGISTRY_PATH.name))
@@ -845,7 +920,10 @@ def main(argv: list[str] | None = None) -> int:
         "universe": {
             "attested_taxa": len(core),
             "ancestor_taxa": len(lineage - core),
+            "retired_context_taxa": len(retired_context),
             "total_taxa": len(universe),
+            "complete_ncbi_prokaryote_taxa": len(prokaryotes),
+            "retired_taxa_retained": len(retired),
             # Attested by a source but absent from kg-microbe's NCBITaxon
             # transform (a removed or merged id); they get no record.
             "dropped_attested_taxa": dropped_attested,

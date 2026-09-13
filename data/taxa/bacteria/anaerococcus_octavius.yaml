@@ -62,11 +62,17 @@ taxonomy_mappings:
   genome_count: 12
   notes: LPSN links this GTDB species to the taxon's name.
 synonyms:
+- synonym_text: Anaerococcus octavius (Murdoch et al. 1997) Ezaki et al. 2001
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: Peptostreptococcus octavius
   synonym_type: RELATED_SYNONYM
   source: LPSN
   source_id: lpsn:779390
 - synonym_text: Peptostreptococcus octavius
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Peptostreptococcus octavius Murdoch et al. 1997
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 xrefs:
@@ -91,8 +97,9 @@ strains:
     source_id: bacdive:17975
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Anaerococcus octavius NCTC9810
+    assembly_name: 51765_E01 assembly for Anaerococcus octavius NCTC9810
     taxon_id: NCBITaxon:54007
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_900445265.1
     source: GOLD
     source_id: gold:Ga0317232
@@ -141,9 +148,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:17975
     source_reference_id: '66792'
-    assembly_level: draft
+    assembly_level: complete
     genome_name: Anaerococcus octavius NCTC 9810
     taxon_id: NCBITaxon:1161098
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2512047049
     source_database: img
     source: GOLD
@@ -173,9 +181,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:17975
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Anaerococcus octavius NCTC 9810
-    taxon_id: NCBITaxon:1161098
+    assembly_level: contig
+    genome_name: 51765_E01 assembly for Anaerococcus octavius NCTC9810
+    taxon_id: NCBITaxon:54007
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2808606682
     source_database: img
     source: GOLD
@@ -205,9 +214,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:17975
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Anaerococcus octavius strain NCTC9810
+    assembly_level: contig
+    genome_name: 51765_E01 assembly for Anaerococcus octavius NCTC9810
     taxon_id: NCBITaxon:54007
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
@@ -724,13 +734,53 @@ strains:
   source: BACDIVE
   source_id: bacdive:150755
   culture_collection_ids:
-  - kgmicrobe.strain:CCUG-42198-A
+  - kgmicrobe.strain:CCUG-42198%20A
+  related_records:
+  - record_id: straininfo.deposit:917459
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:409763
+    taxon_id: NCBITaxon:54007
+    record_name: CCUG 42198 A
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCUG-42198%20A
+    source_strain_identifiers: CCUG 42198 A
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 42198 A
+      deposit_id: straininfo.deposit:917459
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:150755
+      strain_doi: DOI:10.60712/SI-ID409763.2
+      strain_id: straininfo.strain:409763
+      strain_status: published online
+  - record_id: straininfo.strain:409763
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:409763
+    taxon_id: NCBITaxon:54007
+    record_name: CCUG 42198 A
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCUG-42198%20A
+    source_strain_identifiers: CCUG 42198 A
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 42198 A
+      deposit_id: straininfo.deposit:917459
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:150755
+      strain_doi: DOI:10.60712/SI-ID409763.2
+      strain_id: straininfo.strain:409763
+      strain_status: published online
 source_attestations:
 - source: NCBITAXON
   source_id: NCBITaxon:54007
   source_label: Anaerococcus octavius
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:773246
   source_label: Anaerococcus octavius
@@ -774,7 +824,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

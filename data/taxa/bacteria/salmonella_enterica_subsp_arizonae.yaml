@@ -59,37 +59,57 @@ taxonomy_mappings:
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 synonyms:
-- synonym_text: '"Salmonella arizona" (sic) Kauffmann 1940'
+- synonym_text: '"Arizona arizonae" Kauffmann and Edwards 1952'
   synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Arizona hinshawii" Ewing 1969'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Paracolobactrum arizonae" (Kauffmann 1940) Borman 1957'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Salmonella arizona" (sic) Kauffmann 1940'
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Arizona arizonae
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Arizona hinshawii
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Paracolobactrum arizonae
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Salmonella arizonae
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Salmonella arizonae (Borman 1957) Kauffmann 1964 (Approved Lists 1980)
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Salmonella cholerae-suis subsp. arizonae
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Salmonella choleraesuis subsp. arizonae
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Salmonella choleraesuis subsp. arizonae corrig. (Borman 1957) Le Minor
+    et al. 1985
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Salmonella enterica IIIa
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Salmonella enterica serovar IIIa
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Salmonella enterica subsp. IIIa
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Salmonella enterica subsp. Subsp. IIIa
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Salmonella enterica subsp. arizonae (Borman 1957) Le Minor and Popoff
+    1987
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 genetic_code: 11
@@ -115,22 +135,36 @@ strains:
     source_id: bacdive:5127
     source_reference_id: '67770'
     assembly_level: contig
-    assembly_name: Salmonella enterica subsp. arizonae CCUG 6322T
+    assembly_name: ASM869284v1 assembly for Salmonella enterica subsp. arizonae CCUG
+      6322T
     taxon_id: NCBITaxon:59203
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_016029385
     source: BACDIVE
     source_id: bacdive:5127
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Salmonella enterica subsp. arizonae CCUG6322
+    assembly_name: PDT000910268.1 assembly for Salmonella enterica subsp. arizonae
+      CCUG6322
     taxon_id: NCBITaxon:59203
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_900456225
     source: BACDIVE
     source_id: bacdive:5127
     source_reference_id: '67770'
     assembly_level: contig
-    assembly_name: Salmonella enterica subsp. arizonae NCTC8297
+    assembly_name: 31180_C01 assembly for Salmonella enterica subsp. arizonae NCTC8297
     taxon_id: NCBITaxon:59203
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900456225.1
+    source: BV_BRC
+    source_id: patric:59203.8
+    assembly_name: Salmonella enterica subsp. arizonae strain NCTC8297
+    taxon_id: NCBITaxon:59203
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8297
+    source_strain_identifiers: NCTC:8297
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_900456225.1
     source: GOLD
     source_id: gold:Ga0668025
@@ -196,6 +230,24 @@ strains:
       strain_id: straininfo.strain:11113
       strain_status: published online
   genome_records:
+  - genome_id: img.taxon:8112361317
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:5127
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: PDT000910268.1 assembly for Salmonella enterica subsp. arizonae CCUG6322
+    taxon_id: NCBITaxon:59203
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:8117884779
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:5127
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: 31180_C01 assembly for Salmonella enterica subsp. arizonae NCTC8297
+    taxon_id: NCBITaxon:59203
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:8117884779
     source_database: img
     source: GOLD
@@ -220,15 +272,54 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0159601
     source_project_id: gold:Gp0818730
-  - genome_id: patric:59203.8
+  - genome_id: patric:59203.26
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:5127
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: ASM869284v1 assembly for Salmonella enterica subsp. arizonae CCUG
+      6322T
+    taxon_id: NCBITaxon:59203
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:59203.512
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5127
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: PDT000910268.1 assembly for Salmonella enterica subsp. arizonae CCUG6322
+    taxon_id: NCBITaxon:59203
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:59203.8
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:5127
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: 31180_C01 assembly for Salmonella enterica subsp. arizonae NCTC8297
+    taxon_id: NCBITaxon:59203
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:59203.8
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:59203.8
     genome_name: Salmonella enterica subsp. arizonae strain NCTC8297
     taxon_id: NCBITaxon:59203
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-8297
+    source_strain_identifiers: NCTC:8297
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:59203.8
+    taxon_id: NCBITaxon:59203
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8297
+    source_strain_identifiers: NCTC:8297
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
     source: GOLD
@@ -251,6 +342,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0159601
     source_project_id: gold:Gp0818730
+  - record_id: biosample:SAMEA2665124
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:59203.8
+    taxon_id: NCBITaxon:59203
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8297
+    source_strain_identifiers: NCTC:8297
+    source_strain_field: culture_collection
   - record_id: biosample:SAMEA2665124
     record_type: BIOSAMPLE
     source: GOLD
@@ -1297,8 +1397,18 @@ strains:
     source_id: bacdive:136652
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Salmonella enterica subsp. arizonae NCTC7303
+    assembly_name: 30066_D01 assembly for Salmonella enterica subsp. arizonae NCTC7303
     taxon_id: NCBITaxon:59203
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900456255.1
+    source: BV_BRC
+    source_id: patric:59203.10
+    assembly_name: Salmonella enterica subsp. arizonae strain NCTC7303
+    taxon_id: NCBITaxon:59203
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-7303
+    source_strain_identifiers: NCTC:7303
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_900456255
     source: STRAININFO
     source_id: straininfo.strain:69913
@@ -1326,10 +1436,39 @@ strains:
     source: BACDIVE
     source_id: bacdive:136652
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: 30066_D01 assembly for Salmonella enterica subsp. arizonae NCTC7303
+    taxon_id: NCBITaxon:59203
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:59203.10
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:59203.10
     genome_name: Salmonella enterica subsp. arizonae strain NCTC7303
     taxon_id: NCBITaxon:59203
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-7303
+    source_strain_identifiers: NCTC:7303
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:59203.10
+    taxon_id: NCBITaxon:59203
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-7303
+    source_strain_identifiers: NCTC:7303
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMEA2634526
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:59203.10
+    taxon_id: NCBITaxon:59203
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-7303
+    source_strain_identifiers: NCTC:7303
+    source_strain_field: culture_collection
   - record_id: gold:Go0158664
     record_type: GOLD_ORGANISM
     source: GOLD
@@ -1563,8 +1702,18 @@ strains:
     source_id: bacdive:136658
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Salmonella enterica subsp. arizonae NCTC7299
+    assembly_name: 29840_A02 assembly for Salmonella enterica subsp. arizonae NCTC7299
     taxon_id: NCBITaxon:59203
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900456235.1
+    source: BV_BRC
+    source_id: patric:59203.9
+    assembly_name: Salmonella enterica subsp. arizonae strain NCTC7299
+    taxon_id: NCBITaxon:59203
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-7299
+    source_strain_identifiers: NCTC:7299
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_900456235
     source: STRAININFO
     source_id: straininfo.strain:69917
@@ -1592,10 +1741,39 @@ strains:
     source: BACDIVE
     source_id: bacdive:136658
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: 29840_A02 assembly for Salmonella enterica subsp. arizonae NCTC7299
+    taxon_id: NCBITaxon:59203
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:59203.9
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:59203.9
     genome_name: Salmonella enterica subsp. arizonae strain NCTC7299
     taxon_id: NCBITaxon:59203
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-7299
+    source_strain_identifiers: NCTC:7299
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:59203.9
+    taxon_id: NCBITaxon:59203
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-7299
+    source_strain_identifiers: NCTC:7299
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMEA2634523
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:59203.9
+    taxon_id: NCBITaxon:59203
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-7299
+    source_strain_identifiers: NCTC:7299
+    source_strain_field: culture_collection
   - record_id: gold:Go0158670
     record_type: GOLD_ORGANISM
     source: GOLD
@@ -2385,6 +2563,7 @@ source_attestations:
   source_label: Salmonella enterica subsp. arizonae
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: GTDB
   source_id: GTDB:s__Salmonella_enterica
   source_label: s__Salmonella_enterica
@@ -2410,7 +2589,7 @@ source_attestations:
   assertion_unit: ORGANISM
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

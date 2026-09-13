@@ -58,10 +58,9 @@ PATHS_LOCKFILE = TAXA_DIR / "PATHS.tsv"
 
 SEED_CURATOR = "seed_from_sources"
 
-# Strains listed per record. The count is always the full number; the listing
-# is capped so a species with thousands of BacDive entries stays a readable
-# record. Type strains come first.
-STRAIN_LISTING_CAP = 200
+# Retain every inventoried strain in records; the browser handles presentation.
+# Optional caps remain available to isolated tests and downstream callers.
+STRAIN_LISTING_CAP = None
 
 # REPOSITORY RULE: TaxonMech records are species-level and below. A record is
 # a species, or an infraspecific taxon (subspecies, strain, serotype, ...), or
@@ -88,6 +87,7 @@ DOMAIN_ROOTS = {
 }
 
 SOURCE_ENUM = {
+    "ncbitaxon": "NCBITAXON", "gtdb": "GTDB",
     "bacdive": "BACDIVE", "lpsn": "LPSN", "mediadive": "MEDIADIVE", "gold": "GOLD",
     "madin_etal": "MADIN", "bactotraits": "BACTOTRAITS",
 }
@@ -355,7 +355,15 @@ def build_document(concept: Concept, inv: Inventory) -> dict[str, Any]:
             for a in lineage
         ]
     doc["grounding_status"] = "EXACT"
-    doc["mapping_status"] = "SEEDED"
+    doc["mapping_status"] = "DEPRECATED" if row.get("retired_into") else "SEEDED"
+    if not hasattr(inv, "_replaces"):
+        inv._replaces = defaultdict(list)
+        for old, old_row in inv.taxa.items():
+            successor = old_row.get("retired_into", "")
+            if successor.startswith("NCBITaxon:"):
+                inv._replaces[successor].append(old)
+    if inv._replaces.get(tid):
+        doc["replaces"] = sorted(inv._replaces[tid], key=id_key)
 
     # --- synonyms -----------------------------------------------------------
     synonyms: dict[tuple[str, str, str], dict[str, str]] = {}
@@ -544,6 +552,15 @@ def build_document(concept: Concept, inv: Inventory) -> dict[str, Any]:
         "assertion_count": 1,
         "assertion_unit": "NAME",
     }]
+    if row.get("taxonomy_snapshot"):
+        attestations[0]["notes"] = f"NCBI taxonomy snapshot: {row['taxonomy_snapshot']}."
+    if row.get("retired_into"):
+        successor = row["retired_into"]
+        attestations[0]["notes"] = (
+            "Retired NCBI identifier; "
+            f"{'merged into ' + successor if successor != 'deleted' else 'deleted by NCBI'}. "
+            f"Prior taxonomy values retained from {row.get('taxonomy_snapshot', 'the preceding inventory')}."
+        )
     if nomenclature:
         correct = [n for n in nomenclature if n.get("is_correct_name")]
         chosen = correct[0] if correct else nomenclature[0]
@@ -774,7 +791,7 @@ def main(argv: list[str] | None = None) -> int:
     for rank, count in Counter(c.rank for c in concepts).most_common():
         print(f"  {rank:16s} {count:6d}")
     print("\n=== sources per record ===")
-    for n, count in sorted(Counter(len(c.sources) + 1 for c in concepts).items()):
+    for n, count in sorted(Counter(len(c.sources | {"ncbitaxon"}) for c in concepts).items()):
         print(f"  {n} source(s)        {count:6d}")
 
     selected = concepts

@@ -1,0 +1,1513 @@
+{
+  "coverage": {
+    "audited": "2026-09-13",
+    "scope": "Bacterial and archaeal species, infraspecific taxa, strain deposits and genome identifiers",
+    "sources": [
+      {
+        "catalogs": [
+          "ncbi_taxa",
+          "ncbi_names",
+          "ncbi_type_material",
+          "ncbi_merged_ids"
+        ],
+        "coverage": "Full bacterial and archaeal backbone, original name classes, type-material assertions and merged IDs.",
+        "limitation": "Species and below become taxon records; higher ranks remain lineage. Names are not proof of strain identity.",
+        "name": "NCBI Taxonomy",
+        "status": "complete_snapshot",
+        "url": "https://ftp.ncbi.nlm.nih.gov/pub/taxonomy/new_taxdump/"
+      },
+      {
+        "catalogs": [
+          "ncbi_genbank",
+          "ncbi_refseq",
+          "ncbi_genbank_historical",
+          "ncbi_refseq_historical"
+        ],
+        "coverage": "Current and historical prokaryotic assembly metadata; unresolved taxonomy retained; all supplied columns.",
+        "limitation": "Only latest assemblies with an explicit registered culture identifier supply direct strain links.",
+        "name": "NCBI GenBank and RefSeq assemblies",
+        "status": "complete_snapshot",
+        "url": "https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/"
+      },
+      {
+        "catalogs": [
+          "gtdb_species",
+          "gtdb_mappings",
+          "gtdb_genomes"
+        ],
+        "coverage": "All RS232 species clusters and bacterial/archaeal genomes, including clusters without an NCBI mapping.",
+        "limitation": "MAGs and species clusters are not physical strain deposits; GTDB taxonomy remains a separate assertion.",
+        "name": "GTDB",
+        "status": "complete_snapshot",
+        "url": "https://data.gtdb.ecogenomic.org/releases/release232/232.0/"
+      },
+      {
+        "catalogs": [
+          "lpsn"
+        ],
+        "coverage": "All names and available API annotations in the pinned kg-microbe transform, including unmapped names.",
+        "limitation": "This is the recorded upstream extraction, not a claim to the live authenticated LPSN service.",
+        "name": "LPSN",
+        "status": "complete_pinned_transform",
+        "url": "https://lpsn.dsmz.de/"
+      },
+      {
+        "catalogs": [
+          "bacdive",
+          "bacdive_deposits"
+        ],
+        "coverage": "Complete public ID census and current v2 identity, deposit and sequence records.",
+        "limitation": "One wholly empty census export row has no source ID and is reported separately.",
+        "name": "BacDive",
+        "status": "complete_snapshot",
+        "url": "https://hub.dsmz.de/wiki/bacdive/api/"
+      },
+      {
+        "catalogs": [
+          "straininfo"
+        ],
+        "coverage": "Every captured public strain, its own deposits, taxon assertions and sequence records, independent of BacDive overlap.",
+        "limitation": "SI-ID, SI-DP and DOI versions remain distinct; only explicitly named eligible deposits supply genome links.",
+        "name": "StrainInfo",
+        "status": "complete_snapshot",
+        "url": "https://straininfo.dsmz.de/"
+      },
+      {
+        "catalogs": [
+          "seqcode_names",
+          "seqcode_type_genomes"
+        ],
+        "coverage": "Complete public name census and type-genome endpoint, including uncultivated species names.",
+        "license": "CC-BY-4.0",
+        "license_url": "https://registry.seqco.de/help/open_data",
+        "limitation": "Discovery names are not all validly published; source statuses and genome types are retained independently.",
+        "name": "SeqCode Registry",
+        "status": "complete_snapshot",
+        "url": "https://registry.seqco.de/page/api"
+      },
+      {
+        "catalogs": [
+          "gold_organism",
+          "gold_sequencing_project",
+          "gold_analysis_project"
+        ],
+        "coverage": "Every public workbook organism, sequencing project and analysis, including supplied IMG identifiers and GenBank accessions.",
+        "limitation": "This is complete for the pinned GOLD workbook, not for every IMG database or private genome.",
+        "name": "JGI GOLD and IMG",
+        "status": "complete_gold_snapshot_with_img_crosslinks",
+        "url": "https://gold.jgi.doe.gov/download?mode=site_excel"
+      },
+      {
+        "catalogs": [
+          "allthebacteria"
+        ],
+        "coverage": "Complete 2025-05 source metadata, all statuses, samples, runs, analysis accessions, checksums and supplied download URLs.",
+        "limitation": "Evidenced strain/genome crosslinks are a subset of the full catalog; shared BioSample is not assembly equivalence.",
+        "name": "AllTheBacteria",
+        "status": "complete_snapshot",
+        "url": "https://osf.io/download/4kjh7/"
+      },
+      {
+        "catalogs": [
+          "bvbrc",
+          "bacdive"
+        ],
+        "coverage": "Complete public bacterial and archaeal genome census with identity, culture, taxonomy, assembly, sample and project metadata.",
+        "limitation": "Strain links require whole registered culture identifiers; private genomes and non-prokaryotic records are excluded.",
+        "name": "BV-BRC / PATRIC",
+        "status": "complete_snapshot",
+        "url": "https://www.bv-brc.org/docs/system_documentation/data.html"
+      },
+      {
+        "catalogs": [
+          "ncbi_genbank",
+          "ncbi_refseq",
+          "straininfo",
+          "allthebacteria"
+        ],
+        "coverage": "Exchanged GenBank assembly accessions and supplied sample, project, sequence, run and ENA analysis identifiers.",
+        "limitation": "No claim that every ENA or DDBJ metadata field or unassembled sequence is locally mirrored.",
+        "name": "ENA and DDBJ / INSDC",
+        "status": "source_crosslinks",
+        "url": "https://www.ebi.ac.uk/ena/browser/about/policies"
+      },
+      {
+        "catalogs": [
+          "bacdive_deposits",
+          "straininfo",
+          "ncbi_type_material"
+        ],
+        "coverage": "All reported culture-collection accessions in captured BacDive and StrainInfo; pinned CAFI validates join authorities and formats.",
+        "limitation": "ATCC, DSMZ, JCM, NBRC, CIP, CECT, CCUG, LMG, KCTC and other collections retain their source deposit identities; no claim of independent complete collection crawls.",
+        "name": "Culture collections and CAFI",
+        "status": "source_crosslinks",
+        "url": "https://github.com/LeibnizDSMZ/cafi"
+      },
+      {
+        "catalogs": [],
+        "coverage": "Existing growth-media and phenotypic evidence from the pinned upstream transforms remains in taxon records.",
+        "limitation": "These evidence sources do not define complete species or strain censuses.",
+        "name": "MediaDive, Madin et al. and BactoTraits",
+        "status": "supporting_evidence",
+        "url": "https://github.com/Knowledge-Graph-Hub/kg-microbe"
+      },
+      {
+        "catalogs": [],
+        "coverage": "Type-strain genome classification resource, linked in the source directory; related LPSN and BacDive assertions are retained.",
+        "limitation": "The documented API retrieves analysis-job results. No direct complete TYGS genome-table capture is asserted.",
+        "name": "TYGS",
+        "status": "external_index",
+        "url": "https://tygs.dsmz.de/"
+      },
+      {
+        "catalogs": [],
+        "coverage": "Global culture-catalog and reference-strain discovery resources, linked in the source directory.",
+        "limitation": "No independent full WDCM bulk snapshot is committed; overlapping deposits are retained only as asserted by captured sources.",
+        "name": "WDCM GCM, gcType and reference strains",
+        "status": "external_index",
+        "url": "https://gcm.wdcm.org/"
+      },
+      {
+        "catalogs": [],
+        "coverage": "Ribosomal sequence taxonomy and type-strain reference resources, linked in the source directory.",
+        "limitation": "Ribosomal accessions are sequence records, not genome assemblies; no complete SILVA sequence catalog is claimed.",
+        "name": "SILVA and Living Tree Project",
+        "status": "external_index",
+        "url": "https://www.arb-silva.de/documentation/silva-taxonomy"
+      },
+      {
+        "catalogs": [
+          "bacdive"
+        ],
+        "coverage": "Specialist isolate and typing catalogs; BacDive-supplied EnteroBase references are preserved in its primary projection.",
+        "limitation": "No independent full isolate census or MLST-to-genome equivalence is inferred.",
+        "name": "EnteroBase and PubMLST",
+        "status": "external_index",
+        "url": "https://enterobase.warwick.ac.uk/"
+      }
+    ]
+  },
+  "format_version": 1,
+  "inputs": [
+    {
+      "bytes": 315,
+      "path": "conf/ncbi_taxdump.yaml",
+      "sha256": "1d734bbb3ebf9d36e304d8030c5852fa4f0f306fca2849be5dec8f3dff86f887"
+    },
+    {
+      "bytes": 1208,
+      "path": "conf/ncbi_assemblies.yaml",
+      "sha256": "3289103effee2db41bb8331a9acac9d5d85bbd08b31ff689503f8d41455bb461"
+    },
+    {
+      "bytes": 564,
+      "path": "conf/allthebacteria.yaml",
+      "sha256": "bcc362625f83b9cadc138c45dd9d3ca0187a9932c3a254e1588c7c3e68ed60da"
+    },
+    {
+      "bytes": 31139,
+      "path": "data/catalog/PRIMARY.json",
+      "sha256": "8ae7c5d329ebfccb98670f1b40d58932e400d1f3423e45135dc3926d412c17e5"
+    },
+    {
+      "bytes": 7069,
+      "path": "conf/source_coverage.yaml",
+      "sha256": "ae418509d3b9a138e88cd89d2fec07a6da0ca8b274648c02f16c5105e1d88c3a"
+    },
+    {
+      "bytes": 13587,
+      "path": "data/raw/MANIFEST.yaml",
+      "sha256": "ee76711683b1b579d1561dcf40187e10e4f0027ae1b89f108eb18e865e7e7d38"
+    },
+    {
+      "bytes": 2568559,
+      "path": "data/bacdive/SOURCE.json",
+      "sha256": "16c898e46bca4544e4d9f1908db229aa3d360c8cf7018e036a5389a979dc3716"
+    },
+    {
+      "bytes": 6671991,
+      "path": "data/straininfo/SOURCE.json",
+      "sha256": "75f53bb29032b192833020b37decbc1d98fb12937e3a3cfa486ec273620453b5"
+    },
+    {
+      "bytes": 517813,
+      "path": "data/seqcode/SOURCE.json",
+      "sha256": "b651e2c2803409024edd12b0177225019fc12cf10de1d295d0a95219e3510ab8"
+    },
+    {
+      "bytes": 232492,
+      "path": "data/bvbrc/SOURCE.json",
+      "sha256": "0e00cbb6c5fa55ceb60f8d9359a86f605feaf26ddfa4f91dab084bc52f1d1fe4"
+    },
+    {
+      "bytes": 893,
+      "path": "data/gold/SOURCE.json",
+      "sha256": "c7ff51dc6be17c45b18cd031500fde0bd83fb6275e7c021e51bedf68f75ecf2d"
+    }
+  ],
+  "interpretation": "Catalog inclusion preserves source assertions and does not establish equivalence. Complete refers to each named pinned snapshot, not every organism or database on the Internet.",
+  "sources": [
+    {
+      "files": [
+        {
+          "bytes": 68738428,
+          "path": "data/catalog/allthebacteria.tsv.xz",
+          "rows": 3227665,
+          "sha256": "f0130062cb9e1d9b024eb4ca48dfedb2e612784aa808cbe2dd805ab4da00156f"
+        }
+      ],
+      "format": "atb.tsv.xz",
+      "id": "allthebacteria",
+      "name": "AllTheBacteria full catalog",
+      "rows": 3227665,
+      "scope": "Every source sample/assembly row, including all unavailable statuses",
+      "snapshot": "2025-05",
+      "url": "https://osf.io/download/4kjh7/"
+    },
+    {
+      "files": [
+        {
+          "bytes": 8185531,
+          "path": "data/bacdive/records.jsonl.gz",
+          "rows": 101417,
+          "sha256": "b27d0f50f06aa33615e7cc2aae4acb7c2767df930c85292e76fbb462ac136080"
+        }
+      ],
+      "format": "jsonl.gz",
+      "id": "bacdive",
+      "name": "BacDive",
+      "rows": 101417,
+      "scope": "Every strain in the captured public census; original identity and sequence projection",
+      "snapshot": "2026-09-13T17:17:21.092811+00:00",
+      "url": "https://bacdive.dsmz.de/"
+    },
+    {
+      "files": [
+        {
+          "bytes": 11696360,
+          "path": "data/raw/bacdive_strains.tsv",
+          "rows": 101417,
+          "sha256": "029fd6d1f53ef7f90684130bf0d644ed3edd1d8fbeb065a511ae928f160b1eea"
+        }
+      ],
+      "format": "tsv",
+      "id": "bacdive_deposits",
+      "name": "BacDive deposit crosswalk",
+      "rows": 101417,
+      "scope": "Every current strain and its reported culture-collection identifiers",
+      "snapshot": "2026-09-13T17:50:44Z",
+      "url": "https://bacdive.dsmz.de/"
+    },
+    {
+      "files": [
+        {
+          "bytes": 2268377,
+          "path": "data/bvbrc/bvbrc-0000.jsonl.gz",
+          "rows": 50000,
+          "sha256": "2596cba5d338aec8efba41ffd2fd41575dc7902ca8efa11927ce08317575911f"
+        },
+        {
+          "bytes": 1467192,
+          "path": "data/bvbrc/bvbrc-0001.jsonl.gz",
+          "rows": 50000,
+          "sha256": "57e653d914dc3ad6774a586f40a5059361654319423b5e92cc31909593d75ae8"
+        },
+        {
+          "bytes": 1563922,
+          "path": "data/bvbrc/bvbrc-0002.jsonl.gz",
+          "rows": 50000,
+          "sha256": "bef1faede27841f9cf4c19b1d10c19055c5abae8b662dede01dfdcc99c4d4e61"
+        },
+        {
+          "bytes": 2057469,
+          "path": "data/bvbrc/bvbrc-0003.jsonl.gz",
+          "rows": 50000,
+          "sha256": "8bb3c271889d5fa2a0c07ebec1ab3ef53814cb05669e6527862e72344414db57"
+        },
+        {
+          "bytes": 1826857,
+          "path": "data/bvbrc/bvbrc-0004.jsonl.gz",
+          "rows": 50000,
+          "sha256": "a41fba508df434ec13223ff5bd0fe0129f8725d34002602a69244f98f935e4d7"
+        },
+        {
+          "bytes": 1775191,
+          "path": "data/bvbrc/bvbrc-0005.jsonl.gz",
+          "rows": 50000,
+          "sha256": "2888bdd5c63eaf62325334a2e027dafb2261ad4dfbf80e2a9809a496037c2dcd"
+        },
+        {
+          "bytes": 1481763,
+          "path": "data/bvbrc/bvbrc-0006.jsonl.gz",
+          "rows": 50000,
+          "sha256": "61c0401e39f33dc39277f32315a517f763f9272330fab2b0aed6d0458c693c44"
+        },
+        {
+          "bytes": 1844414,
+          "path": "data/bvbrc/bvbrc-0007.jsonl.gz",
+          "rows": 50000,
+          "sha256": "ecec1a204901c3d4db320a7e9dcd22e4103913b82711263108f8413133337dd2"
+        },
+        {
+          "bytes": 1965405,
+          "path": "data/bvbrc/bvbrc-0008.jsonl.gz",
+          "rows": 50000,
+          "sha256": "24a1a20ec12f7c0857e5457cc70df82ad71b6e5a2420f9ab64ebc89213f0d866"
+        },
+        {
+          "bytes": 1550560,
+          "path": "data/bvbrc/bvbrc-0009.jsonl.gz",
+          "rows": 50000,
+          "sha256": "f78ffa7e07a829537c004f561e31124837565ec354dce4db11630f0f11cc000b"
+        },
+        {
+          "bytes": 1770409,
+          "path": "data/bvbrc/bvbrc-0010.jsonl.gz",
+          "rows": 50000,
+          "sha256": "8836863434baa22b0910abdb5ef4bdb263fa2ed628bfa80e79f2be98f81fe872"
+        },
+        {
+          "bytes": 1821566,
+          "path": "data/bvbrc/bvbrc-0011.jsonl.gz",
+          "rows": 50000,
+          "sha256": "3ed26d0ec9d06ebf36f16e83d6c65ea76e6f50a3b9355ed2f0a6b899d5e4cb87"
+        },
+        {
+          "bytes": 1898599,
+          "path": "data/bvbrc/bvbrc-0012.jsonl.gz",
+          "rows": 50000,
+          "sha256": "90763f4d476afd14ff08c5cac4d38743cad2f8919d72c756755b76179f766f16"
+        },
+        {
+          "bytes": 1975143,
+          "path": "data/bvbrc/bvbrc-0013.jsonl.gz",
+          "rows": 50000,
+          "sha256": "ba814e4c647d96e5d00512c336e83a6fd2448549c7f9ef46cc8fd59e1790235b"
+        },
+        {
+          "bytes": 2071300,
+          "path": "data/bvbrc/bvbrc-0014.jsonl.gz",
+          "rows": 50000,
+          "sha256": "741df59559faa6e84faad9216adf238d4506198332b9d441a74a5b1ff09364cc"
+        },
+        {
+          "bytes": 2267035,
+          "path": "data/bvbrc/bvbrc-0015.jsonl.gz",
+          "rows": 50000,
+          "sha256": "6387f2db4e0dd8b1c4f91a1506223687dd465f05b213bcae74968644805af13e"
+        },
+        {
+          "bytes": 1679886,
+          "path": "data/bvbrc/bvbrc-0016.jsonl.gz",
+          "rows": 50000,
+          "sha256": "2a653d62267adbf5f930680c75fdc402e77c771c770e3600d81f4eae9c3a61d8"
+        },
+        {
+          "bytes": 1752205,
+          "path": "data/bvbrc/bvbrc-0017.jsonl.gz",
+          "rows": 50000,
+          "sha256": "56b0b9a6d669ac631000b4469eb875627f7c7aa658875955a7956b06fa63468a"
+        },
+        {
+          "bytes": 1997292,
+          "path": "data/bvbrc/bvbrc-0018.jsonl.gz",
+          "rows": 50000,
+          "sha256": "7d8ded4bfb5c1f6597ef5aa1de1fd84d437c281affa257c2900f884319cc75fe"
+        },
+        {
+          "bytes": 2196414,
+          "path": "data/bvbrc/bvbrc-0019.jsonl.gz",
+          "rows": 50000,
+          "sha256": "1f46317fc56c582f17dfa6c0ea30c6d80a5cc5f2730dc4ac491b0aed2b8c9876"
+        },
+        {
+          "bytes": 1880985,
+          "path": "data/bvbrc/bvbrc-0020.jsonl.gz",
+          "rows": 50000,
+          "sha256": "ce96b1844f603b80f97dd4d814dafe8d4091e976a8b9e3a4e59fafffd28ad553"
+        },
+        {
+          "bytes": 1683681,
+          "path": "data/bvbrc/bvbrc-0021.jsonl.gz",
+          "rows": 50000,
+          "sha256": "5cb3e9b76ea660b12b003d61ee6cf680dc486928f359d819002171603afdba3b"
+        },
+        {
+          "bytes": 1357648,
+          "path": "data/bvbrc/bvbrc-0022.jsonl.gz",
+          "rows": 50000,
+          "sha256": "12db5676a406f1c32dcb2d130785d2a046493b8535ba95dd806135850e21b8ff"
+        },
+        {
+          "bytes": 1346252,
+          "path": "data/bvbrc/bvbrc-0023.jsonl.gz",
+          "rows": 50000,
+          "sha256": "5eaec8d122bdfcabd4483693821bb0c761b8509806006ecdf436926f620926fd"
+        },
+        {
+          "bytes": 1510951,
+          "path": "data/bvbrc/bvbrc-0024.jsonl.gz",
+          "rows": 50000,
+          "sha256": "b4f07a81b1af211aa9c77595e9d1d9fb300eb3e57bc183157c3fceecfac54d73"
+        },
+        {
+          "bytes": 1535336,
+          "path": "data/bvbrc/bvbrc-0025.jsonl.gz",
+          "rows": 50000,
+          "sha256": "6d40fd7201112c415d5a8112b19b4ce388a4e44ea98fd879e4814897959befaf"
+        },
+        {
+          "bytes": 1944732,
+          "path": "data/bvbrc/bvbrc-0026.jsonl.gz",
+          "rows": 50000,
+          "sha256": "eb239c5e814a8434429a6977bfa6e1a909f45763423ff73a8834adb735f8dfe8"
+        },
+        {
+          "bytes": 1774844,
+          "path": "data/bvbrc/bvbrc-0027.jsonl.gz",
+          "rows": 50000,
+          "sha256": "1ddd098b0401da6d7b63ceb6e3eb02ded4d4811a9959e8074dc68d3410fc65de"
+        },
+        {
+          "bytes": 770358,
+          "path": "data/bvbrc/bvbrc-0028.jsonl.gz",
+          "rows": 19549,
+          "sha256": "46b20814a333c68d624f1451c15c3059dbf6a7d5fa81bc99715b1b903aa34dc1"
+        }
+      ],
+      "format": "jsonl.gz",
+      "id": "bvbrc",
+      "name": "BV-BRC / PATRIC",
+      "rows": 1419549,
+      "scope": "Complete public bacterial and archaeal genome census and identity metadata",
+      "snapshot": "2026-09-13T17:42:47.000815+00:00",
+      "url": "https://www.bv-brc.org/"
+    },
+    {
+      "files": [
+        {
+          "bytes": 10544549,
+          "path": "data/gold/analyses.jsonl.gz",
+          "rows": 459542,
+          "sha256": "d597f0d5f31fc8b387caaf659f3c6a337959219870529e907a1c0287e3877b7a"
+        }
+      ],
+      "format": "jsonl.gz",
+      "id": "gold_analysis_project",
+      "name": "GOLD Analysis Project",
+      "rows": 459542,
+      "scope": "Every public workbook row; original identity, strain and genome/project fields",
+      "snapshot": "7d22ea3f2c9ac40d513cd4af1410f7d19f3525347eb272787ba1c20525340370",
+      "url": "https://gold.jgi.doe.gov/download?mode=site_excel"
+    },
+    {
+      "files": [
+        {
+          "bytes": 8600009,
+          "path": "data/gold/organisms.jsonl.gz",
+          "rows": 531961,
+          "sha256": "8c1a055214cb240c58fadda0815efbefcb60848245e8a7474e6b1b41d123235c"
+        }
+      ],
+      "format": "jsonl.gz",
+      "id": "gold_organism",
+      "name": "GOLD Organism",
+      "rows": 531961,
+      "scope": "Every public workbook row; original identity, strain and genome/project fields",
+      "snapshot": "7d22ea3f2c9ac40d513cd4af1410f7d19f3525347eb272787ba1c20525340370",
+      "url": "https://gold.jgi.doe.gov/download?mode=site_excel"
+    },
+    {
+      "files": [
+        {
+          "bytes": 10429834,
+          "path": "data/gold/projects.jsonl.gz",
+          "rows": 636630,
+          "sha256": "0d852fe0144afd778609fef82b266fd1507a4c0be949efd2f53c7c34526b6c95"
+        }
+      ],
+      "format": "jsonl.gz",
+      "id": "gold_sequencing_project",
+      "name": "GOLD Sequencing Project",
+      "rows": 636630,
+      "scope": "Every public workbook row; original identity, strain and genome/project fields",
+      "snapshot": "7d22ea3f2c9ac40d513cd4af1410f7d19f3525347eb272787ba1c20525340370",
+      "url": "https://gold.jgi.doe.gov/download?mode=site_excel"
+    },
+    {
+      "files": [
+        {
+          "bytes": 9785903,
+          "path": "data/catalog/gtdb_genomes-0000.jsonl.gz",
+          "rows": 50000,
+          "sha256": "2392b3f07a712e9198bb9a5088cc1389ccc7d426f7bd2f5462dedb88b1f69ccf"
+        },
+        {
+          "bytes": 9758507,
+          "path": "data/catalog/gtdb_genomes-0001.jsonl.gz",
+          "rows": 50000,
+          "sha256": "806fe9de52b466a3bf143e780aa8a047bf9b91272f1a3025200e81a19c39db11"
+        },
+        {
+          "bytes": 9764829,
+          "path": "data/catalog/gtdb_genomes-0002.jsonl.gz",
+          "rows": 50000,
+          "sha256": "a80402c55fc62af4e29455b3ff541a9898c547941bb6979ae32768130b457878"
+        },
+        {
+          "bytes": 9760478,
+          "path": "data/catalog/gtdb_genomes-0003.jsonl.gz",
+          "rows": 50000,
+          "sha256": "27952cd83f56e084919e6bc31778365b9e7495d80a9fe6bbc97055a586ce8344"
+        },
+        {
+          "bytes": 9790079,
+          "path": "data/catalog/gtdb_genomes-0004.jsonl.gz",
+          "rows": 50000,
+          "sha256": "f600f5d831d44c43e2d0872bd4d3d497d5e3550309650a2061b5f277f8c00e32"
+        },
+        {
+          "bytes": 9781710,
+          "path": "data/catalog/gtdb_genomes-0005.jsonl.gz",
+          "rows": 50000,
+          "sha256": "43bdf17b0d30e3faa3ca880d89b5204fd9e79939bd82f32e5c1109b9d8674dfc"
+        },
+        {
+          "bytes": 9795462,
+          "path": "data/catalog/gtdb_genomes-0006.jsonl.gz",
+          "rows": 50000,
+          "sha256": "70cf49ec754904337e0beb7fddb86bb57cf1affde8d326aef821b4b0628f8199"
+        },
+        {
+          "bytes": 9809584,
+          "path": "data/catalog/gtdb_genomes-0007.jsonl.gz",
+          "rows": 50000,
+          "sha256": "0ba5c74cb32e97a3b85e26e1f43501dc2aac915bd8b26d71beab56e4b30bfd2d"
+        },
+        {
+          "bytes": 9807329,
+          "path": "data/catalog/gtdb_genomes-0008.jsonl.gz",
+          "rows": 50000,
+          "sha256": "f085fdc8d521b2edc10d58092170e5bc8364a3ab9d9aff5faca718f54939c7b8"
+        },
+        {
+          "bytes": 9814357,
+          "path": "data/catalog/gtdb_genomes-0009.jsonl.gz",
+          "rows": 50000,
+          "sha256": "455c03d8df2b955d3a8e9cb2e502b36e62114996ed114c8c34f273854c48b4ef"
+        },
+        {
+          "bytes": 9807998,
+          "path": "data/catalog/gtdb_genomes-0010.jsonl.gz",
+          "rows": 50000,
+          "sha256": "aeb33045242e4c215fad2acb25ea21402e11a07164e93c54ce19a1d6408e60b3"
+        },
+        {
+          "bytes": 9809130,
+          "path": "data/catalog/gtdb_genomes-0011.jsonl.gz",
+          "rows": 50000,
+          "sha256": "36fe03c7caf806752d9005fc1855616dd722a65e0b123bebbd8fea37068e3fb5"
+        },
+        {
+          "bytes": 9800280,
+          "path": "data/catalog/gtdb_genomes-0012.jsonl.gz",
+          "rows": 50000,
+          "sha256": "415d91c43886d172cff6cee466abce5fccac75dfcea5d587d6290f693ba2b7e6"
+        },
+        {
+          "bytes": 9802450,
+          "path": "data/catalog/gtdb_genomes-0013.jsonl.gz",
+          "rows": 50000,
+          "sha256": "1a64663893af28bb7f2a99832c81c9f2bc4203b4e5e3b318431d179c0e0ebd3b"
+        },
+        {
+          "bytes": 9804954,
+          "path": "data/catalog/gtdb_genomes-0014.jsonl.gz",
+          "rows": 50000,
+          "sha256": "18d06a6dc475b9f9a7b03c57a44ad0ce3c099e2c5878a85d8385cdb48189582e"
+        },
+        {
+          "bytes": 9812546,
+          "path": "data/catalog/gtdb_genomes-0015.jsonl.gz",
+          "rows": 50000,
+          "sha256": "294a24c5f36f7a2fcd8543962ca061494f3f705d65b53e525f680dd362f15d42"
+        },
+        {
+          "bytes": 9789171,
+          "path": "data/catalog/gtdb_genomes-0016.jsonl.gz",
+          "rows": 50000,
+          "sha256": "d97a816a4d84c4af63bbdc904ba5d8a399436da32c38a9463fa1b8497d3373d6"
+        },
+        {
+          "bytes": 9777074,
+          "path": "data/catalog/gtdb_genomes-0017.jsonl.gz",
+          "rows": 50000,
+          "sha256": "f2a4d2c5b7927184206c6614540746b5e9c298e7a924bd149fc86c0f0c046ff6"
+        },
+        {
+          "bytes": 260576,
+          "path": "data/catalog/gtdb_genomes-0018.jsonl.gz",
+          "rows": 1341,
+          "sha256": "8baa314877815777abcdf600079c6ee42f2ea5340398df9f2e18de9c18fd4347"
+        }
+      ],
+      "format": "jsonl.gz",
+      "id": "gtdb_genomes",
+      "name": "GTDB genomes",
+      "primary_inputs": [
+        {
+          "bytes": 289043801,
+          "path": "data/raw/gtdb/bac120_metadata.tsv.gz",
+          "sha256": "1650d3164666e5839c20ee15d82511909a5bbd5269035a7b564b9048dd777893"
+        },
+        {
+          "bytes": 7015869,
+          "path": "data/raw/gtdb/ar53_metadata.tsv.gz",
+          "sha256": "d6ddc0f95d269a6e31af8329e0c3c2af0d90d5dad48f5b3e9d820f340951d8c3"
+        }
+      ],
+      "rows": 901341,
+      "scope": "Every bacterial and archaeal genome in RS232",
+      "snapshot": "RS232",
+      "url": "https://data.gtdb.ecogenomic.org/releases/release232/232.0/"
+    },
+    {
+      "files": [
+        {
+          "bytes": 36331768,
+          "path": "data/raw/gtdb_mappings.tsv",
+          "rows": 322327,
+          "sha256": "bf62441b1b76abb16dd92e795c020ff30fc24e37e195b862fb9beda567277225"
+        }
+      ],
+      "format": "tsv",
+      "id": "gtdb_mappings",
+      "name": "GTDB NCBI mappings",
+      "rows": 322327,
+      "scope": "Every supplied species-to-NCBI mapping",
+      "snapshot": "2026-09-13T17:50:44Z",
+      "url": "https://gtdb.ecogenomic.org/"
+    },
+    {
+      "files": [
+        {
+          "bytes": 15564426,
+          "path": "data/raw/gtdb_species.tsv",
+          "rows": 199923,
+          "sha256": "24eddf08fe8fdd1fed534a1b7fd411561eec612c58c3709a36032998fdab8f21"
+        }
+      ],
+      "format": "tsv",
+      "id": "gtdb_species",
+      "name": "GTDB species",
+      "rows": 199923,
+      "scope": "Every species cluster, including unmapped clusters",
+      "snapshot": "2026-09-13T17:50:44Z",
+      "url": "https://gtdb.ecogenomic.org/"
+    },
+    {
+      "files": [
+        {
+          "bytes": 13748738,
+          "path": "data/raw/lpsn_names.tsv",
+          "rows": 34301,
+          "sha256": "097f8f4ba3fd077d02e48f2c298a0af88fe02db79cc862f9af1c05141b0baa57"
+        }
+      ],
+      "format": "tsv",
+      "id": "lpsn",
+      "name": "LPSN names",
+      "rows": 34301,
+      "scope": "Every name in the pinned kg-microbe transform, including unmapped names",
+      "snapshot": "2026-09-13T17:50:44Z",
+      "url": "https://lpsn.dsmz.de/"
+    },
+    {
+      "files": [
+        {
+          "bytes": 4225560,
+          "path": "data/catalog/ncbi_genbank-0000.jsonl.gz",
+          "rows": 50000,
+          "sha256": "2d0f73ddded027424214ecc6c9f0c91ec229278cacf8d0e1d63e5745c8064ea7"
+        },
+        {
+          "bytes": 3736873,
+          "path": "data/catalog/ncbi_genbank-0001.jsonl.gz",
+          "rows": 50000,
+          "sha256": "a3d1c13cd71857ef301afb53b7207af6f42f6fe2d729579660869201608c5337"
+        },
+        {
+          "bytes": 3648201,
+          "path": "data/catalog/ncbi_genbank-0002.jsonl.gz",
+          "rows": 50000,
+          "sha256": "5931b3c1684ae211b5a726b0ac459abe095cb6d27a4eb8f6f54cc34aca211f75"
+        },
+        {
+          "bytes": 3214298,
+          "path": "data/catalog/ncbi_genbank-0003.jsonl.gz",
+          "rows": 50000,
+          "sha256": "8e0b9562cce19621f04e26b859273d35b04ff59d581f331d266936f73de20157"
+        },
+        {
+          "bytes": 2968650,
+          "path": "data/catalog/ncbi_genbank-0004.jsonl.gz",
+          "rows": 50000,
+          "sha256": "1a2f01cd2f3fd80d4af0c3cb66a8e240dae417da7c590c9cf3ba5a8f1b277840"
+        },
+        {
+          "bytes": 3025738,
+          "path": "data/catalog/ncbi_genbank-0005.jsonl.gz",
+          "rows": 50000,
+          "sha256": "a98802ec69b24c4c30ee290e19c3276dd6d09886e92d94d310860a36eac00f50"
+        },
+        {
+          "bytes": 3176946,
+          "path": "data/catalog/ncbi_genbank-0006.jsonl.gz",
+          "rows": 50000,
+          "sha256": "c3a9d0123c4b6b030567500e1be4d1612097012390a81755f01d3608ba28ac0f"
+        },
+        {
+          "bytes": 3075948,
+          "path": "data/catalog/ncbi_genbank-0007.jsonl.gz",
+          "rows": 50000,
+          "sha256": "0585d70867b6c9ee2a28e88bc2c3f287af525e8a2068280a00aa78bdd22067a0"
+        },
+        {
+          "bytes": 3119559,
+          "path": "data/catalog/ncbi_genbank-0008.jsonl.gz",
+          "rows": 50000,
+          "sha256": "6b31a395d770af741d40a6832c0d74026c4c82f5b95216023df867e3cdebd764"
+        },
+        {
+          "bytes": 3361702,
+          "path": "data/catalog/ncbi_genbank-0009.jsonl.gz",
+          "rows": 50000,
+          "sha256": "90c09802a6726dc9feebf7f731a1429719501f2b7e72fde7a2c1bbba35645aa8"
+        },
+        {
+          "bytes": 3169342,
+          "path": "data/catalog/ncbi_genbank-0010.jsonl.gz",
+          "rows": 50000,
+          "sha256": "bd3b25c26922b8bb4d07330b2def9f458751eca751c053b3c8fad28b96d8fcff"
+        },
+        {
+          "bytes": 3064361,
+          "path": "data/catalog/ncbi_genbank-0011.jsonl.gz",
+          "rows": 50000,
+          "sha256": "c83ab7738f13d73d3a12e80fb9e375f3c606a8edf1e5033497022b1171bf18a9"
+        },
+        {
+          "bytes": 3150854,
+          "path": "data/catalog/ncbi_genbank-0012.jsonl.gz",
+          "rows": 50000,
+          "sha256": "682fedc09b37ef04be14ddd277328faeb355a07e306db6b4e6f7e2744bd4f967"
+        },
+        {
+          "bytes": 3128604,
+          "path": "data/catalog/ncbi_genbank-0013.jsonl.gz",
+          "rows": 50000,
+          "sha256": "4acf04eb8c8508428b6551aa5f11d32166a9e480bdb9a183903f1ff100846a14"
+        },
+        {
+          "bytes": 3083216,
+          "path": "data/catalog/ncbi_genbank-0014.jsonl.gz",
+          "rows": 50000,
+          "sha256": "b6359ecb36d82f0452e6a475116ed1570120a71975ab9b3223a11255a14184c3"
+        },
+        {
+          "bytes": 3181148,
+          "path": "data/catalog/ncbi_genbank-0015.jsonl.gz",
+          "rows": 50000,
+          "sha256": "f01fd32080be9cd013bf43115c6fc205cb05922a2b764e08e7d963a1505d4d53"
+        },
+        {
+          "bytes": 3244161,
+          "path": "data/catalog/ncbi_genbank-0016.jsonl.gz",
+          "rows": 50000,
+          "sha256": "4079d0d4ccf46146db7c2cc422fe5ffbc1db60aa7c27c8a0b1ca900af13232df"
+        },
+        {
+          "bytes": 3197898,
+          "path": "data/catalog/ncbi_genbank-0017.jsonl.gz",
+          "rows": 50000,
+          "sha256": "f518ac6440bb9e7904fd0469915b543b14498052ea23bbc3d5b8d269e2283f6b"
+        },
+        {
+          "bytes": 3208276,
+          "path": "data/catalog/ncbi_genbank-0018.jsonl.gz",
+          "rows": 50000,
+          "sha256": "3acd95b3da5fc1a7ba5eb3ca935dfeaf9876b56bd6649a1a9a2c495d70ac9215"
+        },
+        {
+          "bytes": 3189018,
+          "path": "data/catalog/ncbi_genbank-0019.jsonl.gz",
+          "rows": 50000,
+          "sha256": "43c3cf300889cf57c0f216fea556d26538373930283384cb2ea6e6ad76bd2d87"
+        },
+        {
+          "bytes": 3104986,
+          "path": "data/catalog/ncbi_genbank-0020.jsonl.gz",
+          "rows": 50000,
+          "sha256": "e156e63235d049eea79fbd6ba18ee36789cfb8e292cfd45e91ab0c66c9732147"
+        },
+        {
+          "bytes": 3225851,
+          "path": "data/catalog/ncbi_genbank-0021.jsonl.gz",
+          "rows": 50000,
+          "sha256": "ea9debf9ba38dc8d89229a7a00fbbf8d064ae3aa0558004ecec9cae88793e74c"
+        },
+        {
+          "bytes": 3186370,
+          "path": "data/catalog/ncbi_genbank-0022.jsonl.gz",
+          "rows": 50000,
+          "sha256": "469a26d5bf58e8af7dc9902606792f36ec63e2555d4f389ab4cbf83a897c6c3d"
+        },
+        {
+          "bytes": 3119791,
+          "path": "data/catalog/ncbi_genbank-0023.jsonl.gz",
+          "rows": 50000,
+          "sha256": "41b2e6a6f8e2dbf771ba9a4b08af9fcbdb7ba63e5f5dd609512807bf2bdd21a8"
+        },
+        {
+          "bytes": 3077273,
+          "path": "data/catalog/ncbi_genbank-0024.jsonl.gz",
+          "rows": 50000,
+          "sha256": "9c18f881e3b3de3fb7efb9c2b8789a7e2a6da03589d2b4e4db29b75fa4031ac0"
+        },
+        {
+          "bytes": 2958552,
+          "path": "data/catalog/ncbi_genbank-0025.jsonl.gz",
+          "rows": 50000,
+          "sha256": "38750d3827d1c67eba306be889b709dce7476389853c7152d79ec0f6b1dfa944"
+        },
+        {
+          "bytes": 3139794,
+          "path": "data/catalog/ncbi_genbank-0026.jsonl.gz",
+          "rows": 50000,
+          "sha256": "1136718b09392eb9cf4db29e1a7e75d87b50e37dd09eeceb53d4f1683beaa31f"
+        },
+        {
+          "bytes": 3132517,
+          "path": "data/catalog/ncbi_genbank-0027.jsonl.gz",
+          "rows": 50000,
+          "sha256": "ac95b037a0444ba889e1f6c8315fe2851ab6af365468599da9e453d16b18c44b"
+        },
+        {
+          "bytes": 3175261,
+          "path": "data/catalog/ncbi_genbank-0028.jsonl.gz",
+          "rows": 50000,
+          "sha256": "a1bfcfc8149eb6ed239f3cb02ac99b32ed846d8752b1ab7387d2687c1d5771fa"
+        },
+        {
+          "bytes": 3123759,
+          "path": "data/catalog/ncbi_genbank-0029.jsonl.gz",
+          "rows": 50000,
+          "sha256": "5980edac340d816bff1150ac52ce927941089d586ca044f32cf4d2d41ffda6c8"
+        },
+        {
+          "bytes": 3113220,
+          "path": "data/catalog/ncbi_genbank-0030.jsonl.gz",
+          "rows": 50000,
+          "sha256": "6b55fcf1e58ee2fd454641f8bbb94d18460855248bce17f383d01ef09a003e07"
+        },
+        {
+          "bytes": 2976869,
+          "path": "data/catalog/ncbi_genbank-0031.jsonl.gz",
+          "rows": 50000,
+          "sha256": "b0a3bd7b8d737619ecf3060c3c0420e5608ca56d420c16dcff3470fca4eefb8e"
+        },
+        {
+          "bytes": 2900606,
+          "path": "data/catalog/ncbi_genbank-0032.jsonl.gz",
+          "rows": 50000,
+          "sha256": "e2f086237fa93b8f8a696c707b98e130bad83d4744129d5743a938048e362bc1"
+        },
+        {
+          "bytes": 3266410,
+          "path": "data/catalog/ncbi_genbank-0033.jsonl.gz",
+          "rows": 50000,
+          "sha256": "fe98183240729cac317960e7121336da1562d6c3742db7022b449f8a5ea75e8a"
+        },
+        {
+          "bytes": 3313876,
+          "path": "data/catalog/ncbi_genbank-0034.jsonl.gz",
+          "rows": 50000,
+          "sha256": "1e1a05cb78e41e6351c0bef175095aaea97424aaa58b7d521394c5a060d051b9"
+        },
+        {
+          "bytes": 3072807,
+          "path": "data/catalog/ncbi_genbank-0035.jsonl.gz",
+          "rows": 50000,
+          "sha256": "9bb70597de12ccf7693a757a2e037ed85714ccb9a7283699652c59aeb913f5af"
+        },
+        {
+          "bytes": 3274280,
+          "path": "data/catalog/ncbi_genbank-0036.jsonl.gz",
+          "rows": 50000,
+          "sha256": "0d1ae12a380e63b3668cdb0aad1b2f2e8ffdb6403502d6087cd3b7528cbdc278"
+        },
+        {
+          "bytes": 3177008,
+          "path": "data/catalog/ncbi_genbank-0037.jsonl.gz",
+          "rows": 50000,
+          "sha256": "a805deb41c1b79774d25f8fa2bcd3a362697e6a6c099d974081dc9de8f2371cc"
+        },
+        {
+          "bytes": 2979154,
+          "path": "data/catalog/ncbi_genbank-0038.jsonl.gz",
+          "rows": 50000,
+          "sha256": "4fb74b5bace0a0c9f7b1285fdfba600323d70ec0e463bb651bb28487af4cfa7a"
+        },
+        {
+          "bytes": 3141249,
+          "path": "data/catalog/ncbi_genbank-0039.jsonl.gz",
+          "rows": 50000,
+          "sha256": "e84ae88ba419d93ad67157323d87bdb38e683974a9ec2cfde5de82dd3337225f"
+        },
+        {
+          "bytes": 3048408,
+          "path": "data/catalog/ncbi_genbank-0040.jsonl.gz",
+          "rows": 50000,
+          "sha256": "4b5f18231e8901aa20d058470317754b8f6f694a41c461b487ae54bf0d7d3ab5"
+        },
+        {
+          "bytes": 2958401,
+          "path": "data/catalog/ncbi_genbank-0041.jsonl.gz",
+          "rows": 50000,
+          "sha256": "1aa59ca0100eafc71c52dbff7254b814a7446b64d25cd18238e393765d842801"
+        },
+        {
+          "bytes": 3004316,
+          "path": "data/catalog/ncbi_genbank-0042.jsonl.gz",
+          "rows": 50000,
+          "sha256": "05943522e7acc7d26d699abcaea1789047569bd7577f3358b250cb663865d159"
+        },
+        {
+          "bytes": 3020834,
+          "path": "data/catalog/ncbi_genbank-0043.jsonl.gz",
+          "rows": 50000,
+          "sha256": "814c09850d5e9b7ae09701979e333fce91a2f8d68417839d4ac48919d929f875"
+        },
+        {
+          "bytes": 3157625,
+          "path": "data/catalog/ncbi_genbank-0044.jsonl.gz",
+          "rows": 50000,
+          "sha256": "2a302507e7a9e7757589b0df7a708e45400c29c2417719d8446b4405ae5ef7e0"
+        },
+        {
+          "bytes": 3165964,
+          "path": "data/catalog/ncbi_genbank-0045.jsonl.gz",
+          "rows": 50000,
+          "sha256": "dbe2d8292d237125a2c614a6be589ca7df814698982f9a42baa0cab27c023798"
+        },
+        {
+          "bytes": 3166189,
+          "path": "data/catalog/ncbi_genbank-0046.jsonl.gz",
+          "rows": 50000,
+          "sha256": "aae02918afda531c03c3a0ce09a91544161615aa6991679941f9d98429b1bf3a"
+        },
+        {
+          "bytes": 3175489,
+          "path": "data/catalog/ncbi_genbank-0047.jsonl.gz",
+          "rows": 50000,
+          "sha256": "adfd221d87cf34824e331dd2b6ea05c2f5d4b0ee61731d27a0e96a25d3e635c2"
+        },
+        {
+          "bytes": 3204226,
+          "path": "data/catalog/ncbi_genbank-0048.jsonl.gz",
+          "rows": 50000,
+          "sha256": "414ebf1659198f48aad082325acc72bb10f8308008885fad797b75f2d9971ee0"
+        },
+        {
+          "bytes": 3166741,
+          "path": "data/catalog/ncbi_genbank-0049.jsonl.gz",
+          "rows": 50000,
+          "sha256": "467c948218f1ffbd318c3e10fd67169adbf04116b97b85a4503c9283ac58ad74"
+        },
+        {
+          "bytes": 3223337,
+          "path": "data/catalog/ncbi_genbank-0050.jsonl.gz",
+          "rows": 50000,
+          "sha256": "3255e0b4b642bd0052a8868567154f0f56e1e0d3c4f20389f24ca107d3c03664"
+        },
+        {
+          "bytes": 3195078,
+          "path": "data/catalog/ncbi_genbank-0051.jsonl.gz",
+          "rows": 50000,
+          "sha256": "f16fcea27063ebcc95b962c6897cdbc9f1c744dc0dcd65f92a6a42c921b2db88"
+        },
+        {
+          "bytes": 3331769,
+          "path": "data/catalog/ncbi_genbank-0052.jsonl.gz",
+          "rows": 50000,
+          "sha256": "09f90de7c34454c61e3cbb8e91780b6011db46309550657b0eaad6bd99670b91"
+        },
+        {
+          "bytes": 3252014,
+          "path": "data/catalog/ncbi_genbank-0053.jsonl.gz",
+          "rows": 50000,
+          "sha256": "de3f65f1634101e204dadf5f857bfccbe386a2f6c41f93a5044b8b1e08f4f1a2"
+        },
+        {
+          "bytes": 3202305,
+          "path": "data/catalog/ncbi_genbank-0054.jsonl.gz",
+          "rows": 50000,
+          "sha256": "d60db2aae2f5d820154fb2299ff0cbca1034ef057084b816497eab8ad6146643"
+        },
+        {
+          "bytes": 3224000,
+          "path": "data/catalog/ncbi_genbank-0055.jsonl.gz",
+          "rows": 50000,
+          "sha256": "53dcb61e34c587557e8508725122fc6c1b6f3b17b2e193fcf051c32ebe583c4f"
+        },
+        {
+          "bytes": 3422787,
+          "path": "data/catalog/ncbi_genbank-0056.jsonl.gz",
+          "rows": 50000,
+          "sha256": "b3ce949155fa51ffb24841db9d308b9a4ab2215919542b4babe6e33dc42a9e66"
+        },
+        {
+          "bytes": 2875681,
+          "path": "data/catalog/ncbi_genbank-0057.jsonl.gz",
+          "rows": 50000,
+          "sha256": "4ec73a547c2c9ccf0b44651e250e0761ead089321762967dd05a0480b3efceaa"
+        },
+        {
+          "bytes": 3098016,
+          "path": "data/catalog/ncbi_genbank-0058.jsonl.gz",
+          "rows": 50000,
+          "sha256": "042ed969a534ff871b1f2a8af346c374ed22958141fb051522a9a628acde00a2"
+        },
+        {
+          "bytes": 3270913,
+          "path": "data/catalog/ncbi_genbank-0059.jsonl.gz",
+          "rows": 50000,
+          "sha256": "41b8b3bc2dd519acfaac5e9fde412031b774b03e6a35a84b342f64292b9bae8b"
+        },
+        {
+          "bytes": 3411763,
+          "path": "data/catalog/ncbi_genbank-0060.jsonl.gz",
+          "rows": 50000,
+          "sha256": "543178fd8e56953dc1148ea86dd4c042aada07c6011e390288fe888dedeebc84"
+        },
+        {
+          "bytes": 3371888,
+          "path": "data/catalog/ncbi_genbank-0061.jsonl.gz",
+          "rows": 50000,
+          "sha256": "ce7f731cb4689c3f1dde97fa2625be006bf05caa8730e33a93ce6be9ffcb7e11"
+        },
+        {
+          "bytes": 3147207,
+          "path": "data/catalog/ncbi_genbank-0062.jsonl.gz",
+          "rows": 50000,
+          "sha256": "806652a7d24466aa814d3ff5d744cabbde12f1080d5f3e6482165a29b9d51451"
+        },
+        {
+          "bytes": 3653444,
+          "path": "data/catalog/ncbi_genbank-0063.jsonl.gz",
+          "rows": 50000,
+          "sha256": "cd7930d65598b83cad7de491f5f0a5c3e6ea8bdf884ab15b7d68e62a3f1051fb"
+        },
+        {
+          "bytes": 3387030,
+          "path": "data/catalog/ncbi_genbank-0064.jsonl.gz",
+          "rows": 50000,
+          "sha256": "c6021a2fb86726043c595711d082c0ecbad948407383a9a84f65052c985cbbcd"
+        },
+        {
+          "bytes": 3081876,
+          "path": "data/catalog/ncbi_genbank-0065.jsonl.gz",
+          "rows": 50000,
+          "sha256": "d47bd3c6bc300d7cda873ed20dcd439e4cb0f9ffb6d96fb593e281702a0fe113"
+        },
+        {
+          "bytes": 3488612,
+          "path": "data/catalog/ncbi_genbank-0066.jsonl.gz",
+          "rows": 50000,
+          "sha256": "bd87ee943f3c2561e9aa5a46f178f095f9251c6f698acfc07600df92896a443d"
+        },
+        {
+          "bytes": 1022200,
+          "path": "data/catalog/ncbi_genbank-0067.jsonl.gz",
+          "rows": 15719,
+          "sha256": "0ae1684b88136de08e4cb4358929b0886290c120f162ec67d1eac4ef1d0905f3"
+        }
+      ],
+      "format": "jsonl.gz",
+      "id": "ncbi_genbank",
+      "name": "NCBI Assembly genbank",
+      "rows": 3365719,
+      "scope": "All bacterial/archaeal rows and unresolved taxon IDs; all original columns and statuses",
+      "selection_counts": {
+        "input_rows": 3743717,
+        "non_prokaryote_rows": 377998,
+        "prokaryote_rows": 3364078,
+        "unresolved_taxonomy_rows_retained": 1641
+      },
+      "snapshot": "2026-09-13",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_genbank.txt"
+    },
+    {
+      "files": [
+        {
+          "bytes": 3192269,
+          "path": "data/catalog/ncbi_genbank_historical-0000.jsonl.gz",
+          "rows": 50000,
+          "sha256": "375dfa8c9776b3f6d4ebc53a3db9211749b367b25f399c2b048e5a442857a878"
+        },
+        {
+          "bytes": 2894568,
+          "path": "data/catalog/ncbi_genbank_historical-0001.jsonl.gz",
+          "rows": 50000,
+          "sha256": "ff30d64b2b61588ea82a3e8ba8e51b663052c711e5645fbcc897bfabb8613e47"
+        },
+        {
+          "bytes": 47208,
+          "path": "data/catalog/ncbi_genbank_historical-0002.jsonl.gz",
+          "rows": 1100,
+          "sha256": "6da27c005ef6972ed76deaaa19e4b5e78604902da01cdccae716eb161f093f31"
+        }
+      ],
+      "format": "jsonl.gz",
+      "id": "ncbi_genbank_historical",
+      "name": "NCBI Assembly genbank historical",
+      "rows": 101100,
+      "scope": "All bacterial/archaeal rows and unresolved taxon IDs; all original columns and statuses",
+      "selection_counts": {
+        "input_rows": 116496,
+        "non_prokaryote_rows": 15396,
+        "prokaryote_rows": 101093,
+        "unresolved_taxonomy_rows_retained": 7
+      },
+      "snapshot": "2026-09-13",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_genbank_historical.txt"
+    },
+    {
+      "files": [
+        {
+          "bytes": 3518901,
+          "path": "data/raw/ncbi_merged_ids.tsv",
+          "rows": 101006,
+          "sha256": "316bd4830713573cc6fe931a21a4c78f4c5159575550e71b5fd843c82a9211d9"
+        }
+      ],
+      "format": "tsv",
+      "id": "ncbi_merged_ids",
+      "name": "NCBI merged taxon IDs",
+      "rows": 101006,
+      "scope": "Every source merged-ID assertion",
+      "snapshot": "2026-09-13T17:50:44Z",
+      "url": "https://ftp.ncbi.nlm.nih.gov/pub/taxonomy/new_taxdump/"
+    },
+    {
+      "files": [
+        {
+          "bytes": 539337,
+          "path": "data/catalog/ncbi_names-0000.jsonl.gz",
+          "rows": 50000,
+          "sha256": "a873aeec2b2a9a391b1c210bd28827c9b6dad851eeccd7d1644373cb8c6ce802"
+        },
+        {
+          "bytes": 517122,
+          "path": "data/catalog/ncbi_names-0001.jsonl.gz",
+          "rows": 50000,
+          "sha256": "fdb89eec80f04526f3f06fa49a6a03af586efaa5477404f1635d8c012c7ea999"
+        },
+        {
+          "bytes": 499405,
+          "path": "data/catalog/ncbi_names-0002.jsonl.gz",
+          "rows": 50000,
+          "sha256": "0d9a38612c08a7a78c93c18513328ccd7ecf44f5fff10489b26358814ec22149"
+        },
+        {
+          "bytes": 472842,
+          "path": "data/catalog/ncbi_names-0003.jsonl.gz",
+          "rows": 50000,
+          "sha256": "4ac5c4dfb9f0af855246461054ce5d9fa8f94ef6cfdecefb29870c972dd69dc4"
+        },
+        {
+          "bytes": 468840,
+          "path": "data/catalog/ncbi_names-0004.jsonl.gz",
+          "rows": 50000,
+          "sha256": "ac8968aea5627fc73425a4f70942a74d4b666183762e4116b780384a1853f8a3"
+        },
+        {
+          "bytes": 452093,
+          "path": "data/catalog/ncbi_names-0005.jsonl.gz",
+          "rows": 50000,
+          "sha256": "31c672adade0c3485ee5d6817567f7972b06ce3b6853cf191159b76cad3b023c"
+        },
+        {
+          "bytes": 468797,
+          "path": "data/catalog/ncbi_names-0006.jsonl.gz",
+          "rows": 50000,
+          "sha256": "4c63f036b4707bfd7a66f7f85601ca11a5694cb19744857a506b8464b64bc8d2"
+        },
+        {
+          "bytes": 470345,
+          "path": "data/catalog/ncbi_names-0007.jsonl.gz",
+          "rows": 50000,
+          "sha256": "e54bd96ed840ab4a6ffe0e251197fc9367a75e07dbdf89e070656bf38811ef34"
+        },
+        {
+          "bytes": 437983,
+          "path": "data/catalog/ncbi_names-0008.jsonl.gz",
+          "rows": 50000,
+          "sha256": "c955a1d23e3e5b1e5a18f535755b423ae20efb6ca9ae4eef97a4c40dd0323f52"
+        },
+        {
+          "bytes": 438645,
+          "path": "data/catalog/ncbi_names-0009.jsonl.gz",
+          "rows": 50000,
+          "sha256": "7e1cbec759be96b0bd4b57f09ed075dc9cd7a22dc20cde8cc6f7a66cfb88da90"
+        },
+        {
+          "bytes": 440046,
+          "path": "data/catalog/ncbi_names-0010.jsonl.gz",
+          "rows": 50000,
+          "sha256": "7f4d714a5b982de851dc5ea21e981dadee3a77ac2fcadebbf9cb68bfaeb5dd25"
+        },
+        {
+          "bytes": 477295,
+          "path": "data/catalog/ncbi_names-0011.jsonl.gz",
+          "rows": 50000,
+          "sha256": "436b26d9d1510c958add8f0f4cf2371b489c169c9af900f74ebb8687e991b7d7"
+        },
+        {
+          "bytes": 539327,
+          "path": "data/catalog/ncbi_names-0012.jsonl.gz",
+          "rows": 50000,
+          "sha256": "a9234414e4addc9780860a46cb9329a3a3837a70d22607c5446321508224a8fa"
+        },
+        {
+          "bytes": 523112,
+          "path": "data/catalog/ncbi_names-0013.jsonl.gz",
+          "rows": 50000,
+          "sha256": "8dee13292d2eececf3eab780149a1c5a0f669f36ba5c82119200323fb7554972"
+        },
+        {
+          "bytes": 488708,
+          "path": "data/catalog/ncbi_names-0014.jsonl.gz",
+          "rows": 50000,
+          "sha256": "4e22fb0532c498e145beae904ec2c4a78912421ae6864b93bc37d37b21e89e3a"
+        },
+        {
+          "bytes": 326014,
+          "path": "data/catalog/ncbi_names-0015.jsonl.gz",
+          "rows": 33107,
+          "sha256": "6d5de5074643b1d19f89c223bbfe01b35ccf4ad8167ae628f2f7f96745dee045"
+        }
+      ],
+      "format": "jsonl.gz",
+      "id": "ncbi_names",
+      "name": "NCBI Taxonomy names",
+      "rows": 783107,
+      "scope": "Every bacterial/archaeal name class",
+      "snapshot": "2026-09-13",
+      "url": "https://ftp.ncbi.nlm.nih.gov/pub/taxonomy/new_taxdump/new_taxdump.tar.gz"
+    },
+    {
+      "files": [
+        {
+          "bytes": 4284066,
+          "path": "data/catalog/ncbi_refseq-0000.jsonl.gz",
+          "rows": 50000,
+          "sha256": "57d1b732198a6443d2df08f26786e669a15fdf1dbb9627bedf58407ae9cd849f"
+        },
+        {
+          "bytes": 4027592,
+          "path": "data/catalog/ncbi_refseq-0001.jsonl.gz",
+          "rows": 50000,
+          "sha256": "06282ae41e57cf37ac73b236eab58ecaa081a04bf54d834b1fb61ac065ad56dc"
+        },
+        {
+          "bytes": 4074058,
+          "path": "data/catalog/ncbi_refseq-0002.jsonl.gz",
+          "rows": 50000,
+          "sha256": "f22a85bd89937e6e2a8c7774d699102bcbf26a31af296a6cc77976d5f2a40f72"
+        },
+        {
+          "bytes": 4101053,
+          "path": "data/catalog/ncbi_refseq-0003.jsonl.gz",
+          "rows": 50000,
+          "sha256": "b474d886f9ea8191aac95542314c20da96980c39753bdc32f6404fa9fdbe27fc"
+        },
+        {
+          "bytes": 3974189,
+          "path": "data/catalog/ncbi_refseq-0004.jsonl.gz",
+          "rows": 50000,
+          "sha256": "3d589aeabe75cff6ff95df3cbc6b5f24d36aab5a3a42790ac770c2df692c9429"
+        },
+        {
+          "bytes": 3966565,
+          "path": "data/catalog/ncbi_refseq-0005.jsonl.gz",
+          "rows": 50000,
+          "sha256": "01c2478189da678fb45af2d4e9eb2174daf2a15202757af463f68d71773fed79"
+        },
+        {
+          "bytes": 3967733,
+          "path": "data/catalog/ncbi_refseq-0006.jsonl.gz",
+          "rows": 50000,
+          "sha256": "fee429f92cc3820d078608de37317f71fe90054b05e4163720cc4543b9e48409"
+        },
+        {
+          "bytes": 3820447,
+          "path": "data/catalog/ncbi_refseq-0007.jsonl.gz",
+          "rows": 50000,
+          "sha256": "f1572d8421305b87b836f67f3d382414b166997d8dd29275d638ab906333ee6c"
+        },
+        {
+          "bytes": 3785296,
+          "path": "data/catalog/ncbi_refseq-0008.jsonl.gz",
+          "rows": 50000,
+          "sha256": "a47074dcd480b25d2044fcb6ed15725031e355649e7dca9c18b73408000daef9"
+        },
+        {
+          "bytes": 3708636,
+          "path": "data/catalog/ncbi_refseq-0009.jsonl.gz",
+          "rows": 50000,
+          "sha256": "e33402526f960a69d7e9d74c8e37e00774659987b29b9b99c6a9c14eec462851"
+        },
+        {
+          "bytes": 2831914,
+          "path": "data/catalog/ncbi_refseq-0010.jsonl.gz",
+          "rows": 32797,
+          "sha256": "50cf8e902a4041cf5078a815c39c9ec44573f3499aa2e4cd9501ad59f94baae8"
+        }
+      ],
+      "format": "jsonl.gz",
+      "id": "ncbi_refseq",
+      "name": "NCBI Assembly refseq",
+      "rows": 532797,
+      "scope": "All bacterial/archaeal rows and unresolved taxon IDs; all original columns and statuses",
+      "selection_counts": {
+        "input_rows": 551082,
+        "non_prokaryote_rows": 18285,
+        "prokaryote_rows": 531743,
+        "unresolved_taxonomy_rows_retained": 1054
+      },
+      "snapshot": "2026-09-13",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_refseq.txt"
+    },
+    {
+      "files": [
+        {
+          "bytes": 3791611,
+          "path": "data/catalog/ncbi_refseq_historical-0000.jsonl.gz",
+          "rows": 50000,
+          "sha256": "11bfa9d15d6ca8bc0aaed8dc29f38260a053d718eb039281e0191fa47c235b9d"
+        },
+        {
+          "bytes": 3123297,
+          "path": "data/catalog/ncbi_refseq_historical-0001.jsonl.gz",
+          "rows": 50000,
+          "sha256": "995f353cb4bb8619ff31aa371b9e17168693131d7b77b152a707bf2799d92e91"
+        },
+        {
+          "bytes": 960363,
+          "path": "data/catalog/ncbi_refseq_historical-0002.jsonl.gz",
+          "rows": 12178,
+          "sha256": "e8a09e66d7fe1ae1032dd572d3129a1c7c3d1ce2357c4ec6d9715b76054fc674"
+        }
+      ],
+      "format": "jsonl.gz",
+      "id": "ncbi_refseq_historical",
+      "name": "NCBI Assembly refseq historical",
+      "rows": 112178,
+      "scope": "All bacterial/archaeal rows and unresolved taxon IDs; all original columns and statuses",
+      "selection_counts": {
+        "input_rows": 114966,
+        "non_prokaryote_rows": 2788,
+        "prokaryote_rows": 112169,
+        "unresolved_taxonomy_rows_retained": 9
+      },
+      "snapshot": "2026-09-13",
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_refseq_historical.txt"
+    },
+    {
+      "files": [
+        {
+          "bytes": 71776169,
+          "path": "data/raw/ncbitaxon_taxa.tsv",
+          "rows": 650767,
+          "sha256": "97ff340e1eebf62ea541a299e5c798cdcc24ef935c636fb059df48ab45d6f2f6"
+        }
+      ],
+      "format": "tsv",
+      "id": "ncbi_taxa",
+      "name": "NCBI Taxonomy",
+      "rows": 650767,
+      "scope": "Complete prokaryote backbone plus other attested taxa and ancestors",
+      "snapshot": "2026-09-13T17:50:44Z",
+      "url": "https://www.ncbi.nlm.nih.gov/taxonomy"
+    },
+    {
+      "files": [
+        {
+          "bytes": 23003257,
+          "path": "data/raw/ncbi_type_material.tsv",
+          "rows": 277306,
+          "sha256": "38f1de7d1ae173620b54849b0ab81d7219763a4395984e9a1057cce47f574f69"
+        }
+      ],
+      "format": "tsv",
+      "id": "ncbi_type_material",
+      "name": "NCBI type material",
+      "rows": 277306,
+      "scope": "Type and excluded-from-type assertions; no inferred equivalence",
+      "snapshot": "2026-09-13T17:50:44Z",
+      "url": "https://ftp.ncbi.nlm.nih.gov/pub/taxonomy/new_taxdump/"
+    },
+    {
+      "files": [
+        {
+          "bytes": 812472,
+          "path": "data/seqcode/names.jsonl.gz",
+          "rows": 48392,
+          "sha256": "c605e040be5bbca2d7ba8a461787082114f3d1f42ab31835a255eca67255ba94"
+        }
+      ],
+      "format": "jsonl.gz",
+      "id": "seqcode_names",
+      "name": "SeqCode names",
+      "rows": 48392,
+      "scope": "Every public name (discovery census)",
+      "snapshot": "2026-09-13T17:18:13.485769+00:00",
+      "url": "https://registry.seqco.de/"
+    },
+    {
+      "files": [
+        {
+          "bytes": 306639,
+          "path": "data/seqcode/type-genomes.jsonl.gz",
+          "rows": 1808,
+          "sha256": "6ced91e5a1ec20d0fbb2fbaaaee654bcb5fadb2606ba998399cae439f333119c"
+        }
+      ],
+      "format": "jsonl.gz",
+      "id": "seqcode_type_genomes",
+      "name": "SeqCode type-genomes",
+      "rows": 1808,
+      "scope": "Every returned type-genome name, preserving rank, status and classification",
+      "snapshot": "2026-09-13T17:18:13.485769+00:00",
+      "url": "https://registry.seqco.de/"
+    },
+    {
+      "files": [
+        {
+          "bytes": 24013193,
+          "path": "data/straininfo/records.jsonl.gz",
+          "rows": 314470,
+          "sha256": "8f8e6093f0617317e0488463e52de153f566effa7a5d43b44d17dabab9692819"
+        }
+      ],
+      "format": "jsonl.gz",
+      "id": "straininfo",
+      "name": "StrainInfo",
+      "rows": 314470,
+      "scope": "Every strain in the captured public census; original identity and sequence projection",
+      "snapshot": "2026-09-13T17:29:00Z",
+      "url": "https://straininfo.dsmz.de/"
+    }
+  ]
+}

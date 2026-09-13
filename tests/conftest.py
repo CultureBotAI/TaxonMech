@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 import pytest
-import yaml
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 TAXA_DIR = REPO_ROOT / "data" / "taxa"
@@ -38,10 +38,11 @@ def records() -> list[tuple[Path, dict]]:
     """Every TaxonRecord as (path, parsed doc)."""
     if not TAXA_DIR.exists():
         pytest.skip(f"no corpus at {TAXA_DIR}")
-    out = []
-    for path in sorted(TAXA_DIR.rglob("*.yaml")):
-        with path.open(encoding="utf-8") as fh:
-            out.append((path, yaml.load(fh, Loader=getattr(yaml, "CSafeLoader", yaml.SafeLoader))))
+    sys.path.insert(0, str(REPO_ROOT / "scripts"))
+    from corpus import load_records
+    out = load_records(TAXA_DIR)
     if not out:
         pytest.skip(f"corpus at {TAXA_DIR} is empty")
-    return out
+    yield out
+    if hasattr(out, "close"):
+        out.close()

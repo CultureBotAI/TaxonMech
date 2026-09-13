@@ -93,24 +93,34 @@ taxonomy_mappings:
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 synonyms:
+- synonym_text: '"Blautia producta subsp. coccoides" (Kaneuchi et al. 1976) Maturana
+    and Cardenas 2021'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: Blautia coccoides
   synonym_type: RELATED_SYNONYM
   source: LPSN
   source_id: lpsn:787479
 - synonym_text: Blautia coccoides
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Blautia coccoides (Kaneuchi et al. 1976) Liu et al. 2008
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Blautia producta (Prevot 1941) Liu et al. 2008
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Blautia producta subsp. coccoides
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Clostridium coccoides
   synonym_type: RELATED_SYNONYM
   source: LPSN
   source_id: lpsn:774858
 - synonym_text: Clostridium coccoides
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Clostridium coccoides Kaneuchi et al. 1976 (Approved Lists 1980)
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Peptostreptococcus productus
@@ -119,20 +129,23 @@ synonyms:
   source_id: lpsn:779393
 - synonym_text: Peptostreptococcus productus (Prevot 1941) Smith 1957 (Approved Lists
     1980)
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Ruminococcus productus
   synonym_type: RELATED_SYNONYM
   source: LPSN
   source_id: lpsn:780618
 - synonym_text: Ruminococcus productus
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Ruminococcus productus (Prevot 1941) Ezaki et al. 1994
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 xrefs:
 - GTDB:s__Blautia_producta
 - lpsn:787483
 genetic_code: 11
-strain_count: 4
+strain_count: 6
 strains:
 - strain_id: kgmicrobe.strain:bacdive_18068
   source: BACDIVE
@@ -149,7 +162,7 @@ strains:
   - kgmicrobe.strain:KCTC-3242
   - kgmicrobe.strain:KCTC-3695
   - kgmicrobe.strain:NCTC-11829
-  - kgmicrobe.strain:VPI-4299
+  - kgmicrobe.strain:VPI%204299
   is_type_strain: true
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_000373885
@@ -157,8 +170,18 @@ strains:
     source_id: bacdive:18068
     source_reference_id: '67771'
     assembly_level: scaffold
-    assembly_name: Blautia producta ATCC 27340 = DSM 2950
+    assembly_name: ASM37388v1 assembly for Blautia producta ATCC 27340 = DSM 2950
     taxon_id: NCBITaxon:1121114
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_000373885.1
+    source: BV_BRC
+    source_id: patric:1121114.4
+    assembly_name: Blautia producta ATCC 27340
+    taxon_id: NCBITaxon:1121114
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-27340
+    source_strain_identifiers: ATCC 27340
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_000373885.1
     source: GOLD
     source_id: gold:Ga0025344
@@ -191,13 +214,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-27340
     source_strain_identifiers: ATCC 27340
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_000373885.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000373885.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM37388v1
+    taxon_id: NCBITaxon:1121114
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-27340
+    source_strain_identifiers: strain=ATCC 27340
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_000439125
     source: BACDIVE
     source_id: bacdive:18068
     source_reference_id: '67770'
     assembly_level: scaffold
-    assembly_name: Blautia producta ATCC 27340 = DSM 2950
+    assembly_name: ASM43912v1 assembly for Blautia producta ATCC 27340 = DSM 2950
     taxon_id: NCBITaxon:1121114
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_000439125.1
+    source: BV_BRC
+    source_id: patric:1121114.7
+    assembly_name: Blautia producta ATCC 27340
+    taxon_id: NCBITaxon:1121114
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-27340
+    source_strain_identifiers: ATCC 27340
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_000439125.1
     source: GOLD
     source_id: gold:Ga0002346
@@ -230,13 +274,44 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-2950
     source_strain_identifiers: DSM 2950
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_000439125.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000439125.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM43912v1
+    taxon_id: NCBITaxon:1121114
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2950
+    source_strain_identifiers: strain=DSM 2950
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_010669205
     source: BACDIVE
     source_id: bacdive:18068
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Blautia producta ATCC 27340 = DSM 2950 JCM 1471
+    assembly_name: ASM1066920v1 assembly for Blautia producta ATCC 27340 = DSM 2950
+      JCM 1471
     taxon_id: NCBITaxon:1121114
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_010669205.1
+    source: BV_BRC
+    source_id: patric:1121114.32
+    assembly_name: Blautia producta ATCC 27340 = DSM 2950 strain JCM 1471
+    taxon_id: NCBITaxon:1121114
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-1471
+    source_strain_identifiers: JCM 1471
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_010669205.1
+    source: BV_BRC
+    source_id: patric:1121114.32
+    assembly_name: Blautia producta ATCC 27340 = DSM 2950 strain JCM 1471
+    taxon_id: NCBITaxon:1121114
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-1471
+    source_strain_identifiers: JCM:1471
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_010669205.1
     source: GOLD
     source_id: gold:Ga0560371
@@ -269,13 +344,43 @@ strains:
     matched_strain_id: kgmicrobe.strain:JCM-1471
     source_strain_identifiers: JCM 1471
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_010669205.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_010669205.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM1066920v1
+    taxon_id: NCBITaxon:1121114
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-1471
+    source_strain_identifiers: strain=JCM 1471
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_014131715
     source: BACDIVE
     source_id: bacdive:18068
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Blautia producta DSM 2950
+    assembly_name: ASM1413171v1 assembly for Blautia producta DSM 2950
     taxon_id: NCBITaxon:33035
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_014131715.1
+    source: BV_BRC
+    source_id: patric:33035.113
+    assembly_name: Blautia producta strain DSM 2950
+    taxon_id: NCBITaxon:33035
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2950
+    source_strain_identifiers: DSM 2950
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_014131715.1
+    source: BV_BRC
+    source_id: patric:33035.113
+    assembly_name: Blautia producta strain DSM 2950
+    taxon_id: NCBITaxon:33035
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2950
+    source_strain_identifiers: DSM:2950
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_014131715.1
     source: GOLD
     source_id: gold:Ga0490599
@@ -308,6 +413,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-2950
     source_strain_identifiers: DSM 2950
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_014131715.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_014131715.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM1413171v1
+    taxon_id: NCBITaxon:33035
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2950
+    source_strain_identifiers: strain=DSM 2950
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_000373885.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_000373885.1
@@ -318,6 +434,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-27340
     source_strain_identifiers: ATCC 27340
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_000373885.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000373885.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM37388v1
+    taxon_id: NCBITaxon:1121114
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-27340
+    source_strain_identifiers: strain=ATCC 27340
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_000439125.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_000439125.1
@@ -328,6 +455,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-2950
     source_strain_identifiers: DSM 2950
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_000439125.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000439125.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM43912v1
+    taxon_id: NCBITaxon:1121114
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2950
+    source_strain_identifiers: strain=DSM 2950
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_010669205.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_010669205.1
@@ -338,6 +476,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:JCM-1471
     source_strain_identifiers: JCM 1471
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_010669205.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_010669205.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM1066920v1
+    taxon_id: NCBITaxon:1121114
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-1471
+    source_strain_identifiers: strain=JCM 1471
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_014131715.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_014131715.1
@@ -348,6 +497,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-2950
     source_strain_identifiers: DSM 2950
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_014131715.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_014131715.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM1413171v1
+    taxon_id: NCBITaxon:33035
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2950
+    source_strain_identifiers: strain=DSM 2950
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_000373885
     source: STRAININFO
     source_id: straininfo.strain:38945
@@ -565,10 +725,11 @@ strains:
     source_database: img
     source: BACDIVE
     source_id: bacdive:18068
-    source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Blautia producta ATCC 27340
+    source_reference_id: '67771'
+    assembly_level: scaffold
+    genome_name: ASM37388v1 assembly for Blautia producta ATCC 27340 = DSM 2950
     taxon_id: NCBITaxon:1121114
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2515154176
     source_database: img
     source: GOLD
@@ -597,34 +758,44 @@ strains:
     source_database: img
     source: BACDIVE
     source_id: bacdive:18068
+    source_reference_id: '67770'
+    assembly_level: scaffold
+    genome_name: ASM43912v1 assembly for Blautia producta ATCC 27340 = DSM 2950
+    taxon_id: NCBITaxon:1121114
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:2524023161
+    source_database: img
+    source: GOLD
+    source_id: gold:Ga0002346
+    genome_name: Blautia producta DSM 2950
+    taxon_id: NCBITaxon:1121114
+    source_field: AP IMG TAXON ID
+    matched_strain_id: kgmicrobe.strain:DSM-2950
+    source_strain_identifiers: DSM 2950
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0013603
+    source_project_id: gold:Gp0013603
+  - genome_id: img.taxon:2524023161
+    source_database: img
+    source: GOLD
+    source_id: gold:Ga0002346
+    genome_name: Blautia producta DSM 2950
+    taxon_id: NCBITaxon:1121114
+    source_field: AP IMG TAXON ID
+    matched_strain_id: kgmicrobe.strain:DSM-2950
+    source_strain_identifiers: DSM 2950
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0013603
+    source_project_id: gold:Gp0013603
+  - genome_id: img.taxon:8003815505
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:18068
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Blautia producta DSM 2950
-    taxon_id: NCBITaxon:1121114
-  - genome_id: img.taxon:2524023161
-    source_database: img
-    source: GOLD
-    source_id: gold:Ga0002346
-    genome_name: Blautia producta DSM 2950
-    taxon_id: NCBITaxon:1121114
-    source_field: AP IMG TAXON ID
-    matched_strain_id: kgmicrobe.strain:DSM-2950
-    source_strain_identifiers: DSM 2950
-    source_strain_field: ORGANISM CULTURE COLLECTION ID
-    source_organism_id: gold:Go0013603
-    source_project_id: gold:Gp0013603
-  - genome_id: img.taxon:2524023161
-    source_database: img
-    source: GOLD
-    source_id: gold:Ga0002346
-    genome_name: Blautia producta DSM 2950
-    taxon_id: NCBITaxon:1121114
-    source_field: AP IMG TAXON ID
-    matched_strain_id: kgmicrobe.strain:DSM-2950
-    source_strain_identifiers: DSM 2950
-    source_strain_field: ORGANISM STRAIN
-    source_organism_id: gold:Go0013603
-    source_project_id: gold:Gp0013603
+    assembly_level: complete
+    genome_name: ASM1413171v1 assembly for Blautia producta DSM 2950
+    taxon_id: NCBITaxon:33035
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:8003815505
     source_database: img
     source: GOLD
@@ -649,6 +820,16 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0013603
     source_project_id: gold:Gp0548846
+  - genome_id: img.taxon:8113713614
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:18068
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM1066920v1 assembly for Blautia producta ATCC 27340 = DSM 2950
+      JCM 1471
+    taxon_id: NCBITaxon:1121114
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:8113713614
     source_database: img
     source: GOLD
@@ -679,32 +860,97 @@ strains:
     source_id: bacdive:18068
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1066920v1 assembly for Blautia producta ATCC 27340 = DSM 2950
+      JCM 1471
+    taxon_id: NCBITaxon:1121114
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1121114.32
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1121114.32
     genome_name: Blautia producta ATCC 27340 = DSM 2950 strain JCM 1471
     taxon_id: NCBITaxon:1121114
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-1471
+    source_strain_identifiers: JCM 1471
+    source_strain_field: strain
+  - genome_id: patric:1121114.32
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1121114.32
+    genome_name: Blautia producta ATCC 27340 = DSM 2950 strain JCM 1471
+    taxon_id: NCBITaxon:1121114
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-1471
+    source_strain_identifiers: JCM:1471
+    source_strain_field: culture_collection
   - genome_id: patric:1121114.4
     source_database: patric
     source: BACDIVE
     source_id: bacdive:18068
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '67771'
+    assembly_level: scaffold
+    genome_name: ASM37388v1 assembly for Blautia producta ATCC 27340 = DSM 2950
+    taxon_id: NCBITaxon:1121114
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1121114.4
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1121114.4
     genome_name: Blautia producta ATCC 27340
     taxon_id: NCBITaxon:1121114
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-27340
+    source_strain_identifiers: ATCC 27340
+    source_strain_field: strain
   - genome_id: patric:1121114.7
     source_database: patric
     source: BACDIVE
     source_id: bacdive:18068
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '67770'
+    assembly_level: scaffold
+    genome_name: ASM43912v1 assembly for Blautia producta ATCC 27340 = DSM 2950
+    taxon_id: NCBITaxon:1121114
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1121114.7
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1121114.7
     genome_name: Blautia producta ATCC 27340
     taxon_id: NCBITaxon:1121114
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-27340
+    source_strain_identifiers: ATCC 27340
+    source_strain_field: strain
   - genome_id: patric:33035.113
     source_database: patric
     source: BACDIVE
     source_id: bacdive:18068
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1413171v1 assembly for Blautia producta DSM 2950
+    taxon_id: NCBITaxon:33035
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:33035.113
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:33035.113
     genome_name: Blautia producta strain DSM 2950
     taxon_id: NCBITaxon:33035
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-2950
+    source_strain_identifiers: DSM 2950
+    source_strain_field: strain
+  - genome_id: patric:33035.113
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:33035.113
+    genome_name: Blautia producta strain DSM 2950
+    taxon_id: NCBITaxon:33035
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-2950
+    source_strain_identifiers: DSM:2950
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN02441708
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -722,6 +968,15 @@ strains:
       archive_url: https://osf.io/download/667155e877ff4c5f44e04566/
       archive_filename: atb.assembly.r0.2.batch.99.tar.xz
       sample_links:
+      - matched_strain_id: kgmicrobe.strain:ATCC-27340
+        record_id: biosample:SAMN02441708
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1121114.4
+        source_strain_field: strain
+        source_strain_identifiers: ATCC 27340
+        taxon_id: NCBITaxon:1121114
       - matched_strain_id: kgmicrobe.strain:ATCC-27340
         record_id: biosample:SAMN02441708
         record_type: BIOSAMPLE
@@ -753,6 +1008,26 @@ strains:
         source_strain_field: ncbi_strain_identifiers
         source_strain_identifiers: ATCC 27340
         taxon_id: NCBITaxon:1121114
+      - matched_strain_id: kgmicrobe.strain:ATCC-27340
+        record_id: biosample:SAMN02441708
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_000373885.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=ATCC 27340
+        taxon_id: NCBITaxon:1121114
+      - matched_strain_id: kgmicrobe.strain:ATCC-27340
+        record_id: biosample:SAMN02441708
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCF_000373885.1
+        source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=ATCC 27340
+        taxon_id: NCBITaxon:1121114
       ena_analysis_id: ena.analysis:ERZ25474422
       sylph_species: Blautia coccoides
   - genome_id: atb.assembly:202505.SAMN13925607
@@ -772,6 +1047,24 @@ strains:
       archive_url: https://osf.io/download/667155e877ff4c5f44e04566/
       archive_filename: atb.assembly.r0.2.batch.99.tar.xz
       sample_links:
+      - matched_strain_id: kgmicrobe.strain:JCM-1471
+        record_id: biosample:SAMN13925607
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1121114.32
+        source_strain_field: culture_collection
+        source_strain_identifiers: JCM:1471
+        taxon_id: NCBITaxon:1121114
+      - matched_strain_id: kgmicrobe.strain:JCM-1471
+        record_id: biosample:SAMN13925607
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1121114.32
+        source_strain_field: strain
+        source_strain_identifiers: JCM 1471
+        taxon_id: NCBITaxon:1121114
       - matched_strain_id: kgmicrobe.strain:JCM-1471
         record_id: biosample:SAMN13925607
         record_type: BIOSAMPLE
@@ -803,11 +1096,40 @@ strains:
         source_strain_field: ncbi_strain_identifiers
         source_strain_identifiers: JCM 1471
         taxon_id: NCBITaxon:1121114
+      - matched_strain_id: kgmicrobe.strain:JCM-1471
+        record_id: biosample:SAMN13925607
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_010669205.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=JCM 1471
+        taxon_id: NCBITaxon:1121114
+      - matched_strain_id: kgmicrobe.strain:JCM-1471
+        record_id: biosample:SAMN13925607
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCF_010669205.1
+        source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=JCM 1471
+        taxon_id: NCBITaxon:1121114
       ena_analysis_id: ena.analysis:ERZ25708132
       sylph_species: Blautia coccoides
   related_records:
   - record_id: bioproject:PRJNA169801
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1121114.4
+    taxon_id: NCBITaxon:1121114
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-27340
+    source_strain_identifiers: ATCC 27340
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA169801
+    record_type: BIOPROJECT
     source: GOLD
     source_id: gold:Gp0019094
     taxon_id: NCBITaxon:1121114
@@ -828,6 +1150,25 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0019094
     source_project_id: gold:Gp0019094
+  - record_id: bioproject:PRJNA169801
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000373885.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1121114
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-27340
+    source_strain_identifiers: strain=ATCC 27340
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA185563
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1121114.7
+    taxon_id: NCBITaxon:1121114
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-27340
+    source_strain_identifiers: ATCC 27340
+    source_strain_field: strain
   - record_id: bioproject:PRJNA185563
     record_type: BIOPROJECT
     source: GOLD
@@ -850,6 +1191,16 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0013603
     source_project_id: gold:Gp0013603
+  - record_id: bioproject:PRJNA185563
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000439125.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1121114
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-2950
+    source_strain_identifiers: strain=DSM 2950
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
     source: GTDB
@@ -886,6 +1237,64 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-2950
     source_strain_identifiers: DSM 2950
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000373885.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1121114
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-27340
+    source_strain_identifiers: strain=ATCC 27340
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000439125.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1121114
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-2950
+    source_strain_identifiers: strain=DSM 2950
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_010669205.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1121114
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:JCM-1471
+    source_strain_identifiers: strain=JCM 1471
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_014131715.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:33035
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-2950
+    source_strain_identifiers: strain=DSM 2950
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA531376
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:33035.113
+    taxon_id: NCBITaxon:33035
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2950
+    source_strain_identifiers: DSM 2950
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA531376
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:33035.113
+    taxon_id: NCBITaxon:33035
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2950
+    source_strain_identifiers: DSM:2950
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA531376
     record_type: BIOPROJECT
     source: GOLD
@@ -908,6 +1317,34 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0013603
     source_project_id: gold:Gp0548846
+  - record_id: bioproject:PRJNA531376
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_014131715.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:33035
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-2950
+    source_strain_identifiers: strain=DSM 2950
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA603245
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1121114.32
+    taxon_id: NCBITaxon:1121114
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-1471
+    source_strain_identifiers: JCM 1471
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA603245
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1121114.32
+    taxon_id: NCBITaxon:1121114
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-1471
+    source_strain_identifiers: JCM:1471
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA603245
     record_type: BIOPROJECT
     source: GOLD
@@ -930,6 +1367,25 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0635475
     source_project_id: gold:Gp0652903
+  - record_id: bioproject:PRJNA603245
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_010669205.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1121114
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:JCM-1471
+    source_strain_identifiers: strain=JCM 1471
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02440793
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1121114.7
+    taxon_id: NCBITaxon:1121114
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-27340
+    source_strain_identifiers: ATCC 27340
+    source_strain_field: strain
   - record_id: biosample:SAMN02440793
     record_type: BIOSAMPLE
     source: GOLD
@@ -961,6 +1417,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-2950
     source_strain_identifiers: DSM 2950
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN02440793
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000439125.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1121114
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-2950
+    source_strain_identifiers: strain=DSM 2950
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02440793
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000439125.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1121114
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-2950
+    source_strain_identifiers: strain=DSM 2950
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02441708
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1121114.4
+    taxon_id: NCBITaxon:1121114
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-27340
+    source_strain_identifiers: ATCC 27340
+    source_strain_field: strain
   - record_id: biosample:SAMN02441708
     record_type: BIOSAMPLE
     source: GOLD
@@ -992,6 +1477,44 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-27340
     source_strain_identifiers: ATCC 27340
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN02441708
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000373885.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1121114
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-27340
+    source_strain_identifiers: strain=ATCC 27340
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02441708
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000373885.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1121114
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-27340
+    source_strain_identifiers: strain=ATCC 27340
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN11357168
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:33035.113
+    taxon_id: NCBITaxon:33035
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2950
+    source_strain_identifiers: DSM 2950
+    source_strain_field: strain
+  - record_id: biosample:SAMN11357168
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:33035.113
+    taxon_id: NCBITaxon:33035
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2950
+    source_strain_identifiers: DSM:2950
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN11357168
     record_type: BIOSAMPLE
     source: GOLD
@@ -1023,6 +1546,44 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-2950
     source_strain_identifiers: DSM 2950
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN11357168
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_014131715.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:33035
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-2950
+    source_strain_identifiers: strain=DSM 2950
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN11357168
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_014131715.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:33035
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-2950
+    source_strain_identifiers: strain=DSM 2950
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN13925607
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1121114.32
+    taxon_id: NCBITaxon:1121114
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-1471
+    source_strain_identifiers: JCM 1471
+    source_strain_field: strain
+  - record_id: biosample:SAMN13925607
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1121114.32
+    taxon_id: NCBITaxon:1121114
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-1471
+    source_strain_identifiers: JCM:1471
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN13925607
     record_type: BIOSAMPLE
     source: GOLD
@@ -1054,6 +1615,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:JCM-1471
     source_strain_identifiers: JCM 1471
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN13925607
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_010669205.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1121114
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:JCM-1471
+    source_strain_identifiers: strain=JCM 1471
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN13925607
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_010669205.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1121114
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:JCM-1471
+    source_strain_identifiers: strain=JCM 1471
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0002346
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -1853,6 +2434,1404 @@ strains:
       strain_doi: DOI:10.60712/SI-ID38945.3
       strain_id: straininfo.strain:38945
       strain_status: published online
+- strain_id: kgmicrobe.strain:bacdive_18067
+  source: BACDIVE
+  source_id: bacdive:18067
+  designation: CLC-1
+  culture_collection_ids:
+  - kgmicrobe.strain:ATCC-29236
+  - kgmicrobe.strain:BCRC-14467
+  - kgmicrobe.strain:CCM-6064
+  - kgmicrobe.strain:DSM-935
+  - kgmicrobe.strain:JCM-1395
+  - kgmicrobe.strain:NCTC-11035
+  genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_004340925
+    source: BACDIVE
+    source_id: bacdive:18067
+    source_reference_id: '67770'
+    assembly_level: scaffold
+    assembly_name: ASM434092v1 assembly for Blautia producta DSM 935
+    taxon_id: NCBITaxon:1532
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_004340925.1
+    source: BV_BRC
+    source_id: patric:1532.16
+    assembly_name: Blautia coccoides strain DSM 935
+    taxon_id: NCBITaxon:33035
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_004340925.1
+    source: BV_BRC
+    source_id: patric:1532.16
+    assembly_name: Blautia coccoides strain DSM 935
+    taxon_id: NCBITaxon:33035
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM:935
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_004340925.1
+    source: GOLD
+    source_id: gold:Ga0310518
+    assembly_name: Blautia coccoides DSM 935
+    taxon_id: NCBITaxon:1532
+    source_field: AP GENBANK.assemblyAccession
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0029084
+    source_project_id: gold:Gp0325694
+  - assembly_id: ncbi.assembly:GCA_004340925.1
+    source: GOLD
+    source_id: gold:Ga0310518
+    assembly_name: Blautia coccoides DSM 935
+    taxon_id: NCBITaxon:1532
+    source_field: AP GENBANK.assemblyAccession
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0029084
+    source_project_id: gold:Gp0325694
+  - assembly_id: ncbi.assembly:GCA_004340925.1
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_004340925.1
+    assembly_level: Scaffold
+    assembly_name: ASM434092v1
+    taxon_id: NCBITaxon:33035
+    source_field: ncbi_genbank_assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_004340925.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_004340925.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM434092v1
+    taxon_id: NCBITaxon:33035
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: strain=DSM 935
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCA_034355335
+    source: BACDIVE
+    source_id: bacdive:18067
+    source_reference_id: '124043'
+    assembly_level: complete
+    assembly_name: ASM3435533v1 assembly for Blautia producta DSM 935
+    taxon_id: NCBITaxon:1532
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_034355335.1
+    source: BV_BRC
+    source_id: patric:1532.78
+    assembly_name: Blautia coccoides DSM 935
+    taxon_id: NCBITaxon:33035
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_034355335.1
+    source: GOLD
+    source_id: gold:Ga0674396
+    assembly_name: Blautia coccoides DSM 935
+    taxon_id: NCBITaxon:1532
+    source_field: AP GENBANK.assemblyAccession
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0029084
+    source_project_id: gold:Gp0828779
+  - assembly_id: ncbi.assembly:GCA_034355335.1
+    source: GOLD
+    source_id: gold:Ga0674396
+    assembly_name: Blautia coccoides DSM 935
+    taxon_id: NCBITaxon:1532
+    source_field: AP GENBANK.assemblyAccession
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0029084
+    source_project_id: gold:Gp0828779
+  - assembly_id: ncbi.assembly:GCA_034355335.1
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_034355335.1
+    assembly_level: Complete Genome
+    assembly_name: ASM3435533v1
+    taxon_id: NCBITaxon:33035
+    source_field: ncbi_genbank_assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_034355335.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_034355335.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM3435533v1
+    taxon_id: NCBITaxon:33035
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: strain=DSM 935
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCA_900461125
+    source: BACDIVE
+    source_id: bacdive:18067
+    source_reference_id: '67770'
+    assembly_level: contig
+    assembly_name: 49699_D02 assembly for Blautia producta NCTC11035
+    taxon_id: NCBITaxon:1532
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900461125.1
+    source: GOLD
+    source_id: gold:Ga0317269
+    assembly_name: Blautia coccoides NCTC 11035
+    taxon_id: NCBITaxon:1532
+    source_field: AP GENBANK.assemblyAccession
+    matched_strain_id: kgmicrobe.strain:NCTC-11035
+    source_strain_identifiers: NCTC 11035
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0468474
+    source_project_id: gold:Gp0342086
+  - assembly_id: ncbi.assembly:GCA_900461125.1
+    source: GOLD
+    source_id: gold:Ga0317269
+    assembly_name: Blautia coccoides NCTC 11035
+    taxon_id: NCBITaxon:1532
+    source_field: AP GENBANK.assemblyAccession
+    matched_strain_id: kgmicrobe.strain:NCTC-11035
+    source_strain_identifiers: NCTC 11035
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0468474
+    source_project_id: gold:Gp0342086
+  - assembly_id: ncbi.assembly:GCF_004340925.1
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_004340925.1
+    assembly_level: Scaffold
+    assembly_name: ASM434092v1
+    taxon_id: NCBITaxon:33035
+    source_field: accession
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_004340925.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_004340925.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM434092v1
+    taxon_id: NCBITaxon:33035
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: strain=DSM 935
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCF_034355335.1
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_034355335.1
+    assembly_level: Complete Genome
+    assembly_name: ASM3435533v1
+    taxon_id: NCBITaxon:33035
+    source_field: accession
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_034355335.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_034355335.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM3435533v1
+    taxon_id: NCBITaxon:33035
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: strain=DSM 935
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCA_004340925
+    source: STRAININFO
+    source_id: straininfo.strain:92924
+    assembly_level: scaffold
+    assembly_name: Blautia coccoides DSM 935
+    taxon_id: NCBITaxon:1532
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 935
+      deposit_id: straininfo.deposit:510059
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:510059
+      sequence_type: genome
+      source_bacdive_id: bacdive:18067
+      strain_doi: DOI:10.60712/SI-ID92924.3
+      strain_id: straininfo.strain:92924
+      strain_status: published online
+  - assembly_id: ncbi.assembly:GCA_034355335
+    source: STRAININFO
+    source_id: straininfo.strain:92924
+    assembly_level: complete
+    assembly_name: Blautia coccoides DSM 935
+    taxon_id: NCBITaxon:1532
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 935
+      deposit_id: straininfo.deposit:510059
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:510059
+      sequence_type: genome
+      source_bacdive_id: bacdive:18067
+      strain_doi: DOI:10.60712/SI-ID92924.3
+      strain_id: straininfo.strain:92924
+      strain_status: published online
+  - assembly_id: ncbi.assembly:GCA_900461125
+    source: STRAININFO
+    source_id: straininfo.strain:92924
+    assembly_level: contig
+    assembly_name: Blautia coccoides NCTC11035
+    taxon_id: NCBITaxon:1532
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:NCTC-11035
+    source_strain_identifiers: NCTC 11035
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NCTC 11035
+      deposit_id: straininfo.deposit:106589
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:106589
+      sequence_type: genome
+      source_bacdive_id: bacdive:18067
+      strain_doi: DOI:10.60712/SI-ID92924.3
+      strain_id: straininfo.strain:92924
+      strain_status: published online
+  genome_records:
+  - genome_id: gtdb.genome:RS_GCF_004340925.1
+    source_database: gtdb
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_004340925.1
+    assembly_level: Scaffold
+    genome_name: Blautia producta
+    taxon_id: NCBITaxon:33035
+    source_field: accession
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ncbi_strain_identifiers
+  - genome_id: gtdb.genome:RS_GCF_034355335.1
+    source_database: gtdb
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_034355335.1
+    assembly_level: Complete Genome
+    genome_name: Blautia producta
+    taxon_id: NCBITaxon:33035
+    source_field: accession
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ncbi_strain_identifiers
+  - genome_id: img.taxon:2799112274
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:18067
+    source_reference_id: '67770'
+    assembly_level: scaffold
+    genome_name: ASM434092v1 assembly for Blautia producta DSM 935
+    taxon_id: NCBITaxon:1532
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:2799112274
+    source_database: img
+    source: GOLD
+    source_id: gold:Ga0310518
+    genome_name: Blautia coccoides DSM 935
+    taxon_id: NCBITaxon:1532
+    source_field: AP IMG TAXON ID
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0029084
+    source_project_id: gold:Gp0325694
+  - genome_id: img.taxon:2799112274
+    source_database: img
+    source: GOLD
+    source_id: gold:Ga0310518
+    genome_name: Blautia coccoides DSM 935
+    taxon_id: NCBITaxon:1532
+    source_field: AP IMG TAXON ID
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0029084
+    source_project_id: gold:Gp0325694
+  - genome_id: img.taxon:2808606725
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:18067
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: 49699_D02 assembly for Blautia producta NCTC11035
+    taxon_id: NCBITaxon:1532
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:2808606725
+    source_database: img
+    source: GOLD
+    source_id: gold:Ga0317269
+    genome_name: Blautia coccoides NCTC 11035
+    taxon_id: NCBITaxon:1532
+    source_field: AP IMG TAXON ID
+    matched_strain_id: kgmicrobe.strain:NCTC-11035
+    source_strain_identifiers: NCTC 11035
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0468474
+    source_project_id: gold:Gp0342086
+  - genome_id: img.taxon:2808606725
+    source_database: img
+    source: GOLD
+    source_id: gold:Ga0317269
+    genome_name: Blautia coccoides NCTC 11035
+    taxon_id: NCBITaxon:1532
+    source_field: AP IMG TAXON ID
+    matched_strain_id: kgmicrobe.strain:NCTC-11035
+    source_strain_identifiers: NCTC 11035
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0468474
+    source_project_id: gold:Gp0342086
+  - genome_id: img.taxon:8130115255
+    source_database: img
+    source: GOLD
+    source_id: gold:Ga0674396
+    genome_name: Blautia coccoides DSM 935
+    taxon_id: NCBITaxon:1532
+    source_field: AP IMG TAXON ID
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0029084
+    source_project_id: gold:Gp0828779
+  - genome_id: img.taxon:8130115255
+    source_database: img
+    source: GOLD
+    source_id: gold:Ga0674396
+    genome_name: Blautia coccoides DSM 935
+    taxon_id: NCBITaxon:1532
+    source_field: AP IMG TAXON ID
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0029084
+    source_project_id: gold:Gp0828779
+  - genome_id: patric:1532.16
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:18067
+    source_reference_id: '67770'
+    assembly_level: scaffold
+    genome_name: ASM434092v1 assembly for Blautia producta DSM 935
+    taxon_id: NCBITaxon:1532
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1532.16
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1532.16
+    genome_name: Blautia coccoides strain DSM 935
+    taxon_id: NCBITaxon:33035
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: strain
+  - genome_id: patric:1532.16
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1532.16
+    genome_name: Blautia coccoides strain DSM 935
+    taxon_id: NCBITaxon:33035
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM:935
+    source_strain_field: culture_collection
+  - genome_id: patric:1532.78
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:18067
+    source_reference_id: '124043'
+    assembly_level: complete
+    genome_name: ASM3435533v1 assembly for Blautia producta DSM 935
+    taxon_id: NCBITaxon:1532
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1532.78
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1532.78
+    genome_name: Blautia coccoides DSM 935
+    taxon_id: NCBITaxon:33035
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: strain
+  - genome_id: patric:1532.9
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:18067
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: 49699_D02 assembly for Blautia producta NCTC11035
+    taxon_id: NCBITaxon:1532
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: atb.assembly:202505.SAMN10864821
+    source_database: allthebacteria
+    source: ALLTHEBACTERIA
+    source_id: atb.assembly:202505.SAMN10864821
+    genome_name: Blautia coccoides
+    atb_evidence:
+      release: 2025-05
+      sample_id: biosample:SAMN10864821
+      dataset: Incr_release.202408
+      run_accessions: SRR8552813
+      assembly_seqkit_sum: seqkit.v0.1_DLS_k0_a60e41c6775393cc00b3b5bafcd3ac40
+      assembly_filter: PASS
+      hq_filter: PASS
+      download_url: https://allthebacteria-assemblies.s3.eu-west-2.amazonaws.com/SAMN10864821.fa.gz
+      archive_url: https://osf.io/download/66d9a41b5cbc564c9b77acea/
+      archive_filename: atb.assembly.incr_release.202408.batch.37.tar.xz
+      sample_links:
+      - matched_strain_id: kgmicrobe.strain:DSM-935
+        record_id: biosample:SAMN10864821
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1532.16
+        source_strain_field: culture_collection
+        source_strain_identifiers: DSM:935
+        taxon_id: NCBITaxon:33035
+      - matched_strain_id: kgmicrobe.strain:DSM-935
+        record_id: biosample:SAMN10864821
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1532.16
+        source_strain_field: strain
+        source_strain_identifiers: DSM 935
+        taxon_id: NCBITaxon:33035
+      - matched_strain_id: kgmicrobe.strain:DSM-935
+        record_id: biosample:SAMN10864821
+        record_type: BIOSAMPLE
+        source: GOLD
+        source_field: NCBI BIOSAMPLE ACCESSION
+        source_id: gold:Gp0325694
+        source_organism_id: gold:Go0029084
+        source_project_id: gold:Gp0325694
+        source_strain_field: ORGANISM CULTURE COLLECTION ID
+        source_strain_identifiers: DSM 935
+        taxon_id: NCBITaxon:1532
+      - matched_strain_id: kgmicrobe.strain:DSM-935
+        record_id: biosample:SAMN10864821
+        record_type: BIOSAMPLE
+        source: GOLD
+        source_field: NCBI BIOSAMPLE ACCESSION
+        source_id: gold:Gp0325694
+        source_organism_id: gold:Go0029084
+        source_project_id: gold:Gp0325694
+        source_strain_field: ORGANISM STRAIN
+        source_strain_identifiers: DSM 935
+        taxon_id: NCBITaxon:1532
+      - matched_strain_id: kgmicrobe.strain:DSM-935
+        record_id: biosample:SAMN10864821
+        record_type: BIOSAMPLE
+        source: GTDB
+        source_field: ncbi_biosample
+        source_id: gtdb.genome:RS_GCF_004340925.1
+        source_strain_field: ncbi_strain_identifiers
+        source_strain_identifiers: DSM 935
+        taxon_id: NCBITaxon:33035
+      - matched_strain_id: kgmicrobe.strain:DSM-935
+        record_id: biosample:SAMN10864821
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_004340925.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=DSM 935
+        taxon_id: NCBITaxon:33035
+      - matched_strain_id: kgmicrobe.strain:DSM-935
+        record_id: biosample:SAMN10864821
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCF_004340925.1
+        source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=DSM 935
+        taxon_id: NCBITaxon:33035
+      ena_analysis_id: ena.analysis:ERZ26408848
+      sylph_species: Blautia coccoides
+  - genome_id: atb.assembly:202505.SAMN36866739
+    source_database: allthebacteria
+    source: ALLTHEBACTERIA
+    source_id: atb.assembly:202505.SAMN36866739
+    genome_name: Blautia coccoides
+    atb_evidence:
+      release: 2025-05
+      sample_id: biosample:SAMN36866739
+      dataset: Incr_release.202408
+      run_accessions: SRR27175288
+      assembly_seqkit_sum: seqkit.v0.1_DLS_k0_51a43be4581257495c4232d07ede4391
+      assembly_filter: PASS
+      hq_filter: PASS
+      download_url: https://allthebacteria-assemblies.s3.eu-west-2.amazonaws.com/SAMN36866739.fa.gz
+      archive_url: https://osf.io/download/66d9a41b5cbc564c9b77acea/
+      archive_filename: atb.assembly.incr_release.202408.batch.37.tar.xz
+      sample_links:
+      - matched_strain_id: kgmicrobe.strain:DSM-935
+        record_id: biosample:SAMN36866739
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1532.78
+        source_strain_field: strain
+        source_strain_identifiers: DSM 935
+        taxon_id: NCBITaxon:33035
+      - matched_strain_id: kgmicrobe.strain:DSM-935
+        record_id: biosample:SAMN36866739
+        record_type: BIOSAMPLE
+        source: GOLD
+        source_field: NCBI BIOSAMPLE ACCESSION
+        source_id: gold:Gp0828779
+        source_organism_id: gold:Go0029084
+        source_project_id: gold:Gp0828779
+        source_strain_field: ORGANISM CULTURE COLLECTION ID
+        source_strain_identifiers: DSM 935
+        taxon_id: NCBITaxon:1532
+      - matched_strain_id: kgmicrobe.strain:DSM-935
+        record_id: biosample:SAMN36866739
+        record_type: BIOSAMPLE
+        source: GOLD
+        source_field: NCBI BIOSAMPLE ACCESSION
+        source_id: gold:Gp0828779
+        source_organism_id: gold:Go0029084
+        source_project_id: gold:Gp0828779
+        source_strain_field: ORGANISM STRAIN
+        source_strain_identifiers: DSM 935
+        taxon_id: NCBITaxon:1532
+      - matched_strain_id: kgmicrobe.strain:DSM-935
+        record_id: biosample:SAMN36866739
+        record_type: BIOSAMPLE
+        source: GTDB
+        source_field: ncbi_biosample
+        source_id: gtdb.genome:RS_GCF_034355335.1
+        source_strain_field: ncbi_strain_identifiers
+        source_strain_identifiers: DSM 935
+        taxon_id: NCBITaxon:33035
+      - matched_strain_id: kgmicrobe.strain:DSM-935
+        record_id: biosample:SAMN36866739
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_034355335.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=DSM 935
+        taxon_id: NCBITaxon:33035
+      - matched_strain_id: kgmicrobe.strain:DSM-935
+        record_id: biosample:SAMN36866739
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCF_034355335.1
+        source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=DSM 935
+        taxon_id: NCBITaxon:33035
+      ena_analysis_id: ena.analysis:ERZ26545498
+      sylph_species: Blautia coccoides
+  related_records:
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: GOLD
+    source_id: gold:Gp0342086
+    taxon_id: NCBITaxon:1532
+    source_field: NCBI BIOPROJECT ACCESSION
+    matched_strain_id: kgmicrobe.strain:NCTC-11035
+    source_strain_identifiers: NCTC 11035
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0468474
+    source_project_id: gold:Gp0342086
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: GOLD
+    source_id: gold:Gp0342086
+    taxon_id: NCBITaxon:1532
+    source_field: NCBI BIOPROJECT ACCESSION
+    matched_strain_id: kgmicrobe.strain:NCTC-11035
+    source_strain_identifiers: NCTC 11035
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0468474
+    source_project_id: gold:Gp0342086
+  - record_id: bioproject:PRJNA1002958
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1532.78
+    taxon_id: NCBITaxon:33035
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA1002958
+    record_type: BIOPROJECT
+    source: GOLD
+    source_id: gold:Gp0828779
+    taxon_id: NCBITaxon:1532
+    source_field: NCBI BIOPROJECT ACCESSION
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0029084
+    source_project_id: gold:Gp0828779
+  - record_id: bioproject:PRJNA1002958
+    record_type: BIOPROJECT
+    source: GOLD
+    source_id: gold:Gp0828779
+    taxon_id: NCBITaxon:1532
+    source_field: NCBI BIOPROJECT ACCESSION
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0029084
+    source_project_id: gold:Gp0828779
+  - record_id: bioproject:PRJNA1002958
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_034355335.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:33035
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: strain=DSM 935
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_004340925.1
+    taxon_id: NCBITaxon:33035
+    source_field: ncbi_bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_034355335.1
+    taxon_id: NCBITaxon:33035
+    source_field: ncbi_bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_004340925.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:33035
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: strain=DSM 935
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_034355335.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:33035
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: strain=DSM 935
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA519317
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1532.16
+    taxon_id: NCBITaxon:33035
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA519317
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1532.16
+    taxon_id: NCBITaxon:33035
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM:935
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA519317
+    record_type: BIOPROJECT
+    source: GOLD
+    source_id: gold:Gp0325694
+    taxon_id: NCBITaxon:1532
+    source_field: NCBI BIOPROJECT ACCESSION
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0029084
+    source_project_id: gold:Gp0325694
+  - record_id: bioproject:PRJNA519317
+    record_type: BIOPROJECT
+    source: GOLD
+    source_id: gold:Gp0325694
+    taxon_id: NCBITaxon:1532
+    source_field: NCBI BIOPROJECT ACCESSION
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0029084
+    source_project_id: gold:Gp0325694
+  - record_id: bioproject:PRJNA519317
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_004340925.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:33035
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: strain=DSM 935
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMEA44522668
+    record_type: BIOSAMPLE
+    source: GOLD
+    source_id: gold:Gp0342086
+    taxon_id: NCBITaxon:1532
+    source_field: NCBI BIOSAMPLE ACCESSION
+    matched_strain_id: kgmicrobe.strain:NCTC-11035
+    source_strain_identifiers: NCTC 11035
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0468474
+    source_project_id: gold:Gp0342086
+  - record_id: biosample:SAMEA44522668
+    record_type: BIOSAMPLE
+    source: GOLD
+    source_id: gold:Gp0342086
+    taxon_id: NCBITaxon:1532
+    source_field: NCBI BIOSAMPLE ACCESSION
+    matched_strain_id: kgmicrobe.strain:NCTC-11035
+    source_strain_identifiers: NCTC 11035
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0468474
+    source_project_id: gold:Gp0342086
+  - record_id: biosample:SAMN10864821
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1532.16
+    taxon_id: NCBITaxon:33035
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: strain
+  - record_id: biosample:SAMN10864821
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1532.16
+    taxon_id: NCBITaxon:33035
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM:935
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN10864821
+    record_type: BIOSAMPLE
+    source: GOLD
+    source_id: gold:Gp0325694
+    taxon_id: NCBITaxon:1532
+    source_field: NCBI BIOSAMPLE ACCESSION
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0029084
+    source_project_id: gold:Gp0325694
+  - record_id: biosample:SAMN10864821
+    record_type: BIOSAMPLE
+    source: GOLD
+    source_id: gold:Gp0325694
+    taxon_id: NCBITaxon:1532
+    source_field: NCBI BIOSAMPLE ACCESSION
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0029084
+    source_project_id: gold:Gp0325694
+  - record_id: biosample:SAMN10864821
+    record_type: BIOSAMPLE
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_004340925.1
+    taxon_id: NCBITaxon:33035
+    source_field: ncbi_biosample
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN10864821
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_004340925.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:33035
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: strain=DSM 935
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN10864821
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_004340925.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:33035
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: strain=DSM 935
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN36866739
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1532.78
+    taxon_id: NCBITaxon:33035
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: strain
+  - record_id: biosample:SAMN36866739
+    record_type: BIOSAMPLE
+    source: GOLD
+    source_id: gold:Gp0828779
+    taxon_id: NCBITaxon:1532
+    source_field: NCBI BIOSAMPLE ACCESSION
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0029084
+    source_project_id: gold:Gp0828779
+  - record_id: biosample:SAMN36866739
+    record_type: BIOSAMPLE
+    source: GOLD
+    source_id: gold:Gp0828779
+    taxon_id: NCBITaxon:1532
+    source_field: NCBI BIOSAMPLE ACCESSION
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0029084
+    source_project_id: gold:Gp0828779
+  - record_id: biosample:SAMN36866739
+    record_type: BIOSAMPLE
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_034355335.1
+    taxon_id: NCBITaxon:33035
+    source_field: ncbi_biosample
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN36866739
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_034355335.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:33035
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: strain=DSM 935
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN36866739
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_034355335.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:33035
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: strain=DSM 935
+    source_strain_field: infraspecific_name
+  - record_id: gold:Ga0310518
+    record_type: GOLD_ANALYSIS
+    source: GOLD
+    source_id: gold:Ga0310518
+    taxon_id: NCBITaxon:1532
+    record_name: Blautia coccoides DSM 935
+    source_field: AP GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0029084
+    source_project_id: gold:Gp0325694
+  - record_id: gold:Ga0310518
+    record_type: GOLD_ANALYSIS
+    source: GOLD
+    source_id: gold:Ga0310518
+    taxon_id: NCBITaxon:1532
+    record_name: Blautia coccoides DSM 935
+    source_field: AP GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0029084
+    source_project_id: gold:Gp0325694
+  - record_id: gold:Ga0317269
+    record_type: GOLD_ANALYSIS
+    source: GOLD
+    source_id: gold:Ga0317269
+    taxon_id: NCBITaxon:1532
+    record_name: Blautia coccoides NCTC 11035
+    source_field: AP GOLD ID
+    matched_strain_id: kgmicrobe.strain:NCTC-11035
+    source_strain_identifiers: NCTC 11035
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0468474
+    source_project_id: gold:Gp0342086
+  - record_id: gold:Ga0317269
+    record_type: GOLD_ANALYSIS
+    source: GOLD
+    source_id: gold:Ga0317269
+    taxon_id: NCBITaxon:1532
+    record_name: Blautia coccoides NCTC 11035
+    source_field: AP GOLD ID
+    matched_strain_id: kgmicrobe.strain:NCTC-11035
+    source_strain_identifiers: NCTC 11035
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0468474
+    source_project_id: gold:Gp0342086
+  - record_id: gold:Ga0674396
+    record_type: GOLD_ANALYSIS
+    source: GOLD
+    source_id: gold:Ga0674396
+    taxon_id: NCBITaxon:1532
+    record_name: Blautia coccoides DSM 935
+    source_field: AP GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0029084
+    source_project_id: gold:Gp0828779
+  - record_id: gold:Ga0674396
+    record_type: GOLD_ANALYSIS
+    source: GOLD
+    source_id: gold:Ga0674396
+    taxon_id: NCBITaxon:1532
+    record_name: Blautia coccoides DSM 935
+    source_field: AP GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0029084
+    source_project_id: gold:Gp0828779
+  - record_id: gold:Go0029084
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0029084
+    taxon_id: NCBITaxon:1532
+    record_name: Blautia coccoides DSM 935
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0029084
+  - record_id: gold:Go0029084
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0029084
+    taxon_id: NCBITaxon:1532
+    record_name: Blautia coccoides DSM 935
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0029084
+  - record_id: gold:Go0468474
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0468474
+    taxon_id: NCBITaxon:1532
+    record_name: Blautia coccoides NCTC 11035
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:NCTC-11035
+    source_strain_identifiers: NCTC 11035
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0468474
+  - record_id: gold:Go0468474
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0468474
+    taxon_id: NCBITaxon:1532
+    record_name: Blautia coccoides NCTC 11035
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:NCTC-11035
+    source_strain_identifiers: NCTC 11035
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0468474
+  - record_id: gold:Go0625229
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0625229
+    taxon_id: NCBITaxon:1532
+    record_name: Clostridium coccoides ATCC 29236
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:ATCC-29236
+    source_strain_identifiers: ATCC 29236
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0625229
+  - record_id: gold:Go0625229
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0625229
+    taxon_id: NCBITaxon:1532
+    record_name: Clostridium coccoides ATCC 29236
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:ATCC-29236
+    source_strain_identifiers: ATCC 29236
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0625229
+  - record_id: gold:Gp0325694
+    record_type: GOLD_PROJECT
+    source: GOLD
+    source_id: gold:Gp0325694
+    taxon_id: NCBITaxon:1532
+    record_name: Blautia coccoides DSM 935
+    source_field: PROJECT GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0029084
+    source_project_id: gold:Gp0325694
+  - record_id: gold:Gp0325694
+    record_type: GOLD_PROJECT
+    source: GOLD
+    source_id: gold:Gp0325694
+    taxon_id: NCBITaxon:1532
+    record_name: Blautia coccoides DSM 935
+    source_field: PROJECT GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0029084
+    source_project_id: gold:Gp0325694
+  - record_id: gold:Gp0342086
+    record_type: GOLD_PROJECT
+    source: GOLD
+    source_id: gold:Gp0342086
+    taxon_id: NCBITaxon:1532
+    record_name: Blautia coccoides NCTC 11035
+    source_field: PROJECT GOLD ID
+    matched_strain_id: kgmicrobe.strain:NCTC-11035
+    source_strain_identifiers: NCTC 11035
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0468474
+    source_project_id: gold:Gp0342086
+  - record_id: gold:Gp0342086
+    record_type: GOLD_PROJECT
+    source: GOLD
+    source_id: gold:Gp0342086
+    taxon_id: NCBITaxon:1532
+    record_name: Blautia coccoides NCTC 11035
+    source_field: PROJECT GOLD ID
+    matched_strain_id: kgmicrobe.strain:NCTC-11035
+    source_strain_identifiers: NCTC 11035
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0468474
+    source_project_id: gold:Gp0342086
+  - record_id: gold:Gp0828779
+    record_type: GOLD_PROJECT
+    source: GOLD
+    source_id: gold:Gp0828779
+    taxon_id: NCBITaxon:1532
+    record_name: Blautia coccoides DSM 935
+    source_field: PROJECT GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0029084
+    source_project_id: gold:Gp0828779
+  - record_id: gold:Gp0828779
+    record_type: GOLD_PROJECT
+    source: GOLD
+    source_id: gold:Gp0828779
+    taxon_id: NCBITaxon:1532
+    record_name: Blautia coccoides DSM 935
+    source_field: PROJECT GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0029084
+    source_project_id: gold:Gp0828779
+  - record_id: INSDC:AB571656
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:92924
+    taxon_id: NCBITaxon:1532
+    record_name: 'Blautia coccoides gene for 16S ribosomal RNA, partial sequence,
+      strain: JCM 1395'
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:JCM-1395
+    source_strain_identifiers: JCM 1395
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 1395
+      deposit_id: straininfo.deposit:171780
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:171780
+      sequence_type: rrnaop
+      source_bacdive_id: bacdive:18067
+      strain_doi: DOI:10.60712/SI-ID92924.3
+      strain_id: straininfo.strain:92924
+      strain_status: published online
+  - record_id: INSDC:AY691229
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:92924
+    taxon_id: NCBITaxon:1532
+    record_name: Blautia coccoides strain ATCC 29236 60 kDa chaperonin (cpn60) gene,
+      partial cds
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:ATCC-29236
+    source_strain_identifiers: ATCC 29236
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: ATCC 29236
+      deposit_id: straininfo.deposit:106587
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:106587
+      sequence_type: gene
+      source_bacdive_id: bacdive:18067
+      strain_doi: DOI:10.60712/SI-ID92924.3
+      strain_id: straininfo.strain:92924
+      strain_status: published online
+  - record_id: straininfo.deposit:106587
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:92924
+    taxon_id: NCBITaxon:1532
+    record_name: ATCC 29236
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:ATCC-29236
+    source_strain_identifiers: ATCC 29236
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: ATCC 29236
+      deposit_id: straininfo.deposit:106587
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:18067
+      strain_doi: DOI:10.60712/SI-ID92924.3
+      strain_id: straininfo.strain:92924
+      strain_status: published online
+  - record_id: straininfo.deposit:106589
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:92924
+    taxon_id: NCBITaxon:1532
+    record_name: NCTC 11035
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:NCTC-11035
+    source_strain_identifiers: NCTC 11035
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NCTC 11035
+      deposit_id: straininfo.deposit:106589
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:18067
+      strain_doi: DOI:10.60712/SI-ID92924.3
+      strain_id: straininfo.strain:92924
+      strain_status: published online
+  - record_id: straininfo.deposit:171780
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:92924
+    taxon_id: NCBITaxon:1532
+    record_name: JCM 1395
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:JCM-1395
+    source_strain_identifiers: JCM 1395
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 1395
+      deposit_id: straininfo.deposit:171780
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:18067
+      strain_doi: DOI:10.60712/SI-ID92924.3
+      strain_id: straininfo.strain:92924
+      strain_status: published online
+  - record_id: straininfo.deposit:171781
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:92924
+    taxon_id: NCBITaxon:1532
+    record_name: CCM 6064
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCM-6064
+    source_strain_identifiers: CCM 6064
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCM 6064
+      deposit_id: straininfo.deposit:171781
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:18067
+      strain_doi: DOI:10.60712/SI-ID92924.3
+      strain_id: straininfo.strain:92924
+      strain_status: published online
+  - record_id: straininfo.deposit:510058
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:92924
+    taxon_id: NCBITaxon:1532
+    record_name: BCRC 14467
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:BCRC-14467
+    source_strain_identifiers: BCRC 14467
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: BCRC 14467
+      deposit_id: straininfo.deposit:510058
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:18067
+      strain_doi: DOI:10.60712/SI-ID92924.3
+      strain_id: straininfo.strain:92924
+      strain_status: published online
+  - record_id: straininfo.deposit:510059
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:92924
+    taxon_id: NCBITaxon:1532
+    record_name: DSM 935
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 935
+      deposit_id: straininfo.deposit:510059
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:18067
+      strain_doi: DOI:10.60712/SI-ID92924.3
+      strain_id: straininfo.strain:92924
+      strain_status: published online
+  - record_id: straininfo.strain:92924
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:92924
+    taxon_id: NCBITaxon:1532
+    record_name: ATCC 29236
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:ATCC-29236
+    source_strain_identifiers: ATCC 29236
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: ATCC 29236
+      deposit_id: straininfo.deposit:106587
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:18067
+      strain_doi: DOI:10.60712/SI-ID92924.3
+      strain_id: straininfo.strain:92924
+      strain_status: published online
+  - record_id: straininfo.strain:92924
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:92924
+    taxon_id: NCBITaxon:1532
+    record_name: BCRC 14467
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:BCRC-14467
+    source_strain_identifiers: BCRC 14467
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: BCRC 14467
+      deposit_id: straininfo.deposit:510058
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:18067
+      strain_doi: DOI:10.60712/SI-ID92924.3
+      strain_id: straininfo.strain:92924
+      strain_status: published online
+  - record_id: straininfo.strain:92924
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:92924
+    taxon_id: NCBITaxon:1532
+    record_name: CCM 6064
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCM-6064
+    source_strain_identifiers: CCM 6064
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCM 6064
+      deposit_id: straininfo.deposit:171781
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:18067
+      strain_doi: DOI:10.60712/SI-ID92924.3
+      strain_id: straininfo.strain:92924
+      strain_status: published online
+  - record_id: straininfo.strain:92924
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:92924
+    taxon_id: NCBITaxon:1532
+    record_name: DSM 935
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:DSM-935
+    source_strain_identifiers: DSM 935
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 935
+      deposit_id: straininfo.deposit:510059
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:18067
+      strain_doi: DOI:10.60712/SI-ID92924.3
+      strain_id: straininfo.strain:92924
+      strain_status: published online
+  - record_id: straininfo.strain:92924
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:92924
+    taxon_id: NCBITaxon:1532
+    record_name: JCM 1395
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:JCM-1395
+    source_strain_identifiers: JCM 1395
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 1395
+      deposit_id: straininfo.deposit:171780
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:18067
+      strain_doi: DOI:10.60712/SI-ID92924.3
+      strain_id: straininfo.strain:92924
+      strain_status: published online
+  - record_id: straininfo.strain:92924
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:92924
+    taxon_id: NCBITaxon:1532
+    record_name: NCTC 11035
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:NCTC-11035
+    source_strain_identifiers: NCTC 11035
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: NCTC 11035
+      deposit_id: straininfo.deposit:106589
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:18067
+      strain_doi: DOI:10.60712/SI-ID92924.3
+      strain_id: straininfo.strain:92924
+      strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_18069
   source: BACDIVE
   source_id: bacdive:18069
@@ -1866,8 +3845,27 @@ strains:
     source_id: bacdive:18069
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Blautia producta DSM 3507
+    assembly_name: ASM291553v1 assembly for Blautia producta DSM 3507
     taxon_id: NCBITaxon:33035
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_002915535.1
+    source: BV_BRC
+    source_id: patric:33035.17
+    assembly_name: Blautia producta strain DSM 3507
+    taxon_id: NCBITaxon:33035
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-3507
+    source_strain_identifiers: DSM 3507
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_002915535.1
+    source: BV_BRC
+    source_id: patric:33035.17
+    assembly_name: Blautia producta strain DSM 3507
+    taxon_id: NCBITaxon:33035
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-3507
+    source_strain_identifiers: DSM:3507
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_002915535.1
     source: GOLD
     source_id: gold:Ga0347669
@@ -1910,6 +3908,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-3507
     source_strain_identifiers: DSM 3507
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_002915535.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_002915535.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM291553v1
+    taxon_id: NCBITaxon:33035
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-3507
+    source_strain_identifiers: strain=DSM 3507
+    source_strain_field: infraspecific_name
   genome_records:
   - genome_id: gtdb.genome:GB_GCA_002915535.1
     source_database: gtdb
@@ -1927,9 +3936,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:18069
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Blautia producta DSM 3507
+    assembly_level: contig
+    genome_name: ASM291553v1 assembly for Blautia producta DSM 3507
     taxon_id: NCBITaxon:33035
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2852254035
     source_database: img
     source: GOLD
@@ -1959,10 +3969,49 @@ strains:
     source: BACDIVE
     source_id: bacdive:18069
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM291553v1 assembly for Blautia producta DSM 3507
+    taxon_id: NCBITaxon:33035
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:33035.17
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:33035.17
     genome_name: Blautia producta strain DSM 3507
     taxon_id: NCBITaxon:33035
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-3507
+    source_strain_identifiers: DSM 3507
+    source_strain_field: strain
+  - genome_id: patric:33035.17
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:33035.17
+    genome_name: Blautia producta strain DSM 3507
+    taxon_id: NCBITaxon:33035
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-3507
+    source_strain_identifiers: DSM:3507
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJNA431659
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:33035.17
+    taxon_id: NCBITaxon:33035
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-3507
+    source_strain_identifiers: DSM 3507
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA431659
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:33035.17
+    taxon_id: NCBITaxon:33035
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-3507
+    source_strain_identifiers: DSM:3507
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA431659
     record_type: BIOPROJECT
     source: GOLD
@@ -1994,6 +4043,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-3507
     source_strain_identifiers: DSM 3507
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA431659
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_002915535.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:33035
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-3507
+    source_strain_identifiers: strain=DSM 3507
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN08397823
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:33035.17
+    taxon_id: NCBITaxon:33035
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-3507
+    source_strain_identifiers: DSM 3507
+    source_strain_field: strain
+  - record_id: biosample:SAMN08397823
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:33035.17
+    taxon_id: NCBITaxon:33035
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-3507
+    source_strain_identifiers: DSM:3507
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN08397823
     record_type: BIOSAMPLE
     source: GOLD
@@ -2025,6 +4102,16 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-3507
     source_strain_identifiers: DSM 3507
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN08397823
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_002915535.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:33035
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-3507
+    source_strain_identifiers: strain=DSM 3507
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0347669
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -2216,6 +4303,434 @@ strains:
       strain_doi: DOI:10.60712/SI-ID400569.2
       strain_id: straininfo.strain:400569
       strain_status: published online
+- strain_id: kgmicrobe.strain:bacdive_130918
+  source: BACDIVE
+  source_id: bacdive:130918
+  designation: PG-424-CC-9
+  culture_collection_ids:
+  - kgmicrobe.strain:DSM-29138
+  genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_024623045
+    source: BACDIVE
+    source_id: bacdive:130918
+    source_reference_id: '66792'
+    assembly_level: contig
+    assembly_name: ASM2462304v1 assembly for Blautia producta DSM 29138
+    taxon_id: NCBITaxon:1532
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_024623045.1
+    source: BV_BRC
+    source_id: patric:1532.34
+    assembly_name: Blautia coccoides DSM 29138
+    taxon_id: NCBITaxon:33035
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_024623045.1
+    source: BV_BRC
+    source_id: patric:1532.34
+    assembly_name: Blautia coccoides DSM 29138
+    taxon_id: NCBITaxon:33035
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM:29138
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_024623045.1
+    source: GOLD
+    source_id: gold:Ga0595242
+    assembly_name: Blautia coccoides DSM 29138
+    taxon_id: NCBITaxon:1532
+    source_field: AP GENBANK.assemblyAccession
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0658935
+    source_project_id: gold:Gp0703219
+  - assembly_id: ncbi.assembly:GCA_024623045.1
+    source: GOLD
+    source_id: gold:Ga0595242
+    assembly_name: Blautia coccoides DSM 29138
+    taxon_id: NCBITaxon:1532
+    source_field: AP GENBANK.assemblyAccession
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0658935
+    source_project_id: gold:Gp0703219
+  - assembly_id: ncbi.assembly:GCA_024623045.1
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_024623045.1
+    assembly_level: Contig
+    assembly_name: ASM2462304v1
+    taxon_id: NCBITaxon:1532
+    source_field: ncbi_genbank_assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_024623045.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_024623045.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM2462304v1
+    taxon_id: NCBITaxon:33035
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: strain=DSM 29138
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCF_024623045.1
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_024623045.1
+    assembly_level: Contig
+    assembly_name: ASM2462304v1
+    taxon_id: NCBITaxon:1532
+    source_field: accession
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_024623045.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_024623045.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM2462304v1
+    taxon_id: NCBITaxon:33035
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: strain=DSM 29138
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCA_024623045
+    source: STRAININFO
+    source_id: straininfo.strain:405422
+    assembly_level: contig
+    assembly_name: Blautia coccoides DSM 29138
+    taxon_id: NCBITaxon:1532
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 29138
+      deposit_id: straininfo.deposit:912640
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:912640
+      sequence_type: genome
+      source_bacdive_id: bacdive:130918
+      strain_doi: DOI:10.60712/SI-ID405422.2
+      strain_id: straininfo.strain:405422
+      strain_status: published online
+  genome_records:
+  - genome_id: gtdb.genome:RS_GCF_024623045.1
+    source_database: gtdb
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_024623045.1
+    assembly_level: Contig
+    genome_name: Blautia producta
+    taxon_id: NCBITaxon:1532
+    source_field: accession
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: ncbi_strain_identifiers
+  - genome_id: patric:1532.34
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:130918
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: ASM2462304v1 assembly for Blautia producta DSM 29138
+    taxon_id: NCBITaxon:1532
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1532.34
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1532.34
+    genome_name: Blautia coccoides DSM 29138
+    taxon_id: NCBITaxon:33035
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: strain
+  - genome_id: patric:1532.34
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1532.34
+    genome_name: Blautia coccoides DSM 29138
+    taxon_id: NCBITaxon:33035
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM:29138
+    source_strain_field: culture_collection
+  related_records:
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_024623045.1
+    taxon_id: NCBITaxon:1532
+    source_field: ncbi_bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_024623045.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:33035
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: strain=DSM 29138
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA856830
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1532.34
+    taxon_id: NCBITaxon:33035
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA856830
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1532.34
+    taxon_id: NCBITaxon:33035
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM:29138
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA856830
+    record_type: BIOPROJECT
+    source: GOLD
+    source_id: gold:Gp0703219
+    taxon_id: NCBITaxon:1532
+    source_field: NCBI BIOPROJECT ACCESSION
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0658935
+    source_project_id: gold:Gp0703219
+  - record_id: bioproject:PRJNA856830
+    record_type: BIOPROJECT
+    source: GOLD
+    source_id: gold:Gp0703219
+    taxon_id: NCBITaxon:1532
+    source_field: NCBI BIOPROJECT ACCESSION
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0658935
+    source_project_id: gold:Gp0703219
+  - record_id: bioproject:PRJNA856830
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_024623045.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:33035
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: strain=DSM 29138
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN29593108
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1532.34
+    taxon_id: NCBITaxon:33035
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: strain
+  - record_id: biosample:SAMN29593108
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1532.34
+    taxon_id: NCBITaxon:33035
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM:29138
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN29593108
+    record_type: BIOSAMPLE
+    source: GOLD
+    source_id: gold:Gp0703219
+    taxon_id: NCBITaxon:1532
+    source_field: NCBI BIOSAMPLE ACCESSION
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0658935
+    source_project_id: gold:Gp0703219
+  - record_id: biosample:SAMN29593108
+    record_type: BIOSAMPLE
+    source: GOLD
+    source_id: gold:Gp0703219
+    taxon_id: NCBITaxon:1532
+    source_field: NCBI BIOSAMPLE ACCESSION
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0658935
+    source_project_id: gold:Gp0703219
+  - record_id: biosample:SAMN29593108
+    record_type: BIOSAMPLE
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_024623045.1
+    taxon_id: NCBITaxon:1532
+    source_field: ncbi_biosample
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN29593108
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_024623045.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:33035
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: strain=DSM 29138
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN29593108
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_024623045.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:33035
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: strain=DSM 29138
+    source_strain_field: infraspecific_name
+  - record_id: gold:Ga0595242
+    record_type: GOLD_ANALYSIS
+    source: GOLD
+    source_id: gold:Ga0595242
+    taxon_id: NCBITaxon:1532
+    record_name: Blautia coccoides DSM 29138
+    source_field: AP GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0658935
+    source_project_id: gold:Gp0703219
+  - record_id: gold:Ga0595242
+    record_type: GOLD_ANALYSIS
+    source: GOLD
+    source_id: gold:Ga0595242
+    taxon_id: NCBITaxon:1532
+    record_name: Blautia coccoides DSM 29138
+    source_field: AP GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0658935
+    source_project_id: gold:Gp0703219
+  - record_id: gold:Go0658935
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0658935
+    taxon_id: NCBITaxon:1532
+    record_name: Blautia coccoides DSM 29138
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0658935
+  - record_id: gold:Go0658935
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0658935
+    taxon_id: NCBITaxon:1532
+    record_name: Blautia coccoides DSM 29138
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0658935
+  - record_id: gold:Gp0703219
+    record_type: GOLD_PROJECT
+    source: GOLD
+    source_id: gold:Gp0703219
+    taxon_id: NCBITaxon:1532
+    record_name: Blautia coccoides DSM 29138
+    source_field: PROJECT GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0658935
+    source_project_id: gold:Gp0703219
+  - record_id: gold:Gp0703219
+    record_type: GOLD_PROJECT
+    source: GOLD
+    source_id: gold:Gp0703219
+    taxon_id: NCBITaxon:1532
+    record_name: Blautia coccoides DSM 29138
+    source_field: PROJECT GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0658935
+    source_project_id: gold:Gp0703219
+  - record_id: INSDC:KU196081
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:405422
+    taxon_id: NCBITaxon:1532
+    record_name: Blautia coccoides strain DSM 29138 16S ribosomal RNA gene, partial
+      sequence
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 29138
+      deposit_id: straininfo.deposit:912640
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:912640
+      sequence_type: rrnaop
+      source_bacdive_id: bacdive:130918
+      strain_doi: DOI:10.60712/SI-ID405422.2
+      strain_id: straininfo.strain:405422
+      strain_status: published online
+  - record_id: straininfo.deposit:912640
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:405422
+    taxon_id: NCBITaxon:1532
+    record_name: DSM 29138
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 29138
+      deposit_id: straininfo.deposit:912640
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:130918
+      strain_doi: DOI:10.60712/SI-ID405422.2
+      strain_id: straininfo.strain:405422
+      strain_status: published online
+  - record_id: straininfo.strain:405422
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:405422
+    taxon_id: NCBITaxon:1532
+    record_name: DSM 29138
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:DSM-29138
+    source_strain_identifiers: DSM 29138
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 29138
+      deposit_id: straininfo.deposit:912640
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:130918
+      strain_doi: DOI:10.60712/SI-ID405422.2
+      strain_id: straininfo.strain:405422
+      strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_149907
   source: BACDIVE
   source_id: bacdive:149907
@@ -2266,6 +4781,7 @@ source_attestations:
   source_label: Blautia producta
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:787483
   source_label: Blautia producta
@@ -2282,7 +4798,7 @@ source_attestations:
 - source: BACDIVE
   source_id: NCBITaxon:33035
   source_label: Blautia producta
-  assertion_count: 4
+  assertion_count: 6
   assertion_unit: STRAIN
   notes: 1 strains are filed under 1 descendant NCBI taxa (see classified_as).
 - source: MEDIADIVE
@@ -2310,7 +4826,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

@@ -62,11 +62,21 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 2
   notes: LPSN links this GTDB species to the taxon's name.
+synonyms:
+- synonym_text: '"Bifidobacterium rousetti" Modesto et al. 2019'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Bifidobacterium rousetti Modesto et al. 2021
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Bifidobacterium sp. RST9
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Bifidobacterium_rousetti
 - lpsn:18957
 genetic_code: 11
-strain_count: 1
+strain_count: 2
 strains:
 - strain_id: kgmicrobe.strain:bacdive_159322
   source: BACDIVE
@@ -75,8 +85,36 @@ strains:
   - kgmicrobe.strain:BCRC-81136
   - kgmicrobe.strain:DSM-106023
   - kgmicrobe.strain:NBRC-113378
-  - kgmicrobe.strain:RST-9
+  - kgmicrobe.strain:RST%209
   is_type_strain: true
+  genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_008698235
+    source: BACDIVE
+    source_id: bacdive:159322
+    source_reference_id: '66145'
+    assembly_level: scaffold
+    assembly_name: ASM869823v1 assembly for Bifidobacterium rousetti RST9
+    taxon_id: NCBITaxon:2045439
+    source_field: Sequence information.Genome sequences.INSDC accession
+  genome_records:
+  - genome_id: img.taxon:2899417961
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:159322
+    source_reference_id: '66145'
+    assembly_level: scaffold
+    genome_name: ASM869823v1 assembly for Bifidobacterium rousetti RST9
+    taxon_id: NCBITaxon:2045439
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: patric:2045439.3
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:159322
+    source_reference_id: '66145'
+    assembly_level: scaffold
+    genome_name: ASM869823v1 assembly for Bifidobacterium rousetti RST9
+    taxon_id: NCBITaxon:2045439
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: gold:Go0621556
     record_type: GOLD_ORGANISM
@@ -182,12 +220,59 @@ strains:
       strain_doi: DOI:10.60712/SI-ID403884.2
       strain_id: straininfo.strain:403884
       strain_status: published online
+- strain_id: kgmicrobe.strain:bacdive_159326
+  source: BACDIVE
+  source_id: bacdive:159326
+  culture_collection_ids:
+  - kgmicrobe.strain:DSM-106027
+  - kgmicrobe.strain:RST%2019
+  is_type_strain: true
+  related_records:
+  - record_id: straininfo.deposit:910727
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:403641
+    taxon_id: NCBITaxon:1678
+    record_name: DSM 106027
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:DSM-106027
+    source_strain_identifiers: DSM 106027
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 106027
+      deposit_id: straininfo.deposit:910727
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:159326
+      strain_doi: DOI:10.60712/SI-ID403641.2
+      strain_id: straininfo.strain:403641
+      strain_status: published online
+  - record_id: straininfo.strain:403641
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:403641
+    taxon_id: NCBITaxon:1678
+    record_name: DSM 106027
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:DSM-106027
+    source_strain_identifiers: DSM 106027
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 106027
+      deposit_id: straininfo.deposit:910727
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:159326
+      strain_doi: DOI:10.60712/SI-ID403641.2
+      strain_id: straininfo.strain:403641
+      strain_status: published online
 source_attestations:
 - source: NCBITAXON
   source_id: NCBITaxon:2045439
   source_label: Bifidobacterium rousetti
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:18957
   source_label: Bifidobacterium rousetti
@@ -203,7 +288,7 @@ source_attestations:
 - source: BACDIVE
   source_id: NCBITaxon:2045439
   source_label: Bifidobacterium rousetti
-  assertion_count: 1
+  assertion_count: 2
   assertion_unit: STRAIN
 - source: MEDIADIVE
   source_id: NCBITaxon:2045439
@@ -216,7 +301,7 @@ source_attestations:
   assertion_count: 5
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

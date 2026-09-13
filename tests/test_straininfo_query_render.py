@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import base64
 import gzip
 import importlib
 import json
@@ -221,15 +220,13 @@ def test_browser_detail_batches_respect_byte_limit(component, tmp_path):
 
 
 def test_compressed_taxon_table_retains_anchors_and_escapes_source_text(component, tmp_path, monkeypatch):
-    import re
+    from tests.rendered_taxon import rendered_taxon
 
     _, _, renderer, records = component
     records[0][1]["strains"][0]["designation"] = "<script>alert(1)</script> Ω"
-    monkeypatch.setattr(renderer, "STRAIN_HTML_THRESHOLD", 0)
     renderer.render(tmp_path / "site")
-    page = (tmp_path / "site/taxa/bacteria/fixture.html").read_text()
-    encoded = re.search(r'data-gzip-content="([^"]+)"', page).group(1)
-    table = gzip.decompress(base64.b64decode(encoded)).decode()
+    page = rendered_taxon(tmp_path / "site", records[0][1]["identifier"])
+    table = page
     assert 'id="strains-kgmicrobe.strain-bacdive_1"' in table
     assert "https://bacdive.dsmz.de/strain/1" in table
     assert "&lt;script&gt;alert(1)&lt;/script&gt; Ω" in table
@@ -250,7 +247,7 @@ def test_generated_script_urls_change_when_browser_code_changes(component, tmp_p
     script.write_text(script.read_text() + "\n// Updated browser code.\n")
     renderer.render(tmp_path / "second")
     versions = [re.search(r'compressed-data.js\?v=([a-f0-9]{16})',
-                          (tmp_path / output / "taxa/bacteria/fixture.html").read_text()).group(1)
+                          (tmp_path / output / "taxon.html").read_text()).group(1)
                 for output in ("first", "second")]
     assert versions[0] != versions[1]
 
@@ -263,12 +260,13 @@ def test_taxon_links_and_report_keep_record_types_separate(component, tmp_path):
     strain = records[0][1]["strains"][0]
     strain["genome_assemblies"], strain["related_records"] = assemblies[SID], related[SID]
     renderer.render(tmp_path / "site")
-    html = (tmp_path / "site/taxa/bacteria/fixture.html").read_text()
+    from tests.rendered_taxon import rendered_taxon
+    html = rendered_taxon(tmp_path / "site", records[0][1]["identifier"])
     parsed = _StrainTableParser(SID)
     parsed.feed(html)
     ncbi, _, references = parsed.cells[-3:]
     assert "https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_000000001" in ncbi["hrefs"]
-    assert "../../straininfo.html#straininfo.strain:1" in ncbi["hrefs"]
+    assert "straininfo.html#straininfo.strain:1" in ncbi["hrefs"]
     assert "https://straininfo.dsmz.de/strain/1?SI-DP11" in references["hrefs"]
     assert "https://doi.org/10.60712/SI-ID1.3" in references["hrefs"]
     assert "Strain record-version DOI" in references["text"]

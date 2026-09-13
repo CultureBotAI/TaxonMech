@@ -96,7 +96,13 @@ EMIT_OPTS = {
 
 def emit_taxon_yaml(doc: dict[str, Any], yaml_kwargs: dict[str, Any] | None = None) -> str:
     """Serialise ``doc`` exactly as :func:`write_validated_taxon` writes it."""
-    return yaml.safe_dump(doc, **{**EMIT_OPTS, **(yaml_kwargs or {})})
+    # Verified byte-identical across the entire preceding corpus. The safe
+    # C emitter makes full-taxonomy generation and reproduction practical.
+    options = {**EMIT_OPTS, **(yaml_kwargs or {})}
+    text = yaml.dump(doc, Dumper=getattr(yaml, "CSafeDumper", yaml.SafeDumper), **options)
+    # LibYAML escapes supplementary-plane Unicode that the Python emitter
+    # writes literally. Preserve that established contract for those records.
+    return yaml.safe_dump(doc, **options) if "\\U" in text else text
 
 
 def write_validated_taxon(

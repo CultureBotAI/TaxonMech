@@ -60,6 +60,13 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 3
   notes: LPSN links this GTDB species to the taxon's name.
+synonyms:
+- synonym_text: Skermanella aerolata Weon et al. 2007
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Skermanella sp. 5416T-32
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Skermanella_aerolata
 - lpsn:786511
@@ -81,8 +88,18 @@ strains:
     source_id: bacdive:13964
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Skermanella aerolata KACC 11604 5416T-32
+    assembly_name: ASM93642v1 assembly for Skermanella aerolata KACC 11604 5416T-32
     taxon_id: NCBITaxon:1385368
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_000936425.1
+    source: BV_BRC
+    source_id: patric:1385368.4
+    assembly_name: Skermanella aerolata KACC 11604 strain 5416T-32
+    taxon_id: NCBITaxon:1385368
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:KACC-11604
+    source_strain_identifiers: KACC:11604
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_000936425.1
     source: GOLD
     source_id: gold:Ga0069205
@@ -132,9 +149,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:13964
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Skermanella aerolata KACC 11604
+    assembly_level: contig
+    genome_name: ASM93642v1 assembly for Skermanella aerolata KACC 11604 5416T-32
     taxon_id: NCBITaxon:1385368
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2627853908
     source_database: img
     source: GOLD
@@ -164,10 +182,30 @@ strains:
     source: BACDIVE
     source_id: bacdive:13964
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM93642v1 assembly for Skermanella aerolata KACC 11604 5416T-32
+    taxon_id: NCBITaxon:1385368
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1385368.4
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1385368.4
     genome_name: Skermanella aerolata KACC 11604 strain 5416T-32
     taxon_id: NCBITaxon:1385368
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:KACC-11604
+    source_strain_identifiers: KACC:11604
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJNA214806
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1385368.4
+    taxon_id: NCBITaxon:1385368
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:KACC-11604
+    source_strain_identifiers: KACC:11604
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA214806
     record_type: BIOPROJECT
     source: GOLD
@@ -190,6 +228,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0049845
     source_project_id: gold:Gp0049845
+  - record_id: biosample:SAMN03382941
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1385368.4
+    taxon_id: NCBITaxon:1385368
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:KACC-11604
+    source_strain_identifiers: KACC:11604
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN03382941
     record_type: BIOSAMPLE
     source: GOLD
@@ -428,6 +475,7 @@ source_attestations:
   source_label: Skermanella aerolata
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:786511
   source_label: Skermanella aerolata
@@ -459,7 +507,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

@@ -69,6 +69,13 @@ taxonomy_mappings:
   genome_count: 3
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
+synonyms:
+- synonym_text: Paenibacillus cisolokensis Yokota et al. 2016
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Paenibacillus sp. UICC B-42
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - lpsn:794389
 genetic_code: 11
@@ -81,7 +88,7 @@ strains:
   culture_collection_ids:
   - kgmicrobe.strain:DSM-101873
   - kgmicrobe.strain:NRRL-B-65368
-  - kgmicrobe.strain:UICC-B-42
+  - kgmicrobe.strain:UICC%20B-42
   is_type_strain: true
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_018403665
@@ -89,18 +96,57 @@ strains:
     source_id: bacdive:132589
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Paenibacillus cisolokensis LC2-13A
+    assembly_name: ASM1840366v1 assembly for Paenibacillus cisolokensis LC2-13A
     taxon_id: NCBITaxon:1658519
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_018403665.1
+    source: BV_BRC
+    source_id: patric:1658519.3
+    assembly_name: Paenibacillus cisolokensis strain LC2-13A
+    taxon_id: NCBITaxon:1658519
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-101873
+    source_strain_identifiers: DSM:101873
+    source_strain_field: culture_collection
   genome_records:
   - genome_id: patric:1658519.3
     source_database: patric
     source: BACDIVE
     source_id: bacdive:132589
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM1840366v1 assembly for Paenibacillus cisolokensis LC2-13A
+    taxon_id: NCBITaxon:1658519
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1658519.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1658519.3
     genome_name: Paenibacillus cisolokensis strain LC2-13A
     taxon_id: NCBITaxon:1658519
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-101873
+    source_strain_identifiers: DSM:101873
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJDB11488
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1658519.3
+    taxon_id: NCBITaxon:1658519
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-101873
+    source_strain_identifiers: DSM:101873
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMD00296211
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1658519.3
+    taxon_id: NCBITaxon:1658519
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-101873
+    source_strain_identifiers: DSM:101873
+    source_strain_field: culture_collection
   - record_id: gold:Go0619926
     record_type: GOLD_ORGANISM
     source: GOLD
@@ -189,6 +235,7 @@ source_attestations:
   source_label: Paenibacillus cisolokensis
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:794389
   source_label: Paenibacillus cisolokensis
@@ -223,7 +270,7 @@ source_attestations:
   assertion_count: 21
   assertion_unit: TRAIT_ASSERTION
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

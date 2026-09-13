@@ -62,6 +62,10 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 5
   notes: LPSN links this GTDB species to the taxon's name.
+synonyms:
+- synonym_text: Rhodovulum visakhapatnamense Srinivas et al. 2007
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Rhodovulum_visakhapatnamense
 - lpsn:786582
@@ -79,6 +83,23 @@ strains:
   - kgmicrobe.strain:JCM-13531
   is_type_strain: true
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_004365965
+    source: BACDIVE
+    source_id: bacdive:13749
+    source_reference_id: '124043'
+    assembly_level: scaffold
+    assembly_name: ASM436596v1 assembly for Rhodovulum visakhapatnamense JA181
+    taxon_id: NCBITaxon:364297
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_004365965.1
+    source: BV_BRC
+    source_id: patric:364297.3
+    assembly_name: Rhodovulum visakhapatnamense strain JA181
+    taxon_id: NCBITaxon:364297
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-17937
+    source_strain_identifiers: DSM:17937
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_004365965.1
     source: GOLD
     source_id: gold:Ga0310483
@@ -95,10 +116,11 @@ strains:
     source_database: img
     source: BACDIVE
     source_id: bacdive:13749
-    source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Rhodovulum visakhapatnamense DSM 17937
+    source_reference_id: '124043'
+    assembly_level: scaffold
+    genome_name: ASM436596v1 assembly for Rhodovulum visakhapatnamense JA181
     taxon_id: NCBITaxon:364297
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2802428856
     source_database: img
     source: GOLD
@@ -115,10 +137,21 @@ strains:
     source_database: patric
     source: BACDIVE
     source_id: bacdive:13749
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '124043'
+    assembly_level: scaffold
+    genome_name: ASM436596v1 assembly for Rhodovulum visakhapatnamense JA181
+    taxon_id: NCBITaxon:364297
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:364297.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:364297.3
     genome_name: Rhodovulum visakhapatnamense strain JA181
     taxon_id: NCBITaxon:364297
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-17937
+    source_strain_identifiers: DSM:17937
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN10866330
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -136,6 +169,15 @@ strains:
       archive_url: https://osf.io/download/66d9a84762c73df0ff77ac39/
       archive_filename: atb.assembly.incr_release.202408.batch.52.tar.xz
       sample_links:
+      - matched_strain_id: kgmicrobe.strain:DSM-17937
+        record_id: biosample:SAMN10866330
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:364297.3
+        source_strain_field: culture_collection
+        source_strain_identifiers: DSM:17937
+        taxon_id: NCBITaxon:364297
       - matched_strain_id: kgmicrobe.strain:DSM-17937
         record_id: biosample:SAMN10866330
         record_type: BIOSAMPLE
@@ -163,6 +205,15 @@ strains:
     source_project_id: gold:Gp0117017
   - record_id: bioproject:PRJNA520299
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:364297.3
+    taxon_id: NCBITaxon:364297
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-17937
+    source_strain_identifiers: DSM:17937
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA520299
+    record_type: BIOPROJECT
     source: GOLD
     source_id: gold:Gp0325710
     taxon_id: NCBITaxon:364297
@@ -183,6 +234,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0026432
     source_project_id: gold:Gp0117017
+  - record_id: biosample:SAMN10866330
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:364297.3
+    taxon_id: NCBITaxon:364297
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-17937
+    source_strain_identifiers: DSM:17937
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN10866330
     record_type: BIOSAMPLE
     source: GOLD
@@ -395,6 +455,7 @@ source_attestations:
   source_label: Rhodovulum visakhapatnamense
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:786582
   source_label: Rhodovulum visakhapatnamense
@@ -423,7 +484,7 @@ source_attestations:
   assertion_count: 16
   assertion_unit: TRAIT_ASSERTION
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

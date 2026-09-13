@@ -40,9 +40,7 @@
     page = 0;
     render();
   }
-  window.TaxonMechData.loadJSON(root + "index.json.gz").catch(() =>
-    window.TaxonMechData.loadJSON(root + "index.json")
-  ).then(data => {
+  window.TaxonMechData.loadJSON(root + "index.json.gz").then(data => {
     rows = data.filter(row => (!browser.dataset.domain || row.domain === browser.dataset.domain) &&
       (browser.dataset.typed !== "true" || row.has_type_strain)).map(row => ({...row,
       searchText: [row.identifier, row.label, row.rank, row.domain, ...row.sources].join(" ").toLowerCase()}));

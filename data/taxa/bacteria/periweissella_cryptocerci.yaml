@@ -61,11 +61,20 @@ taxonomy_mappings:
   genome_count: 1
   notes: LPSN links this GTDB species to the taxon's name.
 synonyms:
+- synonym_text: Periweissella cryptocerci (Heo et al. 2019) Bello et al. 2022
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: Weissella cryptocerci
   synonym_type: RELATED_SYNONYM
   source: LPSN
   source_id: lpsn:5334
 - synonym_text: Weissella cryptocerci
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Weissella cryptocerci Heo et al. 2019
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Weissella sp. 26KH-42
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 xrefs:
@@ -88,8 +97,18 @@ strains:
     source_id: bacdive:166205
     source_reference_id: '68006'
     assembly_level: complete
-    assembly_name: Periweissella cryptocerci 26KH-42
+    assembly_name: ASM435832v1 assembly for Periweissella cryptocerci 26KH-42
     taxon_id: NCBITaxon:2506420
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_004358325.1
+    source: BV_BRC
+    source_id: patric:2506420.3
+    assembly_name: Weissella sp. 26KH-42
+    taxon_id: NCBITaxon:2506420
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:KACC-18423
+    source_strain_identifiers: 'KACC: 18423'
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_004358325.1
     source: GOLD
     source_id: gold:Ga0398886
@@ -106,10 +125,11 @@ strains:
     source_database: img
     source: BACDIVE
     source_id: bacdive:166205
-    source_reference_id: '66792'
+    source_reference_id: '68006'
     assembly_level: complete
-    genome_name: Weissella cryptocerci 26KH-42
+    genome_name: ASM435832v1 assembly for Periweissella cryptocerci 26KH-42
     taxon_id: NCBITaxon:2506420
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2847055974
     source_database: img
     source: GOLD
@@ -122,7 +142,35 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0517993
     source_project_id: gold:Gp0442060
+  - genome_id: patric:2506420.3
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:166205
+    source_reference_id: '68006'
+    assembly_level: complete
+    genome_name: ASM435832v1 assembly for Periweissella cryptocerci 26KH-42
+    taxon_id: NCBITaxon:2506420
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:2506420.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:2506420.3
+    genome_name: Weissella sp. 26KH-42
+    taxon_id: NCBITaxon:2506420
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:KACC-18423
+    source_strain_identifiers: 'KACC: 18423'
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJNA514919
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:2506420.3
+    taxon_id: NCBITaxon:2506420
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:KACC-18423
+    source_strain_identifiers: 'KACC: 18423'
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA514919
     record_type: BIOPROJECT
     source: GOLD
@@ -134,6 +182,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0517993
     source_project_id: gold:Gp0442060
+  - record_id: biosample:SAMN10737330
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:2506420.3
+    taxon_id: NCBITaxon:2506420
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:KACC-18423
+    source_strain_identifiers: 'KACC: 18423'
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN10737330
     record_type: BIOSAMPLE
     source: GOLD
@@ -186,6 +243,7 @@ source_attestations:
   source_label: Periweissella cryptocerci
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:28167
   source_label: Periweissella cryptocerci
@@ -209,7 +267,7 @@ source_attestations:
   assertion_count: 1
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

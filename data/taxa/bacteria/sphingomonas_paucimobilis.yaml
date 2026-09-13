@@ -161,13 +161,23 @@ taxonomy_mappings:
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 synonyms:
-- synonym_text: Bacillus devorans
+- synonym_text: '"Bacillus devorans" Zimmermann 1890'
   synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Chromobacterium devorans" (Zimmermann 1890) Krasil''nikov 1949'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Bacillus devorans
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Chromobacterium devorans
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Flavobacterium devorans
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Flavobacterium devorans (Zimmermann 1890) Bergey et al. 1923 (Approved
+    Lists 1980)
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Pseudomonas paucimobilis
@@ -175,6 +185,12 @@ synonyms:
   source: LPSN
   source_id: lpsn:780091
 - synonym_text: Pseudomonas paucimobilis
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Pseudomonas paucimobilis Holmes et al. 1977 (Approved Lists 1980)
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Sphingomonas paucimobilis (Holmes et al. 1977) Yabuuchi et al. 1990
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 xrefs:
@@ -193,13 +209,13 @@ strains:
   - kgmicrobe.strain:CCM-3293
   - kgmicrobe.strain:CCUG-31192
   - kgmicrobe.strain:CCUG-6518
-  - kgmicrobe.strain:CDC-CL-1/70
+  - kgmicrobe.strain:CDC%20CL%201%2F70
   - kgmicrobe.strain:CECT-599
   - kgmicrobe.strain:CIP-100752
   - kgmicrobe.strain:DSM-1098
-  - kgmicrobe.strain:GIFU-2395
+  - kgmicrobe.strain:GIFU%202395
   - kgmicrobe.strain:IAM-12576
-  - kgmicrobe.strain:ICPB-4235
+  - kgmicrobe.strain:ICPB%204235
   - kgmicrobe.strain:IFO-13935
   - kgmicrobe.strain:JCM-7516
   - kgmicrobe.strain:LMG-1227
@@ -214,8 +230,9 @@ strains:
     source_id: bacdive:14201
     source_reference_id: '67770'
     assembly_level: contig
-    assembly_name: Sphingomonas paucimobilis NBRC 13935
+    assembly_name: ASM73989v2 assembly for Sphingomonas paucimobilis NBRC 13935
     taxon_id: NCBITaxon:1219050
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_000739895
     source: GOLD
     source_id: gold:Ga0056716
@@ -227,6 +244,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0023617
     source_project_id: gold:Gp0023617
+  - assembly_id: ncbi.assembly:GCA_000739895.1
+    source: BV_BRC
+    source_id: patric:1219050.3
+    assembly_name: Sphingomonas paucimobilis NBRC 13935
+    taxon_id: NCBITaxon:1219050
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-13935
+    source_strain_identifiers: NBRC 13935
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_000739895.2
     source: GTDB
     source_id: gtdb.genome:RS_GCF_000739895.2
@@ -237,6 +263,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-13935
     source_strain_identifiers: NBRC 13935
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_000739895.2
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000739895.2
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM73989v2
+    taxon_id: NCBITaxon:1219050
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-13935
+    source_strain_identifiers: strain=NBRC 13935
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCA_016027095
+    source: BACDIVE
+    source_id: bacdive:14201
+    source_reference_id: '124043'
+    assembly_level: complete
+    assembly_name: ASM1602709v1 assembly for Sphingomonas paucimobilis FDAARGOS_908
+    taxon_id: NCBITaxon:13689
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_016027095.1
+    source: BV_BRC
+    source_id: patric:13689.29
+    assembly_name: Sphingomonas paucimobilis strain FDAARGOS_908 strain Not applicable
+    taxon_id: NCBITaxon:13689
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-1098
+    source_strain_identifiers: DSM:1098
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_016027095.1
     source: GOLD
     source_id: gold:Ga0490839
@@ -253,8 +307,18 @@ strains:
     source_id: bacdive:14201
     source_reference_id: '67770'
     assembly_level: contig
-    assembly_name: Sphingomonas paucimobilis NCTC11030
+    assembly_name: 42650_F02 assembly for Sphingomonas paucimobilis NCTC11030
     taxon_id: NCBITaxon:13689
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900457515.1
+    source: BV_BRC
+    source_id: patric:13689.16
+    assembly_name: Sphingomonas paucimobilis strain NCTC11030
+    taxon_id: NCBITaxon:13689
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-11030
+    source_strain_identifiers: NCTC:11030
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_900457515.1
     source: GOLD
     source_id: gold:Ga0668118
@@ -287,6 +351,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-13935
     source_strain_identifiers: NBRC 13935
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_000739895.2
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000739895.2
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM73989v2
+    taxon_id: NCBITaxon:1219050
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-13935
+    source_strain_identifiers: strain=NBRC 13935
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_000739895
     source: STRAININFO
     source_id: straininfo.strain:72295
@@ -345,10 +420,11 @@ strains:
     source_database: img
     source: BACDIVE
     source_id: bacdive:14201
-    source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Sphingomonas paucimobilis NBRC 13935
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: ASM73989v2 assembly for Sphingomonas paucimobilis NBRC 13935
     taxon_id: NCBITaxon:1219050
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2600255072
     source_database: img
     source: GOLD
@@ -361,6 +437,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0023617
     source_project_id: gold:Gp0023617
+  - genome_id: img.taxon:8116399615
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:14201
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: 42650_F02 assembly for Sphingomonas paucimobilis NCTC11030
+    taxon_id: NCBITaxon:13689
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:8116399615
     source_database: img
     source: GOLD
@@ -387,6 +472,15 @@ strains:
     source_project_id: gold:Gp0818823
   - genome_id: img.taxon:8121651663
     source_database: img
+    source: BACDIVE
+    source_id: bacdive:14201
+    source_reference_id: '124043'
+    assembly_level: complete
+    genome_name: ASM1602709v1 assembly for Sphingomonas paucimobilis FDAARGOS_908
+    taxon_id: NCBITaxon:13689
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:8121651663
+    source_database: img
     source: GOLD
     source_id: gold:Ga0490839
     genome_name: Sphingomonas paucimobilis FDAARGOS_908
@@ -401,26 +495,59 @@ strains:
     source_database: patric
     source: BACDIVE
     source_id: bacdive:14201
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: ASM73989v2 assembly for Sphingomonas paucimobilis NBRC 13935
+    taxon_id: NCBITaxon:1219050
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1219050.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1219050.3
     genome_name: Sphingomonas paucimobilis NBRC 13935
     taxon_id: NCBITaxon:1219050
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NBRC-13935
+    source_strain_identifiers: NBRC 13935
+    source_strain_field: strain
   - genome_id: patric:13689.16
     source_database: patric
     source: BACDIVE
     source_id: bacdive:14201
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: 42650_F02 assembly for Sphingomonas paucimobilis NCTC11030
+    taxon_id: NCBITaxon:13689
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:13689.16
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:13689.16
     genome_name: Sphingomonas paucimobilis strain NCTC11030
     taxon_id: NCBITaxon:13689
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-11030
+    source_strain_identifiers: NCTC:11030
+    source_strain_field: culture_collection
   - genome_id: patric:13689.29
     source_database: patric
     source: BACDIVE
     source_id: bacdive:14201
-    source_reference_id: '66792'
+    source_reference_id: '124043'
     assembly_level: complete
-    genome_name: Sphingomonas paucimobilis strain FDAARGOS_908
+    genome_name: ASM1602709v1 assembly for Sphingomonas paucimobilis FDAARGOS_908
     taxon_id: NCBITaxon:13689
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:13689.29
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:13689.29
+    genome_name: Sphingomonas paucimobilis strain FDAARGOS_908 strain Not applicable
+    taxon_id: NCBITaxon:13689
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-1098
+    source_strain_identifiers: DSM:1098
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN13450438
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -441,6 +568,15 @@ strains:
       - matched_strain_id: kgmicrobe.strain:DSM-1098
         record_id: biosample:SAMN13450438
         record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:13689.29
+        source_strain_field: culture_collection
+        source_strain_identifiers: DSM:1098
+        taxon_id: NCBITaxon:13689
+      - matched_strain_id: kgmicrobe.strain:DSM-1098
+        record_id: biosample:SAMN13450438
+        record_type: BIOSAMPLE
         source: GOLD
         source_field: NCBI BIOSAMPLE ACCESSION
         source_id: gold:Gp0550497
@@ -454,6 +590,15 @@ strains:
   related_records:
   - record_id: bioproject:PRJDB329
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1219050.3
+    taxon_id: NCBITaxon:1219050
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-13935
+    source_strain_identifiers: NBRC 13935
+    source_strain_field: strain
+  - record_id: bioproject:PRJDB329
+    record_type: BIOPROJECT
     source: GOLD
     source_id: gold:Gp0023617
     taxon_id: NCBITaxon:1219050
@@ -463,6 +608,25 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0023617
     source_project_id: gold:Gp0023617
+  - record_id: bioproject:PRJDB329
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000739895.2
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1219050
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NBRC-13935
+    source_strain_identifiers: strain=NBRC 13935
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:13689.16
+    taxon_id: NCBITaxon:13689
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-11030
+    source_strain_identifiers: NCTC:11030
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
     source: GOLD
@@ -494,6 +658,25 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-13935
     source_strain_identifiers: NBRC 13935
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000739895.2
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1219050
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NBRC-13935
+    source_strain_identifiers: strain=NBRC 13935
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA231221
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:13689.29
+    taxon_id: NCBITaxon:13689
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-1098
+    source_strain_identifiers: DSM:1098
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA231221
     record_type: BIOPROJECT
     source: GOLD
@@ -505,6 +688,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0575768
     source_project_id: gold:Gp0550497
+  - record_id: biosample:SAMD00018691
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1219050.3
+    taxon_id: NCBITaxon:1219050
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-13935
+    source_strain_identifiers: NBRC 13935
+    source_strain_field: strain
   - record_id: biosample:SAMD00018691
     record_type: BIOSAMPLE
     source: GOLD
@@ -525,6 +717,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-13935
     source_strain_identifiers: NBRC 13935
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMD00018691
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000739895.2
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1219050
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NBRC-13935
+    source_strain_identifiers: strain=NBRC 13935
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00018691
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000739895.2
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1219050
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NBRC-13935
+    source_strain_identifiers: strain=NBRC 13935
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMEA3649025
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:13689.16
+    taxon_id: NCBITaxon:13689
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-11030
+    source_strain_identifiers: NCTC:11030
+    source_strain_field: culture_collection
   - record_id: biosample:SAMEA3649025
     record_type: BIOSAMPLE
     source: GOLD
@@ -547,6 +768,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0248854
     source_project_id: gold:Gp0818823
+  - record_id: biosample:SAMN13450438
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:13689.29
+    taxon_id: NCBITaxon:13689
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-1098
+    source_strain_identifiers: DSM:1098
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN13450438
     record_type: BIOSAMPLE
     source: GOLD
@@ -1681,8 +1911,26 @@ strains:
   - kgmicrobe.strain:NBRC-13934
   - kgmicrobe.strain:NCIB-8195
   - kgmicrobe.strain:NCIMB-8195
+  - kgmicrobe.strain:NRRL%20B%2054
   - kgmicrobe.strain:NRRL-B-54
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_016028435
+    source: BACDIVE
+    source_id: bacdive:14202
+    source_reference_id: '66792'
+    assembly_level: complete
+    assembly_name: ASM1602843v1 assembly for Sphingomonas paucimobilis FDAARGOS_881
+    taxon_id: NCBITaxon:13689
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_016028435.1
+    source: BV_BRC
+    source_id: patric:13689.30
+    assembly_name: Sphingomonas paucimobilis strain FDAARGOS_881 strain Not applicable
+    taxon_id: NCBITaxon:13689
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-30198
+    source_strain_identifiers: DSM:30198
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_016028435.1
     source: GOLD
     source_id: gold:Ga0490967
@@ -1701,8 +1949,19 @@ strains:
     source_id: bacdive:14202
     source_reference_id: '66792'
     assembly_level: complete
-    genome_name: Sphingomonas paucimobilis strain FDAARGOS_881
+    genome_name: ASM1602843v1 assembly for Sphingomonas paucimobilis FDAARGOS_881
     taxon_id: NCBITaxon:13689
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:13689.30
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:13689.30
+    genome_name: Sphingomonas paucimobilis strain FDAARGOS_881 strain Not applicable
+    taxon_id: NCBITaxon:13689
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-30198
+    source_strain_identifiers: DSM:30198
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN13450411
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -1720,6 +1979,15 @@ strains:
       archive_url: https://osf.io/download/66717d020f8c80180c3c9237/
       archive_filename: atb.assembly.r0.2.batch.138.tar.xz
       sample_links:
+      - matched_strain_id: kgmicrobe.strain:DSM-30198
+        record_id: biosample:SAMN13450411
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:13689.30
+        source_strain_field: culture_collection
+        source_strain_identifiers: DSM:30198
+        taxon_id: NCBITaxon:13689
       - matched_strain_id: kgmicrobe.strain:DSM-30198
         record_id: biosample:SAMN13450411
         record_type: BIOSAMPLE
@@ -1758,6 +2026,15 @@ strains:
     source_project_id: gold:Gp0456344
   - record_id: bioproject:PRJNA231221
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:13689.30
+    taxon_id: NCBITaxon:13689
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-30198
+    source_strain_identifiers: DSM:30198
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA231221
+    record_type: BIOPROJECT
     source: GOLD
     source_id: gold:Gp0550496
     taxon_id: NCBITaxon:13689
@@ -1767,6 +2044,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0575767
     source_project_id: gold:Gp0550496
+  - record_id: biosample:SAMN13450411
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:13689.30
+    taxon_id: NCBITaxon:13689
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-30198
+    source_strain_identifiers: DSM:30198
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN13450411
     record_type: BIOSAMPLE
     source: GOLD
@@ -2398,8 +2684,8 @@ strains:
   source: BACDIVE
   source_id: bacdive:165543
   culture_collection_ids:
-  - kgmicrobe.strain:CDC-B3271
-  - kgmicrobe.strain:GIFU-2396
+  - kgmicrobe.strain:CDC%20B3271
+  - kgmicrobe.strain:GIFU%202396
   - kgmicrobe.strain:IAM-12577
   - kgmicrobe.strain:IFO-13936
   - kgmicrobe.strain:JCM-7515
@@ -2816,7 +3102,7 @@ strains:
   source: BACDIVE
   source_id: bacdive:165542
   culture_collection_ids:
-  - kgmicrobe.strain:GIFU-2406
+  - kgmicrobe.strain:GIFU%202406
   - kgmicrobe.strain:JCM-7509
   medium_count: 1
   related_records:
@@ -2906,7 +3192,7 @@ strains:
   source: BACDIVE
   source_id: bacdive:165545
   culture_collection_ids:
-  - kgmicrobe.strain:GIFU-2137
+  - kgmicrobe.strain:GIFU%202137
   - kgmicrobe.strain:JCM-7518
   medium_count: 1
   related_records:
@@ -2996,7 +3282,7 @@ strains:
   source: BACDIVE
   source_id: bacdive:165546
   culture_collection_ids:
-  - kgmicrobe.strain:GIFU-11386
+  - kgmicrobe.strain:GIFU%2011386
   - kgmicrobe.strain:JCM-7519
   medium_count: 1
   related_records:
@@ -3086,7 +3372,7 @@ strains:
   source: BACDIVE
   source_id: bacdive:165548
   culture_collection_ids:
-  - kgmicrobe.strain:GIFU-11385
+  - kgmicrobe.strain:GIFU%2011385
   - kgmicrobe.strain:JCM-7521
   medium_count: 1
   related_records:
@@ -3286,12 +3572,134 @@ strains:
   source: BACDIVE
   source_id: bacdive:141286
   culture_collection_ids:
-  - kgmicrobe.strain:CCUG-635-A
+  - kgmicrobe.strain:CCUG-635%20A
+  related_records:
+  - record_id: gold:Go0248943
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0248943
+    taxon_id: NCBITaxon:13689
+    record_name: Sphingomonas paucimobilis CCUG 635 A
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-635%20A
+    source_strain_identifiers: CCUG 635 A
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0248943
+  - record_id: gold:Go0248943
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0248943
+    taxon_id: NCBITaxon:13689
+    record_name: Sphingomonas paucimobilis CCUG 635 A
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-635%20A
+    source_strain_identifiers: CCUG 635 A
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0248943
+  - record_id: straininfo.deposit:144069
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:57077
+    taxon_id: NCBITaxon:13689
+    record_name: CCUG 635 A
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCUG-635%20A
+    source_strain_identifiers: CCUG 635 A
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 635 A
+      deposit_id: straininfo.deposit:144069
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:141286
+      strain_doi: DOI:10.60712/SI-ID57077.2
+      strain_id: straininfo.strain:57077
+      strain_status: published online
+  - record_id: straininfo.strain:57077
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:57077
+    taxon_id: NCBITaxon:13689
+    record_name: CCUG 635 A
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCUG-635%20A
+    source_strain_identifiers: CCUG 635 A
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 635 A
+      deposit_id: straininfo.deposit:144069
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:141286
+      strain_doi: DOI:10.60712/SI-ID57077.2
+      strain_id: straininfo.strain:57077
+      strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_141287
   source: BACDIVE
   source_id: bacdive:141287
   culture_collection_ids:
-  - kgmicrobe.strain:CCUG-645-A
+  - kgmicrobe.strain:CCUG-645%20A
+  related_records:
+  - record_id: gold:Go0248944
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0248944
+    taxon_id: NCBITaxon:13689
+    record_name: Sphingomonas paucimobilis CCUG 645 A
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-645%20A
+    source_strain_identifiers: CCUG 645 A
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0248944
+  - record_id: gold:Go0248944
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0248944
+    taxon_id: NCBITaxon:13689
+    record_name: Sphingomonas paucimobilis CCUG 645 A
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-645%20A
+    source_strain_identifiers: CCUG 645 A
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0248944
+  - record_id: straininfo.deposit:144070
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:57078
+    taxon_id: NCBITaxon:13689
+    record_name: CCUG 645 A
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCUG-645%20A
+    source_strain_identifiers: CCUG 645 A
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 645 A
+      deposit_id: straininfo.deposit:144070
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:141287
+      strain_doi: DOI:10.60712/SI-ID57078.2
+      strain_id: straininfo.strain:57078
+      strain_status: published online
+  - record_id: straininfo.strain:57078
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:57078
+    taxon_id: NCBITaxon:13689
+    record_name: CCUG 645 A
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCUG-645%20A
+    source_strain_identifiers: CCUG 645 A
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 645 A
+      deposit_id: straininfo.deposit:144070
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:141287
+      strain_doi: DOI:10.60712/SI-ID57078.2
+      strain_id: straininfo.strain:57078
+      strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_141291
   source: BACDIVE
   source_id: bacdive:141291
@@ -4088,7 +4496,68 @@ strains:
   source: BACDIVE
   source_id: bacdive:145614
   culture_collection_ids:
-  - kgmicrobe.strain:CCUG-28990-A
+  - kgmicrobe.strain:CCUG-28990%20A
+  related_records:
+  - record_id: gold:Go0248959
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0248959
+    taxon_id: NCBITaxon:13689
+    record_name: Sphingomonas paucimobilis CCUG 28990 A
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-28990%20A
+    source_strain_identifiers: CCUG 28990 A
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0248959
+  - record_id: gold:Go0248959
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0248959
+    taxon_id: NCBITaxon:13689
+    record_name: Sphingomonas paucimobilis CCUG 28990 A
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-28990%20A
+    source_strain_identifiers: CCUG 28990 A
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0248959
+  - record_id: straininfo.deposit:144090
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:57090
+    taxon_id: NCBITaxon:13689
+    record_name: CCUG 28990 A
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCUG-28990%20A
+    source_strain_identifiers: CCUG 28990 A
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 28990 A
+      deposit_id: straininfo.deposit:144090
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:145614
+      strain_doi: DOI:10.60712/SI-ID57090.2
+      strain_id: straininfo.strain:57090
+      strain_status: published online
+  - record_id: straininfo.strain:57090
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:57090
+    taxon_id: NCBITaxon:13689
+    record_name: CCUG 28990 A
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCUG-28990%20A
+    source_strain_identifiers: CCUG 28990 A
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 28990 A
+      deposit_id: straininfo.deposit:144090
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:145614
+      strain_doi: DOI:10.60712/SI-ID57090.2
+      strain_id: straininfo.strain:57090
+      strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_145782
   source: BACDIVE
   source_id: bacdive:145782
@@ -4687,32 +5156,398 @@ strains:
   source: BACDIVE
   source_id: bacdive:150646
   culture_collection_ids:
-  - kgmicrobe.strain:CCUG-41852-B
+  - kgmicrobe.strain:CCUG-41852%20B
+  related_records:
+  - record_id: gold:Go0249115
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0249115
+    taxon_id: NCBITaxon:13689
+    record_name: Sphingomonas paucimobilis CCUG 41852 B
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-41852%20B
+    source_strain_identifiers: CCUG 41852 B
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0249115
+  - record_id: gold:Go0249115
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0249115
+    taxon_id: NCBITaxon:13689
+    record_name: Sphingomonas paucimobilis CCUG 41852 B
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-41852%20B
+    source_strain_identifiers: CCUG 41852 B
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0249115
+  - record_id: straininfo.deposit:327496
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:109110
+    taxon_id: NCBITaxon:13689
+    record_name: CCUG 41852 B
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCUG-41852%20B
+    source_strain_identifiers: CCUG 41852 B
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 41852 B
+      deposit_id: straininfo.deposit:327496
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:150646
+      strain_doi: DOI:10.60712/SI-ID109110.2
+      strain_id: straininfo.strain:109110
+      strain_status: published online
+  - record_id: straininfo.strain:109110
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:109110
+    taxon_id: NCBITaxon:13689
+    record_name: CCUG 41852 B
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCUG-41852%20B
+    source_strain_identifiers: CCUG 41852 B
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 41852 B
+      deposit_id: straininfo.deposit:327496
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:150646
+      strain_doi: DOI:10.60712/SI-ID109110.2
+      strain_id: straininfo.strain:109110
+      strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_150651
   source: BACDIVE
   source_id: bacdive:150651
   culture_collection_ids:
-  - kgmicrobe.strain:CCUG-41858-A
+  - kgmicrobe.strain:CCUG-41858%20A
+  related_records:
+  - record_id: gold:Go0249229
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0249229
+    taxon_id: NCBITaxon:13689
+    record_name: Sphingomonas paucimobilis CCUG 41858 A
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-41858%20A
+    source_strain_identifiers: CCUG 41858 A
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0249229
+  - record_id: gold:Go0249229
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0249229
+    taxon_id: NCBITaxon:13689
+    record_name: Sphingomonas paucimobilis CCUG 41858 A
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-41858%20A
+    source_strain_identifiers: CCUG 41858 A
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0249229
+  - record_id: straininfo.deposit:327508
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:109115
+    taxon_id: NCBITaxon:13689
+    record_name: CCUG 41858 A
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCUG-41858%20A
+    source_strain_identifiers: CCUG 41858 A
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 41858 A
+      deposit_id: straininfo.deposit:327508
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:150651
+      strain_doi: DOI:10.60712/SI-ID109115.1
+      strain_id: straininfo.strain:109115
+      strain_status: published offline
+  - record_id: straininfo.strain:109115
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:109115
+    taxon_id: NCBITaxon:13689
+    record_name: CCUG 41858 A
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCUG-41858%20A
+    source_strain_identifiers: CCUG 41858 A
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 41858 A
+      deposit_id: straininfo.deposit:327508
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:150651
+      strain_doi: DOI:10.60712/SI-ID109115.1
+      strain_id: straininfo.strain:109115
+      strain_status: published offline
 - strain_id: kgmicrobe.strain:bacdive_150677
   source: BACDIVE
   source_id: bacdive:150677
   culture_collection_ids:
-  - kgmicrobe.strain:CCUG-41946-A
+  - kgmicrobe.strain:CCUG-41946%20A
+  related_records:
+  - record_id: gold:Go0249231
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0249231
+    taxon_id: NCBITaxon:13689
+    record_name: Sphingomonas paucimobilis CCUG 41946 A
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-41946%20A
+    source_strain_identifiers: CCUG 41946 A
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0249231
+  - record_id: gold:Go0249231
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0249231
+    taxon_id: NCBITaxon:13689
+    record_name: Sphingomonas paucimobilis CCUG 41946 A
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-41946%20A
+    source_strain_identifiers: CCUG 41946 A
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0249231
+  - record_id: straininfo.deposit:327567
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:109138
+    taxon_id: NCBITaxon:13689
+    record_name: CCUG 41946 A
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCUG-41946%20A
+    source_strain_identifiers: CCUG 41946 A
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 41946 A
+      deposit_id: straininfo.deposit:327567
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:150677
+      strain_doi: DOI:10.60712/SI-ID109138.1
+      strain_id: straininfo.strain:109138
+      strain_status: published offline
+  - record_id: straininfo.strain:109138
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:109138
+    taxon_id: NCBITaxon:13689
+    record_name: CCUG 41946 A
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCUG-41946%20A
+    source_strain_identifiers: CCUG 41946 A
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 41946 A
+      deposit_id: straininfo.deposit:327567
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:150677
+      strain_doi: DOI:10.60712/SI-ID109138.1
+      strain_id: straininfo.strain:109138
+      strain_status: published offline
 - strain_id: kgmicrobe.strain:bacdive_150680
   source: BACDIVE
   source_id: bacdive:150680
   culture_collection_ids:
-  - kgmicrobe.strain:CCUG-41951-A
+  - kgmicrobe.strain:CCUG-41951%20A
+  related_records:
+  - record_id: gold:Go0249233
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0249233
+    taxon_id: NCBITaxon:13689
+    record_name: Sphingomonas paucimobilis CCUG 41951 A
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-41951%20A
+    source_strain_identifiers: CCUG 41951 A
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0249233
+  - record_id: gold:Go0249233
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0249233
+    taxon_id: NCBITaxon:13689
+    record_name: Sphingomonas paucimobilis CCUG 41951 A
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-41951%20A
+    source_strain_identifiers: CCUG 41951 A
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0249233
+  - record_id: straininfo.deposit:327570
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:109139
+    taxon_id: NCBITaxon:13689
+    record_name: CCUG 41951 A
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCUG-41951%20A
+    source_strain_identifiers: CCUG 41951 A
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 41951 A
+      deposit_id: straininfo.deposit:327570
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:150680
+      strain_doi: DOI:10.60712/SI-ID109139.1
+      strain_id: straininfo.strain:109139
+      strain_status: published offline
+  - record_id: straininfo.strain:109139
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:109139
+    taxon_id: NCBITaxon:13689
+    record_name: CCUG 41951 A
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCUG-41951%20A
+    source_strain_identifiers: CCUG 41951 A
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 41951 A
+      deposit_id: straininfo.deposit:327570
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:150680
+      strain_doi: DOI:10.60712/SI-ID109139.1
+      strain_id: straininfo.strain:109139
+      strain_status: published offline
 - strain_id: kgmicrobe.strain:bacdive_150719
   source: BACDIVE
   source_id: bacdive:150719
   culture_collection_ids:
-  - kgmicrobe.strain:CCUG-42046-A
+  - kgmicrobe.strain:CCUG-42046%20A
+  related_records:
+  - record_id: gold:Go0249235
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0249235
+    taxon_id: NCBITaxon:13689
+    record_name: Sphingomonas paucimobilis CCUG 42046 A
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-42046%20A
+    source_strain_identifiers: CCUG 42046 A
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0249235
+  - record_id: gold:Go0249235
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0249235
+    taxon_id: NCBITaxon:13689
+    record_name: Sphingomonas paucimobilis CCUG 42046 A
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-42046%20A
+    source_strain_identifiers: CCUG 42046 A
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0249235
+  - record_id: straininfo.deposit:327632
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:109163
+    taxon_id: NCBITaxon:13689
+    record_name: CCUG 42046 A
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCUG-42046%20A
+    source_strain_identifiers: CCUG 42046 A
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 42046 A
+      deposit_id: straininfo.deposit:327632
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:150719
+      strain_doi: DOI:10.60712/SI-ID109163.1
+      strain_id: straininfo.strain:109163
+      strain_status: published offline
+  - record_id: straininfo.strain:109163
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:109163
+    taxon_id: NCBITaxon:13689
+    record_name: CCUG 42046 A
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCUG-42046%20A
+    source_strain_identifiers: CCUG 42046 A
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 42046 A
+      deposit_id: straininfo.deposit:327632
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:150719
+      strain_doi: DOI:10.60712/SI-ID109163.1
+      strain_id: straininfo.strain:109163
+      strain_status: published offline
 - strain_id: kgmicrobe.strain:bacdive_150725
   source: BACDIVE
   source_id: bacdive:150725
   culture_collection_ids:
-  - kgmicrobe.strain:CCUG-42077-C
+  - kgmicrobe.strain:CCUG-42077%20C
+  related_records:
+  - record_id: gold:Go0249237
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0249237
+    taxon_id: NCBITaxon:13689
+    record_name: Sphingomonas paucimobilis CCUG 42077 C
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-42077%20C
+    source_strain_identifiers: CCUG 42077 C
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0249237
+  - record_id: gold:Go0249237
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0249237
+    taxon_id: NCBITaxon:13689
+    record_name: Sphingomonas paucimobilis CCUG 42077 C
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-42077%20C
+    source_strain_identifiers: CCUG 42077 C
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0249237
+  - record_id: straininfo.deposit:327646
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:109168
+    taxon_id: NCBITaxon:13689
+    record_name: CCUG 42077 C
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCUG-42077%20C
+    source_strain_identifiers: CCUG 42077 C
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 42077 C
+      deposit_id: straininfo.deposit:327646
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:150725
+      strain_doi: DOI:10.60712/SI-ID109168.1
+      strain_id: straininfo.strain:109168
+      strain_status: published offline
+  - record_id: straininfo.strain:109168
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:109168
+    taxon_id: NCBITaxon:13689
+    record_name: CCUG 42077 C
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCUG-42077%20C
+    source_strain_identifiers: CCUG 42077 C
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 42077 C
+      deposit_id: straininfo.deposit:327646
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:150725
+      strain_doi: DOI:10.60712/SI-ID109168.1
+      strain_id: straininfo.strain:109168
+      strain_status: published offline
 - strain_id: kgmicrobe.strain:bacdive_151240
   source: BACDIVE
   source_id: bacdive:151240
@@ -4835,6 +5670,7 @@ source_attestations:
   source_label: Sphingomonas paucimobilis
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:781021
   source_label: Sphingomonas paucimobilis
@@ -4879,7 +5715,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

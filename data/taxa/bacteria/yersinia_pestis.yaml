@@ -29,7 +29,7 @@ lineage:
   taxon_label: Yersiniaceae
   rank: FAMILY
 - taxon_id: NCBITaxon:629
-  taxon_label: Yersinia <enterobacteria>
+  taxon_label: Yersinia
   rank: GENUS
 - taxon_id: NCBITaxon:1649845
   taxon_label: Yersinia pseudotuberculosis complex
@@ -64,24 +64,37 @@ taxonomy_mappings:
   genome_count: 1039
   notes: LPSN links this GTDB species to the taxon's name.
 synonyms:
-- synonym_text: Bacillus pestis
+- synonym_text: '"Bacillus pestis" (Lehmann and Neumann 1896) Migula 1900'
   synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Pasteurella pestis" (Lehmann and Neumann 1896) Bergey et al. 1923'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Pestisella pestis" (Lehmann and Neumann 1896) Dorofeev 1947'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Bacillus pestis
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Pasteurella pestis
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Pestisella pestis
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Yersinia pestis (Lehmann and Neumann 1896) van Loghem 1944 (Approved
     Lists 1980), nom. cons.
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Yersinia pseudotuberculosis pestis
   synonym_type: RELATED_SYNONYM
   source: LPSN
   source_id: lpsn:798529
 - synonym_text: Yersinia pseudotuberculosis subsp. pestis
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Yersinia pseudotuberculosis subsp. pestis (Lehmann and Neumann 1896)
+    Bercovier et al. 1981
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 xrefs:
@@ -104,8 +117,18 @@ strains:
     source_id: bacdive:166619
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Yersinia pestis NCTC5923
+    assembly_name: 57940_B01 assembly for Yersinia pestis NCTC5923
     taxon_id: NCBITaxon:632
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900460465.1
+    source: BV_BRC
+    source_id: patric:632.457
+    assembly_name: Yersinia pestis strain NCTC5923
+    taxon_id: NCBITaxon:632
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-5923
+    source_strain_identifiers: NCTC:5923
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_900460465.1
     source: GOLD
     source_id: gold:Ga0668030
@@ -152,6 +175,15 @@ strains:
   genome_records:
   - genome_id: img.taxon:8117909240
     source_database: img
+    source: BACDIVE
+    source_id: bacdive:166619
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: 57940_B01 assembly for Yersinia pestis NCTC5923
+    taxon_id: NCBITaxon:632
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:8117909240
+    source_database: img
     source: GOLD
     source_id: gold:Ga0668030
     genome_name: Yersinia pestis NCTC 5923
@@ -179,10 +211,30 @@ strains:
     source: BACDIVE
     source_id: bacdive:166619
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: 57940_B01 assembly for Yersinia pestis NCTC5923
+    taxon_id: NCBITaxon:632
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:632.457
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:632.457
     genome_name: Yersinia pestis strain NCTC5923
     taxon_id: NCBITaxon:632
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-5923
+    source_strain_identifiers: NCTC:5923
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:632.457
+    taxon_id: NCBITaxon:632
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-5923
+    source_strain_identifiers: NCTC:5923
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
     source: GOLD
@@ -205,6 +257,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0299519
     source_project_id: gold:Gp0818735
+  - record_id: biosample:SAMEA104281628
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:632.457
+    taxon_id: NCBITaxon:632
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-5923
+    source_strain_identifiers: NCTC:5923
+    source_strain_field: culture_collection
   - record_id: biosample:SAMEA104281628
     record_type: BIOSAMPLE
     source: GOLD
@@ -627,6 +688,7 @@ source_attestations:
   source_label: Yersinia pestis
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:785226
   source_label: Yersinia pestis
@@ -644,6 +706,7 @@ source_attestations:
   source_label: Yersinia pestis
   assertion_count: 2
   assertion_unit: STRAIN
+  notes: 0 strains are filed under 1 descendant NCBI taxa (see classified_as).
 - source: GOLD
   source_id: NCBITaxon:632
   source_label: Yersinia pestis
@@ -657,7 +720,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

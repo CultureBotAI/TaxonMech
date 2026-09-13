@@ -29,7 +29,7 @@ lineage:
   taxon_label: Bacillaceae
   rank: FAMILY
 - taxon_id: NCBITaxon:1386
-  taxon_label: Bacillus <firmicutes>
+  taxon_label: Bacillus
   rank: GENUS
 grounding_status: EXACT
 mapping_status: SEEDED
@@ -40,6 +40,12 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 1
 synonyms:
+- synonym_text: '"Bacillus aerolatus" Chen et al. 2020'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Bacillus sp. CX253
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: Pseudobacillus aerolatus
   synonym_type: EXACT_SYNONYM
   source: GTDB
@@ -54,7 +60,7 @@ strains:
   source_id: bacdive:166332
   designation: CX253
   culture_collection_ids:
-  - kgmicrobe.strain:GDMCC-1.1608
+  - kgmicrobe.strain:GDMCC%201.1608
   - kgmicrobe.strain:KACC-21318
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_009183655
@@ -62,8 +68,18 @@ strains:
     source_id: bacdive:166332
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Bacillus aerolatus CX253
+    assembly_name: ASM918365v1 assembly for Bacillus aerolatus CX253
     taxon_id: NCBITaxon:2653354
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_009183655.1
+    source: BV_BRC
+    source_id: patric:2653354.3
+    assembly_name: Bacillus sp. CX253
+    taxon_id: NCBITaxon:2653354
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:KACC-21318
+    source_strain_identifiers: KACC:21318
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_009183655.1
     source: GOLD
     source_id: gold:Ga0449340
@@ -76,6 +92,15 @@ strains:
     source_organism_id: gold:Go0544560
     source_project_id: gold:Gp0495478
   genome_records:
+  - genome_id: img.taxon:2997701709
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:166332
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: ASM918365v1 assembly for Bacillus aerolatus CX253
+    taxon_id: NCBITaxon:2653354
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2997701709
     source_database: img
     source: GOLD
@@ -93,10 +118,30 @@ strains:
     source: BACDIVE
     source_id: bacdive:166332
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM918365v1 assembly for Bacillus aerolatus CX253
+    taxon_id: NCBITaxon:2653354
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:2653354.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:2653354.3
     genome_name: Bacillus sp. CX253
     taxon_id: NCBITaxon:2653354
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:KACC-21318
+    source_strain_identifiers: KACC:21318
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJNA576393
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:2653354.3
+    taxon_id: NCBITaxon:2653354
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:KACC-21318
+    source_strain_identifiers: KACC:21318
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA576393
     record_type: BIOPROJECT
     source: GOLD
@@ -108,6 +153,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0544560
     source_project_id: gold:Gp0495478
+  - record_id: biosample:SAMN12993151
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:2653354.3
+    taxon_id: NCBITaxon:2653354
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:KACC-21318
+    source_strain_identifiers: KACC:21318
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN12993151
     record_type: BIOSAMPLE
     source: GOLD
@@ -160,6 +214,7 @@ source_attestations:
   source_label: Bacillus aerolatus
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: GTDB
   source_id: GTDB:s__Pseudobacillus_aerolatus
   source_label: s__Pseudobacillus_aerolatus
@@ -177,7 +232,7 @@ source_attestations:
   assertion_count: 1
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

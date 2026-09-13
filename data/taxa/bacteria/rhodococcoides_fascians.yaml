@@ -83,39 +83,58 @@ taxonomy_mappings:
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 synonyms:
+- synonym_text: '"Bacterium fascians" (Tilford 1936) Lacey 1939'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: '"Mycobacterium luteum" Sohngen 1913'
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Phytomonas fascians" Tilford 1936'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Pseudobacterium fasciens" (sic) (Tilford 1936) Krasil''nikov 1949'
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Bacterium fascians
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Corynebacterium fascians
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Corynebacterium fascians (Tilford 1936) Dowson 1942 (Approved Lists
+    1980)
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Phytomonas fascians
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Pseudobacterium fasciens
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Rhodococcoides fascians (Tilford 1936) Val-Calvo and Vazquez-Boland
     2024
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Rhodococcus fascians
   synonym_type: RELATED_SYNONYM
   source: LPSN
   source_id: lpsn:780450
 - synonym_text: Rhodococcus fascians (Tilford 1936) Goodfellow 1984
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Rhodococcus luteus
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Rhodococcus luteus (ex Sohngen 1913) Nesterenko et al. 1982
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Rhodococcus sp. PBTS 2
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 xrefs:
 - GTDB:s__Rhodococcoides_fascians
 genetic_code: 11
-strain_count: 24
+strain_count: 27
 strains:
 - strain_id: kgmicrobe.strain:bacdive_10883
   source: BACDIVE
@@ -128,12 +147,12 @@ strains:
   - kgmicrobe.strain:CFBP-2401
   - kgmicrobe.strain:CGMCC-4.1817
   - kgmicrobe.strain:CIP-104713
-  - kgmicrobe.strain:CNCTC-Cor-66/77
+  - kgmicrobe.strain:CNCTC%20Cor%2066%2F77
   - kgmicrobe.strain:DSM-20669
   - kgmicrobe.strain:IAM-12427
   - kgmicrobe.strain:ICMP-5833
-  - kgmicrobe.strain:ICPB-CF-122
-  - kgmicrobe.strain:ICPB-CF122
+  - kgmicrobe.strain:ICPB%20CF%20122
+  - kgmicrobe.strain:ICPB%20CF122
   - kgmicrobe.strain:IFO-12155
   - kgmicrobe.strain:JCM-10002
   - kgmicrobe.strain:JCM-1316
@@ -148,13 +167,41 @@ strains:
   - kgmicrobe.strain:VKM-Ac-1462
   is_type_strain: true
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_000333955
+    source: BACDIVE
+    source_id: bacdive:10883
+    source_reference_id: '66792'
+    assembly_level: contig
+    assembly_name: ASM33395v1 assembly for Rhodococcus sp. AW25M09
+    taxon_id: NCBITaxon:1268303
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_000333955.1
+    source: BV_BRC
+    source_id: patric:1268303.4
+    assembly_name: Rhodococcus sp. AW25M09
+    taxon_id: NCBITaxon:1268303
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-20669
+    source_strain_identifiers: DSM 20669
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_000761055
     source: BACDIVE
     source_id: bacdive:10883
     source_reference_id: '67770'
     assembly_level: scaffold
+    assembly_name: R_fas_LMG3623 assembly for Rhodococcoides fascians NBRC 12155 =
+      LMG 3623
+    taxon_id: NCBITaxon:1219015
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_000761055.1
+    source: BV_BRC
+    source_id: patric:1219015.3
     assembly_name: Rhodococcus fascians NBRC 12155 = LMG 3623
     taxon_id: NCBITaxon:1219015
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:LMG-3623
+    source_strain_identifiers: LMG 3623
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_000761055.1
     source: GOLD
     source_id: gold:Ga0124376
@@ -187,13 +234,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:LMG-3623
     source_strain_identifiers: LMG 3623
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_000761055.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000761055.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: R_fas_LMG3623
+    taxon_id: NCBITaxon:1219015
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:LMG-3623
+    source_strain_identifiers: strain=LMG 3623
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_001894785
     source: BACDIVE
     source_id: bacdive:10883
     source_reference_id: '67770'
     assembly_level: contig
-    assembly_name: Rhodococcus fascians NBRC 12155 = LMG 3623
+    assembly_name: ASM189478v1 assembly for Rhodococcoides fascians NBRC 12155 = LMG
+      3623
     taxon_id: NCBITaxon:1219015
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_001894785.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_001894785.1
@@ -204,6 +264,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-12155
     source_strain_identifiers: NBRC 12155
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_001894785.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001894785.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM189478v1
+    taxon_id: NCBITaxon:1219015
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-12155
+    source_strain_identifiers: strain=NBRC 12155
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_000761055.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_000761055.1
@@ -214,6 +285,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:LMG-3623
     source_strain_identifiers: LMG 3623
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_000761055.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000761055.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: R_fas_LMG3623
+    taxon_id: NCBITaxon:1219015
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:LMG-3623
+    source_strain_identifiers: strain=LMG 3623
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCF_001894785.1
+    source: BV_BRC
+    source_id: patric:1219015.4
+    assembly_name: Rhodococcus fascians NBRC 12155 = LMG 3623
+    taxon_id: NCBITaxon:1219015
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-12155
+    source_strain_identifiers: NBRC 12155
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCF_001894785.1
+    source: BV_BRC
+    source_id: patric:1219015.4
+    assembly_name: Rhodococcus fascians NBRC 12155 = LMG 3623
+    taxon_id: NCBITaxon:1219015
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-12155
+    source_strain_identifiers: NBRC:12155
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCF_001894785.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_001894785.1
@@ -224,6 +324,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-12155
     source_strain_identifiers: NBRC 12155
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_001894785.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001894785.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM189478v1
+    taxon_id: NCBITaxon:1219015
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-12155
+    source_strain_identifiers: strain=NBRC 12155
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_000761055
     source: STRAININFO
     source_id: straininfo.strain:92423
@@ -329,14 +440,25 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-12155
     source_strain_identifiers: NBRC 12155
     source_strain_field: ncbi_strain_identifiers
-  - genome_id: img.taxon:2711768092
+  - genome_id: img.taxon:2600255126
     source_database: img
     source: BACDIVE
     source_id: bacdive:10883
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Rhodococcus fascians NBRC 12155 = LMG 3623
+    assembly_level: contig
+    genome_name: ASM33395v1 assembly for Rhodococcus sp. AW25M09
+    taxon_id: NCBITaxon:1268303
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:2711768092
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:10883
+    source_reference_id: '67770'
+    assembly_level: scaffold
+    genome_name: R_fas_LMG3623 assembly for Rhodococcoides fascians NBRC 12155 = LMG
+      3623
     taxon_id: NCBITaxon:1219015
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2711768092
     source_database: img
     source: GOLD
@@ -365,26 +487,71 @@ strains:
     source_database: patric
     source: BACDIVE
     source_id: bacdive:10883
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '67770'
+    assembly_level: scaffold
+    genome_name: R_fas_LMG3623 assembly for Rhodococcoides fascians NBRC 12155 = LMG
+      3623
+    taxon_id: NCBITaxon:1219015
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1219015.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1219015.3
     genome_name: Rhodococcus fascians NBRC 12155 = LMG 3623
     taxon_id: NCBITaxon:1219015
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:LMG-3623
+    source_strain_identifiers: LMG 3623
+    source_strain_field: strain
   - genome_id: patric:1219015.4
     source_database: patric
     source: BACDIVE
     source_id: bacdive:10883
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: ASM189478v1 assembly for Rhodococcoides fascians NBRC 12155 = LMG
+      3623
+    taxon_id: NCBITaxon:1219015
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1219015.4
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1219015.4
     genome_name: Rhodococcus fascians NBRC 12155 = LMG 3623
     taxon_id: NCBITaxon:1219015
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NBRC-12155
+    source_strain_identifiers: NBRC 12155
+    source_strain_field: strain
+  - genome_id: patric:1219015.4
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1219015.4
+    genome_name: Rhodococcus fascians NBRC 12155 = LMG 3623
+    taxon_id: NCBITaxon:1219015
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NBRC-12155
+    source_strain_identifiers: NBRC:12155
+    source_strain_field: culture_collection
   - genome_id: patric:1268303.4
     source_database: patric
     source: BACDIVE
     source_id: bacdive:10883
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM33395v1 assembly for Rhodococcus sp. AW25M09
+    taxon_id: NCBITaxon:1268303
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1268303.4
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1268303.4
     genome_name: Rhodococcus sp. AW25M09
     taxon_id: NCBITaxon:1268303
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-20669
+    source_strain_identifiers: DSM 20669
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN02570003
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -403,6 +570,15 @@ strains:
       archive_url: https://osf.io/download/66717cf86b6c8e344b04cb98/
       archive_filename: atb.assembly.r0.2.batch.135.tar.xz
       sample_links:
+      - matched_strain_id: kgmicrobe.strain:LMG-3623
+        record_id: biosample:SAMN02570003
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1219015.3
+        source_strain_field: strain
+        source_strain_identifiers: LMG 3623
+        taxon_id: NCBITaxon:1219015
       - matched_strain_id: kgmicrobe.strain:LMG-3623
         record_id: biosample:SAMN02570003
         record_type: BIOSAMPLE
@@ -434,9 +610,47 @@ strains:
         source_strain_field: ncbi_strain_identifiers
         source_strain_identifiers: LMG 3623
         taxon_id: NCBITaxon:1219015
+      - matched_strain_id: kgmicrobe.strain:LMG-3623
+        record_id: biosample:SAMN02570003
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_000761055.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=LMG 3623
+        taxon_id: NCBITaxon:1219015
+      - matched_strain_id: kgmicrobe.strain:LMG-3623
+        record_id: biosample:SAMN02570003
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCF_000761055.1
+        source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=LMG 3623
+        taxon_id: NCBITaxon:1219015
       ena_analysis_id: ena.analysis:ERZ4058977
       sylph_species: Rhodococcus fascians
   related_records:
+  - record_id: bioproject:PRJDB294
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1219015.4
+    taxon_id: NCBITaxon:1219015
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-12155
+    source_strain_identifiers: NBRC 12155
+    source_strain_field: strain
+  - record_id: bioproject:PRJDB294
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1219015.4
+    taxon_id: NCBITaxon:1219015
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-12155
+    source_strain_identifiers: NBRC:12155
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJDB294
     record_type: BIOPROJECT
     source: GOLD
@@ -448,6 +662,25 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0023805
     source_project_id: gold:Gp0023805
+  - record_id: bioproject:PRJDB294
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001894785.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1219015
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NBRC-12155
+    source_strain_identifiers: strain=NBRC 12155
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJEB1196
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1268303.4
+    taxon_id: NCBITaxon:1268303
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-20669
+    source_strain_identifiers: DSM 20669
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
     source: GTDB
@@ -466,6 +699,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-12155
     source_strain_identifiers: NBRC 12155
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000761055.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1219015
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:LMG-3623
+    source_strain_identifiers: strain=LMG 3623
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001894785.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1219015
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NBRC-12155
+    source_strain_identifiers: strain=NBRC 12155
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA233522
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1219015.3
+    taxon_id: NCBITaxon:1219015
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:LMG-3623
+    source_strain_identifiers: LMG 3623
+    source_strain_field: strain
   - record_id: bioproject:PRJNA233522
     record_type: BIOPROJECT
     source: GOLD
@@ -488,6 +750,34 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0141166
     source_project_id: gold:Gp0146335
+  - record_id: bioproject:PRJNA233522
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000761055.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1219015
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:LMG-3623
+    source_strain_identifiers: strain=LMG 3623
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00046773
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1219015.4
+    taxon_id: NCBITaxon:1219015
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-12155
+    source_strain_identifiers: NBRC 12155
+    source_strain_field: strain
+  - record_id: biosample:SAMD00046773
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1219015.4
+    taxon_id: NCBITaxon:1219015
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-12155
+    source_strain_identifiers: NBRC:12155
+    source_strain_field: culture_collection
   - record_id: biosample:SAMD00046773
     record_type: BIOSAMPLE
     source: GTDB
@@ -497,6 +787,44 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-12155
     source_strain_identifiers: NBRC 12155
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMD00046773
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001894785.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1219015
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NBRC-12155
+    source_strain_identifiers: strain=NBRC 12155
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00046773
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001894785.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1219015
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NBRC-12155
+    source_strain_identifiers: strain=NBRC 12155
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMEA2271987
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1268303.4
+    taxon_id: NCBITaxon:1268303
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-20669
+    source_strain_identifiers: DSM 20669
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN02570003
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1219015.3
+    taxon_id: NCBITaxon:1219015
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:LMG-3623
+    source_strain_identifiers: LMG 3623
+    source_strain_field: strain
   - record_id: biosample:SAMN02570003
     record_type: BIOSAMPLE
     source: GOLD
@@ -528,6 +856,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:LMG-3623
     source_strain_identifiers: LMG 3623
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN02570003
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000761055.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1219015
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:LMG-3623
+    source_strain_identifiers: strain=LMG 3623
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02570003
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000761055.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1219015
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:LMG-3623
+    source_strain_identifiers: strain=LMG 3623
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0124376
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -1635,11 +1983,11 @@ strains:
   source_id: bacdive:10885
   culture_collection_ids:
   - kgmicrobe.strain:ATCC-35014
-  - kgmicrobe.strain:AUCNM-A-594
+  - kgmicrobe.strain:AUCNM%20A-594
   - kgmicrobe.strain:CIP-104187
   - kgmicrobe.strain:DSM-43673
   - kgmicrobe.strain:IFO-15528
-  - kgmicrobe.strain:IMV-385
+  - kgmicrobe.strain:IMV%20385
   - kgmicrobe.strain:JCM-6162
   - kgmicrobe.strain:LMG-5360
   - kgmicrobe.strain:NBRC-15528
@@ -1647,6 +1995,32 @@ strains:
   - kgmicrobe.strain:NRRL-B-16939
   - kgmicrobe.strain:VKM-Ac-594
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_030813815
+    source: BACDIVE
+    source_id: bacdive:10885
+    source_reference_id: '124043'
+    assembly_level: contig
+    assembly_name: ASM3081381v1 assembly for Rhodococcoides fascians DSM 43673
+    taxon_id: NCBITaxon:1828
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_030813815.1
+    source: BV_BRC
+    source_id: patric:1828.63
+    assembly_name: Rhodococcus fascians DSM 43673
+    taxon_id: NCBITaxon:1828
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-43673
+    source_strain_identifiers: DSM 43673
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_030813815.1
+    source: BV_BRC
+    source_id: patric:1828.63
+    assembly_name: Rhodococcus fascians DSM 43673
+    taxon_id: NCBITaxon:1828
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-43673
+    source_strain_identifiers: DSM:43673
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_030813815.1
     source: GOLD
     source_id: gold:Ga0480505
@@ -1679,6 +2053,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-43673
     source_strain_identifiers: DSM 43673
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_030813815.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_030813815.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM3081381v1
+    taxon_id: NCBITaxon:1828
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-43673
+    source_strain_identifiers: strain=DSM 43673
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_030813815.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_030813815.1
@@ -1689,6 +2074,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-43673
     source_strain_identifiers: DSM 43673
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_030813815.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_030813815.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM3081381v1
+    taxon_id: NCBITaxon:1828
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-43673
+    source_strain_identifiers: strain=DSM 43673
+    source_strain_field: infraspecific_name
   genome_records:
   - genome_id: gtdb.genome:RS_GCF_030813815.1
     source_database: gtdb
@@ -1705,10 +2101,11 @@ strains:
     source_database: img
     source: BACDIVE
     source_id: bacdive:10885
-    source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Rhodococcus luteus DSM 43673
+    source_reference_id: '124043'
+    assembly_level: contig
+    genome_name: ASM3081381v1 assembly for Rhodococcoides fascians DSM 43673
     taxon_id: NCBITaxon:1828
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2926799693
     source_database: img
     source: GOLD
@@ -1733,6 +2130,35 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0029518
     source_project_id: gold:Gp0539491
+  - genome_id: patric:1828.63
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:10885
+    source_reference_id: '124043'
+    assembly_level: contig
+    genome_name: ASM3081381v1 assembly for Rhodococcoides fascians DSM 43673
+    taxon_id: NCBITaxon:1828
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1828.63
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1828.63
+    genome_name: Rhodococcus fascians DSM 43673
+    taxon_id: NCBITaxon:1828
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-43673
+    source_strain_identifiers: DSM 43673
+    source_strain_field: strain
+  - genome_id: patric:1828.63
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1828.63
+    genome_name: Rhodococcus fascians DSM 43673
+    taxon_id: NCBITaxon:1828
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-43673
+    source_strain_identifiers: DSM:43673
+    source_strain_field: culture_collection
   related_records:
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
@@ -1743,6 +2169,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-43673
     source_strain_identifiers: DSM 43673
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_030813815.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1828
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-43673
+    source_strain_identifiers: strain=DSM 43673
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA708473
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1828.63
+    taxon_id: NCBITaxon:1828
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-43673
+    source_strain_identifiers: DSM 43673
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA708473
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1828.63
+    taxon_id: NCBITaxon:1828
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-43673
+    source_strain_identifiers: DSM:43673
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA708473
     record_type: BIOPROJECT
     source: GOLD
@@ -1765,6 +2219,34 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0029518
     source_project_id: gold:Gp0539491
+  - record_id: bioproject:PRJNA708473
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_030813815.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1828
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-43673
+    source_strain_identifiers: strain=DSM 43673
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN18243130
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1828.63
+    taxon_id: NCBITaxon:1828
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-43673
+    source_strain_identifiers: DSM 43673
+    source_strain_field: strain
+  - record_id: biosample:SAMN18243130
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1828.63
+    taxon_id: NCBITaxon:1828
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-43673
+    source_strain_identifiers: DSM:43673
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN18243130
     record_type: BIOSAMPLE
     source: GOLD
@@ -1796,6 +2278,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-43673
     source_strain_identifiers: DSM 43673
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN18243130
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_030813815.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1828
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-43673
+    source_strain_identifiers: strain=DSM 43673
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN18243130
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_030813815.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1828
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-43673
+    source_strain_identifiers: strain=DSM 43673
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0480505
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -2798,12 +3300,237 @@ strains:
       strain_doi: DOI:10.60712/SI-ID35706.2
       strain_id: straininfo.strain:35706
       strain_status: published online
+- strain_id: kgmicrobe.strain:bacdive_10891
+  source: BACDIVE
+  source_id: bacdive:10891
+  culture_collection_ids:
+  - kgmicrobe.strain:CIP-104629
+  - kgmicrobe.strain:DSM-46103
+  - kgmicrobe.strain:IMET-7762
+  - kgmicrobe.strain:VKM-Ac-868
+  related_records:
+  - record_id: gold:Go0178341
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0178341
+    taxon_id: NCBITaxon:1828
+    record_name: Rhodococcus fascians CIP 104629
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CIP-104629
+    source_strain_identifiers: CIP 104629
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0178341
+  - record_id: gold:Go0178341
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0178341
+    taxon_id: NCBITaxon:1828
+    record_name: Rhodococcus fascians CIP 104629
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CIP-104629
+    source_strain_identifiers: CIP 104629
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0178341
+  - record_id: gold:Go0178342
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0178342
+    taxon_id: NCBITaxon:1828
+    record_name: Rhodococcus fascians DSM 46103
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-46103
+    source_strain_identifiers: DSM 46103
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0178342
+  - record_id: gold:Go0178342
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0178342
+    taxon_id: NCBITaxon:1828
+    record_name: Rhodococcus fascians DSM 46103
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-46103
+    source_strain_identifiers: DSM 46103
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0178342
+  - record_id: gold:Go0178343
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0178343
+    taxon_id: NCBITaxon:1828
+    record_name: Rhodococcus fascians IMET 7762
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:IMET-7762
+    source_strain_identifiers: IMET 7762
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0178343
+  - record_id: gold:Go0178344
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0178344
+    taxon_id: NCBITaxon:1828
+    record_name: Rhodococcus fascians VKM Ac-868
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:VKM-Ac-868
+    source_strain_identifiers: VKM Ac-868
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0178344
+  - record_id: straininfo.deposit:154595
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:50739
+    taxon_id: NCBITaxon:1828
+    record_name: CIP 104629
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CIP-104629
+    source_strain_identifiers: CIP 104629
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CIP 104629
+      deposit_id: straininfo.deposit:154595
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:10891
+      strain_doi: DOI:10.60712/SI-ID50739.2
+      strain_id: straininfo.strain:50739
+      strain_status: published online
+  - record_id: straininfo.deposit:154596
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:50739
+    record_name: DSM 46103
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:DSM-46103
+    source_strain_identifiers: DSM 46103
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 46103
+      deposit_id: straininfo.deposit:154596
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:10891
+      strain_doi: DOI:10.60712/SI-ID50739.2
+      strain_id: straininfo.strain:50739
+      strain_status: published online
+  - record_id: straininfo.deposit:154597
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:50739
+    taxon_id: NCBITaxon:1828
+    record_name: IMET 7762
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:IMET-7762
+    source_strain_identifiers: IMET 7762
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: IMET 7762
+      deposit_id: straininfo.deposit:154597
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:10891
+      strain_doi: DOI:10.60712/SI-ID50739.2
+      strain_id: straininfo.strain:50739
+      strain_status: published online
+  - record_id: straininfo.deposit:154598
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:50739
+    taxon_id: NCBITaxon:1828
+    record_name: VKM Ac-868
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:VKM-Ac-868
+    source_strain_identifiers: VKM Ac-868
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: VKM Ac-868
+      deposit_id: straininfo.deposit:154598
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:10891
+      strain_doi: DOI:10.60712/SI-ID50739.2
+      strain_id: straininfo.strain:50739
+      strain_status: published online
+  - record_id: straininfo.strain:50739
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:50739
+    record_name: DSM 46103
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:DSM-46103
+    source_strain_identifiers: DSM 46103
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 46103
+      deposit_id: straininfo.deposit:154596
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:10891
+      strain_doi: DOI:10.60712/SI-ID50739.2
+      strain_id: straininfo.strain:50739
+      strain_status: published online
+  - record_id: straininfo.strain:50739
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:50739
+    taxon_id: NCBITaxon:1828
+    record_name: CIP 104629
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CIP-104629
+    source_strain_identifiers: CIP 104629
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CIP 104629
+      deposit_id: straininfo.deposit:154595
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:10891
+      strain_doi: DOI:10.60712/SI-ID50739.2
+      strain_id: straininfo.strain:50739
+      strain_status: published online
+  - record_id: straininfo.strain:50739
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:50739
+    taxon_id: NCBITaxon:1828
+    record_name: IMET 7762
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:IMET-7762
+    source_strain_identifiers: IMET 7762
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: IMET 7762
+      deposit_id: straininfo.deposit:154597
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:10891
+      strain_doi: DOI:10.60712/SI-ID50739.2
+      strain_id: straininfo.strain:50739
+      strain_status: published online
+  - record_id: straininfo.strain:50739
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:50739
+    taxon_id: NCBITaxon:1828
+    record_name: VKM Ac-868
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:VKM-Ac-868
+    source_strain_identifiers: VKM Ac-868
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: VKM Ac-868
+      deposit_id: straininfo.deposit:154598
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:10891
+      strain_doi: DOI:10.60712/SI-ID50739.2
+      strain_id: straininfo.strain:50739
+      strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_137089
   source: BACDIVE
   source_id: bacdive:137089
   culture_collection_ids:
   - kgmicrobe.strain:CIP-104504
-  - kgmicrobe.strain:IMV-187
+  - kgmicrobe.strain:IMV%20187
   - kgmicrobe.strain:JCM-6163
   - kgmicrobe.strain:VKM-Ac-986
   medium_count: 1
@@ -2982,7 +3709,7 @@ strains:
   source_id: bacdive:137090
   culture_collection_ids:
   - kgmicrobe.strain:CIP-104505
-  - kgmicrobe.strain:IMV-419
+  - kgmicrobe.strain:IMV%20419
   - kgmicrobe.strain:JCM-6164
   - kgmicrobe.strain:VKM-Ac-991
   medium_count: 1
@@ -3155,181 +3882,6 @@ strains:
       source_bacdive_id: bacdive:137090
       strain_doi: DOI:10.60712/SI-ID64796.2
       strain_id: straininfo.strain:64796
-      strain_status: published online
-- strain_id: kgmicrobe.strain:bacdive_10891
-  source: BACDIVE
-  source_id: bacdive:10891
-  culture_collection_ids:
-  - kgmicrobe.strain:CIP-104629
-  - kgmicrobe.strain:DSM-46103
-  - kgmicrobe.strain:VKM-Ac-868
-  related_records:
-  - record_id: gold:Go0178341
-    record_type: GOLD_ORGANISM
-    source: GOLD
-    source_id: gold:Go0178341
-    taxon_id: NCBITaxon:1828
-    record_name: Rhodococcus fascians CIP 104629
-    source_field: ORGANISM GOLD ID
-    matched_strain_id: kgmicrobe.strain:CIP-104629
-    source_strain_identifiers: CIP 104629
-    source_strain_field: ORGANISM CULTURE COLLECTION ID
-    source_organism_id: gold:Go0178341
-  - record_id: gold:Go0178341
-    record_type: GOLD_ORGANISM
-    source: GOLD
-    source_id: gold:Go0178341
-    taxon_id: NCBITaxon:1828
-    record_name: Rhodococcus fascians CIP 104629
-    source_field: ORGANISM GOLD ID
-    matched_strain_id: kgmicrobe.strain:CIP-104629
-    source_strain_identifiers: CIP 104629
-    source_strain_field: ORGANISM STRAIN
-    source_organism_id: gold:Go0178341
-  - record_id: gold:Go0178342
-    record_type: GOLD_ORGANISM
-    source: GOLD
-    source_id: gold:Go0178342
-    taxon_id: NCBITaxon:1828
-    record_name: Rhodococcus fascians DSM 46103
-    source_field: ORGANISM GOLD ID
-    matched_strain_id: kgmicrobe.strain:DSM-46103
-    source_strain_identifiers: DSM 46103
-    source_strain_field: ORGANISM CULTURE COLLECTION ID
-    source_organism_id: gold:Go0178342
-  - record_id: gold:Go0178342
-    record_type: GOLD_ORGANISM
-    source: GOLD
-    source_id: gold:Go0178342
-    taxon_id: NCBITaxon:1828
-    record_name: Rhodococcus fascians DSM 46103
-    source_field: ORGANISM GOLD ID
-    matched_strain_id: kgmicrobe.strain:DSM-46103
-    source_strain_identifiers: DSM 46103
-    source_strain_field: ORGANISM STRAIN
-    source_organism_id: gold:Go0178342
-  - record_id: gold:Go0178344
-    record_type: GOLD_ORGANISM
-    source: GOLD
-    source_id: gold:Go0178344
-    taxon_id: NCBITaxon:1828
-    record_name: Rhodococcus fascians VKM Ac-868
-    source_field: ORGANISM GOLD ID
-    matched_strain_id: kgmicrobe.strain:VKM-Ac-868
-    source_strain_identifiers: VKM Ac-868
-    source_strain_field: ORGANISM STRAIN
-    source_organism_id: gold:Go0178344
-  - record_id: straininfo.deposit:154595
-    record_type: STRAININFO_DEPOSIT
-    source: STRAININFO
-    source_id: straininfo.strain:50739
-    taxon_id: NCBITaxon:1828
-    record_name: CIP 104629
-    source_field: deposits.siDP
-    matched_strain_id: kgmicrobe.strain:CIP-104629
-    source_strain_identifiers: CIP 104629
-    source_strain_field: deposits.designation
-    straininfo_evidence:
-      deposit_designation: CIP 104629
-      deposit_id: straininfo.deposit:154595
-      deposit_status: available
-      match_method: culture_identifier
-      source_bacdive_id: bacdive:10891
-      strain_doi: DOI:10.60712/SI-ID50739.2
-      strain_id: straininfo.strain:50739
-      strain_status: published online
-  - record_id: straininfo.deposit:154596
-    record_type: STRAININFO_DEPOSIT
-    source: STRAININFO
-    source_id: straininfo.strain:50739
-    record_name: DSM 46103
-    source_field: deposits.siDP
-    matched_strain_id: kgmicrobe.strain:DSM-46103
-    source_strain_identifiers: DSM 46103
-    source_strain_field: deposits.designation
-    straininfo_evidence:
-      deposit_designation: DSM 46103
-      deposit_id: straininfo.deposit:154596
-      deposit_status: available
-      match_method: culture_identifier
-      source_bacdive_id: bacdive:10891
-      strain_doi: DOI:10.60712/SI-ID50739.2
-      strain_id: straininfo.strain:50739
-      strain_status: published online
-  - record_id: straininfo.deposit:154598
-    record_type: STRAININFO_DEPOSIT
-    source: STRAININFO
-    source_id: straininfo.strain:50739
-    taxon_id: NCBITaxon:1828
-    record_name: VKM Ac-868
-    source_field: deposits.siDP
-    matched_strain_id: kgmicrobe.strain:VKM-Ac-868
-    source_strain_identifiers: VKM Ac-868
-    source_strain_field: deposits.designation
-    straininfo_evidence:
-      deposit_designation: VKM Ac-868
-      deposit_id: straininfo.deposit:154598
-      deposit_status: available
-      match_method: culture_identifier
-      source_bacdive_id: bacdive:10891
-      strain_doi: DOI:10.60712/SI-ID50739.2
-      strain_id: straininfo.strain:50739
-      strain_status: published online
-  - record_id: straininfo.strain:50739
-    record_type: STRAININFO_STRAIN
-    source: STRAININFO
-    source_id: straininfo.strain:50739
-    record_name: DSM 46103
-    source_field: strain.siID
-    matched_strain_id: kgmicrobe.strain:DSM-46103
-    source_strain_identifiers: DSM 46103
-    source_strain_field: deposits.designation
-    straininfo_evidence:
-      deposit_designation: DSM 46103
-      deposit_id: straininfo.deposit:154596
-      deposit_status: available
-      match_method: culture_identifier
-      source_bacdive_id: bacdive:10891
-      strain_doi: DOI:10.60712/SI-ID50739.2
-      strain_id: straininfo.strain:50739
-      strain_status: published online
-  - record_id: straininfo.strain:50739
-    record_type: STRAININFO_STRAIN
-    source: STRAININFO
-    source_id: straininfo.strain:50739
-    taxon_id: NCBITaxon:1828
-    record_name: CIP 104629
-    source_field: strain.siID
-    matched_strain_id: kgmicrobe.strain:CIP-104629
-    source_strain_identifiers: CIP 104629
-    source_strain_field: deposits.designation
-    straininfo_evidence:
-      deposit_designation: CIP 104629
-      deposit_id: straininfo.deposit:154595
-      deposit_status: available
-      match_method: culture_identifier
-      source_bacdive_id: bacdive:10891
-      strain_doi: DOI:10.60712/SI-ID50739.2
-      strain_id: straininfo.strain:50739
-      strain_status: published online
-  - record_id: straininfo.strain:50739
-    record_type: STRAININFO_STRAIN
-    source: STRAININFO
-    source_id: straininfo.strain:50739
-    taxon_id: NCBITaxon:1828
-    record_name: VKM Ac-868
-    source_field: strain.siID
-    matched_strain_id: kgmicrobe.strain:VKM-Ac-868
-    source_strain_identifiers: VKM Ac-868
-    source_strain_field: deposits.designation
-    straininfo_evidence:
-      deposit_designation: VKM Ac-868
-      deposit_id: straininfo.deposit:154598
-      deposit_status: available
-      match_method: culture_identifier
-      source_bacdive_id: bacdive:10891
-      strain_doi: DOI:10.60712/SI-ID50739.2
-      strain_id: straininfo.strain:50739
       strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_134414
   source: BACDIVE
@@ -3897,7 +4449,7 @@ strains:
   source: BACDIVE
   source_id: bacdive:165353
   culture_collection_ids:
-  - kgmicrobe.strain:IMV-27
+  - kgmicrobe.strain:IMV%2027
   - kgmicrobe.strain:JCM-6165
   - kgmicrobe.strain:VKM-Ac-1006
   medium_count: 1
@@ -4017,7 +4569,7 @@ strains:
   designation: N 1026
   culture_collection_ids:
   - kgmicrobe.strain:DSM-43985
-  - kgmicrobe.strain:IMV-29
+  - kgmicrobe.strain:IMV%2029
   related_records:
   - record_id: gold:Go0178334
     record_type: GOLD_ORGANISM
@@ -4081,7 +4633,7 @@ strains:
   source: BACDIVE
   source_id: bacdive:10890
   culture_collection_ids:
-  - kgmicrobe.strain:BEM-660
+  - kgmicrobe.strain:BEM%20660
   - kgmicrobe.strain:DSM-45106
   related_records:
   - record_id: straininfo.deposit:913957
@@ -4369,6 +4921,51 @@ strains:
       source_bacdive_id: bacdive:137275
       strain_doi: DOI:10.60712/SI-ID4877.2
       strain_id: straininfo.strain:4877
+      strain_status: published online
+- strain_id: kgmicrobe.strain:bacdive_8455
+  source: BACDIVE
+  source_id: bacdive:8455
+  designation: TBC 4351/91
+  culture_collection_ids:
+  - kgmicrobe.strain:DSM-44418
+  related_records:
+  - record_id: straininfo.deposit:153026
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:45334
+    record_name: DSM 44418
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:DSM-44418
+    source_strain_identifiers: DSM 44418
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      bacdive_reference_conflict: true
+      deposit_designation: DSM 44418
+      deposit_id: straininfo.deposit:153026
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:24232
+      strain_doi: DOI:10.60712/SI-ID45334.3
+      strain_id: straininfo.strain:45334
+      strain_status: published online
+  - record_id: straininfo.strain:45334
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:45334
+    record_name: DSM 44418
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:DSM-44418
+    source_strain_identifiers: DSM 44418
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      bacdive_reference_conflict: true
+      deposit_designation: DSM 44418
+      deposit_id: straininfo.deposit:153026
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:24232
+      strain_doi: DOI:10.60712/SI-ID45334.3
+      strain_id: straininfo.strain:45334
       strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_10884
   source: BACDIVE
@@ -4886,20 +5483,29 @@ strains:
       strain_doi: DOI:10.60712/SI-ID303639.2
       strain_id: straininfo.strain:303639
       strain_status: published online
-- strain_id: kgmicrobe.strain:bacdive_8455
+- strain_id: kgmicrobe.strain:bacdive_100161
   source: BACDIVE
-  source_id: bacdive:8455
-  designation: TBC 4351/91
-- strain_id: kgmicrobe.strain:bacdive_103559
+  source_id: bacdive:100161
+  designation: STI07849
+- strain_id: kgmicrobe.strain:bacdive_103134
   source: BACDIVE
-  source_id: bacdive:103559
-  designation: ST033347(HKI)
+  source_id: bacdive:103134
+  designation: STI07151a
+- strain_id: kgmicrobe.strain:bacdive_103135
+  source: BACDIVE
+  source_id: bacdive:103135
+  designation: STI07170(IMET), P.Hirsch 54
+- strain_id: kgmicrobe.strain:bacdive_103136
+  source: BACDIVE
+  source_id: bacdive:103136
+  designation: STI07151b
 source_attestations:
 - source: NCBITAXON
   source_id: NCBITaxon:1828
   source_label: Rhodococcoides fascians
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:46668
   source_label: Rhodococcoides fascians
@@ -4916,7 +5522,7 @@ source_attestations:
 - source: BACDIVE
   source_id: NCBITaxon:1828
   source_label: Rhodococcoides fascians
-  assertion_count: 24
+  assertion_count: 27
   assertion_unit: STRAIN
   notes: 1 strains are filed under 1 descendant NCBI taxa (see classified_as).
 - source: MEDIADIVE
@@ -4944,7 +5550,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

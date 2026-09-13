@@ -167,8 +167,17 @@ taxonomy_mappings:
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 synonyms:
-- synonym_text: Selenomastix ruminantium
+- synonym_text: '"Selenomastix ruminantium" Woodcock and Lapage 1913-1914'
   synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Spirillum ruminantium" Macdonald et al. 1959'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Pseudoselenomonas ruminantium (Certes 1889) Heng and Kittelmann 2026
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Selenomastix ruminantium
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Selenomonas ruminantium
   synonym_type: RELATED_SYNONYM
@@ -176,15 +185,15 @@ synonyms:
   source_id: lpsn:784873
 - synonym_text: Selenomonas ruminantium (Certes 1889) Wenyon 1926 (Approved Lists
     1980)
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Spirillum ruminantium
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 xrefs:
 - lpsn:72270
 genetic_code: 11
-strain_count: 1
+strain_count: 3
 strains:
 - strain_id: kgmicrobe.strain:bacdive_17156
   source: BACDIVE
@@ -201,8 +210,19 @@ strains:
     source_id: bacdive:17156
     source_reference_id: '66792'
     assembly_level: scaffold
+    assembly_name: ASM42406v1 assembly for Selenomonas ruminantium subsp. ruminantium
+      ATCC 12561
+    taxon_id: NCBITaxon:1280706
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_000424065.1
+    source: BV_BRC
+    source_id: patric:1280706.4
     assembly_name: Selenomonas ruminantium subsp. ruminantium ATCC 12561
     taxon_id: NCBITaxon:1280706
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-12561
+    source_strain_identifiers: ATCC 12561
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_000424065.1
     source: GOLD
     source_id: gold:Ga0002474
@@ -235,6 +255,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-12561
     source_strain_identifiers: ATCC 12561
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_000424065.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000424065.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM42406v1
+    taxon_id: NCBITaxon:1280706
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-12561
+    source_strain_identifiers: strain=ATCC 12561
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_000424065.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_000424065.1
@@ -245,6 +276,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-12561
     source_strain_identifiers: ATCC 12561
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_000424065.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000424065.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: ASM42406v1
+    taxon_id: NCBITaxon:1280706
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-12561
+    source_strain_identifiers: strain=ATCC 12561
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_000424065
     source: STRAININFO
     source_id: straininfo.strain:35606
@@ -283,9 +325,11 @@ strains:
     source: BACDIVE
     source_id: bacdive:17156
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Selenomonas ruminantium ATCC 12561
+    assembly_level: scaffold
+    genome_name: ASM42406v1 assembly for Selenomonas ruminantium subsp. ruminantium
+      ATCC 12561
     taxon_id: NCBITaxon:1280706
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2524614686
     source_database: img
     source: GOLD
@@ -315,10 +359,31 @@ strains:
     source: BACDIVE
     source_id: bacdive:17156
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: scaffold
+    genome_name: ASM42406v1 assembly for Selenomonas ruminantium subsp. ruminantium
+      ATCC 12561
+    taxon_id: NCBITaxon:1280706
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1280706.4
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1280706.4
     genome_name: Selenomonas ruminantium subsp. ruminantium ATCC 12561
     taxon_id: NCBITaxon:1280706
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-12561
+    source_strain_identifiers: ATCC 12561
+    source_strain_field: strain
   related_records:
+  - record_id: bioproject:PRJNA185691
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1280706.4
+    taxon_id: NCBITaxon:1280706
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-12561
+    source_strain_identifiers: ATCC 12561
+    source_strain_field: strain
   - record_id: bioproject:PRJNA185691
     record_type: BIOPROJECT
     source: GOLD
@@ -341,6 +406,16 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0025721
     source_project_id: gold:Gp0025721
+  - record_id: bioproject:PRJNA185691
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000424065.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1280706
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-12561
+    source_strain_identifiers: strain=ATCC 12561
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
     source: GTDB
@@ -350,6 +425,25 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-12561
     source_strain_identifiers: ATCC 12561
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000424065.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1280706
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-12561
+    source_strain_identifiers: strain=ATCC 12561
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02441491
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1280706.4
+    taxon_id: NCBITaxon:1280706
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-12561
+    source_strain_identifiers: ATCC 12561
+    source_strain_field: strain
   - record_id: biosample:SAMN02441491
     record_type: BIOSAMPLE
     source: GOLD
@@ -381,6 +475,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-12561
     source_strain_identifiers: ATCC 12561
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN02441491
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000424065.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1280706
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-12561
+    source_strain_identifiers: strain=ATCC 12561
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02441491
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000424065.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1280706
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-12561
+    source_strain_identifiers: strain=ATCC 12561
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0002474
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -619,12 +733,813 @@ strains:
       strain_doi: DOI:10.60712/SI-ID35606.3
       strain_id: straininfo.strain:35606
       strain_status: published online
+- strain_id: kgmicrobe.strain:bacdive_17155
+  source: BACDIVE
+  source_id: bacdive:17155
+  designation: PC 18
+  culture_collection_ids:
+  - kgmicrobe.strain:ATCC-19205
+  - kgmicrobe.strain:DSM-2872
+  - kgmicrobe.strain:JCM-6582
+  genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_900107615
+    source: BACDIVE
+    source_id: bacdive:17155
+    source_reference_id: '66792'
+    assembly_level: scaffold
+    assembly_name: IMG-taxon 2593339219 annotated assembly for Selenomonas ruminantium
+      DSM 2872
+    taxon_id: NCBITaxon:971
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900107615.1
+    source: BV_BRC
+    source_id: patric:971.19
+    assembly_name: Selenomonas ruminantium strain DSM 2872
+    taxon_id: NCBITaxon:971
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_900107615.1
+    source: GOLD
+    source_id: gold:Ga0041860
+    assembly_name: Selenomonas ruminantium lactilytica DSM 2872
+    taxon_id: NCBITaxon:971
+    source_field: AP GENBANK.assemblyAccession
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0095059
+    source_project_id: gold:Gp0095059
+  - assembly_id: ncbi.assembly:GCA_900107615.1
+    source: GOLD
+    source_id: gold:Ga0041860
+    assembly_name: Selenomonas ruminantium lactilytica DSM 2872
+    taxon_id: NCBITaxon:971
+    source_field: AP GENBANK.assemblyAccession
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0095059
+    source_project_id: gold:Gp0095059
+  - assembly_id: ncbi.assembly:GCA_900107615.1
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_900107615.1
+    assembly_level: Scaffold
+    assembly_name: IMG-taxon 2593339219 annotated assembly
+    taxon_id: NCBITaxon:971
+    source_field: ncbi_genbank_assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_900107615.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_900107615.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: IMG-taxon 2593339219 annotated assembly
+    taxon_id: NCBITaxon:971
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: strain=DSM 2872
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCF_900107615.1
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_900107615.1
+    assembly_level: Scaffold
+    assembly_name: IMG-taxon 2593339219 annotated assembly
+    taxon_id: NCBITaxon:971
+    source_field: accession
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_900107615.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_900107615.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: IMG-taxon 2593339219 annotated assembly
+    taxon_id: NCBITaxon:971
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: strain=DSM 2872
+    source_strain_field: infraspecific_name
+  genome_records:
+  - genome_id: gtdb.genome:RS_GCF_900107615.1
+    source_database: gtdb
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_900107615.1
+    assembly_level: Scaffold
+    genome_name: Selenomonas ruminantium
+    taxon_id: NCBITaxon:971
+    source_field: accession
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: ncbi_strain_identifiers
+  - genome_id: img.taxon:2593339219
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:17155
+    source_reference_id: '66792'
+    assembly_level: scaffold
+    genome_name: IMG-taxon 2593339219 annotated assembly for Selenomonas ruminantium
+      DSM 2872
+    taxon_id: NCBITaxon:971
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:2593339219
+    source_database: img
+    source: GOLD
+    source_id: gold:Ga0041860
+    genome_name: Selenomonas ruminantium lactilytica DSM 2872
+    taxon_id: NCBITaxon:971
+    source_field: AP IMG TAXON ID
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0095059
+    source_project_id: gold:Gp0095059
+  - genome_id: img.taxon:2593339219
+    source_database: img
+    source: GOLD
+    source_id: gold:Ga0041860
+    genome_name: Selenomonas ruminantium lactilytica DSM 2872
+    taxon_id: NCBITaxon:971
+    source_field: AP IMG TAXON ID
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0095059
+    source_project_id: gold:Gp0095059
+  - genome_id: patric:971.19
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:17155
+    source_reference_id: '66792'
+    assembly_level: scaffold
+    genome_name: IMG-taxon 2593339219 annotated assembly for Selenomonas ruminantium
+      DSM 2872
+    taxon_id: NCBITaxon:971
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:971.19
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:971.19
+    genome_name: Selenomonas ruminantium strain DSM 2872
+    taxon_id: NCBITaxon:971
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: strain
+  - genome_id: atb.assembly:202505.SAMN05660648
+    source_database: allthebacteria
+    source: ALLTHEBACTERIA
+    source_id: atb.assembly:202505.SAMN05660648
+    genome_name: Selenomonas ruminantium
+    atb_evidence:
+      release: 2025-05
+      sample_id: biosample:SAMN05660648
+      dataset: 661k
+      run_accessions: SRR4996427
+      assembly_seqkit_sum: seqkit.v0.1_DLS_k0_ebe2a0ecf84690d14cf1b8bb2ca694c4
+      assembly_filter: PASS
+      hq_filter: SYLPH_RESULTS_FAIL
+      download_url: https://allthebacteria-assemblies.s3.eu-west-2.amazonaws.com/SAMN05660648.fa.gz
+      archive_url: https://osf.io/download/7q6ur/
+      archive_filename: atb.assembly.r0.2.batch.647.tar.xz
+      sample_links:
+      - matched_strain_id: kgmicrobe.strain:DSM-2872
+        record_id: biosample:SAMN05660648
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:971.19
+        source_strain_field: strain
+        source_strain_identifiers: DSM 2872
+        taxon_id: NCBITaxon:971
+      - matched_strain_id: kgmicrobe.strain:DSM-2872
+        record_id: biosample:SAMN05660648
+        record_type: BIOSAMPLE
+        source: GOLD
+        source_field: NCBI BIOSAMPLE ACCESSION
+        source_id: gold:Gp0095059
+        source_organism_id: gold:Go0095059
+        source_project_id: gold:Gp0095059
+        source_strain_field: ORGANISM CULTURE COLLECTION ID
+        source_strain_identifiers: DSM 2872
+        taxon_id: NCBITaxon:971
+      - matched_strain_id: kgmicrobe.strain:DSM-2872
+        record_id: biosample:SAMN05660648
+        record_type: BIOSAMPLE
+        source: GOLD
+        source_field: NCBI BIOSAMPLE ACCESSION
+        source_id: gold:Gp0095059
+        source_organism_id: gold:Go0095059
+        source_project_id: gold:Gp0095059
+        source_strain_field: ORGANISM STRAIN
+        source_strain_identifiers: DSM 2872
+        taxon_id: NCBITaxon:971
+      - matched_strain_id: kgmicrobe.strain:DSM-2872
+        record_id: biosample:SAMN05660648
+        record_type: BIOSAMPLE
+        source: GTDB
+        source_field: ncbi_biosample
+        source_id: gtdb.genome:RS_GCF_900107615.1
+        source_strain_field: ncbi_strain_identifiers
+        source_strain_identifiers: DSM 2872
+        taxon_id: NCBITaxon:971
+      - matched_strain_id: kgmicrobe.strain:DSM-2872
+        record_id: biosample:SAMN05660648
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_900107615.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=DSM 2872
+        taxon_id: NCBITaxon:971
+      - matched_strain_id: kgmicrobe.strain:DSM-2872
+        record_id: biosample:SAMN05660648
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCF_900107615.1
+        source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=DSM 2872
+        taxon_id: NCBITaxon:971
+      ena_analysis_id: ena.analysis:ERZ4409508
+      sylph_species: unknown
+  related_records:
+  - record_id: bioproject:PRJEB16657
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:971.19
+    taxon_id: NCBITaxon:971
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB16657
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_900107615.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:971
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: strain=DSM 2872
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_900107615.1
+    taxon_id: NCBITaxon:971
+    source_field: ncbi_bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_900107615.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:971
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: strain=DSM 2872
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA254915
+    record_type: BIOPROJECT
+    source: GOLD
+    source_id: gold:Gp0095059
+    taxon_id: NCBITaxon:971
+    source_field: NCBI BIOPROJECT ACCESSION
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0095059
+    source_project_id: gold:Gp0095059
+  - record_id: bioproject:PRJNA254915
+    record_type: BIOPROJECT
+    source: GOLD
+    source_id: gold:Gp0095059
+    taxon_id: NCBITaxon:971
+    source_field: NCBI BIOPROJECT ACCESSION
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0095059
+    source_project_id: gold:Gp0095059
+  - record_id: biosample:SAMN05660648
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:971.19
+    taxon_id: NCBITaxon:971
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: strain
+  - record_id: biosample:SAMN05660648
+    record_type: BIOSAMPLE
+    source: GOLD
+    source_id: gold:Gp0095059
+    taxon_id: NCBITaxon:971
+    source_field: NCBI BIOSAMPLE ACCESSION
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0095059
+    source_project_id: gold:Gp0095059
+  - record_id: biosample:SAMN05660648
+    record_type: BIOSAMPLE
+    source: GOLD
+    source_id: gold:Gp0095059
+    taxon_id: NCBITaxon:971
+    source_field: NCBI BIOSAMPLE ACCESSION
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0095059
+    source_project_id: gold:Gp0095059
+  - record_id: biosample:SAMN05660648
+    record_type: BIOSAMPLE
+    source: GTDB
+    source_id: gtdb.genome:RS_GCF_900107615.1
+    taxon_id: NCBITaxon:971
+    source_field: ncbi_biosample
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN05660648
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_900107615.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:971
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: strain=DSM 2872
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN05660648
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_900107615.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:971
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: strain=DSM 2872
+    source_strain_field: infraspecific_name
+  - record_id: gold:Ga0041860
+    record_type: GOLD_ANALYSIS
+    source: GOLD
+    source_id: gold:Ga0041860
+    taxon_id: NCBITaxon:971
+    record_name: Selenomonas ruminantium lactilytica DSM 2872
+    source_field: AP GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0095059
+    source_project_id: gold:Gp0095059
+  - record_id: gold:Ga0041860
+    record_type: GOLD_ANALYSIS
+    source: GOLD
+    source_id: gold:Ga0041860
+    taxon_id: NCBITaxon:971
+    record_name: Selenomonas ruminantium lactilytica DSM 2872
+    source_field: AP GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0095059
+    source_project_id: gold:Gp0095059
+  - record_id: gold:Go0032866
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0032866
+    taxon_id: NCBITaxon:114197
+    record_name: Selenomonas ruminantium lactilytica ATCC 19205
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:ATCC-19205
+    source_strain_identifiers: ATCC 19205
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0032866
+  - record_id: gold:Go0032866
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0032866
+    taxon_id: NCBITaxon:114197
+    record_name: Selenomonas ruminantium lactilytica ATCC 19205
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:ATCC-19205
+    source_strain_identifiers: ATCC 19205
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0032866
+  - record_id: gold:Go0095059
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0095059
+    taxon_id: NCBITaxon:971
+    record_name: Selenomonas ruminantium lactilytica DSM 2872
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0095059
+  - record_id: gold:Go0095059
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0095059
+    taxon_id: NCBITaxon:971
+    record_name: Selenomonas ruminantium lactilytica DSM 2872
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0095059
+  - record_id: gold:Go0293263
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0293263
+    taxon_id: NCBITaxon:971
+    record_name: Selenomonas ruminantium JCM 6582
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:JCM-6582
+    source_strain_identifiers: JCM 6582
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0293263
+  - record_id: gold:Go0293263
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0293263
+    taxon_id: NCBITaxon:971
+    record_name: Selenomonas ruminantium JCM 6582
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:JCM-6582
+    source_strain_identifiers: JCM 6582
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0293263
+  - record_id: gold:Gp0095059
+    record_type: GOLD_PROJECT
+    source: GOLD
+    source_id: gold:Gp0095059
+    taxon_id: NCBITaxon:971
+    record_name: Selenomonas ruminantium lactilytica DSM 2872
+    source_field: PROJECT GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0095059
+    source_project_id: gold:Gp0095059
+  - record_id: gold:Gp0095059
+    record_type: GOLD_PROJECT
+    source: GOLD
+    source_id: gold:Gp0095059
+    taxon_id: NCBITaxon:971
+    record_name: Selenomonas ruminantium lactilytica DSM 2872
+    source_field: PROJECT GOLD ID
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0095059
+    source_project_id: gold:Gp0095059
+  - record_id: INSDC:AB003379
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:36898
+    taxon_id: NCBITaxon:114197
+    record_name: Selenomonas ruminantium DNA for 16S rRNA, partial sequence
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:JCM-6582
+    source_strain_identifiers: JCM 6582
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 6582
+      deposit_id: straininfo.deposit:99850
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:99850
+      sequence_type: rrnaop
+      source_bacdive_id: bacdive:17155
+      strain_doi: DOI:10.60712/SI-ID36898.3
+      strain_id: straininfo.strain:36898
+      strain_status: published online
+  - record_id: INSDC:DQ257442
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:36898
+    taxon_id: NCBITaxon:114197
+    record_name: Selenomonas ruminantium subsp. lactilytica clone Srl19205 PTP-like
+      phytase precursor (phyA) gene, complete cds
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:ATCC-19205
+    source_strain_identifiers: ATCC 19205
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: ATCC 19205
+      deposit_id: straininfo.deposit:99849
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:99849
+      sequence_type: gene
+      source_bacdive_id: bacdive:17155
+      strain_doi: DOI:10.60712/SI-ID36898.3
+      strain_id: straininfo.strain:36898
+      strain_status: published online
+  - record_id: INSDC:LC037209
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:36898
+    taxon_id: NCBITaxon:114197
+    record_name: 'Selenomonas ruminantium subsp. lactilytica gene for 16S ribosomal
+      RNA, partial sequence, strain: JCM 6582.'
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:JCM-6582
+    source_strain_identifiers: JCM 6582
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 6582
+      deposit_id: straininfo.deposit:99850
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:99850
+      sequence_type: rrnaop
+      source_bacdive_id: bacdive:17155
+      strain_doi: DOI:10.60712/SI-ID36898.3
+      strain_id: straininfo.strain:36898
+      strain_status: published online
+  - record_id: straininfo.deposit:158195
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:36898
+    taxon_id: NCBITaxon:114197
+    record_name: DSM 2872
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 2872
+      deposit_id: straininfo.deposit:158195
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:17155
+      strain_doi: DOI:10.60712/SI-ID36898.3
+      strain_id: straininfo.strain:36898
+      strain_status: published online
+  - record_id: straininfo.deposit:99849
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:36898
+    taxon_id: NCBITaxon:114197
+    record_name: ATCC 19205
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:ATCC-19205
+    source_strain_identifiers: ATCC 19205
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: ATCC 19205
+      deposit_id: straininfo.deposit:99849
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:17155
+      strain_doi: DOI:10.60712/SI-ID36898.3
+      strain_id: straininfo.strain:36898
+      strain_status: published online
+  - record_id: straininfo.deposit:99850
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:36898
+    taxon_id: NCBITaxon:114197
+    record_name: JCM 6582
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:JCM-6582
+    source_strain_identifiers: JCM 6582
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 6582
+      deposit_id: straininfo.deposit:99850
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:17155
+      strain_doi: DOI:10.60712/SI-ID36898.3
+      strain_id: straininfo.strain:36898
+      strain_status: published online
+  - record_id: straininfo.strain:36898
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:36898
+    taxon_id: NCBITaxon:114197
+    record_name: ATCC 19205
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:ATCC-19205
+    source_strain_identifiers: ATCC 19205
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: ATCC 19205
+      deposit_id: straininfo.deposit:99849
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:17155
+      strain_doi: DOI:10.60712/SI-ID36898.3
+      strain_id: straininfo.strain:36898
+      strain_status: published online
+  - record_id: straininfo.strain:36898
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:36898
+    taxon_id: NCBITaxon:114197
+    record_name: DSM 2872
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:DSM-2872
+    source_strain_identifiers: DSM 2872
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: DSM 2872
+      deposit_id: straininfo.deposit:158195
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:17155
+      strain_doi: DOI:10.60712/SI-ID36898.3
+      strain_id: straininfo.strain:36898
+      strain_status: published online
+  - record_id: straininfo.strain:36898
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:36898
+    taxon_id: NCBITaxon:114197
+    record_name: JCM 6582
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:JCM-6582
+    source_strain_identifiers: JCM 6582
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 6582
+      deposit_id: straininfo.deposit:99850
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:17155
+      strain_doi: DOI:10.60712/SI-ID36898.3
+      strain_id: straininfo.strain:36898
+      strain_status: published online
+- strain_id: kgmicrobe.strain:bacdive_165552
+  source: BACDIVE
+  source_id: bacdive:165552
+  culture_collection_ids:
+  - kgmicrobe.strain:ATCC-27209
+  - kgmicrobe.strain:JCM-7528
+  medium_count: 1
+  related_records:
+  - record_id: gold:Go0293270
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0293270
+    taxon_id: NCBITaxon:971
+    record_name: Selenomonas ruminantium ATCC 27209
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:ATCC-27209
+    source_strain_identifiers: ATCC 27209
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0293270
+  - record_id: gold:Go0293270
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0293270
+    taxon_id: NCBITaxon:971
+    record_name: Selenomonas ruminantium ATCC 27209
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:ATCC-27209
+    source_strain_identifiers: ATCC 27209
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0293270
+  - record_id: gold:Go0293272
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0293272
+    taxon_id: NCBITaxon:971
+    record_name: Selenomonas ruminantium JCM 7528
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:JCM-7528
+    source_strain_identifiers: JCM 7528
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0293272
+  - record_id: gold:Go0293272
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0293272
+    taxon_id: NCBITaxon:971
+    record_name: Selenomonas ruminantium JCM 7528
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:JCM-7528
+    source_strain_identifiers: JCM 7528
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0293272
+  - record_id: INSDC:AB558164
+    record_type: NUCLEOTIDE_SEQUENCE
+    source: STRAININFO
+    source_id: straininfo.strain:38866
+    taxon_id: NCBITaxon:114197
+    record_name: 'Selenomonas ruminantium subsp. lactilytica gene for 16S ribosomal
+      RNA, partial sequence, strain: JCM 7528.'
+    source_field: strain.sequence.accessionNumber
+    matched_strain_id: kgmicrobe.strain:JCM-7528
+    source_strain_identifiers: JCM 7528
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 7528
+      deposit_id: straininfo.deposit:182991
+      deposit_status: available
+      match_method: culture_identifier
+      sequence_deposit_id: straininfo.deposit:182991
+      sequence_type: rrnaop
+      source_bacdive_id: bacdive:165552
+      strain_doi: DOI:10.60712/SI-ID38866.2
+      strain_id: straininfo.strain:38866
+      strain_status: published online
+  - record_id: straininfo.deposit:105040
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:38866
+    taxon_id: NCBITaxon:114197
+    record_name: ATCC 27209
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:ATCC-27209
+    source_strain_identifiers: ATCC 27209
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: ATCC 27209
+      deposit_id: straininfo.deposit:105040
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:165552
+      strain_doi: DOI:10.60712/SI-ID38866.2
+      strain_id: straininfo.strain:38866
+      strain_status: published online
+  - record_id: straininfo.deposit:182991
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:38866
+    taxon_id: NCBITaxon:114197
+    record_name: JCM 7528
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:JCM-7528
+    source_strain_identifiers: JCM 7528
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 7528
+      deposit_id: straininfo.deposit:182991
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:165552
+      strain_doi: DOI:10.60712/SI-ID38866.2
+      strain_id: straininfo.strain:38866
+      strain_status: published online
+  - record_id: straininfo.strain:38866
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:38866
+    taxon_id: NCBITaxon:114197
+    record_name: ATCC 27209
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:ATCC-27209
+    source_strain_identifiers: ATCC 27209
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: ATCC 27209
+      deposit_id: straininfo.deposit:105040
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:165552
+      strain_doi: DOI:10.60712/SI-ID38866.2
+      strain_id: straininfo.strain:38866
+      strain_status: published online
+  - record_id: straininfo.strain:38866
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:38866
+    taxon_id: NCBITaxon:114197
+    record_name: JCM 7528
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:JCM-7528
+    source_strain_identifiers: JCM 7528
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: JCM 7528
+      deposit_id: straininfo.deposit:182991
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:165552
+      strain_doi: DOI:10.60712/SI-ID38866.2
+      strain_id: straininfo.strain:38866
+      strain_status: published online
 source_attestations:
 - source: NCBITAXON
   source_id: NCBITaxon:971
   source_label: Pseudoselenomonas ruminantium
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:72270
   source_label: Pseudoselenomonas ruminantium
@@ -641,7 +1556,7 @@ source_attestations:
 - source: BACDIVE
   source_id: NCBITaxon:971
   source_label: Pseudoselenomonas ruminantium
-  assertion_count: 1
+  assertion_count: 3
   assertion_unit: STRAIN
   notes: 1 strains are filed under 1 descendant NCBI taxa (see classified_as).
 - source: GOLD
@@ -657,7 +1572,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

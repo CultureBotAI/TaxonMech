@@ -27,8 +27,9 @@ COMMANDS = [
     ),
     (
         "tests",
-        [sys.executable, "-m", "pytest", "-q"],
-        "Tests cover corpus-wide invariants that per-record validation cannot see.",
+        [sys.executable, "-m", "pytest", "-q", "-m", "not qc_gate"],
+        "Tests cover corpus-wide invariants; duplicate validation, reproduction, render and report "
+        "smoke tests run as the explicit full-corpus gates below.",
     ),
     (
         "history records",

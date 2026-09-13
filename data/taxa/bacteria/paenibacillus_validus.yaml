@@ -65,11 +65,17 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 8
 synonyms:
+- synonym_text: '"Bacillus validus" Bredemann and Heigener 1935'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: Bacillus gordonae
   synonym_type: RELATED_SYNONYM
   source: LPSN
   source_id: lpsn:773721
 - synonym_text: Bacillus gordonae
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Bacillus gordonae Pichinoty et al. 1987
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Bacillus validus
@@ -77,6 +83,9 @@ synonyms:
   source: LPSN
   source_id: lpsn:773902
 - synonym_text: Bacillus validus
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Bacillus validus (ex Bredemann and Heigener 1935) Nakamura 1984
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Paenibacillus G validus
@@ -88,9 +97,13 @@ synonyms:
   source: LPSN
   source_id: lpsn:779070
 - synonym_text: Paenibacillus gordonae
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Paenibacillus validas
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Paenibacillus validus (Nakamura 1984) Ash et al. 1994 emend. Heyndrickx
+    et al. 1995
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 xrefs:
@@ -120,7 +133,7 @@ strains:
   - kgmicrobe.strain:NCIMB-12782
   - kgmicrobe.strain:NRRL-B-14484
   - kgmicrobe.strain:NRRL-NRS-1000
-  - kgmicrobe.strain:NRS-1000
+  - kgmicrobe.strain:NRS%201000
   is_type_strain: true
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_004000985
@@ -128,8 +141,27 @@ strains:
     source_id: bacdive:11488
     source_reference_id: '67770'
     assembly_level: contig
+    assembly_name: ASM400098v1 assembly for Paenibacillus validus NBRC 15382
+    taxon_id: NCBITaxon:1349783
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_004000985.1
+    source: BV_BRC
+    source_id: patric:1349783.3
     assembly_name: Paenibacillus validus NBRC 15382
     taxon_id: NCBITaxon:1349783
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-15382
+    source_strain_identifiers: NBRC 15382
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_004000985.1
+    source: BV_BRC
+    source_id: patric:1349783.3
+    assembly_name: Paenibacillus validus NBRC 15382
+    taxon_id: NCBITaxon:1349783
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-15382
+    source_strain_identifiers: NBRC:15382
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_004000985.1
     source: GOLD
     source_id: gold:Ga0667567
@@ -162,6 +194,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-15382
     source_strain_identifiers: NBRC 15382
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_004000985.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_004000985.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM400098v1
+    taxon_id: NCBITaxon:1349783
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-15382
+    source_strain_identifiers: strain=NBRC 15382
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_004000985.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_004000985.1
@@ -172,6 +215,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-15382
     source_strain_identifiers: NBRC 15382
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_004000985.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_004000985.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM400098v1
+    taxon_id: NCBITaxon:1349783
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-15382
+    source_strain_identifiers: strain=NBRC 15382
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_004000985
     source: STRAININFO
     source_id: straininfo.strain:1210
@@ -207,6 +261,15 @@ strains:
     source_strain_field: ncbi_strain_identifiers
   - genome_id: img.taxon:8117258880
     source_database: img
+    source: BACDIVE
+    source_id: bacdive:11488
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: ASM400098v1 assembly for Paenibacillus validus NBRC 15382
+    taxon_id: NCBITaxon:1349783
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:8117258880
+    source_database: img
     source: GOLD
     source_id: gold:Ga0667567
     genome_name: Paenibacillus validus NBRC 15382
@@ -233,11 +296,50 @@ strains:
     source_database: patric
     source: BACDIVE
     source_id: bacdive:11488
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '67770'
+    assembly_level: contig
+    genome_name: ASM400098v1 assembly for Paenibacillus validus NBRC 15382
+    taxon_id: NCBITaxon:1349783
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1349783.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1349783.3
     genome_name: Paenibacillus validus NBRC 15382
     taxon_id: NCBITaxon:1349783
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NBRC-15382
+    source_strain_identifiers: NBRC 15382
+    source_strain_field: strain
+  - genome_id: patric:1349783.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1349783.3
+    genome_name: Paenibacillus validus NBRC 15382
+    taxon_id: NCBITaxon:1349783
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NBRC-15382
+    source_strain_identifiers: NBRC:15382
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJDB1368
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1349783.3
+    taxon_id: NCBITaxon:1349783
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-15382
+    source_strain_identifiers: NBRC 15382
+    source_strain_field: strain
+  - record_id: bioproject:PRJDB1368
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1349783.3
+    taxon_id: NCBITaxon:1349783
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-15382
+    source_strain_identifiers: NBRC:15382
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJDB1368
     record_type: BIOPROJECT
     source: GOLD
@@ -260,6 +362,16 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0075783
     source_project_id: gold:Gp0075783
+  - record_id: bioproject:PRJDB1368
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_004000985.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1349783
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NBRC-15382
+    source_strain_identifiers: strain=NBRC 15382
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
     source: GTDB
@@ -269,6 +381,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-15382
     source_strain_identifiers: NBRC 15382
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_004000985.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1349783
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NBRC-15382
+    source_strain_identifiers: strain=NBRC 15382
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00034174
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1349783.3
+    taxon_id: NCBITaxon:1349783
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-15382
+    source_strain_identifiers: NBRC 15382
+    source_strain_field: strain
+  - record_id: biosample:SAMD00034174
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1349783.3
+    taxon_id: NCBITaxon:1349783
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-15382
+    source_strain_identifiers: NBRC:15382
+    source_strain_field: culture_collection
   - record_id: biosample:SAMD00034174
     record_type: BIOSAMPLE
     source: GOLD
@@ -300,6 +440,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-15382
     source_strain_identifiers: NBRC 15382
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMD00034174
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_004000985.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1349783
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NBRC-15382
+    source_strain_identifiers: strain=NBRC 15382
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00034174
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_004000985.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1349783
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NBRC-15382
+    source_strain_identifiers: strain=NBRC 15382
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0667567
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -1161,9 +1321,9 @@ strains:
   culture_collection_ids:
   - kgmicrobe.strain:ATCC-29948
   - kgmicrobe.strain:CCUG-28520
+  - kgmicrobe.strain:CIP%20R%201062
   - kgmicrobe.strain:CIP-103498
   - kgmicrobe.strain:CIP-106931
-  - kgmicrobe.strain:CIP-R-1062
   - kgmicrobe.strain:DSM-5395
   - kgmicrobe.strain:LMG-9817
   - kgmicrobe.strain:NCIB-12553
@@ -1695,94 +1855,6 @@ strains:
       strain_doi: DOI:10.60712/SI-ID311032.2
       strain_id: straininfo.strain:311032
       strain_status: published online
-- strain_id: kgmicrobe.strain:bacdive_145015
-  source: BACDIVE
-  source_id: bacdive:145015
-  culture_collection_ids:
-  - kgmicrobe.strain:CCUG-27416
-  - kgmicrobe.strain:NRRL-NRS-1000
-  is_type_strain: true
-  related_records:
-  - record_id: straininfo.deposit:153643
-    record_type: STRAININFO_DEPOSIT
-    source: STRAININFO
-    source_id: straininfo.strain:1210
-    taxon_id: NCBITaxon:44253
-    record_name: CCUG 27416
-    source_field: deposits.siDP
-    matched_strain_id: kgmicrobe.strain:CCUG-27416
-    source_strain_identifiers: CCUG 27416
-    source_strain_field: deposits.designation
-    straininfo_evidence:
-      bacdive_reference_conflict: true
-      deposit_designation: CCUG 27416
-      deposit_id: straininfo.deposit:153643
-      deposit_status: available
-      match_method: culture_identifier
-      source_bacdive_id: bacdive:11488
-      strain_doi: DOI:10.60712/SI-ID1210.3
-      strain_id: straininfo.strain:1210
-      strain_status: published online
-  - record_id: straininfo.deposit:683668
-    record_type: STRAININFO_DEPOSIT
-    source: STRAININFO
-    source_id: straininfo.strain:1210
-    taxon_id: NCBITaxon:44253
-    record_name: NRRL NRS-1000
-    source_field: deposits.siDP
-    matched_strain_id: kgmicrobe.strain:NRRL-NRS-1000
-    source_strain_identifiers: NRRL NRS-1000
-    source_strain_field: deposits.designation
-    straininfo_evidence:
-      bacdive_reference_conflict: true
-      deposit_designation: NRRL NRS-1000
-      deposit_id: straininfo.deposit:683668
-      deposit_status: available
-      match_method: culture_identifier
-      source_bacdive_id: bacdive:11488
-      strain_doi: DOI:10.60712/SI-ID1210.3
-      strain_id: straininfo.strain:1210
-      strain_status: published online
-  - record_id: straininfo.strain:1210
-    record_type: STRAININFO_STRAIN
-    source: STRAININFO
-    source_id: straininfo.strain:1210
-    taxon_id: NCBITaxon:44253
-    record_name: CCUG 27416
-    source_field: strain.siID
-    matched_strain_id: kgmicrobe.strain:CCUG-27416
-    source_strain_identifiers: CCUG 27416
-    source_strain_field: deposits.designation
-    straininfo_evidence:
-      bacdive_reference_conflict: true
-      deposit_designation: CCUG 27416
-      deposit_id: straininfo.deposit:153643
-      deposit_status: available
-      match_method: culture_identifier
-      source_bacdive_id: bacdive:11488
-      strain_doi: DOI:10.60712/SI-ID1210.3
-      strain_id: straininfo.strain:1210
-      strain_status: published online
-  - record_id: straininfo.strain:1210
-    record_type: STRAININFO_STRAIN
-    source: STRAININFO
-    source_id: straininfo.strain:1210
-    taxon_id: NCBITaxon:44253
-    record_name: NRRL NRS-1000
-    source_field: strain.siID
-    matched_strain_id: kgmicrobe.strain:NRRL-NRS-1000
-    source_strain_identifiers: NRRL NRS-1000
-    source_strain_field: deposits.designation
-    straininfo_evidence:
-      bacdive_reference_conflict: true
-      deposit_designation: NRRL NRS-1000
-      deposit_id: straininfo.deposit:683668
-      deposit_status: available
-      match_method: culture_identifier
-      source_bacdive_id: bacdive:11488
-      strain_doi: DOI:10.60712/SI-ID1210.3
-      strain_id: straininfo.strain:1210
-      strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_11491
   source: BACDIVE
   source_id: bacdive:11491
@@ -2044,7 +2116,7 @@ strains:
   source_id: bacdive:11493
   culture_collection_ids:
   - kgmicrobe.strain:DSM-6545
-  - kgmicrobe.strain:Tri-4
+  - kgmicrobe.strain:Tri%204
   related_records:
   - record_id: gold:Go0298291
     record_type: GOLD_ORGANISM
@@ -2107,6 +2179,53 @@ strains:
       source_bacdive_id: bacdive:135182
       strain_doi: DOI:10.60712/SI-ID8345.2
       strain_id: straininfo.strain:8345
+      strain_status: published online
+- strain_id: kgmicrobe.strain:bacdive_145015
+  source: BACDIVE
+  source_id: bacdive:145015
+  culture_collection_ids:
+  - kgmicrobe.strain:CCUG-27416
+  - kgmicrobe.strain:NRRL%20NRS%201000
+  related_records:
+  - record_id: straininfo.deposit:153643
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:1210
+    taxon_id: NCBITaxon:44253
+    record_name: CCUG 27416
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCUG-27416
+    source_strain_identifiers: CCUG 27416
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      bacdive_reference_conflict: true
+      deposit_designation: CCUG 27416
+      deposit_id: straininfo.deposit:153643
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:11488
+      strain_doi: DOI:10.60712/SI-ID1210.3
+      strain_id: straininfo.strain:1210
+      strain_status: published online
+  - record_id: straininfo.strain:1210
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:1210
+    taxon_id: NCBITaxon:44253
+    record_name: CCUG 27416
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCUG-27416
+    source_strain_identifiers: CCUG 27416
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      bacdive_reference_conflict: true
+      deposit_designation: CCUG 27416
+      deposit_id: straininfo.deposit:153643
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:11488
+      strain_doi: DOI:10.60712/SI-ID1210.3
+      strain_id: straininfo.strain:1210
       strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_11490
   source: BACDIVE
@@ -2758,6 +2877,7 @@ source_attestations:
   source_label: Paenibacillus validus
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:779104
   source_label: Paenibacillus validus
@@ -2801,7 +2921,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

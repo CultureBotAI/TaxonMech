@@ -4,11 +4,15 @@ from __future__ import annotations
 
 import base64
 import gzip
+import html as html_module
+import json
 import re
 import subprocess
 import sys
 from pathlib import Path
-from urllib.parse import unquote, urlsplit
+from urllib.parse import parse_qs, unquote, urlsplit
+
+import pytest
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
@@ -32,16 +36,19 @@ def test_seed_refuses_an_identifier_outside_scope():
     assert "not in scope" in out.stderr
 
 
+@pytest.mark.qc_gate
 def test_validate_strict_passes_on_corpus(tmp_path):
     out = _run("scripts/validate_strict.py", "--quiet", "--out", str(tmp_path / "f.tsv"))
     assert out.returncode == 0, out.stderr
 
 
+@pytest.mark.qc_gate
 def test_render_check_is_current():
     out = _run("scripts/render_pages.py", "--check")
     assert out.returncode == 0, out.stderr
 
 
+@pytest.mark.qc_gate
 def test_corpus_report_runs():
     out = _run("scripts/corpus_report.py")
     assert out.returncode == 0, out.stderr
@@ -58,23 +65,45 @@ def test_propose_scope_runs_and_proposes_only_unscoped_taxa():
     assert not set(proposed) & in_scope
 
 
-def test_rendered_site_has_no_broken_local_links(tmp_path):
+def test_rendered_site_has_no_broken_local_links():
     """Every relative href/src in the rendered site must resolve to a file in
     the output tree."""
-    out = tmp_path / "site"
-    res = _run("scripts/render_pages.py", "--out", str(out))
-    assert res.returncode == 0, res.stderr
-    broken = []
-    for html in out.rglob("*.html"):
-        text = html.read_text(encoding="utf-8")
+    # The render-reproduction test verifies generation separately. Audit the
+    # published bytes, including every deferred record and strain page.
+    from taxonmech.seed import load_scope
+
+    out = REPO_ROOT / "pages"
+    scope = set(load_scope())
+    broken, checked, seen = [], set(), set()
+
+    def check_links(html, text):
         for encoded in re.findall(r'data-gzip-content="([^"]+)"', text):
             text += gzip.decompress(base64.b64decode(encoded)).decode("utf-8")
         for m in re.finditer(r'(?:href|src)="([^"]+)"', text):
-            url = urlsplit(m.group(1))
+            url = urlsplit(html_module.unescape(m.group(1)))
             if url.scheme or url.netloc or not url.path:
                 continue
-            if not (html.parent / unquote(url.path)).resolve().is_file():
+            key = (html.parent, url.path)
+            if key not in checked and not (html.parent / unquote(url.path)).resolve().is_file():
                 broken.append(f"{html.relative_to(out)}: {m.group(1)}")
+            checked.add(key)
+            if url.path.endswith("taxon.html"):
+                identifier = parse_qs(url.query).get("id", [None])[0]
+                if identifier not in scope:
+                    broken.append(f"unpublished taxon target: {m.group(1)}")
+
+    for html in out.rglob("*.html"):
+        check_links(html, html.read_text(encoding="utf-8"))
+    for shard in sorted((out / "taxon-details").glob("*.json.gz")):
+        data = json.loads(gzip.decompress(shard.read_bytes()))
+        assert not seen.intersection(data), f"duplicate published taxon in {shard}"
+        for identifier, row in data.items():
+            assert int(identifier.split(":")[1]) // 1000 == int(shard.name.split(".")[0])
+            check_links(out / "taxon.html", row["html"])
+            for page in row["strain_pages"]:
+                check_links(out / "taxon.html", page["html"])
+        seen.update(data)
+    assert seen == scope, "published detail shards must cover the entire explicit scope"
     assert not broken, broken
 
 

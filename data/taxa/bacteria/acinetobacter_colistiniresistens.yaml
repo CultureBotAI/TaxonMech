@@ -70,14 +70,17 @@ taxonomy_mappings:
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 synonyms:
-- synonym_text: Acinetobacter genomosp. 13BJ
+- synonym_text: Acinetobacter colistiniresistens Nemec et al. 2017
   synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Acinetobacter genomosp. 13BJ
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Acinetobacter genomosp. 14
   synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Acinetobacter genomosp. 14TU
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Acinetobacter genomosp. BJ13
   synonym_type: EXACT_SYNONYM
@@ -89,6 +92,12 @@ synonyms:
   synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Acinetobacter sp. 'group 14'
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Acinetobacter sp. NIPH 1859
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Acinetobacter sp. NIPH 2036
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 xrefs:
@@ -106,7 +115,7 @@ strains:
   - kgmicrobe.strain:CIP-110478
   - kgmicrobe.strain:CNCTC-7573
   - kgmicrobe.strain:DSM-107593
-  - kgmicrobe.strain:NIPH-2036
+  - kgmicrobe.strain:NIPH%202036
   is_type_strain: true
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_000413935
@@ -114,25 +123,31 @@ strains:
     source_id: bacdive:140537
     source_reference_id: '66792'
     assembly_level: scaffold
-    assembly_name: Acinetobacter colistiniresistens NIPH 2036
+    assembly_name: Acin_sp_NIPH_2036_V1 assembly for Acinetobacter colistiniresistens
+      NIPH 2036
     taxon_id: NCBITaxon:280145
+    source_field: Sequence information.Genome sequences.INSDC accession
   genome_records:
   - genome_id: img.taxon:2565956665
     source_database: img
     source: BACDIVE
     source_id: bacdive:140537
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Acinetobacter colistiniresistens NIPH 2036
+    assembly_level: scaffold
+    genome_name: Acin_sp_NIPH_2036_V1 assembly for Acinetobacter colistiniresistens
+      NIPH 2036
     taxon_id: NCBITaxon:280145
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: patric:1217696.3
     source_database: patric
     source: BACDIVE
     source_id: bacdive:140537
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Acinetobacter sp. NIPH 2036
+    assembly_level: scaffold
+    genome_name: Acin_sp_NIPH_2036_V1 assembly for Acinetobacter colistiniresistens
+      NIPH 2036
     taxon_id: NCBITaxon:280145
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: gold:Go0621862
     record_type: GOLD_ORGANISM
@@ -367,15 +382,16 @@ strains:
   - kgmicrobe.strain:CIP-64.2
   - kgmicrobe.strain:CNCTC-7582
   - kgmicrobe.strain:NCTC-10304
-  - kgmicrobe.strain:NIPH-1860
+  - kgmicrobe.strain:NIPH%201860
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_000248215
     source: BACDIVE
     source_id: bacdive:141331
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Acinetobacter genomosp. 13 NCTC 10304
+    assembly_name: ASM24821v2 assembly for Acinetobacter genomosp. 13 NCTC 10304
     taxon_id: NCBITaxon:72607
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_000248215
     source: GOLD
     source_id: gold:Ga0019807
@@ -399,6 +415,15 @@ strains:
     source_organism_id: gold:Go0009935
     source_project_id: gold:Gp0009935
   - assembly_id: ncbi.assembly:GCA_000248215.2
+    source: BV_BRC
+    source_id: patric:981224.3
+    assembly_name: Acinetobacter sp. NCTC 10304
+    taxon_id: NCBITaxon:72607
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10304
+    source_strain_identifiers: NCTC 10304
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_000248215.2
     source: GTDB
     source_id: gtdb.genome:GB_GCA_000248215.2
     assembly_level: Contig
@@ -418,13 +443,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:NCTC-10304
     source_strain_identifiers: NCTC 10304
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_000248215.2
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000248215.2
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM24821v2
+    taxon_id: NCBITaxon:72607
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10304
+    source_strain_identifiers: strain=NCTC 10304
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_000369645
     source: BACDIVE
     source_id: bacdive:141331
     source_reference_id: '66792'
     assembly_level: scaffold
+    assembly_name: Acin_sp_CIP_64_2_V1 assembly for Acinetobacter sp. CIP 64.2
+    taxon_id: NCBITaxon:1217694
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_000369645.1
+    source: BV_BRC
+    source_id: patric:1217694.3
     assembly_name: Acinetobacter sp. CIP 64.2
     taxon_id: NCBITaxon:1217694
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:CIP-64.2
+    source_strain_identifiers: CIP 64.2
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_000369645.1
     source: GOLD
     source_id: gold:Ga0032018
@@ -446,6 +492,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:CIP-64.2
     source_strain_identifiers: CIP 64.2
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_000369645.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000369645.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: Acin_sp_CIP_64_2_V1
+    taxon_id: NCBITaxon:1217694
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:CIP-64.2
+    source_strain_identifiers: strain=CIP 64.2
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_000369645.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_000369645.1
@@ -456,6 +513,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:CIP-64.2
     source_strain_identifiers: CIP 64.2
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_000369645.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000369645.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: Acin_sp_CIP_64_2_V1
+    taxon_id: NCBITaxon:1217694
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:CIP-64.2
+    source_strain_identifiers: strain=CIP 64.2
+    source_strain_field: infraspecific_name
   genome_records:
   - genome_id: gtdb.genome:GB_GCA_000248215.2
     source_database: gtdb
@@ -484,9 +552,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:141331
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Acinetobacter sp. Hugh 2212, NCTC 10304
-    taxon_id: NCBITaxon:981224
+    assembly_level: contig
+    genome_name: ASM24821v2 assembly for Acinetobacter genomosp. 13 NCTC 10304
+    taxon_id: NCBITaxon:72607
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2547132309
     source_database: img
     source: GOLD
@@ -516,9 +585,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:141331
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Acinetobacter sp. CIP 64.2
+    assembly_level: scaffold
+    genome_name: Acin_sp_CIP_64_2_V1 assembly for Acinetobacter sp. CIP 64.2
     taxon_id: NCBITaxon:1217694
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2565956660
     source_database: img
     source: GOLD
@@ -536,17 +606,39 @@ strains:
     source: BACDIVE
     source_id: bacdive:141331
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: scaffold
+    genome_name: Acin_sp_CIP_64_2_V1 assembly for Acinetobacter sp. CIP 64.2
+    taxon_id: NCBITaxon:1217694
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1217694.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1217694.3
     genome_name: Acinetobacter sp. CIP 64.2
     taxon_id: NCBITaxon:1217694
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:CIP-64.2
+    source_strain_identifiers: CIP 64.2
+    source_strain_field: strain
   - genome_id: patric:981224.3
     source_database: patric
     source: BACDIVE
     source_id: bacdive:141331
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM24821v2 assembly for Acinetobacter genomosp. 13 NCTC 10304
+    taxon_id: NCBITaxon:72607
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:981224.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:981224.3
     genome_name: Acinetobacter sp. NCTC 10304
     taxon_id: NCBITaxon:72607
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-10304
+    source_strain_identifiers: NCTC 10304
+    source_strain_field: strain
   - genome_id: atb.assembly:202505.SAMN01087858
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -567,6 +659,15 @@ strains:
       - matched_strain_id: kgmicrobe.strain:CIP-64.2
         record_id: biosample:SAMN01087858
         record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1217694.3
+        source_strain_field: strain
+        source_strain_identifiers: CIP 64.2
+        taxon_id: NCBITaxon:1217694
+      - matched_strain_id: kgmicrobe.strain:CIP-64.2
+        record_id: biosample:SAMN01087858
+        record_type: BIOSAMPLE
         source: GOLD
         source_field: NCBI BIOSAMPLE ACCESSION
         source_id: gold:Gp0034238
@@ -584,9 +685,38 @@ strains:
         source_strain_field: ncbi_strain_identifiers
         source_strain_identifiers: CIP 64.2
         taxon_id: NCBITaxon:1217694
+      - matched_strain_id: kgmicrobe.strain:CIP-64.2
+        record_id: biosample:SAMN01087858
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_000369645.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=CIP 64.2
+        taxon_id: NCBITaxon:1217694
+      - matched_strain_id: kgmicrobe.strain:CIP-64.2
+        record_id: biosample:SAMN01087858
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCF_000369645.1
+        source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=CIP 64.2
+        taxon_id: NCBITaxon:1217694
       ena_analysis_id: ena.analysis:ERZ3636629
       sylph_species: Acinetobacter sp000369645
   related_records:
+  - record_id: bioproject:PRJNA183233
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1217694.3
+    taxon_id: NCBITaxon:1217694
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:CIP-64.2
+    source_strain_identifiers: CIP 64.2
+    source_strain_field: strain
   - record_id: bioproject:PRJNA183233
     record_type: BIOPROJECT
     source: GOLD
@@ -598,6 +728,16 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0034238
     source_project_id: gold:Gp0034238
+  - record_id: bioproject:PRJNA183233
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000369645.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1217694
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:CIP-64.2
+    source_strain_identifiers: strain=CIP 64.2
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
     source: GTDB
@@ -607,6 +747,25 @@ strains:
     matched_strain_id: kgmicrobe.strain:CIP-64.2
     source_strain_identifiers: CIP 64.2
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000369645.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1217694
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:CIP-64.2
+    source_strain_identifiers: strain=CIP 64.2
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA62435
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:981224.3
+    taxon_id: NCBITaxon:72607
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10304
+    source_strain_identifiers: NCTC 10304
+    source_strain_field: strain
   - record_id: bioproject:PRJNA62435
     record_type: BIOPROJECT
     source: GOLD
@@ -638,6 +797,25 @@ strains:
     matched_strain_id: kgmicrobe.strain:NCTC-10304
     source_strain_identifiers: NCTC 10304
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA62435
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000248215.2
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:72607
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NCTC-10304
+    source_strain_identifiers: strain=NCTC 10304
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN01087858
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1217694.3
+    taxon_id: NCBITaxon:1217694
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:CIP-64.2
+    source_strain_identifiers: CIP 64.2
+    source_strain_field: strain
   - record_id: biosample:SAMN01087858
     record_type: BIOSAMPLE
     source: GOLD
@@ -658,6 +836,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:CIP-64.2
     source_strain_identifiers: CIP 64.2
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN01087858
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000369645.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1217694
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:CIP-64.2
+    source_strain_identifiers: strain=CIP 64.2
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN01087858
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000369645.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1217694
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:CIP-64.2
+    source_strain_identifiers: strain=CIP 64.2
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02471591
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:981224.3
+    taxon_id: NCBITaxon:72607
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10304
+    source_strain_identifiers: NCTC 10304
+    source_strain_field: strain
   - record_id: biosample:SAMN02471591
     record_type: BIOSAMPLE
     source: GOLD
@@ -689,6 +896,16 @@ strains:
     matched_strain_id: kgmicrobe.strain:NCTC-10304
     source_strain_identifiers: NCTC 10304
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN02471591
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000248215.2
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:72607
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NCTC-10304
+    source_strain_identifiers: strain=NCTC 10304
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0019807
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -1035,36 +1252,61 @@ strains:
   source: BACDIVE
   source_id: bacdive:138442
   culture_collection_ids:
+  - kgmicrobe.strain:CCUG-26389
   - kgmicrobe.strain:CIP-110477
   - kgmicrobe.strain:CNCTC-7581
   - kgmicrobe.strain:LMG-10627
-  - kgmicrobe.strain:NIPH-1859
+  - kgmicrobe.strain:NIPH%201859
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_000369765
     source: BACDIVE
     source_id: bacdive:138442
     source_reference_id: '66792'
     assembly_level: scaffold
-    assembly_name: Acinetobacter colistiniresistens NIPH 1859
+    assembly_name: Acin_sp_NIPH_1859_V1 assembly for Acinetobacter colistiniresistens
+      NIPH 1859
     taxon_id: NCBITaxon:280145
+    source_field: Sequence information.Genome sequences.INSDC accession
   genome_records:
   - genome_id: img.taxon:2565956648
     source_database: img
     source: BACDIVE
     source_id: bacdive:138442
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Acinetobacter colistiniresistens NIPH 1859
+    assembly_level: scaffold
+    genome_name: Acin_sp_NIPH_1859_V1 assembly for Acinetobacter colistiniresistens
+      NIPH 1859
     taxon_id: NCBITaxon:280145
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: patric:1217695.3
     source_database: patric
     source: BACDIVE
     source_id: bacdive:138442
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Acinetobacter sp. NIPH 1859
+    assembly_level: scaffold
+    genome_name: Acin_sp_NIPH_1859_V1 assembly for Acinetobacter colistiniresistens
+      NIPH 1859
     taxon_id: NCBITaxon:280145
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
+  - record_id: straininfo.deposit:126283
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:51040
+    record_name: CCUG 26389
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCUG-26389
+    source_strain_identifiers: CCUG 26389
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 26389
+      deposit_id: straininfo.deposit:126283
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:138442
+      strain_doi: DOI:10.60712/SI-ID51040.2
+      strain_id: straininfo.strain:51040
+      strain_status: published online
   - record_id: straininfo.deposit:1527
     record_type: STRAININFO_DEPOSIT
     source: STRAININFO
@@ -1103,12 +1345,31 @@ strains:
       strain_doi: DOI:10.60712/SI-ID286.2
       strain_id: straininfo.strain:286
       strain_status: published online
+  - record_id: straininfo.strain:51040
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:51040
+    record_name: CCUG 26389
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCUG-26389
+    source_strain_identifiers: CCUG 26389
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 26389
+      deposit_id: straininfo.deposit:126283
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:138442
+      strain_doi: DOI:10.60712/SI-ID51040.2
+      strain_id: straininfo.strain:51040
+      strain_status: published online
 source_attestations:
 - source: NCBITAXON
   source_id: NCBITaxon:280145
   source_label: Acinetobacter colistiniresistens
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:795535
   source_label: Acinetobacter colistiniresistens
@@ -1143,7 +1404,7 @@ source_attestations:
   assertion_count: 11
   assertion_unit: TRAIT_ASSERTION
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

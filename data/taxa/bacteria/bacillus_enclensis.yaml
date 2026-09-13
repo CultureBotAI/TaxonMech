@@ -41,9 +41,15 @@ taxonomy_mappings:
   genome_count: 9
 synonyms:
 - synonym_text: '"Rossellomorea enclensis" (Dastager et al. 2014) Gupta et al. 2020'
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Bacillus enclensis
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Bacillus enclensis Dastager et al. 2014
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Bacillus sp. SGD-1123
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Rossellomorea enclensis
@@ -60,7 +66,7 @@ strains:
   source_id: bacdive:167659
   designation: SGD-1123
   culture_collection_ids:
-  - kgmicrobe.strain:CCTCC-AB-2011125
+  - kgmicrobe.strain:CCTCC-AB%202011125
   - kgmicrobe.strain:NCIM-5450
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_001456935
@@ -68,30 +74,102 @@ strains:
     source_id: bacdive:167659
     source_reference_id: '66792'
     assembly_level: scaffold
-    assembly_name: '[Bacillus] enclensis SGD-1123'
+    assembly_name: ASM145693v1 assembly for [Bacillus] enclensis SGD-1123
     taxon_id: NCBITaxon:1402860
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_900094975
     source: BACDIVE
     source_id: bacdive:167659
     source_reference_id: '66792'
     assembly_level: scaffold
-    assembly_name: '[Bacillus] enclensis SGD-1123'
+    assembly_name: IMG-taxon 2617270721 annotated assembly for [Bacillus] enclensis
+      SGD-1123
     taxon_id: NCBITaxon:1402860
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCF_001456935.1
+    source: BV_BRC
+    source_id: patric:1402860.4
+    assembly_name: Bacillus enclensis strain SGD-1123
+    taxon_id: NCBITaxon:1402860
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCIM-5450
+    source_strain_identifiers: NCIM:5450
+    source_strain_field: culture_collection
   genome_records:
+  - genome_id: img.taxon:2617270721
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:167659
+    source_reference_id: '66792'
+    assembly_level: scaffold
+    genome_name: IMG-taxon 2617270721 annotated assembly for [Bacillus] enclensis
+      SGD-1123
+    taxon_id: NCBITaxon:1402860
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:2802429285
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:167659
+    source_reference_id: '66792'
+    assembly_level: scaffold
+    genome_name: ASM145693v1 assembly for [Bacillus] enclensis SGD-1123
+    taxon_id: NCBITaxon:1402860
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: patric:1402860.4
     source_database: patric
     source: BACDIVE
     source_id: bacdive:167659
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: scaffold
+    genome_name: ASM145693v1 assembly for [Bacillus] enclensis SGD-1123
+    taxon_id: NCBITaxon:1402860
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1402860.4
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1402860.4
     genome_name: Bacillus enclensis strain SGD-1123
     taxon_id: NCBITaxon:1402860
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCIM-5450
+    source_strain_identifiers: NCIM:5450
+    source_strain_field: culture_collection
+  - genome_id: patric:1402860.6
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:167659
+    source_reference_id: '66792'
+    assembly_level: scaffold
+    genome_name: IMG-taxon 2617270721 annotated assembly for [Bacillus] enclensis
+      SGD-1123
+    taxon_id: NCBITaxon:1402860
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  related_records:
+  - record_id: bioproject:PRJNA302096
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1402860.4
+    taxon_id: NCBITaxon:1402860
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCIM-5450
+    source_strain_identifiers: NCIM:5450
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN04263896
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1402860.4
+    taxon_id: NCBITaxon:1402860
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCIM-5450
+    source_strain_identifiers: NCIM:5450
+    source_strain_field: culture_collection
 source_attestations:
 - source: NCBITAXON
   source_id: NCBITaxon:1402860
   source_label: '[Bacillus] enclensis'
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: GTDB
   source_id: GTDB:s__Rossellomorea_enclensis
   source_label: s__Rossellomorea_enclensis
@@ -109,7 +187,7 @@ source_attestations:
   assertion_count: 1
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

@@ -106,7 +106,7 @@ def test_browser_retains_eligible_unlisted_strains_exact_metadata_and_source_cha
     assert set(first["metadata"]) == set(ASSEMBLY_COLUMNS)
     assert first["strains"][0]["sample_evidence"] == [SAMPLE]
     assert first["strains"][0]["taxon_pages"][0]["page"] == (
-        "taxa/bacteria/fixture.html#strains-kgmicrobe.strain-bacdive_1")
+        "taxon.html?id=NCBITaxon:1#strains-kgmicrobe.strain-bacdive_1")
     assert other["strains"][0]["taxon_pages"] == []
     assert other["strains"][0]["source_id"] == "bacdive:2"
     assert other["metadata"]["assembly_accession"] == "NA"
@@ -143,13 +143,14 @@ def test_taxon_and_atb_pages_expose_safe_native_links_and_original_sample_eviden
     evidence["archive_url"] = 'javascript:alert("archive")'
     output = tmp_path / "site"
     renderer.render(output)
-    html = (output / "taxa/bacteria/fixture.html").read_text()
+    from tests.rendered_taxon import rendered_taxon
+    html = rendered_taxon(output, doc["identifier"])
     parsed = _StrainTableParser(SID)
     parsed.feed(html)
     ncbi, other, _related = parsed.cells[-3:]
     assert parsed.headers.index("NCBI genome assemblies") < parsed.headers.index("Other genome records")
     assert "No NCBI assembly link imported" in ncbi["text"]
-    assert "../../atb.html#" + ATB in other["hrefs"]
+    assert "atb.html#" + ATB in other["hrefs"]
     assert "https://example.org/1.fa.gz" in other["hrefs"]
     assert "https://www.ebi.ac.uk/ena/browser/view/ERZ1" in other["hrefs"]
     assert "https://gold.jgi.doe.gov/project?id=Gp1" in other["hrefs"]

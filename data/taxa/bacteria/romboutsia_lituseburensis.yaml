@@ -72,11 +72,18 @@ taxonomy_mappings:
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 synonyms:
+- synonym_text: '"Inflabilis litus-eburense" Laplanche and Saissac in Prevot 1948'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: Clostridium lituseburense
   synonym_type: RELATED_SYNONYM
   source: LPSN
   source_id: lpsn:774920
 - synonym_text: Inflabilis litus-eburense
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Romboutsia lituseburensis (Laplanche and Saissac 1948) Gerritsen et
+    al. 2014
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 xrefs:
@@ -96,7 +103,7 @@ strains:
   - kgmicrobe.strain:DSM-797
   - kgmicrobe.strain:JCM-1404
   - kgmicrobe.strain:NCIMB-10637
-  - kgmicrobe.strain:VPI-2751
+  - kgmicrobe.strain:VPI%202751
   - kgmicrobe.strain:VTT-E-021853
   is_type_strain: true
   genome_assemblies:
@@ -105,15 +112,46 @@ strains:
     source_id: bacdive:2614
     source_reference_id: '66792'
     assembly_level: scaffold
-    assembly_name: Romboutsia lituseburensis A25K
+    assembly_name: Romboutsia_lituseburensis_assembly1 assembly for Romboutsia lituseburensis
+      A25K
     taxon_id: NCBITaxon:1537
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900002825.1
+    source: BV_BRC
+    source_id: patric:1537.3
+    assembly_name: Romboutsia lituseburensis strain A25K
+    taxon_id: NCBITaxon:1537
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-797
+    source_strain_identifiers: DSM:797
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_900103615
     source: BACDIVE
     source_id: bacdive:2614
     source_reference_id: '67770'
     assembly_level: scaffold
+    assembly_name: IMG-taxon 2634166902 annotated assembly for Romboutsia lituseburensis
+      DSM 797
+    taxon_id: NCBITaxon:1121325
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900103615.1
+    source: BV_BRC
+    source_id: patric:1121325.3
     assembly_name: Romboutsia lituseburensis DSM 797
     taxon_id: NCBITaxon:1121325
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-797
+    source_strain_identifiers: DSM 797
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_900103615.1
+    source: BV_BRC
+    source_id: patric:1121325.3
+    assembly_name: Romboutsia lituseburensis DSM 797
+    taxon_id: NCBITaxon:1121325
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-797
+    source_strain_identifiers: DSM 797
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_900103615.1
     source: GOLD
     source_id: gold:Ga0074814
@@ -146,6 +184,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-797
     source_strain_identifiers: DSM 797
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_900103615.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_900103615.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: IMG-taxon 2634166902 annotated assembly
+    taxon_id: NCBITaxon:1121325
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-797
+    source_strain_identifiers: strain=DSM 797
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_900103615.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_900103615.1
@@ -156,6 +205,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-797
     source_strain_identifiers: DSM 797
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_900103615.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_900103615.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: IMG-taxon 2634166902 annotated assembly
+    taxon_id: NCBITaxon:1121325
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-797
+    source_strain_identifiers: strain=DSM 797
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_900103615
     source: STRAININFO
     source_id: straininfo.strain:38658
@@ -193,10 +253,12 @@ strains:
     source_database: img
     source: BACDIVE
     source_id: bacdive:2614
-    source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Romboutsia lituseburensis DSM 797
+    source_reference_id: '67770'
+    assembly_level: scaffold
+    genome_name: IMG-taxon 2634166902 annotated assembly for Romboutsia lituseburensis
+      DSM 797
     taxon_id: NCBITaxon:1121325
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2634166902
     source_database: img
     source: GOLD
@@ -225,18 +287,52 @@ strains:
     source_database: patric
     source: BACDIVE
     source_id: bacdive:2614
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '67770'
+    assembly_level: scaffold
+    genome_name: IMG-taxon 2634166902 annotated assembly for Romboutsia lituseburensis
+      DSM 797
+    taxon_id: NCBITaxon:1121325
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1121325.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1121325.3
     genome_name: Romboutsia lituseburensis DSM 797
     taxon_id: NCBITaxon:1121325
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-797
+    source_strain_identifiers: DSM 797
+    source_strain_field: culture_collection
+  - genome_id: patric:1121325.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1121325.3
+    genome_name: Romboutsia lituseburensis DSM 797
+    taxon_id: NCBITaxon:1121325
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-797
+    source_strain_identifiers: DSM 797
+    source_strain_field: strain
   - genome_id: patric:1537.3
     source_database: patric
     source: BACDIVE
     source_id: bacdive:2614
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: scaffold
+    genome_name: Romboutsia_lituseburensis_assembly1 assembly for Romboutsia lituseburensis
+      A25K
+    taxon_id: NCBITaxon:1537
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1537.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1537.3
     genome_name: Romboutsia lituseburensis strain A25K
     taxon_id: NCBITaxon:1537
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-797
+    source_strain_identifiers: DSM:797
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN04515677
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -254,6 +350,24 @@ strains:
       archive_url: https://osf.io/download/66717cf86b6c8e344b04cb98/
       archive_filename: atb.assembly.r0.2.batch.135.tar.xz
       sample_links:
+      - matched_strain_id: kgmicrobe.strain:DSM-797
+        record_id: biosample:SAMN04515677
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1121325.3
+        source_strain_field: culture_collection
+        source_strain_identifiers: DSM 797
+        taxon_id: NCBITaxon:1121325
+      - matched_strain_id: kgmicrobe.strain:DSM-797
+        record_id: biosample:SAMN04515677
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1121325.3
+        source_strain_field: strain
+        source_strain_identifiers: DSM 797
+        taxon_id: NCBITaxon:1121325
       - matched_strain_id: kgmicrobe.strain:DSM-797
         record_id: biosample:SAMN04515677
         record_type: BIOSAMPLE
@@ -285,9 +399,66 @@ strains:
         source_strain_field: ncbi_strain_identifiers
         source_strain_identifiers: DSM 797
         taxon_id: NCBITaxon:1121325
+      - matched_strain_id: kgmicrobe.strain:DSM-797
+        record_id: biosample:SAMN04515677
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_900103615.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=DSM 797
+        taxon_id: NCBITaxon:1121325
+      - matched_strain_id: kgmicrobe.strain:DSM-797
+        record_id: biosample:SAMN04515677
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCF_900103615.1
+        source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=DSM 797
+        taxon_id: NCBITaxon:1121325
       ena_analysis_id: ena.analysis:ERZ26859257
       sylph_species: Romboutsia_D lituseburensis
   related_records:
+  - record_id: bioproject:PRJEB16174
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1121325.3
+    taxon_id: NCBITaxon:1121325
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-797
+    source_strain_identifiers: DSM 797
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJEB16174
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1121325.3
+    taxon_id: NCBITaxon:1121325
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-797
+    source_strain_identifiers: DSM 797
+    source_strain_field: strain
+  - record_id: bioproject:PRJEB16174
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_900103615.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1121325
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-797
+    source_strain_identifiers: strain=DSM 797
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJEB7306
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1537.3
+    taxon_id: NCBITaxon:1537
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-797
+    source_strain_identifiers: DSM:797
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
     source: GTDB
@@ -297,6 +468,16 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-797
     source_strain_identifiers: DSM 797
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_900103615.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1121325
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-797
+    source_strain_identifiers: strain=DSM 797
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA311470
     record_type: BIOPROJECT
     source: GOLD
@@ -319,6 +500,33 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0013563
     source_project_id: gold:Gp0117025
+  - record_id: biosample:SAMEA2775047
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1537.3
+    taxon_id: NCBITaxon:1537
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-797
+    source_strain_identifiers: DSM:797
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN04515677
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1121325.3
+    taxon_id: NCBITaxon:1121325
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-797
+    source_strain_identifiers: DSM 797
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN04515677
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1121325.3
+    taxon_id: NCBITaxon:1121325
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-797
+    source_strain_identifiers: DSM 797
+    source_strain_field: strain
   - record_id: biosample:SAMN04515677
     record_type: BIOSAMPLE
     source: GOLD
@@ -350,6 +558,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-797
     source_strain_identifiers: DSM 797
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN04515677
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_900103615.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1121325
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-797
+    source_strain_identifiers: strain=DSM 797
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN04515677
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_900103615.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1121325
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-797
+    source_strain_identifiers: strain=DSM 797
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0074814
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -921,6 +1149,7 @@ source_attestations:
   source_label: Romboutsia lituseburensis
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:791846
   source_label: Romboutsia lituseburensis
@@ -953,7 +1182,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

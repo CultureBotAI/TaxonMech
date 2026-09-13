@@ -66,18 +66,32 @@ taxonomy_mappings:
   genome_count: 4
   notes: LPSN links this GTDB species to the taxon's name.
 synonyms:
-- synonym_text: Bacillus histolyticus
+- synonym_text: '"Bacillus histolyticus" Weinberg and Seguin 1916'
   synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Weinbergillus histolyticus" (Weinberg and Seguin 1916) Heller 1922'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Bacillus histolyticus
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Clostridium histolyticum
   synonym_type: RELATED_SYNONYM
   source: LPSN
   source_id: lpsn:774896
 - synonym_text: Clostridium histolyticum
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Clostridium histolyticum (Weinberg and Seguin 1916) Bergey et al.
+    1923 (Approved Lists 1980)
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Hathewaya histolytica (Weinberg and Seguin 1916) Lawson and Rainey
+    2016
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Weinbergillus histolyticus
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 xrefs:
 - GTDB:s__Hathewaya_histolytica
@@ -95,7 +109,7 @@ strains:
   - kgmicrobe.strain:CCUG-4854
   - kgmicrobe.strain:CECT-4109
   - kgmicrobe.strain:CIP-103713
-  - kgmicrobe.strain:CN-1693
+  - kgmicrobe.strain:CN%201693
   - kgmicrobe.strain:DSM-2158
   - kgmicrobe.strain:JCM-1403
   - kgmicrobe.strain:KCTC-5010
@@ -108,8 +122,18 @@ strains:
     source_id: bacdive:2601
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Hathewaya histolytica NCTC503
+    assembly_name: 45532_E01 assembly for Hathewaya histolytica NCTC503
     taxon_id: NCBITaxon:1498
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_901482605.1
+    source: BV_BRC
+    source_id: patric:1498.4
+    assembly_name: Hathewaya histolytica strain NCTC503
+    taxon_id: NCBITaxon:1498
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-503
+    source_strain_identifiers: NCTC:503
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_901482605.1
     source: GOLD
     source_id: gold:Ga0490804
@@ -145,6 +169,15 @@ strains:
   genome_records:
   - genome_id: img.taxon:2989142138
     source_database: img
+    source: BACDIVE
+    source_id: bacdive:2601
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: 45532_E01 assembly for Hathewaya histolytica NCTC503
+    taxon_id: NCBITaxon:1498
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:2989142138
+    source_database: img
     source: GOLD
     source_id: gold:Ga0490804
     genome_name: Hathewaya histolytica NCTC503
@@ -161,9 +194,29 @@ strains:
     source_id: bacdive:2601
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: 45532_E01 assembly for Hathewaya histolytica NCTC503
+    taxon_id: NCBITaxon:1498
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1498.4
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1498.4
     genome_name: Hathewaya histolytica strain NCTC503
     taxon_id: NCBITaxon:1498
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-503
+    source_strain_identifiers: NCTC:503
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1498.4
+    taxon_id: NCBITaxon:1498
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-503
+    source_strain_identifiers: NCTC:503
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
     source: GOLD
@@ -175,6 +228,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0575863
     source_project_id: gold:Gp0550596
+  - record_id: biosample:SAMEA3919786
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1498.4
+    taxon_id: NCBITaxon:1498
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-503
+    source_strain_identifiers: NCTC:503
+    source_strain_field: culture_collection
   - record_id: biosample:SAMEA3919786
     record_type: BIOSAMPLE
     source: GOLD
@@ -1343,6 +1405,7 @@ source_attestations:
   source_label: Hathewaya histolytica
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:793805
   source_label: Hathewaya histolytica
@@ -1381,7 +1444,7 @@ source_attestations:
   assertion_count: 9
   assertion_unit: TRAIT_ASSERTION
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

@@ -10,7 +10,7 @@ root. One YAML per record.
 | Names | `TaxonSynonym` | Alternate names with scope (`SynonymTypeEnum`) and source (NCBITaxon, LPSN, GTDB) |
 | Nomenclature | `NomenclatureEntry` | One per LPSN name: authority, verbatim status, `validly_published` / `legitimate` / `is_correct_name`, `type_strain_designations`, `publications`, `sequence_accessions` |
 | Mappings | `TaxonomyMapping` | A GTDB species mapped here, with `mapping_predicate` (from the source taxon's side) and `genome_count` |
-| Strains | `StrainEntry` | BacDive strain id, designation, `culture_collection_ids`, `is_type_strain`, `medium_count`, `genome_assemblies`, `genome_records`, `related_records`; capped at 200 per record, `strain_count` gives the total |
+| Strains | `StrainEntry` | BacDive strain id, designation, `culture_collection_ids`, `is_type_strain`, `medium_count`, `genome_assemblies`, `genome_records`, `related_records`; all classified strains retained, `strain_count` gives the total; the site pages tables by 200 |
 | NCBI assembly links (primary) | `GenomeAssemblyLink` | `assembly_id` (GCA/GCF, supplied version preserved), required `source` and `source_id`; optional `source_reference_id`, `assembly_name`, `assembly_level`, `taxon_id` as asserted by the source |
 | Other genome-record links | `GenomeRecordLink` | `genome_id` (`patric:<digits>.<digits>`, `img.taxon:<digits>`, `gtdb.genome:RS_GCF_…` / `gtdb.genome:GB_GCA_…` or `atb.assembly:202505.SAM…`), required `source_database`, `source` and `source_id`; optional `source_reference_id`, `genome_name`, `assembly_level`, `taxon_id` as asserted by the source |
 | Related records | `GenomeRelatedRecordLink` | `record_id`, `record_type` (`BIOSAMPLE`, `BIOPROJECT`, `GOLD_ORGANISM`, `GOLD_PROJECT`, `GOLD_ANALYSIS`, `STRAININFO_STRAIN`, `STRAININFO_DEPOSIT` or `NUCLEOTIDE_SEQUENCE`), source provenance, optional `record_name` and `taxon_id`; these are excluded from genome counts |
@@ -73,7 +73,7 @@ may include aliases or unsupported formats that are retained but not joined.
 
 NCBI assemblies remain the primary links. The uncapped crosswalks are
 `data/raw/strain_assemblies.tsv` and `data/raw/strain_genome_records.tsv`,
-including strains beyond record listing caps. A shared strain or source
+including strains outside the taxon scope. A shared strain or source
 record does not establish equivalence between genome identifiers.
 
 `related_records` uses `biosample:`, `bioproject:`, `gold:Go…`, `gold:Gp…` and

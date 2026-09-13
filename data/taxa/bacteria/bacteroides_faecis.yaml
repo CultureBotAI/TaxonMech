@@ -82,6 +82,13 @@ taxonomy_mappings:
   genome_count: 4
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
+synonyms:
+- synonym_text: Bacteroides faecis Kim et al. 2010
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Bacteroides sp. MAJ26
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Bacteroides_faecis
 - lpsn:788868
@@ -105,8 +112,9 @@ strains:
     source_id: bacdive:1631
     source_reference_id: '67771'
     assembly_level: contig
-    assembly_name: Bacteroides faecis MAJ27
+    assembly_name: ASM22613v2 assembly for Bacteroides faecis MAJ27
     taxon_id: NCBITaxon:1077285
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_000226135
     source: GOLD
     source_id: gold:Ga0020292
@@ -123,8 +131,19 @@ strains:
     source_id: bacdive:1631
     source_reference_id: '67771'
     assembly_level: scaffold
+    assembly_name: IMG-taxon 2693429916 annotated assembly for Bacteroides faecis
+      MAJ27
+    taxon_id: NCBITaxon:1077285
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900106755.1
+    source: BV_BRC
+    source_id: patric:1077285.5
     assembly_name: Bacteroides faecis MAJ27
     taxon_id: NCBITaxon:1077285
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-24798
+    source_strain_identifiers: DSM 24798
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_900106755.1
     source: GOLD
     source_id: gold:Ga0131244
@@ -141,10 +160,11 @@ strains:
     source_database: img
     source: BACDIVE
     source_id: bacdive:1631
-    source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Bacteroides faecis MAJ27
+    source_reference_id: '67771'
+    assembly_level: contig
+    genome_name: ASM22613v2 assembly for Bacteroides faecis MAJ27
     taxon_id: NCBITaxon:1077285
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2548876788
     source_database: img
     source: GOLD
@@ -161,10 +181,11 @@ strains:
     source_database: img
     source: BACDIVE
     source_id: bacdive:1631
-    source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Bacteroides faecis DSM 24798
+    source_reference_id: '67771'
+    assembly_level: scaffold
+    genome_name: IMG-taxon 2693429916 annotated assembly for Bacteroides faecis MAJ27
     taxon_id: NCBITaxon:1077285
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2693429916
     source_database: img
     source: GOLD
@@ -181,18 +202,30 @@ strains:
     source_database: patric
     source: BACDIVE
     source_id: bacdive:1631
-    source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Bacteroides faecis MAJ27
+    source_reference_id: '67771'
+    assembly_level: contig
+    genome_name: ASM22613v2 assembly for Bacteroides faecis MAJ27
     taxon_id: NCBITaxon:1077285
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   - genome_id: patric:1077285.5
     source_database: patric
     source: BACDIVE
     source_id: bacdive:1631
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source_reference_id: '67771'
+    assembly_level: scaffold
+    genome_name: IMG-taxon 2693429916 annotated assembly for Bacteroides faecis MAJ27
+    taxon_id: NCBITaxon:1077285
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1077285.5
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1077285.5
     genome_name: Bacteroides faecis MAJ27
     taxon_id: NCBITaxon:1077285
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-24798
+    source_strain_identifiers: DSM 24798
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN05444400
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -213,6 +246,15 @@ strains:
       - matched_strain_id: kgmicrobe.strain:DSM-24798
         record_id: biosample:SAMN05444400
         record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1077285.5
+        source_strain_field: culture_collection
+        source_strain_identifiers: DSM 24798
+        taxon_id: NCBITaxon:1077285
+      - matched_strain_id: kgmicrobe.strain:DSM-24798
+        record_id: biosample:SAMN05444400
+        record_type: BIOSAMPLE
         source: GOLD
         source_field: NCBI BIOSAMPLE ACCESSION
         source_id: gold:Gp0148789
@@ -224,6 +266,15 @@ strains:
       ena_analysis_id: ena.analysis:ERZ26862019
       sylph_species: Bacteroides faecis
   related_records:
+  - record_id: bioproject:PRJEB16568
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1077285.5
+    taxon_id: NCBITaxon:1077285
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-24798
+    source_strain_identifiers: DSM 24798
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA335188
     record_type: BIOPROJECT
     source: GOLD
@@ -257,6 +308,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0016332
     source_project_id: gold:Gp0016332
+  - record_id: biosample:SAMN05444400
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1077285.5
+    taxon_id: NCBITaxon:1077285
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-24798
+    source_strain_identifiers: DSM 24798
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN05444400
     record_type: BIOSAMPLE
     source: GOLD
@@ -460,6 +520,7 @@ source_attestations:
   source_label: Bacteroides faecis
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:788868
   source_label: Bacteroides faecis
@@ -492,7 +553,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

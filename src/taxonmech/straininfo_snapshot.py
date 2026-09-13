@@ -6,10 +6,12 @@ import argparse
 import datetime
 import gzip
 import hashlib
+import http.client
 import io
 import json
 import os
 import re
+import sys
 import tempfile
 import time
 import urllib.request
@@ -221,10 +223,13 @@ def _boundaries(directory: Path, plan: dict, ids: list[int]) -> None:
 
 def finalize(directory: Path, *, root: Path = ROOT) -> dict:
     """Verify every original response and atomically finish an offline snapshot."""
-    before, strains = _inputs(root)
     plan_path = directory / "CAPTURE.json"
     plan_data = plan_path.read_bytes()
     plan = json.loads(plan_data)
+    if isinstance(plan, dict) and plan.get("selection") not in {None, "all"}:
+        raise ValueError("unknown StrainInfo capture selection")
+    all_records = isinstance(plan, dict) and plan.get("selection") == "all"
+    before, strains = ([], []) if all_records else _inputs(root)
     if not isinstance(plan, dict) or plan.get("inputs") != before:
         raise ValueError("StrainInfo capture used different candidate-selection inputs")
     stamp = _utc(nonempty(plan.get("captured_at"), "capture timestamp"))
@@ -234,7 +239,7 @@ def finalize(directory: Path, *, root: Path = ROOT) -> dict:
     if len({r.get("url") for r in responses}) != len(responses):
         raise ValueError("StrainInfo capture contains duplicate request URLs")
     ids, rows = _catalog(directory, responses)
-    selected = candidate_ids(rows, strains)
+    selected = ids if all_records else candidate_ids(rows, strains)
     if not selected:
         raise ValueError("StrainInfo capture has no exact culture-identifier candidates")
     search = {row[0]: {normalize_culture_identifier(des) for des in row[1]} for row in rows}
@@ -276,12 +281,14 @@ def finalize(directory: Path, *, root: Path = ROOT) -> dict:
             for si_id in sorted(projected):
                 handle.write(projected[si_id] + "\n")
         records_data = records_path.read_bytes()
-        source = {"format_version": 1, "captured_at": stamp, "api_version": API_VERSION,
+        source = {"format_version": 2 if all_records else 1, "captured_at": stamp, "api_version": API_VERSION,
                   "api_base": API_BASE, "license": "CC-BY-4.0", "catalog_count": len(ids),
                   "candidate_count": len(selected), "inputs": before,
                   "records": {"path": "records.jsonl.gz", "bytes": len(records_data),
                               "sha256": _sha(records_data), "rows": len(projected)},
                   "responses": responses, "checks": plan["checks"], "api_schema": plan["api_schema"]}
+        if all_records:
+            source["selection"] = "all"
         source_data = _json_bytes(source)
         temp_source = Path(temporary) / "SNAPSHOT.json"
         temp_source.write_bytes(source_data)
@@ -290,7 +297,7 @@ def finalize(directory: Path, *, root: Path = ROOT) -> dict:
         for metadata in descriptors:
             if _sha(_path(directory, metadata["path"]).read_bytes()) != metadata["compressed_sha256"]:
                 raise ValueError("StrainInfo original responses changed during finalization")
-        if input_provenance(root) != before or plan_path.read_bytes() != plan_data:
+        if (not all_records and input_provenance(root) != before) or plan_path.read_bytes() != plan_data:
             raise ValueError("StrainInfo source or selection inputs changed during finalization")
         targets = [(directory / "records.jsonl.gz", records_data), (directory / "SNAPSHOT.json", source_data)]
         for path, data in targets:
@@ -320,7 +327,7 @@ def _request(url: str) -> tuple[bytes, str, dict]:
                 if response.url != url:
                     raise ValueError("StrainInfo primary endpoint redirected unexpectedly")
                 return response.read(), stamp, dict(response.headers)
-        except OSError:
+        except (OSError, http.client.IncompleteRead):
             if attempt == 3:
                 raise
             time.sleep(2 ** attempt)
@@ -346,17 +353,21 @@ def _response(directory: Path, *, kind: str, name: str, url: str,
                           retrieved_at=stamp, headers=headers, requested_ids=requested_ids)
 
 
-def capture(directory: Path, *, root: Path = ROOT, workers: int = 2) -> dict:
+def capture(directory: Path, *, root: Path = ROOT, workers: int = 2, all_records: bool = False) -> dict:
     """Capture public responses with at most two workers and resumable checkpoints."""
     if type(workers) is not int or not 1 <= workers <= 2:
         raise ValueError("StrainInfo capture permits one or two workers")
-    before, strains = _inputs(root)
+    before, strains = ([], []) if all_records else _inputs(root)
     if any((root / name).resolve().is_relative_to(directory.resolve()) for name in INPUT_PATHS):
         raise ValueError("StrainInfo snapshot directory cannot contain its selection inputs")
     if (directory / "SNAPSHOT.json").exists() or (directory / "CAPTURE.json").exists():
+        existing = json.loads((directory / "CAPTURE.json").read_text())
+        if (existing.get("selection") == "all") != all_records:
+            raise ValueError("requested StrainInfo selection differs from the existing capture")
         return finalize(directory, root=root)
     directory.mkdir(parents=True, exist_ok=True)
-    _new_file(directory / "SELECTION.json", _json_bytes({"inputs": before}))
+    _new_file(directory / "SELECTION.json", _json_bytes(
+        {"inputs": before, **({"selection": "all"} if all_records else {})}))
     status_before = _response(directory, kind="status", name="api-before", url=API_BASE + "/")
     schema = _response(directory, kind="schema", name="openapi", url=API_SCHEMA)
     census = _response(directory, kind="ids", name="ids-before", url=API_BASE + "/service/all/strains")
@@ -374,23 +385,29 @@ def capture(directory: Path, *, root: Path = ROOT, workers: int = 2) -> dict:
         if "next" not in page:
             break
         index = positive_id(page["next"], "search next page")
-    _, rows = _catalog(directory, responses)
-    selected = candidate_ids(rows, strains)
+    ids, rows = _catalog(directory, responses)
+    selected = ids if all_records else candidate_ids(rows, strains)
+    print(f"StrainInfo: capturing {len(selected)} of {len(ids)} source strains", flush=True, file=sys.stderr)
     batches = [selected[pos:pos + 100] for pos in range(0, len(selected), 100)]
 
     def fetch_batch(item: tuple[int, list[int]]) -> dict:
         number, ids = item
-        return _response(directory, kind="records", name=f"records-{number:04}", requested_ids=ids,
-                         url=API_BASE + "/v2/data/strain/max/" + ",".join(map(str, ids)))
+        response = _response(directory, kind="records", name=f"records-{number:04}", requested_ids=ids,
+                             url=API_BASE + "/v2/data/strain/max/" + ",".join(map(str, ids)))
+        if number % 50 == 0:
+            print(f"StrainInfo: source batch {number + 1}/{len(batches)}", flush=True, file=sys.stderr)
+        return response
 
     with ThreadPoolExecutor(max_workers=workers) as pool:
         responses.extend(pool.map(fetch_batch, enumerate(batches)))
     status_after = _response(directory, kind="status", name="api-after", url=API_BASE + "/")
     ids_after = _response(directory, kind="ids", name="ids-after", url=API_BASE + "/service/all/strains")
-    if input_provenance(root) != before:
+    if not all_records and input_provenance(root) != before:
         raise ValueError("StrainInfo selection inputs changed during capture")
     plan = {"captured_at": _utc(), "inputs": before, "responses": responses,
             "checks": [status_before, status_after, ids_after], "api_schema": schema}
+    if all_records:
+        plan["selection"] = "all"
     _new_file(directory / "CAPTURE.json", _json_bytes(plan))
     return finalize(directory, root=root)
 
@@ -400,12 +417,14 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--out", required=True, type=Path, help="new ignored source snapshot directory")
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--workers", type=int, choices=(1, 2), default=2)
+    parser.add_argument("--all", action="store_true",
+                        help="capture every source strain, independent of local deposit overlap")
     parser.add_argument("--finalize-only", action="store_true",
                         help="verify retained responses without network access")
     args = parser.parse_args(argv)
     try:
         source = finalize(args.out, root=args.root) if args.finalize_only else capture(
-            args.out, root=args.root, workers=args.workers)
+            args.out, root=args.root, workers=args.workers, all_records=args.all)
     except (OSError, ValueError, KeyError, TypeError, yaml.YAMLError) as exc:
         parser.exit(1, f"StrainInfo capture failed: {exc}\n")
     print(encoded({"snapshot": str(args.out / "SNAPSHOT.json"),

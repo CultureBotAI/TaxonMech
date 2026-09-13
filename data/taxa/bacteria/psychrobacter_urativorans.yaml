@@ -80,10 +80,13 @@ taxonomy_mappings:
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 synonyms:
 - synonym_text: Micrococcus cryophilus
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Psychrobacter urativorans Bowman et al. 1996
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Psychrobacter uratovorans
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 xrefs:
 - GTDB:s__Psychrobacter_urativorans
@@ -96,7 +99,7 @@ strains:
   source_id: bacdive:8178
   designation: McLean B-57
   culture_collection_ids:
-  - kgmicrobe.strain:ACAM-534
+  - kgmicrobe.strain:ACAM%20534
   - kgmicrobe.strain:ATCC-15174
   - kgmicrobe.strain:CCM-900
   - kgmicrobe.strain:CCUG-4982
@@ -107,6 +110,23 @@ strains:
   - kgmicrobe.strain:NCIMB-11372
   is_type_strain: true
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_042658945
+    source: BACDIVE
+    source_id: bacdive:8178
+    source_reference_id: '124043'
+    assembly_level: contig
+    assembly_name: ASM4265894v1 assembly for Psychrobacter urativorans CCUG 4982
+    taxon_id: NCBITaxon:45610
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_042658945.1
+    source: BV_BRC
+    source_id: patric:45610.24
+    assembly_name: Psychrobacter urativorans CCUG 4982
+    taxon_id: NCBITaxon:45610
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:CCUG-4982
+    source_strain_identifiers: CCUG 4982
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_042658945.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_042658945.1
@@ -117,13 +137,25 @@ strains:
     matched_strain_id: kgmicrobe.strain:CCUG-4982
     source_strain_identifiers: CCUG 4982
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_042658945.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_042658945.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM4265894v1
+    taxon_id: NCBITaxon:45610
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:CCUG-4982
+    source_strain_identifiers: strain=CCUG 4982
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_904846695
     source: BACDIVE
     source_id: bacdive:8178
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Psychrobacter urativorans Psychrobacter urativorans ACAM534
+    assembly_name: ASM90484669v1 assembly for Psychrobacter urativorans
     taxon_id: NCBITaxon:45610
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCF_042658945.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_042658945.1
@@ -134,6 +166,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:CCUG-4982
     source_strain_identifiers: CCUG 4982
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_042658945.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_042658945.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM4265894v1
+    taxon_id: NCBITaxon:45610
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:CCUG-4982
+    source_strain_identifiers: strain=CCUG 4982
+    source_strain_field: infraspecific_name
   genome_records:
   - genome_id: gtdb.genome:RS_GCF_042658945.1
     source_database: gtdb
@@ -146,14 +189,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:CCUG-4982
     source_strain_identifiers: CCUG 4982
     source_strain_field: ncbi_strain_identifiers
+  - genome_id: img.taxon:8003215415
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:8178
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: ASM90484669v1 assembly for Psychrobacter urativorans
+    taxon_id: NCBITaxon:45610
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: patric:45610.23
     source_database: patric
     source: BACDIVE
     source_id: bacdive:8178
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Psychrobacter urativorans strain Psychrobacter urativorans ACAM534
+    assembly_level: contig
+    genome_name: ASM90484669v1 assembly for Psychrobacter urativorans
     taxon_id: NCBITaxon:45610
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:45610.24
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:45610.24
+    genome_name: Psychrobacter urativorans CCUG 4982
+    taxon_id: NCBITaxon:45610
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:CCUG-4982
+    source_strain_identifiers: CCUG 4982
+    source_strain_field: strain
   related_records:
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
@@ -164,6 +227,44 @@ strains:
     matched_strain_id: kgmicrobe.strain:CCUG-4982
     source_strain_identifiers: CCUG 4982
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_042658945.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:45610
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:CCUG-4982
+    source_strain_identifiers: strain=CCUG 4982
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA595761
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:45610.24
+    taxon_id: NCBITaxon:45610
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:CCUG-4982
+    source_strain_identifiers: CCUG 4982
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA595761
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_042658945.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:45610
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:CCUG-4982
+    source_strain_identifiers: strain=CCUG 4982
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN43284220
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:45610.24
+    taxon_id: NCBITaxon:45610
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:CCUG-4982
+    source_strain_identifiers: CCUG 4982
+    source_strain_field: strain
   - record_id: biosample:SAMN43284220
     record_type: BIOSAMPLE
     source: GTDB
@@ -173,6 +274,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:CCUG-4982
     source_strain_identifiers: CCUG 4982
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN43284220
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_042658945.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:45610
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:CCUG-4982
+    source_strain_identifiers: strain=CCUG 4982
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN43284220
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_042658945.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:45610
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:CCUG-4982
+    source_strain_identifiers: strain=CCUG 4982
+    source_strain_field: infraspecific_name
   - record_id: gold:Go0028799
     record_type: GOLD_ORGANISM
     source: GOLD
@@ -786,7 +907,7 @@ strains:
   source: BACDIVE
   source_id: bacdive:147850
   culture_collection_ids:
-  - kgmicrobe.strain:ACAM-300
+  - kgmicrobe.strain:ACAM%20300
   - kgmicrobe.strain:CCUG-34380
   related_records:
   - record_id: straininfo.deposit:142833
@@ -878,6 +999,7 @@ source_attestations:
   source_label: Psychrobacter urativorans
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:780247
   source_label: Psychrobacter urativorans
@@ -917,7 +1039,7 @@ source_attestations:
   assertion_count: 1
   assertion_unit: TRAIT_ASSERTION
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

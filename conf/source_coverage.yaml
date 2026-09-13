@@ -1,0 +1,108 @@
+# Coverage is explicit per source; an identifier crosslink is not a full census.
+audited: '2026-09-13'
+scope: Bacterial and archaeal species, infraspecific taxa, strain deposits and genome identifiers
+sources:
+  - name: NCBI Taxonomy
+    status: complete_snapshot
+    catalogs: [ncbi_taxa, ncbi_names, ncbi_type_material, ncbi_merged_ids]
+    url: https://ftp.ncbi.nlm.nih.gov/pub/taxonomy/new_taxdump/
+    coverage: Full bacterial and archaeal backbone, original name classes, type-material assertions and merged IDs.
+    limitation: Species and below become taxon records; higher ranks remain lineage. Names are not proof of strain identity.
+  - name: NCBI GenBank and RefSeq assemblies
+    status: complete_snapshot
+    catalogs: [ncbi_genbank, ncbi_refseq, ncbi_genbank_historical, ncbi_refseq_historical]
+    url: https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/
+    coverage: Current and historical prokaryotic assembly metadata; unresolved taxonomy retained; all supplied columns.
+    limitation: Only latest assemblies with an explicit registered culture identifier supply direct strain links.
+  - name: GTDB
+    status: complete_snapshot
+    catalogs: [gtdb_species, gtdb_mappings, gtdb_genomes]
+    url: https://data.gtdb.ecogenomic.org/releases/release232/232.0/
+    coverage: All RS232 species clusters and bacterial/archaeal genomes, including clusters without an NCBI mapping.
+    limitation: MAGs and species clusters are not physical strain deposits; GTDB taxonomy remains a separate assertion.
+  - name: LPSN
+    status: complete_pinned_transform
+    catalogs: [lpsn]
+    url: https://lpsn.dsmz.de/
+    coverage: All names and available API annotations in the pinned kg-microbe transform, including unmapped names.
+    limitation: This is the recorded upstream extraction, not a claim to the live authenticated LPSN service.
+  - name: BacDive
+    status: complete_snapshot
+    catalogs: [bacdive, bacdive_deposits]
+    url: https://hub.dsmz.de/wiki/bacdive/api/
+    coverage: Complete public ID census and current v2 identity, deposit and sequence records.
+    limitation: One wholly empty census export row has no source ID and is reported separately.
+  - name: StrainInfo
+    status: complete_snapshot
+    catalogs: [straininfo]
+    url: https://straininfo.dsmz.de/
+    coverage: Every captured public strain, its own deposits, taxon assertions and sequence records, independent of BacDive overlap.
+    limitation: SI-ID, SI-DP and DOI versions remain distinct; only explicitly named eligible deposits supply genome links.
+  - name: SeqCode Registry
+    status: complete_snapshot
+    catalogs: [seqcode_names, seqcode_type_genomes]
+    url: https://registry.seqco.de/page/api
+    coverage: Complete public name census and type-genome endpoint, including uncultivated species names.
+    limitation: Discovery names are not all validly published; source statuses and genome types are retained independently.
+    license: CC-BY-4.0
+    license_url: https://registry.seqco.de/help/open_data
+  - name: JGI GOLD and IMG
+    status: complete_gold_snapshot_with_img_crosslinks
+    catalogs: [gold_organism, gold_sequencing_project, gold_analysis_project]
+    url: https://gold.jgi.doe.gov/download?mode=site_excel
+    coverage: Every public workbook organism, sequencing project and analysis, including supplied IMG identifiers and GenBank accessions.
+    limitation: This is complete for the pinned GOLD workbook, not for every IMG database or private genome.
+  - name: AllTheBacteria
+    status: complete_snapshot
+    catalogs: [allthebacteria]
+    url: https://osf.io/download/4kjh7/
+    coverage: Complete 2025-05 source metadata, all statuses, samples, runs, analysis accessions, checksums and supplied download URLs.
+    limitation: Evidenced strain/genome crosslinks are a subset of the full catalog; shared BioSample is not assembly equivalence.
+  - name: BV-BRC / PATRIC
+    status: complete_snapshot
+    catalogs: [bvbrc, bacdive]
+    url: https://www.bv-brc.org/docs/system_documentation/data.html
+    coverage: Complete public bacterial and archaeal genome census with identity, culture, taxonomy, assembly, sample and project metadata.
+    limitation: Strain links require whole registered culture identifiers; private genomes and non-prokaryotic records are excluded.
+  - name: ENA and DDBJ / INSDC
+    status: source_crosslinks
+    catalogs: [ncbi_genbank, ncbi_refseq, straininfo, allthebacteria]
+    url: https://www.ebi.ac.uk/ena/browser/about/policies
+    coverage: Exchanged GenBank assembly accessions and supplied sample, project, sequence, run and ENA analysis identifiers.
+    limitation: No claim that every ENA or DDBJ metadata field or unassembled sequence is locally mirrored.
+  - name: Culture collections and CAFI
+    status: source_crosslinks
+    catalogs: [bacdive_deposits, straininfo, ncbi_type_material]
+    url: https://github.com/LeibnizDSMZ/cafi
+    coverage: All reported culture-collection accessions in captured BacDive and StrainInfo; pinned CAFI validates join authorities and formats.
+    limitation: ATCC, DSMZ, JCM, NBRC, CIP, CECT, CCUG, LMG, KCTC and other collections retain their source deposit identities; no claim of independent complete collection crawls.
+  - name: MediaDive, Madin et al. and BactoTraits
+    status: supporting_evidence
+    catalogs: []
+    url: https://github.com/Knowledge-Graph-Hub/kg-microbe
+    coverage: Existing growth-media and phenotypic evidence from the pinned upstream transforms remains in taxon records.
+    limitation: These evidence sources do not define complete species or strain censuses.
+  - name: TYGS
+    status: external_index
+    catalogs: []
+    url: https://tygs.dsmz.de/
+    coverage: Type-strain genome classification resource, linked in the source directory; related LPSN and BacDive assertions are retained.
+    limitation: The documented API retrieves analysis-job results. No direct complete TYGS genome-table capture is asserted.
+  - name: WDCM GCM, gcType and reference strains
+    status: external_index
+    catalogs: []
+    url: https://gcm.wdcm.org/
+    coverage: Global culture-catalog and reference-strain discovery resources, linked in the source directory.
+    limitation: No independent full WDCM bulk snapshot is committed; overlapping deposits are retained only as asserted by captured sources.
+  - name: SILVA and Living Tree Project
+    status: external_index
+    catalogs: []
+    url: https://www.arb-silva.de/documentation/silva-taxonomy
+    coverage: Ribosomal sequence taxonomy and type-strain reference resources, linked in the source directory.
+    limitation: Ribosomal accessions are sequence records, not genome assemblies; no complete SILVA sequence catalog is claimed.
+  - name: EnteroBase and PubMLST
+    status: external_index
+    catalogs: [bacdive]
+    url: https://enterobase.warwick.ac.uk/
+    coverage: Specialist isolate and typing catalogs; BacDive-supplied EnteroBase references are preserved in its primary projection.
+    limitation: No independent full isolate census or MLST-to-genome equivalence is inferred.

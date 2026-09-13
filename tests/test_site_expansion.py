@@ -132,3 +132,50 @@ def test_shipped_taxon_browser_searches_beyond_the_first_page():
                              str(TEMPLATES / "taxon-browser.js")], capture_output=True, text=True)
     assert result.returncode == 0, result.stderr
     assert "Complete-corpus search and bounded pagination passed" in result.stdout
+
+
+@pytest.mark.skipif(shutil.which("node") is None, reason="Node is needed for browser execution")
+def test_shared_taxon_viewer_preserves_deep_strain_anchors():
+    result = subprocess.run(["node", str(Path(__file__).with_name("taxon_viewer_harness.cjs")),
+                             str(TEMPLATES / "taxon-viewer.js")], capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
+
+
+def test_complete_search_data_has_a_verified_download_manifest(monkeypatch, tmp_path):
+    monkeypatch.syspath_prepend(str(ROOT / "scripts"))
+    from scripts.render_pages import write_search_index
+
+    rows = [{"identifier": f"NCBITaxon:{i}", "label": "Ω"} for i in range(1, 452)]
+    write_search_index(tmp_path, rows)
+    manifest = json.loads((tmp_path / "index.json").read_text())
+    payload = (tmp_path / manifest["path"]).read_bytes()
+    assert json.loads(gzip.decompress(payload)) == rows
+    assert manifest["records"] == len(rows)
+    assert manifest["bytes"] == len(payload)
+    assert manifest["sha256"] == hashlib.sha256(payload).hexdigest()
+
+
+def test_lossless_taxon_shards_keep_strains_after_200_and_escape_source_text(monkeypatch, tmp_path):
+    monkeypatch.syspath_prepend(str(ROOT / "scripts"))
+    from scripts.render_pages import curie_url, external_url, write_taxon_data
+    from tests.test_write_validated import MINIMAL
+
+    env = Environment(loader=FileSystemLoader(str(TEMPLATES)), autoescape=select_autoescape(["html"]))
+    env.filters.update(curie_url=curie_url, external_url=external_url)
+    strains = [{"strain_id": f"kgmicrobe.strain:bacdive_{i}", "source": "BACDIVE",
+                "source_id": f"bacdive:{i}", "designation": "<script>unsafe</script>",
+                "culture_collection_ids": ["kgmicrobe.strain:ATCC-BAA-1556",
+                                            "kgmicrobe.strain:alias%20%3Cb%3E"]} for i in range(1, 208)]
+    record = {**MINIMAL, "label": "<script>unsafe taxon</script>", "strains": strains, "strain_count": 207}
+    path = ROOT / "data/taxa/bacteria/test.yaml"
+    write_taxon_data(env, tmp_path, [(path, record), (path, {**MINIMAL, "identifier": "NCBITaxon:1000"})])
+    shard = json.loads(gzip.decompress((tmp_path / "taxon-details/0000.json.gz").read_bytes()))
+    value = shard["NCBITaxon:562"]
+    assert [len(page["anchors"]) for page in value["strain_pages"]] == [200, 7]
+    assert value["strain_pages"][-1]["anchors"][-1] == "strains-kgmicrobe.strain-bacdive_207"
+    assert '<script>unsafe' not in value["html"] + "".join(p["html"] for p in value["strain_pages"])
+    assert '&lt;script&gt;unsafe' in value["html"]
+    assert "ATCC-BAA-1556" in value["strain_pages"][0]["html"]
+    assert "alias &lt;b&gt;" in value["strain_pages"][0]["html"]
+    assert set(json.loads(gzip.decompress((tmp_path / "taxon-details/0001.json.gz").read_bytes()))) == {
+        "NCBITaxon:1000"}

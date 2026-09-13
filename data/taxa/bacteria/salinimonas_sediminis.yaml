@@ -69,12 +69,21 @@ synonyms:
   source: LPSN
   source_id: lpsn:3283
 - synonym_text: Alteromonas alterisediminis
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Alteromonas alterisediminis Gago et al. 2021
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Alteromonas indica
   synonym_type: EXACT_SYNONYM
   source: GTDB
   source_id: GTDB:s__Alteromonas_indica
+- synonym_text: Salinimonas sediminis Cao et al. 2018
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Salinimonas sp. N102
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Alteromonas_indica
 genetic_code: 11
@@ -85,11 +94,28 @@ strains:
   source_id: bacdive:159822
   designation: N102
   culture_collection_ids:
+  - kgmicrobe.strain:KCTC%2062440.
   - kgmicrobe.strain:KCTC-62440
-  - kgmicrobe.strain:KCTC-62440.
-  - kgmicrobe.strain:MCCC-1K03497
+  - kgmicrobe.strain:MCCC%201K03497
   is_type_strain: true
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_003429285
+    source: BACDIVE
+    source_id: bacdive:159822
+    source_reference_id: '124043'
+    assembly_level: complete
+    assembly_name: ASM342928v1 assembly for Salinimonas sediminis N102
+    taxon_id: NCBITaxon:2303538
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_003429285.1
+    source: BV_BRC
+    source_id: patric:2303538.3
+    assembly_name: Salinimonas sp. N102
+    taxon_id: NCBITaxon:2303538
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:KCTC-62440
+    source_strain_identifiers: KCTC:62440
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_003429285.1
     source: GOLD
     source_id: gold:Ga0335562
@@ -102,6 +128,15 @@ strains:
     source_organism_id: gold:Go0476549
     source_project_id: gold:Gp0360207
   genome_records:
+  - genome_id: img.taxon:2832892563
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:159822
+    source_reference_id: '124043'
+    assembly_level: complete
+    genome_name: ASM342928v1 assembly for Salinimonas sediminis N102
+    taxon_id: NCBITaxon:2303538
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2832892563
     source_database: img
     source: GOLD
@@ -118,11 +153,31 @@ strains:
     source_database: patric
     source: BACDIVE
     source_id: bacdive:159822
-    source_reference_id: '66792'
+    source_reference_id: '124043'
     assembly_level: complete
+    genome_name: ASM342928v1 assembly for Salinimonas sediminis N102
+    taxon_id: NCBITaxon:2303538
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:2303538.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:2303538.3
     genome_name: Salinimonas sp. N102
     taxon_id: NCBITaxon:2303538
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:KCTC-62440
+    source_strain_identifiers: KCTC:62440
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJNA486605
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:2303538.3
+    taxon_id: NCBITaxon:2303538
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:KCTC-62440
+    source_strain_identifiers: KCTC:62440
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA486605
     record_type: BIOPROJECT
     source: GOLD
@@ -134,6 +189,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0476549
     source_project_id: gold:Gp0360207
+  - record_id: biosample:SAMN09858433
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:2303538.3
+    taxon_id: NCBITaxon:2303538
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:KCTC-62440
+    source_strain_identifiers: KCTC:62440
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN09858433
     record_type: BIOSAMPLE
     source: GOLD
@@ -186,6 +250,7 @@ source_attestations:
   source_label: Salinimonas sediminis
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:797991
   source_label: Salinimonas sediminis
@@ -209,7 +274,7 @@ source_attestations:
   assertion_count: 1
   assertion_unit: ORGANISM
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

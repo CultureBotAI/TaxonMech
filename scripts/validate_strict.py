@@ -23,7 +23,7 @@ import os
 import re
 import sys
 from collections.abc import Iterable
-from concurrent.futures import ProcessPoolExecutor, as_completed
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 
 import yaml
@@ -96,6 +96,10 @@ def validate_one(path: Path) -> list[dict]:
     return rows
 
 
+def validate_batch(paths: list[Path]) -> list[dict]:
+    return [error for path in paths for error in validate_one(path)]
+
+
 _YAML_SUFFIXES = {".yaml", ".yml"}
 
 
@@ -117,7 +121,7 @@ def main() -> int:
     parser.add_argument("paths", nargs="*", type=Path, help="Files or directories. Defaults to data/taxa/.")
     parser.add_argument("--out", type=Path, default=Path("reports/instance_validation_failures.tsv"))
     parser.add_argument("--sample", type=int, metavar="N", help="Validate only the first N files.")
-    parser.add_argument("--workers", type=int, default=max(1, (os.cpu_count() or 4) - 1))
+    parser.add_argument("--workers", type=int, default=max(1, min(4, (os.cpu_count() or 4) - 1)))
     parser.add_argument("--fail-on", choices=("error", "never"), default="error")
     parser.add_argument("--quiet", action="store_true", help="Suppress per-file progress.")
     args = parser.parse_args()
@@ -133,11 +137,12 @@ def main() -> int:
 
     all_rows: list[dict] = []
     with ProcessPoolExecutor(max_workers=args.workers) as pool:
-        futures = {pool.submit(validate_one, p): p for p in files}
-        for done, fut in enumerate(as_completed(futures), start=1):
-            all_rows.extend(fut.result())
-            if not args.quiet and done % 50 == 0:
-                print(f"  {done}/{len(files)} files processed, {len(all_rows)} ERROR rows so far",
+        batches = (files[offset:offset + 100] for offset in range(0, len(files), 100))
+        for done, errors in enumerate(pool.map(validate_batch, batches), start=1):
+            all_rows.extend(errors)
+            if not args.quiet and done % 10 == 0:
+                print(f"  {min(done * 100, len(files))}/{len(files)} files processed, "
+                      f"{len(all_rows)} ERROR rows so far",
                       file=sys.stderr)
 
     all_rows.sort(key=lambda r: (r["file"], r["path"], r["category"], r["message"]))

@@ -111,36 +111,67 @@ taxonomy_mappings:
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 synonyms:
+- synonym_text: '"Enterococcus proteiformis" Thiercelin and Jouhaud 1903'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Enterocoque" Thiercelin 1902'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Micrococcus ovalis" Escherich 1886'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Micrococcus zymogenes" MacCallum and Hastings 1899'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Streptococcus glycerinaceus" Orla-Jensen 1919'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Streptococcus liquefaciens" Sternberg 1892'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Enterococcus faecalis (Andrewes and Horder 1906) Schleifer and Kilpper-Balz
+    1984
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: Enterococcus proteiformis
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Enterococcus sp. 7L76
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Enterococcus sp. KB1
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Enterocoque
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Micrococcus ovalis
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Micrococcus zymogenes
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Streptococcus faecalis
   synonym_type: RELATED_SYNONYM
   source: LPSN
   source_id: lpsn:781330
 - synonym_text: Streptococcus faecalis
+  synonym_type: EXACT_SYNONYM
+  source: NCBITaxon
+- synonym_text: Streptococcus faecalis Andrewes and Horder 1906 (Approved Lists 1980)
   synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Streptococcus glycerinaceus
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Streptococcus liquefaciens
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 xrefs:
 - GTDB:s__Enterococcus_faecalis
 - lpsn:775964
 genetic_code: 11
-strain_count: 180
+strain_count: 184
 strains:
 - strain_id: kgmicrobe.strain:bacdive_5292
   source: BACDIVE
@@ -171,7 +202,7 @@ strains:
   - kgmicrobe.strain:NCIMB-775
   - kgmicrobe.strain:NCTC-775
   - kgmicrobe.strain:VTT-E-93203
-  - kgmicrobe.strain:WDCM-00009
+  - kgmicrobe.strain:WDCM%2000009
   is_type_strain: true
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_000392875
@@ -179,8 +210,19 @@ strains:
     source_id: bacdive:5292
     source_reference_id: '66792'
     assembly_level: scaffold
+    assembly_name: Ente_faec_ATCC_19433_V1 assembly for Enterococcus faecalis ATCC
+      19433 = NBRC 100480
+    taxon_id: NCBITaxon:1169286
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_000392875.1
+    source: BV_BRC
+    source_id: patric:1169286.3
     assembly_name: Enterococcus faecalis ATCC 19433
     taxon_id: NCBITaxon:1169286
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-19433
+    source_strain_identifiers: ATCC 19433
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_000392875.1
     source: GOLD
     source_id: gold:Ga0023166
@@ -213,13 +255,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-19433
     source_strain_identifiers: ATCC 19433
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_000392875.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000392875.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: Ente_faec_ATCC_19433_V1
+    taxon_id: NCBITaxon:1169286
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-19433
+    source_strain_identifiers: strain=ATCC 19433
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_001544235
     source: BACDIVE
     source_id: bacdive:5292
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Enterococcus faecalis NBRC 100480
+    assembly_name: ASM154423v1 assembly for Enterococcus faecalis ATCC 19433 = NBRC
+      100480
     taxon_id: NCBITaxon:1218089
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_001544235.1
     source: GOLD
     source_id: gold:Ga0128511
@@ -252,13 +307,43 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-100480
     source_strain_identifiers: NBRC 100480
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_001544235.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001544235.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM154423v1
+    taxon_id: NCBITaxon:1169286
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-100480
+    source_strain_identifiers: strain=NBRC 100480
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_015311765
     source: BACDIVE
     source_id: bacdive:5292
     source_reference_id: '66792'
     assembly_level: contig
+    assembly_name: PDT000701674.1 assembly for Enterococcus faecalis NCTC 775
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_015311765.1
+    source: BV_BRC
+    source_id: patric:1351.5783
+    assembly_name: Enterococcus faecalis strain NCTC 775
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-775
+    source_strain_identifiers: NCTC 775
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_015311765.1
+    source: BV_BRC
+    source_id: patric:1351.6037
     assembly_name: Enterococcus faecalis NCTC 775
     taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-775
+    source_strain_identifiers: NCTC 775
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_015311765.1
     source: GOLD
     source_id: gold:Ga0623629
@@ -291,6 +376,60 @@ strains:
     matched_strain_id: kgmicrobe.strain:NCTC-775
     source_strain_identifiers: NCTC 775
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_015311765.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_015311765.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: PDT000701674.1
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-775
+    source_strain_identifiers: strain=NCTC 775
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCA_022869705
+    source: BACDIVE
+    source_id: bacdive:5292
+    source_reference_id: '124043'
+    assembly_level: complete
+    assembly_name: ASM2286970v1 assembly for Enterococcus faecalis PartL-Efaecalis-RM8376
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_022869705.1
+    source: BV_BRC
+    source_id: patric:1351.6423
+    assembly_name: Enterococcus faecalis PartL-Efaecalis-RM8376
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-19433
+    source_strain_identifiers: ATCC:19433
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_029024925
+    source: BACDIVE
+    source_id: bacdive:5292
+    source_reference_id: '124043'
+    assembly_level: complete
+    assembly_name: ASM2902492v1 assembly for Enterococcus faecalis DSM 20478
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_029024925.1
+    source: BV_BRC
+    source_id: patric:1351.8125
+    assembly_name: Enterococcus faecalis DSM 20478
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-20478
+    source_strain_identifiers: DSM 20478
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_029024925.1
+    source: BV_BRC
+    source_id: patric:1351.8125
+    assembly_name: Enterococcus faecalis DSM 20478
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-20478
+    source_strain_identifiers: DSM:20478
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_029024925.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_029024925.1
@@ -301,13 +440,25 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-20478
     source_strain_identifiers: DSM 20478
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_029024925.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_029024925.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM2902492v1
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-20478
+    source_strain_identifiers: strain=DSM 20478
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_900447895
     source: BACDIVE
     source_id: bacdive:5292
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Enterococcus faecalis NCTC775
+    assembly_name: 43941_F01 assembly for Enterococcus faecalis NCTC775
     taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_900447895.1
     source: GOLD
     source_id: gold:Ga0318008
@@ -340,6 +491,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-19433
     source_strain_identifiers: ATCC 19433
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_000392875.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000392875.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Scaffold
+    assembly_name: Ente_faec_ATCC_19433_V1
+    taxon_id: NCBITaxon:1169286
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-19433
+    source_strain_identifiers: strain=ATCC 19433
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCF_001544235.1
+    source: BV_BRC
+    source_id: patric:1218089.3
+    assembly_name: Enterococcus faecalis NBRC 100480
+    taxon_id: NCBITaxon:1169286
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-100480
+    source_strain_identifiers: NBRC 100480
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCF_001544235.1
+    source: BV_BRC
+    source_id: patric:1218089.3
+    assembly_name: Enterococcus faecalis NBRC 100480
+    taxon_id: NCBITaxon:1169286
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-100480
+    source_strain_identifiers: NBRC:100480
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCF_001544235.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_001544235.1
@@ -350,6 +530,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-100480
     source_strain_identifiers: NBRC 100480
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_001544235.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001544235.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM154423v1
+    taxon_id: NCBITaxon:1169286
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-100480
+    source_strain_identifiers: strain=NBRC 100480
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_015311765.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_015311765.1
@@ -360,6 +551,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:NCTC-775
     source_strain_identifiers: NCTC 775
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_015311765.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_015311765.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: PDT000701674.1
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-775
+    source_strain_identifiers: strain=NCTC 775
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_029024925.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_029024925.1
@@ -370,6 +572,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-20478
     source_strain_identifiers: DSM 20478
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_029024925.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_029024925.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM2902492v1
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-20478
+    source_strain_identifiers: strain=DSM 20478
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_000392875
     source: STRAININFO
     source_id: straininfo.strain:92691
@@ -546,9 +759,11 @@ strains:
     source: BACDIVE
     source_id: bacdive:5292
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Enterococcus faecalis ATCC 19433
+    assembly_level: scaffold
+    genome_name: Ente_faec_ATCC_19433_V1 assembly for Enterococcus faecalis ATCC 19433
+      = NBRC 100480
     taxon_id: NCBITaxon:1169286
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2558860282
     source_database: img
     source: GOLD
@@ -578,9 +793,11 @@ strains:
     source: BACDIVE
     source_id: bacdive:5292
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Enterococcus faecalis NBRC 100480
+    assembly_level: contig
+    genome_name: ASM154423v1 assembly for Enterococcus faecalis ATCC 19433 = NBRC
+      100480
     taxon_id: NCBITaxon:1218089
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2731957565
     source_database: img
     source: GOLD
@@ -607,6 +824,15 @@ strains:
     source_project_id: gold:Gp0023751
   - genome_id: img.taxon:8109060919
     source_database: img
+    source: BACDIVE
+    source_id: bacdive:5292
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: 43941_F01 assembly for Enterococcus faecalis NCTC775
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:8109060919
+    source_database: img
     source: GOLD
     source_id: gold:Ga0318008
     genome_name: Enterococcus faecalis NCTC 775
@@ -629,6 +855,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0468660
     source_project_id: gold:Gp0342273
+  - genome_id: img.taxon:8112353525
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:5292
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: PDT000701674.1 assembly for Enterococcus faecalis NCTC 775
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:8112353525
     source_database: img
     source: GOLD
@@ -658,33 +893,137 @@ strains:
     source: BACDIVE
     source_id: bacdive:5292
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: scaffold
+    genome_name: Ente_faec_ATCC_19433_V1 assembly for Enterococcus faecalis ATCC 19433
+      = NBRC 100480
+    taxon_id: NCBITaxon:1169286
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1169286.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1169286.3
     genome_name: Enterococcus faecalis ATCC 19433
     taxon_id: NCBITaxon:1169286
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-19433
+    source_strain_identifiers: ATCC 19433
+    source_strain_field: strain
   - genome_id: patric:1218089.3
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5292
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Enterococcus faecalis NBRC 100480
+    assembly_level: contig
+    genome_name: ASM154423v1 assembly for Enterococcus faecalis ATCC 19433 = NBRC
+      100480
     taxon_id: NCBITaxon:1218089
-  - genome_id: patric:1351.1230
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1218089.3
     source_database: patric
-    source: BACDIVE
-    source_id: bacdive:5292
-    source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Enterococcus faecalis strain NCTC775
-    taxon_id: NCBITaxon:1351
+    source: BV_BRC
+    source_id: patric:1218089.3
+    genome_name: Enterococcus faecalis NBRC 100480
+    taxon_id: NCBITaxon:1169286
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NBRC-100480
+    source_strain_identifiers: NBRC 100480
+    source_strain_field: strain
+  - genome_id: patric:1218089.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1218089.3
+    genome_name: Enterococcus faecalis NBRC 100480
+    taxon_id: NCBITaxon:1169286
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NBRC-100480
+    source_strain_identifiers: NBRC:100480
+    source_strain_field: culture_collection
   - genome_id: patric:1351.3961
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5292
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Enterococcus faecalis strain NCTC775
+    assembly_level: contig
+    genome_name: 43941_F01 assembly for Enterococcus faecalis NCTC775
     taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1351.5783
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:5292
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: PDT000701674.1 assembly for Enterococcus faecalis NCTC 775
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1351.5783
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1351.5783
+    genome_name: Enterococcus faecalis strain NCTC 775
+    taxon_id: NCBITaxon:1351
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-775
+    source_strain_identifiers: NCTC 775
+    source_strain_field: strain
+  - genome_id: patric:1351.6037
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1351.6037
+    genome_name: Enterococcus faecalis NCTC 775
+    taxon_id: NCBITaxon:1351
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-775
+    source_strain_identifiers: NCTC 775
+    source_strain_field: strain
+  - genome_id: patric:1351.6423
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:5292
+    source_reference_id: '124043'
+    assembly_level: complete
+    genome_name: ASM2286970v1 assembly for Enterococcus faecalis PartL-Efaecalis-RM8376
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1351.6423
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1351.6423
+    genome_name: Enterococcus faecalis PartL-Efaecalis-RM8376
+    taxon_id: NCBITaxon:1351
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-19433
+    source_strain_identifiers: ATCC:19433
+    source_strain_field: culture_collection
+  - genome_id: patric:1351.8125
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:5292
+    source_reference_id: '124043'
+    assembly_level: complete
+    genome_name: ASM2902492v1 assembly for Enterococcus faecalis DSM 20478
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1351.8125
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1351.8125
+    genome_name: Enterococcus faecalis DSM 20478
+    taxon_id: NCBITaxon:1351
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-20478
+    source_strain_identifiers: DSM 20478
+    source_strain_field: strain
+  - genome_id: patric:1351.8125
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1351.8125
+    genome_name: Enterococcus faecalis DSM 20478
+    taxon_id: NCBITaxon:1351
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-20478
+    source_strain_identifiers: DSM:20478
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMEA2149965
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -702,6 +1041,24 @@ strains:
       archive_url: https://osf.io/download/66719f4877ff4c5fa1e04e3b/
       archive_filename: atb.assembly.r0.2.batch.172.tar.xz
       sample_links:
+      - matched_strain_id: kgmicrobe.strain:NCTC-775
+        record_id: biosample:SAMEA2149965
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1351.5783
+        source_strain_field: strain
+        source_strain_identifiers: NCTC 775
+        taxon_id: NCBITaxon:1351
+      - matched_strain_id: kgmicrobe.strain:NCTC-775
+        record_id: biosample:SAMEA2149965
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1351.6037
+        source_strain_field: strain
+        source_strain_identifiers: NCTC 775
+        taxon_id: NCBITaxon:1351
       - matched_strain_id: kgmicrobe.strain:NCTC-775
         record_id: biosample:SAMEA2149965
         record_type: BIOSAMPLE
@@ -733,11 +1090,49 @@ strains:
         source_strain_field: ncbi_strain_identifiers
         source_strain_identifiers: NCTC 775
         taxon_id: NCBITaxon:1351
+      - matched_strain_id: kgmicrobe.strain:NCTC-775
+        record_id: biosample:SAMEA2149965
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_015311765.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=NCTC 775
+        taxon_id: NCBITaxon:1351
+      - matched_strain_id: kgmicrobe.strain:NCTC-775
+        record_id: biosample:SAMEA2149965
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCF_015311765.1
+        source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=NCTC 775
+        taxon_id: NCBITaxon:1351
       ena_analysis_id: ena.analysis:ERZ3155085
       sylph_species: Enterococcus faecalis
   related_records:
   - record_id: bioproject:PRJDB262
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1218089.3
+    taxon_id: NCBITaxon:1169286
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-100480
+    source_strain_identifiers: NBRC 100480
+    source_strain_field: strain
+  - record_id: bioproject:PRJDB262
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1218089.3
+    taxon_id: NCBITaxon:1169286
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-100480
+    source_strain_identifiers: NBRC:100480
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJDB262
+    record_type: BIOPROJECT
     source: GOLD
     source_id: gold:Gp0023751
     taxon_id: NCBITaxon:1218089
@@ -758,6 +1153,16 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0023751
     source_project_id: gold:Gp0023751
+  - record_id: bioproject:PRJDB262
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001544235.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1169286
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NBRC-100480
+    source_strain_identifiers: strain=NBRC 100480
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
     source: GOLD
@@ -782,6 +1187,15 @@ strains:
     source_project_id: gold:Gp0342273
   - record_id: bioproject:PRJNA157741
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1169286.3
+    taxon_id: NCBITaxon:1169286
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-19433
+    source_strain_identifiers: ATCC 19433
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA157741
+    record_type: BIOPROJECT
     source: GOLD
     source_id: gold:Gp0004769
     taxon_id: NCBITaxon:1169286
@@ -802,6 +1216,16 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0004769
     source_project_id: gold:Gp0004769
+  - record_id: bioproject:PRJNA157741
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000392875.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1169286
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-19433
+    source_strain_identifiers: strain=ATCC 19433
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
     source: GTDB
@@ -838,6 +1262,64 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-20478
     source_strain_identifiers: DSM 20478
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000392875.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1169286
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-19433
+    source_strain_identifiers: strain=ATCC 19433
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001544235.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1169286
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NBRC-100480
+    source_strain_identifiers: strain=NBRC 100480
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_015311765.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NCTC-775
+    source_strain_identifiers: strain=NCTC 775
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_029024925.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-20478
+    source_strain_identifiers: strain=DSM 20478
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA514245
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1351.5783
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-775
+    source_strain_identifiers: NCTC 775
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA514245
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1351.6037
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-775
+    source_strain_identifiers: NCTC 775
+    source_strain_field: strain
   - record_id: bioproject:PRJNA514245
     record_type: BIOPROJECT
     source: GOLD
@@ -860,6 +1342,71 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0468660
     source_project_id: gold:Gp0784566
+  - record_id: bioproject:PRJNA514245
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_015311765.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NCTC-775
+    source_strain_identifiers: strain=NCTC 775
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA605254
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1351.6423
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-19433
+    source_strain_identifiers: ATCC:19433
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA936091
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1351.8125
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-20478
+    source_strain_identifiers: DSM 20478
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA936091
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1351.8125
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-20478
+    source_strain_identifiers: DSM:20478
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA936091
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_029024925.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-20478
+    source_strain_identifiers: strain=DSM 20478
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00045729
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1218089.3
+    taxon_id: NCBITaxon:1169286
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-100480
+    source_strain_identifiers: NBRC 100480
+    source_strain_field: strain
+  - record_id: biosample:SAMD00045729
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1218089.3
+    taxon_id: NCBITaxon:1169286
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NBRC-100480
+    source_strain_identifiers: NBRC:100480
+    source_strain_field: culture_collection
   - record_id: biosample:SAMD00045729
     record_type: BIOSAMPLE
     source: GOLD
@@ -891,6 +1438,44 @@ strains:
     matched_strain_id: kgmicrobe.strain:NBRC-100480
     source_strain_identifiers: NBRC 100480
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMD00045729
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001544235.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1169286
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NBRC-100480
+    source_strain_identifiers: strain=NBRC 100480
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD00045729
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001544235.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1169286
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NBRC-100480
+    source_strain_identifiers: strain=NBRC 100480
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMEA2149965
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1351.5783
+    taxon_id: NCBITaxon:1351
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-775
+    source_strain_identifiers: NCTC 775
+    source_strain_field: strain
+  - record_id: biosample:SAMEA2149965
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1351.6037
+    taxon_id: NCBITaxon:1351
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-775
+    source_strain_identifiers: NCTC 775
+    source_strain_field: strain
   - record_id: biosample:SAMEA2149965
     record_type: BIOSAMPLE
     source: GOLD
@@ -922,6 +1507,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:NCTC-775
     source_strain_identifiers: NCTC 775
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMEA2149965
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_015311765.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NCTC-775
+    source_strain_identifiers: strain=NCTC 775
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMEA2149965
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_015311765.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NCTC-775
+    source_strain_identifiers: strain=NCTC 775
+    source_strain_field: infraspecific_name
   - record_id: biosample:SAMEA3856678
     record_type: BIOSAMPLE
     source: GOLD
@@ -944,6 +1549,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0468660
     source_project_id: gold:Gp0342273
+  - record_id: biosample:SAMN00847602
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1169286.3
+    taxon_id: NCBITaxon:1169286
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-19433
+    source_strain_identifiers: ATCC 19433
+    source_strain_field: strain
   - record_id: biosample:SAMN00847602
     record_type: BIOSAMPLE
     source: GOLD
@@ -975,6 +1589,53 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-19433
     source_strain_identifiers: ATCC 19433
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN00847602
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000392875.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1169286
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-19433
+    source_strain_identifiers: strain=ATCC 19433
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN00847602
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000392875.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1169286
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-19433
+    source_strain_identifiers: strain=ATCC 19433
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN14078803
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1351.6423
+    taxon_id: NCBITaxon:1351
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-19433
+    source_strain_identifiers: ATCC:19433
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN33336514
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1351.8125
+    taxon_id: NCBITaxon:1351
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-20478
+    source_strain_identifiers: DSM 20478
+    source_strain_field: strain
+  - record_id: biosample:SAMN33336514
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1351.8125
+    taxon_id: NCBITaxon:1351
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-20478
+    source_strain_identifiers: DSM:20478
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN33336514
     record_type: BIOSAMPLE
     source: GTDB
@@ -984,6 +1645,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-20478
     source_strain_identifiers: DSM 20478
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN33336514
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_029024925.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-20478
+    source_strain_identifiers: strain=DSM 20478
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN33336514
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_029024925.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-20478
+    source_strain_identifiers: strain=DSM 20478
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0023166
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -3635,15 +4316,34 @@ strains:
   - kgmicrobe.strain:NCCB-93062
   - kgmicrobe.strain:NCIMB-13280
   - kgmicrobe.strain:NCTC-12697
-  - kgmicrobe.strain:WDCM-00087
+  - kgmicrobe.strain:WDCM%2000087
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_000291565
     source: BACDIVE
     source_id: bacdive:5279
     source_reference_id: '66792'
     assembly_level: contig
+    assembly_name: ASM29156v1 assembly for Enterococcus faecalis ATCC 29212
+    taxon_id: NCBITaxon:1201292
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_000291565.1
+    source: BV_BRC
+    source_id: patric:1201292.3
     assembly_name: Enterococcus faecalis ATCC 29212
     taxon_id: NCBITaxon:1201292
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC 29212
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_000291565.1
+    source: BV_BRC
+    source_id: patric:1201292.3
+    assembly_name: Enterococcus faecalis ATCC 29212
+    taxon_id: NCBITaxon:1201292
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC 29212
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_000291565.1
     source: GOLD
     source_id: gold:Ga0012076
@@ -3686,13 +4386,43 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-29212
     source_strain_identifiers: ATCC 29212
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_000291565.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000291565.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM29156v1
+    taxon_id: NCBITaxon:1201292
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: strain=ATCC 29212
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_000742975
     source: BACDIVE
     source_id: bacdive:5279
     source_reference_id: '66792'
     assembly_level: complete
+    assembly_name: ASM74297v1 assembly for Enterococcus faecalis ATCC 29212
+    taxon_id: NCBITaxon:1201292
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_000742975.1
+    source: BV_BRC
+    source_id: patric:1201292.21
     assembly_name: Enterococcus faecalis ATCC 29212
     taxon_id: NCBITaxon:1201292
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC:29212
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_000742975.1
+    source: BV_BRC
+    source_id: patric:1201292.22
+    assembly_name: Enterococcus faecalis ATCC 29212
+    taxon_id: NCBITaxon:1201292
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC:29212
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_000742975.1
     source: GOLD
     source_id: gold:Ga0057519
@@ -3737,13 +4467,25 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0014026
     source_project_id: gold:Gp0261122
+  - assembly_id: ncbi.assembly:GCA_000742975.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000742975.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM74297v1
+    taxon_id: NCBITaxon:1201292
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: strain=ATCC 29212
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_001999625
     source: BACDIVE
     source_id: bacdive:5279
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Enterococcus faecalis ATCC 29212
+    assembly_name: ASM199962v1 assembly for Enterococcus faecalis ATCC 29212
     taxon_id: NCBITaxon:1201292
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_001999625.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_001999625.1
@@ -3754,13 +4496,43 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-29212
     source_strain_identifiers: ATCC 29212
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_001999625.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001999625.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM199962v1
+    taxon_id: NCBITaxon:1201292
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: strain=ATCC 29212
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_022406475
     source: BACDIVE
     source_id: bacdive:5279
     source_reference_id: '66792'
     assembly_level: contig
+    assembly_name: ASM2240647v1 assembly for Enterococcus faecalis ATCC 29212
+    taxon_id: NCBITaxon:1201292
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_022406475.1
+    source: BV_BRC
+    source_id: patric:1201292.43
     assembly_name: Enterococcus faecalis ATCC 29212
     taxon_id: NCBITaxon:1201292
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC 29212
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_022406475.1
+    source: BV_BRC
+    source_id: patric:1201292.43
+    assembly_name: Enterococcus faecalis ATCC 29212
+    taxon_id: NCBITaxon:1201292
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC:29212
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_022406475.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_022406475.1
@@ -3771,6 +4543,25 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-29212
     source_strain_identifiers: ATCC 29212
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_022406475.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_022406475.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM2240647v1
+    taxon_id: NCBITaxon:1201292
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: strain=ATCC 29212
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCA_040703145
+    source: BACDIVE
+    source_id: bacdive:5279
+    source_reference_id: '124043'
+    assembly_level: chromosome
+    assembly_name: ASM4070314v1 assembly for Enterococcus faecalis ATCC 29212
+    taxon_id: NCBITaxon:1201292
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_040703145.1
     source: GTDB
     source_id: gtdb.genome:GB_GCA_040703145.1
@@ -3791,55 +4582,73 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-29212
     source_strain_identifiers: ATCC 29212
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_040703145.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_040703145.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Chromosome
+    assembly_name: ASM4070314v1
+    taxon_id: NCBITaxon:1201292
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: strain=ATCC 29212
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_900117305
     source: BACDIVE
     source_id: bacdive:5279
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Enterococcus faecalis ATCC 29212 G824
+    assembly_name: PRJEB17655 assembly for Enterococcus faecalis ATCC 29212 G824
     taxon_id: NCBITaxon:1201292
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_900117325
     source: BACDIVE
     source_id: bacdive:5279
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Enterococcus faecalis ATCC 29212 G882
+    assembly_name: PRJEB17657 assembly for Enterococcus faecalis ATCC 29212 G882
     taxon_id: NCBITaxon:1201292
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_900117335
     source: BACDIVE
     source_id: bacdive:5279
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Enterococcus faecalis ATCC 29212 G881
+    assembly_name: PRJEB17656 assembly for Enterococcus faecalis ATCC 29212 G881
     taxon_id: NCBITaxon:1201292
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_900117345
     source: BACDIVE
     source_id: bacdive:5279
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Enterococcus faecalis ATCC 29212 G823
+    assembly_name: PRJEB17653 assembly for Enterococcus faecalis ATCC 29212 G823
     taxon_id: NCBITaxon:1201292
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_900117355
     source: BACDIVE
     source_id: bacdive:5279
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Enterococcus faecalis ATCC 29212 G884
+    assembly_name: PRJEB17659 assembly for Enterococcus faecalis ATCC 29212 G884
     taxon_id: NCBITaxon:1201292
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_900117365
     source: BACDIVE
     source_id: bacdive:5279
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Enterococcus faecalis ATCC 29212 G883
+    assembly_name: PRJEB17658 assembly for Enterococcus faecalis ATCC 29212 G883
     taxon_id: NCBITaxon:1201292
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_900447845
     source: BACDIVE
     source_id: bacdive:5279
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Enterococcus faecalis NCTC12697
+    assembly_name: 44310_F01 assembly for Enterococcus faecalis NCTC12697
     taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_900447845.1
     source: GOLD
     source_id: gold:Ga0351685
@@ -3862,6 +4671,33 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0280607
     source_project_id: gold:Gp0384156
+  - assembly_id: ncbi.assembly:GCF_000742975.1
+    source: BV_BRC
+    source_id: patric:1201292.8
+    assembly_name: Enterococcus faecalis ATCC 29212
+    taxon_id: NCBITaxon:1201292
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC:29212
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCF_001999625.1
+    source: BV_BRC
+    source_id: patric:1201292.16
+    assembly_name: Enterococcus faecalis ATCC 29212 strain ATCC 29212
+    taxon_id: NCBITaxon:1201292
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC 29212
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCF_001999625.1
+    source: BV_BRC
+    source_id: patric:1201292.16
+    assembly_name: Enterococcus faecalis ATCC 29212 strain ATCC 29212
+    taxon_id: NCBITaxon:1201292
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC:29212
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCF_001999625.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_001999625.1
@@ -3872,6 +4708,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-29212
     source_strain_identifiers: ATCC 29212
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_001999625.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001999625.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM199962v1
+    taxon_id: NCBITaxon:1201292
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: strain=ATCC 29212
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_022406475.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_022406475.1
@@ -3882,6 +4729,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-29212
     source_strain_identifiers: ATCC 29212
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_022406475.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_022406475.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM2240647v1
+    taxon_id: NCBITaxon:1201292
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: strain=ATCC 29212
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_000291565
     source: STRAININFO
     source_id: straininfo.strain:2251
@@ -4163,9 +5021,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:5279
     source_reference_id: '66792'
-    assembly_level: draft
+    assembly_level: complete
     genome_name: Enterococcus faecalis Portland, ATCC 29212
     taxon_id: NCBITaxon:1201292
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2510461065
     source_database: img
     source: GOLD
@@ -4195,9 +5054,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:5279
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Enterococcus faecalis Portland, ATCC 29212
+    assembly_level: contig
+    genome_name: ASM29156v1 assembly for Enterococcus faecalis ATCC 29212
     taxon_id: NCBITaxon:1201292
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2519899746
     source_database: img
     source: GOLD
@@ -4228,8 +5088,9 @@ strains:
     source_id: bacdive:5279
     source_reference_id: '66792'
     assembly_level: complete
-    genome_name: Enterococcus faecalis Portland, ATCC 29212
+    genome_name: ASM74297v1 assembly for Enterococcus faecalis ATCC 29212
     taxon_id: NCBITaxon:1201292
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2597490101
     source_database: img
     source: GOLD
@@ -4254,14 +5115,6 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0014026
     source_project_id: gold:Gp0093654
-  - genome_id: img.taxon:2875009991
-    source_database: img
-    source: BACDIVE
-    source_id: bacdive:5279
-    source_reference_id: '66792'
-    assembly_level: complete
-    genome_name: Enterococcus faecalis Portland, ATCC 29212
-    taxon_id: NCBITaxon:1201292
   - genome_id: img.taxon:2875009991
     source_database: img
     source: GOLD
@@ -4291,97 +5144,191 @@ strains:
     source: BACDIVE
     source_id: bacdive:5279
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Enterococcus faecalis ATCC 29212
+    assembly_level: contig
+    genome_name: PRJEB17658 assembly for Enterococcus faecalis ATCC 29212 G883
     taxon_id: NCBITaxon:1201292
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   - genome_id: patric:1201292.11
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5279
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Enterococcus faecalis ATCC 29212
+    assembly_level: contig
+    genome_name: PRJEB17657 assembly for Enterococcus faecalis ATCC 29212 G882
     taxon_id: NCBITaxon:1201292
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   - genome_id: patric:1201292.12
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5279
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Enterococcus faecalis ATCC 29212
+    assembly_level: contig
+    genome_name: PRJEB17659 assembly for Enterococcus faecalis ATCC 29212 G884
     taxon_id: NCBITaxon:1201292
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   - genome_id: patric:1201292.13
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5279
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Enterococcus faecalis ATCC 29212
+    assembly_level: contig
+    genome_name: PRJEB17653 assembly for Enterococcus faecalis ATCC 29212 G823
     taxon_id: NCBITaxon:1201292
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   - genome_id: patric:1201292.14
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5279
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Enterococcus faecalis ATCC 29212
+    assembly_level: contig
+    genome_name: PRJEB17656 assembly for Enterococcus faecalis ATCC 29212 G881
     taxon_id: NCBITaxon:1201292
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   - genome_id: patric:1201292.15
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5279
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Enterococcus faecalis ATCC 29212
+    assembly_level: contig
+    genome_name: PRJEB17655 assembly for Enterococcus faecalis ATCC 29212 G824
     taxon_id: NCBITaxon:1201292
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   - genome_id: patric:1201292.16
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5279
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM199962v1 assembly for Enterococcus faecalis ATCC 29212
+    taxon_id: NCBITaxon:1201292
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1201292.16
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1201292.16
     genome_name: Enterococcus faecalis ATCC 29212 strain ATCC 29212
     taxon_id: NCBITaxon:1201292
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC 29212
+    source_strain_field: strain
+  - genome_id: patric:1201292.16
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1201292.16
+    genome_name: Enterococcus faecalis ATCC 29212 strain ATCC 29212
+    taxon_id: NCBITaxon:1201292
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC:29212
+    source_strain_field: culture_collection
   - genome_id: patric:1201292.21
     source_database: patric
-    source: BACDIVE
-    source_id: bacdive:5279
-    source_reference_id: '66792'
-    assembly_level: plasmid
+    source: BV_BRC
+    source_id: patric:1201292.21
     genome_name: Enterococcus faecalis ATCC 29212
     taxon_id: NCBITaxon:1201292
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC:29212
+    source_strain_field: culture_collection
   - genome_id: patric:1201292.22
     source_database: patric
-    source: BACDIVE
-    source_id: bacdive:5279
-    source_reference_id: '66792'
-    assembly_level: plasmid
+    source: BV_BRC
+    source_id: patric:1201292.22
     genome_name: Enterococcus faecalis ATCC 29212
     taxon_id: NCBITaxon:1201292
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC:29212
+    source_strain_field: culture_collection
   - genome_id: patric:1201292.3
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5279
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM29156v1 assembly for Enterococcus faecalis ATCC 29212
+    taxon_id: NCBITaxon:1201292
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1201292.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1201292.3
     genome_name: Enterococcus faecalis ATCC 29212
     taxon_id: NCBITaxon:1201292
-  - genome_id: patric:1201292.8
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC 29212
+    source_strain_field: culture_collection
+  - genome_id: patric:1201292.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1201292.3
+    genome_name: Enterococcus faecalis ATCC 29212
+    taxon_id: NCBITaxon:1201292
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC 29212
+    source_strain_field: strain
+  - genome_id: patric:1201292.43
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5279
     source_reference_id: '66792'
-    assembly_level: complete
+    assembly_level: contig
+    genome_name: ASM2240647v1 assembly for Enterococcus faecalis ATCC 29212
+    taxon_id: NCBITaxon:1201292
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1201292.43
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1201292.43
     genome_name: Enterococcus faecalis ATCC 29212
     taxon_id: NCBITaxon:1201292
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC 29212
+    source_strain_field: strain
+  - genome_id: patric:1201292.43
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1201292.43
+    genome_name: Enterococcus faecalis ATCC 29212
+    taxon_id: NCBITaxon:1201292
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC:29212
+    source_strain_field: culture_collection
+  - genome_id: patric:1201292.45
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1201292.45
+    genome_name: Enterococcus faecalis ATCC 29212
+    taxon_id: NCBITaxon:1201292
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC 29212
+    source_strain_field: strain
+  - genome_id: patric:1201292.8
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1201292.8
+    genome_name: Enterococcus faecalis ATCC 29212
+    taxon_id: NCBITaxon:1201292
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC:29212
+    source_strain_field: culture_collection
   - genome_id: patric:1351.1227
     source_database: patric
     source: BACDIVE
     source_id: bacdive:5279
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Enterococcus faecalis strain NCTC12697
+    assembly_level: contig
+    genome_name: 44310_F01 assembly for Enterococcus faecalis NCTC12697
     taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   - genome_id: atb.assembly:202505.SAMN05721774
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -4402,11 +5349,49 @@ strains:
       - matched_strain_id: kgmicrobe.strain:ATCC-29212
         record_id: biosample:SAMN05721774
         record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1201292.16
+        source_strain_field: culture_collection
+        source_strain_identifiers: ATCC:29212
+        taxon_id: NCBITaxon:1201292
+      - matched_strain_id: kgmicrobe.strain:ATCC-29212
+        record_id: biosample:SAMN05721774
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1201292.16
+        source_strain_field: strain
+        source_strain_identifiers: ATCC 29212
+        taxon_id: NCBITaxon:1201292
+      - matched_strain_id: kgmicrobe.strain:ATCC-29212
+        record_id: biosample:SAMN05721774
+        record_type: BIOSAMPLE
         source: GTDB
         source_field: ncbi_biosample
         source_id: gtdb.genome:RS_GCF_001999625.1
         source_strain_field: ncbi_strain_identifiers
         source_strain_identifiers: ATCC 29212
+        taxon_id: NCBITaxon:1201292
+      - matched_strain_id: kgmicrobe.strain:ATCC-29212
+        record_id: biosample:SAMN05721774
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_001999625.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=ATCC 29212
+        taxon_id: NCBITaxon:1201292
+      - matched_strain_id: kgmicrobe.strain:ATCC-29212
+        record_id: biosample:SAMN05721774
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCF_001999625.1
+        source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=ATCC 29212
         taxon_id: NCBITaxon:1201292
       ena_analysis_id: ena.analysis:ERZ9469691
       sylph_species: unknown
@@ -4430,11 +5415,49 @@ strains:
       - matched_strain_id: kgmicrobe.strain:ATCC-29212
         record_id: biosample:SAMN23719929
         record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1201292.43
+        source_strain_field: culture_collection
+        source_strain_identifiers: ATCC:29212
+        taxon_id: NCBITaxon:1201292
+      - matched_strain_id: kgmicrobe.strain:ATCC-29212
+        record_id: biosample:SAMN23719929
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:1201292.43
+        source_strain_field: strain
+        source_strain_identifiers: ATCC 29212
+        taxon_id: NCBITaxon:1201292
+      - matched_strain_id: kgmicrobe.strain:ATCC-29212
+        record_id: biosample:SAMN23719929
+        record_type: BIOSAMPLE
         source: GTDB
         source_field: ncbi_biosample
         source_id: gtdb.genome:RS_GCF_022406475.1
         source_strain_field: ncbi_strain_identifiers
         source_strain_identifiers: ATCC 29212
+        taxon_id: NCBITaxon:1201292
+      - matched_strain_id: kgmicrobe.strain:ATCC-29212
+        record_id: biosample:SAMN23719929
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_022406475.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=ATCC 29212
+        taxon_id: NCBITaxon:1201292
+      - matched_strain_id: kgmicrobe.strain:ATCC-29212
+        record_id: biosample:SAMN23719929
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCF_022406475.1
+        source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=ATCC 29212
         taxon_id: NCBITaxon:1201292
       ena_analysis_id: ena.analysis:ERZ26057656
       sylph_species: Enterococcus faecalis
@@ -4463,6 +5486,15 @@ strains:
     source_project_id: gold:Gp0384156
   - record_id: bioproject:PRJNA1070412
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1201292.45
+    taxon_id: NCBITaxon:1201292
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC 29212
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA1070412
+    record_type: BIOPROJECT
     source: GTDB
     source_id: gtdb.genome:GB_GCA_040703145.1
     taxon_id: NCBITaxon:1201292
@@ -4470,6 +5502,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-29212
     source_strain_identifiers: ATCC 29212
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA1070412
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_040703145.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1201292
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: strain=ATCC 29212
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA169315
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1201292.3
+    taxon_id: NCBITaxon:1201292
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC 29212
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA169315
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1201292.3
+    taxon_id: NCBITaxon:1201292
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC 29212
+    source_strain_field: strain
   - record_id: bioproject:PRJNA169315
     record_type: BIOPROJECT
     source: GOLD
@@ -4501,6 +5561,16 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-29212
     source_strain_identifiers: ATCC 29212
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA169315
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000291565.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1201292
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: strain=ATCC 29212
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
     source: GTDB
@@ -4519,6 +5589,53 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-29212
     source_strain_identifiers: ATCC 29212
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001999625.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1201292
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: strain=ATCC 29212
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_022406475.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1201292
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: strain=ATCC 29212
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA244550
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1201292.21
+    taxon_id: NCBITaxon:1201292
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC:29212
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA244550
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1201292.22
+    taxon_id: NCBITaxon:1201292
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC:29212
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA244550
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1201292.8
+    taxon_id: NCBITaxon:1201292
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC:29212
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA244550
     record_type: BIOPROJECT
     source: GOLD
@@ -4563,6 +5680,72 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0014026
     source_project_id: gold:Gp0261122
+  - record_id: bioproject:PRJNA244550
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000742975.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1201292
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: strain=ATCC 29212
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA341407
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1201292.16
+    taxon_id: NCBITaxon:1201292
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC 29212
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA341407
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1201292.16
+    taxon_id: NCBITaxon:1201292
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC:29212
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA341407
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001999625.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1201292
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: strain=ATCC 29212
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA786742
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1201292.43
+    taxon_id: NCBITaxon:1201292
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC 29212
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA786742
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1201292.43
+    taxon_id: NCBITaxon:1201292
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC:29212
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA786742
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_022406475.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1201292
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: strain=ATCC 29212
+    source_strain_field: infraspecific_name
   - record_id: biosample:SAMEA3867451
     record_type: BIOSAMPLE
     source: GOLD
@@ -4585,6 +5768,24 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0280607
     source_project_id: gold:Gp0384156
+  - record_id: biosample:SAMN02471683
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1201292.3
+    taxon_id: NCBITaxon:1201292
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC 29212
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN02471683
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1201292.3
+    taxon_id: NCBITaxon:1201292
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC 29212
+    source_strain_field: strain
   - record_id: biosample:SAMN02471683
     record_type: BIOSAMPLE
     source: GOLD
@@ -4616,6 +5817,43 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-29212
     source_strain_identifiers: ATCC 29212
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN02471683
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000291565.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1201292
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: strain=ATCC 29212
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN02870637
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1201292.21
+    taxon_id: NCBITaxon:1201292
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC:29212
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN02870637
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1201292.22
+    taxon_id: NCBITaxon:1201292
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC:29212
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN02870637
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1201292.8
+    taxon_id: NCBITaxon:1201292
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC:29212
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN02870637
     record_type: BIOSAMPLE
     source: GOLD
@@ -4638,6 +5876,34 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0014026
     source_project_id: gold:Gp0261122
+  - record_id: biosample:SAMN02870637
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000742975.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1201292
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: strain=ATCC 29212
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN05721774
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1201292.16
+    taxon_id: NCBITaxon:1201292
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC 29212
+    source_strain_field: strain
+  - record_id: biosample:SAMN05721774
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1201292.16
+    taxon_id: NCBITaxon:1201292
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC:29212
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN05721774
     record_type: BIOSAMPLE
     source: GTDB
@@ -4647,6 +5913,44 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-29212
     source_strain_identifiers: ATCC 29212
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN05721774
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_001999625.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1201292
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: strain=ATCC 29212
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN05721774
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_001999625.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1201292
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: strain=ATCC 29212
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN23719929
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1201292.43
+    taxon_id: NCBITaxon:1201292
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC 29212
+    source_strain_field: strain
+  - record_id: biosample:SAMN23719929
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1201292.43
+    taxon_id: NCBITaxon:1201292
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC:29212
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN23719929
     record_type: BIOSAMPLE
     source: GTDB
@@ -4656,6 +5960,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-29212
     source_strain_identifiers: ATCC 29212
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN23719929
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_022406475.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1201292
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: strain=ATCC 29212
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN23719929
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_022406475.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1201292
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: strain=ATCC 29212
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN39645100
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1201292.45
+    taxon_id: NCBITaxon:1201292
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: ATCC 29212
+    source_strain_field: strain
   - record_id: biosample:SAMN39645100
     record_type: BIOSAMPLE
     source: GTDB
@@ -4665,6 +5998,16 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-29212
     source_strain_identifiers: ATCC 29212
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN39645100
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_040703145.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1201292
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-29212
+    source_strain_identifiers: strain=ATCC 29212
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0010517
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -6509,16 +7852,35 @@ strains:
   - kgmicrobe.strain:DSM-12956
   - kgmicrobe.strain:LMG-16216
   - kgmicrobe.strain:NCTC-13379
-  - kgmicrobe.strain:WDCM-00085
-  - kgmicrobe.strain:WDCM-00152
+  - kgmicrobe.strain:WDCM%2000085
+  - kgmicrobe.strain:WDCM%2000152
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_000772515
     source: BACDIVE
     source_id: bacdive:5284
     source_reference_id: '66792'
     assembly_level: contig
+    assembly_name: ASM77251v1 assembly for Enterococcus faecalis ATCC 51299
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_000772515.1
+    source: BV_BRC
+    source_id: patric:1351.114
     assembly_name: Enterococcus faecalis ATCC 51299
     taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-51299
+    source_strain_identifiers: ATCC 51299
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_000772515.1
+    source: BV_BRC
+    source_id: patric:1351.114
+    assembly_name: Enterococcus faecalis ATCC 51299
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-51299
+    source_strain_identifiers: ATCC 51299
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_000772515.1
     source: GOLD
     source_id: gold:Ga0077595
@@ -6551,6 +7913,53 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-51299
     source_strain_identifiers: ATCC 51299
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_000772515.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000772515.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM77251v1
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-51299
+    source_strain_identifiers: strain=ATCC 51299
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCA_015311045
+    source: BACDIVE
+    source_id: bacdive:5284
+    source_reference_id: '124043'
+    assembly_level: contig
+    assembly_name: PDT000701690.1 assembly for Enterococcus faecalis NCTC 13379
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_015311045.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_015311045.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: PDT000701690.1
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-13379
+    source_strain_identifiers: strain=NCTC 13379
+    source_strain_field: infraspecific_name
+  - assembly_id: ncbi.assembly:GCA_900448045
+    source: BACDIVE
+    source_id: bacdive:5284
+    source_reference_id: '124043'
+    assembly_level: contig
+    assembly_name: 52121_B02 assembly for Enterococcus faecalis NCTC13379
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900448045.1
+    source: BV_BRC
+    source_id: patric:1351.1231
+    assembly_name: Enterococcus faecalis strain NCTC13379
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-13379
+    source_strain_identifiers: NCTC:13379
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCF_000772515.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_000772515.1
@@ -6561,6 +7970,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-51299
     source_strain_identifiers: ATCC 51299
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_000772515.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000772515.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM77251v1
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-51299
+    source_strain_identifiers: strain=ATCC 51299
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_000772515
     source: STRAININFO
     source_id: straininfo.strain:8460
@@ -6599,9 +8019,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:5284
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Enterococcus faecalis ATCC 51299
+    assembly_level: contig
+    genome_name: ASM77251v1 assembly for Enterococcus faecalis ATCC 51299
     taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2636415664
     source_database: img
     source: GOLD
@@ -6631,10 +8052,88 @@ strains:
     source: BACDIVE
     source_id: bacdive:5284
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM77251v1 assembly for Enterococcus faecalis ATCC 51299
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1351.114
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1351.114
     genome_name: Enterococcus faecalis ATCC 51299
     taxon_id: NCBITaxon:1351
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-51299
+    source_strain_identifiers: ATCC 51299
+    source_strain_field: culture_collection
+  - genome_id: patric:1351.114
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1351.114
+    genome_name: Enterococcus faecalis ATCC 51299
+    taxon_id: NCBITaxon:1351
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-51299
+    source_strain_identifiers: ATCC 51299
+    source_strain_field: strain
+  - genome_id: patric:1351.1231
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1351.1231
+    genome_name: Enterococcus faecalis strain NCTC13379
+    taxon_id: NCBITaxon:1351
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-13379
+    source_strain_identifiers: NCTC:13379
+    source_strain_field: culture_collection
+  - genome_id: patric:1351.3966
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:5284
+    source_reference_id: '124043'
+    assembly_level: contig
+    genome_name: 52121_B02 assembly for Enterococcus faecalis NCTC13379
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: atb.assembly:202505.SAMEA2143677
+    source_database: allthebacteria
+    source: ALLTHEBACTERIA
+    source_id: atb.assembly:202505.SAMEA2143677
+    genome_name: Enterococcus faecalis
+    atb_evidence:
+      release: 2025-05
+      sample_id: biosample:SAMEA2143677
+      dataset: 661k
+      run_accessions: ERR375591
+      assembly_seqkit_sum: seqkit.v0.1_DLS_k0_dda252c9cb0d5bcb84fa31ef415ef6f5
+      assembly_filter: PASS
+      hq_filter: PASS
+      download_url: https://allthebacteria-assemblies.s3.eu-west-2.amazonaws.com/SAMEA2143677.fa.gz
+      archive_url: https://osf.io/download/66719f4877ff4c5fa1e04e3b/
+      archive_filename: atb.assembly.r0.2.batch.172.tar.xz
+      sample_links:
+      - matched_strain_id: kgmicrobe.strain:NCTC-13379
+        record_id: biosample:SAMEA2143677
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_015311045.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=NCTC 13379
+        taxon_id: NCBITaxon:1351
+      ena_analysis_id: ena.analysis:ERZ3153685
+      sylph_species: Enterococcus faecalis
   related_records:
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1351.1231
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-13379
+    source_strain_identifiers: NCTC:13379
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
     source: GTDB
@@ -6644,6 +8143,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-51299
     source_strain_identifiers: ATCC 51299
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000772515.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-51299
+    source_strain_identifiers: strain=ATCC 51299
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA264825
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1351.114
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-51299
+    source_strain_identifiers: ATCC 51299
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA264825
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1351.114
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-51299
+    source_strain_identifiers: ATCC 51299
+    source_strain_field: strain
   - record_id: bioproject:PRJNA264825
     record_type: BIOPROJECT
     source: GOLD
@@ -6666,6 +8193,63 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0114029
     source_project_id: gold:Gp0117726
+  - record_id: bioproject:PRJNA264825
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000772515.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-51299
+    source_strain_identifiers: strain=ATCC 51299
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA514245
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_015311045.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NCTC-13379
+    source_strain_identifiers: strain=NCTC 13379
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMEA2143677
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_015311045.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NCTC-13379
+    source_strain_identifiers: strain=NCTC 13379
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMEA4442468
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1351.1231
+    taxon_id: NCBITaxon:1351
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-13379
+    source_strain_identifiers: NCTC:13379
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN03142838
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1351.114
+    taxon_id: NCBITaxon:1351
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-51299
+    source_strain_identifiers: ATCC 51299
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN03142838
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1351.114
+    taxon_id: NCBITaxon:1351
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-51299
+    source_strain_identifiers: ATCC 51299
+    source_strain_field: strain
   - record_id: biosample:SAMN03142838
     record_type: BIOSAMPLE
     source: GOLD
@@ -6697,6 +8281,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-51299
     source_strain_identifiers: ATCC 51299
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN03142838
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000772515.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-51299
+    source_strain_identifiers: strain=ATCC 51299
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN03142838
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000772515.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-51299
+    source_strain_identifiers: strain=ATCC 51299
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0077595
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -7176,8 +8780,78 @@ strains:
   - kgmicrobe.strain:NCFB-610
   - kgmicrobe.strain:NCIMB-8260
   - kgmicrobe.strain:NCTC-8213
-  - kgmicrobe.strain:WDCM-00084
+  - kgmicrobe.strain:WDCM%2000084
+  genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_015311725
+    source: BACDIVE
+    source_id: bacdive:139526
+    source_reference_id: '124043'
+    assembly_level: contig
+    assembly_name: PDT000701692.1 assembly for Enterococcus faecalis NCTC 8213
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_015311725.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_015311725.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: PDT000701692.1
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-8213
+    source_strain_identifiers: strain=NCTC 8213
+    source_strain_field: infraspecific_name
+  genome_records:
+  - genome_id: atb.assembly:202505.SAMEA2161428
+    source_database: allthebacteria
+    source: ALLTHEBACTERIA
+    source_id: atb.assembly:202505.SAMEA2161428
+    genome_name: Enterococcus faecalis
+    atb_evidence:
+      release: 2025-05
+      sample_id: biosample:SAMEA2161428
+      dataset: 661k
+      run_accessions: ERR375598
+      assembly_seqkit_sum: seqkit.v0.1_DLS_k0_06acb16b46413acee5c2ef450e05fe17
+      assembly_filter: PASS
+      hq_filter: PASS
+      download_url: https://allthebacteria-assemblies.s3.eu-west-2.amazonaws.com/SAMEA2161428.fa.gz
+      archive_url: https://osf.io/download/66719f4877ff4c5fa1e04e3b/
+      archive_filename: atb.assembly.r0.2.batch.172.tar.xz
+      sample_links:
+      - matched_strain_id: kgmicrobe.strain:NCTC-8213
+        record_id: biosample:SAMEA2161428
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_015311725.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=NCTC 8213
+        taxon_id: NCBITaxon:1351
+      ena_analysis_id: ena.analysis:ERZ3157562
+      sylph_species: Enterococcus faecalis
   related_records:
+  - record_id: bioproject:PRJNA514245
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_015311725.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NCTC-8213
+    source_strain_identifiers: strain=NCTC 8213
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMEA2161428
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_015311725.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NCTC-8213
+    source_strain_identifiers: strain=NCTC 8213
+    source_strain_field: infraspecific_name
   - record_id: gold:Go0280816
     record_type: GOLD_ORGANISM
     source: GOLD
@@ -7805,7 +9479,7 @@ strains:
   - kgmicrobe.strain:CIP-110054
   - kgmicrobe.strain:DSM-13591
   - kgmicrobe.strain:NCTC-13632
-  - kgmicrobe.strain:WDCM-00153
+  - kgmicrobe.strain:WDCM%2000153
   related_records:
   - record_id: gold:Go0281838
     record_type: GOLD_ORGANISM
@@ -7996,7 +9670,7 @@ strains:
   - kgmicrobe.strain:CECT-8118
   - kgmicrobe.strain:CIP-106877
   - kgmicrobe.strain:DSM-24916
-  - kgmicrobe.strain:WDCM-00176
+  - kgmicrobe.strain:WDCM%2000176
   related_records:
   - record_id: gold:Go0281337
     record_type: GOLD_ORGANISM
@@ -8222,7 +9896,7 @@ strains:
   culture_collection_ids:
   - kgmicrobe.strain:ATCC-14506
   - kgmicrobe.strain:DSM-2981
-  - kgmicrobe.strain:PCI-1325
+  - kgmicrobe.strain:PCI%201325
   related_records:
   - record_id: gold:Go0282579
     record_type: GOLD_ORGANISM
@@ -8352,15 +10026,25 @@ strains:
   - kgmicrobe.strain:CIP-103017
   - kgmicrobe.strain:NCDO-1620
   - kgmicrobe.strain:NCTC-8744
+  genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_900683565
+    source: BACDIVE
+    source_id: bacdive:137223
+    source_reference_id: '124043'
+    assembly_level: contig
+    assembly_name: 42969_G01 assembly for Enterococcus faecalis 3012STDY6263031
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.INSDC accession
   genome_records:
   - genome_id: patric:1351.1944
     source_database: patric
     source: BACDIVE
     source_id: bacdive:137223
-    source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Enterococcus faecalis strain 3012STDY6263031 strain NCTC8744
+    source_reference_id: '124043'
+    assembly_level: contig
+    genome_name: 42969_G01 assembly for Enterococcus faecalis 3012STDY6263031
     taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: gold:Go0281153
     record_type: GOLD_ORGANISM
@@ -8548,8 +10232,78 @@ strains:
   culture_collection_ids:
   - kgmicrobe.strain:ATCC-33186
   - kgmicrobe.strain:CIP-100750
-  - kgmicrobe.strain:WDCM-00210
+  - kgmicrobe.strain:WDCM%2000210
+  genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_015310985
+    source: BACDIVE
+    source_id: bacdive:139527
+    source_reference_id: '124043'
+    assembly_level: contig
+    assembly_name: PDT000703390.1 assembly for Enterococcus faecalis ATCC 33186
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_015310985.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_015310985.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: PDT000703390.1
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-33186
+    source_strain_identifiers: strain=ATCC 33186
+    source_strain_field: infraspecific_name
+  genome_records:
+  - genome_id: atb.assembly:202505.SAMN03447946
+    source_database: allthebacteria
+    source: ALLTHEBACTERIA
+    source_id: atb.assembly:202505.SAMN03447946
+    genome_name: Enterococcus faecalis
+    atb_evidence:
+      release: 2025-05
+      sample_id: biosample:SAMN03447946
+      dataset: 661k
+      run_accessions: SRR1930104
+      assembly_seqkit_sum: seqkit.v0.1_DLS_k0_ba328a215858efde6ab575140bbb7c7a
+      assembly_filter: PASS
+      hq_filter: PASS
+      download_url: https://allthebacteria-assemblies.s3.eu-west-2.amazonaws.com/SAMN03447946.fa.gz
+      archive_url: https://osf.io/download/66719f4065e1de5ee9894289/
+      archive_filename: atb.assembly.r0.2.batch.173.tar.xz
+      sample_links:
+      - matched_strain_id: kgmicrobe.strain:ATCC-33186
+        record_id: biosample:SAMN03447946
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_015310985.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=ATCC 33186
+        taxon_id: NCBITaxon:1351
+      ena_analysis_id: ena.analysis:ERZ4106585
+      sylph_species: Enterococcus faecalis
   related_records:
+  - record_id: bioproject:PRJNA514245
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_015310985.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-33186
+    source_strain_identifiers: strain=ATCC 33186
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN03447946
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_015310985.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-33186
+    source_strain_identifiers: strain=ATCC 33186
+    source_strain_field: infraspecific_name
   - record_id: gold:Go0280634
     record_type: GOLD_ORGANISM
     source: GOLD
@@ -8864,7 +10618,7 @@ strains:
   designation: V347
   culture_collection_ids:
   - kgmicrobe.strain:DSM-8629
-  - kgmicrobe.strain:PIP-pIP501
+  - kgmicrobe.strain:PIP%20pIP501
   medium_count: 1
   related_records:
   - record_id: gold:Go0281821
@@ -9725,6 +11479,32 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0000649
     source_project_id: gold:Gp0260618
+  - assembly_id: ncbi.assembly:GCA_022406515
+    source: BACDIVE
+    source_id: bacdive:137332
+    source_reference_id: '124043'
+    assembly_level: contig
+    assembly_name: ASM2240651v1 assembly for Enterococcus faecalis V583 ATCC 700802
+    taxon_id: NCBITaxon:226185
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_022406515.1
+    source: BV_BRC
+    source_id: patric:226185.147
+    assembly_name: Enterococcus faecalis V583 ATCC 700802
+    taxon_id: NCBITaxon:226185
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-700802
+    source_strain_identifiers: ATCC 700802
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_022406515.1
+    source: BV_BRC
+    source_id: patric:226185.147
+    assembly_name: Enterococcus faecalis V583 ATCC 700802
+    taxon_id: NCBITaxon:226185
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-700802
+    source_strain_identifiers: ATCC:700802
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_022406515.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_022406515.1
@@ -9735,6 +11515,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-700802
     source_strain_identifiers: ATCC 700802
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_022406515.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_022406515.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM2240651v1
+    taxon_id: NCBITaxon:226185
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-700802
+    source_strain_identifiers: strain=ATCC 700802
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_022406515.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_022406515.1
@@ -9745,6 +11536,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-700802
     source_strain_identifiers: ATCC 700802
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_022406515.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_022406515.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM2240651v1
+    taxon_id: NCBITaxon:226185
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-700802
+    source_strain_identifiers: strain=ATCC 700802
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_022406515
     source: STRAININFO
     source_id: straininfo.strain:44146
@@ -9826,6 +11628,35 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0000649
     source_project_id: gold:Gp0000649
+  - genome_id: patric:226185.147
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:137332
+    source_reference_id: '124043'
+    assembly_level: contig
+    genome_name: ASM2240651v1 assembly for Enterococcus faecalis V583 ATCC 700802
+    taxon_id: NCBITaxon:226185
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:226185.147
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:226185.147
+    genome_name: Enterococcus faecalis V583 ATCC 700802
+    taxon_id: NCBITaxon:226185
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-700802
+    source_strain_identifiers: ATCC 700802
+    source_strain_field: strain
+  - genome_id: patric:226185.147
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:226185.147
+    genome_name: Enterococcus faecalis V583 ATCC 700802
+    taxon_id: NCBITaxon:226185
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-700802
+    source_strain_identifiers: ATCC:700802
+    source_strain_field: culture_collection
   - genome_id: atb.assembly:202505.SAMN23719927
     source_database: allthebacteria
     source: ALLTHEBACTERIA
@@ -9846,11 +11677,49 @@ strains:
       - matched_strain_id: kgmicrobe.strain:ATCC-700802
         record_id: biosample:SAMN23719927
         record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:226185.147
+        source_strain_field: culture_collection
+        source_strain_identifiers: ATCC:700802
+        taxon_id: NCBITaxon:226185
+      - matched_strain_id: kgmicrobe.strain:ATCC-700802
+        record_id: biosample:SAMN23719927
+        record_type: BIOSAMPLE
+        source: BV_BRC
+        source_field: biosample_accession
+        source_id: patric:226185.147
+        source_strain_field: strain
+        source_strain_identifiers: ATCC 700802
+        taxon_id: NCBITaxon:226185
+      - matched_strain_id: kgmicrobe.strain:ATCC-700802
+        record_id: biosample:SAMN23719927
+        record_type: BIOSAMPLE
         source: GTDB
         source_field: ncbi_biosample
         source_id: gtdb.genome:RS_GCF_022406515.1
         source_strain_field: ncbi_strain_identifiers
         source_strain_identifiers: ATCC 700802
+        taxon_id: NCBITaxon:226185
+      - matched_strain_id: kgmicrobe.strain:ATCC-700802
+        record_id: biosample:SAMN23719927
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_022406515.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=ATCC 700802
+        taxon_id: NCBITaxon:226185
+      - matched_strain_id: kgmicrobe.strain:ATCC-700802
+        record_id: biosample:SAMN23719927
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCF_022406515.1
+        source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=ATCC 700802
         taxon_id: NCBITaxon:226185
       ena_analysis_id: ena.analysis:ERZ26057640
       sylph_species: Enterococcus faecalis
@@ -9875,6 +11744,16 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-700802
     source_strain_identifiers: ATCC 700802
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_022406515.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:226185
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-700802
+    source_strain_identifiers: strain=ATCC 700802
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA389368
     record_type: BIOPROJECT
     source: GOLD
@@ -9897,6 +11776,34 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0000649
     source_project_id: gold:Gp0000649
+  - record_id: bioproject:PRJNA786742
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:226185.147
+    taxon_id: NCBITaxon:226185
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-700802
+    source_strain_identifiers: ATCC 700802
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA786742
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:226185.147
+    taxon_id: NCBITaxon:226185
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-700802
+    source_strain_identifiers: ATCC:700802
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA786742
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_022406515.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:226185
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-700802
+    source_strain_identifiers: strain=ATCC 700802
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA82565
     record_type: BIOPROJECT
     source: GOLD
@@ -9943,6 +11850,24 @@ strains:
     source_project_id: gold:Gp0260618
   - record_id: biosample:SAMN23719927
     record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:226185.147
+    taxon_id: NCBITaxon:226185
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-700802
+    source_strain_identifiers: ATCC 700802
+    source_strain_field: strain
+  - record_id: biosample:SAMN23719927
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:226185.147
+    taxon_id: NCBITaxon:226185
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-700802
+    source_strain_identifiers: ATCC:700802
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN23719927
+    record_type: BIOSAMPLE
     source: GTDB
     source_id: gtdb.genome:RS_GCF_022406515.1
     taxon_id: NCBITaxon:226185
@@ -9950,6 +11875,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-700802
     source_strain_identifiers: ATCC 700802
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN23719927
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_022406515.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:226185
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-700802
+    source_strain_identifiers: strain=ATCC 700802
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN23719927
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_022406515.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:226185
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-700802
+    source_strain_identifiers: strain=ATCC 700802
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0017464
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -10673,7 +12618,96 @@ strains:
   - kgmicrobe.strain:IAM-10071
   - kgmicrobe.strain:JCM-20313
   medium_count: 2
+  genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_054652535.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_054652535.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM5465253v1
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-20313
+    source_strain_identifiers: strain=JCM 20313
+    source_strain_field: infraspecific_name
+  genome_records:
+  - genome_id: patric:1351.13287
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1351.13287
+    genome_name: Enterococcus faecalis JCM 20313
+    taxon_id: NCBITaxon:1351
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-20313
+    source_strain_identifiers: JCM 20313
+    source_strain_field: strain
+  - genome_id: patric:1351.13287
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1351.13287
+    genome_name: Enterococcus faecalis JCM 20313
+    taxon_id: NCBITaxon:1351
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-20313
+    source_strain_identifiers: JCM:20313
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJDB20694
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1351.13287
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-20313
+    source_strain_identifiers: JCM 20313
+    source_strain_field: strain
+  - record_id: bioproject:PRJDB20694
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1351.13287
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-20313
+    source_strain_identifiers: JCM:20313
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJDB20694
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_054652535.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:JCM-20313
+    source_strain_identifiers: strain=JCM 20313
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMD01611665
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1351.13287
+    taxon_id: NCBITaxon:1351
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-20313
+    source_strain_identifiers: JCM 20313
+    source_strain_field: strain
+  - record_id: biosample:SAMD01611665
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1351.13287
+    taxon_id: NCBITaxon:1351
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-20313
+    source_strain_identifiers: JCM:20313
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMD01611665
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_054652535.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:JCM-20313
+    source_strain_identifiers: strain=JCM 20313
+    source_strain_field: infraspecific_name
   - record_id: gold:Go0281985
     record_type: GOLD_ORGANISM
     source: GOLD
@@ -11146,13 +13180,42 @@ strains:
   - kgmicrobe.strain:NCTC-12201
   medium_count: 1
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_015311865
+    source: BACDIVE
+    source_id: bacdive:165965
+    source_reference_id: '124043'
+    assembly_level: contig
+    assembly_name: PDT000701667.1 assembly for Enterococcus faecalis NCTC 12201
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_015311865.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_015311865.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: PDT000701667.1
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-12201
+    source_strain_identifiers: strain=NCTC 12201
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_900447835
     source: BACDIVE
     source_id: bacdive:165965
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Enterococcus faecalis NCTC12201
+    assembly_name: 46166_A01 assembly for Enterococcus faecalis NCTC12201
     taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900447835.1
+    source: BV_BRC
+    source_id: patric:1351.1226
+    assembly_name: Enterococcus faecalis strain NCTC12201
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-12201
+    source_strain_identifiers: NCTC:12201
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_900447835.1
     source: GOLD
     source_id: gold:Ga0351691
@@ -11199,21 +13262,62 @@ strains:
   genome_records:
   - genome_id: patric:1351.1226
     source_database: patric
-    source: BACDIVE
-    source_id: bacdive:165965
-    source_reference_id: '66792'
-    assembly_level: wgs
+    source: BV_BRC
+    source_id: patric:1351.1226
     genome_name: Enterococcus faecalis strain NCTC12201
     taxon_id: NCBITaxon:1351
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-12201
+    source_strain_identifiers: NCTC:12201
+    source_strain_field: culture_collection
   - genome_id: patric:1351.3964
     source_database: patric
     source: BACDIVE
     source_id: bacdive:165965
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Enterococcus faecalis strain NCTC12201
+    assembly_level: contig
+    genome_name: 46166_A01 assembly for Enterococcus faecalis NCTC12201
     taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: atb.assembly:202505.SAMEA2146451
+    source_database: allthebacteria
+    source: ALLTHEBACTERIA
+    source_id: atb.assembly:202505.SAMEA2146451
+    genome_name: Enterococcus faecalis
+    atb_evidence:
+      release: 2025-05
+      sample_id: biosample:SAMEA2146451
+      dataset: 661k
+      run_accessions: ERR375559
+      assembly_seqkit_sum: seqkit.v0.1_DLS_k0_ca99db34908478d0c82f35ed485710e8
+      assembly_filter: PASS
+      hq_filter: PASS
+      download_url: https://allthebacteria-assemblies.s3.eu-west-2.amazonaws.com/SAMEA2146451.fa.gz
+      archive_url: https://osf.io/download/66719f4877ff4c5fa1e04e3b/
+      archive_filename: atb.assembly.r0.2.batch.172.tar.xz
+      sample_links:
+      - matched_strain_id: kgmicrobe.strain:NCTC-12201
+        record_id: biosample:SAMEA2146451
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_015311865.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=NCTC 12201
+        taxon_id: NCBITaxon:1351
+      ena_analysis_id: ena.analysis:ERZ3154360
+      sylph_species: Enterococcus faecalis
   related_records:
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1351.1226
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-12201
+    source_strain_identifiers: NCTC:12201
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
     source: GOLD
@@ -11236,6 +13340,35 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0281825
     source_project_id: gold:Gp0384152
+  - record_id: bioproject:PRJNA514245
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_015311865.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NCTC-12201
+    source_strain_identifiers: strain=NCTC 12201
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMEA2146451
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_015311865.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NCTC-12201
+    source_strain_identifiers: strain=NCTC 12201
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMEA3930550
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1351.1226
+    taxon_id: NCBITaxon:1351
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-12201
+    source_strain_identifiers: NCTC:12201
+    source_strain_field: culture_collection
   - record_id: biosample:SAMEA3930550
     record_type: BIOSAMPLE
     source: GOLD
@@ -11374,13 +13507,33 @@ strains:
   - kgmicrobe.strain:NCTC-12203
   medium_count: 1
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_015311745
+    source: BACDIVE
+    source_id: bacdive:165967
+    source_reference_id: '124043'
+    assembly_level: contig
+    assembly_name: PDT000701682.1 assembly for Enterococcus faecalis NCTC 12203
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_015311745.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_015311745.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: PDT000701682.1
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-12203
+    source_strain_identifiers: strain=NCTC 12203
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_900447755
     source: BACDIVE
     source_id: bacdive:165967
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Enterococcus faecalis NCTC12203
+    assembly_name: 44310_A02 assembly for Enterococcus faecalis NCTC12203
     taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_900447755.1
     source: GOLD
     source_id: gold:Ga0351686
@@ -11425,22 +13578,44 @@ strains:
       strain_id: straininfo.strain:115033
       strain_status: published online
   genome_records:
-  - genome_id: patric:1351.1220
-    source_database: patric
-    source: BACDIVE
-    source_id: bacdive:165967
-    source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Enterococcus faecalis strain NCTC12203
-    taxon_id: NCBITaxon:1351
   - genome_id: patric:1351.3962
     source_database: patric
     source: BACDIVE
     source_id: bacdive:165967
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Enterococcus faecalis strain NCTC12203
+    assembly_level: contig
+    genome_name: 44310_A02 assembly for Enterococcus faecalis NCTC12203
     taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: atb.assembly:202505.SAMEA2158235
+    source_database: allthebacteria
+    source: ALLTHEBACTERIA
+    source_id: atb.assembly:202505.SAMEA2158235
+    genome_name: Enterococcus faecalis
+    atb_evidence:
+      release: 2025-05
+      sample_id: biosample:SAMEA2158235
+      dataset: 661k
+      run_accessions: ERR375578
+      assembly_seqkit_sum: seqkit.v0.1_DLS_k0_a644b511f5d0f781fdb8617e01331b99
+      assembly_filter: PASS
+      hq_filter: PASS
+      download_url: https://allthebacteria-assemblies.s3.eu-west-2.amazonaws.com/SAMEA2158235.fa.gz
+      archive_url: https://osf.io/download/66719f4877ff4c5fa1e04e3b/
+      archive_filename: atb.assembly.r0.2.batch.172.tar.xz
+      sample_links:
+      - matched_strain_id: kgmicrobe.strain:NCTC-12203
+        record_id: biosample:SAMEA2158235
+        record_type: BIOSAMPLE
+        source: NCBI_ASSEMBLY
+        source_field: biosample
+        source_id: ncbi.assembly:GCA_015311745.1
+        source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+        source_strain_field: infraspecific_name
+        source_strain_identifiers: strain=NCTC 12203
+        taxon_id: NCBITaxon:1351
+      ena_analysis_id: ena.analysis:ERZ3156884
+      sylph_species: Enterococcus faecalis
   related_records:
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
@@ -11464,6 +13639,26 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0281826
     source_project_id: gold:Gp0384151
+  - record_id: bioproject:PRJNA514245
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_015311745.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:NCTC-12203
+    source_strain_identifiers: strain=NCTC 12203
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMEA2158235
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_015311745.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:NCTC-12203
+    source_strain_identifiers: strain=NCTC 12203
+    source_strain_field: infraspecific_name
   - record_id: biosample:SAMEA3867454
     record_type: BIOSAMPLE
     source: GOLD
@@ -11599,7 +13794,7 @@ strains:
   source_id: bacdive:174412
   culture_collection_ids:
   - kgmicrobe.strain:DSM-116622
-  - kgmicrobe.strain:NCCP-11511
+  - kgmicrobe.strain:NCCP%2011511
   related_records:
   - record_id: straininfo.deposit:53556
     record_type: STRAININFO_DEPOSIT
@@ -11644,7 +13839,7 @@ strains:
   source_id: bacdive:174413
   culture_collection_ids:
   - kgmicrobe.strain:DSM-116624
-  - kgmicrobe.strain:NCCP-11514
+  - kgmicrobe.strain:NCCP%2011514
   related_records:
   - record_id: straininfo.deposit:55276
     record_type: STRAININFO_DEPOSIT
@@ -11689,7 +13884,7 @@ strains:
   source_id: bacdive:174414
   culture_collection_ids:
   - kgmicrobe.strain:DSM-116625
-  - kgmicrobe.strain:NCCP-16130
+  - kgmicrobe.strain:NCCP%2016130
   related_records:
   - record_id: straininfo.deposit:54046
     record_type: STRAININFO_DEPOSIT
@@ -11734,7 +13929,7 @@ strains:
   source_id: bacdive:174415
   culture_collection_ids:
   - kgmicrobe.strain:DSM-116626
-  - kgmicrobe.strain:NCCP-16131
+  - kgmicrobe.strain:NCCP%2016131
   related_records:
   - record_id: straininfo.deposit:53898
     record_type: STRAININFO_DEPOSIT
@@ -11849,6 +14044,32 @@ strains:
   - kgmicrobe.strain:DSM-8630
   medium_count: 1
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_030708435
+    source: BACDIVE
+    source_id: bacdive:5283
+    source_reference_id: '124043'
+    assembly_level: contig
+    assembly_name: ASM3070843v1 assembly for Enterococcus faecalis DSM 8630
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_030708435.1
+    source: BV_BRC
+    source_id: patric:1351.8809
+    assembly_name: Enterococcus faecalis DSM 8630
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-8630
+    source_strain_identifiers: DSM 8630
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_030708435.1
+    source: BV_BRC
+    source_id: patric:1351.8809
+    assembly_name: Enterococcus faecalis DSM 8630
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-8630
+    source_strain_identifiers: DSM:8630
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_030708435.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_030708435.1
@@ -11859,6 +14080,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-8630
     source_strain_identifiers: DSM 8630
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_030708435.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_030708435.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM3070843v1
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-8630
+    source_strain_identifiers: strain=DSM 8630
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_030708435.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_030708435.1
@@ -11869,6 +14101,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-8630
     source_strain_identifiers: DSM 8630
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_030708435.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_030708435.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM3070843v1
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-8630
+    source_strain_identifiers: strain=DSM 8630
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_030708435
     source: STRAININFO
     source_id: straininfo.strain:113205
@@ -11902,6 +14145,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-8630
     source_strain_identifiers: DSM 8630
     source_strain_field: ncbi_strain_identifiers
+  - genome_id: patric:1351.8809
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:5283
+    source_reference_id: '124043'
+    assembly_level: contig
+    genome_name: ASM3070843v1 assembly for Enterococcus faecalis DSM 8630
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1351.8809
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1351.8809
+    genome_name: Enterococcus faecalis DSM 8630
+    taxon_id: NCBITaxon:1351
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-8630
+    source_strain_identifiers: DSM 8630
+    source_strain_field: strain
+  - genome_id: patric:1351.8809
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1351.8809
+    genome_name: Enterococcus faecalis DSM 8630
+    taxon_id: NCBITaxon:1351
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-8630
+    source_strain_identifiers: DSM:8630
+    source_strain_field: culture_collection
   related_records:
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
@@ -11912,6 +14184,62 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-8630
     source_strain_identifiers: DSM 8630
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_030708435.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-8630
+    source_strain_identifiers: strain=DSM 8630
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA841406
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1351.8809
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-8630
+    source_strain_identifiers: DSM 8630
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA841406
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1351.8809
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-8630
+    source_strain_identifiers: DSM:8630
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA841406
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_030708435.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-8630
+    source_strain_identifiers: strain=DSM 8630
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN28592282
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1351.8809
+    taxon_id: NCBITaxon:1351
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-8630
+    source_strain_identifiers: DSM 8630
+    source_strain_field: strain
+  - record_id: biosample:SAMN28592282
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1351.8809
+    taxon_id: NCBITaxon:1351
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-8630
+    source_strain_identifiers: DSM:8630
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN28592282
     record_type: BIOSAMPLE
     source: GTDB
@@ -11921,6 +14249,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-8630
     source_strain_identifiers: DSM 8630
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN28592282
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_030708435.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-8630
+    source_strain_identifiers: strain=DSM 8630
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN28592282
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_030708435.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-8630
+    source_strain_identifiers: strain=DSM 8630
+    source_strain_field: infraspecific_name
   - record_id: gold:Go0281822
     record_type: GOLD_ORGANISM
     source: GOLD
@@ -12329,25 +14677,28 @@ strains:
     source_id: bacdive:24002
     source_reference_id: '66792'
     assembly_level: scaffold
-    assembly_name: Enterococcus faecalis 12
+    assembly_name: ASM78815v1 assembly for Enterococcus faecalis 12
     taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.INSDC accession
   genome_records:
   - genome_id: img.taxon:2636415556
     source_database: img
     source: BACDIVE
     source_id: bacdive:24002
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Enterococcus faecalis 12
+    assembly_level: scaffold
+    genome_name: ASM78815v1 assembly for Enterococcus faecalis 12
     taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: patric:1351.116
     source_database: patric
     source: BACDIVE
     source_id: bacdive:24002
     source_reference_id: '66792'
-    assembly_level: wgs
-    genome_name: Enterococcus faecalis 12
+    assembly_level: scaffold
+    genome_name: ASM78815v1 assembly for Enterococcus faecalis 12
     taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: straininfo.deposit:910887
     record_type: STRAININFO_DEPOSIT
@@ -12399,8 +14750,27 @@ strains:
     source_id: bacdive:130942
     source_reference_id: '66792'
     assembly_level: contig
+    assembly_name: ASM2462272v1 assembly for Enterococcus faecalis DSM 29488
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_024622725.1
+    source: BV_BRC
+    source_id: patric:1351.6777
     assembly_name: Enterococcus faecalis DSM 29488
     taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29488
+    source_strain_identifiers: DSM 29488
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_024622725.1
+    source: BV_BRC
+    source_id: patric:1351.6777
+    assembly_name: Enterococcus faecalis DSM 29488
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29488
+    source_strain_identifiers: DSM:29488
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_024622725.1
     source: GOLD
     source_id: gold:Ga0595227
@@ -12433,6 +14803,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-29488
     source_strain_identifiers: DSM 29488
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_024622725.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_024622725.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM2462272v1
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29488
+    source_strain_identifiers: strain=DSM 29488
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_024622725.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_024622725.1
@@ -12443,6 +14824,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-29488
     source_strain_identifiers: DSM 29488
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_024622725.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_024622725.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM2462272v1
+    taxon_id: NCBITaxon:1351
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29488
+    source_strain_identifiers: strain=DSM 29488
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_024622725
     source: STRAININFO
     source_id: straininfo.strain:397145
@@ -12476,6 +14868,35 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-29488
     source_strain_identifiers: DSM 29488
     source_strain_field: ncbi_strain_identifiers
+  - genome_id: patric:1351.6777
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:130942
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: ASM2462272v1 assembly for Enterococcus faecalis DSM 29488
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1351.6777
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1351.6777
+    genome_name: Enterococcus faecalis DSM 29488
+    taxon_id: NCBITaxon:1351
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-29488
+    source_strain_identifiers: DSM 29488
+    source_strain_field: strain
+  - genome_id: patric:1351.6777
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1351.6777
+    genome_name: Enterococcus faecalis DSM 29488
+    taxon_id: NCBITaxon:1351
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-29488
+    source_strain_identifiers: DSM:29488
+    source_strain_field: culture_collection
   related_records:
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
@@ -12486,6 +14907,34 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-29488
     source_strain_identifiers: DSM 29488
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_024622725.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-29488
+    source_strain_identifiers: strain=DSM 29488
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA856830
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1351.6777
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29488
+    source_strain_identifiers: DSM 29488
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA856830
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1351.6777
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29488
+    source_strain_identifiers: DSM:29488
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA856830
     record_type: BIOPROJECT
     source: GOLD
@@ -12508,6 +14957,34 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0658944
     source_project_id: gold:Gp0703228
+  - record_id: bioproject:PRJNA856830
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_024622725.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-29488
+    source_strain_identifiers: strain=DSM 29488
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN29593124
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1351.6777
+    taxon_id: NCBITaxon:1351
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29488
+    source_strain_identifiers: DSM 29488
+    source_strain_field: strain
+  - record_id: biosample:SAMN29593124
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1351.6777
+    taxon_id: NCBITaxon:1351
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-29488
+    source_strain_identifiers: DSM:29488
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN29593124
     record_type: BIOSAMPLE
     source: GOLD
@@ -12539,6 +15016,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-29488
     source_strain_identifiers: DSM 29488
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN29593124
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_024622725.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-29488
+    source_strain_identifiers: strain=DSM 29488
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN29593124
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_024622725.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:1351
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-29488
+    source_strain_identifiers: strain=DSM 29488
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0595227
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -12659,22 +15156,25 @@ strains:
     source_id: bacdive:130943
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Enterococcus faecalis KB1
+    assembly_name: ASM168905v2 assembly for Enterococcus faecalis KB1
     taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_002221625
     source: BACDIVE
     source_id: bacdive:130943
     source_reference_id: '66792'
     assembly_level: chromosome
-    assembly_name: Enterococcus faecalis KB1
+    assembly_name: ASM222162v2 assembly for Enterococcus faecalis KB1
     taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_016696825
     source: BACDIVE
     source_id: bacdive:130943
     source_reference_id: '66792'
     assembly_level: chromosome
-    assembly_name: Enterococcus faecalis KB1
+    assembly_name: ASM1669682v1 assembly for Enterococcus faecalis KB1
     taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.INSDC accession
   genome_records:
   - genome_id: img.taxon:2721755477
     source_database: img
@@ -12682,16 +15182,36 @@ strains:
     source_id: bacdive:130943
     source_reference_id: '66792'
     assembly_level: complete
-    genome_name: Enterococcus faecalis KB1
+    genome_name: ASM168905v2 assembly for Enterococcus faecalis KB1
     taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2879835786
     source_database: img
     source: BACDIVE
     source_id: bacdive:130943
     source_reference_id: '66792'
-    assembly_level: complete
-    genome_name: Enterococcus faecalis KB1
+    assembly_level: chromosome
+    genome_name: ASM222162v2 assembly for Enterococcus faecalis KB1
     taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: patric:1351.4417
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:130943
+    source_reference_id: '66792'
+    assembly_level: chromosome
+    genome_name: ASM1669682v1 assembly for Enterococcus faecalis KB1
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1351.597
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:130943
+    source_reference_id: '66792'
+    assembly_level: chromosome
+    genome_name: ASM222162v2 assembly for Enterococcus faecalis KB1
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: straininfo.deposit:906101
     record_type: STRAININFO_DEPOSIT
@@ -13471,12 +15991,12 @@ strains:
   source: BACDIVE
   source_id: bacdive:136713
   culture_collection_ids:
-  - kgmicrobe.strain:CIP-pAT145
+  - kgmicrobe.strain:CIP%20pAT145
 - strain_id: kgmicrobe.strain:bacdive_136721
   source: BACDIVE
   source_id: bacdive:136721
   culture_collection_ids:
-  - kgmicrobe.strain:CIP-pAT191
+  - kgmicrobe.strain:CIP%20pAT191
 - strain_id: kgmicrobe.strain:bacdive_137074
   source: BACDIVE
   source_id: bacdive:137074
@@ -15843,7 +18363,68 @@ strains:
   source: BACDIVE
   source_id: bacdive:151599
   culture_collection_ids:
-  - kgmicrobe.strain:CCUG-44415-B
+  - kgmicrobe.strain:CCUG-44415%20B
+  related_records:
+  - record_id: gold:Go0281804
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0281804
+    taxon_id: NCBITaxon:1351
+    record_name: Enterococcus faecalis CCUG 44415 B
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-44415%20B
+    source_strain_identifiers: CCUG 44415 B
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0281804
+  - record_id: gold:Go0281804
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0281804
+    taxon_id: NCBITaxon:1351
+    record_name: Enterococcus faecalis CCUG 44415 B
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-44415%20B
+    source_strain_identifiers: CCUG 44415 B
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0281804
+  - record_id: straininfo.deposit:329579
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:110003
+    taxon_id: NCBITaxon:1351
+    record_name: CCUG 44415 B
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCUG-44415%20B
+    source_strain_identifiers: CCUG 44415 B
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 44415 B
+      deposit_id: straininfo.deposit:329579
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:151599
+      strain_doi: DOI:10.60712/SI-ID110003.2
+      strain_id: straininfo.strain:110003
+      strain_status: published online
+  - record_id: straininfo.strain:110003
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:110003
+    taxon_id: NCBITaxon:1351
+    record_name: CCUG 44415 B
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCUG-44415%20B
+    source_strain_identifiers: CCUG 44415 B
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 44415 B
+      deposit_id: straininfo.deposit:329579
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:151599
+      strain_doi: DOI:10.60712/SI-ID110003.2
+      strain_id: straininfo.strain:110003
+      strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_151872
   source: BACDIVE
   source_id: bacdive:151872
@@ -16488,12 +19069,134 @@ strains:
   source: BACDIVE
   source_id: bacdive:153110
   culture_collection_ids:
-  - kgmicrobe.strain:CCUG-48513-A
+  - kgmicrobe.strain:CCUG-48513%20A
+  related_records:
+  - record_id: gold:Go0281971
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0281971
+    taxon_id: NCBITaxon:1351
+    record_name: Enterococcus faecalis CCUG 48513 A
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-48513%20A
+    source_strain_identifiers: CCUG 48513 A
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0281971
+  - record_id: gold:Go0281971
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0281971
+    taxon_id: NCBITaxon:1351
+    record_name: Enterococcus faecalis CCUG 48513 A
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-48513%20A
+    source_strain_identifiers: CCUG 48513 A
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0281971
+  - record_id: straininfo.deposit:531795
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:214516
+    taxon_id: NCBITaxon:1351
+    record_name: CCUG 48513 A
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCUG-48513%20A
+    source_strain_identifiers: CCUG 48513 A
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 48513 A
+      deposit_id: straininfo.deposit:531795
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:153110
+      strain_doi: DOI:10.60712/SI-ID214516.2
+      strain_id: straininfo.strain:214516
+      strain_status: published online
+  - record_id: straininfo.strain:214516
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:214516
+    taxon_id: NCBITaxon:1351
+    record_name: CCUG 48513 A
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCUG-48513%20A
+    source_strain_identifiers: CCUG 48513 A
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 48513 A
+      deposit_id: straininfo.deposit:531795
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:153110
+      strain_doi: DOI:10.60712/SI-ID214516.2
+      strain_id: straininfo.strain:214516
+      strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_153111
   source: BACDIVE
   source_id: bacdive:153111
   culture_collection_ids:
-  - kgmicrobe.strain:CCUG-48513-B
+  - kgmicrobe.strain:CCUG-48513%20B
+  related_records:
+  - record_id: gold:Go0281972
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0281972
+    taxon_id: NCBITaxon:1351
+    record_name: Enterococcus faecalis CCUG 48513 B
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-48513%20B
+    source_strain_identifiers: CCUG 48513 B
+    source_strain_field: ORGANISM CULTURE COLLECTION ID
+    source_organism_id: gold:Go0281972
+  - record_id: gold:Go0281972
+    record_type: GOLD_ORGANISM
+    source: GOLD
+    source_id: gold:Go0281972
+    taxon_id: NCBITaxon:1351
+    record_name: Enterococcus faecalis CCUG 48513 B
+    source_field: ORGANISM GOLD ID
+    matched_strain_id: kgmicrobe.strain:CCUG-48513%20B
+    source_strain_identifiers: CCUG 48513 B
+    source_strain_field: ORGANISM STRAIN
+    source_organism_id: gold:Go0281972
+  - record_id: straininfo.deposit:531797
+    record_type: STRAININFO_DEPOSIT
+    source: STRAININFO
+    source_id: straininfo.strain:214517
+    taxon_id: NCBITaxon:1351
+    record_name: CCUG 48513 B
+    source_field: deposits.siDP
+    matched_strain_id: kgmicrobe.strain:CCUG-48513%20B
+    source_strain_identifiers: CCUG 48513 B
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 48513 B
+      deposit_id: straininfo.deposit:531797
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:153111
+      strain_doi: DOI:10.60712/SI-ID214517.2
+      strain_id: straininfo.strain:214517
+      strain_status: published online
+  - record_id: straininfo.strain:214517
+    record_type: STRAININFO_STRAIN
+    source: STRAININFO
+    source_id: straininfo.strain:214517
+    taxon_id: NCBITaxon:1351
+    record_name: CCUG 48513 B
+    source_field: strain.siID
+    matched_strain_id: kgmicrobe.strain:CCUG-48513%20B
+    source_strain_identifiers: CCUG 48513 B
+    source_strain_field: deposits.designation
+    straininfo_evidence:
+      deposit_designation: CCUG 48513 B
+      deposit_id: straininfo.deposit:531797
+      deposit_status: available
+      match_method: culture_identifier
+      source_bacdive_id: bacdive:153111
+      strain_doi: DOI:10.60712/SI-ID214517.2
+      strain_id: straininfo.strain:214517
+      strain_status: published online
 - strain_id: kgmicrobe.strain:bacdive_153620
   source: BACDIVE
   source_id: bacdive:153620
@@ -17399,8 +20102,9 @@ strains:
     source_id: bacdive:157685
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Enterococcus faecalis UCD-PD3
+    assembly_name: ASM169295v1 assembly for Enterococcus faecalis UCD-PD3
     taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.INSDC accession
   related_records:
   - record_id: straininfo.deposit:909477
     record_type: STRAININFO_DEPOSIT
@@ -17452,8 +20156,19 @@ strains:
     source_id: bacdive:158931
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Enterococcus faecalis BL-380-WT-3A
+    assembly_name: ASM1284376v1 assembly for Enterococcus faecalis BL-380-WT-3A
     taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.INSDC accession
+  genome_records:
+  - genome_id: patric:1351.3672
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:158931
+    source_reference_id: '66792'
+    assembly_level: contig
+    genome_name: ASM1284376v1 assembly for Enterococcus faecalis BL-380-WT-3A
+    taxon_id: NCBITaxon:1351
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   related_records:
   - record_id: INSDC:MN537440
     record_type: NUCLEOTIDE_SEQUENCE
@@ -18571,7 +21286,7 @@ strains:
 - strain_id: kgmicrobe.strain:bacdive_174416
   source: BACDIVE
   source_id: bacdive:174416
-  designation: HUN086 (68A)
+  designation: HUN086 (68A), HUN086, 68A
   culture_collection_ids:
   - kgmicrobe.strain:DSM-118056
   related_records:
@@ -18613,6 +21328,30 @@ strains:
       strain_doi: DOI:10.60712/SI-ID282066.1
       strain_id: straininfo.strain:282066
       strain_status: published online
+- strain_id: kgmicrobe.strain:bacdive_178760
+  source: BACDIVE
+  source_id: bacdive:178760
+  designation: '1528'
+  culture_collection_ids:
+  - kgmicrobe.strain:ST033700
+- strain_id: kgmicrobe.strain:bacdive_178867
+  source: BACDIVE
+  source_id: bacdive:178867
+  designation: UW3658
+  culture_collection_ids:
+  - kgmicrobe.strain:ST033812
+- strain_id: kgmicrobe.strain:bacdive_178868
+  source: BACDIVE
+  source_id: bacdive:178868
+  designation: UW3659
+  culture_collection_ids:
+  - kgmicrobe.strain:ST033813
+- strain_id: kgmicrobe.strain:bacdive_178869
+  source: BACDIVE
+  source_id: bacdive:178869
+  designation: UW3553-1
+  culture_collection_ids:
+  - kgmicrobe.strain:ST033814
 - strain_id: kgmicrobe.strain:bacdive_100250
   source: BACDIVE
   source_id: bacdive:100250
@@ -18622,6 +21361,7 @@ source_attestations:
   source_label: Enterococcus faecalis
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:775964
   source_label: Enterococcus faecalis
@@ -18638,7 +21378,7 @@ source_attestations:
 - source: BACDIVE
   source_id: NCBITaxon:1351
   source_label: Enterococcus faecalis
-  assertion_count: 180
+  assertion_count: 184
   assertion_unit: STRAIN
   notes: 2 strains are filed under 2 descendant NCBI taxa (see classified_as).
 - source: MEDIADIVE
@@ -18666,7 +21406,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

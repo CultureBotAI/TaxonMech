@@ -77,10 +77,12 @@ points to the source record within that snapshot.
 
 ## BacDive assertions
 
-The extractor reads `Sequence information / Genome sequences` from
-kg-microbe's `data/raw/bacdive_strains.json`, which is recorded and hashed in
-`data/raw/MANIFEST.yaml`. The transformed BacDive graph supplies the strain
-IDs and deposits; the raw snapshot supplies the missing genome links.
+The extractor reads `Sequence information / Genome sequences` from the
+complete current BacDive v2 projection in `data/bacdive/`, recorded and hashed
+in `data/raw/MANIFEST.yaml`. The same primary records supply strain IDs,
+classification and culture deposits. Legacy KGX LPSN links remain separate.
+The v2 fields `INSDC accession`, `BV-BRC accession` and `IMG accession` can
+supply multiple independent identifiers on the same genome-sequence row.
 BacDive assertions use `source: BACDIVE` and `source_id: bacdive:<digits>`;
 `source_database` retains `patric` or `img` for those genome-record links.
 
@@ -91,7 +93,7 @@ see the [BV-BRC data model](https://www.bv-brc.org/docs/cli_tutorial/cli_getting
 IMG similarly distinguishes genome, scaffold and gene identifiers in its
 [import documentation](https://img.jgi.doe.gov/docs/faq/).
 
-These links preserve the source's `assembly_level` value, including labels
+These links preserve the source's `assembly level` value, including labels
 such as `plasmid` and `wgs`. They are database-record assertions and must not
 all be described as complete genome assemblies. Chromosome and WGS sequence
 accessions in the snapshot do not become NCBI assembly or other database
@@ -309,7 +311,7 @@ The primary `data/raw/strain_assemblies.tsv` contains NCBI assembly assertions;
 `data/raw/strain_genome_records.tsv` contains the additional BV-BRC / PATRIC
 and IMG assertions plus GTDB genome links. Both include all imported links
 for the inventoried strains, including taxa outside the current corpus scope
-and strains omitted by the 200-entry listing cap. Join either inventory's
+and source strains without an eligible taxon record. Join either inventory's
 `strain_id` to `data/raw/bacdive_strains.tsv` to obtain the BacDive ID, strain designation,
 NCBI classifications and culture-collection identifiers. To start with a
 culture identifier, match an exact element of the pipe-delimited
@@ -322,7 +324,7 @@ kind; these rows are never added to the genome crosswalk or genome counts.
 `data/straininfo/assemblies.tsv` adds explicit source deposit-to-NCBI links;
 `data/straininfo/related_records.tsv.gz` adds its typed related references.
 The StrainInfo component is joined to the same local strain IDs, independently
-of the taxon listing cap.
+of the taxon scope.
 
 This prints genome associations for local BacDive strains carrying a culture
 deposit, with NCBI first and each additional source's matched deposit visible.

@@ -99,10 +99,20 @@ def problems() -> list[str]:
 def main() -> int:
     failures = problems()
     from taxonmech.atb import provenance_problems
+    from taxonmech.bacdive_v2 import records as bacdive_records
+    from taxonmech.bvbrc import records as bvbrc_records
+    from taxonmech.gold_genomes import validate_projection
+    from taxonmech.source_catalog import check as catalog_problems
     from taxonmech.straininfo import provenance_problems as straininfo_problems
 
     failures.extend(provenance_problems(REPO_ROOT))
     failures.extend(straininfo_problems(REPO_ROOT))
+    failures.extend(catalog_problems(REPO_ROOT))
+    # Verify full source projections independently of the smaller biological
+    # crosswalks; matching only the overlap must never pass as a source census.
+    sum(1 for _ in bacdive_records(REPO_ROOT / "data/bacdive"))
+    sum(1 for _ in bvbrc_records(REPO_ROOT / "data/bvbrc"))
+    validate_projection(REPO_ROOT / "data/gold")
     if failures:
         print("provenance check failed:\n  " + "\n  ".join(failures), file=sys.stderr)
         return 1

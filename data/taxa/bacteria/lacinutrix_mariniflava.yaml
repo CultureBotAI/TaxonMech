@@ -66,6 +66,16 @@ taxonomy_mappings:
   mapping_predicate: skos:closeMatch
   genome_count: 1
   notes: LPSN links this GTDB species to the taxon's name.
+synonyms:
+- synonym_text: Lacinutrix mariniflava Nedashkovskaya et al. 2008
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Lacinutrix sp. AKS432
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Lacinutrix sp. JCM 13824
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Lacinutrix_mariniflava
 - lpsn:787643
@@ -76,12 +86,20 @@ strains:
   source: BACDIVE
   source_id: bacdive:134366
   culture_collection_ids:
-  - kgmicrobe.strain:AKS-432
+  - kgmicrobe.strain:AKS%20432
   - kgmicrobe.strain:JCM-13824
   - kgmicrobe.strain:KCCM-42306
   is_type_strain: true
   medium_count: 1
   genome_assemblies:
+  - assembly_id: ncbi.assembly:GCA_001418015
+    source: BACDIVE
+    source_id: bacdive:134366
+    source_reference_id: '66792'
+    assembly_level: contig
+    assembly_name: ASM141801v1 assembly for Lacinutrix mariniflava AKS432
+    taxon_id: NCBITaxon:342955
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_001418015.1
     source: GOLD
     source_id: gold:Ga0128987
@@ -104,15 +122,25 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0026256
     source_project_id: gold:Gp0119042
+  - assembly_id: ncbi.assembly:GCF_001418015.1
+    source: BV_BRC
+    source_id: patric:342955.4
+    assembly_name: Lacinutrix mariniflava strain AKS432
+    taxon_id: NCBITaxon:342955
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:JCM-13824
+    source_strain_identifiers: JCM:13824
+    source_strain_field: culture_collection
   genome_records:
   - genome_id: img.taxon:2731957952
     source_database: img
     source: BACDIVE
     source_id: bacdive:134366
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Lacinutrix sp. JCM 13824
+    assembly_level: contig
+    genome_name: ASM141801v1 assembly for Lacinutrix mariniflava AKS432
     taxon_id: NCBITaxon:342955
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:2731957952
     source_database: img
     source: GOLD
@@ -142,10 +170,30 @@ strains:
     source: BACDIVE
     source_id: bacdive:134366
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM141801v1 assembly for Lacinutrix mariniflava AKS432
+    taxon_id: NCBITaxon:342955
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:342955.4
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:342955.4
     genome_name: Lacinutrix mariniflava strain AKS432
     taxon_id: NCBITaxon:342955
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:JCM-13824
+    source_strain_identifiers: JCM:13824
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJNA239393
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:342955.4
+    taxon_id: NCBITaxon:342955
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:JCM-13824
+    source_strain_identifiers: JCM:13824
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA239393
     record_type: BIOPROJECT
     source: GOLD
@@ -168,6 +216,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0026256
     source_project_id: gold:Gp0119042
+  - record_id: biosample:SAMN04002510
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:342955.4
+    taxon_id: NCBITaxon:342955
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:JCM-13824
+    source_strain_identifiers: JCM:13824
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN04002510
     record_type: BIOSAMPLE
     source: GOLD
@@ -266,6 +323,7 @@ source_attestations:
   source_label: Lacinutrix mariniflava
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:787643
   source_label: Lacinutrix mariniflava
@@ -294,7 +352,7 @@ source_attestations:
   assertion_count: 13
   assertion_unit: TRAIT_ASSERTION
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

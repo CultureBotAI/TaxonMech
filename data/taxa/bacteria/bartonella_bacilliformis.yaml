@@ -68,8 +68,14 @@ taxonomy_mappings:
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 synonyms:
-- synonym_text: Bartonia bacilliformis
+- synonym_text: '"Bartonia bacilliformis" Strong et al. 1913'
   synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Bartonella bacilliformis (Strong et al. 1913) Strong et al. 1915
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Bartonia bacilliformis
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 xrefs:
 - GTDB:s__Bartonella_bacilliformis
@@ -90,8 +96,10 @@ strains:
     source_id: bacdive:167784
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Bartonella bacilliformis KC583 KC583; ATCC 35685
+    assembly_name: ASM1544v1 assembly for Bartonella bacilliformis KC583 KC583; ATCC
+      35685
     taxon_id: NCBITaxon:360095
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_000015445
     source: GOLD
     source_id: gold:Ga0027791
@@ -103,6 +111,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0000210
     source_project_id: gold:Gp0000210
+  - assembly_id: ncbi.assembly:GCA_000015445.1
+    source: BV_BRC
+    source_id: patric:360095.6
+    assembly_name: Bartonella bacilliformis KC583
+    taxon_id: NCBITaxon:360095
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-35685
+    source_strain_identifiers: ATCC 35685
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_000015445.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_000015445.1
@@ -137,6 +154,16 @@ strains:
     source_strain_field: ncbi_strain_identifiers
   - genome_id: img.taxon:639633009
     source_database: img
+    source: BACDIVE
+    source_id: bacdive:167784
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM1544v1 assembly for Bartonella bacilliformis KC583 KC583; ATCC
+      35685
+    taxon_id: NCBITaxon:360095
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:639633009
+    source_database: img
     source: GOLD
     source_id: gold:Ga0027791
     genome_name: Bartonella bacilliformis KC583
@@ -153,9 +180,30 @@ strains:
     source_id: bacdive:167784
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1544v1 assembly for Bartonella bacilliformis KC583 KC583; ATCC
+      35685
+    taxon_id: NCBITaxon:360095
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:360095.6
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:360095.6
     genome_name: Bartonella bacilliformis KC583
     taxon_id: NCBITaxon:360095
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-35685
+    source_strain_identifiers: ATCC 35685
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJNA16249
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:360095.6
+    taxon_id: NCBITaxon:360095
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-35685
+    source_strain_identifiers: ATCC 35685
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA16249
     record_type: BIOPROJECT
     source: GOLD
@@ -176,6 +224,15 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-35685
     source_strain_identifiers: ATCC 35685;KC583
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN02604047
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:360095.6
+    taxon_id: NCBITaxon:360095
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-35685
+    source_strain_identifiers: ATCC 35685
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN02604047
     record_type: BIOSAMPLE
     source: GOLD
@@ -667,6 +724,7 @@ source_attestations:
   source_label: Bartonella bacilliformis
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:783476
   source_label: Bartonella bacilliformis
@@ -698,7 +756,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

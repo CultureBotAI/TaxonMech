@@ -63,15 +63,24 @@ taxonomy_mappings:
   genome_count: 304
   notes: LPSN links this GTDB species to the taxon's name.
 synonyms:
+- synonym_text: '"Filterable agent of primary atypical pneumonia" Eaton et al. 1944'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: '"Schizoplasma pneumoniae" (Somerson et al. 1963) Furness et al. 1968'
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 - synonym_text: Filterable agent of primary atypical pneumonia
-  synonym_type: EXACT_SYNONYM
+  synonym_type: RELATED_SYNONYM
   source: NCBITaxon
 - synonym_text: Mycoplasma pneumoniae
   synonym_type: RELATED_SYNONYM
   source: LPSN
   source_id: lpsn:784427
-- synonym_text: Schizoplasma pneumoniae
+- synonym_text: Mycoplasmoides pneumoniae (Somerson et al. 1963) Gupta et al. 2018
   synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Schizoplasma pneumoniae
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 xrefs:
 - GTDB:s__Mycoplasmoides_pneumoniae
@@ -87,7 +96,7 @@ strains:
   - kgmicrobe.strain:ATCC-15531
   - kgmicrobe.strain:CIP-103766
   - kgmicrobe.strain:DSM-23978
-  - kgmicrobe.strain:Eaton-Agent
+  - kgmicrobe.strain:Eaton%20Agent
   - kgmicrobe.strain:NBRC-14401
   - kgmicrobe.strain:NCTC-10119
   is_type_strain: true
@@ -119,8 +128,18 @@ strains:
     source_id: bacdive:8615
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Mycoplasmoides pneumoniae NCTC10119
+    assembly_name: 50648_A01-3 assembly for Mycoplasmoides pneumoniae NCTC10119
     taxon_id: NCBITaxon:2104
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_900660465.1
+    source: BV_BRC
+    source_id: patric:2104.332
+    assembly_name: Mycoplasma pneumoniae strain NCTC10119
+    taxon_id: NCBITaxon:2104
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10119
+    source_strain_identifiers: NCTC:10119
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_900660465.1
     source: GOLD
     source_id: gold:Ga0616113
@@ -143,6 +162,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0613405
     source_project_id: gold:Gp0761151
+  - assembly_id: ncbi.assembly:GCF_001272835.1
+    source: BV_BRC
+    source_id: patric:722438.5
+    assembly_name: Mycoplasma pneumoniae FH
+    taxon_id: NCBITaxon:722438
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-15531
+    source_strain_identifiers: ATCC:15531
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_900660465
     source: STRAININFO
     source_id: straininfo.strain:311028
@@ -190,6 +218,15 @@ strains:
     source_project_id: gold:Gp0007705
   - genome_id: img.taxon:8045958143
     source_database: img
+    source: BACDIVE
+    source_id: bacdive:8615
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: 50648_A01-3 assembly for Mycoplasmoides pneumoniae NCTC10119
+    taxon_id: NCBITaxon:2104
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:8045958143
+    source_database: img
     source: GOLD
     source_id: gold:Ga0616113
     genome_name: Mycoplasmoides pneumoniae NCTC 10119
@@ -218,17 +255,39 @@ strains:
     source_id: bacdive:8615
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: 50648_A01-3 assembly for Mycoplasmoides pneumoniae NCTC10119
+    taxon_id: NCBITaxon:2104
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:2104.332
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:2104.332
     genome_name: Mycoplasma pneumoniae strain NCTC10119
     taxon_id: NCBITaxon:2104
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:NCTC-10119
+    source_strain_identifiers: NCTC:10119
+    source_strain_field: culture_collection
   - genome_id: patric:722438.5
     source_database: patric
-    source: BACDIVE
-    source_id: bacdive:8615
-    source_reference_id: '66792'
-    assembly_level: complete
+    source: BV_BRC
+    source_id: patric:722438.5
     genome_name: Mycoplasma pneumoniae FH
     taxon_id: NCBITaxon:722438
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-15531
+    source_strain_identifiers: ATCC:15531
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJEB6403
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:2104.332
+    taxon_id: NCBITaxon:2104
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10119
+    source_strain_identifiers: NCTC:10119
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJEB6403
     record_type: BIOPROJECT
     source: GOLD
@@ -251,6 +310,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0613405
     source_project_id: gold:Gp0761151
+  - record_id: bioproject:PRJNA182276
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:722438.5
+    taxon_id: NCBITaxon:722438
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-15531
+    source_strain_identifiers: ATCC:15531
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA182276
     record_type: BIOPROJECT
     source: GOLD
@@ -286,6 +354,15 @@ strains:
     source_project_id: gold:Gp0007705
   - record_id: biosample:SAMEA4384307
     record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:2104.332
+    taxon_id: NCBITaxon:2104
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:NCTC-10119
+    source_strain_identifiers: NCTC:10119
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMEA4384307
+    record_type: BIOSAMPLE
     source: GOLD
     source_id: gold:Gp0761151
     taxon_id: NCBITaxon:2104
@@ -306,6 +383,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0613405
     source_project_id: gold:Gp0761151
+  - record_id: biosample:SAMN03284384
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:722438.5
+    taxon_id: NCBITaxon:722438
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-15531
+    source_strain_identifiers: ATCC:15531
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN03284384
     record_type: BIOSAMPLE
     source: GOLD
@@ -846,15 +932,54 @@ strains:
     source_id: bacdive:8614
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Mycoplasmoides pneumoniae FH
+    assembly_name: ASM14394v1 assembly for Mycoplasmoides pneumoniae FH
     taxon_id: NCBITaxon:722438
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_001272835
     source: BACDIVE
     source_id: bacdive:8614
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Mycoplasmoides pneumoniae FH
+    assembly_name: ASM127283v1 assembly for Mycoplasmoides pneumoniae FH
     taxon_id: NCBITaxon:722438
+    source_field: Sequence information.Genome sequences.INSDC accession
+  genome_records:
+  - genome_id: img.taxon:2636415685
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:8614
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM127283v1 assembly for Mycoplasmoides pneumoniae FH
+    taxon_id: NCBITaxon:722438
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:648231715
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:8614
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM14394v1 assembly for Mycoplasmoides pneumoniae FH
+    taxon_id: NCBITaxon:722438
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: patric:722438.3
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:8614
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM14394v1 assembly for Mycoplasmoides pneumoniae FH
+    taxon_id: NCBITaxon:722438
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:722438.5
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:8614
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM127283v1 assembly for Mycoplasmoides pneumoniae FH
+    taxon_id: NCBITaxon:722438
+    source_field: Sequence information.Genome sequences.BV-BRC accession
 - strain_id: kgmicrobe.strain:bacdive_8616
   source: BACDIVE
   source_id: bacdive:8616
@@ -868,8 +993,10 @@ strains:
     source_id: bacdive:8616
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Mycoplasmoides pneumoniae M129 M129; ATCC 29342
+    assembly_name: ASM2734v1 assembly for Mycoplasmoides pneumoniae M129 M129; ATCC
+      29342
     taxon_id: NCBITaxon:272634
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_000027345
     source: GOLD
     source_id: gold:Ga0029564
@@ -881,6 +1008,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0034988
     source_project_id: gold:Gp0000788
+  - assembly_id: ncbi.assembly:GCA_000027345.1
+    source: BV_BRC
+    source_id: patric:272634.6
+    assembly_name: Mycoplasma pneumoniae M129
+    taxon_id: NCBITaxon:272634
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29342
+    source_strain_identifiers: ATCC 29342
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCA_000027345.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_000027345.1
@@ -896,8 +1032,9 @@ strains:
     source_id: bacdive:8616
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Mycoplasmoides pneumoniae M129-B7
+    assembly_name: ASM33108v2 assembly for Mycoplasmoides pneumoniae M129-B7
     taxon_id: NCBITaxon:1238993
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_000331085
     source: GOLD
     source_id: gold:Ga0012264
@@ -909,6 +1046,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0000788
     source_project_id: gold:Gp0034988
+  - assembly_id: ncbi.assembly:GCA_000331085.2
+    source: BV_BRC
+    source_id: patric:1238993.3
+    assembly_name: Mycoplasma pneumoniae M129-B7
+    taxon_id: NCBITaxon:1238993
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29342
+    source_strain_identifiers: ATCC 29342
+    source_strain_field: culture_collection
   - assembly_id: ncbi.assembly:GCF_000027345.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_000027345.1
@@ -953,6 +1099,15 @@ strains:
     source_strain_field: ncbi_strain_identifiers
   - genome_id: img.taxon:2521172699
     source_database: img
+    source: BACDIVE
+    source_id: bacdive:8616
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM33108v2 assembly for Mycoplasmoides pneumoniae M129-B7
+    taxon_id: NCBITaxon:1238993
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:2521172699
+    source_database: img
     source: GOLD
     source_id: gold:Ga0012264
     genome_name: Mycoplasmoides pneumoniae M129-B7
@@ -963,6 +1118,16 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0000788
     source_project_id: gold:Gp0034988
+  - genome_id: img.taxon:637000183
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:8616
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM2734v1 assembly for Mycoplasmoides pneumoniae M129 M129; ATCC
+      29342
+    taxon_id: NCBITaxon:272634
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:637000183
     source_database: img
     source: GOLD
@@ -981,17 +1146,49 @@ strains:
     source_id: bacdive:8616
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM33108v2 assembly for Mycoplasmoides pneumoniae M129-B7
+    taxon_id: NCBITaxon:1238993
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:1238993.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:1238993.3
     genome_name: Mycoplasma pneumoniae M129-B7
     taxon_id: NCBITaxon:1238993
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-29342
+    source_strain_identifiers: ATCC 29342
+    source_strain_field: culture_collection
   - genome_id: patric:272634.6
     source_database: patric
     source: BACDIVE
     source_id: bacdive:8616
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM2734v1 assembly for Mycoplasmoides pneumoniae M129 M129; ATCC
+      29342
+    taxon_id: NCBITaxon:272634
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:272634.6
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:272634.6
     genome_name: Mycoplasma pneumoniae M129
     taxon_id: NCBITaxon:272634
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-29342
+    source_strain_identifiers: ATCC 29342
+    source_strain_field: culture_collection
   related_records:
+  - record_id: bioproject:PRJNA176548
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:1238993.3
+    taxon_id: NCBITaxon:1238993
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29342
+    source_strain_identifiers: ATCC 29342
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA176548
     record_type: BIOPROJECT
     source: GOLD
@@ -1014,6 +1211,15 @@ strains:
     source_strain_field: ncbi_strain_identifiers
   - record_id: bioproject:PRJNA99
     record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:272634.6
+    taxon_id: NCBITaxon:272634
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29342
+    source_strain_identifiers: ATCC 29342
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA99
+    record_type: BIOPROJECT
     source: GOLD
     source_id: gold:Gp0000788
     taxon_id: NCBITaxon:272634
@@ -1023,6 +1229,15 @@ strains:
     source_strain_field: ORGANISM CULTURE COLLECTION ID
     source_organism_id: gold:Go0034988
     source_project_id: gold:Gp0000788
+  - record_id: biosample:SAMN02603304
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:272634.6
+    taxon_id: NCBITaxon:272634
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29342
+    source_strain_identifiers: ATCC 29342
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN02603304
     record_type: BIOSAMPLE
     source: GOLD
@@ -1043,6 +1258,15 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-29342
     source_strain_identifiers: ATCC 29342;M129
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN02604130
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:1238993.3
+    taxon_id: NCBITaxon:1238993
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29342
+    source_strain_identifiers: ATCC 29342
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN02604130
     record_type: BIOSAMPLE
     source: GOLD
@@ -1247,6 +1471,7 @@ source_attestations:
   source_label: Mycoplasmoides pneumoniae
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:798618
   source_label: Mycoplasmoides pneumoniae
@@ -1289,7 +1514,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

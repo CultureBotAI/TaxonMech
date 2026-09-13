@@ -53,10 +53,10 @@ taxonomy_mappings:
     also maps to other NCBI taxa (kg-microbe broadMatch).'
 synonyms:
 - synonym_text: Neisseria sicca LMG 5290
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Neisseria sicca NRL 30016
-  synonym_type: RELATED_SYNONYM
+  synonym_type: EXACT_SYNONYM
   source: NCBITaxon
 - synonym_text: Neisseria sicca str. ATCC 29256
   synonym_type: EXACT_SYNONYM
@@ -72,6 +72,7 @@ strains:
   source_id: bacdive:10483
   designation: Berger 6b, 30.016, Q19
   culture_collection_ids:
+  - kgmicrobe.strain:016
   - kgmicrobe.strain:ATCC-29256
   - kgmicrobe.strain:ATCC-49276
   - kgmicrobe.strain:CCUG-23929
@@ -80,16 +81,17 @@ strains:
   - kgmicrobe.strain:DSM-17713
   - kgmicrobe.strain:LMG-5290
   - kgmicrobe.strain:LMG-5312
-  - kgmicrobe.strain:NRL-30
-  - kgmicrobe.strain:NRL-30016
+  - kgmicrobe.strain:NRL%2030
+  - kgmicrobe.strain:NRL%2030016
   genome_assemblies:
   - assembly_id: ncbi.assembly:GCA_000174655
     source: BACDIVE
     source_id: bacdive:10483
     source_reference_id: '66792'
     assembly_level: contig
-    assembly_name: Neisseria sicca ATCC 29256
+    assembly_name: ASM17465v1 assembly for Neisseria sicca ATCC 29256
     taxon_id: NCBITaxon:547045
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_000174655
     source: GOLD
     source_id: gold:Ga0029619
@@ -113,6 +115,33 @@ strains:
     source_organism_id: gold:Go0003928
     source_project_id: gold:Gp0003928
   - assembly_id: ncbi.assembly:GCA_000174655.1
+    source: BV_BRC
+    source_id: patric:547045.3
+    assembly_name: Neisseria sicca ATCC 29256
+    taxon_id: NCBITaxon:547045
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29256
+    source_strain_identifiers: ATCC 29256
+    source_strain_field: strain
+  - assembly_id: ncbi.assembly:GCA_000174655.1
+    source: BV_BRC
+    source_id: patric:547045.3
+    assembly_name: Neisseria sicca ATCC 29256
+    taxon_id: NCBITaxon:547045
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29256
+    source_strain_identifiers: ATCC 29256, ATCC 49276, CDN 16, NRL 30016
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_000174655.1
+    source: BV_BRC
+    source_id: patric:547045.3
+    assembly_name: Neisseria sicca ATCC 29256
+    taxon_id: NCBITaxon:547045
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-49276
+    source_strain_identifiers: ATCC 29256, ATCC 49276, CDN 16, NRL 30016
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_000174655.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_000174655.1
     assembly_level: Contig
@@ -122,13 +151,43 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-29256
     source_strain_identifiers: ATCC 29256
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_000174655.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000174655.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM17465v1
+    taxon_id: NCBITaxon:547045
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29256
+    source_strain_identifiers: strain=ATCC 29256
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_014054945
     source: BACDIVE
     source_id: bacdive:10483
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Neisseria sicca DSM 17713
+    assembly_name: ASM1405494v1 assembly for Neisseria sicca DSM 17713
     taxon_id: NCBITaxon:490
+    source_field: Sequence information.Genome sequences.INSDC accession
+  - assembly_id: ncbi.assembly:GCA_014054945.1
+    source: BV_BRC
+    source_id: patric:490.255
+    assembly_name: Neisseria sicca strain DSM 17713
+    taxon_id: NCBITaxon:490
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29256
+    source_strain_identifiers: ATCC:29256
+    source_strain_field: culture_collection
+  - assembly_id: ncbi.assembly:GCA_014054945.1
+    source: BV_BRC
+    source_id: patric:490.255
+    assembly_name: Neisseria sicca strain DSM 17713
+    taxon_id: NCBITaxon:490
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-17713
+    source_strain_identifiers: DSM 17713
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_014054945.1
     source: GOLD
     source_id: gold:Ga0561191
@@ -161,13 +220,25 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-17713
     source_strain_identifiers: DSM 17713
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_014054945.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_014054945.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM1405494v1
+    taxon_id: NCBITaxon:490
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-17713
+    source_strain_identifiers: strain=DSM 17713
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_019334765
     source: BACDIVE
     source_id: bacdive:10483
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Neisseria sicca ATCC 29256
+    assembly_name: ASM1933476v1 assembly for Neisseria sicca ATCC 29256
     taxon_id: NCBITaxon:547045
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_019334765.1
     source: GOLD
     source_id: gold:Ga0560374
@@ -200,6 +271,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-29256
     source_strain_identifiers: ATCC 29256
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCA_019334765.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_019334765.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM1933476v1
+    taxon_id: NCBITaxon:547045
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29256
+    source_strain_identifiers: strain=ATCC 29256
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_000174655.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_000174655.1
@@ -210,6 +292,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-29256
     source_strain_identifiers: ATCC 29256
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_000174655.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000174655.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Contig
+    assembly_name: ASM17465v1
+    taxon_id: NCBITaxon:547045
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29256
+    source_strain_identifiers: strain=ATCC 29256
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_014054945.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_014054945.1
@@ -220,6 +313,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-17713
     source_strain_identifiers: DSM 17713
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_014054945.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_014054945.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM1405494v1
+    taxon_id: NCBITaxon:490
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:DSM-17713
+    source_strain_identifiers: strain=DSM 17713
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCF_019334765.1
     source: GTDB
     source_id: gtdb.genome:RS_GCF_019334765.1
@@ -230,6 +334,17 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-29256
     source_strain_identifiers: ATCC 29256
     source_strain_field: ncbi_strain_identifiers
+  - assembly_id: ncbi.assembly:GCF_019334765.1
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_019334765.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    assembly_level: Complete Genome
+    assembly_name: ASM1933476v1
+    taxon_id: NCBITaxon:547045
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29256
+    source_strain_identifiers: strain=ATCC 29256
+    source_strain_field: infraspecific_name
   - assembly_id: ncbi.assembly:GCA_000174655
     source: STRAININFO
     source_id: straininfo.strain:298122
@@ -332,9 +447,10 @@ strains:
     source: BACDIVE
     source_id: bacdive:10483
     source_reference_id: '66792'
-    assembly_level: draft
-    genome_name: Neisseria sicca ATCC 29256
+    assembly_level: contig
+    genome_name: ASM17465v1 assembly for Neisseria sicca ATCC 29256
     taxon_id: NCBITaxon:547045
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:645058748
     source_database: img
     source: GOLD
@@ -361,6 +477,15 @@ strains:
     source_project_id: gold:Gp0003928
   - genome_id: img.taxon:8006863052
     source_database: img
+    source: BACDIVE
+    source_id: bacdive:10483
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM1933476v1 assembly for Neisseria sicca ATCC 29256
+    taxon_id: NCBITaxon:547045
+    source_field: Sequence information.Genome sequences.IMG accession
+  - genome_id: img.taxon:8006863052
+    source_database: img
     source: GOLD
     source_id: gold:Ga0560374
     genome_name: Neisseria sicca ATCC 29256
@@ -383,6 +508,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0003928
     source_project_id: gold:Gp0653269
+  - genome_id: img.taxon:8115597348
+    source_database: img
+    source: BACDIVE
+    source_id: bacdive:10483
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM1405494v1 assembly for Neisseria sicca DSM 17713
+    taxon_id: NCBITaxon:490
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:8115597348
     source_database: img
     source: GOLD
@@ -413,16 +547,77 @@ strains:
     source_id: bacdive:10483
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM1405494v1 assembly for Neisseria sicca DSM 17713
+    taxon_id: NCBITaxon:490
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:490.255
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:490.255
     genome_name: Neisseria sicca strain DSM 17713
     taxon_id: NCBITaxon:490
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-29256
+    source_strain_identifiers: ATCC:29256
+    source_strain_field: culture_collection
+  - genome_id: patric:490.255
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:490.255
+    genome_name: Neisseria sicca strain DSM 17713
+    taxon_id: NCBITaxon:490
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:DSM-17713
+    source_strain_identifiers: DSM 17713
+    source_strain_field: strain
+  - genome_id: patric:490.260
+    source_database: patric
+    source: BACDIVE
+    source_id: bacdive:10483
+    source_reference_id: '66792'
+    assembly_level: complete
+    genome_name: ASM1933476v1 assembly for Neisseria sicca ATCC 29256
+    taxon_id: NCBITaxon:547045
+    source_field: Sequence information.Genome sequences.BV-BRC accession
   - genome_id: patric:547045.3
     source_database: patric
     source: BACDIVE
     source_id: bacdive:10483
     source_reference_id: '66792'
-    assembly_level: wgs
+    assembly_level: contig
+    genome_name: ASM17465v1 assembly for Neisseria sicca ATCC 29256
+    taxon_id: NCBITaxon:547045
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:547045.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:547045.3
     genome_name: Neisseria sicca ATCC 29256
     taxon_id: NCBITaxon:547045
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-29256
+    source_strain_identifiers: ATCC 29256
+    source_strain_field: strain
+  - genome_id: patric:547045.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:547045.3
+    genome_name: Neisseria sicca ATCC 29256
+    taxon_id: NCBITaxon:547045
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-29256
+    source_strain_identifiers: ATCC 29256, ATCC 49276, CDN 16, NRL 30016
+    source_strain_field: culture_collection
+  - genome_id: patric:547045.3
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:547045.3
+    genome_name: Neisseria sicca ATCC 29256
+    taxon_id: NCBITaxon:547045
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:ATCC-49276
+    source_strain_identifiers: ATCC 29256, ATCC 49276, CDN 16, NRL 30016
+    source_strain_field: culture_collection
   related_records:
   - record_id: bioproject:PRJNA224116
     record_type: BIOPROJECT
@@ -451,6 +646,63 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-29256
     source_strain_identifiers: ATCC 29256
     source_strain_field: ncbi_strain_identifiers
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000174655.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:547045
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-29256
+    source_strain_identifiers: strain=ATCC 29256
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_014054945.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:490
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-17713
+    source_strain_identifiers: strain=DSM 17713
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA224116
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_019334765.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:547045
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-29256
+    source_strain_identifiers: strain=ATCC 29256
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA30481
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:547045.3
+    taxon_id: NCBITaxon:547045
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29256
+    source_strain_identifiers: ATCC 29256
+    source_strain_field: strain
+  - record_id: bioproject:PRJNA30481
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:547045.3
+    taxon_id: NCBITaxon:547045
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29256
+    source_strain_identifiers: ATCC 29256, ATCC 49276, CDN 16, NRL 30016
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA30481
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:547045.3
+    taxon_id: NCBITaxon:547045
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-49276
+    source_strain_identifiers: ATCC 29256, ATCC 49276, CDN 16, NRL 30016
+    source_strain_field: culture_collection
   - record_id: bioproject:PRJNA30481
     record_type: BIOPROJECT
     source: GOLD
@@ -473,6 +725,34 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0003928
     source_project_id: gold:Gp0003928
+  - record_id: bioproject:PRJNA30481
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000174655.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:547045
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-29256
+    source_strain_identifiers: strain=ATCC 29256
+    source_strain_field: infraspecific_name
+  - record_id: bioproject:PRJNA647881
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:490.255
+    taxon_id: NCBITaxon:490
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29256
+    source_strain_identifiers: ATCC:29256
+    source_strain_field: culture_collection
+  - record_id: bioproject:PRJNA647881
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:490.255
+    taxon_id: NCBITaxon:490
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:DSM-17713
+    source_strain_identifiers: DSM 17713
+    source_strain_field: strain
   - record_id: bioproject:PRJNA647881
     record_type: BIOPROJECT
     source: GOLD
@@ -495,6 +775,16 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0629264
     source_project_id: gold:Gp0656306
+  - record_id: bioproject:PRJNA647881
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_014054945.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:490
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:DSM-17713
+    source_strain_identifiers: strain=DSM 17713
+    source_strain_field: infraspecific_name
   - record_id: bioproject:PRJNA744665
     record_type: BIOPROJECT
     source: GOLD
@@ -517,6 +807,43 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0003928
     source_project_id: gold:Gp0653269
+  - record_id: bioproject:PRJNA744665
+    record_type: BIOPROJECT
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_019334765.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:547045
+    source_field: bioproject
+    matched_strain_id: kgmicrobe.strain:ATCC-29256
+    source_strain_identifiers: strain=ATCC 29256
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN00008842
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:547045.3
+    taxon_id: NCBITaxon:547045
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29256
+    source_strain_identifiers: ATCC 29256
+    source_strain_field: strain
+  - record_id: biosample:SAMN00008842
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:547045.3
+    taxon_id: NCBITaxon:547045
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29256
+    source_strain_identifiers: ATCC 29256, ATCC 49276, CDN 16, NRL 30016
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN00008842
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:547045.3
+    taxon_id: NCBITaxon:547045
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-49276
+    source_strain_identifiers: ATCC 29256, ATCC 49276, CDN 16, NRL 30016
+    source_strain_field: culture_collection
   - record_id: biosample:SAMN00008842
     record_type: BIOSAMPLE
     source: GOLD
@@ -548,6 +875,44 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-29256
     source_strain_identifiers: ATCC 29256
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN00008842
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_000174655.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:547045
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-29256
+    source_strain_identifiers: strain=ATCC 29256
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN00008842
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_000174655.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:547045
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-29256
+    source_strain_identifiers: strain=ATCC 29256
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN15603184
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:490.255
+    taxon_id: NCBITaxon:490
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:ATCC-29256
+    source_strain_identifiers: ATCC:29256
+    source_strain_field: culture_collection
+  - record_id: biosample:SAMN15603184
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:490.255
+    taxon_id: NCBITaxon:490
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:DSM-17713
+    source_strain_identifiers: DSM 17713
+    source_strain_field: strain
   - record_id: biosample:SAMN15603184
     record_type: BIOSAMPLE
     source: GOLD
@@ -579,6 +944,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:DSM-17713
     source_strain_identifiers: DSM 17713
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN15603184
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_014054945.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:490
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-17713
+    source_strain_identifiers: strain=DSM 17713
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN15603184
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_014054945.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:490
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:DSM-17713
+    source_strain_identifiers: strain=DSM 17713
+    source_strain_field: infraspecific_name
   - record_id: biosample:SAMN20114574
     record_type: BIOSAMPLE
     source: GOLD
@@ -610,6 +995,26 @@ strains:
     matched_strain_id: kgmicrobe.strain:ATCC-29256
     source_strain_identifiers: ATCC 29256
     source_strain_field: ncbi_strain_identifiers
+  - record_id: biosample:SAMN20114574
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCA_019334765.1
+    source_reference_id: ncbi-assembly-genbank-2026-09-13.txt
+    taxon_id: NCBITaxon:547045
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-29256
+    source_strain_identifiers: strain=ATCC 29256
+    source_strain_field: infraspecific_name
+  - record_id: biosample:SAMN20114574
+    record_type: BIOSAMPLE
+    source: NCBI_ASSEMBLY
+    source_id: ncbi.assembly:GCF_019334765.1
+    source_reference_id: ncbi-assembly-refseq-2026-09-13.txt
+    taxon_id: NCBITaxon:547045
+    source_field: biosample
+    matched_strain_id: kgmicrobe.strain:ATCC-29256
+    source_strain_identifiers: strain=ATCC 29256
+    source_strain_field: infraspecific_name
   - record_id: gold:Ga0029619
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -1280,6 +1685,7 @@ source_attestations:
   source_label: Neisseria sicca ATCC 29256
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: GTDB
   source_id: GTDB:s__Neisseria_subflava_A
   source_label: s__Neisseria_subflava_A
@@ -1308,7 +1714,7 @@ source_attestations:
   assertion_count: 1
   assertion_unit: TRAIT_ASSERTION
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested

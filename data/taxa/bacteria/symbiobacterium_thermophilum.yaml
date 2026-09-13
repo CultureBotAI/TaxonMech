@@ -83,6 +83,19 @@ taxonomy_mappings:
   genome_count: 1
   notes: 'Pooled: GTDB places genomes NCBI labels as this taxon in this species, which
     also maps to other NCBI taxa (kg-microbe broadMatch).'
+synonyms:
+- synonym_text: Symbiobacteriaceae bacterium G2
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Symbiobacterium sp. No. 67
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Symbiobacterium sp. YK67
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
+- synonym_text: Symbiobacterium thermophilum Ohno et al. 2000
+  synonym_type: RELATED_SYNONYM
+  source: NCBITaxon
 xrefs:
 - GTDB:s__Symbiobacterium_thermophilum
 - lpsn:785038
@@ -105,8 +118,9 @@ strains:
     source_id: bacdive:18012
     source_reference_id: '66792'
     assembly_level: complete
-    assembly_name: Symbiobacterium thermophilum IAM 14863 IAM14863
+    assembly_name: ASM990v1 assembly for Symbiobacterium thermophilum IAM 14863 IAM14863
     taxon_id: NCBITaxon:292459
+    source_field: Sequence information.Genome sequences.INSDC accession
   - assembly_id: ncbi.assembly:GCA_000009905
     source: GOLD
     source_id: gold:Ga0031126
@@ -140,6 +154,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0000549
     source_project_id: gold:Gp0000549
+  - assembly_id: ncbi.assembly:GCA_000009905.1
+    source: BV_BRC
+    source_id: patric:292459.5
+    assembly_name: Symbiobacterium thermophilum IAM 14863
+    taxon_id: NCBITaxon:292459
+    source_field: assembly_accession
+    matched_strain_id: kgmicrobe.strain:IAM-14863
+    source_strain_identifiers: IAM 14863
+    source_strain_field: strain
   - assembly_id: ncbi.assembly:GCA_000009905
     source: STRAININFO
     source_id: straininfo.strain:88609
@@ -168,8 +191,9 @@ strains:
     source_id: bacdive:18012
     source_reference_id: '66792'
     assembly_level: complete
-    genome_name: Symbiobacterium thermophilum IAM 14863
+    genome_name: ASM990v1 assembly for Symbiobacterium thermophilum IAM 14863 IAM14863
     taxon_id: NCBITaxon:292459
+    source_field: Sequence information.Genome sequences.IMG accession
   - genome_id: img.taxon:637000306
     source_database: img
     source: GOLD
@@ -212,9 +236,29 @@ strains:
     source_id: bacdive:18012
     source_reference_id: '66792'
     assembly_level: complete
+    genome_name: ASM990v1 assembly for Symbiobacterium thermophilum IAM 14863 IAM14863
+    taxon_id: NCBITaxon:292459
+    source_field: Sequence information.Genome sequences.BV-BRC accession
+  - genome_id: patric:292459.5
+    source_database: patric
+    source: BV_BRC
+    source_id: patric:292459.5
     genome_name: Symbiobacterium thermophilum IAM 14863
     taxon_id: NCBITaxon:292459
+    source_field: genome_id
+    matched_strain_id: kgmicrobe.strain:IAM-14863
+    source_strain_identifiers: IAM 14863
+    source_strain_field: strain
   related_records:
+  - record_id: bioproject:PRJNA12994
+    record_type: BIOPROJECT
+    source: BV_BRC
+    source_id: patric:292459.5
+    taxon_id: NCBITaxon:292459
+    source_field: bioproject_accession
+    matched_strain_id: kgmicrobe.strain:IAM-14863
+    source_strain_identifiers: IAM 14863
+    source_strain_field: strain
   - record_id: bioproject:PRJNA12994
     record_type: BIOPROJECT
     source: GOLD
@@ -248,6 +292,15 @@ strains:
     source_strain_field: ORGANISM STRAIN
     source_organism_id: gold:Go0000549
     source_project_id: gold:Gp0000549
+  - record_id: biosample:SAMD00061067
+    record_type: BIOSAMPLE
+    source: BV_BRC
+    source_id: patric:292459.5
+    taxon_id: NCBITaxon:292459
+    source_field: biosample_accession
+    matched_strain_id: kgmicrobe.strain:IAM-14863
+    source_strain_identifiers: IAM 14863
+    source_strain_field: strain
   - record_id: gold:Ga0031126
     record_type: GOLD_ANALYSIS
     source: GOLD
@@ -539,6 +592,7 @@ source_attestations:
   source_label: Symbiobacterium thermophilum
   assertion_count: 1
   assertion_unit: NAME
+  notes: 'NCBI taxonomy snapshot: 2026-09-13.'
 - source: LPSN
   source_id: lpsn:785038
   source_label: Symbiobacterium thermophilum
@@ -571,7 +625,7 @@ source_attestations:
   assertion_unit: TRAIT_ASSERTION
   notes: Records filed directly under this taxon; descendant taxa are not gathered.
 curation_history:
-- timestamp: '2026-09-12T08:15:34Z'
+- timestamp: '2026-09-13T17:54:04Z'
   curator: seed_from_sources
   action: SEEDED_FROM_SOURCES
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested
