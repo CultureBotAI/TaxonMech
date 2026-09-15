@@ -30,6 +30,8 @@ from urllib.parse import unquote, urlsplit
 from corpus import REPO_ROOT, TAXA_DIR, load_records
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
+from taxonmech.text_map_site import PreparedTextMap, prepare_text_map
+
 TEMPLATES_DIR = REPO_ROOT / "src" / "taxonmech" / "templates"
 PAGES_DIR = REPO_ROOT / "pages"
 ATB_DIR = REPO_ROOT / "data" / "atb"
@@ -314,9 +316,21 @@ def add_straininfo_context(atb: dict, overlap: dict) -> None:
                 strain["straininfo_context"] = by_strain[strain["strain_id"]]
 
 
-def render(out_dir: Path) -> None:
+def render(out_dir: Path, *, replace: bool = False) -> None:
+    # Validate enablement, current checksums and fresh full inputs before
+    # an ordinary site build can remove or replace existing pages.
+    with prepare_text_map(REPO_ROOT) as text_map:
+        if replace and out_dir.exists():
+            shutil.rmtree(out_dir)
+        _render(out_dir, text_map)
+
+
+def _render(out_dir: Path, text_map: PreparedTextMap | None) -> None:
+    if text_map is not None:
+        text_map.stage(out_dir)
     env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)), autoescape=select_autoescape(["html"]),
                       trim_blocks=True, lstrip_blocks=True)
+    env.globals["text_map_enabled"] = text_map is not None
     env.filters["curie_url"] = curie_url
     env.filters["external_url"] = external_url
     env.filters["deposit_label"] = deposit_label
@@ -520,9 +534,7 @@ def main() -> int:
         print("pages/ is current")
         return 0
 
-    if args.out.exists():
-        shutil.rmtree(args.out)
-    render(args.out)
+    render(args.out, replace=True)
     print(f"rendered site under {args.out}")
     return 0
 

@@ -166,3 +166,8 @@ validate-history *args:
     for target in "$@"; do
       uv run python scripts/validate_history.py "$target"
     done
+
+# Preview full semantic map inputs; --limit/--record select an explicit canary.
+# Add --output build/text-map/inputs.jsonl to atomically export the JSONL.
+text-map-inputs *args:
+    uv run python scripts/text_map_inputs.py "$@"
