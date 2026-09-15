@@ -84,6 +84,7 @@ def prepare_text_map(root: Path) -> Iterator[PreparedTextMap | None]:
             profile["model"] != pipeline.MODEL
             or profile["revision"] != pipeline.MODEL_REVISION
             or profile["dimension"] != pipeline.MODEL_DIMENSION
+            or profile["max_seq_length"] != pipeline.MAX_SEQ_LENGTH
         ):
             raise ValueError("common semantic map requires the pinned fleet BGE encoder profile")
         yield PreparedTextMap(pipeline, source, inputs, bundle.name)

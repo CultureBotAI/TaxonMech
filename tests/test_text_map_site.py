@@ -24,6 +24,7 @@ def fake_pipeline():
         "model": "BAAI/bge-large-en-v1.5",
         "revision": "d4aa6901d3a41ba39fb536a557fa166f842b0e09",
         "dimension": 1024,
+        "max_seq_length": 512,
     }
     manifest = {"encoder": profile, "projection": {"implementation": "pacmap.PaCMAP"}}
 
@@ -41,6 +42,7 @@ def fake_pipeline():
         MODEL=profile["model"],
         MODEL_REVISION=profile["revision"],
         MODEL_DIMENSION=1024,
+        MAX_SEQ_LENGTH=512,
         current_bundle=lambda output: output / ("a" * 64),
         validate_bundle=validate,
         stage_map=stage,
@@ -176,3 +178,10 @@ def test_pointer_change_does_not_replace_the_preflight_generation(tmp_path, monk
             ready.stage(tmp_path / "published")
     assert seen == ["a" * 64]
     assert old.read_text() == "previously published map"
+
+
+def test_alternate_window_cannot_be_published_as_the_common_space(tmp_path, monkeypatch):
+    _, _, manifest = enable_fixture(tmp_path, monkeypatch)
+    manifest["encoder"]["max_seq_length"] = 256
+    with pytest.raises(ValueError, match="pinned fleet BGE"), site.prepare_text_map(tmp_path):
+        pass
