@@ -133,13 +133,20 @@ def test_subset_receipt_cannot_reach_publication(tmp_path, monkeypatch):
         pass
 
 
-def test_navigation_is_conditional_and_uses_relative_site_root():
+@pytest.mark.parametrize("name, root", [("index.html", ""), ("base.html", "../../")])
+def test_navigation_is_conditional_and_uses_relative_site_root(name, root):
     templates = Path(__file__).resolve().parents[1] / "src" / "taxonmech" / "templates"
-    env = Environment(loader=FileSystemLoader(str(templates)))
-    template = env.get_template("base.html")
-    context = {"root": "../../", "stats": {"extracted_at": "fixture"}}
-    assert "Semantic text map" not in template.render(text_map_enabled=False, **context)
-    assert 'href="../../text-map/"' in template.render(text_map_enabled=True, **context)
+    env = Environment(
+        loader=FileSystemLoader(str(templates)), trim_blocks=True, lstrip_blocks=True
+    )
+    template = env.get_template(name)
+    context = {"root": root, "stats": {"extracted_at": "fixture"}}
+    disabled = template.render(text_map_enabled=False, **context)
+    enabled = template.render(text_map_enabled=True, **context)
+    link = f'    <a href="{root}text-map/">Semantic text map</a>\n'
+    assert "Semantic text map" not in disabled
+    assert enabled.count(link) == 1
+    assert enabled.replace(link, "") == disabled
 
 
 def test_invalid_map_preflight_preserves_existing_published_pages(tmp_path, monkeypatch):
