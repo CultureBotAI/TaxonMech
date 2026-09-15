@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import importlib
 import json
 from copy import deepcopy
 from html.parser import HTMLParser
@@ -272,10 +271,9 @@ class _StrainTableParser(HTMLParser):
 
 
 def test_rendered_strain_links_prioritize_ncbi_and_preserve_other_database_ids(
-    tmp_path, repo_root, monkeypatch,
+    tmp_path, fixture_renderer, monkeypatch,
 ):
-    monkeypatch.syspath_prepend(str(repo_root / "scripts"))
-    renderer = importlib.import_module("render_pages")
+    renderer = fixture_renderer
     monkeypatch.setattr(renderer, "build_straininfo_index",
                         lambda *_args: {"manifest": {}, "records": []})
     monkeypatch.setattr(renderer, "ATB_DIR", tmp_path / "no-atb-bundle")

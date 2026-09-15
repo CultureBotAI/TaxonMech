@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import csv
-import importlib
 import json
 from collections import defaultdict
 from copy import deepcopy
@@ -169,10 +168,9 @@ def test_gtdb_genome_namespace_matches_database_label(tmp_path, validate, databa
 
 
 def test_pages_show_typed_urls_and_provenance_without_counting_related_as_genomes(
-    tmp_path, repo_root, monkeypatch,
+    tmp_path, fixture_renderer, monkeypatch,
 ):
-    monkeypatch.syspath_prepend(str(repo_root / "scripts"))
-    renderer = importlib.import_module("render_pages")
+    renderer = fixture_renderer
     monkeypatch.setattr(renderer, "build_straininfo_index",
                         lambda *_args: {"manifest": {}, "records": []})
     monkeypatch.setattr(renderer, "ATB_DIR", tmp_path / "no-atb-bundle")

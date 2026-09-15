@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import importlib
 import sys
 from pathlib import Path
 
@@ -46,3 +47,28 @@ def records() -> list[tuple[Path, dict]]:
     yield out
     if hasattr(out, "close"):
         out.close()
+
+
+@pytest.fixture
+def fixture_renderer(tmp_path, repo_root, monkeypatch):
+    """Render synthetic records against an explicit temporary site configuration."""
+    from taxonmech import text_map_site
+
+    monkeypatch.syspath_prepend(str(repo_root / "scripts"))
+    renderer = importlib.import_module("render_pages")
+    config = tmp_path / "conf" / "text_map.yaml"
+    config.parent.mkdir()
+    config.write_text("enabled: false\n", encoding="utf-8")
+    legacy = tmp_path / "curation" / "legacy_page_paths.tsv"
+    legacy.parent.mkdir()
+    legacy.write_text("identifier\tpage\n", encoding="utf-8")
+    monkeypatch.setattr(renderer, "REPO_ROOT", tmp_path)
+    monkeypatch.setattr(renderer, "TAXA_DIR", tmp_path / "data" / "taxa")
+
+    def unexpected_export(*_args, **_kwargs):
+        pytest.fail("synthetic renderer fixtures must not export a real semantic corpus")
+
+    # Keep actual prepare_text_map/config validation. Fail immediately if a
+    # fixture ever leaks back to the enabled repository corpus.
+    monkeypatch.setattr(text_map_site, "export_inputs", unexpected_export)
+    return renderer

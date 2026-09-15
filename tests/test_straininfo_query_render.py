@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import gzip
-import importlib
 import json
 import shutil
 import subprocess
@@ -42,7 +41,7 @@ def sequence(accession, depid, designation, kind="genome"):
 
 
 @pytest.fixture
-def component(tmp_path, monkeypatch, repo_root):
+def component(tmp_path, monkeypatch, fixture_renderer):
     raw = tmp_path / "data/raw"
     directory = tmp_path / "data/straininfo"
     raw.mkdir(parents=True)
@@ -90,8 +89,7 @@ def component(tmp_path, monkeypatch, repo_root):
 
     monkeypatch.setattr(straininfo, "record_links", fixture_links)
     monkeypatch.setattr(straininfo_query, "ROOT", tmp_path)
-    monkeypatch.syspath_prepend(str(repo_root / "scripts"))
-    renderer = importlib.import_module("render_pages")
+    renderer = fixture_renderer
     monkeypatch.setattr(renderer, "STRAININFO_DIR", directory)
     monkeypatch.setattr(renderer, "STRAINS_TSV", raw / "bacdive_strains.tsv")
     monkeypatch.setattr(renderer, "ATB_DIR", tmp_path / "no-atb")
