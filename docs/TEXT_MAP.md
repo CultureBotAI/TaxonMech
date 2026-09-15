@@ -31,11 +31,13 @@ rendering. A stale bundle must be refreshed before publishing curated changes.
 
 ## Validated site publication
 
-`conf/text_map.yaml` remains disabled while the full-corpus BGE build is
-in progress. The runtime and adapter are installed, and the complete source
-corpus and input export are verified; no full common-map bundle or navigation
-is published yet. Enable the map only after the full-input cache and generated
-bundle pass validation, then run `just render` on the complete source corpus.
+`conf/text_map.yaml` enables the shared semantic text map. The verified
+2026-09-15 build covers all 625,960 input records, with 50,000 displayed and
+575,960 omitted from the bounded view. Every input has a validated vector;
+omission affects display only. The complete site was rendered and checked
+against those inputs, including all displayed taxon routes and retained content.
+The current map manifest records the exact input, model and projection identity.
+After refreshing a bundle, run `just render` on the complete source corpus.
 
 The default PaCMAP display limit is 50,000 deterministically selected records.
 Every input record must have a verified vector-cache entry, and the published
