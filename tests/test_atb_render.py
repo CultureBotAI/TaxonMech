@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import csv
-import importlib
 import json
 import shutil
 import subprocess
@@ -46,9 +45,8 @@ def write_tsv(path, rows):
 
 
 @pytest.fixture
-def browser(tmp_path, repo_root, monkeypatch):
-    monkeypatch.syspath_prepend(str(repo_root / "scripts"))
-    renderer = importlib.import_module("render_pages")
+def browser(tmp_path, fixture_renderer, monkeypatch):
+    renderer = fixture_renderer
     directory = tmp_path / "atb"
     directory.mkdir()
     (directory / "MANIFEST.yaml").write_text("source:\n  release: '2025-05'\n  license: CC-BY-4.0\n")
