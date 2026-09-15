@@ -32,16 +32,16 @@ def fake_pipeline():
         calls.append(("validate", bundle, input_path))
         return manifest
 
-    def stage(output, published_dir, *, input_path):
+    def stage(output, published_dir, *, input_path, expected_bundle):
         assert json.loads(input_path.read_text()) == {"test": "fresh full inputs"}
-        calls.append(("stage", output, published_dir))
+        calls.append(("stage", output, published_dir, expected_bundle))
         return manifest
 
     pipeline = SimpleNamespace(
         MODEL=profile["model"],
         MODEL_REVISION=profile["revision"],
         MODEL_DIMENSION=1024,
-        current_bundle=lambda output: output / "fixture-bundle",
+        current_bundle=lambda output: output / ("a" * 64),
         validate_bundle=validate,
         stage_map=stage,
     )
@@ -100,7 +100,12 @@ def test_enabled_map_uses_fresh_full_inputs_and_canonical_stage(tmp_path, monkey
     with site.prepare_text_map(tmp_path) as ready:
         inputs = ready.inputs
         ready.stage(tmp_path / "published")
-        assert calls[-1] == ("stage", tmp_path / "data" / "text_map", tmp_path / "published" / "text-map")
+        assert calls[-1] == (
+            "stage",
+            tmp_path / "data" / "text_map",
+            tmp_path / "published" / "text-map",
+            "a" * 64,
+        )
     assert not inputs.exists()
     assert calls[0][0] == "validate"
 
@@ -148,3 +153,26 @@ def test_invalid_map_preflight_preserves_existing_published_pages(tmp_path, monk
     with pytest.raises(ValueError, match="current.json"):
         render_pages.render(published, replace=True)
     assert old.read_text() == "existing published site"
+
+
+def test_pointer_change_does_not_replace_the_preflight_generation(tmp_path, monkeypatch):
+    pipeline, _, _ = enable_fixture(tmp_path, monkeypatch)
+    published = tmp_path / "published" / "text-map"
+    published.mkdir(parents=True)
+    old = published / "index.html"
+    old.write_text("previously published map")
+    seen = []
+
+    def checked_stage(output, published_dir, *, input_path, expected_bundle):
+        seen.append(expected_bundle)
+        if pipeline.current_bundle(output).name != expected_bundle:
+            raise ValueError("current map differs from preflight generation")
+        (published_dir / "index.html").write_text("replacement map")
+
+    monkeypatch.setattr(pipeline, "stage_map", checked_stage)
+    with site.prepare_text_map(tmp_path) as ready:
+        monkeypatch.setattr(pipeline, "current_bundle", lambda output: output / ("b" * 64))
+        with pytest.raises(ValueError, match="preflight generation"):
+            ready.stage(tmp_path / "published")
+    assert seen == ["a" * 64]
+    assert old.read_text() == "previously published map"

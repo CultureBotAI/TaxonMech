@@ -44,3 +44,7 @@ published pages are retained if this preflight fails.
 site. Ordinary checks do not download weights, encode text or fit PaCMAP.
 The initial disabled setting is temporary rollout state, not a resolution of
 the missing-map issue. Canaries must not be enabled as full-corpus publication.
+
+Site staging binds the exact immutable bundle approved during preflight. If the
+current pointer changes before staging, rendering fails instead of publishing a
+different generation under the earlier encoder-policy approval (CLAW #429).
