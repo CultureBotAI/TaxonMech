@@ -21,30 +21,38 @@ lineage labels and source-qualified synonyms. Broad/close taxonomy mappings
 are not synonyms; neither linked genomes nor text geometry establishes genome
 or phylogenetic similarity. Links use the existing taxon viewer route.
 
-The downstream encoder/PaCMAP runtime and published view are separate work;
-this exporter alone does not resolve the missing-map issue.
-
+The installed CLAW runtime is `scripts/embedding_pipeline.py`; its separate
+locked environment and exact build commands are in the [maintained runtime guide](../conf/embedding-runtime/README.md).
+Normal rendering and verification do not install that model environment or run
+inference. When record membership or selected semantic fields change, export
+fresh full inputs, reuse the existing profile-bound vector cache to encode only
+new or changed text, regenerate PaCMAP, and validate the complete bundle before
+rendering. A stale bundle must be refreshed before publishing curated changes.
 
 ## Validated site publication
 
-`conf/text_map.yaml` explicitly starts with `enabled: false`; no common map or
-navigation link is claimed ready yet. After generating and reviewing the full
-input-bound bundle under `data/text_map/`, set `enabled: true` and run `just render`.
-The shared CLAW runtime must first be installed at `scripts/embedding_pipeline.py`.
+`conf/text_map.yaml` remains disabled while the full-corpus BGE build is
+in progress. The runtime and adapter are installed, and the complete source
+corpus and input export are verified; no full common-map bundle or navigation
+is published yet. Enable the map only after the full-input cache and generated
+bundle pass validation, then run `just render` on the complete source corpus.
 
-When enabled, rendering exports fresh **full-corpus** JSONL and validates the
-current pointer, artifact checksums, input coverage and pinned common BGE profile.
-The runtime atomically stages the current bundle's `index.html`, `points.json`
-and `manifest.json` at `pages/text-map/`. Only successful staging enables the
-navigation link. Missing runtime/current pointer, stale inputs or invalid
-checksums fail the build; they never silently hide an enabled map. The existing
-published pages are retained if this preflight fails.
+The default PaCMAP display limit is 50,000 deterministically selected records.
+Every input record must have a verified vector-cache entry, and the published
+manifest reports the displayed and omitted counts. This does not turn a canary
+into a complete-corpus build.
 
-`just render --check` uses the same validation and staging inside its temporary
-site. Ordinary checks do not download weights, encode text or fit PaCMAP.
-The initial disabled setting is temporary rollout state, not a resolution of
-the missing-map issue. Canaries must not be enabled as full-corpus publication.
+Rendering exports fresh **full-corpus** JSONL and validates the current pointer,
+artifact checksums, complete input identity and pinned common BGE profile. The
+runtime stages the selected `index.html`, `points.json` and `manifest.json` at
+`pages/text-map/`; the site links to that view after successful staging. Missing
+runtime or current pointer, stale inputs and invalid checksums fail an enabled
+build. A failed preflight preserves the existing published pages.
 
-Site staging binds the exact immutable bundle approved during preflight. If the
-current pointer changes before staging, rendering fails instead of publishing a
-different generation under the earlier encoder-policy approval (CLAW #429).
+`just render-check` uses the same validation and staging inside a temporary site.
+These checks do not download weights, encode text or fit PaCMAP. A canary cannot
+satisfy the full-corpus publication check.
+
+Staging binds the exact immutable generation approved during preflight. A changed
+current pointer or substituted generation fails validation before publication
+(CLAW #429).
