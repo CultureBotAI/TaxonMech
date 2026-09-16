@@ -173,9 +173,6 @@ def test_pages_show_typed_urls_and_provenance_without_counting_related_as_genome
 ):
     monkeypatch.syspath_prepend(str(repo_root / "scripts"))
     renderer = importlib.import_module("render_pages")
-    monkeypatch.setattr(renderer, "build_straininfo_index",
-                        lambda *_args: {"manifest": {}, "records": []})
-    monkeypatch.setattr(renderer, "ATB_DIR", tmp_path / "no-atb-bundle")
     document, _ = _document(tmp_path)
     path = renderer.TAXA_DIR / "bacteria" / "genome-integration.yaml"
     monkeypatch.setattr(renderer, "load_records", lambda: [(path, document)])

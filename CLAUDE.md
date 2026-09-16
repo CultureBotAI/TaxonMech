@@ -45,8 +45,10 @@ provided download URLs; SeqKit sum is not MD5 and AWS URLs are mutable.
 The full catalog retains all statuses, but strain/genome links require an
 available FASTA without NO_RUNS, RUN_REMOVED, RMMS, META_FAIL or RUN_CHANGE.
 Non-HQ assemblies and available FASTAs lacking an ENA analysis remain eligible.
-Render the ATB browser from committed `data/atb/` inventories, not the full
-ignored SQLite catalog. Upstream metadata retain CC-BY-4.0 attribution.
+ATB data is published on the taxon record that classifies the strain, not on a
+per-source browser page; the site has none. Upstream metadata retain
+CC-BY-4.0 attribution, which `sources.html` publishes from each source's own
+committed `MANIFEST.yaml`.
 See [docs/ALLTHEBACTERIA.md](docs/ALLTHEBACTERIA.md).
 
 StrainInfo is a separate source overlay in `data/straininfo/`. SI-ID is a
@@ -56,7 +58,7 @@ authority and full accession template. Every sequence must explicitly name
 that same SI-DP; source grouping, names and BacDive cross-references cannot
 transfer links. Preserve unversioned NCBI accessions without appending `.1`.
 Keep strain/deposit IDs and gene, rRNA operon and patent accessions in typed
-`related_records`, outside genome counts. The browser/query labels other
+`related_records`, outside genome counts. The record and the query label other
 resources as existing TaxonMech strain associations, preserving their source
 evidence without attributing them to StrainInfo. Read [docs/STRAININFO.md](docs/STRAININFO.md).
 

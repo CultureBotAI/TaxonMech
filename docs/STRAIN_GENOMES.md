@@ -234,7 +234,7 @@ records `shares_biosample` crosslinks only where an existing genome assertion
 and sample assertion have matching source provenance. It never joins every
 genome listed under one strain. Neither shared sample nor matching species
 means the assemblies are identical. The full source catalog keeps all
-statuses; the browser uses only the committed linked overlap. See the
+statuses; the record uses only the committed linked overlap. See the
 [ATB catalog, flags and query guide](ALLTHEBACTERIA.md).
 
 ## StrainInfo deposit-specific assertions
@@ -252,7 +252,7 @@ Explicit NCBI GCA/GCF accessions enter `genome_assemblies`, preserving supplied
 versions and leaving unversioned accessions unversioned. SI strain/deposit
 IDs and gene/rRNA/patent sequence accessions enter typed `related_records`,
 outside genome counts. StrainInfo is the asserting source; NCBI is the genome
-identifier database. The [StrainInfo browser and query guide](STRAININFO.md)
+identifier database. The [StrainInfo query guide](STRAININFO.md)
 exposes source deposit paths and separately labeled existing TaxonMech
 associations, including ATB, GTDB and IMG, with their original provenance.
 

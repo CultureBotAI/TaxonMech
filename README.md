@@ -90,22 +90,24 @@ BacDive lists them together. An absent entry means no link of that kind was
 imported for that strain; it does not mean the strain has never been
 sequenced. See [the relationship model and evidence rules](docs/STRAIN_GENOMES.md).
 
-[Browse AllTheBacteria assemblies](https://culturebotai.github.io/TaxonMech/pages/atb.html)
-by sample, ENA analysis, strain, deposit or genome ID. Its snapshot-scoped
-assembly IDs join through existing BioSample evidence; a shared sample does
-not establish genome equivalence. The browser includes eligible assemblies
-for unlisted strains and exposes FASTA/archive links, source flags and the
-original evidence. The [ATB inventories](data/atb) are uncapped; the
-[full catalog and query guide](docs/ALLTHEBACTERIA.md) explains broader
-snapshot searches and source attribution.
+**Every source is read on the taxon record, not on a page of its own.** The
+site publishes no per-source browser: a strain row carries its NCBI, GTDB,
+BV-BRC/PATRIC, IMG and AllTheBacteria genome records and its StrainInfo
+strain and deposit records inline, each with the evidence that produced it.
+Open the taxon that classifies the strain.
 
-[Browse StrainInfo strain and deposit records](https://culturebotai.github.io/TaxonMech/pages/straininfo.html)
-by SI-ID, SI-DP, culture, BacDive strain, record-version DOI or NCBI accession.
-StrainInfo adds explicit deposit-to-NCBI assertions and typed strain/deposit
-and nucleotide references. A sequence must name the matched source deposit;
-sharing a StrainInfo group does not transfer genome links. The uncapped
-[StrainInfo component](data/straininfo) and [query guide](docs/STRAININFO.md)
-keep these source assertions separate from existing TaxonMech genome associations.
+AllTheBacteria assembly IDs are snapshot-scoped and join through existing
+BioSample evidence; a shared sample does not establish genome equivalence.
+StrainInfo adds explicit deposit-to-NCBI assertions and typed strain, deposit
+and nucleotide references; a sequence must name the matched source deposit,
+and sharing a StrainInfo group does not transfer genome links.
+
+Strains beyond a record's listing are not lost: the uncapped
+[ATB inventories](data/atb) and [StrainInfo component](data/straininfo) hold
+every imported link, and the [full catalog and query guide](docs/ALLTHEBACTERIA.md)
+and [StrainInfo query guide](docs/STRAININFO.md) cover broader snapshot
+searches. Source licences and citations are published on the
+[source catalogue](https://culturebotai.github.io/TaxonMech/pages/sources.html).
 
 ## Current corpus
 

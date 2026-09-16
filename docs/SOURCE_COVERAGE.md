@@ -82,7 +82,7 @@ record cap. The site uses a shared taxon viewer with lossless compressed
 record shards and strain tables paged in groups of 200. Every pre-expansion
 taxon remains reachable at its published URL. `pages/index.json.gz` holds
 the complete search array; `pages/index.json` is now its download manifest
-with count, size and checksum. The browser uses native or vendored gzip
+with count, size and checksum. The site uses native or vendored gzip
 decoding, and static browse pages remain available if search cannot load.
 `curation/legacy_page_paths.tsv` preserves every prior taxon URL, including
 incoming strain fragments. Static browse pages retain the complete record listing.

@@ -1,22 +1,21 @@
-"""ATB browser eligibility, evidence, links and separate coverage counts."""
+"""AllTheBacteria evidence as it is published: inline on the taxon record.
+
+AllTheBacteria has no per-source browser page. Its assemblies, sample evidence
+and source chains are rendered on the strain row of the taxon that classifies
+the strain, which makes this the only surface that publishes them — so the
+escaping and link-safety checks here are load-bearing rather than incidental.
+"""
 
 from __future__ import annotations
 
-import csv
 import importlib
-import json
-import shutil
-import subprocess
 from copy import deepcopy
-from pathlib import Path
 
 import pytest
 
-from taxonmech.atb_catalog import ASSEMBLY_COLUMNS
 from taxonmech.report import summarize
 
 SID = "kgmicrobe.strain:bacdive_1"
-OTHER = "kgmicrobe.strain:bacdive_2"
 ATB = "atb.assembly:202505.SAMN1"
 SAMPLE = {"record_id": "biosample:SAMN1", "record_type": "BIOSAMPLE", "source": "GOLD",
           "source_id": "gold:Gp1", "source_field": "PROJECT NCBI BIOSAMPLE ID",
@@ -38,119 +37,43 @@ def atb_record():
             }}
 
 
-def write_tsv(path, rows):
-    with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(rows[0]), delimiter="\t", lineterminator="\n")
-        writer.writeheader()
-        writer.writerows(rows)
-
-
 @pytest.fixture
-def browser(tmp_path, repo_root, monkeypatch):
+def site(tmp_path, repo_root, monkeypatch):
+    """A renderer over one fixture record. Rendering reads only the records;
+    the ATB inventories are a seeding input, not a rendering input."""
     monkeypatch.syspath_prepend(str(repo_root / "scripts"))
     renderer = importlib.import_module("render_pages")
-    directory = tmp_path / "atb"
-    directory.mkdir()
-    (directory / "MANIFEST.yaml").write_text("source:\n  release: '2025-05'\n  license: CC-BY-4.0\n")
-    rows = []
-    for n in range(1, 4):
-        row = dict.fromkeys(ASSEMBLY_COLUMNS, "NA")
-        row.update(sample_accession=f"SAMN{n}", assembly_accession=f"ERZ{n}",
-                   scientific_name='Species <script>alert("name")</script>',
-                   run_accession="ERR1,ERR2", assembly_seqkit_sum="seqkit:source-sum",
-                   asm_pipe_filter="PASS", asm_fasta_on_osf="1", hq_filter="FALSE",
-                   dataset="2024-08", aws_url=f"https://example.org/{n}.fa.gz",
-                   osf_tarball_url="https://osf.io/example", osf_tarball_filename="part001.tar")
-        rows.append(row)
-    rows[1]["assembly_accession"] = "NA"  # Available FASTA without an ENA analysis.
-    rows[2]["asm_fasta_on_osf"] = "0"  # Metadata overlap alone cannot become a browser result.
-    write_tsv(directory / "assemblies.tsv", rows)
-    strain_links = [
-        {"strain_id": sid, "atb_id": f"atb.assembly:202505.SAMN{n}", "sample_id": f"biosample:SAMN{n}",
-         "sample_evidence_json": json.dumps([{**SAMPLE, "record_id": f"biosample:SAMN{n}"}])}
-        for n, sid in [(1, SID), (2, OTHER)]
-    ]
-    write_tsv(directory / "strain_links.tsv", strain_links)
-    genome_links = [
-        {"strain_id": SID, "atb_id": ATB, "sample_id": "biosample:SAMN1", "genome_id": gid,
-         "relationship": "shares_biosample", "source_evidence_json": json.dumps([
-             {"genome": {"source": "GOLD", "source_id": "gold:Ga1", "source_project_id": "gold:Gp1",
-                         "source_organism_id": "gold:Go1"}, "sample": SAMPLE}])}
-        for gid in ["img.taxon:1", "ncbi.assembly:GCA_000000001.2"]
-    ]
-    write_tsv(directory / "genome_links.tsv", genome_links)
-    strains = tmp_path / "bacdive_strains.tsv"
-    write_tsv(strains, [
-        {"strain_id": sid, "bacdive_id": str(n), "designation": f"Culture {n}",
-         "culture_collection_ids": f"kgmicrobe.strain:DSM-{n}"}
-        for n, sid in [(1, SID), (2, OTHER)]
-    ])
     doc = {"identifier": "NCBITaxon:1", "label": "Fixture species", "rank": "SPECIES",
-           "taxon_domain": "BACTERIA", "strain_count": 2, "mapping_status": "SEEDED",
+           "taxon_domain": "BACTERIA", "strain_count": 1, "mapping_status": "SEEDED",
            "strains": [{"strain_id": SID, "source_id": "bacdive:1", "designation": "Culture 1"}]}
     records = [(renderer.TAXA_DIR / "bacteria/fixture.yaml", doc)]
-    monkeypatch.setattr(renderer, "build_straininfo_index",
-                        lambda *_args: {"manifest": {}, "records": []})
-    monkeypatch.setattr(renderer, "ATB_DIR", directory)
-    monkeypatch.setattr(renderer, "STRAINS_TSV", strains)
     monkeypatch.setattr(renderer, "load_records", lambda: records)
-    return renderer, records, directory, strains
+    return renderer, records
 
 
-def test_browser_retains_eligible_unlisted_strains_exact_metadata_and_source_chains(browser):
-    renderer, records, directory, strains = browser
-    index = renderer.build_atb_index(records, directory, strains)
-    first, other = index["assemblies"]
-    assert index["release"] == "2025-05"
-    assert [row["atb_id"] for row in index["assemblies"]] == [ATB, "atb.assembly:202505.SAMN2"]
-    assert set(first["metadata"]) == set(ASSEMBLY_COLUMNS)
-    assert first["strains"][0]["sample_evidence"] == [SAMPLE]
-    assert first["strains"][0]["taxon_pages"][0]["page"] == (
-        "taxon.html?id=NCBITaxon:1#strains-kgmicrobe.strain-bacdive_1")
-    assert other["strains"][0]["taxon_pages"] == []
-    assert other["strains"][0]["source_id"] == "bacdive:2"
-    assert other["metadata"]["assembly_accession"] == "NA"
-    assert first["metadata"]["hq_filter"] == "FALSE"
-    assert first["genome_links"][0]["genome_id"] == "ncbi.assembly:GCA_000000001.2"
-    assert first["genome_links"][0]["source_evidence"][0]["sample"] == SAMPLE
-    assert {link["relationship"] for link in first["genome_links"]} == {"shares_biosample"}
-    assert other["genome_links"] == []
-
-
-@pytest.mark.parametrize("change", ["sample", "strain", "relationship", "missing_metadata"])
-def test_browser_rejects_inconsistent_committed_crosslinks(browser, change):
-    renderer, records, directory, strains = browser
-    if change == "missing_metadata":
-        rows = renderer._tsv(directory / "assemblies.tsv")
-        write_tsv(directory / "assemblies.tsv", rows[1:])
-    else:
-        rows = renderer._tsv(directory / "genome_links.tsv")
-        key, value = {"sample": ("sample_id", "biosample:SAMN999"),
-                      "strain": ("strain_id", OTHER), "relationship": ("relationship", "sameAs")}[change]
-        rows[0][key] = value
-        write_tsv(directory / "genome_links.tsv", rows)
-    with pytest.raises(ValueError):
-        renderer.build_atb_index(records, directory, strains)
-
-
-def test_taxon_and_atb_pages_expose_safe_native_links_and_original_sample_evidence(browser, tmp_path):
+def test_taxon_page_exposes_safe_native_links_and_original_sample_evidence(site, tmp_path):
+    from tests.rendered_taxon import rendered_taxon
     from tests.test_genome_records import _StrainTableParser
 
-    renderer, records, directory, _strains = browser
+    renderer, records = site
     doc = records[0][1]
     doc["strains"][0]["genome_records"] = [atb_record()]
     evidence = doc["strains"][0]["genome_records"][0]["atb_evidence"]
     evidence["archive_url"] = 'javascript:alert("archive")'
     output = tmp_path / "site"
     renderer.render(output)
-    from tests.rendered_taxon import rendered_taxon
+
     html = rendered_taxon(output, doc["identifier"])
     parsed = _StrainTableParser(SID)
     parsed.feed(html)
     ncbi, other, _related = parsed.cells[-3:]
     assert parsed.headers.index("NCBI genome assemblies") < parsed.headers.index("Other genome records")
     assert "No NCBI assembly link imported" in ncbi["text"]
-    assert "atb.html#" + ATB in other["hrefs"]
+    # The assembly identifier is published as text: it has no resolvable page
+    # of its own now that the browser is gone, and inventing one would be a
+    # link to nothing.
+    assert ATB in other["text"]
+    assert not [href for href in other["hrefs"] if "atb.html" in href]
     assert "https://example.org/1.fa.gz" in other["hrefs"]
     assert "https://www.ebi.ac.uk/ena/browser/view/ERZ1" in other["hrefs"]
     assert "https://gold.jgi.doe.gov/project?id=Gp1" in other["hrefs"]
@@ -158,20 +81,59 @@ def test_taxon_and_atb_pages_expose_safe_native_links_and_original_sample_eviden
     assert "SeqKit sum" in other["text"] and "not MD5" in other["text"]
     assert "javascript:" not in html
     assert "&lt;script&gt;" in html and '<script>alert("name")' not in html
-    browser_html = (output / "atb.html").read_text()
-    assert 'id="atb-query"' in browser_html and 'role="status"' in browser_html
-    assert "CC-BY-4.0" in browser_html and "not genome equivalence" in browser_html
-    assert "SAMN3" not in (output / "atb-index.json").read_text()
-    light_index = json.loads((output / "atb-index.json").read_text())
-    assert "sample_evidence" not in light_index["assemblies"][0]["strains"][0]
-    full_details = json.loads((output / light_index["assemblies"][0]["detail_path"]).read_text())
-    assert full_details[0]["strains"][0]["sample_evidence"] == [SAMPLE]
-    assert 'href="atb.html"' in (output / "index.html").read_text()
-    assert (output / "atb-browser.js").exists()
 
 
-def test_atb_report_deduplicates_genome_identifiers_without_promoting_samples(browser):
-    _renderer, records, directory, _strains = browser
+def test_the_site_publishes_no_per_source_browser(site, tmp_path):
+    """The sources are integrated into the records, so the standalone browsers
+    and their indexes must not be published at all — a stale copy left behind
+    would keep serving a second, divergent view of the same data."""
+    renderer, records = site
+    records[0][1]["strains"][0]["genome_records"] = [atb_record()]
+    output = tmp_path / "site"
+    renderer.render(output)
+
+    for name in ("atb.html", "atb-browser.js", "atb-index.json",
+                 "straininfo.html", "straininfo-browser.js", "straininfo-index.json",
+                 "straininfo-index.json.gz"):
+        assert not (output / name).exists(), f"{name} should no longer be published"
+    for directory in ("atb-details", "straininfo-details"):
+        assert not (output / directory).exists(), f"{directory}/ should no longer be published"
+    landing = (output / "index.html").read_text()
+    assert "atb.html" not in landing and "straininfo.html" not in landing
+
+
+def test_attribution_for_the_integrated_sources_is_published(site, tmp_path):
+    """Removing the browsers removed the only page that carried the CC-BY
+    notice for these sources. Their metadata is still published on every taxon
+    record, so the notice moved to the source catalogue rather than vanishing."""
+    renderer, _records = site
+    output = tmp_path / "site"
+    renderer.render(output)
+    sources = (output / "sources.html").read_text()
+    assert "Attribution" in sources
+    for name in ("AllTheBacteria", "StrainInfo"):
+        assert name in sources
+    assert "CC-BY-4.0" in sources
+    assert "https://creativecommons.org/licenses/by/4.0/" in sources
+
+
+def test_attribution_refuses_to_publish_without_a_licence(site, monkeypatch, tmp_path):
+    """Guard the guard: a manifest that loses its licence must fail the render,
+    not publish the metadata silently."""
+    renderer, _records = site
+    monkeypatch.setitem(renderer.ATTRIBUTION_MANIFESTS, "AllTheBacteria", tmp_path / "absent.yaml")
+    with pytest.raises(FileNotFoundError, match="AllTheBacteria"):
+        renderer.source_attributions()
+
+    manifest = tmp_path / "no-licence.yaml"
+    manifest.write_text("source:\n  release: '2025-05'\n")
+    monkeypatch.setitem(renderer.ATTRIBUTION_MANIFESTS, "AllTheBacteria", manifest)
+    with pytest.raises(ValueError, match="license"):
+        renderer.source_attributions()
+
+
+def test_atb_report_deduplicates_genome_identifiers_without_promoting_samples(site):
+    _renderer, records = site
     doc = records[0][1]
     doc["strains"][0]["genome_records"] = [atb_record()]
     doc["strains"][0]["related_records"] = [SAMPLE]
@@ -182,18 +144,3 @@ def test_atb_report_deduplicates_genome_identifiers_without_promoting_samples(br
     assert coverage["AllTheBacteria"] == {"strain_links": 1, "strains": 1, "identifiers": 1}
     assert stats["listed_genome_records"] == 1
     assert stats["listed_related_records_by_type"]["BIOSAMPLE"]["identifiers"] == 1
-
-
-def test_shipped_browser_script_searches_and_follows_evidence(browser, tmp_path):
-    node = shutil.which("node")
-    if not node:
-        pytest.skip("Node is needed to execute the browser interaction test")
-    renderer, records, directory, strains = browser
-    index = tmp_path / "atb-index.json"
-    renderer.write_atb_browser_data(renderer.build_atb_index(records, directory, strains), tmp_path)
-    result = subprocess.run([
-        node, str(Path(__file__).with_name("atb_browser_harness.cjs")),
-        str(renderer.TEMPLATES_DIR / "atb-browser.js"), str(index),
-    ], text=True, capture_output=True, check=False)
-    assert result.returncode == 0, result.stdout + result.stderr
-    assert "URL safety passed" in result.stdout
