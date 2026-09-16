@@ -159,12 +159,17 @@ descendants.
 
 This gathering is deliberately asymmetric: the `GOLD`, `MEDIADIVE`, `MADIN`
 and `BACTOTRAITS` counts remain what each source files *directly* under the
-record's taxon, and say so in their `notes`. *Escherichia coli* therefore
-reports 1,861 strains gathered from nine descendant taxa but only the GOLD
-organisms filed under `NCBITaxon:562` itself. Strains are gathered because a
-species record without its type strain is wrong; whether the other counts
-should be summed over the subtree is a modelling decision tracked in the
-issues, not something to do silently.
+record's taxon, and say so in their `notes`. A species record therefore counts
+strains from its whole subtree but only the GOLD organisms filed under its own
+taxon id. Strains are gathered because a species record without its type strain
+is wrong; whether the other counts should be summed over the subtree is a
+modelling decision tracked in the issues, not something to do silently.
+
+Read the live numbers off a record (`strain_count`, and the `notes` on the
+`BACDIVE` attestation) or off `just report`. This paragraph deliberately quotes
+none: prose outside the `check_docs.py` generated block is not checked against
+the corpus, and the counts it used to quote had drifted from the record they
+described (#67).
 
 ## Type strains
 

@@ -91,6 +91,40 @@ def test_causal_edge_with_evidence_is_valid():
     assert validate_taxon(doc) == []
 
 
+_NODES = [
+    {"node_id": "a", "label": "Escherichia coli", "node_type": "TAXON"},
+    {"node_id": "b", "label": "lactose fermentation", "node_type": "TRAIT"},
+]
+_EDGE = {"edge_id": "e1", "subject": "a", "predicate": "has trait", "object": "b",
+         "evidence": [{"reference": "PMID:12345678", "notes": "n"}]}
+
+
+def _graph(**overrides):
+    return dict(MINIMAL, causal_graphs=[{**{"graph_id": "g1", "nodes": _NODES, "edges": [_EDGE]},
+                                         **overrides}])
+
+
+def test_causal_edge_with_an_empty_evidence_list_is_rejected():
+    """`required` alone makes only the KEY mandatory, so `evidence: []` used to
+    validate clean while README and docs/CURATION.md promised that every causal
+    edge carries a citation (#66). minimum_cardinality is what enforces it."""
+    edge = {k: v for k, v in _EDGE.items() if k != "evidence"}
+    doc = dict(MINIMAL, causal_graphs=[{"graph_id": "g1", "nodes": _NODES,
+                                        "edges": [dict(edge, evidence=[])]}])
+    assert validate_taxon(doc), "an edge with an empty evidence list must not validate"
+
+
+def test_causal_graph_with_no_nodes_or_no_edges_is_rejected():
+    """Same defect class: a graph with an empty node or edge list is not a graph."""
+    assert validate_taxon(_graph(nodes=[])), "a graph with no nodes must not validate"
+    assert validate_taxon(_graph(edges=[])), "a graph with no edges must not validate"
+
+
+def test_a_fully_populated_causal_graph_still_validates():
+    """Guard the guard: the cardinality floors must not reject a real graph."""
+    assert validate_taxon(_graph()) == []
+
+
 def test_curation_timestamp_year_guard():
     event = {"curator": "x", "action": "y"}
     doc = dict(MINIMAL, curation_history=[{"timestamp": "2206-01-01T00:00:00Z", **event}])
