@@ -6,22 +6,19 @@ name: vendored-sync
 # manifest and every applicable payload, then verifies bytes and Git modes, so
 # a one-copy edit or incomplete artifact list fails CI.
 #
-# DELIBERATELY NO `paths:` FILTER. This job used to live in
-# label-correspondence.yaml and inherited that workflow's filter, which listed
-# only 1 of the governed files the checker compares — so editing chem_formula.py,
-# any tests/test_id_label_*.py, or src/taxonmech/schema/mech_shared.yaml never fired
-# the guard (#184). It did not even fire for edits to the checker itself or to
-# the pinned ref: #182 rewrote check_vendored_sync.sh and changed
-# .vendored_canon_ref without this job running once.
+# DELIBERATELY NO `paths:` FILTER, inherited from the fleet pattern rather than
+# learned here: in a sibling Mech repository a `paths:` filter on this job
+# listed only one of the governed files the checker compares, so edits to the
+# other governed files — and to the checker and the pinned ref themselves —
+# never fired the guard.
 #
-# A path list cannot be derived from claw's manifest — GitHub evaluates `paths:`
-# from static YAML before checkout, so it cannot read the pin or manifest. Any
-# hand-maintained list therefore has to be kept in sync with the canonical list
-# by hand, which is precisely the drift this guard exists to prevent.
+# A path list cannot be derived from claw's manifest: GitHub evaluates `paths:`
+# from static YAML before checkout, so it cannot read the pin or the manifest.
+# Any hand-maintained list therefore has to be kept in sync with the canonical
+# list by hand, which is precisely the drift this guard exists to prevent.
 # Running unconditionally removes the failure class instead of re-syncing two
-# lists. The job uses a thin Bash launcher plus Python's standard library, with
-# no uv/OAK, so there is nothing to save by filtering: the ~2min
-# label-correspondence job keeps its filter.
+# lists, and costs little: the job is a thin Bash launcher plus Python's
+# standard library, with no uv or OAK.
 
 on:
   # Required checks report on every PR and on the combined queue commit.

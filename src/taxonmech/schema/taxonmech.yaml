@@ -1175,11 +1175,15 @@ classes:
       nodes:
         required: true
         multivalued: true
+        # required alone makes only the KEY mandatory; an empty list still
+        # validates. A graph with no nodes or no edges is not a graph.
+        minimum_cardinality: 1
         inlined_as_list: true
         range: CausalNode
       edges:
         required: true
         multivalued: true
+        minimum_cardinality: 1
         inlined_as_list: true
         range: CausalEdge
 
@@ -1245,6 +1249,10 @@ classes:
           claim is curator-asserted and nothing upstream backs it.
         required: true
         multivalued: true
+        # `required` alone makes only the KEY mandatory, so `evidence: []`
+        # validated clean and "every causal edge must carry a citation"
+        # (README, docs/CURATION.md) was enforced nowhere (#66).
+        minimum_cardinality: 1
         inlined_as_list: true
         range: EvidenceItem
 
