@@ -63,6 +63,7 @@
 {% for g in r.causal_graphs %}
 <h3 id="causal_graphs-{{ g.graph_id }}">{{ g.title or g.graph_id }}</h3>
 {% if g.description %}<p>{{ g.description }}</p>{% endif %}
+{{ g | graph_svg(loop.index) }}
 <table><thead><tr><th>Subject</th><th>Predicate</th><th>Object</th><th>Evidence</th></tr></thead><tbody>
 {% set nodes = {} %}{% for n in g.nodes %}{% set _ = nodes.update({n.node_id: n}) %}{% endfor %}
 {% for e in g.edges %}
