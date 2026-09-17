@@ -115,7 +115,7 @@ the same matched SI-DP; no assembly transfers from another deposit in the
 group. The nested evidence retains both identities, source statuses, exact
 culture match, sequence deposit and record-version DOI. Alternative/archive
 metadata remain source context without asserting that strain groups or
-assemblies are equivalent. The browser exposes existing TaxonMech genome
+assemblies are equivalent. The record exposes existing TaxonMech genome
 associations separately, preserving their earlier sources and ATB sample
 chains. See [STRAININFO.md](STRAININFO.md).
 

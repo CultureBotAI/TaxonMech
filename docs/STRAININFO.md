@@ -2,10 +2,12 @@
 
 TaxonMech imports the evidence-backed overlap with
 [StrainInfo](https://straininfo.dsmz.de/), DSMZ's resource for microbial strain
-identifiers and culture deposits. The
-[StrainInfo browser](https://culturebotai.github.io/TaxonMech/pages/straininfo.html)
-covers matched inventoried strains, including those omitted from taxon-page
-listings. NCBI assembly identifiers remain the primary genome links.
+identifiers and culture deposits. There is no separate StrainInfo browser:
+matched strain and deposit records are published on the strain row of the
+taxon record that classifies them. Matches for strains omitted from a
+record's listing are searched through the uncapped
+[component](../data/straininfo) and the query described below. NCBI assembly
+identifiers remain the primary genome links.
 
 ## Keep the identities separate
 
@@ -83,9 +85,11 @@ metadata, omitting unrelated phenotype fields.
 | `data/straininfo/related_records.tsv.gz` | Compressed SI strain/deposit and nucleotide assertions with the same evidence |
 | `data/straininfo/exclusions.tsv` | Source IDs, accessions, exclusion reasons and original values, including unused conflicting cross-references |
 | `data/straininfo/MANIFEST.yaml` | Source pin, input/output hashes, coverage and exclusion counts |
-| `pages/straininfo-index.json` | Search identifiers and pointers to detail batches |
-| `pages/straininfo-index.json.gz` | Deterministic compressed copy used by browsers with native stream decompression; plain JSON remains the fallback |
-| `pages/straininfo-details/*.json.gz` | Losslessly compressed source assertions, native links and separately labeled existing TaxonMech genome associations, loaded on selection |
+
+Matched strain and deposit records are published on the taxon record that
+classifies the strain, inside its strain rows, together with their source
+evidence and the separately labeled existing TaxonMech genome associations.
+The site publishes no StrainInfo index or detail files of its own.
 
 The component joins existing strains by `strain_id`; it does not create
 BacDive strains or change taxonomic classification. Its inventories are
@@ -124,7 +128,7 @@ Validation replays the full source evidence before returning results and can
 take tens of seconds per invocation. `--limit` reduces the returned paths,
 without reducing that validation work.
 
-The browser uses case-insensitive substring search across indexed IDs and
+The query uses case-insensitive substring search across indexed IDs and
 deposit designations. Results are SI-ID groups; details show the exact
 deposit associated with each sequence. Existing ATB, GTDB, PATRIC and IMG
 links remain **existing TaxonMech strain associations** with their original
@@ -143,7 +147,7 @@ deposit. Querying DSM 30083 together with that accession must return no match.
 
 Existing TaxonMech evidence separately links this local strain to
 `ncbi.assembly:GCA_000690815.1`, GTDB, IMG and ATB
-`atb.assembly:202505.SAMN00718807`. The browser exposes these paths without
+`atb.assembly:202505.SAMN00718807`. The record exposes these paths without
 attributing ATB to StrainInfo or equating versioned and unversioned assemblies.
 
 ## Attribution and refresh

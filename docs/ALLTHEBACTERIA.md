@@ -1,10 +1,12 @@
 # AllTheBacteria assemblies and strain crosslinks
 
 TaxonMech prioritizes NCBI assemblies and adds AllTheBacteria assemblies
-through existing BioSample evidence. The [assembly browser](https://culturebotai.github.io/TaxonMech/pages/atb.html)
-searches the linked overlap by ATB ID, sample, ENA analysis, strain, culture
-deposit, genome identifier or source species label. It includes strains
-outside taxon-page listings and links them to their BacDive source records.
+through existing BioSample evidence. There is no separate assembly browser:
+each linked assembly is published on the strain row of the taxon record that
+classifies the strain, with its sample evidence, source flags and
+FASTA/archive links. Strains outside a record's listing, and the broader
+snapshot, are searched through the uncapped [inventories](../data/atb) and
+the query described below.
 
 ## Snapshot and identifiers
 
@@ -23,7 +25,7 @@ and the optional `ena.analysis:ERZ…` analysis record. A sample alone is not
 an immutable assembly identifier.
 
 The source warns that metadata, run availability and sequence files can
-change. The browser uses supplied `aws_url` and `osf_tarball_url` values,
+change. The record uses supplied `aws_url` and `osf_tarball_url` values,
 without inventing release-specific download URLs. Preserve the source run
 accessions and `assembly_seqkit_sum`; this is a SeqKit sum, not an MD5 file
 checksum. See the upstream [metadata](https://allthebacteria.org/docs/metadata_sqlite/)
@@ -69,13 +71,16 @@ assembly identifiers. Exclusions are recorded in `data/atb/exclusions.tsv`.
 | `data/atb/exclusions.tsv` | Overlapping samples excluded from derived links, with reasons |
 | `data/atb/MANIFEST.yaml` | Source pin, full-catalog statistics, crosslink counts and byte provenance |
 | `data/indexes/allthebacteria.sqlite` | Ignored local index of the complete metadata snapshot and derived crosslinks |
-| `pages/atb-index.json` | Lightweight search index of eligible assembly/sample/strain/genome identifiers and labels |
-| `pages/atb-details/*.json` | Deterministic batches of full assembly metadata, listed taxon-page links, uncapped BacDive references and original source evidence; fetched when an assembly is selected |
+
+Eligible assemblies are published on the taxon record that classifies the
+linked strain, inside its strain rows, with full metadata, source flags,
+FASTA/archive links and the original sample evidence. The site publishes no
+ATB index or detail files of its own.
 
 The website reads only the committed overlap. It does not download or scan
 the full source catalog. `data/atb/strain_links.tsv` joins on `strain_id` to
 `data/raw/bacdive_strains.tsv`. Taxon records retain the complete strain
-listing; the browser displays it in pages of 200. Existing NCBI, GTDB,
+listing; the record displays it in pages of 200. Existing NCBI, GTDB,
 PATRIC and IMG inventories remain separate. The full source metadata are
 also downloadable through the [source catalog](SOURCE_COVERAGE.md).
 
@@ -120,7 +125,7 @@ full local SQLite catalog or downloading genome FASTAs.
 The culture deposit `kgmicrobe.strain:DSM-30083` leads to
 `kgmicrobe.strain:bacdive_4907` and the existing sample assertion
 `biosample:SAMN00718807`. The ATB snapshot reports that whole sample key for
-[assembly `atb.assembly:202505.SAMN00718807`](https://culturebotai.github.io/TaxonMech/pages/atb.html#atb.assembly:202505.SAMN00718807),
+assembly `atb.assembly:202505.SAMN00718807`,
 with ENA analysis `ERZ9433419` and source scientific name
 *Escherichia coli DSM 30083 = JCM 1649 = ATCC 11775*.
 
@@ -129,11 +134,11 @@ The supported source chains connect this ATB sample to NCBI
 `gtdb.genome:RS_GCF_000690815.1` and IMG `img.taxon:2528311135`.
 These are `shares_biosample` associations. Other genomes listed by the same
 BacDive strain remain outside this crosslink unless their own sample chain
-supports it. The browser exposes each original assertion for inspection.
+supports it. The record exposes each original assertion for inspection.
 
 ## StrainInfo context
 
-ATB browser strain cards also link to matched StrainInfo SI-ID records through
+A strain row also carries matched StrainInfo SI-ID records, reached through
 the same local BacDive strain ID. These are separate strain/deposit context
 links. StrainInfo does not supply ATB's `shares_biosample` assertion, and its
 NCBI sequences require their own explicit SI-DP evidence. See
