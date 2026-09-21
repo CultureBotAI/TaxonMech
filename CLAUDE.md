@@ -88,6 +88,9 @@ Read these before changing domain behavior:
 - [docs/SCHEMA.md](docs/SCHEMA.md) — field guide.
 - [.claude/skills/curate-yaml-record/SKILL.md](.claude/skills/curate-yaml-record/SKILL.md)
   — audit one taxon record; generated YAML remains read-only.
+- [.claude/skills/review-yaml-category/SKILL.md](.claude/skills/review-yaml-category/SKILL.md)
+  — audit a coherent taxon category or cohort without editing records,
+  including member selection and lump/split boundaries.
 - [.claude/skills/review-open-issues/SKILL.md](.claude/skills/review-open-issues/SKILL.md)
   — read-only, evidence-backed sweep of the open issue queue.
 
