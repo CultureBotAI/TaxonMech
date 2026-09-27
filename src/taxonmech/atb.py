@@ -418,6 +418,11 @@ def genome_records(directory: Path = ATB_DIR) -> dict[str, list[dict]]:
                     "download_url": row["aws_url"], "archive_url": row["osf_tarball_url"],
                     "archive_filename": row["osf_tarball_filename"],
                     "sample_links": sample_links}
+        # Keep the remaining source quality/status metadata, including literal
+        # NA/None sentinels and historical calls. These never supply join keys.
+        for field in ("asm_fasta_on_osf", "sylph_filter", "sylph_species_pre_202505",
+                      "in_hq_pre_202505", "comments"):
+            evidence[field] = row[field]
         if row["assembly_accession"] not in ("", "NA"):
             evidence["ena_analysis_id"] = f"ena.analysis:{row['assembly_accession']}"
         if row["sylph_species"] not in ("", "NA"):

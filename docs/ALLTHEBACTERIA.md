@@ -77,6 +77,21 @@ linked strain, inside its strain rows, with full metadata, source flags,
 FASTA/archive links and the original sample evidence. The site publishes no
 ATB index or detail files of its own.
 
+Each assembly also links to the upstream [AllTheBacteria browser](https://allthebacteria.org/browse/)
+and [metadata and QC guide](https://allthebacteria.org/docs/sample_metadata/).
+The browser link opens the upstream dataset; it is not a sample-specific or
+snapshot-specific resolver for TaxonMech's local assembly ID. BioSample, ENA
+analysis and individual run accessions link to their own public records.
+
+The record retains source FASTA availability (`asm_fasta_on_osf`), the
+current `sylph_filter`, historical `sylph_species_pre_202505` and
+`in_hq_pre_202505` values, and verbatim source `comments`, alongside the
+existing assembly metadata. Historical calls are displayed separately from
+the current calls; they never change strain matching or taxonomy. Source
+sentinels (`NA`, and `None` for comments) remain in the record but are omitted
+from the displayed optional metadata. Licences and citations are visible on
+the site's source coverage page.
+
 The website reads only the committed overlap. It does not download or scan
 the full source catalog. `data/atb/strain_links.tsv` joins on `strain_id` to
 `data/raw/bacdive_strains.tsv`. Taxon records retain the complete strain

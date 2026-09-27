@@ -26,7 +26,9 @@ def _source(tmp_path):
     directory = tmp_path / "atb"
     directory.mkdir()
     sample = "SAMN02604091"
-    row = assembly_row(sample, scientific_name="Escherichia coli")
+    row = assembly_row(sample, scientific_name="Escherichia coli", sylph_filter="PASS",
+                       sylph_species_pre_202505="Escherichia coli_E", in_hq_pre_202505="F",
+                       comments="Source assembly note")
     evidence = {
         "record_id": f"biosample:{sample}", "record_type": "BIOSAMPLE", "source": "GTDB",
         "source_id": "gtdb.genome:RS_GCF_000005845.2", "source_field": "ncbi_biosample",
@@ -81,6 +83,13 @@ def test_complete_source_contract_is_valid_and_preserves_nested_assertions(tmp_p
     assert link["source"] == "ALLTHEBACTERIA"
     assert link["genome_id"] == link["source_id"] == "atb.assembly:202505.SAMN02604091"
     assert link["atb_evidence"]["sample_links"][0]["matched_strain_id"] == "kgmicrobe.strain:DSM-30083"
+    assert {field: link["atb_evidence"][field] for field in (
+        "asm_fasta_on_osf", "sylph_filter", "sylph_species_pre_202505", "in_hq_pre_202505", "comments"
+    )} == {
+        "asm_fasta_on_osf": "1", "sylph_filter": "PASS",
+        "sylph_species_pre_202505": "Escherichia coli_E", "in_hq_pre_202505": "F",
+        "comments": "Source assembly note",
+    }
     assert "genome_records" not in document["strains"][1]
 
 
@@ -139,6 +148,7 @@ def test_database_source_and_namespace_cannot_be_mixed(tmp_path, errors, changes
     {"sample_id": "biosample:SAMN1;SAMN2"}, {"release": "latest"},
     {"assembly_seqkit_sum": "22841afbe77ffd5789a81fb81082f04f"}, {"assembly_filter": "RUN_CHANGE"},
     {"download_url": "https://example.org/assembly.fa.gz"}, {"unexpected_evidence": "discard me"},
+    {"asm_fasta_on_osf": "0"}, {"in_hq_pre_202505": "PASS"},
 ])
 def test_evidence_keeps_typed_identifiers_and_closed_shape(tmp_path, errors, changes):
     document = _document(tmp_path)
@@ -192,6 +202,11 @@ def test_inventory_appends_atb_evidence_without_changing_primary_ncbi_links(tmp_
     destination = tmp_path / "record.yaml"
     write_validated_taxon(document, destination)
     before = destination.read_bytes()
+    emitted = yaml.safe_load(before)
+    atb_link = next(link for link in emitted["strains"][0]["genome_records"]
+                    if link["source_database"] == "allthebacteria")
+    assert atb_link["atb_evidence"]["in_hq_pre_202505"] == "F"
+    assert atb_link["atb_evidence"]["asm_fasta_on_osf"] == "1"
     write_validated_taxon(document, destination)
     assert destination.read_bytes() == before
 

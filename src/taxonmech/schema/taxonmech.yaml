@@ -841,6 +841,27 @@ classes:
       sylph_species:
         description: Source species prediction retained as metadata, never used as a strain join key.
         range: string
+      asm_fasta_on_osf:
+        description: >-
+          Source FASTA availability flag as text. Linked assemblies must have
+          value 1; unavailable source rows remain in the catalog only.
+        range: string
+        pattern: '^1$'
+      sylph_filter:
+        description: Source Sylph species-call filter, independent of assembly and high-quality filters.
+        range: string
+      sylph_species_pre_202505:
+        description: >-
+          Historical source species call before the 2025-05 method change,
+          preserved verbatim (including NA), never used as a strain join key.
+        range: string
+      in_hq_pre_202505:
+        description: Historical high-quality membership flag, preserved as source text (T, F or NA).
+        range: string
+        pattern: '^(T|F|NA)$'
+      comments:
+        description: Verbatim source assembly comments, including the source's literal None sentinel.
+        range: string
       sample_links:
         description: Original source assertions linking the strain to the exact BioSample.
         required: true
