@@ -42,6 +42,10 @@ in `genome_id` and `source_id`. Their nested `atb_evidence`
 (`AtbAssemblyEvidence`) retains `release`, `sample_id`, optional `ena_analysis_id`, `run_accessions`,
 `assembly_seqkit_sum`, `dataset`, `assembly_filter`, `hq_filter`,
 `download_url`, `archive_url`, `archive_filename` and optional `sylph_species`.
+It also carries source `asm_fasta_on_osf`, `sylph_filter`,
+`sylph_species_pre_202505`, `in_hq_pre_202505` and `comments` metadata.
+Historical calls and source sentinels are preserved as text; they supply no
+new strain-identity or taxonomic assertions.
 `sample_links` uses `AtbSampleLink`, a BIOSAMPLE-only specialization of
 `GenomeRelatedRecordLink` with GTDB or GOLD source evidence. It preserves the
 complete prior assertions, including culture-match and organism/project chains.

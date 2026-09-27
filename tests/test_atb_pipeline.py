@@ -51,6 +51,11 @@ def test_dry_run_is_read_only_and_replay_is_byte_identical(pipeline):
     assert atb.generate(*pipeline, apply=True) == first
     assert snapshot(index, out) == before
     assert atb.genome_records(out)[SID][0]["atb_evidence"]["sample_links"]
+    evidence = atb.genome_records(out)[SID][0]["atb_evidence"]
+    assert evidence["asm_fasta_on_osf"] == "1"
+    assert evidence["sylph_filter"] == evidence["in_hq_pre_202505"] == "NA"
+    assert evidence["sylph_species_pre_202505"] == "NA"
+    assert evidence["comments"] == "None"
 
 
 @pytest.mark.parametrize("source", ["NCBI_ASSEMBLY", "BV_BRC"])

@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import importlib
 from copy import deepcopy
+from html.parser import HTMLParser
 
 import pytest
 
@@ -32,6 +33,9 @@ def atb_record():
                 "release": "2025-05", "sample_id": "biosample:SAMN1", "ena_analysis_id": "ena.analysis:ERZ1",
                 "run_accessions": "ERR1,ERR2", "assembly_seqkit_sum": "seqkit.v0.1_DLS_k0_" + "a" * 32,
                 "dataset": "2024-08", "assembly_filter": "PASS", "hq_filter": "FALSE",
+                "asm_fasta_on_osf": "1", "sylph_filter": "SYLPH_RESULTS_FAIL",
+                "sylph_species_pre_202505": "Earlier <species>", "in_hq_pre_202505": "F",
+                "comments": 'Source <script>alert("comment")</script> & note',
                 "download_url": "https://example.org/1.fa.gz", "archive_url": "https://osf.io/example",
                 "archive_filename": "part001.tar", "sample_links": [deepcopy(SAMPLE)],
             }}
@@ -73,14 +77,41 @@ def test_taxon_page_exposes_safe_native_links_and_original_sample_evidence(site,
     # of its own now that the browser is gone, and inventing one would be a
     # link to nothing.
     assert ATB in other["text"]
+    assert "local assembly ID" in other["text"]
     assert not [href for href in other["hrefs"] if "atb.html" in href]
+    assert "https://allthebacteria.org/browse/" in other["hrefs"]
+    assert "https://allthebacteria.org/docs/sample_metadata/" in other["hrefs"]
     assert "https://example.org/1.fa.gz" in other["hrefs"]
     assert "https://www.ebi.ac.uk/ena/browser/view/ERZ1" in other["hrefs"]
+    assert "https://www.ebi.ac.uk/ena/browser/view/ERR1" in other["hrefs"]
+    assert "https://www.ebi.ac.uk/ena/browser/view/ERR2" in other["hrefs"]
     assert "https://gold.jgi.doe.gov/project?id=Gp1" in other["hrefs"]
     assert "DSM 1 <original>" in other["text"]
     assert "SeqKit sum" in other["text"] and "not MD5" in other["text"]
+    assert "Sylph filter: SYLPH_RESULTS_FAIL" in other["text"]
+    assert "Earlier <species>" in other["text"] and "HQ membership: no (F)" in other["text"]
+    assert 'Source <script>alert("comment")</script> & note' in other["text"]
     assert "javascript:" not in html
     assert "&lt;script&gt;" in html and '<script>alert("name")' not in html
+    assert '<script>alert("comment")' not in html
+
+
+@pytest.mark.parametrize("sentinel", ["NA", "None", ""])
+def test_missing_source_metadata_does_not_appear_as_a_species_or_a_note(site, tmp_path, sentinel):
+    from tests.rendered_taxon import rendered_taxon
+
+    renderer, records = site
+    record = atb_record()
+    record["atb_evidence"].update({
+        "sylph_species_pre_202505": "NA", "in_hq_pre_202505": "NA",
+        "sylph_filter": "NA", "comments": sentinel,
+    })
+    records[0][1]["strains"][0]["genome_records"] = [record]
+    renderer.render(tmp_path / "site")
+    html = rendered_taxon(tmp_path / "site", "NCBITaxon:1")
+    assert "Source comments:" not in html
+    assert "Historical species and quality calls" not in html
+    assert "Sylph filter: NA" not in html
 
 
 def test_the_site_publishes_no_per_source_browser(site, tmp_path):
@@ -115,6 +146,31 @@ def test_attribution_for_the_integrated_sources_is_published(site, tmp_path):
         assert name in sources
     assert "CC-BY-4.0" in sources
     assert "https://creativecommons.org/licenses/by/4.0/" in sources
+    # Text somewhere in the file is insufficient: markup in <title> is not
+    # visible page content. Check the actual publication location as well.
+    class PageText(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.section = None
+            self.text = {"title": "", "body": ""}
+
+        def handle_starttag(self, tag, attrs):
+            if tag in self.text:
+                self.section = tag
+
+        def handle_endtag(self, tag):
+            if tag == self.section:
+                self.section = None
+
+        def handle_data(self, data):
+            if self.section:
+                self.text[self.section] += data
+
+    parsed = PageText()
+    parsed.feed(sources)
+    assert parsed.text["title"] == "Source coverage · TaxonMech"
+    for text in ("Attribution", "AllTheBacteria", "StrainInfo", "CC-BY-4.0"):
+        assert text in parsed.text["body"]
 
 
 def test_attribution_refuses_to_publish_without_a_licence(site, monkeypatch, tmp_path):

@@ -98,6 +98,9 @@ Open the taxon that classifies the strain.
 
 AllTheBacteria assembly IDs are snapshot-scoped and join through existing
 BioSample evidence; a shared sample does not establish genome equivalence.
+Strain rows retain current and historical source quality metadata and comments,
+and link to the [AllTheBacteria browser](https://allthebacteria.org/browse/),
+BioSample and ENA records, and source-supplied FASTA/archive downloads.
 StrainInfo adds explicit deposit-to-NCBI assertions and typed strain, deposit
 and nucleotide references; a sequence must name the matched source deposit,
 and sharing a StrainInfo group does not transfer genome links.
