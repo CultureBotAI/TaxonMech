@@ -154,7 +154,7 @@ attributing ATB to StrainInfo or equating versioned and unversioned assemblies.
 
 StrainInfo metadata retain **CC-BY-4.0** attribution. Cite
 [StrainInfo—the central database for linked microbial strain identifiers](https://doi.org/10.1093/database/baaf059).
-TaxonMech's CC0 license does not relicense upstream metadata.
+TaxonMech's project licenses does not relicense upstream metadata.
 
 `just straininfo-fetch --help` describes capturing primary API evidence.
 `just straininfo-index` checks the configured snapshot in a dry run;
