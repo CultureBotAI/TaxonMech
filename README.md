@@ -388,8 +388,16 @@ when queue enforcement is enabled on `main`.
 
 ## License
 
-CC0-1.0 for everything this project authored. Upstream resources keep their
-own terms; the inventories in `data/raw/` are derived counts and identifiers,
+Project-authored data, records, annotations, mappings, data exports and narrative
+documentation are licensed under [CC BY 4.0](LICENSE-DATA). Project-authored
+code, scripts, tests, schemas and website templates are licensed under
+[BSD-3-Clause](LICENSE-CODE). See [LICENSE](LICENSE) for scope and attribution.
+
+Third-party material retains its own licenses and notices. Preserve upstream
+attribution and source-specific terms when redistributing a record or subset.
+Previously released material remains available under its original license.
+
+Upstream resources keep their own terms; the inventories in `data/raw/` are derived counts and identifiers,
 not redistributed source records. GOLD metadata remain subject to
 [GOLD's usage policy](https://gold.jgi.doe.gov/usagepolicy). The packaged CAFI
 register retains CC-BY-4.0 licensing and its

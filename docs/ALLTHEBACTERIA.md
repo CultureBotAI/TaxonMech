@@ -148,4 +148,4 @@ NCBI sequences require their own explicit SI-DP evidence. See
 
 The AllTheBacteria metadata are supplied under **CC-BY-4.0**. Preserve the
 upstream attribution and cite [AllTheBacteria](https://doi.org/10.1101/2024.03.08.584059).
-TaxonMech's CC0 license for its own content does not relicense these metadata.
+TaxonMech's project licenses does not relicense these metadata.
