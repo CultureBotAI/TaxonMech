@@ -245,11 +245,14 @@ def render(out_dir: Path) -> None:
         source = f"data/taxa/{active[row['identifier']].lower()}/{relative.stem}.yaml"
         path = out_dir / relative
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text('<!doctype html><meta charset="utf-8"><title>TaxonMech</title>'
+        path.write_text('<!doctype html><html lang="en"><head><meta charset="utf-8">'
+                        '<meta name="viewport" content="width=device-width, initial-scale=1">'
+                        '<title>TaxonMech</title></head><body><main>'
                         f'<a href="{target}">Open the taxon record</a>'
                         '<p><a href="https://github.com/CultureBotAI/TaxonMech/blob/main/'
-                        f'{source}">Read the source YAML</a></p>'
-                        f'<script>location.replace({json.dumps(target)}+location.hash)</script>\n')
+                        f'{source}">Read the source YAML</a></p></main>'
+                        f'<script>location.replace({json.dumps(target)}+location.hash)</script>'
+                        '</body></html>\n')
     if hasattr(records, "close"):
         records.close()
 
