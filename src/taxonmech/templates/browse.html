@@ -14,14 +14,17 @@
 {% if pagination.next %}<a href="{{ pagination.next }}">Next</a>{% endif %}
 </nav>
 <nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>{{ heading | default("All records") }}</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB genomes</th><th scope="col">Status</th></tr></thead>
 <tbody>
 {% for r in records %}
 <tr><td><a href="{{ root }}{{ r.page }}"><em>{{ r.label }}</em></a></td><td><code>{{ r.identifier }}</code></td><td>{{ r.rank or "" }}</td><td>{{ r.domain }}</td><td>{{ r.sources | length }}</td><td>{{ r.strain_count }}</td><td>{{ r.genomes }}</td><td>{{ r.status }}</td></tr>
 {% endfor %}
 </tbody>
 </table>
+</div>
 </section>
 <script defer src="{{ root }}taxon-browser.js?v={{ script_version | default('1') }}"></script>
 {% endblock %}
