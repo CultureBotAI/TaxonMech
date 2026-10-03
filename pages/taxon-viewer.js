@@ -4,9 +4,23 @@
   const container = document.getElementById("taxon-record");
   const identifier = new URLSearchParams(window.location.search).get("id") || "";
   const match = /^NCBITaxon:([1-9][0-9]*)$/.exec(identifier);
-  function install(target, html) {
+  function install(target, html, fallbackLabel = "Taxon record") {
     const template = document.createElement("template");
     template.innerHTML = html; // Generated through the same autoescaping templates as static pages.
+    let label = fallbackLabel;
+    for (const element of template.content.querySelectorAll("h2, h3, table")) {
+      if (element.tagName !== "TABLE") {
+        label = element.textContent.trim() || fallbackLabel;
+        continue;
+      }
+      const region = document.createElement("div");
+      region.className = "table-scroll";
+      region.setAttribute("role", "region");
+      region.setAttribute("aria-label", element.caption?.textContent.trim() || label);
+      region.setAttribute("tabindex", "0");
+      element.before(region);
+      region.appendChild(element);
+    }
     target.replaceChildren(template.content);
   }
   async function run() {
@@ -26,7 +40,7 @@
     function show(number) {
       if (!pages.length || number < 0 || number >= pages.length) return;
       current = number;
-      install(table, pages[number].html);
+      install(table, pages[number].html, "Strains");
       status.textContent = "Strain page " + (number + 1) + " of " + pages.length;
       previous.disabled = number === 0;
       next.disabled = number === pages.length - 1;
