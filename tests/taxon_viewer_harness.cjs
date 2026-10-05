@@ -11,6 +11,7 @@ class Element {
     this.children = []; this.parentNode = null; this.attributes = {}; this.events = {};
   }
   setAttribute(name, value) { this.attributes[name] = value; }
+  removeAttribute(name) { delete this.attributes[name]; }
   appendChild(child) {
     if (child.parentNode) child.parentNode.children.splice(child.parentNode.children.indexOf(child), 1);
     this.children.push(child); child.parentNode = this;
@@ -29,9 +30,13 @@ class Element {
     }
     visit(this); return result;
   }
-  replaceChildren(content) {
-    this.rendered = content.html; this.children = [];
-    for (const child of [...content.children]) this.appendChild(child);
+  replaceChildren(...contents) {
+    this.rendered = contents[0]?.html; this.children = [];
+    for (const content of contents) {
+      for (const child of content.tagName === "FRAGMENT" ? [...content.children] : [content]) {
+        this.appendChild(child);
+      }
+    }
   }
   addEventListener(name, fn) { this.events[name] = fn; }
   scrollIntoView() { this.scrolled = true; }
@@ -59,15 +64,16 @@ async function exercise(search, shard) {
   const document = {
     getElementById: node,
     createElement(tag) {
-      if (tag === "div") return new Element("DIV");
-      assert.equal(tag, "template");
-      return {set innerHTML(value) { this.content = fragment(value); }};
+      if (tag === "template") return {set innerHTML(value) { this.content = fragment(value); }};
+      return new Element(tag.toUpperCase());
     }
   };
   const window = {
     location: {search, hash: "#strains-last"},
     addEventListener(name, fn) { events[name] = fn; },
-    TaxonMechData: {loadJSON: async path => {calls.push(path); return shard;}}
+    TaxonMechData: {loadJSON: async path => {
+      calls.push(path); return typeof shard === "function" ? shard(path, calls.length) : shard;
+    }}
   };
   vm.runInNewContext(script, {document, window, URLSearchParams});
   await new Promise(resolve => setImmediate(resolve));
@@ -99,6 +105,28 @@ async function exercise(search, shard) {
   const absent = await exercise("?id=NCBITaxon:1234", {});
   assert.deepEqual(absent.calls, ["taxon-details/0001.json.gz"]);
   assert.equal(absent.node("taxon-record").attributes.role, "alert");
+  assert.match(absent.node("taxon-record").children[0].textContent, /not in the published scope/);
+  assert.equal(absent.node("taxon-record").querySelectorAll("button").length, 0);
+  for (const inventory of [{buckets: []}, {buckets: ["0001"]}, null]) {
+    const missing = await exercise("?id=NCBITaxon:1234", async path => {
+      if (path.endsWith("index.json") && inventory) return inventory;
+      throw Object.assign(new Error("HTTP 404: raw transport detail"), {status: 404});
+    });
+    const container = missing.node("taxon-record");
+    assert.equal(container.querySelectorAll("a")[0].href, "browse.html");
+    const outside = inventory && inventory.buckets.length === 0;
+    assert.match(container.children[0].textContent, outside ? /not in the published scope/ : /temporarily unavailable/);
+    assert.equal(container.querySelectorAll("button").length, outside ? 0 : 1);
+    assert.doesNotMatch(container.children[0].textContent, /HTTP 404|raw transport/);
+  }
+  const retry = await exercise("?id=NCBITaxon:562", async (path, count) => {
+    if (count === 1) throw new Error("network error");
+    return {"NCBITaxon:562": {label: "Recovered", html: "complete recovered record"}};
+  });
+  await retry.node("taxon-record").querySelectorAll("button")[0].events.click();
+  assert.equal(retry.node("taxon-record").rendered, "complete recovered record");
+  assert.equal(retry.node("taxon-record").attributes.role, undefined);
+  assert.equal(retry.node("taxon-record").attributes["aria-busy"], "false");
 
   const table = id => '<table><thead><tr><th>Scientific evidence</th></tr></thead>' +
     '<tbody><tr id="' + id + '"><td><a href="https://pubmed.ncbi.nlm.nih.gov/123/">' +

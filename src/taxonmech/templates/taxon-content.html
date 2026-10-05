@@ -5,9 +5,15 @@
 
 {% if r.lineage %}
 <p class="lineage"><strong>Lineage:</strong>
-{% for a in r.lineage %}<a href="{{ a.taxon_id | curie_url }}" title="{{ a.rank }}">{{ a.taxon_label }}</a>{% if not loop.last %} › {% endif %}{% endfor %}
+{% set local_pages = taxon_pages | default({}) %}
+{% for a in r.lineage %}{% if a.taxon_id in local_pages %}<a href="{{ root }}{{ local_pages[a.taxon_id] }}" title="{{ a.rank }} · TaxonMech record">{{ a.taxon_label }}</a> <small>(<a href="{{ a.taxon_id | curie_url }}">NCBI</a>)</small>{% else %}<a href="{{ a.taxon_id | curie_url }}" title="{{ a.rank }}">{{ a.taxon_label }}</a>{% endif %}{% if not loop.last %} › {% endif %}{% endfor %}
 </p>
 {% endif %}
+{% set related = (taxon_children | default({})).get(r.identifier, []) %}
+{% if related %}<details class="related-taxa"><summary>{{ related | length }} child taxon records</summary>
+<p>Records whose NCBI parent is this taxon. These links preserve the source classification.</p>
+<ul tabindex="0" aria-label="Child taxon records">{% for child in related %}<li><a href="{{ root }}{{ child.page }}">{{ child.label }}</a> <code>{{ child.identifier }}</code></li>{% endfor %}</ul>
+</details>{% endif %}
 {% if r.synonyms %}<p><strong>Synonyms:</strong> {% for s in r.synonyms %}{{ s.synonym_text }} <small>({{ s.source }})</small>{% if not loop.last %}; {% endif %}{% endfor %}</p>{% endif %}
 {% if r.xrefs %}<p><strong>Xrefs:</strong> {% for c in r.xrefs %}{{ curie(c) }} {% endfor %}</p>{% endif %}
 {% if r.genetic_code %}<p><strong>Genetic code:</strong> {{ r.genetic_code }}</p>{% endif %}
@@ -45,7 +51,7 @@
 {% if r.strain_count %}
 <h2>Strains</h2>
 <p><small>{{ r.strain_count }} BacDive strain{{ "" if r.strain_count == 1 else "s" }} classified here{% if strain_page_count %}; all are available below in pages of 200{% endif %}.</small></p>
-<p><small>NCBI assemblies appear first, followed by GTDB, BV-BRC/PATRIC, IMG and AllTheBacteria genome records. Links retain evidence from NCBI Assembly, BacDive, GTDB, BV-BRC, GOLD and StrainInfo; AllTheBacteria links preserve the BioSample evidence connecting the assembly to the strain. Supplied accession versions, source strain identifiers and database meanings are preserved. NCBI accessions without a version suffix have unspecified version. Links under one strain do not establish genome equivalence; source descriptions may identify a substrain or plasmid. Samples, GOLD organism/project records, StrainInfo strain/deposit records and nucleotide references are listed separately. StrainInfo sequences must explicitly name the matched source deposit. The complete <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/data/raw/strain_assemblies.tsv">NCBI assembly inventory</a>, <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/data/raw/strain_genome_records.tsv">other genome-record inventory</a>,, <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/data/raw/strain_related_records.tsv">related-record inventory</a>, <a href="https://github.com/CultureBotAI/TaxonMech/tree/main/data/atb">AllTheBacteria inventories</a> and <a href="https://github.com/CultureBotAI/TaxonMech/tree/main/data/straininfo">StrainInfo inventories</a> provide access to source records beyond this taxon.</small></p>
+<p><small>NCBI assemblies appear first, followed by GTDB, BV-BRC/PATRIC, IMG and AllTheBacteria genome records. Links retain evidence from NCBI Assembly, BacDive, GTDB, BV-BRC, GOLD and StrainInfo; AllTheBacteria links preserve the BioSample evidence connecting the assembly to the strain. Supplied accession versions, source strain identifiers and database meanings are preserved. NCBI accessions without a version suffix have unspecified version. Links under one strain do not establish genome equivalence; source descriptions may identify a substrain or plasmid. Samples, GOLD organism/project records, StrainInfo strain/deposit records and nucleotide references are listed separately. StrainInfo sequences must explicitly name the matched source deposit. The complete <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/data/raw/strain_assemblies.tsv">NCBI assembly inventory</a>, <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/data/raw/strain_genome_records.tsv">other genome-record inventory</a>, <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/data/raw/strain_related_records.tsv">related-record inventory</a>, <a href="https://github.com/CultureBotAI/TaxonMech/tree/main/data/atb">AllTheBacteria inventories</a> and <a href="https://github.com/CultureBotAI/TaxonMech/tree/main/data/straininfo">StrainInfo inventories</a> provide access to source records beyond this taxon.</small></p>
 {% if strain_page_count %}
 <nav aria-label="Strain pages"><button id="strain-page-previous" type="button">Previous strains</button> <span id="strain-page-status" role="status"></span> <button id="strain-page-next" type="button">Next strains</button></nav>
 <div id="taxon-strain-table"></div>

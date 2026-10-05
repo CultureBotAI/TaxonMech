@@ -24,11 +24,35 @@
     target.replaceChildren(template.content);
   }
   async function run() {
-    if (!match || !Number.isSafeInteger(Number(match[1]))) throw new Error("Select a valid NCBI taxon from Browse.");
+    if (!match || !Number.isSafeInteger(Number(match[1]))) {
+      const error = new Error("Select a valid NCBI taxon from Browse.");
+      error.outsideScope = true;
+      throw error;
+    }
     const bucket = String(Math.floor(Number(match[1]) / 1000)).padStart(4, "0");
-    const shard = await window.TaxonMechData.loadJSON("taxon-details/" + bucket + ".json.gz");
+    let shard;
+    try {
+      shard = await window.TaxonMechData.loadJSON("taxon-details/" + bucket + ".json.gz");
+    } catch (error) {
+      if (error.status === 404) {
+        // A missing published file can be a deployment failure. Only the
+        // publication inventory can establish that this bucket is out of scope.
+        try {
+          const inventory = await window.TaxonMechData.loadJSON("taxon-details/index.json");
+          if (Array.isArray(inventory.buckets) && !inventory.buckets.includes(bucket)) {
+            error.outsideScope = true;
+            error.message = "This taxon is not in the published scope. Choose a record from Browse.";
+          }
+        } catch (_) { /* An unreadable inventory does not prove record absence. */ }
+      }
+      throw error;
+    }
     const record = shard[identifier];
-    if (!record) throw new Error("This taxon is not in the published scope. Choose a record from Browse.");
+    if (!record) {
+      const error = new Error("This taxon is not in the published scope. Choose a record from Browse.");
+      error.outsideScope = true;
+      throw error;
+    }
     document.title = record.label + " · TaxonMech";
     install(container, record.html);
     const pages = record.strain_pages || [];
@@ -60,8 +84,30 @@
     window.addEventListener("hashchange", followAnchor);
     followAnchor();
   }
-  run().catch(error => {
-    container.textContent = error.message || "Could not load this record. Reload the page or use Browse.";
-    container.setAttribute("role", "alert");
-  });
+  async function start() {
+    container.removeAttribute("role");
+    container.setAttribute("aria-busy", "true");
+    try {
+      await run();
+    } catch (error) {
+      const message = document.createElement("p");
+      message.textContent = error.outsideScope ? error.message :
+        "Could not load this taxon record. The data may be temporarily unavailable. Try again or use Browse.";
+      const browse = document.createElement("a");
+      browse.href = "browse.html";
+      browse.textContent = "Browse taxon records";
+      container.replaceChildren(message, browse);
+      if (!error.outsideScope) {
+        const retry = document.createElement("button");
+        retry.type = "button";
+        retry.textContent = "Try again";
+        retry.addEventListener("click", start);
+        container.appendChild(retry);
+      }
+      container.setAttribute("role", "alert");
+    } finally {
+      container.setAttribute("aria-busy", "false");
+    }
+  }
+  start();
 })();
