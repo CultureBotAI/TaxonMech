@@ -9,6 +9,8 @@
 <form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
 <input id="taxon-query" type="search"><button type="submit">Search</button></form>
 <p id="taxon-status" role="status">{{ pagination.total }} records · page {{ pagination.page }} of {{ pagination.pages }}.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 {% if pagination.previous %}<a href="{{ pagination.previous }}">Previous</a>{% endif %}
 {% if pagination.next %}<a href="{{ pagination.next }}">Next</a>{% endif %}
@@ -17,10 +19,10 @@
 <div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
 <caption>{{ heading | default("All records") }}</caption>
-<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB genomes</th><th scope="col">Status</th></tr></thead>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 {% for r in records %}
-<tr><td><a href="{{ root }}{{ r.page }}"><em>{{ r.label }}</em></a></td><td><code>{{ r.identifier }}</code></td><td>{{ r.rank or "" }}</td><td>{{ r.domain }}</td><td>{{ r.sources | length }}</td><td>{{ r.strain_count }}</td><td>{{ r.genomes }}</td><td>{{ r.status }}</td></tr>
+<tr><td><a href="{{ root }}{{ r.page }}"><em>{{ r.label }}</em></a></td><td><code>{{ r.identifier }}</code></td><td>{{ r.rank or "" }}</td><td>{{ r.domain }}</td><td>{{ r.sources | length }}</td><td>{{ r.strain_count }}</td><td>{{ r.gtdb_mapping_count | default(0) }}{% if r.gtdb_pooled_mapping_count %} ({{ r.gtdb_pooled_mapping_count }} pooled){% endif %}</td><td>{{ r.status }}</td></tr>
 {% endfor %}
 </tbody>
 </table>

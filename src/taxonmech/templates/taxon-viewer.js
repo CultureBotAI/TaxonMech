@@ -23,12 +23,64 @@
     }
     target.replaceChildren(template.content);
   }
+  function bucketForId(value) {
+    const found = /^NCBITaxon:([1-9][0-9]*)$/.exec(value);
+    return found && Number.isSafeInteger(Number(found[1])) ?
+      String(Math.floor(Number(found[1]) / 1000)).padStart(4, "0") : null;
+  }
+  function validBucket(value) {
+    return typeof value === "string" && /^[0-9]{4,}$/.test(value) &&
+      Number.isSafeInteger(Number(value)) && String(Number(value)).padStart(4, "0") === value;
+  }
+  function validRecord(record) {
+    return record && typeof record === "object" && !Array.isArray(record) &&
+      typeof record.label === "string" && record.label.trim().length > 0 &&
+      typeof record.html === "string" && record.html.trim().length > 0 &&
+      (record.strain_pages === undefined || (Array.isArray(record.strain_pages) &&
+        record.strain_pages.every(page => page && typeof page === "object" &&
+          typeof page.html === "string" && page.html.trim().length > 0 && Array.isArray(page.anchors) &&
+          page.anchors.every(anchor => typeof anchor === "string"))));
+  }
+  function validShard(shard, bucket) {
+    return shard && typeof shard === "object" && !Array.isArray(shard) &&
+      Object.keys(shard).length > 0 && Object.entries(shard).every(([key, value]) =>
+        bucketForId(key) === bucket && validRecord(value));
+  }
   async function run() {
-    if (!match || !Number.isSafeInteger(Number(match[1]))) throw new Error("Select a valid NCBI taxon from Browse.");
+    if (!match || !Number.isSafeInteger(Number(match[1]))) {
+      const error = new Error("Select a valid NCBI taxon from Browse.");
+      error.outsideScope = true;
+      throw error;
+    }
     const bucket = String(Math.floor(Number(match[1]) / 1000)).padStart(4, "0");
-    const shard = await window.TaxonMechData.loadJSON("taxon-details/" + bucket + ".json.gz");
+    let shard;
+    try {
+      shard = await window.TaxonMechData.loadJSON("taxon-details/" + bucket + ".json.gz");
+    } catch (error) {
+      if (error.status === 404) {
+        // A missing published file can be a deployment failure. Only the
+        // publication inventory can establish that this bucket is out of scope.
+        try {
+          const inventory = await window.TaxonMechData.loadJSON("taxon-details/index.json");
+          if (inventory && typeof inventory === "object" && !Array.isArray(inventory) &&
+              Array.isArray(inventory.buckets) && inventory.buckets.every(validBucket) &&
+              !inventory.buckets.includes(bucket)) {
+            error.outsideScope = true;
+            error.message = "This taxon is not in the published scope. Choose a record from Browse.";
+          }
+        } catch (_) { /* An unreadable inventory does not prove record absence. */ }
+      }
+      throw error;
+    }
+    if (!validShard(shard, bucket)) {
+      throw new Error("Invalid taxon shard");
+    }
+    if (!Object.prototype.hasOwnProperty.call(shard, identifier)) {
+      const error = new Error("This taxon is not in the published scope. Choose a record from Browse.");
+      error.outsideScope = true;
+      throw error;
+    }
     const record = shard[identifier];
-    if (!record) throw new Error("This taxon is not in the published scope. Choose a record from Browse.");
     document.title = record.label + " · TaxonMech";
     install(container, record.html);
     const pages = record.strain_pages || [];
@@ -60,8 +112,37 @@
     window.addEventListener("hashchange", followAnchor);
     followAnchor();
   }
-  run().catch(error => {
-    container.textContent = error.message || "Could not load this record. Reload the page or use Browse.";
-    container.setAttribute("role", "alert");
-  });
+  let loading = false;
+  async function start() {
+    if (loading) return;
+    loading = true;
+    container.removeAttribute("role");
+    container.setAttribute("aria-busy", "true");
+    try {
+      await run();
+    } catch (error) {
+      const message = document.createElement("p");
+      message.textContent = error.outsideScope ? error.message :
+        "Could not load this taxon record. The data may be temporarily unavailable. Try again or use Browse.";
+      const browse = document.createElement("a");
+      browse.href = "browse.html";
+      browse.textContent = "Browse taxon records";
+      container.replaceChildren(message, browse);
+      if (!error.outsideScope) {
+        const retry = document.createElement("button");
+        retry.type = "button";
+        retry.textContent = "Try again";
+        retry.addEventListener("click", () => {
+          retry.disabled = true;
+          return start();
+        });
+        container.appendChild(retry);
+      }
+      container.setAttribute("role", "alert");
+    } finally {
+      loading = false;
+      container.setAttribute("aria-busy", "false");
+    }
+  }
+  start();
 })();

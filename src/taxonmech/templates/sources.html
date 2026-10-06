@@ -1,21 +1,24 @@
 {% extends "base.html" %}
-{% block title %}Source coverage · TaxonMech<h2>Attribution</h2>
+{% block title %}Source coverage · TaxonMech{% endblock %}
+{% block content %}
+<h1>Source coverage</h1>
+<h2>Attribution</h2>
 <p>These sources are published under licences that require attribution. Their
 metadata appears inline on the strain rows of the taxon records that classify
 the strain, not on a separate per-source page, so the notice for every record
 that carries their data is here.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Source attribution">
 <table><thead><tr><th>Source</th><th>Snapshot</th><th>Licence</th><th>Citation</th></tr></thead><tbody>
 {% for a in attributions %}<tr><td>{{ a.name }}</td><td>{{ a.version | default('') }}</td>
 <td><a href="{{ a.license_url | external_url }}">{{ a.license }}</a></td>
 <td>{% if a.citation %}<a href="{{ a.citation | external_url }}">{{ a.citation }}</a>{% endif %}</td></tr>{% endfor %}
 </tbody></table>
-{% endblock %}
-{% block content %}
-<h1>Source coverage</h1>
+</div>
 <p>Species, strains, deposits and assemblies are different kinds of records. These catalogs retain source identifiers and assertions even when they cannot be attached to an NCBI taxon.</p>
 <p>“Complete” describes the named snapshot. Crosslinks and external resources have narrower coverage, shown below. Catalog counts must not be added together as counts of distinct organisms.</p>
 <p><a href="https://github.com/CultureBotAI/TaxonMech/blob/main/docs/SOURCE_COVERAGE.md">Coverage and refresh guide</a> · <a href="https://raw.githubusercontent.com/CultureBotAI/TaxonMech/main/data/catalog/MANIFEST.json">Download the source manifest</a></p>
 <h2>Catalogs</h2>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Source catalogs">
 <table>
 <thead><tr><th>Source</th><th>Records</th><th>Coverage</th><th>Downloads</th></tr></thead>
 <tbody>{% for source in catalog.sources %}
@@ -25,9 +28,12 @@ that carries their data is here.</p>
 <li><a href="https://raw.githubusercontent.com/CultureBotAI/TaxonMech/main/{{ file.path }}">{{ file.path.split('/')[-1] }}</a> ({{ '{:,}'.format(file.rows) }} records)</li>
 {% endfor %}</ul></details></td></tr>{% endfor %}</tbody>
 </table>
+</div>
 <h2>Coverage boundaries and other resources</h2>
 <p>Source audit: {{ catalog.coverage.audited }}.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Source coverage boundaries">
 <table><thead><tr><th>Resource</th><th>Included</th><th>Boundary</th></tr></thead><tbody>
 {% for source in catalog.coverage.sources %}<tr><td><a href="{{ source.url | external_url }}">{{ source.name }}</a><br><small>{{ source.status.replace('_', ' ') }}</small></td><td>{{ source.coverage }}</td><td>{{ source.limitation }}</td></tr>{% endfor %}
 </tbody></table>
+</div>
 {% endblock %}

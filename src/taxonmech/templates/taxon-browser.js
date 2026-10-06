@@ -25,8 +25,10 @@
       link.append(element("em", row.label));
       name.append(link);
       tr.append(name);
+      const mappings = (row.gtdb_mapping_count || 0) +
+        (row.gtdb_pooled_mapping_count ? " (" + row.gtdb_pooled_mapping_count + " pooled)" : "");
       for (const value of [row.identifier, row.rank, row.domain, row.sources.length,
-        row.strain_count, row.genomes, row.status]) tr.append(element("td", value ?? ""));
+        row.strain_count, mappings, row.status]) tr.append(element("td", value ?? ""));
       tbody.append(tr);
     }
     status.textContent = filtered.length + " of " + rows.length + " records match · page " +
