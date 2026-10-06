@@ -102,7 +102,9 @@ async function exercise(search, shard) {
     assert.equal(invalid.calls.length, 0);
     assert.equal(invalid.node("taxon-record").attributes.role, "alert");
   }
-  const absent = await exercise("?id=NCBITaxon:1234", {});
+  const absent = await exercise("?id=NCBITaxon:1234", {
+    "NCBITaxon:1235": {label: "Other published taxon", html: "Other complete record"}
+  });
   assert.deepEqual(absent.calls, ["taxon-details/0001.json.gz"]);
   assert.equal(absent.node("taxon-record").attributes.role, "alert");
   assert.match(absent.node("taxon-record").children[0].textContent, /not in the published scope/);
@@ -127,6 +129,78 @@ async function exercise(search, shard) {
   assert.equal(retry.node("taxon-record").rendered, "complete recovered record");
   assert.equal(retry.node("taxon-record").attributes.role, undefined);
   assert.equal(retry.node("taxon-record").attributes["aria-busy"], "false");
+
+  for (const invalid of [null, {}, [], "unavailable", {error: "unavailable"},
+      {"NCBITaxon:777": null}, {"NCBITaxon:562": null},
+      {"NCBITaxon:1562": {label: "Wrong bucket", html: "body"}},
+      {"NCBITaxon:9007199254740992": {label: "Unsafe integer", html: "body"}},
+      {"NCBITaxon:0562": {label: "Noncanonical identifier", html: "body"}},
+      {"NCBITaxon:562": {label: "Missing HTML"}},
+      {"NCBITaxon:562": {label: "", html: ""}},
+      {"NCBITaxon:562": {label: "Valid label", html: "  \n "}},
+      {"NCBITaxon:562": {label: "Valid label", html: "body",
+        strain_pages: [{html: " ", anchors: []}] }},
+      {"NCBITaxon:562": {label: "Bad strain pages", html: "body", strain_pages: {}}},
+      {"NCBITaxon:562": {label: "Bad anchors", html: "body",
+        strain_pages: [{html: "strains", anchors: [7]}]}}]) {
+    const corrupt = await exercise("?id=NCBITaxon:562", async (path, count) => {
+      if (count === 1) return invalid;
+      return {"NCBITaxon:562": {label: "Recovered", html: "complete recovered record"}};
+    });
+    const container = corrupt.node("taxon-record");
+    assert.equal(container.attributes.role, "alert");
+    assert.match(container.children[0].textContent, /temporarily unavailable/);
+    assert.equal(container.querySelectorAll("button").length, 1);
+    await container.querySelectorAll("button")[0].events.click();
+    assert.equal(corrupt.calls.length, 2, "Retry must fetch fresh data");
+    assert.equal(container.rendered, "complete recovered record");
+    assert.equal(container.attributes.role, undefined);
+  }
+
+  for (const inventory of [null, [], "unavailable", {buckets: null},
+      {buckets: [1234]}, {buckets: ["not-a-bucket"]}, {buckets: ["1"]},
+      {buckets: ["00001"]}, {buckets: ["9007199254740992"]}]) {
+    let attempt = 0;
+    const corrupt = await exercise("?id=NCBITaxon:562", async path => {
+      if (path.endsWith("index.json")) return inventory;
+      if (++attempt === 1) throw Object.assign(new Error("missing deployment file"), {status: 404});
+      return {"NCBITaxon:562": {label: "Recovered", html: "complete recovered record"}};
+    });
+    const container = corrupt.node("taxon-record");
+    assert.match(container.children[0].textContent, /temporarily unavailable/);
+    assert.equal(container.querySelectorAll("button").length, 1);
+    await container.querySelectorAll("button")[0].events.click();
+    assert.equal(container.rendered, "complete recovered record");
+  }
+  for (const buckets of [[], ["0001"], ["10000"]]) {
+    const outside = await exercise("?id=NCBITaxon:562", async path => {
+      if (path.endsWith("index.json")) return {buckets};
+      throw Object.assign(new Error("missing bucket"), {status: 404});
+    });
+    assert.match(outside.node("taxon-record").children[0].textContent, /not in the published scope/);
+    assert.equal(outside.node("taxon-record").querySelectorAll("button").length, 0);
+  }
+
+  let completeRetry;
+  const concurrent = await exercise("?id=NCBITaxon:562", async (path, count) => {
+    if (count === 1) throw new Error("Initial failure");
+    return new Promise(resolve => { completeRetry = resolve; });
+  });
+  const oldRetry = concurrent.node("taxon-record").querySelectorAll("button")[0];
+  const firstRetry = oldRetry.events.click();
+  const secondRetry = oldRetry.events.click();
+  assert.equal(oldRetry.disabled, true);
+  assert.equal(concurrent.calls.length, 2, "Repeated Retry must not start another request");
+  completeRetry({"NCBITaxon:562": {label: "Recovered", html: "Latest complete record"}});
+  await Promise.all([firstRetry, secondRetry]);
+  assert.equal(concurrent.node("taxon-record").rendered, "Latest complete record");
+  assert.equal(concurrent.node("taxon-record").attributes.role, undefined);
+
+  const failsAgain = await exercise("?id=NCBITaxon:562", async () => { throw new Error("offline"); });
+  await failsAgain.node("taxon-record").querySelectorAll("button")[0].events.click();
+  const availableRetry = failsAgain.node("taxon-record").querySelectorAll("button")[0];
+  assert.ok(!availableRetry.disabled, "A completed failed retry must offer an enabled new Retry");
+  assert.equal(failsAgain.node("taxon-record").attributes["aria-busy"], "false");
 
   const table = id => '<table><thead><tr><th>Scientific evidence</th></tr></thead>' +
     '<tbody><tr id="' + id + '"><td><a href="https://pubmed.ncbi.nlm.nih.gov/123/">' +
