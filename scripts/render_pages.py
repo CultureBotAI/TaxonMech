@@ -31,6 +31,11 @@ import yaml
 from corpus import REPO_ROOT, TAXA_DIR, load_records
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
+if __package__:
+    from .mechanism_graph import graph_svg
+else:
+    from mechanism_graph import graph_svg
+
 TEMPLATES_DIR = REPO_ROOT / "src" / "taxonmech" / "templates"
 PAGES_DIR = REPO_ROOT / "pages"
 BROWSE_PAGE_SIZE = 200
@@ -173,6 +178,7 @@ def _tsv(path: Path) -> list[dict]:
 def render(out_dir: Path) -> None:
     env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)), autoescape=select_autoescape(["html"]),
                       trim_blocks=True, lstrip_blocks=True)
+    env.filters["graph_svg"] = graph_svg
     env.filters["curie_url"] = curie_url
     env.filters["external_url"] = external_url
     env.filters["deposit_label"] = deposit_label
@@ -290,6 +296,7 @@ def write_search_index(out_dir: Path, index: list[dict]) -> None:
 
 
 def taxon_payload(env: Environment, path: Path, doc: dict) -> dict:
+    env.filters.setdefault("graph_svg", graph_svg)
     env.filters.setdefault("deposit_label", deposit_label)
     pages = []
     strains = doc.get("strains") or []
