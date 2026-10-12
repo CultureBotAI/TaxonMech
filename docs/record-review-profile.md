@@ -6,6 +6,11 @@ authoritative YAML and derived Markdown under
 historical evidence and need no migration. `conf/record_review.yaml` lists the
 active routes and local rubrics.
 
+The [historical archive guide](legacy-review-archive.md) and its reproducible
+inventory describe the published legacy reports, their coverage limitations,
+and preservation checks. File coverage is not structured or scientific review
+coverage, and importing old findings does not resolve them.
+
 ## Routes and output
 
 - `.claude/skills/review-yaml-record/SKILL.md`: one resolved record.
