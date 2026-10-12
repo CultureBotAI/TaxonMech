@@ -1,0 +1,90 @@
+# YAML Record Review: Blakeslea trispora
+
+- Repository: CultureBotAI/TaxonMech
+- Record: data/taxa/eukaryota/blakeslea_trispora.yaml
+- Started UTC: 2026-09-22T01:22:06Z
+- Finished UTC: 2026-09-22T01:22:06Z
+- Verdict: pass
+
+## Target
+
+| Field | Value |
+|---|---|
+| identifier | NCBITaxon:4850 |
+| label | Blakeslea trispora |
+| rank | SPECIES |
+| taxon_domain | EUKARYOTA |
+| parent_taxon | NCBITaxon:4849 |
+| grounding_status | EXACT |
+| mapping_status | SEEDED |
+| generated status | Generated in `data/taxa/` from committed inventories plus `curation/seed_scope.tsv`; future corrections belong in source extraction, seeding, the scope, or upstream source mappings. |
+
+The target record is a generated eukaryotic fungal species at `data/taxa/eukaryota/blakeslea_trispora.yaml`. It carries one NCBI exact synonym, one NCBI related synonym, no LPSN nomenclature, no GTDB taxonomy mappings, no BacDive-derived local strain entries, no causal graphs, and source attestations from NCBITAXON and GOLD.
+
+## Validation
+
+| Check | Result |
+|---|---|
+| Prior report check | Pass; `find reports/yaml_record_review -maxdepth 1 -name '*blakeslea_trispora.md' -print` returned no prior report. This search was scoped to the ignored `reports/yaml_record_review/` directory and included ignored report files. |
+| Open LinkML validation | Pass; `just validate data/taxa/eukaryota/blakeslea_trispora.yaml` exited successfully with `No issues found`. |
+| Strict closed-schema validation | Pass; `just validate-strict data/taxa/eukaryota/blakeslea_trispora.yaml` scanned one file with zero ERROR rows and refreshed `reports/instance_validation_failures.tsv`. |
+| History validation | Not rerun for this compact generated record; `just validate-history` is a full-history gate and had already passed on the current checkout. |
+| Corpus reproduction | Not rerun for this compact generated record; `just verify-corpus` is a full-corpus gate and had already reproduced 625,960 expected records on the current checkout with zero missing, extra, or differing files. |
+| Product id-label validation | Not applicable; `just validate-products` only walks curator-added `causal_graphs` nodes, and this generated record has no `causal_graphs`. |
+
+## Identity and Grounding
+
+The YAML identity agrees with `data/raw/ncbitaxon_taxa.tsv`: line 2096 has `NCBITaxon:4850`, label `Blakeslea trispora`, rank `SPECIES`, direct parent `NCBITaxon:4849`, genetic code `1`, one exact synonym, one related synonym, and source `gold`. `curation/seed_scope.tsv` line 51861 keeps this taxon in scope through the attested-source rule.
+
+The YAML lineage matches the NCBI inventory parent chain exactly, including the immediate parent `Blakeslea` under subfamily `Choanephoroideae`.
+
+`data/raw/ncbi_merged_ids.tsv` maps one old ID to this taxon: `NCBITaxon:64500`. No retained retired row in `data/raw/ncbitaxon_taxa.tsv` points at this taxon with `retired_into`, so the generated record correctly omits `replaces`.
+
+## Evidence
+
+| Claim | Source check | Assessment |
+|---|---|---|
+| NCBITaxon identity, rank, parent, genetic code, and synonyms | `data/raw/ncbitaxon_taxa.tsv` line 2096 | Supported exactly. |
+| Scope rationale and seeded history | `curation/seed_scope.tsv` line 51861 | Supported exactly: `attested rule: Blakeslea trispora, 2 sources incl. NCBI`. |
+| NCBITAXON attestation | NCBI inventory row above | Supported exactly with one name assertion from the 2026-09-13 snapshot. |
+| GOLD attestation | `data/raw/gold_organisms.tsv` line 36862 | Supported exactly with four aggregate KG-Microbe GOLD organism assertions for `NCBITaxon:4850`. |
+| Native GOLD organism evidence | Exact native GOLD organism scan | Supported exactly with four native organisms filed directly under `NCBITaxon:4850`. |
+| Native GOLD project evidence | Exact native GOLD sequencing-project scan | Supported exactly with seven projects joined through those exact organism IDs. |
+| Native GOLD analysis evidence | Exact native GOLD analysis scan by organism and project IDs | Supported exactly with two analysis rows joining through projects `Gp0208021` and `Gp0208022`. |
+| Empty NCBI type-material inventory | Exact scan of `data/raw/ncbi_type_material.tsv` | Supported; no exact type-material row was filed under `NCBITaxon:4850`. |
+| Empty BacDive-derived local strain surface | Exact taxon scans of `data/bacdive/records.jsonl.gz` and `data/raw/bacdive_strains.tsv` | Supported; no BacDive record or raw BacDive-derived strain row was filed under taxon ID `4850`. |
+| Empty generated StrainInfo overlay surface | Exact scans of `data/straininfo/assemblies.tsv`, `data/straininfo/exclusions.tsv`, and `data/straininfo/related_records.tsv.gz` | Supported; no generated StrainInfo assembly, exclusion, or related-record rows mention `NCBITaxon:4850`. |
+| Empty auxiliary source surfaces | Exact scans of the LPSN, GTDB, MediaDive, Madin et al., and BactoTraits raw TSVs | Supported; no auxiliary source row mentions `NCBITaxon:4850`. |
+
+The local native GOLD snapshot has four exact organisms: NRRL 2456, F986, F921, and NRRL 2895. Those rows join to seven projects: NRRL 2456 standard-draft, transcriptome, and resequencing projects; F986 standard-draft and transcriptome projects; an F921 standard-draft project; and an NRRL 2895 resequencing project. The two native analysis rows join by `AP PROJECT GOLD IDS` to the F986 and F921 standard-draft projects.
+
+The native StrainInfo snapshot has 43 exact direct rows and 85 exact deposit rows under `NCBITaxon:4850`. None overlays onto a BacDive-derived local strain inventory entry, so the generated StrainInfo assembly, exclusion, and related-record surfaces are correctly empty for this record.
+
+## Completeness
+
+The record is complete for the committed source evidence:
+
+- NCBI supplies identity, lineage, genetic code, the direct `Blakeslea` parent, one exact synonym, and one related synonym.
+- NCBI supplies one raw merged-ID row, but does not supply type-material rows or a retained retired row that would generate `replaces`.
+- The aggregate GOLD transform supplies a taxon-level organism count of four.
+- The local native GOLD snapshot supplies four exact organisms with seven joined projects and two joined analyses.
+- BacDive does not supply exact local strain evidence for this taxon, and exact StrainInfo rows correctly have no generated overlay rows without a BacDive-derived local strain.
+- LPSN, GTDB, MediaDive, Madin et al., BactoTraits, causal-graph, and curated-evidence sections are correctly empty for the current inventories.
+
+## Findings
+
+None found.
+
+## Recommended Edits
+
+None.
+
+## Follow-up Checks
+
+None required for this record.
+
+## Additional Notes
+
+- The GOLD source attestation explicitly counts records filed directly under this taxon, not descendant taxa, and the exact native GOLD scan used direct `ORGANISM NCBI TAX ID` matches for `4850`.
+- The BacDive, StrainInfo, raw strain-table, auxiliary source, type-material, and native GOLD checks used exact scans of the relevant committed TSV and gzip JSONL snapshots.
+- NCBI ranks `Blakeslea trispora` as `SPECIES`, and the generated record follows the source rank exactly.

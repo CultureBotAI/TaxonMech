@@ -1,0 +1,62 @@
+# YAML Record Review: Magnetospirillum sp. pMbN1
+
+- Repository: CultureBotAI/TaxonMech
+- Record: data/taxa/bacteria/magnetospirillum_sp_pmbn1.yaml
+- Started UTC: 2026-09-23T05:51:31Z
+- Finished UTC: 2026-09-23T05:52:59Z
+- Verdict: pass
+
+## Target
+
+- Identifier: `NCBITaxon:1007128`
+- Label: `Magnetospirillum sp. pMbN1`
+- Rank: `SPECIES`
+- Domain: `BACTERIA`
+- Parent: `NCBITaxon:2617991` (`unclassified Magnetospirillum`)
+- Maintained path: generated `data/taxa/bacteria/magnetospirillum_sp_pmbn1.yaml`; fixes, if any, would belong in the source inventories or generator, not by hand in the generated YAML.
+
+The record is a generated NCBI-only Magnetospirillum placeholder with no auxiliary source evidence.
+
+## Validation
+
+| Check | Result |
+|---|---|
+| `just validate-strict data/taxa/bacteria/candidatus_neomarinimicrobium_atlanticum.yaml data/taxa/bacteria/fidelibacterota_bacterium_scgc_aaa076_m08.yaml data/taxa/bacteria/magnetospirillum_sp_pmbn1.yaml data/taxa/bacteria/acinetobacter_sp_wr1b02.yaml` | Passed; closed-schema validation accepted all 4 files with zero errors. |
+| `just validate data/taxa/bacteria/magnetospirillum_sp_pmbn1.yaml` | Passed; `linkml-validate` reported `No issues found`. |
+| `just validate-history` | Deliberately skipped for this read-only review because it did not create a `history/` decision record. |
+| `just verify-corpus` | Deliberately skipped in this focused batch; earlier full-corpus verification over 625,960 generated records was clean, and this review did not edit `data/taxa/`. |
+| `just validate-products` | Not applicable; this record has no `causal_graphs`. |
+
+## Identity and Grounding
+
+The NCBI identity agrees with the pinned NCBI inventory row in `data/raw/ncbitaxon_taxa.tsv:210829`: `NCBITaxon:1007128`, label `Magnetospirillum sp. pMbN1`, rank `SPECIES`, parent `NCBITaxon:2617991`, genetic code `11`, source `ncbitaxon`, and snapshot date `2026-09-13`.
+
+The lineage correctly places the placeholder under `Magnetospirillum` and `unclassified Magnetospirillum`, with no NCBI synonym, GTDB, LPSN, strain, genome, or trait fields projected into the YAML.
+
+## Evidence
+
+- `source_attestations` correctly contains only the single NCBI name assertion.
+- `grounding_status: EXACT` and `mapping_status: SEEDED` are appropriate for a generated record seeded directly from the same pinned NCBI taxon row.
+- The absence of `taxonomy_mappings`, `synonyms`, `xrefs`, `strains`, `genome_records`, and trait/database attestations is supported by the exact ignored-file source search.
+
+## Completeness
+
+- `find reports/yaml_record_review -maxdepth 1 -type f -name '*-magnetospirillum_sp_pmbn1.md'` included ignored reports and found no prior review for this stem.
+- An exact `rg --no-ignore --hidden` over `data/taxa/PATHS.tsv`, `data/raw`, `data/atb`, and `data/straininfo` found only the PATHS row and the pinned NCBI row for `NCBITaxon:1007128`, so the missing auxiliary sections were checked against ignored and non-ignored local source files.
+
+## Findings
+
+No curation findings.
+
+## Recommended Edits
+
+No edits recommended.
+
+## Follow-up Checks
+
+- No follow-up is required for this record beyond normal regeneration QA.
+- If the source inventories or generator change, rerun `just validate-strict data/taxa/bacteria/magnetospirillum_sp_pmbn1.yaml` and `just validate data/taxa/bacteria/magnetospirillum_sp_pmbn1.yaml`.
+
+## Additional Notes
+
+The live source-provider lookups were unavailable earlier in this run, so the committed 2026-09-13 local source rows are the authority evidence used for this report.

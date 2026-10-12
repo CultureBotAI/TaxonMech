@@ -1,0 +1,66 @@
+# YAML Record Review: Streptomyces goraiensis
+
+- Repository: CultureBotAI/TaxonMech
+- Record: data/taxa/bacteria/streptomyces_goraiensis.yaml
+- Started UTC: 2026-09-23T08:36:57Z
+- Finished UTC: 2026-09-23T08:38:10Z
+- Verdict: pass
+
+## Target
+
+| Field | Value |
+|---|---|
+| identifier | NCBITaxon:100753 |
+| label | Streptomyces goraiensis |
+| rank | SPECIES |
+| taxon_domain | BACTERIA |
+| parent_taxon | NCBITaxon:1883 |
+| mapping_status | SEEDED |
+| grounding_status | EXACT |
+| generated status | Generated from `data/raw/` and `curation/seed_scope.tsv`; do not hand-edit under `data/taxa/` |
+
+## Validation
+
+| Check | Result |
+|---|---|
+| Full YAML read | Pass: all 55 lines of `data/taxa/bacteria/streptomyces_goraiensis.yaml` were read end to end. |
+| Prior report search | Pass: `find reports/yaml_record_review -maxdepth 1 -type f -name '*-streptomyces_goraiensis.md'` found no pre-existing report, including ignored report files. |
+| Local source search | Pass: exact `rg --no-ignore --hidden` checks for `NCBITaxon:100753`, `Streptomyces goraiensis`, and `streptomyces_goraiensis` found only the expected NCBI raw-taxonomy row across `data/raw/`, `data/atb/`, `data/straininfo/`, and `curation/seed_scope.tsv`. |
+| `just validate data/taxa/bacteria/streptomyces_goraiensis.yaml` | Pass: LinkML validation reported `No issues found`. |
+| `just validate-strict data/taxa/bacteria/sphingomonadaceae_bacterium_860.yaml data/taxa/bacteria/streptomyces_goraiensis.yaml data/taxa/bacteria/rhizobium_sp_r45621.yaml data/taxa/bacteria/rhizobium_sp_r46039.yaml` | Pass: closed-schema validation accepted all four records in this batch. |
+| `just verify-corpus` | Skipped: this read-only review did not change generated records; earlier full-corpus verification over 625,960 records was clean. |
+| `just validate-history` | Skipped: this read-only review did not add a `history/` decision. |
+| `just validate-products` | Not applicable: the record has no curator-added `causal_graphs`. |
+
+## Identity and Grounding
+
+The record denotes the pinned NCBI Taxonomy species `NCBITaxon:100753`. Its label, `SPECIES` rank, parent `NCBITaxon:1883`, and bacterial genetic code `11` match `data/raw/ncbitaxon_taxa.tsv:17315`.
+
+The root-first lineage through `Bacillati`, `Actinomycetota`, `Actinomycetes`, `Kitasatosporales`, `Streptomycetaceae`, and `Streptomyces` is consistent with the corresponding pinned NCBI inventory rows.
+
+## Evidence
+
+- `data/raw/ncbitaxon_taxa.tsv:17315` supports the NCBI identifier, label, rank, parent, bacterial genetic code, and exact NCBI synonym `'Streptomyces goraiensis'`.
+- `source_attestations[0]` is correctly limited to `NCBITAXON`, `source_id: NCBITaxon:100753`, `source_label: Streptomyces goraiensis`, `assertion_count: 1`, and `assertion_unit: NAME`, matching the same raw source row.
+- No evidence is over-applied from GTDB, LPSN, BacDive, GOLD, MediaDive, AllTheBacteria, StrainInfo, or NCBI type-material rows.
+
+## Completeness
+
+The record is complete for the source evidence currently attached to this species. It correctly omits nomenclature, taxonomy mappings, strain records, genome links, and a causal graph because exact gitignore-independent searches over `data/raw/`, `data/atb/`, `data/straininfo/`, and `curation/seed_scope.tsv` found no same-taxon auxiliary rows beyond the NCBI inventory row.
+
+## Findings
+
+None found.
+
+## Recommended Edits
+
+None.
+
+## Follow-up Checks
+
+If upstream inventories later add GTDB, LPSN, BacDive, ATB, StrainInfo, or NCBI type-material evidence for `NCBITaxon:100753`, rerun `just seed-canary NCBITaxon:100753`, inspect `data/taxa/bacteria/streptomyces_goraiensis.yaml`, and rerun `just validate-strict data/taxa/bacteria/streptomyces_goraiensis.yaml`.
+
+## Additional Notes
+
+- External live NCBI Taxonomy lookup was not used in this environment; the pinned `2026-09-13` NCBI rows in `data/raw/ncbitaxon_taxa.tsv` are the reviewed source of truth.
+- The prior-report search used `find`, so ignored files under `reports/yaml_record_review/` were included.
