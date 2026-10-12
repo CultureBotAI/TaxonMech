@@ -1,0 +1,78 @@
+# YAML Record Review: Acetobacter sp. AN02
+
+- Repository: CultureBotAI/TaxonMech
+- Record: `data/taxa/bacteria/acetobacter_sp_an02.yaml`
+- Reviewed UTC: 2026-09-26T09:17:54Z
+- Verdict: pass
+
+## Target
+
+| Field | Value |
+|---|---|
+| identifier | `NCBITaxon:2894186` |
+| label | `Acetobacter sp. AN02` |
+| rank | `SPECIES` |
+| taxon_domain | `BACTERIA` |
+| parent_taxon | `NCBITaxon:2628570` |
+| grounding_status | `EXACT` |
+| mapping_status | `SEEDED` |
+| generated status | Generated in `data/taxa/` from committed inventories plus `curation/seed_scope.tsv`; future corrections belong in source extraction, seeding, the scope, or upstream source mappings. |
+
+The target is a generated species record under `unclassified Acetobacter`. It has source attestations from NCBITAXON and GTDB; one GTDB `skos:closeMatch` taxonomy mapping to `GTDB:s__Acetobacter_sp029759835`; one GTDB exact synonym; one GTDB xref; an exact 10-entry NCBI lineage; genetic code 11; and no strains, genome assemblies, genome records, related records, LPSN nomenclature, definitions, or causal graphs.
+
+## Validation
+
+| Check | Result |
+|---|---|
+| Target resolution | Pass; `data/taxa/PATHS.tsv` line 389267 maps `NCBITaxon:2894186` to `acetobacter_sp_an02`, and the target file exists under `data/taxa/bacteria/`. |
+| Prior report check | Pass; `find reports/yaml_record_review -maxdepth 1 ... -name '*-acetobacter_sp_an02.md' ... -print` returned no prior report. `find` includes ignored files, and this search was scoped to the report directory. |
+| Open LinkML validation | Pass; `just validate data/taxa/bacteria/acetobacter_sp_an02.yaml` found no issues. |
+| Strict closed-schema validation | Pass; `just validate-strict data/taxa/bacteria/acetobacter_sp_ac_ht4_1.yaml data/taxa/bacteria/acetobacter_sp_aci1.yaml data/taxa/bacteria/acetobacter_sp_an02.yaml data/taxa/bacteria/acetobacter_sp_atcc_21760.yaml` scanned 4 files with 0 files containing `ERROR` and 0 total `ERROR` rows. |
+| History validation | Not rerun; this read-only review does not write a `history/` event. |
+| Corpus reproduction | Not rerun for this generated record; the review did not change YAML or generation inputs. |
+| Product id-label validation | Not applicable; this record has no `causal_graphs`. |
+
+## Identity and Grounding
+
+The YAML identity agrees with `data/raw/ncbitaxon_taxa.tsv`: line 568657 has `NCBITaxon:2894186`, label `Acetobacter sp. AN02`, rank `SPECIES`, parent `NCBITaxon:2628570`, genetic code `11`, source set `ncbitaxon|gtdb`, no synonyms, no retired-into redirect, and taxonomy snapshot `2026-09-13`.
+
+The YAML lineage has 10 ancestors and matches the pinned NCBI inventory parent chain exactly; the bounded source scan found 10 checked lineage rows, no missing ancestors, and no mismatched labels, ranks, or parents.
+
+`curation/seed_scope.tsv` line 108037 keeps the species in scope, and `data/raw/gtdb_mappings.tsv` line 229597 links the NCBI taxon to `GTDB:s__Acetobacter_sp029759835` with `skos:closeMatch` and `genome_count: 1`.
+
+## Evidence
+
+| Claim | Source check | Assessment |
+|---|---|---|
+| NCBI identity, label, species rank, parent, genetic code, source set, empty synonyms, and snapshot date | `data/raw/ncbitaxon_taxa.tsv` line 568657 | Supported exactly. |
+| Filesystem slug | `data/taxa/PATHS.tsv` line 389267 | Supported exactly. |
+| Scope rationale | `curation/seed_scope.tsv` line 108037 | Supported exactly by a single seed-scope row. |
+| Lineage | 10 NCBI ancestor rows resolved from `data/raw/ncbitaxon_taxa.tsv` | Supported exactly; no ancestor was missing or mismatched. |
+| GTDB close match, xref, and synonym | `data/raw/gtdb_mappings.tsv` line 229597 | Supported exactly; the mapping row names `GTDB:s__Acetobacter_sp029759835`, carries `skos:closeMatch`, and reports 1 genome. |
+| Empty nomenclature, strain, genome, related-record, and non-GTDB auxiliary sections | Exact scans of LPSN, BacDive, culture-collection, raw strain assembly, raw strain genome, raw strain related-record, MediaDive, GOLD, Madin et al., BactoTraits, StrainInfo, NCBI type-material, and NCBI merged-ID surfaces for `NCBITaxon:2894186` | Supported; no committed row on those surfaces names this NCBI taxon. |
+
+## Completeness
+
+The record is complete for the committed processed source evidence:
+
+- NCBI supplies the placeholder species identity, the direct `unclassified Acetobacter` parent, and the exact 10-ancestor lineage.
+- GTDB supplies a single species mapping to `GTDB:s__Acetobacter_sp029759835`; the YAML preserves that as a `skos:closeMatch`, an exact synonym of `Acetobacter sp029759835`, a GTDB xref, and a 1-genome source attestation.
+- The committed scope row reflects the combined NCBI and GTDB evidence.
+- No LPSN, BacDive, MediaDive, GOLD, Madin et al., BactoTraits, StrainInfo, NCBI type-material, NCBI merged-ID, raw strain, genome, or related-record row exists for this taxon.
+- With `strain_count: 0` and no curator-added `causal_graphs`, all optional local strain, genome, related-record, definition, and product sections are correctly empty.
+
+## Findings
+
+None found.
+
+## Recommended Edits
+
+None.
+
+## Follow-up Checks
+
+None required for this record.
+
+## Additional Notes
+
+This is a generated `Acetobacter` placeholder species record with a GTDB species-level close match; the absence of BacDive, LPSN, GOLD, and StrainInfo evidence is supported by the bounded committed-source scans.

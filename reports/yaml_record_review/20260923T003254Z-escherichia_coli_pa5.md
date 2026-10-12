@@ -1,0 +1,57 @@
+# YAML Record Review: Escherichia coli PA5
+
+- Repository: CultureBotAI/TaxonMech
+- Record: data/taxa/bacteria/escherichia_coli_pa5.yaml
+- Started UTC: 2026-09-23T00:32:54Z
+- Finished UTC: 2026-09-23T00:33:05Z
+- Verdict: needs curation
+
+## Target
+
+- Identifier: `NCBITaxon:1005490`
+- Label: `Escherichia coli PA5`
+- Class/rank/domain: `TaxonRecord` / `STRAIN` / `BACTERIA`
+- Parent: `NCBITaxon:562` / `Escherichia coli`
+- Maintained owner: generated from `data/raw/ncbitaxon_taxa.tsv`, `data/raw/gtdb_mappings.tsv`, `data/raw/gtdb_species.tsv`, `data/raw/madin_taxa.tsv`, and `curation/seed_scope.tsv`
+
+The filename is pinned by `data/taxa/PATHS.tsv:1724`, and `curation/seed_scope.tsv:35973` keeps this taxon in scope from the `2026-09-12` rule with 3 attesting sources including NCBI.
+
+## Validation
+
+- `just validate data/taxa/bacteria/escherichia_coli_pa5.yaml`: passed.
+- `just validate-strict data/taxa/bacteria/escherichia_coli_pa2.yaml data/taxa/bacteria/escherichia_coli_pa3.yaml data/taxa/bacteria/escherichia_coli_pa4.yaml data/taxa/bacteria/escherichia_coli_pa5.yaml`: passed; 4 files scanned, 0 files with `ERROR`, 0 total `ERROR` rows.
+- `just validate-products`: skipped because this full-corpus graph-label gate has no `causal_graphs` to inspect here.
+- `just validate-history`: skipped because this read-only review did not add `history/`.
+- `just verify-corpus`: skipped for this report; the earlier full-corpus verifier over 625,960 records was clean, and this review did not edit `data/taxa/`.
+
+## Identity and Grounding
+
+`data/raw/ncbitaxon_taxa.tsv:210386` supports the core NCBI identity: `NCBITaxon:1005490`, `Escherichia coli PA5`, rank `STRAIN`, parent `NCBITaxon:562`, genetic code `11`, `attested_by` = `ncbitaxon|gtdb|madin_etal`, and snapshot `2026-09-13`. The ancestor rows for `Pseudomonadati`, `Pseudomonadota`, `Gammaproteobacteria`, `Enterobacterales`, `Enterobacteriaceae`, `Escherichia`, and `Escherichia coli` are present in `data/raw/ncbitaxon_taxa.tsv`. `grounding_status: EXACT` and `mapping_status: SEEDED` are appropriate for the NCBI identity.
+
+`data/raw/gtdb_mappings.tsv:930` maps `GTDB:s__Escherichia_coli` with `genome_count: 36408` onto this NCBI strain as `skos:closeMatch`, and `data/raw/gtdb_species.tsv:59219` confirms that the GTDB source row is a species cluster. That species cluster is broader than strain `PA5`, so the GTDB mapping, `GTDB` exact synonym `Escherichia coli`, and `xrefs` entry should not be projected as if the species cluster were exact to this strain.
+
+## Evidence
+
+The `NCBITAXON` source attestation is supported by `data/raw/ncbitaxon_taxa.tsv:210386`, and the `MADIN` trait-assertion count of 1 is supported by `data/raw/madin_taxa.tsv:258`. The `GTDB` attestation count is numerically supported by `data/raw/gtdb_mappings.tsv:930` and `data/raw/gtdb_species.tsv:59219`, but its placement on this record is over-scoped for the narrower NCBI strain target.
+
+## Completeness
+
+- Before this report was written, an exact `find reports/yaml_record_review -maxdepth 1 -type f -name ...` probe for the four batch stems found no prior report for this stem; `find` includes ignored reports.
+- A gitignore-independent `rg --no-ignore --hidden` scan of `data/atb` and `data/straininfo` for `NCBITaxon:1005490`, `Escherichia coli PA5`, and `escherichia_coli_pa5` found no same-taxon auxiliary source rows.
+- No BacDive, GOLD, AllTheBacteria, StrainInfo, or curated causal graph rows were found for this taxon. The main consequential gap is the over-broad GTDB species projection.
+
+## Findings
+
+- **Major:** `data/raw/gtdb_mappings.tsv:930` maps `GTDB:s__Escherichia_coli` to the NCBI strain `NCBITaxon:1005490` as `skos:closeMatch`. The seeded YAML then promotes the GTDB species to an `xrefs` entry and an `EXACT_SYNONYM` of `Escherichia coli`, which makes a species cluster look exact to strain `PA5`. Future correction belongs in `data/raw/gtdb_mappings.tsv` generation and the GTDB taxonomy-mapping/synonym projection in `src/taxonmech/seed.py`.
+
+## Recommended Edits
+
+- Stop projecting GTDB species clusters as close matches, `xrefs`, or exact synonyms for NCBI strain records. Regenerate `data/raw/gtdb_mappings.tsv` and reseed `NCBITaxon:1005490` so the GTDB source does not overstate the target scope.
+
+## Follow-up Checks
+
+After fixing the GTDB mapping/projection, rerun `just seed --only NCBITaxon:1005490`, validate the emitted YAML with `just validate-strict`, run `just verify-corpus`, and confirm that this strain record no longer contains `GTDB:s__Escherichia_coli` as an exact xref or synonym unless the predicate is demonstrably narrowed to strain `PA5`.
+
+## Additional Notes
+
+Live NCBI, GTDB, and Madin lookups were unavailable; the pinned local `2026-09-13` NCBI/GTDB/Madin projections in `data/raw/` are the reviewed source of truth.

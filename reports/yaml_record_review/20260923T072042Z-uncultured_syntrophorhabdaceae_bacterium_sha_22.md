@@ -1,0 +1,54 @@
+# YAML Record Review: uncultured Syntrophorhabdaceae bacterium SHA-22
+
+- Repository: CultureBotAI/TaxonMech
+- Record: data/taxa/bacteria/uncultured_syntrophorhabdaceae_bacterium_sha_22.yaml
+- Started UTC: 2026-09-23T07:20:44Z
+- Finished UTC: 2026-09-23T07:20:44Z
+- Verdict: pass
+
+## Target
+
+Read the whole generated species record `NCBITaxon:100725`, `uncultured Syntrophorhabdaceae bacterium SHA-22`, at `data/taxa/bacteria/uncultured_syntrophorhabdaceae_bacterium_sha_22.yaml`. It is a seeded NCBITaxon-only bacterial placeholder under a no-rank Syntrophorhabdaceae `environmental samples` lineage bucket, with `strain_count: 0`.
+
+## Validation
+
+| Check | Result |
+|---|---|
+| `just validate-strict data/taxa/bacteria/acinetobacter_sp_ycg39.yaml data/taxa/bacteria/proteus_sp_ycg13.yaml data/taxa/bacteria/proteus_sp_ycg15.yaml data/taxa/bacteria/uncultured_syntrophorhabdaceae_bacterium_sha_22.yaml` | Passed; 4 files scanned and 0 files had errors. |
+| `just validate data/taxa/bacteria/uncultured_syntrophorhabdaceae_bacterium_sha_22.yaml` | Passed; LinkML reported `No issues found`. |
+| `find reports/yaml_record_review -maxdepth 1 -type f -name '*-uncultured_syntrophorhabdaceae_bacterium_sha_22.md'` | No prior report found; ignored report files were included. |
+| CURIE-bounded `rg --no-ignore --hidden ... data/taxa/PATHS.tsv data/raw data/atb data/straininfo` | Found the PATHS row and pinned NCBI taxonomy row, with no same-taxon ATB or StrainInfo rows. |
+| `just verify-corpus` | Skipped; no generated YAML was edited and earlier full-corpus verification over 625,960 records was clean. |
+| `just validate-history` | Skipped; no review history event was created. |
+| `just validate-products` | Not applicable; the record has no `causal_graphs`. |
+
+## Identity and Grounding
+
+The NCBI identity is internally consistent: `data/taxa/PATHS.tsv` maps `NCBITaxon:100725` to `uncultured_syntrophorhabdaceae_bacterium_sha_22`, and `data/raw/ncbitaxon_taxa.tsv` carries label `uncultured Syntrophorhabdaceae bacterium SHA-22`, rank `SPECIES`, parent `NCBITaxon:513581`, genetic code `11`, and the alternate NCBI name `uncultured bacterium SHA-22`. No LPSN, GTDB, ATB, or StrainInfo overlay alters that seeded identity.
+
+Live NCBI lookup was unavailable, so the pinned 2026-09-13 NCBI row is the reviewed source of truth.
+
+## Evidence
+
+The NCBITAXON source attestation is supported by the exact pinned row and has the correct `NAME` unit/count. The `uncultured bacterium SHA-22` exact synonym is also supported by that NCBI row. No nomenclature, mapping, strain, genome, ATB, StrainInfo, or causal-graph claims need additional evidence.
+
+## Completeness
+
+The ignored-inclusive exact source search found no same-taxon rows in ATB or StrainInfo. `strain_count: 0` and the absent optional sections are complete for the committed local inventories.
+
+## Findings
+
+None found.
+
+## Recommended Edits
+
+None.
+
+## Follow-up Checks
+
+- `just validate-strict data/taxa/bacteria/uncultured_syntrophorhabdaceae_bacterium_sha_22.yaml`
+- `just verify-corpus`
+
+## Additional Notes
+
+The no-rank `environmental samples` parent is lineage context inside Syntrophorhabdaceae, not a maintained higher-rank TaxonMech record.

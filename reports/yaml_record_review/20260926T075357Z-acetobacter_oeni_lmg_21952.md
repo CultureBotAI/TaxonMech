@@ -1,0 +1,81 @@
+# YAML Record Review: Acetobacter oeni LMG 21952
+
+- Repository: CultureBotAI/TaxonMech
+- Record: `data/taxa/bacteria/acetobacter_oeni_lmg_21952.yaml`
+- Reviewed UTC: 2026-09-26T07:53:57Z
+- Verdict: pass
+
+## Target
+
+| Field | Value |
+|---|---|
+| identifier | `NCBITaxon:1307912` |
+| label | `Acetobacter oeni LMG 21952` |
+| rank | `STRAIN` |
+| taxon_domain | `BACTERIA` |
+| parent_taxon | `NCBITaxon:304077` |
+| grounding_status | `EXACT` |
+| mapping_status | `SEEDED` |
+| generated status | Generated in `data/taxa/` from committed inventories plus `curation/seed_scope.tsv`; future corrections belong in source extraction, seeding, the scope, or upstream source mappings. |
+
+The target is a generated bacterial strain record under `Acetobacter oeni`. It has source attestations from NCBITAXON, GTDB, BACDIVE, MEDIADIVE, and BACTOTRAITS; one GTDB `skos:closeMatch`; one GTDB exact synonym; one xref; two BacDive-derived local strains; 7 culture collection IDs; 44 genome assemblies; 32 genome records; 126 related records; and no LPSN nomenclature, definitions, or causal graphs.
+
+## Validation
+
+| Check | Result |
+|---|---|
+| Target resolution | Pass; `data/taxa/PATHS.tsv` line 107657 maps `NCBITaxon:1307912` to `acetobacter_oeni_lmg_21952`, and the target file exists under `data/taxa/bacteria/`. |
+| Prior report check | Pass; `find reports/yaml_record_review -maxdepth 1 ... -name '*-acetobacter_oeni_lmg_21952.md' ... -print` returned no prior report. `find` includes ignored files, and this search was scoped to the report directory. |
+| Open LinkML validation | Pass; `just validate data/taxa/bacteria/acetobacter_oeni_lmg_21952.yaml` found no issues. |
+| Strict closed-schema validation | Pass; `just validate-strict data/taxa/bacteria/acetobacter_nitrogenifigens.yaml data/taxa/bacteria/acetobacter_nitrogenifigens_dsm_23921_nbrc_105050.yaml data/taxa/bacteria/acetobacter_oeni.yaml data/taxa/bacteria/acetobacter_oeni_lmg_21952.yaml` scanned 4 files with 0 files containing `ERROR` and 0 total `ERROR` rows. |
+| History validation | Not rerun; this read-only review does not write a `history/` event. |
+| Corpus reproduction | Not rerun for this generated record; the review did not change YAML or generation inputs. |
+| Product id-label validation | Not applicable; this record has no `causal_graphs`. |
+
+## Identity and Grounding
+
+The YAML identity agrees with `data/raw/ncbitaxon_taxa.tsv`: line 309515 has `NCBITaxon:1307912`, label `Acetobacter oeni LMG 21952`, rank `STRAIN`, parent `NCBITaxon:304077`, genetic code `11`, source set `ncbitaxon|gtdb|bacdive|mediadive|bactotraits`, no NCBI synonyms, no retired-into redirect, and taxonomy snapshot `2026-09-13`.
+
+The YAML lineage has 10 ancestors and matches the pinned NCBI inventory parent chain exactly; the bounded source scan found 10 checked lineage rows, no missing ancestors, and no mismatched labels, ranks, or parents.
+
+`curation/seed_scope.tsv` line 13882 keeps the strain in scope.
+
+## Evidence
+
+| Claim | Source check | Assessment |
+|---|---|---|
+| NCBI identity, label, strain rank, parent, genetic code, source set, and snapshot date | `data/raw/ncbitaxon_taxa.tsv` line 309515 | Supported exactly. |
+| Filesystem slug | `data/taxa/PATHS.tsv` line 107657 | Supported exactly. |
+| Scope rationale | `curation/seed_scope.tsv` line 13882 | Supported exactly by a single seed-scope row. |
+| Lineage | 10 NCBI ancestor rows resolved from `data/raw/ncbitaxon_taxa.tsv` | Supported exactly; no ancestor was missing or mismatched. |
+| GTDB mapping, exact synonym, and xref | `data/raw/gtdb_mappings.tsv` line 17791 | Supported exactly by one 4-genome `skos:closeMatch` to `GTDB:s__Acetobacter_oeni`. |
+| BacDive strain identities and culture IDs | `data/bacdive/records.jsonl.gz` lines 19 and 55148, `data/raw/bacdive_strains.tsv` lines 20 and 55149, and 5 exact `data/raw/culture_collection_strains.tsv` rows | Supported; BacDive records 19 and 132838 materialize two local strain blocks with seven generated culture IDs across the YAML. |
+| Genome, related-record, BactoTraits, and MediaDive evidence | Exact raw strain-table scans, `data/raw/bactotraits_taxa.tsv` line 2342, and `data/raw/mediadive_taxa.tsv` line 2890 | Supported by 21 raw assembly rows, 16 raw genome rows, 56 raw related records, 9 BactoTraits assertions, and 3 MediaDive media IDs. |
+| Empty same-taxon LPSN, GOLD aggregate, Madin et al., StrainInfo, NCBI type-material, and NCBI merged-ID surfaces | Exact scans for `NCBITaxon:1307912` | Supported; no committed row in those processed source tables names this strain as an exact target. |
+
+## Completeness
+
+The record is complete for the committed processed source evidence:
+
+- NCBI supplies the strain identity, the direct `Acetobacter oeni` parent, and the exact 10-ancestor lineage.
+- GTDB supplies the only taxonomy mapping, one exact GTDB synonym, one xref, and a GENOME source attestation.
+- BacDive supplies two generated local strain blocks, and the culture-collection table contributes the five unique normalized collection identifiers attached to those strains.
+- GOLD, BV-BRC, GTDB, NCBI Assembly, AllTheBacteria, and BacDive rows that resolve to this strain are represented in nested strain evidence as appropriate.
+- BactoTraits and MediaDive each supply one aggregate source attestation for the strain.
+- No exact LPSN name, processed GOLD aggregate, Madin et al. row, StrainInfo overlay, NCBI type-material row, generated definition, or curator-added causal graph is present for this strain identifier.
+
+## Findings
+
+None found.
+
+## Recommended Edits
+
+None.
+
+## Follow-up Checks
+
+None required for this record.
+
+## Additional Notes
+
+This generated strain shares BacDive records 19 and 132838 with its parent `NCBITaxon:304077` species record.

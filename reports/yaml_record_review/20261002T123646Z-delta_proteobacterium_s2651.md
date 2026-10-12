@@ -1,0 +1,88 @@
+# YAML Record Review: delta proteobacterium S2651
+
+- Repository: CultureBotAI/TaxonMech
+- Record: data/taxa/bacteria/delta_proteobacterium_s2651.yaml
+- Started UTC: 2026-10-02T12:36:46Z
+- Finished UTC: 2026-10-02T12:36:46Z
+- Verdict: pass
+
+## Target
+
+| Field | Value |
+|---|---|
+| Class | `TaxonRecord` |
+| Identifier | `NCBITaxon:102111` |
+| Label | `delta proteobacterium S2651` |
+| Rank | `SPECIES` |
+| Domain | `BACTERIA` |
+| Parent taxon | `NCBITaxon:122706` |
+| Parent label | `unclassified Deltaproteobacteria` |
+| Grounding status | `EXACT` |
+| Mapping status | `SEEDED` |
+| Genetic code | `11` |
+| Declared strains | `0` |
+| Source attestations | `NCBITAXON` |
+
+## Validation
+
+| Check | Result |
+|---|---|
+| `just validate data/taxa/bacteria/delta_proteobacterium_s2651.yaml` | Pass: `No issues found`. |
+| `just validate-strict data/taxa/bacteria/delta_proteobacterium_s2651.yaml data/taxa/bacteria/stanieria_cyanosphaera.yaml data/taxa/bacteria/oscillatoria_sancta.yaml data/taxa/bacteria/parathermosynechococcus_lividus_c1.yaml` | Pass: the strict four-file batch scanned 4 files and reported 0 error rows. |
+| `just verify-corpus` | Pass: the last full-corpus run in this checkout reproduced the generated corpus exactly: 625960 expected, 625960 found, 0 missing, 0 extra, and 0 differing. |
+| `taxonmech_yaml_summary.py` for this YAML | Pass: 42 lines, 6 lineage entries, 0 synonyms, 0 xrefs, 0 declared strains, 0 genome assemblies, and 1 source attestation. |
+| `taxonmech_bounded_scan.py` for this YAML | Pass: found one seed row and one NCBI Taxonomy row; confirmed all 6 lineage rows; and found no native GOLD organism, project, or analysis rows. |
+| Exact ignored-file-inclusive report preflight | Pass: no prior report existed for this stem. |
+| `rg --no-ignore --hidden -n 'NCBITaxon:(102111\|102116\|102117\|102118)([^0-9]\|$)' data curation` | Pass: all checked occurrences trace to source rows, `PATHS.tsv`, `seed_scope.tsv`, and the generated YAMLs. |
+
+## Identity and Grounding
+
+- `data/taxa/PATHS.tsv` row 10511 maps `NCBITaxon:102111` to `delta_proteobacterium_s2651`.
+- `curation/seed_scope.tsv` row 143499 keeps this taxon in scope with an attested NCBI-only rule.
+- `data/raw/ncbitaxon_taxa.tsv` row 17807 names `NCBITaxon:102111` as `delta proteobacterium S2651`.
+- The generated YAML line 1 preserves the NCBI identifier and line 31 preserves the sole NCBI source attestation.
+
+## Evidence
+
+- The YAML identifier, species rank, label, parent taxon, and genetic code agree with the exact NCBI Taxonomy row.
+- The record is seeded exactly from NCBI Taxonomy snapshot 2026-09-13.
+- The `lineage` block is a root-first NCBI chain ending at `NCBITaxon:122706` / `unclassified Deltaproteobacteria`.
+- No source synonyms, external xrefs, strain rows, genome assemblies, genome records, or causal graphs are expected for the current source set.
+
+## Completeness
+
+- The record is complete for the exact NCBI row currently present for this taxon.
+- `strain_count: 0` is consistent with the absence of BacDive, culture-collection, StrainInfo, ATB, and exact strain-related source rows.
+- `taxonomy_mappings` is absent because no GTDB or other external taxonomy mapping is currently present for `NCBITaxon:102111`.
+- This review does not infer a deeper placement below the unclassified Deltaproteobacteria parent.
+
+## Findings
+
+None found.
+
+## Recommended Edits
+
+None.
+
+## Follow-up Checks
+
+- Re-run `just validate data/taxa/bacteria/delta_proteobacterium_s2651.yaml`.
+- Re-run `just validate-strict data/taxa/bacteria/delta_proteobacterium_s2651.yaml`.
+- Re-run `just verify-corpus`.
+- Re-run the direct exact-ID source scan after any refresh of `data/raw/`, `data/straininfo/`, or `curation/seed_scope.tsv`.
+
+## Additional Notes
+
+- Absence checks used `--no-ignore --hidden`, so ignored files were included.
+- Reviewed row anchors:
+
+| Artifact | Row or line |
+|---|---|
+| `data/taxa/PATHS.tsv` | 10511 |
+| `curation/seed_scope.tsv` | 143499 |
+| `data/raw/ncbitaxon_taxa.tsv` | 17807 |
+| `data/taxa/bacteria/delta_proteobacterium_s2651.yaml` | 1 and 31 |
+
+- Direct lineage checks covered every lineage id in `data/taxa/bacteria/delta_proteobacterium_s2651.yaml`.
+- The generated record has no top-level `nomenclature`, `taxonomy_mappings`, `synonyms`, `xrefs`, `strains`, `genomes`, or `causal_graphs` blocks.
+- Future corrections belong in the upstream source extraction, `curation/seed_scope.tsv`, or the seeder, not in `data/taxa/bacteria/delta_proteobacterium_s2651.yaml` directly.
