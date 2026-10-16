@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text embedding map · TaxonMech</title>
+<link rel="stylesheet" href="style.css">
+<script src="theme-toggle.js"></script>
+<script defer src="vendor/fflate-0.8.2.js"></script>
+<script defer src="compressed-data.js?v=ecc71880d23e361d"></script>
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="index.html">TaxonMech</a>
+  <nav>
+    <a href="browse.html">Browse</a>
+    <a href="type-strains.html">Type strains</a>
+    <a href="map.html">Text map</a>
+    <a href="sources.html">Sources</a>
+    <a href="index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
+  </nav>
+</header>
+<main>
+<div class="record-topbar">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="index.html">TaxonMech</a> › <span>Text embedding map</span>
+  </nav>
+  <form class="page-search" action="browse.html" method="get" role="search">
+    <input type="search" name="q" placeholder="Search all 625,960 records in Browse…" aria-label="Search all TaxonMech records">
+    <button type="submit">Browse search</button>
+  </form>
+</div>
+<h1>TaxonMech text embedding browser</h1>
+<p class="lede">
+  2D PaCMAP projection of BAAI/bge-small-en-v1.5 text embeddings across the core multi-source
+  harmonized microbial taxa (NCBI Taxonomy, GTDB, LPSN, and BacDive) and representative Archaea,
+  Eukaryota, and Other-domain taxa. Filter with the left-hand facets, hover to inspect, or click
+  a point to open its taxon record.
+</p>
+<section id="taxon-map-browser" class="browse-layout" data-root="">
+  <aside class="facet-sidebar" aria-label="Embedding map filters">
+    <form id="map-filter-form" class="facet-form" role="search">
+      <div class="facet-group">
+        <label for="map-search">Filter map by taxon or ID</label>
+        <input id="map-search" name="q" type="search" placeholder="e.g. Bacillus, Methano, NCBITaxon:562…">
+      </div>
+      <div class="facet-group">
+        <label for="map-domain">Domain</label>
+        <select id="map-domain">
+          <option value="">All domains</option>
+          <option value="BACTERIA">Bacteria</option>
+          <option value="ARCHAEA">Archaea</option>
+          <option value="EUKARYOTA">Eukaryota</option>
+          <option value="OTHER">Other</option>
+        </select>
+      </div>
+      <div class="facet-group">
+        <label for="map-rank">Taxonomic rank</label>
+        <select id="map-rank">
+          <option value="">All ranks</option>
+          <option value="SPECIES">Species</option>
+          <option value="STRAIN">Strain</option>
+          <option value="SUBSPECIES">Subspecies</option>
+          <option value="NO_RANK">No rank</option>
+        </select>
+      </div>
+      <div class="facet-group">
+        <label for="map-source">Attesting source</label>
+        <select id="map-source">
+          <option value="">All sources</option>
+          <option value="NCBITAXON">NCBI Taxonomy</option>
+          <option value="GTDB">GTDB</option>
+          <option value="LPSN">LPSN</option>
+          <option value="BACDIVE">BacDive</option>
+        </select>
+      </div>
+      <div class="facet-group">
+        <label for="map-typed">Type strain status</label>
+        <select id="map-typed">
+          <option value="">All taxa</option>
+          <option value="yes">With type strain</option>
+          <option value="no">Without type strain</option>
+        </select>
+      </div>
+      <div class="facet-group">
+        <label for="map-color">Colour points by</label>
+        <select id="map-color">
+          <option value="domain">Domain</option>
+          <option value="rank">Taxonomic rank</option>
+          <option value="typed">Type strain status</option>
+          <option value="sources">Source count</option>
+        </select>
+      </div>
+      <div class="facet-actions">
+        <button type="button" id="map-reset" class="btn-secondary">Reset filters &amp; zoom</button>
+      </div>
+    </form>
+    <div id="map-legend" class="map-legend" aria-label="Colour legend"></div>
+  </aside>
+  <div class="browse-main">
+    <p id="map-status" role="status">Loading text embedding map…</p>
+    <div class="map-canvas-wrap">
+      <canvas id="map-canvas" width="820" height="580" aria-label="2D text embedding scatter plot of TaxonMech records"></canvas>
+      <div id="map-tooltip" class="map-tooltip" hidden></div>
+    </div>
+    <div id="map-selection" class="map-selection-card" hidden></div>
+  </div>
+</section>
+<script>
+(() => {
+  "use strict";
+  const wrap = document.getElementById("taxon-map-browser");
+  if (!wrap) return;
+  const root = wrap.dataset.root || "";
+  const canvas = document.getElementById("map-canvas");
+  const ctx = canvas.getContext("2d");
+  const statusEl = document.getElementById("map-status");
+  const tooltip = document.getElementById("map-tooltip");
+  const selectionCard = document.getElementById("map-selection");
+  const legendEl = document.getElementById("map-legend");
+  const searchInput = document.getElementById("map-search");
+  const domainSelect = document.getElementById("map-domain");
+  const rankSelect = document.getElementById("map-rank");
+  const sourceSelect = document.getElementById("map-source");
+  const typedSelect = document.getElementById("map-typed");
+  const colorSelect = document.getElementById("map-color");
+  const resetBtn = document.getElementById("map-reset");
+
+  const PALETTE = [
+    "#5257C9", "#1B9E77", "#D95F02", "#E7298A",
+    "#66A61E", "#E6AB02", "#A6761D", "#386CB0"
+  ];
+  let points = [];
+  let zoom = 1, panX = 0, panY = 0;
+  let dragging = false, dragStartX = 0, dragStartY = 0;
+  let hovered = null, selected = null;
+
+  const initialQ = new URLSearchParams(window.location.search).get("q") || "";
+  if (initialQ) searchInput.value = initialQ;
+
+  function syncUrl(q) {
+    if (!window.history || typeof window.history.replaceState !== "function") return;
+    const params = new URLSearchParams(window.location.search);
+    if (q) params.set("q", q);
+    else params.delete("q");
+    const qs = params.toString();
+    window.history.replaceState(null, "", window.location.pathname + (qs ? "?" + qs : ""));
+  }
+
+  function groupKey(p, mode) {
+    if (mode === "rank") return p.rank || "NO_RANK";
+    if (mode === "typed") return p.has_type_strain ? "With type strain" : "Without type strain";
+    if (mode === "sources") return (p.source_count || (p.sources || []).length) + " sources";
+    return p.domain || "OTHER";
+  }
+
+  function matches(p, term, dom, rank, src, typed) {
+    if (dom && p.domain !== dom) return false;
+    if (rank && (p.rank || "NO_RANK") !== rank) return false;
+    if (src && !(p.sources || []).includes(src)) return false;
+    if (typed === "yes" && !p.has_type_strain) return false;
+    if (typed === "no" && p.has_type_strain) return false;
+    if (term && !p._search.includes(term)) return false;
+    return true;
+  }
+
+  function screenCoords(p) {
+    const pad = 34;
+    const w = canvas.width - pad * 2;
+    const h = canvas.height - pad * 2;
+    const bx = pad + p.x * w;
+    const by = pad + (1 - p.y) * h;
+    return [
+      (bx - canvas.width / 2) * zoom + canvas.width / 2 + panX,
+      (by - canvas.height / 2) * zoom + canvas.height / 2 + panY
+    ];
+  }
+
+  function draw() {
+    const term = searchInput.value.toLowerCase().trim();
+    const dom = domainSelect.value;
+    const rank = rankSelect.value;
+    const src = sourceSelect.value;
+    const typed = typedSelect.value;
+    const mode = colorSelect.value;
+    syncUrl(searchInput.value.trim());
+
+    const groups = new Map();
+    let activeCount = 0;
+    for (const p of points) {
+      const k = groupKey(p, mode);
+      if (!groups.has(k)) groups.set(k, PALETTE[groups.size % PALETTE.length]);
+      p._active = matches(p, term, dom, rank, src, typed);
+      if (p._active) activeCount++;
+    }
+
+    legendEl.replaceChildren();
+    for (const [label, color] of groups.entries()) {
+      const item = document.createElement("div");
+      item.className = "legend-item";
+      const swatch = document.createElement("span");
+      swatch.className = "legend-swatch";
+      swatch.style.background = color;
+      const text = document.createElement("span");
+      text.textContent = label;
+      item.append(swatch, text);
+      legendEl.append(item);
+    }
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const p of points) {
+      if (p._active) continue;
+      const [sx, sy] = screenCoords(p);
+      p._sx = sx; p._sy = sy;
+      ctx.fillStyle = "rgba(150,155,175,0.18)";
+      ctx.beginPath();
+      ctx.arc(sx, sy, 2.2, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    for (const p of points) {
+      if (!p._active) continue;
+      const [sx, sy] = screenCoords(p);
+      p._sx = sx; p._sy = sy;
+      ctx.fillStyle = groups.get(groupKey(p, mode));
+      ctx.beginPath();
+      ctx.arc(sx, sy, p === selected || p === hovered ? 5.5 : 3.2, 0, Math.PI * 2);
+      ctx.fill();
+      if (p === selected || p === hovered) {
+        ctx.strokeStyle = "#1a1a1a";
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+    }
+    statusEl.textContent = activeCount + " of " + points.length + " embedded taxa shown.";
+  }
+
+  function showSelection(p) {
+    if (!p) {
+      selectionCard.hidden = true;
+      return;
+    }
+    selectionCard.hidden = false;
+    selectionCard.replaceChildren();
+    const title = document.createElement("h2");
+    const link = document.createElement("a");
+    link.href = root + p.page;
+    const em = document.createElement("em");
+    em.textContent = p.label;
+    link.append(em);
+    title.append(link);
+    const meta = document.createElement("p");
+    meta.className = "meta";
+    meta.textContent = p.id + " · " + p.domain + " · " + p.rank +
+      " · Sources: " + (p.sources || []).join(", ") +
+      " · Strains: " + (p.strain_count || 0) +
+      (p.has_type_strain ? " (includes type strain)" : "");
+    selectionCard.append(title, meta);
+  }
+
+  canvas.addEventListener("mousemove", e => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = (e.clientX - rect.left) * (canvas.width / rect.width);
+    const my = (e.clientY - rect.top) * (canvas.height / rect.height);
+    if (dragging) {
+      panX += mx - dragStartX;
+      panY += my - dragStartY;
+      dragStartX = mx;
+      dragStartY = my;
+      draw();
+      return;
+    }
+    let best = null, bestDist = 100;
+    for (const p of points) {
+      if (!p._active) continue;
+      const d = Math.hypot((p._sx || 0) - mx, (p._sy || 0) - my);
+      if (d < 10 && d < bestDist) {
+        best = p;
+        bestDist = d;
+      }
+    }
+    if (best !== hovered) {
+      hovered = best;
+      draw();
+    }
+    if (best) {
+      tooltip.hidden = false;
+      tooltip.textContent = best.label + " (" + best.id + ") · " + best.domain;
+      tooltip.style.left = Math.min(rect.width - 220, Math.max(8, e.clientX - rect.left + 12)) + "px";
+      tooltip.style.top = Math.max(8, e.clientY - rect.top - 28) + "px";
+    } else {
+      tooltip.hidden = true;
+    }
+  });
+
+  canvas.addEventListener("mousedown", e => {
+    const rect = canvas.getBoundingClientRect();
+    dragStartX = (e.clientX - rect.left) * (canvas.width / rect.width);
+    dragStartY = (e.clientY - rect.top) * (canvas.height / rect.height);
+    dragging = true;
+  });
+  window.addEventListener("mouseup", () => { dragging = false; });
+  canvas.addEventListener("click", () => {
+    if (hovered) {
+      selected = hovered;
+      showSelection(selected);
+      draw();
+    }
+  });
+  canvas.addEventListener("wheel", e => {
+    e.preventDefault();
+    zoom = Math.max(0.6, Math.min(12, zoom * (e.deltaY < 0 ? 1.15 : 0.87)));
+    draw();
+  }, {passive: false});
+
+  for (const el of [searchInput, domainSelect, rankSelect, sourceSelect, typedSelect, colorSelect]) {
+    el.addEventListener(el.tagName === "INPUT" ? "input" : "change", draw);
+  }
+  document.getElementById("map-filter-form").addEventListener("submit", e => {
+    e.preventDefault();
+    draw();
+  });
+  resetBtn.addEventListener("click", () => {
+    searchInput.value = "";
+    domainSelect.value = "";
+    rankSelect.value = "";
+    sourceSelect.value = "";
+    typedSelect.value = "";
+    colorSelect.value = "domain";
+    zoom = 1; panX = 0; panY = 0;
+    selected = null;
+    showSelection(null);
+    draw();
+  });
+
+  window.TaxonMechData.loadJSON(root + "corpus_map.json.gz").then(payload => {
+    points = (payload.points || []).map(p => ({
+      ...p,
+      _search: [p.id, p.label, p.domain, p.rank, ...(p.sources || [])].join(" ").toLowerCase()
+    }));
+    draw();
+  }).catch(() => {
+    statusEl.textContent = "Embedding map data could not be loaded.";
+  });
+})();
+</script>
+</main>
+<footer>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="index.json.gz">Index JSON.gz</a> · <a href="index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>796bb41c66df</code>, 625,960 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p class="fam">
+    <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
+    <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·
+    <a href="https://gtdb.ecogenomic.org/">GTDB</a> ·
+    <a href="https://lpsn.dsmz.de/">LPSN</a> ·
+    <a href="https://bacdive.dsmz.de/">BacDive</a>
+  </p>
+</footer>
+</body>
+</html>

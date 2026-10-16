@@ -207,6 +207,10 @@ def render(out_dir: Path) -> None:
         index.append(entry)
 
     env.globals["taxon_pages"] = {entry["identifier"]: entry["page"] for entry in index}
+    env.globals["corpus_records"] = len(index)
+    env.globals["corpus_digest"] = hashlib.sha256(
+        json.dumps(index, separators=(",", ":"), ensure_ascii=False, sort_keys=True).encode("utf-8")
+    ).hexdigest()[:12]
     children = defaultdict(list)
     for entry in index:
         parent = parents[entry["identifier"]]
@@ -254,6 +258,9 @@ def render(out_dir: Path) -> None:
     write_taxon_data(env, out_dir, records)
     (out_dir / "taxon.html").write_text(
         env.get_template("taxon-viewer.html").render(root=""), encoding="utf-8")
+    (out_dir / "map.html").write_text(
+        env.get_template("map.html").render(root=""), encoding="utf-8")
+    write_corpus_map(out_dir, index)
     # Preserve every previously published taxon URL, including its strain anchor.
     active = {entry["identifier"]: entry["domain"] for entry in index}
     for row in _tsv(REPO_ROOT / "curation/legacy_page_paths.tsv"):
@@ -276,6 +283,33 @@ def render(out_dir: Path) -> None:
                         '</body></html>\n')
     if hasattr(records, "close"):
         records.close()
+
+
+def write_corpus_map(out_dir: Path, index: list[dict]) -> None:
+    """Publish the 2D text embedding map (corpus_map.json.gz) for map.html."""
+    corpus_map_path = REPO_ROOT / "data" / "embeddings" / "corpus_map.json"
+    if len(index) > 1000 and corpus_map_path.exists():
+        raw = corpus_map_path.read_bytes()
+    else:
+        n = max(1, len(index))
+        points = [
+            {
+                "id": e["identifier"],
+                "label": e["label"],
+                "domain": e["domain"],
+                "rank": e["rank"],
+                "sources": e.get("sources") or [],
+                "source_count": len(e.get("sources") or []),
+                "strain_count": e.get("strain_count", 0),
+                "has_type_strain": bool(e.get("has_type_strain")),
+                "page": e["page"],
+                "x": round((idx + 0.5) / n, 4),
+                "y": round(((idx * 7) % n + 0.5) / n, 4),
+            }
+            for idx, e in enumerate(index)
+        ]
+        raw = (json.dumps({"points": points}, separators=(",", ":"), ensure_ascii=False) + "\n").encode("utf-8")
+    (out_dir / "corpus_map.json.gz").write_bytes(gzip_bytes(raw))
 
 
 def write_search_index(out_dir: Path, index: list[dict]) -> None:

@@ -119,6 +119,21 @@
     content:"";position:absolute;inset:0 0 auto 0;height:2px;border-radius:16px 16px 0 0;
     background:linear-gradient(90deg,#D6DAF7,#CFEDD9);opacity:.55}
 
+  header.site-header{position:relative;display:flex;justify-content:space-between;align-items:center;
+         gap:1rem;flex-wrap:wrap;padding:.75rem 1.2rem;
+         background:linear-gradient(135deg,var(--pastel-a),var(--pastel-b));
+         border-bottom:1px solid var(--line)}
+  header.site-header .brand{font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+  header.site-header nav{display:flex;align-items:center;flex-wrap:wrap;gap:.2rem}
+  header.site-header nav a{margin-left:.9rem;color:var(--muted);text-decoration:none;font-size:.95rem}
+  header.site-header nav a:hover{color:var(--accent)}
+  .hero-search{display:flex;gap:.55rem;max-width:620px;margin:24px auto 0;justify-content:center;flex-wrap:wrap}
+  .hero-search input[type="search"]{flex:1;min-width:240px;padding:.72rem 1rem;border:1px solid var(--accent);
+         border-radius:999px;font:inherit;font-size:1rem;background:var(--card);color:var(--ink);
+         box-shadow:0 2px 8px rgba(0,0,0,.06)}
+  .hero-search button{padding:.72rem 1.35rem;border:none;border-radius:999px;background:var(--accent);
+         color:var(--on-accent);font:inherit;font-weight:600;cursor:pointer}
+  .hero-search button:hover{filter:brightness(.93)}
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     *{transition:none!important;animation:none!important}
@@ -128,7 +143,19 @@
 <script src="theme-toggle.js"></script>
 </head>
 <body>
-
+<header class="site-header">
+  <a class="brand" href="index.html">TaxonMech</a>
+  <nav>
+    <a href="browse.html">Browse</a>
+    <a href="type-strains.html">Type strains</a>
+    <a href="map.html">Text map</a>
+    <a href="sources.html">Sources</a>
+    <a href="index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
+  </nav>
+</header>
 <main>
 <div class="hero">
   <h1>TaxonMech</h1>
@@ -137,6 +164,10 @@
     GTDB genomes, LPSN nomenclature and BacDive culture-collection strains,
     harmonized into one record per taxon from kg-microbe's transforms.
   </p>
+  <form class="hero-search" action="browse.html" method="get" role="search">
+    <input type="search" name="q" placeholder="Search {{ total }} taxon records by name, NCBI ID, rank, or source…" aria-label="Search TaxonMech">
+    <button type="submit">Search</button>
+  </form>
   <div class="stats">
     <a class="stat" href="browse.html"><b>{{ total }}</b><span>taxon records</span></a>
     <a class="stat" href="browse.html"><b>{{ strains }}</b><span>distinct listed strains</span></a>
@@ -157,11 +188,10 @@
          classifies the strain.</p>
     </div>
     <div class="card">
-      <div class="actions"><a class="btn" href="browse.html">Browse records</a></div>
-      <h2>Record browser</h2>
+      <div class="actions"><a class="btn" href="browse.html">Browse records</a><a class="btn" href="map.html">Text map</a></div>
+      <h2>Record browser &amp; embedding map</h2>
       <p>Every taxon in the corpus, with its rank, domain, attesting sources,
-         strain count and GTDB species-mapping count. Search all records or browse by page.
-         Source-specific genome counts and mapping qualifications remain on each record.</p>
+         strain count and GTDB species-mapping count. Search all records, filter by left-hand facets, or explore the 2D text embedding map.</p>
     </div>
     <div class="card">
       <div class="actions">
@@ -174,12 +204,15 @@
     </div>
     <div class="card">
       <div class="actions">
+        <a class="btn" href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a>
+        <a class="btn" href="index.json.gz">Download index (JSON.gz)</a>
+        <a class="btn" href="index.json">Download manifest</a>
         <a class="btn" href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
       </div>
-      <h2>Source and schema</h2>
+      <h2>Source, schema &amp; bulk downloads</h2>
       <p>Records are LinkML-validated YAML under <code>data/taxa/</code>, seeded
-         from committed inventories of kg-microbe's transforms. The schema,
-         curation history and pipeline all live in the repository.</p>
+         from committed inventories of kg-microbe's transforms. Download the complete
+         harmonized taxon index (<code>index.json.gz</code>) or inspect the LinkML schema.</p>
     </div>
   </div>
 
@@ -206,7 +239,7 @@
 
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="index.json.gz">Index JSON.gz</a> · <a href="index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code>{% if corpus_digest %} (corpus digest <code>{{ corpus_digest }}</code>, {{ '{:,}'.format(total) }} records){% endif %}</p>
   <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
   <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">

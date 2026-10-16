@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% block title %}Source coverage · TaxonMech{% endblock %}
 {% block content %}
+<div class="record-topbar">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="{{ root }}index.html">TaxonMech</a> › <span>Source coverage</span>
+  </nav>
+  <form class="page-search" action="{{ root }}browse.html" method="get" role="search">
+    <input type="search" name="q" placeholder="Search taxa, NCBI IDs, ranks, or sources…" aria-label="Search TaxonMech records">
+    <button type="submit">Search</button>
+  </form>
+</div>
 <h1>Source coverage</h1>
 <h2>Attribution</h2>
 <p>These sources are published under licences that require attribution. Their
@@ -16,7 +25,7 @@ that carries their data is here.</p>
 </div>
 <p>Species, strains, deposits and assemblies are different kinds of records. These catalogs retain source identifiers and assertions even when they cannot be attached to an NCBI taxon.</p>
 <p>“Complete” describes the named snapshot. Crosslinks and external resources have narrower coverage, shown below. Catalog counts must not be added together as counts of distinct organisms.</p>
-<p><a href="https://github.com/CultureBotAI/TaxonMech/blob/main/docs/SOURCE_COVERAGE.md">Coverage and refresh guide</a> · <a href="https://raw.githubusercontent.com/CultureBotAI/TaxonMech/main/data/catalog/MANIFEST.json">Download the source manifest</a></p>
+<p><a href="https://github.com/CultureBotAI/TaxonMech/blob/main/docs/SOURCE_COVERAGE.md">Coverage and refresh guide</a> · <a href="https://raw.githubusercontent.com/CultureBotAI/TaxonMech/main/data/catalog/MANIFEST.json">Download the source manifest</a> · <a href="{{ root }}index.json.gz">Download harmonized taxon index (index.json.gz)</a> · <a href="{{ root }}index.json">Index integrity manifest (index.json)</a></p>
 <h2>Catalogs</h2>
 <div class="table-scroll" role="region" tabindex="0" aria-label="Source catalogs">
 <table>
