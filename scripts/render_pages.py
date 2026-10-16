@@ -308,7 +308,8 @@ def write_corpus_map(out_dir: Path, index: list[dict]) -> None:
             }
             for idx, e in enumerate(index)
         ]
-        raw = (json.dumps({"points": points}, separators=(",", ":"), ensure_ascii=False) + "\n").encode("utf-8")
+        raw_str = json.dumps({"points": points}, separators=(",", ":"), ensure_ascii=False) + "\n"
+        raw = raw_str.encode("utf-8")
     (out_dir / "corpus_map.json.gz").write_bytes(gzip_bytes(raw))
 
 

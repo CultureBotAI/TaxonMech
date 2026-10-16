@@ -74,12 +74,16 @@ def main() -> int:
     payload = {
         "model": model_name,
         "dim": int(vectors.shape[1]),
-        "method": "PaCMAP (n_neighbors=10, MN_ratio=0.5, FP_ratio=2.0, init=pca) on mean-centered L2-normalized vectors",
+        "method": (
+            "PaCMAP (n_neighbors=10, MN_ratio=0.5, FP_ratio=2.0, init=pca) "
+            "on mean-centered L2-normalized vectors"
+        ),
         "count": len(points),
         "points": points,
     }
     args.out.parent.mkdir(parents=True, exist_ok=True)
-    args.out.write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
+    out_json = json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + "\n"
+    args.out.write_text(out_json, encoding="utf-8")
     print(f"Wrote 2D embedding map ({len(points)} points) -> {args.out}")
     return 0
 
