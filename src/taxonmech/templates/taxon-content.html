@@ -17,6 +17,13 @@
 {% if r.synonyms %}<p><strong>Synonyms:</strong> {% for s in r.synonyms %}{{ s.synonym_text }} <small>({{ s.source }})</small>{% if not loop.last %}; {% endif %}{% endfor %}</p>{% endif %}
 {% if r.xrefs %}<p><strong>Xrefs:</strong> {% for c in r.xrefs %}{{ curie(c) }} {% endfor %}</p>{% endif %}
 {% if r.genetic_code %}<p><strong>Genetic code:</strong> {{ r.genetic_code }}</p>{% endif %}
+<p class="cross-mech"><strong>Explore across X-Mech:</strong>
+  <a href="https://culturebotai.github.io/CultureMech/browser.html?q={{ r.label | urlencode }}">CultureMech media</a> ·
+  <a href="https://culturebotai.github.io/CommunityMech/browser.html?q={{ r.identifier | urlencode }}">CommunityMech communities</a> ·
+  <a href="https://culturebotai.github.io/HabitatMech/browse.html?q={{ r.identifier | urlencode }}">HabitatMech habitats</a> ·
+  <a href="https://culturebotai.github.io/PathwayMech/browse.html?q={{ r.identifier | urlencode }}">PathwayMech pathways</a> ·
+  <a href="https://culturebotai.github.io/NaturalProductMech/browse.html?q={{ r.identifier | urlencode }}">NaturalProductMech BGCs</a>
+</p>
 
 <h2>Source attestations</h2>
 <table><thead><tr><th>Source</th><th>Identifier</th><th>Label</th><th>Predicate</th><th>Count</th><th>Unit</th><th>Notes</th></tr></thead><tbody>

@@ -1,13 +1,93 @@
 {% extends "base.html" %}
 {% block title %}{{ page_title | default("Browse") }} · TaxonMech{% endblock %}
 {% block content %}
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="{{ root }}index.html">TaxonMech</a> › <span>{{ heading | default("All records") }}</span>
+</nav>
 <h1>{{ heading | default("All records") }}</h1>
 {% if lede %}
 <p class="lede">{{ lede }}</p>
 {% endif %}
-<section id="taxon-browser" data-domain="{{ pagination.domain }}" data-typed="{{ 'true' if pagination.typed else 'false' }}" data-page="{{ pagination.page }}" data-size="{{ pagination.size }}" data-root="{{ root }}">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="{{ pagination.domain }}" data-typed="{{ 'true' if pagination.typed else 'false' }}" data-page="{{ pagination.page }}" data-size="{{ pagination.size }}" data-root="{{ root }}">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="{{ root }}browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA"{% if pagination.domain == "BACTERIA" %} selected{% endif %}>Bacteria</option>
+        <option value="ARCHAEA"{% if pagination.domain == "ARCHAEA" %} selected{% endif %}>Archaea</option>
+        <option value="EUKARYOTA"{% if pagination.domain == "EUKARYOTA" %} selected{% endif %}>Eukaryota</option>
+        <option value="OTHER"{% if pagination.domain == "OTHER" %} selected{% endif %}>Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed"{% if pagination.typed %} selected{% endif %}>With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">{{ pagination.total }} records · page {{ pagination.page }} of {{ pagination.pages }}.</p>
 <p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
 Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
@@ -15,7 +95,7 @@ Pooled mappings retain their qualifications and source-specific genome counts on
 {% if pagination.previous %}<a href="{{ pagination.previous }}">Previous</a>{% endif %}
 {% if pagination.next %}<a href="{{ pagination.next }}">Next</a>{% endif %}
 </nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
 <div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
 <caption>{{ heading | default("All records") }}</caption>
@@ -26,6 +106,7 @@ Pooled mappings retain their qualifications and source-specific genome counts on
 {% endfor %}
 </tbody>
 </table>
+</div>
 </div>
 </section>
 <script defer src="{{ root }}taxon-browser.js?v={{ script_version | default('1') }}"></script>

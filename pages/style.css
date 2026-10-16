@@ -148,3 +148,45 @@ q{font-style:italic}
 caption { text-align: left; font-weight: 600; padding: .5rem; }
 .related-taxa ul { max-height: 18rem; overflow-y: auto; overflow-wrap: anywhere; }
 .related-taxa ul:focus-visible { outline: 3px solid var(--accent); }
+
+/* Unified layout: widened main container, breadcrumbs, downstream search bar, and sticky left-hand facet sidebar */
+main { max-width: 1240px; }
+.breadcrumbs { font-size: .88rem; color: var(--muted); margin-bottom: .45rem; }
+.breadcrumbs a { color: var(--muted); text-decoration: none; }
+.breadcrumbs a:hover { color: var(--accent); text-decoration: underline; }
+.record-topbar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: .75rem; padding-bottom: .6rem; border-bottom: 1px solid var(--line); }
+.page-search { display: flex; gap: .45rem; align-items: center; flex-wrap: wrap; }
+.page-search input[type="search"] { min-width: 240px; padding: .42rem .75rem; border: 1px solid var(--accent); border-radius: 999px; background: var(--card); color: var(--ink); font: inherit; font-size: .92rem; }
+.page-search button { padding: .42rem .95rem; border: 1px solid var(--accent); border-radius: 999px; background: var(--accent); color: #fff; font: inherit; font-size: .9rem; font-weight: 600; cursor: pointer; }
+:root[data-theme="dark"] .page-search button { color: #121320; }
+
+.browse-layout { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 1.5rem; align-items: start; margin-top: 1rem; }
+.facet-sidebar { position: sticky; top: 1rem; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+.facet-form { display: flex; flex-direction: column; gap: .85rem; }
+.facet-group { display: flex; flex-direction: column; gap: .3rem; }
+.facet-group label { font-size: .82rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+.facet-group input[type="search"], .facet-group select { width: 100%; padding: .48rem .6rem; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--fg); font: inherit; font-size: .92rem; }
+.facet-group input[type="search"]:focus, .facet-group select:focus { outline: 2px solid var(--accent); border-color: var(--accent); }
+.search-input-row { display: flex; gap: .35rem; }
+.search-input-row button { padding: .45rem .75rem; border: 1px solid var(--accent); border-radius: 6px; background: var(--accent); color: #fff; font: inherit; font-size: .88rem; font-weight: 600; cursor: pointer; }
+:root[data-theme="dark"] .search-input-row button { color: #121320; }
+.facet-actions { margin-top: .25rem; }
+.btn-secondary { width: 100%; padding: .45rem .75rem; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); color: var(--ink); font: inherit; font-size: .88rem; cursor: pointer; }
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+.browse-main { min-width: 0; }
+
+.map-canvas-wrap { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+#map-canvas { display: block; width: 100%; height: auto; cursor: grab; }
+#map-canvas:active { cursor: grabbing; }
+.map-tooltip { position: absolute; pointer-events: none; background: var(--card); color: var(--ink); border: 1px solid var(--accent); border-radius: 6px; padding: .35rem .6rem; font-size: .84rem; box-shadow: 0 4px 12px rgba(0,0,0,.15); z-index: 10; }
+.map-selection-card { margin-top: .85rem; padding: .9rem 1.1rem; background: var(--card); border: 1px solid var(--accent); border-radius: 10px; }
+.map-selection-card h2, .map-selection-card h3 { margin: 0 0 .25rem; font-size: 1.1rem; }
+.map-legend { margin-top: 1rem; padding-top: .75rem; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: .35rem; font-size: .84rem; }
+.legend-item { display: flex; align-items: center; gap: .45rem; }
+.legend-swatch { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+
+@media (max-width: 860px) {
+  .browse-layout { grid-template-columns: 1fr; }
+  .facet-sidebar { position: static; }
+}
+

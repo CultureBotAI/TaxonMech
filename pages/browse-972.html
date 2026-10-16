@@ -7,29 +7,113 @@
 <link rel="stylesheet" href="style.css">
 <script src="theme-toggle.js"></script>
 <script defer src="vendor/fflate-0.8.2.js"></script>
-<script defer src="compressed-data.js?v=dae8e05c41b5a082"></script>
+<script defer src="compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="index.html">TaxonMech</a>
   <nav>
     <a href="browse.html">Browse</a>
     <a href="type-strains.html">Type strains</a>
+    <a href="map.html">Text map</a>
     <a href="sources.html">Sources</a>
+    <a href="index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="index.html">TaxonMech</a> › <span>All records</span>
+</nav>
 <h1>All records</h1>
-<section id="taxon-browser" data-domain="" data-typed="false" data-page="972" data-size="200" data-root="">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="" data-typed="false" data-page="972" data-size="200" data-root="">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA">Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">625960 records · page 972 of 3130.</p>
 <p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
 Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="browse-971.html">Previous</a><a href="browse-973.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
 <div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
 <caption>All records</caption>
@@ -238,11 +322,12 @@ Pooled mappings retain their qualifications and source-specific genome counts on
 </tbody>
 </table>
 </div>
+</div>
 </section>
-<script defer src="taxon-browser.js?v=dae8e05c41b5a082"></script>
+<script defer src="taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="index.json.gz">Index JSON.gz</a> · <a href="index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>796bb41c66df</code>, 625,960 records)</p>
   <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
   <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
