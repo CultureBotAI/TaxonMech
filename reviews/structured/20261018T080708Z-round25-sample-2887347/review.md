@@ -109,7 +109,7 @@ Require an explicit nomenclatural or taxon-identity bridge in src/taxonmech/seed
 
 - Read-only structured review; no generated taxon YAML, page, history, or maintained source file was modified.
 - Absence of optional strain, phenotype, or causal-graph assertions reflects repository scope rather than negative biological evidence.
-- Batch evidence ledger: docs/structured-review-batches.tsv (SHA256 d0b0a5109de081e9fed1a44cba9a662745b46f393ccf2126577c6076f15199be).
+- Batch evidence ledger: docs/structured-review-batches.tsv (SHA256 6e9bdf3a8f72107da520003eb810b8f6dbdc4276783529cdce694b9b9fd3a05e).
 - Generated and validated via scripts/record_review.py without modifying any tracked corpus files.
 
 ## Complete Structured Record
@@ -243,13 +243,13 @@ source:
     sha256: 275df7f9fdbef59d1e53428f4a211079bb443a32b30d23accbd67111c82d2404
     role: context
   - path: docs/record-review-profile.md
-    sha256: 9ccf04ecaabe00c4cfd88e2d518a664d58fbf93223f5ed9c1946dfd7682d216d
+    sha256: d98d6944810090bf9c344ab218d82f8927d73eaad432322b94a876fe9e891334
     role: context
   - path: docs/record-reviews.md
     sha256: 452a19ab688276747b7c4308523a14d4d99c1c39ef6909ae8a90b85b7a9b3e9b
     role: context
   - path: docs/structured-review-batches.tsv
-    sha256: d0b0a5109de081e9fed1a44cba9a662745b46f393ccf2126577c6076f15199be
+    sha256: 6e9bdf3a8f72107da520003eb810b8f6dbdc4276783529cdce694b9b9fd3a05e
     role: context
   - path: justfile
     sha256: c46d88186cad450fbd47ce5176bf2afc8289252e287324245ad30090753c750e
@@ -456,7 +456,7 @@ evidence:
     "attested rule: Cohnella baijiui, 3 sources incl. NCBI"}}}'
   accessed_at: '2026-10-18T08:07:08.293217Z'
   support: supports
-  snapshot_sha256: d0b0a5109de081e9fed1a44cba9a662745b46f393ccf2126577c6076f15199be
+  snapshot_sha256: 6e9bdf3a8f72107da520003eb810b8f6dbdc4276783529cdce694b9b9fd3a05e
   search_scope: Full scan of all 16 data/raw/*.tsv tables, curation/seed_scope.tsv,
     and data/taxa/PATHS.tsv for exact target_id, parent_id, and mapped GTDB cluster
     IDs.
@@ -477,7 +477,7 @@ evidence:
     including data/taxa/bacteria/cohnella_baijiui.yaml.
   accessed_at: '2026-10-18T08:05:49Z'
   support: supports
-  snapshot_sha256: d0b0a5109de081e9fed1a44cba9a662745b46f393ccf2126577c6076f15199be
+  snapshot_sha256: 6e9bdf3a8f72107da520003eb810b8f6dbdc4276783529cdce694b9b9fd3a05e
 - evidence_id: history-receipt
   kind: validation
   reference: docs/structured-review-batches.tsv
@@ -485,7 +485,7 @@ evidence:
   summary: Native validate_history.py passed (17 valid history records, 0 invalid).
   accessed_at: '2026-10-18T08:05:49Z'
   support: supports
-  snapshot_sha256: d0b0a5109de081e9fed1a44cba9a662745b46f393ccf2126577c6076f15199be
+  snapshot_sha256: 6e9bdf3a8f72107da520003eb810b8f6dbdc4276783529cdce694b9b9fd3a05e
 - evidence_id: gtdb
   kind: database
   reference: data/raw/gtdb_mappings.tsv; data/raw/gtdb_species.tsv
@@ -629,7 +629,7 @@ limitations:
 - Absence of optional strain, phenotype, or causal-graph assertions reflects repository
   scope rather than negative biological evidence.
 notes:
-- 'Batch evidence ledger: docs/structured-review-batches.tsv (SHA256 d0b0a5109de081e9fed1a44cba9a662745b46f393ccf2126577c6076f15199be).'
+- 'Batch evidence ledger: docs/structured-review-batches.tsv (SHA256 6e9bdf3a8f72107da520003eb810b8f6dbdc4276783529cdce694b9b9fd3a05e).'
 - Generated and validated via scripts/record_review.py without modifying any tracked
   corpus files.
 tags:
