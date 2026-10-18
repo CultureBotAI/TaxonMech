@@ -1,0 +1,540 @@
+# Record review: candidate division JS1 bacterium enrichment culture clone L35B_100 (NCBITaxon:1223169)
+
+- Review: 20261018T080705Z-round25-sample-1223169
+- Repository: CultureBotAI/TaxonMech
+- Started UTC: 2026-10-18T00:00:00Z
+- Finished UTC: 2026-10-18T08:07:05.706431Z
+- Reviewer: Antigravity (independent)
+- Completion: completed
+- Verdict: pass
+- Scientific review: true
+
+## Summary
+
+candidate division JS1 bacterium enrichment culture clone L35B_100 is verified as NCBITaxon:1223169 (rank SPECIES, domain BACTERIA, parent NCBITaxon:97507 environmental samples, genetic_code 11) at data/raw/ncbitaxon_taxa.tsv line 278474 with 6 carried lineage ancestors and 0 child taxa in the pinned taxonomy inventory. No NCBITaxon exact synonym is asserted. Local imported strain_count=0 agrees with the pinned subtree inventory without implying biological absence. No GTDB or external equivalent-resource xref is asserted. All asserted source_attestations counts are directly verified against local raw inventories.
+
+## Scope And Provenance
+
+Complete represented YAML content and source provenance assertions for NCBITaxon:1223169 (candidate division JS1 bacterium enrichment culture clone L35B_100).
+
+Selection: Sequential unreviewed record in sorted corpus path order (round25-sample), excluding all legacy-archived and previously structured-reviewed target_ids.
+Coverage: full; 1 reviewed / 1 in the declared population.
+Source: working_tree at Git base 9e35388d8c663fa8b682551efd5c72cc218011bb.
+Working-tree hashes do not imply those bytes were committed.
+
+| Target | Path / selector | Kind | Label |
+| --- | --- | --- | --- |
+| NCBITaxon:1223169 | data/taxa/bacteria/candidate_division_js1_bacterium_enrichment_culture_clone_l35b_100.yaml | generated | candidate division JS1 bacterium enrichment culture clone L35B_100 |
+
+## Validation
+
+| Check | Status | Required | Targets | Result |
+| --- | --- | --- | --- | --- |
+| Native strict and LinkML schema validation | passed | True | NCBITaxon:1223169 | scripts/validate_strict.py passed with 0 errors on batch including data/taxa/bacteria/candidate_division_js1_bacterium_enrichment_culture_clone_l35b_100.yaml (start 2026-10-18T08:05:49Z, finish 2026-10-18T08:05:49Z). |
+| Native history validation | passed | True | NCBITaxon:1223169 | scripts/validate_history.py passed on all 17 repository history records (start 2026-10-18T08:05:49Z, finish 2026-10-18T08:05:49Z). |
+| Whole original record read | passed | True | NCBITaxon:1223169 | Entire 42-line YAML file (1281 bytes) read untruncated prior to scientific assessment. |
+| Exact identity and carried ancestry verification | passed | True | NCBITaxon:1223169 | Pinned ncbitaxon_taxa.tsv row (line 278474) and all 6 carried lineage entries match candidate division JS1 bacterium enrichment culture clone L35B_100 (NCBITaxon:1223169). |
+| Raw source tables and local subtree census | passed | True | NCBITaxon:1223169 | Scanned all 16 raw TSV tables, curation/seed_scope.tsv, and data/taxa/PATHS.tsv; verified 0 child taxa and strain_count=0. |
+| Configured ontology term applicability | not_applicable | False | NCBITaxon:1223169 | No curator-grounded causal graph ontology terms occur in this record. |
+| Structured expression applicability | not_applicable | False | NCBITaxon:1223169 | No gene, regulator, iModulon, or transcriptomic assertion is present in this record. |
+| Source attestation and strain count verification | passed | True | NCBITaxon:1223169 | All asserted source_attestations and strain_count=0 are directly verified against local raw inventories. |
+
+## Scientific And Domain Assessments
+
+### Exact NCBI taxon identity and carried lineage
+
+identity: supported. Targets: NCBITaxon:1223169.
+
+candidate division JS1 bacterium enrichment culture clone L35B_100 matches NCBITaxon:1223169 at data/raw/ncbitaxon_taxa.tsv line 278474 (rank SPECIES, parent NCBITaxon:97507 environmental samples, genetic_code 11, domain BACTERIA) and all 6 carried lineage ancestors.
+
+### Imported local subtree and strain inventory
+
+completeness: supported. Targets: NCBITaxon:1223169.
+
+Parent-child scan of data/raw/ncbitaxon_taxa.tsv finds 0 direct child taxa for NCBITaxon:1223169. Local imported strain_count=0 agrees with the pinned subtree inventory without implying biological absence.
+
+### Source-qualified synonyms and nomenclature
+
+nomenclature: supported. Targets: NCBITaxon:1223169.
+
+No NCBITaxon exact synonym is asserted. No GTDB or external equivalent-resource xref is asserted.
+
+### Source attestations, seed history, and generated ownership
+
+provenance: supported. Targets: NCBITaxon:1223169.
+
+NCBITAXON NAME=1 records the taxon inventory assertion. Seeded curation_history and SEEDED status reflect deterministic generator provenance from src/taxonmech/seed.py and curation/seed_scope.tsv.
+
+### Native strict and history validation checks
+
+schema: supported. Targets: NCBITaxon:1223169.
+
+Fresh native validate_strict.py and validate_history.py checks passed with exit_code=0.
+
+## Findings
+
+No findings recorded within this review's declared scope.
+
+## Recommended Actions And Acceptance Checks
+
+## Category Boundaries
+
+
+## Evidence
+
+| Evidence | Reference / locator | Support | Observation |
+| --- | --- | --- | --- |
+| record | data/taxa/bacteria/candidate_division_js1_bacterium_enrichment_culture_clone_l35b_100.yaml; Entire original YAML lines 1-42 (1281 bytes) | supports | Complete target YAML read and verified before judgment for candidate division JS1 bacterium enrichment culture clone L35B_100 (NCBITaxon:1223169). |
+| taxonomy | data/raw/ncbitaxon_taxa.tsv; Exact target physical line 278474; 6 carried ancestor rows; 0 child rows | supports | {"ancestor_count": 6, "child_count": 0, "target": {"line": 278474, "row": {"attested_by": "ncbitaxon", "broad_synonyms": "", "exact_synonyms": "", "genetic_code": "11", "label": "candidate division JS1 bacterium enrichment culture clone L35B_100", "parent_id": "NCBITaxon:97507", "rank": "SPECIES", "related_synonyms": "", "retired_into": "", "taxon_id": "NCBITaxon:1223169", "taxonomy_snapshot": "2026-09-13"}}} |
+| inventory | docs/structured-review-batches.tsv; records[NCBITaxon:1223169] in batch evidence ledger; all 16 data/raw/*.tsv tables, curation/seed_scope.tsv, and data/taxa/PATHS.tsv | supports | {"matched_raw_tables": {"data/raw/ncbitaxon_taxa.tsv": 1}, "paths_tsv": {"line": 74833, "row": {"identifier": "NCBITaxon:1223169", "slug": "candidate_division_js1_bacterium_enrichment_culture_clone_l35b_100"}}, "rows_scanned": {"data/raw/bacdive_strains.tsv": 101417, "data/raw/bactotraits_taxa.tsv": 9658, "data/raw/culture_collection_strains.tsv": 154969, "data/raw/dropped.tsv": 2048, "data/raw/gold_organisms.tsv": 45616, "data/raw/gtdb_mappings.tsv": 322327, "data/raw/gtdb_species.tsv": 199923, "data/raw/lpsn_names.tsv": 34301, "data/raw/madin_taxa.tsv": 34148, "data/raw/mediadive_taxa.tsv": 14225, "data/raw/ncbi_merged_ids.tsv": 101006, "data/raw/ncbi_type_material.tsv": 277306, "data/raw/ncbitaxon_taxa.tsv": 650767, "data/raw/strain_assemblies.tsv": 159283, "data/raw/strain_genome_records.tsv": 126576, "data/raw/strain_related_records.tsv": 455720}, "seed_scope": {"line": 368383, "row": {"added": "2026-09-13", "identifier": "NCBITaxon:1223169", "reason": "attested rule: candidate division JS1 bacterium enrichment culture clone L35B_100, 1 sources incl. NCBI"}}} |
+| policy | src/taxonmech/schema/taxonmech.yaml; src/taxonmech/seed.py; docs/record-review-profile.md; taxonmech.yaml:xrefs; seed.py:440-472; docs/record-review-profile.md | supports | Xrefs and EXACT_SYNONYM assert concept equivalence; closeMatch cluster membership alone does not establish exact equivalence for unnamed or infraspecific taxa without an explicit nomenclatural or taxon-identity bridge. |
+| strict-receipt | docs/structured-review-batches.tsv; UTC 2026-10-18T08:05:49Z to 2026-10-18T08:05:49Z; stdout docs/structured-review-batches.tsv | supports | Native validate_strict.py passed with exit_code=0 and 0 error rows on batch including data/taxa/bacteria/candidate_division_js1_bacterium_enrichment_culture_clone_l35b_100.yaml. |
+| history-receipt | docs/structured-review-batches.tsv; UTC 2026-10-18T08:05:49Z to 2026-10-18T08:05:49Z; stdout docs/structured-review-batches.tsv | supports | Native validate_history.py passed (17 valid history records, 0 invalid). |
+
+## Limits And Additional Notes
+
+- Read-only structured review; no generated taxon YAML, page, history, or maintained source file was modified.
+- Absence of optional strain, phenotype, or causal-graph assertions reflects repository scope rather than negative biological evidence.
+- Batch evidence ledger: docs/structured-review-batches.tsv (SHA256 d0b0a5109de081e9fed1a44cba9a662745b46f393ccf2126577c6076f15199be).
+- Generated and validated via scripts/record_review.py without modifying any tracked corpus files.
+
+## Complete Structured Record
+
+The sibling review.yaml is authoritative.
+
+```yaml
+schema_version: 1.0.0
+review_id: 20261018T080705Z-round25-sample-1223169
+kind: record
+repository: CultureBotAI/TaxonMech
+title: 'Record review: candidate division JS1 bacterium enrichment culture clone L35B_100
+  (NCBITaxon:1223169)'
+started_at: '2026-10-18T00:00:00Z'
+finished_at: '2026-10-18T08:07:05.706431Z'
+reviewer:
+  identity: Antigravity
+  kind: agent
+  independence: independent
+  independence_basis: Read-only scientific and provenance review worker; authored
+    none of the generated taxon records or seed scripts; every target YAML record
+    and its raw inventory rows were read and verified prior to judgment.
+skill: .claude/skills/review-yaml-record/SKILL.md
+completion: completed
+verdict: pass
+scientific_review: true
+summary: candidate division JS1 bacterium enrichment culture clone L35B_100 is verified
+  as NCBITaxon:1223169 (rank SPECIES, domain BACTERIA, parent NCBITaxon:97507 environmental
+  samples, genetic_code 11) at data/raw/ncbitaxon_taxa.tsv line 278474 with 6 carried
+  lineage ancestors and 0 child taxa in the pinned taxonomy inventory. No NCBITaxon
+  exact synonym is asserted. Local imported strain_count=0 agrees with the pinned
+  subtree inventory without implying biological absence. No GTDB or external equivalent-resource
+  xref is asserted. All asserted source_attestations counts are directly verified
+  against local raw inventories.
+source:
+  git_revision: 9e35388d8c663fa8b682551efd5c72cc218011bb
+  state: working_tree
+  inputs:
+  - path: .claude/skills/curate-yaml-record/references/review-checklist.md
+    sha256: 8e8fd97c64fbff27e023c7a768b4c806c98f56cd6571e7102217a2c833284df6
+    role: context
+  - path: .claude/skills/review-yaml-record/SKILL.md
+    sha256: 4c7090b9d7fd0c6f7f2b4e47b48cbf64835e8d27b44944649e1ccd9038ce462d
+    role: context
+  - path: CLAUDE.md
+    sha256: 8ae749dbc22700080dcf5e1a0b7ed75710dee6a27f5c7f9e7c6790c26176e5c8
+    role: context
+  - path: conf/id_label_targets.yaml
+    sha256: bfd1b248f7b189cd054e15b7ad0171042a30980d2ebdbdd8e7d85cea68dde9c8
+    role: context
+  - path: conf/ncbi_taxdump.yaml
+    sha256: 1d734bbb3ebf9d36e304d8030c5852fa4f0f306fca2849be5dec8f3dff86f887
+    role: context
+  - path: conf/record_review.yaml
+    sha256: 366312506b771fc18fc5bfc30d5ec942b2c96212e1f4f95c463cfa1707fbebaa
+    role: context
+  - path: conf/sources.yaml
+    sha256: 759ef444b1890559846fd4ab7818c8dbca74ab6bee2f6b9466a1aff6b5f4d8c8
+    role: context
+  - path: curation/seed_scope.tsv
+    sha256: 5fdc0f7111b64e02439d95c6f2b51fcff1d2154c34b2d957422dd9b297e94d4b
+    role: context
+  - path: data/raw/MANIFEST.yaml
+    sha256: ee76711683b1b579d1561dcf40187e10e4f0027ae1b89f108eb18e865e7e7d38
+    role: context
+  - path: data/raw/bacdive_strains.tsv
+    sha256: 029fd6d1f53ef7f90684130bf0d644ed3edd1d8fbeb065a511ae928f160b1eea
+    role: context
+  - path: data/raw/bactotraits_taxa.tsv
+    sha256: 976d109cef832d8bf27cc105f67a42efbe900b6946736298602ef6d11158b197
+    role: context
+  - path: data/raw/culture_collection_strains.tsv
+    sha256: 810fdcb16abd6330fb15bb03d4c74b18db86be36a7c599df7c6b2498d9735c95
+    role: context
+  - path: data/raw/dropped.tsv
+    sha256: b0d5dfe91ebaf762249beceef51c5136291f9bfcb08ffa5098bd6510bb1a7401
+    role: context
+  - path: data/raw/gold_organisms.tsv
+    sha256: 0680971a156eef0b79de46c71a1f2138eaee5212ad8193eec943bd8e6257e473
+    role: context
+  - path: data/raw/gtdb_mappings.tsv
+    sha256: bf62441b1b76abb16dd92e795c020ff30fc24e37e195b862fb9beda567277225
+    role: context
+  - path: data/raw/gtdb_species.tsv
+    sha256: 24eddf08fe8fdd1fed534a1b7fd411561eec612c58c3709a36032998fdab8f21
+    role: context
+  - path: data/raw/lpsn_names.tsv
+    sha256: 097f8f4ba3fd077d02e48f2c298a0af88fe02db79cc862f9af1c05141b0baa57
+    role: context
+  - path: data/raw/madin_taxa.tsv
+    sha256: 7620448834f1b86daa83f2e338160ec3291a2ec3900ea4cec449418b1dc8b148
+    role: context
+  - path: data/raw/mediadive_taxa.tsv
+    sha256: 3f74b78cadfcdb6aeae953e09fdb39e34fd9c5d5ed0be65a04a5d7fb02355905
+    role: context
+  - path: data/raw/ncbi_merged_ids.tsv
+    sha256: 316bd4830713573cc6fe931a21a4c78f4c5159575550e71b5fd843c82a9211d9
+    role: context
+  - path: data/raw/ncbi_type_material.tsv
+    sha256: 38f1de7d1ae173620b54849b0ab81d7219763a4395984e9a1057cce47f574f69
+    role: context
+  - path: data/raw/ncbitaxon_taxa.tsv
+    sha256: 97ff340e1eebf62ea541a299e5c798cdcc24ef935c636fb059df48ab45d6f2f6
+    role: context
+  - path: data/raw/strain_assemblies.tsv
+    sha256: 71344b934db3081bfcac9562a0bd1fd8fddcfdabb8af60e208ca09035e818315
+    role: context
+  - path: data/raw/strain_genome_records.tsv
+    sha256: 47ed80be55660aad4bd82d37d889ea60f8686cec1aeeccf72e5af22bf43728ab
+    role: context
+  - path: data/raw/strain_related_records.tsv
+    sha256: c33a9bf4c6b94dc6971f1c0d46565092c37ba7c2d462a6bc9c20ccbf58fb9c56
+    role: context
+  - path: data/taxa/PATHS.tsv
+    sha256: c950844feb0638ce04f7349784749dd1d728fe70bc80f7e2756d956d4ecea254
+    role: context
+  - path: data/taxa/bacteria/candidate_division_js1_bacterium_enrichment_culture_clone_l35b_100.yaml
+    sha256: f2bcd94182569dfa54623e3c59df59350dcd483d39e1b43ba888229abf342a11
+    role: target
+  - path: docs/CURATION.md
+    sha256: 9e09c97bcd617f2b3d0090f775b80565fccc9d00e4c398ed58d3a31192a8fa8e
+    role: context
+  - path: docs/HARMONIZATION.md
+    sha256: 9c676a03a226d7fdce82f064acd01807a1a783497ffbbb1aabb8fdd393ac250d
+    role: context
+  - path: docs/SCHEMA.md
+    sha256: 9e767cebb2506f8372c65ceb5f75e5ef2df2b23c2be3727cfd198f447a6a0e30
+    role: context
+  - path: docs/legacy-review-inventory.tsv
+    sha256: 275df7f9fdbef59d1e53428f4a211079bb443a32b30d23accbd67111c82d2404
+    role: context
+  - path: docs/record-review-profile.md
+    sha256: 9ccf04ecaabe00c4cfd88e2d518a664d58fbf93223f5ed9c1946dfd7682d216d
+    role: context
+  - path: docs/record-reviews.md
+    sha256: 452a19ab688276747b7c4308523a14d4d99c1c39ef6909ae8a90b85b7a9b3e9b
+    role: context
+  - path: docs/structured-review-batches.tsv
+    sha256: d0b0a5109de081e9fed1a44cba9a662745b46f393ccf2126577c6076f15199be
+    role: context
+  - path: justfile
+    sha256: c46d88186cad450fbd47ce5176bf2afc8289252e287324245ad30090753c750e
+    role: context
+  - path: schema/record_review.yaml
+    sha256: 229baf9b69118a1fe318e4c31085c0820e4e3d1365e7b04d6ace451b7c35f9bb
+    role: context
+  - path: scripts/record_review.py
+    sha256: 95a4ec41e38ec47ba3578e76838c46a0adbf47e49ad3636524735d08cfcb1c4d
+    role: context
+  - path: scripts/run_qc.py
+    sha256: d3a8e398b0484fef1ce4ae13e639a03dd41467c1d597d753132e4dba04df9da3
+    role: context
+  - path: scripts/validate_history.py
+    sha256: aa8fd8528a28cf56a92768c05d57aea7ff48745510796126f144856b8fd7ae8b
+    role: context
+  - path: scripts/validate_strict.py
+    sha256: d0d75cc805cc746053076b5f75f5e6c817ab15c75a9362f8ce3be53bd4ec7382
+    role: context
+  - path: src/taxonmech/extract.py
+    sha256: 7c5b5bf385e0c060f1cb3dbac304d05ddb941e4c83c900017a04133efd6d1822
+    role: context
+  - path: src/taxonmech/ncbi_taxdump.py
+    sha256: 83e3bfd53721a1f85291022511de6504d84caa58e899c0fd8d1797e9f00f67cf
+    role: context
+  - path: src/taxonmech/schema/history.yaml
+    sha256: b01b06f1b9a37db205c26c31ec0fd910690848507c7e1bfb73b424ac0829c52d
+    role: context
+  - path: src/taxonmech/schema/mech_shared.yaml
+    sha256: c2e7054fd32635e380c698282bd886a9105861009b9f0474f02bb1b80865e895
+    role: context
+  - path: src/taxonmech/schema/taxonmech.yaml
+    sha256: aab25fee94c73eb70e5197a4f3ab8ddf0fa6731785974364963906d4f4d87fc3
+    role: context
+  - path: src/taxonmech/seed.py
+    sha256: 6b5b065f4ae7aea022af736a22c0f63dc58a2425c7ee453259e567ab030f8257
+    role: context
+scope:
+  description: Complete represented YAML content and source provenance assertions
+    for NCBITaxon:1223169 (candidate division JS1 bacterium enrichment culture clone
+    L35B_100).
+  selection: Sequential unreviewed record in sorted corpus path order (round25-sample),
+    excluding all legacy-archived and previously structured-reviewed target_ids.
+  coverage: full
+  population_size: 1
+  reviewed_target_ids:
+  - NCBITaxon:1223169
+targets:
+- target_id: NCBITaxon:1223169
+  path: data/taxa/bacteria/candidate_division_js1_bacterium_enrichment_culture_clone_l35b_100.yaml
+  label: candidate division JS1 bacterium enrichment culture clone L35B_100
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+  - repository: CultureBotAI/TaxonMech
+    path: data/raw/ncbitaxon_taxa.tsv
+    role: Pinned taxonomy and lineage inventory
+checks:
+- check_id: validate-strict
+  name: Native strict and LinkML schema validation
+  status: passed
+  required: true
+  summary: scripts/validate_strict.py passed with 0 errors on batch including data/taxa/bacteria/candidate_division_js1_bacterium_enrichment_culture_clone_l35b_100.yaml
+    (start 2026-10-18T08:05:49Z, finish 2026-10-18T08:05:49Z).
+  target_ids:
+  - NCBITaxon:1223169
+  command: python3 scripts/validate_strict.py data/taxa --workers 4
+  exit_code: 0
+  expected_exit_code: 0
+  evidence_ids:
+  - strict-receipt
+- check_id: history
+  name: Native history validation
+  status: passed
+  required: true
+  summary: scripts/validate_history.py passed on all 17 repository history records
+    (start 2026-10-18T08:05:49Z, finish 2026-10-18T08:05:49Z).
+  target_ids:
+  - NCBITaxon:1223169
+  command: python3 scripts/validate_history.py history
+  exit_code: 0
+  expected_exit_code: 0
+  evidence_ids:
+  - history-receipt
+- check_id: whole-target
+  name: Whole original record read
+  status: passed
+  required: true
+  summary: Entire 42-line YAML file (1281 bytes) read untruncated prior to scientific
+    assessment.
+  target_ids:
+  - NCBITaxon:1223169
+  evidence_ids:
+  - record
+- check_id: identity
+  name: Exact identity and carried ancestry verification
+  status: passed
+  required: true
+  summary: Pinned ncbitaxon_taxa.tsv row (line 278474) and all 6 carried lineage entries
+    match candidate division JS1 bacterium enrichment culture clone L35B_100 (NCBITaxon:1223169).
+  target_ids:
+  - NCBITaxon:1223169
+  evidence_ids:
+  - taxonomy
+  - record
+- check_id: source-inventory
+  name: Raw source tables and local subtree census
+  status: passed
+  required: true
+  summary: Scanned all 16 raw TSV tables, curation/seed_scope.tsv, and data/taxa/PATHS.tsv;
+    verified 0 child taxa and strain_count=0.
+  target_ids:
+  - NCBITaxon:1223169
+  evidence_ids:
+  - inventory
+- check_id: oak
+  name: Configured ontology term applicability
+  status: not_applicable
+  required: false
+  summary: No curator-grounded causal graph ontology terms occur in this record.
+  target_ids:
+  - NCBITaxon:1223169
+  evidence_ids:
+  - record
+- check_id: imodulondb
+  name: Structured expression applicability
+  status: not_applicable
+  required: false
+  summary: No gene, regulator, iModulon, or transcriptomic assertion is present in
+    this record.
+  target_ids:
+  - NCBITaxon:1223169
+  evidence_ids:
+  - record
+- check_id: count-obligations
+  name: Source attestation and strain count verification
+  status: passed
+  required: true
+  summary: All asserted source_attestations and strain_count=0 are directly verified
+    against local raw inventories.
+  target_ids:
+  - NCBITaxon:1223169
+  evidence_ids:
+  - record
+  - inventory
+  - policy
+evidence:
+- evidence_id: record
+  kind: record_content
+  reference: data/taxa/bacteria/candidate_division_js1_bacterium_enrichment_culture_clone_l35b_100.yaml
+  locator: Entire original YAML lines 1-42 (1281 bytes)
+  summary: Complete target YAML read and verified before judgment for candidate division
+    JS1 bacterium enrichment culture clone L35B_100 (NCBITaxon:1223169).
+  accessed_at: '2026-10-18T00:00:00Z'
+  support: supports
+  snapshot_sha256: f2bcd94182569dfa54623e3c59df59350dcd483d39e1b43ba888229abf342a11
+- evidence_id: taxonomy
+  kind: database
+  reference: data/raw/ncbitaxon_taxa.tsv
+  locator: Exact target physical line 278474; 6 carried ancestor rows; 0 child rows
+  summary: '{"ancestor_count": 6, "child_count": 0, "target": {"line": 278474, "row":
+    {"attested_by": "ncbitaxon", "broad_synonyms": "", "exact_synonyms": "", "genetic_code":
+    "11", "label": "candidate division JS1 bacterium enrichment culture clone L35B_100",
+    "parent_id": "NCBITaxon:97507", "rank": "SPECIES", "related_synonyms": "", "retired_into":
+    "", "taxon_id": "NCBITaxon:1223169", "taxonomy_snapshot": "2026-09-13"}}}'
+  accessed_at: '2026-10-18T08:07:05.706431Z'
+  support: supports
+  snapshot_sha256: 97ff340e1eebf62ea541a299e5c798cdcc24ef935c636fb059df48ab45d6f2f6
+- evidence_id: inventory
+  kind: search
+  reference: docs/structured-review-batches.tsv
+  locator: records[NCBITaxon:1223169] in batch evidence ledger; all 16 data/raw/*.tsv
+    tables, curation/seed_scope.tsv, and data/taxa/PATHS.tsv
+  summary: '{"matched_raw_tables": {"data/raw/ncbitaxon_taxa.tsv": 1}, "paths_tsv":
+    {"line": 74833, "row": {"identifier": "NCBITaxon:1223169", "slug": "candidate_division_js1_bacterium_enrichment_culture_clone_l35b_100"}},
+    "rows_scanned": {"data/raw/bacdive_strains.tsv": 101417, "data/raw/bactotraits_taxa.tsv":
+    9658, "data/raw/culture_collection_strains.tsv": 154969, "data/raw/dropped.tsv":
+    2048, "data/raw/gold_organisms.tsv": 45616, "data/raw/gtdb_mappings.tsv": 322327,
+    "data/raw/gtdb_species.tsv": 199923, "data/raw/lpsn_names.tsv": 34301, "data/raw/madin_taxa.tsv":
+    34148, "data/raw/mediadive_taxa.tsv": 14225, "data/raw/ncbi_merged_ids.tsv": 101006,
+    "data/raw/ncbi_type_material.tsv": 277306, "data/raw/ncbitaxon_taxa.tsv": 650767,
+    "data/raw/strain_assemblies.tsv": 159283, "data/raw/strain_genome_records.tsv":
+    126576, "data/raw/strain_related_records.tsv": 455720}, "seed_scope": {"line":
+    368383, "row": {"added": "2026-09-13", "identifier": "NCBITaxon:1223169", "reason":
+    "attested rule: candidate division JS1 bacterium enrichment culture clone L35B_100,
+    1 sources incl. NCBI"}}}'
+  accessed_at: '2026-10-18T08:07:05.706431Z'
+  support: supports
+  snapshot_sha256: d0b0a5109de081e9fed1a44cba9a662745b46f393ccf2126577c6076f15199be
+  search_scope: Full scan of all 16 data/raw/*.tsv tables, curation/seed_scope.tsv,
+    and data/taxa/PATHS.tsv for exact target_id, parent_id, and mapped GTDB cluster
+    IDs.
+- evidence_id: policy
+  kind: record_content
+  reference: src/taxonmech/schema/taxonmech.yaml; src/taxonmech/seed.py; docs/record-review-profile.md
+  locator: taxonmech.yaml:xrefs; seed.py:440-472; docs/record-review-profile.md
+  summary: Xrefs and EXACT_SYNONYM assert concept equivalence; closeMatch cluster
+    membership alone does not establish exact equivalence for unnamed or infraspecific
+    taxa without an explicit nomenclatural or taxon-identity bridge.
+  accessed_at: '2026-10-18T08:07:05.706431Z'
+  support: supports
+- evidence_id: strict-receipt
+  kind: validation
+  reference: docs/structured-review-batches.tsv
+  locator: UTC 2026-10-18T08:05:49Z to 2026-10-18T08:05:49Z; stdout docs/structured-review-batches.tsv
+  summary: Native validate_strict.py passed with exit_code=0 and 0 error rows on batch
+    including data/taxa/bacteria/candidate_division_js1_bacterium_enrichment_culture_clone_l35b_100.yaml.
+  accessed_at: '2026-10-18T08:05:49Z'
+  support: supports
+  snapshot_sha256: d0b0a5109de081e9fed1a44cba9a662745b46f393ccf2126577c6076f15199be
+- evidence_id: history-receipt
+  kind: validation
+  reference: docs/structured-review-batches.tsv
+  locator: UTC 2026-10-18T08:05:49Z to 2026-10-18T08:05:49Z; stdout docs/structured-review-batches.tsv
+  summary: Native validate_history.py passed (17 valid history records, 0 invalid).
+  accessed_at: '2026-10-18T08:05:49Z'
+  support: supports
+  snapshot_sha256: d0b0a5109de081e9fed1a44cba9a662745b46f393ccf2126577c6076f15199be
+assessments:
+- assessment_id: identity
+  area: identity
+  topic: Exact NCBI taxon identity and carried lineage
+  outcome: supported
+  summary: candidate division JS1 bacterium enrichment culture clone L35B_100 matches
+    NCBITaxon:1223169 at data/raw/ncbitaxon_taxa.tsv line 278474 (rank SPECIES, parent
+    NCBITaxon:97507 environmental samples, genetic_code 11, domain BACTERIA) and all
+    6 carried lineage ancestors.
+  target_ids:
+  - NCBITaxon:1223169
+  evidence_ids:
+  - record
+  - taxonomy
+- assessment_id: inventory
+  area: completeness
+  topic: Imported local subtree and strain inventory
+  outcome: supported
+  summary: Parent-child scan of data/raw/ncbitaxon_taxa.tsv finds 0 direct child taxa
+    for NCBITaxon:1223169. Local imported strain_count=0 agrees with the pinned subtree
+    inventory without implying biological absence.
+  target_ids:
+  - NCBITaxon:1223169
+  evidence_ids:
+  - record
+  - taxonomy
+  - inventory
+- assessment_id: names
+  area: nomenclature
+  topic: Source-qualified synonyms and nomenclature
+  outcome: supported
+  summary: No NCBITaxon exact synonym is asserted. No GTDB or external equivalent-resource
+    xref is asserted.
+  target_ids:
+  - NCBITaxon:1223169
+  evidence_ids:
+  - record
+  - taxonomy
+  - policy
+- assessment_id: provenance
+  area: provenance
+  topic: Source attestations, seed history, and generated ownership
+  outcome: supported
+  summary: NCBITAXON NAME=1 records the taxon inventory assertion. Seeded curation_history
+    and SEEDED status reflect deterministic generator provenance from src/taxonmech/seed.py
+    and curation/seed_scope.tsv.
+  target_ids:
+  - NCBITaxon:1223169
+  evidence_ids:
+  - record
+  - inventory
+  - policy
+- assessment_id: validation
+  area: schema
+  topic: Native strict and history validation checks
+  outcome: supported
+  summary: Fresh native validate_strict.py and validate_history.py checks passed with
+    exit_code=0.
+  target_ids:
+  - NCBITaxon:1223169
+  evidence_ids:
+  - strict-receipt
+  - history-receipt
+findings: []
+actions: []
+limitations:
+- Read-only structured review; no generated taxon YAML, page, history, or maintained
+  source file was modified.
+- Absence of optional strain, phenotype, or causal-graph assertions reflects repository
+  scope rather than negative biological evidence.
+notes:
+- 'Batch evidence ledger: docs/structured-review-batches.tsv (SHA256 d0b0a5109de081e9fed1a44cba9a662745b46f393ccf2126577c6076f15199be).'
+- Generated and validated via scripts/record_review.py without modifying any tracked
+  corpus files.
+tags:
+- round25-sample
+- unreviewed-corpus
+- bacteria
+```
