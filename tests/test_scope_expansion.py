@@ -63,12 +63,50 @@ def test_invalid_limits_are_rejected(args):
     assert exc.value.code == 2
 
 
+def test_species_with_attested_strain_descendant_is_proposed(many_taxa, capsys):
+    inv, _ = many_taxa
+    inv.taxa["NCBITaxon:9002"] = dict(
+        inv.taxa["NCBITaxon:562"],
+        taxon_id="NCBITaxon:9002",
+        label="Cryptococcus deuterogattii",
+        rank="SPECIES",
+        attested_by="",
+    )
+    inv.taxa["NCBITaxon:9003"] = dict(
+        inv.taxa["NCBITaxon:83333"],
+        taxon_id="NCBITaxon:9003",
+        parent_id="NCBITaxon:9002",
+        label="Cryptococcus gattii R265",
+        rank="STRAIN",
+        attested_by="gold",
+    )
+    assert propose_scope.main(["--rule", "attested", "--rank", "", "--all", "--append"]) == 0
+    rows = [
+        line.split("\t")
+        for line in capsys.readouterr().out.splitlines()
+        if line.startswith("NCBITaxon:")
+    ]
+    by_id = {row[0]: row[2] for row in rows}
+    assert "NCBITaxon:9002" in by_id
+    assert "descendant strains attested by gold" in by_id["NCBITaxon:9002"]
+    assert "NCBITaxon:9003" in by_id
+
+
 def test_scope_covers_all_attested_species_or_below(repo_root):
     with (repo_root / "data/raw/ncbitaxon_taxa.tsv").open() as handle:
         taxa = {row["taxon_id"]: row for row in csv.DictReader(handle, delimiter="\t")}
-    eligible = set()
+    attested_or_ancestor = set()
     for identifier, row in taxa.items():
         if not row["attested_by"]:
+            continue
+        cur, seen = identifier, set()
+        while cur in taxa and cur not in seen:
+            seen.add(cur)
+            attested_or_ancestor.add(cur)
+            cur = taxa[cur]["parent_id"]
+    eligible = set()
+    for identifier, row in taxa.items():
+        if identifier not in attested_or_ancestor:
             continue
         if row["rank"] in seed.RECORD_RANKS:
             eligible.add(identifier)

@@ -226,6 +226,10 @@ class Inventory:
             return False
         return any((self.taxa.get(a) or {}).get("rank") == "SPECIES" for a in self.lineage(tid))
 
+    def has_attested_descendant(self, tid: str) -> bool:
+        """True when at least one descendant taxon in the inventory is directly attested."""
+        return any((self.taxa.get(d) or {}).get("attested_by") for d in self.descendants(tid))
+
     def domain(self, tid: str) -> str:
         for ancestor in [tid, *self.lineage(tid)]:
             if ancestor in DOMAIN_ROOTS:
@@ -748,8 +752,15 @@ def build_corpus(*, everything: bool = False) -> Corpus:
     inv = load_inventory()
     scope = load_scope()
     if everything:
-        identifiers = sorted((t for t, r in inv.taxa.items()
-                              if r.get("attested_by") and inv.is_species_or_below(t)), key=id_key)
+        identifiers = sorted(
+            (
+                t
+                for t, r in inv.taxa.items()
+                if inv.is_species_or_below(t)
+                and (r.get("attested_by") or inv.has_attested_descendant(t))
+            ),
+            key=id_key,
+        )
     else:
         identifiers = sorted(scope, key=id_key)
     concepts = build_concepts(inv, identifiers)

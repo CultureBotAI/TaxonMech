@@ -158,11 +158,11 @@ def test_batch_summary_drift_is_rejected(sample_repo: Path) -> None:
 
 def test_committed_corpus_review_inventory_is_complete_and_valid() -> None:
     summary = cri.check(cri.ROOT, verify_target_sha256=False)
-    assert summary["corpus_records"] == 625960
+    assert summary["corpus_records"] == 626048
     assert summary["legacy_records"] == 23883
-    assert summary["structured_records"] == 602077
+    assert summary["structured_records"] == 602165
     assert summary["overlap_records"] == 0
     assert summary["unreviewed_records"] == 0
-    assert summary["structured_shards"] == 13
-    assert summary["structured_batches"] == 610
-    assert sum(summary["structured_verdicts_not_promoted"].values()) == 602077
+    assert summary["structured_shards"] == 14
+    assert summary["structured_batches"] == 611
+    assert sum(summary["structured_verdicts_not_promoted"].values()) == 602165

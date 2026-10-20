@@ -10,8 +10,8 @@ The [historical archive guide](legacy-review-archive.md) and its reproducible
 inventory describe the published legacy reports, their coverage limitations,
 and preservation checks. The [full-corpus coverage guide](corpus-review-coverage.md)
 documents how `docs/legacy-review-inventory.tsv` (23,883 records) and
-`docs/structured-review-inventory/part-00..12.tsv` (602,077 records across 610
-batches in `docs/structured-review-batches.tsv`) partition all 625,960 indexed
+`docs/structured-review-inventory/part-00..13.tsv` (602,165 records across 611
+batches in `docs/structured-review-batches.tsv`) partition all 626,048 indexed
 taxon records and are verified via `scripts/corpus_review_inventory.py`. File
 or inventory coverage is not a blanket scientific pass, and recording or
 importing findings does not resolve them.

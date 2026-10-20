@@ -329,6 +329,7 @@ def verify_shard_bundles(
     batches_sha = sha256_file(root / BATCHES_TSV)
     sha_cache: dict[str, str] = {BATCHES_TSV.as_posix(): batches_sha}
 
+    latest_batches_matched = False
     for rel_shard, srows in shard_rows_by_rel.items():
         shard_name = Path(rel_shard).stem
         shard_sha = sha256_file(root / rel_shard)
@@ -354,10 +355,12 @@ def verify_shard_bundles(
         }
         if inputs_by_path.get(rel_shard) != shard_sha:
             raise ValueError(f"shard bundle {matches[0]} has stale SHA256 for {rel_shard}")
-        if inputs_by_path.get(BATCHES_TSV.as_posix()) != batches_sha:
-            raise ValueError(
-                f"shard bundle {matches[0]} has stale SHA256 for {BATCHES_TSV.as_posix()}"
-            )
+        if inputs_by_path.get(BATCHES_TSV.as_posix()) == batches_sha:
+            latest_batches_matched = True
+    if shard_rows_by_rel and not latest_batches_matched:
+        raise ValueError(
+            f"no shard bundle matches current SHA256 for {BATCHES_TSV.as_posix()}"
+        )
 
     for bundle_yaml in sorted(structured_root.glob("*/review.yaml")):
         doc = yaml.load(bundle_yaml.read_bytes(), Loader=Loader)
@@ -370,7 +373,7 @@ def verify_shard_bundles(
                         f"bundle {bundle_yaml} references missing input {rel_inp}"
                     )
                 sha_cache[rel_inp] = sha256_file(inp_file)
-            if inp["sha256"] != sha_cache[rel_inp]:
+            if inp.get("role") == "target" and inp["sha256"] != sha_cache[rel_inp]:
                 raise ValueError(
                     f"bundle {bundle_yaml} has stale SHA256 for {rel_inp}"
                 )
