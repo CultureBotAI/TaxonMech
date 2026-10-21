@@ -86,6 +86,9 @@ Read these before changing domain behavior:
 - [docs/HARMONIZATION.md](docs/HARMONIZATION.md) — identity, mapping and seeding design.
 - [docs/CURATION.md](docs/CURATION.md) — what a record is and the evidence rules.
 - [docs/SCHEMA.md](docs/SCHEMA.md) — field guide.
+- [.claude/skills/add-record/SKILL.md](.claude/skills/add-record/SKILL.md)
+  ([.claude/skills/add-yaml-record/SKILL.md](.claude/skills/add-yaml-record/SKILL.md))
+  — propose, review, scope, and seed new microbial taxon records.
 - [.claude/skills/curate-yaml-record/SKILL.md](.claude/skills/curate-yaml-record/SKILL.md)
   — audit one taxon record; generated YAML remains read-only.
 - [.claude/skills/review-yaml-category/SKILL.md](.claude/skills/review-yaml-category/SKILL.md)
