@@ -1,0 +1,39 @@
+history_version: 1
+target:
+  kind: infrastructure
+  path: src/taxonmech/seed.py
+  slug: stage2-causal-graphs-assessment
+session:
+  id: 2026-10-21T043201Z-Antigravity-c2a701
+  timestamp: '2026-10-21T04:32:01Z'
+  actors:
+  - type: ai_agent
+    name: Antigravity
+    agent_tool: antigravity-cli
+events:
+- type: AUDIT
+  outcome: blocked
+  sections:
+  - causal_graphs
+  - evidence
+  - validation
+  summary: >-
+    Assess Stage 2 causal-graph eligibility, raw source coverage, and native writer/validator
+    prerequisites across all 626,048 TaxonRecord files
+  details: >-
+    Audited all 626,048 in-scope TaxonRecord files (605,695 Bacteria, 14,013 Archaea,
+    6,331 Eukaryota, 9 other) and all raw functional/trait/medium/genome/strain inventories
+    against the Stage 2 causal-graph curation contract (.claude/skills/curate-causal-graphs/SKILL.md).
+    Classified 38,357 records with Madin et al. (34,148), BactoTraits (9,626), or MediaDive
+    (14,154) phenotype/medium attestations, 63,366 records with any functional/genome/strain/trait
+    attestation (adding GOLD: 43,822 and BacDive: 25,779), and 562,682 taxonomy-only records.
+    Verified that 0 records currently populate causal_graphs and that direct writes are blocked
+    by four native prerequisites: (1) src/taxonmech/seed.py has no maintained curation/causal_graphs/
+    overlay input or merge step; (2) scripts/verify_corpus.py enforces 100% byte-for-byte identity
+    against seeder-only output; (3) conf/id_label_targets.yaml targets CausalNode.grounding
+    instead of CausalNode.id and omits UniProtKB/EC adapters; and (4) src/taxonmech/templates/taxon-content.html
+    indexes CausalNode by n.node_id instead of n.id. Documented source-grounded candidate
+    CausalGraph / CausalNode / CausalEdge and GENE_OR_PROTEIN tables for five cross-domain
+    exemplars (NCBITaxon:562, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2190, NCBITaxon:1859096)
+    in reviews/structured/20261021T043201Z-stage2-causal-graphs-assessment/review.yaml and
+    recorded follow-up infrastructure tasks in INFRA_TASKS.md.
