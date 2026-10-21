@@ -1,0 +1,1853 @@
+# Record review: archaeon D22
+
+- Review: 20261021T093728Z-archaeon_d22
+- Repository: CultureBotAI/TaxonMech
+- Started UTC: 2026-10-21T09:14:58Z
+- Finished UTC: 2026-10-21T09:37:28Z
+- Reviewer: Codex (independent)
+- Completion: partial
+- Verdict: pass_with_limitations
+- Scientific review: true
+
+## Summary
+
+archaeon D22 has supported exact NCBI identity, carried lineage and source-scoped representation. No record-specific defect was established within the inspected sources.
+
+## Scope And Provenance
+
+Entire single generated record, including all source assertions and imported strains.
+
+Selection: Batch-0027 target 1; next unreviewed path-order selection after excluding 315 actual covered target paths. Canonical record_review.py list over the 39-bundle current base and all twenty-six actually saved branch worktrees, including ignored and hidden review bundles. Native corpus enumerated with os.walk including ignored/hidden files. Coverage only derives from explicit validated bundle targets, never inventories or reservations.
+Coverage: full; 1 reviewed / 1 in the declared population.
+Source: working_tree at Git base 01ca63effdf8c03a644df893ba6129b2d8448ea4.
+Working-tree hashes do not imply those bytes were committed.
+
+| Target | Path / selector | Kind | Label |
+| --- | --- | --- | --- |
+| NCBITaxon:1932700 | data/taxa/archaea/archaeon_d22.yaml | generated | archaeon D22 |
+
+## Validation
+
+| Check | Status | Required | Targets | Result |
+| --- | --- | --- | --- | --- |
+| Exact NCBI taxon, rank and lineage | passed | True | NCBITaxon:1932700 | NCBITaxon:1932700 denotes the exact SPECIES record archaeon D22, under NCBITaxon:93506, unclassified Archaea, with genetic code 11. All four carried ancestors and their literal names and ranks agree with the pinned taxonomy and current official NCBI response; EFetch omits root. ARCHAEA follows the taxonomic lineage, separately from EFetch Division metadata. No finer NCBI placement is inferred. |
+| Complete exact identifier and name inventory search | passed | True | NCBITaxon:1932700 | Complete direct reads of all twelve named source, scope and path tables, including ignored files, used the exact taxon ID, full literal label, slug and current EFetch misspelling. The complete pinned parent graph has zero descendants; zero imported BacDive strains agrees with the target/subtree and culture inventories. The NCBITAXON 1 NAME and GOLD 1 ORGANISM attestations agree with the pinned projections. Exact queries find no optional LPSN, GTDB mapping/species, BacDive, culture, MediaDive, Madin or BactoTraits rows. Complete GOLD organism/project/analysis projection scans identify one organism Go0541099 with taxid 1932700, strain text D22 and an empty culture-collection field, its project Gp0491942 and analysis Ga0440272. This independently supports a typed GOLD organism association but does not reconstruct the historical transformed-edge count. The current misspelling differs from the complete pinned name catalog and remains a source-channel or snapshot concern. These bounded checks do not establish worldwide absence or a missing culture/genome import. |
+| GTDB mapping applicability | not_applicable | False | NCBITaxon:1932700 | The complete native record asserts no GTDB mapping or genome count. Complete exact queries in the pinned mapping/species inventories have no matches; no primary-genome absence claim follows. |
+| Imported strain links | not_applicable | False | NCBITaxon:1932700 | The complete native record asserts no imported BacDive strain, culture deposit or strain-level genome link. Literal source strain text alone does not establish an inventoried deposit. |
+| Nomenclatural publication authorities | not_applicable | False | NCBITaxon:1932700 | The complete native record asserts no LPSN authority, species-authority publication or type-strain sequence. Current NCBI name classes and bounded pinned LPSN queries were checked. |
+| Gene or transcriptomics evidence applicability | not_applicable | False | NCBITaxon:1932700 | Not applicable: the complete native record asserts no gene, protein, regulator, pathway, experimental trait, mechanism or transcriptome link. |
+| Typed GOLD organism, project and analysis chain | passed | True | NCBITaxon:1932700 | The complete pinned GOLD projections retain Go0541099 as ORGANISM, Gp0491942 as sequencing PROJECT and Ga0440272 as ANALYSIS. Gp0491942 names BioProject PRJNA360185 and BioSample SAMN06204669. Ga0440272 resolves through that project, has type Single Cell Analysis (unscreened), an empty direct organism field and empty IMG taxon field, and records GenBank MSYC00000000 plus assembly GCA_002176885.1. These are source metadata with distinct identifier roles; no current assembly status, sequence identity, cultured deposit, phenotype or causal mechanism is inferred. The maintained strain-genome importer requires an explicit inventoried culture identifier; the source strain text D22 and shared taxid alone do not establish that prerequisite. |
+| Original manifest-pinned aggregate recount | unavailable | True | NCBITaxon:1932700 | GOLD 1 ORGANISM agrees with its exact committed inventory. The original transformed-edge input was not available in the bounded owned27 source search, so its matching edge-row count was not independently reconstructed. The public-workbook organism/project/analysis rows are a separate source boundary. |
+| Pinned and current source name classes | passed | True | NCBITaxon:1932700 | The complete source comparison is finished: current misspelling Euryarchaeota archaeon D22 is absent from the complete pinned name catalog and projected synonyms. The original archive was not replayed, and source-channel/snapshot cause remains unresolved. |
+| Native strict record validation | passed | True | NCBITaxon:1932700 | Actual terminal exit code 0. This exact generated YAML only; its captured bytes remain unchanged. Actual earlier per-target invocation; the receipt retains its original cwd and times. |
+| Repository history validation | passed | True | NCBITaxon:1932700 | Actual terminal exit code 0. The complete standalone history population; the generated seed event was also inspected in this target. Actual native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4; retained original cwd, times, commands, log hashes and terminal exit codes identify the executions. Reused repository-wide receipts require the explicit same-base/native-input certificate; these are historical runs, not new batch-0027 invocations. Missing terminal receipts or reuse proof remain unavailable in unsaved previews. Exact-target strict receipts retain their original execution context. New review bundles still require individual validation/save/check. |
+| Full-corpus exact reproduction | passed | True | NCBITaxon:1932700 | Actual terminal exit code 0. All 626,048 generated taxon YAMLs, not a focused approximation. Actual native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4; retained original cwd, times, commands, log hashes and terminal exit codes identify the executions. Reused repository-wide receipts require the explicit same-base/native-input certificate; these are historical runs, not new batch-0027 invocations. Missing terminal receipts or reuse proof remain unavailable in unsaved previews. Exact-target strict receipts retain their original execution context. New review bundles still require individual validation/save/check. |
+| Native product ID/label gate | passed | True | NCBITaxon:1932700 | Actual terminal exit code 0. Full configured corpus scan for curator-added graph nodes; this target contains no causal graph. Actual native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4; retained original cwd, times, commands, log hashes and terminal exit codes identify the executions. Reused repository-wide receipts require the explicit same-base/native-input certificate; these are historical runs, not new batch-0027 invocations. Missing terminal receipts or reuse proof remain unavailable in unsaved previews. Exact-target strict receipts retain their original execution context. New review bundles still require individual validation/save/check. |
+| Authoritative complete quality gate | passed | True | NCBITaxon:1932700 | Actual terminal exit code 0. Repository-wide just qc, including native corpus-wide checks. Actual native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4; retained original cwd, times, commands, log hashes and terminal exit codes identify the executions. Reused repository-wide receipts require the explicit same-base/native-input certificate; these are historical runs, not new batch-0027 invocations. Missing terminal receipts or reuse proof remain unavailable in unsaved previews. Exact-target strict receipts retain their original execution context. New review bundles still require individual validation/save/check. 1073 passed, 3 skipped, 5 deselected in 1293.90s (0:21:33) |
+
+## Scientific And Domain Assessments
+
+### Typed GOLD metadata and importer scope
+
+evidence: supported. Targets: NCBITaxon:1932700.
+
+The complete pinned GOLD projections retain Go0541099 as ORGANISM, Gp0491942 as sequencing PROJECT and Ga0440272 as ANALYSIS. Gp0491942 names BioProject PRJNA360185 and BioSample SAMN06204669. Ga0440272 resolves through that project, has type Single Cell Analysis (unscreened), an empty direct organism field and empty IMG taxon field, and records GenBank MSYC00000000 plus assembly GCA_002176885.1. These are source metadata with distinct identifier roles; no current assembly status, sequence identity, cultured deposit, phenotype or causal mechanism is inferred. The maintained strain-genome importer requires an explicit inventoried culture identifier; the source strain text D22 and shared taxid alone do not establish that prerequisite.
+
+### Current and pinned name-class discrepancy
+
+nomenclature: concern. Targets: NCBITaxon:1932700.
+
+Current NCBI misspelling Euryarchaeota archaeon D22 is absent from the pinned raw synonym projection and complete pinned NCBI-name catalog; cause remains unresolved without the original archive.
+
+### Exact taxon and source lineage
+
+identity: supported. Targets: NCBITaxon:1932700.
+
+NCBITaxon:1932700 denotes the exact SPECIES record archaeon D22, under NCBITaxon:93506, unclassified Archaea, with genetic code 11. All four carried ancestors and their literal names and ranks agree with the pinned taxonomy and current official NCBI response; EFetch omits root. ARCHAEA follows the taxonomic lineage, separately from EFetch Division metadata. No finer NCBI placement is inferred.
+
+### Name classes and nomenclatural scope
+
+nomenclature: concern. Targets: NCBITaxon:1932700.
+
+The pinned NCBI exact, related and broad synonym columns are empty. Current official EFetch lists Euryarchaeota archaeon D22 under OtherNames/Name with ClassCDE misspelling; it is not an exact synonym or a current phylum placement. Full exact queries across all 16 pinned NCBI-name shards (783107 rows) return only the scientific name archaeon D22 for NCBITaxon:1932700, with no row for that misspelling. The name-catalog policy preserves every source name class and the taxonomy loader maps non-exact classes to related names; these sources support a bounded snapshot or source-channel discrepancy, not a proven filtering defect. The original names archive was not replayed. Complete pinned LPSN queries find no associated row, and the native record asserts no nomenclatural publication or type-deposit relationship.
+
+### Imported subtree and source assertion units
+
+completeness: supported. Targets: NCBITaxon:1932700.
+
+Complete direct reads of all twelve named source, scope and path tables, including ignored files, used the exact taxon ID, full literal label, slug and current EFetch misspelling. The complete pinned parent graph has zero descendants; zero imported BacDive strains agrees with the target/subtree and culture inventories. The NCBITAXON 1 NAME and GOLD 1 ORGANISM attestations agree with the pinned projections. Exact queries find no optional LPSN, GTDB mapping/species, BacDive, culture, MediaDive, Madin or BactoTraits rows. Complete GOLD organism/project/analysis projection scans identify one organism Go0541099 with taxid 1932700, strain text D22 and an empty culture-collection field, its project Gp0491942 and analysis Ga0440272. This independently supports a typed GOLD organism association but does not reconstruct the historical transformed-edge count. The current misspelling differs from the complete pinned name catalog and remains a source-channel or snapshot concern. These bounded checks do not establish worldwide absence or a missing culture/genome import.
+
+### Unchanged native status and history
+
+provenance: supported. Targets: NCBITaxon:1932700.
+
+EXACT grounding and SEEDED mapping status preserve the generated source state. The sole SEEDED_FROM_SOURCES event at 2026-09-13T17:54:04Z agrees with the latest raw, ATB and StrainInfo manifest extraction. The exact seed-scope and PATHS rows preserve inclusion and path. No manual curation, scientific status promotion or new native history event is inferred.
+
+## Findings
+
+No findings recorded within this review's declared scope.
+
+## Recommended Actions And Acceptance Checks
+
+### recover-pinned-aggregate-inputs
+
+Provide the original data/transformed/gold/edges.tsv (83535194 bytes, SHA256 b793c4f84278789f5dc7c68173b1f08364fd68c5d52a555c4037793006010a12) through the maintained source-input workflow; verify its manifest pin, canonically capture it, and rerun count_subjects_by_object with gold:Go and biolink:subclass_of for NCBITaxon:1932700. Record the resulting organism count and reopen the unavailable historical-source-count check. If only a new source version is available, record and assess that version separately; do not claim historical replay or edit the generated native record directly.
+
+- Verify exact original data/transformed/gold/edges.tsv byte count 83535194 and SHA256 b793c4f84278789f5dc7c68173b1f08364fd68c5d52a555c4037793006010a12 before historical replay.
+- Canonically capture the recovered input and independently count matching gold:Go-prefix biolink:subclass_of edge rows whose object is NCBITaxon:1932700.
+- Compare the independently reconstructed ORGANISM count with data/raw/gold_organisms.tsv line 17733 and the native attestation; record any discrepancy in a new review, never by editing generated YAML.
+- A newly available source version must retain its own version/hash and assessment; it cannot establish historical reproduction.
+
+## Category Boundaries
+
+
+## Evidence
+
+| Evidence | Reference / locator | Support | Observation |
+| --- | --- | --- | --- |
+| record | data/taxa/archaea/archaeon_d22.yaml; entire TaxonRecord; identifier=NCBITaxon:1932700 | supports | Read the entire generated YAML, including identity, lineage, names, mappings, source attestations, all imported strains and links, and seed history. |
+| taxonomy-inventory | data/raw/ncbitaxon_taxa.tsv; line 2: {"taxon_id":"NCBITaxon:1","label":"root","rank":"NO_RANK","parent_id":""}; line 1698: {"taxon_id":"NCBITaxon:2157","label":"Archaea","rank":"DOMAIN","parent_id":"NCBITaxon:131567"}; line 15329: {"taxon_id":"NCBITaxon:93506","label":"unclassified Archaea","rank":"NO_RANK","parent_id":"NCBITaxon:2157"}; line 25334: {"taxon_id":"NCBITaxon:131567","label":"cellular organisms","rank":"CELLULAR_ROOT","parent_id":"NCBITaxon:1"}; line 496451: {"taxon_id":"NCBITaxon:1932700","label":"archaeon D22","rank":"SPECIES","parent_id":"NCBITaxon:93506","genetic_code":"11","exact_synonyms":"","related_synonyms":"","broad_synonyms":"","attested_by":"ncbitaxon&#124;gold","retired_into":"","taxonomy_snapshot":"2026-09-13"} | supports | Inspected the target and each carried ancestor, rank, parent, genetic code and source name classes. |
+| scope-row | curation/seed_scope.tsv; line 61660: {"identifier":"NCBITaxon:1932700","added":"2026-09-12","reason":"attested rule: archaeon D22, 2 sources incl. NCBI"} | supports | Exact target is included in the declared seed scope. |
+| path-row | data/taxa/PATHS.tsv; line 304608: {"identifier":"NCBITaxon:1932700","slug":"archaeon_d22"} | supports | Indexed path resolves to this exact NCBI taxon. |
+| ncbi-live | https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=taxonomy&amp;id=1932700,115530,1293314,1293315,1293316,1293317,1293318,1293319,1293320,1293321&amp;retmode=xml; TaxaSet/Taxon[TaxId='1932700']; ten-target captured response | supports | Inspected the successful official response for this exact taxon: scientific name, rank, parent, source name classes, lineage and genetic code. Current authority and pinned September inventory remain distinct observations. The HTTP request ran in owned25; its response and original execution receipt were imported byte-identically into owned27 and retain their actual cwd/times. |
+| lpsn-inventory | data/raw/lpsn_names.tsv; complete table; recorded exact query terms have no match | supports | Complete exact taxon, literal name and slug queries found no associated LPSN inventory row; this observation is bounded to the pinned inventory. |
+| gtdb-mappings | data/raw/gtdb_mappings.tsv; complete table; recorded exact query terms have no match | supports | Complete exact target queries found no matching GTDB mapping row; no source cluster or reverse-mapping claim is asserted for this target. |
+| gtdb-species | data/raw/gtdb_species.tsv; complete table; recorded exact query terms have no match | supports | Complete exact target queries found no matching GTDB species inventory row; this is not a primary-genome absence claim. |
+| bacdive-inventory | data/raw/bacdive_strains.tsv; complete table; recorded exact query terms have no match | supports | Complete inventory selection covers the exact target and descendants from the complete NCBI parent graph; its imported strain population was compared with the complete YAML. |
+| culture-inventory | data/raw/culture_collection_strains.tsv; complete table; recorded exact query terms have no match | supports | Inspected exact culture-inventory associations; an isolate name or genome does not create an inferred deposit. |
+| gold-organisms | data/raw/gold_organisms.tsv; line 17733: {"taxon_id":"NCBITaxon:1932700","organism_count":"1"} | supports | Inspected the exact GOLD organism count row or bounded absence, without converting counts to phenotypes. |
+| mediadive-taxa | data/raw/mediadive_taxa.tsv; complete table; recorded exact query terms have no match | supports | Inspected the exact MediaDive medium count row or bounded absence, without converting counts to phenotypes. |
+| madin-taxa | data/raw/madin_taxa.tsv; complete table; recorded exact query terms have no match | supports | Inspected the exact Madin trait-assertion count row or bounded absence, without converting counts to phenotypes. |
+| bactotraits-taxa | data/raw/bactotraits_taxa.tsv; complete table; recorded exact query terms have no match | supports | Inspected the exact BactoTraits trait-assertion count row or bounded absence, without converting counts to phenotypes. |
+| mapping-policy | docs/HARMONIZATION.md; Mapping predicates; Which strains belong to a record | supports | Policy permits source-scoped species-level closeMatch normalization and LPSN-linked species xrefs/synonyms, retains pooled broadMatch entries and carries NCBI lineage unchanged. Multiple reverse target mappings do not alone establish a normalization defect or make genomes and physical strains identical. |
+| equivalence-contract | src/taxonmech/schema/taxonmech.yaml; TaxonRecord.xrefs, lines 180–187; TaxonomyMapping, lines 417–439 | supports | TaxonRecord.xrefs denotes equivalent identifiers; broader/narrower relations remain qualified taxonomy mappings. TaxonomyMapping.genome_count counts genomes under the source taxon. |
+| seed-owner | src/taxonmech/seed.py; Source attestation construction lines 551–631, including GOLD at 615–631; seed history construction lines 630–647 | supports | Inspected source mapping normalization, NCBI NAME and whole-source-species GTDB GENOME and GOLD ORGANISM attestation construction, and seed history. Qualified source mappings and physical strain derivation remain distinct. |
+| manifest | data/raw/MANIFEST.yaml; kg_microbe_source, inputs, extracted_at | supports | Manifest pins kg-microbe revision 30405b70ef762aa46c08278b2b3e06bffb0b34cd, upstream input hashes and extraction time 2026-09-13T17:50:44Z. |
+| overlay-manifests | data/atb/MANIFEST.yaml; extracted_at, together with data/raw/MANIFEST.yaml and data/straininfo/MANIFEST.yaml | supports | Raw, ATB and StrainInfo extraction times have maximum 2026-09-13T17:54:04Z, matching the sole seed event. StrainInfo manifest is independently captured in source.inputs. |
+| pinned-source-query-check | /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0027/ten-source-check-report.json; {"target_id":"NCBITaxon:1932700","queries":["archaeon d22","archaeon_d22","euryarchaeota archaeon d22","ncbitaxon:1932700"],"table_counts":{"data/raw/ncbitaxon_taxa.tsv":650767,"data/raw/lpsn_names.tsv":34301,"data/raw/gtdb_mappings.tsv":322327,"data/raw/gtdb_species.tsv":199923,"data/raw/bacdive_strains.tsv":101417,"data/raw/culture_collection_strains.tsv":154969,"data/raw/gold_organisms.tsv":45616,"data/raw/mediadive_taxa.tsv":14225,"data/raw/madin_taxa.tsv":34148,"data/raw/bactotraits_taxa.tsv":9658,"curation/seed_scope.tsv":626048,"data/taxa/PATHS.tsv":626048},"matching_rows":{"data/raw/ncbitaxon_taxa.tsv":[{"line":496451,"matched_terms":["archaeon d22","ncbitaxon:1932700"],"row":{"taxon_id":"NCBITaxon:1932700","label":"archaeon D22","rank":"SPECIES","parent_id":"NCBITaxon:93506","genetic_code":"11","exact_synonyms":"","related_synonyms":"","broad_synonyms":"","attested_by":"ncbitaxon&#124;gold","retired_into":"","taxonomy_snapshot":"2026-09-13"}}],"data/raw/lpsn_names.tsv":[],"data/raw/gtdb_mappings.tsv":[],"data/raw/gtdb_species.tsv":[],"data/raw/bacdive_strains.tsv":[],"data/raw/culture_collection_strains.tsv":[],"data/raw/gold_organisms.tsv":[{"line":17733,"matched_terms":["ncbitaxon:1932700"],"row":{"taxon_id":"NCBITaxon:1932700","organism_count":"1"}}],"data/raw/mediadive_taxa.tsv":[],"data/raw/madin_taxa.tsv":[],"data/raw/bactotraits_taxa.tsv":[],"curation/seed_scope.tsv":[{"line":61660,"matched_terms":["ncbitaxon:1932700"],"row":{"identifier":"NCBITaxon:1932700","added":"2026-09-12","reason":"attested rule: archaeon D22, 2 sources incl. NCBI"}}],"data/taxa/PATHS.tsv":[{"line":304608,"matched_terms":["archaeon_d22","ncbitaxon:1932700"],"row":{"identifier":"NCBITaxon:1932700","slug":"archaeon_d22"}}]}} | supports | All twelve complete source/scope/path tables were checked with the recorded exact target/name/slug queries; this includes the current D22 misspelling when present. All canonical input hashes agree. No broader absence or phenotype claim is inferred. |
+| authority-import | /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0027/scout-source-import-agent.json; authority_files; authority_original_command_cwd_times_unchanged; source_input_sha256 | supports | The official taxonomy response and original successful owned25 HTTP receipt were imported byte-identically. Fresh owned27 local inspections and source comparisons are separate executions; no fetched-at time or cwd was rewritten. |
+| gold-organism-primary | data/gold/organisms.jsonl.gz; line 380397: {"ORGANISM CULTURE COLLECTION ID":"","ORGANISM GOLD ID":"Go0541099","ORGANISM NAME":"Unclassified archaeon D22","ORGANISM NCBI TAX ID":"1932700","ORGANISM STRAIN":"D22"} | supports | Inspected the complete selected Organism row and its distinct identifier roles. Source metadata does not establish a cultured deposit, current assembly status, sequence identity or phenotype. |
+| gold-project-primary | data/gold/projects.jsonl.gz; line 352894: {"NCBI BIOPROJECT ACCESSION":"PRJNA360185","NCBI BIOSAMPLE ACCESSION":"SAMN06204669","ORGANISM GOLD ID":"Go0541099","PROJECT GOLD ID":"Gp0491942","PROJECT NAME":"Unclassified archaeon D22"} | supports | Inspected the complete selected Sequencing Project row and its distinct identifier roles. Source metadata does not establish a cultured deposit, current assembly status, sequence identity or phenotype. |
+| gold-analysis-primary | data/gold/analyses.jsonl.gz; line 273856: {"AP GENBANK":"[{\"genbankId\":\"MSYC00000000\",\"assemblyAccession\":\"GCA_002176885.1\"}]","AP GOLD ID":"Ga0440272","AP IMG TAXON ID":"","AP NAME":"Unclassified archaeon D22","AP ORGANISM GOLD ID":"","AP PROJECT GOLD IDS":"Gp0491942","AP TYPE":"Single Cell Analysis (unscreened)"} | supports | Inspected the complete selected Analysis Project row and its distinct identifier roles. Source metadata does not establish a cultured deposit, current assembly status, sequence identity or phenotype. |
+| gold-projection-source | data/gold/SOURCE.json; {"outputs":{"Analysis Project":{"bytes":10544549,"path":"analyses.jsonl.gz","rows":459542,"sha256":"d597f0d5f31fc8b387caaf659f3c6a337959219870529e907a1c0287e3877b7a"},"Organism":{"bytes":8600009,"path":"organisms.jsonl.gz","rows":531961,"sha256":"8c1a055214cb240c58fadda0815efbefcb60848245e8a7474e6b1b41d123235c"},"Sequencing Project":{"bytes":10429834,"path":"projects.jsonl.gz","rows":636630,"sha256":"0d852fe0144afd778609fef82b266fd1507a4c0be949efd2f53c7c34526b6c95"}},"projection":"all rows; identity, strain, taxon, project and genome columns","source":"GOLD","url":"https://gold.jgi.doe.gov/download?mode=site_excel","workbook_bytes":238856378,"workbook_sha256":"7d22ea3f2c9ac40d513cd4af1410f7d19f3525347eb272787ba1c20525340370"} | supports | The full public-workbook projection census and hashes bind all three selected typed source rows; the projection is distinct from the historical transformed-edge aggregate. |
+| aggregate-count-owner | src/taxonmech/extract.py; count_subjects_by_object lines 403–409; GOLD call line 676; source attestation in src/taxonmech/seed.py lines 615–631 | supports | count_subjects_by_object increments one count per matching gold:Go-prefix biolink:subclass_of edge row; it does not deduplicate subjects. The seeder copies organism_count without making a genome, strain or phenotype claim. |
+| gold-strain-link-policy | src/taxonmech/gold_genomes.py; extract_gold_genomes: explicit ORGANISM CULTURE COLLECTION ID/ORGANISM STRAIN lookup against normalized inventoried deposits; project and analysis chain qualification | supports | Strain-linked GOLD imports require explicit inventoried culture identifiers. Organism names, source strain designations and taxonomic association alone do not establish a culture or genome identity. |
+| gold-original-input-search | /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0027/historical-gold-input-availability-agent.json; {"pins":[{"path":"data/transformed/gold/edges.tsv","bytes":83535194,"mtime":"2026-09-12T09:31:28Z","sha256":"b793c4f84278789f5dc7c68173b1f08364fd68c5d52a555c4037793006010a12"},{"path":"GOLD/goldData.xlsx","bytes":238856378,"mtime":"2026-09-11T23:28:37Z","sha256":"7d22ea3f2c9ac40d513cd4af1410f7d19f3525347eb272787ba1c20525340370","source":"GOLD","url":"https://gold.jgi.doe.gov/download?mode=site_excel"}],"search_roots":[{"root":"/private/tmp/taxonmech-record-reviews-k0MubV/repo-batch-0027/data","exists":true,"is_symlink":false},{"root":"/private/tmp/taxonmech-record-reviews-k0MubV/repo-batch-0027/GOLD","exists":false,"is_symlink":false}],"regular_files_enumerated":626243,"candidates":[],"exact_matches":[],"skipped_symlinks":[]} | context_only | Neither exact original manifest-pinned GOLD input was found in the bounded owned27 regular-file search. This is scoped unavailability, not a global source-absence claim or completed recount. |
+| ncbi-name-shard-1 | data/catalog/ncbi_names-0000.jsonl.gz; complete shard; no exact query match | supports | This complete pinned name shard was inspected without a name-class filter, using the exact taxid, scientific name and current misspelling; only recorded matching rows support name assertions. |
+| ncbi-name-shard-2 | data/catalog/ncbi_names-0001.jsonl.gz; complete shard; no exact query match | supports | This complete pinned name shard was inspected without a name-class filter, using the exact taxid, scientific name and current misspelling; only recorded matching rows support name assertions. |
+| ncbi-name-shard-3 | data/catalog/ncbi_names-0002.jsonl.gz; complete shard; no exact query match | supports | This complete pinned name shard was inspected without a name-class filter, using the exact taxid, scientific name and current misspelling; only recorded matching rows support name assertions. |
+| ncbi-name-shard-4 | data/catalog/ncbi_names-0003.jsonl.gz; complete shard; no exact query match | supports | This complete pinned name shard was inspected without a name-class filter, using the exact taxid, scientific name and current misspelling; only recorded matching rows support name assertions. |
+| ncbi-name-shard-5 | data/catalog/ncbi_names-0004.jsonl.gz; complete shard; no exact query match | supports | This complete pinned name shard was inspected without a name-class filter, using the exact taxid, scientific name and current misspelling; only recorded matching rows support name assertions. |
+| ncbi-name-shard-6 | data/catalog/ncbi_names-0005.jsonl.gz; complete shard; no exact query match | supports | This complete pinned name shard was inspected without a name-class filter, using the exact taxid, scientific name and current misspelling; only recorded matching rows support name assertions. |
+| ncbi-name-shard-7 | data/catalog/ncbi_names-0006.jsonl.gz; complete shard; no exact query match | supports | This complete pinned name shard was inspected without a name-class filter, using the exact taxid, scientific name and current misspelling; only recorded matching rows support name assertions. |
+| ncbi-name-shard-8 | data/catalog/ncbi_names-0007.jsonl.gz; complete shard; no exact query match | supports | This complete pinned name shard was inspected without a name-class filter, using the exact taxid, scientific name and current misspelling; only recorded matching rows support name assertions. |
+| ncbi-name-shard-9 | data/catalog/ncbi_names-0008.jsonl.gz; complete shard; no exact query match | supports | This complete pinned name shard was inspected without a name-class filter, using the exact taxid, scientific name and current misspelling; only recorded matching rows support name assertions. |
+| ncbi-name-shard-10 | data/catalog/ncbi_names-0009.jsonl.gz; complete shard; no exact query match | supports | This complete pinned name shard was inspected without a name-class filter, using the exact taxid, scientific name and current misspelling; only recorded matching rows support name assertions. |
+| ncbi-name-shard-11 | data/catalog/ncbi_names-0010.jsonl.gz; complete shard; no exact query match | supports | This complete pinned name shard was inspected without a name-class filter, using the exact taxid, scientific name and current misspelling; only recorded matching rows support name assertions. |
+| ncbi-name-shard-12 | data/catalog/ncbi_names-0011.jsonl.gz; line 37227: {"name":"archaeon D22","name_class":"scientific name","taxon_id":"NCBITaxon:1932700","unique_name":""} | supports | This complete pinned name shard was inspected without a name-class filter, using the exact taxid, scientific name and current misspelling; only recorded matching rows support name assertions. |
+| ncbi-name-shard-13 | data/catalog/ncbi_names-0012.jsonl.gz; complete shard; no exact query match | supports | This complete pinned name shard was inspected without a name-class filter, using the exact taxid, scientific name and current misspelling; only recorded matching rows support name assertions. |
+| ncbi-name-shard-14 | data/catalog/ncbi_names-0013.jsonl.gz; complete shard; no exact query match | supports | This complete pinned name shard was inspected without a name-class filter, using the exact taxid, scientific name and current misspelling; only recorded matching rows support name assertions. |
+| ncbi-name-shard-15 | data/catalog/ncbi_names-0014.jsonl.gz; complete shard; no exact query match | supports | This complete pinned name shard was inspected without a name-class filter, using the exact taxid, scientific name and current misspelling; only recorded matching rows support name assertions. |
+| ncbi-name-shard-16 | data/catalog/ncbi_names-0015.jsonl.gz; complete shard; no exact query match | supports | This complete pinned name shard was inspected without a name-class filter, using the exact taxid, scientific name and current misspelling; only recorded matching rows support name assertions. |
+| ncbi-name-full-scan | /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0027/d22-name-catalog-scan.json; {"target_id":"NCBITaxon:1932700","query_terms":["archaeon d22","euryarchaeota archaeon d22","ncbitaxon:1932700"],"rows_scanned":783107,"matches":[{"path":"data/catalog/ncbi_names-0011.jsonl.gz","line":37227,"matched_terms":["archaeon d22","ncbitaxon:1932700"],"row":{"name":"archaeon D22","name_class":"scientific name","taxon_id":"NCBITaxon:1932700","unique_name":""}}],"input_hashes":{"data/catalog/MANIFEST.json":"15b5cfe42be7919faf2a6feb5ac4f7084009e84b2d6da669f7101aacc3586299","scripts/build_source_catalog.py":"0e985fdbd74e5e58db2e28126bb8bc4f11a2d32929aa5d36f193d33142b5249e","src/taxonmech/source_catalog.py":"e941d67ede488ddf4dc1838c183f8ff0e5f7a0b9788e47651ea61e4e7d9c5d8f","data/catalog/ncbi_names-0000.jsonl.gz":"a873aeec2b2a9a391b1c210bd28827c9b6dad851eeccd7d1644373cb8c6ce802","data/catalog/ncbi_names-0001.jsonl.gz":"fdb89eec80f04526f3f06fa49a6a03af586efaa5477404f1635d8c012c7ea999","data/catalog/ncbi_names-0002.jsonl.gz":"0d9a38612c08a7a78c93c18513328ccd7ecf44f5fff10489b26358814ec22149","data/catalog/ncbi_names-0003.jsonl.gz":"4ac5c4dfb9f0af855246461054ce5d9fa8f94ef6cfdecefb29870c972dd69dc4","data/catalog/ncbi_names-0004.jsonl.gz":"ac8968aea5627fc73425a4f70942a74d4b666183762e4116b780384a1853f8a3","data/catalog/ncbi_names-0005.jsonl.gz":"31c672adade0c3485ee5d6817567f7972b06ce3b6853cf191159b76cad3b023c","data/catalog/ncbi_names-0006.jsonl.gz":"4c63f036b4707bfd7a66f7f85601ca11a5694cb19744857a506b8464b64bc8d2","data/catalog/ncbi_names-0007.jsonl.gz":"e54bd96ed840ab4a6ffe0e251197fc9367a75e07dbdf89e070656bf38811ef34","data/catalog/ncbi_names-0008.jsonl.gz":"c955a1d23e3e5b1e5a18f535755b423ae20efb6ca9ae4eef97a4c40dd0323f52","data/catalog/ncbi_names-0009.jsonl.gz":"7e1cbec759be96b0bd4b57f09ed075dc9cd7a22dc20cde8cc6f7a66cfb88da90","data/catalog/ncbi_names-0010.jsonl.gz":"7f4d714a5b982de851dc5ea21e981dadee3a77ac2fcadebbf9cb68bfaeb5dd25","data/catalog/ncbi_names-0011.jsonl.gz":"436b26d9d1510c958add8f0f4cf2371b489c169c9af900f74ebb8687e991b7d7","data/catalog/ncbi_names-0012.jsonl.gz":"a9234414e4addc9780860a46cb9329a3a3837a70d22607c5446321508224a8fa","data/catalog/ncbi_names-0013.jsonl.gz":"8dee13292d2eececf3eab780149a1c5a0f669f36ba5c82119200323fb7554972","data/catalog/ncbi_names-0014.jsonl.gz":"4e22fb0532c498e145beae904ec2c4a78912421ae6864b93bc37d37b21e89e3a","data/catalog/ncbi_names-0015.jsonl.gz":"6d5de5074643b1d19f89c223bbfe01b35ccf4ad8167ae628f2f7f96745dee045"}} | supports | The complete pinned name catalog returns only the target scientific-name row. Current EFetch additionally returns a misspelling. The cause remains a snapshot or source-channel uncertainty; an importer defect and annotation-addition date are not established. |
+| ncbi-name-catalog-policy | scripts/build_source_catalog.py; names(), lines 92–112 | supports | The catalog projects names.dmp fields and every source name class for bacterial/archaeal taxa; it has no misspelling-class exclusion in this projection. |
+| ncbi-name-projection-policy | src/taxonmech/ncbi_taxdump.py; load_taxdump: names.dmp scientific-name and non-scientific name handling | supports | The taxonomy loader maps synonym/equivalent name to EXACT_SYNONYM and other non-scientific source classes to RELATED_SYNONYM. Current EFetch alone does not prove those classes existed in the pinned names archive. |
+| native-gate-reuse | /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0027/native-gate-reuse.json; base, native_inputs_unchanged, source_directory, gates, input_proof_path and input_proof_sha256 | supports | Retained explicit verification of identical base/native inputs authorizes historical native-gate reuse; original command receipts remain separately cited. |
+| strict-receipt | just validate-strict data/taxa/archaea/archaeon_d22.yaml --out /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0027/strict-01.tsv; This exact generated YAML only; its captured bytes remain unchanged. Actual earlier per-target invocation; the receipt retains its original cwd and times. | supports | Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo-batch-0027; started 2026-10-21T09:15:03Z, finished 2026-10-21T09:15:06Z, exit 0. This exact generated YAML only; its captured bytes remain unchanged. Actual earlier per-target invocation; the receipt retains its original cwd and times.<br>Validating 1 files with 4 workers; schema=/private/tmp/taxonmech-record-reviews-k0MubV/repo-batch-0027/src/taxonmech/schema/taxonmech.yaml<br><br>=== validate-strict summary ===<br>  files scanned:      1<br>  files with ERROR:   0<br>  total ERROR rows:   0<br>  TSV:                /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0027/strict-01.tsv |
+| history-receipt | just validate-history; The complete standalone history population; the generated seed event was also inspected in this target. Actual native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4; retained original cwd, times, commands, log hashes and terminal exit codes identify the executions. Reused repository-wide receipts require the explicit same-base/native-input certificate; these are historical runs, not new batch-0027 invocations. Missing terminal receipts or reuse proof remain unavailable in unsaved previews. Exact-target strict receipts retain their original execution context. New review bundles still require individual validation/save/check. | supports | Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0014/repo; started 2026-10-21T06:42:09Z, finished 2026-10-21T06:42:11Z, exit 0. The complete standalone history population; the generated seed event was also inspected in this target. Actual native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4; retained original cwd, times, commands, log hashes and terminal exit codes identify the executions. Reused repository-wide receipts require the explicit same-base/native-input certificate; these are historical runs, not new batch-0027 invocations. Missing terminal receipts or reuse proof remain unavailable in unsaved previews. Exact-target strict receipts retain their original execution context. New review bundles still require individual validation/save/check.<br>history links: 18 record(s), 0 invalid<br>No issues found<br>18 history record(s) valid against src/taxonmech/schema/history.yaml |
+| corpus-receipt | just verify-corpus; All 626,048 generated taxon YAMLs, not a focused approximation. Actual native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4; retained original cwd, times, commands, log hashes and terminal exit codes identify the executions. Reused repository-wide receipts require the explicit same-base/native-input certificate; these are historical runs, not new batch-0027 invocations. Missing terminal receipts or reuse proof remain unavailable in unsaved previews. Exact-target strict receipts retain their original execution context. New review bundles still require individual validation/save/check. | supports | Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0014/repo; started 2026-10-21T06:42:09Z, finished 2026-10-21T06:48:01Z, exit 0. All 626,048 generated taxon YAMLs, not a focused approximation. Actual native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4; retained original cwd, times, commands, log hashes and terminal exit codes identify the executions. Reused repository-wide receipts require the explicit same-base/native-input certificate; these are historical runs, not new batch-0027 invocations. Missing terminal receipts or reuse proof remain unavailable in unsaved previews. Exact-target strict receipts retain their original execution context. New review bundles still require individual validation/save/check.<br>uv run python scripts/verify_corpus.py <br>expected 626048 records, found 626048 on disk<br>  missing:   0<br>  extra:     0<br>  differing: 0<br><br>corpus reproduces exactly from data/raw/ and curation/seed_scope.tsv |
+| products-receipt | just validate-products; Full configured corpus scan for curator-added graph nodes; this target contains no causal graph. Actual native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4; retained original cwd, times, commands, log hashes and terminal exit codes identify the executions. Reused repository-wide receipts require the explicit same-base/native-input certificate; these are historical runs, not new batch-0027 invocations. Missing terminal receipts or reuse proof remain unavailable in unsaved previews. Exact-target strict receipts retain their original execution context. New review bundles still require individual validation/save/check. | supports | Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0014/repo; started 2026-10-21T06:42:09Z, finished 2026-10-21T07:19:10Z, exit 0. Full configured corpus scan for curator-added graph nodes; this target contains no causal graph. Actual native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4; retained original cwd, times, commands, log hashes and terminal exit codes identify the executions. Reused repository-wide receipts require the explicit same-base/native-input certificate; these are historical runs, not new batch-0027 invocations. Missing terminal receipts or reuse proof remain unavailable in unsaved previews. Exact-target strict receipts retain their original execution context. New review bundles still require individual validation/save/check.<br>uv run python scripts/validate_id_label_correspondence.py -c conf/id_label_targets.yaml<br><br>id↔label correspondence summary:<br><br>✅ All id↔label pairs correspond. |
+| qc-receipt | just qc; Repository-wide just qc, including native corpus-wide checks. Actual native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4; retained original cwd, times, commands, log hashes and terminal exit codes identify the executions. Reused repository-wide receipts require the explicit same-base/native-input certificate; these are historical runs, not new batch-0027 invocations. Missing terminal receipts or reuse proof remain unavailable in unsaved previews. Exact-target strict receipts retain their original execution context. New review bundles still require individual validation/save/check. | supports | Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0014/repo; started 2026-10-21T06:42:09Z, finished 2026-10-21T07:50:51Z, exit 0. Repository-wide just qc, including native corpus-wide checks. Actual native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4; retained original cwd, times, commands, log hashes and terminal exit codes identify the executions. Reused repository-wide receipts require the explicit same-base/native-input certificate; these are historical runs, not new batch-0027 invocations. Missing terminal receipts or reuse proof remain unavailable in unsaved previews. Exact-target strict receipts retain their original execution context. New review bundles still require individual validation/save/check.<br>All checks passed!<br>1073 passed, 3 skipped, 5 deselected in 1293.90s (0:21:33)<br>Validating 626048 files with 4 workers; schema=/private/tmp/taxonmech-record-reviews-k0MubV/repo-batch-0014/src/taxonmech/schema/taxonmech.yaml<br>  files scanned:      626048<br>expected 626048 records, found 626048 on disk<br>pages/ is current<br>Site publication: 530,946,096 bytes (budget 950,000,000)<br>626048 taxon records<br>  NCBITAXON        626048<br>All TaxonMech quality gates passed.<br>  Related STRAININFO_STRAIN: 54312 strain-record pairs, 53745 identifiers, 53890 strains (not genome counts)<br>  Related STRAININFO_DEPOSIT: 107277 strain-record pairs, 106843 identifiers, 53890 strains (not genome counts)<br>  Related NUCLEOTIDE_SEQUENCE: 51594 strain-record pairs, 51301 identifiers, 9984 strains (not genome counts)<br>LPSN: 22469 records carry nomenclature, 21254 with a correct name   GTDB: 117809 records mapped, 324404579 genomes summed across record attestations (not deduplicated)<br>Causal graphs: 0 records (0 evidence-backed edges)<br><br>All TaxonMech quality gates passed. |
+
+## Limits And Additional Notes
+
+- SPECIES rank and the literal designation are source taxonomy assertions, not independent evidence of a formally named biological species, physical culture, phenotype or mechanism. Absence claims are limited to the specified complete pinned inputs and recorded exact queries.
+- The historical GOLD aggregate agrees with its pinned one-organism projection. A full ignored-inclusive regular-file size/hash candidate search under owned27/data and owned27/GOLD did not locate the exact manifest-pinned transformed edge file or workbook. The original aggregate edges were not recounted; the public-workbook projection is a separate source boundary.
+- D22 current EFetch exposes a misspelling absent from both the pinned synonym projection and complete pinned name catalog. The original names archive was not replayed, so neither deliberate class omission nor an importer defect is established.
+- GOLD rows were checked in the pinned complete public-workbook projections; no current GOLD page, BioSample, BioProject, GenBank assembly or IMG record was independently re-resolved. Versioned GCA_002176885.1 and the Single Cell Analysis (unscreened) source type remain metadata, not cultured-strain or functional evidence.
+- D22 is the literal designation of this exact NCBI taxon. Its letters, digits and punctuation do not independently identify a culture deposit, genome accession, environmental measurement or experimental phenotype.
+- Actual native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4; retained original cwd, times, commands, log hashes and terminal exit codes identify the executions. Reused repository-wide receipts require the explicit same-base/native-input certificate; these are historical runs, not new batch-0027 invocations. Missing terminal receipts or reuse proof remain unavailable in unsaved previews. Exact-target strict receipts retain their original execution context. New review bundles still require individual validation/save/check.
+- No generated record or history was edited; curation actions remain proposed.
+- Fresh-base source transitions are verified against retained original captures and exact changed-input receipts.
+- Every new bundle still requires its own validate/save/check recipe; historical native receipts do not claim these later steps have run.
+
+## Complete Structured Record
+
+The sibling review.yaml is authoritative.
+
+```yaml
+schema_version: 1.0.0
+review_id: 20261021T093728Z-archaeon_d22
+kind: record
+repository: CultureBotAI/TaxonMech
+title: 'Record review: archaeon D22'
+started_at: '2026-10-21T09:14:58Z'
+finished_at: '2026-10-21T09:37:28Z'
+reviewer:
+  identity: Codex
+  kind: agent
+  independence: independent
+  independence_basis: The reviewer did not author the existing generated target; this
+    review changes only new review artifacts in an isolated checkout.
+skill: .claude/skills/review-yaml-record/SKILL.md
+completion: partial
+verdict: pass_with_limitations
+scientific_review: true
+summary: archaeon D22 has supported exact NCBI identity, carried lineage and source-scoped
+  representation. No record-specific defect was established within the inspected sources.
+source:
+  git_revision: 01ca63effdf8c03a644df893ba6129b2d8448ea4
+  state: working_tree
+  inputs:
+  - path: .claude/skills/curate-yaml-record/references/review-checklist.md
+    sha256: 8e8fd97c64fbff27e023c7a768b4c806c98f56cd6571e7102217a2c833284df6
+    role: context
+  - path: .claude/skills/review-yaml-record/SKILL.md
+    sha256: 4c7090b9d7fd0c6f7f2b4e47b48cbf64835e8d27b44944649e1ccd9038ce462d
+    role: context
+  - path: AGENTS.md
+    sha256: bde64bd1943c4fc64b332cdbc76b89c1460294d9b1042beeedbfa91160a70331
+    role: context
+  - path: CLAUDE.md
+    sha256: 7ffd88ac6de931cabf76781935be14d465472038e3bb654208b837c3e2df8258
+    role: context
+  - path: conf/id_label_targets.yaml
+    sha256: bfd1b248f7b189cd054e15b7ad0171042a30980d2ebdbdd8e7d85cea68dde9c8
+    role: context
+  - path: conf/ncbi_taxdump.yaml
+    sha256: 1d734bbb3ebf9d36e304d8030c5852fa4f0f306fca2849be5dec8f3dff86f887
+    role: context
+  - path: conf/record_review.yaml
+    sha256: 366312506b771fc18fc5bfc30d5ec942b2c96212e1f4f95c463cfa1707fbebaa
+    role: context
+  - path: curation/seed_scope.tsv
+    sha256: 95589ac7f548dcd27951c6afe432895c7409717df5f6e789a93dcb9229535963
+    role: context
+  - path: data/atb/MANIFEST.yaml
+    sha256: 1358809b2af7e8d4a6c8bb4c122781f48ae40b2c4f0f1c7ad3f37ad8907d7315
+    role: context
+  - path: data/catalog/MANIFEST.json
+    sha256: 15b5cfe42be7919faf2a6feb5ac4f7084009e84b2d6da669f7101aacc3586299
+    role: context
+  - path: data/catalog/ncbi_names-0000.jsonl.gz
+    sha256: a873aeec2b2a9a391b1c210bd28827c9b6dad851eeccd7d1644373cb8c6ce802
+    role: context
+  - path: data/catalog/ncbi_names-0001.jsonl.gz
+    sha256: fdb89eec80f04526f3f06fa49a6a03af586efaa5477404f1635d8c012c7ea999
+    role: context
+  - path: data/catalog/ncbi_names-0002.jsonl.gz
+    sha256: 0d9a38612c08a7a78c93c18513328ccd7ecf44f5fff10489b26358814ec22149
+    role: context
+  - path: data/catalog/ncbi_names-0003.jsonl.gz
+    sha256: 4ac5c4dfb9f0af855246461054ce5d9fa8f94ef6cfdecefb29870c972dd69dc4
+    role: context
+  - path: data/catalog/ncbi_names-0004.jsonl.gz
+    sha256: ac8968aea5627fc73425a4f70942a74d4b666183762e4116b780384a1853f8a3
+    role: context
+  - path: data/catalog/ncbi_names-0005.jsonl.gz
+    sha256: 31c672adade0c3485ee5d6817567f7972b06ce3b6853cf191159b76cad3b023c
+    role: context
+  - path: data/catalog/ncbi_names-0006.jsonl.gz
+    sha256: 4c63f036b4707bfd7a66f7f85601ca11a5694cb19744857a506b8464b64bc8d2
+    role: context
+  - path: data/catalog/ncbi_names-0007.jsonl.gz
+    sha256: e54bd96ed840ab4a6ffe0e251197fc9367a75e07dbdf89e070656bf38811ef34
+    role: context
+  - path: data/catalog/ncbi_names-0008.jsonl.gz
+    sha256: c955a1d23e3e5b1e5a18f535755b423ae20efb6ca9ae4eef97a4c40dd0323f52
+    role: context
+  - path: data/catalog/ncbi_names-0009.jsonl.gz
+    sha256: 7e1cbec759be96b0bd4b57f09ed075dc9cd7a22dc20cde8cc6f7a66cfb88da90
+    role: context
+  - path: data/catalog/ncbi_names-0010.jsonl.gz
+    sha256: 7f4d714a5b982de851dc5ea21e981dadee3a77ac2fcadebbf9cb68bfaeb5dd25
+    role: context
+  - path: data/catalog/ncbi_names-0011.jsonl.gz
+    sha256: 436b26d9d1510c958add8f0f4cf2371b489c169c9af900f74ebb8687e991b7d7
+    role: context
+  - path: data/catalog/ncbi_names-0012.jsonl.gz
+    sha256: a9234414e4addc9780860a46cb9329a3a3837a70d22607c5446321508224a8fa
+    role: context
+  - path: data/catalog/ncbi_names-0013.jsonl.gz
+    sha256: 8dee13292d2eececf3eab780149a1c5a0f669f36ba5c82119200323fb7554972
+    role: context
+  - path: data/catalog/ncbi_names-0014.jsonl.gz
+    sha256: 4e22fb0532c498e145beae904ec2c4a78912421ae6864b93bc37d37b21e89e3a
+    role: context
+  - path: data/catalog/ncbi_names-0015.jsonl.gz
+    sha256: 6d5de5074643b1d19f89c223bbfe01b35ccf4ad8167ae628f2f7f96745dee045
+    role: context
+  - path: data/gold/SOURCE.json
+    sha256: c7ff51dc6be17c45b18cd031500fde0bd83fb6275e7c021e51bedf68f75ecf2d
+    role: context
+  - path: data/gold/analyses.jsonl.gz
+    sha256: d597f0d5f31fc8b387caaf659f3c6a337959219870529e907a1c0287e3877b7a
+    role: context
+  - path: data/gold/organisms.jsonl.gz
+    sha256: 8c1a055214cb240c58fadda0815efbefcb60848245e8a7474e6b1b41d123235c
+    role: context
+  - path: data/gold/projects.jsonl.gz
+    sha256: 0d852fe0144afd778609fef82b266fd1507a4c0be949efd2f53c7c34526b6c95
+    role: context
+  - path: data/raw/MANIFEST.yaml
+    sha256: ee76711683b1b579d1561dcf40187e10e4f0027ae1b89f108eb18e865e7e7d38
+    role: context
+  - path: data/raw/bacdive_strains.tsv
+    sha256: 029fd6d1f53ef7f90684130bf0d644ed3edd1d8fbeb065a511ae928f160b1eea
+    role: context
+  - path: data/raw/bactotraits_taxa.tsv
+    sha256: 976d109cef832d8bf27cc105f67a42efbe900b6946736298602ef6d11158b197
+    role: context
+  - path: data/raw/culture_collection_strains.tsv
+    sha256: 810fdcb16abd6330fb15bb03d4c74b18db86be36a7c599df7c6b2498d9735c95
+    role: context
+  - path: data/raw/gold_organisms.tsv
+    sha256: 0680971a156eef0b79de46c71a1f2138eaee5212ad8193eec943bd8e6257e473
+    role: context
+  - path: data/raw/gtdb_mappings.tsv
+    sha256: bf62441b1b76abb16dd92e795c020ff30fc24e37e195b862fb9beda567277225
+    role: context
+  - path: data/raw/gtdb_species.tsv
+    sha256: 24eddf08fe8fdd1fed534a1b7fd411561eec612c58c3709a36032998fdab8f21
+    role: context
+  - path: data/raw/lpsn_names.tsv
+    sha256: 097f8f4ba3fd077d02e48f2c298a0af88fe02db79cc862f9af1c05141b0baa57
+    role: context
+  - path: data/raw/madin_taxa.tsv
+    sha256: 7620448834f1b86daa83f2e338160ec3291a2ec3900ea4cec449418b1dc8b148
+    role: context
+  - path: data/raw/mediadive_taxa.tsv
+    sha256: 3f74b78cadfcdb6aeae953e09fdb39e34fd9c5d5ed0be65a04a5d7fb02355905
+    role: context
+  - path: data/raw/ncbitaxon_taxa.tsv
+    sha256: 97ff340e1eebf62ea541a299e5c798cdcc24ef935c636fb059df48ab45d6f2f6
+    role: context
+  - path: data/straininfo/MANIFEST.yaml
+    sha256: 25dd601c8cf6d4d84e5cc756d1e642ebef89f565bd31967152bf0026fa072847
+    role: context
+  - path: data/taxa/PATHS.tsv
+    sha256: f8f2e0721cb6839b30530b44be0d3004b9f0e6e2d4be8736f235b10117a8bd99
+    role: context
+  - path: data/taxa/archaea/archaeon_d22.yaml
+    sha256: f24ca376895f4b3e8263a73f975d44c25b8a41d9b7beeee60959b3203424cee8
+    role: target
+  - path: docs/ALLTHEBACTERIA.md
+    sha256: a1b0c298988782ad4b7dbb80c661c483a67cd0e478366eddbea7d1ba7595e7cd
+    role: context
+  - path: docs/CURATION.md
+    sha256: 9e09c97bcd617f2b3d0090f775b80565fccc9d00e4c398ed58d3a31192a8fa8e
+    role: context
+  - path: docs/HARMONIZATION.md
+    sha256: 9c676a03a226d7fdce82f064acd01807a1a783497ffbbb1aabb8fdd393ac250d
+    role: context
+  - path: docs/SCHEMA.md
+    sha256: 9e767cebb2506f8372c65ceb5f75e5ef2df2b23c2be3727cfd198f447a6a0e30
+    role: context
+  - path: docs/SOURCE_COVERAGE.md
+    sha256: 43f17c3c80815d395136aab53f310be3190a8d614a45fc2f4a3942faeb0bc9e9
+    role: context
+  - path: docs/STRAININFO.md
+    sha256: 65d274e7126fcf7810da746366b0e60c1957f05df9016fb0900600932b278241
+    role: context
+  - path: docs/STRAIN_GENOMES.md
+    sha256: 7cfdbc8a600173d6569f885b409b1543098bb6022e8764324d91879eaed2b597
+    role: context
+  - path: docs/record-review-profile.md
+    sha256: bc2074242edcf09f510aae8d9cf40961ea0c1155ca497808765bdabfb35ee721
+    role: context
+  - path: docs/record-reviews.md
+    sha256: 452a19ab688276747b7c4308523a14d4d99c1c39ef6909ae8a90b85b7a9b3e9b
+    role: context
+  - path: justfile
+    sha256: c46d88186cad450fbd47ce5176bf2afc8289252e287324245ad30090753c750e
+    role: context
+  - path: schema/record_review.yaml
+    sha256: 229baf9b69118a1fe318e4c31085c0820e4e3d1365e7b04d6ace451b7c35f9bb
+    role: context
+  - path: scripts/build_source_catalog.py
+    sha256: 0e985fdbd74e5e58db2e28126bb8bc4f11a2d32929aa5d36f193d33142b5249e
+    role: context
+  - path: scripts/record_review.py
+    sha256: 95a4ec41e38ec47ba3578e76838c46a0adbf47e49ad3636524735d08cfcb1c4d
+    role: context
+  - path: scripts/run_qc.py
+    sha256: d3a8e398b0484fef1ce4ae13e639a03dd41467c1d597d753132e4dba04df9da3
+    role: context
+  - path: scripts/validate_history.py
+    sha256: aa8fd8528a28cf56a92768c05d57aea7ff48745510796126f144856b8fd7ae8b
+    role: context
+  - path: scripts/validate_id_label_correspondence.py
+    sha256: b5ff41bb52d24f5d7819fb12769e216440f75ec3fb3df3e3cb2c5082fffb40e0
+    role: context
+  - path: scripts/validate_strict.py
+    sha256: d0d75cc805cc746053076b5f75f5e6c817ab15c75a9362f8ce3be53bd4ec7382
+    role: context
+  - path: scripts/verify_corpus.py
+    sha256: 48c4ef707543d1b836052013e8991d530d14559f9b58aa3ff9faf02c4e1ffc2e
+    role: context
+  - path: src/taxonmech/extract.py
+    sha256: 7c5b5bf385e0c060f1cb3dbac304d05ddb941e4c83c900017a04133efd6d1822
+    role: context
+  - path: src/taxonmech/gold_genomes.py
+    sha256: d6c57dd12035c1efd168a1dc0169fc18c0ed4709eb5acba408b707e7bc1dadcd
+    role: context
+  - path: src/taxonmech/gold_snapshot.py
+    sha256: 6f34fb6225b0bf1c4cb0d0b5537d49acfc4bea615ee4002d9a2133b0d503a578
+    role: context
+  - path: src/taxonmech/ncbi_taxdump.py
+    sha256: 83e3bfd53721a1f85291022511de6504d84caa58e899c0fd8d1797e9f00f67cf
+    role: context
+  - path: src/taxonmech/schema/history.yaml
+    sha256: b01b06f1b9a37db205c26c31ec0fd910690848507c7e1bfb73b424ac0829c52d
+    role: context
+  - path: src/taxonmech/schema/mech_shared.yaml
+    sha256: c2e7054fd32635e380c698282bd886a9105861009b9f0474f02bb1b80865e895
+    role: context
+  - path: src/taxonmech/schema/taxonmech.yaml
+    sha256: aab25fee94c73eb70e5197a4f3ab8ddf0fa6731785974364963906d4f4d87fc3
+    role: context
+  - path: src/taxonmech/seed.py
+    sha256: 3cc30f6413a293165385dfc1860505fe389e5adfe9aa3d168f76aa4cb2ac36bd
+    role: context
+  - path: src/taxonmech/source_catalog.py
+    sha256: e941d67ede488ddf4dc1838c183f8ff0e5f7a0b9788e47651ea61e4e7d9c5d8f
+    role: context
+scope:
+  description: Entire single generated record, including all source assertions and
+    imported strains.
+  selection: Batch-0027 target 1; next unreviewed path-order selection after excluding
+    315 actual covered target paths. Canonical record_review.py list over the 39-bundle
+    current base and all twenty-six actually saved branch worktrees, including ignored
+    and hidden review bundles. Native corpus enumerated with os.walk including ignored/hidden
+    files. Coverage only derives from explicit validated bundle targets, never inventories
+    or reservations.
+  coverage: full
+  population_size: 1
+  reviewed_target_ids:
+  - NCBITaxon:1932700
+targets:
+- target_id: NCBITaxon:1932700
+  path: data/taxa/archaea/archaeon_d22.yaml
+  label: archaeon D22
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Maintained generated-record builder
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/extract.py
+    role: Maintained source inventory extractor
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/ncbi_taxdump.py
+    role: Maintained NCBI primary-taxonomy projection
+  - repository: CultureBotAI/TaxonMech
+    path: data/raw/ncbitaxon_taxa.tsv
+    role: Pinned taxon identity, name classes and carried ancestry
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit species-or-below scope
+checks:
+- check_id: identity-authority
+  name: Exact NCBI taxon, rank and lineage
+  status: passed
+  required: true
+  summary: NCBITaxon:1932700 denotes the exact SPECIES record archaeon D22, under
+    NCBITaxon:93506, unclassified Archaea, with genetic code 11. All four carried
+    ancestors and their literal names and ranks agree with the pinned taxonomy and
+    current official NCBI response; EFetch omits root. ARCHAEA follows the taxonomic
+    lineage, separately from EFetch Division metadata. No finer NCBI placement is
+    inferred.
+  target_ids:
+  - NCBITaxon:1932700
+  evidence_ids:
+  - record
+  - taxonomy-inventory
+  - ncbi-live
+  - scope-row
+  - path-row
+- check_id: optional-inventories
+  name: Complete exact identifier and name inventory search
+  status: passed
+  required: true
+  summary: Complete direct reads of all twelve named source, scope and path tables,
+    including ignored files, used the exact taxon ID, full literal label, slug and
+    current EFetch misspelling. The complete pinned parent graph has zero descendants;
+    zero imported BacDive strains agrees with the target/subtree and culture inventories.
+    The NCBITAXON 1 NAME and GOLD 1 ORGANISM attestations agree with the pinned projections.
+    Exact queries find no optional LPSN, GTDB mapping/species, BacDive, culture, MediaDive,
+    Madin or BactoTraits rows. Complete GOLD organism/project/analysis projection
+    scans identify one organism Go0541099 with taxid 1932700, strain text D22 and
+    an empty culture-collection field, its project Gp0491942 and analysis Ga0440272.
+    This independently supports a typed GOLD organism association but does not reconstruct
+    the historical transformed-edge count. The current misspelling differs from the
+    complete pinned name catalog and remains a source-channel or snapshot concern.
+    These bounded checks do not establish worldwide absence or a missing culture/genome
+    import.
+  target_ids:
+  - NCBITaxon:1932700
+  evidence_ids:
+  - record
+  - taxonomy-inventory
+  - lpsn-inventory
+  - gtdb-mappings
+  - gtdb-species
+  - bacdive-inventory
+  - culture-inventory
+  - pinned-source-query-check
+  - gold-organisms
+  - mediadive-taxa
+  - madin-taxa
+  - bactotraits-taxa
+  - scope-row
+  - path-row
+  - ncbi-live
+  - authority-import
+  - gold-organism-primary
+  - gold-project-primary
+  - gold-analysis-primary
+  - gold-projection-source
+  - aggregate-count-owner
+  - gold-strain-link-policy
+  - gold-original-input-search
+  - manifest
+  - seed-owner
+  - ncbi-name-shard-1
+  - ncbi-name-shard-2
+  - ncbi-name-shard-3
+  - ncbi-name-shard-4
+  - ncbi-name-shard-5
+  - ncbi-name-shard-6
+  - ncbi-name-shard-7
+  - ncbi-name-shard-8
+  - ncbi-name-shard-9
+  - ncbi-name-shard-10
+  - ncbi-name-shard-11
+  - ncbi-name-shard-12
+  - ncbi-name-shard-13
+  - ncbi-name-shard-14
+  - ncbi-name-shard-15
+  - ncbi-name-shard-16
+  - ncbi-name-full-scan
+  - ncbi-name-catalog-policy
+  - ncbi-name-projection-policy
+  scope_note: Full direct reads of all explicitly named TSV files, including ignored
+    files; exact case-folded whole-field and pipe-token ID/full-label/slug/synonym/source-ID
+    search. All claims of no rows are limited to these complete pinned inputs.
+- check_id: gtdb-native-mappings
+  name: GTDB mapping applicability
+  status: not_applicable
+  required: false
+  summary: The complete native record asserts no GTDB mapping or genome count. Complete
+    exact queries in the pinned mapping/species inventories have no matches; no primary-genome
+    absence claim follows.
+  target_ids:
+  - NCBITaxon:1932700
+  evidence_ids:
+  - record
+  - gtdb-mappings
+  - gtdb-species
+  - pinned-source-query-check
+- check_id: strain-genome-evidence
+  name: Imported strain links
+  status: not_applicable
+  required: false
+  summary: The complete native record asserts no imported BacDive strain, culture
+    deposit or strain-level genome link. Literal source strain text alone does not
+    establish an inventoried deposit.
+  target_ids:
+  - NCBITaxon:1932700
+  evidence_ids:
+  - record
+  - bacdive-inventory
+  - culture-inventory
+- check_id: nomenclature-authorities
+  name: Nomenclatural publication authorities
+  status: not_applicable
+  required: false
+  summary: The complete native record asserts no LPSN authority, species-authority
+    publication or type-strain sequence. Current NCBI name classes and bounded pinned
+    LPSN queries were checked.
+  target_ids:
+  - NCBITaxon:1932700
+  evidence_ids:
+  - record
+  - taxonomy-inventory
+  - ncbi-live
+  - lpsn-inventory
+- check_id: structured-adapter-applicability
+  name: Gene or transcriptomics evidence applicability
+  status: not_applicable
+  required: false
+  summary: 'Not applicable: the complete native record asserts no gene, protein, regulator,
+    pathway, experimental trait, mechanism or transcriptome link.'
+  target_ids:
+  - NCBITaxon:1932700
+  evidence_ids:
+  - record
+- check_id: gold-primary-association
+  name: Typed GOLD organism, project and analysis chain
+  status: passed
+  required: true
+  summary: The complete pinned GOLD projections retain Go0541099 as ORGANISM, Gp0491942
+    as sequencing PROJECT and Ga0440272 as ANALYSIS. Gp0491942 names BioProject PRJNA360185
+    and BioSample SAMN06204669. Ga0440272 resolves through that project, has type
+    Single Cell Analysis (unscreened), an empty direct organism field and empty IMG
+    taxon field, and records GenBank MSYC00000000 plus assembly GCA_002176885.1. These
+    are source metadata with distinct identifier roles; no current assembly status,
+    sequence identity, cultured deposit, phenotype or causal mechanism is inferred.
+    The maintained strain-genome importer requires an explicit inventoried culture
+    identifier; the source strain text D22 and shared taxid alone do not establish
+    that prerequisite.
+  target_ids:
+  - NCBITaxon:1932700
+  evidence_ids:
+  - record
+  - gold-organisms
+  - gold-organism-primary
+  - gold-project-primary
+  - gold-analysis-primary
+  - gold-projection-source
+  - aggregate-count-owner
+  - gold-strain-link-policy
+  - gold-original-input-search
+  - manifest
+  - seed-owner
+  scope_note: Complete pinned projections and explicit Go/Gp/Ga links only; no current
+    external ID re-resolution.
+- check_id: historical-source-counts
+  name: Original manifest-pinned aggregate recount
+  status: unavailable
+  required: true
+  summary: GOLD 1 ORGANISM agrees with its exact committed inventory. The original
+    transformed-edge input was not available in the bounded owned27 source search,
+    so its matching edge-row count was not independently reconstructed. The public-workbook
+    organism/project/analysis rows are a separate source boundary.
+  target_ids:
+  - NCBITaxon:1932700
+  evidence_ids:
+  - record
+  - gold-organisms
+  - gold-organism-primary
+  - gold-project-primary
+  - gold-analysis-primary
+  - gold-projection-source
+  - aggregate-count-owner
+  - gold-strain-link-policy
+  - gold-original-input-search
+  - manifest
+  - seed-owner
+  scope_note: 'Full os.walk including hidden/ignored names, lstat regular-file filter,
+    byte-size prefilter followed by SHA256 for every candidate regardless of filename;
+    symlinks not followed. Roots: [{"root":"/private/tmp/taxonmech-record-reviews-k0MubV/repo-batch-0027/data","exists":true,"is_symlink":false},{"root":"/private/tmp/taxonmech-record-reviews-k0MubV/repo-batch-0027/GOLD","exists":false,"is_symlink":false}]'
+- check_id: ncbi-name-source-comparison
+  name: Pinned and current source name classes
+  status: passed
+  required: true
+  summary: 'The complete source comparison is finished: current misspelling Euryarchaeota
+    archaeon D22 is absent from the complete pinned name catalog and projected synonyms.
+    The original archive was not replayed, and source-channel/snapshot cause remains
+    unresolved.'
+  target_ids:
+  - NCBITaxon:1932700
+  evidence_ids:
+  - record
+  - ncbi-name-shard-1
+  - ncbi-name-shard-2
+  - ncbi-name-shard-3
+  - ncbi-name-shard-4
+  - ncbi-name-shard-5
+  - ncbi-name-shard-6
+  - ncbi-name-shard-7
+  - ncbi-name-shard-8
+  - ncbi-name-shard-9
+  - ncbi-name-shard-10
+  - ncbi-name-shard-11
+  - ncbi-name-shard-12
+  - ncbi-name-shard-13
+  - ncbi-name-shard-14
+  - ncbi-name-shard-15
+  - ncbi-name-shard-16
+  - ncbi-name-full-scan
+  - ncbi-name-catalog-policy
+  - ncbi-name-projection-policy
+  - pinned-source-query-check
+  - ncbi-live
+  - taxonomy-inventory
+- check_id: strict
+  name: Native strict record validation
+  status: passed
+  required: true
+  summary: Actual terminal exit code 0. This exact generated YAML only; its captured
+    bytes remain unchanged. Actual earlier per-target invocation; the receipt retains
+    its original cwd and times.
+  target_ids:
+  - NCBITaxon:1932700
+  evidence_ids:
+  - strict-receipt
+  command: just validate-strict data/taxa/archaea/archaeon_d22.yaml --out /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0027/strict-01.tsv
+  exit_code: 0
+  expected_exit_code: 0
+  scope_note: This exact generated YAML only; its captured bytes remain unchanged.
+    Actual earlier per-target invocation; the receipt retains its original cwd and
+    times.
+- check_id: history
+  name: Repository history validation
+  status: passed
+  required: true
+  summary: Actual terminal exit code 0. The complete standalone history population;
+    the generated seed event was also inspected in this target. Actual native gate
+    execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4; retained original
+    cwd, times, commands, log hashes and terminal exit codes identify the executions.
+    Reused repository-wide receipts require the explicit same-base/native-input certificate;
+    these are historical runs, not new batch-0027 invocations. Missing terminal receipts
+    or reuse proof remain unavailable in unsaved previews. Exact-target strict receipts
+    retain their original execution context. New review bundles still require individual
+    validation/save/check.
+  target_ids:
+  - NCBITaxon:1932700
+  evidence_ids:
+  - history-receipt
+  - native-gate-reuse
+  command: just validate-history
+  exit_code: 0
+  expected_exit_code: 0
+  scope_note: The complete standalone history population; the generated seed event
+    was also inspected in this target. Actual native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4;
+    retained original cwd, times, commands, log hashes and terminal exit codes identify
+    the executions. Reused repository-wide receipts require the explicit same-base/native-input
+    certificate; these are historical runs, not new batch-0027 invocations. Missing
+    terminal receipts or reuse proof remain unavailable in unsaved previews. Exact-target
+    strict receipts retain their original execution context. New review bundles still
+    require individual validation/save/check.
+- check_id: corpus
+  name: Full-corpus exact reproduction
+  status: passed
+  required: true
+  summary: Actual terminal exit code 0. All 626,048 generated taxon YAMLs, not a focused
+    approximation. Actual native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4;
+    retained original cwd, times, commands, log hashes and terminal exit codes identify
+    the executions. Reused repository-wide receipts require the explicit same-base/native-input
+    certificate; these are historical runs, not new batch-0027 invocations. Missing
+    terminal receipts or reuse proof remain unavailable in unsaved previews. Exact-target
+    strict receipts retain their original execution context. New review bundles still
+    require individual validation/save/check.
+  target_ids:
+  - NCBITaxon:1932700
+  evidence_ids:
+  - corpus-receipt
+  - native-gate-reuse
+  command: just verify-corpus
+  exit_code: 0
+  expected_exit_code: 0
+  scope_note: All 626,048 generated taxon YAMLs, not a focused approximation. Actual
+    native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4; retained
+    original cwd, times, commands, log hashes and terminal exit codes identify the
+    executions. Reused repository-wide receipts require the explicit same-base/native-input
+    certificate; these are historical runs, not new batch-0027 invocations. Missing
+    terminal receipts or reuse proof remain unavailable in unsaved previews. Exact-target
+    strict receipts retain their original execution context. New review bundles still
+    require individual validation/save/check.
+- check_id: products
+  name: Native product ID/label gate
+  status: passed
+  required: true
+  summary: Actual terminal exit code 0. Full configured corpus scan for curator-added
+    graph nodes; this target contains no causal graph. Actual native gate execution
+    at base 01ca63effdf8c03a644df893ba6129b2d8448ea4; retained original cwd, times,
+    commands, log hashes and terminal exit codes identify the executions. Reused repository-wide
+    receipts require the explicit same-base/native-input certificate; these are historical
+    runs, not new batch-0027 invocations. Missing terminal receipts or reuse proof
+    remain unavailable in unsaved previews. Exact-target strict receipts retain their
+    original execution context. New review bundles still require individual validation/save/check.
+  target_ids:
+  - NCBITaxon:1932700
+  evidence_ids:
+  - products-receipt
+  - native-gate-reuse
+  command: just validate-products
+  exit_code: 0
+  expected_exit_code: 0
+  scope_note: Full configured corpus scan for curator-added graph nodes; this target
+    contains no causal graph. Actual native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4;
+    retained original cwd, times, commands, log hashes and terminal exit codes identify
+    the executions. Reused repository-wide receipts require the explicit same-base/native-input
+    certificate; these are historical runs, not new batch-0027 invocations. Missing
+    terminal receipts or reuse proof remain unavailable in unsaved previews. Exact-target
+    strict receipts retain their original execution context. New review bundles still
+    require individual validation/save/check.
+- check_id: qc
+  name: Authoritative complete quality gate
+  status: passed
+  required: true
+  summary: Actual terminal exit code 0. Repository-wide just qc, including native
+    corpus-wide checks. Actual native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4;
+    retained original cwd, times, commands, log hashes and terminal exit codes identify
+    the executions. Reused repository-wide receipts require the explicit same-base/native-input
+    certificate; these are historical runs, not new batch-0027 invocations. Missing
+    terminal receipts or reuse proof remain unavailable in unsaved previews. Exact-target
+    strict receipts retain their original execution context. New review bundles still
+    require individual validation/save/check. 1073 passed, 3 skipped, 5 deselected
+    in 1293.90s (0:21:33)
+  target_ids:
+  - NCBITaxon:1932700
+  evidence_ids:
+  - qc-receipt
+  - native-gate-reuse
+  command: just qc
+  exit_code: 0
+  expected_exit_code: 0
+  scope_note: Repository-wide just qc, including native corpus-wide checks. Actual
+    native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4; retained
+    original cwd, times, commands, log hashes and terminal exit codes identify the
+    executions. Reused repository-wide receipts require the explicit same-base/native-input
+    certificate; these are historical runs, not new batch-0027 invocations. Missing
+    terminal receipts or reuse proof remain unavailable in unsaved previews. Exact-target
+    strict receipts retain their original execution context. New review bundles still
+    require individual validation/save/check.
+evidence:
+- evidence_id: record
+  kind: record_content
+  reference: data/taxa/archaea/archaeon_d22.yaml
+  accessed_at: '2026-10-21T09:37:28Z'
+  support: supports
+  summary: Read the entire generated YAML, including identity, lineage, names, mappings,
+    source attestations, all imported strains and links, and seed history.
+  locator: entire TaxonRecord; identifier=NCBITaxon:1932700
+  snapshot_sha256: f24ca376895f4b3e8263a73f975d44c25b8a41d9b7beeee60959b3203424cee8
+- evidence_id: taxonomy-inventory
+  kind: database
+  reference: data/raw/ncbitaxon_taxa.tsv
+  accessed_at: '2026-10-21T09:17:11Z'
+  support: supports
+  summary: Inspected the target and each carried ancestor, rank, parent, genetic code
+    and source name classes.
+  locator: 'line 2: {"taxon_id":"NCBITaxon:1","label":"root","rank":"NO_RANK","parent_id":""};
+    line 1698: {"taxon_id":"NCBITaxon:2157","label":"Archaea","rank":"DOMAIN","parent_id":"NCBITaxon:131567"};
+    line 15329: {"taxon_id":"NCBITaxon:93506","label":"unclassified Archaea","rank":"NO_RANK","parent_id":"NCBITaxon:2157"};
+    line 25334: {"taxon_id":"NCBITaxon:131567","label":"cellular organisms","rank":"CELLULAR_ROOT","parent_id":"NCBITaxon:1"};
+    line 496451: {"taxon_id":"NCBITaxon:1932700","label":"archaeon D22","rank":"SPECIES","parent_id":"NCBITaxon:93506","genetic_code":"11","exact_synonyms":"","related_synonyms":"","broad_synonyms":"","attested_by":"ncbitaxon|gold","retired_into":"","taxonomy_snapshot":"2026-09-13"}'
+  snapshot_sha256: 97ff340e1eebf62ea541a299e5c798cdcc24ef935c636fb059df48ab45d6f2f6
+  search_scope: 'Full direct reads of all explicitly named TSV files, including ignored
+    files; exact case-folded whole-field and pipe-token ID/full-label/slug/synonym/source-ID
+    search. All claims of no rows are limited to these complete pinned inputs. Exact
+    case-folded query terms: ["archaeon d22","archaeon_d22","euryarchaeota archaeon
+    d22","ncbitaxon:1932700"]; complete table data rows: 650767.'
+- evidence_id: scope-row
+  kind: database
+  reference: curation/seed_scope.tsv
+  accessed_at: '2026-10-21T09:17:11Z'
+  support: supports
+  summary: Exact target is included in the declared seed scope.
+  locator: 'line 61660: {"identifier":"NCBITaxon:1932700","added":"2026-09-12","reason":"attested
+    rule: archaeon D22, 2 sources incl. NCBI"}'
+  snapshot_sha256: 95589ac7f548dcd27951c6afe432895c7409717df5f6e789a93dcb9229535963
+  search_scope: 'Full direct reads of all explicitly named TSV files, including ignored
+    files; exact case-folded whole-field and pipe-token ID/full-label/slug/synonym/source-ID
+    search. All claims of no rows are limited to these complete pinned inputs. Exact
+    case-folded query terms: ["archaeon d22","archaeon_d22","euryarchaeota archaeon
+    d22","ncbitaxon:1932700"]; complete table data rows: 626048.'
+- evidence_id: path-row
+  kind: database
+  reference: data/taxa/PATHS.tsv
+  accessed_at: '2026-10-21T09:17:11Z'
+  support: supports
+  summary: Indexed path resolves to this exact NCBI taxon.
+  locator: 'line 304608: {"identifier":"NCBITaxon:1932700","slug":"archaeon_d22"}'
+  snapshot_sha256: f8f2e0721cb6839b30530b44be0d3004b9f0e6e2d4be8736f235b10117a8bd99
+  search_scope: 'Full direct reads of all explicitly named TSV files, including ignored
+    files; exact case-folded whole-field and pipe-token ID/full-label/slug/synonym/source-ID
+    search. All claims of no rows are limited to these complete pinned inputs. Exact
+    case-folded query terms: ["archaeon d22","archaeon_d22","euryarchaeota archaeon
+    d22","ncbitaxon:1932700"]; complete table data rows: 626048.'
+- evidence_id: ncbi-live
+  kind: authority
+  reference: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=taxonomy&id=1932700,115530,1293314,1293315,1293316,1293317,1293318,1293319,1293320,1293321&retmode=xml
+  accessed_at: '2026-10-21T09:09:37Z'
+  support: supports
+  summary: 'Inspected the successful official response for this exact taxon: scientific
+    name, rank, parent, source name classes, lineage and genetic code. Current authority
+    and pinned September inventory remain distinct observations. The HTTP request
+    ran in owned25; its response and original execution receipt were imported byte-identically
+    into owned27 and retain their actual cwd/times.'
+  locator: TaxaSet/Taxon[TaxId='1932700']; ten-target captured response
+  snapshot_sha256: 2a10fe4ec2f8112d082da347807015f191b27678de986e7ac29f69815eb6bd08
+- evidence_id: lpsn-inventory
+  kind: database
+  reference: data/raw/lpsn_names.tsv
+  accessed_at: '2026-10-21T09:17:11Z'
+  support: supports
+  summary: Complete exact taxon, literal name and slug queries found no associated
+    LPSN inventory row; this observation is bounded to the pinned inventory.
+  locator: complete table; recorded exact query terms have no match
+  snapshot_sha256: 097f8f4ba3fd077d02e48f2c298a0af88fe02db79cc862f9af1c05141b0baa57
+  search_scope: 'Full direct reads of all explicitly named TSV files, including ignored
+    files; exact case-folded whole-field and pipe-token ID/full-label/slug/synonym/source-ID
+    search. All claims of no rows are limited to these complete pinned inputs. Exact
+    case-folded query terms: ["archaeon d22","archaeon_d22","euryarchaeota archaeon
+    d22","ncbitaxon:1932700"]; complete table data rows: 34301.'
+- evidence_id: gtdb-mappings
+  kind: database
+  reference: data/raw/gtdb_mappings.tsv
+  accessed_at: '2026-10-21T09:17:11Z'
+  support: supports
+  summary: Complete exact target queries found no matching GTDB mapping row; no source
+    cluster or reverse-mapping claim is asserted for this target.
+  locator: complete table; recorded exact query terms have no match
+  snapshot_sha256: bf62441b1b76abb16dd92e795c020ff30fc24e37e195b862fb9beda567277225
+  search_scope: 'Full direct reads of all explicitly named TSV files, including ignored
+    files; exact case-folded whole-field and pipe-token ID/full-label/slug/synonym/source-ID
+    search. All claims of no rows are limited to these complete pinned inputs. Exact
+    case-folded query terms: ["archaeon d22","archaeon_d22","euryarchaeota archaeon
+    d22","ncbitaxon:1932700"]; complete table data rows: 322327.'
+- evidence_id: gtdb-species
+  kind: database
+  reference: data/raw/gtdb_species.tsv
+  accessed_at: '2026-10-21T09:17:11Z'
+  support: supports
+  summary: Complete exact target queries found no matching GTDB species inventory
+    row; this is not a primary-genome absence claim.
+  locator: complete table; recorded exact query terms have no match
+  snapshot_sha256: 24eddf08fe8fdd1fed534a1b7fd411561eec612c58c3709a36032998fdab8f21
+  search_scope: 'Full direct reads of all explicitly named TSV files, including ignored
+    files; exact case-folded whole-field and pipe-token ID/full-label/slug/synonym/source-ID
+    search. All claims of no rows are limited to these complete pinned inputs. Exact
+    case-folded query terms: ["archaeon d22","archaeon_d22","euryarchaeota archaeon
+    d22","ncbitaxon:1932700"]; complete table data rows: 199923.'
+- evidence_id: bacdive-inventory
+  kind: database
+  reference: data/raw/bacdive_strains.tsv
+  accessed_at: '2026-10-21T09:17:11Z'
+  support: supports
+  summary: Complete inventory selection covers the exact target and descendants from
+    the complete NCBI parent graph; its imported strain population was compared with
+    the complete YAML.
+  locator: complete table; recorded exact query terms have no match
+  snapshot_sha256: 029fd6d1f53ef7f90684130bf0d644ed3edd1d8fbeb065a511ae928f160b1eea
+  search_scope: 'Full direct reads of all explicitly named TSV files, including ignored
+    files; exact case-folded whole-field and pipe-token ID/full-label/slug/synonym/source-ID
+    search. All claims of no rows are limited to these complete pinned inputs. Exact
+    case-folded query terms: ["archaeon d22","archaeon_d22","euryarchaeota archaeon
+    d22","ncbitaxon:1932700"]; complete table data rows: 101417.'
+- evidence_id: culture-inventory
+  kind: database
+  reference: data/raw/culture_collection_strains.tsv
+  accessed_at: '2026-10-21T09:17:11Z'
+  support: supports
+  summary: Inspected exact culture-inventory associations; an isolate name or genome
+    does not create an inferred deposit.
+  locator: complete table; recorded exact query terms have no match
+  snapshot_sha256: 810fdcb16abd6330fb15bb03d4c74b18db86be36a7c599df7c6b2498d9735c95
+  search_scope: 'Full direct reads of all explicitly named TSV files, including ignored
+    files; exact case-folded whole-field and pipe-token ID/full-label/slug/synonym/source-ID
+    search. All claims of no rows are limited to these complete pinned inputs. Exact
+    case-folded query terms: ["archaeon d22","archaeon_d22","euryarchaeota archaeon
+    d22","ncbitaxon:1932700"]; complete table data rows: 154969.'
+- evidence_id: gold-organisms
+  kind: database
+  reference: data/raw/gold_organisms.tsv
+  accessed_at: '2026-10-21T09:17:11Z'
+  support: supports
+  summary: Inspected the exact GOLD organism count row or bounded absence, without
+    converting counts to phenotypes.
+  locator: 'line 17733: {"taxon_id":"NCBITaxon:1932700","organism_count":"1"}'
+  snapshot_sha256: 0680971a156eef0b79de46c71a1f2138eaee5212ad8193eec943bd8e6257e473
+  search_scope: 'Full direct reads of all explicitly named TSV files, including ignored
+    files; exact case-folded whole-field and pipe-token ID/full-label/slug/synonym/source-ID
+    search. All claims of no rows are limited to these complete pinned inputs. Exact
+    case-folded query terms: ["archaeon d22","archaeon_d22","euryarchaeota archaeon
+    d22","ncbitaxon:1932700"]; complete table data rows: 45616.'
+- evidence_id: mediadive-taxa
+  kind: database
+  reference: data/raw/mediadive_taxa.tsv
+  accessed_at: '2026-10-21T09:17:11Z'
+  support: supports
+  summary: Inspected the exact MediaDive medium count row or bounded absence, without
+    converting counts to phenotypes.
+  locator: complete table; recorded exact query terms have no match
+  snapshot_sha256: 3f74b78cadfcdb6aeae953e09fdb39e34fd9c5d5ed0be65a04a5d7fb02355905
+  search_scope: 'Full direct reads of all explicitly named TSV files, including ignored
+    files; exact case-folded whole-field and pipe-token ID/full-label/slug/synonym/source-ID
+    search. All claims of no rows are limited to these complete pinned inputs. Exact
+    case-folded query terms: ["archaeon d22","archaeon_d22","euryarchaeota archaeon
+    d22","ncbitaxon:1932700"]; complete table data rows: 14225.'
+- evidence_id: madin-taxa
+  kind: database
+  reference: data/raw/madin_taxa.tsv
+  accessed_at: '2026-10-21T09:17:11Z'
+  support: supports
+  summary: Inspected the exact Madin trait-assertion count row or bounded absence,
+    without converting counts to phenotypes.
+  locator: complete table; recorded exact query terms have no match
+  snapshot_sha256: 7620448834f1b86daa83f2e338160ec3291a2ec3900ea4cec449418b1dc8b148
+  search_scope: 'Full direct reads of all explicitly named TSV files, including ignored
+    files; exact case-folded whole-field and pipe-token ID/full-label/slug/synonym/source-ID
+    search. All claims of no rows are limited to these complete pinned inputs. Exact
+    case-folded query terms: ["archaeon d22","archaeon_d22","euryarchaeota archaeon
+    d22","ncbitaxon:1932700"]; complete table data rows: 34148.'
+- evidence_id: bactotraits-taxa
+  kind: database
+  reference: data/raw/bactotraits_taxa.tsv
+  accessed_at: '2026-10-21T09:17:11Z'
+  support: supports
+  summary: Inspected the exact BactoTraits trait-assertion count row or bounded absence,
+    without converting counts to phenotypes.
+  locator: complete table; recorded exact query terms have no match
+  snapshot_sha256: 976d109cef832d8bf27cc105f67a42efbe900b6946736298602ef6d11158b197
+  search_scope: 'Full direct reads of all explicitly named TSV files, including ignored
+    files; exact case-folded whole-field and pipe-token ID/full-label/slug/synonym/source-ID
+    search. All claims of no rows are limited to these complete pinned inputs. Exact
+    case-folded query terms: ["archaeon d22","archaeon_d22","euryarchaeota archaeon
+    d22","ncbitaxon:1932700"]; complete table data rows: 9658.'
+- evidence_id: mapping-policy
+  kind: record_content
+  reference: docs/HARMONIZATION.md
+  accessed_at: '2026-10-21T09:37:28Z'
+  support: supports
+  summary: Policy permits source-scoped species-level closeMatch normalization and
+    LPSN-linked species xrefs/synonyms, retains pooled broadMatch entries and carries
+    NCBI lineage unchanged. Multiple reverse target mappings do not alone establish
+    a normalization defect or make genomes and physical strains identical.
+  locator: Mapping predicates; Which strains belong to a record
+  snapshot_sha256: 9c676a03a226d7fdce82f064acd01807a1a783497ffbbb1aabb8fdd393ac250d
+- evidence_id: equivalence-contract
+  kind: record_content
+  reference: src/taxonmech/schema/taxonmech.yaml
+  accessed_at: '2026-10-21T09:37:28Z'
+  support: supports
+  summary: TaxonRecord.xrefs denotes equivalent identifiers; broader/narrower relations
+    remain qualified taxonomy mappings. TaxonomyMapping.genome_count counts genomes
+    under the source taxon.
+  locator: TaxonRecord.xrefs, lines 180–187; TaxonomyMapping, lines 417–439
+  snapshot_sha256: aab25fee94c73eb70e5197a4f3ab8ddf0fa6731785974364963906d4f4d87fc3
+- evidence_id: seed-owner
+  kind: record_content
+  reference: src/taxonmech/seed.py
+  accessed_at: '2026-10-21T09:37:28Z'
+  support: supports
+  summary: Inspected source mapping normalization, NCBI NAME and whole-source-species
+    GTDB GENOME and GOLD ORGANISM attestation construction, and seed history. Qualified
+    source mappings and physical strain derivation remain distinct.
+  locator: Source attestation construction lines 551–631, including GOLD at 615–631;
+    seed history construction lines 630–647
+  snapshot_sha256: 3cc30f6413a293165385dfc1860505fe389e5adfe9aa3d168f76aa4cb2ac36bd
+- evidence_id: manifest
+  kind: record_content
+  reference: data/raw/MANIFEST.yaml
+  accessed_at: '2026-10-21T09:37:28Z'
+  support: supports
+  summary: Manifest pins kg-microbe revision 30405b70ef762aa46c08278b2b3e06bffb0b34cd,
+    upstream input hashes and extraction time 2026-09-13T17:50:44Z.
+  locator: kg_microbe_source, inputs, extracted_at
+  snapshot_sha256: ee76711683b1b579d1561dcf40187e10e4f0027ae1b89f108eb18e865e7e7d38
+- evidence_id: overlay-manifests
+  kind: record_content
+  reference: data/atb/MANIFEST.yaml
+  accessed_at: '2026-10-21T09:37:28Z'
+  support: supports
+  summary: Raw, ATB and StrainInfo extraction times have maximum 2026-09-13T17:54:04Z,
+    matching the sole seed event. StrainInfo manifest is independently captured in
+    source.inputs.
+  locator: extracted_at, together with data/raw/MANIFEST.yaml and data/straininfo/MANIFEST.yaml
+  snapshot_sha256: 1358809b2af7e8d4a6c8bb4c122781f48ae40b2c4f0f1c7ad3f37ad8907d7315
+- evidence_id: pinned-source-query-check
+  kind: validation
+  reference: /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0027/ten-source-check-report.json
+  accessed_at: '2026-10-21T09:17:11Z'
+  support: supports
+  summary: All twelve complete source/scope/path tables were checked with the recorded
+    exact target/name/slug queries; this includes the current D22 misspelling when
+    present. All canonical input hashes agree. No broader absence or phenotype claim
+    is inferred.
+  locator: '{"target_id":"NCBITaxon:1932700","queries":["archaeon d22","archaeon_d22","euryarchaeota
+    archaeon d22","ncbitaxon:1932700"],"table_counts":{"data/raw/ncbitaxon_taxa.tsv":650767,"data/raw/lpsn_names.tsv":34301,"data/raw/gtdb_mappings.tsv":322327,"data/raw/gtdb_species.tsv":199923,"data/raw/bacdive_strains.tsv":101417,"data/raw/culture_collection_strains.tsv":154969,"data/raw/gold_organisms.tsv":45616,"data/raw/mediadive_taxa.tsv":14225,"data/raw/madin_taxa.tsv":34148,"data/raw/bactotraits_taxa.tsv":9658,"curation/seed_scope.tsv":626048,"data/taxa/PATHS.tsv":626048},"matching_rows":{"data/raw/ncbitaxon_taxa.tsv":[{"line":496451,"matched_terms":["archaeon
+    d22","ncbitaxon:1932700"],"row":{"taxon_id":"NCBITaxon:1932700","label":"archaeon
+    D22","rank":"SPECIES","parent_id":"NCBITaxon:93506","genetic_code":"11","exact_synonyms":"","related_synonyms":"","broad_synonyms":"","attested_by":"ncbitaxon|gold","retired_into":"","taxonomy_snapshot":"2026-09-13"}}],"data/raw/lpsn_names.tsv":[],"data/raw/gtdb_mappings.tsv":[],"data/raw/gtdb_species.tsv":[],"data/raw/bacdive_strains.tsv":[],"data/raw/culture_collection_strains.tsv":[],"data/raw/gold_organisms.tsv":[{"line":17733,"matched_terms":["ncbitaxon:1932700"],"row":{"taxon_id":"NCBITaxon:1932700","organism_count":"1"}}],"data/raw/mediadive_taxa.tsv":[],"data/raw/madin_taxa.tsv":[],"data/raw/bactotraits_taxa.tsv":[],"curation/seed_scope.tsv":[{"line":61660,"matched_terms":["ncbitaxon:1932700"],"row":{"identifier":"NCBITaxon:1932700","added":"2026-09-12","reason":"attested
+    rule: archaeon D22, 2 sources incl. NCBI"}}],"data/taxa/PATHS.tsv":[{"line":304608,"matched_terms":["archaeon_d22","ncbitaxon:1932700"],"row":{"identifier":"NCBITaxon:1932700","slug":"archaeon_d22"}}]}}'
+  snapshot_sha256: 94bd38445a6d3dbd7f3e7a060f862b479b630aeab2d1f32ec35fb4e2fb51973e
+  search_scope: Full direct reads of all explicitly named TSV files, including ignored
+    files; exact case-folded whole-field and pipe-token ID/full-label/slug/synonym/source-ID
+    search. All claims of no rows are limited to these complete pinned inputs.
+- evidence_id: authority-import
+  kind: validation
+  reference: /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0027/scout-source-import-agent.json
+  accessed_at: '2026-10-21T09:14:58Z'
+  support: supports
+  summary: The official taxonomy response and original successful owned25 HTTP receipt
+    were imported byte-identically. Fresh owned27 local inspections and source comparisons
+    are separate executions; no fetched-at time or cwd was rewritten.
+  locator: authority_files; authority_original_command_cwd_times_unchanged; source_input_sha256
+  snapshot_sha256: c40b828a00c3fee09ba172047ca46daab021823c266e05e9d38c83350a81b10e
+- evidence_id: gold-organism-primary
+  kind: primary_source
+  reference: data/gold/organisms.jsonl.gz
+  accessed_at: '2026-10-21T09:16:20Z'
+  support: supports
+  summary: Inspected the complete selected Organism row and its distinct identifier
+    roles. Source metadata does not establish a cultured deposit, current assembly
+    status, sequence identity or phenotype.
+  locator: 'line 380397: {"ORGANISM CULTURE COLLECTION ID":"","ORGANISM GOLD ID":"Go0541099","ORGANISM
+    NAME":"Unclassified archaeon D22","ORGANISM NCBI TAX ID":"1932700","ORGANISM STRAIN":"D22"}'
+  snapshot_sha256: 8c1a055214cb240c58fadda0815efbefcb60848245e8a7474e6b1b41d123235c
+  search_scope: Full manifest-matching projection of 531961 rows; Exact NCBI taxid
+    or full literal name
+- evidence_id: gold-project-primary
+  kind: primary_source
+  reference: data/gold/projects.jsonl.gz
+  accessed_at: '2026-10-21T09:16:20Z'
+  support: supports
+  summary: Inspected the complete selected Sequencing Project row and its distinct
+    identifier roles. Source metadata does not establish a cultured deposit, current
+    assembly status, sequence identity or phenotype.
+  locator: 'line 352894: {"NCBI BIOPROJECT ACCESSION":"PRJNA360185","NCBI BIOSAMPLE
+    ACCESSION":"SAMN06204669","ORGANISM GOLD ID":"Go0541099","PROJECT GOLD ID":"Gp0491942","PROJECT
+    NAME":"Unclassified archaeon D22"}'
+  snapshot_sha256: 0d852fe0144afd778609fef82b266fd1507a4c0be949efd2f53c7c34526b6c95
+  search_scope: Full manifest-matching projection of 636630 rows; Explicit linked
+    organism ID or sequencing project ID only; no name-based equivalence
+- evidence_id: gold-analysis-primary
+  kind: primary_source
+  reference: data/gold/analyses.jsonl.gz
+  accessed_at: '2026-10-21T09:16:20Z'
+  support: supports
+  summary: Inspected the complete selected Analysis Project row and its distinct identifier
+    roles. Source metadata does not establish a cultured deposit, current assembly
+    status, sequence identity or phenotype.
+  locator: 'line 273856: {"AP GENBANK":"[{\"genbankId\":\"MSYC00000000\",\"assemblyAccession\":\"GCA_002176885.1\"}]","AP
+    GOLD ID":"Ga0440272","AP IMG TAXON ID":"","AP NAME":"Unclassified archaeon D22","AP
+    ORGANISM GOLD ID":"","AP PROJECT GOLD IDS":"Gp0491942","AP TYPE":"Single Cell
+    Analysis (unscreened)"}'
+  snapshot_sha256: d597f0d5f31fc8b387caaf659f3c6a337959219870529e907a1c0287e3877b7a
+  search_scope: Full manifest-matching projection of 459542 rows; Explicit linked
+    organism ID or sequencing project ID only; no name-based equivalence
+- evidence_id: gold-projection-source
+  kind: primary_source
+  reference: data/gold/SOURCE.json
+  accessed_at: '2026-10-21T09:16:20Z'
+  support: supports
+  summary: The full public-workbook projection census and hashes bind all three selected
+    typed source rows; the projection is distinct from the historical transformed-edge
+    aggregate.
+  locator: '{"outputs":{"Analysis Project":{"bytes":10544549,"path":"analyses.jsonl.gz","rows":459542,"sha256":"d597f0d5f31fc8b387caaf659f3c6a337959219870529e907a1c0287e3877b7a"},"Organism":{"bytes":8600009,"path":"organisms.jsonl.gz","rows":531961,"sha256":"8c1a055214cb240c58fadda0815efbefcb60848245e8a7474e6b1b41d123235c"},"Sequencing
+    Project":{"bytes":10429834,"path":"projects.jsonl.gz","rows":636630,"sha256":"0d852fe0144afd778609fef82b266fd1507a4c0be949efd2f53c7c34526b6c95"}},"projection":"all
+    rows; identity, strain, taxon, project and genome columns","source":"GOLD","url":"https://gold.jgi.doe.gov/download?mode=site_excel","workbook_bytes":238856378,"workbook_sha256":"7d22ea3f2c9ac40d513cd4af1410f7d19f3525347eb272787ba1c20525340370"}'
+  snapshot_sha256: c7ff51dc6be17c45b18cd031500fde0bd83fb6275e7c021e51bedf68f75ecf2d
+- evidence_id: aggregate-count-owner
+  kind: record_content
+  reference: src/taxonmech/extract.py
+  accessed_at: '2026-10-21T09:37:28Z'
+  support: supports
+  summary: count_subjects_by_object increments one count per matching gold:Go-prefix
+    biolink:subclass_of edge row; it does not deduplicate subjects. The seeder copies
+    organism_count without making a genome, strain or phenotype claim.
+  locator: count_subjects_by_object lines 403–409; GOLD call line 676; source attestation
+    in src/taxonmech/seed.py lines 615–631
+  snapshot_sha256: 7c5b5bf385e0c060f1cb3dbac304d05ddb941e4c83c900017a04133efd6d1822
+- evidence_id: gold-strain-link-policy
+  kind: record_content
+  reference: src/taxonmech/gold_genomes.py
+  accessed_at: '2026-10-21T09:37:28Z'
+  support: supports
+  summary: Strain-linked GOLD imports require explicit inventoried culture identifiers.
+    Organism names, source strain designations and taxonomic association alone do
+    not establish a culture or genome identity.
+  locator: 'extract_gold_genomes: explicit ORGANISM CULTURE COLLECTION ID/ORGANISM
+    STRAIN lookup against normalized inventoried deposits; project and analysis chain
+    qualification'
+  snapshot_sha256: d6c57dd12035c1efd168a1dc0169fc18c0ed4709eb5acba408b707e7bc1dadcd
+- evidence_id: gold-original-input-search
+  kind: search
+  reference: /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0027/historical-gold-input-availability-agent.json
+  accessed_at: '2026-10-21T09:17:02Z'
+  support: context_only
+  summary: Neither exact original manifest-pinned GOLD input was found in the bounded
+    owned27 regular-file search. This is scoped unavailability, not a global source-absence
+    claim or completed recount.
+  locator: '{"pins":[{"path":"data/transformed/gold/edges.tsv","bytes":83535194,"mtime":"2026-09-12T09:31:28Z","sha256":"b793c4f84278789f5dc7c68173b1f08364fd68c5d52a555c4037793006010a12"},{"path":"GOLD/goldData.xlsx","bytes":238856378,"mtime":"2026-09-11T23:28:37Z","sha256":"7d22ea3f2c9ac40d513cd4af1410f7d19f3525347eb272787ba1c20525340370","source":"GOLD","url":"https://gold.jgi.doe.gov/download?mode=site_excel"}],"search_roots":[{"root":"/private/tmp/taxonmech-record-reviews-k0MubV/repo-batch-0027/data","exists":true,"is_symlink":false},{"root":"/private/tmp/taxonmech-record-reviews-k0MubV/repo-batch-0027/GOLD","exists":false,"is_symlink":false}],"regular_files_enumerated":626243,"candidates":[],"exact_matches":[],"skipped_symlinks":[]}'
+  snapshot_sha256: fe988a885901fd55c30906f3cabb7be4c3a69b923b96ec302fb6c0e703574656
+  search_scope: Full os.walk including hidden/ignored names, lstat regular-file filter,
+    byte-size prefilter followed by SHA256 for every candidate regardless of filename;
+    symlinks not followed. Absence is limited to owned27/data and owned27/GOLD regular
+    files. No external kg-microbe directory, external symlink target, network archive
+    or whole host filesystem was searched. The pinned GOLD public-workbook projection
+    already present is a separate input and does not reconstruct the historical transformed-edge
+    aggregate.
+- evidence_id: ncbi-name-shard-1
+  kind: primary_source
+  reference: data/catalog/ncbi_names-0000.jsonl.gz
+  accessed_at: '2026-10-21T09:16:05Z'
+  support: supports
+  summary: This complete pinned name shard was inspected without a name-class filter,
+    using the exact taxid, scientific name and current misspelling; only recorded
+    matching rows support name assertions.
+  locator: complete shard; no exact query match
+  snapshot_sha256: a873aeec2b2a9a391b1c210bd28827c9b6dad851eeccd7d1644373cb8c6ce802
+  search_scope: 'Full direct decompression of every manifest-listed NCBI-name shard
+    including ignored files; exact casefolded whole-field queries. No class filter.
+    Queries: ["archaeon d22","euryarchaeota archaeon d22","ncbitaxon:1932700"]; rows=50000'
+- evidence_id: ncbi-name-shard-2
+  kind: primary_source
+  reference: data/catalog/ncbi_names-0001.jsonl.gz
+  accessed_at: '2026-10-21T09:16:05Z'
+  support: supports
+  summary: This complete pinned name shard was inspected without a name-class filter,
+    using the exact taxid, scientific name and current misspelling; only recorded
+    matching rows support name assertions.
+  locator: complete shard; no exact query match
+  snapshot_sha256: fdb89eec80f04526f3f06fa49a6a03af586efaa5477404f1635d8c012c7ea999
+  search_scope: 'Full direct decompression of every manifest-listed NCBI-name shard
+    including ignored files; exact casefolded whole-field queries. No class filter.
+    Queries: ["archaeon d22","euryarchaeota archaeon d22","ncbitaxon:1932700"]; rows=50000'
+- evidence_id: ncbi-name-shard-3
+  kind: primary_source
+  reference: data/catalog/ncbi_names-0002.jsonl.gz
+  accessed_at: '2026-10-21T09:16:05Z'
+  support: supports
+  summary: This complete pinned name shard was inspected without a name-class filter,
+    using the exact taxid, scientific name and current misspelling; only recorded
+    matching rows support name assertions.
+  locator: complete shard; no exact query match
+  snapshot_sha256: 0d9a38612c08a7a78c93c18513328ccd7ecf44f5fff10489b26358814ec22149
+  search_scope: 'Full direct decompression of every manifest-listed NCBI-name shard
+    including ignored files; exact casefolded whole-field queries. No class filter.
+    Queries: ["archaeon d22","euryarchaeota archaeon d22","ncbitaxon:1932700"]; rows=50000'
+- evidence_id: ncbi-name-shard-4
+  kind: primary_source
+  reference: data/catalog/ncbi_names-0003.jsonl.gz
+  accessed_at: '2026-10-21T09:16:05Z'
+  support: supports
+  summary: This complete pinned name shard was inspected without a name-class filter,
+    using the exact taxid, scientific name and current misspelling; only recorded
+    matching rows support name assertions.
+  locator: complete shard; no exact query match
+  snapshot_sha256: 4ac5c4dfb9f0af855246461054ce5d9fa8f94ef6cfdecefb29870c972dd69dc4
+  search_scope: 'Full direct decompression of every manifest-listed NCBI-name shard
+    including ignored files; exact casefolded whole-field queries. No class filter.
+    Queries: ["archaeon d22","euryarchaeota archaeon d22","ncbitaxon:1932700"]; rows=50000'
+- evidence_id: ncbi-name-shard-5
+  kind: primary_source
+  reference: data/catalog/ncbi_names-0004.jsonl.gz
+  accessed_at: '2026-10-21T09:16:05Z'
+  support: supports
+  summary: This complete pinned name shard was inspected without a name-class filter,
+    using the exact taxid, scientific name and current misspelling; only recorded
+    matching rows support name assertions.
+  locator: complete shard; no exact query match
+  snapshot_sha256: ac8968aea5627fc73425a4f70942a74d4b666183762e4116b780384a1853f8a3
+  search_scope: 'Full direct decompression of every manifest-listed NCBI-name shard
+    including ignored files; exact casefolded whole-field queries. No class filter.
+    Queries: ["archaeon d22","euryarchaeota archaeon d22","ncbitaxon:1932700"]; rows=50000'
+- evidence_id: ncbi-name-shard-6
+  kind: primary_source
+  reference: data/catalog/ncbi_names-0005.jsonl.gz
+  accessed_at: '2026-10-21T09:16:05Z'
+  support: supports
+  summary: This complete pinned name shard was inspected without a name-class filter,
+    using the exact taxid, scientific name and current misspelling; only recorded
+    matching rows support name assertions.
+  locator: complete shard; no exact query match
+  snapshot_sha256: 31c672adade0c3485ee5d6817567f7972b06ce3b6853cf191159b76cad3b023c
+  search_scope: 'Full direct decompression of every manifest-listed NCBI-name shard
+    including ignored files; exact casefolded whole-field queries. No class filter.
+    Queries: ["archaeon d22","euryarchaeota archaeon d22","ncbitaxon:1932700"]; rows=50000'
+- evidence_id: ncbi-name-shard-7
+  kind: primary_source
+  reference: data/catalog/ncbi_names-0006.jsonl.gz
+  accessed_at: '2026-10-21T09:16:05Z'
+  support: supports
+  summary: This complete pinned name shard was inspected without a name-class filter,
+    using the exact taxid, scientific name and current misspelling; only recorded
+    matching rows support name assertions.
+  locator: complete shard; no exact query match
+  snapshot_sha256: 4c63f036b4707bfd7a66f7f85601ca11a5694cb19744857a506b8464b64bc8d2
+  search_scope: 'Full direct decompression of every manifest-listed NCBI-name shard
+    including ignored files; exact casefolded whole-field queries. No class filter.
+    Queries: ["archaeon d22","euryarchaeota archaeon d22","ncbitaxon:1932700"]; rows=50000'
+- evidence_id: ncbi-name-shard-8
+  kind: primary_source
+  reference: data/catalog/ncbi_names-0007.jsonl.gz
+  accessed_at: '2026-10-21T09:16:05Z'
+  support: supports
+  summary: This complete pinned name shard was inspected without a name-class filter,
+    using the exact taxid, scientific name and current misspelling; only recorded
+    matching rows support name assertions.
+  locator: complete shard; no exact query match
+  snapshot_sha256: e54bd96ed840ab4a6ffe0e251197fc9367a75e07dbdf89e070656bf38811ef34
+  search_scope: 'Full direct decompression of every manifest-listed NCBI-name shard
+    including ignored files; exact casefolded whole-field queries. No class filter.
+    Queries: ["archaeon d22","euryarchaeota archaeon d22","ncbitaxon:1932700"]; rows=50000'
+- evidence_id: ncbi-name-shard-9
+  kind: primary_source
+  reference: data/catalog/ncbi_names-0008.jsonl.gz
+  accessed_at: '2026-10-21T09:16:05Z'
+  support: supports
+  summary: This complete pinned name shard was inspected without a name-class filter,
+    using the exact taxid, scientific name and current misspelling; only recorded
+    matching rows support name assertions.
+  locator: complete shard; no exact query match
+  snapshot_sha256: c955a1d23e3e5b1e5a18f535755b423ae20efb6ca9ae4eef97a4c40dd0323f52
+  search_scope: 'Full direct decompression of every manifest-listed NCBI-name shard
+    including ignored files; exact casefolded whole-field queries. No class filter.
+    Queries: ["archaeon d22","euryarchaeota archaeon d22","ncbitaxon:1932700"]; rows=50000'
+- evidence_id: ncbi-name-shard-10
+  kind: primary_source
+  reference: data/catalog/ncbi_names-0009.jsonl.gz
+  accessed_at: '2026-10-21T09:16:05Z'
+  support: supports
+  summary: This complete pinned name shard was inspected without a name-class filter,
+    using the exact taxid, scientific name and current misspelling; only recorded
+    matching rows support name assertions.
+  locator: complete shard; no exact query match
+  snapshot_sha256: 7e1cbec759be96b0bd4b57f09ed075dc9cd7a22dc20cde8cc6f7a66cfb88da90
+  search_scope: 'Full direct decompression of every manifest-listed NCBI-name shard
+    including ignored files; exact casefolded whole-field queries. No class filter.
+    Queries: ["archaeon d22","euryarchaeota archaeon d22","ncbitaxon:1932700"]; rows=50000'
+- evidence_id: ncbi-name-shard-11
+  kind: primary_source
+  reference: data/catalog/ncbi_names-0010.jsonl.gz
+  accessed_at: '2026-10-21T09:16:05Z'
+  support: supports
+  summary: This complete pinned name shard was inspected without a name-class filter,
+    using the exact taxid, scientific name and current misspelling; only recorded
+    matching rows support name assertions.
+  locator: complete shard; no exact query match
+  snapshot_sha256: 7f4d714a5b982de851dc5ea21e981dadee3a77ac2fcadebbf9cb68bfaeb5dd25
+  search_scope: 'Full direct decompression of every manifest-listed NCBI-name shard
+    including ignored files; exact casefolded whole-field queries. No class filter.
+    Queries: ["archaeon d22","euryarchaeota archaeon d22","ncbitaxon:1932700"]; rows=50000'
+- evidence_id: ncbi-name-shard-12
+  kind: primary_source
+  reference: data/catalog/ncbi_names-0011.jsonl.gz
+  accessed_at: '2026-10-21T09:16:05Z'
+  support: supports
+  summary: This complete pinned name shard was inspected without a name-class filter,
+    using the exact taxid, scientific name and current misspelling; only recorded
+    matching rows support name assertions.
+  locator: 'line 37227: {"name":"archaeon D22","name_class":"scientific name","taxon_id":"NCBITaxon:1932700","unique_name":""}'
+  snapshot_sha256: 436b26d9d1510c958add8f0f4cf2371b489c169c9af900f74ebb8687e991b7d7
+  search_scope: 'Full direct decompression of every manifest-listed NCBI-name shard
+    including ignored files; exact casefolded whole-field queries. No class filter.
+    Queries: ["archaeon d22","euryarchaeota archaeon d22","ncbitaxon:1932700"]; rows=50000'
+- evidence_id: ncbi-name-shard-13
+  kind: primary_source
+  reference: data/catalog/ncbi_names-0012.jsonl.gz
+  accessed_at: '2026-10-21T09:16:05Z'
+  support: supports
+  summary: This complete pinned name shard was inspected without a name-class filter,
+    using the exact taxid, scientific name and current misspelling; only recorded
+    matching rows support name assertions.
+  locator: complete shard; no exact query match
+  snapshot_sha256: a9234414e4addc9780860a46cb9329a3a3837a70d22607c5446321508224a8fa
+  search_scope: 'Full direct decompression of every manifest-listed NCBI-name shard
+    including ignored files; exact casefolded whole-field queries. No class filter.
+    Queries: ["archaeon d22","euryarchaeota archaeon d22","ncbitaxon:1932700"]; rows=50000'
+- evidence_id: ncbi-name-shard-14
+  kind: primary_source
+  reference: data/catalog/ncbi_names-0013.jsonl.gz
+  accessed_at: '2026-10-21T09:16:05Z'
+  support: supports
+  summary: This complete pinned name shard was inspected without a name-class filter,
+    using the exact taxid, scientific name and current misspelling; only recorded
+    matching rows support name assertions.
+  locator: complete shard; no exact query match
+  snapshot_sha256: 8dee13292d2eececf3eab780149a1c5a0f669f36ba5c82119200323fb7554972
+  search_scope: 'Full direct decompression of every manifest-listed NCBI-name shard
+    including ignored files; exact casefolded whole-field queries. No class filter.
+    Queries: ["archaeon d22","euryarchaeota archaeon d22","ncbitaxon:1932700"]; rows=50000'
+- evidence_id: ncbi-name-shard-15
+  kind: primary_source
+  reference: data/catalog/ncbi_names-0014.jsonl.gz
+  accessed_at: '2026-10-21T09:16:05Z'
+  support: supports
+  summary: This complete pinned name shard was inspected without a name-class filter,
+    using the exact taxid, scientific name and current misspelling; only recorded
+    matching rows support name assertions.
+  locator: complete shard; no exact query match
+  snapshot_sha256: 4e22fb0532c498e145beae904ec2c4a78912421ae6864b93bc37d37b21e89e3a
+  search_scope: 'Full direct decompression of every manifest-listed NCBI-name shard
+    including ignored files; exact casefolded whole-field queries. No class filter.
+    Queries: ["archaeon d22","euryarchaeota archaeon d22","ncbitaxon:1932700"]; rows=50000'
+- evidence_id: ncbi-name-shard-16
+  kind: primary_source
+  reference: data/catalog/ncbi_names-0015.jsonl.gz
+  accessed_at: '2026-10-21T09:16:05Z'
+  support: supports
+  summary: This complete pinned name shard was inspected without a name-class filter,
+    using the exact taxid, scientific name and current misspelling; only recorded
+    matching rows support name assertions.
+  locator: complete shard; no exact query match
+  snapshot_sha256: 6d5de5074643b1d19f89c223bbfe01b35ccf4ad8167ae628f2f7f96745dee045
+  search_scope: 'Full direct decompression of every manifest-listed NCBI-name shard
+    including ignored files; exact casefolded whole-field queries. No class filter.
+    Queries: ["archaeon d22","euryarchaeota archaeon d22","ncbitaxon:1932700"]; rows=33107'
+- evidence_id: ncbi-name-full-scan
+  kind: search
+  reference: /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0027/d22-name-catalog-scan.json
+  accessed_at: '2026-10-21T09:16:05Z'
+  support: supports
+  summary: The complete pinned name catalog returns only the target scientific-name
+    row. Current EFetch additionally returns a misspelling. The cause remains a snapshot
+    or source-channel uncertainty; an importer defect and annotation-addition date
+    are not established.
+  locator: '{"target_id":"NCBITaxon:1932700","query_terms":["archaeon d22","euryarchaeota
+    archaeon d22","ncbitaxon:1932700"],"rows_scanned":783107,"matches":[{"path":"data/catalog/ncbi_names-0011.jsonl.gz","line":37227,"matched_terms":["archaeon
+    d22","ncbitaxon:1932700"],"row":{"name":"archaeon D22","name_class":"scientific
+    name","taxon_id":"NCBITaxon:1932700","unique_name":""}}],"input_hashes":{"data/catalog/MANIFEST.json":"15b5cfe42be7919faf2a6feb5ac4f7084009e84b2d6da669f7101aacc3586299","scripts/build_source_catalog.py":"0e985fdbd74e5e58db2e28126bb8bc4f11a2d32929aa5d36f193d33142b5249e","src/taxonmech/source_catalog.py":"e941d67ede488ddf4dc1838c183f8ff0e5f7a0b9788e47651ea61e4e7d9c5d8f","data/catalog/ncbi_names-0000.jsonl.gz":"a873aeec2b2a9a391b1c210bd28827c9b6dad851eeccd7d1644373cb8c6ce802","data/catalog/ncbi_names-0001.jsonl.gz":"fdb89eec80f04526f3f06fa49a6a03af586efaa5477404f1635d8c012c7ea999","data/catalog/ncbi_names-0002.jsonl.gz":"0d9a38612c08a7a78c93c18513328ccd7ecf44f5fff10489b26358814ec22149","data/catalog/ncbi_names-0003.jsonl.gz":"4ac5c4dfb9f0af855246461054ce5d9fa8f94ef6cfdecefb29870c972dd69dc4","data/catalog/ncbi_names-0004.jsonl.gz":"ac8968aea5627fc73425a4f70942a74d4b666183762e4116b780384a1853f8a3","data/catalog/ncbi_names-0005.jsonl.gz":"31c672adade0c3485ee5d6817567f7972b06ce3b6853cf191159b76cad3b023c","data/catalog/ncbi_names-0006.jsonl.gz":"4c63f036b4707bfd7a66f7f85601ca11a5694cb19744857a506b8464b64bc8d2","data/catalog/ncbi_names-0007.jsonl.gz":"e54bd96ed840ab4a6ffe0e251197fc9367a75e07dbdf89e070656bf38811ef34","data/catalog/ncbi_names-0008.jsonl.gz":"c955a1d23e3e5b1e5a18f535755b423ae20efb6ca9ae4eef97a4c40dd0323f52","data/catalog/ncbi_names-0009.jsonl.gz":"7e1cbec759be96b0bd4b57f09ed075dc9cd7a22dc20cde8cc6f7a66cfb88da90","data/catalog/ncbi_names-0010.jsonl.gz":"7f4d714a5b982de851dc5ea21e981dadee3a77ac2fcadebbf9cb68bfaeb5dd25","data/catalog/ncbi_names-0011.jsonl.gz":"436b26d9d1510c958add8f0f4cf2371b489c169c9af900f74ebb8687e991b7d7","data/catalog/ncbi_names-0012.jsonl.gz":"a9234414e4addc9780860a46cb9329a3a3837a70d22607c5446321508224a8fa","data/catalog/ncbi_names-0013.jsonl.gz":"8dee13292d2eececf3eab780149a1c5a0f669f36ba5c82119200323fb7554972","data/catalog/ncbi_names-0014.jsonl.gz":"4e22fb0532c498e145beae904ec2c4a78912421ae6864b93bc37d37b21e89e3a","data/catalog/ncbi_names-0015.jsonl.gz":"6d5de5074643b1d19f89c223bbfe01b35ccf4ad8167ae628f2f7f96745dee045"}}'
+  snapshot_sha256: 3a527065e931642eb6fb12a47eb76eae0a2b414d07f19f98b9cce8e5fe0af3f9
+  search_scope: Full direct decompression of every manifest-listed NCBI-name shard
+    including ignored files; exact casefolded whole-field queries. No class filter.
+- evidence_id: ncbi-name-catalog-policy
+  kind: record_content
+  reference: scripts/build_source_catalog.py
+  accessed_at: '2026-10-21T09:37:28Z'
+  support: supports
+  summary: The catalog projects names.dmp fields and every source name class for bacterial/archaeal
+    taxa; it has no misspelling-class exclusion in this projection.
+  locator: names(), lines 92–112
+  snapshot_sha256: 0e985fdbd74e5e58db2e28126bb8bc4f11a2d32929aa5d36f193d33142b5249e
+- evidence_id: ncbi-name-projection-policy
+  kind: record_content
+  reference: src/taxonmech/ncbi_taxdump.py
+  accessed_at: '2026-10-21T09:37:28Z'
+  support: supports
+  summary: The taxonomy loader maps synonym/equivalent name to EXACT_SYNONYM and other
+    non-scientific source classes to RELATED_SYNONYM. Current EFetch alone does not
+    prove those classes existed in the pinned names archive.
+  locator: 'load_taxdump: names.dmp scientific-name and non-scientific name handling'
+  snapshot_sha256: 83e3bfd53721a1f85291022511de6504d84caa58e899c0fd8d1797e9f00f67cf
+- evidence_id: native-gate-reuse
+  kind: validation
+  reference: /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0027/native-gate-reuse.json
+  accessed_at: '2026-10-21T09:18:52Z'
+  support: supports
+  summary: Retained explicit verification of identical base/native inputs authorizes
+    historical native-gate reuse; original command receipts remain separately cited.
+  locator: base, native_inputs_unchanged, source_directory, gates, input_proof_path
+    and input_proof_sha256
+  snapshot_sha256: 74f668c25c913534aac1076108a890cc9e97af451e1f059753d5a7b17b3bd562
+- evidence_id: strict-receipt
+  kind: validation
+  reference: just validate-strict data/taxa/archaea/archaeon_d22.yaml --out /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0027/strict-01.tsv
+  accessed_at: '2026-10-21T09:15:06Z'
+  support: supports
+  summary: "Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo-batch-0027;\
+    \ started 2026-10-21T09:15:03Z, finished 2026-10-21T09:15:06Z, exit 0. This exact\
+    \ generated YAML only; its captured bytes remain unchanged. Actual earlier per-target\
+    \ invocation; the receipt retains its original cwd and times.\nValidating 1 files\
+    \ with 4 workers; schema=/private/tmp/taxonmech-record-reviews-k0MubV/repo-batch-0027/src/taxonmech/schema/taxonmech.yaml\n\
+    \n=== validate-strict summary ===\n  files scanned:      1\n  files with ERROR:\
+    \   0\n  total ERROR rows:   0\n  TSV:                /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0027/strict-01.tsv"
+  locator: This exact generated YAML only; its captured bytes remain unchanged. Actual
+    earlier per-target invocation; the receipt retains its original cwd and times.
+  snapshot_sha256: e1dddec9fe101d4cc07eb547d3300b6ffa8f8980f1d76cc4bdb88b9f4c581b88
+- evidence_id: history-receipt
+  kind: validation
+  reference: just validate-history
+  accessed_at: '2026-10-21T06:42:11Z'
+  support: supports
+  summary: 'Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0014/repo;
+    started 2026-10-21T06:42:09Z, finished 2026-10-21T06:42:11Z, exit 0. The complete
+    standalone history population; the generated seed event was also inspected in
+    this target. Actual native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4;
+    retained original cwd, times, commands, log hashes and terminal exit codes identify
+    the executions. Reused repository-wide receipts require the explicit same-base/native-input
+    certificate; these are historical runs, not new batch-0027 invocations. Missing
+    terminal receipts or reuse proof remain unavailable in unsaved previews. Exact-target
+    strict receipts retain their original execution context. New review bundles still
+    require individual validation/save/check.
+
+    history links: 18 record(s), 0 invalid
+
+    No issues found
+
+    18 history record(s) valid against src/taxonmech/schema/history.yaml'
+  locator: The complete standalone history population; the generated seed event was
+    also inspected in this target. Actual native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4;
+    retained original cwd, times, commands, log hashes and terminal exit codes identify
+    the executions. Reused repository-wide receipts require the explicit same-base/native-input
+    certificate; these are historical runs, not new batch-0027 invocations. Missing
+    terminal receipts or reuse proof remain unavailable in unsaved previews. Exact-target
+    strict receipts retain their original execution context. New review bundles still
+    require individual validation/save/check.
+  snapshot_sha256: 98b39b3ec0f369362dd50578fb05797d78334edf5b6961dd70e82283af0ac3ca
+- evidence_id: corpus-receipt
+  kind: validation
+  reference: just verify-corpus
+  accessed_at: '2026-10-21T06:48:01Z'
+  support: supports
+  summary: "Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0014/repo;\
+    \ started 2026-10-21T06:42:09Z, finished 2026-10-21T06:48:01Z, exit 0. All 626,048\
+    \ generated taxon YAMLs, not a focused approximation. Actual native gate execution\
+    \ at base 01ca63effdf8c03a644df893ba6129b2d8448ea4; retained original cwd, times,\
+    \ commands, log hashes and terminal exit codes identify the executions. Reused\
+    \ repository-wide receipts require the explicit same-base/native-input certificate;\
+    \ these are historical runs, not new batch-0027 invocations. Missing terminal\
+    \ receipts or reuse proof remain unavailable in unsaved previews. Exact-target\
+    \ strict receipts retain their original execution context. New review bundles\
+    \ still require individual validation/save/check.\nuv run python scripts/verify_corpus.py\
+    \ \nexpected 626048 records, found 626048 on disk\n  missing:   0\n  extra:  \
+    \   0\n  differing: 0\n\ncorpus reproduces exactly from data/raw/ and curation/seed_scope.tsv"
+  locator: All 626,048 generated taxon YAMLs, not a focused approximation. Actual
+    native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4; retained
+    original cwd, times, commands, log hashes and terminal exit codes identify the
+    executions. Reused repository-wide receipts require the explicit same-base/native-input
+    certificate; these are historical runs, not new batch-0027 invocations. Missing
+    terminal receipts or reuse proof remain unavailable in unsaved previews. Exact-target
+    strict receipts retain their original execution context. New review bundles still
+    require individual validation/save/check.
+  snapshot_sha256: 223185ba1237af69c7392ba3608374e92d93c219292d3303af5c06592b84b4e6
+- evidence_id: products-receipt
+  kind: validation
+  reference: just validate-products
+  accessed_at: '2026-10-21T07:19:10Z'
+  support: supports
+  summary: 'Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0014/repo;
+    started 2026-10-21T06:42:09Z, finished 2026-10-21T07:19:10Z, exit 0. Full configured
+    corpus scan for curator-added graph nodes; this target contains no causal graph.
+    Actual native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4;
+    retained original cwd, times, commands, log hashes and terminal exit codes identify
+    the executions. Reused repository-wide receipts require the explicit same-base/native-input
+    certificate; these are historical runs, not new batch-0027 invocations. Missing
+    terminal receipts or reuse proof remain unavailable in unsaved previews. Exact-target
+    strict receipts retain their original execution context. New review bundles still
+    require individual validation/save/check.
+
+    uv run python scripts/validate_id_label_correspondence.py -c conf/id_label_targets.yaml
+
+
+    id↔label correspondence summary:
+
+
+    ✅ All id↔label pairs correspond.'
+  locator: Full configured corpus scan for curator-added graph nodes; this target
+    contains no causal graph. Actual native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4;
+    retained original cwd, times, commands, log hashes and terminal exit codes identify
+    the executions. Reused repository-wide receipts require the explicit same-base/native-input
+    certificate; these are historical runs, not new batch-0027 invocations. Missing
+    terminal receipts or reuse proof remain unavailable in unsaved previews. Exact-target
+    strict receipts retain their original execution context. New review bundles still
+    require individual validation/save/check.
+  snapshot_sha256: 48dd07515706dc62199fc2205c4b0bfdd5750028037d9b800179f254d2f1eb07
+- evidence_id: qc-receipt
+  kind: validation
+  reference: just qc
+  accessed_at: '2026-10-21T07:50:51Z'
+  support: supports
+  summary: "Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0014/repo;\
+    \ started 2026-10-21T06:42:09Z, finished 2026-10-21T07:50:51Z, exit 0. Repository-wide\
+    \ just qc, including native corpus-wide checks. Actual native gate execution at\
+    \ base 01ca63effdf8c03a644df893ba6129b2d8448ea4; retained original cwd, times,\
+    \ commands, log hashes and terminal exit codes identify the executions. Reused\
+    \ repository-wide receipts require the explicit same-base/native-input certificate;\
+    \ these are historical runs, not new batch-0027 invocations. Missing terminal\
+    \ receipts or reuse proof remain unavailable in unsaved previews. Exact-target\
+    \ strict receipts retain their original execution context. New review bundles\
+    \ still require individual validation/save/check.\nAll checks passed!\n1073 passed,\
+    \ 3 skipped, 5 deselected in 1293.90s (0:21:33)\nValidating 626048 files with\
+    \ 4 workers; schema=/private/tmp/taxonmech-record-reviews-k0MubV/repo-batch-0014/src/taxonmech/schema/taxonmech.yaml\n\
+    \  files scanned:      626048\nexpected 626048 records, found 626048 on disk\n\
+    pages/ is current\nSite publication: 530,946,096 bytes (budget 950,000,000)\n\
+    626048 taxon records\n  NCBITAXON        626048\nAll TaxonMech quality gates passed.\n\
+    \  Related STRAININFO_STRAIN: 54312 strain-record pairs, 53745 identifiers, 53890\
+    \ strains (not genome counts)\n  Related STRAININFO_DEPOSIT: 107277 strain-record\
+    \ pairs, 106843 identifiers, 53890 strains (not genome counts)\n  Related NUCLEOTIDE_SEQUENCE:\
+    \ 51594 strain-record pairs, 51301 identifiers, 9984 strains (not genome counts)\n\
+    LPSN: 22469 records carry nomenclature, 21254 with a correct name   GTDB: 117809\
+    \ records mapped, 324404579 genomes summed across record attestations (not deduplicated)\n\
+    Causal graphs: 0 records (0 evidence-backed edges)\n\nAll TaxonMech quality gates\
+    \ passed."
+  locator: Repository-wide just qc, including native corpus-wide checks. Actual native
+    gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4; retained original
+    cwd, times, commands, log hashes and terminal exit codes identify the executions.
+    Reused repository-wide receipts require the explicit same-base/native-input certificate;
+    these are historical runs, not new batch-0027 invocations. Missing terminal receipts
+    or reuse proof remain unavailable in unsaved previews. Exact-target strict receipts
+    retain their original execution context. New review bundles still require individual
+    validation/save/check.
+  snapshot_sha256: dcb3f98d5c8ce264240732733ca70a5b93ee3e818d03f809d428748abffefca3
+assessments:
+- assessment_id: gold-source-identity
+  area: evidence
+  topic: Typed GOLD metadata and importer scope
+  outcome: supported
+  summary: The complete pinned GOLD projections retain Go0541099 as ORGANISM, Gp0491942
+    as sequencing PROJECT and Ga0440272 as ANALYSIS. Gp0491942 names BioProject PRJNA360185
+    and BioSample SAMN06204669. Ga0440272 resolves through that project, has type
+    Single Cell Analysis (unscreened), an empty direct organism field and empty IMG
+    taxon field, and records GenBank MSYC00000000 plus assembly GCA_002176885.1. These
+    are source metadata with distinct identifier roles; no current assembly status,
+    sequence identity, cultured deposit, phenotype or causal mechanism is inferred.
+    The maintained strain-genome importer requires an explicit inventoried culture
+    identifier; the source strain text D22 and shared taxid alone do not establish
+    that prerequisite.
+  target_ids:
+  - NCBITaxon:1932700
+  evidence_ids:
+  - record
+  - gold-organisms
+  - gold-organism-primary
+  - gold-project-primary
+  - gold-analysis-primary
+  - gold-projection-source
+  - aggregate-count-owner
+  - gold-strain-link-policy
+  - gold-original-input-search
+  - manifest
+  - seed-owner
+- assessment_id: ncbi-name-source-concern
+  area: nomenclature
+  topic: Current and pinned name-class discrepancy
+  outcome: concern
+  summary: Current NCBI misspelling Euryarchaeota archaeon D22 is absent from the
+    pinned raw synonym projection and complete pinned NCBI-name catalog; cause remains
+    unresolved without the original archive.
+  target_ids:
+  - NCBITaxon:1932700
+  evidence_ids:
+  - record
+  - ncbi-name-shard-1
+  - ncbi-name-shard-2
+  - ncbi-name-shard-3
+  - ncbi-name-shard-4
+  - ncbi-name-shard-5
+  - ncbi-name-shard-6
+  - ncbi-name-shard-7
+  - ncbi-name-shard-8
+  - ncbi-name-shard-9
+  - ncbi-name-shard-10
+  - ncbi-name-shard-11
+  - ncbi-name-shard-12
+  - ncbi-name-shard-13
+  - ncbi-name-shard-14
+  - ncbi-name-shard-15
+  - ncbi-name-shard-16
+  - ncbi-name-full-scan
+  - ncbi-name-catalog-policy
+  - ncbi-name-projection-policy
+  - pinned-source-query-check
+  - ncbi-live
+  - taxonomy-inventory
+- assessment_id: identity
+  area: identity
+  topic: Exact taxon and source lineage
+  outcome: supported
+  summary: NCBITaxon:1932700 denotes the exact SPECIES record archaeon D22, under
+    NCBITaxon:93506, unclassified Archaea, with genetic code 11. All four carried
+    ancestors and their literal names and ranks agree with the pinned taxonomy and
+    current official NCBI response; EFetch omits root. ARCHAEA follows the taxonomic
+    lineage, separately from EFetch Division metadata. No finer NCBI placement is
+    inferred.
+  target_ids:
+  - NCBITaxon:1932700
+  evidence_ids:
+  - record
+  - taxonomy-inventory
+  - ncbi-live
+  - scope-row
+  - path-row
+  - authority-import
+  dimensions:
+  - name: native-rank
+    value: SPECIES
+    definition: Rank of this exact NCBI target, distinct from source species mappings
+      and strain genome records.
+    evidence_ids:
+    - record
+    - taxonomy-inventory
+    - ncbi-live
+- assessment_id: nomenclature
+  area: nomenclature
+  topic: Name classes and nomenclatural scope
+  outcome: concern
+  summary: The pinned NCBI exact, related and broad synonym columns are empty. Current
+    official EFetch lists Euryarchaeota archaeon D22 under OtherNames/Name with ClassCDE
+    misspelling; it is not an exact synonym or a current phylum placement. Full exact
+    queries across all 16 pinned NCBI-name shards (783107 rows) return only the scientific
+    name archaeon D22 for NCBITaxon:1932700, with no row for that misspelling. The
+    name-catalog policy preserves every source name class and the taxonomy loader
+    maps non-exact classes to related names; these sources support a bounded snapshot
+    or source-channel discrepancy, not a proven filtering defect. The original names
+    archive was not replayed. Complete pinned LPSN queries find no associated row,
+    and the native record asserts no nomenclatural publication or type-deposit relationship.
+  target_ids:
+  - NCBITaxon:1932700
+  evidence_ids:
+  - record
+  - taxonomy-inventory
+  - ncbi-live
+  - lpsn-inventory
+  - mapping-policy
+  - ncbi-name-shard-1
+  - ncbi-name-shard-2
+  - ncbi-name-shard-3
+  - ncbi-name-shard-4
+  - ncbi-name-shard-5
+  - ncbi-name-shard-6
+  - ncbi-name-shard-7
+  - ncbi-name-shard-8
+  - ncbi-name-shard-9
+  - ncbi-name-shard-10
+  - ncbi-name-shard-11
+  - ncbi-name-shard-12
+  - ncbi-name-shard-13
+  - ncbi-name-shard-14
+  - ncbi-name-shard-15
+  - ncbi-name-shard-16
+  - ncbi-name-full-scan
+  - ncbi-name-catalog-policy
+  - ncbi-name-projection-policy
+  - pinned-source-query-check
+- assessment_id: completeness
+  area: completeness
+  topic: Imported subtree and source assertion units
+  outcome: supported
+  summary: Complete direct reads of all twelve named source, scope and path tables,
+    including ignored files, used the exact taxon ID, full literal label, slug and
+    current EFetch misspelling. The complete pinned parent graph has zero descendants;
+    zero imported BacDive strains agrees with the target/subtree and culture inventories.
+    The NCBITAXON 1 NAME and GOLD 1 ORGANISM attestations agree with the pinned projections.
+    Exact queries find no optional LPSN, GTDB mapping/species, BacDive, culture, MediaDive,
+    Madin or BactoTraits rows. Complete GOLD organism/project/analysis projection
+    scans identify one organism Go0541099 with taxid 1932700, strain text D22 and
+    an empty culture-collection field, its project Gp0491942 and analysis Ga0440272.
+    This independently supports a typed GOLD organism association but does not reconstruct
+    the historical transformed-edge count. The current misspelling differs from the
+    complete pinned name catalog and remains a source-channel or snapshot concern.
+    These bounded checks do not establish worldwide absence or a missing culture/genome
+    import.
+  target_ids:
+  - NCBITaxon:1932700
+  evidence_ids:
+  - record
+  - taxonomy-inventory
+  - scope-row
+  - path-row
+  - lpsn-inventory
+  - bacdive-inventory
+  - culture-inventory
+  - gtdb-mappings
+  - gtdb-species
+  - gold-organisms
+  - mediadive-taxa
+  - madin-taxa
+  - bactotraits-taxa
+  - pinned-source-query-check
+  - ncbi-live
+  - authority-import
+  - gold-organism-primary
+  - gold-project-primary
+  - gold-analysis-primary
+  - gold-projection-source
+  - aggregate-count-owner
+  - gold-strain-link-policy
+  - gold-original-input-search
+  - manifest
+  - seed-owner
+  - ncbi-name-shard-1
+  - ncbi-name-shard-2
+  - ncbi-name-shard-3
+  - ncbi-name-shard-4
+  - ncbi-name-shard-5
+  - ncbi-name-shard-6
+  - ncbi-name-shard-7
+  - ncbi-name-shard-8
+  - ncbi-name-shard-9
+  - ncbi-name-shard-10
+  - ncbi-name-shard-11
+  - ncbi-name-shard-12
+  - ncbi-name-shard-13
+  - ncbi-name-shard-14
+  - ncbi-name-shard-15
+  - ncbi-name-shard-16
+  - ncbi-name-full-scan
+  - ncbi-name-catalog-policy
+  - ncbi-name-projection-policy
+- assessment_id: native-status
+  area: provenance
+  topic: Unchanged native status and history
+  outcome: supported
+  summary: EXACT grounding and SEEDED mapping status preserve the generated source
+    state. The sole SEEDED_FROM_SOURCES event at 2026-09-13T17:54:04Z agrees with
+    the latest raw, ATB and StrainInfo manifest extraction. The exact seed-scope and
+    PATHS rows preserve inclusion and path. No manual curation, scientific status
+    promotion or new native history event is inferred.
+  target_ids:
+  - NCBITaxon:1932700
+  evidence_ids:
+  - record
+  - manifest
+  - overlay-manifests
+  - scope-row
+  - path-row
+findings: []
+actions:
+- action_id: recover-pinned-aggregate-inputs
+  finding_ids: []
+  target_ids:
+  - NCBITaxon:1932700
+  description: Provide the original data/transformed/gold/edges.tsv (83535194 bytes,
+    SHA256 b793c4f84278789f5dc7c68173b1f08364fd68c5d52a555c4037793006010a12) through
+    the maintained source-input workflow; verify its manifest pin, canonically capture
+    it, and rerun count_subjects_by_object with gold:Go and biolink:subclass_of for
+    NCBITaxon:1932700. Record the resulting organism count and reopen the unavailable
+    historical-source-count check. If only a new source version is available, record
+    and assess that version separately; do not claim historical replay or edit the
+    generated native record directly.
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: data/raw/MANIFEST.yaml
+    role: Original historical input identity and SHA256
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/extract.py
+    role: Maintained GOLD organism-count semantics
+  acceptance_checks:
+  - Verify exact original data/transformed/gold/edges.tsv byte count 83535194 and
+    SHA256 b793c4f84278789f5dc7c68173b1f08364fd68c5d52a555c4037793006010a12 before
+    historical replay.
+  - Canonically capture the recovered input and independently count matching gold:Go-prefix
+    biolink:subclass_of edge rows whose object is NCBITaxon:1932700.
+  - Compare the independently reconstructed ORGANISM count with data/raw/gold_organisms.tsv
+    line 17733 and the native attestation; record any discrepancy in a new review,
+    never by editing generated YAML.
+  - A newly available source version must retain its own version/hash and assessment;
+    it cannot establish historical reproduction.
+limitations:
+- SPECIES rank and the literal designation are source taxonomy assertions, not independent
+  evidence of a formally named biological species, physical culture, phenotype or
+  mechanism. Absence claims are limited to the specified complete pinned inputs and
+  recorded exact queries.
+- The historical GOLD aggregate agrees with its pinned one-organism projection. A
+  full ignored-inclusive regular-file size/hash candidate search under owned27/data
+  and owned27/GOLD did not locate the exact manifest-pinned transformed edge file
+  or workbook. The original aggregate edges were not recounted; the public-workbook
+  projection is a separate source boundary.
+- D22 current EFetch exposes a misspelling absent from both the pinned synonym projection
+  and complete pinned name catalog. The original names archive was not replayed, so
+  neither deliberate class omission nor an importer defect is established.
+- GOLD rows were checked in the pinned complete public-workbook projections; no current
+  GOLD page, BioSample, BioProject, GenBank assembly or IMG record was independently
+  re-resolved. Versioned GCA_002176885.1 and the Single Cell Analysis (unscreened)
+  source type remain metadata, not cultured-strain or functional evidence.
+- D22 is the literal designation of this exact NCBI taxon. Its letters, digits and
+  punctuation do not independently identify a culture deposit, genome accession, environmental
+  measurement or experimental phenotype.
+- Actual native gate execution at base 01ca63effdf8c03a644df893ba6129b2d8448ea4; retained
+  original cwd, times, commands, log hashes and terminal exit codes identify the executions.
+  Reused repository-wide receipts require the explicit same-base/native-input certificate;
+  these are historical runs, not new batch-0027 invocations. Missing terminal receipts
+  or reuse proof remain unavailable in unsaved previews. Exact-target strict receipts
+  retain their original execution context. New review bundles still require individual
+  validation/save/check.
+notes:
+- No generated record or history was edited; curation actions remain proposed.
+- Fresh-base source transitions are verified against retained original captures and
+  exact changed-input receipts.
+- Every new bundle still requires its own validate/save/check recipe; historical native
+  receipts do not claim these later steps have run.
+tags:
+- record-review
+- batch-0027
+- archaea
+- generated
+- source-checked
+```
