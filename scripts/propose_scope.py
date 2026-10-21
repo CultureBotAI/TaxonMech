@@ -82,7 +82,9 @@ def main(argv: list[str] | None = None) -> int:
             for t in (tid, *descendants)
             for s in inv.strains.get(t, [])
         })
-        if args.rule == "core" and not ((sources or desc_sources) and strain_count and correct_typed and has_gtdb):
+        if args.rule == "core" and not (
+            (sources or desc_sources) and strain_count and correct_typed and has_gtdb
+        ):
             continue
         # NCBI itself, the attesting sources, and GTDB when it maps (#5).
         n_sources = len(sources | {"ncbitaxon"} | ({"gtdb"} if has_gtdb else set()))
