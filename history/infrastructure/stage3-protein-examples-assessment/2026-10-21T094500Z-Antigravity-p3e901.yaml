@@ -1,0 +1,42 @@
+history_version: 1
+target:
+  kind: infrastructure
+  path: src/taxonmech/schema/taxonmech.yaml
+  slug: stage3-protein-examples-assessment
+session:
+  id: 2026-10-21T094500Z-Antigravity-p3e901
+  timestamp: '2026-10-21T09:45:00Z'
+  actors:
+  - type: ai_agent
+    name: Antigravity
+    agent_tool: antigravity-cli
+events:
+- type: AUDIT
+  outcome: blocked
+  sections:
+  - causal_graphs
+  - evidence
+  - validation
+  summary: >-
+    Assess Stage 3 UniProtKB protein example eligibility, sequence/genome/proteome anchor
+    coverage, live UniProt REST API accession/gene/taxon verification, and native writer/validator
+    prerequisites across all 626,048 TaxonRecord files
+  details: >-
+    Audited all 626,048 in-scope TaxonRecord files (605,695 Bacteria, 14,013 Archaea,
+    6,331 Eukaryota, 9 other) and data/straininfo/related_records.tsv.gz against the Stage 3
+    UniProtKB protein-example curation contract (.claude/skills/add-uniprot-protein-examples/SKILL.md).
+    Quantified corpus-wide sequence and genome anchors: 0 existing causal_graphs or UniProtKB:
+    CURIEs; 21,787 records carrying 21,825 LPSN 16S rRNA INSDC:... accessions; 20,868 records
+    carrying 227,539 ncbi.assembly:GCA_/GCF_ assemblies; 20,570 records carrying 173,174 genome
+    records; and 9,241 records carrying 78,785 StrainInfo NUCLEOTIDE_SEQUENCE links across
+    51,467 unique INSDC accessions (28,160 gene/CDS, 22,703 rRNA operon, 604 patent). Verified
+    15 UniProtKB protein entries (14 reviewed Swiss-Prot + 1 full-length unreviewed TrEMBL for
+    Cryptococcus deuterogattii R265) across 15 species- and strain-level TaxonRecord files via
+    live UniProtKB REST API queries, catching 6 concrete accession/gene/taxon errors in unpinned
+    candidate tables (UniProtKB:P0A858 is tpiA not tnaA P0A853; UniProtKB:Q9I4X3/Q9I4X2 are
+    pqsA/pqsB not phzM/phzS Q9HWH2/Q9HWG9; UniProtKB:Q58254 is mcrC not mcrA Q58256;
+    UniProtKB:Q55P57 belongs to sibling species C. deneoformans B-3501A NCBITaxon:283643 rather
+    than C. deuterogattii NCBITaxon:1859096/NCBITaxon:294750; and UniProtKB:A0A1S6LQA8 is an
+    87-aa fragment). Recorded structured findings in
+    reviews/structured/20261021T094500Z-stage3-protein-examples-assessment/review.yaml and
+    follow-up task taxonmech-infra-0003 in INFRA_TASKS.md.

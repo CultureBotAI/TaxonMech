@@ -48,6 +48,14 @@ tasks:
       object CURIE, and literature/source provenance
     status: note
     disposition: pending_issue_link
+  - task_id: taxonmech-infra-0003
+    summary: >-
+      Add a release-pinned UniProtKB / UniProt Reference Proteomes raw source snapshot in
+      data/raw/, declare UniProtKB and EC prefixes in src/taxonmech/schema/taxonmech.yaml and
+      conf/id_label_targets.yaml, and add structured GENE_OR_PROTEIN organism/strain/proteome/locus/checksum
+      scope slots and accession-to-taxon validation
+    status: note
+    disposition: pending_issue_link
 ```
 <!-- mech-infra-tasks:end -->
 
@@ -96,4 +104,29 @@ tasks:
   - `data/raw/mediadive_taxa.tsv`
   - `reviews/structured/20261021T043201Z-stage2-causal-graphs-assessment/review.yaml`
   - `history/infrastructure/stage2-causal-graphs-assessment/2026-10-21T043201Z-Antigravity-c2a701.yaml`
+
+### `taxonmech-infra-0003` — Pinned UniProtKB / Reference Proteomes raw source snapshot, schema prefix declarations, and structured `GENE_OR_PROTEIN` organism/strain/sequence scope validation
+
+- **Origin**: `run_id: mech-goal-sequence-20261019`, `cycle: 1`, `stage: 3` (`protein_examples`)
+- **Status**: `note` (`pending_issue_link` — to be promoted to a tracked GitHub issue during Stage 5 review remediation or Stage 6 infrastructure implementation)
+- **Priority**: `high`
+- **Dependencies**: `taxonmech-infra-0001`
+- **Observation**:
+  1. `TaxonRecord` (`src/taxonmech/schema/taxonmech.yaml` lines 105–313) has no dedicated `protein_examples` slot; the sole native protein representation surface is `TaxonRecord.causal_graphs[].nodes[]` (`CausalNode`, lines 1190–1216) with `node_type: GENE_OR_PROTEIN` (`CausalNodeTypeEnum`, lines 1487–1488). Meanwhile, `strains[].related_records[]` with `record_type: NUCLEOTIDE_SEQUENCE` (`StrainRelatedRecord`, lines 1012–1095) is restricted by regex (`^INSDC:[A-Z0-9_]+(\.[0-9]+)?$`, lines 1028/1081) to INSDC nucleotide accessions from `source: STRAININFO` (9,241 records, 78,785 links across 51,467 unique INSDC accessions in `data/straininfo/related_records.tsv.gz`).
+  2. Neither `conf/sources.yaml` nor `data/raw/MANIFEST.yaml` includes a pinned UniProtKB (Swiss-Prot/TrEMBL) or UniProt Reference Proteomes inventory, and `src/taxonmech/schema/taxonmech.yaml` (`prefixes`, lines 43–88) omits `UniProtKB` and `EC`.
+  3. TaxonMech seeds both species-level `TaxonRecord` files (e.g., `NCBITaxon:562`, `NCBITaxon:1423`, `NCBITaxon:287`, `NCBITaxon:2190`, `NCBITaxon:1859096`, `NCBITaxon:40410`, `NCBITaxon:5207`) and strain-level `TaxonRecord` files (e.g., `NCBITaxon:83333`, `NCBITaxon:511145`, `NCBITaxon:224308`, `NCBITaxon:208964`, `NCBITaxon:243232`, `NCBITaxon:294750`, `NCBITaxon:283643`, `NCBITaxon:235443`). Because UniProtKB reference proteomes (`UP000000625`, `UP000001570`, `UP000002438`, `UP000000805`, `UP000029445`, `UP000010091`) are annotated at the strain-level NCBI Taxon ID and `CausalNode` currently provides only `node_id`, `label`, `node_type`, `grounding`, `xrefs`, and free-text `description`, there are no structured slots to record the UniProt entry's exact `organism_taxon_id`, `strain_id`, `proteome_id`, `gene_symbol`, `locus_tag`, `sequence_length`, `sequence_crc64`, `sequence_version`, or `entry_status` (`SWISS_PROT` vs `TREMBL`).
+  4. Live UniProt REST API verification during Stage 3 caught multiple accession/gene/species mismatches in unpinned candidate tables (`UniProtKB:P0A858` is `tpiA` rather than `tnaA` `UniProtKB:P0A853`; `UniProtKB:Q9I4X3`/`Q9I4X2` are `pqsA`/`pqsB` rather than `phzM`/`phzS` `UniProtKB:Q9HWH2`/`UniProtKB:Q9HWG9`; `UniProtKB:Q58254` is `mcrC` rather than `mcrA` `UniProtKB:Q58256`; and `UniProtKB:Q55P57` belongs to sibling species *Cryptococcus deneoformans* B-3501A `NCBITaxon:283643` rather than *C. deuterogattii* `NCBITaxon:1859096`/`NCBITaxon:294750`), demonstrating why offline pinned UniProtKB validation is essential.
+- **Desired Outcome**:
+  1. Add a release-pinned UniProtKB / UniProt Reference Proteomes TSV inventory in `data/raw/` (registered in `conf/sources.yaml` and `data/raw/MANIFEST.yaml`) storing accession, entry name, review status (`SWISS_PROT`/`TREMBL`), recommended protein name, gene symbol, locus tag, EC numbers, NCBI Taxon ID, UniProt Proteome ID (`UP...`), sequence length, CRC64 checksum, and sequence version.
+  2. Declare `UniProtKB` and `EC` in `src/taxonmech/schema/taxonmech.yaml` `prefixes` and configure `conf/id_label_targets.yaml` and `scripts/validate_strict.py` to validate `UniProtKB:` accessions against the pinned raw inventory, enforcing organism/strain lineage consistency (`TaxonRecord.identifier` matches or is the parent species of the UniProt organism taxon ID) and rejecting gene/locus/checksum mismatches or unflagged fragments.
+  3. Extend `CausalNode` (or a dedicated `ProteinAnnotation` / `protein_examples` subobject) with optional structured metadata slots (`organism_taxon_id`, `proteome_id`, `gene_symbol`, `locus_tag`, `sequence_length`, `sequence_crc64`, `sequence_version`, `entry_status`) so species-level exemplar projections vs strain-exact reference proteome bindings are machine-distinguishable.
+- **Evidence Paths**:
+  - `src/taxonmech/schema/taxonmech.yaml`
+  - `conf/id_label_targets.yaml`
+  - `conf/sources.yaml`
+  - `data/raw/MANIFEST.yaml`
+  - `data/straininfo/related_records.tsv.gz`
+  - `reviews/structured/20261021T094500Z-stage3-protein-examples-assessment/review.yaml`
+  - `history/infrastructure/stage3-protein-examples-assessment/2026-10-21T094500Z-Antigravity-p3e901.yaml`
+
 
