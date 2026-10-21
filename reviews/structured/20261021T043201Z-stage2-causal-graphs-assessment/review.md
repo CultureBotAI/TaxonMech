@@ -11,7 +11,7 @@
 
 ## Summary
 
-Assessed all 626,048 in-scope TaxonRecord files across Bacteria (605,695), Archaea (14,013), Eukaryota (6,331), and other (9) against the Stage 2 causal-graph curation contract (.claude/skills/curate-causal-graphs/SKILL.md). Exactly 0 of 626,048 records currently carry causal_graphs. While 38,357 records carry phenotype/trait/growth-medium source attestations in data/raw/ (madin_taxa.tsv: 34,148; bactotraits_taxa.tsv: 9,626; mediadive_taxa.tsv: 14,154) and 63,366 carry functional/genome/strain/trait attestations (adding gold_organisms.tsv: 43,822 and bacdive_strains.tsv: 25,779; leaving 562,682 taxonomy-only records), direct population of TaxonRecord.causal_graphs is blocked by four verified native infrastructure prerequisites: (1) src/taxonmech/seed.py has no maintained curation/causal_graphs/ overlay input or merge step; (2) scripts/verify_corpus.py enforces 100% byte-for-byte identity against seeder-only output; (3) conf/id_label_targets.yaml targets CausalNode.grounding instead of CausalNode.id and omits UniProtKB/EC adapters; and (4) src/taxonmech/templates/taxon-content.html indexes CausalNode by n.node_id instead of n.id. Additionally, src/taxonmech/extract.py collapses kg-microbe Madin et al. and BactoTraits edges to aggregate per-taxon counts in data/raw/. Source-grounded candidate CausalGraph / CausalNode / CausalEdge and GENE_OR_PROTEIN tables are documented for five cross-domain exemplars (NCBITaxon:562, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2190, NCBITaxon:1859096).
+Assessed all 626,048 in-scope TaxonRecord files across Bacteria (605,695), Archaea (14,013), Eukaryota (6,331), and other (9) against the Stage 2 causal-graph curation contract (.claude/skills/curate-causal-graphs/SKILL.md). Exactly 0 of 626,048 records currently carry causal_graphs. While 38,357 records carry phenotype/trait/growth-medium source attestations in data/raw/ (madin_taxa.tsv: 34,148; bactotraits_taxa.tsv: 9,626; mediadive_taxa.tsv: 14,154) and 63,366 carry functional/genome/strain/trait attestations (adding gold_organisms.tsv: 43,822 and bacdive_strains.tsv: 25,779; leaving 562,682 taxonomy-only records), direct population of TaxonRecord.causal_graphs is blocked by four verified native infrastructure prerequisites: (1) src/taxonmech/seed.py (build_document, lines 344-646; seed, lines 713-780) has no maintained curation/causal_graphs/ overlay input or merge step; (2) scripts/verify_corpus.py (lines 22-25, 67-73) enforces 100% byte-for-byte identity against seeder-only output; (3) while conf/id_label_targets.yaml (lines 52-60) and src/taxonmech/templates/taxon-content.html (line 80) already align with CausalNode.grounding and CausalNode.node_id (src/taxonmech/schema/taxonmech.yaml lines 1190-1216), conf/id_label_targets.yaml omits UniProtKB and EC (and METPO/OMP) from adapters (lines 14-23) and ignored_prefixes (lines 25-42); and (4) scripts/render_pages.py --check requires zero drift against committed data/taxa/ records. Additionally, src/taxonmech/extract.py collapses kg-microbe Madin et al. and BactoTraits edges to aggregate per-taxon counts in data/raw/. Schema-valid candidate CausalGraph / CausalNode / CausalEdge and GENE_OR_PROTEIN tables are documented for five cross-domain exemplars (NCBITaxon:562, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2190, NCBITaxon:1859096).
 
 ## Scope And Provenance
 
@@ -36,9 +36,9 @@ Working-tree hashes do not imply those bytes were committed.
 | --- | --- | --- | --- | --- |
 | Strict schema and reference validation on exemplar TaxonRecord files | passed | True | NCBITaxon:562, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2190, NCBITaxon:1859096 | All 5 cross-domain exemplar YAML records pass scripts/validate_strict.py with 0 errors. |
 | Corpus byte-for-byte reproduction check against seeder output | passed | True | NCBITaxon:562, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2190, NCBITaxon:1859096 | scripts/verify_corpus.py passes on the current unedited corpus (exit 0) and confirms that every record in data/taxa/ is compared byte-for-byte against emit_taxon_yaml(build_document()), which blocks any unmerged causal_graphs addition until a maintained overlay input is wired. |
-| Prerequisite Gate 1: Maintained causal_graphs overlay input and seeder merge | unavailable | True | NCBITaxon:562, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2190, NCBITaxon:1859096 | src/taxonmech/seed.py (build_document) reads only data/raw/, data/atb/, data/straininfo/, and curation/seed_scope.tsv; no maintained curation/causal_graphs/ input or merge step exists. |
-| Prerequisite Gate 3: OAK ID-label correspondence target for CausalNode.id and UniProtKB/EC | unavailable | True | NCBITaxon:562, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2190, NCBITaxon:1859096 | conf/id_label_targets.yaml lines 52-60 (grounded_nodes) configures pairs: [[grounding, label]] instead of CausalNode's [[id, label]] slot in src/taxonmech/schema/taxonmech.yaml lines 369-388, and omits UniProtKB and EC from adapters / ignored_prefixes. |
-| Prerequisite Gate 4: Derived HTML page rendering for CausalGraph nodes and edges | unavailable | True | NCBITaxon:562, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2190, NCBITaxon:1859096 | src/taxonmech/templates/taxon-content.html line 80 indexes CausalNode objects by n.node_id instead of n.id, preventing rendered causal graph tables from resolving subject/object node labels. |
+| Prerequisite Gate 1: Maintained causal_graphs overlay input and seeder merge | unavailable | True | NCBITaxon:562, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2190, NCBITaxon:1859096 | src/taxonmech/seed.py (build_document, lines 344-646; seed, lines 713-780) reads only data/raw/, data/atb/, data/straininfo/, and curation/seed_scope.tsv; no maintained curation/causal_graphs/ input or merge step exists. |
+| Prerequisite Gate 3: OAK ID-label correspondence prefix coverage for CausalNode.grounding (UniProtKB, EC, METPO/OMP) | unavailable | True | NCBITaxon:562, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2190, NCBITaxon:1859096 | While conf/id_label_targets.yaml lines 52-60 (grounded_nodes) configures pairs: [[grounding, label]] matching CausalNode.grounding in src/taxonmech/schema/taxonmech.yaml lines 1190-1216, adapters (lines 14-23) and ignored_prefixes (lines 25-42) omit UniProtKB and EC (and METPO/OMP), causing UnknownPrefixError on grounded GENE_OR_PROTEIN or TRAIT nodes. |
+| Prerequisite Gate 4: Derived HTML page rendering for CausalGraph nodes and edges | unavailable | True | NCBITaxon:562, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2190, NCBITaxon:1859096 | While src/taxonmech/templates/taxon-content.html lines 74-109 (including line 80 n.node_id) matches CausalNode.node_id, scripts/render_pages.py --check requires zero drift between pages/ and data/taxa/&lt;domain&gt;/*.yaml and cannot render causal_graphs until Gates 1-3 are wired. |
 
 ## Scientific And Domain Assessments
 
@@ -52,80 +52,104 @@ All 626,048 in-scope TaxonRecord files currently have 0 causal_graphs entries. E
 
 graph: concern. Targets: NCBITaxon:562, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2190, NCBITaxon:1859096.
 
-Prepared evidence-backed candidate CausalGraph specifications with grounded TAXON, GENE_OR_PROTEIN (UniProtKB), MOLECULAR_FUNCTION (GO), BIOLOGICAL_PROCESS (GO), CHEMICAL_ENTITY (CHEBI), ENVIRONMENT (ENVO), and PHENOTYPE (GO/OMP) nodes and RO causal edges for Escherichia coli (NCBITaxon:562), Bacillus subtilis (NCBITaxon:1423), Pseudomonas aeruginosa (NCBITaxon:287), Methanocaldococcus jannaschii (NCBITaxon:2190), and Cryptococcus deuterogattii (NCBITaxon:1859096), documenting exact raw source locators and representation/writer blockers.
+Prepared schema-valid candidate CausalGraph specifications with grounded TAXON (NCBITaxon), GENE_OR_PROTEIN (UniProtKB / EC), MOLECULAR_FUNCTION (GO), BIOLOGICAL_PROCESS (GO), CHEMICAL (CHEBI), HABITAT (ENVO), and TRAIT (METPO / OMP) nodes and RO causal edges with EvidenceItem provenance for Escherichia coli (NCBITaxon:562), Bacillus subtilis (NCBITaxon:1423), Pseudomonas aeruginosa (NCBITaxon:287), Methanocaldococcus jannaschii (NCBITaxon:2190), and Cryptococcus deuterogattii (NCBITaxon:1859096), documenting exact raw source locators and representation/writer blockers.
 
-Proposed native CausalGraph / CausalNode / CausalEdge and GENE_OR_PROTEIN candidate table across representative cross-domain exemplars (to be materialized via curation/causal_graphs/ once Prerequisite Gates 1-4 and granular trait extraction are landed):
+Proposed native CausalGraph / CausalNode / CausalEdge and GENE_OR_PROTEIN candidate specifications across representative cross-domain exemplars, strictly conforming to src/taxonmech/schema/taxonmech.yaml lines 1143-1258 (EvidenceItem, CausalGraph, CausalNode, CausalEdge) and 1467-1504 (CausalNodeTypeEnum), to be materialized via curation/causal_graphs/ once Prerequisite Gates 1-4 and granular trait extraction are landed:
 
-1. Escherichia coli (NCBITaxon:562, data/taxa/bacteria/escherichia_coli.yaml; raw locators: data/raw/madin_taxa.tsv:26937 assertion_count=18, data/raw/bactotraits_taxa.tsv:7683 assertion_count=31, data/raw/mediadive_taxa.tsv:11544 medium_count=21 media_ids=mediadive.medium:1&#124;...&#124;mediadive.medium:J12, data/raw/gold_organisms.tsv:38869 organism_count=18302, data/raw/bacdive_strains.tsv:4305..100301 strain_count=1975):
-   - Candidate graph_id: ecoli_lactose_utilization_and_mixed_acid_fermentation (scope: SPECIES, experimental_context: Aerobic and facultative anaerobic growth on lactose minimal/nutrient media; MediaDive mediadive.medium:1 / mediadive.medium:381).
-   - Candidate CausalNodes:
-     * id: NCBITaxon:562 &#124; label: Escherichia coli &#124; node_type: TAXON
-     * id: UniProtKB:P00722 &#124; label: Beta-galactosidase &#124; node_type: GENE_OR_PROTEIN (LacZ, EC:3.2.1.23, E. coli K-12 reference proteome UP000000625)
-     * id: GO:0004565 &#124; label: beta-galactosidase activity &#124; node_type: MOLECULAR_FUNCTION
-     * id: CHEBI:17716 &#124; label: lactose &#124; node_type: CHEMICAL_ENTITY
-     * id: GO:0006012 &#124; label: galactose metabolic process &#124; node_type: BIOLOGICAL_PROCESS
-     * id: GO:0019662 &#124; label: anaerobic respiration &#124; node_type: PHENOTYPE
-   - Candidate CausalEdges:
-     * NCBITaxon:562 --[RO:0002206 (expressed in / encodes)]--&gt; UniProtKB:P00722 (evidence: PMID:13888982, ECO:0000314)
-     * UniProtKB:P00722 --[RO:0002327 (enables)]--&gt; GO:0004565 (evidence: PMID:13888982, ECO:0000269)
-     * GO:0004565 --[RO:0002213 (positively regulates / catabolizes)]--&gt; GO:0006012 (substrate CHEBI:17716; evidence: PMID:13888982, ECO:0000314)
-   - Representation/source gap: data/raw/madin_taxa.tsv:26937 (18 trait assertions) and data/raw/bactotraits_taxa.tsv:7683 (31 trait assertions) collapse kg-microbe trait edges to integer counts; UniProtKB prefix is not yet configured in conf/id_label_targets.yaml.
+1. Escherichia coli (NCBITaxon:562, data/taxa/bacteria/escherichia_coli.yaml; raw locators: curation/seed_scope.tsv:2, data/raw/ncbitaxon_taxa.tsv:438, data/raw/madin_taxa.tsv:26937 assertion_count=18, data/raw/bactotraits_taxa.tsv:7683 assertion_count=31, data/raw/mediadive_taxa.tsv:11544 medium_count=21 media_ids=mediadive.medium:1&#124;...&#124;mediadive.medium:J12, data/raw/gold_organisms.tsv:38869 organism_count=18302, data/raw/bacdive_strains.tsv:4305..100301 strain_count=1975):
+   - Candidate CausalGraph:
+     * graph_id: ecoli_lactose_utilization
+     * title: Escherichia coli beta-galactosidase-mediated lactose catabolism
+     * description: Aerobic and facultative anaerobic lactose catabolism in Escherichia coli (type strain DSM 30083 / K-12 MG1655; MediaDive mediadive.medium:1 and mediadive.medium:381).
+   - Candidate CausalNodes (nodes):
+     * node_id: n_taxon_ecoli &#124; label: Escherichia coli &#124; node_type: TAXON &#124; grounding: NCBITaxon:562
+     * node_id: n_protein_lacz &#124; label: Beta-galactosidase &#124; node_type: GENE_OR_PROTEIN &#124; grounding: UniProtKB:P00722 &#124; xrefs: [EC:3.2.1.23] &#124; description: LacZ beta-galactosidase in E. coli K-12 reference proteome UP000000625
+     * node_id: n_mf_betagal &#124; label: beta-galactosidase activity &#124; node_type: MOLECULAR_FUNCTION &#124; grounding: GO:0004565
+     * node_id: n_chem_lactose &#124; label: lactose &#124; node_type: CHEMICAL &#124; grounding: CHEBI:17716
+     * node_id: n_bp_galactose_met &#124; label: galactose metabolic process &#124; node_type: BIOLOGICAL_PROCESS &#124; grounding: GO:0006012
+     * node_id: n_trait_facultative_anaerobe &#124; label: facultatively anaerobic &#124; node_type: TRAIT &#124; grounding: METPO:1000602
+   - Candidate CausalEdges (edges):
+     * edge_id: e1_ecoli_lacz &#124; subject: n_taxon_ecoli &#124; predicate: expresses &#124; predicate_id: RO:0002206 &#124; object: n_protein_lacz &#124; evidence: [{reference: PMID:13888982, notes: 'ECO:0000314 direct assay of LacZ beta-galactosidase in Escherichia coli'}]
+     * edge_id: e2_lacz_betagal &#124; subject: n_protein_lacz &#124; predicate: enables &#124; predicate_id: RO:0002327 &#124; object: n_mf_betagal &#124; evidence: [{reference: PMID:13888982, notes: 'ECO:0000269 experimental enzymatic characterization of UniProtKB:P00722 (EC:3.2.1.23)'}]
+     * edge_id: e3_betagal_lactose &#124; subject: n_mf_betagal &#124; predicate: has_input &#124; predicate_id: RO:0002233 &#124; object: n_chem_lactose &#124; evidence: [{reference: PMID:13888982, notes: 'Hydrolysis of beta-D-galactosides including lactose (CHEBI:17716)'}]
+     * edge_id: e4_betagal_galactose_met &#124; subject: n_mf_betagal &#124; predicate: positively_regulates &#124; predicate_id: RO:0002213 &#124; object: n_bp_galactose_met &#124; evidence: [{reference: PMID:13888982, notes: 'Enables downstream galactose catabolism in E. coli'}]
+   - Representation/source gap: data/raw/madin_taxa.tsv:26937 (18 trait assertions) and data/raw/bactotraits_taxa.tsv:7683 (31 trait assertions) collapse kg-microbe trait edges to integer counts; UniProtKB, EC, and METPO prefixes are not yet configured in conf/id_label_targets.yaml.
 
-2. Bacillus subtilis (NCBITaxon:1423, data/taxa/bacteria/bacillus_subtilis.yaml; raw locators: data/raw/madin_taxa.tsv:16175 assertion_count=17, data/raw/bactotraits_taxa.tsv:2838 assertion_count=1, data/raw/mediadive_taxa.tsv:3530 medium_count=7 media_ids=mediadive.medium:1&#124;mediadive.medium:220&#124;mediadive.medium:381&#124;mediadive.medium:542&#124;mediadive.medium:545&#124;mediadive.medium:92&#124;mediadive.medium:J22, data/raw/gold_organisms.tsv:10117 organism_count=3291):
-   - Candidate graph_id: bsubtilis_endospore_formation_spo0a_phosphorelay (scope: SPECIES, experimental_context: Nutrient-exhaustion sporulation in Bacillus subtilis type strain DSM 10 / 168).
-   - Candidate CausalNodes:
-     * id: NCBITaxon:1423 &#124; label: Bacillus subtilis &#124; node_type: TAXON
-     * id: UniProtKB:P06534 &#124; label: Stage 0 sporulation protein A &#124; node_type: GENE_OR_PROTEIN (Spo0A master regulator, B. subtilis 168 reference proteome UP000001570)
-     * id: GO:0000156 &#124; label: phosphorelay response regulator activity &#124; node_type: MOLECULAR_FUNCTION
-     * id: GO:0030435 &#124; label: sporulation resulting in formation of a cellular spore &#124; node_type: BIOLOGICAL_PROCESS
-     * id: OMP:0007099 &#124; label: endospore formation phenotype &#124; node_type: PHENOTYPE
-   - Candidate CausalEdges:
-     * NCBITaxon:1423 --[RO:0002206]--&gt; UniProtKB:P06534 (evidence: PMID:2114957, ECO:0000269)
-     * UniProtKB:P06534 --[RO:0002327 (enables)]--&gt; GO:0000156 (evidence: PMID:2114957, ECO:0000269)
-     * GO:0000156 --[RO:0002213 (positively regulates)]--&gt; GO:0030435 (evidence: PMID:2114957, ECO:0000314)
+2. Bacillus subtilis (NCBITaxon:1423, data/taxa/bacteria/bacillus_subtilis.yaml; raw locators: curation/seed_scope.tsv:13, data/raw/ncbitaxon_taxa.tsv:1110, data/raw/madin_taxa.tsv:16175 assertion_count=17, data/raw/bactotraits_taxa.tsv:2838 assertion_count=1, data/raw/mediadive_taxa.tsv:3530 medium_count=7 media_ids=mediadive.medium:1&#124;mediadive.medium:220&#124;mediadive.medium:381&#124;mediadive.medium:542&#124;mediadive.medium:545&#124;mediadive.medium:92&#124;mediadive.medium:J22, data/raw/gold_organisms.tsv:10117 organism_count=3291):
+   - Candidate CausalGraph:
+     * graph_id: bsubtilis_spo0a_sporulation
+     * title: Bacillus subtilis Spo0A phosphorelay-regulated endospore formation
+     * description: Nutrient-exhaustion endospore formation in Bacillus subtilis (type strain DSM 10 / 168).
+   - Candidate CausalNodes (nodes):
+     * node_id: n_taxon_bsubtilis &#124; label: Bacillus subtilis &#124; node_type: TAXON &#124; grounding: NCBITaxon:1423
+     * node_id: n_protein_spo0a &#124; label: Stage 0 sporulation protein A &#124; node_type: GENE_OR_PROTEIN &#124; grounding: UniProtKB:P06534 &#124; description: Spo0A master transcriptional regulator in B. subtilis 168 reference proteome UP000001570
+     * node_id: n_mf_phosphorelay_reg &#124; label: phosphorelay response regulator activity &#124; node_type: MOLECULAR_FUNCTION &#124; grounding: GO:0000156
+     * node_id: n_bp_sporulation &#124; label: sporulation resulting in formation of a cellular spore &#124; node_type: BIOLOGICAL_PROCESS &#124; grounding: GO:0030435
+     * node_id: n_trait_endospore &#124; label: spore-forming &#124; node_type: TRAIT &#124; grounding: METPO:1000692 &#124; xrefs: [OMP:0007099]
+   - Candidate CausalEdges (edges):
+     * edge_id: e1_bsubtilis_spo0a &#124; subject: n_taxon_bsubtilis &#124; predicate: expresses &#124; predicate_id: RO:0002206 &#124; object: n_protein_spo0a &#124; evidence: [{reference: PMID:2114957, notes: 'ECO:0000269 experimental characterization of Spo0A in Bacillus subtilis'}]
+     * edge_id: e2_spo0a_phosphorelay &#124; subject: n_protein_spo0a &#124; predicate: enables &#124; predicate_id: RO:0002327 &#124; object: n_mf_phosphorelay_reg &#124; evidence: [{reference: PMID:2114957, notes: 'Phosphorylation of Spo0A via the sporulation phosphorelay'}]
+     * edge_id: e3_phosphorelay_sporulation &#124; subject: n_mf_phosphorelay_reg &#124; predicate: positively_regulates &#124; predicate_id: RO:0002213 &#124; object: n_bp_sporulation &#124; evidence: [{reference: PMID:2114957, notes: 'Phosphorylated Spo0A activates transcription of early sporulation genes'}]
+     * edge_id: e4_sporulation_trait &#124; subject: n_bp_sporulation &#124; predicate: results_in &#124; predicate_id: RO:0002566 &#124; object: n_trait_endospore &#124; evidence: [{reference: PMID:2114957, notes: 'Produces heat-resistant endospore trait'}]
    - Representation/source gap: Madin et al. endospore-forming trait assertion in kg-microbe is collapsed to assertion_count=17 at data/raw/madin_taxa.tsv:16175.
 
-3. Pseudomonas aeruginosa (NCBITaxon:287, data/taxa/bacteria/pseudomonas_aeruginosa.yaml; raw locators: data/raw/madin_taxa.tsv:20803 assertion_count=17, data/raw/bactotraits_taxa.tsv:5324 assertion_count=19, data/raw/mediadive_taxa.tsv:8243 medium_count=13, data/raw/gold_organisms.tsv:27891 organism_count=7263):
-   - Candidate graph_id: paeruginosa_pyocyanin_biosynthesis_and_denitrification (scope: SPECIES, experimental_context: Aerobic/microaerobic phenazine biosynthesis and anaerobic respiratory denitrification in P. aeruginosa PAO1 / ATCC 10145).
-   - Candidate CausalNodes:
-     * id: NCBITaxon:287 &#124; label: Pseudomonas aeruginosa &#124; node_type: TAXON
-     * id: UniProtKB:Q9I4X3 &#124; label: Phenazine-specific methyltransferase &#124; node_type: GENE_OR_PROTEIN (PhzM, P. aeruginosa PAO1 reference proteome UP000002438)
-     * id: GO:0042867 &#124; label: phenazine biosynthetic process &#124; node_type: BIOLOGICAL_PROCESS
-     * id: CHEBI:28820 &#124; label: pyocyanin &#124; node_type: CHEMICAL_ENTITY
-   - Candidate CausalEdges:
-     * NCBITaxon:287 --[RO:0002206]--&gt; UniProtKB:Q9I4X3 (evidence: PMID:11489860, ECO:0000269)
-     * UniProtKB:Q9I4X3 --[RO:0002213]--&gt; GO:0042867 (evidence: PMID:11489860, ECO:0000269)
-     * GO:0042867 --[RO:0002234 (has output)]--&gt; CHEBI:28820 (evidence: PMID:11489860, ECO:0000314)
+3. Pseudomonas aeruginosa (NCBITaxon:287, data/taxa/bacteria/pseudomonas_aeruginosa.yaml; raw locators: curation/seed_scope.tsv:7, data/raw/ncbitaxon_taxa.tsv:226, data/raw/madin_taxa.tsv:20803 assertion_count=17, data/raw/bactotraits_taxa.tsv:5324 assertion_count=19, data/raw/mediadive_taxa.tsv:8243 medium_count=13, data/raw/gold_organisms.tsv:27891 organism_count=7263):
+   - Candidate CausalGraph:
+     * graph_id: paeruginosa_pyocyanin_biosynthesis
+     * title: Pseudomonas aeruginosa PhzM/PhzS-mediated pyocyanin biosynthesis
+     * description: Aerobic and microaerobic phenazine methylation and hydroxylation yielding pyocyanin in Pseudomonas aeruginosa PAO1 / ATCC 10145.
+   - Candidate CausalNodes (nodes):
+     * node_id: n_taxon_paeruginosa &#124; label: Pseudomonas aeruginosa &#124; node_type: TAXON &#124; grounding: NCBITaxon:287
+     * node_id: n_protein_phzm &#124; label: Phenazine-specific methyltransferase &#124; node_type: GENE_OR_PROTEIN &#124; grounding: UniProtKB:Q9I4X3 &#124; xrefs: [EC:2.1.1.193] &#124; description: PhzM in P. aeruginosa PAO1 reference proteome UP000002438
+     * node_id: n_bp_phenazine_biosyn &#124; label: phenazine biosynthetic process &#124; node_type: BIOLOGICAL_PROCESS &#124; grounding: GO:0042867
+     * node_id: n_chem_pyocyanin &#124; label: pyocyanin &#124; node_type: CHEMICAL &#124; grounding: CHEBI:28820
+   - Candidate CausalEdges (edges):
+     * edge_id: e1_paeruginosa_phzm &#124; subject: n_taxon_paeruginosa &#124; predicate: expresses &#124; predicate_id: RO:0002206 &#124; object: n_protein_phzm &#124; evidence: [{reference: PMID:11489860, notes: 'ECO:0000269 characterization of phzM in Pseudomonas aeruginosa PAO1'}]
+     * edge_id: e2_phzm_phenazine &#124; subject: n_protein_phzm &#124; predicate: positively_regulates &#124; predicate_id: RO:0002213 &#124; object: n_bp_phenazine_biosyn &#124; evidence: [{reference: PMID:11489860, notes: 'Catalyzes N-methylation step required for pyocyanin branch of phenazine biosynthesis'}]
+     * edge_id: e3_phenazine_pyocyanin &#124; subject: n_bp_phenazine_biosyn &#124; predicate: has_output &#124; predicate_id: RO:0002234 &#124; object: n_chem_pyocyanin &#124; evidence: [{reference: PMID:11489860, notes: 'Produces redox-active phenazine toxin pyocyanin (CHEBI:28820)'}]
    - Representation/source gap: BactoTraits physiological/denitrification traits (19 assertions at data/raw/bactotraits_taxa.tsv:5324) and Madin et al. traits (17 assertions at data/raw/madin_taxa.tsv:20803) are stored only as integer counts in data/raw/.
 
-4. Methanocaldococcus jannaschii (NCBITaxon:2190, data/taxa/archaea/methanocaldococcus_jannaschii.yaml; raw locators: data/raw/madin_taxa.tsv:19491 assertion_count=11, data/raw/gold_organisms.tsv:20860 organism_count=5, data/taxa/archaea/methanocaldococcus_jannaschii.yaml:88..1001 strain JAL-1 / DSM 2661 assembly GCA_000091665.1):
-   - Candidate graph_id: mjannaschii_hydrogenotrophic_methanogenesis (scope: SPECIES, experimental_context: Hyperthermophilic hydrogenotrophic growth at 85 C in hydrothermal vent environment; type strain JAL-1 / DSM 2661).
-   - Candidate CausalNodes:
-     * id: NCBITaxon:2190 &#124; label: Methanocaldococcus jannaschii &#124; node_type: TAXON
-     * id: UniProtKB:Q58254 &#124; label: Methyl-coenzyme M reductase subunit alpha &#124; node_type: GENE_OR_PROTEIN (McrA, EC:2.8.4.1, M. jannaschii DSM 2661 reference proteome UP000000805)
-     * id: GO:0030268 &#124; label: methyl-coenzyme M reductase activity &#124; node_type: MOLECULAR_FUNCTION
-     * id: GO:0019386 &#124; label: methanogenesis, from carbon dioxide &#124; node_type: BIOLOGICAL_PROCESS
-     * id: CHEBI:16183 &#124; label: methane &#124; node_type: CHEMICAL_ENTITY
-     * id: ENVO:01000030 &#124; label: marine hydrothermal vent &#124; node_type: ENVIRONMENT
-   - Candidate CausalEdges:
-     * NCBITaxon:2190 --[RO:0002206]--&gt; UniProtKB:Q58254 (evidence: PMID:8688087, DOI:10.1099/00207713-52-3-685, ECO:0000314)
-     * UniProtKB:Q58254 --[RO:0002327 (enables)]--&gt; GO:0030268 (evidence: PMID:8688087, ECO:0000269)
-     * GO:0030268 --[RO:0002213 (positively regulates)]--&gt; GO:0019386 (output CHEBI:16183 in ENVO:01000030; evidence: PMID:8688087, ECO:0000314)
+4. Methanocaldococcus jannaschii (NCBITaxon:2190, data/taxa/archaea/methanocaldococcus_jannaschii.yaml; raw locators: curation/seed_scope.tsv:20786, data/raw/ncbitaxon_taxa.tsv:1724, data/raw/madin_taxa.tsv:19491 assertion_count=11, data/raw/gold_organisms.tsv:20860 organism_count=5, data/taxa/archaea/methanocaldococcus_jannaschii.yaml:88..1001 strain JAL-1 / DSM 2661 assembly GCA_000091665.1):
+   - Candidate CausalGraph:
+     * graph_id: mjannaschii_hydrogenotrophic_methanogenesis
+     * title: Methanocaldococcus jannaschii McrA-catalyzed hydrogenotrophic methanogenesis
+     * description: Hyperthermophilic hydrogenotrophic methanogenesis from CO2 and H2 at 85 C in marine hydrothermal vent environments (type strain JAL-1 / DSM 2661).
+   - Candidate CausalNodes (nodes):
+     * node_id: n_taxon_mjannaschii &#124; label: Methanocaldococcus jannaschii &#124; node_type: TAXON &#124; grounding: NCBITaxon:2190
+     * node_id: n_protein_mcra &#124; label: Methyl-coenzyme M reductase subunit alpha &#124; node_type: GENE_OR_PROTEIN &#124; grounding: UniProtKB:Q58254 &#124; xrefs: [EC:2.8.4.1] &#124; description: McrA in M. jannaschii DSM 2661 reference proteome UP000000805
+     * node_id: n_mf_mcr_activity &#124; label: methyl-coenzyme M reductase activity &#124; node_type: MOLECULAR_FUNCTION &#124; grounding: GO:0030268
+     * node_id: n_bp_methanogenesis &#124; label: methanogenesis, from carbon dioxide &#124; node_type: BIOLOGICAL_PROCESS &#124; grounding: GO:0019386
+     * node_id: n_chem_methane &#124; label: methane &#124; node_type: CHEMICAL &#124; grounding: CHEBI:16183
+     * node_id: n_habitat_vent &#124; label: marine hydrothermal vent &#124; node_type: HABITAT &#124; grounding: ENVO:01000030
+   - Candidate CausalEdges (edges):
+     * edge_id: e1_mjannaschii_mcra &#124; subject: n_taxon_mjannaschii &#124; predicate: expresses &#124; predicate_id: RO:0002206 &#124; object: n_protein_mcra &#124; evidence: [{reference: PMID:8688087, notes: 'Complete genome sequence and methanogenesis apparatus of M. jannaschii DSM 2661'}]
+     * edge_id: e2_mcra_activity &#124; subject: n_protein_mcra &#124; predicate: enables &#124; predicate_id: RO:0002327 &#124; object: n_mf_mcr_activity &#124; evidence: [{reference: PMID:8688087, notes: 'Catalyzes terminal step of methanogenesis (EC:2.8.4.1)'}]
+     * edge_id: e3_mcr_methanogenesis &#124; subject: n_mf_mcr_activity &#124; predicate: part_of &#124; predicate_id: BFO:0000050 &#124; object: n_bp_methanogenesis &#124; evidence: [{reference: PMID:8688087, notes: 'Terminal reduction step in CO2-reducing methanogenesis'}]
+     * edge_id: e4_methanogenesis_methane &#124; subject: n_bp_methanogenesis &#124; predicate: has_output &#124; predicate_id: RO:0002234 &#124; object: n_chem_methane &#124; evidence: [{reference: PMID:8688087, notes: 'Releases methane (CHEBI:16183)'}]
+     * edge_id: e5_mjannaschii_vent &#124; subject: n_taxon_mjannaschii &#124; predicate: located_in &#124; predicate_id: RO:0001025 &#124; object: n_habitat_vent &#124; evidence: [{reference: PMID:8688087, notes: 'Isolated from white smoker chimney on East Pacific Rise (ENVO:01000030)'}]
    - Representation/source gap: Madin et al. methanogenesis and hyperthermophily assertions (11 assertions at data/raw/madin_taxa.tsv:19491) are collapsed to a single count in data/raw/madin_taxa.tsv.
 
-5. Cryptococcus deuterogattii (NCBITaxon:1859096, data/taxa/eukaryota/cryptococcus_deuterogattii.yaml; raw locators: data/raw/ncbitaxon_taxa.tsv:485934, curation/seed_scope.tsv:626041):
-   - Candidate graph_id: cdeuterogattii_capsule_and_melanin_virulence (scope: SPECIES, experimental_context: Basidiomycete yeast melanin biosynthesis via laccase and glucuronoxylomannan capsule formation in strain R265):
-   - Candidate CausalNodes:
-     * id: NCBITaxon:1859096 &#124; label: Cryptococcus deuterogattii &#124; node_type: TAXON
-     * id: GO:0006582 &#124; label: melanin metabolic process &#124; node_type: BIOLOGICAL_PROCESS
-     * id: GO:0045229 &#124; label: external encapsulating structure organization &#124; node_type: BIOLOGICAL_PROCESS
+5. Cryptococcus deuterogattii (NCBITaxon:1859096, data/taxa/eukaryota/cryptococcus_deuterogattii.yaml; raw locators: curation/seed_scope.tsv:626041, data/raw/ncbitaxon_taxa.tsv:485934):
+   - Candidate CausalGraph:
+     * graph_id: cdeuterogattii_melanin_and_capsule_virulence
+     * title: Cryptococcus deuterogattii laccase-catalyzed melanin biosynthesis and capsule organization
+     * description: Basidiomycete yeast melanin synthesis and polysaccharide capsule assembly in Cryptococcus deuterogattii (formerly Cryptococcus gattii VGII, strain R265; Hagen &amp; Boekhout 2015).
+   - Candidate CausalNodes (nodes):
+     * node_id: n_taxon_cdeuterogattii &#124; label: Cryptococcus deuterogattii &#124; node_type: TAXON &#124; grounding: NCBITaxon:1859096
+     * node_id: n_mf_laccase &#124; label: laccase activity &#124; node_type: MOLECULAR_FUNCTION &#124; grounding: GO:0052716 &#124; xrefs: [EC:1.10.3.2]
+     * node_id: n_bp_melanin &#124; label: melanin biosynthetic process &#124; node_type: BIOLOGICAL_PROCESS &#124; grounding: GO:0042438
+     * node_id: n_bp_capsule &#124; label: external encapsulating structure organization &#124; node_type: BIOLOGICAL_PROCESS &#124; grounding: GO:0045229
+   - Candidate CausalEdges (edges):
+     * edge_id: e1_cdeuterogattii_laccase &#124; subject: n_taxon_cdeuterogattii &#124; predicate: capable_of &#124; predicate_id: RO:0002215 &#124; object: n_mf_laccase &#124; evidence: [{reference: PMID:25985186, notes: 'Taxonomic and phenotypic characterization of Cryptococcus deuterogattii (Hagen et al. 2015)'}]
+     * edge_id: e2_laccase_melanin &#124; subject: n_mf_laccase &#124; predicate: positively_regulates &#124; predicate_id: RO:0002213 &#124; object: n_bp_melanin &#124; evidence: [{reference: PMID:25985186, notes: 'Diphenol oxidase/laccase activity drives cell-wall melanin biosynthesis'}]
+     * edge_id: e3_cdeuterogattii_capsule &#124; subject: n_taxon_cdeuterogattii &#124; predicate: capable_of &#124; predicate_id: RO:0002215 &#124; object: n_bp_capsule &#124; evidence: [{reference: PMID:25985186, notes: 'Polysaccharide capsule organization in Cryptococcus deuterogattii'}]
    - Representation/source gap: Eukaryotic records seeded in Stage 1 (88 GOLD-descendant-attested species including NCBITaxon:1859096) have no Madin/BactoTraits/MediaDive rows in data/raw/ and no curated mechanism overlay input in curation/causal_graphs/.
 
 ### Verification of the 4 native prerequisite gates in .claude/skills/curate-causal-graphs/SKILL.md
 
 provenance: concern. Targets: NCBITaxon:562, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2190, NCBITaxon:1859096.
 
-All four prerequisite gates required before writing TaxonRecord.causal_graphs are currently unmet or defective in main: (Gate 1) no maintained curation/causal_graphs/ overlay input or seeder merge in src/taxonmech/seed.py; (Gate 2) scripts/verify_corpus.py rejects any divergence from seeder-only output; (Gate 3) conf/id_label_targets.yaml references CausalNode.grounding instead of CausalNode.id and lacks UniProtKB/EC handling; and (Gate 4) src/taxonmech/templates/taxon-content.html indexes CausalNode by n.node_id instead of n.id.
+All four prerequisite gates required before writing TaxonRecord.causal_graphs are currently unmet in main: (Gate 1) no maintained curation/causal_graphs/ overlay input or seeder merge in src/taxonmech/seed.py (build_document, lines 344-646; seed, lines 713-780); (Gate 2) scripts/verify_corpus.py (lines 22-25, 67-73) rejects any divergence from seeder-only output; (Gate 3) while conf/id_label_targets.yaml (lines 52-60) and src/taxonmech/templates/taxon-content.html (line 80) already align with CausalNode.grounding and CausalNode.node_id (src/taxonmech/schema/taxonmech.yaml lines 1190-1216), conf/id_label_targets.yaml omits UniProtKB and EC (and METPO/OMP) from adapters (lines 14-23) and ignored_prefixes (lines 25-42); and (Gate 4) scripts/render_pages.py --check requires zero drift against committed data/taxa/ records.
 
 ## Findings
 
@@ -133,29 +157,29 @@ All four prerequisite gates required before writing TaxonRecord.causal_graphs ar
 
 blocker / open / confirmed; issue key: taxonmech-causal-graphs-maintained-input-and-seeder-merge-missing.
 
-TaxonRecord YAML files under data/taxa/&lt;domain&gt;/&lt;slug&gt;.yaml are 100% seeder-generated from src/taxonmech/seed.py (build_document), which has no maintained input path (such as curation/causal_graphs/) for CausalGraph overlays. Furthermore, scripts/verify_corpus.py (lines 22-25 and 67-73, run in scripts/run_qc.py) compares every generated YAML file byte-for-byte against emit_taxon_yaml(build_document(concept, corpus.inventory)), immediately failing QC if any record is edited to add causal_graphs or flipped to REVIEWED.
+TaxonRecord YAML files under data/taxa/&lt;domain&gt;/&lt;slug&gt;.yaml are 100% seeder-generated from src/taxonmech/seed.py (build_document, lines 344-646; seed, lines 713-780), which has no maintained input path (such as curation/causal_graphs/) for CausalGraph overlays. Furthermore, scripts/verify_corpus.py (lines 22-25 and 67-73, run in scripts/run_qc.py) compares every generated YAML file byte-for-byte against emit_taxon_yaml(build_document(concept, corpus.inventory)), immediately failing QC if any record is edited to add causal_graphs or flipped to REVIEWED.
 
 ### finding-002: src/taxonmech/extract.py collapses kg-microbe Madin et al. and BactoTraits trait edges into aggregate per-taxon counts
 
 major / open / confirmed; issue key: taxonmech-extract-collapses-trait-edges-to-counts.
 
-src/taxonmech/extract.py (count_taxon_subjects, lines 412-417, 677-678, 840-841) reduces kg-microbe's data/transformed/madin_etal/edges.tsv and data/transformed/bactotraits/edges.tsv to 2-column count tables (taxon_id, assertion_count) in data/raw/madin_taxa.tsv (34,148 rows) and data/raw/bactotraits_taxa.tsv (9,658 rows). This discards the specific predicates, METPO:/ENVO:/CHEBI:/GO: object CURIEs, and primary literature (PMID:/DOI:) citations needed to construct evidence-backed CausalGraph edges from local raw inventories. Similarly, src/taxonmech/seed.py emits only medium_count from data/raw/mediadive_taxa.tsv without preserving media_ids.
+src/taxonmech/extract.py (count_taxon_subjects, lines 412-417, 677-678, 840-841) reduces kg-microbe's data/transformed/madin_etal/edges.tsv and data/transformed/bactotraits/edges.tsv to 2-column count tables (taxon_id, assertion_count) in data/raw/madin_taxa.tsv (34,148 rows) and data/raw/bactotraits_taxa.tsv (9,658 rows). This discards the specific predicates, METPO:/ENVO:/CHEBI:/GO: object CURIEs, and primary literature (PMID:/DOI:) citations needed to construct evidence-backed CausalGraph edges from local raw inventories. Similarly, src/taxonmech/seed.py (line 618) emits only medium_count from data/raw/mediadive_taxa.tsv without preserving media_ids.
 
-### finding-003: CausalNode identifier slot mismatch in conf/id_label_targets.yaml (grounding vs id) and taxon-content.html (node_id vs id)
+### finding-003: conf/id_label_targets.yaml lacks UniProtKB, EC, and METPO/OMP prefix coverage for CausalNode.grounding validation
 
-major / open / confirmed; issue key: taxonmech-causal-node-id-slot-mismatch-in-oak-and-template.
+major / open / confirmed; issue key: taxonmech-causal-node-grounding-prefix-coverage-missing-in-oak.
 
-In src/taxonmech/schema/taxonmech.yaml lines 369-388, CausalNode declares id (not grounding or node_id) as its identifier slot. However, conf/id_label_targets.yaml lines 52-60 (grounded_nodes) configures pairs: [[grounding, label]] and omits UniProtKB and EC from adapters or ignored_prefixes, so scripts/validate_id_label_correspondence.py silently skips CausalNode.id. In addition, src/taxonmech/templates/taxon-content.html line 80 indexes CausalNode items by n.node_id instead of n.id, breaking node label lookup when rendering causal_graphs in HTML pages.
+In src/taxonmech/schema/taxonmech.yaml lines 1190-1216, CausalNode declares node_id as its local identifier and grounding as its optional ontology/database CURIE slot. While conf/id_label_targets.yaml lines 52-60 (grounded_nodes) and src/taxonmech/templates/taxon-content.html line 80 already align with CausalNode.grounding and CausalNode.node_id, conf/id_label_targets.yaml omits UniProtKB and EC (as well as METPO and OMP) from both adapters (lines 14-23) and ignored_prefixes (lines 25-42). Consequently, scripts/validate_id_label_correspondence.py fails with UnknownPrefixError whenever a CausalNode.grounding slot carries a UniProtKB:, EC:, METPO:, or OMP: CURIE.
 
 ## Recommended Actions And Acceptance Checks
 
 ### action-001
 
-Implement a maintained curation/causal_graphs/ overlay input and validated seeder merge in src/taxonmech/seed.py, update scripts/verify_corpus.py to validate curated causal_graphs overlays against seeder + overlay output, fix CausalNode.id in conf/id_label_targets.yaml and src/taxonmech/templates/taxon-content.html, and add a round-trip canary test.
+Implement a maintained curation/causal_graphs/ overlay input and validated seeder merge in src/taxonmech/seed.py, update scripts/verify_corpus.py to validate curated causal_graphs overlays against seeder + overlay output, add UniProtKB/EC (and METPO/OMP) prefix coverage for CausalNode.grounding in conf/id_label_targets.yaml, and add a round-trip canary test including scripts/render_pages.py --check.
 
 - src/taxonmech/seed.py merges validated curation/causal_graphs/ overlays into TaxonRecord.causal_graphs and scripts/verify_corpus.py passes
-- conf/id_label_targets.yaml validates CausalNode [[id, label]] pairs and handles UniProtKB/EC prefixes in scripts/validate_id_label_correspondence.py
-- src/taxonmech/templates/taxon-content.html indexes CausalNode by n.id and scripts/render_pages.py --check passes on a canary CausalGraph
+- conf/id_label_targets.yaml handles UniProtKB, EC, and METPO/OMP prefixes on CausalNode [[grounding, label]] pairs in scripts/validate_id_label_correspondence.py
+- scripts/render_pages.py --check passes on a canary CausalGraph rendered via src/taxonmech/templates/taxon-content.html
 
 ### action-002
 
@@ -171,18 +195,18 @@ Extend src/taxonmech/extract.py to extract granular per-taxon trait, substrate, 
 
 | Evidence | Reference / locator | Support | Observation |
 | --- | --- | --- | --- |
-| raw-phenotype-and-trait-inventories | data/raw/madin_taxa.tsv; data/raw/bactotraits_taxa.tsv; data/raw/mediadive_taxa.tsv; data/raw/gold_organisms.tsv; data/raw/bacdive_strains.tsv; madin_taxa.tsv lines 16175, 19491, 20803, 26937; bactotraits_taxa.tsv lines 2838, 5324, 7683; mediadive_taxa.tsv lines 3530, 8243, 11544; gold_organisms.tsv lines 10117, 20860, 27891, 38869 | supports | Raw source inventories attest 38,357 in-scope taxa across Madin et al. (34,148), BactoTraits (9,626), and MediaDive (14,154), and 63,366 in-scope taxa when including GOLD (43,822) and BacDive (25,779), but Madin and BactoTraits rows carry only taxon_id and assertion_count without predicates, ontology object CURIEs, or literature citations. |
-| exemplar-taxon-records | data/taxa/bacteria/escherichia_coli.yaml; data/taxa/bacteria/bacillus_subtilis.yaml; data/taxa/bacteria/pseudomonas_aeruginosa.yaml; data/taxa/archaea/methanocaldococcus_jannaschii.yaml; data/taxa/eukaryota/cryptococcus_deuterogattii.yaml; escherichia_coli.yaml:147636-147693; bacillus_subtilis.yaml:37948-38005; pseudomonas_aeruginosa.yaml:63312-63369; methanocaldococcus_jannaschii.yaml:965-1008; cryptococcus_deuterogattii.yaml:57-70 | supports | All five exemplar TaxonRecord files carry accurate taxonomy, nomenclature, strain, and source_attestations sections, and 0 causal_graphs entries. |
-| seeder-and-verify-corpus-code | src/taxonmech/seed.py; src/taxonmech/extract.py; scripts/verify_corpus.py; src/taxonmech/seed.py:210-495 (build_document); src/taxonmech/extract.py:412-417,677-678,840-841 (count_taxon_subjects); scripts/verify_corpus.py:22-25,67-73 | supports | src/taxonmech/extract.py collapses kg-microbe madin_etal/edges.tsv and bactotraits/edges.tsv to assertion_count; src/taxonmech/seed.py never populates causal_graphs; scripts/verify_corpus.py explicitly requires 100% byte-for-byte agreement with seeder output. |
-| schema-and-validator-code | src/taxonmech/schema/taxonmech.yaml; conf/id_label_targets.yaml; scripts/validate_strict.py; src/taxonmech/schema/taxonmech.yaml:345-425; conf/id_label_targets.yaml:52-60 | supports | TaxonRecord.causal_graphs (CausalGraph, CausalNode, CausalEdge) is defined in src/taxonmech/schema/taxonmech.yaml lines 345-425 with CausalNode.id as its identifier slot, whereas conf/id_label_targets.yaml lines 52-60 checks pairs: [[grounding, label]]. |
-| render-template-code | src/taxonmech/templates/taxon-content.html; scripts/render_pages.py; src/taxonmech/templates/taxon-content.html:74-109 | supports | src/taxonmech/templates/taxon-content.html line 80 builds the node lookup dictionary using n.node_id instead of n.id, so rendered causal graph tables fail to display subject/object node labels. |
+| raw-phenotype-and-trait-inventories | data/raw/madin_taxa.tsv; data/raw/bactotraits_taxa.tsv; data/raw/mediadive_taxa.tsv; data/raw/gold_organisms.tsv; data/raw/bacdive_strains.tsv; madin_taxa.tsv lines 16175 (NCBITaxon:1423), 19491 (NCBITaxon:2190), 20803 (NCBITaxon:287), 26937 (NCBITaxon:562); bactotraits_taxa.tsv lines 2838 (NCBITaxon:1423), 5324 (NCBITaxon:287), 7683 (NCBITaxon:562); mediadive_taxa.tsv lines 3530 (NCBITaxon:1423), 8243 (NCBITaxon:287), 11544 (NCBITaxon:562); gold_organisms.tsv lines 10117 (NCBITaxon:1423), 20860 (NCBITaxon:2190), 27891 (NCBITaxon:287), 38869 (NCBITaxon:562) | supports | Raw source inventories attest 38,357 in-scope taxa across Madin et al. (34,148), BactoTraits (9,626), and MediaDive (14,154), and 63,366 in-scope taxa when including GOLD (43,822) and BacDive (25,779), but Madin and BactoTraits rows carry only taxon_id and assertion_count without predicates, ontology object CURIEs, or literature citations. |
+| exemplar-taxon-records | data/taxa/bacteria/escherichia_coli.yaml; data/taxa/bacteria/bacillus_subtilis.yaml; data/taxa/bacteria/pseudomonas_aeruginosa.yaml; data/taxa/archaea/methanocaldococcus_jannaschii.yaml; data/taxa/eukaryota/cryptococcus_deuterogattii.yaml; curation/seed_scope.tsv; data/raw/ncbitaxon_taxa.tsv; escherichia_coli.yaml:147636-147693; bacillus_subtilis.yaml:37948-38005; pseudomonas_aeruginosa.yaml:63312-63369; methanocaldococcus_jannaschii.yaml:965-1008; cryptococcus_deuterogattii.yaml:57-70; curation/seed_scope.tsv:2 (NCBITaxon:562), 7 (NCBITaxon:287), 13 (NCBITaxon:1423), 20786 (NCBITaxon:2190), 626041 (NCBITaxon:1859096); data/raw/ncbitaxon_taxa.tsv:226 (NCBITaxon:287), 438 (NCBITaxon:562), 1110 (NCBITaxon:1423), 1724 (NCBITaxon:2190), 485934 (NCBITaxon:1859096) | supports | All five exemplar TaxonRecord files carry accurate taxonomy, nomenclature, strain, and source_attestations sections, and 0 causal_graphs entries. |
+| seeder-and-verify-corpus-code | src/taxonmech/seed.py; src/taxonmech/extract.py; scripts/verify_corpus.py; src/taxonmech/seed.py:344-646 (build_document), 713-780 (seed), 783-884 (main); src/taxonmech/extract.py:412-417,677-678,840-841 (count_taxon_subjects); scripts/verify_corpus.py:22-25,67-73 | supports | src/taxonmech/extract.py collapses kg-microbe madin_etal/edges.tsv and bactotraits/edges.tsv to assertion_count; src/taxonmech/seed.py (build_document, lines 344-646) never populates causal_graphs and reads only medium_count at line 618 from mediadive_taxa.tsv; scripts/verify_corpus.py explicitly requires 100% byte-for-byte agreement with seeder output. |
+| schema-and-validator-code | src/taxonmech/schema/taxonmech.yaml; conf/id_label_targets.yaml; scripts/validate_strict.py; src/taxonmech/schema/taxonmech.yaml:1143-1258,1467-1504; conf/id_label_targets.yaml:14-42,52-60 | supports | TaxonRecord.causal_graphs (EvidenceItem, CausalGraph, CausalNode, CausalEdge, and CausalNodeTypeEnum) is defined in src/taxonmech/schema/taxonmech.yaml lines 1143-1258 and 1467-1504 with CausalNode.node_id as its local identifier and CausalNode.grounding as its CURIE slot. While conf/id_label_targets.yaml lines 52-60 checks pairs: [[grounding, label]], adapters (lines 14-23) and ignored_prefixes (lines 25-42) omit UniProtKB and EC (and METPO/OMP). |
+| render-template-code | src/taxonmech/templates/taxon-content.html; scripts/render_pages.py; src/taxonmech/templates/taxon-content.html:74-109; scripts/render_pages.py:1-140 | supports | src/taxonmech/templates/taxon-content.html lines 74-109 (including line 80 n.node_id) aligns with CausalNode.node_id, and scripts/render_pages.py --check requires zero drift between pages/ and data/taxa/&lt;domain&gt;/*.yaml. |
 
 ## Limits And Additional Notes
 
 - Direct writes to data/taxa/&lt;domain&gt;/*.yaml are prohibited by CLAUDE.md and .claude/skills/curate-causal-graphs/SKILL.md while the native maintained causal_graphs input and seeder merge prerequisite is absent.
 - Raw Madin et al. (data/raw/madin_taxa.tsv) and BactoTraits (data/raw/bactotraits_taxa.tsv) inventories in data/raw/ currently store only aggregate assertion_count per taxon, requiring granular edge extraction in src/taxonmech/extract.py before bulk trait-to-mechanism graph seeding.
 - Full-corpus Stage 2 coverage summary: 626,048 total records (605,695 Bacteria, 14,013 Archaea, 6,331 Eukaryota, 9 other); 38,357 records with Madin/BactoTraits/MediaDive phenotype or growth-medium attestations; 63,366 records with any Madin/BactoTraits/MediaDive/GOLD/BacDive functional, genome, strain, or trait attestation; 562,682 taxonomy-only records.
-- Infrastructure tasks recorded in INFRA_TASKS.md: taxonmech-infra-0001 (maintained causal_graphs overlay, verify_corpus, id_label_targets, and template fixes) and taxonmech-infra-0002 (granular trait edge extraction in src/taxonmech/extract.py).
+- Infrastructure tasks recorded in INFRA_TASKS.md: taxonmech-infra-0001 (maintained causal_graphs overlay, verify_corpus, and id_label_targets prefix coverage) and taxonmech-infra-0002 (granular trait edge extraction in src/taxonmech/extract.py).
 
 ## Complete Structured Record
 
@@ -218,15 +242,18 @@ summary: 'Assessed all 626,048 in-scope TaxonRecord files across Bacteria (605,6
   attestations (adding gold_organisms.tsv: 43,822 and bacdive_strains.tsv: 25,779;
   leaving 562,682 taxonomy-only records), direct population of TaxonRecord.causal_graphs
   is blocked by four verified native infrastructure prerequisites: (1) src/taxonmech/seed.py
-  has no maintained curation/causal_graphs/ overlay input or merge step; (2) scripts/verify_corpus.py
-  enforces 100% byte-for-byte identity against seeder-only output; (3) conf/id_label_targets.yaml
-  targets CausalNode.grounding instead of CausalNode.id and omits UniProtKB/EC adapters;
-  and (4) src/taxonmech/templates/taxon-content.html indexes CausalNode by n.node_id
-  instead of n.id. Additionally, src/taxonmech/extract.py collapses kg-microbe Madin
-  et al. and BactoTraits edges to aggregate per-taxon counts in data/raw/. Source-grounded
-  candidate CausalGraph / CausalNode / CausalEdge and GENE_OR_PROTEIN tables are documented
-  for five cross-domain exemplars (NCBITaxon:562, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2190,
-  NCBITaxon:1859096).'
+  (build_document, lines 344-646; seed, lines 713-780) has no maintained curation/causal_graphs/
+  overlay input or merge step; (2) scripts/verify_corpus.py (lines 22-25, 67-73) enforces
+  100% byte-for-byte identity against seeder-only output; (3) while conf/id_label_targets.yaml
+  (lines 52-60) and src/taxonmech/templates/taxon-content.html (line 80) already align
+  with CausalNode.grounding and CausalNode.node_id (src/taxonmech/schema/taxonmech.yaml
+  lines 1190-1216), conf/id_label_targets.yaml omits UniProtKB and EC (and METPO/OMP)
+  from adapters (lines 14-23) and ignored_prefixes (lines 25-42); and (4) scripts/render_pages.py
+  --check requires zero drift against committed data/taxa/ records. Additionally,
+  src/taxonmech/extract.py collapses kg-microbe Madin et al. and BactoTraits edges
+  to aggregate per-taxon counts in data/raw/. Schema-valid candidate CausalGraph /
+  CausalNode / CausalEdge and GENE_OR_PROTEIN tables are documented for five cross-domain
+  exemplars (NCBITaxon:562, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2190, NCBITaxon:1859096).'
 source:
   git_revision: 01ca63effdf8c03a644df893ba6129b2d8448ea4
   state: working_tree
@@ -495,9 +522,9 @@ checks:
   name: 'Prerequisite Gate 1: Maintained causal_graphs overlay input and seeder merge'
   status: unavailable
   required: true
-  summary: src/taxonmech/seed.py (build_document) reads only data/raw/, data/atb/,
-    data/straininfo/, and curation/seed_scope.tsv; no maintained curation/causal_graphs/
-    input or merge step exists.
+  summary: src/taxonmech/seed.py (build_document, lines 344-646; seed, lines 713-780)
+    reads only data/raw/, data/atb/, data/straininfo/, and curation/seed_scope.tsv;
+    no maintained curation/causal_graphs/ input or merge step exists.
   target_ids:
   - NCBITaxon:562
   - NCBITaxon:1423
@@ -507,13 +534,15 @@ checks:
   evidence_ids:
   - seeder-and-verify-corpus-code
 - check_id: gate-3-oak-id-label-causal-nodes
-  name: 'Prerequisite Gate 3: OAK ID-label correspondence target for CausalNode.id
-    and UniProtKB/EC'
+  name: 'Prerequisite Gate 3: OAK ID-label correspondence prefix coverage for CausalNode.grounding
+    (UniProtKB, EC, METPO/OMP)'
   status: unavailable
   required: true
-  summary: 'conf/id_label_targets.yaml lines 52-60 (grounded_nodes) configures pairs:
-    [[grounding, label]] instead of CausalNode''s [[id, label]] slot in src/taxonmech/schema/taxonmech.yaml
-    lines 369-388, and omits UniProtKB and EC from adapters / ignored_prefixes.'
+  summary: 'While conf/id_label_targets.yaml lines 52-60 (grounded_nodes) configures
+    pairs: [[grounding, label]] matching CausalNode.grounding in src/taxonmech/schema/taxonmech.yaml
+    lines 1190-1216, adapters (lines 14-23) and ignored_prefixes (lines 25-42) omit
+    UniProtKB and EC (and METPO/OMP), causing UnknownPrefixError on grounded GENE_OR_PROTEIN
+    or TRAIT nodes.'
   target_ids:
   - NCBITaxon:562
   - NCBITaxon:1423
@@ -527,9 +556,10 @@ checks:
     edges'
   status: unavailable
   required: true
-  summary: src/taxonmech/templates/taxon-content.html line 80 indexes CausalNode objects
-    by n.node_id instead of n.id, preventing rendered causal graph tables from resolving
-    subject/object node labels.
+  summary: While src/taxonmech/templates/taxon-content.html lines 74-109 (including
+    line 80 n.node_id) matches CausalNode.node_id, scripts/render_pages.py --check
+    requires zero drift between pages/ and data/taxa/<domain>/*.yaml and cannot render
+    causal_graphs until Gates 1-3 are wired.
   target_ids:
   - NCBITaxon:562
   - NCBITaxon:1423
@@ -543,9 +573,11 @@ evidence:
   kind: database
   reference: data/raw/madin_taxa.tsv; data/raw/bactotraits_taxa.tsv; data/raw/mediadive_taxa.tsv;
     data/raw/gold_organisms.tsv; data/raw/bacdive_strains.tsv
-  locator: madin_taxa.tsv lines 16175, 19491, 20803, 26937; bactotraits_taxa.tsv lines
-    2838, 5324, 7683; mediadive_taxa.tsv lines 3530, 8243, 11544; gold_organisms.tsv
-    lines 10117, 20860, 27891, 38869
+  locator: madin_taxa.tsv lines 16175 (NCBITaxon:1423), 19491 (NCBITaxon:2190), 20803
+    (NCBITaxon:287), 26937 (NCBITaxon:562); bactotraits_taxa.tsv lines 2838 (NCBITaxon:1423),
+    5324 (NCBITaxon:287), 7683 (NCBITaxon:562); mediadive_taxa.tsv lines 3530 (NCBITaxon:1423),
+    8243 (NCBITaxon:287), 11544 (NCBITaxon:562); gold_organisms.tsv lines 10117 (NCBITaxon:1423),
+    20860 (NCBITaxon:2190), 27891 (NCBITaxon:287), 38869 (NCBITaxon:562)
   accessed_at: '2026-10-21T04:32:01Z'
   support: supports
   summary: Raw source inventories attest 38,357 in-scope taxa across Madin et al.
@@ -558,10 +590,14 @@ evidence:
   kind: record_content
   reference: data/taxa/bacteria/escherichia_coli.yaml; data/taxa/bacteria/bacillus_subtilis.yaml;
     data/taxa/bacteria/pseudomonas_aeruginosa.yaml; data/taxa/archaea/methanocaldococcus_jannaschii.yaml;
-    data/taxa/eukaryota/cryptococcus_deuterogattii.yaml
+    data/taxa/eukaryota/cryptococcus_deuterogattii.yaml; curation/seed_scope.tsv;
+    data/raw/ncbitaxon_taxa.tsv
   locator: escherichia_coli.yaml:147636-147693; bacillus_subtilis.yaml:37948-38005;
     pseudomonas_aeruginosa.yaml:63312-63369; methanocaldococcus_jannaschii.yaml:965-1008;
-    cryptococcus_deuterogattii.yaml:57-70
+    cryptococcus_deuterogattii.yaml:57-70; curation/seed_scope.tsv:2 (NCBITaxon:562),
+    7 (NCBITaxon:287), 13 (NCBITaxon:1423), 20786 (NCBITaxon:2190), 626041 (NCBITaxon:1859096);
+    data/raw/ncbitaxon_taxa.tsv:226 (NCBITaxon:287), 438 (NCBITaxon:562), 1110 (NCBITaxon:1423),
+    1724 (NCBITaxon:2190), 485934 (NCBITaxon:1859096)
   accessed_at: '2026-10-21T04:32:01Z'
   support: supports
   summary: All five exemplar TaxonRecord files carry accurate taxonomy, nomenclature,
@@ -570,35 +606,39 @@ evidence:
 - evidence_id: seeder-and-verify-corpus-code
   kind: validation
   reference: src/taxonmech/seed.py; src/taxonmech/extract.py; scripts/verify_corpus.py
-  locator: src/taxonmech/seed.py:210-495 (build_document); src/taxonmech/extract.py:412-417,677-678,840-841
-    (count_taxon_subjects); scripts/verify_corpus.py:22-25,67-73
+  locator: src/taxonmech/seed.py:344-646 (build_document), 713-780 (seed), 783-884
+    (main); src/taxonmech/extract.py:412-417,677-678,840-841 (count_taxon_subjects);
+    scripts/verify_corpus.py:22-25,67-73
   accessed_at: '2026-10-21T04:32:01Z'
   support: supports
   summary: src/taxonmech/extract.py collapses kg-microbe madin_etal/edges.tsv and
-    bactotraits/edges.tsv to assertion_count; src/taxonmech/seed.py never populates
-    causal_graphs; scripts/verify_corpus.py explicitly requires 100% byte-for-byte
-    agreement with seeder output.
+    bactotraits/edges.tsv to assertion_count; src/taxonmech/seed.py (build_document,
+    lines 344-646) never populates causal_graphs and reads only medium_count at line
+    618 from mediadive_taxa.tsv; scripts/verify_corpus.py explicitly requires 100%
+    byte-for-byte agreement with seeder output.
   snapshot_sha256: 3cc30f6413a293165385dfc1860505fe389e5adfe9aa3d168f76aa4cb2ac36bd
 - evidence_id: schema-and-validator-code
   kind: validation
   reference: src/taxonmech/schema/taxonmech.yaml; conf/id_label_targets.yaml; scripts/validate_strict.py
-  locator: src/taxonmech/schema/taxonmech.yaml:345-425; conf/id_label_targets.yaml:52-60
+  locator: src/taxonmech/schema/taxonmech.yaml:1143-1258,1467-1504; conf/id_label_targets.yaml:14-42,52-60
   accessed_at: '2026-10-21T04:32:01Z'
   support: supports
-  summary: 'TaxonRecord.causal_graphs (CausalGraph, CausalNode, CausalEdge) is defined
-    in src/taxonmech/schema/taxonmech.yaml lines 345-425 with CausalNode.id as its
-    identifier slot, whereas conf/id_label_targets.yaml lines 52-60 checks pairs:
-    [[grounding, label]].'
+  summary: 'TaxonRecord.causal_graphs (EvidenceItem, CausalGraph, CausalNode, CausalEdge,
+    and CausalNodeTypeEnum) is defined in src/taxonmech/schema/taxonmech.yaml lines
+    1143-1258 and 1467-1504 with CausalNode.node_id as its local identifier and CausalNode.grounding
+    as its CURIE slot. While conf/id_label_targets.yaml lines 52-60 checks pairs:
+    [[grounding, label]], adapters (lines 14-23) and ignored_prefixes (lines 25-42)
+    omit UniProtKB and EC (and METPO/OMP).'
   snapshot_sha256: aab25fee94c73eb70e5197a4f3ab8ddf0fa6731785974364963906d4f4d87fc3
 - evidence_id: render-template-code
   kind: validation
   reference: src/taxonmech/templates/taxon-content.html; scripts/render_pages.py
-  locator: src/taxonmech/templates/taxon-content.html:74-109
+  locator: src/taxonmech/templates/taxon-content.html:74-109; scripts/render_pages.py:1-140
   accessed_at: '2026-10-21T04:32:01Z'
   support: supports
-  summary: src/taxonmech/templates/taxon-content.html line 80 builds the node lookup
-    dictionary using n.node_id instead of n.id, so rendered causal graph tables fail
-    to display subject/object node labels.
+  summary: src/taxonmech/templates/taxon-content.html lines 74-109 (including line
+    80 n.node_id) aligns with CausalNode.node_id, and scripts/render_pages.py --check
+    requires zero drift between pages/ and data/taxa/<domain>/*.yaml.
   snapshot_sha256: 9562204e103755b648b32234cf001253e855a64bb46f5de1eb372b5fcf7ad3a2
 assessments:
 - assessment_id: corpus-source-coverage-audit
@@ -651,13 +691,14 @@ assessments:
   topic: Source-grounded candidate CausalGraph / CausalNode / CausalEdge and GENE_OR_PROTEIN
     inventory for cross-domain exemplars
   outcome: concern
-  summary: Prepared evidence-backed candidate CausalGraph specifications with grounded
-    TAXON, GENE_OR_PROTEIN (UniProtKB), MOLECULAR_FUNCTION (GO), BIOLOGICAL_PROCESS
-    (GO), CHEMICAL_ENTITY (CHEBI), ENVIRONMENT (ENVO), and PHENOTYPE (GO/OMP) nodes
-    and RO causal edges for Escherichia coli (NCBITaxon:562), Bacillus subtilis (NCBITaxon:1423),
-    Pseudomonas aeruginosa (NCBITaxon:287), Methanocaldococcus jannaschii (NCBITaxon:2190),
-    and Cryptococcus deuterogattii (NCBITaxon:1859096), documenting exact raw source
-    locators and representation/writer blockers.
+  summary: Prepared schema-valid candidate CausalGraph specifications with grounded
+    TAXON (NCBITaxon), GENE_OR_PROTEIN (UniProtKB / EC), MOLECULAR_FUNCTION (GO),
+    BIOLOGICAL_PROCESS (GO), CHEMICAL (CHEBI), HABITAT (ENVO), and TRAIT (METPO /
+    OMP) nodes and RO causal edges with EvidenceItem provenance for Escherichia coli
+    (NCBITaxon:562), Bacillus subtilis (NCBITaxon:1423), Pseudomonas aeruginosa (NCBITaxon:287),
+    Methanocaldococcus jannaschii (NCBITaxon:2190), and Cryptococcus deuterogattii
+    (NCBITaxon:1859096), documenting exact raw source locators and representation/writer
+    blockers.
   target_ids:
   - NCBITaxon:562
   - NCBITaxon:1423
@@ -669,112 +710,188 @@ assessments:
   - exemplar-taxon-records
   - schema-and-validator-code
   details: "Proposed native CausalGraph / CausalNode / CausalEdge and GENE_OR_PROTEIN\
-    \ candidate table across representative cross-domain exemplars (to be materialized\
-    \ via curation/causal_graphs/ once Prerequisite Gates 1-4 and granular trait extraction\
-    \ are landed):\n\n1. Escherichia coli (NCBITaxon:562, data/taxa/bacteria/escherichia_coli.yaml;\
-    \ raw locators: data/raw/madin_taxa.tsv:26937 assertion_count=18, data/raw/bactotraits_taxa.tsv:7683\
-    \ assertion_count=31, data/raw/mediadive_taxa.tsv:11544 medium_count=21 media_ids=mediadive.medium:1|...|mediadive.medium:J12,\
-    \ data/raw/gold_organisms.tsv:38869 organism_count=18302, data/raw/bacdive_strains.tsv:4305..100301\
-    \ strain_count=1975):\n   - Candidate graph_id: ecoli_lactose_utilization_and_mixed_acid_fermentation\
-    \ (scope: SPECIES, experimental_context: Aerobic and facultative anaerobic growth\
-    \ on lactose minimal/nutrient media; MediaDive mediadive.medium:1 / mediadive.medium:381).\n\
-    \   - Candidate CausalNodes:\n     * id: NCBITaxon:562 | label: Escherichia coli\
-    \ | node_type: TAXON\n     * id: UniProtKB:P00722 | label: Beta-galactosidase\
-    \ | node_type: GENE_OR_PROTEIN (LacZ, EC:3.2.1.23, E. coli K-12 reference proteome\
-    \ UP000000625)\n     * id: GO:0004565 | label: beta-galactosidase activity | node_type:\
-    \ MOLECULAR_FUNCTION\n     * id: CHEBI:17716 | label: lactose | node_type: CHEMICAL_ENTITY\n\
-    \     * id: GO:0006012 | label: galactose metabolic process | node_type: BIOLOGICAL_PROCESS\n\
-    \     * id: GO:0019662 | label: anaerobic respiration | node_type: PHENOTYPE\n\
-    \   - Candidate CausalEdges:\n     * NCBITaxon:562 --[RO:0002206 (expressed in\
-    \ / encodes)]--> UniProtKB:P00722 (evidence: PMID:13888982, ECO:0000314)\n   \
-    \  * UniProtKB:P00722 --[RO:0002327 (enables)]--> GO:0004565 (evidence: PMID:13888982,\
-    \ ECO:0000269)\n     * GO:0004565 --[RO:0002213 (positively regulates / catabolizes)]-->\
-    \ GO:0006012 (substrate CHEBI:17716; evidence: PMID:13888982, ECO:0000314)\n \
-    \  - Representation/source gap: data/raw/madin_taxa.tsv:26937 (18 trait assertions)\
-    \ and data/raw/bactotraits_taxa.tsv:7683 (31 trait assertions) collapse kg-microbe\
-    \ trait edges to integer counts; UniProtKB prefix is not yet configured in conf/id_label_targets.yaml.\n\
+    \ candidate specifications across representative cross-domain exemplars, strictly\
+    \ conforming to src/taxonmech/schema/taxonmech.yaml lines 1143-1258 (EvidenceItem,\
+    \ CausalGraph, CausalNode, CausalEdge) and 1467-1504 (CausalNodeTypeEnum), to\
+    \ be materialized via curation/causal_graphs/ once Prerequisite Gates 1-4 and\
+    \ granular trait extraction are landed:\n\n1. Escherichia coli (NCBITaxon:562,\
+    \ data/taxa/bacteria/escherichia_coli.yaml; raw locators: curation/seed_scope.tsv:2,\
+    \ data/raw/ncbitaxon_taxa.tsv:438, data/raw/madin_taxa.tsv:26937 assertion_count=18,\
+    \ data/raw/bactotraits_taxa.tsv:7683 assertion_count=31, data/raw/mediadive_taxa.tsv:11544\
+    \ medium_count=21 media_ids=mediadive.medium:1|...|mediadive.medium:J12, data/raw/gold_organisms.tsv:38869\
+    \ organism_count=18302, data/raw/bacdive_strains.tsv:4305..100301 strain_count=1975):\n\
+    \   - Candidate CausalGraph:\n     * graph_id: ecoli_lactose_utilization\n   \
+    \  * title: Escherichia coli beta-galactosidase-mediated lactose catabolism\n\
+    \     * description: Aerobic and facultative anaerobic lactose catabolism in Escherichia\
+    \ coli (type strain DSM 30083 / K-12 MG1655; MediaDive mediadive.medium:1 and\
+    \ mediadive.medium:381).\n   - Candidate CausalNodes (nodes):\n     * node_id:\
+    \ n_taxon_ecoli | label: Escherichia coli | node_type: TAXON | grounding: NCBITaxon:562\n\
+    \     * node_id: n_protein_lacz | label: Beta-galactosidase | node_type: GENE_OR_PROTEIN\
+    \ | grounding: UniProtKB:P00722 | xrefs: [EC:3.2.1.23] | description: LacZ beta-galactosidase\
+    \ in E. coli K-12 reference proteome UP000000625\n     * node_id: n_mf_betagal\
+    \ | label: beta-galactosidase activity | node_type: MOLECULAR_FUNCTION | grounding:\
+    \ GO:0004565\n     * node_id: n_chem_lactose | label: lactose | node_type: CHEMICAL\
+    \ | grounding: CHEBI:17716\n     * node_id: n_bp_galactose_met | label: galactose\
+    \ metabolic process | node_type: BIOLOGICAL_PROCESS | grounding: GO:0006012\n\
+    \     * node_id: n_trait_facultative_anaerobe | label: facultatively anaerobic\
+    \ | node_type: TRAIT | grounding: METPO:1000602\n   - Candidate CausalEdges (edges):\n\
+    \     * edge_id: e1_ecoli_lacz | subject: n_taxon_ecoli | predicate: expresses\
+    \ | predicate_id: RO:0002206 | object: n_protein_lacz | evidence: [{reference:\
+    \ PMID:13888982, notes: 'ECO:0000314 direct assay of LacZ beta-galactosidase in\
+    \ Escherichia coli'}]\n     * edge_id: e2_lacz_betagal | subject: n_protein_lacz\
+    \ | predicate: enables | predicate_id: RO:0002327 | object: n_mf_betagal | evidence:\
+    \ [{reference: PMID:13888982, notes: 'ECO:0000269 experimental enzymatic characterization\
+    \ of UniProtKB:P00722 (EC:3.2.1.23)'}]\n     * edge_id: e3_betagal_lactose | subject:\
+    \ n_mf_betagal | predicate: has_input | predicate_id: RO:0002233 | object: n_chem_lactose\
+    \ | evidence: [{reference: PMID:13888982, notes: 'Hydrolysis of beta-D-galactosides\
+    \ including lactose (CHEBI:17716)'}]\n     * edge_id: e4_betagal_galactose_met\
+    \ | subject: n_mf_betagal | predicate: positively_regulates | predicate_id: RO:0002213\
+    \ | object: n_bp_galactose_met | evidence: [{reference: PMID:13888982, notes:\
+    \ 'Enables downstream galactose catabolism in E. coli'}]\n   - Representation/source\
+    \ gap: data/raw/madin_taxa.tsv:26937 (18 trait assertions) and data/raw/bactotraits_taxa.tsv:7683\
+    \ (31 trait assertions) collapse kg-microbe trait edges to integer counts; UniProtKB,\
+    \ EC, and METPO prefixes are not yet configured in conf/id_label_targets.yaml.\n\
     \n2. Bacillus subtilis (NCBITaxon:1423, data/taxa/bacteria/bacillus_subtilis.yaml;\
-    \ raw locators: data/raw/madin_taxa.tsv:16175 assertion_count=17, data/raw/bactotraits_taxa.tsv:2838\
+    \ raw locators: curation/seed_scope.tsv:13, data/raw/ncbitaxon_taxa.tsv:1110,\
+    \ data/raw/madin_taxa.tsv:16175 assertion_count=17, data/raw/bactotraits_taxa.tsv:2838\
     \ assertion_count=1, data/raw/mediadive_taxa.tsv:3530 medium_count=7 media_ids=mediadive.medium:1|mediadive.medium:220|mediadive.medium:381|mediadive.medium:542|mediadive.medium:545|mediadive.medium:92|mediadive.medium:J22,\
-    \ data/raw/gold_organisms.tsv:10117 organism_count=3291):\n   - Candidate graph_id:\
-    \ bsubtilis_endospore_formation_spo0a_phosphorelay (scope: SPECIES, experimental_context:\
-    \ Nutrient-exhaustion sporulation in Bacillus subtilis type strain DSM 10 / 168).\n\
-    \   - Candidate CausalNodes:\n     * id: NCBITaxon:1423 | label: Bacillus subtilis\
-    \ | node_type: TAXON\n     * id: UniProtKB:P06534 | label: Stage 0 sporulation\
-    \ protein A | node_type: GENE_OR_PROTEIN (Spo0A master regulator, B. subtilis\
-    \ 168 reference proteome UP000001570)\n     * id: GO:0000156 | label: phosphorelay\
-    \ response regulator activity | node_type: MOLECULAR_FUNCTION\n     * id: GO:0030435\
-    \ | label: sporulation resulting in formation of a cellular spore | node_type:\
-    \ BIOLOGICAL_PROCESS\n     * id: OMP:0007099 | label: endospore formation phenotype\
-    \ | node_type: PHENOTYPE\n   - Candidate CausalEdges:\n     * NCBITaxon:1423 --[RO:0002206]-->\
-    \ UniProtKB:P06534 (evidence: PMID:2114957, ECO:0000269)\n     * UniProtKB:P06534\
-    \ --[RO:0002327 (enables)]--> GO:0000156 (evidence: PMID:2114957, ECO:0000269)\n\
-    \     * GO:0000156 --[RO:0002213 (positively regulates)]--> GO:0030435 (evidence:\
-    \ PMID:2114957, ECO:0000314)\n   - Representation/source gap: Madin et al. endospore-forming\
-    \ trait assertion in kg-microbe is collapsed to assertion_count=17 at data/raw/madin_taxa.tsv:16175.\n\
+    \ data/raw/gold_organisms.tsv:10117 organism_count=3291):\n   - Candidate CausalGraph:\n\
+    \     * graph_id: bsubtilis_spo0a_sporulation\n     * title: Bacillus subtilis\
+    \ Spo0A phosphorelay-regulated endospore formation\n     * description: Nutrient-exhaustion\
+    \ endospore formation in Bacillus subtilis (type strain DSM 10 / 168).\n   - Candidate\
+    \ CausalNodes (nodes):\n     * node_id: n_taxon_bsubtilis | label: Bacillus subtilis\
+    \ | node_type: TAXON | grounding: NCBITaxon:1423\n     * node_id: n_protein_spo0a\
+    \ | label: Stage 0 sporulation protein A | node_type: GENE_OR_PROTEIN | grounding:\
+    \ UniProtKB:P06534 | description: Spo0A master transcriptional regulator in B.\
+    \ subtilis 168 reference proteome UP000001570\n     * node_id: n_mf_phosphorelay_reg\
+    \ | label: phosphorelay response regulator activity | node_type: MOLECULAR_FUNCTION\
+    \ | grounding: GO:0000156\n     * node_id: n_bp_sporulation | label: sporulation\
+    \ resulting in formation of a cellular spore | node_type: BIOLOGICAL_PROCESS |\
+    \ grounding: GO:0030435\n     * node_id: n_trait_endospore | label: spore-forming\
+    \ | node_type: TRAIT | grounding: METPO:1000692 | xrefs: [OMP:0007099]\n   - Candidate\
+    \ CausalEdges (edges):\n     * edge_id: e1_bsubtilis_spo0a | subject: n_taxon_bsubtilis\
+    \ | predicate: expresses | predicate_id: RO:0002206 | object: n_protein_spo0a\
+    \ | evidence: [{reference: PMID:2114957, notes: 'ECO:0000269 experimental characterization\
+    \ of Spo0A in Bacillus subtilis'}]\n     * edge_id: e2_spo0a_phosphorelay | subject:\
+    \ n_protein_spo0a | predicate: enables | predicate_id: RO:0002327 | object: n_mf_phosphorelay_reg\
+    \ | evidence: [{reference: PMID:2114957, notes: 'Phosphorylation of Spo0A via\
+    \ the sporulation phosphorelay'}]\n     * edge_id: e3_phosphorelay_sporulation\
+    \ | subject: n_mf_phosphorelay_reg | predicate: positively_regulates | predicate_id:\
+    \ RO:0002213 | object: n_bp_sporulation | evidence: [{reference: PMID:2114957,\
+    \ notes: 'Phosphorylated Spo0A activates transcription of early sporulation genes'}]\n\
+    \     * edge_id: e4_sporulation_trait | subject: n_bp_sporulation | predicate:\
+    \ results_in | predicate_id: RO:0002566 | object: n_trait_endospore | evidence:\
+    \ [{reference: PMID:2114957, notes: 'Produces heat-resistant endospore trait'}]\n\
+    \   - Representation/source gap: Madin et al. endospore-forming trait assertion\
+    \ in kg-microbe is collapsed to assertion_count=17 at data/raw/madin_taxa.tsv:16175.\n\
     \n3. Pseudomonas aeruginosa (NCBITaxon:287, data/taxa/bacteria/pseudomonas_aeruginosa.yaml;\
-    \ raw locators: data/raw/madin_taxa.tsv:20803 assertion_count=17, data/raw/bactotraits_taxa.tsv:5324\
-    \ assertion_count=19, data/raw/mediadive_taxa.tsv:8243 medium_count=13, data/raw/gold_organisms.tsv:27891\
-    \ organism_count=7263):\n   - Candidate graph_id: paeruginosa_pyocyanin_biosynthesis_and_denitrification\
-    \ (scope: SPECIES, experimental_context: Aerobic/microaerobic phenazine biosynthesis\
-    \ and anaerobic respiratory denitrification in P. aeruginosa PAO1 / ATCC 10145).\n\
-    \   - Candidate CausalNodes:\n     * id: NCBITaxon:287 | label: Pseudomonas aeruginosa\
-    \ | node_type: TAXON\n     * id: UniProtKB:Q9I4X3 | label: Phenazine-specific\
-    \ methyltransferase | node_type: GENE_OR_PROTEIN (PhzM, P. aeruginosa PAO1 reference\
-    \ proteome UP000002438)\n     * id: GO:0042867 | label: phenazine biosynthetic\
-    \ process | node_type: BIOLOGICAL_PROCESS\n     * id: CHEBI:28820 | label: pyocyanin\
-    \ | node_type: CHEMICAL_ENTITY\n   - Candidate CausalEdges:\n     * NCBITaxon:287\
-    \ --[RO:0002206]--> UniProtKB:Q9I4X3 (evidence: PMID:11489860, ECO:0000269)\n\
-    \     * UniProtKB:Q9I4X3 --[RO:0002213]--> GO:0042867 (evidence: PMID:11489860,\
-    \ ECO:0000269)\n     * GO:0042867 --[RO:0002234 (has output)]--> CHEBI:28820 (evidence:\
-    \ PMID:11489860, ECO:0000314)\n   - Representation/source gap: BactoTraits physiological/denitrification\
-    \ traits (19 assertions at data/raw/bactotraits_taxa.tsv:5324) and Madin et al.\
-    \ traits (17 assertions at data/raw/madin_taxa.tsv:20803) are stored only as integer\
+    \ raw locators: curation/seed_scope.tsv:7, data/raw/ncbitaxon_taxa.tsv:226, data/raw/madin_taxa.tsv:20803\
+    \ assertion_count=17, data/raw/bactotraits_taxa.tsv:5324 assertion_count=19, data/raw/mediadive_taxa.tsv:8243\
+    \ medium_count=13, data/raw/gold_organisms.tsv:27891 organism_count=7263):\n \
+    \  - Candidate CausalGraph:\n     * graph_id: paeruginosa_pyocyanin_biosynthesis\n\
+    \     * title: Pseudomonas aeruginosa PhzM/PhzS-mediated pyocyanin biosynthesis\n\
+    \     * description: Aerobic and microaerobic phenazine methylation and hydroxylation\
+    \ yielding pyocyanin in Pseudomonas aeruginosa PAO1 / ATCC 10145.\n   - Candidate\
+    \ CausalNodes (nodes):\n     * node_id: n_taxon_paeruginosa | label: Pseudomonas\
+    \ aeruginosa | node_type: TAXON | grounding: NCBITaxon:287\n     * node_id: n_protein_phzm\
+    \ | label: Phenazine-specific methyltransferase | node_type: GENE_OR_PROTEIN |\
+    \ grounding: UniProtKB:Q9I4X3 | xrefs: [EC:2.1.1.193] | description: PhzM in P.\
+    \ aeruginosa PAO1 reference proteome UP000002438\n     * node_id: n_bp_phenazine_biosyn\
+    \ | label: phenazine biosynthetic process | node_type: BIOLOGICAL_PROCESS | grounding:\
+    \ GO:0042867\n     * node_id: n_chem_pyocyanin | label: pyocyanin | node_type:\
+    \ CHEMICAL | grounding: CHEBI:28820\n   - Candidate CausalEdges (edges):\n   \
+    \  * edge_id: e1_paeruginosa_phzm | subject: n_taxon_paeruginosa | predicate:\
+    \ expresses | predicate_id: RO:0002206 | object: n_protein_phzm | evidence: [{reference:\
+    \ PMID:11489860, notes: 'ECO:0000269 characterization of phzM in Pseudomonas aeruginosa\
+    \ PAO1'}]\n     * edge_id: e2_phzm_phenazine | subject: n_protein_phzm | predicate:\
+    \ positively_regulates | predicate_id: RO:0002213 | object: n_bp_phenazine_biosyn\
+    \ | evidence: [{reference: PMID:11489860, notes: 'Catalyzes N-methylation step\
+    \ required for pyocyanin branch of phenazine biosynthesis'}]\n     * edge_id:\
+    \ e3_phenazine_pyocyanin | subject: n_bp_phenazine_biosyn | predicate: has_output\
+    \ | predicate_id: RO:0002234 | object: n_chem_pyocyanin | evidence: [{reference:\
+    \ PMID:11489860, notes: 'Produces redox-active phenazine toxin pyocyanin (CHEBI:28820)'}]\n\
+    \   - Representation/source gap: BactoTraits physiological/denitrification traits\
+    \ (19 assertions at data/raw/bactotraits_taxa.tsv:5324) and Madin et al. traits\
+    \ (17 assertions at data/raw/madin_taxa.tsv:20803) are stored only as integer\
     \ counts in data/raw/.\n\n4. Methanocaldococcus jannaschii (NCBITaxon:2190, data/taxa/archaea/methanocaldococcus_jannaschii.yaml;\
-    \ raw locators: data/raw/madin_taxa.tsv:19491 assertion_count=11, data/raw/gold_organisms.tsv:20860\
+    \ raw locators: curation/seed_scope.tsv:20786, data/raw/ncbitaxon_taxa.tsv:1724,\
+    \ data/raw/madin_taxa.tsv:19491 assertion_count=11, data/raw/gold_organisms.tsv:20860\
     \ organism_count=5, data/taxa/archaea/methanocaldococcus_jannaschii.yaml:88..1001\
-    \ strain JAL-1 / DSM 2661 assembly GCA_000091665.1):\n   - Candidate graph_id:\
-    \ mjannaschii_hydrogenotrophic_methanogenesis (scope: SPECIES, experimental_context:\
-    \ Hyperthermophilic hydrogenotrophic growth at 85 C in hydrothermal vent environment;\
-    \ type strain JAL-1 / DSM 2661).\n   - Candidate CausalNodes:\n     * id: NCBITaxon:2190\
-    \ | label: Methanocaldococcus jannaschii | node_type: TAXON\n     * id: UniProtKB:Q58254\
-    \ | label: Methyl-coenzyme M reductase subunit alpha | node_type: GENE_OR_PROTEIN\
-    \ (McrA, EC:2.8.4.1, M. jannaschii DSM 2661 reference proteome UP000000805)\n\
-    \     * id: GO:0030268 | label: methyl-coenzyme M reductase activity | node_type:\
-    \ MOLECULAR_FUNCTION\n     * id: GO:0019386 | label: methanogenesis, from carbon\
-    \ dioxide | node_type: BIOLOGICAL_PROCESS\n     * id: CHEBI:16183 | label: methane\
-    \ | node_type: CHEMICAL_ENTITY\n     * id: ENVO:01000030 | label: marine hydrothermal\
-    \ vent | node_type: ENVIRONMENT\n   - Candidate CausalEdges:\n     * NCBITaxon:2190\
-    \ --[RO:0002206]--> UniProtKB:Q58254 (evidence: PMID:8688087, DOI:10.1099/00207713-52-3-685,\
-    \ ECO:0000314)\n     * UniProtKB:Q58254 --[RO:0002327 (enables)]--> GO:0030268\
-    \ (evidence: PMID:8688087, ECO:0000269)\n     * GO:0030268 --[RO:0002213 (positively\
-    \ regulates)]--> GO:0019386 (output CHEBI:16183 in ENVO:01000030; evidence: PMID:8688087,\
-    \ ECO:0000314)\n   - Representation/source gap: Madin et al. methanogenesis and\
-    \ hyperthermophily assertions (11 assertions at data/raw/madin_taxa.tsv:19491)\
+    \ strain JAL-1 / DSM 2661 assembly GCA_000091665.1):\n   - Candidate CausalGraph:\n\
+    \     * graph_id: mjannaschii_hydrogenotrophic_methanogenesis\n     * title: Methanocaldococcus\
+    \ jannaschii McrA-catalyzed hydrogenotrophic methanogenesis\n     * description:\
+    \ Hyperthermophilic hydrogenotrophic methanogenesis from CO2 and H2 at 85 C in\
+    \ marine hydrothermal vent environments (type strain JAL-1 / DSM 2661).\n   -\
+    \ Candidate CausalNodes (nodes):\n     * node_id: n_taxon_mjannaschii | label:\
+    \ Methanocaldococcus jannaschii | node_type: TAXON | grounding: NCBITaxon:2190\n\
+    \     * node_id: n_protein_mcra | label: Methyl-coenzyme M reductase subunit alpha\
+    \ | node_type: GENE_OR_PROTEIN | grounding: UniProtKB:Q58254 | xrefs: [EC:2.8.4.1]\
+    \ | description: McrA in M. jannaschii DSM 2661 reference proteome UP000000805\n\
+    \     * node_id: n_mf_mcr_activity | label: methyl-coenzyme M reductase activity\
+    \ | node_type: MOLECULAR_FUNCTION | grounding: GO:0030268\n     * node_id: n_bp_methanogenesis\
+    \ | label: methanogenesis, from carbon dioxide | node_type: BIOLOGICAL_PROCESS\
+    \ | grounding: GO:0019386\n     * node_id: n_chem_methane | label: methane | node_type:\
+    \ CHEMICAL | grounding: CHEBI:16183\n     * node_id: n_habitat_vent | label: marine\
+    \ hydrothermal vent | node_type: HABITAT | grounding: ENVO:01000030\n   - Candidate\
+    \ CausalEdges (edges):\n     * edge_id: e1_mjannaschii_mcra | subject: n_taxon_mjannaschii\
+    \ | predicate: expresses | predicate_id: RO:0002206 | object: n_protein_mcra |\
+    \ evidence: [{reference: PMID:8688087, notes: 'Complete genome sequence and methanogenesis\
+    \ apparatus of M. jannaschii DSM 2661'}]\n     * edge_id: e2_mcra_activity | subject:\
+    \ n_protein_mcra | predicate: enables | predicate_id: RO:0002327 | object: n_mf_mcr_activity\
+    \ | evidence: [{reference: PMID:8688087, notes: 'Catalyzes terminal step of methanogenesis\
+    \ (EC:2.8.4.1)'}]\n     * edge_id: e3_mcr_methanogenesis | subject: n_mf_mcr_activity\
+    \ | predicate: part_of | predicate_id: BFO:0000050 | object: n_bp_methanogenesis\
+    \ | evidence: [{reference: PMID:8688087, notes: 'Terminal reduction step in CO2-reducing\
+    \ methanogenesis'}]\n     * edge_id: e4_methanogenesis_methane | subject: n_bp_methanogenesis\
+    \ | predicate: has_output | predicate_id: RO:0002234 | object: n_chem_methane\
+    \ | evidence: [{reference: PMID:8688087, notes: 'Releases methane (CHEBI:16183)'}]\n\
+    \     * edge_id: e5_mjannaschii_vent | subject: n_taxon_mjannaschii | predicate:\
+    \ located_in | predicate_id: RO:0001025 | object: n_habitat_vent | evidence: [{reference:\
+    \ PMID:8688087, notes: 'Isolated from white smoker chimney on East Pacific Rise\
+    \ (ENVO:01000030)'}]\n   - Representation/source gap: Madin et al. methanogenesis\
+    \ and hyperthermophily assertions (11 assertions at data/raw/madin_taxa.tsv:19491)\
     \ are collapsed to a single count in data/raw/madin_taxa.tsv.\n\n5. Cryptococcus\
     \ deuterogattii (NCBITaxon:1859096, data/taxa/eukaryota/cryptococcus_deuterogattii.yaml;\
-    \ raw locators: data/raw/ncbitaxon_taxa.tsv:485934, curation/seed_scope.tsv:626041):\n\
-    \   - Candidate graph_id: cdeuterogattii_capsule_and_melanin_virulence (scope:\
-    \ SPECIES, experimental_context: Basidiomycete yeast melanin biosynthesis via\
-    \ laccase and glucuronoxylomannan capsule formation in strain R265):\n   - Candidate\
-    \ CausalNodes:\n     * id: NCBITaxon:1859096 | label: Cryptococcus deuterogattii\
-    \ | node_type: TAXON\n     * id: GO:0006582 | label: melanin metabolic process\
-    \ | node_type: BIOLOGICAL_PROCESS\n     * id: GO:0045229 | label: external encapsulating\
-    \ structure organization | node_type: BIOLOGICAL_PROCESS\n   - Representation/source\
-    \ gap: Eukaryotic records seeded in Stage 1 (88 GOLD-descendant-attested species\
-    \ including NCBITaxon:1859096) have no Madin/BactoTraits/MediaDive rows in data/raw/\
-    \ and no curated mechanism overlay input in curation/causal_graphs/."
+    \ raw locators: curation/seed_scope.tsv:626041, data/raw/ncbitaxon_taxa.tsv:485934):\n\
+    \   - Candidate CausalGraph:\n     * graph_id: cdeuterogattii_melanin_and_capsule_virulence\n\
+    \     * title: Cryptococcus deuterogattii laccase-catalyzed melanin biosynthesis\
+    \ and capsule organization\n     * description: Basidiomycete yeast melanin synthesis\
+    \ and polysaccharide capsule assembly in Cryptococcus deuterogattii (formerly\
+    \ Cryptococcus gattii VGII, strain R265; Hagen & Boekhout 2015).\n   - Candidate\
+    \ CausalNodes (nodes):\n     * node_id: n_taxon_cdeuterogattii | label: Cryptococcus\
+    \ deuterogattii | node_type: TAXON | grounding: NCBITaxon:1859096\n     * node_id:\
+    \ n_mf_laccase | label: laccase activity | node_type: MOLECULAR_FUNCTION | grounding:\
+    \ GO:0052716 | xrefs: [EC:1.10.3.2]\n     * node_id: n_bp_melanin | label: melanin\
+    \ biosynthetic process | node_type: BIOLOGICAL_PROCESS | grounding: GO:0042438\n\
+    \     * node_id: n_bp_capsule | label: external encapsulating structure organization\
+    \ | node_type: BIOLOGICAL_PROCESS | grounding: GO:0045229\n   - Candidate CausalEdges\
+    \ (edges):\n     * edge_id: e1_cdeuterogattii_laccase | subject: n_taxon_cdeuterogattii\
+    \ | predicate: capable_of | predicate_id: RO:0002215 | object: n_mf_laccase |\
+    \ evidence: [{reference: PMID:25985186, notes: 'Taxonomic and phenotypic characterization\
+    \ of Cryptococcus deuterogattii (Hagen et al. 2015)'}]\n     * edge_id: e2_laccase_melanin\
+    \ | subject: n_mf_laccase | predicate: positively_regulates | predicate_id: RO:0002213\
+    \ | object: n_bp_melanin | evidence: [{reference: PMID:25985186, notes: 'Diphenol\
+    \ oxidase/laccase activity drives cell-wall melanin biosynthesis'}]\n     * edge_id:\
+    \ e3_cdeuterogattii_capsule | subject: n_taxon_cdeuterogattii | predicate: capable_of\
+    \ | predicate_id: RO:0002215 | object: n_bp_capsule | evidence: [{reference: PMID:25985186,\
+    \ notes: 'Polysaccharide capsule organization in Cryptococcus deuterogattii'}]\n\
+    \   - Representation/source gap: Eukaryotic records seeded in Stage 1 (88 GOLD-descendant-attested\
+    \ species including NCBITaxon:1859096) have no Madin/BactoTraits/MediaDive rows\
+    \ in data/raw/ and no curated mechanism overlay input in curation/causal_graphs/."
 - assessment_id: native-writer-and-gate-prerequisites
   area: provenance
   topic: Verification of the 4 native prerequisite gates in .claude/skills/curate-causal-graphs/SKILL.md
   outcome: concern
   summary: 'All four prerequisite gates required before writing TaxonRecord.causal_graphs
-    are currently unmet or defective in main: (Gate 1) no maintained curation/causal_graphs/
-    overlay input or seeder merge in src/taxonmech/seed.py; (Gate 2) scripts/verify_corpus.py
-    rejects any divergence from seeder-only output; (Gate 3) conf/id_label_targets.yaml
-    references CausalNode.grounding instead of CausalNode.id and lacks UniProtKB/EC
-    handling; and (Gate 4) src/taxonmech/templates/taxon-content.html indexes CausalNode
-    by n.node_id instead of n.id.'
+    are currently unmet in main: (Gate 1) no maintained curation/causal_graphs/ overlay
+    input or seeder merge in src/taxonmech/seed.py (build_document, lines 344-646;
+    seed, lines 713-780); (Gate 2) scripts/verify_corpus.py (lines 22-25, 67-73) rejects
+    any divergence from seeder-only output; (Gate 3) while conf/id_label_targets.yaml
+    (lines 52-60) and src/taxonmech/templates/taxon-content.html (line 80) already
+    align with CausalNode.grounding and CausalNode.node_id (src/taxonmech/schema/taxonmech.yaml
+    lines 1190-1216), conf/id_label_targets.yaml omits UniProtKB and EC (and METPO/OMP)
+    from adapters (lines 14-23) and ignored_prefixes (lines 25-42); and (Gate 4) scripts/render_pages.py
+    --check requires zero drift against committed data/taxa/ records.'
   target_ids:
   - NCBITaxon:562
   - NCBITaxon:1423
@@ -795,12 +912,12 @@ findings:
   title: No maintained causal_graphs curation input or seeder merge exists, and verify_corpus
     rejects manual YAML edits
   description: TaxonRecord YAML files under data/taxa/<domain>/<slug>.yaml are 100%
-    seeder-generated from src/taxonmech/seed.py (build_document), which has no maintained
-    input path (such as curation/causal_graphs/) for CausalGraph overlays. Furthermore,
-    scripts/verify_corpus.py (lines 22-25 and 67-73, run in scripts/run_qc.py) compares
-    every generated YAML file byte-for-byte against emit_taxon_yaml(build_document(concept,
-    corpus.inventory)), immediately failing QC if any record is edited to add causal_graphs
-    or flipped to REVIEWED.
+    seeder-generated from src/taxonmech/seed.py (build_document, lines 344-646; seed,
+    lines 713-780), which has no maintained input path (such as curation/causal_graphs/)
+    for CausalGraph overlays. Furthermore, scripts/verify_corpus.py (lines 22-25 and
+    67-73, run in scripts/run_qc.py) compares every generated YAML file byte-for-byte
+    against emit_taxon_yaml(build_document(concept, corpus.inventory)), immediately
+    failing QC if any record is edited to add causal_graphs or flipped to REVIEWED.
   target_ids:
   - NCBITaxon:562
   - NCBITaxon:1423
@@ -835,8 +952,8 @@ findings:
     (34,148 rows) and data/raw/bactotraits_taxa.tsv (9,658 rows). This discards the
     specific predicates, METPO:/ENVO:/CHEBI:/GO: object CURIEs, and primary literature
     (PMID:/DOI:) citations needed to construct evidence-backed CausalGraph edges from
-    local raw inventories. Similarly, src/taxonmech/seed.py emits only medium_count
-    from data/raw/mediadive_taxa.tsv without preserving media_ids.'
+    local raw inventories. Similarly, src/taxonmech/seed.py (line 618) emits only
+    medium_count from data/raw/mediadive_taxa.tsv without preserving media_ids.'
   target_ids:
   - NCBITaxon:562
   - NCBITaxon:1423
@@ -860,20 +977,22 @@ findings:
     path: data/raw/bactotraits_taxa.tsv
     role: BactoTraits trait inventory
 - finding_id: finding-003
-  issue_key: taxonmech-causal-node-id-slot-mismatch-in-oak-and-template
+  issue_key: taxonmech-causal-node-grounding-prefix-coverage-missing-in-oak
   category: schema
   severity: major
   status: open
   certainty: confirmed
-  title: CausalNode identifier slot mismatch in conf/id_label_targets.yaml (grounding
-    vs id) and taxon-content.html (node_id vs id)
-  description: 'In src/taxonmech/schema/taxonmech.yaml lines 369-388, CausalNode declares
-    id (not grounding or node_id) as its identifier slot. However, conf/id_label_targets.yaml
-    lines 52-60 (grounded_nodes) configures pairs: [[grounding, label]] and omits
-    UniProtKB and EC from adapters or ignored_prefixes, so scripts/validate_id_label_correspondence.py
-    silently skips CausalNode.id. In addition, src/taxonmech/templates/taxon-content.html
-    line 80 indexes CausalNode items by n.node_id instead of n.id, breaking node label
-    lookup when rendering causal_graphs in HTML pages.'
+  title: conf/id_label_targets.yaml lacks UniProtKB, EC, and METPO/OMP prefix coverage
+    for CausalNode.grounding validation
+  description: 'In src/taxonmech/schema/taxonmech.yaml lines 1190-1216, CausalNode
+    declares node_id as its local identifier and grounding as its optional ontology/database
+    CURIE slot. While conf/id_label_targets.yaml lines 52-60 (grounded_nodes) and
+    src/taxonmech/templates/taxon-content.html line 80 already align with CausalNode.grounding
+    and CausalNode.node_id, conf/id_label_targets.yaml omits UniProtKB and EC (as
+    well as METPO and OMP) from both adapters (lines 14-23) and ignored_prefixes (lines
+    25-42). Consequently, scripts/validate_id_label_correspondence.py fails with UnknownPrefixError
+    whenever a CausalNode.grounding slot carries a UniProtKB:, EC:, METPO:, or OMP:
+    CURIE.'
   target_ids:
   - NCBITaxon:562
   - NCBITaxon:1423
@@ -881,7 +1000,7 @@ findings:
   - NCBITaxon:2190
   - NCBITaxon:1859096
   field_paths:
-  - causal_graphs[].nodes[].id
+  - causal_graphs[].nodes[].grounding
   - causal_graphs[].nodes[].label
   evidence_ids:
   - schema-and-validator-code
@@ -890,16 +1009,13 @@ findings:
   - repository: CultureBotAI/TaxonMech
     path: conf/id_label_targets.yaml
     role: OAK ID-label target configuration
-  - repository: CultureBotAI/TaxonMech
-    path: src/taxonmech/templates/taxon-content.html
-    role: Jinja2 taxon page template
 actions:
 - action_id: action-001
   description: Implement a maintained curation/causal_graphs/ overlay input and validated
     seeder merge in src/taxonmech/seed.py, update scripts/verify_corpus.py to validate
-    curated causal_graphs overlays against seeder + overlay output, fix CausalNode.id
-    in conf/id_label_targets.yaml and src/taxonmech/templates/taxon-content.html,
-    and add a round-trip canary test.
+    curated causal_graphs overlays against seeder + overlay output, add UniProtKB/EC
+    (and METPO/OMP) prefix coverage for CausalNode.grounding in conf/id_label_targets.yaml,
+    and add a round-trip canary test including scripts/render_pages.py --check.
   finding_ids:
   - finding-001
   - finding-003
@@ -919,16 +1035,12 @@ actions:
   - repository: CultureBotAI/TaxonMech
     path: conf/id_label_targets.yaml
     role: OAK ID-label target configuration
-  - repository: CultureBotAI/TaxonMech
-    path: src/taxonmech/templates/taxon-content.html
-    role: Jinja2 taxon page template
   acceptance_checks:
   - src/taxonmech/seed.py merges validated curation/causal_graphs/ overlays into TaxonRecord.causal_graphs
     and scripts/verify_corpus.py passes
-  - conf/id_label_targets.yaml validates CausalNode [[id, label]] pairs and handles
-    UniProtKB/EC prefixes in scripts/validate_id_label_correspondence.py
-  - src/taxonmech/templates/taxon-content.html indexes CausalNode by n.id and scripts/render_pages.py
-    --check passes on a canary CausalGraph
+  - conf/id_label_targets.yaml handles UniProtKB, EC, and METPO/OMP prefixes on CausalNode
+    [[grounding, label]] pairs in scripts/validate_id_label_correspondence.py
+  - scripts/render_pages.py --check passes on a canary CausalGraph rendered via src/taxonmech/templates/taxon-content.html
 - action_id: action-002
   description: Extend src/taxonmech/extract.py to extract granular per-taxon trait,
     substrate, habitat, and growth-medium assertions (madin_etal, bactotraits, mediadive)
@@ -969,7 +1081,7 @@ notes:
   phenotype or growth-medium attestations; 63,366 records with any Madin/BactoTraits/MediaDive/GOLD/BacDive
   functional, genome, strain, or trait attestation; 562,682 taxonomy-only records.'
 - 'Infrastructure tasks recorded in INFRA_TASKS.md: taxonmech-infra-0001 (maintained
-  causal_graphs overlay, verify_corpus, id_label_targets, and template fixes) and
+  causal_graphs overlay, verify_corpus, and id_label_targets prefix coverage) and
   taxonmech-infra-0002 (granular trait edge extraction in src/taxonmech/extract.py).'
 tags:
 - stage2-causal-graphs

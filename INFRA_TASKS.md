@@ -38,7 +38,7 @@ tasks:
     summary: >-
       Implement maintained curation/causal_graphs/ overlay input, validated seeder merge in
       src/taxonmech/seed.py, seeder-owned verification in scripts/verify_corpus.py, and
-      CausalNode.id alignment in conf/id_label_targets.yaml and src/taxonmech/templates/taxon-content.html
+      CausalNode.grounding prefix coverage (UniProtKB, EC, METPO/OMP) in conf/id_label_targets.yaml
     status: note
     disposition: pending_issue_link
   - task_id: taxonmech-infra-0002
@@ -53,22 +53,21 @@ tasks:
 
 ## Tasks
 
-### `taxonmech-infra-0001` — Native causal-graph overlay writer, corpus verifier, validator target, and HTML template alignment
+### `taxonmech-infra-0001` — Native causal-graph overlay writer, corpus verifier, and OAK grounding prefix coverage
 
 - **Origin**: `run_id: mech-goal-sequence-20261019`, `cycle: 1`, `stage: 2` (`causal_graphs`)
 - **Status**: `note` (`pending_issue_link` — to be promoted to a tracked GitHub issue during Stage 5 review remediation or Stage 6 infrastructure implementation)
 - **Priority**: `high`
 - **Dependencies**: None
 - **Observation**:
-  1. `src/taxonmech/seed.py` (`build_document`) constructs `TaxonRecord` dicts solely from `TaxonConcept` and `SeedInventory` and never reads a maintained `curation/causal_graphs/` overlay directory or emits `causal_graphs`.
+  1. `src/taxonmech/seed.py` (`build_document`, lines 344–646; `seed`, lines 713–780) constructs `TaxonRecord` dicts solely from `TaxonConcept` and `SeedInventory` and never reads a maintained `curation/causal_graphs/` overlay directory or emits `causal_graphs`.
   2. `scripts/verify_corpus.py` (lines 22–25, 67–73) compares every `data/taxa/<domain>/<slug>.yaml` byte-for-byte against `emit_taxon_yaml(build_document(concept, corpus.inventory))`, rejecting any out-of-band edit to `data/taxa/<domain>/*.yaml`.
-  3. `conf/id_label_targets.yaml` (`grounded_nodes`, lines 52–60) configures `pairs: [[grounding, label]]` on `causal_graphs[*].nodes[*]` instead of `CausalNode`'s actual `[[id, label]]` slot (`src/taxonmech/schema/taxonmech.yaml`, lines 369–388) and omits `UniProtKB` and `EC` from `adapters` or `ignored_prefixes`.
-  4. `src/taxonmech/templates/taxon-content.html` (line 80) indexes `CausalNode` dicts by `n.node_id` instead of `n.id`, causing rendered causal-graph edge tables to fall back to raw CURIEs instead of human-readable node labels.
+  3. While `conf/id_label_targets.yaml` (`grounded_nodes`, lines 52–60) and `src/taxonmech/templates/taxon-content.html` (line 80) are already aligned with `CausalNode.grounding` and `CausalNode.node_id` (`src/taxonmech/schema/taxonmech.yaml`, lines 1190–1216), `conf/id_label_targets.yaml` omits `UniProtKB` and `EC` (and `METPO`/`OMP`) from `adapters` (lines 14–23) and `ignored_prefixes` (lines 25–42), causing `scripts/validate_id_label_correspondence.py` to raise `UnknownPrefixError` when `CausalNode.grounding` references a `UniProtKB:` or `EC:` CURIE.
+  4. `scripts/render_pages.py --check` enforces zero drift between committed `pages/` and `data/taxa/<domain>/*.yaml`, so derived HTML causal-graph tables cannot be rendered until the maintained overlay input and seeder merge (`src/taxonmech/seed.py` + `scripts/verify_corpus.py`) are wired.
 - **Desired Outcome**:
-  1. Introduce a maintained, schema-validated `curation/causal_graphs/` overlay input (or TSV/YAML table) ingested by `src/taxonmech/seed.py` into `TaxonRecord.causal_graphs` and verified by `scripts/verify_corpus.py`.
-  2. Fix `conf/id_label_targets.yaml` `grounded_nodes` to validate `pairs: [[id, label]]` with explicit handling for `UniProtKB:` and `EC:` prefixes alongside `NCBITaxon`, `METPO`, `CHEBI`, `GO`, and `ENVO`.
-  3. Fix `src/taxonmech/templates/taxon-content.html` line 80 to index `CausalNode` objects by `n.id`.
-  4. Add a round-trip canary test exercising the five Stage 2 exemplars (`NCBITaxon:562`, `NCBITaxon:1423`, `NCBITaxon:287`, `NCBITaxon:2190`, `NCBITaxon:1859096`) through LinkML validation, `validate_id_label_correspondence.py`, `verify_corpus.py`, and HTML rendering.
+  1. Introduce a maintained, schema-validated `curation/causal_graphs/` overlay input ingested by `src/taxonmech/seed.py` into `TaxonRecord.causal_graphs` (using `CausalGraph` / `CausalNode` / `CausalEdge` slots defined at `src/taxonmech/schema/taxonmech.yaml` lines 1160–1258 and `CausalNodeTypeEnum` at lines 1467–1504) and verified by `scripts/verify_corpus.py`.
+  2. Update `conf/id_label_targets.yaml` with explicit adapter or prefix handling for `UniProtKB` and `EC` (and `METPO`/`OMP` if grounded in `CausalNode.grounding`) alongside `NCBITaxon`, `ENVO`, `UBERON`, `FOODON`, `CHEBI`, `GO`, `MONDO`, `HP`, and `PATO`.
+  3. Add a round-trip canary test exercising the five Stage 2 exemplars (`NCBITaxon:562`, `NCBITaxon:1423`, `NCBITaxon:287`, `NCBITaxon:2190`, `NCBITaxon:1859096`) through LinkML validation, `validate_id_label_correspondence.py`, `verify_corpus.py`, and HTML rendering (`scripts/render_pages.py --check`).
 - **Evidence Paths**:
   - `src/taxonmech/seed.py`
   - `scripts/verify_corpus.py`
@@ -86,11 +85,12 @@ tasks:
 - **Dependencies**: `taxonmech-infra-0001`
 - **Observation**:
   - `src/taxonmech/extract.py` (`count_taxon_subjects`, lines 412–417, 677–678, 840–841) collapses `kg-microbe` `madin_etal/edges.tsv` and `bactotraits/edges.tsv` into 2-column `(taxon_id, assertion_count)` tables (`data/raw/madin_taxa.tsv` for 34,148 in-scope taxa; `data/raw/bactotraits_taxa.tsv` for 9,626 in-scope taxa), discarding predicates, `METPO:`/`ENVO:`/`CHEBI:`/`GO:` object CURIEs, and primary literature (`PMID:`/`DOI:`) citations.
-  - `src/taxonmech/seed.py` reads only `recipe_count` from `data/raw/mediadive_taxa.tsv` (14,154 in-scope taxa) and discards the `media_ids` column (`mediadive.medium:*`).
+  - `src/taxonmech/seed.py` (line 618) reads only `medium_count` from `data/raw/mediadive_taxa.tsv` (14,154 in-scope taxa) and discards the `media_ids` column (`mediadive.medium:*`).
 - **Desired Outcome**:
   - Extend `src/taxonmech/extract.py` (or a dedicated causal-graph extraction stage) to retain granular per-taxon subject–predicate–object assertions and provenance locators from `kg-microbe` (`madin_etal`, `bactotraits`, `mediadive`, and UniProt/GO annotations) so that evidence-backed `CausalGraph` overlays can be populated reproducibly across the 38,357 phenotype/trait/medium-attested records.
 - **Evidence Paths**:
   - `src/taxonmech/extract.py`
+  - `src/taxonmech/seed.py`
   - `data/raw/madin_taxa.tsv`
   - `data/raw/bactotraits_taxa.tsv`
   - `data/raw/mediadive_taxa.tsv`

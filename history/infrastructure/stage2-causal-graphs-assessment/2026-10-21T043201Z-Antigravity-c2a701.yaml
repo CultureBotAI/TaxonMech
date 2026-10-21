@@ -28,12 +28,16 @@ events:
     (14,154) phenotype/medium attestations, 63,366 records with any functional/genome/strain/trait
     attestation (adding GOLD: 43,822 and BacDive: 25,779), and 562,682 taxonomy-only records.
     Verified that 0 records currently populate causal_graphs and that direct writes are blocked
-    by four native prerequisites: (1) src/taxonmech/seed.py has no maintained curation/causal_graphs/
-    overlay input or merge step; (2) scripts/verify_corpus.py enforces 100% byte-for-byte identity
-    against seeder-only output; (3) conf/id_label_targets.yaml targets CausalNode.grounding
-    instead of CausalNode.id and omits UniProtKB/EC adapters; and (4) src/taxonmech/templates/taxon-content.html
-    indexes CausalNode by n.node_id instead of n.id. Documented source-grounded candidate
-    CausalGraph / CausalNode / CausalEdge and GENE_OR_PROTEIN tables for five cross-domain
-    exemplars (NCBITaxon:562, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2190, NCBITaxon:1859096)
-    in reviews/structured/20261021T043201Z-stage2-causal-graphs-assessment/review.yaml and
+    by native prerequisites: (1) src/taxonmech/seed.py (build_document, lines 344-646; seed,
+    lines 713-780) has no maintained curation/causal_graphs/ overlay input or merge step;
+    (2) scripts/verify_corpus.py (lines 22-25, 67-73) enforces 100% byte-for-byte identity
+    against seeder-only output; (3) while conf/id_label_targets.yaml (lines 52-60) and
+    src/taxonmech/templates/taxon-content.html (line 80) already align with CausalNode.grounding
+    and CausalNode.node_id (src/taxonmech/schema/taxonmech.yaml lines 1190-1216),
+    conf/id_label_targets.yaml omits UniProtKB and EC (and METPO/OMP) from adapters and
+    ignored_prefixes; and (4) scripts/render_pages.py --check requires zero drift against
+    the unmerged corpus. Documented schema-valid candidate CausalGraph / CausalNode / CausalEdge
+    and GENE_OR_PROTEIN tables for five cross-domain exemplars (NCBITaxon:562, NCBITaxon:1423,
+    NCBITaxon:287, NCBITaxon:2190, NCBITaxon:1859096) in
+    reviews/structured/20261021T043201Z-stage2-causal-graphs-assessment/review.yaml and
     recorded follow-up infrastructure tasks in INFRA_TASKS.md.
