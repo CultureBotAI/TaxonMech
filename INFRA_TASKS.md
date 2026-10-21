@@ -147,7 +147,7 @@ tasks:
 - **Priority**: `medium`
 - **Dependencies**: None
 - **Observation**:
-  - Across `docs/structured-review-inventory/part-00.tsv..part-12.tsv` (602,165 structured-inventory records) and `docs/record-review-inventory.tsv` (23,883 legacy-inventory records), 27,118 records carry `pass_with_limitations` and 30 records carry `blocked` because:
+  - Across `docs/structured-review-inventory/part-00.tsv..part-13.tsv` (602,165 structured-inventory records) and `docs/legacy-review-inventory.tsv` (23,883 legacy-inventory records), 27,118 records carry `pass_with_limitations` and 30 records carry `blocked` because:
     1. `data/raw/gold_taxa.tsv`, `data/raw/mediadive_taxa.tsv`, `data/raw/madin_taxa.tsv`, and `data/raw/bactotraits_taxa.tsv` store pre-aggregated 2-column count tables extracted from an uncommitted local `kg-microbe` build (`src/taxonmech/extract.py` lines 412–417, 677–678, 840–841), so `evidence_item.snippet` edge counts cannot be independently re-derived from committed raw files alone.
     2. Only `BACDIVE` rolls strain counts up across descendant strain taxids in `src/taxonmech/seed.py`, while `GOLD`, `MEDIADIVE`, `MADIN`, `BACTOTRAITS`, `GTDB`, and `SILVA` report direct-taxid-only counts without explicit scope qualification in `source_attestations[].evidence[]`.
 - **Desired Outcome**:
@@ -156,7 +156,9 @@ tasks:
   - `src/taxonmech/extract.py`
   - `src/taxonmech/seed.py`
   - `data/raw/MANIFEST.yaml`
+  - `docs/legacy-review-inventory.tsv`
   - `docs/structured-review-inventory/part-00.tsv`
+  - `docs/structured-review-inventory/part-13.tsv`
   - `reviews/structured/20261021T163800Z-stage4-corpus-record-review/review.yaml`
   - `reviews/workflow/mech-goal-sequence-20261019/cycle-000001/stage-04/revision-0001/evidence.yaml`
 

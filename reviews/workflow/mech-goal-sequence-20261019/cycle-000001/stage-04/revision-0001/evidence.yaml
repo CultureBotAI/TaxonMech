@@ -9,25 +9,27 @@ outcome: completed
 source_revision: a4696c9f0cb7400fb95ffd7ce1bfc9bff9eae520
 summary: Reviewed all 626,048 eligible TaxonRecord YAML files across Bacteria (605,695),
   Archaea (14,013), Eukaryota (6,331), and other (9) against pinned raw inventories
-  (23,883 legacy + 602,165 structured; 0 unreviewed; 0 overlap; 0 SHA-256 mismatches),
-  saved native structured review bundle reviews/structured/20261021T163800Z-stage4-corpus-record-review/review.yaml,
-  and recorded 8 consolidated corpus, schema, validator, and seeder findings for Stage
-  5 grouped remediation and Stage 6 infrastructure implementation.
+  (23,883 legacy in docs/legacy-review-inventory.tsv + 602,165 structured in docs/structured-review-inventory/part-00.tsv..part-13.tsv;
+  0 unreviewed; 0 overlap; 0 SHA-256 mismatches), saved native structured review bundle
+  reviews/structured/20261021T163800Z-stage4-corpus-record-review/review.yaml, and
+  recorded 8 consolidated corpus, schema, validator, and seeder findings plus INFRA_TASKS.md
+  taxonmech-infra-0004 for Stage 5 grouped remediation and Stage 6 infrastructure
+  implementation.
 artifacts:
 - path: reviews/workflow/mech-goal-sequence-20261019/cycle-000001/stage-04/revision-0001/review_report.md
   kind: review_report
-  sha256: 5c12692d00906c43808151d2ad83abd11363ece426904dfb206eb49ddcca56ce
+  sha256: 0d83774a84072a5c380bacd70d9bdfa31fb392bf645439c3769c5c005a626105
 - path: reviews/workflow/mech-goal-sequence-20261019/cycle-000001/stage-04/revision-0001/review_findings.yaml
   kind: review_findings
-  sha256: d4f430ba91b26845dbf52b5df0c3c9cf11e0c2c0d8675b371d9eb0175f6734df
+  sha256: a2ae12c990e2e9e9ff5bdc03360a3b799d1ca7c661f98423971783f1e7c636fc
 - path: reviews/workflow/mech-goal-sequence-20261019/cycle-000001/stage-04/revision-0001/corpus_coverage_summary.json
   kind: supporting
-  sha256: ff5fd4100c0d4eb44597c91a47506bccddc1d2cda07bcc0d3f1552d6cdc0c34a
+  sha256: 9fb8253f5da21cfeef6646f921c60c1ef7a84678197c4f90ff6ce2e9adc0562a
 findings:
 - finding_id: causal-node-type-enum-and-mech-family-nav-drift
   status: open
   issue_url: https://github.com/CultureBotAI/TaxonMech/issues/76
-  summary: CausalNodeTypeEnum in src/taxonmech/schema/taxonmech.yaml (lines 1265-1289)
+  summary: CausalNodeTypeEnum in src/taxonmech/schema/taxonmech.yaml (lines 1467-1504)
     omits GENETIC_ELEMENT, ORGANELLE, and RNA relative to the TraitMech superset it
     claims to mirror, and Mech suite navigation in README.md, CLAUDE.md, and HTML
     templates omits NaturalProductMech (#76).
@@ -36,27 +38,30 @@ findings:
 - finding_id: validate-history-bare-linkml-validate-path
   status: open
   issue_url: https://github.com/CultureBotAI/TaxonMech/issues/83
-  summary: scripts/validate_history.py line 48 invokes linkml-validate by bare executable
-    name instead of resolving Path(sys.executable).with_name('linkml-validate') before
-    falling back to PATH (#83).
+  summary: scripts/validate_history.py main() (lines 47-51) invokes linkml-validate
+    by bare executable name instead of resolving Path(sys.executable).with_name('linkml-validate')
+    before falling back to PATH (#83).
   disposition: 'Carry forward to Stage 5 (resolve_review_findings) for direct validator
     executable resolution fix under #83.'
 - finding_id: gtdb-closematch-exact-promotion
   status: open
   issue_url: https://github.com/CultureBotAI/TaxonMech/issues/124
-  summary: 'Across docs/structured-review-inventory/part-00.tsv..part-12.tsv, 95,766
-    records (74,325 from fan-out clusters) carry needs_curation because src/taxonmech/seed.py
-    promotes skos:closeMatch GTDB species-cluster mappings to EXACT_SYNONYM and top-level
-    xrefs without a 1:1 taxon-identity bridge (#124, #63).'
+  summary: 'Across docs/structured-review-inventory/part-00.tsv..part-13.tsv, 95,766
+    records (74,325 from fan-out clusters; e.g., NCBITaxon:2940590, NCBITaxon:206,
+    and legacy-reviewed NCBITaxon:33952) carry needs_curation because src/taxonmech/seed.py
+    (lines 443-478) promotes skos:closeMatch GTDB species-cluster mappings to EXACT_SYNONYM
+    and top-level xrefs without a 1:1 taxon-identity bridge (#124, #63).'
   disposition: 'Carry forward to Stage 5 (resolve_review_findings); requires gating
     closeMatch promotion in src/taxonmech/seed.py and regenerating 95,766 generated
     TaxonRecord YAML files and rendered pages (#124, #63).'
 - finding_id: gtdb-polyphyly-suffix-synonym-mangling
   status: open
   issue_url: https://github.com/CultureBotAI/TaxonMech/issues/65
-  summary: src/taxonmech/seed.py line 468 replaces all underscores in GTDB labels
-    with spaces, mangling 15,704 polyphyly-suffixed GTDB cluster names (e.g., s__Campylobacter_F_sputorum
-    -> 'Campylobacter F sputorum' on NCBITaxon:206) into fake trinomials published
+  summary: src/taxonmech/seed.py lines 470-473 replace all underscores in GTDB labels
+    with spaces via m['gtdb_label'].split('__', 1)[-1].replace('_', ' '), mangling
+    15,704 polyphyly-suffixed GTDB cluster names (e.g., s__Campylobacter_F_sputorum
+    -> 'Campylobacter F sputorum' on NCBITaxon:206 and s__Acetobacterium_woodii_A
+    -> 'Acetobacterium woodii A' on NCBITaxon:33952) into fake trinomials published
     as EXACT_SYNONYM (#65).
   disposition: Carry forward to Stage 5 (resolve_review_findings); requires updating
     GTDB synonym formatting in src/taxonmech/seed.py and regenerating affected TaxonRecord
@@ -64,32 +69,35 @@ findings:
 - finding_id: gtdb-pooled-broadmatch-attestation-and-note
   status: open
   issue_url: https://github.com/CultureBotAI/TaxonMech/issues/118
-  summary: On 6,335 pooled-only GTDB records, src/taxonmech/seed.py emits the largest
-    pooled species cluster's genome total as the taxon's GTDB GENOME attestation (#118),
-    and across 8,587 pooled GTDB records (209,540 rows) the pooled broadMatch note
-    states the reverse of kg-microbe's broadMatch direction (#119).
+  summary: On 6,335 pooled-only GTDB records (e.g., NCBITaxon:3121604 data/taxa/bacteria/acidaminobacteraceae_bacterium.yaml),
+    src/taxonmech/seed.py (lines 579-593) emits the largest pooled species cluster's
+    genome total as the taxon's GTDB GENOME attestation (#118), and across 8,587 pooled
+    GTDB records (209,540 rows, including NCBITaxon:562 and NCBITaxon:3121604) lines
+    465-467 emit a note stating the reverse of kg-microbe's broadMatch direction (#119).
   disposition: 'Carry forward to Stage 5 (resolve_review_findings); requires updating
     pooled GTDB broadMatch handling in src/taxonmech/seed.py and regenerating 8,587
     TaxonRecord YAML files (#118, #119).'
 - finding_id: curation-history-stale-scope-strain-count
   status: open
   issue_url: https://github.com/CultureBotAI/TaxonMech/issues/69
-  summary: 'SEEDED_FROM_SOURCES curation_history in src/taxonmech/seed.py embeds the
-    static strain count from curation/seed_scope.tsv''s reason column (''1861 BacDive
-    strains'' on NCBITaxon:562) instead of the subtree-aggregated strain_count (1975;
-    #69).'
+  summary: 'SEEDED_FROM_SOURCES curation_history in src/taxonmech/seed.py (lines 635-645)
+    embeds the static strain count from curation/seed_scope.tsv''s reason column (''1861
+    BacDive strains'' on NCBITaxon:562) instead of the subtree-aggregated strain_count
+    (1975; #69).'
   disposition: Carry forward to Stage 5 (resolve_review_findings); requires reconciling
     curation/seed_scope.tsv reason strings and SEEDED_FROM_SOURCES note generation
     in src/taxonmech/seed.py (#69).
 - finding_id: upstream-edge-multiplicity-and-subtree-count-scope
   status: open
   issue_url: https://github.com/CultureBotAI/TaxonMech/issues/8
-  summary: Across docs/structured-review-inventory/part-00.tsv..part-12.tsv, 27,118
-    pass_with_limitations and 30 blocked records reflect uncommitted upstream kg-microbe
-    raw edge tables for GOLD/MEDIADIVE/MADIN/BACTOTRAITS and direct-only (non-subtree)
-    count aggregation for non-BacDive sources (#8).
-  disposition: 'Carry forward to Stage 5 (resolve_review_findings); tracked under
-    #8 for upstream edge-table provenance and subtree rollup alignment.'
+  summary: Across docs/structured-review-inventory/part-00.tsv..part-13.tsv, 27,118
+    pass_with_limitations (e.g., NCBITaxon:1435036, NCBITaxon:562, NCBITaxon:1423,
+    NCBITaxon:287) and 30 blocked (e.g., NCBITaxon:209650) records reflect uncommitted
+    upstream kg-microbe raw edge tables for GOLD/MEDIADIVE/MADIN/BACTOTRAITS and direct-only
+    (non-subtree) count aggregation for non-BacDive sources (#8; INFRA_TASKS.md taxonmech-infra-0004).
+  disposition: 'Carry forward to Stage 5 (resolve_review_findings) and Stage 6 (implement_infra_tasks)
+    via INFRA_TASKS.md taxonmech-infra-0004 and #8 for upstream edge-table provenance
+    and subtree rollup alignment.'
 - finding_id: mechanism-and-protein-representation-prerequisites
   status: open
   issue_url: https://github.com/CultureBotAI/TaxonMech/issues/78

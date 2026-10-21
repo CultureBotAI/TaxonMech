@@ -28,10 +28,10 @@ Working-tree hashes do not imply those bytes were committed.
 | NCBITaxon:83333 | data/taxa/bacteria/escherichia_coli_k_12.yaml | generated | Escherichia coli K-12 |
 | NCBITaxon:1423 | data/taxa/bacteria/bacillus_subtilis.yaml | generated | Bacillus subtilis |
 | NCBITaxon:287 | data/taxa/bacteria/pseudomonas_aeruginosa.yaml | generated | Pseudomonas aeruginosa |
-| NCBITaxon:751889 | data/taxa/bacteria/achromobacter_sp_jsk4.yaml | generated | Achromobacter sp. JSK4 |
-| NCBITaxon:345927 | data/taxa/bacteria/acidovorax_sp_js777.yaml | generated | Acidovorax sp. JS777 |
-| NCBITaxon:68987 | data/taxa/bacteria/acinetobacter_sp_atcc_11171.yaml | generated | Acinetobacter sp. ATCC 11171 |
-| NCBITaxon:700537 | data/taxa/bacteria/achromobacter_sp_ym_m_55.yaml | generated | Achromobacter sp. YM-M-55 |
+| NCBITaxon:2940590 | data/taxa/bacteria/achromobacter_sp_jub104.yaml | generated | Achromobacter sp. JUb104 |
+| NCBITaxon:3121604 | data/taxa/bacteria/acidaminobacteraceae_bacterium.yaml | generated | Acidaminobacteraceae bacterium |
+| NCBITaxon:1435036 | data/taxa/bacteria/acinetobacter_bohemicus.yaml | generated | Acinetobacter bohemicus |
+| NCBITaxon:209650 | data/taxa/bacteria/acidicaldus_organivorans.yaml | generated | Acidicaldus organivorans |
 | NCBITaxon:206 | data/taxa/bacteria/campylobacter_sputorum.yaml | generated | Campylobacter sputorum |
 | NCBITaxon:33952 | data/taxa/bacteria/acetobacterium_woodii.yaml | generated | Acetobacterium woodii |
 | NCBITaxon:2190 | data/taxa/archaea/methanocaldococcus_jannaschii.yaml | generated | Methanocaldococcus jannaschii |
@@ -49,31 +49,31 @@ Working-tree hashes do not imply those bytes were committed.
 
 | Check | Status | Required | Targets | Result |
 | --- | --- | --- | --- | --- |
-| Native strict and LinkML schema validation on directly bound Stage 4 exemplar records | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:751889, NCBITaxon:345927, NCBITaxon:68987, NCBITaxon:700537, NCBITaxon:206, NCBITaxon:33952, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:2287, NCBITaxon:4932, NCBITaxon:5207, NCBITaxon:5755, NCBITaxon:1859096, NCBITaxon:155900, NCBITaxon:408170, NCBITaxon:32644 | All 20 directly bound cross-domain exemplar TaxonRecord files pass scripts/validate_strict.py with 0 errors. |
-| Native history validation across committed history records | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:751889, NCBITaxon:345927, NCBITaxon:68987, NCBITaxon:700537, NCBITaxon:206, NCBITaxon:33952, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:2287, NCBITaxon:4932, NCBITaxon:5207, NCBITaxon:5755, NCBITaxon:1859096, NCBITaxon:155900, NCBITaxon:408170, NCBITaxon:32644 | scripts/validate_history.py passes on all 17 repository history records when .venv/bin is on PATH, though line 48 invokes linkml-validate by bare name (#83). |
-| Required historical native-unit counts | unavailable | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:751889, NCBITaxon:345927, NCBITaxon:68987, NCBITaxon:700537, NCBITaxon:206, NCBITaxon:33952, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:2287, NCBITaxon:4932, NCBITaxon:5207, NCBITaxon:5755, NCBITaxon:1859096, NCBITaxon:155900, NCBITaxon:408170, NCBITaxon:32644 | Manifest-pinned upstream kg-microbe raw edge tables for GOLD, MEDIADIVE, MADIN, and BACTOTRAITS are not committed locally, and subtree rollups apply to BacDive strains only (#8). |
-| Full-corpus review coverage and target SHA-256 verification across all 626,048 records | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:751889, NCBITaxon:345927, NCBITaxon:68987, NCBITaxon:700537, NCBITaxon:206, NCBITaxon:33952, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:2287, NCBITaxon:4932, NCBITaxon:5207, NCBITaxon:5755, NCBITaxon:1859096, NCBITaxon:155900, NCBITaxon:408170, NCBITaxon:32644 | scripts/corpus_review_inventory.py --check --verify-target-sha256 verified 626,048 corpus records (23,883 legacy + 602,165 structured across 14 shards and 611 batches) with 0 unreviewed records, 0 overlaps, and 0 SHA-256 mismatches. |
-| Deterministic seeder reproduction check across all 626,048 TaxonRecord YAML files | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:751889, NCBITaxon:345927, NCBITaxon:68987, NCBITaxon:700537, NCBITaxon:206, NCBITaxon:33952, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:2287, NCBITaxon:4932, NCBITaxon:5207, NCBITaxon:5755, NCBITaxon:1859096, NCBITaxon:155900, NCBITaxon:408170, NCBITaxon:32644 | scripts/verify_corpus.py --workers 4 verified zero drift between src/taxonmech/seed.py and all 626,048 committed YAML files. |
+| Native strict and LinkML schema validation on directly bound Stage 4 exemplar records | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2940590, NCBITaxon:3121604, NCBITaxon:1435036, NCBITaxon:209650, NCBITaxon:206, NCBITaxon:33952, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:2287, NCBITaxon:4932, NCBITaxon:5207, NCBITaxon:5755, NCBITaxon:1859096, NCBITaxon:155900, NCBITaxon:408170, NCBITaxon:32644 | All 20 directly bound cross-domain exemplar TaxonRecord files pass scripts/validate_strict.py with 0 errors. |
+| Native history validation across committed history records | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2940590, NCBITaxon:3121604, NCBITaxon:1435036, NCBITaxon:209650, NCBITaxon:206, NCBITaxon:33952, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:2287, NCBITaxon:4932, NCBITaxon:5207, NCBITaxon:5755, NCBITaxon:1859096, NCBITaxon:155900, NCBITaxon:408170, NCBITaxon:32644 | scripts/validate_history.py passes on all 17 repository history records when .venv/bin is on PATH, though main() at lines 47-51 invokes linkml-validate by bare executable name (#83). |
+| Required historical native-unit counts | unavailable | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2940590, NCBITaxon:3121604, NCBITaxon:1435036, NCBITaxon:209650, NCBITaxon:206, NCBITaxon:33952, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:2287, NCBITaxon:4932, NCBITaxon:5207, NCBITaxon:5755, NCBITaxon:1859096, NCBITaxon:155900, NCBITaxon:408170, NCBITaxon:32644 | Manifest-pinned upstream kg-microbe raw edge tables for GOLD, MEDIADIVE, MADIN, and BACTOTRAITS are not committed locally, and subtree rollups apply to BacDive strains only (#8). |
+| Full-corpus review coverage and target SHA-256 verification across all 626,048 records | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2940590, NCBITaxon:3121604, NCBITaxon:1435036, NCBITaxon:209650, NCBITaxon:206, NCBITaxon:33952, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:2287, NCBITaxon:4932, NCBITaxon:5207, NCBITaxon:5755, NCBITaxon:1859096, NCBITaxon:155900, NCBITaxon:408170, NCBITaxon:32644 | scripts/corpus_review_inventory.py --check --verify-target-sha256 verified 626,048 corpus records (23,883 legacy + 602,165 structured across 14 shards and 611 batches) with 0 unreviewed records, 0 overlaps, and 0 SHA-256 mismatches. |
+| Deterministic seeder reproduction check across all 626,048 TaxonRecord YAML files | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2940590, NCBITaxon:3121604, NCBITaxon:1435036, NCBITaxon:209650, NCBITaxon:206, NCBITaxon:33952, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:2287, NCBITaxon:4932, NCBITaxon:5207, NCBITaxon:5755, NCBITaxon:1859096, NCBITaxon:155900, NCBITaxon:408170, NCBITaxon:32644 | scripts/verify_corpus.py --workers 4 verified zero drift between src/taxonmech/seed.py and all 626,048 committed YAML files. |
 
 ## Scientific And Domain Assessments
 
 ### Full-corpus review coverage (626,048 records), SHA-256 inventory reconciliation, and NCBI taxonomy alignment
 
-identity: supported. Targets: NCBITaxon:562, NCBITaxon:83333, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:751889, NCBITaxon:345927, NCBITaxon:68987, NCBITaxon:700537, NCBITaxon:206, NCBITaxon:33952, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:2287, NCBITaxon:4932, NCBITaxon:5207, NCBITaxon:5755, NCBITaxon:1859096, NCBITaxon:155900, NCBITaxon:408170, NCBITaxon:32644.
+identity: supported. Targets: NCBITaxon:562, NCBITaxon:83333, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2940590, NCBITaxon:3121604, NCBITaxon:1435036, NCBITaxon:209650, NCBITaxon:206, NCBITaxon:33952, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:2287, NCBITaxon:4932, NCBITaxon:5207, NCBITaxon:5755, NCBITaxon:1859096, NCBITaxon:155900, NCBITaxon:408170, NCBITaxon:32644.
 
 All 626,048 in-scope TaxonRecord YAML files in data/taxa/ are accounted for without gap or overlap (23,883 legacy + 602,165 structured across 14 shards and 611 batches) and match their pinned data/raw/ncbitaxon_taxa.tsv identifier, label, rank, domain, parent_taxon, and lineage.
 
 ### GTDB closeMatch synonym/xref promotion, polyphyly suffix mangling, and pooled broadMatch genome/note semantics
 
-nomenclature: concern. Targets: NCBITaxon:562, NCBITaxon:751889, NCBITaxon:206, NCBITaxon:33952.
+nomenclature: concern. Targets: NCBITaxon:562, NCBITaxon:2940590, NCBITaxon:3121604, NCBITaxon:206, NCBITaxon:33952.
 
-Across the 602,165 structured-review records, 95,766 records carry verdict needs_curation due to src/taxonmech/seed.py promoting skos:closeMatch GTDB species-cluster mappings to EXACT_SYNONYM and top-level xrefs (#124, #63), mangling 15,704 polyphyly-suffixed GTDB labels into fake trinomials (#65), and emitting misleading pooled broadMatch genome totals and notes on 8,587 records (#118, #119).
+Across the 602,165 structured-review records, 95,766 records carry verdict needs_curation due to src/taxonmech/seed.py (lines 443-478) promoting skos:closeMatch GTDB species-cluster mappings to EXACT_SYNONYM and top-level xrefs (#124, #63), mangling 15,704 polyphyly-suffixed GTDB labels into fake trinomials at lines 470-473 (#65), and emitting misleading pooled broadMatch genome totals (lines 579-593; #118) and inverted broadMatch notes (lines 465-467; #119) on 8,587 records.
 
 ### Schema enum/navigation parity, history validator executable resolution, and mechanism/protein infrastructure prerequisites
 
-completeness: concern. Targets: NCBITaxon:562, NCBITaxon:83333, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:751889, NCBITaxon:345927, NCBITaxon:68987, NCBITaxon:700537, NCBITaxon:206, NCBITaxon:33952, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:2287, NCBITaxon:4932, NCBITaxon:5207, NCBITaxon:5755, NCBITaxon:1859096, NCBITaxon:155900, NCBITaxon:408170, NCBITaxon:32644.
+completeness: concern. Targets: NCBITaxon:562, NCBITaxon:83333, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2940590, NCBITaxon:3121604, NCBITaxon:1435036, NCBITaxon:209650, NCBITaxon:206, NCBITaxon:33952, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:2287, NCBITaxon:4932, NCBITaxon:5207, NCBITaxon:5755, NCBITaxon:1859096, NCBITaxon:155900, NCBITaxon:408170, NCBITaxon:32644.
 
-Schema and tooling review identified two directly actionable repository defects — CausalNodeTypeEnum omitting GENETIC_ELEMENT, ORGANELLE, and RNA plus missing NaturalProductMech family navigation (#76), and bare linkml-validate invocation in scripts/validate_history.py (#83) — alongside the Stage 2/3 infrastructure prerequisites blocking causal_graphs and UniProtKB protein-example population (#78; INFRA_TASKS.md taxonmech-infra-0001..0003).
+Schema and tooling review identified two directly actionable repository defects — CausalNodeTypeEnum (src/taxonmech/schema/taxonmech.yaml lines 1467-1504) omitting GENETIC_ELEMENT, ORGANELLE, and RNA plus missing NaturalProductMech family navigation (#76), and bare linkml-validate invocation in scripts/validate_history.py lines 47-51 (#83) — alongside the Stage 2/3 infrastructure prerequisites blocking causal_graphs and UniProtKB protein-example population (#78; INFRA_TASKS.md taxonmech-infra-0001..0003).
 
 ## Findings
 
@@ -81,43 +81,43 @@ Schema and tooling review identified two directly actionable repository defects 
 
 minor / open / confirmed; issue key: stage4-causal-node-type-enum-and-mech-family-nav-drift.
 
-In src/taxonmech/schema/taxonmech.yaml (lines 1265-1289), CausalNodeTypeEnum claims to be a superset of TraitMech's CausalNodeTypeEnum so TraitMech MechanismTemplate graphs can be instantiated without lossy remapping, but omits GENETIC_ELEMENT, ORGANELLE, and RNA. Additionally, the Mech suite family navigation in README.md, CLAUDE.md, src/taxonmech/templates/index.html, and src/taxonmech/templates/taxon.html omits NaturalProductMech (tracked in https://github.com/CultureBotAI/TaxonMech/issues/76).
+In src/taxonmech/schema/taxonmech.yaml (lines 1467-1504), CausalNodeTypeEnum claims to be a superset of TraitMech's CausalNodeTypeEnum so TraitMech MechanismTemplate graphs can be instantiated without lossy remapping, but omits GENETIC_ELEMENT, ORGANELLE, and RNA. Additionally, the Mech suite family navigation in README.md, CLAUDE.md, src/taxonmech/templates/index.html, and src/taxonmech/templates/taxon.html omits NaturalProductMech (tracked in https://github.com/CultureBotAI/TaxonMech/issues/76).
 
 ### validate-history-bare-linkml-validate-path: scripts/validate_history.py invokes linkml-validate by bare name instead of resolving the active Python environment's bin directory
 
 minor / open / confirmed; issue key: stage4-validate-history-bare-linkml-validate-path.
 
-In scripts/validate_history.py line 48, validate_record() calls subprocess.run(['linkml-validate', '-s', str(SCHEMA), str(path)]) using a bare executable name. When invoked via .venv/bin/python scripts/validate_history.py history in shells or CI steps where .venv/bin is not prepended to PATH, subprocess.run raises FileNotFoundError even though linkml-validate is installed alongside sys.executable (tracked in https://github.com/CultureBotAI/TaxonMech/issues/83).
+In scripts/validate_history.py lines 47-51, main() calls subprocess.run(['linkml-validate', '--schema', str(SCHEMA), '--target-class', TARGET_CLASS, *[str(p) for p in paths]], cwd=REPO_ROOT, check=False) using a bare executable name. When invoked via .venv/bin/python scripts/validate_history.py history in shells or CI steps where .venv/bin is not prepended to PATH, subprocess.run raises FileNotFoundError even though linkml-validate is installed alongside sys.executable (tracked in https://github.com/CultureBotAI/TaxonMech/issues/83).
 
 ### gtdb-closematch-exact-promotion: skos:closeMatch GTDB species-cluster mappings are promoted to EXACT_SYNONYM and equivalent top-level xrefs across 95,766 records
 
 major / open / confirmed; issue key: stage4-gtdb-closematch-exact-promotion.
 
-Across docs/structured-review-inventory/part-00.tsv..part-12.tsv, 95,766 of 602,165 structured-review records (including 74,325 from fan-out closeMatch clusters) carry verdict needs_curation because src/taxonmech/seed.py (lines 440-472) promotes skos:closeMatch GTDB species-cluster rows in data/raw/gtdb_mappings.tsv to EXACT_SYNONYM and top-level xrefs without an explicit 1:1 taxon-identity or nomenclatural bridge (tracked in https://github.com/CultureBotAI/TaxonMech/issues/124 and https://github.com/CultureBotAI/TaxonMech/issues/63).
+Across docs/structured-review-inventory/part-00.tsv..part-13.tsv, 95,766 of 602,165 structured-review records (including 74,325 from fan-out closeMatch clusters; e.g., NCBITaxon:2940590 data/taxa/bacteria/achromobacter_sp_jub104.yaml promoting GTDB:s__Achromobacter_spanius, NCBITaxon:206 data/taxa/bacteria/campylobacter_sputorum.yaml promoting GTDB:s__Campylobacter_F_sputorum, and legacy-reviewed NCBITaxon:33952 data/taxa/bacteria/acetobacterium_woodii.yaml promoting GTDB:s__Acetobacterium_woodii_A) carry verdict needs_curation because src/taxonmech/seed.py (lines 443-478) promotes skos:closeMatch GTDB species-cluster rows in data/raw/gtdb_mappings.tsv to EXACT_SYNONYM and top-level xrefs without an explicit 1:1 taxon-identity or nomenclatural bridge (tracked in https://github.com/CultureBotAI/TaxonMech/issues/124 and https://github.com/CultureBotAI/TaxonMech/issues/63).
 
 ### gtdb-polyphyly-suffix-synonym-mangling: GTDB polyphyly suffixes are mangled by underscore-to-space replacement into fake trinomials published as EXACT_SYNONYM
 
 major / open / confirmed; issue key: stage4-gtdb-polyphyly-suffix-synonym-mangling.
 
-In src/taxonmech/seed.py line 468, GTDB species labels are converted via gtdb_label[3:].replace('_', ' '), turning GTDB polyphyly partition suffixes (e.g., s__Campylobacter_F_sputorum on NCBITaxon:206 data/taxa/bacteria/campylobacter_sputorum.yaml) into fake middle-initial trinomials ('Campylobacter F sputorum') published as EXACT_SYNONYM across 15,704 rows in data/raw/gtdb_mappings.tsv (tracked in https://github.com/CultureBotAI/TaxonMech/issues/65).
+In src/taxonmech/seed.py lines 470-473, GTDB species labels are converted via m['gtdb_label'].split('__', 1)[-1].replace('_', ' '), turning GTDB polyphyly partition suffixes (e.g., s__Campylobacter_F_sputorum on NCBITaxon:206 data/taxa/bacteria/campylobacter_sputorum.yaml -&gt; 'Campylobacter F sputorum', and s__Acetobacterium_woodii_A on NCBITaxon:33952 data/taxa/bacteria/acetobacterium_woodii.yaml -&gt; 'Acetobacterium woodii A') into fake trinomials published as EXACT_SYNONYM across 15,704 rows in data/raw/gtdb_mappings.tsv (tracked in https://github.com/CultureBotAI/TaxonMech/issues/65).
 
 ### gtdb-pooled-broadmatch-attestation-and-note: Pooled GTDB broadMatch mappings emit the largest pooled cluster's genome total and an inverted mapping-direction note
 
 major / open / confirmed; issue key: stage4-gtdb-pooled-broadmatch-attestation-and-note.
 
-On 6,335 pooled-only GTDB records (e.g., NCBITaxon:33952 data/taxa/bacteria/acetobacterium_woodii.yaml), src/taxonmech/seed.py emits the largest pooled GTDB species cluster's genome count as the taxon's GTDB GENOME attestation (#118), and across 8,587 pooled GTDB records (209,540 rows, including NCBITaxon:562 data/taxa/bacteria/escherichia_coli.yaml) seed.py lines 461-463 emit a note stating the reverse of kg-microbe's skos:broadMatch direction (#119).
+On 6,335 pooled-only GTDB records (e.g., NCBITaxon:3121604 data/taxa/bacteria/acidaminobacteraceae_bacterium.yaml, which has 5 pooled skos:broadMatch GTDB mappings led by GTDB:s__JAUMXJ01_sp041781135 with genome_count: 97), src/taxonmech/seed.py (lines 579-593) emits the largest pooled GTDB species cluster's genome count as the taxon's GTDB GENOME attestation (#118), and across 8,587 pooled GTDB records (209,540 rows, including NCBITaxon:562 data/taxa/bacteria/escherichia_coli.yaml and NCBITaxon:3121604 data/taxa/bacteria/acidaminobacteraceae_bacterium.yaml) seed.py lines 465-467 emit a note stating the reverse of kg-microbe's skos:broadMatch direction (#119).
 
 ### curation-history-stale-scope-strain-count: SEEDED_FROM_SOURCES curation_history embeds stale static strain counts from curation/seed_scope.tsv reason strings
 
 minor / open / confirmed; issue key: stage4-curation-history-stale-scope-strain-count.
 
-In src/taxonmech/seed.py lines 586-594, the SEEDED_FROM_SOURCES curation_history note copies the static reason string from curation/seed_scope.tsv (e.g., '1861 BacDive strains' on NCBITaxon:562 data/taxa/bacteria/escherichia_coli.yaml) even when subtree strain aggregation yields a higher seeded strain_count (1975 on NCBITaxon:562; tracked in https://github.com/CultureBotAI/TaxonMech/issues/69).
+In src/taxonmech/seed.py lines 635-645, the SEEDED_FROM_SOURCES curation_history note copies the static reason string from curation/seed_scope.tsv (e.g., '1861 BacDive strains' on NCBITaxon:562 data/taxa/bacteria/escherichia_coli.yaml) even when subtree strain aggregation yields a higher seeded strain_count (1975 on NCBITaxon:562; tracked in https://github.com/CultureBotAI/TaxonMech/issues/69).
 
 ### upstream-edge-multiplicity-and-subtree-count-scope: Upstream kg-microbe edge tables for GOLD/MEDIADIVE/MADIN/BACTOTRAITS are not committed locally and subtree rollups apply only to BacDive strains
 
 minor / open / confirmed; issue key: stage4-upstream-edge-multiplicity-and-subtree-count-scope.
 
-Across docs/structured-review-inventory/part-00.tsv..part-12.tsv, 27,118 records carry verdict pass_with_limitations (e.g., NCBITaxon:68987) and 30 carry verdict blocked (e.g., NCBITaxon:700537) because manifest-pinned upstream kg-microbe raw edge tables for GOLD, MEDIADIVE, MADIN, and BACTOTRAITS are not committed locally, and src/taxonmech/seed.py gathers infraspecific subtree records only for BacDive strains while reporting direct-only taxon counts for GOLD, MediaDive, Madin, and BactoTraits (tracked in https://github.com/CultureBotAI/TaxonMech/issues/8).
+Across docs/structured-review-inventory/part-00.tsv..part-13.tsv, 27,118 records carry verdict pass_with_limitations (e.g., 8-source record NCBITaxon:1435036 data/taxa/bacteria/acinetobacter_bohemicus.yaml as well as NCBITaxon:562, NCBITaxon:1423, and NCBITaxon:287) and 30 carry verdict blocked (e.g., 8-source record NCBITaxon:209650 data/taxa/bacteria/acidicaldus_organivorans.yaml) because manifest-pinned upstream kg-microbe raw edge tables for GOLD, MEDIADIVE, MADIN, and BACTOTRAITS are not committed locally, and src/taxonmech/seed.py gathers infraspecific subtree records only for BacDive strains while reporting direct-only taxon counts for GOLD, MediaDive, Madin, and BactoTraits (tracked in INFRA_TASKS.md taxonmech-infra-0004 and https://github.com/CultureBotAI/TaxonMech/issues/8).
 
 ### mechanism-and-protein-representation-prerequisites: 0 of 626,048 TaxonRecord files populate causal_graphs or UniProtKB GENE_OR_PROTEIN nodes pending seeder overlay, granular extraction, and UniProtKB validation infrastructure
 
@@ -129,7 +129,7 @@ As established in Cycle 1 Stages 2 and 3 (reviews/structured/20261021T043201Z-st
 
 ### remediate-schema-enum-nav-and-history-validator
 
-In Stage 5 (resolve_review_findings), restore GENETIC_ELEMENT, ORGANELLE, and RNA to CausalNodeTypeEnum in src/taxonmech/schema/taxonmech.yaml and add NaturalProductMech to the Mech family navigation (#76), and update scripts/validate_history.py to resolve linkml-validate relative to sys.executable (#83).
+In Stage 5 (resolve_review_findings), restore GENETIC_ELEMENT, ORGANELLE, and RNA to CausalNodeTypeEnum in src/taxonmech/schema/taxonmech.yaml (lines 1467-1504) and add NaturalProductMech to the Mech family navigation (#76), and update scripts/validate_history.py (lines 47-51) to resolve linkml-validate relative to sys.executable (#83).
 
 - CausalNodeTypeEnum in src/taxonmech/schema/taxonmech.yaml includes GENETIC_ELEMENT, ORGANELLE, and RNA
 - README.md and CLAUDE.md Mech suite tables include NaturalProductMech
@@ -145,7 +145,7 @@ Gate skos:closeMatch GTDB promotion to EXACT_SYNONYM and xrefs (#124, #63), fix 
 
 ### implement-mechanism-and-protein-infrastructure-prerequisites
 
-Execute INFRA_TASKS.md tasks taxonmech-infra-0001, taxonmech-infra-0002, and taxonmech-infra-0003 in Stage 6 to add maintained causal_graphs overlay merging in src/taxonmech/seed.py, granular trait/pathway extraction in src/taxonmech/extract.py, and a pinned UniProtKB raw snapshot + prefix/scope validation (#78).
+Execute INFRA_TASKS.md tasks taxonmech-infra-0001, taxonmech-infra-0002, taxonmech-infra-0003, and taxonmech-infra-0004 in Stage 6 to add maintained causal_graphs overlay merging in src/taxonmech/seed.py, granular trait/pathway extraction in src/taxonmech/extract.py, a pinned UniProtKB raw snapshot + prefix/scope validation (#78), and reproducible upstream edge-multiplicity provenance (#8).
 
 - Maintained causal_graphs and UniProtKB GENE_OR_PROTEIN overlays round-trip through src/taxonmech/seed.py and scripts/verify_corpus.py
 - scripts/validate_id_label_correspondence.py and scripts/validate_strict.py validate UniProtKB and EC CURIEs and organism/strain/proteome scope
@@ -158,9 +158,9 @@ Execute INFRA_TASKS.md tasks taxonmech-infra-0001, taxonmech-infra-0002, and tax
 | Evidence | Reference / locator | Support | Observation |
 | --- | --- | --- | --- |
 | corpus-review-inventories | docs/legacy-review-inventory.tsv; docs/structured-review-inventory/part-00.tsv..part-13.tsv; docs/structured-review-batches.tsv; 23,883 rows in docs/legacy-review-inventory.tsv and 602,165 rows across docs/structured-review-inventory/part-00.tsv..part-13.tsv | supports | Complete SHA-256-verified per-record review inventories covering all 626,048 TaxonRecord files in data/taxa/ (0 unreviewed, 0 overlap; structured verdicts: pass=479,251, pass_with_limitations=27,118, needs_curation=95,766, blocked=30). |
-| exemplar-target-records | data/taxa/bacteria/escherichia_coli.yaml; data/taxa/bacteria/escherichia_coli_k_12.yaml; data/taxa/bacteria/bacillus_subtilis.yaml; data/taxa/bacteria/pseudomonas_aeruginosa.yaml; data/taxa/bacteria/achromobacter_sp_jsk4.yaml; data/taxa/bacteria/acidovorax_sp_js777.yaml; data/taxa/bacteria/acinetobacter_sp_atcc_11171.yaml; data/taxa/bacteria/achromobacter_sp_ym_m_55.yaml; data/taxa/bacteria/campylobacter_sputorum.yaml; data/taxa/bacteria/acetobacterium_woodii.yaml; data/taxa/archaea/methanocaldococcus_jannaschii.yaml; data/taxa/archaea/methanocaldococcus_jannaschii_dsm_2661.yaml; data/taxa/archaea/saccharolobus_solfataricus.yaml; data/taxa/eukaryota/saccharomyces_cerevisiae.yaml; data/taxa/eukaryota/cryptococcus_neoformans.yaml; data/taxa/eukaryota/acanthamoeba_castellanii.yaml; data/taxa/eukaryota/cryptococcus_deuterogattii.yaml; data/taxa/other/uncultured_organism.yaml; data/taxa/other/human_gut_metagenome.yaml; data/taxa/other/unidentified.yaml; Complete YAML content of 20 directly bound cross-domain and verdict-stratified TaxonRecord files | supports | Verified taxon identity, lineage, nomenclature, synonyms, xrefs, taxonomy_mappings, source_attestations, strains, and curation_history across 20 exemplar records spanning Bacteria (10), Archaea (3), Eukaryota (4), and other (3). |
+| exemplar-target-records | data/taxa/bacteria/escherichia_coli.yaml; data/taxa/bacteria/escherichia_coli_k_12.yaml; data/taxa/bacteria/bacillus_subtilis.yaml; data/taxa/bacteria/pseudomonas_aeruginosa.yaml; data/taxa/bacteria/achromobacter_sp_jub104.yaml; data/taxa/bacteria/acidaminobacteraceae_bacterium.yaml; data/taxa/bacteria/acinetobacter_bohemicus.yaml; data/taxa/bacteria/acidicaldus_organivorans.yaml; data/taxa/bacteria/campylobacter_sputorum.yaml; data/taxa/bacteria/acetobacterium_woodii.yaml; data/taxa/archaea/methanocaldococcus_jannaschii.yaml; data/taxa/archaea/methanocaldococcus_jannaschii_dsm_2661.yaml; data/taxa/archaea/saccharolobus_solfataricus.yaml; data/taxa/eukaryota/saccharomyces_cerevisiae.yaml; data/taxa/eukaryota/cryptococcus_neoformans.yaml; data/taxa/eukaryota/acanthamoeba_castellanii.yaml; data/taxa/eukaryota/cryptococcus_deuterogattii.yaml; data/taxa/other/uncultured_organism.yaml; data/taxa/other/human_gut_metagenome.yaml; data/taxa/other/unidentified.yaml; Complete YAML content of 20 directly bound cross-domain and verdict-stratified TaxonRecord files | supports | Verified taxon identity, lineage, nomenclature, synonyms, xrefs, taxonomy_mappings, source_attestations, strains, and curation_history across 20 exemplar records spanning Bacteria (10), Archaea (3), Eukaryota (4), and other (3). |
 | raw-source-inventories | curation/seed_scope.tsv; data/raw/MANIFEST.yaml; data/raw/ncbitaxon_taxa.tsv; data/raw/gtdb_mappings.tsv; data/raw/gtdb_species.tsv; data/raw/bacdive_strains.tsv; data/raw/lpsn_names.tsv; curation/seed_scope.tsv (626,048 rows) and data/raw/*.tsv | supports | Pinned raw inventories verify exact NCBI taxon IDs and lineages across all 626,048 records and expose systematic GTDB closeMatch fan-out (74,325 records), polyphyly suffix mangling (15,704 rows), pooled broadMatch genome counts/notes (8,587 records), and stale seed_scope strain-count reason strings. |
-| schema-seeder-validator-code | src/taxonmech/schema/taxonmech.yaml; src/taxonmech/seed.py; src/taxonmech/extract.py; scripts/validate_history.py; README.md; CLAUDE.md; src/taxonmech/templates/index.html; src/taxonmech/templates/taxon.html; taxonmech.yaml:43-88,1190-1289; seed.py:344-646; extract.py:293-395; validate_history.py:48 | supports | Inspection of schema, seeder, extractor, validator, and template code confirms CausalNodeTypeEnum drift and missing NaturalProductMech family navigation (#76), bare linkml-validate invocation in validate_history.py (#83), GTDB closeMatch/polyphyly/pooled mapping defects in seed.py (#124, #63, #65, #118, #119), and missing causal_graphs/UniProtKB infrastructure prerequisites (INFRA_TASKS.md taxonmech-infra-0001..0003; #78). |
+| schema-seeder-validator-code | src/taxonmech/schema/taxonmech.yaml; src/taxonmech/seed.py; src/taxonmech/extract.py; scripts/validate_history.py; README.md; CLAUDE.md; src/taxonmech/templates/index.html; src/taxonmech/templates/taxon.html; taxonmech.yaml:43-88,1188-1258,1467-1504; seed.py:344-646; extract.py:412-417,677-678,840-841; validate_history.py:47-51 | supports | Inspection of schema, seeder, extractor, validator, and template code confirms CausalNodeTypeEnum drift (lines 1467-1504) and missing NaturalProductMech family navigation (#76), bare linkml-validate invocation in validate_history.py lines 47-51 (#83), GTDB closeMatch/polyphyly/pooled mapping defects in seed.py lines 443-478 and 579-593 (#124, #63, #65, #118, #119), SEEDED_FROM_SOURCES reason string copy at seed.py lines 635-645 (#69), and missing causal_graphs/UniProtKB infrastructure prerequisites (INFRA_TASKS.md taxonmech-infra-0001..0003; #78). |
 | stage1-stage2-stage3-reviews | reviews/structured/20261019T052200Z-structured-review-shard-part-13/review.yaml; reviews/structured/20261021T043201Z-stage2-causal-graphs-assessment/review.yaml; reviews/structured/20261021T094500Z-stage3-protein-examples-assessment/review.yaml; Cycle 1 Stages 1-3 structured review bundles and INFRA_TASKS.md | supports | Prior Cycle 1 structured review bundles verify the 88 newly added microbial eukaryote records in part-13 and document the mechanism causal_graphs and UniProtKB protein-example representation/writer prerequisites. |
 
 ## Limits And Additional Notes
@@ -169,7 +169,7 @@ Execute INFRA_TASKS.md tasks taxonmech-infra-0001, taxonmech-infra-0002, and tax
 - Stage 4 is a read-only review and finding-consolidation stage (.claude/skills/review-yaml-record/SKILL.md and .claude/skills/review-yaml-category/SKILL.md); record/schema/validator remediations are preserved for Stage 5 (resolve_review_findings) and Stage 6 (implement_infra_tasks).
 - Manifest-pinned upstream kg-microbe raw edge tables for GOLD, MEDIADIVE, MADIN, and BACTOTRAITS are not committed locally.
 - Full-corpus review coverage verified: 626,048 total records = 23,883 legacy (docs/legacy-review-inventory.tsv) + 602,165 structured (docs/structured-review-inventory/part-00.tsv..part-13.tsv across 611 batches in docs/structured-review-batches.tsv); 0 unreviewed; 0 overlap.
-- Parent workflow Stage 4 evidence manifest saved at reviews/workflow/mech-goal-sequence-20261019/cycle-000001/stage-04/revision-0001/evidence.yaml.
+- Parent workflow Stage 4 evidence manifest saved at reviews/workflow/mech-goal-sequence-20261019/cycle-000001/stage-04/revision-0001/evidence.yaml; originated infrastructure task taxonmech-infra-0004 recorded in INFRA_TASKS.md.
 
 ## Complete Structured Record
 
@@ -232,9 +232,6 @@ source:
     role: context
   - path: CLAUDE.md
     sha256: 7ffd88ac6de931cabf76781935be14d465472038e3bb654208b837c3e2df8258
-    role: context
-  - path: INFRA_TASKS.md
-    sha256: 2fd73b384c7614ef60382687cc5fd0f26624d947f2e326a877a2840df6b6fcdb
     role: context
   - path: README.md
     sha256: e60daa10407414ddc69bcb72d27dd8a44b2933cc65b343b309bce0530a69bfa4
@@ -326,17 +323,17 @@ source:
   - path: data/taxa/bacteria/acetobacterium_woodii.yaml
     sha256: 5230db65344dd60acf05b122b63bfe2f83f478d039f221bf4d7968b7db1ebd39
     role: target
-  - path: data/taxa/bacteria/achromobacter_sp_jsk4.yaml
-    sha256: c128aa63dada205314dab7c9257d37080db69312df00a51b120485eebdef5e01
+  - path: data/taxa/bacteria/achromobacter_sp_jub104.yaml
+    sha256: 26b632ebff370ddd07acf50d8cd595d08963dccd08fa5951ec8f2a7c3f93977d
     role: target
-  - path: data/taxa/bacteria/achromobacter_sp_ym_m_55.yaml
-    sha256: fdfa6af57f754fa6a40a220a18bc5c141500a0b6769772eacbcf55cd38d5bf79
+  - path: data/taxa/bacteria/acidaminobacteraceae_bacterium.yaml
+    sha256: 596bbf35eaf448bccd4dd1042ee2212994a723371c01ac7c93dc0a629c45a307
     role: target
-  - path: data/taxa/bacteria/acidovorax_sp_js777.yaml
-    sha256: 360efd4c625dbd78acda2e22c42392bf93ffb582f6eb61a9cc1bd7404d1b1d14
+  - path: data/taxa/bacteria/acidicaldus_organivorans.yaml
+    sha256: 3d8f207bb388f7fd41ae1e2315d6ebbf3f938f99a209705a34722d8d31c49977
     role: target
-  - path: data/taxa/bacteria/acinetobacter_sp_atcc_11171.yaml
-    sha256: f47f44b65884f191d84b19ede19d852948d484ab89219cba07b6decdec32f564
+  - path: data/taxa/bacteria/acinetobacter_bohemicus.yaml
+    sha256: ce1aed420886f258c1a6277f3cac55271171b96bf235e9630642d6f377168a0b
     role: target
   - path: data/taxa/bacteria/bacillus_subtilis.yaml
     sha256: dcf2b6af885121fd3165a0a8e1c738ab3ad7c5a27c63a95d2e816379ccb2d05c
@@ -548,10 +545,10 @@ scope:
   - NCBITaxon:83333
   - NCBITaxon:1423
   - NCBITaxon:287
-  - NCBITaxon:751889
-  - NCBITaxon:345927
-  - NCBITaxon:68987
-  - NCBITaxon:700537
+  - NCBITaxon:2940590
+  - NCBITaxon:3121604
+  - NCBITaxon:1435036
+  - NCBITaxon:209650
   - NCBITaxon:206
   - NCBITaxon:33952
   - NCBITaxon:2190
@@ -625,9 +622,9 @@ targets:
   - repository: CultureBotAI/TaxonMech
     path: data/raw/ncbitaxon_taxa.tsv
     role: Pinned taxonomy and lineage inventory
-- target_id: NCBITaxon:751889
-  path: data/taxa/bacteria/achromobacter_sp_jsk4.yaml
-  label: Achromobacter sp. JSK4
+- target_id: NCBITaxon:2940590
+  path: data/taxa/bacteria/achromobacter_sp_jub104.yaml
+  label: Achromobacter sp. JUb104
   record_class: TaxonRecord
   kind: generated
   owner_paths:
@@ -640,9 +637,9 @@ targets:
   - repository: CultureBotAI/TaxonMech
     path: data/raw/ncbitaxon_taxa.tsv
     role: Pinned taxonomy and lineage inventory
-- target_id: NCBITaxon:345927
-  path: data/taxa/bacteria/acidovorax_sp_js777.yaml
-  label: Acidovorax sp. JS777
+- target_id: NCBITaxon:3121604
+  path: data/taxa/bacteria/acidaminobacteraceae_bacterium.yaml
+  label: Acidaminobacteraceae bacterium
   record_class: TaxonRecord
   kind: generated
   owner_paths:
@@ -655,9 +652,9 @@ targets:
   - repository: CultureBotAI/TaxonMech
     path: data/raw/ncbitaxon_taxa.tsv
     role: Pinned taxonomy and lineage inventory
-- target_id: NCBITaxon:68987
-  path: data/taxa/bacteria/acinetobacter_sp_atcc_11171.yaml
-  label: Acinetobacter sp. ATCC 11171
+- target_id: NCBITaxon:1435036
+  path: data/taxa/bacteria/acinetobacter_bohemicus.yaml
+  label: Acinetobacter bohemicus
   record_class: TaxonRecord
   kind: generated
   owner_paths:
@@ -670,9 +667,9 @@ targets:
   - repository: CultureBotAI/TaxonMech
     path: data/raw/ncbitaxon_taxa.tsv
     role: Pinned taxonomy and lineage inventory
-- target_id: NCBITaxon:700537
-  path: data/taxa/bacteria/achromobacter_sp_ym_m_55.yaml
-  label: Achromobacter sp. YM-M-55
+- target_id: NCBITaxon:209650
+  path: data/taxa/bacteria/acidicaldus_organivorans.yaml
+  label: Acidicaldus organivorans
   record_class: TaxonRecord
   kind: generated
   owner_paths:
@@ -878,10 +875,10 @@ checks:
   - NCBITaxon:83333
   - NCBITaxon:1423
   - NCBITaxon:287
-  - NCBITaxon:751889
-  - NCBITaxon:345927
-  - NCBITaxon:68987
-  - NCBITaxon:700537
+  - NCBITaxon:2940590
+  - NCBITaxon:3121604
+  - NCBITaxon:1435036
+  - NCBITaxon:209650
   - NCBITaxon:206
   - NCBITaxon:33952
   - NCBITaxon:2190
@@ -896,9 +893,9 @@ checks:
   - NCBITaxon:32644
   command: python3 scripts/validate_strict.py data/taxa/bacteria/escherichia_coli.yaml
     data/taxa/bacteria/escherichia_coli_k_12.yaml data/taxa/bacteria/bacillus_subtilis.yaml
-    data/taxa/bacteria/pseudomonas_aeruginosa.yaml data/taxa/bacteria/achromobacter_sp_jsk4.yaml
-    data/taxa/bacteria/acidovorax_sp_js777.yaml data/taxa/bacteria/acinetobacter_sp_atcc_11171.yaml
-    data/taxa/bacteria/achromobacter_sp_ym_m_55.yaml data/taxa/bacteria/campylobacter_sputorum.yaml
+    data/taxa/bacteria/pseudomonas_aeruginosa.yaml data/taxa/bacteria/achromobacter_sp_jub104.yaml
+    data/taxa/bacteria/acidaminobacteraceae_bacterium.yaml data/taxa/bacteria/acinetobacter_bohemicus.yaml
+    data/taxa/bacteria/acidicaldus_organivorans.yaml data/taxa/bacteria/campylobacter_sputorum.yaml
     data/taxa/bacteria/acetobacterium_woodii.yaml data/taxa/archaea/methanocaldococcus_jannaschii.yaml
     data/taxa/archaea/methanocaldococcus_jannaschii_dsm_2661.yaml data/taxa/archaea/saccharolobus_solfataricus.yaml
     data/taxa/eukaryota/saccharomyces_cerevisiae.yaml data/taxa/eukaryota/cryptococcus_neoformans.yaml
@@ -915,17 +912,17 @@ checks:
   status: passed
   required: true
   summary: scripts/validate_history.py passes on all 17 repository history records
-    when .venv/bin is on PATH, though line 48 invokes linkml-validate by bare name
-    (#83).
+    when .venv/bin is on PATH, though main() at lines 47-51 invokes linkml-validate
+    by bare executable name (#83).
   target_ids:
   - NCBITaxon:562
   - NCBITaxon:83333
   - NCBITaxon:1423
   - NCBITaxon:287
-  - NCBITaxon:751889
-  - NCBITaxon:345927
-  - NCBITaxon:68987
-  - NCBITaxon:700537
+  - NCBITaxon:2940590
+  - NCBITaxon:3121604
+  - NCBITaxon:1435036
+  - NCBITaxon:209650
   - NCBITaxon:206
   - NCBITaxon:33952
   - NCBITaxon:2190
@@ -955,10 +952,10 @@ checks:
   - NCBITaxon:83333
   - NCBITaxon:1423
   - NCBITaxon:287
-  - NCBITaxon:751889
-  - NCBITaxon:345927
-  - NCBITaxon:68987
-  - NCBITaxon:700537
+  - NCBITaxon:2940590
+  - NCBITaxon:3121604
+  - NCBITaxon:1435036
+  - NCBITaxon:209650
   - NCBITaxon:206
   - NCBITaxon:33952
   - NCBITaxon:2190
@@ -987,10 +984,10 @@ checks:
   - NCBITaxon:83333
   - NCBITaxon:1423
   - NCBITaxon:287
-  - NCBITaxon:751889
-  - NCBITaxon:345927
-  - NCBITaxon:68987
-  - NCBITaxon:700537
+  - NCBITaxon:2940590
+  - NCBITaxon:3121604
+  - NCBITaxon:1435036
+  - NCBITaxon:209650
   - NCBITaxon:206
   - NCBITaxon:33952
   - NCBITaxon:2190
@@ -1020,10 +1017,10 @@ checks:
   - NCBITaxon:83333
   - NCBITaxon:1423
   - NCBITaxon:287
-  - NCBITaxon:751889
-  - NCBITaxon:345927
-  - NCBITaxon:68987
-  - NCBITaxon:700537
+  - NCBITaxon:2940590
+  - NCBITaxon:3121604
+  - NCBITaxon:1435036
+  - NCBITaxon:209650
   - NCBITaxon:206
   - NCBITaxon:33952
   - NCBITaxon:2190
@@ -1058,8 +1055,8 @@ evidence:
   kind: record_content
   reference: data/taxa/bacteria/escherichia_coli.yaml; data/taxa/bacteria/escherichia_coli_k_12.yaml;
     data/taxa/bacteria/bacillus_subtilis.yaml; data/taxa/bacteria/pseudomonas_aeruginosa.yaml;
-    data/taxa/bacteria/achromobacter_sp_jsk4.yaml; data/taxa/bacteria/acidovorax_sp_js777.yaml;
-    data/taxa/bacteria/acinetobacter_sp_atcc_11171.yaml; data/taxa/bacteria/achromobacter_sp_ym_m_55.yaml;
+    data/taxa/bacteria/achromobacter_sp_jub104.yaml; data/taxa/bacteria/acidaminobacteraceae_bacterium.yaml;
+    data/taxa/bacteria/acinetobacter_bohemicus.yaml; data/taxa/bacteria/acidicaldus_organivorans.yaml;
     data/taxa/bacteria/campylobacter_sputorum.yaml; data/taxa/bacteria/acetobacterium_woodii.yaml;
     data/taxa/archaea/methanocaldococcus_jannaschii.yaml; data/taxa/archaea/methanocaldococcus_jannaschii_dsm_2661.yaml;
     data/taxa/archaea/saccharolobus_solfataricus.yaml; data/taxa/eukaryota/saccharomyces_cerevisiae.yaml;
@@ -1092,11 +1089,14 @@ evidence:
   reference: src/taxonmech/schema/taxonmech.yaml; src/taxonmech/seed.py; src/taxonmech/extract.py;
     scripts/validate_history.py; README.md; CLAUDE.md; src/taxonmech/templates/index.html;
     src/taxonmech/templates/taxon.html
-  locator: taxonmech.yaml:43-88,1190-1289; seed.py:344-646; extract.py:293-395; validate_history.py:48
+  locator: taxonmech.yaml:43-88,1188-1258,1467-1504; seed.py:344-646; extract.py:412-417,677-678,840-841;
+    validate_history.py:47-51
   summary: 'Inspection of schema, seeder, extractor, validator, and template code
-    confirms CausalNodeTypeEnum drift and missing NaturalProductMech family navigation
-    (#76), bare linkml-validate invocation in validate_history.py (#83), GTDB closeMatch/polyphyly/pooled
-    mapping defects in seed.py (#124, #63, #65, #118, #119), and missing causal_graphs/UniProtKB
+    confirms CausalNodeTypeEnum drift (lines 1467-1504) and missing NaturalProductMech
+    family navigation (#76), bare linkml-validate invocation in validate_history.py
+    lines 47-51 (#83), GTDB closeMatch/polyphyly/pooled mapping defects in seed.py
+    lines 443-478 and 579-593 (#124, #63, #65, #118, #119), SEEDED_FROM_SOURCES reason
+    string copy at seed.py lines 635-645 (#69), and missing causal_graphs/UniProtKB
     infrastructure prerequisites (INFRA_TASKS.md taxonmech-infra-0001..0003; #78).'
   accessed_at: '2026-10-21T16:38:00Z'
   support: supports
@@ -1128,10 +1128,10 @@ assessments:
   - NCBITaxon:83333
   - NCBITaxon:1423
   - NCBITaxon:287
-  - NCBITaxon:751889
-  - NCBITaxon:345927
-  - NCBITaxon:68987
-  - NCBITaxon:700537
+  - NCBITaxon:2940590
+  - NCBITaxon:3121604
+  - NCBITaxon:1435036
+  - NCBITaxon:209650
   - NCBITaxon:206
   - NCBITaxon:33952
   - NCBITaxon:2190
@@ -1184,13 +1184,15 @@ assessments:
     broadMatch genome/note semantics
   outcome: concern
   summary: 'Across the 602,165 structured-review records, 95,766 records carry verdict
-    needs_curation due to src/taxonmech/seed.py promoting skos:closeMatch GTDB species-cluster
-    mappings to EXACT_SYNONYM and top-level xrefs (#124, #63), mangling 15,704 polyphyly-suffixed
-    GTDB labels into fake trinomials (#65), and emitting misleading pooled broadMatch
-    genome totals and notes on 8,587 records (#118, #119).'
+    needs_curation due to src/taxonmech/seed.py (lines 443-478) promoting skos:closeMatch
+    GTDB species-cluster mappings to EXACT_SYNONYM and top-level xrefs (#124, #63),
+    mangling 15,704 polyphyly-suffixed GTDB labels into fake trinomials at lines 470-473
+    (#65), and emitting misleading pooled broadMatch genome totals (lines 579-593;
+    #118) and inverted broadMatch notes (lines 465-467; #119) on 8,587 records.'
   target_ids:
   - NCBITaxon:562
-  - NCBITaxon:751889
+  - NCBITaxon:2940590
+  - NCBITaxon:3121604
   - NCBITaxon:206
   - NCBITaxon:33952
   evidence_ids:
@@ -1234,20 +1236,20 @@ assessments:
     mechanism/protein infrastructure prerequisites
   outcome: concern
   summary: Schema and tooling review identified two directly actionable repository
-    defects — CausalNodeTypeEnum omitting GENETIC_ELEMENT, ORGANELLE, and RNA plus
-    missing NaturalProductMech family navigation (#76), and bare linkml-validate invocation
-    in scripts/validate_history.py (#83) — alongside the Stage 2/3 infrastructure
-    prerequisites blocking causal_graphs and UniProtKB protein-example population
-    (#78; INFRA_TASKS.md taxonmech-infra-0001..0003).
+    defects — CausalNodeTypeEnum (src/taxonmech/schema/taxonmech.yaml lines 1467-1504)
+    omitting GENETIC_ELEMENT, ORGANELLE, and RNA plus missing NaturalProductMech family
+    navigation (#76), and bare linkml-validate invocation in scripts/validate_history.py
+    lines 47-51 (#83) — alongside the Stage 2/3 infrastructure prerequisites blocking
+    causal_graphs and UniProtKB protein-example population (#78; INFRA_TASKS.md taxonmech-infra-0001..0003).
   target_ids:
   - NCBITaxon:562
   - NCBITaxon:83333
   - NCBITaxon:1423
   - NCBITaxon:287
-  - NCBITaxon:751889
-  - NCBITaxon:345927
-  - NCBITaxon:68987
-  - NCBITaxon:700537
+  - NCBITaxon:2940590
+  - NCBITaxon:3121604
+  - NCBITaxon:1435036
+  - NCBITaxon:209650
   - NCBITaxon:206
   - NCBITaxon:33952
   - NCBITaxon:2190
@@ -1272,7 +1274,7 @@ findings:
   certainty: confirmed
   title: CausalNodeTypeEnum omits GENETIC_ELEMENT, ORGANELLE, and RNA relative to
     TraitMech, and Mech family navigation omits NaturalProductMech
-  description: In src/taxonmech/schema/taxonmech.yaml (lines 1265-1289), CausalNodeTypeEnum
+  description: In src/taxonmech/schema/taxonmech.yaml (lines 1467-1504), CausalNodeTypeEnum
     claims to be a superset of TraitMech's CausalNodeTypeEnum so TraitMech MechanismTemplate
     graphs can be instantiated without lossy remapping, but omits GENETIC_ELEMENT,
     ORGANELLE, and RNA. Additionally, the Mech suite family navigation in README.md,
@@ -1307,14 +1309,15 @@ findings:
   certainty: confirmed
   title: scripts/validate_history.py invokes linkml-validate by bare name instead
     of resolving the active Python environment's bin directory
-  description: In scripts/validate_history.py line 48, validate_record() calls subprocess.run(['linkml-validate',
-    '-s', str(SCHEMA), str(path)]) using a bare executable name. When invoked via
-    .venv/bin/python scripts/validate_history.py history in shells or CI steps where
-    .venv/bin is not prepended to PATH, subprocess.run raises FileNotFoundError even
-    though linkml-validate is installed alongside sys.executable (tracked in https://github.com/CultureBotAI/TaxonMech/issues/83).
+  description: In scripts/validate_history.py lines 47-51, main() calls subprocess.run(['linkml-validate',
+    '--schema', str(SCHEMA), '--target-class', TARGET_CLASS, *[str(p) for p in paths]],
+    cwd=REPO_ROOT, check=False) using a bare executable name. When invoked via .venv/bin/python
+    scripts/validate_history.py history in shells or CI steps where .venv/bin is not
+    prepended to PATH, subprocess.run raises FileNotFoundError even though linkml-validate
+    is installed alongside sys.executable (tracked in https://github.com/CultureBotAI/TaxonMech/issues/83).
   target_ids:
   - NCBITaxon:562
-  - NCBITaxon:751889
+  - NCBITaxon:2940590
   field_paths:
   - curation_history
   evidence_ids:
@@ -1334,15 +1337,20 @@ findings:
   certainty: confirmed
   title: skos:closeMatch GTDB species-cluster mappings are promoted to EXACT_SYNONYM
     and equivalent top-level xrefs across 95,766 records
-  description: Across docs/structured-review-inventory/part-00.tsv..part-12.tsv, 95,766
+  description: Across docs/structured-review-inventory/part-00.tsv..part-13.tsv, 95,766
     of 602,165 structured-review records (including 74,325 from fan-out closeMatch
-    clusters) carry verdict needs_curation because src/taxonmech/seed.py (lines 440-472)
-    promotes skos:closeMatch GTDB species-cluster rows in data/raw/gtdb_mappings.tsv
-    to EXACT_SYNONYM and top-level xrefs without an explicit 1:1 taxon-identity or
-    nomenclatural bridge (tracked in https://github.com/CultureBotAI/TaxonMech/issues/124
-    and https://github.com/CultureBotAI/TaxonMech/issues/63).
+    clusters; e.g., NCBITaxon:2940590 data/taxa/bacteria/achromobacter_sp_jub104.yaml
+    promoting GTDB:s__Achromobacter_spanius, NCBITaxon:206 data/taxa/bacteria/campylobacter_sputorum.yaml
+    promoting GTDB:s__Campylobacter_F_sputorum, and legacy-reviewed NCBITaxon:33952
+    data/taxa/bacteria/acetobacterium_woodii.yaml promoting GTDB:s__Acetobacterium_woodii_A)
+    carry verdict needs_curation because src/taxonmech/seed.py (lines 443-478) promotes
+    skos:closeMatch GTDB species-cluster rows in data/raw/gtdb_mappings.tsv to EXACT_SYNONYM
+    and top-level xrefs without an explicit 1:1 taxon-identity or nomenclatural bridge
+    (tracked in https://github.com/CultureBotAI/TaxonMech/issues/124 and https://github.com/CultureBotAI/TaxonMech/issues/63).
   target_ids:
-  - NCBITaxon:751889
+  - NCBITaxon:2940590
+  - NCBITaxon:206
+  - NCBITaxon:33952
   field_paths:
   - synonyms
   - xrefs
@@ -1371,13 +1379,16 @@ findings:
   certainty: confirmed
   title: GTDB polyphyly suffixes are mangled by underscore-to-space replacement into
     fake trinomials published as EXACT_SYNONYM
-  description: In src/taxonmech/seed.py line 468, GTDB species labels are converted
-    via gtdb_label[3:].replace('_', ' '), turning GTDB polyphyly partition suffixes
-    (e.g., s__Campylobacter_F_sputorum on NCBITaxon:206 data/taxa/bacteria/campylobacter_sputorum.yaml)
-    into fake middle-initial trinomials ('Campylobacter F sputorum') published as
-    EXACT_SYNONYM across 15,704 rows in data/raw/gtdb_mappings.tsv (tracked in https://github.com/CultureBotAI/TaxonMech/issues/65).
+  description: In src/taxonmech/seed.py lines 470-473, GTDB species labels are converted
+    via m['gtdb_label'].split('__', 1)[-1].replace('_', ' '), turning GTDB polyphyly
+    partition suffixes (e.g., s__Campylobacter_F_sputorum on NCBITaxon:206 data/taxa/bacteria/campylobacter_sputorum.yaml
+    -> 'Campylobacter F sputorum', and s__Acetobacterium_woodii_A on NCBITaxon:33952
+    data/taxa/bacteria/acetobacterium_woodii.yaml -> 'Acetobacterium woodii A') into
+    fake trinomials published as EXACT_SYNONYM across 15,704 rows in data/raw/gtdb_mappings.tsv
+    (tracked in https://github.com/CultureBotAI/TaxonMech/issues/65).
   target_ids:
   - NCBITaxon:206
+  - NCBITaxon:33952
   field_paths:
   - synonyms
   evidence_ids:
@@ -1399,15 +1410,17 @@ findings:
   certainty: confirmed
   title: Pooled GTDB broadMatch mappings emit the largest pooled cluster's genome
     total and an inverted mapping-direction note
-  description: On 6,335 pooled-only GTDB records (e.g., NCBITaxon:33952 data/taxa/bacteria/acetobacterium_woodii.yaml),
-    src/taxonmech/seed.py emits the largest pooled GTDB species cluster's genome count
-    as the taxon's GTDB GENOME attestation (#118), and across 8,587 pooled GTDB records
-    (209,540 rows, including NCBITaxon:562 data/taxa/bacteria/escherichia_coli.yaml)
-    seed.py lines 461-463 emit a note stating the reverse of kg-microbe's skos:broadMatch
-    direction (#119).
+  description: 'On 6,335 pooled-only GTDB records (e.g., NCBITaxon:3121604 data/taxa/bacteria/acidaminobacteraceae_bacterium.yaml,
+    which has 5 pooled skos:broadMatch GTDB mappings led by GTDB:s__JAUMXJ01_sp041781135
+    with genome_count: 97), src/taxonmech/seed.py (lines 579-593) emits the largest
+    pooled GTDB species cluster''s genome count as the taxon''s GTDB GENOME attestation
+    (#118), and across 8,587 pooled GTDB records (209,540 rows, including NCBITaxon:562
+    data/taxa/bacteria/escherichia_coli.yaml and NCBITaxon:3121604 data/taxa/bacteria/acidaminobacteraceae_bacterium.yaml)
+    seed.py lines 465-467 emit a note stating the reverse of kg-microbe''s skos:broadMatch
+    direction (#119).'
   target_ids:
   - NCBITaxon:562
-  - NCBITaxon:33952
+  - NCBITaxon:3121604
   field_paths:
   - taxonomy_mappings
   - source_attestations
@@ -1430,7 +1443,7 @@ findings:
   certainty: confirmed
   title: SEEDED_FROM_SOURCES curation_history embeds stale static strain counts from
     curation/seed_scope.tsv reason strings
-  description: In src/taxonmech/seed.py lines 586-594, the SEEDED_FROM_SOURCES curation_history
+  description: In src/taxonmech/seed.py lines 635-645, the SEEDED_FROM_SOURCES curation_history
     note copies the static reason string from curation/seed_scope.tsv (e.g., '1861
     BacDive strains' on NCBITaxon:562 data/taxa/bacteria/escherichia_coli.yaml) even
     when subtree strain aggregation yields a higher seeded strain_count (1975 on NCBITaxon:562;
@@ -1462,16 +1475,21 @@ findings:
   certainty: confirmed
   title: Upstream kg-microbe edge tables for GOLD/MEDIADIVE/MADIN/BACTOTRAITS are
     not committed locally and subtree rollups apply only to BacDive strains
-  description: Across docs/structured-review-inventory/part-00.tsv..part-12.tsv, 27,118
-    records carry verdict pass_with_limitations (e.g., NCBITaxon:68987) and 30 carry
-    verdict blocked (e.g., NCBITaxon:700537) because manifest-pinned upstream kg-microbe
-    raw edge tables for GOLD, MEDIADIVE, MADIN, and BACTOTRAITS are not committed
-    locally, and src/taxonmech/seed.py gathers infraspecific subtree records only
-    for BacDive strains while reporting direct-only taxon counts for GOLD, MediaDive,
-    Madin, and BactoTraits (tracked in https://github.com/CultureBotAI/TaxonMech/issues/8).
+  description: Across docs/structured-review-inventory/part-00.tsv..part-13.tsv, 27,118
+    records carry verdict pass_with_limitations (e.g., 8-source record NCBITaxon:1435036
+    data/taxa/bacteria/acinetobacter_bohemicus.yaml as well as NCBITaxon:562, NCBITaxon:1423,
+    and NCBITaxon:287) and 30 carry verdict blocked (e.g., 8-source record NCBITaxon:209650
+    data/taxa/bacteria/acidicaldus_organivorans.yaml) because manifest-pinned upstream
+    kg-microbe raw edge tables for GOLD, MEDIADIVE, MADIN, and BACTOTRAITS are not
+    committed locally, and src/taxonmech/seed.py gathers infraspecific subtree records
+    only for BacDive strains while reporting direct-only taxon counts for GOLD, MediaDive,
+    Madin, and BactoTraits (tracked in INFRA_TASKS.md taxonmech-infra-0004 and https://github.com/CultureBotAI/TaxonMech/issues/8).
   target_ids:
-  - NCBITaxon:68987
-  - NCBITaxon:700537
+  - NCBITaxon:562
+  - NCBITaxon:1423
+  - NCBITaxon:287
+  - NCBITaxon:1435036
+  - NCBITaxon:209650
   field_paths:
   - source_attestations
   evidence_ids:
@@ -1487,7 +1505,7 @@ findings:
     role: Source attestation builder
   rule_id: docs/record-review-profile.md:historical-counts
   normalization_reason: Document and reconcile direct vs subtree attestation counts
-    and upstream edge-table provenance (#8).
+    and upstream edge-table provenance (#8; taxonmech-infra-0004).
 - finding_id: mechanism-and-protein-representation-prerequisites
   issue_key: stage4-mechanism-and-protein-representation-prerequisites
   category: completeness
@@ -1539,9 +1557,9 @@ findings:
 actions:
 - action_id: remediate-schema-enum-nav-and-history-validator
   description: In Stage 5 (resolve_review_findings), restore GENETIC_ELEMENT, ORGANELLE,
-    and RNA to CausalNodeTypeEnum in src/taxonmech/schema/taxonmech.yaml and add NaturalProductMech
-    to the Mech family navigation (#76), and update scripts/validate_history.py to
-    resolve linkml-validate relative to sys.executable (#83).
+    and RNA to CausalNodeTypeEnum in src/taxonmech/schema/taxonmech.yaml (lines 1467-1504)
+    and add NaturalProductMech to the Mech family navigation (#76), and update scripts/validate_history.py
+    (lines 47-51) to resolve linkml-validate relative to sys.executable (#83).
   finding_ids:
   - causal-node-type-enum-and-mech-family-nav-drift
   - validate-history-bare-linkml-validate-path
@@ -1549,7 +1567,7 @@ actions:
   - NCBITaxon:562
   - NCBITaxon:4932
   - NCBITaxon:5207
-  - NCBITaxon:751889
+  - NCBITaxon:2940590
   owner_paths:
   - repository: CultureBotAI/TaxonMech
     path: src/taxonmech/schema/taxonmech.yaml
@@ -1583,11 +1601,14 @@ actions:
   - upstream-edge-multiplicity-and-subtree-count-scope
   target_ids:
   - NCBITaxon:562
-  - NCBITaxon:751889
+  - NCBITaxon:1423
+  - NCBITaxon:287
+  - NCBITaxon:2940590
+  - NCBITaxon:3121604
+  - NCBITaxon:1435036
+  - NCBITaxon:209650
   - NCBITaxon:206
   - NCBITaxon:33952
-  - NCBITaxon:68987
-  - NCBITaxon:700537
   owner_paths:
   - repository: CultureBotAI/TaxonMech
     path: src/taxonmech/seed.py
@@ -1605,9 +1626,10 @@ actions:
     and scripts/render_pages.py --check
 - action_id: implement-mechanism-and-protein-infrastructure-prerequisites
   description: Execute INFRA_TASKS.md tasks taxonmech-infra-0001, taxonmech-infra-0002,
-    and taxonmech-infra-0003 in Stage 6 to add maintained causal_graphs overlay merging
-    in src/taxonmech/seed.py, granular trait/pathway extraction in src/taxonmech/extract.py,
-    and a pinned UniProtKB raw snapshot + prefix/scope validation (#78).
+    taxonmech-infra-0003, and taxonmech-infra-0004 in Stage 6 to add maintained causal_graphs
+    overlay merging in src/taxonmech/seed.py, granular trait/pathway extraction in
+    src/taxonmech/extract.py, a pinned UniProtKB raw snapshot + prefix/scope validation
+    (#78), and reproducible upstream edge-multiplicity provenance (#8).
   finding_ids:
   - mechanism-and-protein-representation-prerequisites
   target_ids:
@@ -1699,7 +1721,8 @@ notes:
 - 'Full-corpus review coverage verified: 626,048 total records = 23,883 legacy (docs/legacy-review-inventory.tsv)
   + 602,165 structured (docs/structured-review-inventory/part-00.tsv..part-13.tsv
   across 611 batches in docs/structured-review-batches.tsv); 0 unreviewed; 0 overlap.'
-- Parent workflow Stage 4 evidence manifest saved at reviews/workflow/mech-goal-sequence-20261019/cycle-000001/stage-04/revision-0001/evidence.yaml.
+- Parent workflow Stage 4 evidence manifest saved at reviews/workflow/mech-goal-sequence-20261019/cycle-000001/stage-04/revision-0001/evidence.yaml;
+  originated infrastructure task taxonmech-infra-0004 recorded in INFRA_TASKS.md.
 tags:
 - stage4-record-review
 - corpus-review-consolidation
