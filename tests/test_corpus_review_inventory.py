@@ -156,6 +156,91 @@ def test_batch_summary_drift_is_rejected(sample_repo: Path) -> None:
         cri.check(sample_repo)
 
 
+def test_multi_shard_append_requires_latest_shard_context_hashes(sample_repo: Path) -> None:
+    (sample_repo / "data/taxa/PATHS.tsv").write_text(
+        (sample_repo / "data/taxa/PATHS.tsv").read_text(encoding="utf-8")
+        + "NCBITaxon:300\tsecond_taxon\n",
+        encoding="utf-8",
+    )
+    second_yaml = "identifier: NCBITaxon:300\nlabel: Second taxon\n"
+    (sample_repo / "data/taxa/bacteria/second_taxon.yaml").write_text(
+        second_yaml, encoding="utf-8"
+    )
+    second_sha = _sha256_text(second_yaml)
+    shard1_rel = "docs/structured-review-inventory/part-01.tsv"
+    shard1_text = (
+        "\t".join(cri.INVENTORY_COLUMNS)
+        + "\n"
+        + "\t".join(
+            [
+                "20261019T000000Z-round26-b01-300",
+                "round26-b01",
+                "NCBITaxon:300",
+                "data/taxa/bacteria/second_taxon.yaml",
+                second_sha,
+                "Second taxon",
+                "pass",
+                "completed",
+                "true",
+                "0",
+                "2026-10-19T00:00:00Z",
+                "2026-10-19T00:01:00Z",
+            ]
+        )
+        + "\n"
+    )
+    (sample_repo / shard1_rel).write_text(shard1_text, encoding="utf-8")
+    id_to_slug, existing_paths = cri.load_corpus_targets(sample_repo)
+    shard_rows_by_rel, _ = cri.load_structured_shards(
+        sample_repo, id_to_slug, existing_paths
+    )
+    batches_text = cri.render_batches(cri.build_batch_rows(shard_rows_by_rel))
+    (sample_repo / cri.BATCHES_TSV).write_text(batches_text, encoding="utf-8")
+    paths_sha = _sha256_text(
+        (sample_repo / "data/taxa/PATHS.tsv").read_text(encoding="utf-8")
+    )
+
+    bundle1_dir = (
+        sample_repo
+        / "reviews/structured/20261019T000000Z-structured-review-shard-part-01"
+    )
+    bundle1_dir.mkdir(parents=True)
+    bundle1_doc = {
+        "schema_version": "1.0.0",
+        "review_id": "20261019T000000Z-structured-review-shard-part-01",
+        "kind": "batch",
+        "scope": {"population_size": 1},
+        "source": {
+            "inputs": [
+                {"path": shard1_rel, "sha256": _sha256_text(shard1_text), "role": "context"},
+                {
+                    "path": cri.BATCHES_TSV.as_posix(),
+                    "sha256": _sha256_text(batches_text),
+                    "role": "context",
+                },
+                {
+                    "path": "data/taxa/PATHS.tsv",
+                    "sha256": paths_sha,
+                    "role": "context",
+                },
+            ]
+        },
+    }
+    (bundle1_dir / "review.yaml").write_text(
+        yaml.dump(bundle1_doc, Dumper=Dumper), encoding="utf-8"
+    )
+    summary = cri.check(sample_repo, verify_target_sha256=True)
+    assert summary["structured_shards"] == 2
+    assert summary["structured_records"] == 2
+
+    bundle1_doc["source"]["inputs"][2]["sha256"] = "0" * 64
+    (bundle1_dir / "review.yaml").write_text(
+        yaml.dump(bundle1_doc, Dumper=Dumper), encoding="utf-8"
+    )
+    with pytest.raises(ValueError, match="stale SHA256 for data/taxa/PATHS.tsv"):
+        cri.check(sample_repo, verify_target_sha256=True)
+
+
 def test_committed_corpus_review_inventory_is_complete_and_valid() -> None:
     summary = cri.check(cri.ROOT, verify_target_sha256=False)
     assert summary["corpus_records"] == 626048

@@ -80,6 +80,11 @@ def test_species_with_attested_strain_descendant_is_proposed(many_taxa, capsys):
         rank="STRAIN",
         attested_by="gold",
     )
+    inv.strains["NCBITaxon:9003"] = [
+        {"strain_id": "strain:9003", "bacdive_id": "9003", "designation": "R265"}
+    ]
+    inv.lpsn_by_taxon["NCBITaxon:9002"] = list(inv.lpsn_by_taxon["NCBITaxon:562"])
+    inv.gtdb["NCBITaxon:9002"] = list(inv.gtdb["NCBITaxon:562"])
     assert propose_scope.main(["--rule", "attested", "--rank", "", "--all", "--append"]) == 0
     rows = [
         line.split("\t")
@@ -90,6 +95,14 @@ def test_species_with_attested_strain_descendant_is_proposed(many_taxa, capsys):
     assert "NCBITaxon:9002" in by_id
     assert "descendant strains attested by gold" in by_id["NCBITaxon:9002"]
     assert "NCBITaxon:9003" in by_id
+    assert propose_scope.main(["--rule", "core", "--rank", "", "--all", "--append"]) == 0
+    core_by_id = {
+        line.split("\t")[0]: line.split("\t")[2]
+        for line in capsys.readouterr().out.splitlines()
+        if line.startswith("NCBITaxon:")
+    }
+    assert "NCBITaxon:9002" in core_by_id
+    assert "1 BacDive strains" in core_by_id["NCBITaxon:9002"]
 
 
 def test_scope_covers_all_attested_species_or_below(repo_root):

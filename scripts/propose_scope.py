@@ -61,9 +61,10 @@ def main(argv: list[str] | None = None) -> int:
             continue
         if args.rank and row.get("rank") != args.rank:
             continue
+        descendants = inv.descendants(tid)
         sources = set(split(row.get("attested_by", "")))
         desc_sources = (
-            sorted({s for d in inv.descendants(tid) for s in split(inv.taxa[d].get("attested_by", ""))})
+            sorted({s for d in descendants for s in split(inv.taxa[d].get("attested_by", ""))})
             if not sources
             else []
         )
@@ -76,8 +77,12 @@ def main(argv: list[str] | None = None) -> int:
         lpsn_gtdb = {g for n in names for g in split(n.get("gtdb_ids", ""))}
         has_gtdb = any(m["gtdb_id"] in lpsn_gtdb or m["predicate"] == "skos:closeMatch"
                        for m in inv.gtdb.get(tid, []))
-        strain_count = len(inv.strains.get(tid, []))
-        if args.rule == "core" and not (sources and strain_count and correct_typed and has_gtdb):
+        strain_count = len({
+            s["strain_id"]
+            for t in (tid, *descendants)
+            for s in inv.strains.get(t, [])
+        })
+        if args.rule == "core" and not ((sources or desc_sources) and strain_count and correct_typed and has_gtdb):
             continue
         # NCBI itself, the attesting sources, and GTDB when it maps (#5).
         n_sources = len(sources | {"ncbitaxon"} | ({"gtdb"} if has_gtdb else set()))

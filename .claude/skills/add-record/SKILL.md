@@ -28,7 +28,7 @@ Adding a taxon record therefore consists of:
    ```bash
    just propose-scope --rule attested --rank '' --all --append
    ```
-   Or check specific selection rules (`core`, `type_strain`, `multi_source`, `gtdb_lpsn`, `bacdive_rich`, `trait_rich`, `attested`).
+   Or check the supported selection rules in `scripts/propose_scope.py` (`core`, `attested`).
 2. For each candidate `NCBITaxon:<id>`:
    - **Rank gate**: Verify `inv.is_species_or_below(tid)` is true (`SPECIES`, an infraspecific rank such as `SUBSPECIES`, `STRAIN`, `VARIETAS`, `FORMA_SPECIALIS`, `SEROTYPE`, etc., or an unranked/`CLADE` node beneath a `SPECIES` ancestor). Genera and higher ranks are never records; they appear only in `lineage`.
    - **Microbial scope**: Verify the taxon is a prokaryote (`BACTERIA`, `ARCHAEA`), microbial eukaryote (`EUKARYOTA` fungi/yeasts, microsporidia, oomycetes, protists, microalgae attested directly or via microbial strain descendants in `GOLD`, `MEDIADIVE`, or `BACDIVE`), or other microbial entry in the pinned inventory.

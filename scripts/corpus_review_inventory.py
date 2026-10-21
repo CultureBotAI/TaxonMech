@@ -329,7 +329,8 @@ def verify_shard_bundles(
     batches_sha = sha256_file(root / BATCHES_TSV)
     sha_cache: dict[str, str] = {BATCHES_TSV.as_posix(): batches_sha}
 
-    latest_batches_matched = False
+    latest_rel_shard = max(shard_rows_by_rel) if shard_rows_by_rel else None
+    latest_bundle_yaml: Path | None = None
     for rel_shard, srows in shard_rows_by_rel.items():
         shard_name = Path(rel_shard).stem
         shard_sha = sha256_file(root / rel_shard)
@@ -355,15 +356,20 @@ def verify_shard_bundles(
         }
         if inputs_by_path.get(rel_shard) != shard_sha:
             raise ValueError(f"shard bundle {matches[0]} has stale SHA256 for {rel_shard}")
-        if inputs_by_path.get(BATCHES_TSV.as_posix()) == batches_sha:
-            latest_batches_matched = True
-    if shard_rows_by_rel and not latest_batches_matched:
-        raise ValueError(
-            f"no shard bundle matches current SHA256 for {BATCHES_TSV.as_posix()}"
-        )
+        if BATCHES_TSV.as_posix() not in inputs_by_path:
+            raise ValueError(
+                f"shard bundle {matches[0]} missing {BATCHES_TSV.as_posix()} input"
+            )
+        if rel_shard == latest_rel_shard:
+            latest_bundle_yaml = matches[0]
+            if inputs_by_path.get(BATCHES_TSV.as_posix()) != batches_sha:
+                raise ValueError(
+                    f"shard bundle {matches[0]} has stale SHA256 for {BATCHES_TSV.as_posix()}"
+                )
 
     for bundle_yaml in sorted(structured_root.glob("*/review.yaml")):
         doc = yaml.load(bundle_yaml.read_bytes(), Loader=Loader)
+        is_latest_shard_bundle = bundle_yaml == latest_bundle_yaml
         for inp in doc.get("source", {}).get("inputs", []):
             rel_inp = inp["path"]
             if rel_inp not in sha_cache:
@@ -373,7 +379,9 @@ def verify_shard_bundles(
                         f"bundle {bundle_yaml} references missing input {rel_inp}"
                     )
                 sha_cache[rel_inp] = sha256_file(inp_file)
-            if inp.get("role") == "target" and inp["sha256"] != sha_cache[rel_inp]:
+            if (is_latest_shard_bundle or inp.get("role") == "target") and (
+                inp["sha256"] != sha_cache[rel_inp]
+            ):
                 raise ValueError(
                     f"bundle {bundle_yaml} has stale SHA256 for {rel_inp}"
                 )
