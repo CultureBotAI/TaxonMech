@@ -39,23 +39,34 @@ tasks:
       Implement maintained curation/causal_graphs/ overlay input, validated seeder merge in
       src/taxonmech/seed.py, seeder-owned verification in scripts/verify_corpus.py, and
       CausalNode.grounding prefix coverage (UniProtKB, EC, METPO/OMP) in conf/id_label_targets.yaml
-    status: note
-    disposition: pending_issue_link
+    status: open
+    issue_url: https://github.com/CultureBotAI/TaxonMech/issues/78
+    disposition: tracked_for_stage6_implementation
   - task_id: taxonmech-infra-0002
     summary: >-
       Extend src/taxonmech/extract.py to preserve granular per-taxon trait, substrate, habitat,
       and growth-medium assertions (madin_etal, bactotraits, mediadive) with predicate, ontology
       object CURIE, and literature/source provenance
-    status: note
-    disposition: pending_issue_link
+    status: open
+    issue_url: https://github.com/CultureBotAI/TaxonMech/issues/78
+    disposition: tracked_for_stage6_implementation
   - task_id: taxonmech-infra-0003
     summary: >-
       Add a release-pinned UniProtKB / UniProt Reference Proteomes raw source snapshot in
       data/raw/, declare UniProtKB and EC prefixes in src/taxonmech/schema/taxonmech.yaml and
       conf/id_label_targets.yaml, and add structured GENE_OR_PROTEIN organism/strain/proteome/locus/checksum
       scope slots and accession-to-taxon validation
-    status: note
-    disposition: pending_issue_link
+    status: open
+    issue_url: https://github.com/CultureBotAI/TaxonMech/issues/78
+    disposition: tracked_for_stage6_implementation
+  - task_id: taxonmech-infra-0004
+    summary: >-
+      Pin reproducible upstream kg-microbe edge-multiplicity provenance and document or align
+      direct-only vs subtree-rolled-up source attestation counts for GOLD, MEDIADIVE, MADIN,
+      and BACTOTRAITS across the 27,118 pass_with_limitations and 30 blocked corpus review records
+    status: open
+    issue_url: https://github.com/CultureBotAI/TaxonMech/issues/8
+    disposition: tracked_for_stage6_implementation
 ```
 <!-- mech-infra-tasks:end -->
 
@@ -64,7 +75,7 @@ tasks:
 ### `taxonmech-infra-0001` — Native causal-graph overlay writer, corpus verifier, and OAK grounding prefix coverage
 
 - **Origin**: `run_id: mech-goal-sequence-20261019`, `cycle: 1`, `stage: 2` (`causal_graphs`)
-- **Status**: `note` (`pending_issue_link` — to be promoted to a tracked GitHub issue during Stage 5 review remediation or Stage 6 infrastructure implementation)
+- **Status**: `open` (`issue_url`: https://github.com/CultureBotAI/TaxonMech/issues/78)
 - **Priority**: `high`
 - **Dependencies**: None
 - **Observation**:
@@ -88,7 +99,7 @@ tasks:
 ### `taxonmech-infra-0002` — Granular trait, substrate, habitat, and growth-medium edge extraction in `src/taxonmech/extract.py`
 
 - **Origin**: `run_id: mech-goal-sequence-20261019`, `cycle: 1`, `stage: 2` (`causal_graphs`)
-- **Status**: `note` (`pending_issue_link` — to be promoted to a tracked GitHub issue during Stage 5 review remediation or Stage 6 infrastructure implementation)
+- **Status**: `open` (`issue_url`: https://github.com/CultureBotAI/TaxonMech/issues/78)
 - **Priority**: `medium`
 - **Dependencies**: `taxonmech-infra-0001`
 - **Observation**:
@@ -108,7 +119,7 @@ tasks:
 ### `taxonmech-infra-0003` — Pinned UniProtKB / Reference Proteomes raw source snapshot, schema prefix declarations, and structured `GENE_OR_PROTEIN` organism/strain/sequence scope validation
 
 - **Origin**: `run_id: mech-goal-sequence-20261019`, `cycle: 1`, `stage: 3` (`protein_examples`)
-- **Status**: `note` (`pending_issue_link` — to be promoted to a tracked GitHub issue during Stage 5 review remediation or Stage 6 infrastructure implementation)
+- **Status**: `open` (`issue_url`: https://github.com/CultureBotAI/TaxonMech/issues/78)
 - **Priority**: `high`
 - **Dependencies**: `taxonmech-infra-0001`
 - **Observation**:
@@ -128,5 +139,27 @@ tasks:
   - `data/straininfo/related_records.tsv.gz`
   - `reviews/structured/20261021T094500Z-stage3-protein-examples-assessment/review.yaml`
   - `history/infrastructure/stage3-protein-examples-assessment/2026-10-21T094500Z-Antigravity-p3e901.yaml`
+
+### `taxonmech-infra-0004` — Reproducible upstream `kg-microbe` edge-multiplicity provenance and subtree count rollup contract
+
+- **Origin**: `run_id: mech-goal-sequence-20261019`, `cycle: 1`, `stage: 4` (`record_review`)
+- **Status**: `open` (`issue_url`: https://github.com/CultureBotAI/TaxonMech/issues/8)
+- **Priority**: `medium`
+- **Dependencies**: None
+- **Observation**:
+  - Across `docs/structured-review-inventory/part-00.tsv..part-13.tsv` (602,165 structured-inventory records) and `docs/legacy-review-inventory.tsv` (23,883 legacy-inventory records), 27,118 records carry `pass_with_limitations` and 30 records carry `blocked` because:
+    1. `data/raw/gold_taxa.tsv`, `data/raw/mediadive_taxa.tsv`, `data/raw/madin_taxa.tsv`, and `data/raw/bactotraits_taxa.tsv` store pre-aggregated 2-column count tables extracted from an uncommitted local `kg-microbe` build (`src/taxonmech/extract.py` lines 412–417, 677–678, 840–841), so `evidence_item.snippet` edge counts cannot be independently re-derived from committed raw files alone.
+    2. Only `BACDIVE` rolls strain counts up across descendant strain taxids in `src/taxonmech/seed.py`, while `GOLD`, `MEDIADIVE`, `MADIN`, `BACTOTRAITS`, `GTDB`, and `SILVA` report direct-taxid-only counts without explicit scope qualification in `source_attestations[].evidence[]`.
+- **Desired Outcome**:
+  - Pin reproducible upstream edge-multiplicity provenance (digest/manifest or per-taxon predicate summary) in `data/raw/MANIFEST.yaml` and clarify or align direct-taxid vs subtree-rolled-up attestation count semantics in `src/taxonmech/seed.py`.
+- **Evidence Paths**:
+  - `src/taxonmech/extract.py`
+  - `src/taxonmech/seed.py`
+  - `data/raw/MANIFEST.yaml`
+  - `docs/legacy-review-inventory.tsv`
+  - `docs/structured-review-inventory/part-00.tsv`
+  - `docs/structured-review-inventory/part-13.tsv`
+  - `reviews/structured/20261021T163800Z-stage4-corpus-record-review/review.yaml`
+  - `reviews/workflow/mech-goal-sequence-20261019/cycle-000001/stage-04/revision-0001/evidence.yaml`
 
 
