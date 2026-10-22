@@ -1,0 +1,50 @@
+history_version: 1
+target:
+  kind: infrastructure
+  path: curation/causal_graphs/README.md
+  slug: cycle2-stage3-uniprot-protein-examples
+session:
+  id: 2026-10-22T190800Z-Antigravity-p3e902
+  timestamp: '2026-10-22T19:08:00Z'
+  actors:
+  - type: ai_agent
+    name: Antigravity
+    agent_tool: antigravity-cli
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - causal_graphs
+  - evidence
+  - validation
+  summary: >-
+    Curate and live-verify 28 UniProtKB GENE_OR_PROTEIN nodes (13 unique UniProtKB
+    accessions) across 15 species- and strain-level TaxonRecord causal-graph overlays,
+    reconciling sequence checksums, locus tags, and organism/strain reference proteome
+    scope
+  details: >-
+    Executed Cycle 2 Stage 3 (protein_examples) across all 626,048 in-scope TaxonRecord
+    files using the native maintained overlay pipeline (curation/causal_graphs/*.yaml ->
+    src/taxonmech/seed.py -> data/taxa/<domain>/*.yaml -> pages/taxon-details/*.json.gz)
+    landed in Cycle 1 Stage 6 (PR #152) and Cycle 2 Stage 2 (PR #155). Verified all
+    13 UniProtKB accessions against live UniProtKB REST API metadata
+    (https://rest.uniprot.org/uniprotkb/{accession}.json) and OAK ontology labels
+    (GO, RO, CHEBI, BFO, METPO), expanding maintained overlays from 10 to 15 records
+    (7 species and 8 reference-proteome strains, 83 evidence-backed edges, 28
+    GENE_OR_PROTEIN nodes): Escherichia coli (NCBITaxon:562, NCBITaxon:83333, and newly
+    added NCBITaxon:511145 with UniProtKB:P02920 lacY and UniProtKB:P00722 lacZ in
+    UP:UP000000625), Bacillus subtilis (NCBITaxon:1423 and NCBITaxon:224308 with newly
+    added UniProtKB:P16497 kinA and UniProtKB:P06534 spo0A in UP:UP000001570),
+    Pseudomonas aeruginosa (NCBITaxon:287 and NCBITaxon:208964 with UniProtKB:Q9HWH2
+    phzM and corrected UniProtKB:Q9HWG9 phzS replacing opmD Q9HWH3 in UP:UP000002438),
+    Methanocaldococcus jannaschii (NCBITaxon:2190 and NCBITaxon:243232 with
+    UniProtKB:Q58256 mcrA and newly added UniProtKB:Q58252 mcrB and UniProtKB:Q58255
+    mcrG in UP:UP000000805), Cryptococcus deuterogattii (NCBITaxon:1859096 and
+    NCBITaxon:294750 with R265-specific UniProtKB:A0A095C6P1 CNBG_1207 and
+    UniProtKB:A0A095CIC4 CNBG_4942 replacing cross-strain C. gattii WM276 E6R5R3/E6R8U0
+    in UP:UP000029445), Cryptococcus deneoformans (newly added NCBITaxon:40410 and
+    NCBITaxon:283643 with reviewed Swiss-Prot UniProtKB:Q55P57 LAC1), and Cryptococcus
+    neoformans (newly added NCBITaxon:5207 and NCBITaxon:235443 with reviewed Swiss-Prot
+    UniProtKB:J9VY90 LAC1 in UP:UP000010091). Documented corpus-wide inapplicability and
+    remaining raw UniProtKB snapshot / offline checksum validation follow-up under
+    taxonmech-infra-0001 and taxonmech-infra-0003 (#78).

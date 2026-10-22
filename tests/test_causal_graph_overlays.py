@@ -64,7 +64,7 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                             "gene_symbol": "lacZ",
                             "locus_tag": "b0344",
                             "sequence_length": 1024,
-                            "sequence_crc64": "C23D36CB46AD9E78",
+                            "sequence_crc64": "9D295EF4CEF90B08",
                             "sequence_version": 2,
                             "entry_status": "SWISS_PROT",
                         },
@@ -123,13 +123,13 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                             "node_type": "GENE_OR_PROTEIN",
                             "grounding": "UniProtKB:P06534",
                             "organism_taxon_id": "NCBITaxon:224308",
-                            "strain_id": "kgmicrobe.strain:bacdive_1187",
+                            "strain_id": "kgmicrobe.strain:bacdive_1156",
                             "proteome_id": "UP:UP000001570",
                             "gene_symbol": "spo0A",
-                            "locus_tag": "BSU_24220",
+                            "locus_tag": "BSU24220",
                             "sequence_length": 267,
-                            "sequence_crc64": "9FEAA90BA04A7C3A",
-                            "sequence_version": 2,
+                            "sequence_crc64": "2F4943A5A5061DD9",
+                            "sequence_version": 1,
                             "entry_status": "SWISS_PROT",
                         },
                         {
@@ -178,13 +178,13 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                             "label": "Phenazine-specific methyltransferase PhzM",
                             "node_type": "GENE_OR_PROTEIN",
                             "grounding": "UniProtKB:Q9HWH2",
-                            "xrefs": ["EC:2.1.1.329"],
+                            "xrefs": ["EC:2.1.1.327"],
                             "organism_taxon_id": "NCBITaxon:208964",
                             "proteome_id": "UP:UP000002438",
                             "gene_symbol": "phzM",
                             "locus_tag": "PA4209",
                             "sequence_length": 334,
-                            "sequence_crc64": "2DF8D219E1A2BE7B",
+                            "sequence_crc64": "27D9717ECA12A1B5",
                             "sequence_version": 1,
                             "entry_status": "SWISS_PROT",
                         },
@@ -238,10 +238,10 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                             "organism_taxon_id": "NCBITaxon:243232",
                             "proteome_id": "UP:UP000000805",
                             "gene_symbol": "mcrA",
-                            "locus_tag": "MJ_0846",
-                            "sequence_length": 552,
-                            "sequence_crc64": "41B3F8A21D7A4F48",
-                            "sequence_version": 1,
+                            "locus_tag": "MJ0846",
+                            "sequence_length": 553,
+                            "sequence_crc64": "CC3AB9AC4F745A24",
+                            "sequence_version": 2,
                             "entry_status": "SWISS_PROT",
                         },
                         {
@@ -286,16 +286,16 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                     "title": "Cryptococcus deuterogattii R265 Cap59 polysaccharide capsule assembly",
                     "nodes": [
                         {
-                            "node_id": "CAP59",
-                            "label": "Capsule-associated protein CAP59",
+                            "node_id": "CNBG_1207",
+                            "label": "Alpha-1,3-mannosyltransferase (CAP59 family)",
                             "node_type": "GENE_OR_PROTEIN",
-                            "grounding": "UniProtKB:E6RCZ6",
+                            "grounding": "UniProtKB:A0A095C6P1",
                             "organism_taxon_id": "NCBITaxon:294750",
                             "proteome_id": "UP:UP000029445",
-                            "gene_symbol": "CAP59",
-                            "locus_tag": "CNBG_0565",
-                            "sequence_length": 458,
-                            "sequence_crc64": "D658F7CC1C6E1CA7",
+                            "gene_symbol": "CNBG_1207",
+                            "locus_tag": "CNBG_1207",
+                            "sequence_length": 457,
+                            "sequence_crc64": "1EE9B113AD99C774",
                             "sequence_version": 1,
                             "entry_status": "TREMBL",
                         },
@@ -308,8 +308,8 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                     ],
                     "edges": [
                         {
-                            "edge_id": "cap59-capsule-organization",
-                            "subject": "CAP59",
+                            "edge_id": "cnbg1207-capsule-organization",
+                            "subject": "CNBG_1207",
                             "predicate": "capable of",
                             "predicate_id": "RO:0002215",
                             "object": "capsule-organization",
@@ -550,13 +550,15 @@ def test_extract_taxon_trait_edges_preserves_granular_assertions(tmp_path):
 
 def test_committed_curation_causal_graphs_overlays_load_and_validate():
     """Verify that all committed curation/causal_graphs/*.yaml overlays load cleanly,
-    cover the 10 species+strain exemplar records (44 evidence-backed edges), and
+    cover the 15 species+strain exemplar records (83 evidence-backed edges and
+    28 GENE_OR_PROTEIN nodes across 13 live-verified UniProtKB accessions), and
     satisfy schema prefix and id_label_targets rules (#78)."""
     overlays_dir = REPO_ROOT / "curation" / "causal_graphs"
     graphs, events = load_causal_graphs(overlays_dir)
     expected_ids = {
         "NCBITaxon:562",
         "NCBITaxon:83333",
+        "NCBITaxon:511145",
         "NCBITaxon:1423",
         "NCBITaxon:224308",
         "NCBITaxon:287",
@@ -565,20 +567,59 @@ def test_committed_curation_causal_graphs_overlays_load_and_validate():
         "NCBITaxon:243232",
         "NCBITaxon:1859096",
         "NCBITaxon:294750",
+        "NCBITaxon:40410",
+        "NCBITaxon:283643",
+        "NCBITaxon:5207",
+        "NCBITaxon:235443",
     }
-    assert expected_ids.issubset(set(graphs))
-    assert expected_ids.issubset(set(events))
+    assert set(graphs) == expected_ids
+    assert set(events) == expected_ids
     total_edges = sum(
         len(e.get("evidence") or [])
         for tid in expected_ids
         for g in graphs[tid]
         for e in g.get("edges") or []
     )
-    assert total_edges >= 44
+    assert total_edges >= 83
     edge_count = sum(
         len(g.get("edges") or [])
         for tid in expected_ids
         for g in graphs[tid]
     )
-    assert edge_count == 44
+    assert edge_count == 83
+    protein_nodes = [
+        n
+        for tid in expected_ids
+        for g in graphs[tid]
+        for n in g.get("nodes") or []
+        if n.get("node_type") == "GENE_OR_PROTEIN"
+    ]
+    assert len(protein_nodes) == 28
+    expected_uniprot = {
+        "UniProtKB:P02920",
+        "UniProtKB:P00722",
+        "UniProtKB:P16497",
+        "UniProtKB:P06534",
+        "UniProtKB:Q9HWH2",
+        "UniProtKB:Q9HWG9",
+        "UniProtKB:Q58256",
+        "UniProtKB:Q58252",
+        "UniProtKB:Q58255",
+        "UniProtKB:A0A095C6P1",
+        "UniProtKB:A0A095CIC4",
+        "UniProtKB:Q55P57",
+        "UniProtKB:J9VY90",
+    }
+    assert {n["grounding"] for n in protein_nodes} == expected_uniprot
+    for n in protein_nodes:
+        assert n.get("organism_taxon_id", "").startswith("NCBITaxon:")
+        if n.get("proteome_id") is not None:
+            assert n["proteome_id"].startswith("UP:UP")
+        assert n.get("gene_symbol") or n.get("locus_tag")
+        assert isinstance(n.get("sequence_length"), int) and n["sequence_length"] > 0
+        assert isinstance(n.get("sequence_crc64"), str) and len(n["sequence_crc64"]) == 16
+        assert isinstance(n.get("sequence_version"), int) and n["sequence_version"] >= 1
+        assert n.get("entry_status") in ("SWISS_PROT", "TREMBL")
+    assert sum(1 for n in protein_nodes if n.get("proteome_id")) == 26
+
 

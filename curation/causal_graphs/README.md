@@ -31,7 +31,7 @@ causal_graphs:
         gene_symbol: lacZ
         locus_tag: b0344
         sequence_length: 1024
-        sequence_crc64: C23D36CB46AD9E78
+        sequence_crc64: 9D295EF4CEF90B08
         sequence_version: 2
         entry_status: SWISS_PROT
       - node_id: lactose-hydrolysis

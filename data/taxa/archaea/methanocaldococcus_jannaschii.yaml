@@ -1013,20 +1013,29 @@ curation_history:
     MJ_0846, UP:UP000000805, GO:0050524, GO:0015948, CHEBI:16183) via maintained curation/causal_graphs/NCBITaxon_2190.yaml
     overlay.
   llm_assisted: true
+- timestamp: '2026-10-22T18:50:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: Reconciled McrA (UniProtKB:Q58256, MCRA_METJA, MJ0846, 553 aa, CRC64 CC3AB9AC4F745A24,
+    v2) and added live-verified subunits McrB (UniProtKB:Q58252, MCRB_METJA, MJ0842,
+    447 aa, CRC64 52C76BB2C4C425E7, v2) and McrG (UniProtKB:Q58255, MCRG_METJA, MJ0845,
+    260 aa, CRC64 34413840D8EADACE, v1) in reference proteome UP:UP000000805.
+  llm_assisted: true
 causal_graphs:
 - graph_id: hydrogenotrophic_methanogenesis
-  title: McrA-catalyzed hydrogenotrophic methanogenesis
+  title: McrABG-catalyzed hydrogenotrophic methanogenesis
   description: Terminal step of hydrogenotrophic methanogenesis in Methanocaldococcus
-    jannaschii, catalyzed by methyl-coenzyme M reductase alpha subunit (McrA, encoded
-    by mcrA / MJ_0846 in type strain JAL-1 = DSM 2661), which reduces methyl-coenzyme
-    M with coenzyme B to release methane and the heterodisulfide CoM-S-S-CoB.
+    jannaschii, catalyzed by the heterohexameric methyl-coenzyme M reductase I complex
+    composed of subunits alpha (McrA, MJ0846), beta (McrB, MJ0842), and gamma (McrG,
+    MJ0845) in type strain JAL-1 = DSM 2661 (proteome UP:UP000000805), which reduces
+    methyl-coenzyme M with coenzyme B to release methane and the heterodisulfide CoM-S-S-CoB.
   nodes:
   - node_id: taxon
     label: Methanocaldococcus jannaschii
     node_type: TAXON
     grounding: NCBITaxon:2190
   - node_id: mcrA
-    label: Methyl-coenzyme M reductase subunit alpha (mcrA)
+    label: Methyl-coenzyme M reductase I subunit alpha (mcrA)
     node_type: GENE_OR_PROTEIN
     grounding: UniProtKB:Q58256
     xrefs:
@@ -1035,10 +1044,40 @@ causal_graphs:
     strain_id: kgmicrobe.strain:bacdive_6981
     proteome_id: UP:UP000000805
     gene_symbol: mcrA
-    locus_tag: MJ_0846
-    sequence_length: 552
-    sequence_crc64: C68B47DB235F5A45
+    locus_tag: MJ0846
+    sequence_length: 553
+    sequence_crc64: CC3AB9AC4F745A24
     sequence_version: 2
+    entry_status: SWISS_PROT
+  - node_id: mcrB
+    label: Methyl-coenzyme M reductase I subunit beta (mcrB)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:Q58252
+    xrefs:
+    - EC:2.8.4.1
+    organism_taxon_id: NCBITaxon:243232
+    strain_id: kgmicrobe.strain:bacdive_6981
+    proteome_id: UP:UP000000805
+    gene_symbol: mcrB
+    locus_tag: MJ0842
+    sequence_length: 447
+    sequence_crc64: 52C76BB2C4C425E7
+    sequence_version: 2
+    entry_status: SWISS_PROT
+  - node_id: mcrG
+    label: Methyl-coenzyme M reductase I subunit gamma (mcrG)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:Q58255
+    xrefs:
+    - EC:2.8.4.1
+    organism_taxon_id: NCBITaxon:243232
+    strain_id: kgmicrobe.strain:bacdive_6981
+    proteome_id: UP:UP000000805
+    gene_symbol: mcrG
+    locus_tag: MJ0845
+    sequence_length: 260
+    sequence_crc64: 34413840D8EADACE
+    sequence_version: 1
     entry_status: SWISS_PROT
   - node_id: mcr_activity
     label: coenzyme-B sulfoethylthiotransferase activity
@@ -1061,17 +1100,53 @@ causal_graphs:
     evidence:
     - reference: PMID:8688087
       notes: Complete genome sequence of Methanocaldococcus jannaschii DSM 2661 identifying
-        mcrA (MJ_0846) in the methyl-coenzyme M reductase I operon.
+        mcrA (MJ0846) in the methyl-coenzyme M reductase I operon.
   - edge_id: e2
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: mcrB
+    evidence:
+    - reference: PMID:8688087
+      notes: Complete genome sequence of Methanocaldococcus jannaschii DSM 2661 identifying
+        mcrB (MJ0842) in the methyl-coenzyme M reductase I operon.
+  - edge_id: e3
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: mcrG
+    evidence:
+    - reference: PMID:8688087
+      notes: Complete genome sequence of Methanocaldococcus jannaschii DSM 2661 identifying
+        mcrG (MJ0845) in the methyl-coenzyme M reductase I operon.
+  - edge_id: e4
     subject: mcrA
     predicate: enables
     predicate_id: RO:0002327
     object: mcr_activity
     evidence:
     - reference: PMID:9367957
-      notes: Crystal structure and factor F430 active-site mechanism of archaeal methyl-coenzyme
-        M reductase.
-  - edge_id: e3
+      notes: Crystal structure and factor F430 active-site mechanism of the alpha2-beta2-gamma2
+        methyl-coenzyme M reductase complex.
+  - edge_id: e5
+    subject: mcrB
+    predicate: enables
+    predicate_id: RO:0002327
+    object: mcr_activity
+    evidence:
+    - reference: PMID:9367957
+      notes: Beta subunit McrB forms the factor F430 catalytic channel together with
+        subunits alpha (McrA) and gamma (McrG).
+  - edge_id: e6
+    subject: mcrG
+    predicate: enables
+    predicate_id: RO:0002327
+    object: mcr_activity
+    evidence:
+    - reference: PMID:9367957
+      notes: Gamma subunit McrG lines the substrate-binding site of the alpha2-beta2-gamma2
+        methyl-coenzyme M reductase holoenzyme.
+  - edge_id: e7
     subject: mcr_activity
     predicate: part of
     predicate_id: BFO:0000050
@@ -1080,7 +1155,7 @@ causal_graphs:
     - reference: PMID:9367957
       notes: Methyl-coenzyme M reductase catalyzes the obligatory final methane-forming
         step in all biologically mediated methanogenesis pathways.
-  - edge_id: e4
+  - edge_id: e8
     subject: methanogenesis
     predicate: has primary output
     predicate_id: RO:0004008

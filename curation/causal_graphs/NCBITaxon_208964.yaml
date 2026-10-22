@@ -4,32 +4,33 @@ causal_graphs:
   title: PhzM/PhzS-mediated pyocyanin biosynthesis
   description: >-
     Terminal steps of phenazine and pyocyanin biosynthesis in Pseudomonas
-    aeruginosa PAO1, where phenazine-specific methyltransferase PhzM (PA4209)
-    and flavin-dependent monooxygenase PhzS (PA4217) in reference proteome
-    UP:UP000002438 convert phenazine-1-carboxylic acid into pyocyanin.
+    aeruginosa PAO1, where phenazine-1-carboxylate N-methyltransferase PhzM
+    (PA4209) and 5-methylphenazine-1-carboxylate 1-monooxygenase PhzS (PA4217)
+    in reference proteome UP:UP000002438 convert phenazine-1-carboxylic acid
+    into pyocyanin.
   nodes:
   - node_id: taxon
     label: Pseudomonas aeruginosa PAO1
     node_type: TAXON
     grounding: NCBITaxon:208964
   - node_id: phzM
-    label: Phenazine-specific methyltransferase (phzM)
+    label: Phenazine-1-carboxylate N-methyltransferase (phzM)
     node_type: GENE_OR_PROTEIN
     grounding: UniProtKB:Q9HWH2
     xrefs:
-    - EC:2.1.1.193
+    - EC:2.1.1.327
     organism_taxon_id: NCBITaxon:208964
     proteome_id: UP:UP000002438
     gene_symbol: phzM
     locus_tag: PA4209
     sequence_length: 334
-    sequence_crc64: 99F57DBCD2F2CEBB
+    sequence_crc64: 27D9717ECA12A1B5
     sequence_version: 1
     entry_status: SWISS_PROT
   - node_id: phzS
-    label: Flavin-dependent monooxygenase PhzS (phzS)
+    label: 5-methylphenazine-1-carboxylate 1-monooxygenase (phzS)
     node_type: GENE_OR_PROTEIN
-    grounding: UniProtKB:Q9HWH3
+    grounding: UniProtKB:Q9HWG9
     xrefs:
     - EC:1.14.13.218
     organism_taxon_id: NCBITaxon:208964
@@ -37,7 +38,7 @@ causal_graphs:
     gene_symbol: phzS
     locus_tag: PA4217
     sequence_length: 402
-    sequence_crc64: D98EC80066E5E765
+    sequence_crc64: F2BB36662ABAC790
     sequence_version: 1
     entry_status: SWISS_PROT
   - node_id: phenazine_biosynthesis
@@ -105,7 +106,15 @@ curation_history:
   action: ADDED_CAUSAL_GRAPHS
   changes: >-
     Curated PhzM/PhzS-mediated pyocyanin biosynthesis causal graph
-    (UniProtKB:Q9HWH2, UniProtKB:Q9HWH3, PA4209, PA4217, UP:UP000002438,
-    GO:0002047, CHEBI:8653) via maintained
-    curation/causal_graphs/NCBITaxon_208964.yaml overlay.
+    (UniProtKB:Q9HWH2, PA4209, PA4217, UP:UP000002438, GO:0002047, CHEBI:8653)
+    via maintained curation/causal_graphs/NCBITaxon_208964.yaml overlay.
+  llm_assisted: true
+- timestamp: '2026-10-22T18:50:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: >-
+    Reconciled PhzM (UniProtKB:Q9HWH2, PHZM_PSEAE, PA4209, EC:2.1.1.327, 334 aa,
+    CRC64 27D9717ECA12A1B5, v1) and corrected PhzS from UniProtKB:Q9HWH3
+    (opmD / PA4208) to live-verified UniProtKB:Q9HWG9 (PHZS_PSEAE, PA4217,
+    EC:1.14.13.218, 402 aa, CRC64 F2BB36662ABAC790, v1) in UP:UP000002438.
   llm_assisted: true
