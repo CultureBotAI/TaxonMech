@@ -39,14 +39,16 @@ tasks:
       Implement maintained curation/causal_graphs/ overlay input, validated seeder merge in
       src/taxonmech/seed.py, seeder-owned verification in scripts/verify_corpus.py, and
       CausalNode.grounding prefix coverage (UniProtKB, EC, METPO/OMP) in conf/id_label_targets.yaml
-    status: resolved
+    status: deferred
     issue_url: https://github.com/CultureBotAI/TaxonMech/issues/78
     disposition: >-
-      Resolved in Cycle 1 Stage 6: implemented load_causal_graphs() and build_document() merge in
+      Deferred to Cycle 2 under open umbrella issue #78 after landing repository-local pipeline in
+      Cycle 1 Stage 6 (PR #152): implemented load_causal_graphs() and build_document() merge in
       src/taxonmech/seed.py, updated scripts/verify_corpus.py, registered UniProtKB/EC/OMP/UP
       prefixes in src/taxonmech/schema/taxonmech.yaml and conf/id_label_targets.yaml, documented
       curation/causal_graphs/README.md, and added 5-exemplar roundtrip/render tests in
-      tests/test_causal_graph_overlays.py
+      tests/test_causal_graph_overlays.py; umbrella issue #78 remains open pending companion tasks
+      taxonmech-infra-0002 and taxonmech-infra-0003 and production overlay seeding
   - task_id: taxonmech-infra-0002
     summary: >-
       Extend src/taxonmech/extract.py to preserve granular per-taxon trait, substrate, habitat,
@@ -95,8 +97,8 @@ tasks:
 ### `taxonmech-infra-0001` — Native causal-graph overlay writer, corpus verifier, and OAK grounding prefix coverage
 
 - **Origin**: `run_id: mech-goal-sequence-20261019`, `cycle: 1`, `stage: 2` (`causal_graphs`)
-- **Status**: `resolved` (`issue_url`: https://github.com/CultureBotAI/TaxonMech/issues/78)
-- **Disposition**: Resolved in `mech-goal-sequence-20261019` Cycle 1 Stage 6 (`src/taxonmech/seed.py`, `scripts/verify_corpus.py`, `src/taxonmech/schema/taxonmech.yaml`, `conf/id_label_targets.yaml`, `curation/causal_graphs/README.md`, `tests/test_causal_graph_overlays.py`).
+- **Status**: `deferred` (`issue_url`: https://github.com/CultureBotAI/TaxonMech/issues/78)
+- **Disposition**: Deferred to Cycle 2 under open umbrella issue `#78` after landing repository-local pipeline in `mech-goal-sequence-20261019` Cycle 1 Stage 6 PR `#152` (`src/taxonmech/seed.py`, `scripts/verify_corpus.py`, `src/taxonmech/schema/taxonmech.yaml`, `conf/id_label_targets.yaml`, `curation/causal_graphs/README.md`, `tests/test_causal_graph_overlays.py`); umbrella issue `#78` remains open pending companion tasks `taxonmech-infra-0002` and `taxonmech-infra-0003` and production overlay seeding.
 - **Priority**: `high`
 - **Dependencies**: None
 - **Observation**:
