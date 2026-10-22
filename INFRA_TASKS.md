@@ -44,7 +44,7 @@ tasks:
     disposition: >-
       Deferred to Cycle 2 Stage 6 under open umbrella issue #78 after landing repository-local
       pipeline in Cycle 1 Stage 6 (PR #152), seeding 10 maintained overlays in Cycle 2 Stage 2
-      (PR #156), and expanding to 15 maintained overlays (83 evidence-backed edges and 28
+      (PR #155), and expanding to 15 maintained overlays (83 evidence-backed edges and 28
       GENE_OR_PROTEIN nodes across 13 live-verified UniProtKB accessions in 7 species and 8
       strain records) in Cycle 2 Stage 3: implemented load_causal_graphs() and build_document()
       merge in src/taxonmech/seed.py, updated scripts/verify_corpus.py, registered
@@ -105,7 +105,7 @@ tasks:
 
 - **Origin**: `run_id: mech-goal-sequence-20261019`, `cycle: 1`, `stage: 2` (`causal_graphs`)
 - **Status**: `deferred` (`issue_url`: https://github.com/CultureBotAI/TaxonMech/issues/78)
-- **Disposition**: Deferred to Cycle 2 Stage 6 under open umbrella issue `#78` after landing repository-local pipeline in `mech-goal-sequence-20261019` Cycle 1 Stage 6 PR `#152` (`src/taxonmech/seed.py`, `scripts/verify_corpus.py`, `src/taxonmech/schema/taxonmech.yaml`, `conf/id_label_targets.yaml`, `curation/causal_graphs/README.md`, `tests/test_causal_graph_overlays.py`), seeding 10 maintained production overlays in Cycle 2 Stage 2 PR `#156`, and expanding to 15 maintained production overlays (83 evidence-backed edges and 28 `GENE_OR_PROTEIN` nodes across 13 live-verified `UniProtKB` accessions in 7 species and 8 strain records) in Cycle 2 Stage 3; umbrella issue `#78` remains open pending companion tasks `taxonmech-infra-0002` and `taxonmech-infra-0003` for corpus-wide raw trait and UniProt extraction.
+- **Disposition**: Deferred to Cycle 2 Stage 6 under open umbrella issue `#78` after landing repository-local pipeline in `mech-goal-sequence-20261019` Cycle 1 Stage 6 PR `#152` (`src/taxonmech/seed.py`, `scripts/verify_corpus.py`, `src/taxonmech/schema/taxonmech.yaml`, `conf/id_label_targets.yaml`, `curation/causal_graphs/README.md`, `tests/test_causal_graph_overlays.py`), seeding 10 maintained production overlays in Cycle 2 Stage 2 PR `#155`, and expanding to 15 maintained production overlays (83 evidence-backed edges and 28 `GENE_OR_PROTEIN` nodes across 13 live-verified `UniProtKB` accessions in 7 species and 8 strain records) in Cycle 2 Stage 3; umbrella issue `#78` remains open pending companion tasks `taxonmech-infra-0002` and `taxonmech-infra-0003` for corpus-wide raw trait and UniProt extraction.
 - **Priority**: `high`
 - **Dependencies**: None
 - **Observation**:

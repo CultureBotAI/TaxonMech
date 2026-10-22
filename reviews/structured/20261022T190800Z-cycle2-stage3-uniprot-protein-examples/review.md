@@ -11,7 +11,7 @@
 
 ## Summary
 
-Reviewed all 626,048 in-scope TaxonRecord files across Bacteria (605,695), Archaea (14,013), Eukaryota (6,331), and other (9) against the Stage 3 UniProt protein-example curation contract (.claude/skills/add-uniprot-protein-examples/SKILL.md). Verified all 13 unique UniProtKB accessions against the live UniProt REST API (https://rest.uniprot.org/uniprotkb/&lt;accession&gt;.json) for exact organism_id, entryName, primary gene symbol, protein fullName, sequence length, and CRC64 checksum. Corrected two accession binding defects from Cycle 2 Stage 2: (1) replaced UniProtKB:Q9HWH3 (opmD / PA4208, 487 aa, TrEMBL) with UniProtKB:Q9HWG9 (PHZS_PSEAE, phzS / PA4217, 402 aa, CRC64 F2BB36662ABAC790, Swiss-Prot) in NCBITaxon:287 and NCBITaxon:208964; and (2) replaced UniProtKB:E6R5R3 and UniProtKB:E6R8U0 (belonging to NCBITaxon:367775 Cryptococcus gattii WM276, UP000007805) with UniProtKB:A0A095C6P1 (CNBG_1207, 513 aa, CRC64 E1DD376B00E0FBE4) and UniProtKB:A0A095CIC4 (CNBG_4942, 626 aa, CRC64 1DD1F372821DE098) from the NCBITaxon:294750 Cryptococcus deuterogattii R265 reference proteome UP000029445. Expanded multi-step GENE_OR_PROTEIN causal chains across the 10 existing overlays (adding LacY UniProtKB:P02920, KinA UniProtKB:P16497, McrB UniProtKB:Q58252, and McrG UniProtKB:Q58255) and authored 5 new maintained overlays for Escherichia coli str. K-12 substr. MG1655 (NCBITaxon:511145), Cryptococcus deneoformans (NCBITaxon:40410) &amp; strain B-3501A (NCBITaxon:283643; LAC1 UniProtKB:Q55P57), and Cryptococcus neoformans (NCBITaxon:5207) &amp; strain H99 (NCBITaxon:235443; LAC1 UniProtKB:J9VY90), bringing corpus coverage to 15 records with 28 GENE_OR_PROTEIN nodes and 83 evidence-backed edges.
+Reviewed all 626,048 in-scope TaxonRecord files across Bacteria (605,695), Archaea (14,013), Eukaryota (6,331), and other (9) against the Stage 3 UniProt protein-example curation contract (.claude/skills/add-uniprot-protein-examples/SKILL.md). Verified all 13 unique UniProtKB accessions against the live UniProt REST API (https://rest.uniprot.org/uniprotkb/&lt;accession&gt;.json) for exact organism_id, entryName, primary gene symbol, protein fullName, sequence length, and CRC64 checksum. Corrected two accession binding defects from Cycle 2 Stage 2: (1) replaced UniProtKB:Q9HWH3 (opmD / PA4208, 487 aa, TrEMBL) with UniProtKB:Q9HWG9 (PHZS_PSEAE, phzS / PA4217, 402 aa, CRC64 F2BB36662ABAC790, Swiss-Prot) in NCBITaxon:287 and NCBITaxon:208964; and (2) replaced UniProtKB:E6R5R3 and UniProtKB:E6R8U0 (belonging to NCBITaxon:367775 Cryptococcus gattii WM276, UP000007805) with UniProtKB:A0A095C6P1 (CNBG_1207, 457 aa, CRC64 1EE9B113AD99C774) and UniProtKB:A0A095CIC4 (CNBG_4942, 640 aa, CRC64 0D78281EB329FEB4) from the NCBITaxon:294750 Cryptococcus deuterogattii R265 reference proteome UP000029445. Expanded multi-step GENE_OR_PROTEIN causal chains across the 10 existing overlays (adding LacY UniProtKB:P02920, KinA UniProtKB:P16497, McrB UniProtKB:Q58252, and McrG UniProtKB:Q58255) and authored 5 new maintained overlays for Escherichia coli str. K-12 substr. MG1655 (NCBITaxon:511145), Cryptococcus deneoformans (NCBITaxon:40410) &amp; strain B-3501A (NCBITaxon:283643; LAC1 UniProtKB:Q55P57), and Cryptococcus neoformans (NCBITaxon:5207) &amp; strain H99 (NCBITaxon:235443; LAC1 UniProtKB:J9VY90), bringing corpus coverage to 15 records with 28 GENE_OR_PROTEIN nodes and 83 evidence-backed edges.
 
 ## Scope And Provenance
 
@@ -19,7 +19,7 @@ Full-corpus Cycle 2 Stage 3 UniProtKB protein-example review across all 626,048 
 
 Selection: All 626,048 in-scope taxa in curation/seed_scope.tsv and data/taxa/PATHS.tsv classified by causal-graph and reference-proteome coverage, with all 15 causal-graph-bearing species and strain records curated and verified directly.
 Coverage: sampled; 15 reviewed / 626048 in the declared population.
-Source: working_tree at Git base 92e7cc724acbc3507315d846720ba8de8a1b41b8.
+Source: working_tree at Git base 36fdfbe55a2014e3949a4af3bbf501c397a82514.
 Working-tree hashes do not imply those bytes were committed.
 
 | Target | Path / selector | Kind | Label |
@@ -143,8 +143,8 @@ summary: 'Reviewed all 626,048 in-scope TaxonRecord files across Bacteria (605,6
   (PHZS_PSEAE, phzS / PA4217, 402 aa, CRC64 F2BB36662ABAC790, Swiss-Prot) in NCBITaxon:287
   and NCBITaxon:208964; and (2) replaced UniProtKB:E6R5R3 and UniProtKB:E6R8U0 (belonging
   to NCBITaxon:367775 Cryptococcus gattii WM276, UP000007805) with UniProtKB:A0A095C6P1
-  (CNBG_1207, 513 aa, CRC64 E1DD376B00E0FBE4) and UniProtKB:A0A095CIC4 (CNBG_4942,
-  626 aa, CRC64 1DD1F372821DE098) from the NCBITaxon:294750 Cryptococcus deuterogattii
+  (CNBG_1207, 457 aa, CRC64 1EE9B113AD99C774) and UniProtKB:A0A095CIC4 (CNBG_4942,
+  640 aa, CRC64 0D78281EB329FEB4) from the NCBITaxon:294750 Cryptococcus deuterogattii
   R265 reference proteome UP000029445. Expanded multi-step GENE_OR_PROTEIN causal
   chains across the 10 existing overlays (adding LacY UniProtKB:P02920, KinA UniProtKB:P16497,
   McrB UniProtKB:Q58252, and McrG UniProtKB:Q58255) and authored 5 new maintained
@@ -154,7 +154,7 @@ summary: 'Reviewed all 626,048 in-scope TaxonRecord files across Bacteria (605,6
   UniProtKB:J9VY90), bringing corpus coverage to 15 records with 28 GENE_OR_PROTEIN
   nodes and 83 evidence-backed edges.'
 source:
-  git_revision: 92e7cc724acbc3507315d846720ba8de8a1b41b8
+  git_revision: 36fdfbe55a2014e3949a4af3bbf501c397a82514
   state: working_tree
   inputs:
   - path: .claude/skills/add-uniprot-protein-examples/SKILL.md
@@ -170,7 +170,7 @@ source:
     sha256: 4bf773b5e5eeccdece4b5b2e2420efebec5e49efa10f60b47f1697295bc1af75
     role: context
   - path: INFRA_TASKS.md
-    sha256: f1a15d5b40527e443676500ca08f222c09e8298c6bba842e192c1093972fb642
+    sha256: 276aa7fa5439a3fac069798ca1b029d8a50b2cbcc47a74f7a3423f9847ba4fa0
     role: context
   - path: README.md
     sha256: 1f145db4b90f0c1380fad8c45756b0d330fa2790a1aa601689c91af91df259f6
