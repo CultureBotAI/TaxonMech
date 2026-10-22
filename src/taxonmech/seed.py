@@ -27,6 +27,7 @@ Usage
 from __future__ import annotations
 
 import argparse
+import copy
 import csv
 import datetime
 import hashlib
@@ -54,6 +55,7 @@ ATB_DIR = REPO_ROOT / "data" / "atb"
 STRAININFO_DIR = REPO_ROOT / "data" / "straininfo"
 TAXA_DIR = REPO_ROOT / "data" / "taxa"
 SCOPE_PATH = REPO_ROOT / "curation" / "seed_scope.tsv"
+CAUSAL_GRAPHS_DIR = REPO_ROOT / "curation" / "causal_graphs"
 PATHS_LOCKFILE = TAXA_DIR / "PATHS.tsv"
 
 SEED_CURATOR = "seed_from_sources"
@@ -178,6 +180,8 @@ class Inventory:
     strain_assemblies: dict[str, list[dict[str, Any]]] = field(default_factory=dict)
     strain_genome_records: dict[str, list[dict[str, Any]]] = field(default_factory=dict)
     strain_related_records: dict[str, list[dict[str, Any]]] = field(default_factory=dict)
+    causal_graphs: dict[str, list[dict[str, Any]]] = field(default_factory=dict)
+    causal_graph_events: dict[str, list[dict[str, Any]]] = field(default_factory=dict)
 
     def parent(self, tid: str) -> str:
         return (self.taxa.get(tid) or {}).get("parent_id", "")
@@ -237,6 +241,57 @@ class Inventory:
         return "OTHER"
 
 
+def load_causal_graphs(
+    path: Path = CAUSAL_GRAPHS_DIR,
+) -> tuple[dict[str, list[dict[str, Any]]], dict[str, list[dict[str, Any]]]]:
+    """Read maintained causal-graph overlays from ``curation/causal_graphs/*.yaml``.
+
+    Returns ``(graphs_by_taxon, events_by_taxon)`` keyed by ``TaxonRecord.identifier``.
+    Overlays survive ``just seed-apply --force`` and ``just verify-corpus`` because
+    ``build_document()`` merges them deterministically into ``doc["causal_graphs"]``
+    and appends any declared ``curation_history`` events.
+    """
+    if not path.exists():
+        return {}, {}
+    graphs_by_taxon: dict[str, list[dict[str, Any]]] = {}
+    events_by_taxon: dict[str, list[dict[str, Any]]] = {}
+    allowed_top_keys = {"identifier", "causal_graphs", "curation_history"}
+    for overlay_file in sorted(path.glob("*.yaml")):
+        data = yaml.safe_load(overlay_file.read_text(encoding="utf-8"))
+        if not isinstance(data, dict):
+            raise SystemExit(f"{overlay_file}: causal-graph overlay must be a YAML mapping")
+        unknown = set(data) - allowed_top_keys
+        if unknown:
+            raise SystemExit(
+                f"{overlay_file}: unexpected top-level keys in causal-graph overlay: {sorted(unknown)}"
+            )
+        identifier = (data.get("identifier") or "").strip() if isinstance(data.get("identifier"), str) else ""
+        if not identifier:
+            raise SystemExit(f"{overlay_file}: missing or invalid 'identifier'")
+        if identifier in graphs_by_taxon:
+            raise SystemExit(f"{overlay_file}: duplicate causal-graph overlay for {identifier}")
+        graphs = data.get("causal_graphs")
+        if not isinstance(graphs, list) or not graphs:
+            raise SystemExit(f"{overlay_file}: 'causal_graphs' must be a non-empty list")
+        seen_graph_ids: set[str] = set()
+        for graph in graphs:
+            if not isinstance(graph, dict):
+                raise SystemExit(f"{overlay_file}: each causal_graphs entry must be a mapping")
+            gid = (graph.get("graph_id") or "").strip() if isinstance(graph.get("graph_id"), str) else ""
+            if not gid:
+                raise SystemExit(f"{overlay_file}: causal_graphs entry missing 'graph_id'")
+            if gid in seen_graph_ids:
+                raise SystemExit(f"{overlay_file}: duplicate graph_id {gid!r} for {identifier}")
+            seen_graph_ids.add(gid)
+        graphs_by_taxon[identifier] = graphs
+        events = data.get("curation_history")
+        if events is not None:
+            if not isinstance(events, list) or any(not isinstance(e, dict) for e in events):
+                raise SystemExit(f"{overlay_file}: 'curation_history' must be a list of event mappings")
+            events_by_taxon[identifier] = events
+    return graphs_by_taxon, events_by_taxon
+
+
 def load_inventory() -> Inventory:
     taxa = {r["taxon_id"]: r for r in read_tsv("ncbitaxon_taxa.tsv")}
     gtdb: dict[str, list[dict[str, str]]] = defaultdict(list)
@@ -277,8 +332,10 @@ def load_inventory() -> Inventory:
         strain_assemblies[strain_id].extend(records)
     for strain_id, records in si_related.items():
         strain_related_records[strain_id].extend(records)
+    causal_graphs, causal_graph_events = load_causal_graphs(CAUSAL_GRAPHS_DIR)
     return Inventory(taxa, gtdb, lpsn, lpsn_by_taxon, strains, cc_strains, media, gold, madin, bacto,
-                     strain_assemblies, strain_genome_records, strain_related_records)
+                     strain_assemblies, strain_genome_records, strain_related_records,
+                     causal_graphs, causal_graph_events)
 
 
 # ---------------------------------------------------------------------------
@@ -643,6 +700,18 @@ def build_document(concept: Concept, inv: Inventory) -> dict[str, Any]:
         ),
         timestamp=SEED_TIMESTAMP,
     )
+    overlay_graphs = inv.causal_graphs.get(tid)
+    if overlay_graphs:
+        doc["causal_graphs"] = [copy.deepcopy(g) for g in overlay_graphs]
+        for event in inv.causal_graph_events.get(tid, []):
+            record_curation_event(
+                doc,
+                curator=event.get("curator") or "curate-causal-graphs",
+                action=event.get("action") or "ADDED_CAUSAL_GRAPHS",
+                changes=event.get("changes"),
+                llm_assisted=bool(event.get("llm_assisted", False)),
+                timestamp=event.get("timestamp") or SEED_TIMESTAMP,
+            )
     return doc
 
 

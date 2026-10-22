@@ -39,34 +39,54 @@ tasks:
       Implement maintained curation/causal_graphs/ overlay input, validated seeder merge in
       src/taxonmech/seed.py, seeder-owned verification in scripts/verify_corpus.py, and
       CausalNode.grounding prefix coverage (UniProtKB, EC, METPO/OMP) in conf/id_label_targets.yaml
-    status: open
+    status: resolved
     issue_url: https://github.com/CultureBotAI/TaxonMech/issues/78
-    disposition: tracked_for_stage6_implementation
+    disposition: >-
+      Resolved in Cycle 1 Stage 6: implemented load_causal_graphs() and build_document() merge in
+      src/taxonmech/seed.py, updated scripts/verify_corpus.py, registered UniProtKB/EC/OMP/UP
+      prefixes in src/taxonmech/schema/taxonmech.yaml and conf/id_label_targets.yaml, documented
+      curation/causal_graphs/README.md, and added 5-exemplar roundtrip/render tests in
+      tests/test_causal_graph_overlays.py
   - task_id: taxonmech-infra-0002
     summary: >-
       Extend src/taxonmech/extract.py to preserve granular per-taxon trait, substrate, habitat,
       and growth-medium assertions (madin_etal, bactotraits, mediadive) with predicate, ontology
       object CURIE, and literature/source provenance
-    status: open
+    status: deferred
     issue_url: https://github.com/CultureBotAI/TaxonMech/issues/78
-    disposition: tracked_for_stage6_implementation
+    disposition: >-
+      Deferred to Cycle 2 after partial implementation in Cycle 1 Stage 6: implemented and
+      unit-tested extract_taxon_trait_edges() and TRAIT_EDGE_FIELDS in src/taxonmech/extract.py;
+      full data/raw/taxon_trait_edges.tsv extraction across 38,357 trait/medium-attested records
+      requires an upstream local kg-microbe checkout re-extraction
   - task_id: taxonmech-infra-0003
     summary: >-
       Add a release-pinned UniProtKB / UniProt Reference Proteomes raw source snapshot in
       data/raw/, declare UniProtKB and EC prefixes in src/taxonmech/schema/taxonmech.yaml and
       conf/id_label_targets.yaml, and add structured GENE_OR_PROTEIN organism/strain/proteome/locus/checksum
       scope slots and accession-to-taxon validation
-    status: open
+    status: deferred
     issue_url: https://github.com/CultureBotAI/TaxonMech/issues/78
-    disposition: tracked_for_stage6_implementation
+    disposition: >-
+      Deferred to Cycle 2 after partial implementation in Cycle 1 Stage 6: declared UniProtKB, EC,
+      OMP, and UP prefixes and added structured GENE_OR_PROTEIN scope slots (organism_taxon_id,
+      strain_id, proteome_id, gene_symbol, locus_tag, sequence_length, sequence_crc64,
+      sequence_version, entry_status) and UniProtEntryStatusEnum to CausalNode in
+      src/taxonmech/schema/taxonmech.yaml; raw UniProtKB/Reference Proteomes TSV snapshot in
+      data/raw/ deferred pending upstream bulk release capture
   - task_id: taxonmech-infra-0004
     summary: >-
       Pin reproducible upstream kg-microbe edge-multiplicity provenance and document or align
       direct-only vs subtree-rolled-up source attestation counts for GOLD, MEDIADIVE, MADIN,
       and BACTOTRAITS across the 27,118 pass_with_limitations and 30 blocked corpus review records
-    status: open
+    status: deferred
     issue_url: https://github.com/CultureBotAI/TaxonMech/issues/8
-    disposition: tracked_for_stage6_implementation
+    disposition: >-
+      Deferred to Cycle 2 after documentation alignment in Cycle 1 Stage 6: documented pinned
+      kg-microbe@30405b70ef762aa46c08278b2b3e06bffb0b34cd edge-table SHA-256 digests and asymmetric
+      direct-taxid vs BacDive-subtree attestation contract in docs/HARMONIZATION.md; corpus-wide
+      re-seeding of source_attestations[].notes across 27,118 records deferred pending a dedicated
+      626,048-record YAML and pages/ regeneration pass
 ```
 <!-- mech-infra-tasks:end -->
 
@@ -75,7 +95,8 @@ tasks:
 ### `taxonmech-infra-0001` — Native causal-graph overlay writer, corpus verifier, and OAK grounding prefix coverage
 
 - **Origin**: `run_id: mech-goal-sequence-20261019`, `cycle: 1`, `stage: 2` (`causal_graphs`)
-- **Status**: `open` (`issue_url`: https://github.com/CultureBotAI/TaxonMech/issues/78)
+- **Status**: `resolved` (`issue_url`: https://github.com/CultureBotAI/TaxonMech/issues/78)
+- **Disposition**: Resolved in `mech-goal-sequence-20261019` Cycle 1 Stage 6 (`src/taxonmech/seed.py`, `scripts/verify_corpus.py`, `src/taxonmech/schema/taxonmech.yaml`, `conf/id_label_targets.yaml`, `curation/causal_graphs/README.md`, `tests/test_causal_graph_overlays.py`).
 - **Priority**: `high`
 - **Dependencies**: None
 - **Observation**:
@@ -99,7 +120,8 @@ tasks:
 ### `taxonmech-infra-0002` — Granular trait, substrate, habitat, and growth-medium edge extraction in `src/taxonmech/extract.py`
 
 - **Origin**: `run_id: mech-goal-sequence-20261019`, `cycle: 1`, `stage: 2` (`causal_graphs`)
-- **Status**: `open` (`issue_url`: https://github.com/CultureBotAI/TaxonMech/issues/78)
+- **Status**: `deferred` (`issue_url`: https://github.com/CultureBotAI/TaxonMech/issues/78)
+- **Disposition**: Deferred to Cycle 2 after partial implementation in Cycle 1 Stage 6 (`extract_taxon_trait_edges` and `TRAIT_EDGE_FIELDS` implemented in `src/taxonmech/extract.py` and tested in `tests/test_causal_graph_overlays.py`; full `data/raw/taxon_trait_edges.tsv` generation deferred pending a local `kg-microbe` checkout re-extraction).
 - **Priority**: `medium`
 - **Dependencies**: `taxonmech-infra-0001`
 - **Observation**:
@@ -119,7 +141,8 @@ tasks:
 ### `taxonmech-infra-0003` — Pinned UniProtKB / Reference Proteomes raw source snapshot, schema prefix declarations, and structured `GENE_OR_PROTEIN` organism/strain/sequence scope validation
 
 - **Origin**: `run_id: mech-goal-sequence-20261019`, `cycle: 1`, `stage: 3` (`protein_examples`)
-- **Status**: `open` (`issue_url`: https://github.com/CultureBotAI/TaxonMech/issues/78)
+- **Status**: `deferred` (`issue_url`: https://github.com/CultureBotAI/TaxonMech/issues/78)
+- **Disposition**: Deferred to Cycle 2 after partial implementation in Cycle 1 Stage 6 (`UniProtKB`, `EC`, `OMP`, and `UP` prefixes declared in `src/taxonmech/schema/taxonmech.yaml` and `conf/id_label_targets.yaml`; structured `GENE_OR_PROTEIN` scope slots and `UniProtEntryStatusEnum` added to `CausalNode` and tested in `tests/test_schema.py` and `tests/test_causal_graph_overlays.py`; raw UniProtKB/Reference Proteomes TSV snapshot in `data/raw/` deferred pending upstream bulk release capture).
 - **Priority**: `high`
 - **Dependencies**: `taxonmech-infra-0001`
 - **Observation**:
@@ -143,7 +166,8 @@ tasks:
 ### `taxonmech-infra-0004` — Reproducible upstream `kg-microbe` edge-multiplicity provenance and subtree count rollup contract
 
 - **Origin**: `run_id: mech-goal-sequence-20261019`, `cycle: 1`, `stage: 4` (`record_review`)
-- **Status**: `open` (`issue_url`: https://github.com/CultureBotAI/TaxonMech/issues/8)
+- **Status**: `deferred` (`issue_url`: https://github.com/CultureBotAI/TaxonMech/issues/8)
+- **Disposition**: Deferred to Cycle 2 after documentation alignment in Cycle 1 Stage 6 (`kg-microbe@30405b70ef762aa46c08278b2b3e06bffb0b34cd` edge-table SHA-256 provenance and direct-taxid vs BacDive-subtree attestation contract documented in `docs/HARMONIZATION.md`; corpus-wide `source_attestations[].notes` re-seeding across 27,118 records deferred pending a dedicated 626,048-record YAML and `pages/` regeneration pass).
 - **Priority**: `medium`
 - **Dependencies**: None
 - **Observation**:
