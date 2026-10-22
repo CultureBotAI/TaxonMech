@@ -329,7 +329,10 @@ def render_batches(rows: list[dict[str, str]]) -> str:
 
 
 def verify_shard_bundles(
-    root: Path, shard_rows_by_rel: dict[str, list[dict[str, str]]]
+    root: Path,
+    shard_rows_by_rel: dict[str, list[dict[str, str]]],
+    *,
+    verify_target_sha256: bool = False,
 ) -> None:
     structured_root = root / STRUCTURED_DIR
     if not structured_root.is_dir() or structured_root.is_symlink():
@@ -391,9 +394,10 @@ def verify_shard_bundles(
                 rel_inp in LATEST_SHARD_LIVE_CONTEXT_PATHS
                 or rel_inp in shard_rows_by_rel
             )
-            if (is_live_inventory_context or inp.get("role") == "target") and (
-                inp["sha256"] != sha_cache[rel_inp]
-            ):
+            if (
+                is_live_inventory_context
+                or (verify_target_sha256 and inp.get("role") == "target")
+            ) and (inp["sha256"] != sha_cache[rel_inp]):
                 raise ValueError(
                     f"bundle {bundle_yaml} has stale SHA256 for {rel_inp}"
                 )
@@ -431,7 +435,9 @@ def check(root: Path, *, verify_target_sha256: bool = False) -> dict[str, Any]:
             "structured-review-batches.tsv drift: rebuild with --write and update shard bundle digests"
         )
 
-    verify_shard_bundles(root, shard_rows_by_rel)
+    verify_shard_bundles(
+        root, shard_rows_by_rel, verify_target_sha256=verify_target_sha256
+    )
 
     return {
         "corpus_records": len(id_to_slug),

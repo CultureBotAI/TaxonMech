@@ -1006,3 +1006,86 @@ curation_history:
   changes: 'Seeded from data/raw/, data/atb/ and data/straininfo/ inventories; attested
     by BACDIVE, GOLD, GTDB, LPSN, MADIN, NCBITAXON. In scope: attested rule: Methanocaldococcus
     jannaschii, 5 sources incl. NCBI'
+- timestamp: '2026-10-22T14:00:00Z'
+  curator: curate-causal-graphs
+  action: ADDED_CAUSAL_GRAPHS
+  changes: Curated McrA-catalyzed hydrogenotrophic methanogenesis causal graph (UniProtKB:Q58256,
+    MJ_0846, UP:UP000000805, GO:0050524, GO:0015948, CHEBI:16183) via maintained curation/causal_graphs/NCBITaxon_2190.yaml
+    overlay.
+  llm_assisted: true
+causal_graphs:
+- graph_id: hydrogenotrophic_methanogenesis
+  title: McrA-catalyzed hydrogenotrophic methanogenesis
+  description: Terminal step of hydrogenotrophic methanogenesis in Methanocaldococcus
+    jannaschii, catalyzed by methyl-coenzyme M reductase alpha subunit (McrA, encoded
+    by mcrA / MJ_0846 in type strain JAL-1 = DSM 2661), which reduces methyl-coenzyme
+    M with coenzyme B to release methane and the heterodisulfide CoM-S-S-CoB.
+  nodes:
+  - node_id: taxon
+    label: Methanocaldococcus jannaschii
+    node_type: TAXON
+    grounding: NCBITaxon:2190
+  - node_id: mcrA
+    label: Methyl-coenzyme M reductase subunit alpha (mcrA)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:Q58256
+    xrefs:
+    - EC:2.8.4.1
+    organism_taxon_id: NCBITaxon:243232
+    strain_id: kgmicrobe.strain:bacdive_6981
+    proteome_id: UP:UP000000805
+    gene_symbol: mcrA
+    locus_tag: MJ_0846
+    sequence_length: 552
+    sequence_crc64: C68B47DB235F5A45
+    sequence_version: 2
+    entry_status: SWISS_PROT
+  - node_id: mcr_activity
+    label: coenzyme-B sulfoethylthiotransferase activity
+    node_type: MOLECULAR_FUNCTION
+    grounding: GO:0050524
+  - node_id: methanogenesis
+    label: methanogenesis
+    node_type: BIOLOGICAL_PROCESS
+    grounding: GO:0015948
+  - node_id: methane
+    label: methane
+    node_type: CHEMICAL
+    grounding: CHEBI:16183
+  edges:
+  - edge_id: e1
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: mcrA
+    evidence:
+    - reference: PMID:8688087
+      notes: Complete genome sequence of Methanocaldococcus jannaschii DSM 2661 identifying
+        mcrA (MJ_0846) in the methyl-coenzyme M reductase I operon.
+  - edge_id: e2
+    subject: mcrA
+    predicate: enables
+    predicate_id: RO:0002327
+    object: mcr_activity
+    evidence:
+    - reference: PMID:9367957
+      notes: Crystal structure and factor F430 active-site mechanism of archaeal methyl-coenzyme
+        M reductase.
+  - edge_id: e3
+    subject: mcr_activity
+    predicate: part of
+    predicate_id: BFO:0000050
+    object: methanogenesis
+    evidence:
+    - reference: PMID:9367957
+      notes: Methyl-coenzyme M reductase catalyzes the obligatory final methane-forming
+        step in all biologically mediated methanogenesis pathways.
+  - edge_id: e4
+    subject: methanogenesis
+    predicate: has primary output
+    predicate_id: RO:0004008
+    object: methane
+    evidence:
+    - reference: PMID:9367957
+      notes: Reduction of methyl-coenzyme M with coenzyme B releases methane (CH4)
+        as the terminal metabolic product.

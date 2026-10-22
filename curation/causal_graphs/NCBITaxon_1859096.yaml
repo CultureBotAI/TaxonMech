@@ -1,0 +1,114 @@
+identifier: NCBITaxon:1859096
+causal_graphs:
+- graph_id: capsule_and_melanin_virulence
+  title: Cap59/Lac1-mediated capsule organization and melanin biosynthesis
+  description: >-
+    Core virulence factor pathways in the basidiomycete yeast Cryptococcus
+    deuterogattii (reference strain R265, proteome UP:UP000007805), where
+    capsular-associated protein Cap59 (CNBG_0606) mediates polysaccharide
+    capsule organization and laccase-1 Lac1 (CNBG_2144) catalyzes diphenol
+    oxidation during cell-wall melanin biosynthesis.
+  nodes:
+  - node_id: taxon
+    label: Cryptococcus deuterogattii
+    node_type: TAXON
+    grounding: NCBITaxon:1859096
+  - node_id: cap59
+    label: Capsular-associated protein CAP59 (CAP59)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:E6R5R3
+    organism_taxon_id: NCBITaxon:294750
+    proteome_id: UP:UP000007805
+    gene_symbol: CAP59
+    locus_tag: CNBG_0606
+    sequence_length: 458
+    sequence_crc64: 9CEB1948D793F99F
+    sequence_version: 1
+    entry_status: TREMBL
+  - node_id: lac1
+    label: Laccase-1 (LAC1)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:E6R8U0
+    xrefs:
+    - EC:1.10.3.2
+    organism_taxon_id: NCBITaxon:294750
+    proteome_id: UP:UP000007805
+    gene_symbol: LAC1
+    locus_tag: CNBG_2144
+    sequence_length: 625
+    sequence_crc64: E05FC5D0C3CAEB61
+    sequence_version: 1
+    entry_status: TREMBL
+  - node_id: capsule_organization
+    label: external encapsulating structure organization
+    node_type: BIOLOGICAL_PROCESS
+    grounding: GO:0045229
+  - node_id: laccase_activity
+    label: hydroquinone:oxygen oxidoreductase activity
+    node_type: MOLECULAR_FUNCTION
+    grounding: GO:0052716
+  - node_id: melanin_biosynthesis
+    label: melanin biosynthetic process
+    node_type: BIOLOGICAL_PROCESS
+    grounding: GO:0042438
+  edges:
+  - edge_id: e1
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: cap59
+    evidence:
+    - reference: PMID:21152013
+      notes: >-
+        Reference genome assembly and annotation of Cryptococcus deuterogattii
+        (C. gattii VGII) strain R265 identifying CAP59 (CNBG_0606).
+  - edge_id: e2
+    subject: cap59
+    predicate: causally upstream of or within
+    predicate_id: RO:0002418
+    object: capsule_organization
+    evidence:
+    - reference: PMID:8188694
+      notes: >-
+        CAP59 is required for extracellular glucuronoxylomannan polysaccharide
+        capsule export and organization in pathogenic Cryptococcus species.
+  - edge_id: e3
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: lac1
+    evidence:
+    - reference: PMID:21152013
+      notes: >-
+        Reference genome assembly and annotation of Cryptococcus deuterogattii
+        strain R265 identifying LAC1 (CNBG_2144).
+  - edge_id: e4
+    subject: lac1
+    predicate: enables
+    predicate_id: RO:0002327
+    object: laccase_activity
+    evidence:
+    - reference: PMID:15576787
+      notes: >-
+        LAC1 encodes the major cell-wall-associated diphenol oxidase (laccase)
+        regulated by the cAMP/PKA signaling pathway.
+  - edge_id: e5
+    subject: laccase_activity
+    predicate: causally upstream of or within
+    predicate_id: RO:0002418
+    object: melanin_biosynthesis
+    evidence:
+    - reference: PMID:15576787
+      notes: >-
+        Laccase activity oxidizes exogenous catecholamines such as L-DOPA to
+        synthesize protective cell-wall melanin pigment.
+curation_history:
+- timestamp: '2026-10-22T14:00:00Z'
+  curator: curate-causal-graphs
+  action: ADDED_CAUSAL_GRAPHS
+  changes: >-
+    Curated Cap59/Lac1-mediated capsule organization and melanin biosynthesis
+    causal graph (UniProtKB:E6R5R3, UniProtKB:E6R8U0, CNBG_0606, CNBG_2144,
+    UP:UP000007805, GO:0045229, GO:0052716, GO:0042438) via maintained
+    curation/causal_graphs/NCBITaxon_1859096.yaml overlay.
+  llm_assisted: true
