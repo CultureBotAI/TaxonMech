@@ -1,17 +1,30 @@
 identifier: NCBITaxon:83333
 causal_graphs:
 - graph_id: lactose_catabolism
-  title: LacZ-mediated lactose catabolism
+  title: LacY/LacZ-mediated lactose transport and catabolism
   description: >-
-    Canonical Escherichia coli K-12 lactose catabolic mechanism mediated by
-    beta-galactosidase (LacZ, encoded by lacZ / b0344 in the K-12 reference
-    proteome UP:UP000000625), which hydrolyzes lactose into D-glucose and
-    D-galactose and isomerizes lactose to allolactose.
+    Canonical Escherichia coli K-12 lactose transport and catabolic mechanism
+    mediated by lactose permease (LacY, encoded by lacY / b0343 in the K-12
+    reference proteome UP:UP000000625) and beta-galactosidase (LacZ, encoded by
+    lacZ / b0344), which import lactose across the inner membrane, hydrolyze
+    lactose into D-glucose and D-galactose, and isomerize lactose to allolactose.
   nodes:
   - node_id: taxon
     label: Escherichia coli K-12
     node_type: TAXON
     grounding: NCBITaxon:83333
+  - node_id: lacY
+    label: Lactose permease (lacY)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:P02920
+    organism_taxon_id: NCBITaxon:83333
+    proteome_id: UP:UP000000625
+    gene_symbol: lacY
+    locus_tag: b0343
+    sequence_length: 417
+    sequence_crc64: 24A8062F628CDA32
+    sequence_version: 1
+    entry_status: SWISS_PROT
   - node_id: lacZ
     label: Beta-galactosidase (lacZ)
     node_type: GENE_OR_PROTEIN
@@ -23,9 +36,13 @@ causal_graphs:
     gene_symbol: lacZ
     locus_tag: b0344
     sequence_length: 1024
-    sequence_crc64: C68A8B3C5EB5E37A
+    sequence_crc64: 9D295EF4CEF90B08
     sequence_version: 2
     entry_status: SWISS_PROT
+  - node_id: lactose_transport
+    label: lactose transport
+    node_type: BIOLOGICAL_PROCESS
+    grounding: GO:0015767
   - node_id: beta_galactosidase_activity
     label: beta-galactosidase activity
     node_type: MOLECULAR_FUNCTION
@@ -43,13 +60,47 @@ causal_graphs:
     subject: taxon
     predicate: expresses
     predicate_id: RO:0002292
+    object: lacY
+    evidence:
+    - reference: PMID:9278503
+      notes: >-
+        Complete genome sequence of Escherichia coli K-12 MG1655 annotating
+        lacY (b0343) within the chromosomal lacZYA operon.
+    - reference: PMID:6444453
+      notes: >-
+        Nucleotide sequence and primary structure of the Escherichia coli K-12
+        lacY lactose permease gene.
+  - edge_id: e2
+    subject: lacY
+    predicate: causally upstream of or within
+    predicate_id: RO:0002418
+    object: lactose_transport
+    evidence:
+    - reference: PMID:7000781
+      notes: >-
+        Solubilization and reconstitution in proteoliposomes demonstrate that
+        the lacY gene product mediates proton-coupled lactose symport.
+  - edge_id: e3
+    subject: lactose_transport
+    predicate: causally upstream of or within
+    predicate_id: RO:0002418
+    object: lactose_catabolism
+    evidence:
+    - reference: PMID:7000781
+      notes: >-
+        LacY-mediated import of extracellular lactose supplies cytoplasmic
+        substrate for LacZ-catalyzed lactose catabolism.
+  - edge_id: e4
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
     object: lacZ
     evidence:
     - reference: PMID:9278503
       notes: >-
         Complete genome sequence of Escherichia coli K-12 MG1655 annotating
         lacZ (b0344) within the chromosomal lacZYA operon.
-  - edge_id: e2
+  - edge_id: e5
     subject: lacZ
     predicate: enables
     predicate_id: RO:0002327
@@ -59,7 +110,7 @@ causal_graphs:
       notes: >-
         Three-dimensional crystal structure and active-site characterization of
         tetrameric Escherichia coli beta-galactosidase (LacZ).
-  - edge_id: e3
+  - edge_id: e6
     subject: beta_galactosidase_activity
     predicate: part of
     predicate_id: BFO:0000050
@@ -69,7 +120,7 @@ causal_graphs:
       notes: >-
         Beta-galactosidase catalyzes hydrolytic cleavage of lactose to glucose
         and galactose and isomerization to allolactose during lactose catabolism.
-  - edge_id: e4
+  - edge_id: e7
     subject: lactose_catabolism
     predicate: has primary input
     predicate_id: RO:0004009
@@ -78,7 +129,7 @@ causal_graphs:
     - reference: PMID:8008071
       notes: >-
         Lactose is the primary disaccharide substrate of the Escherichia coli
-        K-12 LacZ-mediated lactose catabolic pathway.
+        K-12 LacY/LacZ lactose transport and catabolic pathway.
 curation_history:
 - timestamp: '2026-10-22T14:00:00Z'
   curator: curate-causal-graphs
@@ -87,4 +138,13 @@ curation_history:
     Curated LacZ-mediated lactose catabolism causal graph (UniProtKB:P00722,
     b0344, UP:UP000000625, GO:0004565, GO:0005990, CHEBI:17716) via maintained
     curation/causal_graphs/NCBITaxon_83333.yaml overlay.
+  llm_assisted: true
+- timestamp: '2026-10-22T18:50:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: >-
+    Added live-verified UniProtKB:P02920 (LACY_ECOLI, lacY / b0343, 417 aa,
+    CRC64 24A8062F628CDA32, v1) and verified UniProtKB:P00722 (BGAL_ECOLI,
+    lacZ / b0344, 1024 aa, CRC64 9D295EF4CEF90B08, v2) in reference proteome
+    UP:UP000000625.
   llm_assisted: true
