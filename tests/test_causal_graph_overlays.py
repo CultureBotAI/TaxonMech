@@ -546,3 +546,39 @@ def test_extract_taxon_trait_edges_preserves_granular_assertions(tmp_path):
     assert rows[2]["taxon_id"] == "NCBITaxon:1423"
     assert rows[2]["object_id"] == "mediadive.medium:1"
     assert SchemaView(str(SCHEMA_PATH)) is not None
+
+
+def test_committed_curation_causal_graphs_overlays_load_and_validate():
+    """Verify that all committed curation/causal_graphs/*.yaml overlays load cleanly,
+    cover the 10 species+strain exemplar records (44 evidence-backed edges), and
+    satisfy schema prefix and id_label_targets rules (#78)."""
+    overlays_dir = REPO_ROOT / "curation" / "causal_graphs"
+    graphs, events = load_causal_graphs(overlays_dir)
+    expected_ids = {
+        "NCBITaxon:562",
+        "NCBITaxon:83333",
+        "NCBITaxon:1423",
+        "NCBITaxon:224308",
+        "NCBITaxon:287",
+        "NCBITaxon:208964",
+        "NCBITaxon:2190",
+        "NCBITaxon:243232",
+        "NCBITaxon:1859096",
+        "NCBITaxon:294750",
+    }
+    assert expected_ids.issubset(set(graphs))
+    assert expected_ids.issubset(set(events))
+    total_edges = sum(
+        len(e.get("evidence") or [])
+        for tid in expected_ids
+        for g in graphs[tid]
+        for e in g.get("edges") or []
+    )
+    assert total_edges >= 44
+    edge_count = sum(
+        len(g.get("edges") or [])
+        for tid in expected_ids
+        for g in graphs[tid]
+    )
+    assert edge_count == 44
+

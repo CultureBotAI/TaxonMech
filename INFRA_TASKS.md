@@ -42,13 +42,15 @@ tasks:
     status: deferred
     issue_url: https://github.com/CultureBotAI/TaxonMech/issues/78
     disposition: >-
-      Deferred to Cycle 2 under open umbrella issue #78 after landing repository-local pipeline in
-      Cycle 1 Stage 6 (PR #152): implemented load_causal_graphs() and build_document() merge in
-      src/taxonmech/seed.py, updated scripts/verify_corpus.py, registered UniProtKB/EC/OMP/UP
-      prefixes in src/taxonmech/schema/taxonmech.yaml and conf/id_label_targets.yaml, documented
-      curation/causal_graphs/README.md, and added 5-exemplar roundtrip/render tests in
+      Deferred to Cycle 2 Stage 6 under open umbrella issue #78 after landing repository-local
+      pipeline in Cycle 1 Stage 6 (PR #152) and seeding 10 maintained overlays (44 evidence-backed
+      edges across 5 cross-domain species and 5 reference-proteome strain records) in Cycle 2 Stage 2:
+      implemented load_causal_graphs() and build_document() merge in src/taxonmech/seed.py, updated
+      scripts/verify_corpus.py, registered UniProtKB/EC/OMP/UP prefixes in
+      src/taxonmech/schema/taxonmech.yaml and conf/id_label_targets.yaml, documented
+      curation/causal_graphs/README.md, and added roundtrip/render and committed-overlay tests in
       tests/test_causal_graph_overlays.py; umbrella issue #78 remains open pending companion tasks
-      taxonmech-infra-0002 and taxonmech-infra-0003 and production overlay seeding
+      taxonmech-infra-0002 and taxonmech-infra-0003 for corpus-wide raw trait and UniProt extraction
   - task_id: taxonmech-infra-0002
     summary: >-
       Extend src/taxonmech/extract.py to preserve granular per-taxon trait, substrate, habitat,
@@ -98,7 +100,7 @@ tasks:
 
 - **Origin**: `run_id: mech-goal-sequence-20261019`, `cycle: 1`, `stage: 2` (`causal_graphs`)
 - **Status**: `deferred` (`issue_url`: https://github.com/CultureBotAI/TaxonMech/issues/78)
-- **Disposition**: Deferred to Cycle 2 under open umbrella issue `#78` after landing repository-local pipeline in `mech-goal-sequence-20261019` Cycle 1 Stage 6 PR `#152` (`src/taxonmech/seed.py`, `scripts/verify_corpus.py`, `src/taxonmech/schema/taxonmech.yaml`, `conf/id_label_targets.yaml`, `curation/causal_graphs/README.md`, `tests/test_causal_graph_overlays.py`); umbrella issue `#78` remains open pending companion tasks `taxonmech-infra-0002` and `taxonmech-infra-0003` and production overlay seeding.
+- **Disposition**: Deferred to Cycle 2 Stage 6 under open umbrella issue `#78` after landing repository-local pipeline in `mech-goal-sequence-20261019` Cycle 1 Stage 6 PR `#152` (`src/taxonmech/seed.py`, `scripts/verify_corpus.py`, `src/taxonmech/schema/taxonmech.yaml`, `conf/id_label_targets.yaml`, `curation/causal_graphs/README.md`, `tests/test_causal_graph_overlays.py`) and seeding 10 maintained production overlays (44 evidence-backed edges across 5 cross-domain species and 5 reference-proteome strain records) in Cycle 2 Stage 2; umbrella issue `#78` remains open pending companion tasks `taxonmech-infra-0002` and `taxonmech-infra-0003` for corpus-wide raw trait and UniProt extraction.
 - **Priority**: `high`
 - **Dependencies**: None
 - **Observation**:

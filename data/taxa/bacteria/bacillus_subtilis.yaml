@@ -38003,3 +38003,84 @@ curation_history:
     by BACDIVE, BACTOTRAITS, GOLD, GTDB, LPSN, MADIN, MEDIADIVE, NCBITAXON. In scope:
     core rule: Bacillus subtilis, 7 sources incl. NCBI, 269 BacDive strains, LPSN
     correct name with type strain, GTDB mapping'
+- timestamp: '2026-10-22T14:00:00Z'
+  curator: curate-causal-graphs
+  action: ADDED_CAUSAL_GRAPHS
+  changes: Curated Spo0A-regulated endospore formation causal graph (UniProtKB:P06534,
+    BSU_24220, UP:UP000001570, GO:0000156, GO:0034301, METPO:1000874) via maintained
+    curation/causal_graphs/NCBITaxon_1423.yaml overlay.
+  llm_assisted: true
+causal_graphs:
+- graph_id: endospore_formation
+  title: Spo0A-regulated endospore formation
+  description: Master regulatory mechanism of endospore formation in Bacillus subtilis,
+    where phosphorylation of Stage 0 sporulation protein A (Spo0A, encoded by spo0A
+    / BSU_24220 in reference strain 168) via the multicomponent phosphorelay activates
+    sporulation gene expression and confers the spore-forming phenotype.
+  nodes:
+  - node_id: taxon
+    label: Bacillus subtilis
+    node_type: TAXON
+    grounding: NCBITaxon:1423
+  - node_id: spo0A
+    label: Stage 0 sporulation protein A (spo0A)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:P06534
+    organism_taxon_id: NCBITaxon:224308
+    strain_id: kgmicrobe.strain:bacdive_1156
+    proteome_id: UP:UP000001570
+    gene_symbol: spo0A
+    locus_tag: BSU_24220
+    sequence_length: 267
+    sequence_crc64: A90C038462C53A23
+    sequence_version: 2
+    entry_status: SWISS_PROT
+  - node_id: phosphorelay_regulator_activity
+    label: phosphorelay response regulator activity
+    node_type: MOLECULAR_FUNCTION
+    grounding: GO:0000156
+  - node_id: endospore_formation
+    label: endospore formation
+    node_type: BIOLOGICAL_PROCESS
+    grounding: GO:0034301
+  - node_id: spore_forming_trait
+    label: spore-forming
+    node_type: TRAIT
+    grounding: METPO:1000874
+  edges:
+  - edge_id: e1
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: spo0A
+    evidence:
+    - reference: PMID:9384377
+      notes: Complete genome sequence of Bacillus subtilis strain 168 identifying
+        spo0A (BSU_24220) as the central sporulation transcription factor.
+  - edge_id: e2
+    subject: spo0A
+    predicate: enables
+    predicate_id: RO:0002327
+    object: phosphorelay_regulator_activity
+    evidence:
+    - reference: PMID:1987166
+      notes: Spo0A functions as the terminal phosphorelay response regulator phosphorylated
+        via KinA/Spo0F/Spo0B to initiate sporulation.
+  - edge_id: e3
+    subject: phosphorelay_regulator_activity
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: endospore_formation
+    evidence:
+    - reference: PMID:14651647
+      notes: Chromatin immunoprecipitation and microarray profiling demonstrate direct
+        transcriptional activation of the sporulation initiation program by Spo0A~P.
+  - edge_id: e4
+    subject: endospore_formation
+    predicate: has output
+    predicate_id: RO:0002234
+    object: spore_forming_trait
+    evidence:
+    - reference: PMID:14651647
+      notes: Completion of the Spo0A-initiated sporulation developmental pathway yields
+        dormant, heat-resistant endospores.

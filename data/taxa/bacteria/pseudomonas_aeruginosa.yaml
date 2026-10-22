@@ -63367,3 +63367,106 @@ curation_history:
     by BACDIVE, BACTOTRAITS, GOLD, GTDB, LPSN, MADIN, MEDIADIVE, NCBITAXON. In scope:
     core rule: Pseudomonas aeruginosa, 7 sources incl. NCBI, 507 BacDive strains,
     LPSN correct name with type strain, GTDB mapping'
+- timestamp: '2026-10-22T14:00:00Z'
+  curator: curate-causal-graphs
+  action: ADDED_CAUSAL_GRAPHS
+  changes: Curated PhzM/PhzS-mediated pyocyanin biosynthesis causal graph (UniProtKB:Q9HWH2,
+    UniProtKB:Q9HWH3, PA4209, PA4217, UP:UP000002438, GO:0002047, CHEBI:8653) via
+    maintained curation/causal_graphs/NCBITaxon_287.yaml overlay.
+  llm_assisted: true
+causal_graphs:
+- graph_id: pyocyanin_biosynthesis
+  title: PhzM/PhzS-mediated pyocyanin biosynthesis
+  description: Terminal steps of phenazine and pyocyanin biosynthesis in Pseudomonas
+    aeruginosa, where phenazine-specific methyltransferase PhzM (PA4209) and flavin-dependent
+    monooxygenase PhzS (PA4217) convert phenazine-1-carboxylic acid into the redox-active
+    virulence pigment pyocyanin.
+  nodes:
+  - node_id: taxon
+    label: Pseudomonas aeruginosa
+    node_type: TAXON
+    grounding: NCBITaxon:287
+  - node_id: phzM
+    label: Phenazine-specific methyltransferase (phzM)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:Q9HWH2
+    xrefs:
+    - EC:2.1.1.193
+    organism_taxon_id: NCBITaxon:208964
+    strain_id: kgmicrobe.strain:bacdive_12795
+    proteome_id: UP:UP000002438
+    gene_symbol: phzM
+    locus_tag: PA4209
+    sequence_length: 334
+    sequence_crc64: 99F57DBCD2F2CEBB
+    sequence_version: 1
+    entry_status: SWISS_PROT
+  - node_id: phzS
+    label: Flavin-dependent monooxygenase PhzS (phzS)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:Q9HWH3
+    xrefs:
+    - EC:1.14.13.218
+    organism_taxon_id: NCBITaxon:208964
+    strain_id: kgmicrobe.strain:bacdive_12795
+    proteome_id: UP:UP000002438
+    gene_symbol: phzS
+    locus_tag: PA4217
+    sequence_length: 402
+    sequence_crc64: D98EC80066E5E765
+    sequence_version: 1
+    entry_status: SWISS_PROT
+  - node_id: phenazine_biosynthesis
+    label: phenazine biosynthetic process
+    node_type: BIOLOGICAL_PROCESS
+    grounding: GO:0002047
+  - node_id: pyocyanin
+    label: pyocyanine
+    node_type: CHEMICAL
+    grounding: CHEBI:8653
+  edges:
+  - edge_id: e1
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: phzM
+    evidence:
+    - reference: PMID:10984043
+      notes: Complete genome sequence of Pseudomonas aeruginosa PAO1 identifying phzM
+        (PA4209) adjacent to the phzA1-G1 phenazine biosynthetic operon.
+  - edge_id: e2
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: phzS
+    evidence:
+    - reference: PMID:10984043
+      notes: Complete genome sequence of Pseudomonas aeruginosa PAO1 identifying phzS
+        (PA4217) downstream of the phzA1-G1 phenazine biosynthetic operon.
+  - edge_id: e3
+    subject: phzM
+    predicate: causally upstream of or within
+    predicate_id: RO:0002418
+    object: phenazine_biosynthesis
+    evidence:
+    - reference: PMID:11489860
+      notes: PhzM catalyzes N-methylation of phenazine-1-carboxylic acid to 5-methylphenazine-1-carboxylate
+        betaine in pyocyanin biosynthesis.
+  - edge_id: e4
+    subject: phzS
+    predicate: causally upstream of or within
+    predicate_id: RO:0002418
+    object: phenazine_biosynthesis
+    evidence:
+    - reference: PMID:11489860
+      notes: PhzS catalyzes hydroxylative decarboxylation of 5-methylphenazine-1-carboxylate
+        betaine to yield pyocyanin.
+  - edge_id: e5
+    subject: phenazine_biosynthesis
+    predicate: has primary output
+    predicate_id: RO:0004008
+    object: pyocyanin
+    evidence:
+    - reference: PMID:11489860
+      notes: Combined action of PhzM and PhzS in the phenazine biosynthetic pathway
+        produces the blue-green redox-active phenazine pigment pyocyanin.
