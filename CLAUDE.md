@@ -99,7 +99,7 @@ Read these before changing domain behavior:
 
 Sibling repositories use the same conventions: TraitMech, HabitatMech,
 CultureMech, MediaIngredientMech, CommunityMech, CellStructureMech,
-ProteinTraitsMech, AntibioticMech. The upstream pattern is
+ProteinTraitsMech, AntibioticMech, NaturalProductMech. The upstream pattern is
 monarch-initiative/dismech.
 
 ## Authoritative commands

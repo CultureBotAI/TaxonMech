@@ -127,3 +127,52 @@ def test_schema_prefixes_cover_every_curie_in_the_corpus(schema_path, records):
                 add(e.get("predicate_id"))
     missing = used - declared
     assert not missing, f"prefixes used in the corpus but undeclared in the schema: {sorted(missing)}"
+
+
+def test_causal_node_type_enum_is_superset_of_traitmech_and_habitatmech(schema_path):
+    """CausalNodeTypeEnum claims to be a superset of TraitMech's and HabitatMech's
+    enums so causal graphs remain comparable across the Mech repositories (#76)."""
+    view = _schema(schema_path)
+    allowed = _permissible(view, "CausalNodeTypeEnum")
+    traitmech_values = {
+        "TRAIT",
+        "PATHWAY",
+        "ENVIRONMENTAL_FACTOR",
+        "EXPERIMENTAL_FACTOR",
+        "GENE_OR_PROTEIN",
+        "RNA",
+        "GENETIC_ELEMENT",
+        "CHEMICAL",
+        "ORGANELLE",
+        "CELLULAR_LOCALIZATION",
+        "MOLECULAR_FUNCTION",
+        "BIOLOGICAL_PROCESS",
+        "STATE",
+        "QUALITY",
+        "CAPACITY",
+    }
+    habitatmech_values = {
+        "TAXON",
+        "TRAIT",
+        "HABITAT",
+        "ENVIRONMENTAL_PARAMETER",
+        "PATHWAY",
+        "ENVIRONMENTAL_FACTOR",
+        "EXPERIMENTAL_FACTOR",
+        "GENE_OR_PROTEIN",
+        "CHEMICAL",
+        "CELLULAR_LOCALIZATION",
+        "MOLECULAR_FUNCTION",
+        "BIOLOGICAL_PROCESS",
+        "STATE",
+        "QUALITY",
+        "CAPACITY",
+        "COMMUNITY_PROCESS",
+    }
+    assert traitmech_values <= allowed, (
+        f"missing TraitMech values: {sorted(traitmech_values - allowed)}"
+    )
+    assert habitatmech_values <= allowed, (
+        f"missing HabitatMech values: {sorted(habitatmech_values - allowed)}"
+    )
+

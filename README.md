@@ -24,8 +24,9 @@ TaxonMech is the taxonomic counterpart of
 (ingredients), [CommunityMech](https://github.com/CultureBotAI/CommunityMech)
 (communities), [CellStructureMech](https://github.com/CultureBotAI/CellStructureMech)
 (cell structures), [ProteinTraitsMech](https://github.com/CultureBotAI/proteintraitsmech)
-(proteins) and [AntibioticMech](https://github.com/CultureBotAI/AntibioticMech)
-(antimicrobials), and follows the curation pattern established by
+(proteins), [AntibioticMech](https://github.com/CultureBotAI/AntibioticMech)
+(antimicrobials) and [NaturalProductMech](https://github.com/CultureBotAI/NaturalProductMech)
+(natural products), and follows the curation pattern established by
 [dismech](https://github.com/monarch-initiative/dismech): one YAML per entity,
 ontology-grounded, evidence-backed, closed-schema validated, curated
 incrementally with an append-only audit trail.

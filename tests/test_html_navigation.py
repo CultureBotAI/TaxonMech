@@ -35,3 +35,21 @@ def test_browse_template_provides_named_keyboard_region_and_column_scopes():
 def test_both_public_shells_link_the_maintained_project_directory():
     for path in [ROOT / "pages/index.html", ROOT / "pages/browse.html", ROOT / "pages/taxon.html"]:
         assert 'href="https://culturebotai.github.io/mechs/"' in path.read_text(), path
+
+
+def test_mech_family_navigation_and_docs_include_naturalproductmech():
+    """The footer family line and repository sibling lists must include NaturalProductMech (#76)."""
+    nav_link = '<a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a>'
+    for path in [
+        ROOT / "src/taxonmech/templates/base.html",
+        ROOT / "src/taxonmech/templates/index.html",
+        ROOT / "pages/index.html",
+        ROOT / "pages/browse.html",
+        ROOT / "pages/taxon.html",
+    ]:
+        assert nav_link in path.read_text(encoding="utf-8"), path
+    assert "[NaturalProductMech](https://github.com/CultureBotAI/NaturalProductMech)" in (
+        ROOT / "README.md"
+    ).read_text(encoding="utf-8")
+    assert "NaturalProductMech" in (ROOT / "CLAUDE.md").read_text(encoding="utf-8")
+
