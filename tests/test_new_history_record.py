@@ -247,3 +247,31 @@ def test_the_placeholder_path_still_validates_everything_else(tmp_path):
               "--target-root", "data/taxa/bacteria", "--summary", "s",
               "--history-root", str(tmp_path), "--timestamp", "nonsense"])
     assert list(tmp_path.rglob("*.yaml")) == []
+
+
+def test_validate_history_resolves_linkml_validate_beside_interpreter(tmp_path, monkeypatch):
+    """scripts/validate_history.py must find linkml-validate next to sys.executable
+    even when the virtualenv bin directory is absent from PATH (#83)."""
+    import subprocess
+
+    import validate_history
+
+    _, path = _run(tmp_path, "--issue", "83")
+    beside = Path(sys.executable).with_name("linkml-validate")
+    assert beside.exists(), f"expected linkml-validate beside {sys.executable}"
+    assert validate_history.linkml_validate() == str(beside)
+
+    completed = subprocess.run(
+        [sys.executable, str(REPO_ROOT / "scripts" / "validate_history.py"), str(path)],
+        cwd=REPO_ROOT,
+        env={"PATH": "/usr/bin:/bin"},
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert completed.returncode == 0, completed.stderr
+    assert "1 history record(s) valid" in completed.stdout
+
+    monkeypatch.setattr(validate_history.sys, "executable", str(tmp_path / "no-such-bin" / "python"))
+    assert validate_history.linkml_validate() == "linkml-validate"
+

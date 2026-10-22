@@ -200,6 +200,7 @@ def test_multi_shard_append_requires_latest_shard_context_hashes(sample_repo: Pa
         (sample_repo / "data/taxa/PATHS.tsv").read_text(encoding="utf-8")
     )
 
+    (sample_repo / "CLAUDE.md").write_text("# Doc v1\n", encoding="utf-8")
     bundle1_dir = (
         sample_repo
         / "reviews/structured/20261019T000000Z-structured-review-shard-part-01"
@@ -223,12 +224,18 @@ def test_multi_shard_append_requires_latest_shard_context_hashes(sample_repo: Pa
                     "sha256": paths_sha,
                     "role": "context",
                 },
+                {
+                    "path": "CLAUDE.md",
+                    "sha256": _sha256_text("# Doc v1\n"),
+                    "role": "context",
+                },
             ]
         },
     }
     (bundle1_dir / "review.yaml").write_text(
         yaml.dump(bundle1_doc, Dumper=Dumper), encoding="utf-8"
     )
+    (sample_repo / "CLAUDE.md").write_text("# Doc v2\n", encoding="utf-8")
     summary = cri.check(sample_repo, verify_target_sha256=True)
     assert summary["structured_shards"] == 2
     assert summary["structured_records"] == 2
