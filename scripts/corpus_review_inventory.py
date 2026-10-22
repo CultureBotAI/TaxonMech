@@ -33,6 +33,14 @@ SHARD_DIR = Path("docs/structured-review-inventory")
 BATCHES_TSV = Path("docs/structured-review-batches.tsv")
 STRUCTURED_DIR = Path("reviews/structured")
 DOMAINS = ("archaea", "bacteria", "eukaryota", "other")
+LATEST_SHARD_LIVE_CONTEXT_PATHS = frozenset(
+    {
+        PATHS_TSV.as_posix(),
+        LEGACY_TSV.as_posix(),
+        BATCHES_TSV.as_posix(),
+        "curation/seed_scope.tsv",
+    }
+)
 
 INVENTORY_COLUMNS = (
     "review_id",
@@ -379,7 +387,11 @@ def verify_shard_bundles(
                         f"bundle {bundle_yaml} references missing input {rel_inp}"
                     )
                 sha_cache[rel_inp] = sha256_file(inp_file)
-            if (is_latest_shard_bundle or inp.get("role") == "target") and (
+            is_live_inventory_context = is_latest_shard_bundle and (
+                rel_inp in LATEST_SHARD_LIVE_CONTEXT_PATHS
+                or rel_inp in shard_rows_by_rel
+            )
+            if (is_live_inventory_context or inp.get("role") == "target") and (
                 inp["sha256"] != sha_cache[rel_inp]
             ):
                 raise ValueError(
