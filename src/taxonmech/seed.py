@@ -56,7 +56,26 @@ STRAININFO_DIR = REPO_ROOT / "data" / "straininfo"
 TAXA_DIR = REPO_ROOT / "data" / "taxa"
 SCOPE_PATH = REPO_ROOT / "curation" / "seed_scope.tsv"
 CAUSAL_GRAPHS_DIR = REPO_ROOT / "curation" / "causal_graphs"
+UNIPROT_PROTEINS_PATH = REPO_ROOT / "curation" / "uniprot_proteins.tsv"
 PATHS_LOCKFILE = TAXA_DIR / "PATHS.tsv"
+
+UNIPROT_PROTEIN_FIELDS = (
+    "uniprot_id",
+    "entry_name",
+    "entry_status",
+    "protein_name",
+    "organism_taxon_id",
+    "organism_label",
+    "proteome_id",
+    "gene_symbol",
+    "locus_tag",
+    "ec_numbers",
+    "sequence_length",
+    "sequence_crc64",
+    "sequence_version",
+    "release_version",
+)
+CRC64_PATTERN = re.compile(r"^[0-9A-F]{16}$")
 
 SEED_CURATOR = "seed_from_sources"
 
@@ -241,8 +260,184 @@ class Inventory:
         return "OTHER"
 
 
+def load_uniprot_proteins(path: Path = UNIPROT_PROTEINS_PATH) -> dict[str, dict[str, str]]:
+    """Read the pinned UniProtKB protein reference catalog from ``curation/uniprot_proteins.tsv``."""
+    if not path.exists():
+        return {}
+    proteins: dict[str, dict[str, str]] = {}
+    with path.open(newline="", encoding="utf-8") as fh:
+        reader = csv.DictReader(fh, delimiter="\t")
+        if tuple(reader.fieldnames or ()) != UNIPROT_PROTEIN_FIELDS:
+            raise SystemExit(
+                f"{path}: expected columns {list(UNIPROT_PROTEIN_FIELDS)}, got {reader.fieldnames}"
+            )
+        for line_no, row in enumerate(reader, start=2):
+            uid = (row.get("uniprot_id") or "").strip()
+            if not uid.startswith("UniProtKB:"):
+                raise SystemExit(f"{path}:{line_no}: invalid uniprot_id {uid!r}")
+            if uid in proteins:
+                raise SystemExit(f"{path}:{line_no}: duplicate uniprot_id {uid!r}")
+            if row.get("entry_status") not in ("SWISS_PROT", "TREMBL"):
+                raise SystemExit(f"{path}:{line_no}: invalid entry_status for {uid!r}")
+            if not (row.get("organism_taxon_id") or "").startswith("NCBITaxon:"):
+                raise SystemExit(f"{path}:{line_no}: invalid organism_taxon_id for {uid!r}")
+            if row.get("proteome_id") and not row["proteome_id"].startswith("UP:UP"):
+                raise SystemExit(f"{path}:{line_no}: invalid proteome_id for {uid!r}")
+            try:
+                seq_len = int(row.get("sequence_length") or "0")
+                seq_ver = int(row.get("sequence_version") or "0")
+            except ValueError as exc:
+                raise SystemExit(f"{path}:{line_no}: non-integer sequence metadata for {uid!r}") from exc
+            if seq_len <= 0 or seq_ver <= 0:
+                raise SystemExit(f"{path}:{line_no}: non-positive sequence length/version for {uid!r}")
+            crc64 = (row.get("sequence_crc64") or "").strip()
+            if not CRC64_PATTERN.match(crc64):
+                raise SystemExit(f"{path}:{line_no}: invalid sequence_crc64 {crc64!r} for {uid!r}")
+            proteins[uid] = dict(row)
+    return proteins
+
+
+def _taxon_lineage(taxa: dict[str, dict[str, str]], tid: str) -> list[str]:
+    chain: list[str] = []
+    cur = (taxa.get(tid) or {}).get("parent_id", "")
+    seen = {tid}
+    while cur and cur in taxa and cur not in seen:
+        chain.append(cur)
+        seen.add(cur)
+        cur = (taxa.get(cur) or {}).get("parent_id", "")
+    return list(reversed(chain))
+
+
+def _taxon_is_species_or_below(taxa: dict[str, dict[str, str]], tid: str) -> bool:
+    rank = (taxa.get(tid) or {}).get("rank", "")
+    if rank in RECORD_RANKS:
+        return True
+    if rank not in ANCESTRY_DEPENDENT_RANKS:
+        return False
+    return any((taxa.get(a) or {}).get("rank") == "SPECIES" for a in _taxon_lineage(taxa, tid))
+
+
+def validate_causal_graph_proteins(
+    graphs_by_taxon: dict[str, list[dict[str, Any]]],
+    *,
+    uniprot_proteins: dict[str, dict[str, str]] | None = None,
+    taxa: dict[str, dict[str, str]] | None = None,
+) -> None:
+    """Validate GENE_OR_PROTEIN nodes against pinned UniProtKB metadata and NCBI Taxonomy lineage."""
+    for tid, graphs in sorted(graphs_by_taxon.items()):
+        for graph in graphs:
+            gid = graph.get("graph_id", "<unnamed>")
+            for node in graph.get("nodes") or []:
+                if not isinstance(node, dict) or node.get("node_type") != "GENE_OR_PROTEIN":
+                    continue
+                nid = node.get("node_id", "<unnamed>")
+                ctx = f"{tid} graph {gid!r} node {nid!r}"
+                raw_grounding = node.get("grounding")
+                grounding = (raw_grounding or "").strip() if isinstance(raw_grounding, str) else ""
+                if not grounding.startswith("UniProtKB:"):
+                    raise SystemExit(f"{ctx}: GENE_OR_PROTEIN grounding must start with 'UniProtKB:'")
+                org_tid = (
+                    (node.get("organism_taxon_id") or "").strip()
+                    if isinstance(node.get("organism_taxon_id"), str)
+                    else ""
+                )
+                if not org_tid.startswith("NCBITaxon:"):
+                    raise SystemExit(f"{ctx}: GENE_OR_PROTEIN missing valid 'organism_taxon_id'")
+                status = node.get("entry_status")
+                if status not in ("SWISS_PROT", "TREMBL"):
+                    raise SystemExit(f"{ctx}: GENE_OR_PROTEIN invalid 'entry_status' {status!r}")
+                gene_symbol = (node.get("gene_symbol") or "").strip() if node.get("gene_symbol") else ""
+                locus_tag = (node.get("locus_tag") or "").strip() if node.get("locus_tag") else ""
+                if not (gene_symbol or locus_tag):
+                    raise SystemExit(f"{ctx}: GENE_OR_PROTEIN requires 'gene_symbol' or 'locus_tag'")
+                proteome_id = (node.get("proteome_id") or "").strip() if node.get("proteome_id") else ""
+                if proteome_id and not proteome_id.startswith("UP:UP"):
+                    raise SystemExit(f"{ctx}: GENE_OR_PROTEIN invalid 'proteome_id' {proteome_id!r}")
+                seq_len = node.get("sequence_length")
+                if not isinstance(seq_len, int) or isinstance(seq_len, bool) or seq_len <= 0:
+                    raise SystemExit(f"{ctx}: GENE_OR_PROTEIN requires positive integer 'sequence_length'")
+                crc64 = node.get("sequence_crc64")
+                if not isinstance(crc64, str) or not CRC64_PATTERN.match(crc64):
+                    raise SystemExit(f"{ctx}: GENE_OR_PROTEIN requires 16-hex 'sequence_crc64'")
+                seq_ver = node.get("sequence_version")
+                if not isinstance(seq_ver, int) or isinstance(seq_ver, bool) or seq_ver <= 0:
+                    raise SystemExit(f"{ctx}: GENE_OR_PROTEIN requires positive integer 'sequence_version'")
+
+                if uniprot_proteins is not None:
+                    ref = uniprot_proteins.get(grounding)
+                    if ref is None:
+                        raise SystemExit(
+                            f"{ctx}: {grounding} is not registered in curation/uniprot_proteins.tsv"
+                        )
+                    if status != ref["entry_status"]:
+                        raise SystemExit(
+                            f"{ctx}: entry_status {status!r} != {ref['entry_status']!r} for {grounding}"
+                        )
+                    if org_tid != ref["organism_taxon_id"]:
+                        expected_org = ref["organism_taxon_id"]
+                        raise SystemExit(
+                            f"{ctx}: organism_taxon_id {org_tid!r} != {expected_org!r} for {grounding}"
+                        )
+                    if proteome_id != ref["proteome_id"]:
+                        raise SystemExit(
+                            f"{ctx}: proteome_id {proteome_id!r} != {ref['proteome_id']!r} for {grounding}"
+                        )
+                    if locus_tag != ref["locus_tag"]:
+                        raise SystemExit(
+                            f"{ctx}: locus_tag {locus_tag!r} != {ref['locus_tag']!r} for {grounding}"
+                        )
+                    ref_gene = ref["gene_symbol"]
+                    allowed_genes = {ref_gene} if ref_gene else {"", ref["locus_tag"]}
+                    if gene_symbol not in allowed_genes:
+                        raise SystemExit(
+                            f"{ctx}: gene_symbol {gene_symbol!r} != {ref_gene!r} for {grounding}"
+                        )
+                    if seq_len != int(ref["sequence_length"]):
+                        raise SystemExit(
+                            f"{ctx}: sequence_length {seq_len} != {ref['sequence_length']} for {grounding}"
+                        )
+                    if crc64 != ref["sequence_crc64"]:
+                        raise SystemExit(
+                            f"{ctx}: sequence_crc64 {crc64!r} != {ref['sequence_crc64']!r} for {grounding}"
+                        )
+                    if seq_ver != int(ref["sequence_version"]):
+                        raise SystemExit(
+                            f"{ctx}: sequence_version {seq_ver} != {ref['sequence_version']} for {grounding}"
+                        )
+                    node_ecs = [
+                        x for x in (node.get("xrefs") or []) if isinstance(x, str) and x.startswith("EC:")
+                    ]
+                    ref_ecs = split(ref["ec_numbers"])
+                    if any(ec not in ref_ecs for ec in node_ecs):
+                        raise SystemExit(
+                            f"{ctx}: EC xrefs {node_ecs} do not match reference {ref_ecs} for {grounding}"
+                        )
+
+                if taxa is not None:
+                    if tid not in taxa:
+                        raise SystemExit(f"{ctx}: record taxon {tid} is absent from ncbitaxon_taxa.tsv")
+                    if org_tid not in taxa:
+                        raise SystemExit(
+                            f"{ctx}: organism_taxon_id {org_tid} is absent from ncbitaxon_taxa.tsv"
+                        )
+                    org_lineage = _taxon_lineage(taxa, org_tid)
+                    tid_lineage = _taxon_lineage(taxa, tid)
+                    lineage_ok = (
+                        org_tid == tid
+                        or tid in org_lineage
+                        or (org_tid in tid_lineage and _taxon_is_species_or_below(taxa, org_tid))
+                    )
+                    if not lineage_ok:
+                        raise SystemExit(
+                            f"{ctx}: organism_taxon_id {org_tid} is not lineage-consistent with {tid}"
+                        )
+
+
 def load_causal_graphs(
     path: Path = CAUSAL_GRAPHS_DIR,
+    *,
+    uniprot_path: Path | None = None,
+    taxa: dict[str, dict[str, str]] | None = None,
 ) -> tuple[dict[str, list[dict[str, Any]]], dict[str, list[dict[str, Any]]]]:
     """Read maintained causal-graph overlays from ``curation/causal_graphs/*.yaml``.
 
@@ -289,6 +484,15 @@ def load_causal_graphs(
             if not isinstance(events, list) or any(not isinstance(e, dict) for e in events):
                 raise SystemExit(f"{overlay_file}: 'curation_history' must be a list of event mappings")
             events_by_taxon[identifier] = events
+    resolved_uniprot_path = uniprot_path
+    if resolved_uniprot_path is None and UNIPROT_PROTEINS_PATH.exists():
+        resolved_uniprot_path = UNIPROT_PROTEINS_PATH
+    uniprot_proteins = load_uniprot_proteins(resolved_uniprot_path) if resolved_uniprot_path else None
+    validate_causal_graph_proteins(
+        graphs_by_taxon,
+        uniprot_proteins=uniprot_proteins,
+        taxa=taxa,
+    )
     return graphs_by_taxon, events_by_taxon
 
 
@@ -333,6 +537,10 @@ def load_inventory() -> Inventory:
     for strain_id, records in si_related.items():
         strain_related_records[strain_id].extend(records)
     causal_graphs, causal_graph_events = load_causal_graphs(CAUSAL_GRAPHS_DIR)
+    validate_causal_graph_proteins(
+        {tid: graphs for tid, graphs in causal_graphs.items() if tid in taxa},
+        taxa=taxa,
+    )
     return Inventory(taxa, gtdb, lpsn, lpsn_by_taxon, strains, cc_strains, media, gold, madin, bacto,
                      strain_assemblies, strain_genome_records, strain_related_records,
                      causal_graphs, causal_graph_events)

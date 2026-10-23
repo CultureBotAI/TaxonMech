@@ -13,11 +13,15 @@ from linkml_runtime.utils.schemaview import SchemaView
 
 from taxonmech.extract import TRAIT_EDGE_FIELDS, extract_taxon_trait_edges
 from taxonmech.seed import (
+    UNIPROT_PROTEIN_FIELDS,
+    UNIPROT_PROTEINS_PATH,
     Concept,
     Inventory,
     build_concepts,
     build_document,
     load_causal_graphs,
+    load_uniprot_proteins,
+    validate_causal_graph_proteins,
 )
 from taxonmech.validation.write_validated import emit_taxon_yaml, write_validated_taxon
 
@@ -621,5 +625,145 @@ def test_committed_curation_causal_graphs_overlays_load_and_validate():
         assert isinstance(n.get("sequence_version"), int) and n["sequence_version"] >= 1
         assert n.get("entry_status") in ("SWISS_PROT", "TREMBL")
     assert sum(1 for n in protein_nodes if n.get("proteome_id")) == 26
+
+
+def test_uniprot_proteins_catalog_and_lineage_validator():
+    """Verify curation/uniprot_proteins.tsv schema and validate_causal_graph_proteins
+    rejection of unpinned accessions, checksum/length/locus mismatches, and cross-species
+    organism_taxon_id bindings (#78 / taxonmech-infra-0003)."""
+    proteins = load_uniprot_proteins(UNIPROT_PROTEINS_PATH)
+    assert len(proteins) == 13
+    for uid, row in proteins.items():
+        assert uid.startswith("UniProtKB:")
+        assert tuple(row.keys()) == UNIPROT_PROTEIN_FIELDS
+
+    overlays_dir = REPO_ROOT / "curation" / "causal_graphs"
+    graphs, _events = load_causal_graphs(overlays_dir, uniprot_path=UNIPROT_PROTEINS_PATH)
+
+    taxa = {
+        "NCBITaxon:2": {"taxon_id": "NCBITaxon:2", "rank": "DOMAIN", "parent_id": ""},
+        "NCBITaxon:561": {"taxon_id": "NCBITaxon:561", "rank": "GENUS", "parent_id": "NCBITaxon:2"},
+        "NCBITaxon:562": {"taxon_id": "NCBITaxon:562", "rank": "SPECIES", "parent_id": "NCBITaxon:561"},
+        "NCBITaxon:83333": {"taxon_id": "NCBITaxon:83333", "rank": "STRAIN", "parent_id": "NCBITaxon:562"},
+        "NCBITaxon:511145": {
+            "taxon_id": "NCBITaxon:511145",
+            "rank": "NO_RANK",
+            "parent_id": "NCBITaxon:83333",
+        },
+        "NCBITaxon:135461": {
+            "taxon_id": "NCBITaxon:135461",
+            "rank": "SUBSPECIES",
+            "parent_id": "NCBITaxon:1423",
+        },
+        "NCBITaxon:1423": {"taxon_id": "NCBITaxon:1423", "rank": "SPECIES", "parent_id": "NCBITaxon:2"},
+        "NCBITaxon:224308": {
+            "taxon_id": "NCBITaxon:224308",
+            "rank": "STRAIN",
+            "parent_id": "NCBITaxon:135461",
+        },
+        "NCBITaxon:287": {"taxon_id": "NCBITaxon:287", "rank": "SPECIES", "parent_id": "NCBITaxon:2"},
+        "NCBITaxon:208964": {"taxon_id": "NCBITaxon:208964", "rank": "STRAIN", "parent_id": "NCBITaxon:287"},
+        "NCBITaxon:2157": {"taxon_id": "NCBITaxon:2157", "rank": "DOMAIN", "parent_id": ""},
+        "NCBITaxon:2190": {"taxon_id": "NCBITaxon:2190", "rank": "SPECIES", "parent_id": "NCBITaxon:2157"},
+        "NCBITaxon:243232": {"taxon_id": "NCBITaxon:243232", "rank": "STRAIN", "parent_id": "NCBITaxon:2190"},
+        "NCBITaxon:2759": {"taxon_id": "NCBITaxon:2759", "rank": "DOMAIN", "parent_id": ""},
+        "NCBITaxon:1859096": {
+            "taxon_id": "NCBITaxon:1859096",
+            "rank": "SPECIES",
+            "parent_id": "NCBITaxon:2759",
+        },
+        "NCBITaxon:294750": {
+            "taxon_id": "NCBITaxon:294750",
+            "rank": "STRAIN",
+            "parent_id": "NCBITaxon:1859096",
+        },
+        "NCBITaxon:40410": {"taxon_id": "NCBITaxon:40410", "rank": "SPECIES", "parent_id": "NCBITaxon:2759"},
+        "NCBITaxon:283643": {
+            "taxon_id": "NCBITaxon:283643",
+            "rank": "STRAIN",
+            "parent_id": "NCBITaxon:40410",
+        },
+        "NCBITaxon:5207": {"taxon_id": "NCBITaxon:5207", "rank": "SPECIES", "parent_id": "NCBITaxon:2759"},
+        "NCBITaxon:235443": {"taxon_id": "NCBITaxon:235443", "rank": "STRAIN", "parent_id": "NCBITaxon:5207"},
+    }
+    validate_causal_graph_proteins(graphs, uniprot_proteins=proteins, taxa=taxa)
+
+    # Negative control 1: unpinned accession (e.g. Q9HWH3 opmD instead of Q9HWG9 phzS)
+    bad_unpinned = {
+        "NCBITaxon:287": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {
+                        "node_id": "phzS",
+                        "node_type": "GENE_OR_PROTEIN",
+                        "grounding": "UniProtKB:Q9HWH3",
+                        "organism_taxon_id": "NCBITaxon:208964",
+                        "proteome_id": "UP:UP000002438",
+                        "gene_symbol": "phzS",
+                        "locus_tag": "PA4217",
+                        "sequence_length": 402,
+                        "sequence_crc64": "F2BB36662ABAC790",
+                        "sequence_version": 1,
+                        "entry_status": "SWISS_PROT",
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="not registered in curation/uniprot_proteins.tsv"):
+        validate_causal_graph_proteins(bad_unpinned, uniprot_proteins=proteins, taxa=taxa)
+
+    # Negative control 2: sequence_crc64 mismatch
+    bad_crc = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {
+                        "node_id": "lacZ",
+                        "node_type": "GENE_OR_PROTEIN",
+                        "grounding": "UniProtKB:P00722",
+                        "organism_taxon_id": "NCBITaxon:83333",
+                        "proteome_id": "UP:UP000000625",
+                        "gene_symbol": "lacZ",
+                        "locus_tag": "b0344",
+                        "sequence_length": 1024,
+                        "sequence_crc64": "0000000000000000",
+                        "sequence_version": 2,
+                        "entry_status": "SWISS_PROT",
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="sequence_crc64"):
+        validate_causal_graph_proteins(bad_crc, uniprot_proteins=proteins, taxa=taxa)
+
+    # Negative control 3: cross-species organism_taxon_id lineage mismatch
+    # (assigning C. deneoformans B-3501A LAC1 UniProtKB:Q55P57 to C. deuterogattii NCBITaxon:1859096)
+    bad_lineage = {
+        "NCBITaxon:1859096": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {
+                        "node_id": "lac1",
+                        "node_type": "GENE_OR_PROTEIN",
+                        "grounding": "UniProtKB:Q55P57",
+                        "organism_taxon_id": "NCBITaxon:283643",
+                        "gene_symbol": "LAC1",
+                        "locus_tag": "CNBG3550",
+                        "sequence_length": 624,
+                        "sequence_crc64": "A675C03F8940224B",
+                        "sequence_version": 1,
+                        "entry_status": "SWISS_PROT",
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="not lineage-consistent"):
+        validate_causal_graph_proteins(bad_lineage, uniprot_proteins=proteins, taxa=taxa)
 
 

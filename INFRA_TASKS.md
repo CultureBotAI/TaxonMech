@@ -42,17 +42,14 @@ tasks:
     status: deferred
     issue_url: https://github.com/CultureBotAI/TaxonMech/issues/78
     disposition: >-
-      Deferred to Cycle 2 Stage 6 under open umbrella issue #78 after landing repository-local
+      Deferred to Cycle 3 under open umbrella issue #78 after landing repository-local
       pipeline in Cycle 1 Stage 6 (PR #152), seeding 10 maintained overlays in Cycle 2 Stage 2
-      (PR #155), and expanding to 15 maintained overlays (83 evidence-backed edges and 28
+      (PR #155), expanding to 15 maintained overlays (83 evidence-backed edges and 28
       GENE_OR_PROTEIN nodes across 13 live-verified UniProtKB accessions in 7 species and 8
-      strain records) in Cycle 2 Stage 3: implemented load_causal_graphs() and build_document()
-      merge in src/taxonmech/seed.py, updated scripts/verify_corpus.py, registered
-      UniProtKB/EC/OMP/UP prefixes in src/taxonmech/schema/taxonmech.yaml and
-      conf/id_label_targets.yaml, documented curation/causal_graphs/README.md, and added
-      roundtrip/render and committed-overlay tests in tests/test_causal_graph_overlays.py;
-      umbrella issue #78 remains open pending companion tasks taxonmech-infra-0002 and
-      taxonmech-infra-0003 for corpus-wide raw trait and UniProt extraction
+      strain records) in Cycle 2 Stage 3 (PR #156), and wiring load_uniprot_proteins() and
+      validate_causal_graph_proteins() into load_causal_graphs() and load_inventory() in
+      Cycle 2 Stage 6; umbrella issue #78 remains open pending companion task
+      taxonmech-infra-0002 for corpus-wide raw trait extraction and bulk overlay expansion
   - task_id: taxonmech-infra-0002
     summary: >-
       Extend src/taxonmech/extract.py to preserve granular per-taxon trait, substrate, habitat,
@@ -61,10 +58,11 @@ tasks:
     status: deferred
     issue_url: https://github.com/CultureBotAI/TaxonMech/issues/78
     disposition: >-
-      Deferred to Cycle 2 after partial implementation in Cycle 1 Stage 6: implemented and
-      unit-tested extract_taxon_trait_edges() and TRAIT_EDGE_FIELDS in src/taxonmech/extract.py;
-      full data/raw/taxon_trait_edges.tsv extraction across 38,357 trait/medium-attested records
-      requires an upstream local kg-microbe checkout re-extraction
+      Deferred to Cycle 3 under open umbrella issue #78 after partial implementation in Cycle 1
+      Stage 6 (PR #152): implemented and unit-tested extract_taxon_trait_edges() and
+      TRAIT_EDGE_FIELDS in src/taxonmech/extract.py; full data/raw/taxon_trait_edges.tsv
+      extraction across 38,357 trait/medium-attested records requires an upstream local
+      kg-microbe checkout re-extraction
   - task_id: taxonmech-infra-0003
     summary: >-
       Add a release-pinned UniProtKB / UniProt Reference Proteomes raw source snapshot in
@@ -74,15 +72,16 @@ tasks:
     status: deferred
     issue_url: https://github.com/CultureBotAI/TaxonMech/issues/78
     disposition: >-
-      Deferred to Cycle 2 Stage 6 after schema/prefix implementation in Cycle 1 Stage 6 (PR #152)
-      and live-verified UniProtKB curation in Cycle 2 Stage 3: declared UniProtKB, EC, OMP, and UP
-      prefixes and added structured GENE_OR_PROTEIN scope slots (organism_taxon_id, strain_id,
-      proteome_id, gene_symbol, locus_tag, sequence_length, sequence_crc64, sequence_version,
-      entry_status) and UniProtEntryStatusEnum to CausalNode in src/taxonmech/schema/taxonmech.yaml;
-      populated 28 GENE_OR_PROTEIN nodes across 13 unique live-verified UniProtKB accessions in 15
-      records and corrected cross-strain/locus mismatches exposed during Cycle 2 Stage 3; raw
-      UniProtKB/Reference Proteomes TSV snapshot in data/raw/ and offline accession/CRC64 validator
-      deferred pending upstream bulk release capture in Stage 6
+      Deferred to Cycle 3 under open umbrella issue #78 after schema/prefix implementation in
+      Cycle 1 Stage 6 (PR #152), live-verified UniProtKB curation in Cycle 2 Stage 3 (PR #156),
+      and offline catalog + lineage validator implementation in Cycle 2 Stage 6: added
+      release-pinned curation/uniprot_proteins.tsv (UniProt release 2026_02 covering all 13
+      curated UniProtKB accessions across 15 overlays) and implemented load_uniprot_proteins()
+      and validate_causal_graph_proteins() in src/taxonmech/seed.py (enforcing offline
+      accession/proteome/locus/CRC64/EC verification and NCBI Taxonomy vertical lineage
+      consistency across species, strain, and substrain records, with negative-control tests in
+      tests/test_causal_graph_overlays.py); full corpus-wide data/raw/ UniProt Reference
+      Proteomes bulk snapshot remains deferred under #78
   - task_id: taxonmech-infra-0004
     summary: >-
       Pin reproducible upstream kg-microbe edge-multiplicity provenance and document or align
@@ -91,11 +90,12 @@ tasks:
     status: deferred
     issue_url: https://github.com/CultureBotAI/TaxonMech/issues/8
     disposition: >-
-      Deferred to Cycle 2 after documentation alignment in Cycle 1 Stage 6: documented pinned
-      kg-microbe@30405b70ef762aa46c08278b2b3e06bffb0b34cd edge-table SHA-256 digests and asymmetric
-      direct-taxid vs BacDive-subtree attestation contract in docs/HARMONIZATION.md; corpus-wide
-      re-seeding of source_attestations[].notes across 27,118 records deferred pending a dedicated
-      626,048-record YAML and pages/ regeneration pass
+      Deferred to Cycle 3 under open issue #8 after documentation alignment in Cycle 1 Stage 6
+      (PR #152): documented pinned kg-microbe@30405b70ef762aa46c08278b2b3e06bffb0b34cd
+      edge-table SHA-256 digests and asymmetric direct-taxid vs BacDive-subtree attestation
+      contract in docs/HARMONIZATION.md; corpus-wide re-seeding of source_attestations[].notes
+      across 27,118 records deferred pending a dedicated 626,048-record YAML and pages/
+      regeneration pass
 ```
 <!-- mech-infra-tasks:end -->
 
@@ -105,7 +105,7 @@ tasks:
 
 - **Origin**: `run_id: mech-goal-sequence-20261019`, `cycle: 1`, `stage: 2` (`causal_graphs`)
 - **Status**: `deferred` (`issue_url`: https://github.com/CultureBotAI/TaxonMech/issues/78)
-- **Disposition**: Deferred to Cycle 2 Stage 6 under open umbrella issue `#78` after landing repository-local pipeline in `mech-goal-sequence-20261019` Cycle 1 Stage 6 PR `#152` (`src/taxonmech/seed.py`, `scripts/verify_corpus.py`, `src/taxonmech/schema/taxonmech.yaml`, `conf/id_label_targets.yaml`, `curation/causal_graphs/README.md`, `tests/test_causal_graph_overlays.py`), seeding 10 maintained production overlays in Cycle 2 Stage 2 PR `#155`, and expanding to 15 maintained production overlays (83 evidence-backed edges and 28 `GENE_OR_PROTEIN` nodes across 13 live-verified `UniProtKB` accessions in 7 species and 8 strain records) in Cycle 2 Stage 3; umbrella issue `#78` remains open pending companion tasks `taxonmech-infra-0002` and `taxonmech-infra-0003` for corpus-wide raw trait and UniProt extraction.
+- **Disposition**: Deferred to Cycle 3 under open umbrella issue `#78` after landing repository-local pipeline in `mech-goal-sequence-20261019` Cycle 1 Stage 6 PR `#152` (`src/taxonmech/seed.py`, `scripts/verify_corpus.py`, `src/taxonmech/schema/taxonmech.yaml`, `conf/id_label_targets.yaml`, `curation/causal_graphs/README.md`, `tests/test_causal_graph_overlays.py`), seeding 10 maintained production overlays in Cycle 2 Stage 2 PR `#155`, expanding to 15 maintained production overlays (83 evidence-backed edges and 28 `GENE_OR_PROTEIN` nodes across 13 live-verified `UniProtKB` accessions in 7 species and 8 strain records) in Cycle 2 Stage 3 PR `#156`, and wiring `load_uniprot_proteins()` and `validate_causal_graph_proteins()` into `load_causal_graphs()` and `load_inventory()` in Cycle 2 Stage 6; umbrella issue `#78` remains open pending companion task `taxonmech-infra-0002` for corpus-wide raw trait extraction and bulk overlay expansion.
 - **Priority**: `high`
 - **Dependencies**: None
 - **Observation**:
@@ -151,7 +151,7 @@ tasks:
 
 - **Origin**: `run_id: mech-goal-sequence-20261019`, `cycle: 1`, `stage: 3` (`protein_examples`)
 - **Status**: `deferred` (`issue_url`: https://github.com/CultureBotAI/TaxonMech/issues/78)
-- **Disposition**: Deferred to Cycle 2 Stage 6 after schema/prefix implementation in Cycle 1 Stage 6 (PR `#152`) and live-verified UniProtKB curation in Cycle 2 Stage 3 (`UniProtKB`, `EC`, `OMP`, and `UP` prefixes declared in `src/taxonmech/schema/taxonmech.yaml` and `conf/id_label_targets.yaml`; structured `GENE_OR_PROTEIN` scope slots and `UniProtEntryStatusEnum` added to `CausalNode` and tested in `tests/test_schema.py` and `tests/test_causal_graph_overlays.py`; 28 `GENE_OR_PROTEIN` nodes across 13 unique live-verified `UniProtKB` accessions seeded across 15 records in `curation/causal_graphs/`; raw UniProtKB/Reference Proteomes TSV snapshot in `data/raw/` and offline accession/CRC64 validator deferred pending upstream bulk release capture in Stage 6).
+- **Disposition**: Deferred to Cycle 3 under open umbrella issue `#78` after schema/prefix implementation in Cycle 1 Stage 6 (PR `#152`), live-verified UniProtKB curation in Cycle 2 Stage 3 (PR `#156`), and offline catalog + lineage validator implementation in Cycle 2 Stage 6: added release-pinned `curation/uniprot_proteins.tsv` (UniProt release `2026_02` covering all 13 curated `UniProtKB` accessions across 15 overlays) and implemented `load_uniprot_proteins()` and `validate_causal_graph_proteins()` in `src/taxonmech/seed.py` (enforcing offline accession/proteome/locus/CRC64/EC verification and NCBI Taxonomy vertical lineage consistency across species, strain, and substrain records, with negative-control tests in `tests/test_causal_graph_overlays.py`); full corpus-wide `data/raw/` UniProt Reference Proteomes bulk snapshot remains deferred under `#78`.
 - **Priority**: `high`
 - **Dependencies**: `taxonmech-infra-0001`
 - **Observation**:
