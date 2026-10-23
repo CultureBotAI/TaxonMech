@@ -150,6 +150,102 @@ def test_tampered_target_yaml_sha256_is_rejected(sample_repo: Path) -> None:
         cri.check(sample_repo, verify_target_sha256=True)
 
 
+def test_curated_target_reconciled_by_newer_structured_review_bundle(
+    sample_repo: Path,
+) -> None:
+    orig_yaml = (sample_repo / "data/taxa/bacteria/structured_taxon.yaml").read_text(
+        encoding="utf-8"
+    )
+    orig_sha = _sha256_text(orig_yaml)
+    shard0_bundle_path = (
+        sample_repo
+        / "reviews/structured/20261018T000000Z-structured-review-shard-part-00/review.yaml"
+    )
+    shard0_doc = yaml.safe_load(shard0_bundle_path.read_text(encoding="utf-8"))
+    shard0_doc["started_at"] = "2026-10-18T00:00:00Z"
+    shard0_doc["finished_at"] = "2026-10-18T00:01:00Z"
+    shard0_doc["completion"] = "completed"
+    shard0_doc["scientific_review"] = True
+    shard0_doc["verdict"] = "needs_curation"
+    shard0_doc["targets"] = [
+        {
+            "target_id": "NCBITaxon:200",
+            "path": "data/taxa/bacteria/structured_taxon.yaml",
+            "target_kind": "generated",
+            "label": "Structured taxon",
+        }
+    ]
+    shard0_doc["source"]["inputs"].append(
+        {
+            "path": "data/taxa/bacteria/structured_taxon.yaml",
+            "sha256": orig_sha,
+            "role": "target",
+        }
+    )
+    shard0_bundle_path.write_text(
+        yaml.dump(shard0_doc, Dumper=Dumper), encoding="utf-8"
+    )
+
+    curated_yaml = (
+        "identifier: NCBITaxon:200\n"
+        "label: Structured taxon\n"
+        "causal_graphs:\n"
+        "- graph_id: test_graph\n"
+    )
+    curated_sha = _sha256_text(curated_yaml)
+    (sample_repo / "data/taxa/bacteria/structured_taxon.yaml").write_text(
+        curated_yaml, encoding="utf-8"
+    )
+
+    with pytest.raises(ValueError, match="target_sha256 mismatch"):
+        cri.check(sample_repo, verify_target_sha256=True)
+
+    followup_dir = (
+        sample_repo / "reviews/structured/20261023T000000Z-followup-curation-review"
+    )
+    followup_dir.mkdir(parents=True)
+    followup_doc = {
+        "schema_version": "1.0.0",
+        "review_id": "20261023T000000Z-followup-curation-review",
+        "kind": "cohort",
+        "started_at": "2026-10-23T00:00:00Z",
+        "finished_at": "2026-10-23T00:05:00Z",
+        "completion": "completed",
+        "scientific_review": True,
+        "verdict": "pass",
+        "targets": [
+            {
+                "target_id": "NCBITaxon:200",
+                "path": "data/taxa/bacteria/structured_taxon.yaml",
+                "target_kind": "generated",
+                "label": "Structured taxon",
+            }
+        ],
+        "source": {
+            "inputs": [
+                {
+                    "path": "data/taxa/bacteria/structured_taxon.yaml",
+                    "sha256": curated_sha,
+                    "role": "target",
+                }
+            ]
+        },
+    }
+    (followup_dir / "review.yaml").write_text(
+        yaml.dump(followup_doc, Dumper=Dumper), encoding="utf-8"
+    )
+
+    summary = cri.check(sample_repo, verify_target_sha256=True)
+    assert summary["structured_records"] == 1
+
+    # Reverting to pre-curation YAML or further unreviewed edits must fail
+    (sample_repo / "data/taxa/bacteria/structured_taxon.yaml").write_text(
+        orig_yaml, encoding="utf-8"
+    )
+    with pytest.raises(ValueError, match="target_sha256 mismatch"):
+        cri.check(sample_repo, verify_target_sha256=True)
+
+
 def test_batch_summary_drift_is_rejected(sample_repo: Path) -> None:
     (sample_repo / cri.BATCHES_TSV).write_text("drifted\n", encoding="utf-8")
     with pytest.raises(ValueError, match="structured-review-batches.tsv drift"):

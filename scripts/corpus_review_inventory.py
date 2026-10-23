@@ -188,6 +188,95 @@ def load_legacy_targets(
     return legacy_by_id
 
 
+def load_latest_target_reviews(
+    root: Path,
+) -> tuple[
+    dict[tuple[str, str], tuple[datetime, str, str, Path]],
+    dict[str, tuple[datetime, str, str, Path]],
+]:
+    """Return latest completed scientific review target hashes from reviews/structured."""
+    structured_root = root / STRUCTURED_DIR
+    if not structured_root.is_dir() or structured_root.is_symlink():
+        return {}, {}
+    latest_by_target: dict[tuple[str, str], tuple[datetime, str, str, Path]] = {}
+    latest_by_path: dict[str, tuple[datetime, str, str, Path]] = {}
+    for bundle_yaml in sorted(structured_root.glob("*/review.yaml")):
+        doc = yaml.load(bundle_yaml.read_bytes(), Loader=Loader)
+        if not isinstance(doc, dict):
+            continue
+        review_id = doc.get("review_id")
+        if (
+            not isinstance(review_id, str)
+            or not review_id
+            or review_id != bundle_yaml.parent.name
+        ):
+            continue
+        if (
+            doc.get("completion") not in {"completed", "partial"}
+            or doc.get("scientific_review") is not True
+        ):
+            continue
+        if doc.get("verdict") not in ALLOWED_VERDICTS:
+            continue
+        started_raw = doc.get("started_at")
+        finished_raw = doc.get("finished_at")
+        if not isinstance(started_raw, str) or not isinstance(finished_raw, str):
+            continue
+        started_at = parse_iso_utc(started_raw)
+        finished_at = parse_iso_utc(finished_raw)
+        if finished_at < started_at:
+            raise ValueError(f"bundle {bundle_yaml} finished_at precedes started_at")
+        targets_by_path: dict[str, str] = {}
+        for target in doc.get("targets") or []:
+            if (
+                isinstance(target, dict)
+                and isinstance(target.get("target_id"), str)
+                and isinstance(target.get("path"), str)
+                and target["target_id"]
+                and target["path"]
+            ):
+                targets_by_path[target["path"]] = target["target_id"]
+        for inp in doc.get("source", {}).get("inputs", []):
+            if not isinstance(inp, dict) or inp.get("role") != "target":
+                continue
+            rel_inp = inp.get("path")
+            inp_sha = inp.get("sha256")
+            if (
+                not isinstance(rel_inp, str)
+                or not isinstance(inp_sha, str)
+                or not SHA256_RE.match(inp_sha)
+                or rel_inp not in targets_by_path
+            ):
+                continue
+            tid = targets_by_path[rel_inp]
+            entry = (finished_at, review_id, inp_sha, bundle_yaml)
+            prev_t = latest_by_target.get((tid, rel_inp))
+            if (
+                prev_t is not None
+                and finished_at == prev_t[0]
+                and inp_sha != prev_t[2]
+            ):
+                raise ValueError(
+                    f"ambiguous equal finished_at for {tid} ({rel_inp}) across "
+                    f"{prev_t[3]} and {bundle_yaml}"
+                )
+            if prev_t is None or (finished_at, review_id) >= (prev_t[0], prev_t[1]):
+                latest_by_target[(tid, rel_inp)] = entry
+            prev_p = latest_by_path.get(rel_inp)
+            if (
+                prev_p is not None
+                and finished_at == prev_p[0]
+                and inp_sha != prev_p[2]
+            ):
+                raise ValueError(
+                    f"ambiguous equal finished_at for {rel_inp} across "
+                    f"{prev_p[3]} and {bundle_yaml}"
+                )
+            if prev_p is None or (finished_at, review_id) >= (prev_p[0], prev_p[1]):
+                latest_by_path[rel_inp] = entry
+    return latest_by_target, latest_by_path
+
+
 def load_structured_shards(
     root: Path,
     id_to_slug: dict[str, str],
@@ -255,14 +344,30 @@ def load_structured_shards(
         shard_rows_by_rel[rel_path] = rows
 
     if verify_target_sha256:
+        latest_by_target, _ = load_latest_target_reviews(root)
         items = list(structured_by_id.values())
 
         def _check_one(item: dict[str, str]) -> None:
-            actual = sha256_file(root / item["target_path"])
-            if actual != item["target_sha256"]:
+            tid = item["target_id"]
+            tpath = item["target_path"]
+            expected = item["target_sha256"]
+            row_finished = parse_iso_utc(item["finished_at"])
+            row_review_id = item["review_id"]
+            latest = latest_by_target.get((tid, tpath))
+            if latest is not None:
+                bundle_finished, bundle_review_id, bundle_sha, bundle_yaml = latest
+                if bundle_finished == row_finished and bundle_sha != expected:
+                    raise ValueError(
+                        f"ambiguous equal finished_at for {tid} ({tpath}) between "
+                        f"shard row {row_review_id} and {bundle_yaml}"
+                    )
+                if (bundle_finished, bundle_review_id) > (row_finished, row_review_id):
+                    expected = bundle_sha
+            actual = sha256_file(root / tpath)
+            if actual != expected:
                 raise ValueError(
-                    f"target_sha256 mismatch for {item['target_id']} ({item['target_path']}): "
-                    f"expected {item['target_sha256']}, got {actual}"
+                    f"target_sha256 mismatch for {tid} ({tpath}): "
+                    f"expected {expected}, got {actual}"
                 )
 
         with ThreadPoolExecutor(max_workers=16) as executor:
@@ -378,9 +483,24 @@ def verify_shard_bundles(
                     f"shard bundle {matches[0]} has stale SHA256 for {BATCHES_TSV.as_posix()}"
                 )
 
+    _, latest_by_path = (
+        load_latest_target_reviews(root) if verify_target_sha256 else ({}, {})
+    )
+
     for bundle_yaml in sorted(structured_root.glob("*/review.yaml")):
         doc = yaml.load(bundle_yaml.read_bytes(), Loader=Loader)
         is_latest_shard_bundle = bundle_yaml == latest_bundle_yaml
+        bundle_finished = (
+            parse_iso_utc(doc["finished_at"])
+            if isinstance(doc.get("finished_at"), str) and doc.get("finished_at")
+            else None
+        )
+        bundle_review_id = str(doc.get("review_id") or "")
+        bundle_target_paths = {
+            target["path"]
+            for target in (doc.get("targets") or [])
+            if isinstance(target, dict) and isinstance(target.get("path"), str)
+        }
         for inp in doc.get("source", {}).get("inputs", []):
             rel_inp = inp["path"]
             if rel_inp not in sha_cache:
@@ -394,10 +514,19 @@ def verify_shard_bundles(
                 rel_inp in LATEST_SHARD_LIVE_CONTEXT_PATHS
                 or rel_inp in shard_rows_by_rel
             )
-            if (
-                is_live_inventory_context
-                or (verify_target_sha256 and inp.get("role") == "target")
-            ) and (inp["sha256"] != sha_cache[rel_inp]):
+            is_active_target_check = False
+            if verify_target_sha256 and inp.get("role") == "target":
+                latest = latest_by_path.get(rel_inp)
+                is_superseded_target_snapshot = (
+                    latest is not None
+                    and rel_inp in bundle_target_paths
+                    and bundle_finished is not None
+                    and (latest[0], latest[1]) > (bundle_finished, bundle_review_id)
+                )
+                is_active_target_check = not is_superseded_target_snapshot
+            if (is_live_inventory_context or is_active_target_check) and (
+                inp["sha256"] != sha_cache[rel_inp]
+            ):
                 raise ValueError(
                     f"bundle {bundle_yaml} has stale SHA256 for {rel_inp}"
                 )
