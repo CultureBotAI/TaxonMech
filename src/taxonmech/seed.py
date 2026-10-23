@@ -536,7 +536,11 @@ def load_inventory() -> Inventory:
         strain_assemblies[strain_id].extend(records)
     for strain_id, records in si_related.items():
         strain_related_records[strain_id].extend(records)
-    causal_graphs, causal_graph_events = load_causal_graphs(CAUSAL_GRAPHS_DIR, taxa=taxa)
+    causal_graphs, causal_graph_events = load_causal_graphs(CAUSAL_GRAPHS_DIR)
+    validate_causal_graph_proteins(
+        {tid: graphs for tid, graphs in causal_graphs.items() if tid in taxa},
+        taxa=taxa,
+    )
     return Inventory(taxa, gtdb, lpsn, lpsn_by_taxon, strains, cc_strains, media, gold, madin, bacto,
                      strain_assemblies, strain_genome_records, strain_related_records,
                      causal_graphs, causal_graph_events)
