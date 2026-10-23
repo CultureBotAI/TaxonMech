@@ -11,7 +11,7 @@
 
 ## Summary
 
-Reviewed all 626,048 in-scope TaxonRecord files across Bacteria (605,695), Archaea (14,013), Eukaryota (6,331), and other (9) against the Stage 3 UniProtKB protein-examples contract (.claude/skills/add-uniprot-protein-examples/SKILL.md). Expanded curation/uniprot_proteins.tsv from 13 to 17 live-verified UniProtKB accessions (UniProt release 2026_02), adding Swiss-Prot proteins UniProtKB:P03023 (LACI_ECOLI, lacI/b0345, NCBITaxon:83333, UP:UP000000625, 360 aa, CRC64 347A8DEE92D736CB, v3), UniProtKB:P07464 (THGA_ECOLI, lacA/b0342, EC:2.3.1.18, NCBITaxon:83333, UP:UP000000625, 203 aa, CRC64 31C7FEA0B0150D70, v1), UniProtKB:P06628 (SP0F_BACSU, spo0F/BSU37130, EC:2.7.-.-, NCBITaxon:224308, UP:UP000001570, 124 aa, CRC64 4130377E3558D698, v1), and UniProtKB:P06535 (SP0B_BACSU, spo0B/BSU27930, EC:2.7.-.-, NCBITaxon:224308, UP:UP000001570, 192 aa, CRC64 3A9A38B5FFB55647, v1). Enriched 9 maintained overlays in curation/causal_graphs/ (NCBITaxon_562, NCBITaxon_83333, NCBITaxon_511145, NCBITaxon_1423, NCBITaxon_224308, NCBITaxon_287, NCBITaxon_208964, NCBITaxon_1859096, NCBITaxon_294750), bringing the 15 maintained overlays from 28 to 38 GENE_OR_PROTEIN nodes (36 carrying UP:* reference proteome_id; 2 on Cryptococcus deneoformans B-3501A NCBITaxon:283643 &amp; species NCBITaxon:40410 omitting proteome_id because UniProtKB:Q55P57 belongs to JEC21 reference proteome UP:UP000002149) and from 88 to 110 evidence-backed edges, while reconciling 4 PubMed citations against live NCBI PubMed (PMID:1987166 -&gt; PMID:1846779, PMID:11489860 -&gt; PMID:11591691, PMID:8188694 -&gt; PMID:8007987, PMID:15576787 -&gt; PMID:15643074). Corpus-wide protein example attachment outside the 15 causal-graph records remains inapplicable because TaxonRecord has no top-level protein slot and the remaining 626,033 records carry causal_graphs: [].
+Reviewed all 626,048 in-scope TaxonRecord files across Bacteria (605,695), Archaea (14,013), Eukaryota (6,331), and other (9) against the Stage 3 UniProtKB protein-examples contract (.claude/skills/add-uniprot-protein-examples/SKILL.md). Expanded curation/uniprot_proteins.tsv from 13 to 17 live-verified UniProtKB accessions (UniProt release 2026_02), adding Swiss-Prot proteins UniProtKB:P03023 (LACI_ECOLI, lacI/b0345, NCBITaxon:83333, UP:UP000000625, 360 aa, CRC64 347A8DEE92D736CB, v3), UniProtKB:P07464 (THGA_ECOLI, lacA/b0342, EC:2.3.1.18, NCBITaxon:83333, UP:UP000000625, 203 aa, CRC64 31C7FEA0B0150D70, v1), UniProtKB:P06628 (SP0F_BACSU, spo0F/BSU37130, EC:2.7.-.-, NCBITaxon:224308, UP:UP000001570, 124 aa, CRC64 4130377E3558D698, v1), and UniProtKB:P06535 (SP0B_BACSU, spo0B/BSU27930, EC:2.7.-.-, NCBITaxon:224308, UP:UP000001570, 192 aa, CRC64 3A9A38B5FFB55647, v1). Enriched 9 maintained overlays in curation/causal_graphs/ (NCBITaxon_562, NCBITaxon_83333, NCBITaxon_511145, NCBITaxon_1423, NCBITaxon_224308, NCBITaxon_287, NCBITaxon_208964, NCBITaxon_1859096, NCBITaxon_294750), bringing the 15 maintained overlays from 28 to 38 GENE_OR_PROTEIN nodes (36 carrying UP:* reference proteome_id; 2 on Cryptococcus deneoformans B-3501A NCBITaxon:283643 &amp; species NCBITaxon:40410 omitting proteome_id because strain B-3501A has no UP:UP... proteome cross-reference in UniProtKB 2026_02 whereas sibling strain JEC21 NCBITaxon:214684 has UP:UP000001247) and from 88 to 110 evidence-backed edges, while reconciling 4 PubMed citations against live NCBI PubMed (PMID:1987166 -&gt; PMID:1846779, PMID:11489860 -&gt; PMID:11591691, PMID:8188694 -&gt; PMID:8007987, PMID:15576787 -&gt; PMID:15643074). Corpus-wide protein example attachment outside the 15 causal-graph records remains inapplicable because TaxonRecord has no top-level protein slot and the remaining 626,033 records carry causal_graphs: [].
 
 ## Scope And Provenance
 
@@ -19,7 +19,7 @@ Full-corpus Cycle 3 Stage 3 UniProtKB protein-example review across all 626,048 
 
 Selection: All 626,048 in-scope taxa in curation/seed_scope.tsv and data/taxa/PATHS.tsv classified by causal_graphs presence, with 100% direct inspection, live UniProtKB/PubMed verification, and validation of all 15 causal-graph-bearing species and strain records.
 Coverage: sampled; 15 reviewed / 626048 in the declared population.
-Source: working_tree at Git base b1df5865e855753f5a485d987c3f74e53bb58e90.
+Source: working_tree at Git base 8dbf58ea61c1052f4bc7f96bb322ca4bd4049aaa.
 Working-tree hashes do not imply those bytes were committed.
 
 | Target | Path / selector | Kind | Label |
@@ -54,7 +54,7 @@ Working-tree hashes do not imply those bytes were committed.
 
 grounding: supported. Targets: NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:5207, NCBITaxon:235443.
 
-Expanded curation/uniprot_proteins.tsv from 13 to 17 live-verified UniProtKB accessions (15 SWISS_PROT, 2 TREMBL) and enriched 9 maintained causal-graph overlays across Escherichia coli (NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145; adding LacI UniProtKB:P03023 and LacA UniProtKB:P07464 alongside LacZ UniProtKB:P00722 and LacY UniProtKB:P02920 on UP:UP000000625), Bacillus subtilis (NCBITaxon:1423, NCBITaxon:224308; adding Spo0F UniProtKB:P06628 and Spo0B UniProtKB:P06535 alongside KinA UniProtKB:P16497, Spo0A UniProtKB:P06534, and SigF UniProtKB:P07860 on UP:UP000001570), Pseudomonas aeruginosa (NCBITaxon:287, NCBITaxon:208964; adding LasR UniProtKB:P25084 on NCBITaxon:287 alongside PhzA1 UniProtKB:Q9HWH3, PhzM UniProtKB:Q9HWH2, and PhzS UniProtKB:Q9HWG9 on UP:UP000002438), and Cryptococcus deuterogattii (NCBITaxon:1859096, NCBITaxon:294750; reconciling PMID:15576787 -&gt; PMID:15643074 on CAP59 UniProtKB:E6R5R3 and LAC1 UniProtKB:E6R8U0 on UP:UP000007805), bringing all 15 overlays to 38 GENE_OR_PROTEIN nodes and 110 evidence-backed edges.
+Expanded curation/uniprot_proteins.tsv from 13 to 17 live-verified UniProtKB accessions (15 SWISS_PROT, 2 TREMBL) and enriched 9 maintained causal-graph overlays across Escherichia coli (NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145; adding LacI UniProtKB:P03023 and LacA UniProtKB:P07464 alongside LacZ UniProtKB:P00722 and LacY UniProtKB:P02920 on UP:UP000000625), Bacillus subtilis (NCBITaxon:1423, NCBITaxon:224308; adding Spo0F UniProtKB:P06628 and Spo0B UniProtKB:P06535 alongside KinA UniProtKB:P16497 and Spo0A UniProtKB:P06534 on UP:UP000001570 and reconciling PMID:1987166 -&gt; PMID:1846779), Pseudomonas aeruginosa (NCBITaxon:287, NCBITaxon:208964; reconciling PMID:11489860 -&gt; PMID:11591691 on PhzM UniProtKB:Q9HWH2 and PhzS UniProtKB:Q9HWG9 on UP:UP000002438), and Cryptococcus deuterogattii (NCBITaxon:1859096, NCBITaxon:294750; reconciling PMID:8188694 -&gt; PMID:8007987 and PMID:15576787 -&gt; PMID:15643074 on CAP59 UniProtKB:A0A2P1N7P7 and LAC1 UniProtKB:A0A225XZ56 on UP:UP000237516), bringing all 15 overlays to 38 GENE_OR_PROTEIN nodes and 110 evidence-backed edges.
 
 ### Inapplicability of UniProtKB protein examples on the remaining 626,033 TaxonRecord files without causal_graphs
 
@@ -95,8 +95,8 @@ Run extract_taxon_trait_edges() against an upstream kg-microbe checkout to popul
 ## Limits And Additional Notes
 
 - 626,033 of 626,048 in-scope records carry causal_graphs: [] and have no top-level protein slot on TaxonRecord; bulk causal-graph expansion awaits upstream kg-microbe re-extraction (#78 / taxonmech-infra-0002).
-- Cryptococcus deneoformans B-3501A (NCBITaxon:283643) and its parent species C. deneoformans (NCBITaxon:40410) intentionally omit UP:* proteome_id on LAC1 (UniProtKB:Q55P57) because Q55P57 belongs to C. deneoformans JEC21 (NCBITaxon:214684, reference proteome UP:UP000002149) rather than strain B-3501A.
-- Cryptococcus deuterogattii R265 (NCBITaxon:294750, reference proteome UP:UP000007805) has 0 reviewed Swiss-Prot entries in UniProtKB; CAP59 (UniProtKB:E6R5R3) and LAC1 (UniProtKB:E6R8U0) are reference-proteome TrEMBL entries with explicit review_status: TREMBL in curation/uniprot_proteins.tsv.
+- Cryptococcus deneoformans B-3501A (NCBITaxon:283643) and its parent species C. deneoformans (NCBITaxon:40410) intentionally omit UP:* proteome_id on LAC1 (UniProtKB:Q55P57) because strain B-3501A has no UP:UP... proteome cross-reference in UniProtKB 2026_02 (whereas sibling strain JEC21 NCBITaxon:214684 has UP:UP000001247).
+- Cryptococcus deuterogattii R265 (NCBITaxon:294750, reference proteome UP:UP000237516) has 0 reviewed Swiss-Prot entries for CAP59 and LAC1 in UniProtKB 2026_02; CAP59 (UniProtKB:A0A2P1N7P7) and LAC1 (UniProtKB:A0A225XZ56) are reference-proteome TrEMBL entries with explicit review_status: TREMBL in curation/uniprot_proteins.tsv.
 - Cycle 3 Stage 3 expanded curation/uniprot_proteins.tsv from 13 to 17 live-verified UniProtKB accessions and enriched 9 maintained causal-graph overlays to 38 GENE_OR_PROTEIN nodes and 110 evidence-backed edges across all 15 causal-graph records.
 
 ## Complete Structured Record
@@ -146,15 +146,16 @@ summary: 'Reviewed all 626,048 in-scope TaxonRecord files across Bacteria (605,6
   NCBITaxon_224308, NCBITaxon_287, NCBITaxon_208964, NCBITaxon_1859096, NCBITaxon_294750),
   bringing the 15 maintained overlays from 28 to 38 GENE_OR_PROTEIN nodes (36 carrying
   UP:* reference proteome_id; 2 on Cryptococcus deneoformans B-3501A NCBITaxon:283643
-  & species NCBITaxon:40410 omitting proteome_id because UniProtKB:Q55P57 belongs
-  to JEC21 reference proteome UP:UP000002149) and from 88 to 110 evidence-backed edges,
-  while reconciling 4 PubMed citations against live NCBI PubMed (PMID:1987166 -> PMID:1846779,
-  PMID:11489860 -> PMID:11591691, PMID:8188694 -> PMID:8007987, PMID:15576787 -> PMID:15643074).
+  & species NCBITaxon:40410 omitting proteome_id because strain B-3501A has no UP:UP...
+  proteome cross-reference in UniProtKB 2026_02 whereas sibling strain JEC21 NCBITaxon:214684
+  has UP:UP000001247) and from 88 to 110 evidence-backed edges, while reconciling
+  4 PubMed citations against live NCBI PubMed (PMID:1987166 -> PMID:1846779, PMID:11489860
+  -> PMID:11591691, PMID:8188694 -> PMID:8007987, PMID:15576787 -> PMID:15643074).
   Corpus-wide protein example attachment outside the 15 causal-graph records remains
   inapplicable because TaxonRecord has no top-level protein slot and the remaining
   626,033 records carry causal_graphs: [].'
 source:
-  git_revision: b1df5865e855753f5a485d987c3f74e53bb58e90
+  git_revision: 8dbf58ea61c1052f4bc7f96bb322ca4bd4049aaa
   state: working_tree
   inputs:
   - path: .claude/skills/add-uniprot-protein-examples/SKILL.md
@@ -170,10 +171,10 @@ source:
     sha256: 4bf773b5e5eeccdece4b5b2e2420efebec5e49efa10f60b47f1697295bc1af75
     role: context
   - path: INFRA_TASKS.md
-    sha256: d3904b4326203d651be352fcd0c5a009e947b8a79c05472dce6afeaa95747683
+    sha256: 0ba8eeef1675ee22621b04fa97775dd2d0d34f65868db2d871417bbde7dade3e
     role: context
   - path: README.md
-    sha256: 7d1e2381329999b6ffe2e5801b1f11cb2eefb3a16cc68953a55053d9b7616f7b
+    sha256: f124588428a14db89a780e6dd6d05e039ec9e6d0e4473163d1cc13fb36bb2353
     role: context
   - path: conf/id_label_targets.yaml
     sha256: efed4c6d9cc218c9d89ba4468e361761ac02ff535e2669de33af6606202e544c
@@ -781,13 +782,13 @@ assessments:
     LacI UniProtKB:P03023 and LacA UniProtKB:P07464 alongside LacZ UniProtKB:P00722
     and LacY UniProtKB:P02920 on UP:UP000000625), Bacillus subtilis (NCBITaxon:1423,
     NCBITaxon:224308; adding Spo0F UniProtKB:P06628 and Spo0B UniProtKB:P06535 alongside
-    KinA UniProtKB:P16497, Spo0A UniProtKB:P06534, and SigF UniProtKB:P07860 on UP:UP000001570),
-    Pseudomonas aeruginosa (NCBITaxon:287, NCBITaxon:208964; adding LasR UniProtKB:P25084
-    on NCBITaxon:287 alongside PhzA1 UniProtKB:Q9HWH3, PhzM UniProtKB:Q9HWH2, and
-    PhzS UniProtKB:Q9HWG9 on UP:UP000002438), and Cryptococcus deuterogattii (NCBITaxon:1859096,
-    NCBITaxon:294750; reconciling PMID:15576787 -> PMID:15643074 on CAP59 UniProtKB:E6R5R3
-    and LAC1 UniProtKB:E6R8U0 on UP:UP000007805), bringing all 15 overlays to 38 GENE_OR_PROTEIN
-    nodes and 110 evidence-backed edges.
+    KinA UniProtKB:P16497 and Spo0A UniProtKB:P06534 on UP:UP000001570 and reconciling
+    PMID:1987166 -> PMID:1846779), Pseudomonas aeruginosa (NCBITaxon:287, NCBITaxon:208964;
+    reconciling PMID:11489860 -> PMID:11591691 on PhzM UniProtKB:Q9HWH2 and PhzS UniProtKB:Q9HWG9
+    on UP:UP000002438), and Cryptococcus deuterogattii (NCBITaxon:1859096, NCBITaxon:294750;
+    reconciling PMID:8188694 -> PMID:8007987 and PMID:15576787 -> PMID:15643074 on
+    CAP59 UniProtKB:A0A2P1N7P7 and LAC1 UniProtKB:A0A225XZ56 on UP:UP000237516), bringing
+    all 15 overlays to 38 GENE_OR_PROTEIN nodes and 110 evidence-backed edges.
   target_ids:
   - NCBITaxon:562
   - NCBITaxon:83333
@@ -938,12 +939,12 @@ limitations:
   re-extraction (#78 / taxonmech-infra-0002).'
 - Cryptococcus deneoformans B-3501A (NCBITaxon:283643) and its parent species C. deneoformans
   (NCBITaxon:40410) intentionally omit UP:* proteome_id on LAC1 (UniProtKB:Q55P57)
-  because Q55P57 belongs to C. deneoformans JEC21 (NCBITaxon:214684, reference proteome
-  UP:UP000002149) rather than strain B-3501A.
-- 'Cryptococcus deuterogattii R265 (NCBITaxon:294750, reference proteome UP:UP000007805)
-  has 0 reviewed Swiss-Prot entries in UniProtKB; CAP59 (UniProtKB:E6R5R3) and LAC1
-  (UniProtKB:E6R8U0) are reference-proteome TrEMBL entries with explicit review_status:
-  TREMBL in curation/uniprot_proteins.tsv.'
+  because strain B-3501A has no UP:UP... proteome cross-reference in UniProtKB 2026_02
+  (whereas sibling strain JEC21 NCBITaxon:214684 has UP:UP000001247).
+- 'Cryptococcus deuterogattii R265 (NCBITaxon:294750, reference proteome UP:UP000237516)
+  has 0 reviewed Swiss-Prot entries for CAP59 and LAC1 in UniProtKB 2026_02; CAP59
+  (UniProtKB:A0A2P1N7P7) and LAC1 (UniProtKB:A0A225XZ56) are reference-proteome TrEMBL
+  entries with explicit review_status: TREMBL in curation/uniprot_proteins.tsv.'
 notes:
 - Cycle 3 Stage 3 expanded curation/uniprot_proteins.tsv from 13 to 17 live-verified
   UniProtKB accessions and enriched 9 maintained causal-graph overlays to 38 GENE_OR_PROTEIN
