@@ -118,6 +118,15 @@ curation_history:
     lactose, PMID:7000781) linking lactose transport (GO:0015767) to its transported
     disaccharide substrate lactose (CHEBI:17716).
   llm_assisted: true
+- timestamp: '2026-10-23T22:40:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: Added live-verified Swiss-Prot entries UniProtKB:P07464 (THGA_ECOLI, lacA
+    / b0342, EC:2.3.1.18, 203 aa, CRC64 31C7FEA0B0150D70, v1) and UniProtKB:P03023
+    (LACI_ECOLI, lacI / b0345, 360 aa, CRC64 347A8DEE92D736CB, v3) in reference proteome
+    UP:UP000000625 with literature-backed operon expression and regulatory/metabolic
+    edges (PMID:9278503, PMID:3901000, PMID:11937062, PMID:355891, PMID:8638105).
+  llm_assisted: true
 causal_graphs:
 - graph_id: lactose_catabolism
   title: LacY/LacZ-mediated lactose transport and catabolism
@@ -156,6 +165,32 @@ causal_graphs:
     sequence_length: 1024
     sequence_crc64: 9D295EF4CEF90B08
     sequence_version: 2
+    entry_status: SWISS_PROT
+  - node_id: lacA
+    label: Galactoside O-acetyltransferase (lacA)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:P07464
+    xrefs:
+    - EC:2.3.1.18
+    organism_taxon_id: NCBITaxon:83333
+    proteome_id: UP:UP000000625
+    gene_symbol: lacA
+    locus_tag: b0342
+    sequence_length: 203
+    sequence_crc64: 31C7FEA0B0150D70
+    sequence_version: 1
+    entry_status: SWISS_PROT
+  - node_id: lacI
+    label: Lactose operon repressor (lacI)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:P03023
+    organism_taxon_id: NCBITaxon:83333
+    proteome_id: UP:UP000000625
+    gene_symbol: lacI
+    locus_tag: b0345
+    sequence_length: 360
+    sequence_crc64: 347A8DEE92D736CB
+    sequence_version: 3
     entry_status: SWISS_PROT
   - node_id: lactose_transport
     label: lactose transport
@@ -250,3 +285,47 @@ causal_graphs:
       notes: Solubilized and proteoliposome-reconstituted LacY catalyzes proton-coupled
         transmembrane symport with lactose as the primary disaccharide input in Escherichia
         coli K-12.
+  - edge_id: e9
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: lacA
+    evidence:
+    - reference: PMID:9278503
+      notes: Complete genome sequence of Escherichia coli K-12 MG1655 annotating lacA
+        (b0342) as the distal structural gene of the chromosomal lacZYA operon.
+    - reference: PMID:3901000
+      notes: DNA sequence of the Escherichia coli K-12 lactose operon lacA gene encoding
+        galactoside O-acetyltransferase.
+  - edge_id: e10
+    subject: lacA
+    predicate: causally upstream of or within
+    predicate_id: RO:0002418
+    object: lactose_catabolism
+    evidence:
+    - reference: PMID:11937062
+      notes: Crystal structure and mechanistic characterization of Escherichia coli
+        K-12 LacA galactoside O-acetyltransferase (EC:2.3.1.18) co-expressed in the
+        lacZYA lactose catabolic operon.
+  - edge_id: e11
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: lacI
+    evidence:
+    - reference: PMID:9278503
+      notes: Complete genome sequence of Escherichia coli K-12 MG1655 annotating lacI
+        (b0345) immediately upstream of the chromosomal lacZYA operon.
+    - reference: PMID:355891
+      notes: Nucleotide sequence of the Escherichia coli K-12 lacI gene encoding the
+        lactose operon repressor.
+  - edge_id: e12
+    subject: lacI
+    predicate: negatively regulates
+    predicate_id: RO:0002212
+    object: lactose_catabolism
+    evidence:
+    - reference: PMID:8638105
+      notes: Crystal structures of tetrameric Escherichia coli K-12 LacI bound to
+        operator DNA and inducer establish allosteric repression of the lacZYA lactose
+        catabolic operon and derepression upon allolactose binding.

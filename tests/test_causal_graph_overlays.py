@@ -208,7 +208,7 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                             "object": "pyocyanin-biosynthesis",
                             "evidence": [
                                 {
-                                    "reference": "PMID:11566984",
+                                    "reference": "PMID:11591691",
                                     "snippet": (
                                         "PhzM and PhzS convert phenazine-1-carboxylic acid "
                                         "to pyocyanin in Pseudomonas aeruginosa PAO1."
@@ -319,7 +319,7 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                             "object": "capsule-organization",
                             "evidence": [
                                 {
-                                    "reference": "PMID:25593184",
+                                    "reference": "PMID:21304167",
                                     "snippet": (
                                         "Comparative genomics of Cryptococcus gattii VGII R265 "
                                         "identifies conserved capsule biosynthesis determinants."
@@ -554,8 +554,8 @@ def test_extract_taxon_trait_edges_preserves_granular_assertions(tmp_path):
 
 def test_committed_curation_causal_graphs_overlays_load_and_validate():
     """Verify that all committed curation/causal_graphs/*.yaml overlays load cleanly,
-    cover the 15 species+strain exemplar records (88 evidence-backed edges and
-    28 GENE_OR_PROTEIN nodes across 13 live-verified UniProtKB accessions), and
+    cover the 15 species+strain exemplar records (110 evidence-backed edges and
+    38 GENE_OR_PROTEIN nodes across 17 live-verified UniProtKB accessions), and
     satisfy schema prefix and id_label_targets rules (#78)."""
     overlays_dir = REPO_ROOT / "curation" / "causal_graphs"
     graphs, events = load_causal_graphs(overlays_dir)
@@ -584,13 +584,13 @@ def test_committed_curation_causal_graphs_overlays_load_and_validate():
         for g in graphs[tid]
         for e in g.get("edges") or []
     )
-    assert total_edges >= 88
+    assert total_edges >= 110
     edge_count = sum(
         len(g.get("edges") or [])
         for tid in expected_ids
         for g in graphs[tid]
     )
-    assert edge_count == 88
+    assert edge_count == 110
     protein_nodes = [
         n
         for tid in expected_ids
@@ -598,11 +598,15 @@ def test_committed_curation_causal_graphs_overlays_load_and_validate():
         for n in g.get("nodes") or []
         if n.get("node_type") == "GENE_OR_PROTEIN"
     ]
-    assert len(protein_nodes) == 28
+    assert len(protein_nodes) == 38
     expected_uniprot = {
         "UniProtKB:P02920",
         "UniProtKB:P00722",
+        "UniProtKB:P03023",
+        "UniProtKB:P07464",
         "UniProtKB:P16497",
+        "UniProtKB:P06628",
+        "UniProtKB:P06535",
         "UniProtKB:P06534",
         "UniProtKB:Q9HWH2",
         "UniProtKB:Q9HWG9",
@@ -624,7 +628,7 @@ def test_committed_curation_causal_graphs_overlays_load_and_validate():
         assert isinstance(n.get("sequence_crc64"), str) and len(n["sequence_crc64"]) == 16
         assert isinstance(n.get("sequence_version"), int) and n["sequence_version"] >= 1
         assert n.get("entry_status") in ("SWISS_PROT", "TREMBL")
-    assert sum(1 for n in protein_nodes if n.get("proteome_id")) == 26
+    assert sum(1 for n in protein_nodes if n.get("proteome_id")) == 36
 
 
 def test_uniprot_proteins_catalog_and_lineage_validator():
@@ -632,7 +636,7 @@ def test_uniprot_proteins_catalog_and_lineage_validator():
     rejection of unpinned accessions, checksum/length/locus mismatches, and cross-species
     organism_taxon_id bindings (#78 / taxonmech-infra-0003)."""
     proteins = load_uniprot_proteins(UNIPROT_PROTEINS_PATH)
-    assert len(proteins) == 13
+    assert len(proteins) == 17
     for uid, row in proteins.items():
         assert uid.startswith("UniProtKB:")
         assert tuple(row.keys()) == UNIPROT_PROTEIN_FIELDS
