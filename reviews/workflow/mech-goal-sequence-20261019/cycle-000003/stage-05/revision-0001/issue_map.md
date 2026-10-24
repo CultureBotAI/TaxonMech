@@ -5,7 +5,7 @@
 - **Repository**: `CultureBotAI/TaxonMech`
 - **Source Revision**: `1e0a873bbe9927c130df3debe208a2d0e41be6f6`
 - **Consumed Stage 4 Workflow Evidence**: `reviews/workflow/mech-goal-sequence-20261019/cycle-000003/stage-04/revision-0001/evidence.yaml` (`sha256: 61289baeabe1ab7d9479903ef6fad54c27bd820d4ddfbacd06e2599fcda9cce9`)
-- **Consumed Stage 4 Structured Review**: `reviews/structured/20261024T021500Z-cycle3-stage4-corpus-record-review/review.yaml` (`sha256: cb1ccb504a32420345b96eda530e18340047254b3ceba85bf62ca79a2f21013`)
+- **Consumed Stage 4 Structured Review**: `reviews/structured/20261024T021500Z-cycle3-stage4-corpus-record-review/review.yaml` (`sha256: cb1ccb504a32420345b96eda530e18340047254b3ceba85bf62ca79a92f21013`)
 - **Linked Stage 5 Post-Remediation Structured Review**: `reviews/structured/20261024T055500Z-cycle3-stage5-remediation-review/review.yaml`
 
 ---

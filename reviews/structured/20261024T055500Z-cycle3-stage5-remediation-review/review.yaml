@@ -26,8 +26,8 @@ summary: 'Executed the Cycle 3 Stage 5 (resolve_review_findings) post-remediatio
   605,695; Archaea: 14,013; Eukaryota: 6,331; other: 9) after resolving finding corpus-review-coverage-doc-stale-bundle-inventory-counts
   (GitHub Issue #158) in docs/corpus-review-coverage.md and tests/test_corpus_review_inventory.py.
   Verified that scripts/corpus_review_inventory.py --check --verify-target-sha256
-  exits 0 across all 626,048 corpus records, 602,165 structured shard rows, and 50
-  structured review bundles, and that pytest tests/test_corpus_review_inventory.py
+  exits 0 across all 626,048 corpus records, 602,165 structured shard rows, and 51
+  structured review bundles (50 prior bundles plus this Stage 5 bundle), and that pytest tests/test_corpus_review_inventory.py
   (9 passed) enforces the documented post-curation target_sha256 reconciliation contract.
   Confirmed 4 findings are resolved (#76, #83, and both #158 code and documentation/test
   findings) and 6 corpus-regeneration and Stage 6 infrastructure-gated findings (#124/#63,
@@ -1368,10 +1368,9 @@ evidence:
     files in data/taxa/ (0 unreviewed, 0 overlap; structured verdicts: pass=479,251,
     pass_with_limitations=27,118, needs_curation=95,766, blocked=30), with post-curation
     target_sha256 digests reconciled cleanly by scripts/corpus_review_inventory.py
-    --check --verify-target-sha256 (#158); docs/corpus-review-coverage.md still describes
-    only 39 canonical bundles in reviews/structured/ and omits the post-curation target_sha256
-    reconciliation contract.'
-  accessed_at: '2026-10-24T02:15:00Z'
+    --check --verify-target-sha256 and documented in docs/corpus-review-coverage.md
+    (#158).'
+  accessed_at: '2026-10-24T05:55:00Z'
   support: supports
   snapshot_sha256: 023ac83c94ea72c7822acb3b111e5dddb41b1df8304f5b7ec4146883557ebce4
 - evidence_id: exemplar-target-records
@@ -1395,7 +1394,7 @@ evidence:
   summary: Verified taxon identity, lineage, nomenclature, synonyms, xrefs, taxonomy_mappings,
     source_attestations, strains, causal_graphs, and curation_history across 27 exemplar
     records spanning Bacteria (13), Archaea (3), Eukaryota (8), and other (3).
-  accessed_at: '2026-10-24T02:15:00Z'
+  accessed_at: '2026-10-24T05:55:00Z'
   support: supports
   snapshot_sha256: b1f6200890dbfc3211fe3d922eb7049454eac79f1ab32047e9d5749b1ecea7c0
 - evidence_id: cycle3-causal-graph-and-uniprot-overlays
@@ -1410,7 +1409,7 @@ evidence:
     grounded to 17 unique live-verified UniProtKB accessions in curation/uniprot_proteins.tsv
     with exact organism_taxon_id, strain_id, proteome_id, gene_symbol, locus_tag,
     sequence_length, sequence_crc64, sequence_version, and entry_status).
-  accessed_at: '2026-10-24T02:15:00Z'
+  accessed_at: '2026-10-24T05:55:00Z'
   support: supports
   snapshot_sha256: 7390287e69e64500a83482da9739f503fc1c96fb21e8e47c0419218125646959
 - evidence_id: raw-source-inventories
@@ -1423,7 +1422,7 @@ evidence:
     all 626,048 records and confirm persistent GTDB closeMatch fan-out (95,766 records),
     polyphyly suffix mangling (15,704 rows), pooled broadMatch genome counts/notes
     (8,587 records), and stale seed_scope strain-count reason strings.
-  accessed_at: '2026-10-24T02:15:00Z'
+  accessed_at: '2026-10-24T05:55:00Z'
   support: supports
   snapshot_sha256: 95589ac7f548dcd27951c6afe432895c7409717df5f6e789a93dcb9229535963
 - evidence_id: schema-seeder-validator-code
@@ -1435,14 +1434,13 @@ evidence:
     corpus_review_inventory.py:185-330,381-445; corpus-review-coverage.md:34-55; INFRA_TASKS.md:33-286
   summary: 'Inspection of schema, seeder, extractor, strict/UniProt validator, inventory
     checker, and documentation confirms resolution of #76 and #83 in Cycle 1 Stage
-    5, resolution of #158 in Cycle 2 Stage 5 (PR #159), offline UniProtKB protein
-    table validation in Cycle 2 Stage 6 (PR #160), persistent GTDB/scope seeder defects
-    at src/taxonmech/seed.py lines 508-535, 636-650, and 691-702 (#124, #63, #65,
-    #118, #119, #69), remaining corpus-wide trait/UniProt/attestation-note tasks in
-    INFRA_TASKS.md (taxonmech-infra-0001..0004; #78, #8), and stale bundle-count and
-    --verify-target-sha256 documentation in docs/corpus-review-coverage.md (lines
-    40, 51-55).'
-  accessed_at: '2026-10-24T02:15:00Z'
+    5, resolution of #158 code in Cycle 2 Stage 5 (PR #159) and #158 documentation/regression
+    test in Cycle 3 Stage 5 (docs/corpus-review-coverage.md lines 40, 51-55; tests/test_corpus_review_inventory.py),
+    offline UniProtKB protein table validation in Cycle 2 Stage 6 (PR #160), persistent
+    GTDB/scope seeder defects at src/taxonmech/seed.py lines 508-535, 636-650, and
+    691-702 (#124, #63, #65, #118, #119, #69), and remaining corpus-wide trait/UniProt/attestation-note
+    tasks in INFRA_TASKS.md (taxonmech-infra-0001..0004; #78, #8).'
+  accessed_at: '2026-10-24T05:55:00Z'
   support: supports
   snapshot_sha256: 733ab9febfdd56e4b73b8acce3ce6c15de1fe201f31f8769d217e97530578347
 assessments:
@@ -1450,15 +1448,15 @@ assessments:
   area: identity
   topic: Full-corpus review coverage (626,048 records), NCBI taxonomy alignment, and
     post-curation SHA-256 inventory state
-  outcome: concern
+  outcome: supported
   summary: 'All 626,048 in-scope TaxonRecord YAML files in data/taxa/ are accounted
     for without gap or overlap (23,883 legacy + 602,165 structured across 14 shards
     and 611 batches), match their pinned data/raw/ncbitaxon_taxa.tsv identifier, label,
-    rank, domain, parent_taxon, and lineage, and pass scripts/corpus_review_inventory.py
-    --check --verify-target-sha256 (0 unreconciled target SHA-256 mismatches after
-    #158); however, docs/corpus-review-coverage.md still states that reviews/structured/
-    holds only 39 canonical bundles and omits the post-curation target SHA-256 reconciliation
-    contract.'
+    rank, domain, parent_taxon, and lineage, pass scripts/corpus_review_inventory.py
+    --check --verify-target-sha256 (0 unreconciled target SHA-256 mismatches), and
+    have their multi-stage workflow review bundles and post-curation target SHA-256
+    reconciliation contract documented in docs/corpus-review-coverage.md and enforced
+    by tests/test_corpus_review_inventory.py (#158).'
   target_ids:
   - NCBITaxon:562
   - NCBITaxon:83333
@@ -2187,8 +2185,8 @@ findings:
     review_id: 20261024T021500Z-cycle3-stage4-corpus-record-review
     finding_id: structured-inventory-verify-target-sha256-post-curation-drift
   disposition_reason: 'Resolved in Cycle 2 Stage 5 (PR #159) under #158 and verified
-    intact across all 626,048 records and 50 structured review bundles in Cycle 3
-    Stages 4-5.'
+    intact across all 626,048 records and 51 structured review bundles (50 prior bundles
+    plus this Stage 5 bundle) in Cycle 3 Stages 4-5.'
   external_issues:
   - https://github.com/CultureBotAI/TaxonMech/issues/158
   - https://github.com/CultureBotAI/TaxonMech/issues/78
