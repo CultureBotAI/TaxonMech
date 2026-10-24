@@ -354,3 +354,12 @@ def test_committed_corpus_review_inventory_is_complete_and_valid() -> None:
     assert summary["structured_shards"] == 14
     assert summary["structured_batches"] == 611
     assert sum(summary["structured_verdicts_not_promoted"].values()) == 602165
+
+
+def test_corpus_review_coverage_doc_describes_reconciliation_contract() -> None:
+    doc_text = (cri.ROOT / "docs/corpus-review-coverage.md").read_text(encoding="utf-8")
+    assert "multi-stage workflow scientific review bundles" in doc_text
+    assert "load_latest_target_reviews()" in doc_text
+    assert "scientific_review: true" in doc_text
+    assert "--verify-target-sha256" in doc_text
+    assert "#158" in doc_text
