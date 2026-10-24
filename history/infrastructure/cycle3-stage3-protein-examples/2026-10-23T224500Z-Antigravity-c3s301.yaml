@@ -1,0 +1,44 @@
+history_version: 1
+target:
+  kind: infrastructure
+  path: curation/uniprot_proteins.tsv
+  slug: cycle3-stage3-protein-examples
+session:
+  id: 2026-10-23T224500Z-Antigravity-c3s301
+  timestamp: '2026-10-23T22:45:00Z'
+  actors:
+  - type: ai_agent
+    name: Antigravity
+    agent_tool: antigravity-cli
+links:
+  issues:
+  - https://github.com/CultureBotAI/TaxonMech/issues/78
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - causal_graphs
+  - evidence
+  - validation
+  summary: >-
+    Expand release-pinned curation/uniprot_proteins.tsv from 13 to 17 live-verified UniProtKB
+    entries (15 Swiss-Prot, 2 TrEMBL) and enrich 9 maintained causal_graphs overlays across
+    Escherichia coli, Bacillus subtilis, Pseudomonas aeruginosa, and Cryptococcus deuterogattii
+  details: >-
+    Verified 4 additional reviewed Swiss-Prot entries against live UniProtKB REST API (UniProt
+    release 2026_02) and added them to curation/uniprot_proteins.tsv: UniProtKB:P03023
+    (LACI_ECOLI, lacI / b0345, NCBITaxon:83333, UP:UP000000625, 360 aa, CRC64 347A8DEE92D736CB,
+    v3), UniProtKB:P07464 (THGA_ECOLI, lacA / b0342, EC:2.3.1.18, NCBITaxon:83333,
+    UP:UP000000625, 203 aa, CRC64 31C7FEA0B0150D70, v1), UniProtKB:P06628 (SP0F_BACSU, spo0F /
+    BSU37130, EC:2.7.-.-, NCBITaxon:224308, UP:UP000001570, 124 aa, CRC64 4130377E3558D698,
+    v1), and UniProtKB:P06535 (SP0B_BACSU, spo0B / BSU27930, EC:2.7.-.-, NCBITaxon:224308,
+    UP:UP000001570, 192 aa, CRC64 3A9A38B5FFB55647, v1). Updated 9 maintained overlays in
+    curation/causal_graphs/ (NCBITaxon_562, NCBITaxon_83333, NCBITaxon_511145, NCBITaxon_1423,
+    NCBITaxon_224308, NCBITaxon_287, NCBITaxon_208964, NCBITaxon_1859096, NCBITaxon_294750) to
+    38 total GENE_OR_PROTEIN nodes (36 with reference proteome_id) across 17 unique UniProtKB
+    accessions and 110 evidence-backed causal edges, reconciled 4 PMID citations against live
+    NCBI PubMed (PMID:1846779 for Burbulys et al. 1991; PMID:11591691 for Mavrodi et al. 2001;
+    PMID:8007987 for Chang & Kwon-Chung 1994; PMID:15643074 for Pukkila-Worley et al. 2005),
+    re-seeded the 9 corresponding TaxonRecord YAML files and 8 pages/taxon-details/*.json.gz
+    shards, and saved structured review bundle
+    reviews/structured/20261023T224500Z-cycle3-stage3-protein-examples/review.yaml.

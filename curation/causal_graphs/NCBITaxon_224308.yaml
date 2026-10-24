@@ -28,6 +28,30 @@ causal_graphs:
     sequence_crc64: A8BB97FE844B32EE
     sequence_version: 2
     entry_status: SWISS_PROT
+  - node_id: spo0F
+    label: Sporulation initiation phosphotransferase F (spo0F)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:P06628
+    organism_taxon_id: NCBITaxon:224308
+    proteome_id: UP:UP000001570
+    gene_symbol: spo0F
+    locus_tag: BSU37130
+    sequence_length: 124
+    sequence_crc64: 4130377E3558D698
+    sequence_version: 1
+    entry_status: SWISS_PROT
+  - node_id: spo0B
+    label: Sporulation initiation phosphotransferase B (spo0B)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:P06535
+    organism_taxon_id: NCBITaxon:224308
+    proteome_id: UP:UP000001570
+    gene_symbol: spo0B
+    locus_tag: BSU27930
+    sequence_length: 192
+    sequence_crc64: 3A9A38B5FFB55647
+    sequence_version: 1
+    entry_status: SWISS_PROT
   - node_id: spo0A
     label: Stage 0 sporulation protein A (spo0A)
     node_type: GENE_OR_PROTEIN
@@ -87,7 +111,7 @@ causal_graphs:
     predicate_id: RO:0002213
     object: phosphorelay_regulator_activity
     evidence:
-    - reference: PMID:1987166
+    - reference: PMID:1846779
       notes: >-
         KinA-driven phosphoryl flux through the Spo0F/Spo0B phosphorelay
         activates Spo0A response regulator activity.
@@ -107,7 +131,7 @@ causal_graphs:
     predicate_id: RO:0002327
     object: phosphorelay_regulator_activity
     evidence:
-    - reference: PMID:1987166
+    - reference: PMID:1846779
       notes: >-
         Spo0A functions as the terminal phosphorelay response regulator
         phosphorylated via KinA/Spo0F/Spo0B to initiate sporulation.
@@ -142,6 +166,79 @@ causal_graphs:
         Phosphorylated Spo0A directly binds and activates transcription of the
         sporulation initiation regulon required for endospore formation in
         Bacillus subtilis subsp. subtilis str. 168.
+  - edge_id: e9
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: spo0F
+    evidence:
+    - reference: PMID:9384377
+      notes: >-
+        Complete genome sequence of Bacillus subtilis subsp. subtilis str. 168
+        identifying spo0F (BSU37130) encoding the intermediate sporulation
+        response regulator Spo0F.
+    - reference: PMID:3003689
+      notes: >-
+        Sequence characterization of the Bacillus subtilis spo0F gene and its
+        response-regulator homology with spo0A.
+  - edge_id: e10
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: spo0B
+    evidence:
+    - reference: PMID:9384377
+      notes: >-
+        Complete genome sequence of Bacillus subtilis subsp. subtilis str. 168
+        identifying spo0B (BSU27930) encoding sporulation initiation
+        phosphotransferase B.
+    - reference: PMID:6438629
+      notes: >-
+        Nucleotide sequence and transcriptional characterization of the Bacillus
+        subtilis spo0B sporulation initiation gene.
+  - edge_id: e11
+    subject: kinA
+    predicate: directly positively regulates
+    predicate_id: RO:0002629
+    object: spo0F
+    evidence:
+    - reference: PMID:1846779
+      notes: >-
+        Autophosphorylated sensor histidine kinase KinA directly transfers its
+        phosphoryl group to the intermediate response regulator Spo0F.
+    - reference: PMID:2509430
+      notes: >-
+        Purified KinA directly phosphorylates the sporulation response regulator
+        Spo0F in the presence of ATP.
+  - edge_id: e12
+    subject: spo0F
+    predicate: directly positively regulates
+    predicate_id: RO:0002629
+    object: spo0B
+    evidence:
+    - reference: PMID:1846779
+      notes: >-
+        Phosphorylated Spo0F~P serves as the direct phosphoryl donor to the
+        Spo0B phosphotransferase in the sporulation initiation phosphorelay.
+    - reference: PMID:10997904
+      notes: >-
+        Crystal structure of the Spo0F-Spo0B complex reveals the direct
+        molecular recognition and phosphoryl transfer interface between Spo0F
+        and Spo0B.
+  - edge_id: e13
+    subject: spo0B
+    predicate: directly positively regulates
+    predicate_id: RO:0002629
+    object: spo0A
+    evidence:
+    - reference: PMID:1846779
+      notes: >-
+        Phosphorylated Spo0B~P catalyzes direct phosphoryl transfer to the
+        terminal sporulation transcription factor Spo0A.
+    - reference: PMID:9726997
+      notes: >-
+        Biochemical characterization of His-phosphorylated Spo0B demonstrates
+        direct reversible phosphotransfer to Spo0A.
 curation_history:
 - timestamp: '2026-10-22T14:00:00Z'
   curator: curate-causal-graphs
@@ -167,4 +264,16 @@ curation_history:
     Added direct regulator-to-process causal edge (edge e8, spo0A RO:0002418
     endospore_formation, PMID:14651647) linking Spo0A (UniProtKB:P06534) to
     endospore formation (GO:0034301).
+  llm_assisted: true
+- timestamp: '2026-10-23T22:40:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: >-
+    Added live-verified Swiss-Prot intermediate phosphorelay proteins
+    UniProtKB:P06628 (SP0F_BACSU, spo0F / BSU37130, 124 aa, CRC64
+    4130377E3558D698, v1) and UniProtKB:P06535 (SP0B_BACSU, spo0B / BSU27930,
+    192 aa, CRC64 3A9A38B5FFB55647, v1) in reference proteome UP:UP000001570
+    with step-by-step KinA -> Spo0F -> Spo0B -> Spo0A phosphorelay edges and
+    reconciled Burbulys et al. 1991 citation (PMID:1846779, PMID:10997904,
+    PMID:9726997, PMID:3003689, PMID:6438629).
   llm_assisted: true
