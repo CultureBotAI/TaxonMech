@@ -3,8 +3,8 @@
 - **Repository**: `CultureBotAI/TaxonMech`
 - **Source Revision**: `13688091f74fd3c7d95b952097a063dbd28851f6`
 - **Previous Workflow Evidence**: `reviews/workflow/mech-goal-sequence-20261019/cycle-000002/stage-05/revision-0001/evidence.yaml` (`SHA256: d433bc519d9f52a03cc317c0629e341142e0ce1be71b7a36a44b3baa78103b77`)
-- **Native Structured Review Bundle**: `reviews/structured/20261024T021500Z-cycle3-stage4-corpus-record-review/review.yaml` (`SHA256: 64867602c5b5680f0880d6db053c0cd26954f625ad712f2b9bce422ea33ad4c7`)
-- **Native Rendered Report**: `reviews/structured/20261024T021500Z-cycle3-stage4-corpus-record-review/review.md` (`SHA256: 603086f0a2c5a310182d6ae7032357d1865bec1b61aa5a53c96699c086893b2a`)
+- **Native Structured Review Bundle**: `reviews/structured/20261024T021500Z-cycle3-stage4-corpus-record-review/review.yaml` (`SHA256: cb1ccb504a32420345b96eda530e18340047254b3ceba85bf62ca79a92f21013`)
+- **Native Rendered Report**: `reviews/structured/20261024T021500Z-cycle3-stage4-corpus-record-review/review.md` (`SHA256: 19424289022dd4766d5a2a5d96e0cb47594be1646af258f925e676d5e99d8739`)
 - **Infrastructure Tasks Notebook**: `INFRA_TASKS.md` (`SHA256: 0ba8eeef1675ee22621b04fa97775dd2d0d34f65868db2d871417bbde7dade3e`; tracked tasks: `taxonmech-infra-0001..0004`)
 - **Skills Executed**: `.claude/skills/review-yaml-record/SKILL.md`, `.claude/skills/review-yaml-category/SKILL.md`
 - **Rubric**: `.claude/skills/curate-yaml-record/references/review-checklist.md`
@@ -13,7 +13,7 @@
 
 ## 1. Frozen Corpus Coverage & Post-Curation SHA-256 Inventory Audit
 
-`.venv/bin/python scripts/corpus_review_inventory.py --check --verify-target-sha256` verified **100.0% coverage** and **100.0% target SHA-256 parity** across all **626,048** in-scope `TaxonRecord` YAML files in `data/taxa/` (`data/taxa/PATHS.tsv` and `curation/seed_scope.tsv`) following Cycle 3 Stages 2–3 (`#163`, `#164`):
+`.venv/bin/python scripts/corpus_review_inventory.py --check --verify-target-sha256` verified **100.0% coverage** and **100.0% target SHA-256 parity** across all **626,048** in-scope `TaxonRecord` YAML files in `data/taxa/` (`data/taxa/PATHS.tsv` and `curation/seed_scope.tsv`) following Cycle 3 Stages 2–3 (`#162`, `#163`):
 
 | Metric | Count | Notes |
 | --- | ---: | --- |
