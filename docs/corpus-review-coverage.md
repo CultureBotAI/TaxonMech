@@ -37,7 +37,7 @@ Storing 602,165 separate `review.yaml` + `review.md` directory pairs (1.2M+ file
 
 - **Per-record structured inventory shards (`docs/structured-review-inventory/part-00.tsv` .. `part-13.tsv`)** record the exact `review_id`, `round_id`, `target_id`, `target_path`, `target_sha256` (matching the committed `data/taxa/<domain>/<slug>.yaml` bytes), `label`, `verdict`, `completion`, `scientific_review`, `finding_count`, `started_at`, and `finished_at` for all 602,165 records.
 - **Per-round batch summary (`docs/structured-review-batches.tsv`)** aggregates all 611 review rounds (`pre-round` through `round26-b01`), recording the shard path(s), `record_count`, `pass_count`, `pass_with_limitations_count`, `needs_curation_count`, `blocked_count`, boundary `target_id`s, timestamps, and provenance notes (including the `round13-agent2` author-metadata erratum note).
-- **Canonical structured bundles (`reviews/structured/`)** retain **14** `kind: batch` shard bundles (`*-structured-review-shard-part-00` .. `part-13`) that bind each shard TSV and `docs/structured-review-batches.tsv` by SHA-256 along with boundary and verdict-stratified target records, plus **25** representative single-record `kind: record` bundles spanning all four domains (`archaea`, `bacteria`, `eukaryota`, `other`).
+- **Canonical structured bundles (`reviews/structured/`)** retain **14** `kind: batch` shard bundles (`*-structured-review-shard-part-00` .. `part-13`) that bind each shard TSV and `docs/structured-review-batches.tsv` by SHA-256 along with boundary and verdict-stratified target records, **25** representative single-record `kind: record` bundles spanning all four domains (`archaea`, `bacteria`, `eukaryota`, `other`), and append-only multi-stage workflow scientific review bundles (`kind: batch` / `kind: cohort`, including causal-graph curation, UniProtKB protein-example curation, full-corpus review, and Stage 5 remediation review bundles) that record post-curation target SHA-256 digests without mutating historical shard rows.
 
 ## Verification
 
@@ -48,7 +48,7 @@ uv run python scripts/corpus_review_inventory.py --check
 uv run pytest -q tests/test_corpus_review_inventory.py
 ```
 
-To additionally recompute and verify the SHA-256 digest of all 602,165 target YAML files on disk against `target_sha256` in `docs/structured-review-inventory/part-*.tsv`:
+To additionally recompute and verify the SHA-256 digest of all 602,165 target YAML files on disk against `target_sha256` in `docs/structured-review-inventory/part-*.tsv` (reconciling post-curation target digests via `load_latest_target_reviews()` against strictly newer completed/partial scientific review bundles with `scientific_review: true` in `reviews/structured/*/review.yaml` while preserving superseded historical append-only shard rows as immutable observations; see issue #158):
 
 ```bash
 uv run python scripts/corpus_review_inventory.py --check --verify-target-sha256
