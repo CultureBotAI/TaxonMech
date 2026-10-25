@@ -22,6 +22,7 @@ from taxonmech.seed import (
     load_causal_graphs,
     load_uniprot_proteins,
     validate_causal_graph_proteins,
+    validate_causal_graph_structure,
 )
 from taxonmech.validation.write_validated import emit_taxon_yaml, write_validated_taxon
 
@@ -769,5 +770,192 @@ def test_uniprot_proteins_catalog_and_lineage_validator():
     }
     with pytest.raises(SystemExit, match="not lineage-consistent"):
         validate_causal_graph_proteins(bad_lineage, uniprot_proteins=proteins, taxa=taxa)
+
+    # Strain inventory mapping for strain_id validation (#78 / taxonmech-infra-0003)
+    strains = {
+        "NCBITaxon:562": [{"strain_id": "kgmicrobe.strain:bacdive_155687"}],
+        "NCBITaxon:1423": [{"strain_id": "kgmicrobe.strain:bacdive_1156"}],
+        "NCBITaxon:287": [{"strain_id": "kgmicrobe.strain:bacdive_12795"}],
+        "NCBITaxon:243232": [{"strain_id": "kgmicrobe.strain:bacdive_6981"}],
+    }
+    validate_causal_graph_proteins(graphs, uniprot_proteins=proteins, taxa=taxa, strains=strains)
+
+    # Negative control 4: malformed strain_id on GENE_OR_PROTEIN
+    bad_strain_fmt = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {
+                        "node_id": "lacZ",
+                        "node_type": "GENE_OR_PROTEIN",
+                        "grounding": "UniProtKB:P00722",
+                        "organism_taxon_id": "NCBITaxon:83333",
+                        "strain_id": "bacdive:155687",
+                        "proteome_id": "UP:UP000000625",
+                        "gene_symbol": "lacZ",
+                        "locus_tag": "b0344",
+                        "sequence_length": 1024,
+                        "sequence_crc64": "9D295EF4CEF90B08",
+                        "sequence_version": 2,
+                        "entry_status": "SWISS_PROT",
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="invalid 'strain_id'"):
+        validate_causal_graph_proteins(
+            bad_strain_fmt, uniprot_proteins=proteins, taxa=taxa, strains=strains
+        )
+
+    # Negative control 5: absent strain_id from bacdive_strains.tsv
+    bad_strain_missing = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {
+                        "node_id": "lacZ",
+                        "node_type": "GENE_OR_PROTEIN",
+                        "grounding": "UniProtKB:P00722",
+                        "organism_taxon_id": "NCBITaxon:83333",
+                        "strain_id": "kgmicrobe.strain:bacdive_99999999",
+                        "proteome_id": "UP:UP000000625",
+                        "gene_symbol": "lacZ",
+                        "locus_tag": "b0344",
+                        "sequence_length": 1024,
+                        "sequence_crc64": "9D295EF4CEF90B08",
+                        "sequence_version": 2,
+                        "entry_status": "SWISS_PROT",
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="is absent from bacdive_strains.tsv"):
+        validate_causal_graph_proteins(
+            bad_strain_missing, uniprot_proteins=proteins, taxa=taxa, strains=strains
+        )
+
+    # Negative control 6: cross-species strain_id (M. jannaschii bacdive_6981 on E. coli lacZ)
+    bad_strain_lineage = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {
+                        "node_id": "lacZ",
+                        "node_type": "GENE_OR_PROTEIN",
+                        "grounding": "UniProtKB:P00722",
+                        "organism_taxon_id": "NCBITaxon:83333",
+                        "strain_id": "kgmicrobe.strain:bacdive_6981",
+                        "proteome_id": "UP:UP000000625",
+                        "gene_symbol": "lacZ",
+                        "locus_tag": "b0344",
+                        "sequence_length": 1024,
+                        "sequence_crc64": "9D295EF4CEF90B08",
+                        "sequence_version": 2,
+                        "entry_status": "SWISS_PROT",
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="strain_id .* is not lineage-consistent"):
+        validate_causal_graph_proteins(
+            bad_strain_lineage, uniprot_proteins=proteins, taxa=taxa, strains=strains
+        )
+
+
+def test_validate_causal_graph_structure_and_sources_catalog():
+    """Verify validate_causal_graph_structure enforces node_id/edge_id uniqueness,
+    edge endpoint referential integrity, non-self-loop edges, and evidence references,
+    and conf/sources.yaml registers uniprot_proteins (#78 / taxonmech-infra-0001 / 0003)."""
+    sources_cfg = yaml.safe_load((REPO_ROOT / "conf" / "sources.yaml").read_text(encoding="utf-8"))
+    assert "uniprot_proteins" in sources_cfg.get("sources", {})
+    assert "curation/uniprot_proteins.tsv" in sources_cfg["sources"]["uniprot_proteins"]["via"]
+
+    dup_node = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {"node_id": "n1", "label": "Node 1", "node_type": "PATHWAY"},
+                    {"node_id": "n1", "label": "Node 1 dup", "node_type": "PATHWAY"},
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="duplicate node_id 'n1'"):
+        validate_causal_graph_structure(dup_node)
+
+    dangling_edge = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {"node_id": "n1", "label": "Node 1", "node_type": "PATHWAY"},
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "n1",
+                        "predicate": "regulates",
+                        "object": "missing-node",
+                        "evidence": [{"reference": "PMID:1"}],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="object 'missing-node' does not reference a defined node_id"):
+        validate_causal_graph_structure(dangling_edge)
+
+    self_loop = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {"node_id": "n1", "label": "Node 1", "node_type": "PATHWAY"},
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "n1",
+                        "predicate": "regulates",
+                        "object": "n1",
+                        "evidence": [{"reference": "PMID:1"}],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="self-loop subject == object 'n1'"):
+        validate_causal_graph_structure(self_loop)
+
+    missing_ev = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {"node_id": "n1", "label": "Node 1", "node_type": "PATHWAY"},
+                    {"node_id": "n2", "label": "Node 2", "node_type": "PHENOTYPE"},
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "n1",
+                        "predicate": "regulates",
+                        "object": "n2",
+                        "evidence": [{}],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="each evidence item requires non-empty 'reference'"):
+        validate_causal_graph_structure(missing_ev)
+
 
 
