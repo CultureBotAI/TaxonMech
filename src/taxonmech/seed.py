@@ -661,7 +661,7 @@ def load_inventory() -> Inventory:
     validate_causal_graph_proteins(
         {tid: graphs for tid, graphs in causal_graphs.items() if tid in taxa},
         taxa=taxa,
-        strains=strains,
+        strains=strains if set(causal_graphs) <= set(taxa) else None,
     )
     return Inventory(taxa, gtdb, lpsn, lpsn_by_taxon, strains, cc_strains, media, gold, madin, bacto,
                      strain_assemblies, strain_genome_records, strain_related_records,

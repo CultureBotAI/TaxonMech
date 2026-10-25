@@ -19,11 +19,12 @@
 
 ## 2. Executed Validation Commands
 
-1. **Causal-graph overlay, structural referential integrity, UniProtKB catalog + `strain_id` lineage validator, extractor, and schema unit tests**:
+1. **Causal-graph overlay, structural referential integrity, UniProtKB catalog + `strain_id` lineage validator, extractor, ATB/StrainInfo seeder integration, and schema unit tests**:
    ```
-   .venv/bin/pytest -q -o cache_dir=/tmp/pytest_cache tests/test_causal_graph_overlays.py tests/test_schema.py tests/test_corpus_review_inventory.py
+   .venv/bin/pytest -q -o cache_dir=/tmp/pytest_cache tests/test_causal_graph_overlays.py tests/test_atb_schema_seed.py tests/test_straininfo_schema_seed.py tests/test_seed.py tests/test_schema.py tests/test_corpus_review_inventory.py
    ```
    - `tests/test_causal_graph_overlays.py`: 6 passed (`test_five_exemplar_causal_graph_overlays_roundtrip_and_render`, `test_load_causal_graphs_rejects_invalid_or_duplicate_overlays`, `test_extract_taxon_trait_edges_preserves_granular_assertions`, `test_committed_curation_causal_graphs_overlays_load_and_validate`, `test_uniprot_proteins_catalog_and_lineage_validator`, `test_validate_causal_graph_structure_and_sources_catalog`).
+   - `tests/test_atb_schema_seed.py`, `tests/test_straininfo_schema_seed.py`, `tests/test_seed.py`: 331 passed.
    - `tests/test_schema.py`: all schema structure, enum, prefix, and `CausalNode` protein scope slot tests passed.
    - `tests/test_corpus_review_inventory.py`: 4 passed.
 
