@@ -65,14 +65,23 @@ causal_graphs:
    prefixes (`UniProtKB`, `EC`, `METPO`, `OMP`, `UP`, `traitmech`, `habitatmech`)
    are registered in `src/taxonmech/schema/taxonmech.yaml` and
    `conf/id_label_targets.yaml`.
-3. **Offline UniProtKB reference and NCBI Taxonomy lineage validation (`curation/uniprot_proteins.tsv` & `src/taxonmech/seed.py`)**:
-   `load_causal_graphs()` and `validate_causal_graph_proteins()` verify every
-   `GENE_OR_PROTEIN` node against the pinned `curation/uniprot_proteins.tsv`
-   reference catalog (`entry_status`, `organism_taxon_id`, `proteome_id`,
-   `gene_symbol`, `locus_tag`, `ec_numbers`, `sequence_length`, `sequence_crc64`,
-   `sequence_version`) and check `ncbitaxon_taxa.tsv` lineage consistency so
-   species/strain records cannot bind cross-species or mismatched protein entries.
-4. **Byte-exact corpus reproducibility (`scripts/verify_corpus.py`)**:
+3. **Causal-graph structural referential integrity (`src/taxonmech/seed.py`)**:
+   `load_causal_graphs()` invokes `validate_causal_graph_structure()` to verify
+   `node_id` and `edge_id` uniqueness within every graph, referential integrity
+   of `edge.subject` and `edge.object` against `graph.nodes`, absence of
+   self-loop edges (`subject != object`), and presence of non-empty
+   `evidence[].reference` citations on every edge.
+4. **Offline UniProtKB reference, NCBI Taxonomy lineage, and BacDive strain validation (`curation/uniprot_proteins.tsv`, `conf/sources.yaml`, & `src/taxonmech/seed.py`)**:
+   `load_causal_graphs()`, `load_inventory()`, and `scripts/check_provenance.py`
+   verify every `GENE_OR_PROTEIN` node against the pinned
+   `curation/uniprot_proteins.tsv` reference catalog (`entry_status`,
+   `organism_taxon_id`, `proteome_id`, `gene_symbol`, `locus_tag`, `ec_numbers`,
+   `sequence_length`, `sequence_crc64`, `sequence_version`), check
+   `ncbitaxon_taxa.tsv` lineage consistency, and verify any declared `strain_id`
+   (`kgmicrobe.strain:bacdive_*`) against `data/raw/bacdive_strains.tsv` and the
+   host record/organism lineage so species/strain records cannot bind
+   cross-species or mismatched protein/strain entries.
+5. **Byte-exact corpus reproducibility (`scripts/verify_corpus.py`)**:
    `scripts/verify_corpus.py` loads `curation/causal_graphs/` through
    `build_corpus()` and compares every `data/taxa/<domain>/<slug>.yaml` against
    `emit_taxon_yaml(build_document(concept, corpus.inventory))`.

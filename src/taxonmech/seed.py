@@ -76,6 +76,7 @@ UNIPROT_PROTEIN_FIELDS = (
     "release_version",
 )
 CRC64_PATTERN = re.compile(r"^[0-9A-F]{16}$")
+BACDIVE_STRAIN_ID_PATTERN = re.compile(r"^kgmicrobe\.strain:bacdive_[1-9][0-9]*$")
 
 SEED_CURATOR = "seed_from_sources"
 
@@ -317,13 +318,105 @@ def _taxon_is_species_or_below(taxa: dict[str, dict[str, str]], tid: str) -> boo
     return any((taxa.get(a) or {}).get("rank") == "SPECIES" for a in _taxon_lineage(taxa, tid))
 
 
+def _taxa_lineage_compatible(taxa: dict[str, dict[str, str]], tid_a: str, tid_b: str) -> bool:
+    """Return True when ``tid_a`` and ``tid_b`` are identical or on the same ancestor/descendant chain."""
+    return (
+        tid_a == tid_b
+        or tid_a in _taxon_lineage(taxa, tid_b)
+        or tid_b in _taxon_lineage(taxa, tid_a)
+    )
+
+
+def validate_causal_graph_structure(
+    graphs_by_taxon: dict[str, list[dict[str, Any]]],
+) -> None:
+    """Validate internal referential integrity and required slots of causal-graph overlays."""
+    for tid, graphs in sorted(graphs_by_taxon.items()):
+        for graph in graphs:
+            gid = graph.get("graph_id", "<unnamed>")
+            g_ctx = f"{tid} graph {gid!r}"
+            nodes = graph.get("nodes")
+            seen_node_ids: set[str] = set()
+            if nodes is not None:
+                if not isinstance(nodes, list) or not nodes:
+                    raise SystemExit(f"{g_ctx}: 'nodes' must be a non-empty list")
+                for node in nodes:
+                    if not isinstance(node, dict):
+                        raise SystemExit(f"{g_ctx}: each node must be a mapping")
+                    nid = (node.get("node_id") or "").strip() if isinstance(node.get("node_id"), str) else ""
+                    if not nid:
+                        raise SystemExit(f"{g_ctx}: node missing 'node_id'")
+                    if nid in seen_node_ids:
+                        raise SystemExit(f"{g_ctx}: duplicate node_id {nid!r}")
+                    seen_node_ids.add(nid)
+                    lbl = (node.get("label") or "").strip() if isinstance(node.get("label"), str) else ""
+                    raw_ntype = node.get("node_type")
+                    ntype = (raw_ntype or "").strip() if isinstance(raw_ntype, str) else ""
+                    if not lbl or not ntype:
+                        raise SystemExit(f"{g_ctx} node {nid!r}: requires non-empty 'label' and 'node_type'")
+
+            edges = graph.get("edges")
+            if edges is not None:
+                if not isinstance(edges, list) or not edges:
+                    raise SystemExit(f"{g_ctx}: 'edges' must be a non-empty list")
+                seen_edge_ids: set[str] = set()
+                for edge in edges:
+                    if not isinstance(edge, dict):
+                        raise SystemExit(f"{g_ctx}: each edge must be a mapping")
+                    eid = (edge.get("edge_id") or "").strip() if isinstance(edge.get("edge_id"), str) else ""
+                    if not eid:
+                        raise SystemExit(f"{g_ctx}: edge missing 'edge_id'")
+                    if eid in seen_edge_ids:
+                        raise SystemExit(f"{g_ctx}: duplicate edge_id {eid!r}")
+                    seen_edge_ids.add(eid)
+                    e_ctx = f"{g_ctx} edge {eid!r}"
+                    subj = (edge.get("subject") or "").strip() if isinstance(edge.get("subject"), str) else ""
+                    raw_pred = edge.get("predicate")
+                    pred = (raw_pred or "").strip() if isinstance(raw_pred, str) else ""
+                    obj = (edge.get("object") or "").strip() if isinstance(edge.get("object"), str) else ""
+                    if not subj or not pred or not obj:
+                        raise SystemExit(f"{e_ctx}: requires non-empty 'subject', 'predicate', and 'object'")
+                    if subj == obj:
+                        raise SystemExit(f"{e_ctx}: self-loop subject == object {subj!r} is not allowed")
+                    if nodes is not None:
+                        if subj not in seen_node_ids:
+                            raise SystemExit(
+                                f"{e_ctx}: subject {subj!r} does not reference a defined node_id"
+                            )
+                        if obj not in seen_node_ids:
+                            raise SystemExit(
+                                f"{e_ctx}: object {obj!r} does not reference a defined node_id"
+                            )
+                    ev_list = edge.get("evidence")
+                    if not isinstance(ev_list, list) or not ev_list:
+                        raise SystemExit(f"{e_ctx}: requires non-empty 'evidence' list")
+                    for ev in ev_list:
+                        ref = (
+                            (ev.get("reference") or "").strip()
+                            if isinstance(ev, dict) and isinstance(ev.get("reference"), str)
+                            else ""
+                        )
+                        if not ref:
+                            raise SystemExit(f"{e_ctx}: each evidence item requires non-empty 'reference'")
+
+
 def validate_causal_graph_proteins(
     graphs_by_taxon: dict[str, list[dict[str, Any]]],
     *,
     uniprot_proteins: dict[str, dict[str, str]] | None = None,
     taxa: dict[str, dict[str, str]] | None = None,
+    strains: dict[str, list[dict[str, str]]] | None = None,
 ) -> None:
-    """Validate GENE_OR_PROTEIN nodes against pinned UniProtKB metadata and NCBI Taxonomy lineage."""
+    """Validate GENE_OR_PROTEIN nodes against pinned UniProtKB metadata, NCBI Taxonomy lineage,
+    and BacDive strain inventory."""
+    strain_taxa: dict[str, set[str]] | None = None
+    if strains is not None:
+        strain_taxa = defaultdict(set)
+        for s_tid, s_rows in strains.items():
+            for s_row in s_rows:
+                sid = (s_row.get("strain_id") or "").strip()
+                if sid:
+                    strain_taxa[sid].add(s_tid)
     for tid, graphs in sorted(graphs_by_taxon.items()):
         for graph in graphs:
             gid = graph.get("graph_id", "<unnamed>")
@@ -343,6 +436,12 @@ def validate_causal_graph_proteins(
                 )
                 if not org_tid.startswith("NCBITaxon:"):
                     raise SystemExit(f"{ctx}: GENE_OR_PROTEIN missing valid 'organism_taxon_id'")
+                raw_strain_id = node.get("strain_id")
+                strain_id = ""
+                if raw_strain_id is not None:
+                    strain_id = raw_strain_id.strip() if isinstance(raw_strain_id, str) else ""
+                    if not BACDIVE_STRAIN_ID_PATTERN.match(strain_id):
+                        raise SystemExit(f"{ctx}: GENE_OR_PROTEIN invalid 'strain_id' {raw_strain_id!r}")
                 status = node.get("entry_status")
                 if status not in ("SWISS_PROT", "TREMBL"):
                     raise SystemExit(f"{ctx}: GENE_OR_PROTEIN invalid 'entry_status' {status!r}")
@@ -432,12 +531,32 @@ def validate_causal_graph_proteins(
                             f"{ctx}: organism_taxon_id {org_tid} is not lineage-consistent with {tid}"
                         )
 
+                if strain_id and strain_taxa is not None:
+                    linked_tids = strain_taxa.get(strain_id)
+                    if not linked_tids:
+                        raise SystemExit(
+                            f"{ctx}: strain_id {strain_id!r} is absent from bacdive_strains.tsv"
+                        )
+                    if taxa is not None:
+                        strain_lineage_ok = any(
+                            s_tid in taxa
+                            and _taxa_lineage_compatible(taxa, s_tid, tid)
+                            and _taxa_lineage_compatible(taxa, s_tid, org_tid)
+                            for s_tid in linked_tids
+                        )
+                        if not strain_lineage_ok:
+                            raise SystemExit(
+                                f"{ctx}: strain_id {strain_id!r} (taxa {sorted(linked_tids)}) "
+                                f"is not lineage-consistent with {tid} and {org_tid}"
+                            )
+
 
 def load_causal_graphs(
     path: Path = CAUSAL_GRAPHS_DIR,
     *,
     uniprot_path: Path | None = None,
     taxa: dict[str, dict[str, str]] | None = None,
+    strains: dict[str, list[dict[str, str]]] | None = None,
 ) -> tuple[dict[str, list[dict[str, Any]]], dict[str, list[dict[str, Any]]]]:
     """Read maintained causal-graph overlays from ``curation/causal_graphs/*.yaml``.
 
@@ -484,6 +603,7 @@ def load_causal_graphs(
             if not isinstance(events, list) or any(not isinstance(e, dict) for e in events):
                 raise SystemExit(f"{overlay_file}: 'curation_history' must be a list of event mappings")
             events_by_taxon[identifier] = events
+    validate_causal_graph_structure(graphs_by_taxon)
     resolved_uniprot_path = uniprot_path
     if resolved_uniprot_path is None and UNIPROT_PROTEINS_PATH.exists():
         resolved_uniprot_path = UNIPROT_PROTEINS_PATH
@@ -492,6 +612,7 @@ def load_causal_graphs(
         graphs_by_taxon,
         uniprot_proteins=uniprot_proteins,
         taxa=taxa,
+        strains=strains,
     )
     return graphs_by_taxon, events_by_taxon
 
@@ -540,6 +661,7 @@ def load_inventory() -> Inventory:
     validate_causal_graph_proteins(
         {tid: graphs for tid, graphs in causal_graphs.items() if tid in taxa},
         taxa=taxa,
+        strains=strains,
     )
     return Inventory(taxa, gtdb, lpsn, lpsn_by_taxon, strains, cc_strains, media, gold, madin, bacto,
                      strain_assemblies, strain_genome_records, strain_related_records,
