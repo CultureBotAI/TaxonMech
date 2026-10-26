@@ -585,13 +585,13 @@ def test_committed_curation_causal_graphs_overlays_load_and_validate():
         for g in graphs[tid]
         for e in g.get("edges") or []
     )
-    assert total_edges >= 127
+    assert total_edges >= 161
     edge_count = sum(
         len(g.get("edges") or [])
         for tid in expected_ids
         for g in graphs[tid]
     )
-    assert edge_count == 127
+    assert edge_count == 161
     protein_nodes = [
         n
         for tid in expected_ids
@@ -599,25 +599,31 @@ def test_committed_curation_causal_graphs_overlays_load_and_validate():
         for n in g.get("nodes") or []
         if n.get("node_type") == "GENE_OR_PROTEIN"
     ]
-    assert len(protein_nodes) == 38
+    assert len(protein_nodes) == 51
     expected_uniprot = {
         "UniProtKB:P02920",
         "UniProtKB:P00722",
         "UniProtKB:P03023",
         "UniProtKB:P07464",
+        "UniProtKB:P0ACJ8",
         "UniProtKB:P16497",
         "UniProtKB:P06628",
         "UniProtKB:P06535",
         "UniProtKB:P06534",
+        "UniProtKB:P05043",
+        "UniProtKB:Q08430",
         "UniProtKB:Q9HWH2",
         "UniProtKB:Q9HWG9",
+        "UniProtKB:P0DPB9",
         "UniProtKB:Q58256",
         "UniProtKB:Q58252",
         "UniProtKB:Q58255",
+        "UniProtKB:Q58929",
         "UniProtKB:A0A095C6P1",
         "UniProtKB:A0A095CIC4",
         "UniProtKB:Q55P57",
         "UniProtKB:J9VY90",
+        "UniProtKB:J9VQZ4",
     }
     assert {n["grounding"] for n in protein_nodes} == expected_uniprot
     for n in protein_nodes:
@@ -629,7 +635,7 @@ def test_committed_curation_causal_graphs_overlays_load_and_validate():
         assert isinstance(n.get("sequence_crc64"), str) and len(n["sequence_crc64"]) == 16
         assert isinstance(n.get("sequence_version"), int) and n["sequence_version"] >= 1
         assert n.get("entry_status") in ("SWISS_PROT", "TREMBL")
-    assert sum(1 for n in protein_nodes if n.get("proteome_id")) == 36
+    assert sum(1 for n in protein_nodes if n.get("proteome_id")) == 49
 
 
 def test_uniprot_proteins_catalog_and_lineage_validator():
@@ -637,7 +643,7 @@ def test_uniprot_proteins_catalog_and_lineage_validator():
     rejection of unpinned accessions, checksum/length/locus mismatches, and cross-species
     organism_taxon_id bindings (#78 / taxonmech-infra-0003)."""
     proteins = load_uniprot_proteins(UNIPROT_PROTEINS_PATH)
-    assert len(proteins) == 17
+    assert len(proteins) == 23
     for uid, row in proteins.items():
         assert uid.startswith("UniProtKB:")
         assert tuple(row.keys()) == UNIPROT_PROTEIN_FIELDS

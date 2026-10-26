@@ -13,6 +13,21 @@ causal_graphs:
     label: Methanocaldococcus jannaschii DSM 2661
     node_type: TAXON
     grounding: NCBITaxon:243232
+  - node_id: mer
+    label: 5,10-methylenetetrahydromethanopterin reductase (mer)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:Q58929
+    xrefs:
+    - EC:1.5.98.2
+    organism_taxon_id: NCBITaxon:243232
+    strain_id: kgmicrobe.strain:bacdive_6981
+    proteome_id: UP:UP000000805
+    gene_symbol: mer
+    locus_tag: MJ1534
+    sequence_length: 331
+    sequence_crc64: 367B5DFD1EB6EBBD
+    sequence_version: 2
+    entry_status: SWISS_PROT
   - node_id: mcrA
     label: Methyl-coenzyme M reductase I subunit alpha (mcrA)
     node_type: GENE_OR_PROTEIN
@@ -183,6 +198,39 @@ causal_graphs:
         Gamma subunit McrG (UniProtKB:Q58255) lines the coenzyme M and coenzyme B
         binding pocket of the methyl-coenzyme M reductase complex in
         methanogenesis.
+  - edge_id: e12
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: mer
+    evidence:
+    - reference: PMID:8688087
+      notes: >-
+        Complete genome sequence of Methanocaldococcus jannaschii DSM 2661
+        identifying mer (MJ1534) encoding coenzyme F420-dependent
+        N5,N10-methylenetetrahydromethanopterin reductase.
+    - reference: PMID:28644554
+      notes: >-
+        Purification and characterization of native and recombinant
+        Methanocaldococcus jannaschii DSM 2661
+        N5,N10-methylenetetrahydromethanopterin reductase (Mer, MJ1534).
+  - edge_id: e13
+    subject: mer
+    predicate: causally upstream of or within
+    predicate_id: RO:0002418
+    object: methanogenesis
+    evidence:
+    - reference: PMID:28644554
+      notes: >-
+        Coenzyme F420-dependent 5,10-methylenetetrahydromethanopterin reductase
+        Mer (EC:1.5.98.2, UniProtKB:Q58929) catalyzes reduction of
+        N5,N10-methylenetetrahydromethanopterin to
+        N5-methyltetrahydromethanopterin in the central C1-reduction pathway of
+        hydrogenotrophic methanogenesis upstream of methyl-coenzyme M reduction.
+    - reference: PMID:8688087
+      notes: >-
+        Genomic reconstruction of the Methanocaldococcus jannaschii DSM 2661
+        hydrogenotrophic methanogenesis pathway from CO2 and H2 to methane.
 curation_history:
 - timestamp: '2026-10-22T14:00:00Z'
   curator: curate-causal-graphs
@@ -211,4 +259,14 @@ curation_history:
     RO:0002418 methanogenesis, PMID:9367957) linking the heterohexameric
     methyl-coenzyme M reductase subunits (UniProtKB:Q58256, UniProtKB:Q58252,
     UniProtKB:Q58255) to methanogenesis (GO:0015948).
+  llm_assisted: true
+- timestamp: '2026-10-26T03:35:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: >-
+    Added live-verified Swiss-Prot entry UniProtKB:Q58929 (MER_METJA, mer /
+    MJ1534, EC:1.5.98.2, 331 aa, CRC64 367B5DFD1EB6EBBD, v2) in reference
+    proteome UP:UP000000805 with literature-backed expression and C1-reduction
+    pathway edges in hydrogenotrophic methanogenesis (PMID:8688087,
+    PMID:28644554).
   llm_assisted: true

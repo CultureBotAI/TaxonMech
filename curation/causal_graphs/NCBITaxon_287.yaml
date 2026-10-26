@@ -14,6 +14,21 @@ causal_graphs:
     label: Pseudomonas aeruginosa
     node_type: TAXON
     grounding: NCBITaxon:287
+  - node_id: phzD1
+    label: Phenazine biosynthesis protein PhzD1 (phzD1)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:P0DPB9
+    xrefs:
+    - EC:3.3.2.15
+    organism_taxon_id: NCBITaxon:208964
+    strain_id: kgmicrobe.strain:bacdive_12795
+    proteome_id: UP:UP000002438
+    gene_symbol: phzD1
+    locus_tag: PA4213
+    sequence_length: 207
+    sequence_crc64: 37F33F086022F527
+    sequence_version: 1
+    entry_status: SWISS_PROT
   - node_id: phzM
     label: Phenazine-1-carboxylate N-methyltransferase (phzM)
     node_type: GENE_OR_PROTEIN
@@ -113,6 +128,38 @@ causal_graphs:
       notes: >-
         Combined action of PhzM and PhzS in the phenazine biosynthetic pathway
         produces the blue-green redox-active phenazine pigment pyocyanin.
+  - edge_id: e6
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: phzD1
+    evidence:
+    - reference: PMID:10984043
+      notes: >-
+        Complete genome sequence of Pseudomonas aeruginosa PAO1 identifying
+        phzD1 (PA4213) within the core phzA1-G1 phenazine biosynthetic operon.
+    - reference: PMID:11591691
+      notes: >-
+        Functional characterization of the duplicated core phenazine
+        biosynthetic operons phzA1-G1 and phzA2-G2 in Pseudomonas aeruginosa
+        PAO1.
+  - edge_id: e7
+    subject: phzD1
+    predicate: causally upstream of or within
+    predicate_id: RO:0002418
+    object: phenazine_biosynthesis
+    evidence:
+    - reference: PMID:12741825
+      notes: >-
+        Crystal structure and mechanism of Pseudomonas aeruginosa PhzD
+        isochorismatase (EC:3.3.2.15) catalyzing hydrolysis of the vinyl ether
+        of 2-amino-2-deoxyisochorismate to pyruvate and
+        trans-2,3-dihydro-3-hydroxyanthranilic acid in phenazine biosynthesis.
+    - reference: PMID:11591691
+      notes: >-
+        Core phenazine biosynthetic enzymes encoded by phzA1-G1 synthesize
+        phenazine-1-carboxylic acid upstream of PhzM/PhzS-mediated pyocyanin
+        formation.
 curation_history:
 - timestamp: '2026-10-22T14:00:00Z'
   curator: curate-causal-graphs
@@ -139,4 +186,14 @@ curation_history:
     live-verified Mavrodi et al. 2001 (PMID:11591691) and added UniProtKB-indexed
     structural/functional references for PhzM (PMID:17253782) and PhzS
     (PMID:18416536).
+  llm_assisted: true
+- timestamp: '2026-10-26T03:35:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: >-
+    Added live-verified Swiss-Prot entry UniProtKB:P0DPB9 (PHZD1_PSEAE, phzD1 /
+    PA4213, EC:3.3.2.15, 207 aa, CRC64 37F33F086022F527, v1) in reference
+    proteome UP:UP000002438 with literature-backed core phenazine operon
+    expression and isochorismatase biosynthetic edges (PMID:10984043,
+    PMID:11591691, PMID:12741825).
   llm_assisted: true
