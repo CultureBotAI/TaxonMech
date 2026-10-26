@@ -52,10 +52,12 @@ tasks:
       Stage 3 (PR #163), adding validate_causal_graph_structure() (node_id/edge_id
       uniqueness, edge endpoint referential integrity, non-self-loop edges, and required
       evidence references) plus scripts/check_provenance.py integration in Cycle 3 Stage 6
-      (PR #178), and enriching the 15 overlays from 110 to 127 evidence-backed edges with
-      direct enzyme/sensor-kinase-to-process RO:0002418 causal edges in Cycle 4 Stage 2;
-      umbrella issue #78 remains open pending companion task taxonmech-infra-0002 for
-      corpus-wide raw trait extraction and bulk overlay expansion
+      (PR #178), enriching the 15 overlays from 110 to 127 evidence-backed edges with
+      direct enzyme/sensor-kinase-to-process RO:0002418 causal edges in Cycle 4 Stage 2
+      (PR #181), and expanding the 15 overlays to 161 evidence-backed edges and 51
+      GENE_OR_PROTEIN nodes across 23 live-verified UniProtKB accessions in Cycle 4
+      Stage 3; umbrella issue #78 remains open pending companion task
+      taxonmech-infra-0002 for corpus-wide raw trait extraction and bulk overlay expansion
   - task_id: taxonmech-infra-0002
     summary: >-
       Extend src/taxonmech/extract.py to preserve granular per-taxon trait, substrate, habitat,
@@ -86,8 +88,12 @@ tasks:
       nodes in 15 maintained overlays (PR #163), and Cycle 3 Stage 6 registration of
       uniprot_proteins in conf/sources.yaml plus GENE_OR_PROTEIN strain_id format, BacDive
       strain inventory membership, and record/organism lineage-consistency validation in
-      validate_causal_graph_proteins(); full corpus-wide data/raw/ UniProt Reference Proteomes
-      bulk snapshot remains deferred under #78
+      validate_causal_graph_proteins() (PR #178), and Cycle 4 Stage 3 expansion of
+      curation/uniprot_proteins.tsv from 17 to 23 live-verified UniProtKB accessions
+      (21 Swiss-Prot, 2 TrEMBL) across 51 GENE_OR_PROTEIN nodes (49 with reference
+      proteome_id, 2 without on C. deneoformans B-3501A) in 15 maintained overlays;
+      full corpus-wide data/raw/ UniProt Reference Proteomes bulk snapshot remains
+      deferred under #78
   - task_id: taxonmech-infra-0004
     summary: >-
       Pin reproducible upstream kg-microbe edge-multiplicity provenance and document or align
@@ -111,7 +117,7 @@ tasks:
 
 - **Origin**: `run_id: mech-goal-sequence-20261019`, `cycle: 1`, `stage: 2` (`causal_graphs`)
 - **Status**: `deferred` (`issue_url`: https://github.com/CultureBotAI/TaxonMech/issues/78)
-- **Disposition**: Deferred to Cycle 4 under open umbrella issue `#78` after landing repository-local pipeline in `mech-goal-sequence-20261019` Cycle 1 Stage 6 PR `#152` (`src/taxonmech/seed.py`, `scripts/verify_corpus.py`, `src/taxonmech/schema/taxonmech.yaml`, `conf/id_label_targets.yaml`, `curation/causal_graphs/README.md`, `tests/test_causal_graph_overlays.py`), seeding 10 maintained production overlays in Cycle 2 Stage 2 PR `#155`, expanding to 15 maintained production overlays in Cycle 2 Stage 3 PR `#156`, wiring `load_uniprot_proteins()` and `validate_causal_graph_proteins()` into `load_causal_graphs()` and `load_inventory()` in Cycle 2 Stage 6 PR `#160`, enriching the 15 maintained overlays from 83 to 88 evidence-backed edges in Cycle 3 Stage 2 PR `#162`, to 110 evidence-backed edges and 38 `GENE_OR_PROTEIN` nodes across 17 live-verified UniProtKB accessions in Cycle 3 Stage 3 PR `#163`, adding `validate_causal_graph_structure()` (`node_id`/`edge_id` uniqueness, edge endpoint referential integrity, non-self-loop edges, and required evidence references) plus `scripts/check_provenance.py` integration in Cycle 3 Stage 6 PR `#178`, and enriching the 15 maintained overlays from 110 to 127 evidence-backed edges with direct enzyme/sensor-kinase-to-process `RO:0002418` causal edges in Cycle 4 Stage 2; umbrella issue `#78` remains open pending companion task `taxonmech-infra-0002` for corpus-wide raw trait extraction and bulk overlay expansion.
+- **Disposition**: Deferred to Cycle 4 under open umbrella issue `#78` after landing repository-local pipeline in `mech-goal-sequence-20261019` Cycle 1 Stage 6 PR `#152` (`src/taxonmech/seed.py`, `scripts/verify_corpus.py`, `src/taxonmech/schema/taxonmech.yaml`, `conf/id_label_targets.yaml`, `curation/causal_graphs/README.md`, `tests/test_causal_graph_overlays.py`), seeding 10 maintained production overlays in Cycle 2 Stage 2 PR `#155`, expanding to 15 maintained production overlays in Cycle 2 Stage 3 PR `#156`, wiring `load_uniprot_proteins()` and `validate_causal_graph_proteins()` into `load_causal_graphs()` and `load_inventory()` in Cycle 2 Stage 6 PR `#160`, enriching the 15 maintained overlays from 83 to 88 evidence-backed edges in Cycle 3 Stage 2 PR `#162`, to 110 evidence-backed edges and 38 `GENE_OR_PROTEIN` nodes across 17 live-verified UniProtKB accessions in Cycle 3 Stage 3 PR `#163`, adding `validate_causal_graph_structure()` (`node_id`/`edge_id` uniqueness, edge endpoint referential integrity, non-self-loop edges, and required evidence references) plus `scripts/check_provenance.py` integration in Cycle 3 Stage 6 PR `#178`, enriching the 15 maintained overlays from 110 to 127 evidence-backed edges with direct enzyme/sensor-kinase-to-process `RO:0002418` causal edges in Cycle 4 Stage 2 PR `#181`, and expanding the 15 maintained overlays to 161 evidence-backed edges and 51 `GENE_OR_PROTEIN` nodes across 23 live-verified UniProtKB accessions in Cycle 4 Stage 3; umbrella issue `#78` remains open pending companion task `taxonmech-infra-0002` for corpus-wide raw trait extraction and bulk overlay expansion.
 - **Priority**: `high`
 - **Dependencies**: None
 - **Observation**:
@@ -157,7 +163,7 @@ tasks:
 
 - **Origin**: `run_id: mech-goal-sequence-20261019`, `cycle: 1`, `stage: 3` (`protein_examples`)
 - **Status**: `deferred` (`issue_url`: https://github.com/CultureBotAI/TaxonMech/issues/78)
-- **Disposition**: Deferred to Cycle 4 under open umbrella issue `#78` after schema/prefix implementation in Cycle 1 Stage 6 (PR `#152`), live-verified UniProtKB curation in Cycle 2 Stage 3 (PR `#156`), offline catalog + lineage validator implementation in Cycle 2 Stage 6 (PR `#160`), Cycle 3 Stage 3 expansion of release-pinned `curation/uniprot_proteins.tsv` (UniProt release `2026_02`) from 13 to 17 live-verified UniProtKB accessions (15 Swiss-Prot, 2 TrEMBL) across 38 `GENE_OR_PROTEIN` nodes (36 with reference `proteome_id`, 2 without on *Cryptococcus deneoformans* B-3501A) in 15 maintained overlays (PR `#163`), and Cycle 3 Stage 6 registration of `uniprot_proteins` in `conf/sources.yaml` plus `GENE_OR_PROTEIN` `strain_id` format, BacDive strain inventory membership, and record/organism lineage-consistency validation in `validate_causal_graph_proteins()`; full corpus-wide `data/raw/` UniProt Reference Proteomes bulk snapshot remains deferred under `#78`.
+- **Disposition**: Deferred to Cycle 4 under open umbrella issue `#78` after schema/prefix implementation in Cycle 1 Stage 6 (PR `#152`), live-verified UniProtKB curation in Cycle 2 Stage 3 (PR `#156`), offline catalog + lineage validator implementation in Cycle 2 Stage 6 (PR `#160`), Cycle 3 Stage 3 expansion of release-pinned `curation/uniprot_proteins.tsv` (UniProt release `2026_02`) from 13 to 17 live-verified UniProtKB accessions (15 Swiss-Prot, 2 TrEMBL) across 38 `GENE_OR_PROTEIN` nodes (36 with reference `proteome_id`, 2 without on *Cryptococcus deneoformans* B-3501A) in 15 maintained overlays (PR `#163`), Cycle 3 Stage 6 registration of `uniprot_proteins` in `conf/sources.yaml` plus `GENE_OR_PROTEIN` `strain_id` format, BacDive strain inventory membership, and record/organism lineage-consistency validation in `validate_causal_graph_proteins()` (PR `#178`), and Cycle 4 Stage 3 expansion of `curation/uniprot_proteins.tsv` from 17 to 23 live-verified UniProtKB accessions (21 Swiss-Prot, 2 TrEMBL) across 51 `GENE_OR_PROTEIN` nodes (49 with reference `proteome_id`, 2 without on *Cryptococcus deneoformans* B-3501A) in 15 maintained overlays; full corpus-wide `data/raw/` UniProt Reference Proteomes bulk snapshot remains deferred under `#78`.
 - **Priority**: `high`
 - **Dependencies**: `taxonmech-infra-0001`
 - **Observation**:

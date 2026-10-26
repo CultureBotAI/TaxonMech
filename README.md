@@ -132,7 +132,7 @@ searches. Source licences and citations are published on the
 |  |  | | PATHOGROUP | 6 | |  |  |
 |  |  | | CLADE | 3 | |  |  |
 
-These records contain 106,294 BacDive strain classifications and 106,294 listed strain occurrences, representing 100,745 distinct listed strains. Species and descendant records can list the same strain; 0 records cap their listing. 20648 records list a type strain, 21254 carry an LPSN correct name, 117809 map to GTDB (324,404,579 genomes summed across record attestations, not deduplicated), and 15 carry causal graphs (127 evidence-backed edges).
+These records contain 106,294 BacDive strain classifications and 106,294 listed strain occurrences, representing 100,745 distinct listed strains. Species and descendant records can list the same strain; 0 records cap their listing. 20648 records list a type strain, 21254 carry an LPSN correct name, 117809 map to GTDB (324,404,579 genomes summed across record attestations, not deduplicated), and 15 carry causal graphs (161 evidence-backed edges).
 
 **21,071 listed strains have genome identifier links.** Coverage below is deduplicated across records, with NCBI assemblies first:
 

@@ -27,6 +27,20 @@ causal_graphs:
     sequence_crc64: CACD3577C439C6C2
     sequence_version: 1
     entry_status: SWISS_PROT
+  - node_id: lac2
+    label: Laccase-2 (LAC2)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:J9VQZ4
+    xrefs:
+    - EC:1.10.3.2
+    organism_taxon_id: NCBITaxon:235443
+    proteome_id: UP:UP000010091
+    gene_symbol: LAC2
+    locus_tag: CNAG_03464
+    sequence_length: 594
+    sequence_crc64: E71D60C20BD6C102
+    sequence_version: 2
+    entry_status: SWISS_PROT
   - node_id: laccase_activity
     label: hydroquinone:oxygen oxidoreductase activity
     node_type: MOLECULAR_FUNCTION
@@ -83,6 +97,51 @@ causal_graphs:
         compromises melanin production, establishing Lac1 as the primary
         diphenol oxidase driving cell-wall melanin biosynthesis in
         Cryptococcus neoformans.
+  - edge_id: e5
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: lac2
+    evidence:
+    - reference: PMID:24743168
+      notes: >-
+        Reference genome and transcriptome assembly of Cryptococcus neoformans
+        var. grubii strain H99 identifying LAC2 (CNAG_03464) adjacent to LAC1
+        on chromosome 4.
+    - reference: PMID:15643075
+      notes: >-
+        Characterization of Cryptococcus neoformans LAC2 (CNAG_03464) encoded
+        8 kb adjacent to LAC1 and differentially expressed under oxidative and
+        glucose-starvation conditions.
+  - edge_id: e6
+    subject: lac2
+    predicate: enables
+    predicate_id: RO:0002327
+    object: laccase_activity
+    evidence:
+    - reference: PMID:15643075
+      notes: >-
+        Cryptococcus neoformans Lac2 (UniProtKB:J9VQZ4, EC:1.10.3.2) is a
+        functional copper-dependent diphenol oxidase (laccase) paralogous to
+        Lac1.
+    - reference: PMID:15381117
+      notes: >-
+        Comparative analysis of the Cryptococcus neoformans laccase gene family
+        establishing diphenol oxidase activity for both Lac1 and Lac2.
+  - edge_id: e7
+    subject: lac2
+    predicate: causally upstream of or within
+    predicate_id: RO:0002418
+    object: melanin_biosynthesis
+    evidence:
+    - reference: PMID:15643075
+      notes: >-
+        LAC2 encodes a second functional laccase that contributes to catecholamine
+        oxidation and melanin biosynthesis in Cryptococcus neoformans.
+    - reference: PMID:15643074
+      notes: >-
+        cAMP-dependent signaling co-regulates transcription of the Cryptococcus
+        neoformans melanin biosynthesis genes LAC1 and LAC2.
 curation_history:
 - timestamp: '2026-10-22T18:50:00Z'
   curator: add-uniprot-protein-examples
@@ -101,4 +160,14 @@ curation_history:
     Added direct enzyme-to-process causal edge (edge e4, lac1 RO:0002418
     melanin_biosynthesis, PMID:15381117) linking Laccase-1 (UniProtKB:J9VY90)
     to the melanin biosynthetic process (GO:0042438).
+  llm_assisted: true
+- timestamp: '2026-10-26T03:35:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: >-
+    Added live-verified Swiss-Prot entry UniProtKB:J9VQZ4 (LAC2_CRYN9, LAC2 /
+    CNAG_03464, EC:1.10.3.2, 594 aa, CRC64 E71D60C20BD6C102, v2) in reference
+    proteome UP:UP000010091 with literature-backed expression, diphenol oxidase
+    activity, and melanin biosynthesis edges (PMID:24743168, PMID:15643075,
+    PMID:15381117, PMID:15643074).
   llm_assisted: true
