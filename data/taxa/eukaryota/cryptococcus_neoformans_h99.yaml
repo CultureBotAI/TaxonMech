@@ -81,6 +81,13 @@ curation_history:
     624 aa, CRC64 CACD3577C439C6C2, v1, NCBITaxon:235443, UP:UP000010091) via maintained
     curation/causal_graphs/NCBITaxon_235443.yaml overlay.
   llm_assisted: true
+- timestamp: '2026-10-25T23:05:00Z'
+  curator: curate-causal-graphs
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: Added direct enzyme-to-process causal edge (edge e4, lac1 RO:0002418 melanin_biosynthesis,
+    PMID:15381117) linking Laccase-1 (UniProtKB:J9VY90) to the melanin biosynthetic
+    process (GO:0042438).
+  llm_assisted: true
 causal_graphs:
 - graph_id: melanin_biosynthesis
   title: Lac1-mediated melanin biosynthesis
@@ -146,3 +153,13 @@ causal_graphs:
     - reference: PMID:15381117
       notes: Lac1-catalyzed oxidation of exogenous catecholamines synthesizes cell-wall
         melanin that protects Cryptococcus neoformans H99 from oxidative host defenses.
+  - edge_id: e4
+    subject: lac1
+    predicate: causally upstream of or within
+    predicate_id: RO:0002418
+    object: melanin_biosynthesis
+    evidence:
+    - reference: PMID:15381117
+      notes: Disruption of LAC1 (CNAG_03465, UniProtKB:J9VY90) drastically compromises
+        melanin production, establishing Lac1 as the primary diphenol oxidase driving
+        cell-wall melanin biosynthesis in Cryptococcus neoformans.
