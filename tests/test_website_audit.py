@@ -100,3 +100,74 @@ def test_official_resolvers_preserve_identifier_suffixes(audited_site):
     assert renderer.curie_url("lpsn:777826") == "https://lpsn.dsmz.de/taxon/777826"
     assert renderer.curie_url("lpsn:unresolved") is None
     assert 'href="https://lpsn.dsmz.de/taxon/777826"' in rendered_taxon(output, "NCBITaxon:2173")
+
+
+def test_embedding_map_waits_for_deferred_gzip_loader(audited_site):
+    import shutil
+    import subprocess
+
+    if shutil.which("node") is None:
+        pytest.skip("Node is needed for browser execution")
+    _, output = audited_site
+    html = (output / "map.html").read_text()
+    inline_script = re.search(r"<script>\s*(\(\(\)\s*=>[\s\S]*?)\s*</script>", html).group(1)
+    harness = r"""
+const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const path = require("node:path");
+const vm = require("node:vm");
+const siteDir = process.argv[1];
+const inlineScript = process.argv[2];
+class Node {
+  constructor(tag = "DIV") {
+    this.tagName = tag; this.children = []; this.events = {}; this.value = "";
+    this.style = {}; this.dataset = {}; this.width = 820; this.height = 580;
+  }
+  append(...items) { this.children.push(...items); }
+  replaceChildren(...items) { this.children = items; }
+  addEventListener(name, fn) { this.events[name] = fn; }
+  getContext() {
+    return {clearRect() {}, beginPath() {}, arc() {}, fill() {}, stroke() {}};
+  }
+}
+const nodes = new Map();
+const get = id => {
+  if (!nodes.has(id)) nodes.set(id, new Node(id === "map-search" ? "INPUT" : "DIV"));
+  return nodes.get(id);
+};
+get("map-color").value = "domain";
+const winEvents = {};
+global.document = {
+  getElementById: get,
+  querySelectorAll: () => [],
+  createElement: tag => new Node(tag.toUpperCase())
+};
+global.window = global;
+global.location = {search: "", pathname: "/TaxonMech/pages/map.html"};
+global.history = {replaceState() {}};
+global.addEventListener = (name, fn) => { winEvents[name] = fn; };
+global.fetch = async rel => new Response(fs.readFileSync(path.join(siteDir, rel)));
+
+// 1. Inline script in <body> runs synchronously BEFORE deferred <head> scripts execute
+vm.runInThisContext(inlineScript);
+assert.equal(typeof winEvents.DOMContentLoaded, "function");
+assert.equal(global.TaxonMechData, undefined);
+
+// 2. Deferred <head> scripts run after HTML parsing completes, before DOMContentLoaded
+global.fflate = require(path.join(siteDir, "vendor/fflate-0.8.2.js"));
+vm.runInThisContext(fs.readFileSync(path.join(siteDir, "compressed-data.js"), "utf8"));
+assert.equal(typeof global.TaxonMechData.loadJSON, "function");
+
+// 3. DOMContentLoaded fires and loads corpus_map.json.gz
+winEvents.DOMContentLoaded();
+(async () => {
+  for (let i = 0; i < 20 && !get("map-status").textContent; i++) {
+    await new Promise(resolve => setTimeout(resolve, 10));
+  }
+  assert.equal(get("map-status").textContent, "2 of 2 embedded taxa shown.");
+})().catch(err => { console.error(err); process.exitCode = 1; });
+"""
+    result = subprocess.run(
+        ["node", "-e", harness, str(output), inline_script], capture_output=True, text=True
+    )
+    assert result.returncode == 0, result.stderr
