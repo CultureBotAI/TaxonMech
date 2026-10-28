@@ -505,7 +505,13 @@ def verify_shard_bundles(
             rel_inp = inp["path"]
             if rel_inp not in sha_cache:
                 inp_file = root / rel_inp
-                if not inp_file.is_file() or inp_file.is_symlink():
+                # A symlink is accepted only when it resolves inside the
+                # repository: CLAUDE.md and .agents/skills are links to
+                # AGENTS.md and .claude/skills (agent infrastructure contract).
+                if not inp_file.is_file() or (
+                    inp_file.is_symlink()
+                    and not inp_file.resolve().is_relative_to(root.resolve())
+                ):
                     raise ValueError(
                         f"bundle {bundle_yaml} references missing input {rel_inp}"
                     )
