@@ -312,15 +312,26 @@
     draw();
   });
 
-  window.TaxonMechData.loadJSON(root + "corpus_map.json.gz").then(payload => {
-    points = (payload.points || []).map(p => ({
-      ...p,
-      _search: [p.id, p.label, p.domain, p.rank, ...(p.sources || [])].join(" ").toLowerCase()
-    }));
-    draw();
-  }).catch(() => {
-    statusEl.textContent = "Embedding map data could not be loaded.";
-  });
+  function loadMap() {
+    if (!window.TaxonMechData || typeof window.TaxonMechData.loadJSON !== "function") {
+      statusEl.textContent = "Embedding map data could not be loaded.";
+      return;
+    }
+    window.TaxonMechData.loadJSON(root + "corpus_map.json.gz").then(payload => {
+      points = (payload.points || []).map(p => ({
+        ...p,
+        _search: [p.id, p.label, p.domain, p.rank, ...(p.sources || [])].join(" ").toLowerCase()
+      }));
+      draw();
+    }).catch(() => {
+      statusEl.textContent = "Embedding map data could not be loaded.";
+    });
+  }
+  if (window.TaxonMechData && typeof window.TaxonMechData.loadJSON === "function") {
+    loadMap();
+  } else {
+    window.addEventListener("DOMContentLoaded", loadMap, {once: true});
+  }
 })();
 </script>
 {% endblock %}
