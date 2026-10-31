@@ -13,6 +13,12 @@ from linkml_runtime.utils.schemaview import SchemaView
 
 from taxonmech.extract import TRAIT_EDGE_FIELDS, extract_taxon_trait_edges
 from taxonmech.seed import (
+    CAUSAL_NODE_TYPES,
+    CURIE_PATTERN,
+    EC_NUMBER_PATTERN,
+    EDGE_ID_PATTERN,
+    EVIDENCE_REFERENCE_PATTERN,
+    PROTEIN_ONLY_NODE_SLOTS,
     UNIPROT_PROTEIN_FIELDS,
     UNIPROT_PROTEINS_PATH,
     Concept,
@@ -946,7 +952,7 @@ def test_validate_causal_graph_structure_and_sources_catalog():
                 "graph_id": "g1",
                 "nodes": [
                     {"node_id": "n1", "label": "Node 1", "node_type": "PATHWAY"},
-                    {"node_id": "n2", "label": "Node 2", "node_type": "PHENOTYPE"},
+                    {"node_id": "n2", "label": "Node 2", "node_type": "TRAIT"},
                 ],
                 "edges": [
                     {
@@ -962,6 +968,362 @@ def test_validate_causal_graph_structure_and_sources_catalog():
     }
     with pytest.raises(SystemExit, match="each evidence item requires non-empty 'reference'"):
         validate_causal_graph_structure(missing_ev)
+
+
+def test_validate_causal_graph_node_edge_and_protein_ec_invariants(tmp_path):
+    """Verify Cycle 4 Stage 6 (#189) invariants across validate_causal_graph_structure,
+    load_uniprot_proteins, and validate_causal_graph_proteins."""
+    sv = SchemaView(str(SCHEMA_PATH))
+    enum_values = set(sv.get_enum("CausalNodeTypeEnum").permissible_values.keys())
+    assert enum_values == CAUSAL_NODE_TYPES
+    assert PROTEIN_ONLY_NODE_SLOTS == (
+        "organism_taxon_id",
+        "strain_id",
+        "proteome_id",
+        "gene_symbol",
+        "locus_tag",
+        "sequence_length",
+        "sequence_crc64",
+        "sequence_version",
+        "entry_status",
+    )
+    assert CURIE_PATTERN.match("GO:0006099")
+    assert EDGE_ID_PATTERN.match("edge-1")
+    assert EC_NUMBER_PATTERN.match("EC:2.8.4.1")
+    assert EC_NUMBER_PATTERN.match("EC:2.8.4.-")
+    assert EVIDENCE_REFERENCE_PATTERN.match("PMID:12345")
+    assert EVIDENCE_REFERENCE_PATTERN.match("DOI:10.1099/ijsem.0.001")
+
+    # 1. Invalid node_type
+    bad_node_type = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [{"node_id": "n1", "label": "Node 1", "node_type": "PHENOTYPE"}],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="invalid node_type 'PHENOTYPE'"):
+        validate_causal_graph_structure(bad_node_type)
+
+    # 2. Protein-only slot on non-GENE_OR_PROTEIN node
+    bad_protein_slot = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {
+                        "node_id": "n1",
+                        "label": "Pathway",
+                        "node_type": "PATHWAY",
+                        "gene_symbol": "tnaA",
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(
+        SystemExit,
+        match=r"non-GENE_OR_PROTEIN node \(PATHWAY\) cannot declare \['gene_symbol'\]",
+    ):
+        validate_causal_graph_structure(bad_protein_slot)
+
+    # 3. Invalid grounding CURIE
+    bad_grounding = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {
+                        "node_id": "n1",
+                        "label": "Pathway",
+                        "node_type": "PATHWAY",
+                        "grounding": "not a curie",
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="invalid 'grounding' CURIE 'not a curie'"):
+        validate_causal_graph_structure(bad_grounding)
+
+    # 4. TAXON node without NCBITaxon: grounding
+    bad_taxon_grounding = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {
+                        "node_id": "n1",
+                        "label": "Taxon node",
+                        "node_type": "TAXON",
+                        "grounding": "GO:0008150",
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="TAXON grounding must start with 'NCBITaxon:'"):
+        validate_causal_graph_structure(bad_taxon_grounding)
+
+    # 5. Duplicate xrefs or xref duplicating grounding
+    dup_xref = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {
+                        "node_id": "n1",
+                        "label": "Pathway",
+                        "node_type": "PATHWAY",
+                        "grounding": "GO:0006569",
+                        "xrefs": ["GO:0006569"],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="duplicate xref 'GO:0006569'"):
+        validate_causal_graph_structure(dup_xref)
+
+    # 6. Invalid edge_id or predicate_id CURIE
+    bad_edge_id = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {"node_id": "n1", "label": "Node 1", "node_type": "PATHWAY"},
+                    {"node_id": "n2", "label": "Node 2", "node_type": "CHEMICAL"},
+                ],
+                "edges": [
+                    {
+                        "edge_id": "1bad_edge",
+                        "subject": "n1",
+                        "predicate": "produces",
+                        "object": "n2",
+                        "evidence": [{"reference": "PMID:1"}],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="invalid edge_id '1bad_edge'"):
+        validate_causal_graph_structure(bad_edge_id)
+
+    bad_pred_id = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {"node_id": "n1", "label": "Node 1", "node_type": "PATHWAY"},
+                    {"node_id": "n2", "label": "Node 2", "node_type": "CHEMICAL"},
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "n1",
+                        "predicate": "produces",
+                        "predicate_id": "invalid predicate id",
+                        "object": "n2",
+                        "evidence": [{"reference": "PMID:1"}],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="invalid 'predicate_id' CURIE"):
+        validate_causal_graph_structure(bad_pred_id)
+
+    # 7. Duplicate parallel edge (subject, predicate_id or predicate, object)
+    dup_triple = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {"node_id": "n1", "label": "Node 1", "node_type": "PATHWAY"},
+                    {"node_id": "n2", "label": "Node 2", "node_type": "CHEMICAL"},
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "n1",
+                        "predicate": "produces",
+                        "predicate_id": "RO:0002234",
+                        "object": "n2",
+                        "evidence": [{"reference": "PMID:1"}],
+                    },
+                    {
+                        "edge_id": "e2",
+                        "subject": "n1",
+                        "predicate": "has output",
+                        "predicate_id": "RO:0002234",
+                        "object": "n2",
+                        "evidence": [{"reference": "PMID:2"}],
+                    },
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="duplicate parallel edge"):
+        validate_causal_graph_structure(dup_triple)
+
+    # 8. Invalid or duplicate evidence reference
+    bad_ev_ref = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {"node_id": "n1", "label": "Node 1", "node_type": "PATHWAY"},
+                    {"node_id": "n2", "label": "Node 2", "node_type": "CHEMICAL"},
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "n1",
+                        "predicate": "produces",
+                        "object": "n2",
+                        "evidence": [{"reference": "not-a-curie"}],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="invalid evidence reference 'not-a-curie'"):
+        validate_causal_graph_structure(bad_ev_ref)
+
+    dup_ev_ref = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {"node_id": "n1", "label": "Node 1", "node_type": "PATHWAY"},
+                    {"node_id": "n2", "label": "Node 2", "node_type": "CHEMICAL"},
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "n1",
+                        "predicate": "produces",
+                        "object": "n2",
+                        "evidence": [{"reference": "PMID:1"}, {"reference": "PMID:1"}],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="duplicate evidence reference 'PMID:1'"):
+        validate_causal_graph_structure(dup_ev_ref)
+
+    # 9. load_uniprot_proteins required descriptive fields and EC number format
+    header = "\t".join(UNIPROT_PROTEIN_FIELDS)
+    missing_gene_and_locus = tmp_path / "missing_gene_locus.tsv"
+    missing_gene_and_locus.write_text(
+        f"{header}\n"
+        "UniProtKB:P0A853\tTNAA_ECOLI\tSWISS_PROT\tTryptophanase\t"
+        "NCBITaxon:83333\tEscherichia coli (strain K12)\tUP:UP000000625\t\t\t"
+        "EC:4.1.99.1\t471\tC6ECAD1DC1AA5B26\t2\t2026_01\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(SystemExit, match="requires gene_symbol or locus_tag"):
+        load_uniprot_proteins(missing_gene_and_locus)
+
+    bad_ec_tsv = tmp_path / "bad_ec.tsv"
+    bad_ec_tsv.write_text(
+        f"{header}\n"
+        "UniProtKB:P0A853\tTNAA_ECOLI\tSWISS_PROT\tTryptophanase\t"
+        "NCBITaxon:83333\tEscherichia coli (strain K12)\tUP:UP000000625\ttnaA\tb3708\t"
+        "4.1.99.1\t471\tC6ECAD1DC1AA5B26\t2\t2026_01\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(SystemExit, match="invalid EC number '4.1.99.1'"):
+        load_uniprot_proteins(bad_ec_tsv)
+
+    # 10. validate_causal_graph_proteins checks EC xref syntax and TAXON node lineage
+    proteins = load_uniprot_proteins(UNIPROT_PROTEINS_PATH)
+    taxa = {
+        "NCBITaxon:2": {"parent_id": "", "rank": "DOMAIN"},
+        "NCBITaxon:562": {"parent_id": "NCBITaxon:2", "rank": "SPECIES"},
+        "NCBITaxon:83333": {"parent_id": "NCBITaxon:562", "rank": "STRAIN"},
+        "NCBITaxon:1423": {"parent_id": "NCBITaxon:2", "rank": "SPECIES"},
+    }
+    strains = {
+        "NCBITaxon:562": [{"strain_id": "kgmicrobe.strain:bacdive_155687"}],
+        "NCBITaxon:1423": [{"strain_id": "kgmicrobe.strain:bacdive_1156"}],
+    }
+
+    bad_ec_xref_graph = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {
+                        "node_id": "lacZ",
+                        "label": "Beta-galactosidase (LacZ)",
+                        "node_type": "GENE_OR_PROTEIN",
+                        "grounding": "UniProtKB:P00722",
+                        "entry_status": "SWISS_PROT",
+                        "gene_symbol": "lacZ",
+                        "locus_tag": "b0344",
+                        "organism_taxon_id": "NCBITaxon:83333",
+                        "proteome_id": "UP:UP000000625",
+                        "sequence_length": 1024,
+                        "sequence_crc64": "9D295EF4CEF90B08",
+                        "sequence_version": 2,
+                        "xrefs": ["EC:invalid"],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="invalid EC xref 'EC:invalid'"):
+        validate_causal_graph_proteins(
+            bad_ec_xref_graph, uniprot_proteins=proteins, taxa=taxa, strains=strains
+        )
+
+    absent_taxon_graph = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {
+                        "node_id": "missing-taxon",
+                        "label": "Unknown taxon",
+                        "node_type": "TAXON",
+                        "grounding": "NCBITaxon:99999999",
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(
+        SystemExit, match="TAXON grounding NCBITaxon:99999999 is absent from ncbitaxon_taxa.tsv"
+    ):
+        validate_causal_graph_proteins(
+            absent_taxon_graph, uniprot_proteins=proteins, taxa=taxa, strains=strains
+        )
+
+    bad_taxon_lineage_graph = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {
+                        "node_id": "other-taxon",
+                        "label": "Bacillus subtilis",
+                        "node_type": "TAXON",
+                        "grounding": "NCBITaxon:1423",
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(
+        SystemExit, match="TAXON grounding NCBITaxon:1423 is not lineage-consistent with NCBITaxon:562"
+    ):
+        validate_causal_graph_proteins(
+            bad_taxon_lineage_graph, uniprot_proteins=proteins, taxa=taxa, strains=strains
+        )
+
 
 
 
