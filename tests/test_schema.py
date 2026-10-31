@@ -214,3 +214,27 @@ def test_causal_node_protein_scope_slots_and_prefixes(schema_path):
     assert {"UniProtKB", "EC", "OMP", "UP", "METPO"} <= declared_prefixes
 
 
+def test_schema_guide_documents_causal_node_protein_slots(repo_root):
+    """docs/SCHEMA.md documents all 9 CausalNode GENE_OR_PROTEIN protein-grounding
+    slots, UniProtEntryStatusEnum (SWISS_PROT, TREMBL), and curation/uniprot_proteins.tsv (#187)."""
+    schema_doc = (repo_root / "docs" / "SCHEMA.md").read_text(encoding="utf-8")
+    expected_tokens = (
+        "organism_taxon_id",
+        "strain_id",
+        "proteome_id",
+        "gene_symbol",
+        "locus_tag",
+        "sequence_length",
+        "sequence_crc64",
+        "sequence_version",
+        "entry_status",
+        "UniProtEntryStatusEnum",
+        "SWISS_PROT",
+        "TREMBL",
+        "curation/uniprot_proteins.tsv",
+    )
+    missing = [token for token in expected_tokens if token not in schema_doc]
+    assert not missing, f"docs/SCHEMA.md missing protein-grounding tokens: {missing}"
+
+
+

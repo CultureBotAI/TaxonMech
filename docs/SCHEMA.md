@@ -17,7 +17,7 @@ root. One YAML per record.
 | Strain-link evidence | `StrainLinkEvidence` | Shared `source_field`, `matched_strain_id` (an existing culture-deposit CURIE), `source_strain_field` and verbatim `source_strain_identifiers`; GOLD chains also retain `source_organism_id` and `source_project_id` |
 | Harmonization | `SourceAttestation` | One per source: `source_id`, `mapping_predicate`, `assertion_count`, `assertion_unit` (`AssertionUnitEnum`: NAME, STRAIN, GENOME, ORGANISM, MEDIUM, TRAIT_ASSERTION) |
 | Evidence | `EvidenceItem` | Optional record-level citations |
-| Mechanism | `CausalGraph` / `CausalNode` / `CausalEdge` | Same shape as HabitatMech and TraitMech; every edge requires evidence |
+| Mechanism | `CausalGraph` / `CausalNode` / `CausalEdge` / `CausalNodeTypeEnum` / `UniProtEntryStatusEnum` | Same graph shape as HabitatMech and TraitMech; every edge requires `evidence`, and `GENE_OR_PROTEIN` nodes carry UniProtKB protein-grounding slots (`organism_taxon_id`, `strain_id`, `proteome_id`, `gene_symbol`, `locus_tag`, `sequence_length`, `sequence_crc64`, `sequence_version`, `entry_status`) validated offline against `curation/uniprot_proteins.tsv` |
 | Discourse | `Discussion`, `Dataset` | From the vendored `mech_shared` module |
 | Lifecycle | `CurationEvent` | `grounding_status`, `mapping_status`, `replaces`, `contributors`, append-only `curation_history` |
 
@@ -84,6 +84,8 @@ uncapped inventories are `data/raw/strain_related_records.tsv` and
 `data/straininfo/related_records.tsv.gz`; StrainInfo NCBI assertions are in
 `data/straininfo/assemblies.tsv`. See
 [STRAIN_GENOMES.md](STRAIN_GENOMES.md).
+
+`CausalNode` entries with `node_type: GENE_OR_PROTEIN` and `grounding: UniProtKB:<accession>` carry nine typed protein-grounding slots (`organism_taxon_id`, `strain_id`, `proteome_id`, `gene_symbol`, `locus_tag`, `sequence_length`, `sequence_crc64`, `sequence_version`, and `entry_status` with range `UniProtEntryStatusEnum`: `SWISS_PROT` or `TREMBL`). Maintained `curation/causal_graphs/NCBITaxon_*.yaml` overlays are validated offline during seeding (`validate_causal_graph_structure()` and `validate_causal_graph_proteins()` in `src/taxonmech/seed.py`) against the release-pinned protein reference catalog `curation/uniprot_proteins.tsv` (registered in `conf/sources.yaml`) and the NCBI Taxonomy vertical lineage tree so species-level records may cite strain-scoped reference-proteome proteins while cross-taxon mismatches are rejected.
 
 `mech_shared.yaml` and `history.yaml` are vendored byte-identically from
 culturebotai-claw at the commit in `scripts/.vendored_canon_ref`, and compared
