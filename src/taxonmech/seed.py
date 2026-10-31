@@ -77,6 +77,44 @@ UNIPROT_PROTEIN_FIELDS = (
 )
 CRC64_PATTERN = re.compile(r"^[0-9A-F]{16}$")
 BACDIVE_STRAIN_ID_PATTERN = re.compile(r"^kgmicrobe\.strain:bacdive_[1-9][0-9]*$")
+CURIE_PATTERN = re.compile(r"^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$")
+EDGE_ID_PATTERN = re.compile(r"^[A-Za-z][A-Za-z0-9_-]*$")
+EC_NUMBER_PATTERN = re.compile(r"^EC:[1-7]\.(?:[0-9]+|-)\.(?:[0-9]+|-)\.(?:n?[0-9]+|-)$")
+EVIDENCE_REFERENCE_PATTERN = re.compile(
+    r"^(?:PMID:[1-9][0-9]*|PMC:PMC[1-9][0-9]*|DOI:10\.[0-9]{4,9}/\S+|https?://\S+)$"
+)
+CAUSAL_NODE_TYPES = frozenset({
+    "TAXON",
+    "TRAIT",
+    "HABITAT",
+    "ENVIRONMENTAL_PARAMETER",
+    "PATHWAY",
+    "ENVIRONMENTAL_FACTOR",
+    "EXPERIMENTAL_FACTOR",
+    "GENE_OR_PROTEIN",
+    "RNA",
+    "GENETIC_ELEMENT",
+    "CHEMICAL",
+    "ORGANELLE",
+    "CELLULAR_LOCALIZATION",
+    "MOLECULAR_FUNCTION",
+    "BIOLOGICAL_PROCESS",
+    "STATE",
+    "QUALITY",
+    "CAPACITY",
+    "COMMUNITY_PROCESS",
+})
+PROTEIN_ONLY_NODE_SLOTS = (
+    "organism_taxon_id",
+    "strain_id",
+    "proteome_id",
+    "gene_symbol",
+    "locus_tag",
+    "sequence_length",
+    "sequence_crc64",
+    "sequence_version",
+    "entry_status",
+)
 
 SEED_CURATOR = "seed_from_sources"
 
@@ -284,6 +322,17 @@ def load_uniprot_proteins(path: Path = UNIPROT_PROTEINS_PATH) -> dict[str, dict[
                 raise SystemExit(f"{path}:{line_no}: invalid organism_taxon_id for {uid!r}")
             if row.get("proteome_id") and not row["proteome_id"].startswith("UP:UP"):
                 raise SystemExit(f"{path}:{line_no}: invalid proteome_id for {uid!r}")
+            for req_col in ("entry_name", "protein_name", "organism_label", "release_version"):
+                if not (row.get(req_col) or "").strip():
+                    raise SystemExit(f"{path}:{line_no}: missing {req_col} for {uid!r}")
+            if not ((row.get("gene_symbol") or "").strip() or (row.get("locus_tag") or "").strip()):
+                raise SystemExit(f"{path}:{line_no}: requires gene_symbol or locus_tag for {uid!r}")
+            ec_vals = split(row.get("ec_numbers") or "")
+            if len(ec_vals) != len(set(ec_vals)):
+                raise SystemExit(f"{path}:{line_no}: duplicate ec_numbers {ec_vals} for {uid!r}")
+            for ec_val in ec_vals:
+                if not EC_NUMBER_PATTERN.match(ec_val):
+                    raise SystemExit(f"{path}:{line_no}: invalid EC number {ec_val!r} for {uid!r}")
             try:
                 seq_len = int(row.get("sequence_length") or "0")
                 seq_ver = int(row.get("sequence_version") or "0")
@@ -349,23 +398,55 @@ def validate_causal_graph_structure(
                     if nid in seen_node_ids:
                         raise SystemExit(f"{g_ctx}: duplicate node_id {nid!r}")
                     seen_node_ids.add(nid)
+                    n_ctx = f"{g_ctx} node {nid!r}"
                     lbl = (node.get("label") or "").strip() if isinstance(node.get("label"), str) else ""
                     raw_ntype = node.get("node_type")
                     ntype = (raw_ntype or "").strip() if isinstance(raw_ntype, str) else ""
                     if not lbl or not ntype:
-                        raise SystemExit(f"{g_ctx} node {nid!r}: requires non-empty 'label' and 'node_type'")
+                        raise SystemExit(f"{n_ctx}: requires non-empty 'label' and 'node_type'")
+                    if ntype not in CAUSAL_NODE_TYPES:
+                        raise SystemExit(f"{n_ctx}: invalid node_type {ntype!r}")
+                    if ntype != "GENE_OR_PROTEIN":
+                        bad_slots = [s for s in PROTEIN_ONLY_NODE_SLOTS if node.get(s) is not None]
+                        if bad_slots:
+                            raise SystemExit(
+                                f"{n_ctx}: non-GENE_OR_PROTEIN node ({ntype}) cannot declare {bad_slots}"
+                            )
+                    raw_grounding = node.get("grounding")
+                    grounding = ""
+                    if raw_grounding is not None:
+                        grounding = raw_grounding.strip() if isinstance(raw_grounding, str) else ""
+                        if not CURIE_PATTERN.match(grounding):
+                            raise SystemExit(f"{n_ctx}: invalid 'grounding' CURIE {raw_grounding!r}")
+                        if ntype == "TAXON" and not grounding.startswith("NCBITaxon:"):
+                            raise SystemExit(f"{n_ctx}: TAXON grounding must start with 'NCBITaxon:'")
+                    raw_xrefs = node.get("xrefs")
+                    if raw_xrefs is not None:
+                        if not isinstance(raw_xrefs, list):
+                            raise SystemExit(f"{n_ctx}: 'xrefs' must be a list")
+                        seen_xrefs: set[str] = set()
+                        for xr in raw_xrefs:
+                            xr_str = xr.strip() if isinstance(xr, str) else ""
+                            if not CURIE_PATTERN.match(xr_str):
+                                raise SystemExit(f"{n_ctx}: invalid xref CURIE {xr!r}")
+                            if xr_str in seen_xrefs or (grounding and xr_str == grounding):
+                                raise SystemExit(f"{n_ctx}: duplicate xref {xr_str!r}")
+                            seen_xrefs.add(xr_str)
 
             edges = graph.get("edges")
             if edges is not None:
                 if not isinstance(edges, list) or not edges:
                     raise SystemExit(f"{g_ctx}: 'edges' must be a non-empty list")
                 seen_edge_ids: set[str] = set()
+                seen_edge_triples: set[tuple[str, str, str]] = set()
                 for edge in edges:
                     if not isinstance(edge, dict):
                         raise SystemExit(f"{g_ctx}: each edge must be a mapping")
                     eid = (edge.get("edge_id") or "").strip() if isinstance(edge.get("edge_id"), str) else ""
                     if not eid:
                         raise SystemExit(f"{g_ctx}: edge missing 'edge_id'")
+                    if not EDGE_ID_PATTERN.match(eid):
+                        raise SystemExit(f"{g_ctx}: invalid edge_id {eid!r}")
                     if eid in seen_edge_ids:
                         raise SystemExit(f"{g_ctx}: duplicate edge_id {eid!r}")
                     seen_edge_ids.add(eid)
@@ -378,6 +459,16 @@ def validate_causal_graph_structure(
                         raise SystemExit(f"{e_ctx}: requires non-empty 'subject', 'predicate', and 'object'")
                     if subj == obj:
                         raise SystemExit(f"{e_ctx}: self-loop subject == object {subj!r} is not allowed")
+                    raw_pred_id = edge.get("predicate_id")
+                    pred_id = ""
+                    if raw_pred_id is not None:
+                        pred_id = raw_pred_id.strip() if isinstance(raw_pred_id, str) else ""
+                        if not CURIE_PATTERN.match(pred_id):
+                            raise SystemExit(f"{e_ctx}: invalid 'predicate_id' CURIE {raw_pred_id!r}")
+                    triple_key = (subj, pred_id or pred, obj)
+                    if triple_key in seen_edge_triples:
+                        raise SystemExit(f"{e_ctx}: duplicate parallel edge {triple_key!r}")
+                    seen_edge_triples.add(triple_key)
                     if nodes is not None:
                         if subj not in seen_node_ids:
                             raise SystemExit(
@@ -390,6 +481,7 @@ def validate_causal_graph_structure(
                     ev_list = edge.get("evidence")
                     if not isinstance(ev_list, list) or not ev_list:
                         raise SystemExit(f"{e_ctx}: requires non-empty 'evidence' list")
+                    seen_ev_refs: set[str] = set()
                     for ev in ev_list:
                         ref = (
                             (ev.get("reference") or "").strip()
@@ -398,6 +490,11 @@ def validate_causal_graph_structure(
                         )
                         if not ref:
                             raise SystemExit(f"{e_ctx}: each evidence item requires non-empty 'reference'")
+                        if not EVIDENCE_REFERENCE_PATTERN.match(ref):
+                            raise SystemExit(f"{e_ctx}: invalid evidence reference {ref!r}")
+                        if ref in seen_ev_refs:
+                            raise SystemExit(f"{e_ctx}: duplicate evidence reference {ref!r}")
+                        seen_ev_refs.add(ref)
 
 
 def validate_causal_graph_proteins(
@@ -421,7 +518,26 @@ def validate_causal_graph_proteins(
         for graph in graphs:
             gid = graph.get("graph_id", "<unnamed>")
             for node in graph.get("nodes") or []:
-                if not isinstance(node, dict) or node.get("node_type") != "GENE_OR_PROTEIN":
+                if not isinstance(node, dict):
+                    continue
+                if node.get("node_type") == "TAXON":
+                    t_grounding = (
+                        (node.get("grounding") or "").strip()
+                        if isinstance(node.get("grounding"), str)
+                        else ""
+                    )
+                    if t_grounding and taxa is not None:
+                        t_ctx = f"{tid} graph {gid!r} node {node.get('node_id', '<unnamed>')!r}"
+                        if t_grounding not in taxa:
+                            raise SystemExit(
+                                f"{t_ctx}: TAXON grounding {t_grounding} is absent from ncbitaxon_taxa.tsv"
+                            )
+                        if not _taxa_lineage_compatible(taxa, t_grounding, tid):
+                            raise SystemExit(
+                                f"{t_ctx}: TAXON grounding {t_grounding} is not lineage-consistent with {tid}"
+                            )
+                    continue
+                if node.get("node_type") != "GENE_OR_PROTEIN":
                     continue
                 nid = node.get("node_id", "<unnamed>")
                 ctx = f"{tid} graph {gid!r} node {nid!r}"
@@ -461,6 +577,12 @@ def validate_causal_graph_proteins(
                 seq_ver = node.get("sequence_version")
                 if not isinstance(seq_ver, int) or isinstance(seq_ver, bool) or seq_ver <= 0:
                     raise SystemExit(f"{ctx}: GENE_OR_PROTEIN requires positive integer 'sequence_version'")
+                node_ecs = [
+                    x for x in (node.get("xrefs") or []) if isinstance(x, str) and x.startswith("EC:")
+                ]
+                for ec in node_ecs:
+                    if not EC_NUMBER_PATTERN.match(ec):
+                        raise SystemExit(f"{ctx}: invalid EC xref {ec!r}")
 
                 if uniprot_proteins is not None:
                     ref = uniprot_proteins.get(grounding)
@@ -503,9 +625,6 @@ def validate_causal_graph_proteins(
                         raise SystemExit(
                             f"{ctx}: sequence_version {seq_ver} != {ref['sequence_version']} for {grounding}"
                         )
-                    node_ecs = [
-                        x for x in (node.get("xrefs") or []) if isinstance(x, str) and x.startswith("EC:")
-                    ]
                     ref_ecs = split(ref["ec_numbers"])
                     if any(ec not in ref_ecs for ec in node_ecs):
                         raise SystemExit(
