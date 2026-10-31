@@ -1,0 +1,31 @@
+history_version: 1
+target:
+  kind: other
+  path: curation/seed_scope.tsv
+  slug: cycle5-stage1-bounded-frontier-audit
+session:
+  id: 2026-10-31T182300Z-Antigravity-c5s101
+  timestamp: '2026-10-31T18:23:00Z'
+  actors:
+  - type: ai_agent
+    name: Antigravity
+    agent_tool: antigravity-cli
+events:
+- type: AUDIT
+  outcome: no_change
+  sections:
+  - scope
+  - identifiers
+  - validation
+  summary: Audit Cycle 5 Stage 1 bounded frontier across all 650,767 NCBI Taxonomy inventory
+    rows and sync reviews/workflow/latest.yaml
+  details: 'Executed a repeated bounded-frontier discovery search via scripts/propose_scope.py
+    (--rule core --rank '''' --all --append and --rule attested --rank '''' --all --append,
+    run twice each) and audited all 650,767 rows in data/raw/ncbitaxon_taxa.tsv against
+    the 626,048 scoped species-or-below records in curation/seed_scope.tsv and data/taxa/PATHS.tsv.
+    Confirmed 0 remaining admissible species-or-below candidates across the bounded frontier
+    (all 24,719 unscoped rows are strictly 24,702 higher-rank clades above species and
+    17 retired taxa, while unmapped source catalogs in data/bacdive/, data/bvbrc/, data/gold/,
+    data/seqcode/, and data/straininfo/ lack NCBITaxon species/infraspecific IDs by design).
+    Synchronized reviews/workflow/latest.yaml with the verified Cycle 4 Stage 6 closure entry
+    from verified-evidence-index.json (PR #190, merge commit d6997e99a076c6353e079f33a73212abd6679329).'
