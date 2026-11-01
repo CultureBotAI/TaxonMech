@@ -142,6 +142,14 @@ curation_history:
     with literature-backed expression and positive regulatory edges for the lactose
     catabolic operon (PMID:9278503, PMID:6280140, PMID:1646077, PMID:8392187).
   llm_assisted: true
+- timestamp: '2026-10-31T23:10:00Z'
+  curator: curate-causal-graphs
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: Added direct transcriptional regulatory edges linking LacI (edge e16, lacI
+    RO:0002212 lactose_transport, PMID:8638105, PMID:6444453) and cAMP-CRP (edge e17,
+    crp RO:0002213 lactose_transport, PMID:1646077, PMID:8392187) to LacY-mediated
+    lactose transport (GO:0015767).
+  llm_assisted: true
 causal_graphs:
 - graph_id: lactose_catabolism
   title: LacY/LacZ-mediated lactose transport and catabolism
@@ -392,3 +400,29 @@ causal_graphs:
       notes: Genetic and biochemical characterization of activating region 1 (AR1,
         residues 156-162) of Escherichia coli K-12 CRP required for transcriptional
         activation of the lactose catabolic operon.
+  - edge_id: e16
+    subject: lacI
+    predicate: negatively regulates
+    predicate_id: RO:0002212
+    object: lactose_transport
+    evidence:
+    - reference: PMID:8638105
+      notes: Operator-bound tetrameric Escherichia coli K-12 LacI represses transcription
+        of the polycistronic lacZYA operon, inhibiting lacY lactose permease expression
+        and transmembrane lactose transport in the absence of inducer.
+    - reference: PMID:6444453
+      notes: Characterization of the Escherichia coli K-12 lacY lactose permease gene
+        as the second structural cistron of the LacI-regulated lacZYA operon.
+  - edge_id: e17
+    subject: crp
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: lactose_transport
+    evidence:
+    - reference: PMID:1646077
+      notes: cAMP-CRP transcriptional activation at the Escherichia coli K-12 lacP1
+        promoter drives polycistronic lacZYA expression, increasing LacY permease-mediated
+        lactose transport under glucose-depleted conditions.
+    - reference: PMID:8392187
+      notes: Activating region 1 (AR1) of Escherichia coli K-12 CRP is required for
+        cAMP-dependent activation of the lacZYA lactose transport and catabolic operon.
