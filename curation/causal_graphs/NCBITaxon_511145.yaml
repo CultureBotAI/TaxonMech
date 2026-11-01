@@ -78,6 +78,20 @@ causal_graphs:
     sequence_crc64: DCBC24FA46C61B3D
     sequence_version: 1
     entry_status: SWISS_PROT
+  - node_id: cyaA
+    label: Adenylate cyclase (cyaA)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:P00936
+    xrefs:
+    - EC:4.6.1.1
+    organism_taxon_id: NCBITaxon:83333
+    proteome_id: UP:UP000000625
+    gene_symbol: cyaA
+    locus_tag: b3806
+    sequence_length: 848
+    sequence_crc64: F0400E3406B15018
+    sequence_version: 5
+    entry_status: SWISS_PROT
   - node_id: lactose_transport
     label: lactose transport
     node_type: BIOLOGICAL_PROCESS
@@ -308,6 +322,52 @@ causal_graphs:
         Activating region 1 (AR1) of Escherichia coli K-12 CRP is required for
         cAMP-dependent activation of the lacZYA lactose transport and catabolic
         operon.
+  - edge_id: e18
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: cyaA
+    evidence:
+    - reference: PMID:9278503
+      notes: >-
+        Complete genome sequence of Escherichia coli K-12 substr. MG1655
+        annotating cyaA (b3806) encoding adenylate cyclase (EC:4.6.1.1).
+    - reference: PMID:6393056
+      notes: >-
+        Complete nucleotide sequence of the Escherichia coli K-12 cyaA gene
+        encoding the 848-amino-acid adenylate cyclase polypeptide.
+  - edge_id: e19
+    subject: cyaA
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: crp
+    evidence:
+    - reference: PMID:6393056
+      notes: >-
+        Adenylate cyclase CyaA (EC:4.6.1.1) synthesizes cyclic AMP (cAMP) from
+        ATP as the allosteric effector required to activate Escherichia coli
+        K-12 MG1655 CRP DNA-binding and transcriptional regulator activity.
+    - reference: PMID:1646077
+      notes: >-
+        cAMP-activated CRP directly contacts the RNA polymerase alpha subunit
+        C-terminal domain to activate transcription at the Escherichia coli
+        K-12 MG1655 lacP1 promoter.
+  - edge_id: e20
+    subject: cyaA
+    predicate: causally upstream of or within
+    predicate_id: RO:0002418
+    object: lactose_catabolism
+    evidence:
+    - reference: PMID:6393056
+      notes: >-
+        CyaA-catalyzed cAMP synthesis relieves catabolite repression and drives
+        cAMP-CRP-dependent induction of the Escherichia coli K-12 MG1655 lacZYA
+        lactose catabolic operon.
+    - reference: PMID:1646077
+      notes: >-
+        cAMP-CRP transcriptional activation at lacP1 is required for maximal
+        expression of the lactose transport and catabolic pathway in
+        Escherichia coli K-12 MG1655.
 curation_history:
 - timestamp: '2026-10-22T18:50:00Z'
   curator: add-uniprot-protein-examples
@@ -364,4 +424,14 @@ curation_history:
     RO:0002212 lactose_transport, PMID:8638105, PMID:6444453) and cAMP-CRP
     (edge e17, crp RO:0002213 lactose_transport, PMID:1646077, PMID:8392187) to
     LacY-mediated lactose transport (GO:0015767).
+  llm_assisted: true
+- timestamp: '2026-11-01T03:45:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: >-
+    Added live-verified Swiss-Prot entry UniProtKB:P00936 (CYAA_ECOLI, cyaA /
+    b3806, EC:4.6.1.1, 848 aa, CRC64 F0400E3406B15018, v5) in reference proteome
+    UP:UP000000625 with literature-backed expression and cAMP-CRP regulatory
+    edges for the lactose catabolic operon (PMID:9278503, PMID:6393056,
+    PMID:1646077).
   llm_assisted: true

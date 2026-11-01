@@ -561,8 +561,8 @@ def test_extract_taxon_trait_edges_preserves_granular_assertions(tmp_path):
 
 def test_committed_curation_causal_graphs_overlays_load_and_validate():
     """Verify that all committed curation/causal_graphs/*.yaml overlays load cleanly,
-    cover the 15 species+strain exemplar records (171 evidence-backed edges and
-    51 GENE_OR_PROTEIN nodes across 23 live-verified UniProtKB accessions), and
+    cover the 15 species+strain exemplar records (204 evidence-backed edges and
+    64 GENE_OR_PROTEIN nodes across 29 live-verified UniProtKB accessions), and
     satisfy schema prefix and id_label_targets rules (#78)."""
     overlays_dir = REPO_ROOT / "curation" / "causal_graphs"
     graphs, events = load_causal_graphs(overlays_dir)
@@ -591,13 +591,13 @@ def test_committed_curation_causal_graphs_overlays_load_and_validate():
         for g in graphs[tid]
         for e in g.get("edges") or []
     )
-    assert total_edges >= 171
+    assert total_edges >= 204
     edge_count = sum(
         len(g.get("edges") or [])
         for tid in expected_ids
         for g in graphs[tid]
     )
-    assert edge_count == 171
+    assert edge_count == 204
     protein_nodes = [
         n
         for tid in expected_ids
@@ -605,31 +605,37 @@ def test_committed_curation_causal_graphs_overlays_load_and_validate():
         for n in g.get("nodes") or []
         if n.get("node_type") == "GENE_OR_PROTEIN"
     ]
-    assert len(protein_nodes) == 51
+    assert len(protein_nodes) == 64
     expected_uniprot = {
         "UniProtKB:P02920",
         "UniProtKB:P00722",
         "UniProtKB:P03023",
         "UniProtKB:P07464",
         "UniProtKB:P0ACJ8",
+        "UniProtKB:P00936",
         "UniProtKB:P16497",
         "UniProtKB:P06628",
         "UniProtKB:P06535",
         "UniProtKB:P06534",
+        "UniProtKB:Q00828",
         "UniProtKB:P05043",
         "UniProtKB:Q08430",
         "UniProtKB:Q9HWH2",
         "UniProtKB:Q9HWG9",
         "UniProtKB:P0DPB9",
+        "UniProtKB:Q9HWH1",
+        "UniProtKB:O69753",
         "UniProtKB:Q58256",
         "UniProtKB:Q58252",
         "UniProtKB:Q58255",
         "UniProtKB:Q58929",
+        "UniProtKB:P61154",
         "UniProtKB:A0A095C6P1",
         "UniProtKB:A0A095CIC4",
         "UniProtKB:Q55P57",
         "UniProtKB:J9VY90",
         "UniProtKB:J9VQZ4",
+        "UniProtKB:J9VQ26",
     }
     assert {n["grounding"] for n in protein_nodes} == expected_uniprot
     for n in protein_nodes:
@@ -641,7 +647,7 @@ def test_committed_curation_causal_graphs_overlays_load_and_validate():
         assert isinstance(n.get("sequence_crc64"), str) and len(n["sequence_crc64"]) == 16
         assert isinstance(n.get("sequence_version"), int) and n["sequence_version"] >= 1
         assert n.get("entry_status") in ("SWISS_PROT", "TREMBL")
-    assert sum(1 for n in protein_nodes if n.get("proteome_id")) == 49
+    assert sum(1 for n in protein_nodes if n.get("proteome_id")) == 62
 
 
 def test_uniprot_proteins_catalog_and_lineage_validator():
@@ -649,7 +655,7 @@ def test_uniprot_proteins_catalog_and_lineage_validator():
     rejection of unpinned accessions, checksum/length/locus mismatches, and cross-species
     organism_taxon_id bindings (#78 / taxonmech-infra-0003)."""
     proteins = load_uniprot_proteins(UNIPROT_PROTEINS_PATH)
-    assert len(proteins) == 23
+    assert len(proteins) == 29
     for uid, row in proteins.items():
         assert uid.startswith("UniProtKB:")
         assert tuple(row.keys()) == UNIPROT_PROTEIN_FIELDS
