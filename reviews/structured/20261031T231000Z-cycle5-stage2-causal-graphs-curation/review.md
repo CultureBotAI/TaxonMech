@@ -1,0 +1,881 @@
+# Cycle 5 Stage 2 causal graphs curation and corpus review (626,048 records; 15 curated species+strain exemplars, 171 evidence-backed edges)
+
+- Review: 20261031T231000Z-cycle5-stage2-causal-graphs-curation
+- Repository: CultureBotAI/TaxonMech
+- Started UTC: 2026-10-31T23:00:00Z
+- Finished UTC: 2026-10-31T23:10:00Z
+- Reviewer: Antigravity (independent)
+- Completion: completed
+- Verdict: pass_with_limitations
+- Scientific review: true
+
+## Summary
+
+Reviewed all 626,048 in-scope TaxonRecord files across Bacteria (605,695), Archaea (14,013), Eukaryota (6,331), and other (9) against the Stage 2 causal-graph curation contract (.claude/skills/curate-causal-graphs/SKILL.md). Verified that all native prerequisite gates pass, including offline UniProtKB reference proteome and NCBI Taxonomy lineage validation (curation/uniprot_proteins.tsv and validate_causal_graph_proteins() in src/taxonmech/seed.py). Enriched 5 maintained curation/causal_graphs/*.yaml overlays across Escherichia coli (NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145; adding edges e16 linking lacI UniProtKB:P03023 via negatively regulates RO:0002212 to lactose_transport GO:0015767, PMID:8638105, PMID:6444453, and e17 linking crp UniProtKB:P0ACJ8 via positively regulates RO:0002213 to lactose_transport GO:0015767, PMID:1646077, PMID:8392187) and Bacillus subtilis (NCBITaxon:1423, NCBITaxon:224308; adding edges e22 linking spo0F UniProtKB:P06628 via causally upstream of or within RO:0002418 to endospore_formation GO:0034301, PMID:1846779, PMID:3003689, and e23 linking spo0B UniProtKB:P06535 via causally upstream of or within RO:0002418 to endospore_formation GO:0034301, PMID:1846779, PMID:6438629), expanding the 15 maintained overlays from 161 to 171 evidence-backed edges across 7 cross-domain species exemplars and 8 reference-proteome strains (51 GENE_OR_PROTEIN nodes covering 23 live-verified UniProtKB accessions). Corpus-wide automated expansion across the remaining 38,342 trait/medium-attested records remains source-limited by pre-aggregated 2-column count tables in data/raw/{madin_taxa,bactotraits_taxa}.tsv (tracked under #78 / taxonmech-infra-0002).
+
+## Scope And Provenance
+
+Full-corpus Cycle 5 Stage 2 causal-graph review across all 626,048 TaxonRecord files in data/taxa/, paired with native curation, enrichment, and seeding across all 15 maintained curation/causal_graphs/*.yaml overlays (171 evidence-backed edges across 7 cross-domain species exemplars and 8 reference-proteome strains).
+
+Selection: All 626,048 in-scope taxa in curation/seed_scope.tsv and data/taxa/PATHS.tsv classified by raw source coverage, with all 15 causal-graph-bearing species and strain exemplars reviewed, enriched, and validated directly.
+Coverage: sampled; 15 reviewed / 626048 in the declared population.
+Source: working_tree at Git base 28057279ffcf60185fa15d53da7ba69d326548a5.
+Working-tree hashes do not imply those bytes were committed.
+
+| Target | Path / selector | Kind | Label |
+| --- | --- | --- | --- |
+| NCBITaxon:562 | data/taxa/bacteria/escherichia_coli.yaml | generated | Escherichia coli |
+| NCBITaxon:83333 | data/taxa/bacteria/escherichia_coli_k_12.yaml | generated | Escherichia coli K-12 |
+| NCBITaxon:511145 | data/taxa/bacteria/escherichia_coli_str_k_12_substr_mg1655.yaml | generated | Escherichia coli str. K-12 substr. MG1655 |
+| NCBITaxon:1423 | data/taxa/bacteria/bacillus_subtilis.yaml | generated | Bacillus subtilis |
+| NCBITaxon:224308 | data/taxa/bacteria/bacillus_subtilis_subsp_subtilis_str_168.yaml | generated | Bacillus subtilis subsp. subtilis str. 168 |
+| NCBITaxon:287 | data/taxa/bacteria/pseudomonas_aeruginosa.yaml | generated | Pseudomonas aeruginosa |
+| NCBITaxon:208964 | data/taxa/bacteria/pseudomonas_aeruginosa_pao1.yaml | generated | Pseudomonas aeruginosa PAO1 |
+| NCBITaxon:2190 | data/taxa/archaea/methanocaldococcus_jannaschii.yaml | generated | Methanocaldococcus jannaschii |
+| NCBITaxon:243232 | data/taxa/archaea/methanocaldococcus_jannaschii_dsm_2661.yaml | generated | Methanocaldococcus jannaschii DSM 2661 |
+| NCBITaxon:1859096 | data/taxa/eukaryota/cryptococcus_deuterogattii.yaml | generated | Cryptococcus deuterogattii |
+| NCBITaxon:294750 | data/taxa/eukaryota/cryptococcus_deuterogattii_r265.yaml | generated | Cryptococcus deuterogattii R265 |
+| NCBITaxon:40410 | data/taxa/eukaryota/cryptococcus_deneoformans.yaml | generated | Cryptococcus deneoformans |
+| NCBITaxon:283643 | data/taxa/eukaryota/cryptococcus_deneoformans_b_3501a.yaml | generated | Cryptococcus deneoformans B-3501A |
+| NCBITaxon:5207 | data/taxa/eukaryota/cryptococcus_neoformans.yaml | generated | Cryptococcus neoformans |
+| NCBITaxon:235443 | data/taxa/eukaryota/cryptococcus_neoformans_h99.yaml | generated | Cryptococcus neoformans H99 |
+
+## Validation
+
+| Check | Status | Required | Targets | Result |
+| --- | --- | --- | --- | --- |
+| Strict LinkML and custom semantic validation on all 15 causal-graph-seeded TaxonRecord files | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:5207, NCBITaxon:235443 | All 15 seeded TaxonRecord YAML files pass scripts/validate_strict.py with 0 errors. |
+| OAK ID-label correspondence validation across all 15 causal-graph overlays | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:5207, NCBITaxon:235443 | scripts/validate_id_label_correspondence.py reports 164 OK_CANONICAL, 60 SKIPPED_NO_ADAPTER, and 0 MISMATCH across all grounded nodes and predicates in curation/causal_graphs/*.yaml. |
+| Unit and integration test suite for causal-graph overlays, offline UniProtKB reference proteome validation, seeder merge, and HTML rendering | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:5207, NCBITaxon:235443 | tests/test_causal_graph_overlays.py passes all roundtrip, offline UniProtKB reference proteome and lineage validation, rendering, and committed-overlay validation checks (171 edges across 15 overlays). |
+
+## Scientific And Domain Assessments
+
+### Evidence-backed native CausalGraph curation and enrichment across 15 cross-domain species and reference-proteome strain records
+
+graph: supported. Targets: NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:5207, NCBITaxon:235443.
+
+Maintained 15 curation/causal_graphs/*.yaml overlays (enriched from 161 to 171 evidence-backed edges in Cycle 5 Stage 2) across Escherichia coli (NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145; 17 edges each including e16 lacI -&gt; RO:0002212 -&gt; lactose_transport and e17 crp -&gt; RO:0002213 -&gt; lactose_transport), Bacillus subtilis (NCBITaxon:1423, NCBITaxon:224308; 23 edges each including e22 spo0F -&gt; RO:0002418 -&gt; endospore_formation and e23 spo0B -&gt; RO:0002418 -&gt; endospore_formation), Pseudomonas aeruginosa (NCBITaxon:287, NCBITaxon:208964; 9 edges each), Methanocaldococcus jannaschii (NCBITaxon:2190, NCBITaxon:243232; 13 edges each), Cryptococcus deuterogattii (NCBITaxon:1859096, NCBITaxon:294750; 7 edges each), Cryptococcus deneoformans (NCBITaxon:40410, NCBITaxon:283643; 4 edges each), and Cryptococcus neoformans (NCBITaxon:5207, NCBITaxon:235443; 4 edges each).
+
+### Remaining corpus-wide trait/medium-attested records awaiting upstream kg-microbe granular edge extraction
+
+completeness: concern. Targets: NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:5207, NCBITaxon:235443.
+
+While extract_taxon_trait_edges() is implemented in src/taxonmech/extract.py (#78 / taxonmech-infra-0002), committed data/raw/madin_taxa.tsv and data/raw/bactotraits_taxa.tsv remain 2-column count tables until re-extracted from an upstream local kg-microbe checkout, limiting bulk automated causal-graph generation across the remaining 38,342 trait/medium-attested records.
+
+## Findings
+
+### finding-001: Committed data/raw/{madin_taxa,bactotraits_taxa}.tsv store pre-aggregated assertion counts pending upstream kg-microbe re-extraction
+
+minor / deferred / confirmed; issue key: taxonmech-extract-collapses-trait-edges-to-counts.
+
+Although src/taxonmech/extract.py provides extract_taxon_trait_edges() and TRAIT_EDGE_FIELDS (landed in Cycle 1 Stage 6 PR #152 under issue #78 / taxonmech-infra-0002), the committed raw files data/raw/madin_taxa.tsv (34,148 rows) and data/raw/bactotraits_taxa.tsv (9,658 rows) still hold 2-column (taxon_id, assertion_count) summaries until an upstream kg-microbe checkout re-extraction populates data/raw/taxon_trait_edges.tsv.
+
+Disposition: Tracked under open issue #78 (taxonmech-infra-0002 in INFRA_TASKS.md) pending upstream kg-microbe edge-table re-extraction.
+
+## Recommended Actions And Acceptance Checks
+
+### action-001
+
+Run extract_taxon_trait_edges() against an upstream kg-microbe checkout to populate data/raw/taxon_trait_edges.tsv and expand automated causal-graph overlays (#78).
+
+- data/raw/taxon_trait_edges.tsv is populated with predicate, object CURIE, and publication provenance from kg-microbe
+
+## Category Boundaries
+
+
+## Evidence
+
+| Evidence | Reference / locator | Support | Observation |
+| --- | --- | --- | --- |
+| curated-causal-graph-overlays-and-records | curation/causal_graphs/NCBITaxon_*.yaml; data/taxa/{bacteria,archaea,eukaryota}/*.yaml; curation/causal_graphs/NCBITaxon_{562,83333,511145,1423,224308,287,208964,2190,243232,1859096,294750,40410,283643,5207,235443}.yaml | supports | Fifteen maintained curation/causal_graphs/*.yaml overlays define 171 evidence-backed causal edges with PMID citations, verified UniProtKB reference proteome accessions, and canonical GO/CHEBI/RO/METPO groundings, merged deterministically into their 15 TaxonRecord YAML files. |
+| oak-id-label-validation | conf/id_label_targets.yaml; scripts/validate_id_label_correspondence.py; conf/id_label_targets.yaml:14-65 | supports | All OBO-grounded node and edge pairs across GO, CHEBI, RO, and METPO in the 15 causal-graph overlays match canonical OAK ontology labels (0 MISMATCH). |
+| seeder-and-verify-corpus-pipeline | src/taxonmech/seed.py; curation/uniprot_proteins.tsv; tests/test_causal_graph_overlays.py; src/taxonmech/seed.py:217-370,790-810; tests/test_causal_graph_overlays.py:1-961 | supports | load_causal_graphs(), validate_causal_graph_proteins(), and build_document() merge maintained overlays into TaxonRecord.causal_graphs and curation_history while enforcing offline UniProtKB reference proteome and lineage validation and byte-for-byte reproducibility. |
+| raw-phenotype-and-trait-inventories | data/raw/madin_taxa.tsv; data/raw/bactotraits_taxa.tsv; data/raw/mediadive_taxa.tsv; madin_taxa.tsv (34,148 rows); bactotraits_taxa.tsv (9,658 rows); mediadive_taxa.tsv (14,154 rows) | supports | Committed raw tables in data/raw/madin_taxa.tsv and data/raw/bactotraits_taxa.tsv store 2-column (taxon_id, assertion_count) summaries until an upstream kg-microbe checkout re-extraction runs extract_taxon_trait_edges(). |
+
+## Limits And Additional Notes
+
+- Bulk automated causal-graph synthesis across the remaining 38,342 Madin/BactoTraits/MediaDive-attested records requires running extract_taxon_trait_edges() against an upstream local kg-microbe checkout (#78 / taxonmech-infra-0002).
+- 562,682 of 626,048 in-scope records are taxonomy-only records without phenotype, growth-medium, genome, or strain rows in data/raw/.
+- Cycle 5 Stage 2 enriched 5 maintained curation/causal_graphs/*.yaml overlays across Escherichia coli and Bacillus subtilis from 161 to 171 evidence-backed edges across all 15 curated cross-domain species and reference-proteome strain records.
+
+## Complete Structured Record
+
+The sibling review.yaml is authoritative.
+
+```yaml
+schema_version: 1.0.0
+review_id: 20261031T231000Z-cycle5-stage2-causal-graphs-curation
+kind: batch
+repository: CultureBotAI/TaxonMech
+title: Cycle 5 Stage 2 causal graphs curation and corpus review (626,048 records;
+  15 curated species+strain exemplars, 171 evidence-backed edges)
+started_at: '2026-10-31T23:00:00Z'
+finished_at: '2026-10-31T23:10:00Z'
+reviewer:
+  identity: Antigravity
+  kind: agent
+  independence: independent
+  independence_basis: Cycle 5 Stage 2 causal-graph curation and audit worker; verified
+    all native prerequisite gates, inspected all 626,048 in-scope records and all
+    15 maintained curation/causal_graphs/*.yaml overlays, enriched 5 overlays across
+    Escherichia coli and Bacillus subtilis from 161 to 171 evidence-backed edges,
+    seeded the 5 updated TaxonRecord files, and verified LinkML, OAK ID-label correspondence,
+    offline UniProtKB reference proteome validation, and HTML rendering gates.
+skill: .claude/skills/curate-causal-graphs/SKILL.md
+completion: completed
+verdict: pass_with_limitations
+scientific_review: true
+summary: 'Reviewed all 626,048 in-scope TaxonRecord files across Bacteria (605,695),
+  Archaea (14,013), Eukaryota (6,331), and other (9) against the Stage 2 causal-graph
+  curation contract (.claude/skills/curate-causal-graphs/SKILL.md). Verified that
+  all native prerequisite gates pass, including offline UniProtKB reference proteome
+  and NCBI Taxonomy lineage validation (curation/uniprot_proteins.tsv and validate_causal_graph_proteins()
+  in src/taxonmech/seed.py). Enriched 5 maintained curation/causal_graphs/*.yaml overlays
+  across Escherichia coli (NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145; adding
+  edges e16 linking lacI UniProtKB:P03023 via negatively regulates RO:0002212 to lactose_transport
+  GO:0015767, PMID:8638105, PMID:6444453, and e17 linking crp UniProtKB:P0ACJ8 via
+  positively regulates RO:0002213 to lactose_transport GO:0015767, PMID:1646077, PMID:8392187)
+  and Bacillus subtilis (NCBITaxon:1423, NCBITaxon:224308; adding edges e22 linking
+  spo0F UniProtKB:P06628 via causally upstream of or within RO:0002418 to endospore_formation
+  GO:0034301, PMID:1846779, PMID:3003689, and e23 linking spo0B UniProtKB:P06535 via
+  causally upstream of or within RO:0002418 to endospore_formation GO:0034301, PMID:1846779,
+  PMID:6438629), expanding the 15 maintained overlays from 161 to 171 evidence-backed
+  edges across 7 cross-domain species exemplars and 8 reference-proteome strains (51
+  GENE_OR_PROTEIN nodes covering 23 live-verified UniProtKB accessions). Corpus-wide
+  automated expansion across the remaining 38,342 trait/medium-attested records remains
+  source-limited by pre-aggregated 2-column count tables in data/raw/{madin_taxa,bactotraits_taxa}.tsv
+  (tracked under #78 / taxonmech-infra-0002).'
+source:
+  git_revision: 28057279ffcf60185fa15d53da7ba69d326548a5
+  state: working_tree
+  inputs:
+  - path: .claude/skills/curate-causal-graphs/SKILL.md
+    sha256: 2fa7e2978ba4af89df44c366b29bf445805ab1a891645774d3d58a6a2524664d
+    role: context
+  - path: .claude/skills/curate-yaml-record/SKILL.md
+    sha256: 21b59314460383702d1f850d3747f9dbaec5b7fe67c77391b19c9c490c289cca
+    role: context
+  - path: AGENTS.md
+    sha256: f47526b17cdb04305ce32cb1da1488b684b8f50a65458116e5013fc0b4b2a248
+    role: context
+  - path: INFRA_TASKS.md
+    sha256: 49611bb5de81725d31b6d6c0fa0757a980f79140421c8c84a6f1da440852dfcb
+    role: context
+  - path: README.md
+    sha256: 9bbb0f88d3d27767532fafe2d1f43c8dc68443a551d0ff2c5ceca75a5ddb69f7
+    role: context
+  - path: conf/id_label_targets.yaml
+    sha256: efed4c6d9cc218c9d89ba4468e361761ac02ff535e2669de33af6606202e544c
+    role: context
+  - path: conf/record_review.yaml
+    sha256: 366312506b771fc18fc5bfc30d5ec942b2c96212e1f4f95c463cfa1707fbebaa
+    role: context
+  - path: curation/causal_graphs/NCBITaxon_1423.yaml
+    sha256: 411a55a0353252a06deca2006af94bfdc175676b99996f528798d246ac916838
+    role: context
+  - path: curation/causal_graphs/NCBITaxon_1859096.yaml
+    sha256: 0f29a0916110b21224537ec5e337a9e8fa5a61c3a9c3f04885f421e7974d8746
+    role: context
+  - path: curation/causal_graphs/NCBITaxon_208964.yaml
+    sha256: 21e15bcb715fb781d21318949ac303ceb7b98459485aee88e0f9d11081015f45
+    role: context
+  - path: curation/causal_graphs/NCBITaxon_2190.yaml
+    sha256: e6da8dc155fef28501dff2dbf6c77a1e3f444b8f09ee8b7389ada3321b121cad
+    role: context
+  - path: curation/causal_graphs/NCBITaxon_224308.yaml
+    sha256: 2e8797314db28a0a68a943aa2c4708e6a841fef92c17bd8f42067f39751820b0
+    role: context
+  - path: curation/causal_graphs/NCBITaxon_235443.yaml
+    sha256: ec52ee753d46d6853cf12301d835d8282f2c9f7aefae2d24a3784bfa11ecc98f
+    role: context
+  - path: curation/causal_graphs/NCBITaxon_243232.yaml
+    sha256: f6bc7a819cd3b2a959831babc8d87bf418927f813ab282751997de086d7a998c
+    role: context
+  - path: curation/causal_graphs/NCBITaxon_283643.yaml
+    sha256: 3098281e6de9a4dccdcf51f3c7a8db7f47c4c3dfadb333682957c4e331f35caf
+    role: context
+  - path: curation/causal_graphs/NCBITaxon_287.yaml
+    sha256: a0c36afd6c9a2bb2a6d9b801413a9713aba598208d7f3164845157dcc7591f9b
+    role: context
+  - path: curation/causal_graphs/NCBITaxon_294750.yaml
+    sha256: 3ec5ba3c0784bbda20a3df13863c7faf96fb21562e01394fa0e69ec9f3f2215e
+    role: context
+  - path: curation/causal_graphs/NCBITaxon_40410.yaml
+    sha256: 425d1eece60fd72e9c552eee49e2af7543b9b278b2555f0c0b991c537d85c3cc
+    role: context
+  - path: curation/causal_graphs/NCBITaxon_511145.yaml
+    sha256: 3570c8200831ba8900a5efffd99652babd31f2994478272b82087ee1e59176ef
+    role: context
+  - path: curation/causal_graphs/NCBITaxon_5207.yaml
+    sha256: 68f853b2ae303a76b4787f5d6483e2750c338808d8fbca6599cae7d8b5266434
+    role: context
+  - path: curation/causal_graphs/NCBITaxon_562.yaml
+    sha256: 6d548c9f4362c30b386f9c500fb49ae25d51df4902311ddea2a464d340b61f0d
+    role: context
+  - path: curation/causal_graphs/NCBITaxon_83333.yaml
+    sha256: 6e7b1b4d28e709a9bea387f9b5e389d0fe9f2a3dd4439830ed18bd387510245c
+    role: context
+  - path: curation/causal_graphs/README.md
+    sha256: 3fb7a4c5b02ce0085a0e09eed6c88df66d66b4c1894558743c3873bde19bc49d
+    role: context
+  - path: curation/seed_scope.tsv
+    sha256: 95589ac7f548dcd27951c6afe432895c7409717df5f6e789a93dcb9229535963
+    role: context
+  - path: curation/uniprot_proteins.tsv
+    sha256: d03af7aa19849eac678466f8e02030c8910db7b6f247740e842e1cea26d1224c
+    role: context
+  - path: data/raw/bactotraits_taxa.tsv
+    sha256: 976d109cef832d8bf27cc105f67a42efbe900b6946736298602ef6d11158b197
+    role: context
+  - path: data/raw/gold_organisms.tsv
+    sha256: 0680971a156eef0b79de46c71a1f2138eaee5212ad8193eec943bd8e6257e473
+    role: context
+  - path: data/raw/madin_taxa.tsv
+    sha256: 7620448834f1b86daa83f2e338160ec3291a2ec3900ea4cec449418b1dc8b148
+    role: context
+  - path: data/raw/mediadive_taxa.tsv
+    sha256: 3f74b78cadfcdb6aeae953e09fdb39e34fd9c5d5ed0be65a04a5d7fb02355905
+    role: context
+  - path: data/raw/ncbitaxon_taxa.tsv
+    sha256: 97ff340e1eebf62ea541a299e5c798cdcc24ef935c636fb059df48ab45d6f2f6
+    role: context
+  - path: data/taxa/PATHS.tsv
+    sha256: f8f2e0721cb6839b30530b44be0d3004b9f0e6e2d4be8736f235b10117a8bd99
+    role: context
+  - path: data/taxa/archaea/methanocaldococcus_jannaschii.yaml
+    sha256: c0993ec09bd36355e95752af9bb46d1e7ad64d05f10f14483dc465bf23aea800
+    role: target
+  - path: data/taxa/archaea/methanocaldococcus_jannaschii_dsm_2661.yaml
+    sha256: e0b817a61289da32ec9471a9ad1449ae3ed857fe8b17b48e6442b96d8586f642
+    role: target
+  - path: data/taxa/bacteria/bacillus_subtilis.yaml
+    sha256: ef1cf0ca0144024b841dfea40c3e23930e54da1ba6d717c690544c22ff19e023
+    role: target
+  - path: data/taxa/bacteria/bacillus_subtilis_subsp_subtilis_str_168.yaml
+    sha256: 22e223f683bb325afccfcefc61078f92c877c72329e44637a59401a0492cae6d
+    role: target
+  - path: data/taxa/bacteria/escherichia_coli.yaml
+    sha256: 438a6610602d089f963cbf58ebf0e6a22804a47571c95c55eeaf1165741ef70a
+    role: target
+  - path: data/taxa/bacteria/escherichia_coli_k_12.yaml
+    sha256: 4253c1610a3d0bb1eae365046a392d8a7f5d3612d110ffe55ab0865e434fc79e
+    role: target
+  - path: data/taxa/bacteria/escherichia_coli_str_k_12_substr_mg1655.yaml
+    sha256: 912ee139366609bf3b79d262882ba375eab336d83630e22bc63fa2d4dd62418b
+    role: target
+  - path: data/taxa/bacteria/pseudomonas_aeruginosa.yaml
+    sha256: 32b18b290be7b848b4eab0e5a8efc098a18d9ed6e27e59f89bb9acf2d1f40263
+    role: target
+  - path: data/taxa/bacteria/pseudomonas_aeruginosa_pao1.yaml
+    sha256: 7232f3561985f8be4d9b4c386d1d0794afd1aad800ee9186e7a7a18e5808b15b
+    role: target
+  - path: data/taxa/eukaryota/cryptococcus_deneoformans.yaml
+    sha256: 90ed37316d8ea747fdcf3ee3c208e7f34cfa96b9d9a504b5ff6f346fe21fefa5
+    role: target
+  - path: data/taxa/eukaryota/cryptococcus_deneoformans_b_3501a.yaml
+    sha256: 28846cf07c1deb3acf5a63cf5470004db24b7eaf227dabb959aa7a24c12a68ce
+    role: target
+  - path: data/taxa/eukaryota/cryptococcus_deuterogattii.yaml
+    sha256: 361df09d787a4889a5a8753f90adf661283f8f555fba9547d4ece43aa4cd8f24
+    role: target
+  - path: data/taxa/eukaryota/cryptococcus_deuterogattii_r265.yaml
+    sha256: c0a7978eae1b0f1abeba6c77112ecbb1831baecafe2ef3cd95f1c7e09c35a955
+    role: target
+  - path: data/taxa/eukaryota/cryptococcus_neoformans.yaml
+    sha256: 79167fec32d972d251da73e4026ea30ce59fc99e4dfc5b8aafb817ddcec87553
+    role: target
+  - path: data/taxa/eukaryota/cryptococcus_neoformans_h99.yaml
+    sha256: 317b57c85586bdde85979f6d86297b757a92fbcac6c0c4b8e183a785bf7b177f
+    role: target
+  - path: scripts/render_pages.py
+    sha256: de2984d4c5479778e83f9d1a6fb9ba67f8fbd27d42537fbe2b5151f60f1c0342
+    role: context
+  - path: scripts/validate_id_label_correspondence.py
+    sha256: b5ff41bb52d24f5d7819fb12769e216440f75ec3fb3df3e3cb2c5082fffb40e0
+    role: context
+  - path: scripts/validate_strict.py
+    sha256: d0d75cc805cc746053076b5f75f5e6c817ab15c75a9362f8ce3be53bd4ec7382
+    role: context
+  - path: scripts/verify_corpus.py
+    sha256: faa673e0dbb0388b851c8d8b128aa26e312c2d297ca3686acf029a90cc004537
+    role: context
+  - path: src/taxonmech/extract.py
+    sha256: 15349b9935d9c28cc4a0e037928161cf57f9bf145523cd99ec02bac32a00657b
+    role: context
+  - path: src/taxonmech/schema/taxonmech.yaml
+    sha256: 60747327658d0e2560ac9e58fb6e9a19cf711266300f1eff8b5c64e2917020ad
+    role: context
+  - path: src/taxonmech/seed.py
+    sha256: 22d85f2868edcdd8ac05f45148c8a59e5542ffa1d06e714d922f88bda0db0af7
+    role: context
+  - path: src/taxonmech/templates/taxon-content.html
+    sha256: 9562204e103755b648b32234cf001253e855a64bb46f5de1eb372b5fcf7ad3a2
+    role: context
+  - path: tests/test_causal_graph_overlays.py
+    sha256: e98e73a50ccee5d84acccccda3724c92e0da5d2831352e2a3fc7e611324b6a44
+    role: context
+scope:
+  description: Full-corpus Cycle 5 Stage 2 causal-graph review across all 626,048
+    TaxonRecord files in data/taxa/, paired with native curation, enrichment, and
+    seeding across all 15 maintained curation/causal_graphs/*.yaml overlays (171 evidence-backed
+    edges across 7 cross-domain species exemplars and 8 reference-proteome strains).
+  selection: All 626,048 in-scope taxa in curation/seed_scope.tsv and data/taxa/PATHS.tsv
+    classified by raw source coverage, with all 15 causal-graph-bearing species and
+    strain exemplars reviewed, enriched, and validated directly.
+  coverage: sampled
+  population_size: 626048
+  sampling_method: Exhaustive deterministic census of all 626,048 records in curation/seed_scope.tsv
+    and data/raw/{madin_taxa,bactotraits_taxa,mediadive_taxa,gold_organisms,bacdive_strains,ncbitaxon_taxa}.tsv
+    plus 100% inspection and verification of all 15 species and reference-proteome
+    strain records carrying maintained curation/causal_graphs/*.yaml overlays across
+    Bacteria, Archaea, and Eukaryota.
+  reviewed_target_ids:
+  - NCBITaxon:562
+  - NCBITaxon:83333
+  - NCBITaxon:511145
+  - NCBITaxon:1423
+  - NCBITaxon:224308
+  - NCBITaxon:287
+  - NCBITaxon:208964
+  - NCBITaxon:2190
+  - NCBITaxon:243232
+  - NCBITaxon:1859096
+  - NCBITaxon:294750
+  - NCBITaxon:40410
+  - NCBITaxon:283643
+  - NCBITaxon:5207
+  - NCBITaxon:235443
+targets:
+- target_id: NCBITaxon:562
+  path: data/taxa/bacteria/escherichia_coli.yaml
+  label: Escherichia coli
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: curation/causal_graphs/NCBITaxon_562.yaml
+    role: Maintained causal-graph overlay input
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder and overlay merger
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:83333
+  path: data/taxa/bacteria/escherichia_coli_k_12.yaml
+  label: Escherichia coli K-12
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: curation/causal_graphs/NCBITaxon_83333.yaml
+    role: Maintained causal-graph overlay input
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder and overlay merger
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:511145
+  path: data/taxa/bacteria/escherichia_coli_str_k_12_substr_mg1655.yaml
+  label: Escherichia coli str. K-12 substr. MG1655
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: curation/causal_graphs/NCBITaxon_511145.yaml
+    role: Maintained causal-graph overlay input
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder and overlay merger
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:1423
+  path: data/taxa/bacteria/bacillus_subtilis.yaml
+  label: Bacillus subtilis
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: curation/causal_graphs/NCBITaxon_1423.yaml
+    role: Maintained causal-graph overlay input
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder and overlay merger
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:224308
+  path: data/taxa/bacteria/bacillus_subtilis_subsp_subtilis_str_168.yaml
+  label: Bacillus subtilis subsp. subtilis str. 168
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: curation/causal_graphs/NCBITaxon_224308.yaml
+    role: Maintained causal-graph overlay input
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder and overlay merger
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:287
+  path: data/taxa/bacteria/pseudomonas_aeruginosa.yaml
+  label: Pseudomonas aeruginosa
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: curation/causal_graphs/NCBITaxon_287.yaml
+    role: Maintained causal-graph overlay input
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder and overlay merger
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:208964
+  path: data/taxa/bacteria/pseudomonas_aeruginosa_pao1.yaml
+  label: Pseudomonas aeruginosa PAO1
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: curation/causal_graphs/NCBITaxon_208964.yaml
+    role: Maintained causal-graph overlay input
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder and overlay merger
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:2190
+  path: data/taxa/archaea/methanocaldococcus_jannaschii.yaml
+  label: Methanocaldococcus jannaschii
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: curation/causal_graphs/NCBITaxon_2190.yaml
+    role: Maintained causal-graph overlay input
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder and overlay merger
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:243232
+  path: data/taxa/archaea/methanocaldococcus_jannaschii_dsm_2661.yaml
+  label: Methanocaldococcus jannaschii DSM 2661
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: curation/causal_graphs/NCBITaxon_243232.yaml
+    role: Maintained causal-graph overlay input
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder and overlay merger
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:1859096
+  path: data/taxa/eukaryota/cryptococcus_deuterogattii.yaml
+  label: Cryptococcus deuterogattii
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: curation/causal_graphs/NCBITaxon_1859096.yaml
+    role: Maintained causal-graph overlay input
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder and overlay merger
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:294750
+  path: data/taxa/eukaryota/cryptococcus_deuterogattii_r265.yaml
+  label: Cryptococcus deuterogattii R265
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: curation/causal_graphs/NCBITaxon_294750.yaml
+    role: Maintained causal-graph overlay input
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder and overlay merger
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:40410
+  path: data/taxa/eukaryota/cryptococcus_deneoformans.yaml
+  label: Cryptococcus deneoformans
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: curation/causal_graphs/NCBITaxon_40410.yaml
+    role: Maintained causal-graph overlay input
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder and overlay merger
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:283643
+  path: data/taxa/eukaryota/cryptococcus_deneoformans_b_3501a.yaml
+  label: Cryptococcus deneoformans B-3501A
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: curation/causal_graphs/NCBITaxon_283643.yaml
+    role: Maintained causal-graph overlay input
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder and overlay merger
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:5207
+  path: data/taxa/eukaryota/cryptococcus_neoformans.yaml
+  label: Cryptococcus neoformans
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: curation/causal_graphs/NCBITaxon_5207.yaml
+    role: Maintained causal-graph overlay input
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder and overlay merger
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:235443
+  path: data/taxa/eukaryota/cryptococcus_neoformans_h99.yaml
+  label: Cryptococcus neoformans H99
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: curation/causal_graphs/NCBITaxon_235443.yaml
+    role: Maintained causal-graph overlay input
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder and overlay merger
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+checks:
+- check_id: validate-strict-15-curated-records
+  name: Strict LinkML and custom semantic validation on all 15 causal-graph-seeded
+    TaxonRecord files
+  status: passed
+  required: true
+  summary: All 15 seeded TaxonRecord YAML files pass scripts/validate_strict.py with
+    0 errors.
+  target_ids:
+  - NCBITaxon:562
+  - NCBITaxon:83333
+  - NCBITaxon:511145
+  - NCBITaxon:1423
+  - NCBITaxon:224308
+  - NCBITaxon:287
+  - NCBITaxon:208964
+  - NCBITaxon:2190
+  - NCBITaxon:243232
+  - NCBITaxon:1859096
+  - NCBITaxon:294750
+  - NCBITaxon:40410
+  - NCBITaxon:283643
+  - NCBITaxon:5207
+  - NCBITaxon:235443
+  command: .venv/bin/python scripts/validate_strict.py data/taxa/bacteria/escherichia_coli.yaml
+    data/taxa/bacteria/escherichia_coli_k_12.yaml data/taxa/bacteria/escherichia_coli_str_k_12_substr_mg1655.yaml
+    data/taxa/bacteria/bacillus_subtilis.yaml data/taxa/bacteria/bacillus_subtilis_subsp_subtilis_str_168.yaml
+    data/taxa/bacteria/pseudomonas_aeruginosa.yaml data/taxa/bacteria/pseudomonas_aeruginosa_pao1.yaml
+    data/taxa/archaea/methanocaldococcus_jannaschii.yaml data/taxa/archaea/methanocaldococcus_jannaschii_dsm_2661.yaml
+    data/taxa/eukaryota/cryptococcus_deuterogattii.yaml data/taxa/eukaryota/cryptococcus_deuterogattii_r265.yaml
+    data/taxa/eukaryota/cryptococcus_deneoformans.yaml data/taxa/eukaryota/cryptococcus_deneoformans_b_3501a.yaml
+    data/taxa/eukaryota/cryptococcus_neoformans.yaml data/taxa/eukaryota/cryptococcus_neoformans_h99.yaml
+  exit_code: 0
+  expected_exit_code: 0
+  evidence_ids:
+  - curated-causal-graph-overlays-and-records
+- check_id: validate-oak-id-label-correspondence
+  name: OAK ID-label correspondence validation across all 15 causal-graph overlays
+  status: passed
+  required: true
+  summary: scripts/validate_id_label_correspondence.py reports 164 OK_CANONICAL, 60
+    SKIPPED_NO_ADAPTER, and 0 MISMATCH across all grounded nodes and predicates in
+    curation/causal_graphs/*.yaml.
+  target_ids:
+  - NCBITaxon:562
+  - NCBITaxon:83333
+  - NCBITaxon:511145
+  - NCBITaxon:1423
+  - NCBITaxon:224308
+  - NCBITaxon:287
+  - NCBITaxon:208964
+  - NCBITaxon:2190
+  - NCBITaxon:243232
+  - NCBITaxon:1859096
+  - NCBITaxon:294750
+  - NCBITaxon:40410
+  - NCBITaxon:283643
+  - NCBITaxon:5207
+  - NCBITaxon:235443
+  command: .venv/bin/python scripts/validate_id_label_correspondence.py --config conf/id_label_targets.yaml
+  exit_code: 0
+  expected_exit_code: 0
+  evidence_ids:
+  - oak-id-label-validation
+- check_id: pytest-causal-graph-overlays
+  name: Unit and integration test suite for causal-graph overlays, offline UniProtKB
+    reference proteome validation, seeder merge, and HTML rendering
+  status: passed
+  required: true
+  summary: tests/test_causal_graph_overlays.py passes all roundtrip, offline UniProtKB
+    reference proteome and lineage validation, rendering, and committed-overlay validation
+    checks (171 edges across 15 overlays).
+  target_ids:
+  - NCBITaxon:562
+  - NCBITaxon:83333
+  - NCBITaxon:511145
+  - NCBITaxon:1423
+  - NCBITaxon:224308
+  - NCBITaxon:287
+  - NCBITaxon:208964
+  - NCBITaxon:2190
+  - NCBITaxon:243232
+  - NCBITaxon:1859096
+  - NCBITaxon:294750
+  - NCBITaxon:40410
+  - NCBITaxon:283643
+  - NCBITaxon:5207
+  - NCBITaxon:235443
+  command: .venv/bin/pytest -q tests/test_causal_graph_overlays.py
+  exit_code: 0
+  expected_exit_code: 0
+  evidence_ids:
+  - seeder-and-verify-corpus-pipeline
+evidence:
+- evidence_id: curated-causal-graph-overlays-and-records
+  kind: record_content
+  reference: curation/causal_graphs/NCBITaxon_*.yaml; data/taxa/{bacteria,archaea,eukaryota}/*.yaml
+  locator: curation/causal_graphs/NCBITaxon_{562,83333,511145,1423,224308,287,208964,2190,243232,1859096,294750,40410,283643,5207,235443}.yaml
+  accessed_at: '2026-10-31T23:10:00Z'
+  support: supports
+  summary: Fifteen maintained curation/causal_graphs/*.yaml overlays define 171 evidence-backed
+    causal edges with PMID citations, verified UniProtKB reference proteome accessions,
+    and canonical GO/CHEBI/RO/METPO groundings, merged deterministically into their
+    15 TaxonRecord YAML files.
+  snapshot_sha256: 6d548c9f4362c30b386f9c500fb49ae25d51df4902311ddea2a464d340b61f0d
+- evidence_id: oak-id-label-validation
+  kind: validation
+  reference: conf/id_label_targets.yaml; scripts/validate_id_label_correspondence.py
+  locator: conf/id_label_targets.yaml:14-65
+  accessed_at: '2026-10-31T23:10:00Z'
+  support: supports
+  summary: All OBO-grounded node and edge pairs across GO, CHEBI, RO, and METPO in
+    the 15 causal-graph overlays match canonical OAK ontology labels (0 MISMATCH).
+  snapshot_sha256: efed4c6d9cc218c9d89ba4468e361761ac02ff535e2669de33af6606202e544c
+- evidence_id: seeder-and-verify-corpus-pipeline
+  kind: validation
+  reference: src/taxonmech/seed.py; curation/uniprot_proteins.tsv; tests/test_causal_graph_overlays.py
+  locator: src/taxonmech/seed.py:217-370,790-810; tests/test_causal_graph_overlays.py:1-961
+  accessed_at: '2026-10-31T23:10:00Z'
+  support: supports
+  summary: load_causal_graphs(), validate_causal_graph_proteins(), and build_document()
+    merge maintained overlays into TaxonRecord.causal_graphs and curation_history
+    while enforcing offline UniProtKB reference proteome and lineage validation and
+    byte-for-byte reproducibility.
+  snapshot_sha256: 57f375e3d289e4f16ae71340cbd75e0b836d28e6e9c90fbf4fd9a6756be6b4dc
+- evidence_id: raw-phenotype-and-trait-inventories
+  kind: database
+  reference: data/raw/madin_taxa.tsv; data/raw/bactotraits_taxa.tsv; data/raw/mediadive_taxa.tsv
+  locator: madin_taxa.tsv (34,148 rows); bactotraits_taxa.tsv (9,658 rows); mediadive_taxa.tsv
+    (14,154 rows)
+  accessed_at: '2026-10-31T23:10:00Z'
+  support: supports
+  summary: Committed raw tables in data/raw/madin_taxa.tsv and data/raw/bactotraits_taxa.tsv
+    store 2-column (taxon_id, assertion_count) summaries until an upstream kg-microbe
+    checkout re-extraction runs extract_taxon_trait_edges().
+  snapshot_sha256: 7620448834f1b86daa83f2e338160ec3291a2ec3900ea4cec449418b1dc8b148
+assessments:
+- assessment_id: exemplar-species-and-strain-causal-graphs-enriched
+  area: graph
+  topic: Evidence-backed native CausalGraph curation and enrichment across 15 cross-domain
+    species and reference-proteome strain records
+  outcome: supported
+  summary: Maintained 15 curation/causal_graphs/*.yaml overlays (enriched from 161
+    to 171 evidence-backed edges in Cycle 5 Stage 2) across Escherichia coli (NCBITaxon:562,
+    NCBITaxon:83333, NCBITaxon:511145; 17 edges each including e16 lacI -> RO:0002212
+    -> lactose_transport and e17 crp -> RO:0002213 -> lactose_transport), Bacillus
+    subtilis (NCBITaxon:1423, NCBITaxon:224308; 23 edges each including e22 spo0F
+    -> RO:0002418 -> endospore_formation and e23 spo0B -> RO:0002418 -> endospore_formation),
+    Pseudomonas aeruginosa (NCBITaxon:287, NCBITaxon:208964; 9 edges each), Methanocaldococcus
+    jannaschii (NCBITaxon:2190, NCBITaxon:243232; 13 edges each), Cryptococcus deuterogattii
+    (NCBITaxon:1859096, NCBITaxon:294750; 7 edges each), Cryptococcus deneoformans
+    (NCBITaxon:40410, NCBITaxon:283643; 4 edges each), and Cryptococcus neoformans
+    (NCBITaxon:5207, NCBITaxon:235443; 4 edges each).
+  target_ids:
+  - NCBITaxon:562
+  - NCBITaxon:83333
+  - NCBITaxon:511145
+  - NCBITaxon:1423
+  - NCBITaxon:224308
+  - NCBITaxon:287
+  - NCBITaxon:208964
+  - NCBITaxon:2190
+  - NCBITaxon:243232
+  - NCBITaxon:1859096
+  - NCBITaxon:294750
+  - NCBITaxon:40410
+  - NCBITaxon:283643
+  - NCBITaxon:5207
+  - NCBITaxon:235443
+  evidence_ids:
+  - curated-causal-graph-overlays-and-records
+  - oak-id-label-validation
+  - seeder-and-verify-corpus-pipeline
+  metrics:
+  - name: records_with_populated_causal_graphs
+    value: 15.0
+    unit: records
+    definition: In-scope TaxonRecord files carrying a non-empty causal_graphs list.
+    denominator: 626048
+    minimum: 0.0
+    maximum: 626048.0
+  - name: evidence_backed_causal_edges
+    value: 171.0
+    unit: edges
+    definition: Total evidence-backed CausalEdge entries across seeded TaxonRecord.causal_graphs.
+    minimum: 0.0
+- assessment_id: corpus-source-limited-trait-extraction-gap
+  area: completeness
+  topic: Remaining corpus-wide trait/medium-attested records awaiting upstream kg-microbe
+    granular edge extraction
+  outcome: concern
+  summary: While extract_taxon_trait_edges() is implemented in src/taxonmech/extract.py
+    (#78 / taxonmech-infra-0002), committed data/raw/madin_taxa.tsv and data/raw/bactotraits_taxa.tsv
+    remain 2-column count tables until re-extracted from an upstream local kg-microbe
+    checkout, limiting bulk automated causal-graph generation across the remaining
+    38,342 trait/medium-attested records.
+  target_ids:
+  - NCBITaxon:562
+  - NCBITaxon:83333
+  - NCBITaxon:511145
+  - NCBITaxon:1423
+  - NCBITaxon:224308
+  - NCBITaxon:287
+  - NCBITaxon:208964
+  - NCBITaxon:2190
+  - NCBITaxon:243232
+  - NCBITaxon:1859096
+  - NCBITaxon:294750
+  - NCBITaxon:40410
+  - NCBITaxon:283643
+  - NCBITaxon:5207
+  - NCBITaxon:235443
+  evidence_ids:
+  - raw-phenotype-and-trait-inventories
+findings:
+- finding_id: finding-001
+  issue_key: taxonmech-extract-collapses-trait-edges-to-counts
+  category: provenance
+  severity: minor
+  status: deferred
+  certainty: confirmed
+  title: Committed data/raw/{madin_taxa,bactotraits_taxa}.tsv store pre-aggregated
+    assertion counts pending upstream kg-microbe re-extraction
+  description: 'Although src/taxonmech/extract.py provides extract_taxon_trait_edges()
+    and TRAIT_EDGE_FIELDS (landed in Cycle 1 Stage 6 PR #152 under issue #78 / taxonmech-infra-0002),
+    the committed raw files data/raw/madin_taxa.tsv (34,148 rows) and data/raw/bactotraits_taxa.tsv
+    (9,658 rows) still hold 2-column (taxon_id, assertion_count) summaries until an
+    upstream kg-microbe checkout re-extraction populates data/raw/taxon_trait_edges.tsv.'
+  target_ids:
+  - NCBITaxon:562
+  - NCBITaxon:83333
+  - NCBITaxon:511145
+  - NCBITaxon:1423
+  - NCBITaxon:224308
+  - NCBITaxon:287
+  - NCBITaxon:208964
+  - NCBITaxon:2190
+  - NCBITaxon:243232
+  - NCBITaxon:1859096
+  - NCBITaxon:294750
+  - NCBITaxon:40410
+  - NCBITaxon:283643
+  - NCBITaxon:5207
+  - NCBITaxon:235443
+  field_paths:
+  - source_attestations
+  - causal_graphs
+  evidence_ids:
+  - raw-phenotype-and-trait-inventories
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/extract.py
+    role: Raw source extractor
+  - repository: CultureBotAI/TaxonMech
+    path: data/raw/madin_taxa.tsv
+    role: Madin trait inventory
+  - repository: CultureBotAI/TaxonMech
+    path: data/raw/bactotraits_taxa.tsv
+    role: BactoTraits trait inventory
+  external_issues:
+  - https://github.com/CultureBotAI/TaxonMech/issues/78
+  disposition_reason: 'Tracked under open issue #78 (taxonmech-infra-0002 in INFRA_TASKS.md)
+    pending upstream kg-microbe edge-table re-extraction.'
+actions:
+- action_id: action-001
+  description: Run extract_taxon_trait_edges() against an upstream kg-microbe checkout
+    to populate data/raw/taxon_trait_edges.tsv and expand automated causal-graph overlays
+    (#78).
+  finding_ids:
+  - finding-001
+  target_ids:
+  - NCBITaxon:562
+  - NCBITaxon:83333
+  - NCBITaxon:511145
+  - NCBITaxon:1423
+  - NCBITaxon:224308
+  - NCBITaxon:287
+  - NCBITaxon:208964
+  - NCBITaxon:2190
+  - NCBITaxon:243232
+  - NCBITaxon:1859096
+  - NCBITaxon:294750
+  - NCBITaxon:40410
+  - NCBITaxon:283643
+  - NCBITaxon:5207
+  - NCBITaxon:235443
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/extract.py
+    role: Raw source extractor
+  acceptance_checks:
+  - data/raw/taxon_trait_edges.tsv is populated with predicate, object CURIE, and
+    publication provenance from kg-microbe
+limitations:
+- Bulk automated causal-graph synthesis across the remaining 38,342 Madin/BactoTraits/MediaDive-attested
+  records requires running extract_taxon_trait_edges() against an upstream local kg-microbe
+  checkout (#78 / taxonmech-infra-0002).
+- 562,682 of 626,048 in-scope records are taxonomy-only records without phenotype,
+  growth-medium, genome, or strain rows in data/raw/.
+notes:
+- Cycle 5 Stage 2 enriched 5 maintained curation/causal_graphs/*.yaml overlays across
+  Escherichia coli and Bacillus subtilis from 161 to 171 evidence-backed edges across
+  all 15 curated cross-domain species and reference-proteome strain records.
+tags:
+- stage2-causal-graphs
+- cycle5-curation
+- mechanism-representation
+```

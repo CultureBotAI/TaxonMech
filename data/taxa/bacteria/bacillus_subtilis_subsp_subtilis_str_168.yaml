@@ -146,6 +146,14 @@ curation_history:
     and Spo0A~P phosphatase edges (PMID:9384377, PMID:8497199, PMID:2838724, PMID:8127878,
     PMID:12067336).
   llm_assisted: true
+- timestamp: '2026-10-31T23:10:00Z'
+  curator: curate-causal-graphs
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: Added direct phosphorelay-component-to-process causal edges linking Spo0F
+    (edge e22, spo0F RO:0002418 endospore_formation, PMID:1846779, PMID:3003689) and
+    Spo0B (edge e23, spo0B RO:0002418 endospore_formation, PMID:1846779, PMID:6438629)
+    to endospore formation (GO:0034301).
+  llm_assisted: true
 causal_graphs:
 - graph_id: endospore_formation
   title: KinA/Spo0A-regulated endospore formation
@@ -484,3 +492,29 @@ causal_graphs:
     - reference: PMID:2838724
       notes: Overexpression or hypermorphic C-terminal truncation mutations of spo0E
         block sporulation initiation in Bacillus subtilis 168.
+  - edge_id: e22
+    subject: spo0F
+    predicate: causally upstream of or within
+    predicate_id: RO:0002418
+    object: endospore_formation
+    evidence:
+    - reference: PMID:1846779
+      notes: Intermediate response regulator Spo0F (UniProtKB:P06628) is an essential
+        phosphoryl carrier in the multicomponent phosphorelay governing entry into
+        endospore formation in Bacillus subtilis 168.
+    - reference: PMID:3003689
+      notes: Genetic and sequence characterization of the Bacillus subtilis spo0F
+        stage 0 sporulation locus required for initiation of endospore formation.
+  - edge_id: e23
+    subject: spo0B
+    predicate: causally upstream of or within
+    predicate_id: RO:0002418
+    object: endospore_formation
+    evidence:
+    - reference: PMID:1846779
+      notes: Sporulation initiation phosphotransferase Spo0B (UniProtKB:P06535) relays
+        phosphoryl groups from Spo0F~P to Spo0A to initiate endospore formation in
+        Bacillus subtilis 168.
+    - reference: PMID:6438629
+      notes: Characterization of the Bacillus subtilis spo0B stage 0 sporulation gene
+        essential for progression into endospore formation.
