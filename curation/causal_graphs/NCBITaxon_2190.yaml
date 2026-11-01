@@ -14,6 +14,21 @@ causal_graphs:
     label: Methanocaldococcus jannaschii
     node_type: TAXON
     grounding: NCBITaxon:2190
+  - node_id: fwdB
+    label: Tungsten-containing formylmethanofuran dehydrogenase 2 subunit B (fwdB)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:P61154
+    xrefs:
+    - EC:1.2.7.12
+    organism_taxon_id: NCBITaxon:243232
+    strain_id: kgmicrobe.strain:bacdive_6981
+    proteome_id: UP:UP000000805
+    gene_symbol: fwdB
+    locus_tag: MJ1194
+    sequence_length: 435
+    sequence_crc64: C1652D23FFC20970
+    sequence_version: 2
+    entry_status: SWISS_PROT
   - node_id: mer
     label: 5,10-methylenetetrahydromethanopterin reductase (mer)
     node_type: GENE_OR_PROTEIN
@@ -232,6 +247,39 @@ causal_graphs:
       notes: >-
         Genomic reconstruction of the Methanocaldococcus jannaschii DSM 2661
         hydrogenotrophic methanogenesis pathway from CO2 and H2 to methane.
+  - edge_id: e14
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: fwdB
+    evidence:
+    - reference: PMID:8688087
+      notes: >-
+        Complete genome sequence of Methanocaldococcus jannaschii DSM 2661
+        identifying fwdB (MJ1194) encoding the catalytic subunit B of
+        tungsten-containing formylmethanofuran dehydrogenase 2.
+    - reference: PMID:9102456
+      notes: >-
+        Experimental 75Se-labeling identification of selenoproteins in
+        Methanocaldococcus jannaschii DSM 2661 confirming expression of the
+        selenocysteine-containing tungsten formylmethanofuran dehydrogenase
+        subunit FwdB (MJ1194).
+  - edge_id: e15
+    subject: fwdB
+    predicate: causally upstream of or within
+    predicate_id: RO:0002418
+    object: methanogenesis
+    evidence:
+    - reference: PMID:9102456
+      notes: >-
+        Tungsten-containing formylmethanofuran dehydrogenase subunit B (FwdB,
+        EC:1.2.7.12, UniProtKB:P61154) catalyzes the initial CO2-reduction step
+        forming N-formylmethanofuran in hydrogenotrophic methanogenesis.
+    - reference: PMID:8688087
+      notes: >-
+        Genomic reconstruction of the Methanocaldococcus jannaschii DSM 2661
+        hydrogenotrophic methanogenesis pathway from CO2 reduction through
+        methyl-coenzyme M reduction.
 curation_history:
 - timestamp: '2026-10-22T14:00:00Z'
   curator: curate-causal-graphs
@@ -270,4 +318,14 @@ curation_history:
     proteome UP:UP000000805 with literature-backed expression and C1-reduction
     pathway edges in hydrogenotrophic methanogenesis (PMID:8688087,
     PMID:28644554).
+  llm_assisted: true
+- timestamp: '2026-11-01T03:45:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: >-
+    Added live-verified Swiss-Prot entry UniProtKB:P61154 (FWDB_METJA, fwdB /
+    MJ1194, EC:1.2.7.12, 435 aa, CRC64 C1652D23FFC20970, v2) in reference
+    proteome UP:UP000000805 with literature-backed expression and initial
+    CO2-reduction pathway edges in hydrogenotrophic methanogenesis
+    (PMID:8688087, PMID:9102456).
   llm_assisted: true

@@ -1,0 +1,47 @@
+history_version: 1
+target:
+  kind: infrastructure
+  path: curation/uniprot_proteins.tsv
+  slug: cycle5-stage3-protein-examples
+session:
+  id: 2026-11-01T035500Z-Antigravity-c5s3p1
+  timestamp: '2026-11-01T03:55:00Z'
+  actors:
+  - type: ai_agent
+    name: Antigravity
+    agent_tool: antigravity-cli
+links:
+  issues:
+  - https://github.com/CultureBotAI/TaxonMech/issues/78
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - causal_graphs
+  - evidence
+  - validation
+  summary: Expand curation/uniprot_proteins.tsv from 23 to 29 live-verified UniProtKB
+    accessions and enrich 11 causal-graph overlays from 51 to 64 GENE_OR_PROTEIN nodes
+    and from 171 to 204 evidence-backed edges across 15 curated records
+  details: 'Reviewed all 626,048 in-scope TaxonRecord files and all 15 maintained
+    curation/causal_graphs/*.yaml overlays against the Stage 3 UniProtKB protein-examples
+    contract (.claude/skills/add-uniprot-protein-examples/SKILL.md). Live-verified
+    6 additional reviewed Swiss-Prot accessions against UniProt REST (release 2026_02)
+    and NCBI PubMed E-utilities: UniProtKB:P00936 (CYAA_ECOLI, cyaA/b3806, EC:4.6.1.1,
+    NCBITaxon:83333, UP:UP000000625, 848 aa, CRC64 F0400E3406B15018, v5), UniProtKB:Q00828
+    (RAPA_BACSU, rapA/BSU12430, EC:3.1.3.-, NCBITaxon:224308, UP:UP000001570, 378
+    aa, CRC64 8712FE59B865AEF4, v2), UniProtKB:Q9HWH1 (PHZA1_PSEAE, phzA1/PA4210,
+    NCBITaxon:208964, UP:UP000002438, 162 aa, CRC64 8B89D65CDEF67198, v1), UniProtKB:O69753
+    (PHZB1_PSEAE, phzB1/PA4211, NCBITaxon:208964, UP:UP000002438, 162 aa, CRC64 F641EECE73F0B78F,
+    v1), UniProtKB:P61154 (FWDB_METJA, fwdB/MJ1194, EC:1.2.7.12, NCBITaxon:243232,
+    UP:UP000000805, 435 aa, CRC64 C1652D23FFC20970, v2), and UniProtKB:J9VQ26 (BZP4_CRYN9,
+    BZP4/CNAG_03346, NCBITaxon:235443, UP:UP000010091, 341 aa, CRC64 8E34C8525C009CFC,
+    v2). Enriched 11 maintained overlays across Escherichia coli (NCBITaxon:562, NCBITaxon:83333,
+    NCBITaxon:511145), Bacillus subtilis (NCBITaxon:1423, NCBITaxon:224308), Pseudomonas
+    aeruginosa (NCBITaxon:287, NCBITaxon:208964), Methanocaldococcus jannaschii (NCBITaxon:2190,
+    NCBITaxon:243232), and Cryptococcus neoformans (NCBITaxon:5207, NCBITaxon:235443),
+    increasing GENE_OR_PROTEIN nodes from 51 to 64 (62 with UP:* proteome_id) and
+    evidence-backed causal edges from 171 to 204. Regenerated the 11 affected TaxonRecord
+    YAML files, 10 affected pages/taxon-details/<bucket>.json.gz shards, and README.md
+    corpus statistics, and verified LinkML strict validation, OAK ID-label correspondence,
+    offline UniProtKB reference proteome validation, and record-review contracts.'

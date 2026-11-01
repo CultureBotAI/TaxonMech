@@ -151,6 +151,14 @@ curation_history:
     UP:UP000010091 with literature-backed expression, diphenol oxidase activity, and
     melanin biosynthesis edges (PMID:24743168, PMID:15643075, PMID:15381117, PMID:15643074).
   llm_assisted: true
+- timestamp: '2026-11-01T03:45:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: Added live-verified Swiss-Prot entry UniProtKB:J9VQ26 (BZP4_CRYN9, BZP4
+    / CNAG_03346, 341 aa, CRC64 8E34C8525C009CFC, v2) in reference proteome UP:UP000010091
+    with literature-backed expression and positive regulatory edges for LAC1 and melanin
+    biosynthesis (PMID:24743168, PMID:25849373, PMID:31575776).
+  llm_assisted: true
 causal_graphs:
 - graph_id: melanin_biosynthesis
   title: Lac1-mediated melanin biosynthesis
@@ -189,6 +197,18 @@ causal_graphs:
     locus_tag: CNAG_03464
     sequence_length: 594
     sequence_crc64: E71D60C20BD6C102
+    sequence_version: 2
+    entry_status: SWISS_PROT
+  - node_id: bzp4
+    label: BZIP domain-containing transcription factor BZP4 (BZP4)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:J9VQ26
+    organism_taxon_id: NCBITaxon:235443
+    proteome_id: UP:UP000010091
+    gene_symbol: BZP4
+    locus_tag: CNAG_03346
+    sequence_length: 341
+    sequence_crc64: 8E34C8525C009CFC
     sequence_version: 2
     entry_status: SWISS_PROT
   - node_id: laccase_activity
@@ -278,3 +298,41 @@ causal_graphs:
     - reference: PMID:15643074
       notes: cAMP-dependent signaling co-regulates transcription of the Cryptococcus
         neoformans melanin biosynthesis genes LAC1 and LAC2.
+  - edge_id: e8
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: bzp4
+    evidence:
+    - reference: PMID:24743168
+      notes: Reference genome and transcriptome assembly of Cryptococcus neoformans
+        var. grubii strain H99 identifying BZP4 (CNAG_03346).
+    - reference: PMID:25849373
+      notes: Systematic functional profiling of 155 Cryptococcus neoformans transcription
+        factors identifying the bZIP regulator Bzp4 (CNAG_03346).
+  - edge_id: e9
+    subject: bzp4
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: lac1
+    evidence:
+    - reference: PMID:25849373
+      notes: Deletion of BZP4 (CNAG_03346) impairs LAC1 induction under nutrient starvation
+        and reduces melanin production in Cryptococcus neoformans.
+    - reference: PMID:31575776
+      notes: Nutrient deprivation triggers nuclear translocation of Bzp4 to induce
+        LAC1 transcription in the core melanin regulatory network of Cryptococcus
+        neoformans.
+  - edge_id: e10
+    subject: bzp4
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: melanin_biosynthesis
+    evidence:
+    - reference: PMID:25849373
+      notes: Bzp4 is a core transcriptional activator required for wild-type catecholamine
+        oxidation and cell-wall melanin biosynthesis in Cryptococcus neoformans.
+    - reference: PMID:31575776
+      notes: Epistatic and transcriptional network analysis establishes Bzp4 as a
+        core transcription factor driving LAC1 expression and melanization in Cryptococcus
+        neoformans.
