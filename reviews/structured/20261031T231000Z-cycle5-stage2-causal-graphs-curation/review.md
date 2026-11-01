@@ -19,7 +19,7 @@ Full-corpus Cycle 5 Stage 2 causal-graph review across all 626,048 TaxonRecord f
 
 Selection: All 626,048 in-scope taxa in curation/seed_scope.tsv and data/taxa/PATHS.tsv classified by raw source coverage, with all 15 causal-graph-bearing species and strain exemplars reviewed, enriched, and validated directly.
 Coverage: sampled; 15 reviewed / 626048 in the declared population.
-Source: working_tree at Git base 28057279ffcf60185fa15d53da7ba69d326548a5.
+Source: working_tree at Git base b62b0b0016e592b21b5d22f3286419d366e45bb4.
 Working-tree hashes do not imply those bytes were committed.
 
 | Target | Path / selector | Kind | Label |
@@ -146,7 +146,7 @@ summary: 'Reviewed all 626,048 in-scope TaxonRecord files across Bacteria (605,6
   source-limited by pre-aggregated 2-column count tables in data/raw/{madin_taxa,bactotraits_taxa}.tsv
   (tracked under #78 / taxonmech-infra-0002).'
 source:
-  git_revision: 28057279ffcf60185fa15d53da7ba69d326548a5
+  git_revision: b62b0b0016e592b21b5d22f3286419d366e45bb4
   state: working_tree
   inputs:
   - path: .claude/skills/curate-causal-graphs/SKILL.md
@@ -162,7 +162,7 @@ source:
     sha256: 49611bb5de81725d31b6d6c0fa0757a980f79140421c8c84a6f1da440852dfcb
     role: context
   - path: README.md
-    sha256: 9bbb0f88d3d27767532fafe2d1f43c8dc68443a551d0ff2c5ceca75a5ddb69f7
+    sha256: b47caf8a26c7d5bb9cf6259e5cf2af998c1ec01f29c161f72e95e2b989aa8c89
     role: context
   - path: conf/id_label_targets.yaml
     sha256: efed4c6d9cc218c9d89ba4468e361761ac02ff535e2669de33af6606202e544c
