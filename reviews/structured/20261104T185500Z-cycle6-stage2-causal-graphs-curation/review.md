@@ -11,7 +11,7 @@
 
 ## Summary
 
-Reviewed all 626,048 in-scope TaxonRecord files across Bacteria (605,695), Archaea (14,013), Eukaryota (6,331), and other (9) against the Stage 2 causal-graph curation contract (.claude/skills/curate-causal-graphs/SKILL.md). Verified that all native prerequisite gates pass, including offline UniProtKB reference proteome and NCBI Taxonomy lineage validation (curation/uniprot_proteins.tsv and validate_causal_graph_proteins() in src/taxonmech/seed.py). Enriched 7 maintained curation/causal_graphs/*.yaml overlays across Escherichia coli (NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145; adding edge e21 linking cyaA UniProtKB:P00936 via causally upstream of or within RO:0002418 to lactose_transport GO:0015767, PMID:6393056, PMID:1646077), Bacillus subtilis (NCBITaxon:1423, NCBITaxon:224308; adding edge e27 linking spo0E UniProtKB:P14204 via negatively regulates RO:0002212 to phosphorelay_regulator_activity GO:0000156, PMID:8127878, PMID:12067336, and edge e28 linking rapA UniProtKB:P45941 via negatively regulates RO:0002212 to phosphorelay_regulator_activity GO:0000156, PMID:8001132, PMID:11923303), and Cryptococcus neoformans (NCBITaxon:5207, NCBITaxon:235443; adding edge e11 linking bzp4 UniProtKB:J9VKY2 via positively regulates RO:0002213 to laccase_activity GO:0008471, PMID:25849373, PMID:31575776), expanding the 15 maintained overlays from 204 to 213 evidence-backed edges across 7 cross-domain species exemplars and 8 reference-proteome strains (64 GENE_OR_PROTEIN nodes covering 29 live-verified UniProtKB accessions). Corpus-wide automated expansion across the remaining 38,342 trait/medium-attested records remains source-limited by pre-aggregated 2-column count tables in data/raw/{madin_taxa,bactotraits_taxa}.tsv (tracked under #78 / taxonmech-infra-0002).
+Reviewed all 626,048 in-scope TaxonRecord files across Bacteria (605,695), Archaea (14,013), Eukaryota (6,331), and other (9) against the Stage 2 causal-graph curation contract (.claude/skills/curate-causal-graphs/SKILL.md). Verified that all native prerequisite gates pass, including offline UniProtKB reference proteome and NCBI Taxonomy lineage validation (curation/uniprot_proteins.tsv and validate_causal_graph_proteins() in src/taxonmech/seed.py). Enriched 7 maintained curation/causal_graphs/*.yaml overlays across Escherichia coli (NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145; adding edge e21 linking cyaA UniProtKB:P00936 via causally upstream of or within RO:0002418 to lactose_transport GO:0015767, PMID:6393056, PMID:1646077), Bacillus subtilis (NCBITaxon:1423, NCBITaxon:224308; adding edge e27 linking spo0E UniProtKB:P05043 via negatively regulates RO:0002212 to phosphorelay_regulator_activity GO:0000156, PMID:8127878, PMID:12067336, and edge e28 linking rapA UniProtKB:Q00828 via negatively regulates RO:0002212 to phosphorelay_regulator_activity GO:0000156, PMID:8001132, PMID:11923303), and Cryptococcus neoformans (NCBITaxon:5207, NCBITaxon:235443; adding edge e11 linking bzp4 UniProtKB:J9VQ26 via positively regulates RO:0002213 to laccase_activity GO:0052716, PMID:25849373, PMID:31575776), expanding the 15 maintained overlays from 204 to 213 evidence-backed edges across 7 cross-domain species exemplars and 8 reference-proteome strains (64 GENE_OR_PROTEIN nodes covering 29 live-verified UniProtKB accessions). Corpus-wide automated expansion across the remaining 38,342 trait/medium-attested records remains source-limited by pre-aggregated 2-column count tables in data/raw/{madin_taxa,bactotraits_taxa}.tsv (tracked under #78 / taxonmech-infra-0002).
 
 ## Scope And Provenance
 
@@ -135,13 +135,13 @@ summary: 'Reviewed all 626,048 in-scope TaxonRecord files across Bacteria (605,6
   across Escherichia coli (NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145; adding
   edge e21 linking cyaA UniProtKB:P00936 via causally upstream of or within RO:0002418
   to lactose_transport GO:0015767, PMID:6393056, PMID:1646077), Bacillus subtilis
-  (NCBITaxon:1423, NCBITaxon:224308; adding edge e27 linking spo0E UniProtKB:P14204
+  (NCBITaxon:1423, NCBITaxon:224308; adding edge e27 linking spo0E UniProtKB:P05043
   via negatively regulates RO:0002212 to phosphorelay_regulator_activity GO:0000156,
-  PMID:8127878, PMID:12067336, and edge e28 linking rapA UniProtKB:P45941 via negatively
+  PMID:8127878, PMID:12067336, and edge e28 linking rapA UniProtKB:Q00828 via negatively
   regulates RO:0002212 to phosphorelay_regulator_activity GO:0000156, PMID:8001132,
   PMID:11923303), and Cryptococcus neoformans (NCBITaxon:5207, NCBITaxon:235443; adding
-  edge e11 linking bzp4 UniProtKB:J9VKY2 via positively regulates RO:0002213 to laccase_activity
-  GO:0008471, PMID:25849373, PMID:31575776), expanding the 15 maintained overlays
+  edge e11 linking bzp4 UniProtKB:J9VQ26 via positively regulates RO:0002213 to laccase_activity
+  GO:0052716, PMID:25849373, PMID:31575776), expanding the 15 maintained overlays
   from 204 to 213 evidence-backed edges across 7 cross-domain species exemplars and
   8 reference-proteome strains (64 GENE_OR_PROTEIN nodes covering 29 live-verified
   UniProtKB accessions). Corpus-wide automated expansion across the remaining 38,342
