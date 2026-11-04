@@ -11,7 +11,7 @@
 
 ## Summary
 
-Executed the Cycle 5 Stage 4 (record_review) full-corpus and cohort review across all 626,048 eligible TaxonRecord YAML files in data/taxa/ (Bacteria: 605,695; Archaea: 14,013; Eukaryota: 6,331; other: 9) reconciled against docs/legacy-review-inventory.tsv (23,883 records) and docs/structured-review-inventory/part-00.tsv..part-13.tsv (602,165 records across 14 shards and 611 batches; 0 unreviewed; 0 overlap), plus all 15 TaxonRecord files enriched through Cycle 5 Stages 2-3 (PRs #192, #193) with maintained causal_graphs (204 evidence-backed edges across 48 PMIDs) and live-verified + offline-validated UniProtKB GENE_OR_PROTEIN nodes (64 nodes across 29 unique accessions: 27 SWISS_PROT and 2 TREMBL in curation/uniprot_proteins.tsv) and schema/provenance/EC-number validators added in Cycle 4 Stage 6 (PR #190). Verified 5 resolved findings (#76, #83, both #158 code and documentation/test findings, and #187/#78 docs/SCHEMA.md protein-slot documentation), carried forward 6 open corpus-regeneration and upstream-prerequisite findings (#124/#63, #65, #118/#119, #69, #8, #78), and recorded 1 new open curation-documentation finding (curation-guide-and-overlay-readme-stale-causal-graph-overlay-contract under #78, where docs/CURATION.md lines 67-71 still state that curation/causal_graphs/ overlays do not yet exist and curation/causal_graphs/README.md omits the 15-column curation/uniprot_proteins.tsv reference schema table) for Cycle 5 Stage 5 grouped remediation.
+Executed the Cycle 5 Stage 4 (record_review) full-corpus and cohort review across all 626,048 eligible TaxonRecord YAML files in data/taxa/ (Bacteria: 605,695; Archaea: 14,013; Eukaryota: 6,331; other: 9) reconciled against docs/legacy-review-inventory.tsv (23,883 records) and docs/structured-review-inventory/part-00.tsv..part-13.tsv (602,165 records across 14 shards and 611 batches; 0 unreviewed; 0 overlap), plus all 15 TaxonRecord files enriched through Cycle 5 Stages 2-3 (PRs #192, #193) with maintained causal_graphs (204 evidence-backed edges across 48 PMIDs) and live-verified + offline-validated UniProtKB GENE_OR_PROTEIN nodes (64 nodes across 29 unique accessions: 27 SWISS_PROT and 2 TREMBL in curation/uniprot_proteins.tsv) and schema/provenance/EC-number validators added in Cycle 4 Stage 6 (PR #190). Verified 5 resolved findings (#76, #83, both #158 code and documentation/test findings, and #187/#78 docs/SCHEMA.md protein-slot documentation), carried forward 6 open corpus-regeneration and upstream-prerequisite findings (#124/#63, #65, #118/#119, #69, #8, #78), and recorded 1 new open curation-documentation finding (curation-guide-and-overlay-readme-stale-causal-graph-overlay-contract under #78, where docs/CURATION.md lines 67-71 still state that curation/causal_graphs/ overlays do not yet exist and curation/causal_graphs/README.md omits the 14-column curation/uniprot_proteins.tsv reference schema table) for Cycle 5 Stage 5 grouped remediation.
 
 ## Scope And Provenance
 
@@ -75,13 +75,13 @@ All 626,048 in-scope TaxonRecord YAML files in data/taxa/ are accounted for with
 
 nomenclature: concern. Targets: NCBITaxon:562, NCBITaxon:2940590, NCBITaxon:3121604, NCBITaxon:206, NCBITaxon:33952.
 
-Across the 602,165 structured-review records, 95,766 records carry verdict needs_curation due to src/taxonmech/seed.py (lines 508-535) promoting skos:closeMatch GTDB species-cluster mappings to EXACT_SYNONYM and top-level xrefs (#124, #63), mangling 15,704 polyphyly-suffixed GTDB labels into fake trinomials at line 529 (#65), and emitting misleading pooled broadMatch genome totals (lines 636-650; #118) and inverted broadMatch notes (lines 522-524; #119) on 8,587 records.
+Across the 602,165 structured-review records, 95,766 records carry verdict needs_curation due to src/taxonmech/seed.py (lines 949-984) promoting skos:closeMatch GTDB species-cluster mappings to EXACT_SYNONYM and top-level xrefs (#124, #63), mangling 15,704 polyphyly-suffixed GTDB labels into fake trinomials at lines 978-979 (#65), and emitting misleading pooled broadMatch genome totals (lines 1085-1099; #118) and inverted broadMatch notes (lines 971-973; #119) on 8,587 records.
 
 ### Cycle 5 causal_graphs and UniProtKB GENE_OR_PROTEIN coverage (15 records, 64 protein nodes across 29 unique UniProtKB accessions, 204 edges across 48 PMIDs), curation overlay documentation, and remaining corpus-wide prerequisites
 
 completeness: concern. Targets: NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2940590, NCBITaxon:3121604, NCBITaxon:1435036, NCBITaxon:209650, NCBITaxon:206, NCBITaxon:33952, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:2287, NCBITaxon:4932, NCBITaxon:5207, NCBITaxon:235443, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:5755, NCBITaxon:155900, NCBITaxon:408170, NCBITaxon:32644.
 
-All 15 records enriched through Cycle 5 Stages 2-3 (PRs #155, #156, #162, #163, #181, #183, #192, #193) pass strict LinkML validation, structural causal-graph and EC-number/metadata invariant validation (validate_causal_graph_structure(), #189 PR #190), deterministic seeder reproduction, and offline + live UniProtKB verification across 15 causal graphs, 64 GENE_OR_PROTEIN nodes (29 unique UniProtKB accessions: 27 SWISS_PROT and 2 TREMBL in curation/uniprot_proteins.tsv), and 204 evidence-backed edges across 48 PMIDs; however, docs/CURATION.md (lines 67-71) still states that curation/causal_graphs/ overlays do not yet exist and curation/causal_graphs/README.md omits the 15-column curation/uniprot_proteins.tsv schema table, and the remaining 626,033 records (99.998%) still have empty causal_graphs pending upstream kg-microbe bulk data/raw/taxon_trait_edges.tsv extraction (taxonmech-infra-0002) and a corpus-wide data/raw/ UniProtKB Reference Proteomes snapshot (taxonmech-infra-0003; #78).
+All 15 records enriched through Cycle 5 Stages 2-3 (PRs #155, #156, #162, #163, #181, #183, #192, #193) pass strict LinkML validation, structural causal-graph and EC-number/metadata invariant validation (validate_causal_graph_structure(), #189 PR #190), deterministic seeder reproduction, and offline + live UniProtKB verification across 15 causal graphs, 64 GENE_OR_PROTEIN nodes (29 unique UniProtKB accessions: 27 SWISS_PROT and 2 TREMBL in curation/uniprot_proteins.tsv), and 204 evidence-backed edges across 48 PMIDs; however, docs/CURATION.md (lines 67-71) still states that curation/causal_graphs/ overlays do not yet exist and curation/causal_graphs/README.md omits the 14-column curation/uniprot_proteins.tsv schema table, and the remaining 626,033 records (99.998%) still have empty causal_graphs pending upstream kg-microbe bulk data/raw/taxon_trait_edges.tsv extraction (taxonmech-infra-0002) and a corpus-wide data/raw/ UniProtKB Reference Proteomes snapshot (taxonmech-infra-0003; #78).
 
 ## Findings
 
@@ -105,31 +105,31 @@ Disposition: Resolved in Cycle 1 Stage 5 (PR #151) under #83 and verified across
 
 major / open / confirmed; issue key: cycle3-stage4-gtdb-closematch-exact-promotion.
 
-Across docs/structured-review-inventory/part-00.tsv..part-13.tsv, 95,766 of 602,165 structured-review records (including 74,325 from fan-out closeMatch clusters; e.g., NCBITaxon:2940590 data/taxa/bacteria/achromobacter_sp_jub104.yaml promoting GTDB:s__Achromobacter_spanius, NCBITaxon:206 data/taxa/bacteria/campylobacter_sputorum.yaml promoting GTDB:s__Campylobacter_F_sputorum, and legacy-reviewed NCBITaxon:33952 data/taxa/bacteria/acetobacterium_woodii.yaml promoting GTDB:s__Acetobacterium_woodii_A) carry verdict needs_curation because src/taxonmech/seed.py (lines 508-535) promotes skos:closeMatch GTDB species-cluster rows in data/raw/gtdb_mappings.tsv to EXACT_SYNONYM and top-level xrefs without an explicit 1:1 taxon-identity or nomenclatural bridge (tracked in https://github.com/CultureBotAI/TaxonMech/issues/124 and https://github.com/CultureBotAI/TaxonMech/issues/63).
+Across docs/structured-review-inventory/part-00.tsv..part-13.tsv, 95,766 of 602,165 structured-review records (including 74,325 from fan-out closeMatch clusters; e.g., NCBITaxon:2940590 data/taxa/bacteria/achromobacter_sp_jub104.yaml promoting GTDB:s__Achromobacter_spanius, NCBITaxon:206 data/taxa/bacteria/campylobacter_sputorum.yaml promoting GTDB:s__Campylobacter_F_sputorum, and legacy-reviewed NCBITaxon:33952 data/taxa/bacteria/acetobacterium_woodii.yaml promoting GTDB:s__Acetobacterium_woodii_A) carry verdict needs_curation because src/taxonmech/seed.py (lines 949-984) promotes skos:closeMatch GTDB species-cluster rows in data/raw/gtdb_mappings.tsv to EXACT_SYNONYM and top-level xrefs without an explicit 1:1 taxon-identity or nomenclatural bridge (tracked in https://github.com/CultureBotAI/TaxonMech/issues/124 and https://github.com/CultureBotAI/TaxonMech/issues/63).
 
 ### gtdb-polyphyly-suffix-synonym-mangling: GTDB polyphyly suffixes are mangled by underscore-to-space replacement into fake trinomials published as EXACT_SYNONYM
 
 major / open / confirmed; issue key: cycle3-stage4-gtdb-polyphyly-suffix-synonym-mangling.
 
-In src/taxonmech/seed.py line 529, GTDB species labels are converted via m['gtdb_label'].split('__', 1)[-1].replace('_', ' '), turning GTDB polyphyly partition suffixes (e.g., s__Campylobacter_F_sputorum on NCBITaxon:206 data/taxa/bacteria/campylobacter_sputorum.yaml -&gt; 'Campylobacter F sputorum', and s__Acetobacterium_woodii_A on NCBITaxon:33952 data/taxa/bacteria/acetobacterium_woodii.yaml -&gt; 'Acetobacterium woodii A') into fake trinomials published as EXACT_SYNONYM across 15,704 rows in data/raw/gtdb_mappings.tsv (tracked in https://github.com/CultureBotAI/TaxonMech/issues/65).
+In src/taxonmech/seed.py lines 978-979, GTDB species labels are converted via m['gtdb_label'].split('__', 1)[-1].replace('_', ' '), turning GTDB polyphyly partition suffixes (e.g., s__Campylobacter_F_sputorum on NCBITaxon:206 data/taxa/bacteria/campylobacter_sputorum.yaml -&gt; 'Campylobacter F sputorum', and s__Acetobacterium_woodii_A on NCBITaxon:33952 data/taxa/bacteria/acetobacterium_woodii.yaml -&gt; 'Acetobacterium woodii A') into fake trinomials published as EXACT_SYNONYM across 15,704 rows in data/raw/gtdb_mappings.tsv (tracked in https://github.com/CultureBotAI/TaxonMech/issues/65).
 
 ### gtdb-pooled-broadmatch-attestation-and-note: Pooled GTDB broadMatch mappings emit the largest pooled cluster's genome total and an inverted mapping-direction note
 
 major / open / confirmed; issue key: cycle3-stage4-gtdb-pooled-broadmatch-attestation-and-note.
 
-On 6,335 pooled-only GTDB records (e.g., NCBITaxon:3121604 data/taxa/bacteria/acidaminobacteraceae_bacterium.yaml, which has 5 pooled skos:broadMatch GTDB mappings led by GTDB:s__JAUMXJ01_sp041781135 with genome_count: 97), src/taxonmech/seed.py (lines 636-650) emits the largest pooled GTDB species cluster's genome count as the taxon's GTDB GENOME attestation (#118), and across 8,587 pooled GTDB records (209,540 rows, including NCBITaxon:562 data/taxa/bacteria/escherichia_coli.yaml and NCBITaxon:3121604 data/taxa/bacteria/acidaminobacteraceae_bacterium.yaml) seed.py lines 522-524 emit a note stating the reverse of kg-microbe's skos:broadMatch direction (#119).
+On 6,335 pooled-only GTDB records (e.g., NCBITaxon:3121604 data/taxa/bacteria/acidaminobacteraceae_bacterium.yaml, which has 5 pooled skos:broadMatch GTDB mappings led by GTDB:s__JAUMXJ01_sp041781135 with genome_count: 97), src/taxonmech/seed.py (lines 1085-1099) emits the largest pooled GTDB species cluster's genome count as the taxon's GTDB GENOME attestation (#118), and across 8,587 pooled GTDB records (209,540 rows, including NCBITaxon:562 data/taxa/bacteria/escherichia_coli.yaml and NCBITaxon:3121604 data/taxa/bacteria/acidaminobacteraceae_bacterium.yaml) seed.py lines 971-973 emit a note stating the reverse of kg-microbe's skos:broadMatch direction (#119).
 
 ### curation-history-stale-scope-strain-count: SEEDED_FROM_SOURCES curation_history embeds stale static strain counts from curation/seed_scope.tsv reason strings
 
 minor / open / confirmed; issue key: cycle3-stage4-curation-history-stale-scope-strain-count.
 
-In src/taxonmech/seed.py lines 691-702, the SEEDED_FROM_SOURCES curation_history note copies the static reason string from curation/seed_scope.tsv (e.g., '1861 BacDive strains' on NCBITaxon:562 data/taxa/bacteria/escherichia_coli.yaml) even when subtree strain aggregation yields a higher seeded strain_count (1975 on NCBITaxon:562; tracked in https://github.com/CultureBotAI/TaxonMech/issues/69).
+In src/taxonmech/seed.py lines 1141-1151, the SEEDED_FROM_SOURCES curation_history note copies the static reason string from curation/seed_scope.tsv (e.g., '1861 BacDive strains' on NCBITaxon:562 data/taxa/bacteria/escherichia_coli.yaml) even when subtree strain aggregation yields a higher seeded strain_count (1975 on NCBITaxon:562; tracked in https://github.com/CultureBotAI/TaxonMech/issues/69).
 
 ### upstream-edge-multiplicity-and-subtree-count-scope: Upstream kg-microbe edge tables for GOLD/MEDIADIVE/MADIN/BACTOTRAITS are not committed locally and direct-only attestation notes require corpus-wide re-seeding
 
 minor / open / confirmed; issue key: cycle3-stage4-upstream-edge-multiplicity-and-subtree-count-scope.
 
-Across docs/structured-review-inventory/part-00.tsv..part-13.tsv, 27,118 records carry verdict pass_with_limitations (e.g., NCBITaxon:1435036, NCBITaxon:562, NCBITaxon:1423, NCBITaxon:287) and 30 carry verdict blocked (e.g., NCBITaxon:209650) because manifest-pinned upstream kg-microbe raw edge tables for GOLD, MEDIADIVE, MADIN, and BACTOTRAITS are not committed locally and src/taxonmech/seed.py (lines 670-688) gathers infraspecific subtree records only for BacDive strains. Although Cycle 1 Stage 6 (PR #152) documented pinned kg-microbe@30405b70ef762aa46c08278b2b3e06bffb0b34cd edge-table SHA-256 digests in docs/HARMONIZATION.md, corpus-wide re-seeding of source_attestations[].notes remains deferred (INFRA_TASKS.md taxonmech-infra-0004; https://github.com/CultureBotAI/TaxonMech/issues/8).
+Across docs/structured-review-inventory/part-00.tsv..part-13.tsv, 27,118 records carry verdict pass_with_limitations (e.g., NCBITaxon:1435036, NCBITaxon:562, NCBITaxon:1423, NCBITaxon:287) and 30 carry verdict blocked (e.g., NCBITaxon:209650) because manifest-pinned upstream kg-microbe raw edge tables for GOLD, MEDIADIVE, MADIN, and BACTOTRAITS are not committed locally and src/taxonmech/seed.py (lines 1119-1137) gathers infraspecific subtree records only for BacDive strains. Although Cycle 1 Stage 6 (PR #152) documented pinned kg-microbe@30405b70ef762aa46c08278b2b3e06bffb0b34cd edge-table SHA-256 digests in docs/HARMONIZATION.md, corpus-wide re-seeding of source_attestations[].notes remains deferred (INFRA_TASKS.md taxonmech-infra-0004; https://github.com/CultureBotAI/TaxonMech/issues/8).
 
 ### mechanism-and-protein-representation-prerequisites: 626,033 of 626,048 TaxonRecord files remain without causal_graphs or UniProtKB GENE_OR_PROTEIN nodes pending bulk kg-microbe trait-edge extraction and a pinned data/raw/ UniProtKB inventory
 
@@ -161,11 +161,11 @@ Verified in Cycle 5 Stage 4 at b1af8327c9f1d889a5159d0cd55c6bb9e7173966 that doc
 
 Disposition: Resolved in Cycle 4 Stage 5 (PR #188) under #187/#78 and verified intact in Cycle 5 Stage 4.
 
-### curation-guide-and-overlay-readme-stale-causal-graph-overlay-contract: docs/CURATION.md still states that curation/causal_graphs/ overlays do not yet exist and curation/causal_graphs/README.md omits the 15-column curation/uniprot_proteins.tsv schema table
+### curation-guide-and-overlay-readme-stale-causal-graph-overlay-contract: docs/CURATION.md still states that curation/causal_graphs/ overlays do not yet exist and curation/causal_graphs/README.md omits the 14-column curation/uniprot_proteins.tsv schema table
 
 minor / open / confirmed; issue key: cycle5-stage4-curation-guide-and-overlay-readme-stale-causal-graph-overlay-contract.
 
-In docs/CURATION.md (lines 67-71), the 'Seeded fields are read-only' section still states 'Curator-owned overlays for causal_graphs, definition, evidence and mapping_status: REVIEWED — merged by the seeder so they survive a re-seed, as HabitatMech does under curation/causal_graphs/ — are the next step and are tracked in the issues. Until they exist, a curated change is a seeder change with a test', even though curation/causal_graphs/*.yaml overlays and curation/uniprot_proteins.tsv are live maintained inputs merged by src/taxonmech/seed.py across 15 TaxonRecord files (204 edges across 48 PMIDs, 64 GENE_OR_PROTEIN nodes across 29 UniProtKB accessions; while overlays for definition, record-level evidence, and mapping_status: REVIEWED remain unimplemented). In addition, curation/causal_graphs/README.md summarizes UniProtKB validation in prose (lines 81-94) but omits an explicit 15-column schema table for curation/uniprot_proteins.tsv (UNIPROT_PROTEIN_COLUMNS in src/taxonmech/seed.py lines 113-129) and the strain-vs-species strain_id binding rule (tracked under https://github.com/CultureBotAI/TaxonMech/issues/78).
+In docs/CURATION.md (lines 67-71), the 'Seeded fields are read-only' section still states 'Curator-owned overlays for causal_graphs, definition, evidence and mapping_status: REVIEWED — merged by the seeder so they survive a re-seed, as HabitatMech does under curation/causal_graphs/ — are the next step and are tracked in the issues. Until they exist, a curated change is a seeder change with a test', even though curation/causal_graphs/*.yaml overlays and curation/uniprot_proteins.tsv are live maintained inputs merged by src/taxonmech/seed.py across 15 TaxonRecord files (204 edges across 48 PMIDs, 64 GENE_OR_PROTEIN nodes across 29 UniProtKB accessions; while overlays for definition, record-level evidence, and mapping_status: REVIEWED remain unimplemented). In addition, curation/causal_graphs/README.md summarizes UniProtKB validation in prose (lines 81-94) but omits an explicit 14-column schema table for curation/uniprot_proteins.tsv (UNIPROT_PROTEIN_FIELDS in src/taxonmech/seed.py lines 62-77, validated in load_uniprot_proteins() at lines 302-347) and the strain-vs-species strain_id binding rule (tracked under https://github.com/CultureBotAI/TaxonMech/issues/78).
 
 ## Recommended Actions And Acceptance Checks
 
@@ -186,10 +186,10 @@ Execute remaining INFRA_TASKS.md tasks taxonmech-infra-0001..0004 in Cycle 5 Sta
 
 ### update-curation-guide-and-overlay-readme-for-causal-graphs-and-uniprot-tsv
 
-Update docs/CURATION.md and curation/causal_graphs/README.md in Cycle 5 Stage 5 to reflect the live curation/causal_graphs/*.yaml overlay mechanism, document the 15-column curation/uniprot_proteins.tsv reference schema table (UNIPROT_PROTEIN_COLUMNS) and strain_id binding rule, and add a regression test (#78).
+Update docs/CURATION.md and curation/causal_graphs/README.md in Cycle 5 Stage 5 to reflect the live curation/causal_graphs/*.yaml overlay mechanism, document the 14-column curation/uniprot_proteins.tsv reference schema table (UNIPROT_PROTEIN_FIELDS at src/taxonmech/seed.py lines 62-77, validated in load_uniprot_proteins() at lines 302-347) and strain_id binding rule, and add a regression test (#78).
 
 - docs/CURATION.md accurately describes the live curation/causal_graphs/*.yaml and curation/uniprot_proteins.tsv overlay pipeline while distinguishing unimplemented definition/evidence/mapping_status overlays
-- curation/causal_graphs/README.md documents all 15 curation/uniprot_proteins.tsv columns and species-vs-strain strain_id binding rules
+- curation/causal_graphs/README.md documents all 14 curation/uniprot_proteins.tsv columns and species-vs-strain strain_id binding rules
 
 ## Category Boundaries
 
@@ -202,7 +202,7 @@ Update docs/CURATION.md and curation/causal_graphs/README.md in Cycle 5 Stage 5 
 | exemplar-target-records | data/taxa/bacteria/escherichia_coli.yaml; data/taxa/bacteria/escherichia_coli_k_12.yaml; data/taxa/bacteria/escherichia_coli_str_k_12_substr_mg1655.yaml; data/taxa/bacteria/bacillus_subtilis.yaml; data/taxa/bacteria/bacillus_subtilis_subsp_subtilis_str_168.yaml; data/taxa/bacteria/pseudomonas_aeruginosa.yaml; data/taxa/bacteria/pseudomonas_aeruginosa_pao1.yaml; data/taxa/bacteria/achromobacter_sp_jub104.yaml; data/taxa/bacteria/acidaminobacteraceae_bacterium.yaml; data/taxa/bacteria/acinetobacter_bohemicus.yaml; data/taxa/bacteria/acidicaldus_organivorans.yaml; data/taxa/bacteria/campylobacter_sputorum.yaml; data/taxa/bacteria/acetobacterium_woodii.yaml; data/taxa/archaea/methanocaldococcus_jannaschii.yaml; data/taxa/archaea/methanocaldococcus_jannaschii_dsm_2661.yaml; data/taxa/archaea/saccharolobus_solfataricus.yaml; data/taxa/eukaryota/saccharomyces_cerevisiae.yaml; data/taxa/eukaryota/cryptococcus_neoformans.yaml; data/taxa/eukaryota/cryptococcus_neoformans_h99.yaml; data/taxa/eukaryota/cryptococcus_deneoformans.yaml; data/taxa/eukaryota/cryptococcus_deneoformans_b_3501a.yaml; data/taxa/eukaryota/cryptococcus_deuterogattii.yaml; data/taxa/eukaryota/cryptococcus_deuterogattii_r265.yaml; data/taxa/eukaryota/acanthamoeba_castellanii.yaml; data/taxa/other/uncultured_organism.yaml; data/taxa/other/human_gut_metagenome.yaml; data/taxa/other/unidentified.yaml; Complete YAML content of 27 directly bound cross-domain, verdict-stratified, and causal-graph-enriched TaxonRecord files | supports | Verified taxon identity, lineage, nomenclature, synonyms, xrefs, taxonomy_mappings, source_attestations, strains, causal_graphs, and curation_history across 27 exemplar records spanning Bacteria (13), Archaea (3), Eukaryota (8), and other (3). |
 | cycle5-causal-graph-and-uniprot-overlays | curation/causal_graphs/README.md; curation/causal_graphs/NCBITaxon_*.yaml; curation/uniprot_proteins.tsv; reviews/structured/20261031T231000Z-cycle5-stage2-causal-graphs-curation/review.yaml; reviews/structured/20261101T040500Z-cycle5-stage3-protein-examples/review.yaml; 15 maintained curation/causal_graphs/NCBITaxon_*.yaml overlays, curation/uniprot_proteins.tsv (29 rows), and Cycle 5 Stages 2-3 structured review bundles | supports | Verified 15 maintained causal-graph overlays seeded into 7 species and 8 strain TaxonRecord files (204 evidence-backed edges across 48 PMIDs; 64 GENE_OR_PROTEIN nodes grounded to 29 unique live-verified UniProtKB accessions—27 SWISS_PROT and 2 TREMBL—in curation/uniprot_proteins.tsv with exact organism_taxon_id, strain_id, proteome_id, gene_symbol, locus_tag, ec_numbers, sequence_length, sequence_crc64, sequence_version, and entry_status). |
 | raw-source-inventories | curation/seed_scope.tsv; data/raw/MANIFEST.yaml; data/raw/ncbitaxon_taxa.tsv; data/raw/gtdb_mappings.tsv; data/raw/gtdb_species.tsv; data/raw/bacdive_strains.tsv; data/raw/lpsn_names.tsv; curation/seed_scope.tsv (626,048 rows) and data/raw/*.tsv | supports | Pinned raw inventories verify exact NCBI taxon IDs and lineages across all 626,048 records and confirm persistent GTDB closeMatch fan-out (95,766 records), polyphyly suffix mangling (15,704 rows), pooled broadMatch genome counts/notes (8,587 records), and stale seed_scope strain-count reason strings. |
-| schema-seeder-validator-code | src/taxonmech/schema/taxonmech.yaml; src/taxonmech/seed.py; src/taxonmech/extract.py; scripts/validate_strict.py; scripts/check_provenance.py; scripts/corpus_review_inventory.py; scripts/validate_history.py; docs/SCHEMA.md; docs/CURATION.md; curation/causal_graphs/README.md; docs/HARMONIZATION.md; docs/corpus-review-coverage.md; INFRA_TASKS.md; taxonmech.yaml:43-95,1200-1315,1520-1575; seed.py:113-485,508-535,636-715; validate_strict.py:217-370; check_provenance.py:1-140; corpus_review_inventory.py:185-330,381-445; docs/SCHEMA.md:1-38; docs/CURATION.md:52-72; curation/causal_graphs/README.md:1-98; INFRA_TASKS.md:33-340 | supports | Inspection of schema, seeder, extractor, strict/UniProt/provenance validators, inventory checker, and documentation confirms resolution of #76 and #83 in Cycle 1 Stage 5, resolution of #158 code in Cycle 2 Stage 5 (PR #159) and #158 documentation/regression test in Cycle 3 Stage 5 (PR #165), structural causal-graph and strain_id validation plus conf/sources.yaml registration in Cycle 3 Stage 6 (PR #168), resolution of #187/#78 docs/SCHEMA.md protein-slot documentation in Cycle 4 Stage 5 (PR #188), schema/EC/metadata invariant enforcement in Cycle 4 Stage 6 (#189, PR #190), persistent GTDB/scope seeder defects at src/taxonmech/seed.py lines 508-535, 636-650, and 691-702 (#124, #63, #65, #118, #119, #69), remaining corpus-wide trait/UniProt/attestation-note tasks in INFRA_TASKS.md (taxonmech-infra-0001..0004; #78, #8), and stale overlay prose in docs/CURATION.md lines 67-71 plus omission of the 15-column curation/uniprot_proteins.tsv schema table in curation/causal_graphs/README.md (#78). |
+| schema-seeder-validator-code | src/taxonmech/schema/taxonmech.yaml; src/taxonmech/seed.py; src/taxonmech/extract.py; scripts/validate_strict.py; scripts/check_provenance.py; scripts/corpus_review_inventory.py; scripts/validate_history.py; docs/SCHEMA.md; docs/CURATION.md; curation/causal_graphs/README.md; docs/HARMONIZATION.md; docs/corpus-review-coverage.md; INFRA_TASKS.md; taxonmech.yaml:43-95,1200-1315,1520-1575; seed.py:62-117,302-736,949-1164; validate_strict.py:217-370; check_provenance.py:1-140; corpus_review_inventory.py:185-330,381-445; docs/SCHEMA.md:1-38; docs/CURATION.md:52-72; curation/causal_graphs/README.md:1-98; INFRA_TASKS.md:33-340 | supports | Inspection of schema, seeder, extractor, strict/UniProt/provenance validators, inventory checker, and documentation confirms resolution of #76 and #83 in Cycle 1 Stage 5, resolution of #158 code in Cycle 2 Stage 5 (PR #159) and #158 documentation/regression test in Cycle 3 Stage 5 (PR #165), structural causal-graph and strain_id validation plus conf/sources.yaml registration in Cycle 3 Stage 6 (PR #168), resolution of #187/#78 docs/SCHEMA.md protein-slot documentation in Cycle 4 Stage 5 (PR #188), schema/EC/metadata invariant enforcement in Cycle 4 Stage 6 (#189, PR #190), persistent GTDB/scope seeder defects at src/taxonmech/seed.py lines 949-984, 1085-1099, and 1141-1151 (#124, #63, #65, #118, #119, #69), remaining corpus-wide trait/UniProt/attestation-note tasks in INFRA_TASKS.md (taxonmech-infra-0001..0004; #78, #8), and stale overlay prose in docs/CURATION.md lines 67-71 plus omission of the 14-column curation/uniprot_proteins.tsv schema table in curation/causal_graphs/README.md (#78). |
 
 ## Limits And Additional Notes
 
@@ -256,7 +256,7 @@ summary: 'Executed the Cycle 5 Stage 4 (record_review) full-corpus and cohort re
   findings (#124/#63, #65, #118/#119, #69, #8, #78), and recorded 1 new open curation-documentation
   finding (curation-guide-and-overlay-readme-stale-causal-graph-overlay-contract under
   #78, where docs/CURATION.md lines 67-71 still state that curation/causal_graphs/
-  overlays do not yet exist and curation/causal_graphs/README.md omits the 15-column
+  overlays do not yet exist and curation/causal_graphs/README.md omits the 14-column
   curation/uniprot_proteins.tsv reference schema table) for Cycle 5 Stage 5 grouped
   remediation.'
 source:
@@ -1665,7 +1665,7 @@ evidence:
     scripts/validate_strict.py; scripts/check_provenance.py; scripts/corpus_review_inventory.py;
     scripts/validate_history.py; docs/SCHEMA.md; docs/CURATION.md; curation/causal_graphs/README.md;
     docs/HARMONIZATION.md; docs/corpus-review-coverage.md; INFRA_TASKS.md
-  locator: taxonmech.yaml:43-95,1200-1315,1520-1575; seed.py:113-485,508-535,636-715;
+  locator: taxonmech.yaml:43-95,1200-1315,1520-1575; seed.py:62-117,302-736,949-1164;
     validate_strict.py:217-370; check_provenance.py:1-140; corpus_review_inventory.py:185-330,381-445;
     docs/SCHEMA.md:1-38; docs/CURATION.md:52-72; curation/causal_graphs/README.md:1-98;
     INFRA_TASKS.md:33-340
@@ -1676,10 +1676,10 @@ evidence:
     plus conf/sources.yaml registration in Cycle 3 Stage 6 (PR #168), resolution of
     #187/#78 docs/SCHEMA.md protein-slot documentation in Cycle 4 Stage 5 (PR #188),
     schema/EC/metadata invariant enforcement in Cycle 4 Stage 6 (#189, PR #190), persistent
-    GTDB/scope seeder defects at src/taxonmech/seed.py lines 508-535, 636-650, and
-    691-702 (#124, #63, #65, #118, #119, #69), remaining corpus-wide trait/UniProt/attestation-note
+    GTDB/scope seeder defects at src/taxonmech/seed.py lines 949-984, 1085-1099, and
+    1141-1151 (#124, #63, #65, #118, #119, #69), remaining corpus-wide trait/UniProt/attestation-note
     tasks in INFRA_TASKS.md (taxonmech-infra-0001..0004; #78, #8), and stale overlay
-    prose in docs/CURATION.md lines 67-71 plus omission of the 15-column curation/uniprot_proteins.tsv
+    prose in docs/CURATION.md lines 67-71 plus omission of the 14-column curation/uniprot_proteins.tsv
     schema table in curation/causal_graphs/README.md (#78).'
   accessed_at: '2026-11-01T09:15:00Z'
   support: supports
@@ -1775,11 +1775,11 @@ assessments:
     broadMatch genome/note semantics
   outcome: concern
   summary: 'Across the 602,165 structured-review records, 95,766 records carry verdict
-    needs_curation due to src/taxonmech/seed.py (lines 508-535) promoting skos:closeMatch
+    needs_curation due to src/taxonmech/seed.py (lines 949-984) promoting skos:closeMatch
     GTDB species-cluster mappings to EXACT_SYNONYM and top-level xrefs (#124, #63),
-    mangling 15,704 polyphyly-suffixed GTDB labels into fake trinomials at line 529
-    (#65), and emitting misleading pooled broadMatch genome totals (lines 636-650;
-    #118) and inverted broadMatch notes (lines 522-524; #119) on 8,587 records.'
+    mangling 15,704 polyphyly-suffixed GTDB labels into fake trinomials at lines 978-979
+    (#65), and emitting misleading pooled broadMatch genome totals (lines 1085-1099;
+    #118) and inverted broadMatch notes (lines 971-973; #119) on 8,587 records.'
   target_ids:
   - NCBITaxon:562
   - NCBITaxon:2940590
@@ -1835,7 +1835,7 @@ assessments:
     accessions: 27 SWISS_PROT and 2 TREMBL in curation/uniprot_proteins.tsv), and
     204 evidence-backed edges across 48 PMIDs; however, docs/CURATION.md (lines 67-71)
     still states that curation/causal_graphs/ overlays do not yet exist and curation/causal_graphs/README.md
-    omits the 15-column curation/uniprot_proteins.tsv schema table, and the remaining
+    omits the 14-column curation/uniprot_proteins.tsv schema table, and the remaining
     626,033 records (99.998%) still have empty causal_graphs pending upstream kg-microbe
     bulk data/raw/taxon_trait_edges.tsv extraction (taxonmech-infra-0002) and a corpus-wide
     data/raw/ UniProtKB Reference Proteomes snapshot (taxonmech-infra-0003; #78).'
@@ -2027,7 +2027,7 @@ findings:
     promoting GTDB:s__Achromobacter_spanius, NCBITaxon:206 data/taxa/bacteria/campylobacter_sputorum.yaml
     promoting GTDB:s__Campylobacter_F_sputorum, and legacy-reviewed NCBITaxon:33952
     data/taxa/bacteria/acetobacterium_woodii.yaml promoting GTDB:s__Acetobacterium_woodii_A)
-    carry verdict needs_curation because src/taxonmech/seed.py (lines 508-535) promotes
+    carry verdict needs_curation because src/taxonmech/seed.py (lines 949-984) promotes
     skos:closeMatch GTDB species-cluster rows in data/raw/gtdb_mappings.tsv to EXACT_SYNONYM
     and top-level xrefs without an explicit 1:1 taxon-identity or nomenclatural bridge
     (tracked in https://github.com/CultureBotAI/TaxonMech/issues/124 and https://github.com/CultureBotAI/TaxonMech/issues/63).
@@ -2091,7 +2091,7 @@ findings:
   certainty: confirmed
   title: GTDB polyphyly suffixes are mangled by underscore-to-space replacement into
     fake trinomials published as EXACT_SYNONYM
-  description: In src/taxonmech/seed.py line 529, GTDB species labels are converted
+  description: In src/taxonmech/seed.py lines 978-979, GTDB species labels are converted
     via m['gtdb_label'].split('__', 1)[-1].replace('_', ' '), turning GTDB polyphyly
     partition suffixes (e.g., s__Campylobacter_F_sputorum on NCBITaxon:206 data/taxa/bacteria/campylobacter_sputorum.yaml
     -> 'Campylobacter F sputorum', and s__Acetobacterium_woodii_A on NCBITaxon:33952
@@ -2151,11 +2151,11 @@ findings:
     total and an inverted mapping-direction note
   description: 'On 6,335 pooled-only GTDB records (e.g., NCBITaxon:3121604 data/taxa/bacteria/acidaminobacteraceae_bacterium.yaml,
     which has 5 pooled skos:broadMatch GTDB mappings led by GTDB:s__JAUMXJ01_sp041781135
-    with genome_count: 97), src/taxonmech/seed.py (lines 636-650) emits the largest
+    with genome_count: 97), src/taxonmech/seed.py (lines 1085-1099) emits the largest
     pooled GTDB species cluster''s genome count as the taxon''s GTDB GENOME attestation
     (#118), and across 8,587 pooled GTDB records (209,540 rows, including NCBITaxon:562
     data/taxa/bacteria/escherichia_coli.yaml and NCBITaxon:3121604 data/taxa/bacteria/acidaminobacteraceae_bacterium.yaml)
-    seed.py lines 522-524 emit a note stating the reverse of kg-microbe''s skos:broadMatch
+    seed.py lines 971-973 emit a note stating the reverse of kg-microbe''s skos:broadMatch
     direction (#119).'
   previous_occurrences:
   - repository: CultureBotAI/TaxonMech
@@ -2210,7 +2210,7 @@ findings:
   certainty: confirmed
   title: SEEDED_FROM_SOURCES curation_history embeds stale static strain counts from
     curation/seed_scope.tsv reason strings
-  description: In src/taxonmech/seed.py lines 691-702, the SEEDED_FROM_SOURCES curation_history
+  description: In src/taxonmech/seed.py lines 1141-1151, the SEEDED_FROM_SOURCES curation_history
     note copies the static reason string from curation/seed_scope.tsv (e.g., '1861
     BacDive strains' on NCBITaxon:562 data/taxa/bacteria/escherichia_coli.yaml) even
     when subtree strain aggregation yields a higher seeded strain_count (1975 on NCBITaxon:562;
@@ -2274,7 +2274,7 @@ findings:
     NCBITaxon:1423, NCBITaxon:287) and 30 carry verdict blocked (e.g., NCBITaxon:209650)
     because manifest-pinned upstream kg-microbe raw edge tables for GOLD, MEDIADIVE,
     MADIN, and BACTOTRAITS are not committed locally and src/taxonmech/seed.py (lines
-    670-688) gathers infraspecific subtree records only for BacDive strains. Although
+    1119-1137) gathers infraspecific subtree records only for BacDive strains. Although
     Cycle 1 Stage 6 (PR #152) documented pinned kg-microbe@30405b70ef762aa46c08278b2b3e06bffb0b34cd
     edge-table SHA-256 digests in docs/HARMONIZATION.md, corpus-wide re-seeding of
     source_attestations[].notes remains deferred (INFRA_TASKS.md taxonmech-infra-0004;
@@ -2641,7 +2641,7 @@ findings:
   status: open
   certainty: confirmed
   title: docs/CURATION.md still states that curation/causal_graphs/ overlays do not
-    yet exist and curation/causal_graphs/README.md omits the 15-column curation/uniprot_proteins.tsv
+    yet exist and curation/causal_graphs/README.md omits the 14-column curation/uniprot_proteins.tsv
     schema table
   description: 'In docs/CURATION.md (lines 67-71), the ''Seeded fields are read-only''
     section still states ''Curator-owned overlays for causal_graphs, definition, evidence
@@ -2653,10 +2653,10 @@ findings:
     files (204 edges across 48 PMIDs, 64 GENE_OR_PROTEIN nodes across 29 UniProtKB
     accessions; while overlays for definition, record-level evidence, and mapping_status:
     REVIEWED remain unimplemented). In addition, curation/causal_graphs/README.md
-    summarizes UniProtKB validation in prose (lines 81-94) but omits an explicit 15-column
-    schema table for curation/uniprot_proteins.tsv (UNIPROT_PROTEIN_COLUMNS in src/taxonmech/seed.py
-    lines 113-129) and the strain-vs-species strain_id binding rule (tracked under
-    https://github.com/CultureBotAI/TaxonMech/issues/78).'
+    summarizes UniProtKB validation in prose (lines 81-94) but omits an explicit 14-column
+    schema table for curation/uniprot_proteins.tsv (UNIPROT_PROTEIN_FIELDS in src/taxonmech/seed.py
+    lines 62-77, validated in load_uniprot_proteins() at lines 302-347) and the strain-vs-species
+    strain_id binding rule (tracked under https://github.com/CultureBotAI/TaxonMech/issues/78).'
   target_ids:
   - NCBITaxon:562
   - NCBITaxon:83333
@@ -2690,7 +2690,7 @@ findings:
   - repository: CultureBotAI/TaxonMech
     path: src/taxonmech/seed.py
     role: Causal-graph overlay and UniProtKB reference loader
-  rule_id: docs/CURATION.md:Seeded fields are read-only; src/taxonmech/seed.py:UNIPROT_PROTEIN_COLUMNS
+  rule_id: docs/CURATION.md:Seeded fields are read-only; src/taxonmech/seed.py:UNIPROT_PROTEIN_FIELDS
   normalization_reason: Synchronize docs/CURATION.md and curation/causal_graphs/README.md
     with the implemented curation/causal_graphs/*.yaml and curation/uniprot_proteins.tsv
     overlay and validator contract (#78).
@@ -2778,8 +2778,9 @@ actions:
 - action_id: update-curation-guide-and-overlay-readme-for-causal-graphs-and-uniprot-tsv
   description: Update docs/CURATION.md and curation/causal_graphs/README.md in Cycle
     5 Stage 5 to reflect the live curation/causal_graphs/*.yaml overlay mechanism,
-    document the 15-column curation/uniprot_proteins.tsv reference schema table (UNIPROT_PROTEIN_COLUMNS)
-    and strain_id binding rule, and add a regression test (#78).
+    document the 14-column curation/uniprot_proteins.tsv reference schema table (UNIPROT_PROTEIN_FIELDS
+    at src/taxonmech/seed.py lines 62-77, validated in load_uniprot_proteins() at
+    lines 302-347) and strain_id binding rule, and add a regression test (#78).
   finding_ids:
   - curation-guide-and-overlay-readme-stale-causal-graph-overlay-contract
   target_ids:
@@ -2812,7 +2813,7 @@ actions:
   - docs/CURATION.md accurately describes the live curation/causal_graphs/*.yaml and
     curation/uniprot_proteins.tsv overlay pipeline while distinguishing unimplemented
     definition/evidence/mapping_status overlays
-  - curation/causal_graphs/README.md documents all 15 curation/uniprot_proteins.tsv
+  - curation/causal_graphs/README.md documents all 14 curation/uniprot_proteins.tsv
     columns and species-vs-strain strain_id binding rules
 limitations:
 - Per-record review rows for all 626,048 in-scope TaxonRecord files are stored in
