@@ -58,17 +58,27 @@ a seeded field is therefore not curation; it is drift that the next re-seed
 reverts. Curation goes in:
 
 - **the scope** (`curation/seed_scope.tsv`) — which taxa are records;
+- **causal-graph overlays** (`curation/causal_graphs/*.yaml`) and the pinned
+  **UniProtKB protein reference catalog** (`curation/uniprot_proteins.tsv`,
+  registered in `conf/sources.yaml`) — curator-owned `causal_graphs` (and
+  overlay `curation_history` events) merged deterministically by
+  `load_causal_graphs()` and `build_document()` in `src/taxonmech/seed.py`
+  so they survive `just seed-apply` and pass `just verify-corpus` (see
+  [`curation/causal_graphs/README.md`](../curation/causal_graphs/README.md));
 - **the seeder** — when a harmonization rule is wrong for a class of records;
 - **kg-microbe** — when a mapping is wrong upstream (an LPSN name mapped to
   the wrong NCBI taxon, a GTDB predicate that should be `closeMatch`). Fix it
   there, re-extract, re-seed; this repository does not carry mapping
   overrides yet.
 
-Curator-owned overlays for `causal_graphs`, `definition`, `evidence` and
-`mapping_status: REVIEWED` — merged by the seeder so they survive a re-seed,
-as HabitatMech does under `curation/causal_graphs/` — are the next step and
-are tracked in the issues. Until they exist, a curated change is a seeder
-change with a test.
+Curator-owned overlays for `causal_graphs` (and associated `curation_history`
+events) are maintained in `curation/causal_graphs/*.yaml` with
+`GENE_OR_PROTEIN` nodes validated offline against `curation/uniprot_proteins.tsv`
+by `validate_causal_graph_structure()`, `load_uniprot_proteins()`, and
+`validate_causal_graph_proteins()` in `src/taxonmech/seed.py`. Separate
+curator-owned overlays for `definition`, record-level `evidence` and
+`mapping_status: REVIEWED` remain tracked in the issues; until those exist, a
+change to any other record field is a seeder or scope change with a test.
 
 ## Evidence
 

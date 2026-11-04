@@ -51,6 +51,71 @@ causal_graphs:
               Escherichia coli beta-galactosidase (lacZ) system.
 ```
 
+## Pinned UniProtKB Protein Catalog (`curation/uniprot_proteins.tsv`) and `strain_id` Binding
+
+Every `GENE_OR_PROTEIN` node in `curation/causal_graphs/*.yaml` must resolve
+offline against a row in `curation/uniprot_proteins.tsv` (registered in
+`conf/sources.yaml`). `load_uniprot_proteins()` (`src/taxonmech/seed.py` lines
+302–347) enforces the exact 14-column header tuple `UNIPROT_PROTEIN_FIELDS`
+(`src/taxonmech/seed.py` lines 62–77):
+
+| Column (`UNIPROT_PROTEIN_FIELDS`) | Required? | Format / Validation Contract (`load_uniprot_proteins` & `validate_causal_graph_proteins`) |
+|---|---|---|
+| `uniprot_id` | Required (PK) | Unique `UniProtKB:<accession>` CURIE matching `CausalNode.grounding` |
+| `entry_name` | Required | Non-empty UniProtKB entry mnemonic (e.g. `BGAL_ECOLI`) |
+| `entry_status` | Required | `UniProtEntryStatusEnum` value (`SWISS_PROT` or `TREMBL`); must match `CausalNode.entry_status` |
+| `protein_name` | Required | Non-empty recommended or submitted protein name from UniProtKB |
+| `organism_taxon_id` | Required | Source organism `NCBITaxon:<id>` CURIE; must match `CausalNode.organism_taxon_id` and be lineage-compatible with the host `TaxonRecord.identifier` in `data/raw/ncbitaxon_taxa.tsv` |
+| `organism_label` | Required | Non-empty source organism scientific name from UniProtKB |
+| `proteome_id` | Optional | UniProt Proteome `UP:UP<digits>` CURIE when present; must match `CausalNode.proteome_id` |
+| `gene_symbol` | Conditional | Primary gene symbol (at least one of `gene_symbol` or `locus_tag` must be non-empty); must match `CausalNode.gene_symbol` (or allow ORF fallback when `gene_symbol` is empty in TSV) |
+| `locus_tag` | Conditional | Ordered locus / ORF tag (at least one of `gene_symbol` or `locus_tag` must be non-empty); must match `CausalNode.locus_tag` |
+| `ec_numbers` | Optional | Pipe-delimited (`\|`) unique `EC:` CURIEs matching `EC_NUMBER_PATTERN` (`^EC:[1-7]\.(?:[0-9]+\|-)\.(?:[0-9]+\|-)\.(?:n?[0-9]+\|-)$`); any `EC:` CURIE in `CausalNode.xrefs` must appear here |
+| `sequence_length` | Required | Positive integer canonical amino-acid length (`> 0`); must equal `CausalNode.sequence_length` |
+| `sequence_crc64` | Required | 16-character uppercase hex digest matching `CRC64_PATTERN` (`^[0-9A-F]{16}$`); must equal `CausalNode.sequence_crc64` |
+| `sequence_version` | Required | Positive integer sequence version (`> 0`); must equal `CausalNode.sequence_version` |
+| `release_version` | Required | Non-empty UniProtKB release pin (e.g. `2026_01`) |
+
+### Species vs. Strain `strain_id` Binding Rule
+
+`CausalNode.strain_id` is an optional `GENE_OR_PROTEIN`-only slot validated by
+`validate_causal_graph_proteins()` (`src/taxonmech/seed.py` lines 555–560,
+653–670):
+
+- When present, `strain_id` must match `BACDIVE_STRAIN_ID_PATTERN`
+  (`^kgmicrobe\.strain:bacdive_[1-9][0-9]*$`), exist in
+  `data/raw/bacdive_strains.tsv`, and appear on the host `TaxonRecord.strains[]`
+  list.
+- At least one taxon linked to `strain_id` in `data/raw/bacdive_strains.tsv`
+  must be lineage-compatible (`_taxa_lineage_compatible`) with **both** the
+  host `TaxonRecord.identifier` and the node's `organism_taxon_id` in
+  `data/raw/ncbitaxon_taxa.tsv`.
+- Across the 15 maintained overlays (64 `GENE_OR_PROTEIN` nodes), **5 overlays
+  (28 nodes) populate `strain_id`** because the target `TaxonRecord.strains[]`
+  contains that BacDive strain record: `NCBITaxon_562.yaml` (*Escherichia coli*,
+  `kgmicrobe.strain:bacdive_155687`), `NCBITaxon_1423.yaml` (*Bacillus subtilis*,
+  `kgmicrobe.strain:bacdive_1156`), `NCBITaxon_287.yaml` (*Pseudomonas
+  aeruginosa*, `kgmicrobe.strain:bacdive_12795`), and both
+  `NCBITaxon_2190.yaml` (*Methanocaldococcus jannaschii*) and
+  `NCBITaxon_243232.yaml` (*Methanocaldococcus jannaschii DSM 2661*)
+  (`kgmicrobe.strain:bacdive_6981`, which is directly assigned to
+  `NCBITaxon:243232` in `data/raw/bacdive_strains.tsv` and aggregated into
+  `NCBITaxon:2190` via subtree rollup).
+- **10 overlays (36 nodes) omit `strain_id`** while retaining strain-specific
+  `organism_taxon_id` and `proteome_id` because the host `TaxonRecord` has
+  `strains: []`: the 4 bacterial strain overlays whose BacDive strain row in
+  `data/raw/bacdive_strains.tsv` is keyed to the parent species rather than the
+  infraspecific TaxID (`NCBITaxon:83333` *Escherichia coli* K-12,
+  `NCBITaxon:511145` *Escherichia coli* str. K-12 substr. MG1655,
+  `NCBITaxon:224308` *Bacillus subtilis* subsp. *subtilis* str. 168, and
+  `NCBITaxon:208964` *Pseudomonas aeruginosa* PAO1) and the 6 eukaryotic
+  *Cryptococcus* species and strain overlays outside BacDive's prokaryotic
+  scope (`NCBITaxon:5207` *Cryptococcus neoformans*, `NCBITaxon:235443`
+  *Cryptococcus neoformans* H99, `NCBITaxon:40410` *Cryptococcus deneoformans*,
+  `NCBITaxon:283643` *Cryptococcus deneoformans* B-3501A, `NCBITaxon:1859096`
+  *Cryptococcus deuterogattii*, and `NCBITaxon:294750` *Cryptococcus
+  deuterogattii* R265).
+
 ## Validation Gates
 
 1. **LinkML schema validation (`src/taxonmech/schema/taxonmech.yaml`)**:

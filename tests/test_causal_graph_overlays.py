@@ -4,6 +4,7 @@ scope slots, OAK grounding prefix coverage, and granular trait edge extraction (
 from __future__ import annotations
 
 import importlib.util
+import re
 from pathlib import Path
 
 import pytest
@@ -1329,6 +1330,52 @@ def test_validate_causal_graph_node_edge_and_protein_ec_invariants(tmp_path):
         validate_causal_graph_proteins(
             bad_taxon_lineage_graph, uniprot_proteins=proteins, taxa=taxa, strains=strains
         )
+
+
+def test_curation_guide_and_overlay_readme_document_causal_graphs_and_uniprot_fields() -> None:
+    """docs/CURATION.md and curation/causal_graphs/README.md stay synchronized with
+    the live causal-graph overlay pipeline, all 14 UNIPROT_PROTEIN_FIELDS columns,
+    and the species-vs-strain strain_id binding rule (#197, #78)."""
+    curation_doc = (REPO_ROOT / "docs" / "CURATION.md").read_text(encoding="utf-8")
+    assert "Curator-owned overlays for `causal_graphs`, `definition`, `evidence`" not in curation_doc
+    for expected_token in (
+        "curation/causal_graphs/*.yaml",
+        "curation/uniprot_proteins.tsv",
+        "load_causal_graphs()",
+        "validate_causal_graph_structure()",
+        "load_uniprot_proteins()",
+        "validate_causal_graph_proteins()",
+    ):
+        assert expected_token in curation_doc, f"docs/CURATION.md missing {expected_token!r}"
+
+    overlay_readme = (REPO_ROOT / "curation" / "causal_graphs" / "README.md").read_text(
+        encoding="utf-8"
+    )
+    assert "UNIPROT_PROTEIN_FIELDS" in overlay_readme
+    for col in UNIPROT_PROTEIN_FIELDS:
+        assert f"`{col}`" in overlay_readme, f"curation/causal_graphs/README.md missing column {col!r}"
+    for binding_token in (
+        "BACDIVE_STRAIN_ID_PATTERN",
+        "_taxa_lineage_compatible",
+        "Species vs. Strain `strain_id` Binding Rule",
+    ):
+        assert binding_token in overlay_readme, (
+            f"curation/causal_graphs/README.md missing {binding_token!r}"
+        )
+
+    graphs, _ = load_causal_graphs()
+    overlay_strain_ids = {
+        node["strain_id"]
+        for graph_list in graphs.values()
+        for graph in graph_list
+        for node in graph.get("nodes", [])
+        if "strain_id" in node
+    }
+    readme_strain_ids = set(re.findall(r"kgmicrobe\.strain:bacdive_[1-9][0-9]*", overlay_readme))
+    assert readme_strain_ids == overlay_strain_ids, (
+        f"README strain_ids {sorted(readme_strain_ids)} != overlay strain_ids {sorted(overlay_strain_ids)}"
+    )
+
 
 
 
