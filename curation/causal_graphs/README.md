@@ -51,6 +51,57 @@ causal_graphs:
               Escherichia coli beta-galactosidase (lacZ) system.
 ```
 
+## Pinned UniProtKB Protein Catalog (`curation/uniprot_proteins.tsv`) and `strain_id` Binding
+
+Every `GENE_OR_PROTEIN` node in `curation/causal_graphs/*.yaml` must resolve
+offline against a row in `curation/uniprot_proteins.tsv` (registered in
+`conf/sources.yaml`). `load_uniprot_proteins()` (`src/taxonmech/seed.py` lines
+302–347) enforces the exact 14-column header tuple `UNIPROT_PROTEIN_FIELDS`
+(`src/taxonmech/seed.py` lines 62–77):
+
+| Column (`UNIPROT_PROTEIN_FIELDS`) | Required? | Format / Validation Contract (`load_uniprot_proteins` & `validate_causal_graph_proteins`) |
+|---|---|---|
+| `uniprot_id` | Required (PK) | Unique `UniProtKB:<accession>` CURIE matching `CausalNode.grounding` |
+| `entry_name` | Required | Non-empty UniProtKB entry mnemonic (e.g. `BGAL_ECOLI`) |
+| `entry_status` | Required | `UniProtEntryStatusEnum` value (`SWISS_PROT` or `TREMBL`); must match `CausalNode.entry_status` |
+| `protein_name` | Required | Non-empty recommended or submitted protein name from UniProtKB |
+| `organism_taxon_id` | Required | Source organism `NCBITaxon:<id>` CURIE; must match `CausalNode.organism_taxon_id` and be lineage-compatible with the host `TaxonRecord.identifier` in `data/raw/ncbitaxon_taxa.tsv` |
+| `organism_label` | Required | Non-empty source organism scientific name from UniProtKB |
+| `proteome_id` | Optional | UniProt Proteome `UP:UP<digits>` CURIE when present; must match `CausalNode.proteome_id` |
+| `gene_symbol` | Conditional | Primary gene symbol (at least one of `gene_symbol` or `locus_tag` must be non-empty); must match `CausalNode.gene_symbol` (or allow ORF fallback when `gene_symbol` is empty in TSV) |
+| `locus_tag` | Conditional | Ordered locus / ORF tag (at least one of `gene_symbol` or `locus_tag` must be non-empty); must match `CausalNode.locus_tag` |
+| `ec_numbers` | Optional | Pipe-delimited (`\|`) unique `EC:` CURIEs matching `EC_NUMBER_PATTERN` (`^EC:[1-7]\.(?:[0-9]+\|-)\.(?:[0-9]+\|-)\.(?:n?[0-9]+\|-)$`); any `EC:` CURIE in `CausalNode.xrefs` must appear here |
+| `sequence_length` | Required | Positive integer canonical amino-acid length (`> 0`); must equal `CausalNode.sequence_length` |
+| `sequence_crc64` | Required | 16-character uppercase hex digest matching `CRC64_PATTERN` (`^[0-9A-F]{16}$`); must equal `CausalNode.sequence_crc64` |
+| `sequence_version` | Required | Positive integer sequence version (`> 0`); must equal `CausalNode.sequence_version` |
+| `release_version` | Required | Non-empty UniProtKB release pin (e.g. `2026_01`) |
+
+### Species vs. Strain `strain_id` Binding Rule
+
+`CausalNode.strain_id` is an optional `GENE_OR_PROTEIN`-only slot validated by
+`validate_causal_graph_proteins()` (`src/taxonmech/seed.py` lines 555–560,
+653–670):
+
+- When present, `strain_id` must match `BACDIVE_STRAIN_ID_PATTERN`
+  (`^kgmicrobe\.strain:bacdive_[1-9][0-9]*$`) and exist in
+  `data/raw/bacdive_strains.tsv`.
+- At least one taxon linked to `strain_id` in `data/raw/bacdive_strains.tsv`
+  must be lineage-compatible (`_taxa_lineage_compatible`) with **both** the
+  host `TaxonRecord.identifier` and the node's `organism_taxon_id` in
+  `data/raw/ncbitaxon_taxa.tsv`.
+- Populate `strain_id` when the UniProtKB entry (`organism_taxon_id` /
+  `proteome_id`) and `data/raw/bacdive_strains.tsv` identify a specific
+  BacDive strain record (for example, `kgmicrobe.strain:bacdive_1156` for
+  *Bacillus subtilis* 168 on `NCBITaxon:224308` and `NCBITaxon:1423`,
+  `kgmicrobe.strain:bacdive_12807` for *Pseudomonas aeruginosa* PAO1 on
+  `NCBITaxon:208964` and `NCBITaxon:287`, `kgmicrobe.strain:bacdive_7126` for
+  *Methanocaldococcus jannaschii* DSM 2661 on `NCBITaxon:243232` and
+  `NCBITaxon:2190`, `kgmicrobe.strain:bacdive_155687` for *Escherichia coli*
+  K-12 MG1655 on `NCBITaxon:511145`, or `kgmicrobe.strain:bacdive_139393` for
+  *Pyricularia oryzae* 70-15 on `NCBITaxon:1859096`). Omit `strain_id` when
+  the taxon has no BacDive strain entry or when the species/substrain record's
+  BacDive entries do not uniquely bind the specific proteome strain.
+
 ## Validation Gates
 
 1. **LinkML schema validation (`src/taxonmech/schema/taxonmech.yaml`)**:
