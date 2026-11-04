@@ -147752,6 +147752,13 @@ curation_history:
     UP:UP000000625 with literature-backed expression and cAMP-CRP regulatory edges
     for the lactose catabolic operon (PMID:9278503, PMID:6393056, PMID:1646077).
   llm_assisted: true
+- timestamp: '2026-11-04T17:15:00Z'
+  curator: curate-causal-graphs
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: Added direct enzyme-to-process causal edge (edge e21, cyaA RO:0002418 lactose_transport,
+    PMID:6393056, PMID:1646077) linking adenylate cyclase CyaA (UniProtKB:P00936)
+    to cAMP-CRP-induced LacY lactose transport (GO:0015767).
+  llm_assisted: true
 causal_graphs:
 - graph_id: lactose_catabolism
   title: LacY/LacZ-mediated lactose transport and catabolism
@@ -148086,3 +148093,16 @@ causal_graphs:
     - reference: PMID:1646077
       notes: cAMP-CRP transcriptional activation at lacP1 is required for maximal
         expression of the lactose transport and catabolic pathway.
+  - edge_id: e21
+    subject: cyaA
+    predicate: causally upstream of or within
+    predicate_id: RO:0002418
+    object: lactose_transport
+    evidence:
+    - reference: PMID:6393056
+      notes: Adenylate cyclase CyaA (EC:4.6.1.1) synthesizes cAMP required for cAMP-CRP
+        activation of polycistronic lacZYA transcription, driving LacY lactose permease
+        synthesis and active lactose uptake in Escherichia coli.
+    - reference: PMID:1646077
+      notes: cAMP-CRP transcriptional activation at the Escherichia coli lacP1 promoter
+        is required for inducible LacY-mediated transmembrane lactose transport.
