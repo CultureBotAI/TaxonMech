@@ -4,6 +4,7 @@ scope slots, OAK grounding prefix coverage, and granular trait edge extraction (
 from __future__ import annotations
 
 import importlib.util
+import re
 from pathlib import Path
 
 import pytest
@@ -1361,6 +1362,19 @@ def test_curation_guide_and_overlay_readme_document_causal_graphs_and_uniprot_fi
         assert binding_token in overlay_readme, (
             f"curation/causal_graphs/README.md missing {binding_token!r}"
         )
+
+    graphs, _ = load_causal_graphs()
+    overlay_strain_ids = {
+        node["strain_id"]
+        for graph_list in graphs.values()
+        for graph in graph_list
+        for node in graph.get("nodes", [])
+        if "strain_id" in node
+    }
+    readme_strain_ids = set(re.findall(r"kgmicrobe\.strain:bacdive_[1-9][0-9]*", overlay_readme))
+    assert readme_strain_ids == overlay_strain_ids, (
+        f"README strain_ids {sorted(readme_strain_ids)} != overlay strain_ids {sorted(overlay_strain_ids)}"
+    )
 
 
 

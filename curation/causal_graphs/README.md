@@ -83,24 +83,38 @@ offline against a row in `curation/uniprot_proteins.tsv` (registered in
 653–670):
 
 - When present, `strain_id` must match `BACDIVE_STRAIN_ID_PATTERN`
-  (`^kgmicrobe\.strain:bacdive_[1-9][0-9]*$`) and exist in
-  `data/raw/bacdive_strains.tsv`.
+  (`^kgmicrobe\.strain:bacdive_[1-9][0-9]*$`), exist in
+  `data/raw/bacdive_strains.tsv`, and appear on the host `TaxonRecord.strains[]`
+  list.
 - At least one taxon linked to `strain_id` in `data/raw/bacdive_strains.tsv`
   must be lineage-compatible (`_taxa_lineage_compatible`) with **both** the
   host `TaxonRecord.identifier` and the node's `organism_taxon_id` in
   `data/raw/ncbitaxon_taxa.tsv`.
-- Populate `strain_id` when the UniProtKB entry (`organism_taxon_id` /
-  `proteome_id`) and `data/raw/bacdive_strains.tsv` identify a specific
-  BacDive strain record (for example, `kgmicrobe.strain:bacdive_1156` for
-  *Bacillus subtilis* 168 on `NCBITaxon:224308` and `NCBITaxon:1423`,
-  `kgmicrobe.strain:bacdive_12807` for *Pseudomonas aeruginosa* PAO1 on
-  `NCBITaxon:208964` and `NCBITaxon:287`, `kgmicrobe.strain:bacdive_7126` for
-  *Methanocaldococcus jannaschii* DSM 2661 on `NCBITaxon:243232` and
-  `NCBITaxon:2190`, `kgmicrobe.strain:bacdive_155687` for *Escherichia coli*
-  K-12 MG1655 on `NCBITaxon:511145`, or `kgmicrobe.strain:bacdive_139393` for
-  *Pyricularia oryzae* 70-15 on `NCBITaxon:1859096`). Omit `strain_id` when
-  the taxon has no BacDive strain entry or when the species/substrain record's
-  BacDive entries do not uniquely bind the specific proteome strain.
+- Across the 15 maintained overlays (64 `GENE_OR_PROTEIN` nodes), **5 overlays
+  (28 nodes) populate `strain_id`** because the target `TaxonRecord.strains[]`
+  contains that BacDive strain record: `NCBITaxon_562.yaml` (*Escherichia coli*,
+  `kgmicrobe.strain:bacdive_155687`), `NCBITaxon_1423.yaml` (*Bacillus subtilis*,
+  `kgmicrobe.strain:bacdive_1156`), `NCBITaxon_287.yaml` (*Pseudomonas
+  aeruginosa*, `kgmicrobe.strain:bacdive_12795`), and both
+  `NCBITaxon_2190.yaml` (*Methanocaldococcus jannaschii*) and
+  `NCBITaxon_243232.yaml` (*Methanocaldococcus jannaschii DSM 2661*)
+  (`kgmicrobe.strain:bacdive_6981`, which is directly assigned to
+  `NCBITaxon:243232` in `data/raw/bacdive_strains.tsv` and aggregated into
+  `NCBITaxon:2190` via subtree rollup).
+- **10 overlays (36 nodes) omit `strain_id`** while retaining strain-specific
+  `organism_taxon_id` and `proteome_id` because the host `TaxonRecord` has
+  `strains: []`: the 4 bacterial strain overlays whose BacDive strain row in
+  `data/raw/bacdive_strains.tsv` is keyed to the parent species rather than the
+  infraspecific TaxID (`NCBITaxon:83333` *Escherichia coli* K-12,
+  `NCBITaxon:511145` *Escherichia coli* str. K-12 substr. MG1655,
+  `NCBITaxon:224308` *Bacillus subtilis* subsp. *subtilis* str. 168, and
+  `NCBITaxon:208964` *Pseudomonas aeruginosa* PAO1) and the 6 eukaryotic
+  *Cryptococcus* species and strain overlays outside BacDive's prokaryotic
+  scope (`NCBITaxon:5207` *Cryptococcus neoformans*, `NCBITaxon:235443`
+  *Cryptococcus neoformans* H99, `NCBITaxon:40410` *Cryptococcus deneoformans*,
+  `NCBITaxon:283643` *Cryptococcus deneoformans* B-3501A, `NCBITaxon:1859096`
+  *Cryptococcus deuterogattii*, and `NCBITaxon:294750` *Cryptococcus
+  deuterogattii* R265).
 
 ## Validation Gates
 

@@ -19,7 +19,7 @@ Frozen 626,048-record TaxonMech corpus across data/taxa/bacteria/ (605,695), dat
 
 Selection: All 626,048 in-scope TaxonRecord files in curation/seed_scope.tsv and data/taxa/PATHS.tsv reconciled against the frozen review inventories, plus 27 directly bound representative records spanning Bacteria (13), Archaea (3), Eukaryota (8), and other (3) across pass, pass_with_limitations, needs_curation, blocked, and Cycle 2-5 causal-graph/UniProtKB cohorts.
 Coverage: sampled; 27 reviewed / 626048 in the declared population.
-Source: working_tree at Git base b04590a7a416eb934f67e7c04416e37924f10ec8.
+Source: working_tree at Git base 65aab57fdbcb1adb92d2ce9ac73a5f6e3b94cf9d.
 Working-tree hashes do not imply those bytes were committed.
 
 | Target | Path / selector | Kind | Label |
@@ -61,7 +61,7 @@ Working-tree hashes do not imply those bytes were committed.
 | Required historical native-unit counts | unavailable | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2940590, NCBITaxon:3121604, NCBITaxon:1435036, NCBITaxon:209650, NCBITaxon:206, NCBITaxon:33952, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:2287, NCBITaxon:4932, NCBITaxon:5207, NCBITaxon:235443, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:5755, NCBITaxon:155900, NCBITaxon:408170, NCBITaxon:32644 | Manifest-pinned upstream kg-microbe raw edge tables for GOLD, MEDIADIVE, MADIN, and BACTOTRAITS are not committed locally (though SHA-256 digests are documented in docs/HARMONIZATION.md), and subtree rollups apply to BacDive strains only (#8; taxonmech-infra-0004). |
 | Full-corpus review coverage and disjointness check across all 626,048 records | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2940590, NCBITaxon:3121604, NCBITaxon:1435036, NCBITaxon:209650, NCBITaxon:206, NCBITaxon:33952, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:2287, NCBITaxon:4932, NCBITaxon:5207, NCBITaxon:235443, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:5755, NCBITaxon:155900, NCBITaxon:408170, NCBITaxon:32644 | scripts/corpus_review_inventory.py --check verified 626,048 corpus records (23,883 legacy + 602,165 structured across 14 shards and 611 batches) with 0 unreviewed records and 0 overlaps. |
 | Structured review inventory and post-curation target SHA-256 reconciliation regression suite | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2940590, NCBITaxon:3121604, NCBITaxon:1435036, NCBITaxon:209650, NCBITaxon:206, NCBITaxon:33952, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:2287, NCBITaxon:4932, NCBITaxon:5207, NCBITaxon:235443, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:5755, NCBITaxon:155900, NCBITaxon:408170, NCBITaxon:32644 | pytest tests/test_corpus_review_inventory.py -k 'not verify_target_sha256' passed all 9 tests verifying shard coverage, load_latest_target_reviews() post-curation target_sha256 reconciliation (#158), and in-repository symlink input handling (#185). |
-| Committed causal-graph and UniProtKB overlay regression suite | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:5207, NCBITaxon:235443, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:1859096, NCBITaxon:294750 | pytest tests/test_causal_graph_overlays.py passed all 7 tests verifying overlay loading, structural causal-graph and EC-number/metadata invariant validation (#189, PR #190), seeder merge, LinkML validation, offline curation/uniprot_proteins.tsv validation (including strain_id and vertical lineage consistency), and HTML rendering across all 15 maintained overlays (204 edges across 48 PMIDs, 64 GENE_OR_PROTEIN nodes across 29 UniProtKB accessions). |
+| Committed causal-graph and UniProtKB overlay regression suite | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:5207, NCBITaxon:235443, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:1859096, NCBITaxon:294750 | pytest tests/test_causal_graph_overlays.py passed all 8 tests verifying overlay loading, structural causal-graph and EC-number/metadata invariant validation (#189, PR #190), seeder merge, LinkML validation, offline curation/uniprot_proteins.tsv validation (including strain_id and vertical lineage consistency), HTML rendering across all 15 maintained overlays (204 edges across 48 PMIDs, 64 GENE_OR_PROTEIN nodes across 29 UniProtKB accessions), and docs/CURATION.md + curation/causal_graphs/README.md contract synchronization (#197, #78). |
 
 ## Scientific And Domain Assessments
 
@@ -209,7 +209,7 @@ Execute remaining INFRA_TASKS.md tasks taxonmech-infra-0001..0004 in Cycle 5 Sta
 | exemplar-target-records | data/taxa/bacteria/escherichia_coli.yaml; data/taxa/bacteria/escherichia_coli_k_12.yaml; data/taxa/bacteria/escherichia_coli_str_k_12_substr_mg1655.yaml; data/taxa/bacteria/bacillus_subtilis.yaml; data/taxa/bacteria/bacillus_subtilis_subsp_subtilis_str_168.yaml; data/taxa/bacteria/pseudomonas_aeruginosa.yaml; data/taxa/bacteria/pseudomonas_aeruginosa_pao1.yaml; data/taxa/bacteria/achromobacter_sp_jub104.yaml; data/taxa/bacteria/acidaminobacteraceae_bacterium.yaml; data/taxa/bacteria/acinetobacter_bohemicus.yaml; data/taxa/bacteria/acidicaldus_organivorans.yaml; data/taxa/bacteria/campylobacter_sputorum.yaml; data/taxa/bacteria/acetobacterium_woodii.yaml; data/taxa/archaea/methanocaldococcus_jannaschii.yaml; data/taxa/archaea/methanocaldococcus_jannaschii_dsm_2661.yaml; data/taxa/archaea/saccharolobus_solfataricus.yaml; data/taxa/eukaryota/saccharomyces_cerevisiae.yaml; data/taxa/eukaryota/cryptococcus_neoformans.yaml; data/taxa/eukaryota/cryptococcus_neoformans_h99.yaml; data/taxa/eukaryota/cryptococcus_deneoformans.yaml; data/taxa/eukaryota/cryptococcus_deneoformans_b_3501a.yaml; data/taxa/eukaryota/cryptococcus_deuterogattii.yaml; data/taxa/eukaryota/cryptococcus_deuterogattii_r265.yaml; data/taxa/eukaryota/acanthamoeba_castellanii.yaml; data/taxa/other/uncultured_organism.yaml; data/taxa/other/human_gut_metagenome.yaml; data/taxa/other/unidentified.yaml; Complete YAML content of 27 directly bound cross-domain, verdict-stratified, and causal-graph-enriched TaxonRecord files | supports | Verified taxon identity, lineage, nomenclature, synonyms, xrefs, taxonomy_mappings, source_attestations, strains, causal_graphs, and curation_history across 27 exemplar records spanning Bacteria (13), Archaea (3), Eukaryota (8), and other (3). |
 | cycle5-causal-graph-and-uniprot-overlays | curation/causal_graphs/README.md; curation/causal_graphs/NCBITaxon_*.yaml; curation/uniprot_proteins.tsv; reviews/structured/20261031T231000Z-cycle5-stage2-causal-graphs-curation/review.yaml; reviews/structured/20261101T040500Z-cycle5-stage3-protein-examples/review.yaml; 15 maintained curation/causal_graphs/NCBITaxon_*.yaml overlays, curation/uniprot_proteins.tsv (29 rows), and Cycle 5 Stages 2-3 structured review bundles | supports | Verified 15 maintained causal-graph overlays seeded into 7 species and 8 strain TaxonRecord files (204 evidence-backed edges across 48 PMIDs; 64 GENE_OR_PROTEIN nodes grounded to 29 unique live-verified UniProtKB accessions—27 SWISS_PROT and 2 TREMBL—in curation/uniprot_proteins.tsv with exact organism_taxon_id, strain_id, proteome_id, gene_symbol, locus_tag, ec_numbers, sequence_length, sequence_crc64, sequence_version, and entry_status). |
 | raw-source-inventories | curation/seed_scope.tsv; data/raw/MANIFEST.yaml; data/raw/ncbitaxon_taxa.tsv; data/raw/gtdb_mappings.tsv; data/raw/gtdb_species.tsv; data/raw/bacdive_strains.tsv; data/raw/lpsn_names.tsv; curation/seed_scope.tsv (626,048 rows) and data/raw/*.tsv | supports | Pinned raw inventories verify exact NCBI taxon IDs and lineages across all 626,048 records and confirm persistent GTDB closeMatch fan-out (95,766 records), polyphyly suffix mangling (15,704 rows), pooled broadMatch genome counts/notes (8,587 records), and stale seed_scope strain-count reason strings. |
-| schema-seeder-validator-code | src/taxonmech/schema/taxonmech.yaml; src/taxonmech/seed.py; src/taxonmech/extract.py; scripts/validate_strict.py; scripts/check_provenance.py; scripts/corpus_review_inventory.py; scripts/validate_history.py; docs/SCHEMA.md; docs/CURATION.md; curation/causal_graphs/README.md; tests/test_causal_graph_overlays.py; docs/HARMONIZATION.md; docs/corpus-review-coverage.md; INFRA_TASKS.md; taxonmech.yaml:43-95,1200-1315,1520-1575; seed.py:62-117,302-736,949-1164; validate_strict.py:217-370; check_provenance.py:1-140; corpus_review_inventory.py:185-330,381-445; docs/SCHEMA.md:1-38; docs/CURATION.md:52-82; curation/causal_graphs/README.md:1-148; tests/test_causal_graph_overlays.py:1334-1364; INFRA_TASKS.md:33-340 | supports | Inspection of schema, seeder, extractor, strict/UniProt/provenance validators, inventory checker, and documentation confirms resolution of #76 and #83 in Cycle 1 Stage 5, resolution of #158 code in Cycle 2 Stage 5 (PR #159) and #158 documentation/regression test in Cycle 3 Stage 5 (PR #165), structural causal-graph and strain_id validation plus conf/sources.yaml registration in Cycle 3 Stage 6 (PR #168), resolution of #187/#78 docs/SCHEMA.md protein-slot documentation in Cycle 4 Stage 5 (PR #188), schema/EC/metadata invariant enforcement in Cycle 4 Stage 6 (#189, PR #190), resolution of #197/#78 docs/CURATION.md and curation/causal_graphs/README.md contract in Cycle 5 Stage 5, persistent GTDB/scope seeder defects at src/taxonmech/seed.py lines 949-984, 1085-1099, and 1141-1151 (#124, #63, #65, #118, #119, #69), and remaining corpus-wide trait/UniProt/attestation-note tasks in INFRA_TASKS.md (taxonmech-infra-0001..0004; #78, #8). |
+| schema-seeder-validator-code | src/taxonmech/schema/taxonmech.yaml; src/taxonmech/seed.py; src/taxonmech/extract.py; scripts/validate_strict.py; scripts/check_provenance.py; scripts/corpus_review_inventory.py; scripts/validate_history.py; docs/SCHEMA.md; docs/CURATION.md; curation/causal_graphs/README.md; tests/test_causal_graph_overlays.py; docs/HARMONIZATION.md; docs/corpus-review-coverage.md; INFRA_TASKS.md; taxonmech.yaml:43-95,1200-1315,1520-1575; seed.py:62-117,302-736,949-1164; validate_strict.py:217-370; check_provenance.py:1-140; corpus_review_inventory.py:185-330,381-445; docs/SCHEMA.md:1-38; docs/CURATION.md:52-82; curation/causal_graphs/README.md:1-163; tests/test_causal_graph_overlays.py:1335-1379; INFRA_TASKS.md:33-340 | supports | Inspection of schema, seeder, extractor, strict/UniProt/provenance validators, inventory checker, and documentation confirms resolution of #76 and #83 in Cycle 1 Stage 5, resolution of #158 code in Cycle 2 Stage 5 (PR #159) and #158 documentation/regression test in Cycle 3 Stage 5 (PR #165), structural causal-graph and strain_id validation plus conf/sources.yaml registration in Cycle 3 Stage 6 (PR #168), resolution of #187/#78 docs/SCHEMA.md protein-slot documentation in Cycle 4 Stage 5 (PR #188), schema/EC/metadata invariant enforcement in Cycle 4 Stage 6 (#189, PR #190), resolution of #197/#78 docs/CURATION.md and curation/causal_graphs/README.md contract in Cycle 5 Stage 5, persistent GTDB/scope seeder defects at src/taxonmech/seed.py lines 949-984, 1085-1099, and 1141-1151 (#124, #63, #65, #118, #119, #69), and remaining corpus-wide trait/UniProt/attestation-note tasks in INFRA_TASKS.md (taxonmech-infra-0001..0004; #78, #8). |
 
 ## Limits And Additional Notes
 
@@ -268,7 +268,7 @@ summary: 'Executed the Cycle 5 Stage 5 (resolve_review_findings) post-remediatio
   #65, #118/#119, #69, #8, #78) are carried forward as deferred with explicit dispositions
   and canonical open GitHub issues.'
 source:
-  git_revision: b04590a7a416eb934f67e7c04416e37924f10ec8
+  git_revision: 65aab57fdbcb1adb92d2ce9ac73a5f6e3b94cf9d
   state: working_tree
   inputs:
   - path: .claude/skills/add-uniprot-protein-examples/SKILL.md
@@ -359,7 +359,7 @@ source:
     sha256: 638d3c9be0282714c3e5f5dfac411fa8ef8bdb2c7799d15f1a2964fc0511d3a8
     role: context
   - path: curation/causal_graphs/README.md
-    sha256: eb8cd80fa35881f9e3a3a51d430644438e9bac729435b42e2f989254361bb68c
+    sha256: 3ae8f727582c315572eb4ef01450beddc111a591d45c1cc02c1697f8708ca0ec
     role: context
   - path: curation/seed_scope.tsv
     sha256: 95589ac7f548dcd27951c6afe432895c7409717df5f6e789a93dcb9229535963
@@ -794,7 +794,7 @@ source:
     sha256: 7df5b22500adefcb89363c23a6b74ccd0da4fa34a1f73f2997758099cf3253df
     role: context
   - path: tests/test_causal_graph_overlays.py
-    sha256: 85cc2c72f9c15fd1aebdcf27efd3397ebcd65ea5ed16abf8ba3e33b0db80870c
+    sha256: a148a21f657f8d868376866c94a2f584ce59656389e17fab729996d2f0850c87
     role: context
   - path: tests/test_corpus_review_inventory.py
     sha256: fc566c84005c7b56719ab3d7ec4e127f0fc902d0a3dba8f3d44f06e2c382da11
@@ -1577,12 +1577,13 @@ checks:
   name: Committed causal-graph and UniProtKB overlay regression suite
   status: passed
   required: true
-  summary: 'pytest tests/test_causal_graph_overlays.py passed all 7 tests verifying
+  summary: 'pytest tests/test_causal_graph_overlays.py passed all 8 tests verifying
     overlay loading, structural causal-graph and EC-number/metadata invariant validation
     (#189, PR #190), seeder merge, LinkML validation, offline curation/uniprot_proteins.tsv
-    validation (including strain_id and vertical lineage consistency), and HTML rendering
+    validation (including strain_id and vertical lineage consistency), HTML rendering
     across all 15 maintained overlays (204 edges across 48 PMIDs, 64 GENE_OR_PROTEIN
-    nodes across 29 UniProtKB accessions).'
+    nodes across 29 UniProtKB accessions), and docs/CURATION.md + curation/causal_graphs/README.md
+    contract synchronization (#197, #78).'
   target_ids:
   - NCBITaxon:562
   - NCBITaxon:83333
@@ -1659,7 +1660,7 @@ evidence:
     sequence_version, and entry_status).
   accessed_at: '2026-11-04T08:30:00Z'
   support: supports
-  snapshot_sha256: 1d72225f759ec2450999f1fcbfcdfe501aca8abdc6c4253908a4060791d17b4d
+  snapshot_sha256: 497766fe11365f193905abc11875f76b777e60ba724afe2eba5b2217f967b44e
 - evidence_id: raw-source-inventories
   kind: record_content
   reference: curation/seed_scope.tsv; data/raw/MANIFEST.yaml; data/raw/ncbitaxon_taxa.tsv;
@@ -1682,8 +1683,8 @@ evidence:
     INFRA_TASKS.md
   locator: taxonmech.yaml:43-95,1200-1315,1520-1575; seed.py:62-117,302-736,949-1164;
     validate_strict.py:217-370; check_provenance.py:1-140; corpus_review_inventory.py:185-330,381-445;
-    docs/SCHEMA.md:1-38; docs/CURATION.md:52-82; curation/causal_graphs/README.md:1-148;
-    tests/test_causal_graph_overlays.py:1334-1364; INFRA_TASKS.md:33-340
+    docs/SCHEMA.md:1-38; docs/CURATION.md:52-82; curation/causal_graphs/README.md:1-163;
+    tests/test_causal_graph_overlays.py:1335-1379; INFRA_TASKS.md:33-340
   summary: 'Inspection of schema, seeder, extractor, strict/UniProt/provenance validators,
     inventory checker, and documentation confirms resolution of #76 and #83 in Cycle
     1 Stage 5, resolution of #158 code in Cycle 2 Stage 5 (PR #159) and #158 documentation/regression
@@ -1698,7 +1699,7 @@ evidence:
     #78, #8).'
   accessed_at: '2026-11-04T08:30:00Z'
   support: supports
-  snapshot_sha256: 22d85f2868edcdd8ac05f45148c8a59e5542ffa1d06e714d922f88bda0db0af7
+  snapshot_sha256: 7580103329793ac17f2e9c09dc45c89c9aa2144fc09a3a91cb0287d10105b767
 assessments:
 - assessment_id: corpus-review-coverage-and-identity
   area: identity

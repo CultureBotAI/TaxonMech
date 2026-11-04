@@ -28,7 +28,7 @@ previous_evidence:
 artifacts:
 - path: reviews/workflow/mech-goal-sequence-20261019/cycle-000005/stage-05/revision-0001/issue_map.md
   kind: issue_map
-  sha256: b861df0a29fac624efaba27bd6543eca534ab2d0773167811bd2fa8ce504a03c
+  sha256: 5946d909dbd5efac19c7c01a9328ecf46ec6af5f62568682f4361c268f44ff4e
 - path: reviews/workflow/mech-goal-sequence-20261019/cycle-000005/stage-05/revision-0001/validation.md
   kind: validation
   sha256: 9dafeff669ec6e7ae5b22b3b51eb424533cf80d8e976e4d981815affc6428bfa
@@ -39,17 +39,17 @@ findings:
   issue_url: https://github.com/CultureBotAI/TaxonMech/issues/197
   carried_from: curation-guide-and-overlay-readme-stale-causal-graph-overlay-contract
   summary: 'Updated docs/CURATION.md (''Seeded fields are read-only'', lines 60-81)
-    to document curation/causal_graphs/<domain>/<slug>.yaml and curation/uniprot_proteins.tsv
-    as live maintained curation inputs merged into generated TaxonRecord YAML files
-    by load_causal_graphs() and build_document() in src/taxonmech/seed.py and validated
+    to document curation/causal_graphs/*.yaml and curation/uniprot_proteins.tsv as
+    live maintained curation inputs merged into generated TaxonRecord YAML files by
+    load_causal_graphs() and build_document() in src/taxonmech/seed.py and validated
     offline by validate_causal_graph_structure(), load_uniprot_proteins(), and validate_causal_graph_proteins(),
-    updated curation/causal_graphs/README.md (lines 54-104) with a 14-column UNIPROT_PROTEIN_FIELDS
-    schema reference table and the species-vs-strain strain_id binding rule, and added
-    regression test test_curation_guide_and_overlay_readme_document_causal_graphs_and_uniprot_fields()
-    in tests/test_causal_graph_overlays.py (#197, related #78).'
+    updated curation/causal_graphs/README.md (lines 54-118) with a 14-column UNIPROT_PROTEIN_FIELDS
+    schema reference table and the species-vs-strain strain_id binding rule across
+    all 15 maintained overlays, and added regression test test_curation_guide_and_overlay_readme_document_causal_graphs_and_uniprot_fields()
+    in tests/test_causal_graph_overlays.py (lines 1335-1379) (#197, related #78).'
   disposition: 'Resolved in Cycle 5 Stage 5 under #197 (and related #78); verified
     by .venv/bin/pytest -p no:cacheprovider tests/test_causal_graph_overlays.py (8
-    passed in 3.58s) and .venv/bin/ruff check --no-cache tests/test_causal_graph_overlays.py
+    passed in 3.28s) and .venv/bin/ruff check --no-cache tests/test_causal_graph_overlays.py
     (exits 0).'
 - finding_id: schema-guide-missing-causal-node-uniprot-protein-slots
   status: resolved
@@ -146,10 +146,10 @@ findings:
   group_id: group-gtdb-pooled-broadmatch-semantics
   issue_url: https://github.com/CultureBotAI/TaxonMech/issues/118
   carried_from: gtdb-pooled-broadmatch-attestation-and-note
-  summary: On 6,335 pooled-only GTDB records, src/taxonmech/seed.py (lines 1106-1120)
+  summary: On 6,335 pooled-only GTDB records, src/taxonmech/seed.py (lines 1085-1099)
     emits the largest pooled species cluster's genome total as the taxon's GTDB GENOME
     attestation (#118), and across 8,587 pooled GTDB records (209,540 rows) lines
-    963-965 emit a note stating the reverse of kg-microbe's broadMatch direction (#119).
+    971-973 emit a note stating the reverse of kg-microbe's broadMatch direction (#119).
   disposition: 'Deferred under #118 and #119: aligning pooled GTDB broadMatch genome
     counts and mapping-direction notes in src/taxonmech/seed.py requires regenerating
     8,587 TaxonRecord YAML files and rendered shards in a dedicated corpus-regeneration
@@ -159,7 +159,7 @@ findings:
   group_id: group-curation-history-scope-strain-count
   issue_url: https://github.com/CultureBotAI/TaxonMech/issues/69
   carried_from: curation-history-stale-scope-strain-count
-  summary: SEEDED_FROM_SOURCES curation_history in src/taxonmech/seed.py (lines 1168-1179)
+  summary: SEEDED_FROM_SOURCES curation_history in src/taxonmech/seed.py (lines 1141-1151)
     embeds the static strain count from curation/seed_scope.tsv's reason column instead
     of the subtree-aggregated strain_count (#69).
   disposition: 'Deferred under #69: updating SEEDED_FROM_SOURCES curation_history
