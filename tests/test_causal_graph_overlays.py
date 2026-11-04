@@ -19,7 +19,10 @@ from taxonmech.seed import (
     EC_NUMBER_PATTERN,
     EDGE_ID_PATTERN,
     EVIDENCE_REFERENCE_PATTERN,
+    NCBITAXON_ID_PATTERN,
     PROTEIN_ONLY_NODE_SLOTS,
+    PROTEOME_ID_PATTERN,
+    UNIPROT_ID_PATTERN,
     UNIPROT_PROTEIN_FIELDS,
     UNIPROT_PROTEINS_PATH,
     Concept,
@@ -1375,6 +1378,216 @@ def test_curation_guide_and_overlay_readme_document_causal_graphs_and_uniprot_fi
     assert readme_strain_ids == overlay_strain_ids, (
         f"README strain_ids {sorted(readme_strain_ids)} != overlay strain_ids {sorted(overlay_strain_ids)}"
     )
+
+
+def test_causal_graph_node_connectivity_and_id_patterns_enforced(tmp_path: Path):
+    """validate_causal_graph_structure and validate_causal_graph_proteins must reject
+    disconnected nodes, malformed graph_id/node_id/UniProtKB/proteome_id/NCBITaxon IDs,
+    and above-species host or organism taxa (#199, #78)."""
+    assert UNIPROT_ID_PATTERN.match("UniProtKB:P00722")
+    assert UNIPROT_ID_PATTERN.match("UniProtKB:A0A1S6LVH0")
+    assert not UNIPROT_ID_PATTERN.match("UniProtKB:bad")
+    assert NCBITAXON_ID_PATTERN.match("NCBITaxon:562")
+    assert not NCBITAXON_ID_PATTERN.match("NCBITaxon:0")
+    assert PROTEOME_ID_PATTERN.match("UP:UP000000625")
+    assert not PROTEOME_ID_PATTERN.match("UP:UP625")
+
+    # 1. Disconnected node in CausalGraph
+    disconnected_graphs = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {
+                        "node_id": "n1",
+                        "label": "Escherichia coli",
+                        "node_type": "TAXON",
+                        "grounding": "NCBITaxon:562",
+                    },
+                    {
+                        "node_id": "n2",
+                        "label": "lactose catabolic process",
+                        "node_type": "BIOLOGICAL_PROCESS",
+                        "grounding": "GO:0005988",
+                    },
+                    {
+                        "node_id": "orphan_node",
+                        "label": "beta-galactosidase activity",
+                        "node_type": "MOLECULAR_FUNCTION",
+                        "grounding": "GO:0004565",
+                    },
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "n1",
+                        "predicate": "capable of",
+                        "predicate_id": "RO:0002215",
+                        "object": "n2",
+                        "evidence": [{"reference": "PMID:9278503"}],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="disconnected node_id"):
+        validate_causal_graph_structure(disconnected_graphs)
+
+    # 2. Malformed graph_id
+    bad_graph_id = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "123 bad graph id",
+                "nodes": [
+                    {
+                        "node_id": "n1",
+                        "label": "E. coli",
+                        "node_type": "TAXON",
+                        "grounding": "NCBITaxon:562",
+                    },
+                    {
+                        "node_id": "n2",
+                        "label": "lactose",
+                        "node_type": "BIOLOGICAL_PROCESS",
+                        "grounding": "GO:0005988",
+                    },
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "n1",
+                        "predicate": "capable of",
+                        "predicate_id": "RO:0002215",
+                        "object": "n2",
+                        "evidence": [{"reference": "PMID:9278503"}],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="invalid graph_id"):
+        validate_causal_graph_structure(bad_graph_id)
+
+    # 3. Malformed node_id
+    bad_node_id = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {
+                        "node_id": "123-bad-node",
+                        "label": "E. coli",
+                        "node_type": "TAXON",
+                        "grounding": "NCBITaxon:562",
+                    },
+                    {
+                        "node_id": "n2",
+                        "label": "lactose",
+                        "node_type": "BIOLOGICAL_PROCESS",
+                        "grounding": "GO:0005988",
+                    },
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "123-bad-node",
+                        "predicate": "capable of",
+                        "predicate_id": "RO:0002215",
+                        "object": "n2",
+                        "evidence": [{"reference": "PMID:9278503"}],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="invalid node_id"):
+        validate_causal_graph_structure(bad_node_id)
+
+    # 4. Genus-level host or organism_taxon_id rejected by species-or-below scope check
+    taxa = {
+        "NCBITaxon:2": {"parent_id": "", "rank": "DOMAIN"},
+        "NCBITaxon:561": {"parent_id": "NCBITaxon:2", "rank": "GENUS"},
+        "NCBITaxon:562": {"parent_id": "NCBITaxon:561", "rank": "SPECIES"},
+    }
+    proteins = load_uniprot_proteins()
+    genus_host_graph = {
+        "NCBITaxon:561": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {
+                        "node_id": "n1",
+                        "label": "Escherichia",
+                        "node_type": "TAXON",
+                        "grounding": "NCBITaxon:561",
+                    },
+                    {
+                        "node_id": "n2",
+                        "label": "lactose",
+                        "node_type": "BIOLOGICAL_PROCESS",
+                        "grounding": "GO:0005988",
+                    },
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "n1",
+                        "predicate": "capable of",
+                        "predicate_id": "RO:0002215",
+                        "object": "n2",
+                        "evidence": [{"reference": "PMID:9278503"}],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="must be species-or-below"):
+        validate_causal_graph_proteins(genus_host_graph, uniprot_proteins=proteins, taxa=taxa)
+
+    # 5. Malformed proteome_id in uniprot_proteins.tsv rejected
+    bad_proteome_tsv = tmp_path / "bad_proteome.tsv"
+    lines = UNIPROT_PROTEINS_PATH.read_text(encoding="utf-8").splitlines()
+    bad_proteome_tsv.write_text(
+        lines[0] + "\n" + lines[1].replace("UP:UP000029445", "UP:UP29445") + "\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(SystemExit, match="invalid proteome_id"):
+        load_uniprot_proteins(bad_proteome_tsv)
+
+
+def test_causal_graph_provenance_problems_gate(tmp_path: Path):
+    """scripts/check_provenance.py causal_graph_provenance_problems() must pass on the
+    committed repository and report out-of-scope overlays or filename-stem mismatches (#199)."""
+    script_path = REPO_ROOT / "scripts" / "check_provenance.py"
+    spec = importlib.util.spec_from_file_location("check_provenance", script_path)
+    mod = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(mod)
+
+    assert mod.causal_graph_provenance_problems(REPO_ROOT) == []
+
+    # Set up a minimal synthetic repo_root to test failure modes
+    curation_dir = tmp_path / "curation"
+    overlays_dir = curation_dir / "causal_graphs"
+    overlays_dir.mkdir(parents=True)
+    (curation_dir / "uniprot_proteins.tsv").write_text(
+        UNIPROT_PROTEINS_PATH.read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+    (curation_dir / "seed_scope.tsv").write_text(
+        "identifier\tadded\treason\nNCBITaxon:1423\t2026-01-01\ttest\n",
+        encoding="utf-8",
+    )
+    # Write NCBITaxon:562 overlay under a mismatched filename stem and omitted from seed_scope.tsv
+    ecoli_overlay = (REPO_ROOT / "curation" / "causal_graphs" / "NCBITaxon_562.yaml").read_text(
+        encoding="utf-8"
+    )
+    (overlays_dir / "wrong_stem.yaml").write_text(ecoli_overlay, encoding="utf-8")
+
+    failures = mod.causal_graph_provenance_problems(tmp_path)
+    assert any("not present in curation/seed_scope.tsv" in f for f in failures)
+    assert any("does not match identifier 'NCBITaxon:562'" in f for f in failures)
+
 
 
 
