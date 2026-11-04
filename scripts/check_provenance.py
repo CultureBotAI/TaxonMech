@@ -96,24 +96,83 @@ def problems() -> list[str]:
     return failures
 
 
+def causal_graph_provenance_problems(repo_root: Path = REPO_ROOT) -> list[str]:
+    from collections import defaultdict
+
+    from taxonmech.seed import (
+        load_causal_graphs,
+        load_scope,
+        load_uniprot_proteins,
+        split,
+    )
+
+    failures: list[str] = []
+    raw_dir = repo_root / "data" / "raw"
+    curation_dir = repo_root / "curation"
+    overlays_dir = curation_dir / "causal_graphs"
+    uniprot_path = curation_dir / "uniprot_proteins.tsv"
+    scope_path = curation_dir / "seed_scope.tsv"
+    taxa_path = raw_dir / "ncbitaxon_taxa.tsv"
+    strains_path = raw_dir / "bacdive_strains.tsv"
+
+    try:
+        taxa: dict[str, dict[str, str]] | None = None
+        if taxa_path.exists():
+            with taxa_path.open(newline="", encoding="utf-8") as fh:
+                taxa = {row["taxon_id"]: row for row in csv.DictReader(fh, delimiter="\t")}
+        strains: dict[str, list[dict[str, str]]] | None = None
+        if strains_path.exists():
+            strains = defaultdict(list)
+            with strains_path.open(newline="", encoding="utf-8") as fh:
+                for row in csv.DictReader(fh, delimiter="\t"):
+                    for tid in split(row.get("taxon_ids", "")):
+                        strains[tid].append(row)
+        load_uniprot_proteins(uniprot_path, taxa=taxa)
+        graphs_by_taxon, _ = load_causal_graphs(
+            overlays_dir,
+            uniprot_path=uniprot_path,
+            taxa=taxa,
+            strains=strains,
+        )
+        if scope_path.exists():
+            scope = load_scope(scope_path)
+            for tid in sorted(graphs_by_taxon):
+                if tid not in scope:
+                    failures.append(
+                        f"causal-graph overlay {tid}: not present in {scope_path.relative_to(repo_root)}"
+                    )
+        if overlays_dir.exists():
+            for overlay_file in sorted(overlays_dir.glob("*.yaml")):
+                data = yaml.safe_load(overlay_file.read_text(encoding="utf-8"))
+                identifier = (
+                    (data.get("identifier") or "").strip()
+                    if isinstance(data, dict) and isinstance(data.get("identifier"), str)
+                    else ""
+                )
+                expected_stem = identifier.replace(":", "_")
+                if identifier and overlay_file.stem != expected_stem:
+                    failures.append(
+                        f"{overlay_file.relative_to(repo_root)}: filename stem {overlay_file.stem!r} "
+                        f"does not match identifier {identifier!r} (expected '{expected_stem}.yaml')"
+                    )
+    except SystemExit as exc:
+        failures.append(str(exc))
+    return failures
+
+
 def main() -> int:
     failures = problems()
     from taxonmech.atb import provenance_problems
     from taxonmech.bacdive_v2 import records as bacdive_records
     from taxonmech.bvbrc import records as bvbrc_records
     from taxonmech.gold_genomes import validate_projection
-    from taxonmech.seed import load_causal_graphs, load_uniprot_proteins
     from taxonmech.source_catalog import check as catalog_problems
     from taxonmech.straininfo import provenance_problems as straininfo_problems
 
     failures.extend(provenance_problems(REPO_ROOT))
     failures.extend(straininfo_problems(REPO_ROOT))
     failures.extend(catalog_problems(REPO_ROOT))
-    try:
-        load_uniprot_proteins()
-        load_causal_graphs()
-    except SystemExit as exc:
-        failures.append(str(exc))
+    failures.extend(causal_graph_provenance_problems(REPO_ROOT))
     # Verify full source projections independently of the smaller biological
     # crosswalks; matching only the overlap must never pass as a source census.
     sum(1 for _ in bacdive_records(REPO_ROOT / "data/bacdive"))

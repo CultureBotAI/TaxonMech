@@ -77,6 +77,11 @@ UNIPROT_PROTEIN_FIELDS = (
 )
 CRC64_PATTERN = re.compile(r"^[0-9A-F]{16}$")
 BACDIVE_STRAIN_ID_PATTERN = re.compile(r"^kgmicrobe\.strain:bacdive_[1-9][0-9]*$")
+UNIPROT_ID_PATTERN = re.compile(
+    r"^UniProtKB:(?:[OPQ][0-9][A-Z0-9]{3}[0-9]|[A-NR-Z][0-9](?:[A-Z][A-Z0-9]{2}[0-9]){1,2})$"
+)
+NCBITAXON_ID_PATTERN = re.compile(r"^NCBITaxon:[1-9][0-9]*$")
+PROTEOME_ID_PATTERN = re.compile(r"^UP:UP[0-9]{9}$")
 CURIE_PATTERN = re.compile(r"^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$")
 EDGE_ID_PATTERN = re.compile(r"^[A-Za-z][A-Za-z0-9_-]*$")
 EC_NUMBER_PATTERN = re.compile(r"^EC:[1-7]\.(?:[0-9]+|-)\.(?:[0-9]+|-)\.(?:n?[0-9]+|-)$")
@@ -299,7 +304,11 @@ class Inventory:
         return "OTHER"
 
 
-def load_uniprot_proteins(path: Path = UNIPROT_PROTEINS_PATH) -> dict[str, dict[str, str]]:
+def load_uniprot_proteins(
+    path: Path = UNIPROT_PROTEINS_PATH,
+    *,
+    taxa: dict[str, dict[str, str]] | None = None,
+) -> dict[str, dict[str, str]]:
     """Read the pinned UniProtKB protein reference catalog from ``curation/uniprot_proteins.tsv``."""
     if not path.exists():
         return {}
@@ -312,15 +321,26 @@ def load_uniprot_proteins(path: Path = UNIPROT_PROTEINS_PATH) -> dict[str, dict[
             )
         for line_no, row in enumerate(reader, start=2):
             uid = (row.get("uniprot_id") or "").strip()
-            if not uid.startswith("UniProtKB:"):
+            if not UNIPROT_ID_PATTERN.match(uid):
                 raise SystemExit(f"{path}:{line_no}: invalid uniprot_id {uid!r}")
             if uid in proteins:
                 raise SystemExit(f"{path}:{line_no}: duplicate uniprot_id {uid!r}")
             if row.get("entry_status") not in ("SWISS_PROT", "TREMBL"):
                 raise SystemExit(f"{path}:{line_no}: invalid entry_status for {uid!r}")
-            if not (row.get("organism_taxon_id") or "").startswith("NCBITaxon:"):
+            org_tid = (row.get("organism_taxon_id") or "").strip()
+            if not NCBITAXON_ID_PATTERN.match(org_tid):
                 raise SystemExit(f"{path}:{line_no}: invalid organism_taxon_id for {uid!r}")
-            if row.get("proteome_id") and not row["proteome_id"].startswith("UP:UP"):
+            if taxa is not None:
+                if org_tid not in taxa:
+                    raise SystemExit(
+                        f"{path}:{line_no}: organism_taxon_id {org_tid} is absent "
+                        f"from ncbitaxon_taxa.tsv for {uid!r}"
+                    )
+                if not _taxon_is_species_or_below(taxa, org_tid):
+                    raise SystemExit(
+                        f"{path}:{line_no}: organism_taxon_id {org_tid} must be species-or-below for {uid!r}"
+                    )
+            if row.get("proteome_id") and not PROTEOME_ID_PATTERN.match(row["proteome_id"]):
                 raise SystemExit(f"{path}:{line_no}: invalid proteome_id for {uid!r}")
             for req_col in ("entry_name", "protein_name", "organism_label", "release_version"):
                 if not (row.get(req_col) or "").strip():
@@ -381,8 +401,13 @@ def validate_causal_graph_structure(
 ) -> None:
     """Validate internal referential integrity and required slots of causal-graph overlays."""
     for tid, graphs in sorted(graphs_by_taxon.items()):
+        if not NCBITAXON_ID_PATTERN.match(tid):
+            raise SystemExit(f"invalid causal-graph taxon identifier {tid!r}")
         for graph in graphs:
-            gid = graph.get("graph_id", "<unnamed>")
+            raw_gid = graph.get("graph_id")
+            gid = (raw_gid or "").strip() if isinstance(raw_gid, str) else ""
+            if not gid or not EDGE_ID_PATTERN.match(gid):
+                raise SystemExit(f"{tid}: invalid graph_id {raw_gid!r}")
             g_ctx = f"{tid} graph {gid!r}"
             nodes = graph.get("nodes")
             seen_node_ids: set[str] = set()
@@ -395,6 +420,8 @@ def validate_causal_graph_structure(
                     nid = (node.get("node_id") or "").strip() if isinstance(node.get("node_id"), str) else ""
                     if not nid:
                         raise SystemExit(f"{g_ctx}: node missing 'node_id'")
+                    if not EDGE_ID_PATTERN.match(nid):
+                        raise SystemExit(f"{g_ctx}: invalid node_id {nid!r}")
                     if nid in seen_node_ids:
                         raise SystemExit(f"{g_ctx}: duplicate node_id {nid!r}")
                     seen_node_ids.add(nid)
@@ -439,6 +466,7 @@ def validate_causal_graph_structure(
                     raise SystemExit(f"{g_ctx}: 'edges' must be a non-empty list")
                 seen_edge_ids: set[str] = set()
                 seen_edge_triples: set[tuple[str, str, str]] = set()
+                connected_node_ids: set[str] = set()
                 for edge in edges:
                     if not isinstance(edge, dict):
                         raise SystemExit(f"{g_ctx}: each edge must be a mapping")
@@ -478,6 +506,8 @@ def validate_causal_graph_structure(
                             raise SystemExit(
                                 f"{e_ctx}: object {obj!r} does not reference a defined node_id"
                             )
+                        connected_node_ids.add(subj)
+                        connected_node_ids.add(obj)
                     ev_list = edge.get("evidence")
                     if not isinstance(ev_list, list) or not ev_list:
                         raise SystemExit(f"{e_ctx}: requires non-empty 'evidence' list")
@@ -495,6 +525,12 @@ def validate_causal_graph_structure(
                         if ref in seen_ev_refs:
                             raise SystemExit(f"{e_ctx}: duplicate evidence reference {ref!r}")
                         seen_ev_refs.add(ref)
+                if nodes is not None:
+                    orphan_nodes = sorted(seen_node_ids - connected_node_ids)
+                    if orphan_nodes:
+                        raise SystemExit(
+                            f"{g_ctx}: disconnected node_id(s) not referenced by any edge: {orphan_nodes}"
+                        )
 
 
 def validate_causal_graph_proteins(
@@ -515,6 +551,13 @@ def validate_causal_graph_proteins(
                 if sid:
                     strain_taxa[sid].add(s_tid)
     for tid, graphs in sorted(graphs_by_taxon.items()):
+        if not NCBITAXON_ID_PATTERN.match(tid):
+            raise SystemExit(f"invalid causal-graph taxon identifier {tid!r}")
+        if taxa is not None:
+            if tid not in taxa:
+                raise SystemExit(f"{tid}: record taxon {tid} is absent from ncbitaxon_taxa.tsv")
+            if not _taxon_is_species_or_below(taxa, tid):
+                raise SystemExit(f"{tid}: record taxon {tid} must be species-or-below")
         for graph in graphs:
             gid = graph.get("graph_id", "<unnamed>")
             for node in graph.get("nodes") or []:
@@ -545,12 +588,14 @@ def validate_causal_graph_proteins(
                 grounding = (raw_grounding or "").strip() if isinstance(raw_grounding, str) else ""
                 if not grounding.startswith("UniProtKB:"):
                     raise SystemExit(f"{ctx}: GENE_OR_PROTEIN grounding must start with 'UniProtKB:'")
+                if not UNIPROT_ID_PATTERN.match(grounding):
+                    raise SystemExit(f"{ctx}: GENE_OR_PROTEIN invalid 'grounding' {raw_grounding!r}")
                 org_tid = (
                     (node.get("organism_taxon_id") or "").strip()
                     if isinstance(node.get("organism_taxon_id"), str)
                     else ""
                 )
-                if not org_tid.startswith("NCBITaxon:"):
+                if not NCBITAXON_ID_PATTERN.match(org_tid):
                     raise SystemExit(f"{ctx}: GENE_OR_PROTEIN missing valid 'organism_taxon_id'")
                 raw_strain_id = node.get("strain_id")
                 strain_id = ""
@@ -566,7 +611,7 @@ def validate_causal_graph_proteins(
                 if not (gene_symbol or locus_tag):
                     raise SystemExit(f"{ctx}: GENE_OR_PROTEIN requires 'gene_symbol' or 'locus_tag'")
                 proteome_id = (node.get("proteome_id") or "").strip() if node.get("proteome_id") else ""
-                if proteome_id and not proteome_id.startswith("UP:UP"):
+                if proteome_id and not PROTEOME_ID_PATTERN.match(proteome_id):
                     raise SystemExit(f"{ctx}: GENE_OR_PROTEIN invalid 'proteome_id' {proteome_id!r}")
                 seq_len = node.get("sequence_length")
                 if not isinstance(seq_len, int) or isinstance(seq_len, bool) or seq_len <= 0:
@@ -632,11 +677,13 @@ def validate_causal_graph_proteins(
                         )
 
                 if taxa is not None:
-                    if tid not in taxa:
-                        raise SystemExit(f"{ctx}: record taxon {tid} is absent from ncbitaxon_taxa.tsv")
                     if org_tid not in taxa:
                         raise SystemExit(
                             f"{ctx}: organism_taxon_id {org_tid} is absent from ncbitaxon_taxa.tsv"
+                        )
+                    if not _taxon_is_species_or_below(taxa, org_tid):
+                        raise SystemExit(
+                            f"{ctx}: organism_taxon_id {org_tid} must be species-or-below"
                         )
                     org_lineage = _taxon_lineage(taxa, org_tid)
                     tid_lineage = _taxon_lineage(taxa, tid)
@@ -726,7 +773,9 @@ def load_causal_graphs(
     resolved_uniprot_path = uniprot_path
     if resolved_uniprot_path is None and UNIPROT_PROTEINS_PATH.exists():
         resolved_uniprot_path = UNIPROT_PROTEINS_PATH
-    uniprot_proteins = load_uniprot_proteins(resolved_uniprot_path) if resolved_uniprot_path else None
+    uniprot_proteins = (
+        load_uniprot_proteins(resolved_uniprot_path, taxa=taxa) if resolved_uniprot_path else None
+    )
     validate_causal_graph_proteins(
         graphs_by_taxon,
         uniprot_proteins=uniprot_proteins,
