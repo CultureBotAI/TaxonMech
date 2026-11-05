@@ -167,6 +167,15 @@ curation_history:
     linking Bzp4 (UniProtKB:J9VQ26) to hydroquinone:oxygen oxidoreductase (laccase)
     activity (GO:0052716).
   llm_assisted: true
+- timestamp: '2026-11-04T22:30:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: Added live-verified Swiss-Prot entry UniProtKB:J9VT33 (CUF1_CRYN9, CUF1
+    / CNAG_07724, 1048 aa, CRC64 66941210664729AD, v1) in reference proteome UP:UP000010091
+    with literature-backed expression and positive regulatory edges for LAC1 and copper-dependent
+    melanin biosynthesis (PMID:24743168, PMID:17290306, PMID:19459959, PMID:29608794,
+    PMID:23511945).
+  llm_assisted: true
 causal_graphs:
 - graph_id: melanin_biosynthesis
   title: Lac1-mediated melanin biosynthesis
@@ -218,6 +227,18 @@ causal_graphs:
     sequence_length: 341
     sequence_crc64: 8E34C8525C009CFC
     sequence_version: 2
+    entry_status: SWISS_PROT
+  - node_id: cuf1
+    label: Copper-dependent transcription factor 1 (CUF1)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:J9VT33
+    organism_taxon_id: NCBITaxon:235443
+    proteome_id: UP:UP000010091
+    gene_symbol: CUF1
+    locus_tag: CNAG_07724
+    sequence_length: 1048
+    sequence_crc64: 66941210664729AD
+    sequence_version: 1
     entry_status: SWISS_PROT
   - node_id: laccase_activity
     label: hydroquinone:oxygen oxidoreductase activity
@@ -357,3 +378,42 @@ causal_graphs:
     - reference: PMID:31575776
       notes: Nuclear translocation of Bzp4 induces LAC1 expression and increases catecholamine-oxidizing
         laccase activity in Cryptococcus neoformans.
+  - edge_id: e12
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: cuf1
+    evidence:
+    - reference: PMID:24743168
+      notes: Reference genome and transcriptome assembly of Cryptococcus neoformans
+        var. grubii strain H99 identifying CUF1 (CNAG_07724) encoding copper-dependent
+        transcription factor 1.
+    - reference: PMID:17290306
+      notes: Characterization of Cryptococcus neoformans CUF1 encoding a copper-sensing
+        transcription factor essential for copper homeostasis and virulence.
+  - edge_id: e13
+    subject: cuf1
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: lac1
+    evidence:
+    - reference: PMID:19459959
+      notes: Copper-dependent transcription factor Cuf1 positively regulates LAC1
+        expression and laccase induction in Cryptococcus neoformans.
+    - reference: PMID:29608794
+      notes: Transcriptomic and ChIP-seq profiling across copper states demonstrates
+        that Cuf1 regulates copper-responsive gene expression required for laccase
+        function in Cryptococcus neoformans.
+  - edge_id: e14
+    subject: cuf1
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: melanin_biosynthesis
+    evidence:
+    - reference: PMID:19459959
+      notes: Disruption of CUF1 abolishes copper-dependent LAC1 induction and severely
+        impairs L-DOPA melanization in Cryptococcus neoformans.
+    - reference: PMID:23511945
+      notes: Cuf1-mediated transcriptional control of copper acquisition and detoxification
+        is required for copper-dependent laccase activity and cell-wall melanin biosynthesis
+        in Cryptococcus neoformans.
