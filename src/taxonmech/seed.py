@@ -403,11 +403,15 @@ def validate_causal_graph_structure(
     for tid, graphs in sorted(graphs_by_taxon.items()):
         if not NCBITAXON_ID_PATTERN.match(tid):
             raise SystemExit(f"invalid causal-graph taxon identifier {tid!r}")
+        seen_graph_ids: set[str] = set()
         for graph in graphs:
             raw_gid = graph.get("graph_id")
             gid = (raw_gid or "").strip() if isinstance(raw_gid, str) else ""
             if not gid or not EDGE_ID_PATTERN.match(gid):
                 raise SystemExit(f"{tid}: invalid graph_id {raw_gid!r}")
+            if gid in seen_graph_ids:
+                raise SystemExit(f"{tid}: duplicate graph_id {gid!r}")
+            seen_graph_ids.add(gid)
             g_ctx = f"{tid} graph {gid!r}"
             nodes = graph.get("nodes")
             seen_node_ids: set[str] = set()
@@ -445,8 +449,11 @@ def validate_causal_graph_structure(
                         grounding = raw_grounding.strip() if isinstance(raw_grounding, str) else ""
                         if not CURIE_PATTERN.match(grounding):
                             raise SystemExit(f"{n_ctx}: invalid 'grounding' CURIE {raw_grounding!r}")
-                        if ntype == "TAXON" and not grounding.startswith("NCBITaxon:"):
+                    if ntype == "TAXON":
+                        if not grounding or not grounding.startswith("NCBITaxon:"):
                             raise SystemExit(f"{n_ctx}: TAXON grounding must start with 'NCBITaxon:'")
+                        if not NCBITAXON_ID_PATTERN.match(grounding):
+                            raise SystemExit(f"{n_ctx}: invalid TAXON grounding {grounding!r}")
                     raw_xrefs = node.get("xrefs")
                     if raw_xrefs is not None:
                         if not isinstance(raw_xrefs, list):
@@ -706,7 +713,7 @@ def validate_causal_graph_proteins(
                     if taxa is not None:
                         strain_lineage_ok = any(
                             s_tid in taxa
-                            and _taxa_lineage_compatible(taxa, s_tid, tid)
+                            and (s_tid == tid or tid in _taxon_lineage(taxa, s_tid))
                             and _taxa_lineage_compatible(taxa, s_tid, org_tid)
                             for s_tid in linked_tids
                         )
@@ -769,6 +776,18 @@ def load_causal_graphs(
             if not isinstance(events, list) or any(not isinstance(e, dict) for e in events):
                 raise SystemExit(f"{overlay_file}: 'curation_history' must be a list of event mappings")
             events_by_taxon[identifier] = events
+    for tid, graphs in sorted(graphs_by_taxon.items()):
+        for graph in graphs:
+            gid = (graph.get("graph_id") or "").strip() if isinstance(graph.get("graph_id"), str) else ""
+            title = (graph.get("title") or "").strip() if isinstance(graph.get("title"), str) else ""
+            if not title:
+                raise SystemExit(f"{tid} graph {gid!r}: requires non-empty 'title'")
+            nodes = graph.get("nodes")
+            if not isinstance(nodes, list) or not nodes:
+                raise SystemExit(f"{tid} graph {gid!r}: 'nodes' must be a non-empty list")
+            edges = graph.get("edges")
+            if not isinstance(edges, list) or not edges:
+                raise SystemExit(f"{tid} graph {gid!r}: 'edges' must be a non-empty list")
     validate_causal_graph_structure(graphs_by_taxon)
     resolved_uniprot_path = uniprot_path
     if resolved_uniprot_path is None and UNIPROT_PROTEINS_PATH.exists():

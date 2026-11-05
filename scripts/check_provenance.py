@@ -127,13 +127,30 @@ def causal_graph_provenance_problems(repo_root: Path = REPO_ROOT) -> list[str]:
                 for row in csv.DictReader(fh, delimiter="\t"):
                     for tid in split(row.get("taxon_ids", "")):
                         strains[tid].append(row)
-        load_uniprot_proteins(uniprot_path, taxa=taxa)
-        graphs_by_taxon, _ = load_causal_graphs(
+        uniprot_proteins = load_uniprot_proteins(uniprot_path, taxa=taxa)
+        graphs_by_taxon, events_by_taxon = load_causal_graphs(
             overlays_dir,
             uniprot_path=uniprot_path,
             taxa=taxa,
             strains=strains,
         )
+        referenced_uniprot = {
+            (node.get("grounding") or "").strip()
+            for graphs in graphs_by_taxon.values()
+            for graph in graphs
+            for node in (graph.get("nodes") or [])
+            if isinstance(node, dict) and node.get("node_type") == "GENE_OR_PROTEIN"
+        }
+        for uid in sorted(set(uniprot_proteins) - referenced_uniprot):
+            failures.append(
+                f"{uniprot_path.relative_to(repo_root)}: {uid} is not referenced by any "
+                f"GENE_OR_PROTEIN node in curation/causal_graphs/*.yaml"
+            )
+        for tid in sorted(graphs_by_taxon):
+            if not events_by_taxon.get(tid):
+                failures.append(
+                    f"causal-graph overlay {tid}: missing or empty 'curation_history'"
+                )
         if scope_path.exists():
             scope = load_scope(scope_path)
             for tid in sorted(graphs_by_taxon):

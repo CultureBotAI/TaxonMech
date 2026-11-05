@@ -1620,3 +1620,170 @@ def test_schema_guide_and_overlay_readme_document_cycle5_provenance_and_ec_patte
     assert EC_NUMBER_PATTERN.pattern in overlay_readme
 
 
+def test_cycle6_stage6_causal_graph_and_uniprot_provenance_invariants(tmp_path: Path):
+    """Verify Cycle 6 Stage 6 (#208) invariants across validate_causal_graph_structure,
+    load_causal_graphs, validate_causal_graph_proteins, and causal_graph_provenance_problems."""
+    # 1. Duplicate graph_id on the same taxon rejected directly by validate_causal_graph_structure
+    dup_gid = {
+        "NCBITaxon:562": [
+            {"graph_id": "g1"},
+            {"graph_id": "g1"},
+        ]
+    }
+    with pytest.raises(SystemExit, match="duplicate graph_id 'g1'"):
+        validate_causal_graph_structure(dup_gid)
+
+    # 2. TAXON node missing grounding or with malformed NCBITaxon:0 grounding rejected
+    missing_taxon_grounding = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {
+                        "node_id": "n1",
+                        "label": "Escherichia coli",
+                        "node_type": "TAXON",
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="TAXON grounding must start with 'NCBITaxon:'"):
+        validate_causal_graph_structure(missing_taxon_grounding)
+
+    malformed_taxon_grounding = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {
+                        "node_id": "n1",
+                        "label": "Escherichia coli",
+                        "node_type": "TAXON",
+                        "grounding": "NCBITaxon:0",
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="invalid TAXON grounding 'NCBITaxon:0'"):
+        validate_causal_graph_structure(malformed_taxon_grounding)
+
+    # 3. load_causal_graphs requires non-empty title, nodes, and edges on every loaded graph
+    missing_title_dir = tmp_path / "missing_title"
+    missing_title_dir.mkdir()
+    (missing_title_dir / "NCBITaxon_562.yaml").write_text(
+        "identifier: NCBITaxon:562\ncausal_graphs:\n  - graph_id: g1\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(SystemExit, match="requires non-empty 'title'"):
+        load_causal_graphs(missing_title_dir)
+
+    missing_nodes_dir = tmp_path / "missing_nodes"
+    missing_nodes_dir.mkdir()
+    (missing_nodes_dir / "NCBITaxon_562.yaml").write_text(
+        "identifier: NCBITaxon:562\ncausal_graphs:\n  - graph_id: g1\n    title: T1\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(SystemExit, match="'nodes' must be a non-empty list"):
+        load_causal_graphs(missing_nodes_dir)
+
+    missing_edges_dir = tmp_path / "missing_edges"
+    missing_edges_dir.mkdir()
+    (missing_edges_dir / "NCBITaxon_562.yaml").write_text(
+        "identifier: NCBITaxon:562\n"
+        "causal_graphs:\n"
+        "  - graph_id: g1\n"
+        "    title: T1\n"
+        "    nodes:\n"
+        "      - node_id: n1\n"
+        "        label: E. coli\n"
+        "        node_type: TAXON\n"
+        "        grounding: NCBITaxon:562\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(SystemExit, match="'edges' must be a non-empty list"):
+        load_causal_graphs(missing_edges_dir)
+
+    # 4. Ancestor-species strain_id rejected on infraspecific strain overlay with strains: []
+    proteins = load_uniprot_proteins(UNIPROT_PROTEINS_PATH)
+    taxa = {
+        "NCBITaxon:2": {"parent_id": "", "rank": "DOMAIN"},
+        "NCBITaxon:561": {"parent_id": "NCBITaxon:2", "rank": "GENUS"},
+        "NCBITaxon:562": {"parent_id": "NCBITaxon:561", "rank": "SPECIES"},
+        "NCBITaxon:83333": {"parent_id": "NCBITaxon:562", "rank": "STRAIN"},
+    }
+    strains = {
+        "NCBITaxon:562": [{"strain_id": "kgmicrobe.strain:bacdive_155687"}],
+    }
+    ancestor_strain_on_strain_overlay = {
+        "NCBITaxon:83333": [
+            {
+                "graph_id": "g1",
+                "nodes": [
+                    {
+                        "node_id": "lacZ",
+                        "label": "Beta-galactosidase (LacZ)",
+                        "node_type": "GENE_OR_PROTEIN",
+                        "grounding": "UniProtKB:P00722",
+                        "organism_taxon_id": "NCBITaxon:83333",
+                        "strain_id": "kgmicrobe.strain:bacdive_155687",
+                        "proteome_id": "UP:UP000000625",
+                        "gene_symbol": "lacZ",
+                        "locus_tag": "b0344",
+                        "sequence_length": 1024,
+                        "sequence_crc64": "9D295EF4CEF90B08",
+                        "sequence_version": 2,
+                        "entry_status": "SWISS_PROT",
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(
+        SystemExit,
+        match="strain_id 'kgmicrobe.strain:bacdive_155687' .* is not lineage-consistent with NCBITaxon:83333",
+    ):
+        validate_causal_graph_proteins(
+            ancestor_strain_on_strain_overlay,
+            uniprot_proteins=proteins,
+            taxa=taxa,
+            strains=strains,
+        )
+
+    # 5. causal_graph_provenance_problems detects unreferenced uniprot_proteins.tsv rows
+    # and missing curation_history
+    script_path = REPO_ROOT / "scripts" / "check_provenance.py"
+    spec = importlib.util.spec_from_file_location("check_provenance", script_path)
+    mod = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(mod)
+
+    synth_root = tmp_path / "synth_repo"
+    curation_dir = synth_root / "curation"
+    overlays_dir = curation_dir / "causal_graphs"
+    overlays_dir.mkdir(parents=True)
+    (curation_dir / "uniprot_proteins.tsv").write_text(
+        UNIPROT_PROTEINS_PATH.read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+    (curation_dir / "seed_scope.tsv").write_text(
+        "identifier\tadded\treason\nNCBITaxon:562\t2026-01-01\ttest\n",
+        encoding="utf-8",
+    )
+    ecoli_data = yaml.safe_load(
+        (REPO_ROOT / "curation" / "causal_graphs" / "NCBITaxon_562.yaml").read_text(
+            encoding="utf-8"
+        )
+    )
+    ecoli_data.pop("curation_history", None)
+    (overlays_dir / "NCBITaxon_562.yaml").write_text(
+        yaml.safe_dump(ecoli_data, sort_keys=False),
+        encoding="utf-8",
+    )
+    failures = mod.causal_graph_provenance_problems(synth_root)
+    assert any("not referenced by any GENE_OR_PROTEIN node" in f for f in failures)
+    assert any("missing or empty 'curation_history'" in f for f in failures)
+
+
+
