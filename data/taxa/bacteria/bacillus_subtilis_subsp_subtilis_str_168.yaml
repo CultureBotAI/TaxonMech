@@ -170,6 +170,15 @@ curation_history:
     PMID:12067336) and RapA (edge e28, rapA RO:0002212 phosphorelay_regulator_activity,
     PMID:8001132, PMID:11923303) to phosphorelay response regulator activity (GO:0000156).
   llm_assisted: true
+- timestamp: '2026-11-04T22:30:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: Added live-verified Swiss-Prot entry UniProtKB:Q00829 (PHRA_BACSU, phrA
+    / BSU12440, 44 aa, CRC64 95AA9E07F08D2DCB, v1) in reference proteome UP:UP000001570
+    with literature-backed expression, direct RapA phosphatase inhibition, and sporulation
+    initiation regulatory edges (PMID:9384377, PMID:8643670, PMID:9238025, PMID:11923303,
+    PMID:22267516).
+  llm_assisted: true
 causal_graphs:
 - graph_id: endospore_formation
   title: KinA/Spo0A-regulated endospore formation
@@ -274,6 +283,18 @@ causal_graphs:
     sequence_length: 378
     sequence_crc64: 8712FE59B865AEF4
     sequence_version: 2
+    entry_status: SWISS_PROT
+  - node_id: phrA
+    label: Phosphatase RapA inhibitor (phrA)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:Q00829
+    organism_taxon_id: NCBITaxon:224308
+    proteome_id: UP:UP000001570
+    gene_symbol: phrA
+    locus_tag: BSU12440
+    sequence_length: 44
+    sequence_crc64: 95AA9E07F08D2DCB
+    sequence_version: 1
     entry_status: SWISS_PROT
   - node_id: sensor_kinase_activity
     label: phosphorelay sensor kinase activity
@@ -614,3 +635,48 @@ causal_graphs:
       notes: Purified Bacillus subtilis 168 RapA hydrolyzes the phosphoryl group of
         Spo0F~P, attenuating downstream Spo0A~P accumulation and response regulator
         activity.
+  - edge_id: e29
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: phrA
+    evidence:
+    - reference: PMID:9384377
+      notes: Complete genome sequence of Bacillus subtilis subsp. subtilis str. 168
+        identifying phrA (BSU12440) immediately downstream of rapA in the rapA-phrA
+        quorum-sensing phosphatase-inhibitor cassette.
+    - reference: PMID:8643670
+      notes: Identification and characterization of the Bacillus subtilis 168 phrA
+        gene encoding the exported pro-peptide precursor of the RapA phosphatase inhibitor
+        pentapeptide ARNQT.
+  - edge_id: e30
+    subject: phrA
+    predicate: directly negatively regulates
+    predicate_id: RO:0002630
+    object: rapA
+    evidence:
+    - reference: PMID:9238025
+      notes: Processed PhrA pentapeptide (ARNQT) re-imported via the oligopeptide
+        permease directly binds and inhibits Bacillus subtilis 168 RapA Spo0F~P aspartyl-phosphate
+        phosphatase activity.
+    - reference: PMID:11923303
+      notes: Biochemical analysis demonstrating that the PhrA pentapeptide directly
+        competes with Spo0F~P for binding to Bacillus subtilis 168 RapA.
+    - reference: PMID:22267516
+      notes: Crystal structure of Bacillus subtilis 168 RapA in complex with the PhrA
+        pentapeptide reveals the direct conformational mechanism of RapA phosphatase
+        inhibition.
+  - edge_id: e31
+    subject: phrA
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: endospore_formation
+    evidence:
+    - reference: PMID:8643670
+      notes: Loss of phrA causes a sporulation-deficient phenotype in Bacillus subtilis
+        168 due to uninhibited RapA dephosphorylation of Spo0F~P, whereas PhrA pentapeptide
+        restores sporulation initiation.
+    - reference: PMID:9238025
+      notes: PhrA pentapeptide inhibition of RapA preserves Spo0F~P phosphoryl flux
+        through the sporulation phosphorelay to promote entry into endospore formation
+        in Bacillus subtilis 168.

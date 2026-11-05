@@ -79,6 +79,20 @@ causal_graphs:
     sequence_crc64: F2BB36662ABAC790
     sequence_version: 1
     entry_status: SWISS_PROT
+  - node_id: pqsE
+    label: 2-aminobenzoylacetyl-CoA thioesterase (pqsE)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:P20581
+    xrefs:
+    - EC:3.1.2.32
+    organism_taxon_id: NCBITaxon:208964
+    proteome_id: UP:UP000002438
+    gene_symbol: pqsE
+    locus_tag: PA1000
+    sequence_length: 301
+    sequence_crc64: CB78E9103D8F221C
+    sequence_version: 1
+    entry_status: SWISS_PROT
   - node_id: phenazine_biosynthesis
     label: phenazine biosynthetic process
     node_type: BIOLOGICAL_PROCESS
@@ -243,6 +257,54 @@ causal_graphs:
       notes: >-
         Expression of the Pseudomonas aeruginosa PAO1 phzA1-G1 (phz1) operon
         drives phenazine-1-carboxylic acid and pyocyanin production.
+  - edge_id: e12
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: pqsE
+    evidence:
+    - reference: PMID:10984043
+      notes: >-
+        Complete genome sequence of Pseudomonas aeruginosa PAO1 identifying
+        pqsE (PA1000) as the fifth cistron of the pqsABCDE quinolone-signaling
+        operon.
+    - reference: PMID:12426334
+      notes: >-
+        Transcriptional and functional characterization of the Pseudomonas
+        aeruginosa PAO1 pqsABCDE operon encoding the quinolone signal response
+        protein PqsE (PA1000).
+  - edge_id: e13
+    subject: pqsE
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: phzB1
+    evidence:
+    - reference: PMID:27851827
+      notes: >-
+        PqsE acts in concert with the quorum-sensing regulator RhlR to
+        positively regulate transcription of the core phenazine biosynthetic
+        operon including phzB1 in Pseudomonas aeruginosa PAO1.
+    - reference: PMID:35019777
+      notes: >-
+        Direct PqsE-RhlR protein-protein interaction allosterically enhances
+        RhlR promoter binding and transcriptional activation of the phz1
+        (phzA1-G1) phenazine biosynthetic operon in Pseudomonas aeruginosa PAO1.
+  - edge_id: e14
+    subject: pqsE
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: phenazine_biosynthesis
+    evidence:
+    - reference: PMID:18776012
+      notes: >-
+        PqsE is essential for Pseudomonas aeruginosa PAO1 pyocyanin and
+        phenazine biosynthesis through RhlR-dependent quorum-sensing effector
+        signaling.
+    - reference: PMID:36456567
+      notes: >-
+        Structural and genetic dissection of the PqsE-RhlR complex demonstrates
+        that PqsE binding to RhlR is required to drive phenazine and pyocyanin
+        biosynthesis in Pseudomonas aeruginosa.
 curation_history:
 - timestamp: '2026-10-22T14:00:00Z'
   curator: curate-causal-graphs
@@ -290,4 +352,15 @@ curation_history:
     reference proteome UP:UP000002438 with literature-backed core phzA1-G1
     operon expression and phenazine biosynthetic edges (PMID:10984043,
     PMID:11591691, PMID:23129634).
+  llm_assisted: true
+- timestamp: '2026-11-04T22:30:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: >-
+    Added live-verified Swiss-Prot entry UniProtKB:P20581 (PQSE_PSEAE, pqsE /
+    PA1000, EC:3.1.2.32, 301 aa, CRC64 CB78E9103D8F221C, v1) in reference
+    proteome UP:UP000002438 with literature-backed pqsABCDE operon expression
+    and positive regulatory edges for phzB1 and phenazine/pyocyanin
+    biosynthesis (PMID:10984043, PMID:12426334, PMID:27851827, PMID:35019777,
+    PMID:18776012, PMID:36456567).
   llm_assisted: true

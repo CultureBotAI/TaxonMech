@@ -44,6 +44,21 @@ causal_graphs:
     sequence_crc64: 367B5DFD1EB6EBBD
     sequence_version: 2
     entry_status: SWISS_PROT
+  - node_id: mtrA
+    label: Tetrahydromethanopterin S-methyltransferase subunit A (mtrA)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:Q58261
+    xrefs:
+    - EC:7.2.1.4
+    organism_taxon_id: NCBITaxon:243232
+    strain_id: kgmicrobe.strain:bacdive_6981
+    proteome_id: UP:UP000000805
+    gene_symbol: mtrA
+    locus_tag: MJ0851
+    sequence_length: 241
+    sequence_crc64: 155EAE6418E09B8D
+    sequence_version: 2
+    entry_status: SWISS_PROT
   - node_id: mcrA
     label: Methyl-coenzyme M reductase I subunit alpha (mcrA)
     node_type: GENE_OR_PROTEIN
@@ -280,6 +295,51 @@ causal_graphs:
         Genomic reconstruction of the Methanocaldococcus jannaschii DSM 2661
         hydrogenotrophic methanogenesis pathway from CO2 reduction through
         methyl-coenzyme M reduction.
+  - edge_id: e16
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: mtrA
+    evidence:
+    - reference: PMID:8688087
+      notes: >-
+        Complete genome sequence of Methanocaldococcus jannaschii DSM 2661
+        identifying mtrA (MJ0851) encoding the corrinoid-binding subunit A of
+        tetrahydromethanopterin S-methyltransferase (EC:7.2.1.4).
+  - edge_id: e17
+    subject: mtrA
+    predicate: causally upstream of or within
+    predicate_id: RO:0002418
+    object: methanogenesis
+    evidence:
+    - reference: PMID:8688087
+      notes: >-
+        Tetrahydromethanopterin S-methyltransferase subunit A (MtrA, MJ0851,
+        EC:7.2.1.4) transfers the methyl group from
+        N5-methyltetrahydromethanopterin to coenzyme M, generating the
+        methyl-coenzyme M substrate for terminal methane formation.
+    - reference: PMID:9367957
+      notes: >-
+        Methyl-coenzyme M produced by the MtrA-H methyltransferase complex is
+        the obligatory methyl donor reduced by methyl-coenzyme M reductase to
+        methane.
+  - edge_id: e18
+    subject: mer
+    predicate: causally upstream of or within
+    predicate_id: RO:0002418
+    object: mtrA
+    evidence:
+    - reference: PMID:28644554
+      notes: >-
+        5,10-methylenetetrahydromethanopterin reductase Mer (MJ1534) reduces
+        N5,N10-methylenetetrahydromethanopterin to
+        N5-methyltetrahydromethanopterin, supplying the direct methyl-donor
+        substrate for MtrA-dependent methyl transfer to coenzyme M.
+    - reference: PMID:8688087
+      notes: >-
+        Genomic pathway reconstruction of Methanocaldococcus jannaschii DSM 2661
+        establishing consecutive C1 reduction by Mer (MJ1534) and methyl
+        transfer to coenzyme M by MtrA-H (MJ0851).
 curation_history:
 - timestamp: '2026-10-22T14:00:00Z'
   curator: curate-causal-graphs
@@ -328,4 +388,14 @@ curation_history:
     proteome UP:UP000000805 with literature-backed expression and initial
     CO2-reduction pathway edges in hydrogenotrophic methanogenesis
     (PMID:8688087, PMID:9102456).
+  llm_assisted: true
+- timestamp: '2026-11-04T22:30:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: >-
+    Added live-verified Swiss-Prot entry UniProtKB:Q58261 (MTRA_METJA, mtrA /
+    MJ0851, EC:7.2.1.4, 241 aa, CRC64 155EAE6418E09B8D, v2) in reference
+    proteome UP:UP000000805 with literature-backed expression and C1-transfer
+    pathway edges linking Mer and MtrA to hydrogenotrophic methanogenesis
+    (PMID:8688087, PMID:28644554, PMID:9367957).
   llm_assisted: true
