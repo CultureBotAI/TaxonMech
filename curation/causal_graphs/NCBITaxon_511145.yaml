@@ -444,6 +444,24 @@ causal_graphs:
         Unphosphorylated EIIA-Glc (Crr) binds directly to cytoplasmic loops of
         Escherichia coli K-12 MG1655 LacY lactose permease to block lactose
         uptake (inducer exclusion).
+  - edge_id: e25
+    subject: crr
+    predicate: causally upstream of or within
+    predicate_id: RO:0002418
+    object: lactose_transport
+    evidence:
+    - reference: PMID:789369
+      notes: >-
+        Glucose-specific PTS component EIIA-Glc (Crr, UniProtKB:P69783) governs
+        Escherichia coli K-12 MG1655 lactose transport both by direct allosteric
+        inhibition of LacY during glucose transport (inducer exclusion) and by
+        activating CyaA-dependent cAMP synthesis for lacZYA induction under
+        glucose depletion.
+    - reference: PMID:17158705
+      notes: >-
+        Phosphorylation-state-dependent interaction of EIIA-Glc (Crr) with LacY
+        and CyaA couples PTS glucose sensing to transmembrane lactose transport
+        in Escherichia coli K-12 MG1655.
 curation_history:
 - timestamp: '2026-10-22T18:50:00Z'
   curator: add-uniprot-protein-examples
@@ -529,4 +547,12 @@ curation_history:
     UP:UP000000625 with literature-backed expression, CyaA activation, and LacY
     inducer-exclusion edges (PMID:9278503, PMID:2960675, PMID:789369,
     PMID:17158705).
+  llm_assisted: true
+- timestamp: '2026-11-05T17:15:00Z'
+  curator: curate-causal-graphs
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: >-
+    Added direct PTS-effector-to-process causal edge (edge e25, crr RO:0002418
+    lactose_transport, PMID:789369, PMID:17158705) linking EIIA-Glc / Crr
+    (UniProtKB:P69783) to LacY-mediated lactose transport (GO:0015767).
   llm_assisted: true
