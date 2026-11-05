@@ -15,11 +15,11 @@ Reviewed all 626,048 in-scope TaxonRecord files across Bacteria (605,695), Archa
 
 ## Scope And Provenance
 
-Full-corpus Cycle 6 Stage 2 causal-graph review across all 626,048 TaxonRecord files in data/taxa/, paired with native curation, enrichment, and seeding across all 15 maintained curation/causal_graphs/*.yaml overlays (213 evidence-backed edges across 7 cross-domain species exemplars and 8 reference-proteome strains).
+Full-corpus Cycle 7 Stage 2 causal-graph review across all 626,048 TaxonRecord files in data/taxa/, paired with native curation, enrichment, and seeding across all 15 maintained curation/causal_graphs/*.yaml overlays (257 evidence-backed edges across 7 cross-domain species exemplars and 8 reference-proteome strains).
 
 Selection: All 626,048 in-scope taxa in curation/seed_scope.tsv and data/taxa/PATHS.tsv classified by raw source coverage, with all 15 causal-graph-bearing species and strain exemplars reviewed, enriched, and validated directly.
 Coverage: sampled; 15 reviewed / 626048 in the declared population.
-Source: working_tree at Git base 5d39436a01f41bbbd1a28a1ed2ff1b46ed5416b9.
+Source: working_tree at Git base 58594439ca7b957539ca0057c752c4ab402e315d.
 Working-tree hashes do not imply those bytes were committed.
 
 | Target | Path / selector | Kind | Label |
@@ -45,7 +45,7 @@ Working-tree hashes do not imply those bytes were committed.
 | Check | Status | Required | Targets | Result |
 | --- | --- | --- | --- | --- |
 | Strict LinkML and custom semantic validation on all 15 causal-graph-seeded TaxonRecord files | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:5207, NCBITaxon:235443 | All 15 seeded TaxonRecord YAML files pass scripts/validate_strict.py with 0 errors. |
-| OAK ID-label correspondence validation across all 15 causal-graph overlays | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:5207, NCBITaxon:235443 | scripts/validate_id_label_correspondence.py verifies 287 OK_CANONICAL GO and RO pairs and 0 MISMATCH across all grounded nodes and predicates in curation/causal_graphs/*.yaml. |
+| OAK ID-label correspondence validation across all 15 causal-graph overlays | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:5207, NCBITaxon:235443 | scripts/validate_id_label_correspondence.py verifies 287 OK_CANONICAL GO and RO pairs (30 GO node groundings + 257 RO edge predicates; 294 OBO-grounded pairs including 7 CHEBI node groundings) and 0 MISMATCH across all grounded nodes and predicates in curation/causal_graphs/*.yaml. |
 | Unit and integration test suite for causal-graph overlays, offline UniProtKB reference proteome validation, seeder merge, and HTML rendering | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:5207, NCBITaxon:235443 | tests/test_causal_graph_overlays.py passes all roundtrip, offline UniProtKB reference proteome and lineage validation, rendering, and committed-overlay validation checks (257 edges across 15 overlays). |
 
 ## Scientific And Domain Assessments
@@ -152,7 +152,7 @@ summary: 'Reviewed all 626,048 in-scope TaxonRecord files across Bacteria (605,6
   count tables in data/raw/{madin_taxa,bactotraits_taxa}.tsv (tracked under #78 /
   taxonmech-infra-0002).'
 source:
-  git_revision: 5d39436a01f41bbbd1a28a1ed2ff1b46ed5416b9
+  git_revision: 58594439ca7b957539ca0057c752c4ab402e315d
   state: working_tree
   inputs:
   - path: .claude/skills/curate-causal-graphs/SKILL.md
@@ -321,9 +321,9 @@ source:
     sha256: 4fa34b08c8b9407c9d8985dfb30683665767559a792ff70bd03a09ec9db17661
     role: context
 scope:
-  description: Full-corpus Cycle 6 Stage 2 causal-graph review across all 626,048
+  description: Full-corpus Cycle 7 Stage 2 causal-graph review across all 626,048
     TaxonRecord files in data/taxa/, paired with native curation, enrichment, and
-    seeding across all 15 maintained curation/causal_graphs/*.yaml overlays (213 evidence-backed
+    seeding across all 15 maintained curation/causal_graphs/*.yaml overlays (257 evidence-backed
     edges across 7 cross-domain species exemplars and 8 reference-proteome strains).
   selection: All 626,048 in-scope taxa in curation/seed_scope.tsv and data/taxa/PATHS.tsv
     classified by raw source coverage, with all 15 causal-graph-bearing species and
@@ -618,7 +618,9 @@ checks:
   status: passed
   required: true
   summary: scripts/validate_id_label_correspondence.py verifies 287 OK_CANONICAL GO
-    and RO pairs and 0 MISMATCH across all grounded nodes and predicates in curation/causal_graphs/*.yaml.
+    and RO pairs (30 GO node groundings + 257 RO edge predicates; 294 OBO-grounded
+    pairs including 7 CHEBI node groundings) and 0 MISMATCH across all grounded nodes
+    and predicates in curation/causal_graphs/*.yaml.
   target_ids:
   - NCBITaxon:562
   - NCBITaxon:83333
