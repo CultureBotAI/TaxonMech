@@ -61,7 +61,7 @@ Working-tree hashes do not imply those bytes were committed.
 | Required historical native-unit counts | unavailable | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2940590, NCBITaxon:3121604, NCBITaxon:1435036, NCBITaxon:209650, NCBITaxon:206, NCBITaxon:33952, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:2287, NCBITaxon:4932, NCBITaxon:5207, NCBITaxon:235443, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:5755, NCBITaxon:155900, NCBITaxon:408170, NCBITaxon:32644 | Manifest-pinned upstream kg-microbe raw edge tables for GOLD, MEDIADIVE, MADIN, and BACTOTRAITS are not committed locally (though SHA-256 digests are documented in docs/HARMONIZATION.md), and subtree rollups apply to BacDive strains only (#8; taxonmech-infra-0004). |
 | Full-corpus review coverage and disjointness check across all 626,048 records | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2940590, NCBITaxon:3121604, NCBITaxon:1435036, NCBITaxon:209650, NCBITaxon:206, NCBITaxon:33952, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:2287, NCBITaxon:4932, NCBITaxon:5207, NCBITaxon:235443, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:5755, NCBITaxon:155900, NCBITaxon:408170, NCBITaxon:32644 | scripts/corpus_review_inventory.py --check verified 626,048 corpus records (23,883 legacy + 602,165 structured across 14 shards and 611 batches) with 0 unreviewed records and 0 overlaps. |
 | Structured review inventory and post-curation target SHA-256 reconciliation regression suite | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2940590, NCBITaxon:3121604, NCBITaxon:1435036, NCBITaxon:209650, NCBITaxon:206, NCBITaxon:33952, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:2287, NCBITaxon:4932, NCBITaxon:5207, NCBITaxon:235443, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:5755, NCBITaxon:155900, NCBITaxon:408170, NCBITaxon:32644 | pytest tests/test_corpus_review_inventory.py -k 'not verify_target_sha256' passed all 9 tests verifying shard coverage, load_latest_target_reviews() post-curation target_sha256 reconciliation (#158), and in-repository symlink input handling (#185). |
-| Committed causal-graph and UniProtKB overlay regression suite | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:5207, NCBITaxon:235443, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:1859096, NCBITaxon:294750 | pytest tests/test_causal_graph_overlays.py passed all 10 tests verifying overlay loading, structural causal-graph and EC-number/metadata invariant validation (#189, PR #190), Cycle 5 Stage 5 documentation contract (#197, PR #198), Cycle 5 Stage 6 connected-graph, identifier-format, and scripts/check_provenance.py invariants (#199, PR #200), seeder merge, LinkML validation, offline curation/uniprot_proteins.tsv validation (including strain_id and vertical lineage consistency), and HTML rendering across all 15 maintained overlays (246 edges across 48 PMIDs, 75 GENE_OR_PROTEIN nodes across 34 UniProtKB accessions). |
+| Committed causal-graph and UniProtKB overlay regression suite | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:5207, NCBITaxon:235443, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:1859096, NCBITaxon:294750 | pytest tests/test_causal_graph_overlays.py passed all 11 tests verifying overlay loading, structural causal-graph and EC-number/metadata invariant validation (#189, PR #190), Cycle 5 Stage 5 documentation contract (#197, PR #198), Cycle 5 Stage 6 connected-graph, identifier-format, and scripts/check_provenance.py invariants (#199, PR #200), Cycle 6 Stage 5 (#206) docs/SCHEMA.md and curation/causal_graphs/README.md invariant checks (test_schema_guide_and_overlay_readme_document_cycle5_provenance_and_ec_pattern_invariants), seeder merge, LinkML validation, offline curation/uniprot_proteins.tsv validation (including strain_id and vertical lineage consistency), and HTML rendering across all 15 maintained overlays (246 edges across 48 PMIDs, 75 GENE_OR_PROTEIN nodes across 34 UniProtKB accessions). |
 
 ## Scientific And Domain Assessments
 
@@ -69,7 +69,7 @@ Working-tree hashes do not imply those bytes were committed.
 
 identity: supported. Targets: NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2940590, NCBITaxon:3121604, NCBITaxon:1435036, NCBITaxon:209650, NCBITaxon:206, NCBITaxon:33952, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:2287, NCBITaxon:4932, NCBITaxon:5207, NCBITaxon:235443, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:5755, NCBITaxon:155900, NCBITaxon:408170, NCBITaxon:32644.
 
-All 626,048 in-scope TaxonRecord YAML files in data/taxa/ are accounted for without gap or overlap (23,883 legacy + 602,165 structured across 14 shards and 611 batches), match their pinned data/raw/ncbitaxon_taxa.tsv identifier, label, rank, domain, parent_taxon, and lineage, and have their multi-stage workflow review bundles (443 bundles in reviews/structured/ including this bundle) and post-curation target SHA-256 reconciliation contract documented in docs/corpus-review-coverage.md and enforced by tests/test_corpus_review_inventory.py (#158).
+All 626,048 in-scope TaxonRecord YAML files in data/taxa/ are accounted for without gap or overlap (23,883 legacy + 602,165 structured across 14 shards and 611 batches), match their pinned data/raw/ncbitaxon_taxa.tsv identifier, label, rank, domain, parent_taxon, and lineage, and have their multi-stage workflow review bundles (444 bundles in reviews/structured/ including this bundle) and post-curation target SHA-256 reconciliation contract documented in docs/corpus-review-coverage.md and enforced by tests/test_corpus_review_inventory.py (#158).
 
 ### GTDB closeMatch synonym/xref promotion, polyphyly suffix mangling, and pooled broadMatch genome/note semantics
 
@@ -177,7 +177,7 @@ Disposition: Resolved in Cycle 4 Stage 5 (PR #188) under #187/#78 and verified i
 
 minor / resolved / confirmed; issue key: cycle5-stage4-curation-guide-and-overlay-readme-stale-causal-graph-overlay-contract.
 
-Resolved in Cycle 5 Stage 5 (PR #198, commit d4129f3318b980e8f56119eb5956051ca065ff16) under #197/#78 and verified in Cycle 6 Stage 4: docs/CURATION.md (lines 60-81) documents the live curation/causal_graphs/&lt;NCBITaxon_ID&gt;.yaml and curation/uniprot_proteins.tsv overlay pipeline and validation gates while distinguishing unimplemented definition/evidence/mapping_status overlays, and curation/causal_graphs/README.md (lines 54-117) documents all 14 columns of UNIPROT_PROTEIN_FIELDS and species-vs-strain strain_id binding rules, enforced by test_curation_guide_and_overlay_readme_document_causal_graph_and_uniprot_contract() in tests/test_causal_graph_overlays.py.
+Resolved in Cycle 5 Stage 5 (PR #198, commit d4129f3318b980e8f56119eb5956051ca065ff16) under #197/#78 and verified in Cycle 6 Stage 4: docs/CURATION.md (lines 60-81) documents the live curation/causal_graphs/&lt;NCBITaxon_ID&gt;.yaml and curation/uniprot_proteins.tsv overlay pipeline and validation gates while distinguishing unimplemented definition/evidence/mapping_status overlays, and curation/causal_graphs/README.md (lines 54-117) documents all 14 columns of UNIPROT_PROTEIN_FIELDS and species-vs-strain strain_id binding rules, enforced by test_curation_guide_and_overlay_readme_document_causal_graphs_and_uniprot_fields() in tests/test_causal_graph_overlays.py.
 
 Disposition: Resolved in Cycle 5 Stage 5 (PR #198) under #197/#78 and verified intact in Cycle 6 Stage 4.
 
@@ -217,7 +217,7 @@ Execute remaining INFRA_TASKS.md tasks taxonmech-infra-0001, taxonmech-infra-000
 | exemplar-target-records | data/taxa/bacteria/escherichia_coli.yaml; data/taxa/bacteria/escherichia_coli_k_12.yaml; data/taxa/bacteria/escherichia_coli_str_k_12_substr_mg1655.yaml; data/taxa/bacteria/bacillus_subtilis.yaml; data/taxa/bacteria/bacillus_subtilis_subsp_subtilis_str_168.yaml; data/taxa/bacteria/pseudomonas_aeruginosa.yaml; data/taxa/bacteria/pseudomonas_aeruginosa_pao1.yaml; data/taxa/bacteria/achromobacter_sp_jub104.yaml; data/taxa/bacteria/acidaminobacteraceae_bacterium.yaml; data/taxa/bacteria/acinetobacter_bohemicus.yaml; data/taxa/bacteria/acidicaldus_organivorans.yaml; data/taxa/bacteria/campylobacter_sputorum.yaml; data/taxa/bacteria/acetobacterium_woodii.yaml; data/taxa/archaea/methanocaldococcus_jannaschii.yaml; data/taxa/archaea/methanocaldococcus_jannaschii_dsm_2661.yaml; data/taxa/archaea/saccharolobus_solfataricus.yaml; data/taxa/eukaryota/saccharomyces_cerevisiae.yaml; data/taxa/eukaryota/cryptococcus_neoformans.yaml; data/taxa/eukaryota/cryptococcus_neoformans_h99.yaml; data/taxa/eukaryota/cryptococcus_deneoformans.yaml; data/taxa/eukaryota/cryptococcus_deneoformans_b_3501a.yaml; data/taxa/eukaryota/cryptococcus_deuterogattii.yaml; data/taxa/eukaryota/cryptococcus_deuterogattii_r265.yaml; data/taxa/eukaryota/acanthamoeba_castellanii.yaml; data/taxa/other/uncultured_organism.yaml; data/taxa/other/human_gut_metagenome.yaml; data/taxa/other/unidentified.yaml; Complete YAML content of 27 directly bound cross-domain, verdict-stratified, and causal-graph-enriched TaxonRecord files | supports | Verified taxon identity, lineage, nomenclature, synonyms, xrefs, taxonomy_mappings, source_attestations, strains, causal_graphs, and curation_history across 27 exemplar records spanning Bacteria (13), Archaea (3), Eukaryota (8), and other (3). |
 | cycle6-causal-graph-and-uniprot-overlays | curation/causal_graphs/README.md; curation/causal_graphs/NCBITaxon_*.yaml; curation/uniprot_proteins.tsv; reviews/structured/20261104T185500Z-cycle6-stage2-causal-graphs-curation/review.yaml; reviews/structured/20261105T015451Z-cycle6-stage3-protein-examples/review.yaml; 15 maintained curation/causal_graphs/NCBITaxon_*.yaml overlays, curation/uniprot_proteins.tsv (34 rows), and Cycle 6 Stages 2-3 structured review bundles | supports | Verified 15 maintained causal-graph overlays seeded into 7 species and 8 strain TaxonRecord files (246 evidence-backed edges across 48 PMIDs; 75 GENE_OR_PROTEIN nodes grounded to 34 unique live-verified UniProtKB accessions—32 SWISS_PROT and 2 TREMBL—in curation/uniprot_proteins.tsv with exact organism_taxon_id, strain_id, proteome_id, gene_symbol, locus_tag, ec_numbers, sequence_length, sequence_crc64, sequence_version, and entry_status). |
 | raw-source-inventories | curation/seed_scope.tsv; data/raw/MANIFEST.yaml; data/raw/ncbitaxon_taxa.tsv; data/raw/gtdb_mappings.tsv; data/raw/gtdb_species.tsv; data/raw/bacdive_strains.tsv; data/raw/lpsn_names.tsv; curation/seed_scope.tsv (626,048 rows) and data/raw/*.tsv | supports | Pinned raw inventories verify exact NCBI taxon IDs and lineages across all 626,048 records and confirm persistent GTDB closeMatch fan-out (95,766 records), polyphyly suffix mangling (15,704 rows), pooled broadMatch genome counts/notes (8,587 records), and stale seed_scope strain-count reason strings. |
-| schema-seeder-validator-code | src/taxonmech/schema/taxonmech.yaml; src/taxonmech/seed.py; src/taxonmech/extract.py; scripts/validate_strict.py; scripts/check_provenance.py; scripts/corpus_review_inventory.py; scripts/validate_history.py; docs/SCHEMA.md; docs/CURATION.md; curation/causal_graphs/README.md; docs/HARMONIZATION.md; docs/corpus-review-coverage.md; INFRA_TASKS.md; taxonmech.yaml:43-95,1200-1315,1520-1575; seed.py:62-125,302-770,949-1164; validate_strict.py:217-370; check_provenance.py:1-140,253-325; corpus_review_inventory.py:185-330,381-445; docs/SCHEMA.md:1-94; docs/CURATION.md:52-85; curation/causal_graphs/README.md:1-168; INFRA_TASKS.md:1-239 | supports | LinkML schemas (src/taxonmech/schema/taxonmech.yaml, history.yaml, mech_shared.yaml, schema/record_review.yaml), seeder and extractor logic (src/taxonmech/seed.py, src/taxonmech/extract.py), provenance and validation scripts (scripts/check_provenance.py, scripts/validate_strict.py, scripts/validate_history.py, scripts/verify_corpus.py, scripts/record_review.py, scripts/corpus_review_inventory.py), and Cycle 6 Stage 5 remediated schema and overlay guides (docs/SCHEMA.md, curation/causal_graphs/README.md, tests/test_causal_graph_overlays.py). |
+| schema-seeder-validator-code | src/taxonmech/schema/taxonmech.yaml; src/taxonmech/seed.py; src/taxonmech/extract.py; scripts/validate_strict.py; scripts/check_provenance.py; scripts/corpus_review_inventory.py; scripts/validate_history.py; docs/SCHEMA.md; docs/CURATION.md; curation/causal_graphs/README.md; tests/test_causal_graph_overlays.py; docs/HARMONIZATION.md; docs/corpus-review-coverage.md; INFRA_TASKS.md; taxonmech.yaml:43-95,1200-1315,1520-1575; seed.py:62-125,302-770,949-1164; validate_strict.py:217-370; check_provenance.py:1-140,253-325; corpus_review_inventory.py:185-330,381-445; docs/SCHEMA.md:1-94; docs/CURATION.md:52-85; curation/causal_graphs/README.md:1-168; tests/test_causal_graph_overlays.py:1343-1620; INFRA_TASKS.md:1-239 | supports | LinkML schemas (src/taxonmech/schema/taxonmech.yaml, history.yaml, mech_shared.yaml, schema/record_review.yaml), seeder and extractor logic (src/taxonmech/seed.py, src/taxonmech/extract.py), provenance and validation scripts (scripts/check_provenance.py, scripts/validate_strict.py, scripts/validate_history.py, scripts/verify_corpus.py, scripts/record_review.py, scripts/corpus_review_inventory.py), and Cycle 6 Stage 5 remediated schema and overlay guides (docs/SCHEMA.md, curation/causal_graphs/README.md, tests/test_causal_graph_overlays.py). |
 
 ## Limits And Additional Notes
 
@@ -1613,14 +1613,16 @@ checks:
   name: Committed causal-graph and UniProtKB overlay regression suite
   status: passed
   required: true
-  summary: 'pytest tests/test_causal_graph_overlays.py passed all 10 tests verifying
+  summary: 'pytest tests/test_causal_graph_overlays.py passed all 11 tests verifying
     overlay loading, structural causal-graph and EC-number/metadata invariant validation
     (#189, PR #190), Cycle 5 Stage 5 documentation contract (#197, PR #198), Cycle
     5 Stage 6 connected-graph, identifier-format, and scripts/check_provenance.py
-    invariants (#199, PR #200), seeder merge, LinkML validation, offline curation/uniprot_proteins.tsv
-    validation (including strain_id and vertical lineage consistency), and HTML rendering
-    across all 15 maintained overlays (246 edges across 48 PMIDs, 75 GENE_OR_PROTEIN
-    nodes across 34 UniProtKB accessions).'
+    invariants (#199, PR #200), Cycle 6 Stage 5 (#206) docs/SCHEMA.md and curation/causal_graphs/README.md
+    invariant checks (test_schema_guide_and_overlay_readme_document_cycle5_provenance_and_ec_pattern_invariants),
+    seeder merge, LinkML validation, offline curation/uniprot_proteins.tsv validation
+    (including strain_id and vertical lineage consistency), and HTML rendering across
+    all 15 maintained overlays (246 edges across 48 PMIDs, 75 GENE_OR_PROTEIN nodes
+    across 34 UniProtKB accessions).'
   target_ids:
   - NCBITaxon:562
   - NCBITaxon:83333
@@ -1716,11 +1718,12 @@ evidence:
   reference: src/taxonmech/schema/taxonmech.yaml; src/taxonmech/seed.py; src/taxonmech/extract.py;
     scripts/validate_strict.py; scripts/check_provenance.py; scripts/corpus_review_inventory.py;
     scripts/validate_history.py; docs/SCHEMA.md; docs/CURATION.md; curation/causal_graphs/README.md;
-    docs/HARMONIZATION.md; docs/corpus-review-coverage.md; INFRA_TASKS.md
+    tests/test_causal_graph_overlays.py; docs/HARMONIZATION.md; docs/corpus-review-coverage.md;
+    INFRA_TASKS.md
   locator: taxonmech.yaml:43-95,1200-1315,1520-1575; seed.py:62-125,302-770,949-1164;
     validate_strict.py:217-370; check_provenance.py:1-140,253-325; corpus_review_inventory.py:185-330,381-445;
     docs/SCHEMA.md:1-94; docs/CURATION.md:52-85; curation/causal_graphs/README.md:1-168;
-    INFRA_TASKS.md:1-239
+    tests/test_causal_graph_overlays.py:1343-1620; INFRA_TASKS.md:1-239
   summary: LinkML schemas (src/taxonmech/schema/taxonmech.yaml, history.yaml, mech_shared.yaml,
     schema/record_review.yaml), seeder and extractor logic (src/taxonmech/seed.py,
     src/taxonmech/extract.py), provenance and validation scripts (scripts/check_provenance.py,
@@ -1741,7 +1744,7 @@ assessments:
     for without gap or overlap (23,883 legacy + 602,165 structured across 14 shards
     and 611 batches), match their pinned data/raw/ncbitaxon_taxa.tsv identifier, label,
     rank, domain, parent_taxon, and lineage, and have their multi-stage workflow review
-    bundles (443 bundles in reviews/structured/ including this bundle) and post-curation
+    bundles (444 bundles in reviews/structured/ including this bundle) and post-curation
     target SHA-256 reconciliation contract documented in docs/corpus-review-coverage.md
     and enforced by tests/test_corpus_review_inventory.py (#158).
   target_ids:
@@ -2816,7 +2819,7 @@ findings:
     overlay pipeline and validation gates while distinguishing unimplemented definition/evidence/mapping_status
     overlays, and curation/causal_graphs/README.md (lines 54-117) documents all 14
     columns of UNIPROT_PROTEIN_FIELDS and species-vs-strain strain_id binding rules,
-    enforced by test_curation_guide_and_overlay_readme_document_causal_graph_and_uniprot_contract()
+    enforced by test_curation_guide_and_overlay_readme_document_causal_graphs_and_uniprot_fields()
     in tests/test_causal_graph_overlays.py.'
   target_ids:
   - NCBITaxon:562
