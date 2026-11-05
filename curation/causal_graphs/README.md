@@ -90,8 +90,8 @@ offline against a row in `curation/uniprot_proteins.tsv` (registered in
   must sit within the host `TaxonRecord.identifier` subtree (`s_tid == tid or tid in _taxon_lineage(taxa, s_tid)`)
   and be lineage-compatible (`_taxa_lineage_compatible`) with the node's
   `organism_taxon_id` in `data/raw/ncbitaxon_taxa.tsv` (#208).
-- Across the 15 maintained overlays (75 `GENE_OR_PROTEIN` nodes), **5 overlays
-  (33 nodes) populate `strain_id`** because the target `TaxonRecord.strains[]`
+- Across the 15 maintained overlays (86 `GENE_OR_PROTEIN` nodes), **5 overlays
+  (38 nodes) populate `strain_id`** because the target `TaxonRecord.strains[]`
   contains that BacDive strain record: `NCBITaxon_562.yaml` (*Escherichia coli*,
   `kgmicrobe.strain:bacdive_155687`), `NCBITaxon_1423.yaml` (*Bacillus subtilis*,
   `kgmicrobe.strain:bacdive_1156`), `NCBITaxon_287.yaml` (*Pseudomonas
@@ -101,7 +101,7 @@ offline against a row in `curation/uniprot_proteins.tsv` (registered in
   (`kgmicrobe.strain:bacdive_6981`, which is directly assigned to
   `NCBITaxon:243232` in `data/raw/bacdive_strains.tsv` and aggregated into
   `NCBITaxon:2190` via subtree rollup).
-- **10 overlays (42 nodes) omit `strain_id`** while retaining strain-specific
+- **10 overlays (48 nodes) omit `strain_id`** while retaining strain-specific
   `organism_taxon_id` and `proteome_id` because the host `TaxonRecord` has
   `strains: []`: the 4 bacterial strain overlays whose BacDive strain row in
   `data/raw/bacdive_strains.tsv` is keyed to the parent species rather than the

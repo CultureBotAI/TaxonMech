@@ -58,6 +58,21 @@ causal_graphs:
     sequence_crc64: 155EAE6418E09B8D
     sequence_version: 2
     entry_status: SWISS_PROT
+  - node_id: mtrH
+    label: Tetrahydromethanopterin S-methyltransferase subunit H (mtrH)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:Q58264
+    xrefs:
+    - EC:7.2.1.4
+    organism_taxon_id: NCBITaxon:243232
+    strain_id: kgmicrobe.strain:bacdive_6981
+    proteome_id: UP:UP000000805
+    gene_symbol: mtrH
+    locus_tag: MJ0854
+    sequence_length: 319
+    sequence_crc64: 370E20B41F5CDA00
+    sequence_version: 2
+    entry_status: SWISS_PROT
   - node_id: mcrA
     label: Methyl-coenzyme M reductase I subunit alpha (mcrA)
     node_type: GENE_OR_PROTEIN
@@ -360,6 +375,65 @@ causal_graphs:
         Methyl-coenzyme M synthesized by the MtrA-H methyltransferase complex
         binds in the factor F430 active site of McrABG to drive coenzyme-B
         sulfoethylthiotransferase activity.
+  - edge_id: e20
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: mtrH
+    evidence:
+    - reference: PMID:8688087
+      notes: >-
+        Complete genome sequence of Methanocaldococcus jannaschii DSM 2661
+        identifying mtrH (MJ0854) encoding subunit H of the membrane-bound
+        tetrahydromethanopterin S-methyltransferase complex (EC:7.2.1.4).
+    - reference: PMID:10338124
+      notes: >-
+        Characterization of the MtrH subunit of the N5-methyltetrahydromethanopterin:coenzyme M
+        methyltransferase complex in methanogenic archaea.
+  - edge_id: e21
+    subject: mtrH
+    predicate: causally upstream of or within
+    predicate_id: RO:0002418
+    object: mtrA
+    evidence:
+    - reference: PMID:10338124
+      notes: >-
+        Subunit MtrH (EC:7.2.1.4) catalyzes methyl transfer from
+        N5-methyltetrahydromethanopterin to the prosthetic cob(I)amide group of
+        corrinoid-binding subunit MtrA in the first half-reaction of the
+        Methanocaldococcus jannaschii DSM 2661 MtrA-H methyltransferase complex.
+    - reference: PMID:27342374
+      notes: >-
+        Biochemical and spectroscopic characterization of the methanogenic
+        MtrA-H methyltransferase establishing MtrH-mediated methylation of the
+        MtrA corrinoid cofactor prior to CoM methylation.
+    - reference: PMID:38530900
+      notes: >-
+        Structural and mechanistic analysis of the MtrA-H methyltransferase
+        complex demonstrating how MtrH couples N5-methyltetrahydromethanopterin
+        demethylation to MtrA cob(I)amide methylation.
+  - edge_id: e22
+    subject: mtrH
+    predicate: causally upstream of or within
+    predicate_id: RO:0002418
+    object: methanogenesis
+    evidence:
+    - reference: PMID:8688087
+      notes: >-
+        Genomic reconstruction of the Methanocaldococcus jannaschii DSM 2661
+        hydrogenotrophic methanogenesis pathway including mtrH (MJ0854) in the
+        mtrEDCBAFGH operon.
+    - reference: PMID:10338124
+      notes: >-
+        MtrH (UniProtKB:Q58264, EC:7.2.1.4) catalyzes the initial methyl-transfer
+        half-reaction from N5-methyltetrahydromethanopterin required for
+        methyl-coenzyme M synthesis and methane formation in Methanocaldococcus
+        jannaschii DSM 2661.
+    - reference: PMID:38530900
+      notes: >-
+        The MtrA-H complex couples exergonic methyl transfer from
+        N5-methyltetrahydromethanopterin to coenzyme M in energy-conserving
+        hydrogenotrophic methanogenesis.
 curation_history:
 - timestamp: '2026-10-22T14:00:00Z'
   curator: curate-causal-graphs
@@ -427,4 +501,14 @@ curation_history:
     mtrA RO:0002418 mcr_activity, PMID:8688087, PMID:9367957) linking MtrA
     (UniProtKB:Q58261) to coenzyme-B sulfoethylthiotransferase activity
     (GO:0050524).
+  llm_assisted: true
+- timestamp: '2026-11-05T21:05:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: >-
+    Added live-verified Swiss-Prot entry UniProtKB:Q58264 (MTRH_METJA, mtrH /
+    MJ0854, EC:7.2.1.4, 319 aa, CRC64 370E20B41F5CDA00, v2) in reference
+    proteome UP:UP000000805 with literature-backed expression and methyl-transfer
+    half-reaction edges linking MtrH to MtrA and hydrogenotrophic methanogenesis
+    (PMID:8688087, PMID:10338124, PMID:27342374, PMID:38530900).
   llm_assisted: true

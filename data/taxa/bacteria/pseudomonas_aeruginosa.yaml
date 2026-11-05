@@ -63422,6 +63422,15 @@ curation_history:
     edge (edge e15, pqsE RO:0002213 phzA1, PMID:27851827, PMID:35019777) linking PqsE
     (UniProtKB:P20581) to PhzA1 (UniProtKB:Q9HWH1).
   llm_assisted: true
+- timestamp: '2026-11-05T21:05:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: Added live-verified Swiss-Prot entry UniProtKB:P54292 (RHLR_PSEAE, rhlR
+    / PA3477, 241 aa, CRC64 70C0AEA8C1DE0D4B, v1) in reference proteome UP:UP000002438
+    with literature-backed expression, direct PqsE-RhlR complex activation, and positive
+    regulatory edges for phenazine/pyocyanin biosynthesis (PMID:10984043, PMID:8144472,
+    PMID:8522523, PMID:35019777, PMID:36379213, PMID:36456567, PMID:27851827, PMID:38064526).
+  llm_assisted: true
 causal_graphs:
 - graph_id: pyocyanin_biosynthesis
   title: PhzM/PhzS-mediated pyocyanin biosynthesis
@@ -63519,6 +63528,19 @@ causal_graphs:
     locus_tag: PA1000
     sequence_length: 301
     sequence_crc64: CB78E9103D8F221C
+    sequence_version: 1
+    entry_status: SWISS_PROT
+  - node_id: rhlR
+    label: HTH-type quorum-sensing regulator RhlR (rhlR)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:P54292
+    organism_taxon_id: NCBITaxon:208964
+    strain_id: kgmicrobe.strain:bacdive_12795
+    proteome_id: UP:UP000002438
+    gene_symbol: rhlR
+    locus_tag: PA3477
+    sequence_length: 241
+    sequence_crc64: 70C0AEA8C1DE0D4B
     sequence_version: 1
     entry_status: SWISS_PROT
   - node_id: phenazine_biosynthesis
@@ -63711,3 +63733,53 @@ causal_graphs:
       notes: Direct PqsE-RhlR protein-protein interaction allosterically enhances
         RhlR binding and transcriptional activation at the Pseudomonas aeruginosa
         phz1 (phzA1-G1) promoter driving phzA1 expression.
+  - edge_id: e16
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: rhlR
+    evidence:
+    - reference: PMID:10984043
+      notes: Complete genome sequence of Pseudomonas aeruginosa PAO1 identifying rhlR
+        (PA3477) encoding the LuxR-family quorum-sensing transcriptional regulator
+        RhlR.
+    - reference: PMID:8144472
+      notes: Isolation and nucleotide sequence characterization of the Pseudomonas
+        aeruginosa rhlR regulatory gene required for rhamnolipid and pyocyanin production.
+    - reference: PMID:8522523
+      notes: Genetic characterization of the Pseudomonas aeruginosa PAO1 rhlAB-rhlR
+        gene cluster establishing RhlR control of pyocyanin and exoproduct synthesis.
+  - edge_id: e17
+    subject: pqsE
+    predicate: directly positively regulates
+    predicate_id: RO:0002629
+    object: rhlR
+    evidence:
+    - reference: PMID:35019777
+      notes: PqsE forms a direct protein-protein complex with RhlR that allosterically
+        increases RhlR affinity for target quorum-sensing promoters in Pseudomonas
+        aeruginosa.
+    - reference: PMID:36379213
+      notes: X-ray crystal structures of the Pseudomonas aeruginosa PqsE-RhlR heterotetramer
+        bound to C4-HSL define the direct physical interaction stabilizing active
+        RhlR dimers.
+    - reference: PMID:36456567
+      notes: Structure-guided mutagenesis of the PqsE-RhlR binding interface demonstrates
+        that direct PqsE binding to RhlR is required for RhlR-mediated transcriptional
+        activation.
+  - edge_id: e18
+    subject: rhlR
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: phenazine_biosynthesis
+    evidence:
+    - reference: PMID:8522523
+      notes: Quorum-sensing transcriptional regulator RhlR (UniProtKB:P54292) positively
+        regulates phenazine and pyocyanin production in Pseudomonas aeruginosa.
+    - reference: PMID:27851827
+      notes: RhlR acts with C4-HSL and PqsE to activate transcription of the phenazine
+        biosynthetic operons and drive pyocyanin synthesis in Pseudomonas aeruginosa.
+    - reference: PMID:38064526
+      notes: ChIP-seq and RNA-seq profiling across the Pseudomonas aeruginosa RhlR
+        regulon establish direct RhlR binding and activation at the phzA1 and phzM
+        promoters governing phenazine and pyocyanin biosynthesis.

@@ -129,6 +129,14 @@ curation_history:
     linking Cuf1 (UniProtKB:J9VT33) to hydroquinone:oxygen oxidoreductase (laccase)
     activity (GO:0052716).
   llm_assisted: true
+- timestamp: '2026-11-05T21:05:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: Added live-verified Swiss-Prot entry UniProtKB:J9VG42 (MBS1_CRYN9, MBS1
+    / CNAG_07464, 774 aa, CRC64 86EAB6D3B95FF04A, v2) in reference proteome UP:UP000010091
+    with literature-backed expression and positive regulatory edges for LAC1 and cell-wall
+    melanin biosynthesis (PMID:24743168, PMID:22080454, PMID:25849373, PMID:31575776).
+  llm_assisted: true
 causal_graphs:
 - graph_id: melanin_biosynthesis
   title: Lac1-mediated melanin biosynthesis
@@ -192,6 +200,18 @@ causal_graphs:
     sequence_length: 1048
     sequence_crc64: 66941210664729AD
     sequence_version: 1
+    entry_status: SWISS_PROT
+  - node_id: mbs1
+    label: Transcription factor MBS1 (MBS1)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:J9VG42
+    organism_taxon_id: NCBITaxon:235443
+    proteome_id: UP:UP000010091
+    gene_symbol: MBS1
+    locus_tag: CNAG_07464
+    sequence_length: 774
+    sequence_crc64: 86EAB6D3B95FF04A
+    sequence_version: 2
     entry_status: SWISS_PROT
   - node_id: laccase_activity
     label: hydroquinone:oxygen oxidoreductase activity
@@ -384,3 +404,45 @@ causal_graphs:
       notes: Cuf1-regulated copper acquisition and transport supply the essential
         copper cofactor for Cryptococcus neoformans H99 laccase (EC:1.10.3.2) enzymatic
         activity.
+  - edge_id: e16
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: mbs1
+    evidence:
+    - reference: PMID:24743168
+      notes: Reference genome and transcriptome assembly of Cryptococcus neoformans
+        var. grubii strain H99 identifying MBS1 (CNAG_07464) encoding the APSES-family
+        Mbp1/Swi4-like transcription factor Mbs1.
+    - reference: PMID:22080454
+      notes: Identification and functional characterization of Cryptococcus neoformans
+        H99 MBS1 (CNAG_07464) encoding an Mbp1- and Swi4-like APSES transcription
+        factor.
+  - edge_id: e17
+    subject: mbs1
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: lac1
+    evidence:
+    - reference: PMID:22080454
+      notes: APSES-family transcription factor Mbs1 (CNAG_07464) positively regulates
+        LAC1 expression and melanin production in Cryptococcus neoformans H99.
+    - reference: PMID:31575776
+      notes: Transcriptional network dissection of Cryptococcus neoformans H99 melanin
+        biosynthesis establishing Mbs1 as a positive regulator of LAC1 induction.
+  - edge_id: e18
+    subject: mbs1
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: melanin_biosynthesis
+    evidence:
+    - reference: PMID:22080454
+      notes: Disruption of MBS1 (CNAG_07464, UniProtKB:J9VG42) impairs melanin biosynthesis
+        and attenuates virulence in Cryptococcus neoformans H99.
+    - reference: PMID:25849373
+      notes: Systematic transcription-factor phenome profiling confirms Mbs1 (CNAG_07464)
+        as a positive regulator of melanization in Cryptococcus neoformans H99.
+    - reference: PMID:31575776
+      notes: Epistatic and regulatory network analysis places Mbs1 alongside Bzp4,
+        Usv101, and Hob1 as a core transcription factor governing cell-wall melanin
+        biosynthesis in Cryptococcus neoformans H99.
