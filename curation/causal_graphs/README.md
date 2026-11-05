@@ -152,7 +152,7 @@ offline against a row in `curation/uniprot_proteins.tsv` (registered in
    syntax, species-or-below scope (`_taxon_is_species_or_below`), required
    descriptive metadata (`entry_name`, `protein_name`, `organism_label`,
    `release_version`), `gene_symbol` or `locus_tag` presence, and
-   `EC_NUMBER_PATTERN` (`EC:<digits>`) syntax/uniqueness on
+   `EC_NUMBER_PATTERN` (`^EC:[1-7]\.(?:[0-9]+|-)\.(?:[0-9]+|-)\.(?:n?[0-9]+|-)$`) syntax/uniqueness on
    `curation/uniprot_proteins.tsv`; verify every `GENE_OR_PROTEIN` node against
    the pinned reference catalog (`entry_status`, `organism_taxon_id`,
    `proteome_id`, `gene_symbol`, `locus_tag`, `ec_numbers`, `sequence_length`,

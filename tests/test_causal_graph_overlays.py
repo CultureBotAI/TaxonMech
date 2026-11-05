@@ -1594,7 +1594,29 @@ def test_causal_graph_provenance_problems_gate(tmp_path: Path):
     assert any("does not match identifier 'NCBITaxon:562'" in f for f in failures)
 
 
+def test_schema_guide_and_overlay_readme_document_cycle5_provenance_and_ec_pattern_invariants():
+    """docs/SCHEMA.md must document scripts/check_provenance.py causal_graph_provenance_problems()
+    and Cycle 5 structural/provenance invariants, and curation/causal_graphs/README.md must
+    document the exact 4-part EC_NUMBER_PATTERN regex rather than 'EC:<digits>' (#206, #199, #78)."""
+    schema_doc = (REPO_ROOT / "docs" / "SCHEMA.md").read_text(encoding="utf-8")
+    for expected_token in (
+        "scripts/check_provenance.py",
+        "causal_graph_provenance_problems()",
+        "EDGE_ID_PATTERN",
+        "NCBITAXON_ID_PATTERN",
+        "PROTEOME_ID_PATTERN",
+        "UNIPROT_ID_PATTERN",
+        "EC_NUMBER_PATTERN",
+        EC_NUMBER_PATTERN.pattern,
+        "_taxon_is_species_or_below",
+        "curation/seed_scope.tsv",
+    ):
+        assert expected_token in schema_doc, f"docs/SCHEMA.md missing {expected_token!r}"
 
-
+    overlay_readme = (REPO_ROOT / "curation" / "causal_graphs" / "README.md").read_text(
+        encoding="utf-8"
+    )
+    assert "(`EC:<digits>`)" not in overlay_readme
+    assert EC_NUMBER_PATTERN.pattern in overlay_readme
 
 
