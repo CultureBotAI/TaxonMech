@@ -1446,8 +1446,8 @@ evidence:
     docs/CURATION.md; curation/causal_graphs/README.md; docs/HARMONIZATION.md; docs/corpus-review-coverage.md;
     INFRA_TASKS.md
   locator: taxonmech.yaml:43-95,1200-1315,1520-1575; seed.py:62-125,302-770,949-1164; validate_strict.py:217-370;
-    check_provenance.py:1-140,253-325; corpus_review_inventory.py:185-330,381-445; docs/SCHEMA.md:1-125;
-    docs/CURATION.md:52-85; curation/causal_graphs/README.md:1-158; INFRA_TASKS.md:33-345
+    check_provenance.py:1-140,253-325; corpus_review_inventory.py:185-330,381-445; docs/SCHEMA.md:1-94;
+    docs/CURATION.md:52-85; curation/causal_graphs/README.md:1-168; INFRA_TASKS.md:1-239
   summary: 'Inspection of schema, seeder, extractor, strict/UniProt/provenance validators, inventory checker,
     and documentation confirms resolution of #76 and #83 in Cycle 1 Stage 5, resolution of #158 code in
     Cycle 2 Stage 5 (PR #159) and #158 documentation/regression test in Cycle 3 Stage 5 (PR #165), structural
@@ -2322,7 +2322,7 @@ findings:
   certainty: confirmed
   title: docs/corpus-review-coverage.md documents multi-stage workflow review bundles in reviews/structured/
     and the post-curation target_sha256 reconciliation contract (#158)
-  description: 'Verified in Cycle 6 Stage 4 at b1af8327c9f1d889a5159d0cd55c6bb9e7173966 that docs/corpus-review-coverage.md
+  description: 'Verified in Cycle 6 Stage 4 at 448a467bd52474c7597d318d135d040f9b9a54d8 that docs/corpus-review-coverage.md
     (Sections ''Shard Architecture And Canonical Bundles'' and ''Verification'') documents multi-stage
     workflow scientific review bundles in reviews/structured/ and the load_latest_target_reviews() post-curation
     target_sha256 reconciliation contract, and that test_corpus_review_coverage_doc_describes_reconciliation_contract()
@@ -2390,13 +2390,13 @@ findings:
   certainty: confirmed
   title: 'docs/SCHEMA.md Mechanism section documents all 9 CausalNode GENE_OR_PROTEIN UniProtKB protein-grounding
     slots, UniProtEntryStatusEnum, and maintained curation overlay inputs (#187, #78)'
-  description: 'Verified in Cycle 6 Stage 4 at b1af8327c9f1d889a5159d0cd55c6bb9e7173966 that docs/SCHEMA.md
-    (line 20) documents all 9 GENE_OR_PROTEIN UniProtKB protein-grounding slots (organism_taxon_id, strain_id,
-    proteome_id, gene_symbol, locus_tag, sequence_length, sequence_crc64, sequence_version, entry_status),
-    UniProtEntryStatusEnum (SWISS_PROT, TREMBL), and maintained curation/causal_graphs/*.yaml and curation/uniprot_proteins.tsv
-    inputs, enforced by test_schema_guide_documents_causal_node_protein_slots() in tests/test_schema.py
-    (resolved in Cycle 4 Stage 5 PR #188 under https://github.com/CultureBotAI/TaxonMech/issues/187 and
-    https://github.com/CultureBotAI/TaxonMech/issues/78).'
+  description: 'Verified in Cycle 6 Stage 4 at 448a467bd52474c7597d318d135d040f9b9a54d8 that docs/SCHEMA.md
+    (lines 20 and 88) documents all 9 GENE_OR_PROTEIN UniProtKB protein-grounding slots (organism_taxon_id,
+    strain_id, proteome_id, gene_symbol, locus_tag, sequence_length, sequence_crc64, sequence_version,
+    entry_status), UniProtEntryStatusEnum (SWISS_PROT, TREMBL), and maintained curation/causal_graphs/*.yaml
+    and curation/uniprot_proteins.tsv inputs, enforced by test_schema_guide_documents_causal_node_protein_slots()
+    in tests/test_schema.py (resolved in Cycle 4 Stage 5 PR #188 under https://github.com/CultureBotAI/TaxonMech/issues/187
+    and https://github.com/CultureBotAI/TaxonMech/issues/78).'
   target_ids:
   - NCBITaxon:562
   - NCBITaxon:83333
@@ -2464,10 +2464,10 @@ findings:
   title: docs/CURATION.md and curation/causal_graphs/README.md document the live curation/causal_graphs/*.yaml
     overlay contract and 14-column curation/uniprot_proteins.tsv schema table
   description: 'Resolved in Cycle 5 Stage 5 (PR #198, commit d4129f3318b980e8f56119eb5956051ca065ff16)
-    under #197/#78 and verified in Cycle 6 Stage 4: docs/CURATION.md (lines 67-84) documents the live
+    under #197/#78 and verified in Cycle 6 Stage 4: docs/CURATION.md (lines 60-81) documents the live
     curation/causal_graphs/<NCBITaxon_ID>.yaml and curation/uniprot_proteins.tsv overlay pipeline and
     validation gates while distinguishing unimplemented definition/evidence/mapping_status overlays, and
-    curation/causal_graphs/README.md (lines 97-156) documents all 14 columns of UNIPROT_PROTEIN_FIELDS
+    curation/causal_graphs/README.md (lines 54-117) documents all 14 columns of UNIPROT_PROTEIN_FIELDS
     and species-vs-strain strain_id binding rules, enforced by test_curation_guide_and_overlay_readme_document_causal_graph_and_uniprot_contract()
     in tests/test_causal_graph_overlays.py.'
   target_ids:
@@ -2524,19 +2524,20 @@ findings:
   severity: minor
   status: open
   certainty: confirmed
-  title: docs/SCHEMA.md and curation/causal_graphs/README.md omit Cycle 5 Stage 6 provenance/connected-graph
-    invariants and misstate EC_NUMBER_PATTERN
+  title: docs/SCHEMA.md omits Cycle 5 Stage 6 provenance/connected-graph invariants and curation/causal_graphs/README.md
+    line 155 misstates EC_NUMBER_PATTERN
   description: 'In docs/SCHEMA.md (line 88), the Mechanism (CausalGraph / CausalNode / CausalEdge) section
     documents validate_causal_graph_structure() and validate_causal_graph_proteins() in src/taxonmech/seed.py,
     but omits scripts/check_provenance.py (causal_graph_provenance_problems()) and the Cycle 5 Stage 6
     (#199, PR #200) invariants enforced at seed and provenance time: the connected-graph invariant rejecting
     isolated/disconnected CausalNode items, EDGE_ID_PATTERN syntax on graph_id/node_id/edge_id, NCBITAXON_ID_PATTERN,
     PROTEOME_ID_PATTERN, UNIPROT_ID_PATTERN, species-or-below organism_taxon_id scope, and curation/seed_scope.tsv
-    membership for every curation/causal_graphs/*.yaml overlay. In addition, curation/causal_graphs/README.md
-    (line 155) states that ec_number must match `EC:<digits>` instead of the actual 4-part Enzyme Commission
-    regex `^EC:[1-7]\.(?:[0-9]+|-)\.(?:[0-9]+|-)\.(?:n?[0-9]+|-)$` enforced in src/taxonmech/seed.py line
-    84, and omits the Cycle 5 Stage 6 connected-graph and scripts/check_provenance.py gates (tracked under
-    https://github.com/CultureBotAI/TaxonMech/issues/199 and https://github.com/CultureBotAI/TaxonMech/issues/78).'
+    membership for every curation/causal_graphs/*.yaml overlay. In addition, while curation/causal_graphs/README.md
+    documents the Cycle 5 Stage 6 connected-graph and scripts/check_provenance.py gates at lines 133-164
+    and the 4-part regex in the column table at line 73, line 155 still states that ec_numbers must match
+    `EC_NUMBER_PATTERN` (`EC:<digits>`) instead of the actual 4-part Enzyme Commission regex `^EC:[1-7]\.(?:[0-9]+|-)\.(?:[0-9]+|-)\.(?:n?[0-9]+|-)$`
+    enforced in src/taxonmech/seed.py line 87 (tracked under https://github.com/CultureBotAI/TaxonMech/issues/199
+    and https://github.com/CultureBotAI/TaxonMech/issues/78).'
   target_ids:
   - NCBITaxon:562
   - NCBITaxon:83333
@@ -2574,9 +2575,9 @@ findings:
     path: scripts/check_provenance.py
     role: Provenance and causal-graph overlay scope checker
   rule_id: src/taxonmech/seed.py:EC_NUMBER_PATTERN,validate_causal_graph_structure; scripts/check_provenance.py:causal_graph_provenance_problems
-  normalization_reason: 'Synchronize docs/SCHEMA.md and curation/causal_graphs/README.md with the Cycle
-    5 Stage 6 (#199, PR #200) connected-graph, identifier-pattern, 4-part EC_NUMBER_PATTERN, and scripts/check_provenance.py
-    invariants (#199, #78).'
+  normalization_reason: 'Synchronize docs/SCHEMA.md line 88 and curation/causal_graphs/README.md line
+    155 with the Cycle 5 Stage 6 (#199, PR #200) connected-graph, identifier-pattern, 4-part EC_NUMBER_PATTERN
+    (seed.py line 87), and scripts/check_provenance.py invariants (#199, #78).'
   external_issues:
   - https://github.com/CultureBotAI/TaxonMech/issues/199
   - https://github.com/CultureBotAI/TaxonMech/issues/78
@@ -2656,10 +2657,11 @@ actions:
   - Granular trait-edge extraction supports reproducible causal_graphs expansion across trait-attested
     taxa
 - action_id: update-schema-guide-and-overlay-readme-for-cycle5-provenance-and-ec-pattern
-  description: 'Update docs/SCHEMA.md and curation/causal_graphs/README.md in Cycle 6 Stage 5 to document
-    the Cycle 5 Stage 6 (#199, PR #200) connected-graph invariant, identifier regex gates (EDGE_ID_PATTERN,
-    NCBITAXON_ID_PATTERN, PROTEOME_ID_PATTERN, UNIPROT_ID_PATTERN), exact 4-part EC_NUMBER_PATTERN (`^EC:[1-7]\.(?:[0-9]+|-)\.(?:[0-9]+|-)\.(?:n?[0-9]+|-)$`),
-    species-or-below organism_taxon_id scope, and scripts/check_provenance.py (causal_graph_provenance_problems())
+  description: 'Update docs/SCHEMA.md (line 88) and curation/causal_graphs/README.md (line 155) in Cycle
+    6 Stage 5 to document the Cycle 5 Stage 6 (#199, PR #200) connected-graph invariant, identifier regex
+    gates (EDGE_ID_PATTERN, NCBITAXON_ID_PATTERN, PROTEOME_ID_PATTERN, UNIPROT_ID_PATTERN), exact 4-part
+    EC_NUMBER_PATTERN (`^EC:[1-7]\.(?:[0-9]+|-)\.(?:[0-9]+|-)\.(?:n?[0-9]+|-)$` at src/taxonmech/seed.py
+    line 87), species-or-below organism_taxon_id scope, and scripts/check_provenance.py (causal_graph_provenance_problems())
     seed_scope.tsv membership check, and add a regression test in tests/test_causal_graph_overlays.py
     (#199, #78).'
   finding_ids:
@@ -2693,8 +2695,8 @@ actions:
   acceptance_checks:
   - docs/SCHEMA.md Mechanism section documents scripts/check_provenance.py (causal_graph_provenance_problems()),
     the connected-graph invariant, identifier regex patterns, and seed_scope.tsv membership
-  - curation/causal_graphs/README.md documents the exact 4-part EC_NUMBER_PATTERN regex and Cycle 5 Stage
-    6 connected-graph and provenance gates
+  - curation/causal_graphs/README.md line 155 documents the exact 4-part EC_NUMBER_PATTERN regex enforced
+    in src/taxonmech/seed.py line 87
 limitations:
 - Per-record review rows for all 626,048 in-scope TaxonRecord files are stored in docs/legacy-review-inventory.tsv
   (23,883 records) and docs/structured-review-inventory/part-00.tsv..part-13.tsv (602,165 records), with

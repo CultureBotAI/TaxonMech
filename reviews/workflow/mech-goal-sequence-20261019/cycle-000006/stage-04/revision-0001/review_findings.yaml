@@ -7,9 +7,9 @@ previous_evidence_path: reviews/workflow/mech-goal-sequence-20261019/cycle-00000
 previous_evidence_sha256: e3ece75c55ce377f8013a63c46ea48362d88b37f4a6d8cd70a1655151457410c
 native_review_id: 20261105T042500Z-cycle6-stage4-corpus-record-review
 native_review_path: reviews/structured/20261105T042500Z-cycle6-stage4-corpus-record-review/review.yaml
-native_review_sha256: 4170f3c951adec364514737381634087dac965b6e775df8c3f04a69837b6e1ff
+native_review_sha256: 674779ade77420228644f8c27a9318e3a85d71452f78c5624c89e6d749282a25
 native_review_md_path: reviews/structured/20261105T042500Z-cycle6-stage4-corpus-record-review/review.md
-native_review_md_sha256: 9669e2b006dfb8853d289dd6fadd938712fd395c8332627b39337bca2bec7580
+native_review_md_sha256: 1e939dd8a03543edf6e2ad437c2eca0051e48c113b9f450cb2ee8ac06dfb944b
 infra_tasks_notebook_path: INFRA_TASKS.md
 infra_tasks_notebook_sha256: ecb7de0cd54fb576b2a5bbe72e733ebe1bbcb3a1c1789f8385294909feab760a
 originated_infra_task_ids:
@@ -59,20 +59,19 @@ findings:
   status: resolved
   issue_url: https://github.com/CultureBotAI/TaxonMech/issues/187
   carried_from: schema-guide-missing-causal-node-uniprot-protein-slots
-  summary: 'Verified in Cycle 6 Stage 4 that docs/SCHEMA.md (line 20 and section ''Mechanism (CausalGraph
-    / CausalNode / CausalEdge)'', lines 24-50) documents all 9 GENE_OR_PROTEIN UniProtKB protein-grounding
-    slots, UniProtEntryStatusEnum, and the maintained curation/causal_graphs/*.yaml and curation/uniprot_proteins.tsv
-    inputs, enforced by test_schema_guide_documents_causal_node_protein_slots() in tests/test_schema.py
-    (#187, #78; resolved in Cycle 4 Stage 5 PR #188).'
+  summary: 'Verified in Cycle 6 Stage 4 that docs/SCHEMA.md (lines 20 and 88) documents all 9 GENE_OR_PROTEIN
+    UniProtKB protein-grounding slots, UniProtEntryStatusEnum, and the maintained curation/causal_graphs/*.yaml
+    and curation/uniprot_proteins.tsv inputs, enforced by test_schema_guide_documents_causal_node_protein_slots()
+    in tests/test_schema.py (#187, #78; resolved in Cycle 4 Stage 5 PR #188).'
   disposition: 'Resolved in Cycle 4 Stage 5 (PR #188) under #187 (#78) and verified intact in Cycle 6
     Stage 4.'
 - finding_id: curation-guide-and-overlay-readme-stale-causal-graph-overlay-contract
   status: resolved
   issue_url: https://github.com/CultureBotAI/TaxonMech/issues/197
   carried_from: curation-guide-and-overlay-readme-stale-causal-graph-overlay-contract
-  summary: 'Verified in Cycle 6 Stage 4 that docs/CURATION.md (lines 67-84) documents curation/causal_graphs/*.yaml
+  summary: 'Verified in Cycle 6 Stage 4 that docs/CURATION.md (lines 60-81) documents curation/causal_graphs/*.yaml
     and curation/uniprot_proteins.tsv as live maintained curation inputs while distinguishing unimplemented
-    definition/evidence/mapping_status overlays, and that curation/causal_graphs/README.md (lines 97-156)
+    definition/evidence/mapping_status overlays, and that curation/causal_graphs/README.md (lines 54-117)
     documents all 14 columns of UNIPROT_PROTEIN_FIELDS and species-vs-strain strain_id binding rules,
     enforced by test_curation_guide_and_overlay_readme_document_causal_graph_and_uniprot_contract() in
     tests/test_causal_graph_overlays.py (#197, #78; resolved in Cycle 5 Stage 5 PR #198).'
@@ -156,9 +155,10 @@ findings:
     but omits scripts/check_provenance.py (causal_graph_provenance_problems()) and the Cycle 5 Stage 6
     (#199, PR #200) connected-graph invariant, identifier regex gates (EDGE_ID_PATTERN, NCBITAXON_ID_PATTERN,
     PROTEOME_ID_PATTERN, UNIPROT_ID_PATTERN), species-or-below organism_taxon_id scope, and curation/seed_scope.tsv
-    membership; additionally, curation/causal_graphs/README.md (line 155) states that ec_number must match
-    `EC:<digits>` instead of the actual 4-part regex `^EC:[1-7]\.(?:[0-9]+|-)\.(?:[0-9]+|-)\.(?:n?[0-9]+|-)$`
-    enforced in src/taxonmech/seed.py line 84 (#199, #78).'
+    membership; additionally, while curation/causal_graphs/README.md documents the Cycle 5 Stage 6 gates
+    at lines 133-164 and the 4-part regex in the column table at line 73, line 155 still states that ec_numbers
+    must match `EC_NUMBER_PATTERN` (`EC:<digits>`) instead of the actual 4-part regex `^EC:[1-7]\.(?:[0-9]+|-)\.(?:[0-9]+|-)\.(?:n?[0-9]+|-)$`
+    enforced in src/taxonmech/seed.py line 87 (#199, #78).'
   disposition: 'Carry forward to Cycle 6 Stage 5 (resolve_review_findings) for direct documentation and
     regression-test remediation in docs/SCHEMA.md, curation/causal_graphs/README.md, and tests/test_causal_graph_overlays.py
     (#199, #78).'
