@@ -74,12 +74,15 @@ reverts. Curation goes in:
 Curator-owned overlays for `causal_graphs` (and required `curation_history`
 events) are maintained in `curation/causal_graphs/*.yaml` with
 `GENE_OR_PROTEIN` nodes validated offline against `curation/uniprot_proteins.tsv`
-by `validate_causal_graph_structure()`, `load_uniprot_proteins()`, and
-`validate_causal_graph_proteins()` in `src/taxonmech/seed.py` and by
-`causal_graph_provenance_problems()` in `scripts/check_provenance.py`
-(which also enforces `<NCBITaxon_ID>.yaml` filename-stem alignment,
-`curation/seed_scope.tsv` membership, non-empty `curation_history`, and zero
-unreferenced `curation/uniprot_proteins.tsv` rows; #199, #208, #214). Separate
+by `validate_causal_graph_structure()`, `validate_causal_graph_events()`,
+`load_uniprot_proteins()`, and `validate_causal_graph_proteins()` in
+`src/taxonmech/seed.py` and by `causal_graph_provenance_problems()` in
+`scripts/check_provenance.py` (which also enforces closed-key object schemas,
+per-graph `UniProtKB:` uniqueness, host `TAXON` node anchoring, non-empty edge
+evidence `notes`/`snippet`, full 4-part `EC:` xref completeness,
+`<NCBITaxon_ID>.yaml` filename-stem alignment, `curation/seed_scope.tsv`
+membership, non-empty chronological `curation_history`, and zero unreferenced
+`curation/uniprot_proteins.tsv` rows; #199, #208, #214, #216). Separate
 curator-owned overlays for `definition`, record-level `evidence` and
 `mapping_status: REVIEWED` remain tracked in the issues; until those exist, a
 change to any other record field is a seeder or scope change with a test.
