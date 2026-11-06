@@ -1,7 +1,7 @@
 # Curated Causal-Graph Overlays (`curation/causal_graphs/`)
 
 This directory holds maintained YAML overlay files (`*.yaml`) that attach
-evidence-backed `causal_graphs` (and optional curation `history` events) to
+evidence-backed `causal_graphs` and required curation `curation_history` events to
 in-scope `TaxonRecord` entries during `just seed-apply` (`src/taxonmech/seed.py`)
 and `scripts/verify_corpus.py` (#78, `taxonmech-infra-0001`).
 
@@ -9,7 +9,7 @@ and `scripts/verify_corpus.py` (#78, `taxonmech-infra-0001`).
 
 Each `*.yaml` file in `curation/causal_graphs/` defines overlays for a single
 NCBI taxon record using the `TaxonRecord` slot names (`identifier`,
-`causal_graphs`, and optional `curation_history`):
+`causal_graphs`, and required non-empty `curation_history`):
 
 ```yaml
 identifier: NCBITaxon:562
@@ -49,6 +49,11 @@ causal_graphs:
             snippet: >-
               Classical genetic and biochemical characterization of the
               Escherichia coli beta-galactosidase (lacZ) system.
+curation_history:
+  - curator: curator
+    date: "2026-10-22T08:00:00Z"
+    action: CURATED
+    notes: Curated E. coli K-12 lacZYA lactose catabolism causal graph (#78).
 ```
 
 ## Pinned UniProtKB Protein Catalog (`curation/uniprot_proteins.tsv`) and `strain_id` Binding
