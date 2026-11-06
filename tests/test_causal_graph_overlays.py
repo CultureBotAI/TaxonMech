@@ -1791,4 +1791,31 @@ def test_cycle6_stage6_causal_graph_and_uniprot_provenance_invariants(tmp_path: 
     assert any("missing or empty 'curation_history'" in f for f in failures)
 
 
+def test_curation_guide_and_overlay_readme_document_required_curation_history_and_provenance():
+    """curation/causal_graphs/README.md must describe curation_history as required and include
+    it in the Overlay File Contract YAML example, and docs/CURATION.md must document
+    scripts/check_provenance.py causal_graph_provenance_problems() (#214, #208, #78)."""
+    overlay_readme = (REPO_ROOT / "curation" / "causal_graphs" / "README.md").read_text(
+        encoding="utf-8"
+    )
+    assert "optional curation `history`" not in overlay_readme
+    assert "optional `curation_history`" not in overlay_readme
+    assert "required non-empty `curation_history`" in overlay_readme
+
+    match = re.search(r"```yaml\n(.*?)\n```", overlay_readme, flags=re.DOTALL)
+    assert match is not None, "curation/causal_graphs/README.md missing yaml code block"
+    example_doc = yaml.safe_load(match.group(1))
+    assert isinstance(example_doc, dict)
+    assert example_doc.get("identifier") == "NCBITaxon:562"
+    assert isinstance(example_doc.get("causal_graphs"), list) and example_doc["causal_graphs"]
+    assert isinstance(example_doc.get("curation_history"), list) and example_doc["curation_history"]
+
+    curation_doc = (REPO_ROOT / "docs" / "CURATION.md").read_text(encoding="utf-8")
+    for expected_token in (
+        "scripts/check_provenance.py",
+        "causal_graph_provenance_problems()",
+        "required `curation_history`",
+        "curation/seed_scope.tsv",
+    ):
+        assert expected_token in curation_doc, f"docs/CURATION.md missing {expected_token!r}"
 
