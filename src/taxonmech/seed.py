@@ -120,6 +120,36 @@ PROTEIN_ONLY_NODE_SLOTS = (
     "sequence_version",
     "entry_status",
 )
+CAUSAL_GRAPH_KEYS = frozenset({"graph_id", "title", "description", "nodes", "edges"})
+CAUSAL_NODE_KEYS = frozenset({
+    "node_id",
+    "label",
+    "node_type",
+    "grounding",
+    "xrefs",
+    "description",
+    *PROTEIN_ONLY_NODE_SLOTS,
+})
+CAUSAL_EDGE_KEYS = frozenset({
+    "edge_id",
+    "subject",
+    "predicate",
+    "predicate_id",
+    "object",
+    "description",
+    "evidence",
+})
+EVIDENCE_ITEM_KEYS = frozenset({"reference", "snippet", "notes"})
+CURATION_EVENT_KEYS = frozenset({
+    "timestamp",
+    "curator",
+    "action",
+    "changes",
+    "llm_assisted",
+})
+ISO_UTC_TIMESTAMP_PATTERN = re.compile(
+    r"^20[0-9]{2}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+)
 
 SEED_CURATOR = "seed_from_sources"
 
@@ -413,6 +443,9 @@ def validate_causal_graph_structure(
                 raise SystemExit(f"{tid}: duplicate graph_id {gid!r}")
             seen_graph_ids.add(gid)
             g_ctx = f"{tid} graph {gid!r}"
+            unknown_g_keys = sorted(set(graph) - CAUSAL_GRAPH_KEYS)
+            if unknown_g_keys:
+                raise SystemExit(f"{g_ctx}: unexpected CausalGraph keys: {unknown_g_keys}")
             nodes = graph.get("nodes")
             seen_node_ids: set[str] = set()
             if nodes is not None:
@@ -430,6 +463,9 @@ def validate_causal_graph_structure(
                         raise SystemExit(f"{g_ctx}: duplicate node_id {nid!r}")
                     seen_node_ids.add(nid)
                     n_ctx = f"{g_ctx} node {nid!r}"
+                    unknown_n_keys = sorted(set(node) - CAUSAL_NODE_KEYS)
+                    if unknown_n_keys:
+                        raise SystemExit(f"{n_ctx}: unexpected CausalNode keys: {unknown_n_keys}")
                     lbl = (node.get("label") or "").strip() if isinstance(node.get("label"), str) else ""
                     raw_ntype = node.get("node_type")
                     ntype = (raw_ntype or "").strip() if isinstance(raw_ntype, str) else ""
@@ -486,6 +522,9 @@ def validate_causal_graph_structure(
                         raise SystemExit(f"{g_ctx}: duplicate edge_id {eid!r}")
                     seen_edge_ids.add(eid)
                     e_ctx = f"{g_ctx} edge {eid!r}"
+                    unknown_e_keys = sorted(set(edge) - CAUSAL_EDGE_KEYS)
+                    if unknown_e_keys:
+                        raise SystemExit(f"{e_ctx}: unexpected CausalEdge keys: {unknown_e_keys}")
                     subj = (edge.get("subject") or "").strip() if isinstance(edge.get("subject"), str) else ""
                     raw_pred = edge.get("predicate")
                     pred = (raw_pred or "").strip() if isinstance(raw_pred, str) else ""
@@ -520,9 +559,14 @@ def validate_causal_graph_structure(
                         raise SystemExit(f"{e_ctx}: requires non-empty 'evidence' list")
                     seen_ev_refs: set[str] = set()
                     for ev in ev_list:
+                        if not isinstance(ev, dict):
+                            raise SystemExit(f"{e_ctx}: each evidence item must be a mapping")
+                        unknown_ev_keys = sorted(set(ev) - EVIDENCE_ITEM_KEYS)
+                        if unknown_ev_keys:
+                            raise SystemExit(f"{e_ctx}: unexpected EvidenceItem keys: {unknown_ev_keys}")
                         ref = (
                             (ev.get("reference") or "").strip()
-                            if isinstance(ev, dict) and isinstance(ev.get("reference"), str)
+                            if isinstance(ev.get("reference"), str)
                             else ""
                         )
                         if not ref:
@@ -567,6 +611,7 @@ def validate_causal_graph_proteins(
                 raise SystemExit(f"{tid}: record taxon {tid} must be species-or-below")
         for graph in graphs:
             gid = graph.get("graph_id", "<unnamed>")
+            seen_protein_groundings: set[str] = set()
             for node in graph.get("nodes") or []:
                 if not isinstance(node, dict):
                     continue
@@ -597,6 +642,11 @@ def validate_causal_graph_proteins(
                     raise SystemExit(f"{ctx}: GENE_OR_PROTEIN grounding must start with 'UniProtKB:'")
                 if not UNIPROT_ID_PATTERN.match(grounding):
                     raise SystemExit(f"{ctx}: GENE_OR_PROTEIN invalid 'grounding' {raw_grounding!r}")
+                if grounding in seen_protein_groundings:
+                    raise SystemExit(
+                        f"{ctx}: duplicate GENE_OR_PROTEIN grounding {grounding!r} in graph {gid!r}"
+                    )
+                seen_protein_groundings.add(grounding)
                 org_tid = (
                     (node.get("organism_taxon_id") or "").strip()
                     if isinstance(node.get("organism_taxon_id"), str)
@@ -724,6 +774,37 @@ def validate_causal_graph_proteins(
                             )
 
 
+def validate_causal_graph_events(
+    events_by_taxon: dict[str, list[dict[str, Any]]],
+) -> None:
+    """Validate CurationEvent mappings in causal-graph overlay curation_history."""
+    for tid, events in sorted(events_by_taxon.items()):
+        prev_ts = ""
+        for idx, event in enumerate(events):
+            ctx = f"{tid} curation_history[{idx}]"
+            if not isinstance(event, dict):
+                raise SystemExit(f"{ctx}: event must be a mapping")
+            unknown_keys = sorted(set(event) - CURATION_EVENT_KEYS)
+            if unknown_keys:
+                raise SystemExit(f"{ctx}: unexpected CurationEvent keys: {unknown_keys}")
+            raw_ts = event.get("timestamp")
+            ts = (raw_ts or "").strip() if isinstance(raw_ts, str) else ""
+            if not ts or not ISO_UTC_TIMESTAMP_PATTERN.match(ts):
+                raise SystemExit(f"{ctx}: invalid ISO-8601 UTC timestamp {raw_ts!r}")
+            if ts < prev_ts:
+                raise SystemExit(
+                    f"{ctx}: timestamp {ts!r} precedes previous event {prev_ts!r}"
+                )
+            prev_ts = ts
+            for req_field in ("curator", "action", "changes"):
+                raw_val = event.get(req_field)
+                val = (raw_val or "").strip() if isinstance(raw_val, str) else ""
+                if not val:
+                    raise SystemExit(f"{ctx}: requires non-empty {req_field!r}")
+            if "llm_assisted" in event and not isinstance(event["llm_assisted"], bool):
+                raise SystemExit(f"{ctx}: 'llm_assisted' must be a boolean")
+
+
 def load_causal_graphs(
     path: Path = CAUSAL_GRAPHS_DIR,
     *,
@@ -789,6 +870,7 @@ def load_causal_graphs(
             if not isinstance(edges, list) or not edges:
                 raise SystemExit(f"{tid} graph {gid!r}: 'edges' must be a non-empty list")
     validate_causal_graph_structure(graphs_by_taxon)
+    validate_causal_graph_events(events_by_taxon)
     resolved_uniprot_path = uniprot_path
     if resolved_uniprot_path is None and UNIPROT_PROTEINS_PATH.exists():
         resolved_uniprot_path = UNIPROT_PROTEINS_PATH

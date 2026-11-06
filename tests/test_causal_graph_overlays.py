@@ -14,11 +14,17 @@ from linkml_runtime.utils.schemaview import SchemaView
 
 from taxonmech.extract import TRAIT_EDGE_FIELDS, extract_taxon_trait_edges
 from taxonmech.seed import (
+    CAUSAL_EDGE_KEYS,
+    CAUSAL_GRAPH_KEYS,
+    CAUSAL_NODE_KEYS,
     CAUSAL_NODE_TYPES,
+    CURATION_EVENT_KEYS,
     CURIE_PATTERN,
     EC_NUMBER_PATTERN,
     EDGE_ID_PATTERN,
+    EVIDENCE_ITEM_KEYS,
     EVIDENCE_REFERENCE_PATTERN,
+    ISO_UTC_TIMESTAMP_PATTERN,
     NCBITAXON_ID_PATTERN,
     PROTEIN_ONLY_NODE_SLOTS,
     PROTEOME_ID_PATTERN,
@@ -31,6 +37,7 @@ from taxonmech.seed import (
     build_document,
     load_causal_graphs,
     load_uniprot_proteins,
+    validate_causal_graph_events,
     validate_causal_graph_proteins,
     validate_causal_graph_structure,
 )
@@ -113,9 +120,9 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
             "curation_history": [
                 {
                     "timestamp": "2026-10-22T06:00:00Z",
+                    "curator": "stage6-canary",
                     "action": "UPDATED",
-                    "agent": "stage6-canary",
-                    "summary": "Added verified LacZ causal graph overlay for NCBITaxon:562.",
+                    "changes": "Added verified LacZ causal graph overlay for NCBITaxon:562.",
                 }
             ],
         },
@@ -1818,4 +1825,281 @@ def test_curation_guide_and_overlay_readme_document_required_curation_history_an
         "curation/seed_scope.tsv",
     ):
         assert expected_token in curation_doc, f"docs/CURATION.md missing {expected_token!r}"
+
+
+def test_cycle7_stage6_closed_keys_curation_events_and_provenance_invariants(tmp_path: Path):
+    """Verify Cycle 7 Stage 6 (#216) closed-key schemas, CurationEvent timestamp/chronology,
+    per-graph GENE_OR_PROTEIN grounding uniqueness, and provenance checks."""
+    # 0. Key sets match LinkML schema slots and README YAML example passes structural + event gates
+    sv = SchemaView(str(SCHEMA_PATH))
+    for cls_name, key_set in (
+        ("CausalGraph", CAUSAL_GRAPH_KEYS),
+        ("CausalNode", CAUSAL_NODE_KEYS),
+        ("CausalEdge", CAUSAL_EDGE_KEYS),
+        ("EvidenceItem", EVIDENCE_ITEM_KEYS),
+        ("CurationEvent", CURATION_EVENT_KEYS),
+    ):
+        schema_slots = frozenset(slot.name for slot in sv.class_induced_slots(cls_name))
+        assert schema_slots == key_set
+    assert ISO_UTC_TIMESTAMP_PATTERN.match("2026-11-05T18:00:00Z")
+    assert not ISO_UTC_TIMESTAMP_PATTERN.match("2026-11-05")
+
+    overlay_readme = (REPO_ROOT / "curation" / "causal_graphs" / "README.md").read_text(
+        encoding="utf-8"
+    )
+    match = re.search(r"```yaml\n(.*?)\n```", overlay_readme, flags=re.DOTALL)
+    assert match is not None
+    readme_doc = yaml.safe_load(match.group(1))
+    validate_causal_graph_structure({readme_doc["identifier"]: readme_doc["causal_graphs"]})
+    validate_causal_graph_events({readme_doc["identifier"]: readme_doc["curation_history"]})
+
+    # 1. Unknown keys rejected on CausalGraph, CausalNode, CausalEdge, EvidenceItem
+    base_graph = {
+        "graph_id": "g1",
+        "title": "Test Graph",
+        "nodes": [
+            {
+                "node_id": "t1",
+                "label": "Escherichia coli",
+                "node_type": "TAXON",
+                "grounding": "NCBITaxon:562",
+            },
+            {
+                "node_id": "p1",
+                "label": "lactose catabolic process",
+                "node_type": "BIOLOGICAL_PROCESS",
+                "grounding": "GO:0005988",
+            },
+        ],
+        "edges": [
+            {
+                "edge_id": "e1",
+                "subject": "t1",
+                "predicate": "capable of",
+                "predicate_id": "RO:0002215",
+                "object": "p1",
+                "evidence": [
+                    {
+                        "reference": "PMID:9278503",
+                        "snippet": "Complete genome sequence of E. coli K-12.",
+                    }
+                ],
+            }
+        ],
+    }
+
+    bad_graph_key = {"NCBITaxon:562": [{**base_graph, "extra_graph_field": "x"}]}
+    with pytest.raises(SystemExit, match="unexpected CausalGraph keys"):
+        validate_causal_graph_structure(bad_graph_key)
+
+    bad_node_key = {
+        "NCBITaxon:562": [
+            {
+                **base_graph,
+                "nodes": [
+                    {**base_graph["nodes"][0], "extra_node_field": "x"},
+                    base_graph["nodes"][1],
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="unexpected CausalNode keys"):
+        validate_causal_graph_structure(bad_node_key)
+
+    bad_edge_key = {
+        "NCBITaxon:562": [
+            {
+                **base_graph,
+                "edges": [{**base_graph["edges"][0], "extra_edge_field": "x"}],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="unexpected CausalEdge keys"):
+        validate_causal_graph_structure(bad_edge_key)
+
+    bad_ev_key = {
+        "NCBITaxon:562": [
+            {
+                **base_graph,
+                "edges": [
+                    {
+                        **base_graph["edges"][0],
+                        "evidence": [{"reference": "PMID:9278503", "extra_ev": "x"}],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="unexpected EvidenceItem keys"):
+        validate_causal_graph_structure(bad_ev_key)
+
+    # 2. CurationEvent validation: unknown keys, bad timestamp, out-of-order timestamps, non-bool llm_assisted
+    with pytest.raises(SystemExit, match="unexpected CurationEvent keys"):
+        validate_causal_graph_events(
+            {
+                "NCBITaxon:562": [
+                    {
+                        "timestamp": "2026-10-22T06:00:00Z",
+                        "curator": "curator",
+                        "action": "UPDATED",
+                        "changes": "change",
+                        "agent": "invalid",
+                    }
+                ]
+            }
+        )
+
+    with pytest.raises(SystemExit, match="invalid ISO-8601 UTC timestamp"):
+        validate_causal_graph_events(
+            {
+                "NCBITaxon:562": [
+                    {
+                        "timestamp": "2026-10-22",
+                        "curator": "curator",
+                        "action": "UPDATED",
+                        "changes": "change",
+                    }
+                ]
+            }
+        )
+
+    with pytest.raises(SystemExit, match="precedes previous event"):
+        validate_causal_graph_events(
+            {
+                "NCBITaxon:562": [
+                    {
+                        "timestamp": "2026-10-23T06:00:00Z",
+                        "curator": "curator",
+                        "action": "UPDATED",
+                        "changes": "later change",
+                    },
+                    {
+                        "timestamp": "2026-10-22T06:00:00Z",
+                        "curator": "curator",
+                        "action": "UPDATED",
+                        "changes": "earlier change",
+                    },
+                ]
+            }
+        )
+
+    with pytest.raises(SystemExit, match="requires non-empty 'curator'"):
+        validate_causal_graph_events(
+            {
+                "NCBITaxon:562": [
+                    {
+                        "timestamp": "2026-10-22T06:00:00Z",
+                        "curator": "   ",
+                        "action": "UPDATED",
+                        "changes": "change",
+                    }
+                ]
+            }
+        )
+
+    with pytest.raises(SystemExit, match="'llm_assisted' must be a boolean"):
+        validate_causal_graph_events(
+            {
+                "NCBITaxon:562": [
+                    {
+                        "timestamp": "2026-10-22T06:00:00Z",
+                        "curator": "curator",
+                        "action": "UPDATED",
+                        "changes": "change",
+                        "llm_assisted": "yes",
+                    }
+                ]
+            }
+        )
+
+    # 3. Duplicate GENE_OR_PROTEIN grounding within the same CausalGraph rejected
+    proteins = load_uniprot_proteins(UNIPROT_PROTEINS_PATH)
+    taxa = {
+        "NCBITaxon:2": {"parent_id": "", "rank": "DOMAIN"},
+        "NCBITaxon:561": {"parent_id": "NCBITaxon:2", "rank": "GENUS"},
+        "NCBITaxon:562": {"parent_id": "NCBITaxon:561", "rank": "SPECIES"},
+        "NCBITaxon:83333": {"parent_id": "NCBITaxon:562", "rank": "STRAIN"},
+    }
+    lacz_node_a = {
+        "node_id": "lacZ_a",
+        "label": "Beta-galactosidase LacZ",
+        "node_type": "GENE_OR_PROTEIN",
+        "grounding": "UniProtKB:P00722",
+        "xrefs": ["EC:3.2.1.23"],
+        "organism_taxon_id": "NCBITaxon:83333",
+        "proteome_id": "UP:UP000000625",
+        "gene_symbol": "lacZ",
+        "locus_tag": "b0344",
+        "sequence_length": 1024,
+        "sequence_crc64": "9D295EF4CEF90B08",
+        "sequence_version": 2,
+        "entry_status": "SWISS_PROT",
+    }
+    lacz_node_b = {**lacz_node_a, "node_id": "lacZ_b"}
+    dup_protein_graph = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "nodes": [lacz_node_a, lacz_node_b],
+            }
+        ]
+    }
+    with pytest.raises(
+        SystemExit,
+        match="duplicate GENE_OR_PROTEIN grounding 'UniProtKB:P00722'",
+    ):
+        validate_causal_graph_proteins(
+            dup_protein_graph,
+            uniprot_proteins=proteins,
+            taxa=taxa,
+        )
+
+    # 4. causal_graph_provenance_problems detects missing host TAXON node,
+    # missing full 4-part EC xref, and missing evidence notes/snippet
+    script_path = REPO_ROOT / "scripts" / "check_provenance.py"
+    spec = importlib.util.spec_from_file_location("check_provenance", script_path)
+    mod = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(mod)
+
+    synth_root = tmp_path / "synth_repo_c7"
+    curation_dir = synth_root / "curation"
+    overlays_dir = curation_dir / "causal_graphs"
+    overlays_dir.mkdir(parents=True)
+    (curation_dir / "uniprot_proteins.tsv").write_text(
+        UNIPROT_PROTEINS_PATH.read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+    (curation_dir / "seed_scope.tsv").write_text(
+        "identifier\tadded\treason\nNCBITaxon:562\t2026-01-01\ttest\n",
+        encoding="utf-8",
+    )
+    ecoli_data = yaml.safe_load(
+        (REPO_ROOT / "curation" / "causal_graphs" / "NCBITaxon_562.yaml").read_text(
+            encoding="utf-8"
+        )
+    )
+    graph0 = ecoli_data["causal_graphs"][0]
+    # Change host TAXON node to TRAIT, strip EC:3.2.1.23 from lacZ, and strip snippet/notes
+    for n in graph0["nodes"]:
+        if n.get("node_type") == "TAXON":
+            n["node_type"] = "TRAIT"
+            n["grounding"] = "OMP:0000001"
+        elif n.get("node_id") == "lacZ":
+            n["xrefs"] = []
+    graph0["edges"][0]["evidence"][0].pop("snippet", None)
+    graph0["edges"][0]["evidence"][0].pop("notes", None)
+
+    (overlays_dir / "NCBITaxon_562.yaml").write_text(
+        yaml.safe_dump(ecoli_data, sort_keys=False),
+        encoding="utf-8",
+    )
+    failures = mod.causal_graph_provenance_problems(synth_root)
+    assert any("missing TAXON node grounded to NCBITaxon:562" in f for f in failures)
+    assert any(
+        "full 4-part EC xrefs [] != reference ['EC:3.2.1.23'] for UniProtKB:P00722" in f
+        for f in failures
+    )
+    assert any("missing 'notes' or 'snippet'" in f for f in failures)
+
 

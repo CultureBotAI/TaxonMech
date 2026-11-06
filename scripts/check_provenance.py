@@ -151,6 +151,53 @@ def causal_graph_provenance_problems(repo_root: Path = REPO_ROOT) -> list[str]:
                 failures.append(
                     f"causal-graph overlay {tid}: missing or empty 'curation_history'"
                 )
+            for graph in graphs_by_taxon[tid]:
+                gid = (graph.get("graph_id") or "").strip() if isinstance(graph.get("graph_id"), str) else ""
+                has_host_taxon_node = any(
+                    isinstance(n, dict)
+                    and n.get("node_type") == "TAXON"
+                    and (n.get("grounding") or "").strip() == tid
+                    for n in (graph.get("nodes") or [])
+                )
+                if not has_host_taxon_node:
+                    failures.append(
+                        f"causal-graph overlay {tid} graph {gid!r}: missing TAXON node grounded to {tid}"
+                    )
+                for node in graph.get("nodes") or []:
+                    if not isinstance(node, dict) or node.get("node_type") != "GENE_OR_PROTEIN":
+                        continue
+                    nid = (node.get("node_id") or "").strip()
+                    uid = (node.get("grounding") or "").strip()
+                    ref = uniprot_proteins.get(uid)
+                    if ref is not None:
+                        full_ref_ecs = [
+                            ec for ec in split(ref.get("ec_numbers", "")) if "-" not in ec
+                        ]
+                        node_ecs = [
+                            x
+                            for x in (node.get("xrefs") or [])
+                            if isinstance(x, str) and x.startswith("EC:") and "-" not in x
+                        ]
+                        if node_ecs != full_ref_ecs:
+                            failures.append(
+                                f"causal-graph overlay {tid} graph {gid!r} node {nid!r}: "
+                                f"full 4-part EC xrefs {node_ecs} != reference {full_ref_ecs} for {uid}"
+                            )
+                for edge in graph.get("edges") or []:
+                    if not isinstance(edge, dict):
+                        continue
+                    eid = (edge.get("edge_id") or "").strip()
+                    for ev in edge.get("evidence") or []:
+                        if isinstance(ev, dict):
+                            has_text = bool(
+                                (ev.get("notes") or "").strip()
+                                or (ev.get("snippet") or "").strip()
+                            )
+                            if not has_text:
+                                failures.append(
+                                    f"causal-graph overlay {tid} graph {gid!r} edge {eid!r}: "
+                                    f"evidence {ev.get('reference')!r} missing 'notes' or 'snippet'"
+                                )
         if scope_path.exists():
             scope = load_scope(scope_path)
             for tid in sorted(graphs_by_taxon):
