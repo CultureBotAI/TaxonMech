@@ -11,7 +11,7 @@
 
 ## Summary
 
-Reviewed all 626,048 in-scope TaxonRecord files across Bacteria (605,695), Archaea (14,013), Eukaryota (6,331), and other (9) against the Stage 2 causal-graph curation contract (.claude/skills/curate-causal-graphs/SKILL.md). Verified that all native prerequisite gates pass, including offline UniProtKB reference proteome and NCBI Taxonomy lineage validation (curation/uniprot_proteins.tsv and validate_causal_graph_proteins() in src/taxonmech/seed.py). Enriched 11 maintained curation/causal_graphs/*.yaml overlays across Escherichia coli (NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145; adding edge e29 linking ptsH UniProtKB:P0AA04 via causally upstream of or within RO:0002418 to lactose_transport GO:0015767, PMID:2960675, PMID:17158705), Bacillus subtilis (NCBITaxon:1423, NCBITaxon:224308; adding edge e36 linking kinC UniProtKB:P39764 via positively regulates RO:0002213 to spo0A UniProtKB:P06534, PMID:8002614, PMID:8002615, PMID:11069677), Pseudomonas aeruginosa (NCBITaxon:287, NCBITaxon:208964; adding edge e19 linking rhlR UniProtKB:P54292 via positively regulates RO:0002213 to phzA1 UniProtKB:Q9HWH1, PMID:27851827, PMID:35019777, PMID:38064526), Methanocaldococcus jannaschii (NCBITaxon:2190, NCBITaxon:243232; adding edge e23 linking mtrH UniProtKB:Q58259 via causally upstream of or within RO:0002418 to mcr_activity GO:0050524, PMID:10338124, PMID:9367957, PMID:38530900), and Cryptococcus neoformans (NCBITaxon:5207, NCBITaxon:235443; adding edge e19 linking mbs1 UniProtKB:J9VG42 via positively regulates RO:0002213 to laccase_activity GO:0052716, PMID:22080454, PMID:25849373, PMID:31575776), expanding the 15 maintained overlays from 290 to 301 evidence-backed edges across 7 cross-domain species exemplars and 8 reference-proteome strains (86 GENE_OR_PROTEIN nodes covering 39 live-verified UniProtKB accessions). Corpus-wide automated expansion across the remaining 38,342 trait/medium-attested records remains source-limited by pre-aggregated 2-column count tables in data/raw/{madin_taxa,bactotraits_taxa}.tsv (tracked under #78 / taxonmech-infra-0002).
+Reviewed all 626,048 in-scope TaxonRecord files across Bacteria (605,695), Archaea (14,013), Eukaryota (6,331), and other (9) against the Stage 2 causal-graph curation contract (.claude/skills/curate-causal-graphs/SKILL.md). Verified that all native prerequisite gates pass, including offline UniProtKB reference proteome and NCBI Taxonomy lineage validation (curation/uniprot_proteins.tsv and validate_causal_graph_proteins() in src/taxonmech/seed.py). Enriched 11 maintained curation/causal_graphs/*.yaml overlays across Escherichia coli (NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145; adding edge e29 linking ptsH UniProtKB:P0AA04 via causally upstream of or within RO:0002418 to lactose_transport GO:0015767, PMID:2960675, PMID:17158705), Bacillus subtilis (NCBITaxon:1423, NCBITaxon:224308; adding edge e36 linking kinC UniProtKB:P39764 via positively regulates RO:0002213 to spo0A UniProtKB:P06534, PMID:8002614, PMID:8002615, PMID:11069677), Pseudomonas aeruginosa (NCBITaxon:287, NCBITaxon:208964; adding edge e19 linking rhlR UniProtKB:P54292 via positively regulates RO:0002213 to phzA1 UniProtKB:Q9HWH1, PMID:27851827, PMID:35019777, PMID:38064526), Methanocaldococcus jannaschii (NCBITaxon:2190, NCBITaxon:243232; adding edge e23 linking mtrH UniProtKB:Q58264 via causally upstream of or within RO:0002418 to mcr_activity GO:0050524, PMID:10338124, PMID:9367957, PMID:38530900), and Cryptococcus neoformans (NCBITaxon:5207, NCBITaxon:235443; adding edge e19 linking mbs1 UniProtKB:J9VG42 via positively regulates RO:0002213 to laccase_activity GO:0052716, PMID:22080454, PMID:25849373, PMID:31575776), expanding the 15 maintained overlays from 290 to 301 evidence-backed edges across 7 cross-domain species exemplars and 8 reference-proteome strains (86 GENE_OR_PROTEIN nodes covering 39 live-verified UniProtKB accessions). Corpus-wide automated expansion across the remaining 38,342 trait/medium-attested records remains source-limited by pre-aggregated 2-column count tables in data/raw/{madin_taxa,bactotraits_taxa}.tsv (tracked under #78 / taxonmech-infra-0002).
 
 ## Scope And Provenance
 
@@ -140,7 +140,7 @@ summary: 'Reviewed all 626,048 in-scope TaxonRecord files across Bacteria (605,6
   PMID:11069677), Pseudomonas aeruginosa (NCBITaxon:287, NCBITaxon:208964; adding
   edge e19 linking rhlR UniProtKB:P54292 via positively regulates RO:0002213 to phzA1
   UniProtKB:Q9HWH1, PMID:27851827, PMID:35019777, PMID:38064526), Methanocaldococcus
-  jannaschii (NCBITaxon:2190, NCBITaxon:243232; adding edge e23 linking mtrH UniProtKB:Q58259
+  jannaschii (NCBITaxon:2190, NCBITaxon:243232; adding edge e23 linking mtrH UniProtKB:Q58264
   via causally upstream of or within RO:0002418 to mcr_activity GO:0050524, PMID:10338124,
   PMID:9367957, PMID:38530900), and Cryptococcus neoformans (NCBITaxon:5207, NCBITaxon:235443;
   adding edge e19 linking mbs1 UniProtKB:J9VG42 via positively regulates RO:0002213
@@ -192,7 +192,7 @@ source:
     sha256: 8505326e9fba88a9cd62f45aeadeb8b1e4c58a46fe74c87b965b786fb7e25324
     role: context
   - path: curation/causal_graphs/NCBITaxon_235443.yaml
-    sha256: cd03742107e0cbb4f30b29f2d27fa74fe88ea982f1ca25cf332eef697a6171c6
+    sha256: e8d998680af2d5f3197683598a1cb67f9886ac8a787062eebd7dd0133c5a510e
     role: context
   - path: curation/causal_graphs/NCBITaxon_243232.yaml
     sha256: 4cff2d2e2366e98d3b5998b934e10ac4abe02339b814cde69e10922aff15fcda
@@ -213,7 +213,7 @@ source:
     sha256: 508db56887066d691676c07fbabf081e01a2adab872a9345b52a525163cf1222
     role: context
   - path: curation/causal_graphs/NCBITaxon_5207.yaml
-    sha256: a93bbe85957dea4f62ab4637872f3524af49c39abb2611337f7a3a7e1b8c3f62
+    sha256: 2e6a01b0aeed11465a345df69607848dbd0e812128e401b938d05a43903a6784
     role: context
   - path: curation/causal_graphs/NCBITaxon_562.yaml
     sha256: 62f361e651a1c8d3b6a352a0ce77f5f42ae78d0dae2c9c113035152b5f7561c7
@@ -288,10 +288,10 @@ source:
     sha256: c0a7978eae1b0f1abeba6c77112ecbb1831baecafe2ef3cd95f1c7e09c35a955
     role: target
   - path: data/taxa/eukaryota/cryptococcus_neoformans.yaml
-    sha256: 0e2211d2df4b660110150c0611bc82eb0553fbdf65f02102b43fcfd579fb530e
+    sha256: 85f2d06f6deed065f240ed316feb85b7ab90395c5be652a5acbdb54a8088a066
     role: target
   - path: data/taxa/eukaryota/cryptococcus_neoformans_h99.yaml
-    sha256: 16d3ccd392a1765093e382f3f082b00c91c289905424875539301387bac2a7ff
+    sha256: 00bc27c6b00fde56c025d1c46acafba89a997fe56a6839ff641adab22c86759e
     role: target
   - path: scripts/render_pages.py
     sha256: de2984d4c5479778e83f9d1a6fb9ba67f8fbd27d42537fbe2b5151f60f1c0342
