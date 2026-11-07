@@ -1043,6 +1043,15 @@ curation_history:
     linking MtrH (UniProtKB:Q58264) to coenzyme-B sulfoethylthiotransferase activity
     (GO:0050524).
   llm_assisted: true
+- timestamp: '2026-11-07T08:30:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: Added live-verified Swiss-Prot entry UniProtKB:Q58194 (HMD_METJA, hmd /
+    MJ0784, EC:1.12.98.2, 358 aa, CRC64 9D8E789759BCF43A, v1) in reference proteome
+    UP:UP000000805 with literature-backed expression and C1-reduction pathway edges
+    linking Hmd to Mer and hydrogenotrophic methanogenesis (PMID:8688087, PMID:16540118,
+    PMID:16887798, PMID:28644554).
+  llm_assisted: true
 causal_graphs:
 - graph_id: hydrogenotrophic_methanogenesis
   title: McrABG-catalyzed hydrogenotrophic methanogenesis
@@ -1070,6 +1079,21 @@ causal_graphs:
     sequence_length: 435
     sequence_crc64: C1652D23FFC20970
     sequence_version: 2
+    entry_status: SWISS_PROT
+  - node_id: hmd
+    label: 5,10-methenyltetrahydromethanopterin hydrogenase (hmd)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:Q58194
+    xrefs:
+    - EC:1.12.98.2
+    organism_taxon_id: NCBITaxon:243232
+    strain_id: kgmicrobe.strain:bacdive_6981
+    proteome_id: UP:UP000000805
+    gene_symbol: hmd
+    locus_tag: MJ0784
+    sequence_length: 358
+    sequence_crc64: 9D8E789759BCF43A
+    sequence_version: 1
     entry_status: SWISS_PROT
   - node_id: mer
     label: 5,10-methylenetetrahydromethanopterin reductase (mer)
@@ -1455,3 +1479,58 @@ causal_graphs:
       notes: MtrH-driven methylation of MtrA in the membrane-bound MtrA-H complex
         synthesizes the methyl-coenzyme M substrate required for McrABG catalysis
         in Methanocaldococcus jannaschii DSM 2661.
+  - edge_id: e24
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: hmd
+    evidence:
+    - reference: PMID:8688087
+      notes: Complete genome sequence of Methanocaldococcus jannaschii DSM 2661 identifying
+        hmd (MJ0784) encoding the H2-forming N5,N10-methylenetetrahydromethanopterin
+        dehydrogenase (5,10-methenyltetrahydromethanopterin hydrogenase, EC:1.12.98.2).
+    - reference: PMID:16540118
+      notes: Heterologous expression and biochemical characterization of Methanocaldococcus
+        jannaschii DSM 2661 Hmd (MJ0784) apoenzyme reconstituted with the iron-guanylylpyridinol
+        (FeGP) cofactor.
+    - reference: PMID:16887798
+      notes: Crystal structure of the Methanocaldococcus jannaschii DSM 2661 5,10-methenyltetrahydromethanopterin
+        hydrogenase Hmd (MJ0784) homodimer.
+  - edge_id: e25
+    subject: hmd
+    predicate: causally upstream of or within
+    predicate_id: RO:0002418
+    object: mer
+    evidence:
+    - reference: PMID:16540118
+      notes: 5,10-methenyltetrahydromethanopterin hydrogenase Hmd (MJ0784, EC:1.12.98.2)
+        catalyzes the reversible H2-dependent reduction of N5,N10-methenyltetrahydromethanopterin
+        to N5,N10-methylenetetrahydromethanopterin in Methanocaldococcus jannaschii
+        DSM 2661, supplying the direct substrate reduced by Mer (MJ1534).
+    - reference: PMID:16887798
+      notes: Structural characterization of Methanocaldococcus jannaschii DSM 2661
+        Hmd establishing its catalytic cleft for H2-dependent reduction of N5,N10-methenyltetrahydromethanopterin
+        to N5,N10-methylenetetrahydromethanopterin.
+    - reference: PMID:28644554
+      notes: N5,N10-methylenetetrahydromethanopterin generated in the C1-reduction
+        pathway is reduced by Methanocaldococcus jannaschii DSM 2661 Mer (MJ1534,
+        EC:1.5.98.2) to N5-methyltetrahydromethanopterin.
+  - edge_id: e26
+    subject: hmd
+    predicate: causally upstream of or within
+    predicate_id: RO:0002418
+    object: methanogenesis
+    evidence:
+    - reference: PMID:8688087
+      notes: Genomic reconstruction of the Methanocaldococcus jannaschii DSM 2661
+        hydrogenotrophic methanogenesis pathway including hmd (MJ0784) in the central
+        C1-reduction steps from CO2 and H2 to methane.
+    - reference: PMID:16540118
+      notes: FeGP-cofactor-dependent 5,10-methenyltetrahydromethanopterin hydrogenase
+        Hmd (UniProtKB:Q58194, EC:1.12.98.2) catalyzes direct H2-driven reduction
+        of methenyl-H4MPT+ to methylene-H4MPT during hydrogenotrophic methanogenesis
+        in Methanocaldococcus jannaschii DSM 2661.
+    - reference: PMID:16887798
+      notes: Crystal structure of Methanocaldococcus jannaschii DSM 2661 Hmd (MJ0784)
+        defining the [Fe]-hydrogenase architecture that couples H2 cleavage to C1
+        reduction in methanogenesis.

@@ -113,6 +113,21 @@ causal_graphs:
     sequence_crc64: 70C0AEA8C1DE0D4B
     sequence_version: 1
     entry_status: SWISS_PROT
+  - node_id: rhlI
+    label: Acyl-homoserine-lactone synthase (rhlI)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:P54291
+    xrefs:
+    - EC:2.3.1.184
+    organism_taxon_id: NCBITaxon:208964
+    strain_id: kgmicrobe.strain:bacdive_12795
+    proteome_id: UP:UP000002438
+    gene_symbol: rhlI
+    locus_tag: PA3476
+    sequence_length: 201
+    sequence_crc64: 120F95F29D5A2698
+    sequence_version: 2
+    entry_status: SWISS_PROT
   - node_id: phenazine_biosynthesis
     label: phenazine biosynthetic process
     node_type: BIOLOGICAL_PROCESS
@@ -424,6 +439,72 @@ causal_graphs:
         Genome-wide ChIP-seq and RNA-seq profiling demonstrate direct RhlR
         occupancy and transcriptional activation at the phzA1 promoter in
         Pseudomonas aeruginosa.
+  - edge_id: e20
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: rhlI
+    evidence:
+    - reference: PMID:10984043
+      notes: >-
+        Complete genome sequence of Pseudomonas aeruginosa PAO1 identifying
+        rhlI (PA3476) adjacent to rhlR in the rhlAB-rhlRI quorum-sensing gene
+        cluster.
+    - reference: PMID:7604006
+      notes: >-
+        Identification and nucleotide sequence characterization of the
+        Pseudomonas aeruginosa rhlI gene encoding the LuxI-family autoinducer
+        synthase downstream of rhlR.
+    - reference: PMID:8522523
+      notes: >-
+        Genetic characterization of the Pseudomonas aeruginosa PAO1 rhlAB-rhlRI
+        locus establishing rhlI expression and function in exoproduct synthesis.
+    - reference: PMID:7494482
+      notes: >-
+        Identification of the Pseudomonas aeruginosa vsmI (rhlI) autoinducer
+        synthase locus required for N-butyryl-L-homoserine lactone (C4-HSL) and
+        pyocyanin production.
+  - edge_id: e21
+    subject: rhlI
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: rhlR
+    evidence:
+    - reference: PMID:7604006
+      notes: >-
+        Acyl-homoserine-lactone synthase RhlI (EC:2.3.1.184) synthesizes the
+        diffusible autoinducer N-butyryl-L-homoserine lactone (C4-HSL) required
+        to activate the cognate transcriptional regulator RhlR in Pseudomonas
+        aeruginosa.
+    - reference: PMID:8522523
+      notes: >-
+        RhlI-synthesized autoinducer activates RhlR-dependent transcriptional
+        activation of quorum-sensing target genes in Pseudomonas aeruginosa.
+    - reference: PMID:27851827
+      notes: >-
+        RhlI-directed C4-HSL synthesis and PqsE signaling converge on RhlR to
+        activate RhlR-dependent quorum-sensing gene expression in Pseudomonas
+        aeruginosa.
+  - edge_id: e22
+    subject: rhlI
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: phenazine_biosynthesis
+    evidence:
+    - reference: PMID:8522523
+      notes: >-
+        Disruption of rhlI (PA3476, UniProtKB:P54291) abolishes autoinducer
+        synthesis and impairs phenazine and pyocyanin production in Pseudomonas
+        aeruginosa, which is restored by exogenous C4-HSL.
+    - reference: PMID:7494482
+      notes: >-
+        RhlI (VsmI)-catalyzed synthesis of N-butyryl-L-homoserine lactone
+        positively regulates pyocyanin biosynthesis in Pseudomonas aeruginosa.
+    - reference: PMID:27851827
+      notes: >-
+        RhlI-synthesized C4-HSL activates RhlR to drive transcription of the
+        phenazine biosynthetic operons and pyocyanin production in Pseudomonas
+        aeruginosa.
 curation_history:
 - timestamp: '2026-10-22T14:00:00Z'
   curator: curate-causal-graphs
@@ -509,4 +590,15 @@ curation_history:
     Added direct quorum-sensing-regulator-to-operon-cistron positive regulatory
     edge (edge e19, rhlR RO:0002213 phzA1, PMID:27851827, PMID:35019777,
     PMID:38064526) linking RhlR (UniProtKB:P54292) to PhzA1 (UniProtKB:Q9HWH1).
+  llm_assisted: true
+- timestamp: '2026-11-07T08:30:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: >-
+    Added live-verified Swiss-Prot entry UniProtKB:P54291 (RHLI_PSEAE, rhlI /
+    PA3476, EC:2.3.1.184, 201 aa, CRC64 120F95F29D5A2698, v2) in reference
+    proteome UP:UP000002438 with literature-backed expression, C4-HSL-mediated
+    RhlR activation, and positive phenazine/pyocyanin biosynthesis regulatory
+    edges (PMID:10984043, PMID:7604006, PMID:8522523, PMID:7494482,
+    PMID:27851827).
   llm_assisted: true

@@ -132,6 +132,20 @@ causal_graphs:
     sequence_crc64: 95AA9E07F08D2DCB
     sequence_version: 1
     entry_status: SWISS_PROT
+  - node_id: rapB
+    label: Response regulator aspartate phosphatase B (rapB)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:P70962
+    xrefs:
+    - EC:3.1.3.-
+    organism_taxon_id: NCBITaxon:224308
+    proteome_id: UP:UP000001570
+    gene_symbol: rapB
+    locus_tag: BSU36690
+    sequence_length: 377
+    sequence_crc64: 617B29614B483971
+    sequence_version: 1
+    entry_status: SWISS_PROT
   - node_id: sensor_kinase_activity
     label: phosphorelay sensor kinase activity
     node_type: MOLECULAR_FUNCTION
@@ -677,6 +691,64 @@ causal_graphs:
         histidine kinase KinC supplies ATP-dependent phosphoryl input into the
         Spo0F/Spo0B/Spo0A phosphorelay to activate Spo0A in Bacillus subtilis
         168.
+  - edge_id: e37
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: rapB
+    evidence:
+    - reference: PMID:9384377
+      notes: >-
+        Complete genome sequence of Bacillus subtilis subsp. subtilis str. 168
+        identifying rapB (BSU36690) encoding response regulator aspartate
+        phosphatase B.
+    - reference: PMID:8001132
+      notes: >-
+        Identification and characterization of the Bacillus subtilis 168 rapB
+        (spo0P) locus encoding a second Spo0F~P-specific response regulator
+        aspartate phosphatase homologous to RapA.
+  - edge_id: e38
+    subject: rapB
+    predicate: negatively regulates
+    predicate_id: RO:0002212
+    object: spo0F
+    evidence:
+    - reference: PMID:8001132
+      notes: >-
+        Response regulator aspartate phosphatase RapB (EC:3.1.3.-) specifically
+        dephosphorylates the intermediate sporulation response regulator Spo0F~P
+        in Bacillus subtilis 168.
+    - reference: PMID:9843420
+      notes: >-
+        Alanine-scanning mutagenesis of Bacillus subtilis 168 Spo0F defines the
+        surface residues required for recognition and dephosphorylation by both
+        RapA and RapB phosphatases.
+    - reference: PMID:11923303
+      notes: >-
+        Biochemical characterization of purified Bacillus subtilis 168 RapB
+        demonstrating direct binding and aspartyl-phosphate dephosphorylation of
+        phosphorylated Spo0F~P.
+  - edge_id: e39
+    subject: rapB
+    predicate: negatively regulates
+    predicate_id: RO:0002212
+    object: endospore_formation
+    evidence:
+    - reference: PMID:8001132
+      notes: >-
+        RapB-mediated dephosphorylation of Spo0F~P drains phosphoryl flux from
+        the Spo0F/Spo0B/Spo0A phosphorelay and negatively regulates entry into
+        endospore formation in Bacillus subtilis 168.
+    - reference: PMID:9843420
+      notes: >-
+        Spo0F mutations that resist RapA/RapB dephosphorylation bypass
+        phosphatase checkpoints and alter sporulation initiation in Bacillus
+        subtilis 168.
+    - reference: PMID:11923303
+      notes: >-
+        Response regulator aspartate phosphatase RapB (UniProtKB:P70962) acts
+        alongside RapA as a negative checkpoint on the Spo0F~P phosphorelay
+        governing endospore formation in Bacillus subtilis 168.
 curation_history:
 - timestamp: '2026-10-22T14:00:00Z'
   curator: curate-causal-graphs
@@ -799,4 +871,14 @@ curation_history:
     Added direct sensor-kinase-to-regulator positive regulatory edge (edge e36,
     kinC RO:0002213 spo0A, PMID:8002614, PMID:8002615, PMID:11069677) linking
     KinC (UniProtKB:P39764) to Spo0A (UniProtKB:P06534).
+  llm_assisted: true
+- timestamp: '2026-11-07T08:30:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: >-
+    Added live-verified Swiss-Prot entry UniProtKB:P70962 (RAPB_BACSU, rapB /
+    BSU36690, EC:3.1.3.-, 377 aa, CRC64 617B29614B483971, v1) in reference
+    proteome UP:UP000001570 with literature-backed expression, Spo0F~P
+    aspartyl-phosphate phosphatase activity, and negative sporulation regulatory
+    edges (PMID:9384377, PMID:8001132, PMID:9843420, PMID:11923303).
   llm_assisted: true

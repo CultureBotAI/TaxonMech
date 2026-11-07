@@ -145,6 +145,14 @@ curation_history:
     PMID:31575776) linking Mbs1 (UniProtKB:J9VG42) to hydroquinone:oxygen oxidoreductase
     (laccase) activity (GO:0052716).
   llm_assisted: true
+- timestamp: '2026-11-07T08:30:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: Added live-verified Swiss-Prot entry UniProtKB:J9VE33 (CRZ1_CRYN9, CRZ1
+    / CNAG_00156, 1094 aa, CRC64 A8104E5A22F9D8F4, v1) in reference proteome UP:UP000010091
+    with literature-backed expression and positive regulatory edges for LAC1 and cell-wall
+    melanin biosynthesis (PMID:24743168, PMID:21487010, PMID:23251520, PMID:28376087).
+  llm_assisted: true
 causal_graphs:
 - graph_id: melanin_biosynthesis
   title: Lac1-mediated melanin biosynthesis
@@ -220,6 +228,18 @@ causal_graphs:
     sequence_length: 774
     sequence_crc64: 86EAB6D3B95FF04A
     sequence_version: 2
+    entry_status: SWISS_PROT
+  - node_id: crz1
+    label: Transcriptional regulator CRZ1 (CRZ1)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:J9VE33
+    organism_taxon_id: NCBITaxon:235443
+    proteome_id: UP:UP000010091
+    gene_symbol: CRZ1
+    locus_tag: CNAG_00156
+    sequence_length: 1094
+    sequence_crc64: A8104E5A22F9D8F4
+    sequence_version: 1
     entry_status: SWISS_PROT
   - node_id: laccase_activity
     label: hydroquinone:oxygen oxidoreductase activity
@@ -472,3 +492,50 @@ causal_graphs:
       notes: Core melanin-network transcription factor Mbs1 activates LAC1 induction
         to promote catecholamine-oxidizing hydroquinone:oxygen oxidoreductase (laccase)
         activity in Cryptococcus neoformans H99.
+  - edge_id: e20
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: crz1
+    evidence:
+    - reference: PMID:24743168
+      notes: Reference genome and transcriptome assembly of Cryptococcus neoformans
+        var. grubii strain H99 identifying CRZ1 (CNAG_00156) encoding the calcineurin-responsive
+        zinc-finger transcriptional regulator Crz1.
+    - reference: PMID:21487010
+      notes: Identification and characterization of Cryptococcus neoformans H99 CRZ1
+        (SP1, CNAG_00156) encoding a C2H2 zinc-finger transcription factor.
+    - reference: PMID:23251520
+      notes: Identification of Cryptococcus neoformans H99 Crz1 (CNAG_00156) as the
+        calcineurin-target zinc-finger transcription factor essential for cell-wall
+        integrity and virulence.
+  - edge_id: e21
+    subject: crz1
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: lac1
+    evidence:
+    - reference: PMID:21487010
+      notes: C2H2 zinc-finger transcription factor Crz1 (Sp1, CNAG_00156) positively
+        regulates LAC1 expression under glucose starvation in Cryptococcus neoformans
+        H99.
+    - reference: PMID:28376087
+      notes: Calcineurin-activated transcription factor Crz1 (CNAG_00156) acts in
+        concert with Puf4 to positively regulate LAC1 expression and melanin production
+        in Cryptococcus neoformans H99.
+  - edge_id: e22
+    subject: crz1
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: melanin_biosynthesis
+    evidence:
+    - reference: PMID:21487010
+      notes: Deletion of CRZ1 (SP1, CNAG_00156, UniProtKB:J9VE33) impairs LAC1 induction
+        and reduces melanin pigment synthesis in Cryptococcus neoformans H99.
+    - reference: PMID:23251520
+      notes: Calcineurin-responsive transcription factor Crz1 (CNAG_00156) governs
+        cell-wall remodeling and melanin-associated virulence phenotypes in Cryptococcus
+        neoformans H99.
+    - reference: PMID:28376087
+      notes: Crz1 (CNAG_00156) positively regulates LAC1 transcription and cell-wall
+        melanization in Cryptococcus neoformans H99.
