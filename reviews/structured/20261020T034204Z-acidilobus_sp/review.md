@@ -1,0 +1,1353 @@
+# Record review: Acidilobus sp.
+
+- Review: 20261020T034204Z-acidilobus_sp
+- Repository: CultureBotAI/TaxonMech
+- Started UTC: 2026-10-19T23:42:12Z
+- Finished UTC: 2026-10-20T03:42:04Z
+- Reviewer: Codex (independent)
+- Completion: completed
+- Verdict: pass_with_limitations
+- Scientific review: true
+
+## Summary
+
+The generic Acidilobus sp. record correctly retains seven pooled GTDB mappings and their source counts without equivalent xrefs. One minor finding concerns four fixed notes that incorrectly assert another NCBI target for those individual clusters.
+
+## Scope And Provenance
+
+Entire single generated record, including all source assertions and imported strains.
+
+Selection: Original unreviewed path-order position 34; batch-0004 target 4. Excluded 82 actual targets from validated main and local batch-0001/0002/0003 listings; full corpus enumeration includes ignored files.
+Coverage: full; 1 reviewed / 1 in the declared population.
+Source: working_tree at Git base 9b5a8fff5185b38dc5c77bb35235152c81ea7765.
+Working-tree hashes do not imply those bytes were committed.
+
+| Target | Path / selector | Kind | Label |
+| --- | --- | --- | --- |
+| NCBITaxon:1872109 | data/taxa/archaea/acidilobus_sp.yaml | generated | Acidilobus sp. |
+
+## Validation
+
+| Check | Status | Required | Targets | Result |
+| --- | --- | --- | --- | --- |
+| Exact NCBI taxon, rank and lineage | passed | True | NCBITaxon:1872109 | NCBITaxon:1872109 denotes Acidilobus sp. at SPECIES rank, parent NCBITaxon:2635519, genetic code11. All 10 carried ancestors and source name classes agree with the pinned inventory and captured current NCBI response (which omits root). |
+| Complete primary GTDB cluster count | passed | True | NCBITaxon:1872109 | The seven clusters contain 28 inspected primary genomes, of which 22 carry target taxid1872109. Counts are 8,7,6,4,1,1,1. The primary 8-genome cluster includes representative 7A taxid1577685 and seven generic-taxid members. Four clusters (sp022015155, sp049973875, sp049974445, sp049977005) have only taxid1872109 both in primary members and the complete reverse mapping inventory, contradicting the fixed other-NCBI-taxa clause. Pooling several GTDB species onto the NCBI placeholder still supports broadMatch. NCBI lineage Acidilobales is preserved separately from GTDB Sulfolobales. |
+| Imported strain links | not_applicable | False | NCBITaxon:1872109 | No imported BacDive strain or strain-level links are asserted; exact source placement remains distinct from biological strain or genome existence. |
+| Historical aggregate edges | not_applicable | False | NCBITaxon:1872109 | No historical medium, organism or trait aggregate is asserted. |
+| Initial quality-gate setup attempt | failed | False | NCBITaxon:1872109 | Actual exit 1: missing ruff; superseded by the separately recorded successful full retry. |
+| Native strict record validation | passed | True | NCBITaxon:1872109 | Actual terminal exit code 0. This exact generated YAML only; its captured bytes remain unchanged. Actual earlier per-target invocation; the receipt retains its original cwd and times. |
+| Repository history validation | passed | True | NCBITaxon:1872109 | Actual terminal exit code 0. All 17 standalone history records; the generated seed event was also inspected in this target. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. |
+| Full-corpus exact reproduction | passed | True | NCBITaxon:1872109 | Actual terminal exit code 0. All 625,960 generated taxon YAMLs, not a focused approximation. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. |
+| Native product ID/label gate | passed | True | NCBITaxon:1872109 | Actual terminal exit code 0. Full configured corpus scan for curator-added graph nodes; this target contains no causal graph. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. |
+| Authoritative complete quality gate | passed | True | NCBITaxon:1872109 | Actual terminal exit code 0. Repository-wide just qc, including native corpus-wide checks. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. Pytest reported 1055 passed, 3 skipped and 5 deselected; the native QC recipe completed successfully. |
+
+## Scientific And Domain Assessments
+
+### Exact taxon and source lineage
+
+identity: supported. Targets: NCBITaxon:1872109.
+
+NCBITaxon:1872109 denotes Acidilobus sp. at SPECIES rank, parent NCBITaxon:2635519, genetic code11. All 10 carried ancestors and source name classes agree with the pinned inventory and captured current NCBI response (which omits root).
+
+### Name classes and nomenclatural scope
+
+nomenclature: supported. Targets: NCBITaxon:1872109.
+
+The literal NCBI species placeholder is preserved beneath unclassified Acidilobus. No extra NCBI synonym or mapped LPSN name is asserted. GTDB source species remain qualified broadMatch entries, not exact names.
+
+### Imported subtree and source assertion units
+
+completeness: supported. Targets: NCBITaxon:1872109.
+
+All seven direct mappings are represented. The GTDB attestation correctly counts only the leading eight-genome cluster and refers to six further clusters; 28 is not an exact-target attestation replacement. The complete pinned subtree has no descendants or imported BacDive strains. One NCBI NAME and eight source-cluster GENOME assertions remain distinct units; no historical medium/organism/trait aggregate is asserted.
+
+### Qualified species mapping and target scope
+
+grounding: concern. Targets: NCBITaxon:1872109.
+
+The seven clusters contain 28 inspected primary genomes, of which 22 carry target taxid1872109. Counts are 8,7,6,4,1,1,1. The primary 8-genome cluster includes representative 7A taxid1577685 and seven generic-taxid members. Four clusters (sp022015155, sp049973875, sp049974445, sp049977005) have only taxid1872109 both in primary members and the complete reverse mapping inventory, contradicting the fixed other-NCBI-taxa clause. Pooling several GTDB species onto the NCBI placeholder still supports broadMatch. NCBI lineage Acidilobales is preserved separately from GTDB Sulfolobales.
+
+### Unchanged native status and history
+
+provenance: supported. Targets: NCBITaxon:1872109.
+
+EXACT grounding, SEEDED status and the sole seed event remain unchanged. The seed timestamp 2026-09-13T17:54:04Z agrees with the latest raw/ATB/StrainInfo extraction. This review does not promote native status or append history.
+
+## Findings
+
+### pooled-note-other-taxa: Four pooled-mapping notes incorrectly assert other NCBI taxa
+
+minor / open / confirmed; issue key: gtdb-broadmatch-note-other-taxa-1872109.
+
+The seven clusters contain 28 inspected primary genomes, of which 22 carry target taxid1872109. Counts are 8,7,6,4,1,1,1. The primary 8-genome cluster includes representative 7A taxid1577685 and seven generic-taxid members. Four clusters (sp022015155, sp049973875, sp049974445, sp049977005) have only taxid1872109 both in primary members and the complete reverse mapping inventory, contradicting the fixed other-NCBI-taxa clause. Pooling several GTDB species onto the NCBI placeholder still supports broadMatch. NCBI lineage Acidilobales is preserved separately from GTDB Sulfolobales.
+
+## Recommended Actions And Acceptance Checks
+
+### correct-pooled-mapping-note
+
+Revise the maintained broadMatch note to describe pooling without asserting another NCBI taxon for every individual source cluster. Preserve all source mappings, counts and carried NCBI lineage.
+
+- sp022015155 retains count7 and broadMatch without an unsupported other-taxa clause; likewise all three single-genome clusters.
+- Mixed-taxid sp003431325 retains count8, all seven mappings remain present and the attestation still points to six further clusters.
+- After separately authorized guarded regeneration run strict, history, product, corpus and QC gates.
+
+## Category Boundaries
+
+
+## Evidence
+
+| Evidence | Reference / locator | Support | Observation |
+| --- | --- | --- | --- |
+| record | data/taxa/archaea/acidilobus_sp.yaml; entire TaxonRecord; identifier=NCBITaxon:1872109 | supports | Read the entire generated YAML, including identity, lineage, names, mappings, source attestations, all imported strains and links, and seed history. |
+| taxonomy-inventory | data/raw/ncbitaxon_taxa.tsv; line 2: {"taxon_id":"NCBITaxon:1","label":"root","rank":"NO_RANK","parent_id":""}; line 1698: {"taxon_id":"NCBITaxon:2157","label":"Archaea","rank":"DOMAIN","parent_id":"NCBITaxon:131567"}; line 2980: {"taxon_id":"NCBITaxon:28889","label":"Thermoproteota","rank":"PHYLUM","parent_id":"NCBITaxon:1783275"}; line 18995: {"taxon_id":"NCBITaxon:105850","label":"Acidilobus","rank":"GENUS","parent_id":"NCBITaxon:871007"}; line 25334: {"taxon_id":"NCBITaxon:131567","label":"cellular organisms","rank":"CELLULAR_ROOT","parent_id":"NCBITaxon:1"}; line 36612: {"taxon_id":"NCBITaxon:183924","label":"Thermoprotei","rank":"CLASS","parent_id":"NCBITaxon:28889"}; line 184681: {"taxon_id":"NCBITaxon:871006","label":"Acidilobales","rank":"ORDER","parent_id":"NCBITaxon:183924"}; line 184682: {"taxon_id":"NCBITaxon:871007","label":"Acidilobaceae","rank":"FAMILY","parent_id":"NCBITaxon:871006"}; line 464838: {"taxon_id":"NCBITaxon:1783275","label":"Thermoproteati","rank":"KINGDOM","parent_id":"NCBITaxon:2157"}; line 489192: {"taxon_id":"NCBITaxon:1872109","label":"Acidilobus sp.","rank":"SPECIES","parent_id":"NCBITaxon:2635519","genetic_code":"11","exact_synonyms":"","related_synonyms":"","broad_synonyms":"","attested_by":"ncbitaxon&#124;gtdb","retired_into":"","taxonomy_snapshot":"2026-09-13"}; line 538982: {"taxon_id":"NCBITaxon:2635519","label":"unclassified Acidilobus","rank":"NO_RANK","parent_id":"NCBITaxon:105850"} | supports | Inspected the target and each carried ancestor, rank, parent, genetic code and source name classes. |
+| scope-row | curation/seed_scope.tsv; line 80069: {"identifier":"NCBITaxon:1872109","added":"2026-09-13","reason":"attested rule: Acidilobus sp., 2 sources incl. NCBI"} | supports | Exact target is included in the declared seed scope. |
+| path-row | data/taxa/PATHS.tsv; line 296630: {"identifier":"NCBITaxon:1872109","slug":"acidilobus_sp"} | supports | Indexed path resolves to this exact NCBI taxon. |
+| ncbi-live | https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=taxonomy&amp;id=105851,242703,666510,1872109,242702,242704,242705,1577685,1987488,1987489; TaxaSet/Taxon[TaxId='1872109']; ten-target captured response | supports | Inspected the official response for this exact taxon: scientific name, rank, parent, source name classes, lineage and genetic code. Current authority and pinned September inventory remain distinct observations. |
+| lpsn-inventory | data/raw/lpsn_names.tsv; complete table; exact target/subtree/source-identifier search has no match | supports | Inspected exact mapped and linked LPSN names; bounded inventory absence does not establish worldwide nomenclatural absence. |
+| gtdb-mappings | data/raw/gtdb_mappings.tsv; line 25048: {"gtdb_id":"GTDB:s__Acidilobus_sp000495735","gtdb_label":"s__Acidilobus_sp000495735","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1410573","predicate":"skos:closeMatch","genome_count":"6"}; line 25049: {"gtdb_id":"GTDB:s__Acidilobus_sp028276005","gtdb_label":"s__Acidilobus_sp028276005","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1410574","predicate":"skos:closeMatch","genome_count":"4"}; line 25050: {"gtdb_id":"GTDB:s__Acidilobus_sp000495735","gtdb_label":"s__Acidilobus_sp000495735","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1410575","predicate":"skos:closeMatch","genome_count":"6"}; line 25051: {"gtdb_id":"GTDB:s__Acidilobus_sp000495735","gtdb_label":"s__Acidilobus_sp000495735","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1410576","predicate":"skos:closeMatch","genome_count":"6"}; line 38237: {"gtdb_id":"GTDB:s__Acidilobus_sp003431325","gtdb_label":"s__Acidilobus_sp003431325","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1577685","predicate":"skos:closeMatch","genome_count":"8"}; line 70970: {"gtdb_id":"GTDB:s__Acidilobus_sp000495735","gtdb_label":"s__Acidilobus_sp000495735","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1872104","predicate":"skos:broadMatch","genome_count":"6"}; line 70987: {"gtdb_id":"GTDB:s__Acidilobus_sp000495735","gtdb_label":"s__Acidilobus_sp000495735","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1872109","predicate":"skos:broadMatch","genome_count":"6"}; line 70988: {"gtdb_id":"GTDB:s__Acidilobus_sp003431325","gtdb_label":"s__Acidilobus_sp003431325","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1872109","predicate":"skos:broadMatch","genome_count":"8"}; line 70989: {"gtdb_id":"GTDB:s__Acidilobus_sp022015155","gtdb_label":"s__Acidilobus_sp022015155","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1872109","predicate":"skos:broadMatch","genome_count":"7"}; line 70990: {"gtdb_id":"GTDB:s__Acidilobus_sp028276005","gtdb_label":"s__Acidilobus_sp028276005","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1872109","predicate":"skos:broadMatch","genome_count":"4"}; line 70991: {"gtdb_id":"GTDB:s__Acidilobus_sp049973875","gtdb_label":"s__Acidilobus_sp049973875","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1872109","predicate":"skos:broadMatch","genome_count":"1"}; line 70992: {"gtdb_id":"GTDB:s__Acidilobus_sp049974445","gtdb_label":"s__Acidilobus_sp049974445","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1872109","predicate":"skos:broadMatch","genome_count":"1"}; line 70993: {"gtdb_id":"GTDB:s__Acidilobus_sp049977005","gtdb_label":"s__Acidilobus_sp049977005","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1872109","predicate":"skos:broadMatch","genome_count":"1"} | supports | Inspected direct mappings and selected clusters' reverse mappings, retaining each source predicate and taxon boundary. |
+| gtdb-species | data/raw/gtdb_species.tsv; line 3967: {"gtdb_id":"GTDB:s__Acidilobus_sp000495735","label":"s__Acidilobus_sp000495735","parent":"GTDB:g__Acidilobus","genome_count":"6"}; line 3969: {"gtdb_id":"GTDB:s__Acidilobus_sp003431325","label":"s__Acidilobus_sp003431325","parent":"GTDB:g__Acidilobus","genome_count":"8"}; line 3970: {"gtdb_id":"GTDB:s__Acidilobus_sp022015155","label":"s__Acidilobus_sp022015155","parent":"GTDB:g__Acidilobus","genome_count":"7"}; line 3971: {"gtdb_id":"GTDB:s__Acidilobus_sp028276005","label":"s__Acidilobus_sp028276005","parent":"GTDB:g__Acidilobus","genome_count":"4"}; line 3972: {"gtdb_id":"GTDB:s__Acidilobus_sp049973875","label":"s__Acidilobus_sp049973875","parent":"GTDB:g__Acidilobus","genome_count":"1"}; line 3973: {"gtdb_id":"GTDB:s__Acidilobus_sp049974445","label":"s__Acidilobus_sp049974445","parent":"GTDB:g__Acidilobus","genome_count":"1"}; line 3974: {"gtdb_id":"GTDB:s__Acidilobus_sp049977005","label":"s__Acidilobus_sp049977005","parent":"GTDB:g__Acidilobus","genome_count":"1"} | supports | Inspected source species identifiers, labels, parent clusters and genome counts. |
+| bacdive-inventory | data/raw/bacdive_strains.tsv; complete table; exact target/subtree/source-identifier search has no match | supports | Complete inventory selection covers the exact target and descendants from the complete NCBI parent graph; its imported strain population was compared with the complete YAML. |
+| culture-inventory | data/raw/culture_collection_strains.tsv; complete table; exact target/subtree/source-identifier search has no match | supports | Inspected exact culture-inventory associations; an isolate name or genome does not create an inferred deposit. |
+| gold-organisms | data/raw/gold_organisms.tsv; complete table; exact target/subtree/source-identifier search has no match | supports | Inspected the exact GOLD organism count row or bounded absence, without converting counts to phenotypes. |
+| mediadive-taxa | data/raw/mediadive_taxa.tsv; complete table; exact target/subtree/source-identifier search has no match | supports | Inspected the exact MediaDive medium count row or bounded absence, without converting counts to phenotypes. |
+| madin-taxa | data/raw/madin_taxa.tsv; complete table; exact target/subtree/source-identifier search has no match | supports | Inspected the exact Madin trait-assertion count row or bounded absence, without converting counts to phenotypes. |
+| bactotraits-taxa | data/raw/bactotraits_taxa.tsv; complete table; exact target/subtree/source-identifier search has no match | supports | Inspected the exact BactoTraits trait-assertion count row or bounded absence, without converting counts to phenotypes. |
+| mapping-policy | docs/HARMONIZATION.md; Mapping predicates; Which strains belong to a record | supports | Policy permits one-to-one species closeMatch normalization and LPSN-linked species xrefs/synonyms, retains pooled broadMatch entries and carries NCBI lineage unchanged. |
+| equivalence-contract | src/taxonmech/schema/taxonmech.yaml; TaxonRecord.xrefs, lines 180–187; TaxonomyMapping, lines 417–439 | supports | TaxonRecord.xrefs denotes equivalent identifiers; broader/narrower relations remain qualified taxonomy mappings. TaxonomyMapping.genome_count counts genomes under the source taxon. |
+| seed-owner | src/taxonmech/seed.py; GTDB mapping construction lines 440–472; LPSN/type-strain and source-attestation construction | supports | Inspected mapping ranking, qualified predicates, fixed broadMatch wording, synonym/xref construction, primary cluster counts and same-taxon type-strain derivation. |
+| manifest | data/raw/MANIFEST.yaml; kg_microbe_source, inputs, extracted_at | supports | Manifest pins kg-microbe revision 30405b70ef762aa46c08278b2b3e06bffb0b34cd, upstream input hashes and extraction time 2026-09-13T17:50:44Z. |
+| overlay-manifests | data/atb/MANIFEST.yaml; extracted_at, together with data/raw/MANIFEST.yaml and data/straininfo/MANIFEST.yaml | supports | Raw, ATB and StrainInfo extraction times have maximum 2026-09-13T17:54:04Z, matching the sole seed event. StrainInfo manifest is independently captured in source.inputs. |
+| genome-catalog-1 | data/catalog/gtdb_genomes-0017.jsonl.gz; line 29105: {"accession":"GB_GCA_032248955.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp000495735","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM3224895v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA791658","ncbi_biosample":"SAMN37115005","ncbi_contig_count":"195","ncbi_contig_n50":"7955","ncbi_country":"none","ncbi_date":"2023-10-01","ncbi_genbank_assembly_accession":"GCA_032248955.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"RBS.bin.4","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidianus sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2023-10-01","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872104","ncbi_ssu_count":"1","ncbi_strain_identifiers":"RBS.bin.4","ncbi_submitter":"Montana State University","ncbi_taxid":"1872104","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Sulfolobales;f__Sulfolobaceae;g__Acidianus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Sulfolobales;f__Sulfolobaceae;g__Acidianus;x__unclassified Acidianus;s__Acidianus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1324271","ncbi_translation_table":"11","ncbi_trna_count":"45","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1324271","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAVVGT000000000.1"}; line 29190: {"accession":"GB_GCA_046533535.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp003431325","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM4653353v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA1019763","ncbi_biosample":"SAMN37494501","ncbi_contig_count":"128","ncbi_contig_n50":"24008","ncbi_country":"none","ncbi_date":"2025-01-07","ncbi_genbank_assembly_accession":"GCA_046533535.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"SBS.bin.14","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"2","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2025-01-07","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"SBS.bin.14","ncbi_submitter":"Montana State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1376752","ncbi_translation_table":"11","ncbi_trna_count":"47","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1376752","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAWDPC000000000.1"}; line 29221: {"accession":"RS_GCF_003431325.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp003431325","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Complete Genome","ncbi_assembly_name":"ASM343132v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA224116","ncbi_biosample":"SAMN03173949","ncbi_contig_count":"none","ncbi_contig_n50":"none","ncbi_country":"USA: Yellowstone National Park; Cistern Spring","ncbi_date":"2016-02-04","ncbi_genbank_assembly_accession":"GCA_003431325.1","ncbi_genome_category":"none","ncbi_genome_representation":"full","ncbi_isolate":"na","ncbi_isolation_source":"water and sediment","ncbi_lat_lon":"44.72308 N 110.704 W","ncbi_molecule_count":"1","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus sp. 7A","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"1","ncbi_scaffold_l50":"1","ncbi_scaffold_n50":"1539049","ncbi_scaffold_n75":"1539049","ncbi_scaffold_n90":"1539049","ncbi_seq_rel_date":"2016-02-04","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1577685","ncbi_ssu_count":"1","ncbi_strain_identifiers":"7A","ncbi_submitter":"Oak Ridge National Laboratory","ncbi_taxid":"1577685","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified Acidilobus;s__Acidilobus sp. 7A","ncbi_total_gap_length":"0","ncbi_total_length":"1539049","ncbi_translation_table":"11","ncbi_trna_count":"46","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1539049","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"na"}; line 29705: {"accession":"GB_GCA_046536635.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp028276005","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM4653663v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA1019763","ncbi_biosample":"SAMN37494429","ncbi_contig_count":"241","ncbi_contig_n50":"87569","ncbi_country":"none","ncbi_date":"2025-01-07","ncbi_genbank_assembly_accession":"GCA_046536635.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"F8S.bin.12","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2025-01-07","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"F8S.bin.12","ncbi_submitter":"Montana State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"2499414","ncbi_translation_table":"11","ncbi_trna_count":"50","ncbi_type_material_designation":"na","ncbi_ungapped_length":"2499414","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAWDMI000000000.1"}; line 30514: {"accession":"GB_GCA_046536935.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp003431325","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM4653693v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA1019763","ncbi_biosample":"SAMN37494415","ncbi_contig_count":"52","ncbi_contig_n50":"25047","ncbi_country":"none","ncbi_date":"2025-01-07","ncbi_genbank_assembly_accession":"GCA_046536935.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"DS.bin.13","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2025-01-07","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"DS.bin.13","ncbi_submitter":"Montana State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"927598","ncbi_translation_table":"11","ncbi_trna_count":"35","ncbi_type_material_designation":"na","ncbi_ungapped_length":"927598","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAWDLU000000000.1"}; line 30645: {"accession":"GB_GCA_046536475.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp003431325","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM4653647v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA1019763","ncbi_biosample":"SAMN37494439","ncbi_contig_count":"163","ncbi_contig_n50":"15119","ncbi_country":"none","ncbi_date":"2025-01-07","ncbi_genbank_assembly_accession":"GCA_046536475.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"F8S.bin.8","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2025-01-07","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"F8S.bin.8","ncbi_submitter":"Montana State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1536681","ncbi_translation_table":"11","ncbi_trna_count":"44","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1536681","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAWDMS000000000.1"}; line 31349: {"accession":"GB_GCA_049977005.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp049977005","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM4997700v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA1227992","ncbi_biosample":"SAMN47003029","ncbi_contig_count":"10","ncbi_contig_n50":"108201","ncbi_country":"none","ncbi_date":"2025-04-28","ncbi_genbank_assembly_accession":"GCA_049977005.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"KM4311-16","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"2","ncbi_scaffold_count":"8","ncbi_scaffold_l50":"2","ncbi_scaffold_n50":"182073","ncbi_scaffold_n75":"93139","ncbi_scaffold_n90":"66560","ncbi_seq_rel_date":"2025-04-28","ncbi_spanned_gaps":"2","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"KM4311-16","ncbi_submitter":"Research Center of Biotechnology RAS","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"200","ncbi_total_length":"802540","ncbi_translation_table":"11","ncbi_trna_count":"39","ncbi_type_material_designation":"na","ncbi_ungapped_length":"802340","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JBMFHE000000000.1"}; line 31775: {"accession":"GB_GCA_028277005.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp000495735","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM2827700v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA791658","ncbi_biosample":"SAMN32179628","ncbi_contig_count":"210","ncbi_contig_n50":"10526","ncbi_country":"USA: Yellowstone National Park","ncbi_date":"2023-01-30","ncbi_genbank_assembly_accession":"GCA_028277005.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"RSEP6","ncbi_isolation_source":"Hot spring water","ncbi_lat_lon":"44.4512 N 110.4329 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"none","ncbi_organism_name":"Acidilobus sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"none","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2023-01-30","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"none","ncbi_strain_identifiers":"RSEP6","ncbi_submitter":"Montana State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1572024","ncbi_translation_table":"none","ncbi_trna_count":"none","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1572024","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAPYVH000000000.1"}; line 32409: {"accession":"GB_GCA_022015055.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp022015155","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM2201505v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA800390","ncbi_biosample":"SAMN25334111","ncbi_contig_count":"179","ncbi_contig_n50":"8565","ncbi_country":"USA: Yellowstone National Park; Cinder Pool","ncbi_date":"2022-02-06","ncbi_genbank_assembly_accession":"GCA_022015055.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"CP.2020.0m.Bin.2","ncbi_isolation_source":"Hot spring water","ncbi_lat_lon":"44.73244 N 110.70978 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2022-02-06","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"CP.2020.0m.Bin.2","ncbi_submitter":"Montana State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1294660","ncbi_translation_table":"11","ncbi_trna_count":"40","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1294660","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAKLZS000000000.1"}; line 32769: {"accession":"GB_GCA_022015295.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp022015155","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM2201529v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA800390","ncbi_biosample":"SAMN25334102","ncbi_contig_count":"66","ncbi_contig_n50":"40302","ncbi_country":"USA: Yellowstone National Park; Cinder Pool","ncbi_date":"2022-02-06","ncbi_genbank_assembly_accession":"GCA_022015295.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"CP.2016.0m.Bin.5","ncbi_isolation_source":"Hot spring water","ncbi_lat_lon":"44.73244 N 110.70978 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"2","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2022-02-06","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"CP.2016.0m.Bin.5","ncbi_submitter":"Montana State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1269201","ncbi_translation_table":"11","ncbi_trna_count":"44","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1269201","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAKLZJ000000000.1"}; line 33991: {"accession":"GB_GCA_046537315.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp003431325","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM4653731v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA1019763","ncbi_biosample":"SAMN37494397","ncbi_contig_count":"97","ncbi_contig_n50":"21281","ncbi_country":"none","ncbi_date":"2025-01-07","ncbi_genbank_assembly_accession":"GCA_046537315.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"Alice.S.bin.6","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"1","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2025-01-07","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"0","ncbi_strain_identifiers":"Alice.S.bin.6","ncbi_submitter":"Montana State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1042223","ncbi_translation_table":"11","ncbi_trna_count":"33","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1042223","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAWDLC000000000.1"}; line 34649: {"accession":"GB_GCA_000495695.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp028276005","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"Acidilobus sp. CIS","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA221622","ncbi_biosample":"SAMN02364258","ncbi_contig_count":"129","ncbi_contig_n50":"22444","ncbi_country":"USA: Yellowstone National Park","ncbi_date":"2013-11-05","ncbi_genbank_assembly_accession":"GCA_000495695.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"na","ncbi_isolation_source":"Cistern Spring (CIS_19); temperature 78C; pH 4.4","ncbi_lat_lon":"44.7231 N 110.7040 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"uncultured Acidilobus sp. CIS","ncbi_protein_count":"1671","ncbi_refseq_category":"na","ncbi_rrna_count":"2","ncbi_scaffold_count":"18","ncbi_scaffold_l50":"3","ncbi_scaffold_n50":"197428","ncbi_scaffold_n75":"76064","ncbi_scaffold_n90":"51257","ncbi_seq_rel_date":"2013-11-05","ncbi_spanned_gaps":"111","ncbi_species_taxid":"1410574","ncbi_ssu_count":"1","ncbi_strain_identifiers":"none","ncbi_submitter":"Montana State University","ncbi_taxid":"1410574","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__environmental samples;s__uncultured Acidilobus sp. CIS","ncbi_total_gap_length":"16315","ncbi_total_length":"1426691","ncbi_translation_table":"11","ncbi_trna_count":"45","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1410376","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"AYMB00000000.1"}; line 36376: {"accession":"GB_GCA_028276005.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp028276005","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM2827600v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA791658","ncbi_biosample":"SAMN32179816","ncbi_contig_count":"66","ncbi_contig_n50":"20450","ncbi_country":"USA: Yellowstone National Park","ncbi_date":"2023-01-30","ncbi_genbank_assembly_accession":"GCA_028276005.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"RSNS4","ncbi_isolation_source":"Hot spring sediment","ncbi_lat_lon":"44.4514 N 110.4332 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"none","ncbi_organism_name":"Acidilobus sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"none","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2023-01-30","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"none","ncbi_strain_identifiers":"RSNS4","ncbi_submitter":"Montana State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"892315","ncbi_translation_table":"none","ncbi_trna_count":"none","ncbi_type_material_designation":"na","ncbi_ungapped_length":"892315","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAPWTO000000000.1"}; line 38348: {"accession":"GB_GCA_000495715.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp000495735","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"Acidilobus sp. CIS","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA221622","ncbi_biosample":"SAMN02364257","ncbi_contig_count":"153","ncbi_contig_n50":"20771","ncbi_country":"USA: Yellowstone National Park","ncbi_date":"2013-11-05","ncbi_genbank_assembly_accession":"GCA_000495715.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"na","ncbi_isolation_source":"100 Spring Plain (OSP_8); temperature 72C; pH 3.3","ncbi_lat_lon":"44.7330 N 110.7090 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"uncultured Acidilobus sp. OSP8","ncbi_protein_count":"1693","ncbi_refseq_category":"na","ncbi_rrna_count":"1","ncbi_scaffold_count":"42","ncbi_scaffold_l50":"4","ncbi_scaffold_n50":"119213","ncbi_scaffold_n75":"36067","ncbi_scaffold_n90":"19525","ncbi_seq_rel_date":"2013-11-05","ncbi_spanned_gaps":"111","ncbi_species_taxid":"1410575","ncbi_ssu_count":"0","ncbi_strain_identifiers":"none","ncbi_submitter":"Montana State University","ncbi_taxid":"1410575","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__environmental samples;s__uncultured Acidilobus sp. OSP8","ncbi_total_gap_length":"29385","ncbi_total_length":"1430817","ncbi_translation_table":"11","ncbi_trna_count":"46","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1401432","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"AYMC00000000.1"}; line 38822: {"accession":"GB_GCA_022015155.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp022015155","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM2201515v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA800390","ncbi_biosample":"SAMN25334108","ncbi_contig_count":"46","ncbi_contig_n50":"49043","ncbi_country":"USA: Yellowstone National Park; Cinder Pool","ncbi_date":"2022-02-06","ncbi_genbank_assembly_accession":"GCA_022015155.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"CP.2016.15m.Bin.2","ncbi_isolation_source":"Hot spring water","ncbi_lat_lon":"44.73244 N 110.70978 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2022-02-06","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"CP.2016.15m.Bin.2","ncbi_submitter":"Montana State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1252937","ncbi_translation_table":"11","ncbi_trna_count":"44","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1252937","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAKLZP000000000.1"}; line 41527: {"accession":"GB_GCA_046533815.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp003431325","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM4653381v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA1019763","ncbi_biosample":"SAMN37494486","ncbi_contig_count":"127","ncbi_contig_n50":"21519","ncbi_country":"none","ncbi_date":"2025-01-07","ncbi_genbank_assembly_accession":"GCA_046533815.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"RHS.bin.4","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"2","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2025-01-07","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"RHS.bin.4","ncbi_submitter":"Montana State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1472853","ncbi_translation_table":"11","ncbi_trna_count":"44","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1472853","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAWDON000000000.1"}; line 41692: {"accession":"RS_GCF_049973875.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp049973875","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM4997387v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA224116","ncbi_biosample":"SAMN47003087","ncbi_contig_count":"125","ncbi_contig_n50":"72489","ncbi_country":"none","ncbi_date":"2025-04-28","ncbi_genbank_assembly_accession":"GCA_049973875.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"KM4331-13","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"123","ncbi_scaffold_l50":"8","ncbi_scaffold_n50":"72489","ncbi_scaffold_n75":"21543","ncbi_scaffold_n90":"5995","ncbi_seq_rel_date":"2025-04-28","ncbi_spanned_gaps":"2","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"KM4331-13","ncbi_submitter":"Research Center of Biotechnology RAS","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"20","ncbi_total_length":"1561501","ncbi_translation_table":"11","ncbi_trna_count":"45","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1561481","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JBMFJI000000000.1"}; line 42341: {"accession":"GB_GCA_022015235.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp022015155","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM2201523v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA800390","ncbi_biosample":"SAMN25334105","ncbi_contig_count":"65","ncbi_contig_n50":"28771","ncbi_country":"USA: Yellowstone National Park; Cinder Pool","ncbi_date":"2022-02-06","ncbi_genbank_assembly_accession":"GCA_022015235.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"CP.2016.9m.Bin.3","ncbi_isolation_source":"Hot spring water","ncbi_lat_lon":"44.73244 N 110.70978 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"2","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2022-02-06","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"CP.2016.9m.Bin.3","ncbi_submitter":"Montana State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1287197","ncbi_translation_table":"11","ncbi_trna_count":"44","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1287197","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAKLZM000000000.1"}; line 42649: {"accession":"GB_GCA_009903975.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp028276005","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM990397v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA600296","ncbi_biosample":"SAMN13824551","ncbi_contig_count":"112","ncbi_contig_n50":"11576","ncbi_country":"USA: Yellowstone National Park; Evening Primrose Hot Spring","ncbi_date":"2020-01-18","ncbi_genbank_assembly_accession":"GCA_009903975.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"EvPrim.Bin1","ncbi_isolation_source":"Sediment sample from Evening Primrose shelf","ncbi_lat_lon":"44.699437 N 110.767147 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"2","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2020-01-18","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"EvPrim.Bin1","ncbi_submitter":"Montana State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1009520","ncbi_translation_table":"11","ncbi_trna_count":"32","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1009520","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"WYEC00000000.1"}; line 42919: {"accession":"GB_GCA_049974445.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp049974445","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM4997444v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA1227992","ncbi_biosample":"SAMN47003071","ncbi_contig_count":"117","ncbi_contig_n50":"18079","ncbi_country":"none","ncbi_date":"2025-04-28","ncbi_genbank_assembly_accession":"GCA_049974445.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"KM4324-30","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"111","ncbi_scaffold_l50":"22","ncbi_scaffold_n50":"20613","ncbi_scaffold_n75":"11464","ncbi_scaffold_n90":"5741","ncbi_seq_rel_date":"2025-04-28","ncbi_spanned_gaps":"6","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"KM4324-30","ncbi_submitter":"Research Center of Biotechnology RAS","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"240","ncbi_total_length":"1351807","ncbi_translation_table":"11","ncbi_trna_count":"44","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1351567","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JBMFIT000000000.1"}; line 43244: {"accession":"GB_GCA_046537175.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp003431325","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM4653717v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA1019763","ncbi_biosample":"SAMN37494402","ncbi_contig_count":"56","ncbi_contig_n50":"29614","ncbi_country":"none","ncbi_date":"2025-01-07","ncbi_genbank_assembly_accession":"GCA_046537175.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"Cinder.S.bin.11","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2025-01-07","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"Cinder.S.bin.11","ncbi_submitter":"Montana State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"976854","ncbi_translation_table":"11","ncbi_trna_count":"38","ncbi_type_material_designation":"na","ncbi_ungapped_length":"976854","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAWDLH000000000.1"}; line 43522: {"accession":"GB_GCA_046534195.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp003431325","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM4653419v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA1019763","ncbi_biosample":"SAMN37494467","ncbi_contig_count":"90","ncbi_contig_n50":"19531","ncbi_country":"none","ncbi_date":"2025-01-07","ncbi_genbank_assembly_accession":"GCA_046534195.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"Moose.S.bin.9","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2025-01-07","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"Moose.S.bin.9","ncbi_submitter":"Montana State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1026773","ncbi_translation_table":"11","ncbi_trna_count":"34","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1026773","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAWDNU000000000.1"}; line 43564: {"accession":"GB_GCA_000495735.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp000495735","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"Acidilobus sp. JCHS","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA221622","ncbi_biosample":"SAMN02364256","ncbi_contig_count":"51","ncbi_contig_n50":"177485","ncbi_country":"USA: Yellowstone National Park","ncbi_date":"2013-11-05","ncbi_genbank_assembly_accession":"GCA_000495735.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"na","ncbi_isolation_source":"Joseph s Coat Hot Spring (JCHS_4); temperature 80C; pH 6.1","ncbi_lat_lon":"44.7392 N 110.3245 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"uncultured Acidilobus sp. JCHS","ncbi_protein_count":"1634","ncbi_refseq_category":"na","ncbi_rrna_count":"2","ncbi_scaffold_count":"13","ncbi_scaffold_l50":"2","ncbi_scaffold_n50":"387277","ncbi_scaffold_n75":"240131","ncbi_scaffold_n90":"46882","ncbi_seq_rel_date":"2013-11-05","ncbi_spanned_gaps":"38","ncbi_species_taxid":"1410576","ncbi_ssu_count":"1","ncbi_strain_identifiers":"none","ncbi_submitter":"Montana State University","ncbi_taxid":"1410576","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__environmental samples;s__uncultured Acidilobus sp. JCHS","ncbi_total_gap_length":"5186","ncbi_total_length":"1476663","ncbi_translation_table":"11","ncbi_trna_count":"46","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1471477","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"AYMD00000000.1"}; line 43616: {"accession":"GB_GCA_022759325.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp000495735","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM2275932v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA669531","ncbi_biosample":"SAMN16495481","ncbi_contig_count":"49","ncbi_contig_n50":"44424","ncbi_country":"USA: Yellowstone Lake; Wyoming","ncbi_date":"2022-03-29","ncbi_genbank_assembly_accession":"GCA_022759325.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"2016_B01_C_1","ncbi_isolation_source":"biofilm attached to a sub-lacustrine hydrothermal vent","ncbi_lat_lon":"44.51090 N 110.35660 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"39","ncbi_scaffold_l50":"7","ncbi_scaffold_n50":"56843","ncbi_scaffold_n75":"30722","ncbi_scaffold_n90":"18527","ncbi_seq_rel_date":"2022-03-29","ncbi_spanned_gaps":"10","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"2016_B01_C_1","ncbi_submitter":"Montana State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"1000","ncbi_total_length":"1258146","ncbi_translation_table":"11","ncbi_trna_count":"43","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1257146","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAEMPL000000000.1"}; line 44776: {"accession":"GB_GCA_046533795.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp022015155","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM4653379v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA1019763","ncbi_biosample":"SAMN37494488","ncbi_contig_count":"44","ncbi_contig_n50":"16683","ncbi_country":"none","ncbi_date":"2025-01-07","ncbi_genbank_assembly_accession":"GCA_046533795.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"RHS.bin.6","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"1","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2025-01-07","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"0","ncbi_strain_identifiers":"RHS.bin.6","ncbi_submitter":"Montana State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"477923","ncbi_translation_table":"11","ncbi_trna_count":"21","ncbi_type_material_designation":"na","ncbi_ungapped_length":"477923","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAWDOP000000000.1"}; line 48429: {"accession":"GB_GCA_022014845.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp022015155","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM2201484v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA800390","ncbi_biosample":"SAMN25334122","ncbi_contig_count":"170","ncbi_contig_n50":"9380","ncbi_country":"USA: Yellowstone National Park; Cinder Pool","ncbi_date":"2022-02-06","ncbi_genbank_assembly_accession":"GCA_022014845.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"CP.2020.15m.Bin.3","ncbi_isolation_source":"Hot spring water","ncbi_lat_lon":"44.73244 N 110.70978 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2022-02-06","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"CP.2020.15m.Bin.3","ncbi_submitter":"Montana State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1313137","ncbi_translation_table":"11","ncbi_trna_count":"38","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1313137","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAKMAD000000000.1"}; line 49816: {"accession":"GB_GCA_000495675.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp000495735","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"Acidilobus sp. MG","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA221622","ncbi_biosample":"SAMN02364255","ncbi_contig_count":"93","ncbi_contig_n50":"173621","ncbi_country":"USA: Yellowstone National Park","ncbi_date":"2013-11-05","ncbi_genbank_assembly_accession":"GCA_000495675.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"na","ncbi_isolation_source":"Monarch Geyser (MG_3); temperature 80C; pH 4.0","ncbi_lat_lon":"44.7243 N 110.7056 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"1","ncbi_organism_name":"uncultured Acidilobus sp. MG","ncbi_protein_count":"1787","ncbi_refseq_category":"na","ncbi_rrna_count":"2","ncbi_scaffold_count":"35","ncbi_scaffold_l50":"2","ncbi_scaffold_n50":"412542","ncbi_scaffold_n75":"89879","ncbi_scaffold_n90":"38004","ncbi_seq_rel_date":"2013-11-05","ncbi_spanned_gaps":"58","ncbi_species_taxid":"1410573","ncbi_ssu_count":"1","ncbi_strain_identifiers":"none","ncbi_submitter":"Montana State University","ncbi_taxid":"1410573","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__environmental samples;s__uncultured Acidilobus sp. MG","ncbi_total_gap_length":"9390","ncbi_total_length":"1548506","ncbi_translation_table":"11","ncbi_trna_count":"49","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1539116","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"AYMA00000000.1"} | supports | Inspected selected primary source objects, retaining source genome identifiers, taxon/species distinction, accession versions, deposit fields and independently scoped source hierarchies. No physical deposit or sequence equivalence is inferred from names alone. |
+| genome-catalog-2 | data/catalog/gtdb_genomes-0018.jsonl.gz; line 432: {"accession":"GB_GCA_022014995.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus sp022015155","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM2201499v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA800390","ncbi_biosample":"SAMN25334117","ncbi_contig_count":"150","ncbi_contig_n50":"11122","ncbi_country":"USA: Yellowstone National Park; Cinder Pool","ncbi_date":"2022-02-06","ncbi_genbank_assembly_accession":"GCA_022014995.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"CP.2020.9m.Bin.2","ncbi_isolation_source":"Hot spring water","ncbi_lat_lon":"44.73244 N 110.70978 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2022-02-06","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"CP.2020.9m.Bin.2","ncbi_submitter":"Montana State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1248329","ncbi_translation_table":"11","ncbi_trna_count":"40","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1248329","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAKLZY000000000.1"} | supports | Inspected selected primary source objects, retaining source genome identifiers, taxon/species distinction, accession versions, deposit fields and independently scoped source hierarchies. No physical deposit or sequence equivalence is inferred from names alone. |
+| gtdb-full-scan | data/catalog/MANIFEST.json; {"paths":["data/catalog/gtdb_genomes-0000.jsonl.gz","data/catalog/gtdb_genomes-0001.jsonl.gz","data/catalog/gtdb_genomes-0002.jsonl.gz","data/catalog/gtdb_genomes-0003.jsonl.gz","data/catalog/gtdb_genomes-0004.jsonl.gz","data/catalog/gtdb_genomes-0005.jsonl.gz","data/catalog/gtdb_genomes-0006.jsonl.gz","data/catalog/gtdb_genomes-0007.jsonl.gz","data/catalog/gtdb_genomes-0008.jsonl.gz","data/catalog/gtdb_genomes-0009.jsonl.gz","data/catalog/gtdb_genomes-0010.jsonl.gz","data/catalog/gtdb_genomes-0011.jsonl.gz","data/catalog/gtdb_genomes-0012.jsonl.gz","data/catalog/gtdb_genomes-0013.jsonl.gz","data/catalog/gtdb_genomes-0014.jsonl.gz","data/catalog/gtdb_genomes-0015.jsonl.gz","data/catalog/gtdb_genomes-0016.jsonl.gz","data/catalog/gtdb_genomes-0017.jsonl.gz","data/catalog/gtdb_genomes-0018.jsonl.gz"],"clusters":[{"id":"GTDB:s__Acidilobus_sp003431325","count":8,"taxid_distribution":{"1872109":7,"1577685":1},"reverse_taxa":["NCBITaxon:1577685","NCBITaxon:1872109"],"reverse_rows":[38237,70988],"other_taxa_note_supported":true},{"id":"GTDB:s__Acidilobus_sp022015155","count":7,"taxid_distribution":{"1872109":7},"reverse_taxa":["NCBITaxon:1872109"],"reverse_rows":[70989],"other_taxa_note_supported":false},{"id":"GTDB:s__Acidilobus_sp000495735","count":6,"taxid_distribution":{"1872104":1,"1872109":2,"1410575":1,"1410576":1,"1410573":1},"reverse_taxa":["NCBITaxon:1410573","NCBITaxon:1410575","NCBITaxon:1410576","NCBITaxon:1872104","NCBITaxon:1872109"],"reverse_rows":[25048,25050,25051,70970,70987],"other_taxa_note_supported":true},{"id":"GTDB:s__Acidilobus_sp028276005","count":4,"taxid_distribution":{"1872109":3,"1410574":1},"reverse_taxa":["NCBITaxon:1410574","NCBITaxon:1872109"],"reverse_rows":[25049,70990],"other_taxa_note_supported":true},{"id":"GTDB:s__Acidilobus_sp049973875","count":1,"taxid_distribution":{"1872109":1},"reverse_taxa":["NCBITaxon:1872109"],"reverse_rows":[70991],"other_taxa_note_supported":false},{"id":"GTDB:s__Acidilobus_sp049974445","count":1,"taxid_distribution":{"1872109":1},"reverse_taxa":["NCBITaxon:1872109"],"reverse_rows":[70992],"other_taxa_note_supported":false},{"id":"GTDB:s__Acidilobus_sp049977005","count":1,"taxid_distribution":{"1872109":1},"reverse_taxa":["NCBITaxon:1872109"],"reverse_rows":[70993],"other_taxa_note_supported":false}]} | supports | All nineteen GTDB primary shards were hashed and read using exact terminal species tokens. Selected primary memberships support the source cluster counts. |
+| qc-setup-receipt | just qc; initial setup attempt, 2026-10-19T07:17:01Z through 2026-10-19T07:17:01Z | context_only | Initial actual invocation from /private/tmp/taxonmech-record-reviews-k0MubV/repo exited 1 because ruff was absent. Locked ruff 0.16.7 was installed only in that isolated environment before the complete retry. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. |
+| strict-receipt | just validate-strict data/taxa/archaea/acidilobus_sp.yaml --out /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0004/strict-04.tsv; This exact generated YAML only; its captured bytes remain unchanged. Actual earlier per-target invocation; the receipt retains its original cwd and times. | supports | Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0004/repo; started 2026-10-19T23:42:19Z, finished 2026-10-19T23:42:21Z, exit 0. This exact generated YAML only; its captured bytes remain unchanged. Actual earlier per-target invocation; the receipt retains its original cwd and times.<br>Validating 1 files with 4 workers; schema=/private/tmp/taxonmech-record-reviews-k0MubV/repo-batch-0003/src/taxonmech/schema/taxonmech.yaml<br><br>=== validate-strict summary ===<br>  files scanned:      1<br>  files with ERROR:   0<br>  total ERROR rows:   0<br>  TSV:                /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0004/strict-04.tsv |
+| history-receipt | just validate-history; All 17 standalone history records; the generated seed event was also inspected in this target. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. | supports | Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo; started 2026-10-19T07:17:01Z, finished 2026-10-19T07:17:03Z, exit 0. All 17 standalone history records; the generated seed event was also inspected in this target. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles.<br>history links: 17 record(s), 0 invalid<br>No issues found<br>17 history record(s) valid against src/taxonmech/schema/history.yaml |
+| corpus-receipt | just verify-corpus; All 625,960 generated taxon YAMLs, not a focused approximation. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. | supports | Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo; started 2026-10-19T07:18:23Z, finished 2026-10-19T07:24:12Z, exit 0. All 625,960 generated taxon YAMLs, not a focused approximation. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles.<br>uv run python scripts/verify_corpus.py <br>expected 625960 records, found 625960 on disk<br>  missing:   0<br>  extra:     0<br>  differing: 0<br><br>corpus reproduces exactly from data/raw/ and curation/seed_scope.tsv |
+| products-receipt | just validate-products; Full configured corpus scan for curator-added graph nodes; this target contains no causal graph. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. | supports | Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo; started 2026-10-19T07:17:01Z, finished 2026-10-19T07:55:11Z, exit 0. Full configured corpus scan for curator-added graph nodes; this target contains no causal graph. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles.<br>uv run python scripts/validate_id_label_correspondence.py -c conf/id_label_targets.yaml<br><br>id↔label correspondence summary:<br><br>✅ All id↔label pairs correspond. |
+| qc-receipt | just qc; Repository-wide just qc, including native corpus-wide checks. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. | supports | Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo; started 2026-10-19T07:17:41Z, finished 2026-10-19T08:07:39Z, exit 0. Repository-wide just qc, including native corpus-wide checks. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles.<br>1055 passed, 3 skipped, 5 deselected in 1634.00s (0:27:13)<br>Validating 625960 files with 4 workers; schema=/private/tmp/taxonmech-record-reviews-k0MubV/repo/src/taxonmech/schema/taxonmech.yaml<br>  files scanned:      625960<br>expected 625960 records, found 625960 on disk<br>pages/ is current<br>Site publication: 530,864,122 bytes (budget 950,000,000)<br>625960 taxon records<br>  NCBITAXON        625960<br>All TaxonMech quality gates passed.<br>  Related STRAININFO_STRAIN: 54312 strain-record pairs, 53745 identifiers, 53890 strains (not genome counts)<br>  Related STRAININFO_DEPOSIT: 107277 strain-record pairs, 106843 identifiers, 53890 strains (not genome counts)<br>  Related NUCLEOTIDE_SEQUENCE: 51594 strain-record pairs, 51301 identifiers, 9984 strains (not genome counts)<br>LPSN: 22469 records carry nomenclature, 21254 with a correct name   GTDB: 117809 records mapped, 324404579 genomes summed across record attestations (not deduplicated)<br>Causal graphs: 0 records (0 evidence-backed edges)<br><br>All TaxonMech quality gates passed. |
+
+## Limits And Additional Notes
+
+- The review inspects source identity and assertion scope, not a new phylogenetic species-boundary analysis, assembly comparison or experimental mechanism study. Zero imported strains is bounded to the pinned source and subtree rules.
+- Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles.
+- No generated record or history was edited; curation actions remain proposed.
+- Fresh-base canonical recapture preserved all previously reviewed input hashes; original captures and actual transition receipts remain retained.
+- Every new bundle still requires its own validate/save/check recipe; baseline native receipts do not claim these later steps have run.
+
+## Complete Structured Record
+
+The sibling review.yaml is authoritative.
+
+```yaml
+schema_version: 1.0.0
+review_id: 20261020T034204Z-acidilobus_sp
+kind: record
+repository: CultureBotAI/TaxonMech
+title: 'Record review: Acidilobus sp.'
+started_at: '2026-10-19T23:42:12Z'
+finished_at: '2026-10-20T03:42:04Z'
+reviewer:
+  identity: Codex
+  kind: agent
+  independence: independent
+  independence_basis: The reviewer did not author the existing generated target; this
+    review changes only new review artifacts in an isolated checkout.
+skill: .claude/skills/review-yaml-record/SKILL.md
+completion: completed
+verdict: pass_with_limitations
+scientific_review: true
+summary: The generic Acidilobus sp. record correctly retains seven pooled GTDB mappings
+  and their source counts without equivalent xrefs. One minor finding concerns four
+  fixed notes that incorrectly assert another NCBI target for those individual clusters.
+source:
+  git_revision: 9b5a8fff5185b38dc5c77bb35235152c81ea7765
+  state: working_tree
+  inputs:
+  - path: .claude/skills/curate-yaml-record/references/review-checklist.md
+    sha256: 8e8fd97c64fbff27e023c7a768b4c806c98f56cd6571e7102217a2c833284df6
+    role: context
+  - path: .claude/skills/review-yaml-record/SKILL.md
+    sha256: 4c7090b9d7fd0c6f7f2b4e47b48cbf64835e8d27b44944649e1ccd9038ce462d
+    role: context
+  - path: AGENTS.md
+    sha256: bde64bd1943c4fc64b332cdbc76b89c1460294d9b1042beeedbfa91160a70331
+    role: context
+  - path: CLAUDE.md
+    sha256: 8ae749dbc22700080dcf5e1a0b7ed75710dee6a27f5c7f9e7c6790c26176e5c8
+    role: context
+  - path: conf/id_label_targets.yaml
+    sha256: bfd1b248f7b189cd054e15b7ad0171042a30980d2ebdbdd8e7d85cea68dde9c8
+    role: context
+  - path: conf/ncbi_taxdump.yaml
+    sha256: 1d734bbb3ebf9d36e304d8030c5852fa4f0f306fca2849be5dec8f3dff86f887
+    role: context
+  - path: conf/record_review.yaml
+    sha256: 366312506b771fc18fc5bfc30d5ec942b2c96212e1f4f95c463cfa1707fbebaa
+    role: context
+  - path: curation/seed_scope.tsv
+    sha256: 5fdc0f7111b64e02439d95c6f2b51fcff1d2154c34b2d957422dd9b297e94d4b
+    role: context
+  - path: data/atb/MANIFEST.yaml
+    sha256: 1358809b2af7e8d4a6c8bb4c122781f48ae40b2c4f0f1c7ad3f37ad8907d7315
+    role: context
+  - path: data/catalog/MANIFEST.json
+    sha256: 15b5cfe42be7919faf2a6feb5ac4f7084009e84b2d6da669f7101aacc3586299
+    role: context
+  - path: data/catalog/gtdb_genomes-0000.jsonl.gz
+    sha256: 2392b3f07a712e9198bb9a5088cc1389ccc7d426f7bd2f5462dedb88b1f69ccf
+    role: context
+  - path: data/catalog/gtdb_genomes-0001.jsonl.gz
+    sha256: 806fe9de52b466a3bf143e780aa8a047bf9b91272f1a3025200e81a19c39db11
+    role: context
+  - path: data/catalog/gtdb_genomes-0002.jsonl.gz
+    sha256: a80402c55fc62af4e29455b3ff541a9898c547941bb6979ae32768130b457878
+    role: context
+  - path: data/catalog/gtdb_genomes-0003.jsonl.gz
+    sha256: 27952cd83f56e084919e6bc31778365b9e7495d80a9fe6bbc97055a586ce8344
+    role: context
+  - path: data/catalog/gtdb_genomes-0004.jsonl.gz
+    sha256: f600f5d831d44c43e2d0872bd4d3d497d5e3550309650a2061b5f277f8c00e32
+    role: context
+  - path: data/catalog/gtdb_genomes-0005.jsonl.gz
+    sha256: 43bdf17b0d30e3faa3ca880d89b5204fd9e79939bd82f32e5c1109b9d8674dfc
+    role: context
+  - path: data/catalog/gtdb_genomes-0006.jsonl.gz
+    sha256: 70cf49ec754904337e0beb7fddb86bb57cf1affde8d326aef821b4b0628f8199
+    role: context
+  - path: data/catalog/gtdb_genomes-0007.jsonl.gz
+    sha256: 0ba5c74cb32e97a3b85e26e1f43501dc2aac915bd8b26d71beab56e4b30bfd2d
+    role: context
+  - path: data/catalog/gtdb_genomes-0008.jsonl.gz
+    sha256: f085fdc8d521b2edc10d58092170e5bc8364a3ab9d9aff5faca718f54939c7b8
+    role: context
+  - path: data/catalog/gtdb_genomes-0009.jsonl.gz
+    sha256: 455c03d8df2b955d3a8e9cb2e502b36e62114996ed114c8c34f273854c48b4ef
+    role: context
+  - path: data/catalog/gtdb_genomes-0010.jsonl.gz
+    sha256: aeb33045242e4c215fad2acb25ea21402e11a07164e93c54ce19a1d6408e60b3
+    role: context
+  - path: data/catalog/gtdb_genomes-0011.jsonl.gz
+    sha256: 36fe03c7caf806752d9005fc1855616dd722a65e0b123bebbd8fea37068e3fb5
+    role: context
+  - path: data/catalog/gtdb_genomes-0012.jsonl.gz
+    sha256: 415d91c43886d172cff6cee466abce5fccac75dfcea5d587d6290f693ba2b7e6
+    role: context
+  - path: data/catalog/gtdb_genomes-0013.jsonl.gz
+    sha256: 1a64663893af28bb7f2a99832c81c9f2bc4203b4e5e3b318431d179c0e0ebd3b
+    role: context
+  - path: data/catalog/gtdb_genomes-0014.jsonl.gz
+    sha256: 18d06a6dc475b9f9a7b03c57a44ad0ce3c099e2c5878a85d8385cdb48189582e
+    role: context
+  - path: data/catalog/gtdb_genomes-0015.jsonl.gz
+    sha256: 294a24c5f36f7a2fcd8543962ca061494f3f705d65b53e525f680dd362f15d42
+    role: context
+  - path: data/catalog/gtdb_genomes-0016.jsonl.gz
+    sha256: d97a816a4d84c4af63bbdc904ba5d8a399436da32c38a9463fa1b8497d3373d6
+    role: context
+  - path: data/catalog/gtdb_genomes-0017.jsonl.gz
+    sha256: f2a4d2c5b7927184206c6614540746b5e9c298e7a924bd149fc86c0f0c046ff6
+    role: context
+  - path: data/catalog/gtdb_genomes-0018.jsonl.gz
+    sha256: 8baa314877815777abcdf600079c6ee42f2ea5340398df9f2e18de9c18fd4347
+    role: context
+  - path: data/raw/MANIFEST.yaml
+    sha256: ee76711683b1b579d1561dcf40187e10e4f0027ae1b89f108eb18e865e7e7d38
+    role: context
+  - path: data/raw/bacdive_strains.tsv
+    sha256: 029fd6d1f53ef7f90684130bf0d644ed3edd1d8fbeb065a511ae928f160b1eea
+    role: context
+  - path: data/raw/bactotraits_taxa.tsv
+    sha256: 976d109cef832d8bf27cc105f67a42efbe900b6946736298602ef6d11158b197
+    role: context
+  - path: data/raw/culture_collection_strains.tsv
+    sha256: 810fdcb16abd6330fb15bb03d4c74b18db86be36a7c599df7c6b2498d9735c95
+    role: context
+  - path: data/raw/gold_organisms.tsv
+    sha256: 0680971a156eef0b79de46c71a1f2138eaee5212ad8193eec943bd8e6257e473
+    role: context
+  - path: data/raw/gtdb_mappings.tsv
+    sha256: bf62441b1b76abb16dd92e795c020ff30fc24e37e195b862fb9beda567277225
+    role: context
+  - path: data/raw/gtdb_species.tsv
+    sha256: 24eddf08fe8fdd1fed534a1b7fd411561eec612c58c3709a36032998fdab8f21
+    role: context
+  - path: data/raw/lpsn_names.tsv
+    sha256: 097f8f4ba3fd077d02e48f2c298a0af88fe02db79cc862f9af1c05141b0baa57
+    role: context
+  - path: data/raw/madin_taxa.tsv
+    sha256: 7620448834f1b86daa83f2e338160ec3291a2ec3900ea4cec449418b1dc8b148
+    role: context
+  - path: data/raw/mediadive_taxa.tsv
+    sha256: 3f74b78cadfcdb6aeae953e09fdb39e34fd9c5d5ed0be65a04a5d7fb02355905
+    role: context
+  - path: data/raw/ncbitaxon_taxa.tsv
+    sha256: 97ff340e1eebf62ea541a299e5c798cdcc24ef935c636fb059df48ab45d6f2f6
+    role: context
+  - path: data/straininfo/MANIFEST.yaml
+    sha256: 25dd601c8cf6d4d84e5cc756d1e642ebef89f565bd31967152bf0026fa072847
+    role: context
+  - path: data/taxa/PATHS.tsv
+    sha256: c950844feb0638ce04f7349784749dd1d728fe70bc80f7e2756d956d4ecea254
+    role: context
+  - path: data/taxa/archaea/acidilobus_sp.yaml
+    sha256: 9fce106d37219a2be4deff7bf96575b228119161eb3829878ebe1d8acc10adc9
+    role: target
+  - path: docs/ALLTHEBACTERIA.md
+    sha256: a1b0c298988782ad4b7dbb80c661c483a67cd0e478366eddbea7d1ba7595e7cd
+    role: context
+  - path: docs/CURATION.md
+    sha256: 9e09c97bcd617f2b3d0090f775b80565fccc9d00e4c398ed58d3a31192a8fa8e
+    role: context
+  - path: docs/HARMONIZATION.md
+    sha256: 9c676a03a226d7fdce82f064acd01807a1a783497ffbbb1aabb8fdd393ac250d
+    role: context
+  - path: docs/SCHEMA.md
+    sha256: 9e767cebb2506f8372c65ceb5f75e5ef2df2b23c2be3727cfd198f447a6a0e30
+    role: context
+  - path: docs/SOURCE_COVERAGE.md
+    sha256: 43f17c3c80815d395136aab53f310be3190a8d614a45fc2f4a3942faeb0bc9e9
+    role: context
+  - path: docs/STRAININFO.md
+    sha256: 65d274e7126fcf7810da746366b0e60c1957f05df9016fb0900600932b278241
+    role: context
+  - path: docs/STRAIN_GENOMES.md
+    sha256: 7cfdbc8a600173d6569f885b409b1543098bb6022e8764324d91879eaed2b597
+    role: context
+  - path: docs/record-review-profile.md
+    sha256: d98d6944810090bf9c344ab218d82f8927d73eaad432322b94a876fe9e891334
+    role: context
+  - path: docs/record-reviews.md
+    sha256: 452a19ab688276747b7c4308523a14d4d99c1c39ef6909ae8a90b85b7a9b3e9b
+    role: context
+  - path: justfile
+    sha256: c46d88186cad450fbd47ce5176bf2afc8289252e287324245ad30090753c750e
+    role: context
+  - path: schema/record_review.yaml
+    sha256: 229baf9b69118a1fe318e4c31085c0820e4e3d1365e7b04d6ace451b7c35f9bb
+    role: context
+  - path: scripts/record_review.py
+    sha256: 95a4ec41e38ec47ba3578e76838c46a0adbf47e49ad3636524735d08cfcb1c4d
+    role: context
+  - path: scripts/run_qc.py
+    sha256: d3a8e398b0484fef1ce4ae13e639a03dd41467c1d597d753132e4dba04df9da3
+    role: context
+  - path: scripts/validate_history.py
+    sha256: aa8fd8528a28cf56a92768c05d57aea7ff48745510796126f144856b8fd7ae8b
+    role: context
+  - path: scripts/validate_id_label_correspondence.py
+    sha256: b5ff41bb52d24f5d7819fb12769e216440f75ec3fb3df3e3cb2c5082fffb40e0
+    role: context
+  - path: scripts/validate_strict.py
+    sha256: d0d75cc805cc746053076b5f75f5e6c817ab15c75a9362f8ce3be53bd4ec7382
+    role: context
+  - path: scripts/verify_corpus.py
+    sha256: 48c4ef707543d1b836052013e8991d530d14559f9b58aa3ff9faf02c4e1ffc2e
+    role: context
+  - path: src/taxonmech/extract.py
+    sha256: 7c5b5bf385e0c060f1cb3dbac304d05ddb941e4c83c900017a04133efd6d1822
+    role: context
+  - path: src/taxonmech/ncbi_taxdump.py
+    sha256: 83e3bfd53721a1f85291022511de6504d84caa58e899c0fd8d1797e9f00f67cf
+    role: context
+  - path: src/taxonmech/schema/history.yaml
+    sha256: b01b06f1b9a37db205c26c31ec0fd910690848507c7e1bfb73b424ac0829c52d
+    role: context
+  - path: src/taxonmech/schema/mech_shared.yaml
+    sha256: c2e7054fd32635e380c698282bd886a9105861009b9f0474f02bb1b80865e895
+    role: context
+  - path: src/taxonmech/schema/taxonmech.yaml
+    sha256: aab25fee94c73eb70e5197a4f3ab8ddf0fa6731785974364963906d4f4d87fc3
+    role: context
+  - path: src/taxonmech/seed.py
+    sha256: 6b5b065f4ae7aea022af736a22c0f63dc58a2425c7ee453259e567ab030f8257
+    role: context
+scope:
+  description: Entire single generated record, including all source assertions and
+    imported strains.
+  selection: Original unreviewed path-order position 34; batch-0004 target 4. Excluded
+    82 actual targets from validated main and local batch-0001/0002/0003 listings;
+    full corpus enumeration includes ignored files.
+  coverage: full
+  population_size: 1
+  reviewed_target_ids:
+  - NCBITaxon:1872109
+targets:
+- target_id: NCBITaxon:1872109
+  path: data/taxa/archaea/acidilobus_sp.yaml
+  label: Acidilobus sp.
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Maintained generated-record builder
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/extract.py
+    role: Maintained source inventory extractor
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/ncbi_taxdump.py
+    role: Maintained NCBI primary-taxonomy projection
+  - repository: CultureBotAI/TaxonMech
+    path: data/raw/ncbitaxon_taxa.tsv
+    role: Pinned taxon identity, name classes and carried ancestry
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit species-or-below scope
+checks:
+- check_id: identity-authority
+  name: Exact NCBI taxon, rank and lineage
+  status: passed
+  required: true
+  summary: NCBITaxon:1872109 denotes Acidilobus sp. at SPECIES rank, parent NCBITaxon:2635519,
+    genetic code11. All 10 carried ancestors and source name classes agree with the
+    pinned inventory and captured current NCBI response (which omits root).
+  target_ids:
+  - NCBITaxon:1872109
+  evidence_ids:
+  - record
+  - taxonomy-inventory
+  - ncbi-live
+  - scope-row
+  - path-row
+- check_id: gtdb-primary-counts
+  name: Complete primary GTDB cluster count
+  status: passed
+  required: true
+  summary: The seven clusters contain 28 inspected primary genomes, of which 22 carry
+    target taxid1872109. Counts are 8,7,6,4,1,1,1. The primary 8-genome cluster includes
+    representative 7A taxid1577685 and seven generic-taxid members. Four clusters
+    (sp022015155, sp049973875, sp049974445, sp049977005) have only taxid1872109 both
+    in primary members and the complete reverse mapping inventory, contradicting the
+    fixed other-NCBI-taxa clause. Pooling several GTDB species onto the NCBI placeholder
+    still supports broadMatch. NCBI lineage Acidilobales is preserved separately from
+    GTDB Sulfolobales.
+  target_ids:
+  - NCBITaxon:1872109
+  evidence_ids:
+  - gtdb-full-scan
+  - gtdb-species
+  - gtdb-mappings
+  - genome-catalog-1
+  - genome-catalog-2
+  scope_note: All nineteen source shards; full input hashes retained.
+- check_id: strain-genome-evidence
+  name: Imported strain links
+  status: not_applicable
+  required: false
+  summary: No imported BacDive strain or strain-level links are asserted; exact source
+    placement remains distinct from biological strain or genome existence.
+  target_ids:
+  - NCBITaxon:1872109
+  evidence_ids:
+  - record
+  - bacdive-inventory
+  - culture-inventory
+- check_id: historical-source-counts
+  name: Historical aggregate edges
+  status: not_applicable
+  required: false
+  summary: No historical medium, organism or trait aggregate is asserted.
+  target_ids:
+  - NCBITaxon:1872109
+  evidence_ids:
+  - gold-organisms
+  - mediadive-taxa
+  - madin-taxa
+  - bactotraits-taxa
+- check_id: qc-setup-attempt
+  name: Initial quality-gate setup attempt
+  status: failed
+  required: false
+  summary: 'Actual exit 1: missing ruff; superseded by the separately recorded successful
+    full retry.'
+  target_ids:
+  - NCBITaxon:1872109
+  evidence_ids:
+  - qc-setup-receipt
+  command: just qc
+  exit_code: 1
+  expected_exit_code: 0
+  scope_note: Earlier shared-base environment setup attempt; not the final quality-gate
+    result.
+- check_id: strict
+  name: Native strict record validation
+  status: passed
+  required: true
+  summary: Actual terminal exit code 0. This exact generated YAML only; its captured
+    bytes remain unchanged. Actual earlier per-target invocation; the receipt retains
+    its original cwd and times.
+  target_ids:
+  - NCBITaxon:1872109
+  evidence_ids:
+  - strict-receipt
+  command: UV_NO_SYNC=1 UV_CACHE_DIR=/private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0004/uv-cache
+    just validate-strict data/taxa/archaea/acidilobus_sp.yaml --out /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0004/strict-04.tsv
+  exit_code: 0
+  expected_exit_code: 0
+  scope_note: This exact generated YAML only; its captured bytes remain unchanged.
+    Actual earlier per-target invocation; the receipt retains its original cwd and
+    times.
+- check_id: history
+  name: Repository history validation
+  status: passed
+  required: true
+  summary: Actual terminal exit code 0. All 17 standalone history records; the generated
+    seed event was also inspected in this target. Reused actual native validation
+    on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded
+    cwd and timestamps identify the original execution. These native corpus/source
+    inputs are unchanged; only new review files differ. This receipt is not a new
+    run on the batch branch and does not validate subsequently saved review bundles.
+  target_ids:
+  - NCBITaxon:1872109
+  evidence_ids:
+  - history-receipt
+  command: UV_NO_SYNC=1 UV_CACHE_DIR=/private/tmp/taxonmech-record-reviews-k0MubV/uv-cache
+    just validate-history
+  exit_code: 0
+  expected_exit_code: 0
+  scope_note: All 17 standalone history records; the generated seed event was also
+    inspected in this target. Reused actual native validation on the unchanged shared
+    base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps
+    identify the original execution. These native corpus/source inputs are unchanged;
+    only new review files differ. This receipt is not a new run on the batch branch
+    and does not validate subsequently saved review bundles.
+- check_id: corpus
+  name: Full-corpus exact reproduction
+  status: passed
+  required: true
+  summary: Actual terminal exit code 0. All 625,960 generated taxon YAMLs, not a focused
+    approximation. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+    the recorded cwd and timestamps identify the original execution. These native
+    corpus/source inputs are unchanged; only new review files differ. This receipt
+    is not a new run on the batch branch and does not validate subsequently saved
+    review bundles.
+  target_ids:
+  - NCBITaxon:1872109
+  evidence_ids:
+  - corpus-receipt
+  command: UV_NO_SYNC=1 UV_CACHE_DIR=/private/tmp/taxonmech-record-reviews-k0MubV/uv-cache
+    just verify-corpus
+  exit_code: 0
+  expected_exit_code: 0
+  scope_note: All 625,960 generated taxon YAMLs, not a focused approximation. Reused
+    actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+    the recorded cwd and timestamps identify the original execution. These native
+    corpus/source inputs are unchanged; only new review files differ. This receipt
+    is not a new run on the batch branch and does not validate subsequently saved
+    review bundles.
+- check_id: products
+  name: Native product ID/label gate
+  status: passed
+  required: true
+  summary: Actual terminal exit code 0. Full configured corpus scan for curator-added
+    graph nodes; this target contains no causal graph. Reused actual native validation
+    on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded
+    cwd and timestamps identify the original execution. These native corpus/source
+    inputs are unchanged; only new review files differ. This receipt is not a new
+    run on the batch branch and does not validate subsequently saved review bundles.
+  target_ids:
+  - NCBITaxon:1872109
+  evidence_ids:
+  - products-receipt
+  command: UV_NO_SYNC=1 UV_CACHE_DIR=/private/tmp/taxonmech-record-reviews-k0MubV/uv-cache
+    just validate-products
+  exit_code: 0
+  expected_exit_code: 0
+  scope_note: Full configured corpus scan for curator-added graph nodes; this target
+    contains no causal graph. Reused actual native validation on the unchanged shared
+    base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps
+    identify the original execution. These native corpus/source inputs are unchanged;
+    only new review files differ. This receipt is not a new run on the batch branch
+    and does not validate subsequently saved review bundles.
+- check_id: qc
+  name: Authoritative complete quality gate
+  status: passed
+  required: true
+  summary: Actual terminal exit code 0. Repository-wide just qc, including native
+    corpus-wide checks. Reused actual native validation on the unchanged shared base
+    9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify
+    the original execution. These native corpus/source inputs are unchanged; only
+    new review files differ. This receipt is not a new run on the batch branch and
+    does not validate subsequently saved review bundles. Pytest reported 1055 passed,
+    3 skipped and 5 deselected; the native QC recipe completed successfully.
+  target_ids:
+  - NCBITaxon:1872109
+  evidence_ids:
+  - qc-receipt
+  command: UV_NO_SYNC=1 UV_CACHE_DIR=/private/tmp/taxonmech-record-reviews-k0MubV/uv-cache
+    just qc
+  exit_code: 0
+  expected_exit_code: 0
+  scope_note: Repository-wide just qc, including native corpus-wide checks. Reused
+    actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+    the recorded cwd and timestamps identify the original execution. These native
+    corpus/source inputs are unchanged; only new review files differ. This receipt
+    is not a new run on the batch branch and does not validate subsequently saved
+    review bundles.
+evidence:
+- evidence_id: record
+  kind: record_content
+  reference: data/taxa/archaea/acidilobus_sp.yaml
+  accessed_at: '2026-10-20T03:42:04Z'
+  support: supports
+  summary: Read the entire generated YAML, including identity, lineage, names, mappings,
+    source attestations, all imported strains and links, and seed history.
+  locator: entire TaxonRecord; identifier=NCBITaxon:1872109
+  snapshot_sha256: 9fce106d37219a2be4deff7bf96575b228119161eb3829878ebe1d8acc10adc9
+- evidence_id: taxonomy-inventory
+  kind: database
+  reference: data/raw/ncbitaxon_taxa.tsv
+  accessed_at: '2026-10-19T23:42:14Z'
+  support: supports
+  summary: Inspected the target and each carried ancestor, rank, parent, genetic code
+    and source name classes.
+  locator: 'line 2: {"taxon_id":"NCBITaxon:1","label":"root","rank":"NO_RANK","parent_id":""};
+    line 1698: {"taxon_id":"NCBITaxon:2157","label":"Archaea","rank":"DOMAIN","parent_id":"NCBITaxon:131567"};
+    line 2980: {"taxon_id":"NCBITaxon:28889","label":"Thermoproteota","rank":"PHYLUM","parent_id":"NCBITaxon:1783275"};
+    line 18995: {"taxon_id":"NCBITaxon:105850","label":"Acidilobus","rank":"GENUS","parent_id":"NCBITaxon:871007"};
+    line 25334: {"taxon_id":"NCBITaxon:131567","label":"cellular organisms","rank":"CELLULAR_ROOT","parent_id":"NCBITaxon:1"};
+    line 36612: {"taxon_id":"NCBITaxon:183924","label":"Thermoprotei","rank":"CLASS","parent_id":"NCBITaxon:28889"};
+    line 184681: {"taxon_id":"NCBITaxon:871006","label":"Acidilobales","rank":"ORDER","parent_id":"NCBITaxon:183924"};
+    line 184682: {"taxon_id":"NCBITaxon:871007","label":"Acidilobaceae","rank":"FAMILY","parent_id":"NCBITaxon:871006"};
+    line 464838: {"taxon_id":"NCBITaxon:1783275","label":"Thermoproteati","rank":"KINGDOM","parent_id":"NCBITaxon:2157"};
+    line 489192: {"taxon_id":"NCBITaxon:1872109","label":"Acidilobus sp.","rank":"SPECIES","parent_id":"NCBITaxon:2635519","genetic_code":"11","exact_synonyms":"","related_synonyms":"","broad_synonyms":"","attested_by":"ncbitaxon|gtdb","retired_into":"","taxonomy_snapshot":"2026-09-13"};
+    line 538982: {"taxon_id":"NCBITaxon:2635519","label":"unclassified Acidilobus","rank":"NO_RANK","parent_id":"NCBITaxon:105850"}'
+  snapshot_sha256: 97ff340e1eebf62ea541a299e5c798cdcc24ef935c636fb059df48ab45d6f2f6
+- evidence_id: scope-row
+  kind: database
+  reference: curation/seed_scope.tsv
+  accessed_at: '2026-10-19T23:42:14Z'
+  support: supports
+  summary: Exact target is included in the declared seed scope.
+  locator: 'line 80069: {"identifier":"NCBITaxon:1872109","added":"2026-09-13","reason":"attested
+    rule: Acidilobus sp., 2 sources incl. NCBI"}'
+  snapshot_sha256: 5fdc0f7111b64e02439d95c6f2b51fcff1d2154c34b2d957422dd9b297e94d4b
+- evidence_id: path-row
+  kind: database
+  reference: data/taxa/PATHS.tsv
+  accessed_at: '2026-10-19T23:42:14Z'
+  support: supports
+  summary: Indexed path resolves to this exact NCBI taxon.
+  locator: 'line 296630: {"identifier":"NCBITaxon:1872109","slug":"acidilobus_sp"}'
+  snapshot_sha256: c950844feb0638ce04f7349784749dd1d728fe70bc80f7e2756d956d4ecea254
+- evidence_id: ncbi-live
+  kind: authority
+  reference: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=taxonomy&id=105851,242703,666510,1872109,242702,242704,242705,1577685,1987488,1987489
+  accessed_at: '2026-10-19T23:41:44Z'
+  support: supports
+  summary: 'Inspected the official response for this exact taxon: scientific name,
+    rank, parent, source name classes, lineage and genetic code. Current authority
+    and pinned September inventory remain distinct observations.'
+  locator: TaxaSet/Taxon[TaxId='1872109']; ten-target captured response
+  snapshot_sha256: a067de46f53517a2054c07c0cd4757470de852ea8bbc9e0f85aa4b269efb139b
+- evidence_id: lpsn-inventory
+  kind: database
+  reference: data/raw/lpsn_names.tsv
+  accessed_at: '2026-10-19T23:42:14Z'
+  support: supports
+  summary: Inspected exact mapped and linked LPSN names; bounded inventory absence
+    does not establish worldwide nomenclatural absence.
+  locator: complete table; exact target/subtree/source-identifier search has no match
+  snapshot_sha256: 097f8f4ba3fd077d02e48f2c298a0af88fe02db79cc862f9af1c05141b0baa57
+  search_scope: Full reads of explicitly named TSV inputs, including any ignored files;
+    exact whole field/token matches. Does not assert worldwide absence.
+- evidence_id: gtdb-mappings
+  kind: database
+  reference: data/raw/gtdb_mappings.tsv
+  accessed_at: '2026-10-19T23:42:14Z'
+  support: supports
+  summary: Inspected direct mappings and selected clusters' reverse mappings, retaining
+    each source predicate and taxon boundary.
+  locator: 'line 25048: {"gtdb_id":"GTDB:s__Acidilobus_sp000495735","gtdb_label":"s__Acidilobus_sp000495735","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1410573","predicate":"skos:closeMatch","genome_count":"6"};
+    line 25049: {"gtdb_id":"GTDB:s__Acidilobus_sp028276005","gtdb_label":"s__Acidilobus_sp028276005","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1410574","predicate":"skos:closeMatch","genome_count":"4"};
+    line 25050: {"gtdb_id":"GTDB:s__Acidilobus_sp000495735","gtdb_label":"s__Acidilobus_sp000495735","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1410575","predicate":"skos:closeMatch","genome_count":"6"};
+    line 25051: {"gtdb_id":"GTDB:s__Acidilobus_sp000495735","gtdb_label":"s__Acidilobus_sp000495735","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1410576","predicate":"skos:closeMatch","genome_count":"6"};
+    line 38237: {"gtdb_id":"GTDB:s__Acidilobus_sp003431325","gtdb_label":"s__Acidilobus_sp003431325","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1577685","predicate":"skos:closeMatch","genome_count":"8"};
+    line 70970: {"gtdb_id":"GTDB:s__Acidilobus_sp000495735","gtdb_label":"s__Acidilobus_sp000495735","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1872104","predicate":"skos:broadMatch","genome_count":"6"};
+    line 70987: {"gtdb_id":"GTDB:s__Acidilobus_sp000495735","gtdb_label":"s__Acidilobus_sp000495735","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1872109","predicate":"skos:broadMatch","genome_count":"6"};
+    line 70988: {"gtdb_id":"GTDB:s__Acidilobus_sp003431325","gtdb_label":"s__Acidilobus_sp003431325","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1872109","predicate":"skos:broadMatch","genome_count":"8"};
+    line 70989: {"gtdb_id":"GTDB:s__Acidilobus_sp022015155","gtdb_label":"s__Acidilobus_sp022015155","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1872109","predicate":"skos:broadMatch","genome_count":"7"};
+    line 70990: {"gtdb_id":"GTDB:s__Acidilobus_sp028276005","gtdb_label":"s__Acidilobus_sp028276005","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1872109","predicate":"skos:broadMatch","genome_count":"4"};
+    line 70991: {"gtdb_id":"GTDB:s__Acidilobus_sp049973875","gtdb_label":"s__Acidilobus_sp049973875","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1872109","predicate":"skos:broadMatch","genome_count":"1"};
+    line 70992: {"gtdb_id":"GTDB:s__Acidilobus_sp049974445","gtdb_label":"s__Acidilobus_sp049974445","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1872109","predicate":"skos:broadMatch","genome_count":"1"};
+    line 70993: {"gtdb_id":"GTDB:s__Acidilobus_sp049977005","gtdb_label":"s__Acidilobus_sp049977005","gtdb_parent":"GTDB:g__Acidilobus","ncbitaxon_id":"NCBITaxon:1872109","predicate":"skos:broadMatch","genome_count":"1"}'
+  snapshot_sha256: bf62441b1b76abb16dd92e795c020ff30fc24e37e195b862fb9beda567277225
+- evidence_id: gtdb-species
+  kind: database
+  reference: data/raw/gtdb_species.tsv
+  accessed_at: '2026-10-19T23:42:14Z'
+  support: supports
+  summary: Inspected source species identifiers, labels, parent clusters and genome
+    counts.
+  locator: 'line 3967: {"gtdb_id":"GTDB:s__Acidilobus_sp000495735","label":"s__Acidilobus_sp000495735","parent":"GTDB:g__Acidilobus","genome_count":"6"};
+    line 3969: {"gtdb_id":"GTDB:s__Acidilobus_sp003431325","label":"s__Acidilobus_sp003431325","parent":"GTDB:g__Acidilobus","genome_count":"8"};
+    line 3970: {"gtdb_id":"GTDB:s__Acidilobus_sp022015155","label":"s__Acidilobus_sp022015155","parent":"GTDB:g__Acidilobus","genome_count":"7"};
+    line 3971: {"gtdb_id":"GTDB:s__Acidilobus_sp028276005","label":"s__Acidilobus_sp028276005","parent":"GTDB:g__Acidilobus","genome_count":"4"};
+    line 3972: {"gtdb_id":"GTDB:s__Acidilobus_sp049973875","label":"s__Acidilobus_sp049973875","parent":"GTDB:g__Acidilobus","genome_count":"1"};
+    line 3973: {"gtdb_id":"GTDB:s__Acidilobus_sp049974445","label":"s__Acidilobus_sp049974445","parent":"GTDB:g__Acidilobus","genome_count":"1"};
+    line 3974: {"gtdb_id":"GTDB:s__Acidilobus_sp049977005","label":"s__Acidilobus_sp049977005","parent":"GTDB:g__Acidilobus","genome_count":"1"}'
+  snapshot_sha256: 24eddf08fe8fdd1fed534a1b7fd411561eec612c58c3709a36032998fdab8f21
+- evidence_id: bacdive-inventory
+  kind: database
+  reference: data/raw/bacdive_strains.tsv
+  accessed_at: '2026-10-19T23:42:14Z'
+  support: supports
+  summary: Complete inventory selection covers the exact target and descendants from
+    the complete NCBI parent graph; its imported strain population was compared with
+    the complete YAML.
+  locator: complete table; exact target/subtree/source-identifier search has no match
+  snapshot_sha256: 029fd6d1f53ef7f90684130bf0d644ed3edd1d8fbeb065a511ae928f160b1eea
+  search_scope: Full reads of explicitly named TSV inputs, including any ignored files;
+    exact whole field/token matches. Does not assert worldwide absence.
+- evidence_id: culture-inventory
+  kind: database
+  reference: data/raw/culture_collection_strains.tsv
+  accessed_at: '2026-10-19T23:42:14Z'
+  support: supports
+  summary: Inspected exact culture-inventory associations; an isolate name or genome
+    does not create an inferred deposit.
+  locator: complete table; exact target/subtree/source-identifier search has no match
+  snapshot_sha256: 810fdcb16abd6330fb15bb03d4c74b18db86be36a7c599df7c6b2498d9735c95
+  search_scope: Full reads of explicitly named TSV inputs, including any ignored files;
+    exact whole field/token matches. Does not assert worldwide absence.
+- evidence_id: gold-organisms
+  kind: database
+  reference: data/raw/gold_organisms.tsv
+  accessed_at: '2026-10-19T23:42:14Z'
+  support: supports
+  summary: Inspected the exact GOLD organism count row or bounded absence, without
+    converting counts to phenotypes.
+  locator: complete table; exact target/subtree/source-identifier search has no match
+  snapshot_sha256: 0680971a156eef0b79de46c71a1f2138eaee5212ad8193eec943bd8e6257e473
+  search_scope: Full reads of explicitly named TSV inputs, including any ignored files;
+    exact whole field/token matches. Does not assert worldwide absence.
+- evidence_id: mediadive-taxa
+  kind: database
+  reference: data/raw/mediadive_taxa.tsv
+  accessed_at: '2026-10-19T23:42:14Z'
+  support: supports
+  summary: Inspected the exact MediaDive medium count row or bounded absence, without
+    converting counts to phenotypes.
+  locator: complete table; exact target/subtree/source-identifier search has no match
+  snapshot_sha256: 3f74b78cadfcdb6aeae953e09fdb39e34fd9c5d5ed0be65a04a5d7fb02355905
+  search_scope: Full reads of explicitly named TSV inputs, including any ignored files;
+    exact whole field/token matches. Does not assert worldwide absence.
+- evidence_id: madin-taxa
+  kind: database
+  reference: data/raw/madin_taxa.tsv
+  accessed_at: '2026-10-19T23:42:14Z'
+  support: supports
+  summary: Inspected the exact Madin trait-assertion count row or bounded absence,
+    without converting counts to phenotypes.
+  locator: complete table; exact target/subtree/source-identifier search has no match
+  snapshot_sha256: 7620448834f1b86daa83f2e338160ec3291a2ec3900ea4cec449418b1dc8b148
+  search_scope: Full reads of explicitly named TSV inputs, including any ignored files;
+    exact whole field/token matches. Does not assert worldwide absence.
+- evidence_id: bactotraits-taxa
+  kind: database
+  reference: data/raw/bactotraits_taxa.tsv
+  accessed_at: '2026-10-19T23:42:14Z'
+  support: supports
+  summary: Inspected the exact BactoTraits trait-assertion count row or bounded absence,
+    without converting counts to phenotypes.
+  locator: complete table; exact target/subtree/source-identifier search has no match
+  snapshot_sha256: 976d109cef832d8bf27cc105f67a42efbe900b6946736298602ef6d11158b197
+  search_scope: Full reads of explicitly named TSV inputs, including any ignored files;
+    exact whole field/token matches. Does not assert worldwide absence.
+- evidence_id: mapping-policy
+  kind: record_content
+  reference: docs/HARMONIZATION.md
+  accessed_at: '2026-10-20T03:42:04Z'
+  support: supports
+  summary: Policy permits one-to-one species closeMatch normalization and LPSN-linked
+    species xrefs/synonyms, retains pooled broadMatch entries and carries NCBI lineage
+    unchanged.
+  locator: Mapping predicates; Which strains belong to a record
+  snapshot_sha256: 9c676a03a226d7fdce82f064acd01807a1a783497ffbbb1aabb8fdd393ac250d
+- evidence_id: equivalence-contract
+  kind: record_content
+  reference: src/taxonmech/schema/taxonmech.yaml
+  accessed_at: '2026-10-20T03:42:04Z'
+  support: supports
+  summary: TaxonRecord.xrefs denotes equivalent identifiers; broader/narrower relations
+    remain qualified taxonomy mappings. TaxonomyMapping.genome_count counts genomes
+    under the source taxon.
+  locator: TaxonRecord.xrefs, lines 180–187; TaxonomyMapping, lines 417–439
+  snapshot_sha256: aab25fee94c73eb70e5197a4f3ab8ddf0fa6731785974364963906d4f4d87fc3
+- evidence_id: seed-owner
+  kind: record_content
+  reference: src/taxonmech/seed.py
+  accessed_at: '2026-10-20T03:42:04Z'
+  support: supports
+  summary: Inspected mapping ranking, qualified predicates, fixed broadMatch wording,
+    synonym/xref construction, primary cluster counts and same-taxon type-strain derivation.
+  locator: GTDB mapping construction lines 440–472; LPSN/type-strain and source-attestation
+    construction
+  snapshot_sha256: 6b5b065f4ae7aea022af736a22c0f63dc58a2425c7ee453259e567ab030f8257
+- evidence_id: manifest
+  kind: record_content
+  reference: data/raw/MANIFEST.yaml
+  accessed_at: '2026-10-20T03:42:04Z'
+  support: supports
+  summary: Manifest pins kg-microbe revision 30405b70ef762aa46c08278b2b3e06bffb0b34cd,
+    upstream input hashes and extraction time 2026-09-13T17:50:44Z.
+  locator: kg_microbe_source, inputs, extracted_at
+  snapshot_sha256: ee76711683b1b579d1561dcf40187e10e4f0027ae1b89f108eb18e865e7e7d38
+- evidence_id: overlay-manifests
+  kind: record_content
+  reference: data/atb/MANIFEST.yaml
+  accessed_at: '2026-10-20T03:42:04Z'
+  support: supports
+  summary: Raw, ATB and StrainInfo extraction times have maximum 2026-09-13T17:54:04Z,
+    matching the sole seed event. StrainInfo manifest is independently captured in
+    source.inputs.
+  locator: extracted_at, together with data/raw/MANIFEST.yaml and data/straininfo/MANIFEST.yaml
+  snapshot_sha256: 1358809b2af7e8d4a6c8bb4c122781f48ae40b2c4f0f1c7ad3f37ad8907d7315
+- evidence_id: genome-catalog-1
+  kind: primary_source
+  reference: data/catalog/gtdb_genomes-0017.jsonl.gz
+  accessed_at: '2026-10-20T03:35:50Z'
+  support: supports
+  summary: Inspected selected primary source objects, retaining source genome identifiers,
+    taxon/species distinction, accession versions, deposit fields and independently
+    scoped source hierarchies. No physical deposit or sequence equivalence is inferred
+    from names alone.
+  locator: 'line 29105: {"accession":"GB_GCA_032248955.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp000495735","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM3224895v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA791658","ncbi_biosample":"SAMN37115005","ncbi_contig_count":"195","ncbi_contig_n50":"7955","ncbi_country":"none","ncbi_date":"2023-10-01","ncbi_genbank_assembly_accession":"GCA_032248955.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"RBS.bin.4","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidianus
+    sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2023-10-01","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872104","ncbi_ssu_count":"1","ncbi_strain_identifiers":"RBS.bin.4","ncbi_submitter":"Montana
+    State University","ncbi_taxid":"1872104","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Sulfolobales;f__Sulfolobaceae;g__Acidianus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Sulfolobales;f__Sulfolobaceae;g__Acidianus;x__unclassified
+    Acidianus;s__Acidianus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1324271","ncbi_translation_table":"11","ncbi_trna_count":"45","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1324271","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAVVGT000000000.1"};
+    line 29190: {"accession":"GB_GCA_046533535.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp003431325","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM4653353v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA1019763","ncbi_biosample":"SAMN37494501","ncbi_contig_count":"128","ncbi_contig_n50":"24008","ncbi_country":"none","ncbi_date":"2025-01-07","ncbi_genbank_assembly_accession":"GCA_046533535.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"SBS.bin.14","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus
+    sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"2","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2025-01-07","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"SBS.bin.14","ncbi_submitter":"Montana
+    State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified
+    Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1376752","ncbi_translation_table":"11","ncbi_trna_count":"47","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1376752","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAWDPC000000000.1"};
+    line 29221: {"accession":"RS_GCF_003431325.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp003431325","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Complete
+    Genome","ncbi_assembly_name":"ASM343132v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA224116","ncbi_biosample":"SAMN03173949","ncbi_contig_count":"none","ncbi_contig_n50":"none","ncbi_country":"USA:
+    Yellowstone National Park; Cistern Spring","ncbi_date":"2016-02-04","ncbi_genbank_assembly_accession":"GCA_003431325.1","ncbi_genome_category":"none","ncbi_genome_representation":"full","ncbi_isolate":"na","ncbi_isolation_source":"water
+    and sediment","ncbi_lat_lon":"44.72308 N 110.704 W","ncbi_molecule_count":"1","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus
+    sp. 7A","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"1","ncbi_scaffold_l50":"1","ncbi_scaffold_n50":"1539049","ncbi_scaffold_n75":"1539049","ncbi_scaffold_n90":"1539049","ncbi_seq_rel_date":"2016-02-04","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1577685","ncbi_ssu_count":"1","ncbi_strain_identifiers":"7A","ncbi_submitter":"Oak
+    Ridge National Laboratory","ncbi_taxid":"1577685","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified
+    Acidilobus;s__Acidilobus sp. 7A","ncbi_total_gap_length":"0","ncbi_total_length":"1539049","ncbi_translation_table":"11","ncbi_trna_count":"46","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1539049","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"na"};
+    line 29705: {"accession":"GB_GCA_046536635.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp028276005","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM4653663v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA1019763","ncbi_biosample":"SAMN37494429","ncbi_contig_count":"241","ncbi_contig_n50":"87569","ncbi_country":"none","ncbi_date":"2025-01-07","ncbi_genbank_assembly_accession":"GCA_046536635.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"F8S.bin.12","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus
+    sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2025-01-07","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"F8S.bin.12","ncbi_submitter":"Montana
+    State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified
+    Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"2499414","ncbi_translation_table":"11","ncbi_trna_count":"50","ncbi_type_material_designation":"na","ncbi_ungapped_length":"2499414","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAWDMI000000000.1"};
+    line 30514: {"accession":"GB_GCA_046536935.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp003431325","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM4653693v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA1019763","ncbi_biosample":"SAMN37494415","ncbi_contig_count":"52","ncbi_contig_n50":"25047","ncbi_country":"none","ncbi_date":"2025-01-07","ncbi_genbank_assembly_accession":"GCA_046536935.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"DS.bin.13","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus
+    sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2025-01-07","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"DS.bin.13","ncbi_submitter":"Montana
+    State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified
+    Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"927598","ncbi_translation_table":"11","ncbi_trna_count":"35","ncbi_type_material_designation":"na","ncbi_ungapped_length":"927598","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAWDLU000000000.1"};
+    line 30645: {"accession":"GB_GCA_046536475.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp003431325","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM4653647v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA1019763","ncbi_biosample":"SAMN37494439","ncbi_contig_count":"163","ncbi_contig_n50":"15119","ncbi_country":"none","ncbi_date":"2025-01-07","ncbi_genbank_assembly_accession":"GCA_046536475.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"F8S.bin.8","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus
+    sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2025-01-07","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"F8S.bin.8","ncbi_submitter":"Montana
+    State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified
+    Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1536681","ncbi_translation_table":"11","ncbi_trna_count":"44","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1536681","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAWDMS000000000.1"};
+    line 31349: {"accession":"GB_GCA_049977005.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp049977005","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM4997700v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA1227992","ncbi_biosample":"SAMN47003029","ncbi_contig_count":"10","ncbi_contig_n50":"108201","ncbi_country":"none","ncbi_date":"2025-04-28","ncbi_genbank_assembly_accession":"GCA_049977005.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"KM4311-16","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus
+    sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"2","ncbi_scaffold_count":"8","ncbi_scaffold_l50":"2","ncbi_scaffold_n50":"182073","ncbi_scaffold_n75":"93139","ncbi_scaffold_n90":"66560","ncbi_seq_rel_date":"2025-04-28","ncbi_spanned_gaps":"2","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"KM4311-16","ncbi_submitter":"Research
+    Center of Biotechnology RAS","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified
+    Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"200","ncbi_total_length":"802540","ncbi_translation_table":"11","ncbi_trna_count":"39","ncbi_type_material_designation":"na","ncbi_ungapped_length":"802340","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JBMFHE000000000.1"};
+    line 31775: {"accession":"GB_GCA_028277005.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp000495735","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM2827700v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA791658","ncbi_biosample":"SAMN32179628","ncbi_contig_count":"210","ncbi_contig_n50":"10526","ncbi_country":"USA:
+    Yellowstone National Park","ncbi_date":"2023-01-30","ncbi_genbank_assembly_accession":"GCA_028277005.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"RSEP6","ncbi_isolation_source":"Hot
+    spring water","ncbi_lat_lon":"44.4512 N 110.4329 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"none","ncbi_organism_name":"Acidilobus
+    sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"none","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2023-01-30","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"none","ncbi_strain_identifiers":"RSEP6","ncbi_submitter":"Montana
+    State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified
+    Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1572024","ncbi_translation_table":"none","ncbi_trna_count":"none","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1572024","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAPYVH000000000.1"};
+    line 32409: {"accession":"GB_GCA_022015055.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp022015155","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM2201505v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA800390","ncbi_biosample":"SAMN25334111","ncbi_contig_count":"179","ncbi_contig_n50":"8565","ncbi_country":"USA:
+    Yellowstone National Park; Cinder Pool","ncbi_date":"2022-02-06","ncbi_genbank_assembly_accession":"GCA_022015055.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"CP.2020.0m.Bin.2","ncbi_isolation_source":"Hot
+    spring water","ncbi_lat_lon":"44.73244 N 110.70978 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus
+    sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2022-02-06","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"CP.2020.0m.Bin.2","ncbi_submitter":"Montana
+    State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified
+    Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1294660","ncbi_translation_table":"11","ncbi_trna_count":"40","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1294660","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAKLZS000000000.1"};
+    line 32769: {"accession":"GB_GCA_022015295.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp022015155","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM2201529v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA800390","ncbi_biosample":"SAMN25334102","ncbi_contig_count":"66","ncbi_contig_n50":"40302","ncbi_country":"USA:
+    Yellowstone National Park; Cinder Pool","ncbi_date":"2022-02-06","ncbi_genbank_assembly_accession":"GCA_022015295.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"CP.2016.0m.Bin.5","ncbi_isolation_source":"Hot
+    spring water","ncbi_lat_lon":"44.73244 N 110.70978 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus
+    sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"2","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2022-02-06","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"CP.2016.0m.Bin.5","ncbi_submitter":"Montana
+    State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified
+    Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1269201","ncbi_translation_table":"11","ncbi_trna_count":"44","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1269201","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAKLZJ000000000.1"};
+    line 33991: {"accession":"GB_GCA_046537315.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp003431325","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM4653731v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA1019763","ncbi_biosample":"SAMN37494397","ncbi_contig_count":"97","ncbi_contig_n50":"21281","ncbi_country":"none","ncbi_date":"2025-01-07","ncbi_genbank_assembly_accession":"GCA_046537315.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"Alice.S.bin.6","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus
+    sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"1","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2025-01-07","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"0","ncbi_strain_identifiers":"Alice.S.bin.6","ncbi_submitter":"Montana
+    State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified
+    Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1042223","ncbi_translation_table":"11","ncbi_trna_count":"33","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1042223","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAWDLC000000000.1"};
+    line 34649: {"accession":"GB_GCA_000495695.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp028276005","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"Acidilobus
+    sp. CIS","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA221622","ncbi_biosample":"SAMN02364258","ncbi_contig_count":"129","ncbi_contig_n50":"22444","ncbi_country":"USA:
+    Yellowstone National Park","ncbi_date":"2013-11-05","ncbi_genbank_assembly_accession":"GCA_000495695.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"na","ncbi_isolation_source":"Cistern
+    Spring (CIS_19); temperature 78C; pH 4.4","ncbi_lat_lon":"44.7231 N 110.7040 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"uncultured
+    Acidilobus sp. CIS","ncbi_protein_count":"1671","ncbi_refseq_category":"na","ncbi_rrna_count":"2","ncbi_scaffold_count":"18","ncbi_scaffold_l50":"3","ncbi_scaffold_n50":"197428","ncbi_scaffold_n75":"76064","ncbi_scaffold_n90":"51257","ncbi_seq_rel_date":"2013-11-05","ncbi_spanned_gaps":"111","ncbi_species_taxid":"1410574","ncbi_ssu_count":"1","ncbi_strain_identifiers":"none","ncbi_submitter":"Montana
+    State University","ncbi_taxid":"1410574","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__environmental
+    samples;s__uncultured Acidilobus sp. CIS","ncbi_total_gap_length":"16315","ncbi_total_length":"1426691","ncbi_translation_table":"11","ncbi_trna_count":"45","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1410376","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"AYMB00000000.1"};
+    line 36376: {"accession":"GB_GCA_028276005.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp028276005","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM2827600v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA791658","ncbi_biosample":"SAMN32179816","ncbi_contig_count":"66","ncbi_contig_n50":"20450","ncbi_country":"USA:
+    Yellowstone National Park","ncbi_date":"2023-01-30","ncbi_genbank_assembly_accession":"GCA_028276005.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"RSNS4","ncbi_isolation_source":"Hot
+    spring sediment","ncbi_lat_lon":"44.4514 N 110.4332 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"none","ncbi_organism_name":"Acidilobus
+    sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"none","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2023-01-30","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"none","ncbi_strain_identifiers":"RSNS4","ncbi_submitter":"Montana
+    State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified
+    Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"892315","ncbi_translation_table":"none","ncbi_trna_count":"none","ncbi_type_material_designation":"na","ncbi_ungapped_length":"892315","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAPWTO000000000.1"};
+    line 38348: {"accession":"GB_GCA_000495715.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp000495735","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"Acidilobus
+    sp. CIS","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA221622","ncbi_biosample":"SAMN02364257","ncbi_contig_count":"153","ncbi_contig_n50":"20771","ncbi_country":"USA:
+    Yellowstone National Park","ncbi_date":"2013-11-05","ncbi_genbank_assembly_accession":"GCA_000495715.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"na","ncbi_isolation_source":"100
+    Spring Plain (OSP_8); temperature 72C; pH 3.3","ncbi_lat_lon":"44.7330 N 110.7090
+    W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"uncultured
+    Acidilobus sp. OSP8","ncbi_protein_count":"1693","ncbi_refseq_category":"na","ncbi_rrna_count":"1","ncbi_scaffold_count":"42","ncbi_scaffold_l50":"4","ncbi_scaffold_n50":"119213","ncbi_scaffold_n75":"36067","ncbi_scaffold_n90":"19525","ncbi_seq_rel_date":"2013-11-05","ncbi_spanned_gaps":"111","ncbi_species_taxid":"1410575","ncbi_ssu_count":"0","ncbi_strain_identifiers":"none","ncbi_submitter":"Montana
+    State University","ncbi_taxid":"1410575","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__environmental
+    samples;s__uncultured Acidilobus sp. OSP8","ncbi_total_gap_length":"29385","ncbi_total_length":"1430817","ncbi_translation_table":"11","ncbi_trna_count":"46","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1401432","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"AYMC00000000.1"};
+    line 38822: {"accession":"GB_GCA_022015155.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp022015155","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM2201515v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA800390","ncbi_biosample":"SAMN25334108","ncbi_contig_count":"46","ncbi_contig_n50":"49043","ncbi_country":"USA:
+    Yellowstone National Park; Cinder Pool","ncbi_date":"2022-02-06","ncbi_genbank_assembly_accession":"GCA_022015155.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"CP.2016.15m.Bin.2","ncbi_isolation_source":"Hot
+    spring water","ncbi_lat_lon":"44.73244 N 110.70978 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus
+    sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2022-02-06","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"CP.2016.15m.Bin.2","ncbi_submitter":"Montana
+    State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified
+    Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1252937","ncbi_translation_table":"11","ncbi_trna_count":"44","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1252937","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAKLZP000000000.1"};
+    line 41527: {"accession":"GB_GCA_046533815.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp003431325","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM4653381v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA1019763","ncbi_biosample":"SAMN37494486","ncbi_contig_count":"127","ncbi_contig_n50":"21519","ncbi_country":"none","ncbi_date":"2025-01-07","ncbi_genbank_assembly_accession":"GCA_046533815.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"RHS.bin.4","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus
+    sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"2","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2025-01-07","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"RHS.bin.4","ncbi_submitter":"Montana
+    State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified
+    Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1472853","ncbi_translation_table":"11","ncbi_trna_count":"44","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1472853","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAWDON000000000.1"};
+    line 41692: {"accession":"RS_GCF_049973875.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp049973875","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM4997387v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA224116","ncbi_biosample":"SAMN47003087","ncbi_contig_count":"125","ncbi_contig_n50":"72489","ncbi_country":"none","ncbi_date":"2025-04-28","ncbi_genbank_assembly_accession":"GCA_049973875.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"KM4331-13","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus
+    sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"123","ncbi_scaffold_l50":"8","ncbi_scaffold_n50":"72489","ncbi_scaffold_n75":"21543","ncbi_scaffold_n90":"5995","ncbi_seq_rel_date":"2025-04-28","ncbi_spanned_gaps":"2","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"KM4331-13","ncbi_submitter":"Research
+    Center of Biotechnology RAS","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified
+    Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"20","ncbi_total_length":"1561501","ncbi_translation_table":"11","ncbi_trna_count":"45","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1561481","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JBMFJI000000000.1"};
+    line 42341: {"accession":"GB_GCA_022015235.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp022015155","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM2201523v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA800390","ncbi_biosample":"SAMN25334105","ncbi_contig_count":"65","ncbi_contig_n50":"28771","ncbi_country":"USA:
+    Yellowstone National Park; Cinder Pool","ncbi_date":"2022-02-06","ncbi_genbank_assembly_accession":"GCA_022015235.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"CP.2016.9m.Bin.3","ncbi_isolation_source":"Hot
+    spring water","ncbi_lat_lon":"44.73244 N 110.70978 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus
+    sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"2","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2022-02-06","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"CP.2016.9m.Bin.3","ncbi_submitter":"Montana
+    State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified
+    Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1287197","ncbi_translation_table":"11","ncbi_trna_count":"44","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1287197","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAKLZM000000000.1"};
+    line 42649: {"accession":"GB_GCA_009903975.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp028276005","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM990397v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA600296","ncbi_biosample":"SAMN13824551","ncbi_contig_count":"112","ncbi_contig_n50":"11576","ncbi_country":"USA:
+    Yellowstone National Park; Evening Primrose Hot Spring","ncbi_date":"2020-01-18","ncbi_genbank_assembly_accession":"GCA_009903975.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"EvPrim.Bin1","ncbi_isolation_source":"Sediment
+    sample from Evening Primrose shelf","ncbi_lat_lon":"44.699437 N 110.767147 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus
+    sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"2","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2020-01-18","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"EvPrim.Bin1","ncbi_submitter":"Montana
+    State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified
+    Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1009520","ncbi_translation_table":"11","ncbi_trna_count":"32","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1009520","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"WYEC00000000.1"};
+    line 42919: {"accession":"GB_GCA_049974445.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp049974445","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM4997444v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA1227992","ncbi_biosample":"SAMN47003071","ncbi_contig_count":"117","ncbi_contig_n50":"18079","ncbi_country":"none","ncbi_date":"2025-04-28","ncbi_genbank_assembly_accession":"GCA_049974445.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"KM4324-30","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus
+    sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"111","ncbi_scaffold_l50":"22","ncbi_scaffold_n50":"20613","ncbi_scaffold_n75":"11464","ncbi_scaffold_n90":"5741","ncbi_seq_rel_date":"2025-04-28","ncbi_spanned_gaps":"6","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"KM4324-30","ncbi_submitter":"Research
+    Center of Biotechnology RAS","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified
+    Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"240","ncbi_total_length":"1351807","ncbi_translation_table":"11","ncbi_trna_count":"44","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1351567","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JBMFIT000000000.1"};
+    line 43244: {"accession":"GB_GCA_046537175.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp003431325","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM4653717v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA1019763","ncbi_biosample":"SAMN37494402","ncbi_contig_count":"56","ncbi_contig_n50":"29614","ncbi_country":"none","ncbi_date":"2025-01-07","ncbi_genbank_assembly_accession":"GCA_046537175.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"Cinder.S.bin.11","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus
+    sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2025-01-07","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"Cinder.S.bin.11","ncbi_submitter":"Montana
+    State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified
+    Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"976854","ncbi_translation_table":"11","ncbi_trna_count":"38","ncbi_type_material_designation":"na","ncbi_ungapped_length":"976854","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAWDLH000000000.1"};
+    line 43522: {"accession":"GB_GCA_046534195.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp003431325","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM4653419v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA1019763","ncbi_biosample":"SAMN37494467","ncbi_contig_count":"90","ncbi_contig_n50":"19531","ncbi_country":"none","ncbi_date":"2025-01-07","ncbi_genbank_assembly_accession":"GCA_046534195.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"Moose.S.bin.9","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus
+    sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2025-01-07","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"Moose.S.bin.9","ncbi_submitter":"Montana
+    State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified
+    Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1026773","ncbi_translation_table":"11","ncbi_trna_count":"34","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1026773","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAWDNU000000000.1"};
+    line 43564: {"accession":"GB_GCA_000495735.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp000495735","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"Acidilobus
+    sp. JCHS","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA221622","ncbi_biosample":"SAMN02364256","ncbi_contig_count":"51","ncbi_contig_n50":"177485","ncbi_country":"USA:
+    Yellowstone National Park","ncbi_date":"2013-11-05","ncbi_genbank_assembly_accession":"GCA_000495735.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"na","ncbi_isolation_source":"Joseph
+    s Coat Hot Spring (JCHS_4); temperature 80C; pH 6.1","ncbi_lat_lon":"44.7392 N
+    110.3245 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"uncultured
+    Acidilobus sp. JCHS","ncbi_protein_count":"1634","ncbi_refseq_category":"na","ncbi_rrna_count":"2","ncbi_scaffold_count":"13","ncbi_scaffold_l50":"2","ncbi_scaffold_n50":"387277","ncbi_scaffold_n75":"240131","ncbi_scaffold_n90":"46882","ncbi_seq_rel_date":"2013-11-05","ncbi_spanned_gaps":"38","ncbi_species_taxid":"1410576","ncbi_ssu_count":"1","ncbi_strain_identifiers":"none","ncbi_submitter":"Montana
+    State University","ncbi_taxid":"1410576","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__environmental
+    samples;s__uncultured Acidilobus sp. JCHS","ncbi_total_gap_length":"5186","ncbi_total_length":"1476663","ncbi_translation_table":"11","ncbi_trna_count":"46","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1471477","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"AYMD00000000.1"};
+    line 43616: {"accession":"GB_GCA_022759325.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp000495735","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM2275932v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA669531","ncbi_biosample":"SAMN16495481","ncbi_contig_count":"49","ncbi_contig_n50":"44424","ncbi_country":"USA:
+    Yellowstone Lake; Wyoming","ncbi_date":"2022-03-29","ncbi_genbank_assembly_accession":"GCA_022759325.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"2016_B01_C_1","ncbi_isolation_source":"biofilm
+    attached to a sub-lacustrine hydrothermal vent","ncbi_lat_lon":"44.51090 N 110.35660
+    W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus
+    sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"39","ncbi_scaffold_l50":"7","ncbi_scaffold_n50":"56843","ncbi_scaffold_n75":"30722","ncbi_scaffold_n90":"18527","ncbi_seq_rel_date":"2022-03-29","ncbi_spanned_gaps":"10","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"2016_B01_C_1","ncbi_submitter":"Montana
+    State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified
+    Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"1000","ncbi_total_length":"1258146","ncbi_translation_table":"11","ncbi_trna_count":"43","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1257146","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAEMPL000000000.1"};
+    line 44776: {"accession":"GB_GCA_046533795.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp022015155","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM4653379v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA1019763","ncbi_biosample":"SAMN37494488","ncbi_contig_count":"44","ncbi_contig_n50":"16683","ncbi_country":"none","ncbi_date":"2025-01-07","ncbi_genbank_assembly_accession":"GCA_046533795.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"RHS.bin.6","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus
+    sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"1","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2025-01-07","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"0","ncbi_strain_identifiers":"RHS.bin.6","ncbi_submitter":"Montana
+    State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified
+    Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"477923","ncbi_translation_table":"11","ncbi_trna_count":"21","ncbi_type_material_designation":"na","ncbi_ungapped_length":"477923","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAWDOP000000000.1"};
+    line 48429: {"accession":"GB_GCA_022014845.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp022015155","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM2201484v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA800390","ncbi_biosample":"SAMN25334122","ncbi_contig_count":"170","ncbi_contig_n50":"9380","ncbi_country":"USA:
+    Yellowstone National Park; Cinder Pool","ncbi_date":"2022-02-06","ncbi_genbank_assembly_accession":"GCA_022014845.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"CP.2020.15m.Bin.3","ncbi_isolation_source":"Hot
+    spring water","ncbi_lat_lon":"44.73244 N 110.70978 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus
+    sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2022-02-06","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"CP.2020.15m.Bin.3","ncbi_submitter":"Montana
+    State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified
+    Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1313137","ncbi_translation_table":"11","ncbi_trna_count":"38","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1313137","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAKMAD000000000.1"};
+    line 49816: {"accession":"GB_GCA_000495675.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp000495735","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"Acidilobus
+    sp. MG","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA221622","ncbi_biosample":"SAMN02364255","ncbi_contig_count":"93","ncbi_contig_n50":"173621","ncbi_country":"USA:
+    Yellowstone National Park","ncbi_date":"2013-11-05","ncbi_genbank_assembly_accession":"GCA_000495675.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"na","ncbi_isolation_source":"Monarch
+    Geyser (MG_3); temperature 80C; pH 4.0","ncbi_lat_lon":"44.7243 N 110.7056 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"1","ncbi_organism_name":"uncultured
+    Acidilobus sp. MG","ncbi_protein_count":"1787","ncbi_refseq_category":"na","ncbi_rrna_count":"2","ncbi_scaffold_count":"35","ncbi_scaffold_l50":"2","ncbi_scaffold_n50":"412542","ncbi_scaffold_n75":"89879","ncbi_scaffold_n90":"38004","ncbi_seq_rel_date":"2013-11-05","ncbi_spanned_gaps":"58","ncbi_species_taxid":"1410573","ncbi_ssu_count":"1","ncbi_strain_identifiers":"none","ncbi_submitter":"Montana
+    State University","ncbi_taxid":"1410573","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__environmental
+    samples;s__uncultured Acidilobus sp. MG","ncbi_total_gap_length":"9390","ncbi_total_length":"1548506","ncbi_translation_table":"11","ncbi_trna_count":"49","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1539116","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"AYMA00000000.1"}'
+  snapshot_sha256: f2a4d2c5b7927184206c6614540746b5e9c298e7a924bd149fc86c0f0c046ff6
+- evidence_id: genome-catalog-2
+  kind: primary_source
+  reference: data/catalog/gtdb_genomes-0018.jsonl.gz
+  accessed_at: '2026-10-20T03:35:50Z'
+  support: supports
+  summary: Inspected selected primary source objects, retaining source genome identifiers,
+    taxon/species distinction, accession versions, deposit fields and independently
+    scoped source hierarchies. No physical deposit or sequence equivalence is inferred
+    from names alone.
+  locator: 'line 432: {"accession":"GB_GCA_022014995.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei_A;o__Sulfolobales;f__Acidilobaceae;g__Acidilobus;s__Acidilobus
+    sp022015155","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM2201499v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA800390","ncbi_biosample":"SAMN25334117","ncbi_contig_count":"150","ncbi_contig_n50":"11122","ncbi_country":"USA:
+    Yellowstone National Park; Cinder Pool","ncbi_date":"2022-02-06","ncbi_genbank_assembly_accession":"GCA_022014995.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"CP.2020.9m.Bin.2","ncbi_isolation_source":"Hot
+    spring water","ncbi_lat_lon":"44.73244 N 110.70978 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Acidilobus
+    sp.","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2022-02-06","ncbi_spanned_gaps":"0","ncbi_species_taxid":"1872109","ncbi_ssu_count":"1","ncbi_strain_identifiers":"CP.2020.9m.Bin.2","ncbi_submitter":"Montana
+    State University","ncbi_taxid":"1872109","ncbi_taxonomy":"d__Archaea;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Thermoproteati;p__Thermoproteota;c__Thermoprotei;o__Acidilobales;f__Acidilobaceae;g__Acidilobus;x__unclassified
+    Acidilobus;s__Acidilobus sp.","ncbi_total_gap_length":"0","ncbi_total_length":"1248329","ncbi_translation_table":"11","ncbi_trna_count":"40","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1248329","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAKLZY000000000.1"}'
+  snapshot_sha256: 8baa314877815777abcdf600079c6ee42f2ea5340398df9f2e18de9c18fd4347
+- evidence_id: gtdb-full-scan
+  kind: search
+  reference: data/catalog/MANIFEST.json
+  accessed_at: '2026-10-20T03:35:50Z'
+  support: supports
+  summary: All nineteen GTDB primary shards were hashed and read using exact terminal
+    species tokens. Selected primary memberships support the source cluster counts.
+  locator: '{"paths":["data/catalog/gtdb_genomes-0000.jsonl.gz","data/catalog/gtdb_genomes-0001.jsonl.gz","data/catalog/gtdb_genomes-0002.jsonl.gz","data/catalog/gtdb_genomes-0003.jsonl.gz","data/catalog/gtdb_genomes-0004.jsonl.gz","data/catalog/gtdb_genomes-0005.jsonl.gz","data/catalog/gtdb_genomes-0006.jsonl.gz","data/catalog/gtdb_genomes-0007.jsonl.gz","data/catalog/gtdb_genomes-0008.jsonl.gz","data/catalog/gtdb_genomes-0009.jsonl.gz","data/catalog/gtdb_genomes-0010.jsonl.gz","data/catalog/gtdb_genomes-0011.jsonl.gz","data/catalog/gtdb_genomes-0012.jsonl.gz","data/catalog/gtdb_genomes-0013.jsonl.gz","data/catalog/gtdb_genomes-0014.jsonl.gz","data/catalog/gtdb_genomes-0015.jsonl.gz","data/catalog/gtdb_genomes-0016.jsonl.gz","data/catalog/gtdb_genomes-0017.jsonl.gz","data/catalog/gtdb_genomes-0018.jsonl.gz"],"clusters":[{"id":"GTDB:s__Acidilobus_sp003431325","count":8,"taxid_distribution":{"1872109":7,"1577685":1},"reverse_taxa":["NCBITaxon:1577685","NCBITaxon:1872109"],"reverse_rows":[38237,70988],"other_taxa_note_supported":true},{"id":"GTDB:s__Acidilobus_sp022015155","count":7,"taxid_distribution":{"1872109":7},"reverse_taxa":["NCBITaxon:1872109"],"reverse_rows":[70989],"other_taxa_note_supported":false},{"id":"GTDB:s__Acidilobus_sp000495735","count":6,"taxid_distribution":{"1872104":1,"1872109":2,"1410575":1,"1410576":1,"1410573":1},"reverse_taxa":["NCBITaxon:1410573","NCBITaxon:1410575","NCBITaxon:1410576","NCBITaxon:1872104","NCBITaxon:1872109"],"reverse_rows":[25048,25050,25051,70970,70987],"other_taxa_note_supported":true},{"id":"GTDB:s__Acidilobus_sp028276005","count":4,"taxid_distribution":{"1872109":3,"1410574":1},"reverse_taxa":["NCBITaxon:1410574","NCBITaxon:1872109"],"reverse_rows":[25049,70990],"other_taxa_note_supported":true},{"id":"GTDB:s__Acidilobus_sp049973875","count":1,"taxid_distribution":{"1872109":1},"reverse_taxa":["NCBITaxon:1872109"],"reverse_rows":[70991],"other_taxa_note_supported":false},{"id":"GTDB:s__Acidilobus_sp049974445","count":1,"taxid_distribution":{"1872109":1},"reverse_taxa":["NCBITaxon:1872109"],"reverse_rows":[70992],"other_taxa_note_supported":false},{"id":"GTDB:s__Acidilobus_sp049977005","count":1,"taxid_distribution":{"1872109":1},"reverse_taxa":["NCBITaxon:1872109"],"reverse_rows":[70993],"other_taxa_note_supported":false}]}'
+  snapshot_sha256: 15b5cfe42be7919faf2a6feb5ac4f7084009e84b2d6da669f7101aacc3586299
+  search_scope: Full explicit GTDB catalog scan including ignored files; exact terminal
+    species-token selection. No new sequence comparison.
+- evidence_id: qc-setup-receipt
+  kind: validation
+  reference: just qc
+  accessed_at: '2026-10-19T07:17:01Z'
+  support: context_only
+  summary: Initial actual invocation from /private/tmp/taxonmech-record-reviews-k0MubV/repo
+    exited 1 because ruff was absent. Locked ruff 0.16.7 was installed only in that
+    isolated environment before the complete retry. Reused actual native validation
+    on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded
+    cwd and timestamps identify the original execution. These native corpus/source
+    inputs are unchanged; only new review files differ. This receipt is not a new
+    run on the batch branch and does not validate subsequently saved review bundles.
+  locator: initial setup attempt, 2026-10-19T07:17:01Z through 2026-10-19T07:17:01Z
+  snapshot_sha256: 1d189beecc64b369096499a7ce4adf71897235e4c1190c69e7d0ed3a77b6a3f9
+- evidence_id: strict-receipt
+  kind: validation
+  reference: just validate-strict data/taxa/archaea/acidilobus_sp.yaml --out /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0004/strict-04.tsv
+  accessed_at: '2026-10-19T23:42:21Z'
+  support: supports
+  summary: "Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0004/repo;\
+    \ started 2026-10-19T23:42:19Z, finished 2026-10-19T23:42:21Z, exit 0. This exact\
+    \ generated YAML only; its captured bytes remain unchanged. Actual earlier per-target\
+    \ invocation; the receipt retains its original cwd and times.\nValidating 1 files\
+    \ with 4 workers; schema=/private/tmp/taxonmech-record-reviews-k0MubV/repo-batch-0003/src/taxonmech/schema/taxonmech.yaml\n\
+    \n=== validate-strict summary ===\n  files scanned:      1\n  files with ERROR:\
+    \   0\n  total ERROR rows:   0\n  TSV:                /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0004/strict-04.tsv"
+  locator: This exact generated YAML only; its captured bytes remain unchanged. Actual
+    earlier per-target invocation; the receipt retains its original cwd and times.
+  snapshot_sha256: 5bed3883e287cfbf25698a30996599c5e67793c5e4ad2d4311b8114355a1d91f
+- evidence_id: history-receipt
+  kind: validation
+  reference: just validate-history
+  accessed_at: '2026-10-19T07:17:03Z'
+  support: supports
+  summary: 'Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo;
+    started 2026-10-19T07:17:01Z, finished 2026-10-19T07:17:03Z, exit 0. All 17 standalone
+    history records; the generated seed event was also inspected in this target. Reused
+    actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+    the recorded cwd and timestamps identify the original execution. These native
+    corpus/source inputs are unchanged; only new review files differ. This receipt
+    is not a new run on the batch branch and does not validate subsequently saved
+    review bundles.
+
+    history links: 17 record(s), 0 invalid
+
+    No issues found
+
+    17 history record(s) valid against src/taxonmech/schema/history.yaml'
+  locator: All 17 standalone history records; the generated seed event was also inspected
+    in this target. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+    the recorded cwd and timestamps identify the original execution. These native
+    corpus/source inputs are unchanged; only new review files differ. This receipt
+    is not a new run on the batch branch and does not validate subsequently saved
+    review bundles.
+  snapshot_sha256: 3fc63ae7bb58034c180e5dcebec02f98c487038ba74793b9f43462ddaacdcbf4
+- evidence_id: corpus-receipt
+  kind: validation
+  reference: just verify-corpus
+  accessed_at: '2026-10-19T07:24:12Z'
+  support: supports
+  summary: "Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo;\
+    \ started 2026-10-19T07:18:23Z, finished 2026-10-19T07:24:12Z, exit 0. All 625,960\
+    \ generated taxon YAMLs, not a focused approximation. Reused actual native validation\
+    \ on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded\
+    \ cwd and timestamps identify the original execution. These native corpus/source\
+    \ inputs are unchanged; only new review files differ. This receipt is not a new\
+    \ run on the batch branch and does not validate subsequently saved review bundles.\n\
+    uv run python scripts/verify_corpus.py \nexpected 625960 records, found 625960\
+    \ on disk\n  missing:   0\n  extra:     0\n  differing: 0\n\ncorpus reproduces\
+    \ exactly from data/raw/ and curation/seed_scope.tsv"
+  locator: All 625,960 generated taxon YAMLs, not a focused approximation. Reused
+    actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+    the recorded cwd and timestamps identify the original execution. These native
+    corpus/source inputs are unchanged; only new review files differ. This receipt
+    is not a new run on the batch branch and does not validate subsequently saved
+    review bundles.
+  snapshot_sha256: 6bcd0e5b423155259cb8f8dbecb3e4af467b5dba232906734156e9a99fb5a459
+- evidence_id: products-receipt
+  kind: validation
+  reference: just validate-products
+  accessed_at: '2026-10-19T07:55:11Z'
+  support: supports
+  summary: 'Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo;
+    started 2026-10-19T07:17:01Z, finished 2026-10-19T07:55:11Z, exit 0. Full configured
+    corpus scan for curator-added graph nodes; this target contains no causal graph.
+    Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+    the recorded cwd and timestamps identify the original execution. These native
+    corpus/source inputs are unchanged; only new review files differ. This receipt
+    is not a new run on the batch branch and does not validate subsequently saved
+    review bundles.
+
+    uv run python scripts/validate_id_label_correspondence.py -c conf/id_label_targets.yaml
+
+
+    id↔label correspondence summary:
+
+
+    ✅ All id↔label pairs correspond.'
+  locator: Full configured corpus scan for curator-added graph nodes; this target
+    contains no causal graph. Reused actual native validation on the unchanged shared
+    base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps
+    identify the original execution. These native corpus/source inputs are unchanged;
+    only new review files differ. This receipt is not a new run on the batch branch
+    and does not validate subsequently saved review bundles.
+  snapshot_sha256: 48dd07515706dc62199fc2205c4b0bfdd5750028037d9b800179f254d2f1eb07
+- evidence_id: qc-receipt
+  kind: validation
+  reference: just qc
+  accessed_at: '2026-10-19T08:07:39Z'
+  support: supports
+  summary: "Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo;\
+    \ started 2026-10-19T07:17:41Z, finished 2026-10-19T08:07:39Z, exit 0. Repository-wide\
+    \ just qc, including native corpus-wide checks. Reused actual native validation\
+    \ on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded\
+    \ cwd and timestamps identify the original execution. These native corpus/source\
+    \ inputs are unchanged; only new review files differ. This receipt is not a new\
+    \ run on the batch branch and does not validate subsequently saved review bundles.\n\
+    1055 passed, 3 skipped, 5 deselected in 1634.00s (0:27:13)\nValidating 625960\
+    \ files with 4 workers; schema=/private/tmp/taxonmech-record-reviews-k0MubV/repo/src/taxonmech/schema/taxonmech.yaml\n\
+    \  files scanned:      625960\nexpected 625960 records, found 625960 on disk\n\
+    pages/ is current\nSite publication: 530,864,122 bytes (budget 950,000,000)\n\
+    625960 taxon records\n  NCBITAXON        625960\nAll TaxonMech quality gates passed.\n\
+    \  Related STRAININFO_STRAIN: 54312 strain-record pairs, 53745 identifiers, 53890\
+    \ strains (not genome counts)\n  Related STRAININFO_DEPOSIT: 107277 strain-record\
+    \ pairs, 106843 identifiers, 53890 strains (not genome counts)\n  Related NUCLEOTIDE_SEQUENCE:\
+    \ 51594 strain-record pairs, 51301 identifiers, 9984 strains (not genome counts)\n\
+    LPSN: 22469 records carry nomenclature, 21254 with a correct name   GTDB: 117809\
+    \ records mapped, 324404579 genomes summed across record attestations (not deduplicated)\n\
+    Causal graphs: 0 records (0 evidence-backed edges)\n\nAll TaxonMech quality gates\
+    \ passed."
+  locator: Repository-wide just qc, including native corpus-wide checks. Reused actual
+    native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+    the recorded cwd and timestamps identify the original execution. These native
+    corpus/source inputs are unchanged; only new review files differ. This receipt
+    is not a new run on the batch branch and does not validate subsequently saved
+    review bundles.
+  snapshot_sha256: b86a9cc6f529c3b822140f60179e9bc4046e2e6abef3ee0e67fa1035ffb1a76d
+assessments:
+- assessment_id: identity
+  area: identity
+  topic: Exact taxon and source lineage
+  outcome: supported
+  summary: NCBITaxon:1872109 denotes Acidilobus sp. at SPECIES rank, parent NCBITaxon:2635519,
+    genetic code11. All 10 carried ancestors and source name classes agree with the
+    pinned inventory and captured current NCBI response (which omits root).
+  target_ids:
+  - NCBITaxon:1872109
+  evidence_ids:
+  - record
+  - taxonomy-inventory
+  - ncbi-live
+  - scope-row
+  - path-row
+- assessment_id: nomenclature
+  area: nomenclature
+  topic: Name classes and nomenclatural scope
+  outcome: supported
+  summary: The literal NCBI species placeholder is preserved beneath unclassified
+    Acidilobus. No extra NCBI synonym or mapped LPSN name is asserted. GTDB source
+    species remain qualified broadMatch entries, not exact names.
+  target_ids:
+  - NCBITaxon:1872109
+  evidence_ids:
+  - record
+  - taxonomy-inventory
+  - ncbi-live
+  - lpsn-inventory
+  - mapping-policy
+- assessment_id: completeness
+  area: completeness
+  topic: Imported subtree and source assertion units
+  outcome: supported
+  summary: All seven direct mappings are represented. The GTDB attestation correctly
+    counts only the leading eight-genome cluster and refers to six further clusters;
+    28 is not an exact-target attestation replacement. The complete pinned subtree
+    has no descendants or imported BacDive strains. One NCBI NAME and eight source-cluster
+    GENOME assertions remain distinct units; no historical medium/organism/trait aggregate
+    is asserted.
+  target_ids:
+  - NCBITaxon:1872109
+  evidence_ids:
+  - record
+  - taxonomy-inventory
+  - bacdive-inventory
+  - culture-inventory
+  - gtdb-species
+  - gold-organisms
+  - mediadive-taxa
+  - madin-taxa
+  - bactotraits-taxa
+  - genome-catalog-1
+  - genome-catalog-2
+- assessment_id: taxonomy-mapping
+  area: grounding
+  topic: Qualified species mapping and target scope
+  outcome: concern
+  summary: The seven clusters contain 28 inspected primary genomes, of which 22 carry
+    target taxid1872109. Counts are 8,7,6,4,1,1,1. The primary 8-genome cluster includes
+    representative 7A taxid1577685 and seven generic-taxid members. Four clusters
+    (sp022015155, sp049973875, sp049974445, sp049977005) have only taxid1872109 both
+    in primary members and the complete reverse mapping inventory, contradicting the
+    fixed other-NCBI-taxa clause. Pooling several GTDB species onto the NCBI placeholder
+    still supports broadMatch. NCBI lineage Acidilobales is preserved separately from
+    GTDB Sulfolobales.
+  target_ids:
+  - NCBITaxon:1872109
+  evidence_ids:
+  - record
+  - gtdb-mappings
+  - gtdb-species
+  - mapping-policy
+  - equivalence-contract
+  - seed-owner
+  - genome-catalog-1
+  - genome-catalog-2
+  - gtdb-full-scan
+- assessment_id: native-status
+  area: provenance
+  topic: Unchanged native status and history
+  outcome: supported
+  summary: EXACT grounding, SEEDED status and the sole seed event remain unchanged.
+    The seed timestamp 2026-09-13T17:54:04Z agrees with the latest raw/ATB/StrainInfo
+    extraction. This review does not promote native status or append history.
+  target_ids:
+  - NCBITaxon:1872109
+  evidence_ids:
+  - record
+  - manifest
+  - overlay-manifests
+findings:
+- finding_id: pooled-note-other-taxa
+  issue_key: gtdb-broadmatch-note-other-taxa-1872109
+  category: consistency
+  severity: minor
+  status: open
+  certainty: confirmed
+  title: Four pooled-mapping notes incorrectly assert other NCBI taxa
+  description: The seven clusters contain 28 inspected primary genomes, of which 22
+    carry target taxid1872109. Counts are 8,7,6,4,1,1,1. The primary 8-genome cluster
+    includes representative 7A taxid1577685 and seven generic-taxid members. Four
+    clusters (sp022015155, sp049973875, sp049974445, sp049977005) have only taxid1872109
+    both in primary members and the complete reverse mapping inventory, contradicting
+    the fixed other-NCBI-taxa clause. Pooling several GTDB species onto the NCBI placeholder
+    still supports broadMatch. NCBI lineage Acidilobales is preserved separately from
+    GTDB Sulfolobales.
+  target_ids:
+  - NCBITaxon:1872109
+  field_paths:
+  - taxonomy_mappings[source_id=GTDB:s__Acidilobus_sp022015155].notes
+  - taxonomy_mappings[source_id=GTDB:s__Acidilobus_sp049973875].notes
+  - taxonomy_mappings[source_id=GTDB:s__Acidilobus_sp049974445].notes
+  - taxonomy_mappings[source_id=GTDB:s__Acidilobus_sp049977005].notes
+  evidence_ids:
+  - record
+  - gtdb-mappings
+  - gtdb-species
+  - gtdb-full-scan
+  - mapping-policy
+  - seed-owner
+  - genome-catalog-1
+  - genome-catalog-2
+  rule_id: docs/HARMONIZATION.md:Mapping predicates; .claude/skills/review-yaml-record/SKILL.md:preserve
+    claim scope
+  native_severity: minor
+  normalization_reason: Misleading fixed explanatory clause; target identity, qualified
+    mappings and source counts remain correct.
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Maintained GTDB mapping notes and exact synonym/xref promotion
+actions:
+- action_id: correct-pooled-mapping-note
+  description: Revise the maintained broadMatch note to describe pooling without asserting
+    another NCBI taxon for every individual source cluster. Preserve all source mappings,
+    counts and carried NCBI lineage.
+  finding_ids:
+  - pooled-note-other-taxa
+  target_ids:
+  - NCBITaxon:1872109
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Maintained GTDB mapping notes and exact synonym/xref promotion
+  acceptance_checks:
+  - sp022015155 retains count7 and broadMatch without an unsupported other-taxa clause;
+    likewise all three single-genome clusters.
+  - Mixed-taxid sp003431325 retains count8, all seven mappings remain present and
+    the attestation still points to six further clusters.
+  - After separately authorized guarded regeneration run strict, history, product,
+    corpus and QC gates.
+limitations:
+- The review inspects source identity and assertion scope, not a new phylogenetic
+  species-boundary analysis, assembly comparison or experimental mechanism study.
+  Zero imported strains is bounded to the pinned source and subtree rules.
+- Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+  the recorded cwd and timestamps identify the original execution. These native corpus/source
+  inputs are unchanged; only new review files differ. This receipt is not a new run
+  on the batch branch and does not validate subsequently saved review bundles.
+notes:
+- No generated record or history was edited; curation actions remain proposed.
+- Fresh-base canonical recapture preserved all previously reviewed input hashes; original
+  captures and actual transition receipts remain retained.
+- Every new bundle still requires its own validate/save/check recipe; baseline native
+  receipts do not claim these later steps have run.
+tags:
+- record-review
+- batch-0004
+- archaea
+- generated
+- source-checked
+```
