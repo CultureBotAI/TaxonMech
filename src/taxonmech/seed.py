@@ -80,6 +80,7 @@ BACDIVE_STRAIN_ID_PATTERN = re.compile(r"^kgmicrobe\.strain:bacdive_[1-9][0-9]*$
 UNIPROT_ID_PATTERN = re.compile(
     r"^UniProtKB:(?:[OPQ][0-9][A-Z0-9]{3}[0-9]|[A-NR-Z][0-9](?:[A-Z][A-Z0-9]{2}[0-9]){1,2})$"
 )
+UNIPROT_ENTRY_NAME_PATTERN = re.compile(r"^[A-Z0-9]{1,11}_[A-Z0-9]{2,5}$")
 NCBITAXON_ID_PATTERN = re.compile(r"^NCBITaxon:[1-9][0-9]*$")
 PROTEOME_ID_PATTERN = re.compile(r"^UP:UP[0-9]{9}$")
 CURIE_PATTERN = re.compile(r"^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$")
@@ -343,6 +344,8 @@ def load_uniprot_proteins(
     if not path.exists():
         return {}
     proteins: dict[str, dict[str, str]] = {}
+    seen_entry_names: set[str] = set()
+    seen_org_loci: set[tuple[str, str]] = set()
     with path.open(newline="", encoding="utf-8") as fh:
         reader = csv.DictReader(fh, delimiter="\t")
         if tuple(reader.fieldnames or ()) != UNIPROT_PROTEIN_FIELDS:
@@ -375,8 +378,24 @@ def load_uniprot_proteins(
             for req_col in ("entry_name", "protein_name", "organism_label", "release_version"):
                 if not (row.get(req_col) or "").strip():
                     raise SystemExit(f"{path}:{line_no}: missing {req_col} for {uid!r}")
-            if not ((row.get("gene_symbol") or "").strip() or (row.get("locus_tag") or "").strip()):
+            entry_name = (row.get("entry_name") or "").strip()
+            if not UNIPROT_ENTRY_NAME_PATTERN.match(entry_name):
+                raise SystemExit(f"{path}:{line_no}: invalid entry_name {entry_name!r} for {uid!r}")
+            if entry_name in seen_entry_names:
+                raise SystemExit(f"{path}:{line_no}: duplicate entry_name {entry_name!r} for {uid!r}")
+            seen_entry_names.add(entry_name)
+            gene_symbol = (row.get("gene_symbol") or "").strip()
+            locus_tag = (row.get("locus_tag") or "").strip()
+            if not (gene_symbol or locus_tag):
                 raise SystemExit(f"{path}:{line_no}: requires gene_symbol or locus_tag for {uid!r}")
+            if locus_tag:
+                org_locus = (org_tid, locus_tag)
+                if org_locus in seen_org_loci:
+                    raise SystemExit(
+                        f"{path}:{line_no}: duplicate (organism_taxon_id, locus_tag) "
+                        f"{org_locus!r} for {uid!r}"
+                    )
+                seen_org_loci.add(org_locus)
             ec_vals = split(row.get("ec_numbers") or "")
             if len(ec_vals) != len(set(ec_vals)):
                 raise SystemExit(f"{path}:{line_no}: duplicate ec_numbers {ec_vals} for {uid!r}")
@@ -448,6 +467,7 @@ def validate_causal_graph_structure(
                 raise SystemExit(f"{g_ctx}: unexpected CausalGraph keys: {unknown_g_keys}")
             nodes = graph.get("nodes")
             seen_node_ids: set[str] = set()
+            seen_node_groundings: set[str] = set()
             if nodes is not None:
                 if not isinstance(nodes, list) or not nodes:
                     raise SystemExit(f"{g_ctx}: 'nodes' must be a non-empty list")
@@ -485,6 +505,11 @@ def validate_causal_graph_structure(
                         grounding = raw_grounding.strip() if isinstance(raw_grounding, str) else ""
                         if not CURIE_PATTERN.match(grounding):
                             raise SystemExit(f"{n_ctx}: invalid 'grounding' CURIE {raw_grounding!r}")
+                        if grounding in seen_node_groundings:
+                            raise SystemExit(
+                                f"{n_ctx}: duplicate node grounding {grounding!r} in graph {gid!r}"
+                            )
+                        seen_node_groundings.add(grounding)
                     if ntype == "TAXON":
                         if not grounding or not grounding.startswith("NCBITaxon:"):
                             raise SystemExit(f"{n_ctx}: TAXON grounding must start with 'NCBITaxon:'")
@@ -509,6 +534,8 @@ def validate_causal_graph_structure(
                     raise SystemExit(f"{g_ctx}: 'edges' must be a non-empty list")
                 seen_edge_ids: set[str] = set()
                 seen_edge_triples: set[tuple[str, str, str]] = set()
+                seen_pred_by_id: dict[str, str] = {}
+                seen_id_by_pred: dict[str, str] = {}
                 connected_node_ids: set[str] = set()
                 for edge in edges:
                     if not isinstance(edge, dict):
@@ -543,6 +570,19 @@ def validate_causal_graph_structure(
                     if triple_key in seen_edge_triples:
                         raise SystemExit(f"{e_ctx}: duplicate parallel edge {triple_key!r}")
                     seen_edge_triples.add(triple_key)
+                    if pred_id:
+                        if pred_id in seen_pred_by_id and seen_pred_by_id[pred_id] != pred:
+                            raise SystemExit(
+                                f"{e_ctx}: predicate_id {pred_id!r} mapped to inconsistent "
+                                f"predicate {pred!r} != {seen_pred_by_id[pred_id]!r}"
+                            )
+                        if pred in seen_id_by_pred and seen_id_by_pred[pred] != pred_id:
+                            raise SystemExit(
+                                f"{e_ctx}: predicate {pred!r} mapped to inconsistent "
+                                f"predicate_id {pred_id!r} != {seen_id_by_pred[pred]!r}"
+                            )
+                        seen_pred_by_id[pred_id] = pred
+                        seen_id_by_pred[pred] = pred_id
                     if nodes is not None:
                         if subj not in seen_node_ids:
                             raise SystemExit(
