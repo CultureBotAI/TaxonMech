@@ -76,10 +76,10 @@ curation_history:
 Every `GENE_OR_PROTEIN` node in `curation/causal_graphs/*.yaml` must resolve
 offline against a row in `curation/uniprot_proteins.tsv` (registered in
 `conf/sources.yaml`). `load_uniprot_proteins()` (`src/taxonmech/seed.py` lines
-302–347) enforces the exact 14-column header tuple `UNIPROT_PROTEIN_FIELDS`
+337–397) enforces the exact 14-column header tuple `UNIPROT_PROTEIN_FIELDS`
 (`src/taxonmech/seed.py` lines 62–77):
 
-| Column (`UNIPROT_PROTEIN_FIELDS`) | Required? | Format / Validation Contract (`load_uniprot_proteins` & `validate_causal_graph_proteins`) |
+| Column (`UNIPROT_PROTEIN_FIELDS`) | Required? | Format / Validation Contract (`load_uniprot_proteins`, `validate_causal_graph_proteins`, & `causal_graph_provenance_problems`) |
 |---|---|---|
 | `uniprot_id` | Required (PK) | Unique `UniProtKB:<accession>` CURIE matching `UNIPROT_ID_PATTERN` and `CausalNode.grounding` |
 | `entry_name` | Required | Non-empty UniProtKB entry mnemonic (e.g. `BGAL_ECOLI`) |
@@ -90,7 +90,7 @@ offline against a row in `curation/uniprot_proteins.tsv` (registered in
 | `proteome_id` | Optional | UniProt Proteome `UP:UP<9 digits>` CURIE matching `PROTEOME_ID_PATTERN` when present; must match `CausalNode.proteome_id` |
 | `gene_symbol` | Conditional | Primary gene symbol (at least one of `gene_symbol` or `locus_tag` must be non-empty); must match `CausalNode.gene_symbol` (or allow ORF fallback when `gene_symbol` is empty in TSV) |
 | `locus_tag` | Conditional | Ordered locus / ORF tag (at least one of `gene_symbol` or `locus_tag` must be non-empty); must match `CausalNode.locus_tag` |
-| `ec_numbers` | Optional | Pipe-delimited (`\|`) unique `EC:` CURIEs matching `EC_NUMBER_PATTERN` (`^EC:[1-7]\.(?:[0-9]+\|-)\.(?:[0-9]+\|-)\.(?:n?[0-9]+\|-)$`); any `EC:` CURIE in `CausalNode.xrefs` must appear here |
+| `ec_numbers` | Optional | Pipe-delimited (`\|`) unique `EC:` CURIEs matching `EC_NUMBER_PATTERN` (`^EC:[1-7]\.(?:[0-9]+\|-)\.(?:[0-9]+\|-)\.(?:n?[0-9]+\|-)$`); any `EC:` CURIE in `CausalNode.xrefs` must appear here, and all full 4-part (non-wildcard) `EC:` CURIEs in `ec_numbers` must appear in `CausalNode.xrefs` in matching order (`scripts/check_provenance.py` lines 173–185) |
 | `sequence_length` | Required | Positive integer canonical amino-acid length (`> 0`); must equal `CausalNode.sequence_length` |
 | `sequence_crc64` | Required | 16-character uppercase hex digest matching `CRC64_PATTERN` (`^[0-9A-F]{16}$`); must equal `CausalNode.sequence_crc64` |
 | `sequence_version` | Required | Positive integer sequence version (`> 0`); must equal `CausalNode.sequence_version` |
@@ -99,8 +99,8 @@ offline against a row in `curation/uniprot_proteins.tsv` (registered in
 ### Species vs. Strain `strain_id` Binding Rule
 
 `CausalNode.strain_id` is an optional `GENE_OR_PROTEIN`-only slot validated by
-`validate_causal_graph_proteins()` (`src/taxonmech/seed.py` lines 555–560,
-653–670):
+`validate_causal_graph_proteins()` (`src/taxonmech/seed.py` lines 657–662,
+757–774):
 
 - When present, `strain_id` must match `BACDIVE_STRAIN_ID_PATTERN`
   (`^kgmicrobe\.strain:bacdive_[1-9][0-9]*$`), exist in
