@@ -1,0 +1,2016 @@
+# Record review: Aciduliprofundum boonei T469
+
+- Review: 20261020T040949Z-aciduliprofundum_boonei_t469
+- Repository: CultureBotAI/TaxonMech
+- Started UTC: 2026-10-20T03:57:41Z
+- Finished UTC: 2026-10-20T04:09:49Z
+- Reviewer: Codex (independent)
+- Completion: partial
+- Verdict: needs_curation
+- Scientific review: true
+
+## Summary
+
+Aciduliprofundum boonei T469 has supported strain identity and narrow source links, but an unqualified GTDB species synonym/xref inflates its scope. One major finding; historical aggregate recounting remains unresolved.
+
+## Scope And Provenance
+
+Entire single generated record, including all source assertions and imported strains.
+
+Selection: Original unreviewed path-order position 65; batch-0007 target 5. Excluded 112 actual targets from validated main and local batch-0001/0002/0003/0004/0005/0006 listings; full corpus enumeration includes ignored files.
+Coverage: full; 1 reviewed / 1 in the declared population.
+Source: working_tree at Git base 9b5a8fff5185b38dc5c77bb35235152c81ea7765.
+Working-tree hashes do not imply those bytes were committed.
+
+| Target | Path / selector | Kind | Label |
+| --- | --- | --- | --- |
+| NCBITaxon:439481 | data/taxa/archaea/aciduliprofundum_boonei_t469.yaml | generated | Aciduliprofundum boonei T469 |
+
+## Validation
+
+| Check | Status | Required | Targets | Result |
+| --- | --- | --- | --- | --- |
+| Exact NCBI taxon, rank and lineage | passed | True | NCBITaxon:439481 | NCBITaxon:439481 denotes Aciduliprofundum boonei T469, rank STRAIN, parent NCBITaxon:379547, genetic code11. All 8 carried ancestors, literal labels and ranks agree with pinned NCBI and current EFetch. |
+| Complete exact identifier and name inventory search | passed | True | NCBITaxon:439481 | One BacDive strain and one imported deposit are supported. Source units remain NCBI1 NAME, GTDB6 GENOME, BacDive1 STRAIN, MediaDive1 MEDIUM, GOLD1 ORGANISM, Madin7 and BactoTraits1 TRAIT_ASSERTION. Historical aggregate counts are not independently recounted. ATCCBAA1534 in current parent LPSN does not manufacture an imported BacDive deposit. |
+| Complete primary GTDB cluster membership | passed | True | NCBITaxon:439481 | Exact source cluster counts agree with carried mappings where present; LPSN-only species bridges remain distinct from direct GTDB attestations. |
+| Complete strain and genome-source assertions | passed | True | NCBITaxon:439481 | BacDive23434 explicitly associates T469 with strain439481, parent379547 and DSM19572. It supplies two distinct unversioned assemblies GCA_000025665/GCA_000151085, IMG646564501 and BV439481.9/.10. Primary NCBI/BV objects support their separate version1 records and sample/project identities; no assembly merger is inferred. StrainInfo401632.2 contains DSM deposit908583 at parent379547 without a sequence list; both native deposit and strain-group links preserve that parent scope. GOLD Go0608798 directly identifies DSM19572/taxon439481, and full organism-field discovery finds no project. Bare T469 fails deposit normalization, explaining the absence of additional NCBI/GTDB/BV deposit joins. The 2 assembly,3 genome,4 related assertions exactly match the imported multiset. |
+| Original manifest-pinned aggregate edges | unavailable | True | NCBITaxon:439481 | Pinned inventory counts agree; independent historical recounting remains unavailable for gold, mediadive, madin_etal, bactotraits. |
+| Initial quality-gate setup attempt | failed | False | NCBITaxon:439481 | Actual exit 1: missing ruff; superseded by the separately recorded successful full retry. |
+| Native strict record validation | passed | True | NCBITaxon:439481 | Actual terminal exit code 0. This exact generated YAML only; its captured bytes remain unchanged. Actual earlier per-target invocation; the receipt retains its original cwd and times. |
+| Repository history validation | passed | True | NCBITaxon:439481 | Actual terminal exit code 0. All 17 standalone history records; the generated seed event was also inspected in this target. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. |
+| Full-corpus exact reproduction | passed | True | NCBITaxon:439481 | Actual terminal exit code 0. All 625,960 generated taxon YAMLs, not a focused approximation. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. |
+| Native product ID/label gate | passed | True | NCBITaxon:439481 | Actual terminal exit code 0. Full configured corpus scan for curator-added graph nodes; this target contains no causal graph. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. |
+| Authoritative complete quality gate | passed | True | NCBITaxon:439481 | Actual terminal exit code 0. Repository-wide just qc, including native corpus-wide checks. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. Pytest reported 1055 passed, 3 skipped and 5 deselected; the native QC recipe completed successfully. |
+| Previous exact issue-key occurrences | passed | True | NCBITaxon:439481 | No exact earlier occurrence in the explicitly searched structured bundles. |
+
+## Scientific And Domain Assessments
+
+### Exact taxon and source lineage
+
+identity: supported. Targets: NCBITaxon:439481.
+
+NCBITaxon:439481 denotes Aciduliprofundum boonei T469, rank STRAIN, parent NCBITaxon:379547, genetic code11. All 8 carried ancestors, literal labels and ranks agree with pinned NCBI and current EFetch.
+
+### Name classes and nomenclatural scope
+
+nomenclature: supported. Targets: NCBITaxon:439481.
+
+The three NCBI exact strain names remain distinct from the parent Candidatus species. Current LPSN treats the parent as not validly published, with pro-valid/pro-correct Candidatus status and nomenclatural type T469/DSM19572/ATCCBAA1534. This is parent-name context, not a same-taxon LPSN assertion for strain439481. No missing native type flag is treated as a false non-type claim.
+
+### Imported subtree and source assertion units
+
+completeness: supported. Targets: NCBITaxon:439481.
+
+One BacDive strain and one imported deposit are supported. Source units remain NCBI1 NAME, GTDB6 GENOME, BacDive1 STRAIN, MediaDive1 MEDIUM, GOLD1 ORGANISM, Madin7 and BactoTraits1 TRAIT_ASSERTION. Historical aggregate counts are not independently recounted. ATCCBAA1534 in current parent LPSN does not manufacture an imported BacDive deposit.
+
+### Qualified species mapping and target scope
+
+grounding: concern. Targets: NCBITaxon:439481.
+
+A qualified classification in GTDB:s__Aciduliprofundum_boonei is supported. Its six primary genomes include one taxon439481 T469 genome and five taxon379547 genomes with different isolate labels. Emitting the species name as EXACT_SYNONYM and an equivalent xref on the single STRAIN record exceeds that evidence. The seeder needs a taxonomic-scope guard while retaining the qualified mapping and count6.
+
+### Strain, deposit and genome-source links
+
+evidence: supported. Targets: NCBITaxon:439481.
+
+BacDive23434 explicitly associates T469 with strain439481, parent379547 and DSM19572. It supplies two distinct unversioned assemblies GCA_000025665/GCA_000151085, IMG646564501 and BV439481.9/.10. Primary NCBI/BV objects support their separate version1 records and sample/project identities; no assembly merger is inferred. StrainInfo401632.2 contains DSM deposit908583 at parent379547 without a sequence list; both native deposit and strain-group links preserve that parent scope. GOLD Go0608798 directly identifies DSM19572/taxon439481, and full organism-field discovery finds no project. Bare T469 fails deposit normalization, explaining the absence of additional NCBI/GTDB/BV deposit joins. The 2 assembly,3 genome,4 related assertions exactly match the imported multiset.
+
+### Unchanged native status and history
+
+provenance: supported. Targets: NCBITaxon:439481.
+
+Grounding EXACT, mapping SEEDED and the sole 2026-09-13T17:54:04Z seed event remain unchanged and agree with the latest extraction time. No curation history or native status is promoted.
+
+## Findings
+
+### gtdb-strain-scope: GTDB species identity is promoted onto a named strain
+
+major / open / confirmed; issue key: gtdb-closematch-exact-promotion-439481.
+
+A qualified classification in GTDB:s__Aciduliprofundum_boonei is supported. Its six primary genomes include one taxon439481 T469 genome and five taxon379547 genomes with different isolate labels. Emitting the species name as EXACT_SYNONYM and an equivalent xref on the single STRAIN record exceeds that evidence. The seeder needs a taxonomic-scope guard while retaining the qualified mapping and count6.
+
+## Recommended Actions And Acceptance Checks
+
+### guard-gtdb-strain-equivalence
+
+Guard maintained exact-name/xref promotion by taxonomic scope. Preserve qualified mappings and source counts; regenerate only through a separately authorized seeder workflow.
+
+- Retain exact NCBI identifier, STRAIN rank, parent, all NCBI strain synonyms, source attestations, imported strains and links.
+- Retain qualified GTDB:s__Aciduliprofundum_boonei mapping and source count6.
+- The species name and equivalent xref no longer assert exact identity with the named strain; eligible parent species bridges remain supported.
+- After separately authorized regeneration run strict, history, product, corpus and QC gates.
+
+### recover-pinned-aggregate-inputs
+
+Recover manifest-hash-matching original aggregate inputs and independently recount the exact target assertions through the maintained extractor; do not edit generated YAML.
+
+- Require exact original input SHA-256 before using it as historical evidence.
+- Recount only the exact target with each source's own assertion unit and compare to its pinned inventory row.
+- Record any discrepancy in a new review observation.
+
+## Category Boundaries
+
+
+## Evidence
+
+| Evidence | Reference / locator | Support | Observation |
+| --- | --- | --- | --- |
+| record | data/taxa/archaea/aciduliprofundum_boonei_t469.yaml; entire TaxonRecord; identifier=NCBITaxon:439481 | supports | Read the entire generated YAML, including identity, lineage, names, mappings, source attestations, all imported strains and links, and seed history. |
+| taxonomy-inventory | data/raw/ncbitaxon_taxa.tsv; line 2: {"taxon_id":"NCBITaxon:1","label":"root","rank":"NO_RANK","parent_id":""}; line 1698: {"taxon_id":"NCBITaxon:2157","label":"Archaea","rank":"DOMAIN","parent_id":"NCBITaxon:131567"}; line 25334: {"taxon_id":"NCBITaxon:131567","label":"cellular organisms","rank":"CELLULAR_ROOT","parent_id":"NCBITaxon:1"}; line 79734: {"taxon_id":"NCBITaxon:379546","label":"Candidatus Aciduliprofundum","rank":"GENUS","parent_id":"NCBITaxon:1803510"}; line 79735: {"taxon_id":"NCBITaxon:379547","label":"Candidatus Aciduliprofundum boonei","rank":"SPECIES","parent_id":"NCBITaxon:379546"}; line 97574: {"taxon_id":"NCBITaxon:439481","label":"Aciduliprofundum boonei T469","rank":"STRAIN","parent_id":"NCBITaxon:379547","genetic_code":"11","exact_synonyms":"Aciduliprofundum boonei DSM 19572&#124;Aciduliprofundum boonei str. T469&#124;Aciduliprofundum boonei strain T469","related_synonyms":"","broad_synonyms":"","attested_by":"ncbitaxon&#124;gtdb&#124;bacdive&#124;mediadive&#124;gold&#124;madin_etal&#124;bactotraits","retired_into":"","taxonomy_snapshot":"2026-09-13"}; line 470875: {"taxon_id":"NCBITaxon:1803510","label":"DHVE2 group","rank":"CLADE","parent_id":"NCBITaxon:2283796"}; line 523037: {"taxon_id":"NCBITaxon:2283796","label":"Thermoplasmatota","rank":"PHYLUM","parent_id":"NCBITaxon:3366610"}; line 621140: {"taxon_id":"NCBITaxon:3366610","label":"Methanobacteriati","rank":"KINGDOM","parent_id":"NCBITaxon:2157"} | supports | Inspected the target and each carried ancestor, rank, parent, genetic code and source name classes. |
+| scope-row | curation/seed_scope.tsv; line 6465: {"identifier":"NCBITaxon:439481","added":"2026-09-12","reason":"attested rule: Aciduliprofundum boonei T469, 7 sources incl. NCBI"} | supports | Exact target is included in the declared seed scope. |
+| path-row | data/taxa/PATHS.tsv; line 505271: {"identifier":"NCBITaxon:439481","slug":"aciduliprofundum_boonei_t469"} | supports | Indexed path resolves to this exact NCBI taxon. |
+| ncbi-live | https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=taxonomy&amp;id=1872114,3402690,1293648,3697131,439481,229980,1198449,56636,272557,1872399; TaxaSet/Taxon[TaxId='439481']; ten-target captured response | supports | Inspected the official response for this exact taxon: scientific name, rank, parent, source name classes, lineage and genetic code. Current authority and pinned September inventory remain distinct observations. |
+| lpsn-inventory | data/raw/lpsn_names.tsv; complete table; exact target/subtree/source-identifier search has no match | supports | Inspected exact mapped and linked LPSN names; bounded inventory absence does not establish worldwide nomenclatural absence. |
+| gtdb-mappings | data/raw/gtdb_mappings.tsv; line 284987: {"gtdb_id":"GTDB:s__Aciduliprofundum_boonei","gtdb_label":"s__Aciduliprofundum_boonei","gtdb_parent":"GTDB:g__Aciduliprofundum","ncbitaxon_id":"NCBITaxon:379547","predicate":"skos:closeMatch","genome_count":"6"}; line 289513: {"gtdb_id":"GTDB:s__Aciduliprofundum_boonei","gtdb_label":"s__Aciduliprofundum_boonei","gtdb_parent":"GTDB:g__Aciduliprofundum","ncbitaxon_id":"NCBITaxon:439481","predicate":"skos:closeMatch","genome_count":"6"} | supports | Inspected direct mappings and selected clusters' reverse mappings, retaining each source predicate and taxon boundary. |
+| gtdb-species | data/raw/gtdb_species.tsv; line 4258: {"gtdb_id":"GTDB:s__Aciduliprofundum_boonei","label":"s__Aciduliprofundum_boonei","parent":"GTDB:g__Aciduliprofundum","genome_count":"6"} | supports | Inspected source species identifiers, labels, parent clusters and genome counts. |
+| bacdive-inventory | data/raw/bacdive_strains.tsv; line 23237: {"strain_id":"kgmicrobe.strain:bacdive_23434","bacdive_id":"23434","designation":"T469","taxon_ids":"NCBITaxon:439481","lpsn_ids":"","culture_collection_ids":"kgmicrobe.strain:DSM-19572","medium_count":"0"} | supports | Complete inventory selection covers the exact target and descendants from the complete NCBI parent graph; its imported strain population was compared with the complete YAML. |
+| culture-inventory | data/raw/culture_collection_strains.tsv; line 69649: {"strain_id":"kgmicrobe.strain:DSM-19572","taxon_ids":"NCBITaxon:439481"} | supports | Inspected exact culture-inventory associations; an isolate name or genome does not create an inferred deposit. |
+| gold-organisms | data/raw/gold_organisms.tsv; line 35509: {"taxon_id":"NCBITaxon:439481","organism_count":"1"} | supports | Inspected the exact GOLD organism count row or bounded absence, without converting counts to phenotypes. |
+| mediadive-taxa | data/raw/mediadive_taxa.tsv; line 10236: {"taxon_id":"NCBITaxon:439481","medium_count":"1","media_ids":"mediadive.medium:1083"} | supports | Inspected the exact MediaDive medium count row or bounded absence, without converting counts to phenotypes. |
+| madin-taxa | data/raw/madin_taxa.tsv; line 24202: {"taxon_id":"NCBITaxon:439481","assertion_count":"7"} | supports | Inspected the exact Madin trait-assertion count row or bounded absence, without converting counts to phenotypes. |
+| bactotraits-taxa | data/raw/bactotraits_taxa.tsv; line 6659: {"taxon_id":"NCBITaxon:439481","assertion_count":"1"} | supports | Inspected the exact BactoTraits trait-assertion count row or bounded absence, without converting counts to phenotypes. |
+| mapping-policy | docs/HARMONIZATION.md; Mapping predicates; Which strains belong to a record | supports | Policy permits one-to-one species closeMatch normalization and LPSN-linked species xrefs/synonyms, retains pooled broadMatch entries and carries NCBI lineage unchanged. |
+| equivalence-contract | src/taxonmech/schema/taxonmech.yaml; TaxonRecord.xrefs, lines 180–187; TaxonomyMapping, lines 417–439 | supports | TaxonRecord.xrefs denotes equivalent identifiers; broader/narrower relations remain qualified taxonomy mappings. TaxonomyMapping.genome_count counts genomes under the source taxon. |
+| seed-owner | src/taxonmech/seed.py; GTDB mapping construction lines 440–472; LPSN/type-strain and source-attestation construction | supports | Inspected mapping ranking, qualified predicates, fixed broadMatch wording, synonym/xref construction, primary cluster counts and same-taxon type-strain derivation. |
+| manifest | data/raw/MANIFEST.yaml; kg_microbe_source, inputs, extracted_at | supports | Manifest pins kg-microbe revision 30405b70ef762aa46c08278b2b3e06bffb0b34cd, upstream input hashes and extraction time 2026-09-13T17:50:44Z. |
+| overlay-manifests | data/atb/MANIFEST.yaml; extracted_at, together with data/raw/MANIFEST.yaml and data/straininfo/MANIFEST.yaml | supports | Raw, ATB and StrainInfo extraction times have maximum 2026-09-13T17:54:04Z, matching the sole seed event. StrainInfo manifest is independently captured in source.inputs. |
+| lpsn-live | https://lpsn.dsmz.de/species/aciduliprofundum-boonei; Parent Candidatus nomenclatural status and type; not a same-taxon strain nomenclature block | supports | The three NCBI exact strain names remain distinct from the parent Candidatus species. Current LPSN treats the parent as not validly published, with pro-valid/pro-correct Candidatus status and nomenclatural type T469/DSM19572/ATCCBAA1534. This is parent-name context, not a same-taxon LPSN assertion for strain439481. No missing native type flag is treated as a false non-type claim. |
+| genome-catalog-1 | data/catalog/gtdb_genomes-0017.jsonl.gz; line 29763: {"accession":"GB_GCA_015520595.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__Thermoplasmatales;f__Aciduliprofundaceae;g__Aciduliprofundum;s__Aciduliprofundum boonei","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM1552059v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA546572","ncbi_biosample":"SAMN12837331","ncbi_contig_count":"139","ncbi_contig_n50":"14658","ncbi_country":"Pacific Ocean","ncbi_date":"2020-11-16","ncbi_genbank_assembly_accession":"GCA_015520595.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"S144_65_esom","ncbi_isolation_source":"deep-sea hydrothermal deposit","ncbi_lat_lon":"34.8610792 S 179.057703 E","ncbi_molecule_count":"0","ncbi_ncrna_count":"none","ncbi_organism_name":"Candidatus Aciduliprofundum boonei","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"none","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2020-11-16","ncbi_spanned_gaps":"0","ncbi_species_taxid":"379547","ncbi_ssu_count":"none","ncbi_strain_identifiers":"S144_65_esom","ncbi_submitter":"Portland State University","ncbi_taxid":"379547","ncbi_taxonomy":"d__Archaea;p__Thermoplasmatota;c__;o__;f__;g__Candidatus Aciduliprofundum;s__Candidatus Aciduliprofundum boonei","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Thermoplasmatota;x__DHVE2 group;g__Candidatus Aciduliprofundum;s__Candidatus Aciduliprofundum boonei","ncbi_total_gap_length":"0","ncbi_total_length":"1421048","ncbi_translation_table":"none","ncbi_trna_count":"none","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1421048","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"WAPU00000000.1"}; line 32655: {"accession":"GB_GCA_015521405.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__Thermoplasmatales;f__Aciduliprofundaceae;g__Aciduliprofundum;s__Aciduliprofundum boonei","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM1552140v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA546572","ncbi_biosample":"SAMN12837290","ncbi_contig_count":"206","ncbi_contig_n50":"6062","ncbi_country":"Pacific Ocean","ncbi_date":"2020-11-16","ncbi_genbank_assembly_accession":"GCA_015521405.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"S142_21","ncbi_isolation_source":"deep-sea hydrothermal deposit","ncbi_lat_lon":"34.86207984 S 179.0572892 E","ncbi_molecule_count":"0","ncbi_ncrna_count":"none","ncbi_organism_name":"Candidatus Aciduliprofundum boonei","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"none","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2020-11-16","ncbi_spanned_gaps":"0","ncbi_species_taxid":"379547","ncbi_ssu_count":"none","ncbi_strain_identifiers":"S142_21","ncbi_submitter":"Portland State University","ncbi_taxid":"379547","ncbi_taxonomy":"d__Archaea;p__Thermoplasmatota;c__;o__;f__;g__Candidatus Aciduliprofundum;s__Candidatus Aciduliprofundum boonei","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Thermoplasmatota;x__DHVE2 group;g__Candidatus Aciduliprofundum;s__Candidatus Aciduliprofundum boonei","ncbi_total_gap_length":"0","ncbi_total_length":"1118652","ncbi_translation_table":"none","ncbi_trna_count":"none","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1118652","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"WAOF00000000.1"}; line 32903: {"accession":"GB_GCA_013329755.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__Thermoplasmatales;f__Aciduliprofundaceae;g__Aciduliprofundum;s__Aciduliprofundum boonei","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM1332975v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA593905","ncbi_biosample":"SAMN13193044","ncbi_contig_count":"48","ncbi_contig_n50":"35640","ncbi_country":"none","ncbi_date":"2020-06-11","ncbi_genbank_assembly_accession":"GCA_013329755.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"UBA8848","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Candidatus Aciduliprofundum boonei","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"2","ncbi_scaffold_count":"46","ncbi_scaffold_l50":"11","ncbi_scaffold_n50":"37801","ncbi_scaffold_n75":"25936","ncbi_scaffold_n90":"17226","ncbi_seq_rel_date":"2020-06-11","ncbi_spanned_gaps":"2","ncbi_species_taxid":"379547","ncbi_ssu_count":"0","ncbi_strain_identifiers":"UBA8848","ncbi_submitter":"The University of Queensland","ncbi_taxid":"379547","ncbi_taxonomy":"d__Archaea;p__Thermoplasmatota;c__;o__;f__;g__Candidatus Aciduliprofundum;s__Candidatus Aciduliprofundum boonei","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Thermoplasmatota;x__DHVE2 group;g__Candidatus Aciduliprofundum;s__Candidatus Aciduliprofundum boonei","ncbi_total_gap_length":"110","ncbi_total_length":"1382115","ncbi_translation_table":"11","ncbi_trna_count":"46","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1382005","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"DUJQ00000000.1"}; line 45280: {"accession":"RS_GCF_000025665.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__Thermoplasmatales;f__Aciduliprofundaceae;g__Aciduliprofundum;s__Aciduliprofundum boonei","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Complete Genome","ncbi_assembly_name":"ASM2566v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA224116","ncbi_biosample":"SAMN02598523","ncbi_contig_count":"none","ncbi_contig_n50":"none","ncbi_country":"none","ncbi_date":"2010-02-24","ncbi_genbank_assembly_accession":"GCA_000025665.1","ncbi_genome_category":"none","ncbi_genome_representation":"full","ncbi_isolate":"na","ncbi_isolation_source":"none","ncbi_lat_lon":"22.16889 S 176.60028 W","ncbi_molecule_count":"1","ncbi_ncrna_count":"0","ncbi_organism_name":"Aciduliprofundum boonei T469","ncbi_protein_count":"1528","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"1","ncbi_scaffold_l50":"1","ncbi_scaffold_n50":"1486778","ncbi_scaffold_n75":"1486778","ncbi_scaffold_n90":"1486778","ncbi_seq_rel_date":"2010-02-24","ncbi_spanned_gaps":"0","ncbi_species_taxid":"379547","ncbi_ssu_count":"1","ncbi_strain_identifiers":"T469","ncbi_submitter":"US DOE Joint Genome Institute","ncbi_taxid":"439481","ncbi_taxonomy":"d__Archaea;p__Thermoplasmatota;c__;o__;f__;g__Candidatus Aciduliprofundum;s__Candidatus Aciduliprofundum boonei","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Thermoplasmatota;x__DHVE2 group;g__Candidatus Aciduliprofundum;s__Candidatus Aciduliprofundum boonei;x__Aciduliprofundum boonei T469","ncbi_total_gap_length":"0","ncbi_total_length":"1486778","ncbi_translation_table":"11","ncbi_trna_count":"46","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1486778","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"na"}; line 46162: {"accession":"GB_GCA_015520815.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__Thermoplasmatales;f__Aciduliprofundaceae;g__Aciduliprofundum;s__Aciduliprofundum boonei","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM1552081v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA546572","ncbi_biosample":"SAMN12837321","ncbi_contig_count":"148","ncbi_contig_n50":"13368","ncbi_country":"Pacific Ocean","ncbi_date":"2020-11-16","ncbi_genbank_assembly_accession":"GCA_015520815.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"S143_99","ncbi_isolation_source":"deep-sea hydrothermal deposit","ncbi_lat_lon":"34.86107624 S 179.0576384 E","ncbi_molecule_count":"0","ncbi_ncrna_count":"none","ncbi_organism_name":"Candidatus Aciduliprofundum boonei","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"none","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2020-11-16","ncbi_spanned_gaps":"0","ncbi_species_taxid":"379547","ncbi_ssu_count":"none","ncbi_strain_identifiers":"S143_99","ncbi_submitter":"Portland State University","ncbi_taxid":"379547","ncbi_taxonomy":"d__Archaea;p__Thermoplasmatota;c__;o__;f__;g__Candidatus Aciduliprofundum;s__Candidatus Aciduliprofundum boonei","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Thermoplasmatota;x__DHVE2 group;g__Candidatus Aciduliprofundum;s__Candidatus Aciduliprofundum boonei","ncbi_total_gap_length":"0","ncbi_total_length":"1357507","ncbi_translation_table":"none","ncbi_trna_count":"none","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1357507","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"WAPK00000000.1"}; line 47865: {"accession":"GB_GCA_015523095.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__Thermoplasmatales;f__Aciduliprofundaceae;g__Aciduliprofundum;s__Aciduliprofundum boonei","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM1552309v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA546572","ncbi_biosample":"SAMN12837209","ncbi_contig_count":"181","ncbi_contig_n50":"11081","ncbi_country":"Pacific Ocean","ncbi_date":"2020-11-16","ncbi_genbank_assembly_accession":"GCA_015523095.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"S013_40","ncbi_isolation_source":"deep-sea hydrothermal deposit","ncbi_lat_lon":"34.86107892 S 179.0576362 E","ncbi_molecule_count":"0","ncbi_ncrna_count":"none","ncbi_organism_name":"Candidatus Aciduliprofundum boonei","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"none","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2020-11-16","ncbi_spanned_gaps":"0","ncbi_species_taxid":"379547","ncbi_ssu_count":"none","ncbi_strain_identifiers":"S013_40","ncbi_submitter":"Portland State University","ncbi_taxid":"379547","ncbi_taxonomy":"d__Archaea;p__Thermoplasmatota;c__;o__;f__;g__Candidatus Aciduliprofundum;s__Candidatus Aciduliprofundum boonei","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Thermoplasmatota;x__DHVE2 group;g__Candidatus Aciduliprofundum;s__Candidatus Aciduliprofundum boonei","ncbi_total_gap_length":"0","ncbi_total_length":"1357697","ncbi_translation_table":"none","ncbi_trna_count":"none","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1357697","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"WALC00000000.1"} | supports | Inspected primary membership and exact assembly/genome identifiers, retaining NCBI species/strain boundaries, source labels, accession versions, deposit fields and separate project/sample identities. No sequence equivalence or culture identity is inferred from names alone. |
+| genome-catalog-2 | data/catalog/ncbi_genbank-0000.jsonl.gz; line 891: {"annotation_date":"2014-01-28","annotation_name":"Annotation submitted by US DOE Joint Genome Institute","annotation_provider":"US DOE Joint Genome Institute","asm_name":"ASM2566v1","asm_not_live_date":"na","asm_submitter":"US DOE Joint Genome Institute","assembly_accession":"GCA_000025665.1","assembly_level":"Complete Genome","assembly_type":"haploid","bioproject":"PRJNA38403","biosample":"SAMN02598523","contig_count":"1","excluded_from_refseq":"na","ftp_path":"https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/025/665/GCA_000025665.1_ASM2566v1/","gbrs_paired_asm":"GCF_000025665.1","gc_percent":"39.000000","genome_rep":"Full","genome_size":"1486778","genome_size_ungapped":"1486778","group":"archaea","infraspecific_name":"strain=T469","isolate":"na","non_coding_gene_count":"37","organism_name":"Aciduliprofundum boonei T469","paired_asm_comp":"identical","protein_coding_gene_count":"1544","pubmed_id":"na","refseq_category":"na","relation_to_type_material":"na","release_type":"Major","replicon_count":"1","scaffold_count":"1","seq_rel_date":"2010-02-24","species_taxid":"379547","taxid":"439481","total_gene_count":"1587","version_status":"latest","wgs_master":"na"}; line 1319: {"annotation_date":"2016-07-26","annotation_name":"Annotation submitted by The Gordon and Betty Moore Foundation Microbial Genome Sequencing Project","annotation_provider":"The Gordon and Betty Moore Foundation Microbial Genome Sequencing Project","asm_name":"ASM15108v1","asm_not_live_date":"na","asm_submitter":"The Gordon and Betty Moore Foundation Microbial Genome Sequencing Project","assembly_accession":"GCA_000151085.1","assembly_level":"Scaffold","assembly_type":"haploid","bioproject":"PRJNA19277","biosample":"SAMN02436315","contig_count":"63","excluded_from_refseq":"genome length too large","ftp_path":"https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/151/085/GCA_000151085.1_ASM15108v1/","gbrs_paired_asm":"GCF_000151085.1","gc_percent":"39.000000","genome_rep":"Full","genome_size":"2981805","genome_size_ungapped":"2973010","group":"archaea","infraspecific_name":"strain=T469","isolate":"na","non_coding_gene_count":"86","organism_name":"Aciduliprofundum boonei T469","paired_asm_comp":"identical","protein_coding_gene_count":"2949","pubmed_id":"18445019","refseq_category":"na","relation_to_type_material":"na","release_type":"Major","replicon_count":"0","scaffold_count":"41","seq_rel_date":"2008-08-29","species_taxid":"379547","taxid":"439481","total_gene_count":"3037","version_status":"latest","wgs_master":"ABSD00000000.1"} | supports | Inspected primary membership and exact assembly/genome identifiers, retaining NCBI species/strain boundaries, source labels, accession versions, deposit fields and separate project/sample identities. No sequence equivalence or culture identity is inferred from names alone. |
+| genome-catalog-3 | data/bvbrc/bvbrc-0020.jsonl.gz; line 17091: {"assembly_accession":"GCA_000151085.1","bioproject_accession":"PRJNA19277","biosample_accession":"SAMN02436315","date_modified":"2015-03-16T03:17:09.594Z","genbank_accessions":"ABSD00000000","genome_id":"439481.10","genome_name":"Aciduliprofundum boonei T469","genome_status":"WGS","public":true,"refseq_accessions":"-","strain":"T469","superkingdom":"Archaea","taxon_id":439481,"taxon_lineage_ids":["131567","2157","3366610","2283796","1803510","379546","379547","439481"],"taxon_lineage_names":["cellular organisms","Archaea","Methanobacteriati","Thermoplasmatota","DHVE2 group","Candidatus Aciduliprofundum","Candidatus Aciduliprofundum boonei","Aciduliprofundum boonei T469"]}; line 17092: {"assembly_accession":"GCA_000025665.1","bioproject_accession":"PRJNA38403","biosample_accession":"SAMN02598523","date_modified":"2015-03-16T03:17:09.594Z","genbank_accessions":"CP001941.1","genome_id":"439481.9","genome_name":"Aciduliprofundum boonei T469","genome_status":"Complete","public":true,"refseq_accessions":"NC_013926.1","strain":"T469","superkingdom":"Archaea","taxon_id":439481,"taxon_lineage_ids":["131567","2157","3366610","2283796","1803510","379546","379547","439481"],"taxon_lineage_names":["cellular organisms","Archaea","Methanobacteriati","Thermoplasmatota","DHVE2 group","Candidatus Aciduliprofundum","Candidatus Aciduliprofundum boonei","Aciduliprofundum boonei T469"]} | supports | Inspected primary membership and exact assembly/genome identifiers, retaining NCBI species/strain boundaries, source labels, accession versions, deposit fields and separate project/sample identities. No sequence equivalence or culture identity is inferred from names alone. |
+| gtdb-full-scan | data/catalog/MANIFEST.json; {"paths":["data/catalog/gtdb_genomes-0000.jsonl.gz","data/catalog/gtdb_genomes-0001.jsonl.gz","data/catalog/gtdb_genomes-0002.jsonl.gz","data/catalog/gtdb_genomes-0003.jsonl.gz","data/catalog/gtdb_genomes-0004.jsonl.gz","data/catalog/gtdb_genomes-0005.jsonl.gz","data/catalog/gtdb_genomes-0006.jsonl.gz","data/catalog/gtdb_genomes-0007.jsonl.gz","data/catalog/gtdb_genomes-0008.jsonl.gz","data/catalog/gtdb_genomes-0009.jsonl.gz","data/catalog/gtdb_genomes-0010.jsonl.gz","data/catalog/gtdb_genomes-0011.jsonl.gz","data/catalog/gtdb_genomes-0012.jsonl.gz","data/catalog/gtdb_genomes-0013.jsonl.gz","data/catalog/gtdb_genomes-0014.jsonl.gz","data/catalog/gtdb_genomes-0015.jsonl.gz","data/catalog/gtdb_genomes-0016.jsonl.gz","data/catalog/gtdb_genomes-0017.jsonl.gz","data/catalog/gtdb_genomes-0018.jsonl.gz"],"clusters":[{"id":"GTDB:s__Aciduliprofundum_boonei","count":6,"ncbi_taxids":{"379547":5,"439481":1},"other_taxa_note_supported":true}]} | supports | All nineteen GTDB shards were hashed and searched with exact terminal species tokens. Source counts and taxon distributions were inspected; a cluster is not equated with an individual strain. |
+| strain-table-1 | data/raw/strain_assemblies.tsv; line 109909: {"strain_id":"kgmicrobe.strain:bacdive_23434","assembly_id":"ncbi.assembly:GCA_000025665","source":"BACDIVE","source_id":"bacdive:23434","source_reference_id":"66792","assembly_level":"complete","assembly_name":"ASM2566v1 assembly for Aciduliprofundum boonei T469","taxon_id":"NCBITaxon:439481","source_field":"Sequence information.Genome sequences.INSDC accession","matched_strain_id":"","source_strain_identifiers":"","source_strain_field":"","source_organism_id":"","source_project_id":""}; line 109910: {"strain_id":"kgmicrobe.strain:bacdive_23434","assembly_id":"ncbi.assembly:GCA_000151085","source":"BACDIVE","source_id":"bacdive:23434","source_reference_id":"66792","assembly_level":"scaffold","assembly_name":"ASM15108v1 assembly for Aciduliprofundum boonei T469","taxon_id":"NCBITaxon:439481","source_field":"Sequence information.Genome sequences.INSDC accession","matched_strain_id":"","source_strain_identifiers":"","source_strain_field":"","source_organism_id":"","source_project_id":""} | supports | Compared the complete imported assertion multiset, retaining multiplicity, literal source fields, versions and deposit scope. |
+| strain-table-2 | data/raw/strain_genome_records.tsv; line 88345: {"strain_id":"kgmicrobe.strain:bacdive_23434","genome_id":"img.taxon:646564501","source_database":"img","source":"BACDIVE","source_id":"bacdive:23434","source_reference_id":"66792","assembly_level":"complete","genome_name":"ASM2566v1 assembly for Aciduliprofundum boonei T469","taxon_id":"NCBITaxon:439481","source_field":"Sequence information.Genome sequences.IMG accession","matched_strain_id":"","source_strain_identifiers":"","source_strain_field":"","source_organism_id":"","source_project_id":""}; line 88346: {"strain_id":"kgmicrobe.strain:bacdive_23434","genome_id":"patric:439481.10","source_database":"patric","source":"BACDIVE","source_id":"bacdive:23434","source_reference_id":"66792","assembly_level":"scaffold","genome_name":"ASM15108v1 assembly for Aciduliprofundum boonei T469","taxon_id":"NCBITaxon:439481","source_field":"Sequence information.Genome sequences.BV-BRC accession","matched_strain_id":"","source_strain_identifiers":"","source_strain_field":"","source_organism_id":"","source_project_id":""}; line 88347: {"strain_id":"kgmicrobe.strain:bacdive_23434","genome_id":"patric:439481.9","source_database":"patric","source":"BACDIVE","source_id":"bacdive:23434","source_reference_id":"66792","assembly_level":"complete","genome_name":"ASM2566v1 assembly for Aciduliprofundum boonei T469","taxon_id":"NCBITaxon:439481","source_field":"Sequence information.Genome sequences.BV-BRC accession","matched_strain_id":"","source_strain_identifiers":"","source_strain_field":"","source_organism_id":"","source_project_id":""} | supports | Compared the complete imported assertion multiset, retaining multiplicity, literal source fields, versions and deposit scope. |
+| strain-table-3 | data/raw/strain_related_records.tsv; line 318030: {"strain_id":"kgmicrobe.strain:bacdive_23434","record_id":"gold:Go0608798","record_type":"GOLD_ORGANISM","source":"GOLD","source_id":"gold:Go0608798","source_reference_id":"","taxon_id":"NCBITaxon:439481","record_name":"Aciduliprofundum boonei DSM 19572","source_field":"ORGANISM GOLD ID","matched_strain_id":"kgmicrobe.strain:DSM-19572","source_strain_identifiers":"DSM 19572","source_strain_field":"ORGANISM CULTURE COLLECTION ID","source_organism_id":"gold:Go0608798","source_project_id":""}; line 318031: {"strain_id":"kgmicrobe.strain:bacdive_23434","record_id":"gold:Go0608798","record_type":"GOLD_ORGANISM","source":"GOLD","source_id":"gold:Go0608798","source_reference_id":"","taxon_id":"NCBITaxon:439481","record_name":"Aciduliprofundum boonei DSM 19572","source_field":"ORGANISM GOLD ID","matched_strain_id":"kgmicrobe.strain:DSM-19572","source_strain_identifiers":"DSM 19572","source_strain_field":"ORGANISM STRAIN","source_organism_id":"gold:Go0608798","source_project_id":""} | supports | Compared the complete imported assertion multiset, retaining multiplicity, literal source fields, versions and deposit scope. |
+| strain-table-4 | data/straininfo/strain_links.tsv; line 81123: {"strain_id":"kgmicrobe.strain:bacdive_23434","straininfo_strain_id":"straininfo.strain:401632","straininfo_deposit_id":"straininfo.deposit:908583","matched_strain_id":"kgmicrobe.strain:DSM-19572","deposit_designation":"DSM 19572","strain_doi":"DOI:10.60712/SI-ID401632.2","strain_status":"published online","deposit_status":"available","source_bacdive_id":"bacdive:23434","taxon_id":"NCBITaxon:379547"} | supports | Compared the complete imported assertion multiset, retaining multiplicity, literal source fields, versions and deposit scope. |
+| strain-table-5 | data/straininfo/assemblies.tsv; complete table; exact target/subtree/source-identifier search has no match | supports | Compared the complete imported assertion multiset, retaining multiplicity, literal source fields, versions and deposit scope. |
+| strain-table-6 | data/straininfo/related_records.tsv.gz; line 194828: {"strain_id":"kgmicrobe.strain:bacdive_23434","record_id":"straininfo.deposit:908583","record_type":"STRAININFO_DEPOSIT","source":"STRAININFO","source_id":"straininfo.strain:401632","source_reference_id":"","taxon_id":"NCBITaxon:379547","record_name":"DSM 19572","source_field":"deposits.siDP","matched_strain_id":"kgmicrobe.strain:DSM-19572","source_strain_identifiers":"DSM 19572","source_strain_field":"deposits.designation","source_organism_id":"","source_project_id":"","straininfo_evidence_json":"{\"deposit_designation\":\"DSM 19572\",\"deposit_id\":\"straininfo.deposit:908583\",\"deposit_status\":\"available\",\"match_method\":\"culture_identifier\",\"source_bacdive_id\":\"bacdive:23434\",\"strain_doi\":\"DOI:10.60712/SI-ID401632.2\",\"strain_id\":\"straininfo.strain:401632\",\"strain_status\":\"published online\"}"}; line 194829: {"strain_id":"kgmicrobe.strain:bacdive_23434","record_id":"straininfo.strain:401632","record_type":"STRAININFO_STRAIN","source":"STRAININFO","source_id":"straininfo.strain:401632","source_reference_id":"","taxon_id":"NCBITaxon:379547","record_name":"DSM 19572","source_field":"strain.siID","matched_strain_id":"kgmicrobe.strain:DSM-19572","source_strain_identifiers":"DSM 19572","source_strain_field":"deposits.designation","source_organism_id":"","source_project_id":"","straininfo_evidence_json":"{\"deposit_designation\":\"DSM 19572\",\"deposit_id\":\"straininfo.deposit:908583\",\"deposit_status\":\"available\",\"match_method\":\"culture_identifier\",\"source_bacdive_id\":\"bacdive:23434\",\"strain_doi\":\"DOI:10.60712/SI-ID401632.2\",\"strain_id\":\"straininfo.strain:401632\",\"strain_status\":\"published online\"}"} | supports | Compared the complete imported assertion multiset, retaining multiplicity, literal source fields, versions and deposit scope. |
+| strain-table-7 | data/atb/strain_links.tsv; complete table; exact target/subtree/source-identifier search has no match | supports | Compared the complete imported assertion multiset, retaining multiplicity, literal source fields, versions and deposit scope. |
+| strain-primary-1 | data/bacdive/records.jsonl.gz; line 23236: {"General":{"@ref":8186,"BacDive-ID":23434,"NCBI tax id":[{"Matching level":"strain","NCBI tax id":439481},{"Matching level":"species","NCBI tax id":379547}],"doi":"10.13145/bacdive23434.20260601.11"},"Literature":{"@ref":8186,"culture collection no.":"DSM 19572","straininfo link":{"@ref":126262,"straininfo":401632}},"Name and taxonomic classification":{"@ref":8186,"LPSN":{"@ref":20215,"class":"Thermoplasmata","description":"domain/archaea","domain":"Archaea","family":"Aciduliprofundaceae","full scientific name":"&lt;I&gt;Candidatus&lt;/I&gt; Aciduliprofundum boonei Reysenbach et al. 2006","genus":"Aciduliprofundum","keyword":"phylum/methanobacteriota","order":"Aciduliprofundales","phylum":"Methanobacteriota","species":"Aciduliprofundum boonei"},"class":"Euryarchaeota, not assigned to class","domain":"Archaea","family":"Euryarchaeota, not assigned to family","full scientific name":"Aciduliprofundum boonei Schouten et al. 2008","genus":"Aciduliprofundum","order":"Euryarchaeota, not assigned to order","phylum":"Euryarchaeota","species":"Aciduliprofundum boonei","strain designation":"T469","type strain":"yes"},"Sequence information":{"16S sequences":{"@ref":8186,"NCBI tax ID":439481,"accession":"DQ451875","database":"nuccore","description":"Aciduliprofundum boonei strain T469 16S ribosomal RNA gene, partial sequence","length":1409},"Genome sequences":[{"@ref":66792,"BV-BRC accession":"439481.9","IMG accession":"646564501","INSDC accession":"GCA_000025665","NCBI tax ID":439481,"assembly level":"complete","description":"ASM2566v1 assembly for Aciduliprofundum boonei T469","score":97.89},{"@ref":66792,"BV-BRC accession":"439481.10","INSDC accession":"GCA_000151085","NCBI tax ID":439481,"assembly level":"scaffold","description":"ASM15108v1 assembly for Aciduliprofundum boonei T469","score":0}]}} | supports | Inspected complete selected BacDive, StrainInfo and GOLD primary objects. Explicit deposits and project/analysis chains support only their narrow claims. Historical aggregates are not recounted by these newer objects. |
+| strain-primary-2 | data/straininfo/records.jsonl.gz; line 299521: {"deposits":[{"cultureCollection":{"ccID":1,"code":"DSMZ","deprecated":false,"name":"DSMZ-German Collection of Microorganisms and Cell Cultures"},"designation":"DSM 19572","lastUpdate":"2024-12-03","siDP":908583,"status":"available","taxon":{"name":"Aciduliprofundum boonei","ncbi":379547},"typeStrain":true}],"strain":{"archive":[{"date":"2024-05-31","doi":"10.60712/SI-ID401632.1","title":"StrainInfo SI-ID 401632.1"},{"date":"2025-02-25","doi":"10.60712/SI-ID401632.2","title":"StrainInfo SI-ID 401632.2"}],"bdID":23434,"doi":"10.60712/SI-ID401632.2","relation":{"deposit":[{"ccID":1,"designation":"DSM 19572","erroneous":false,"siDP":908583}],"designation":["T469"]},"siID":401632,"status":"published online","taxon":{"name":"Candidatus Aciduliprofundum boonei","ncbi":379547}}} | supports | Inspected complete selected BacDive, StrainInfo and GOLD primary objects. Explicit deposits and project/analysis chains support only their narrow claims. Historical aggregates are not recounted by these newer objects. |
+| strain-primary-3 | data/gold/organisms.jsonl.gz; line 439766: {"ORGANISM CULTURE COLLECTION ID":"DSM 19572","ORGANISM GOLD ID":"Go0608798","ORGANISM NAME":"Aciduliprofundum boonei DSM 19572","ORGANISM NCBI TAX ID":"439481","ORGANISM STRAIN":"DSM 19572"} | supports | Inspected complete selected BacDive, StrainInfo and GOLD primary objects. Explicit deposits and project/analysis chains support only their narrow claims. Historical aggregates are not recounted by these newer objects. |
+| gold-project-discovery | data/gold/projects.jsonl.gz; [] | supports | Full exact organism-field search verifies the available project chains and bounded absences for the explicitly selected organism IDs; no project or analysis is inferred from an empty filtered artifact. |
+| cafi-registry | src/taxonmech/data/cafi_acronyms.json; {"accessed_at":"2026-10-20T04:02:21.239529+00:00","registry_rows":{"1":{"acr":"DSM","acr_synonym":["DSMZ"],"active":true,"catalogue":["https://www.dsmz.de/collection/catalogue/details/culture/{acr}-{id}"],"code":"DSMZ","country":"DE","gbif":"883f3d24-35e9-462d-b7a3-13c2b9b7260e","homepage":"https://www.dsmz.de/","name":"DSMZ-German Collection of Microorganisms and Cell Cultures","regex_ccno":"^DSM\\s*\\d+$","regex_id":{"full":"^\\d+$"},"ror":"02tyer376"},"4":{"acr":"ATCC","active":true,"catalogue":["https://www.atcc.org/products/{id}"],"code":"ATCC","country":"US","gbif":"25160e92-1a80-4226-9afb-b25691622ac6","homepage":"https://www.atcc.org/","name":"American Type Culture Collection","regex_ccno":"^ATCC\\s*((BAA&#124;TSD&#124;MYA&#124;SD&#124;VR&#124;PTA)-)?\\d+$","regex_id":{"core":"\\d+","full":"^((BAA&#124;TSD&#124;MYA&#124;SD&#124;VR&#124;PTA)-)?\\d+$","pre":"(BAA&#124;TSD&#124;MYA&#124;SD&#124;VR&#124;PTA)"},"ror":"03thhhv76"},"14":{"acr":"JCM","active":true,"catalogue":["https://www.jcm.riken.jp/cgi-bin/jcm/jcm_number?{acr}={id}"],"code":"JCM","country":"JP","gbif":"fce1f744-ca76-46bb-9428-d92cfebe39d4","homepage":"https://jcm.brc.riken.jp/en/","name":"Japan Collection of Microorganisms","regex_ccno":"^JCM\\s*\\d+$","regex_id":{"full":"^\\d+$"},"ror":"00s05em53"},"12":{"acr":"NBRC","acr_synonym":["NITE:NBRC"],"active":true,"catalogue":["https://www.nite.go.jp/nbrc/catalogue/NBRCCatalogueDetailServlet?ID=NBRC&amp;CAT={core0:8}"],"code":"NBRC","country":"JP","gbif":"abab42d0-0a95-4166-a0fc-6fe5cd9b66ff","homepage":"https://www.nite.go.jp/en/nbrc/","name":"Biological Resource Center","regex_ccno":"^NBRC\\s*\\d+$","regex_id":{"full":"^\\d+$"}}},"normalization":{"DSM 19572":"DSM-19572","ATCC BAA-758":"ATCC-BAA-758","DSM 16960":"DSM-16960","JCM 12091":"JCM-12091","ATCC 700893":"ATCC-700893","DSM 11879":"DSM-11879","JCM 9820":"JCM-9820","NBRC 100138":"NBRC-100138","T469":"","SY1":"","K1":""}} | supports | Explicit registered deposit keys pass the authority/accession rule. Bare T469, SY1 and K1 do not; genome association alone is not a deposit join. |
+| historical-edge-1 | data/raw/MANIFEST.yaml; /Users/marcin/Documents/VIMSS/ontology/KG-Hub/KG-Microbe/kg-microbe/data/transformed/mediadive/edges.tsv; expected=78ea275a59d4e2de09a9cf72652ec64454c6a111d2defa1ae0a44bac8a72e523; observed=4e933d1e2412fb1aad74e60719a6a64dfa34862ff0a6b84e93d78da5ce13dd8b | partial | Earlier actual check found configured source bytes differing from the manifest-pinned historical input; this is not a new or worldwide search. |
+| historical-edge-2 | data/raw/MANIFEST.yaml; /Users/marcin/Documents/VIMSS/ontology/KG-Hub/KG-Microbe/kg-microbe/data/transformed/gold/edges.tsv; expected=b793c4f84278789f5dc7c68173b1f08364fd68c5d52a555c4037793006010a12; observed=6b3375a06d4dabc86fdcb14a48cea55b86a7003634ba1d3ee449bcac32b89f9d | partial | Earlier actual check found configured source bytes differing from the manifest-pinned historical input; this is not a new or worldwide search. |
+| historical-edge-3 | data/raw/MANIFEST.yaml; /Users/marcin/Documents/VIMSS/ontology/KG-Hub/KG-Microbe/kg-microbe/data/transformed/madin_etal/edges.tsv; expected=3fbe08ab2502458a515f2efc036d4d7004e2ae992521fe25426554126dcdf77f; observed=c19bfc848e1b410548614c54a2b99e2c58452d58aeb61f972c99fcb3039a1d24 | partial | Earlier actual check found configured source bytes differing from the manifest-pinned historical input; this is not a new or worldwide search. |
+| historical-edge-4 | data/raw/MANIFEST.yaml; /Users/marcin/Documents/VIMSS/ontology/KG-Hub/KG-Microbe/kg-microbe/data/transformed/bactotraits/edges.tsv; expected=f99ac3f385b7b94667ed1b59a046c9a0bfa655d0ca0b5757eef753495c901126; observed=7f0c775e18dc75ec2117c52d414af8a9fe35b6d1e01bcd44e42a86c1d0f2614d | partial | Earlier actual check found configured source bytes differing from the manifest-pinned historical input; this is not a new or worldwide search. |
+| qc-setup-receipt | just qc; initial setup attempt, 2026-10-19T07:17:01Z through 2026-10-19T07:17:01Z | context_only | Initial actual invocation from /private/tmp/taxonmech-record-reviews-k0MubV/repo exited 1 because ruff was absent. Locked ruff 0.16.7 was installed only in that isolated environment before the complete retry. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. |
+| strict-receipt | just validate-strict data/taxa/archaea/aciduliprofundum_boonei_t469.yaml --out /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0007/strict-05.tsv; This exact generated YAML only; its captured bytes remain unchanged. Actual earlier per-target invocation; the receipt retains its original cwd and times. | supports | Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0007/repo; started 2026-10-20T03:57:48Z, finished 2026-10-20T03:57:49Z, exit 0. This exact generated YAML only; its captured bytes remain unchanged. Actual earlier per-target invocation; the receipt retains its original cwd and times.<br>Validating 1 files with 4 workers; schema=/private/tmp/taxonmech-record-reviews-k0MubV/repo-batch-0003/src/taxonmech/schema/taxonmech.yaml<br><br>=== validate-strict summary ===<br>  files scanned:      1<br>  files with ERROR:   0<br>  total ERROR rows:   0<br>  TSV:                /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0007/strict-05.tsv |
+| history-receipt | just validate-history; All 17 standalone history records; the generated seed event was also inspected in this target. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. | supports | Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo; started 2026-10-19T07:17:01Z, finished 2026-10-19T07:17:03Z, exit 0. All 17 standalone history records; the generated seed event was also inspected in this target. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles.<br>history links: 17 record(s), 0 invalid<br>No issues found<br>17 history record(s) valid against src/taxonmech/schema/history.yaml |
+| corpus-receipt | just verify-corpus; All 625,960 generated taxon YAMLs, not a focused approximation. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. | supports | Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo; started 2026-10-19T07:18:23Z, finished 2026-10-19T07:24:12Z, exit 0. All 625,960 generated taxon YAMLs, not a focused approximation. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles.<br>uv run python scripts/verify_corpus.py <br>expected 625960 records, found 625960 on disk<br>  missing:   0<br>  extra:     0<br>  differing: 0<br><br>corpus reproduces exactly from data/raw/ and curation/seed_scope.tsv |
+| products-receipt | just validate-products; Full configured corpus scan for curator-added graph nodes; this target contains no causal graph. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. | supports | Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo; started 2026-10-19T07:17:01Z, finished 2026-10-19T07:55:11Z, exit 0. Full configured corpus scan for curator-added graph nodes; this target contains no causal graph. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles.<br>uv run python scripts/validate_id_label_correspondence.py -c conf/id_label_targets.yaml<br><br>id↔label correspondence summary:<br><br>✅ All id↔label pairs correspond. |
+| qc-receipt | just qc; Repository-wide just qc, including native corpus-wide checks. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. | supports | Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo; started 2026-10-19T07:17:41Z, finished 2026-10-19T08:07:39Z, exit 0. Repository-wide just qc, including native corpus-wide checks. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles.<br>1055 passed, 3 skipped, 5 deselected in 1634.00s (0:27:13)<br>Validating 625960 files with 4 workers; schema=/private/tmp/taxonmech-record-reviews-k0MubV/repo/src/taxonmech/schema/taxonmech.yaml<br>  files scanned:      625960<br>expected 625960 records, found 625960 on disk<br>pages/ is current<br>Site publication: 530,864,122 bytes (budget 950,000,000)<br>625960 taxon records<br>  NCBITAXON        625960<br>All TaxonMech quality gates passed.<br>  Related STRAININFO_STRAIN: 54312 strain-record pairs, 53745 identifiers, 53890 strains (not genome counts)<br>  Related STRAININFO_DEPOSIT: 107277 strain-record pairs, 106843 identifiers, 53890 strains (not genome counts)<br>  Related NUCLEOTIDE_SEQUENCE: 51594 strain-record pairs, 51301 identifiers, 9984 strains (not genome counts)<br>LPSN: 22469 records carry nomenclature, 21254 with a correct name   GTDB: 117809 records mapped, 324404579 genomes summed across record attestations (not deduplicated)<br>Causal graphs: 0 records (0 evidence-backed edges)<br><br>All TaxonMech quality gates passed. |
+| previous-issue-key-search | Previous structured review issue-key search; {"issue_key":"gtdb-closematch-exact-promotion-439481","matches":[],"files_read":288} | supports | No earlier occurrence of this exact issue key was found in the bounded complete six-branch review search. |
+
+## Limits And Additional Notes
+
+- The review is bounded to captured sources and versions. Names alone do not establish deposit identity, genome equivalence, phenotype or mechanism; source taxonomy disagreements are preserved.
+- Original manifest-hash-matching historical aggregate edges were unavailable in the retained configured-path checks; pinned projection counts agree, but independent historical recounting remains unresolved.
+- Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles.
+- No generated record or history was edited; curation actions remain proposed.
+- Fresh-base canonical recapture preserved all previously reviewed input hashes; original captures and actual transition receipts remain retained.
+- Every new bundle still requires its own validate/save/check recipe; baseline native receipts do not claim these later steps have run.
+
+## Complete Structured Record
+
+The sibling review.yaml is authoritative.
+
+```yaml
+schema_version: 1.0.0
+review_id: 20261020T040949Z-aciduliprofundum_boonei_t469
+kind: record
+repository: CultureBotAI/TaxonMech
+title: 'Record review: Aciduliprofundum boonei T469'
+started_at: '2026-10-20T03:57:41Z'
+finished_at: '2026-10-20T04:09:49Z'
+reviewer:
+  identity: Codex
+  kind: agent
+  independence: independent
+  independence_basis: The reviewer did not author the existing generated target; this
+    review changes only new review artifacts in an isolated checkout.
+skill: .claude/skills/review-yaml-record/SKILL.md
+completion: partial
+verdict: needs_curation
+scientific_review: true
+summary: Aciduliprofundum boonei T469 has supported strain identity and narrow source
+  links, but an unqualified GTDB species synonym/xref inflates its scope. One major
+  finding; historical aggregate recounting remains unresolved.
+source:
+  git_revision: 9b5a8fff5185b38dc5c77bb35235152c81ea7765
+  state: working_tree
+  inputs:
+  - path: .claude/skills/curate-yaml-record/references/review-checklist.md
+    sha256: 8e8fd97c64fbff27e023c7a768b4c806c98f56cd6571e7102217a2c833284df6
+    role: context
+  - path: .claude/skills/review-yaml-record/SKILL.md
+    sha256: 4c7090b9d7fd0c6f7f2b4e47b48cbf64835e8d27b44944649e1ccd9038ce462d
+    role: context
+  - path: AGENTS.md
+    sha256: bde64bd1943c4fc64b332cdbc76b89c1460294d9b1042beeedbfa91160a70331
+    role: context
+  - path: CLAUDE.md
+    sha256: 8ae749dbc22700080dcf5e1a0b7ed75710dee6a27f5c7f9e7c6790c26176e5c8
+    role: context
+  - path: conf/id_label_targets.yaml
+    sha256: bfd1b248f7b189cd054e15b7ad0171042a30980d2ebdbdd8e7d85cea68dde9c8
+    role: context
+  - path: conf/ncbi_taxdump.yaml
+    sha256: 1d734bbb3ebf9d36e304d8030c5852fa4f0f306fca2849be5dec8f3dff86f887
+    role: context
+  - path: conf/record_review.yaml
+    sha256: 366312506b771fc18fc5bfc30d5ec942b2c96212e1f4f95c463cfa1707fbebaa
+    role: context
+  - path: conf/sources.yaml
+    sha256: 759ef444b1890559846fd4ab7818c8dbca74ab6bee2f6b9466a1aff6b5f4d8c8
+    role: context
+  - path: curation/seed_scope.tsv
+    sha256: 5fdc0f7111b64e02439d95c6f2b51fcff1d2154c34b2d957422dd9b297e94d4b
+    role: context
+  - path: data/atb/MANIFEST.yaml
+    sha256: 1358809b2af7e8d4a6c8bb4c122781f48ae40b2c4f0f1c7ad3f37ad8907d7315
+    role: context
+  - path: data/atb/strain_links.tsv
+    sha256: 50683192c8015badf14a8a2aab73929a21b830117449ce329d1216a698abf1c0
+    role: context
+  - path: data/bacdive/SOURCE.json
+    sha256: 16c898e46bca4544e4d9f1908db229aa3d360c8cf7018e036a5389a979dc3716
+    role: context
+  - path: data/bacdive/records.jsonl.gz
+    sha256: b27d0f50f06aa33615e7cc2aae4acb7c2767df930c85292e76fbb462ac136080
+    role: context
+  - path: data/bvbrc/SOURCE.json
+    sha256: 0e00cbb6c5fa55ceb60f8d9359a86f605feaf26ddfa4f91dab084bc52f1d1fe4
+    role: context
+  - path: data/bvbrc/bvbrc-0000.jsonl.gz
+    sha256: 2596cba5d338aec8efba41ffd2fd41575dc7902ca8efa11927ce08317575911f
+    role: context
+  - path: data/bvbrc/bvbrc-0001.jsonl.gz
+    sha256: 57e653d914dc3ad6774a586f40a5059361654319423b5e92cc31909593d75ae8
+    role: context
+  - path: data/bvbrc/bvbrc-0002.jsonl.gz
+    sha256: bef1faede27841f9cf4c19b1d10c19055c5abae8b662dede01dfdcc99c4d4e61
+    role: context
+  - path: data/bvbrc/bvbrc-0003.jsonl.gz
+    sha256: 8bb3c271889d5fa2a0c07ebec1ab3ef53814cb05669e6527862e72344414db57
+    role: context
+  - path: data/bvbrc/bvbrc-0004.jsonl.gz
+    sha256: a41fba508df434ec13223ff5bd0fe0129f8725d34002602a69244f98f935e4d7
+    role: context
+  - path: data/bvbrc/bvbrc-0005.jsonl.gz
+    sha256: 2888bdd5c63eaf62325334a2e027dafb2261ad4dfbf80e2a9809a496037c2dcd
+    role: context
+  - path: data/bvbrc/bvbrc-0006.jsonl.gz
+    sha256: 61c0401e39f33dc39277f32315a517f763f9272330fab2b0aed6d0458c693c44
+    role: context
+  - path: data/bvbrc/bvbrc-0007.jsonl.gz
+    sha256: ecec1a204901c3d4db320a7e9dcd22e4103913b82711263108f8413133337dd2
+    role: context
+  - path: data/bvbrc/bvbrc-0008.jsonl.gz
+    sha256: 24a1a20ec12f7c0857e5457cc70df82ad71b6e5a2420f9ab64ebc89213f0d866
+    role: context
+  - path: data/bvbrc/bvbrc-0009.jsonl.gz
+    sha256: f78ffa7e07a829537c004f561e31124837565ec354dce4db11630f0f11cc000b
+    role: context
+  - path: data/bvbrc/bvbrc-0010.jsonl.gz
+    sha256: 8836863434baa22b0910abdb5ef4bdb263fa2ed628bfa80e79f2be98f81fe872
+    role: context
+  - path: data/bvbrc/bvbrc-0011.jsonl.gz
+    sha256: 3ed26d0ec9d06ebf36f16e83d6c65ea76e6f50a3b9355ed2f0a6b899d5e4cb87
+    role: context
+  - path: data/bvbrc/bvbrc-0012.jsonl.gz
+    sha256: 90763f4d476afd14ff08c5cac4d38743cad2f8919d72c756755b76179f766f16
+    role: context
+  - path: data/bvbrc/bvbrc-0013.jsonl.gz
+    sha256: ba814e4c647d96e5d00512c336e83a6fd2448549c7f9ef46cc8fd59e1790235b
+    role: context
+  - path: data/bvbrc/bvbrc-0014.jsonl.gz
+    sha256: 741df59559faa6e84faad9216adf238d4506198332b9d441a74a5b1ff09364cc
+    role: context
+  - path: data/bvbrc/bvbrc-0015.jsonl.gz
+    sha256: 6387f2db4e0dd8b1c4f91a1506223687dd465f05b213bcae74968644805af13e
+    role: context
+  - path: data/bvbrc/bvbrc-0016.jsonl.gz
+    sha256: 2a653d62267adbf5f930680c75fdc402e77c771c770e3600d81f4eae9c3a61d8
+    role: context
+  - path: data/bvbrc/bvbrc-0017.jsonl.gz
+    sha256: 56b0b9a6d669ac631000b4469eb875627f7c7aa658875955a7956b06fa63468a
+    role: context
+  - path: data/bvbrc/bvbrc-0018.jsonl.gz
+    sha256: 7d8ded4bfb5c1f6597ef5aa1de1fd84d437c281affa257c2900f884319cc75fe
+    role: context
+  - path: data/bvbrc/bvbrc-0019.jsonl.gz
+    sha256: 1f46317fc56c582f17dfa6c0ea30c6d80a5cc5f2730dc4ac491b0aed2b8c9876
+    role: context
+  - path: data/bvbrc/bvbrc-0020.jsonl.gz
+    sha256: ce96b1844f603b80f97dd4d814dafe8d4091e976a8b9e3a4e59fafffd28ad553
+    role: context
+  - path: data/bvbrc/bvbrc-0021.jsonl.gz
+    sha256: 5cb3e9b76ea660b12b003d61ee6cf680dc486928f359d819002171603afdba3b
+    role: context
+  - path: data/bvbrc/bvbrc-0022.jsonl.gz
+    sha256: 12db5676a406f1c32dcb2d130785d2a046493b8535ba95dd806135850e21b8ff
+    role: context
+  - path: data/bvbrc/bvbrc-0023.jsonl.gz
+    sha256: 5eaec8d122bdfcabd4483693821bb0c761b8509806006ecdf436926f620926fd
+    role: context
+  - path: data/bvbrc/bvbrc-0024.jsonl.gz
+    sha256: b4f07a81b1af211aa9c77595e9d1d9fb300eb3e57bc183157c3fceecfac54d73
+    role: context
+  - path: data/bvbrc/bvbrc-0025.jsonl.gz
+    sha256: 6d40fd7201112c415d5a8112b19b4ce388a4e44ea98fd879e4814897959befaf
+    role: context
+  - path: data/bvbrc/bvbrc-0026.jsonl.gz
+    sha256: eb239c5e814a8434429a6977bfa6e1a909f45763423ff73a8834adb735f8dfe8
+    role: context
+  - path: data/bvbrc/bvbrc-0027.jsonl.gz
+    sha256: 1ddd098b0401da6d7b63ceb6e3eb02ded4d4811a9959e8074dc68d3410fc65de
+    role: context
+  - path: data/bvbrc/bvbrc-0028.jsonl.gz
+    sha256: 46b20814a333c68d624f1451c15c3059dbf6a7d5fa81bc99715b1b903aa34dc1
+    role: context
+  - path: data/catalog/MANIFEST.json
+    sha256: 15b5cfe42be7919faf2a6feb5ac4f7084009e84b2d6da669f7101aacc3586299
+    role: context
+  - path: data/catalog/PRIMARY.json
+    sha256: 8ae7c5d329ebfccb98670f1b40d58932e400d1f3423e45135dc3926d412c17e5
+    role: context
+  - path: data/catalog/gtdb_genomes-0000.jsonl.gz
+    sha256: 2392b3f07a712e9198bb9a5088cc1389ccc7d426f7bd2f5462dedb88b1f69ccf
+    role: context
+  - path: data/catalog/gtdb_genomes-0001.jsonl.gz
+    sha256: 806fe9de52b466a3bf143e780aa8a047bf9b91272f1a3025200e81a19c39db11
+    role: context
+  - path: data/catalog/gtdb_genomes-0002.jsonl.gz
+    sha256: a80402c55fc62af4e29455b3ff541a9898c547941bb6979ae32768130b457878
+    role: context
+  - path: data/catalog/gtdb_genomes-0003.jsonl.gz
+    sha256: 27952cd83f56e084919e6bc31778365b9e7495d80a9fe6bbc97055a586ce8344
+    role: context
+  - path: data/catalog/gtdb_genomes-0004.jsonl.gz
+    sha256: f600f5d831d44c43e2d0872bd4d3d497d5e3550309650a2061b5f277f8c00e32
+    role: context
+  - path: data/catalog/gtdb_genomes-0005.jsonl.gz
+    sha256: 43bdf17b0d30e3faa3ca880d89b5204fd9e79939bd82f32e5c1109b9d8674dfc
+    role: context
+  - path: data/catalog/gtdb_genomes-0006.jsonl.gz
+    sha256: 70cf49ec754904337e0beb7fddb86bb57cf1affde8d326aef821b4b0628f8199
+    role: context
+  - path: data/catalog/gtdb_genomes-0007.jsonl.gz
+    sha256: 0ba5c74cb32e97a3b85e26e1f43501dc2aac915bd8b26d71beab56e4b30bfd2d
+    role: context
+  - path: data/catalog/gtdb_genomes-0008.jsonl.gz
+    sha256: f085fdc8d521b2edc10d58092170e5bc8364a3ab9d9aff5faca718f54939c7b8
+    role: context
+  - path: data/catalog/gtdb_genomes-0009.jsonl.gz
+    sha256: 455c03d8df2b955d3a8e9cb2e502b36e62114996ed114c8c34f273854c48b4ef
+    role: context
+  - path: data/catalog/gtdb_genomes-0010.jsonl.gz
+    sha256: aeb33045242e4c215fad2acb25ea21402e11a07164e93c54ce19a1d6408e60b3
+    role: context
+  - path: data/catalog/gtdb_genomes-0011.jsonl.gz
+    sha256: 36fe03c7caf806752d9005fc1855616dd722a65e0b123bebbd8fea37068e3fb5
+    role: context
+  - path: data/catalog/gtdb_genomes-0012.jsonl.gz
+    sha256: 415d91c43886d172cff6cee466abce5fccac75dfcea5d587d6290f693ba2b7e6
+    role: context
+  - path: data/catalog/gtdb_genomes-0013.jsonl.gz
+    sha256: 1a64663893af28bb7f2a99832c81c9f2bc4203b4e5e3b318431d179c0e0ebd3b
+    role: context
+  - path: data/catalog/gtdb_genomes-0014.jsonl.gz
+    sha256: 18d06a6dc475b9f9a7b03c57a44ad0ce3c099e2c5878a85d8385cdb48189582e
+    role: context
+  - path: data/catalog/gtdb_genomes-0015.jsonl.gz
+    sha256: 294a24c5f36f7a2fcd8543962ca061494f3f705d65b53e525f680dd362f15d42
+    role: context
+  - path: data/catalog/gtdb_genomes-0016.jsonl.gz
+    sha256: d97a816a4d84c4af63bbdc904ba5d8a399436da32c38a9463fa1b8497d3373d6
+    role: context
+  - path: data/catalog/gtdb_genomes-0017.jsonl.gz
+    sha256: f2a4d2c5b7927184206c6614540746b5e9c298e7a924bd149fc86c0f0c046ff6
+    role: context
+  - path: data/catalog/gtdb_genomes-0018.jsonl.gz
+    sha256: 8baa314877815777abcdf600079c6ee42f2ea5340398df9f2e18de9c18fd4347
+    role: context
+  - path: data/catalog/ncbi_genbank-0000.jsonl.gz
+    sha256: 2d0f73ddded027424214ecc6c9f0c91ec229278cacf8d0e1d63e5745c8064ea7
+    role: context
+  - path: data/catalog/ncbi_genbank-0001.jsonl.gz
+    sha256: a3d1c13cd71857ef301afb53b7207af6f42f6fe2d729579660869201608c5337
+    role: context
+  - path: data/catalog/ncbi_genbank-0002.jsonl.gz
+    sha256: 5931b3c1684ae211b5a726b0ac459abe095cb6d27a4eb8f6f54cc34aca211f75
+    role: context
+  - path: data/catalog/ncbi_genbank-0003.jsonl.gz
+    sha256: 8e0b9562cce19621f04e26b859273d35b04ff59d581f331d266936f73de20157
+    role: context
+  - path: data/catalog/ncbi_genbank-0004.jsonl.gz
+    sha256: 1a2f01cd2f3fd80d4af0c3cb66a8e240dae417da7c590c9cf3ba5a8f1b277840
+    role: context
+  - path: data/catalog/ncbi_genbank-0005.jsonl.gz
+    sha256: a98802ec69b24c4c30ee290e19c3276dd6d09886e92d94d310860a36eac00f50
+    role: context
+  - path: data/catalog/ncbi_genbank-0006.jsonl.gz
+    sha256: c3a9d0123c4b6b030567500e1be4d1612097012390a81755f01d3608ba28ac0f
+    role: context
+  - path: data/catalog/ncbi_genbank-0007.jsonl.gz
+    sha256: 0585d70867b6c9ee2a28e88bc2c3f287af525e8a2068280a00aa78bdd22067a0
+    role: context
+  - path: data/catalog/ncbi_genbank-0008.jsonl.gz
+    sha256: 6b31a395d770af741d40a6832c0d74026c4c82f5b95216023df867e3cdebd764
+    role: context
+  - path: data/catalog/ncbi_genbank-0009.jsonl.gz
+    sha256: 90c09802a6726dc9feebf7f731a1429719501f2b7e72fde7a2c1bbba35645aa8
+    role: context
+  - path: data/catalog/ncbi_genbank-0010.jsonl.gz
+    sha256: bd3b25c26922b8bb4d07330b2def9f458751eca751c053b3c8fad28b96d8fcff
+    role: context
+  - path: data/catalog/ncbi_genbank-0011.jsonl.gz
+    sha256: c83ab7738f13d73d3a12e80fb9e375f3c606a8edf1e5033497022b1171bf18a9
+    role: context
+  - path: data/catalog/ncbi_genbank-0012.jsonl.gz
+    sha256: 682fedc09b37ef04be14ddd277328faeb355a07e306db6b4e6f7e2744bd4f967
+    role: context
+  - path: data/catalog/ncbi_genbank-0013.jsonl.gz
+    sha256: 4acf04eb8c8508428b6551aa5f11d32166a9e480bdb9a183903f1ff100846a14
+    role: context
+  - path: data/catalog/ncbi_genbank-0014.jsonl.gz
+    sha256: b6359ecb36d82f0452e6a475116ed1570120a71975ab9b3223a11255a14184c3
+    role: context
+  - path: data/catalog/ncbi_genbank-0015.jsonl.gz
+    sha256: f01fd32080be9cd013bf43115c6fc205cb05922a2b764e08e7d963a1505d4d53
+    role: context
+  - path: data/catalog/ncbi_genbank-0016.jsonl.gz
+    sha256: 4079d0d4ccf46146db7c2cc422fe5ffbc1db60aa7c27c8a0b1ca900af13232df
+    role: context
+  - path: data/catalog/ncbi_genbank-0017.jsonl.gz
+    sha256: f518ac6440bb9e7904fd0469915b543b14498052ea23bbc3d5b8d269e2283f6b
+    role: context
+  - path: data/catalog/ncbi_genbank-0018.jsonl.gz
+    sha256: 3acd95b3da5fc1a7ba5eb3ca935dfeaf9876b56bd6649a1a9a2c495d70ac9215
+    role: context
+  - path: data/catalog/ncbi_genbank-0019.jsonl.gz
+    sha256: 43c3cf300889cf57c0f216fea556d26538373930283384cb2ea6e6ad76bd2d87
+    role: context
+  - path: data/catalog/ncbi_genbank-0020.jsonl.gz
+    sha256: e156e63235d049eea79fbd6ba18ee36789cfb8e292cfd45e91ab0c66c9732147
+    role: context
+  - path: data/catalog/ncbi_genbank-0021.jsonl.gz
+    sha256: ea9debf9ba38dc8d89229a7a00fbbf8d064ae3aa0558004ecec9cae88793e74c
+    role: context
+  - path: data/catalog/ncbi_genbank-0022.jsonl.gz
+    sha256: 469a26d5bf58e8af7dc9902606792f36ec63e2555d4f389ab4cbf83a897c6c3d
+    role: context
+  - path: data/catalog/ncbi_genbank-0023.jsonl.gz
+    sha256: 41b2e6a6f8e2dbf771ba9a4b08af9fcbdb7ba63e5f5dd609512807bf2bdd21a8
+    role: context
+  - path: data/catalog/ncbi_genbank-0024.jsonl.gz
+    sha256: 9c18f881e3b3de3fb7efb9c2b8789a7e2a6da03589d2b4e4db29b75fa4031ac0
+    role: context
+  - path: data/catalog/ncbi_genbank-0025.jsonl.gz
+    sha256: 38750d3827d1c67eba306be889b709dce7476389853c7152d79ec0f6b1dfa944
+    role: context
+  - path: data/catalog/ncbi_genbank-0026.jsonl.gz
+    sha256: 1136718b09392eb9cf4db29e1a7e75d87b50e37dd09eeceb53d4f1683beaa31f
+    role: context
+  - path: data/catalog/ncbi_genbank-0027.jsonl.gz
+    sha256: ac95b037a0444ba889e1f6c8315fe2851ab6af365468599da9e453d16b18c44b
+    role: context
+  - path: data/catalog/ncbi_genbank-0028.jsonl.gz
+    sha256: a1bfcfc8149eb6ed239f3cb02ac99b32ed846d8752b1ab7387d2687c1d5771fa
+    role: context
+  - path: data/catalog/ncbi_genbank-0029.jsonl.gz
+    sha256: 5980edac340d816bff1150ac52ce927941089d586ca044f32cf4d2d41ffda6c8
+    role: context
+  - path: data/catalog/ncbi_genbank-0030.jsonl.gz
+    sha256: 6b55fcf1e58ee2fd454641f8bbb94d18460855248bce17f383d01ef09a003e07
+    role: context
+  - path: data/catalog/ncbi_genbank-0031.jsonl.gz
+    sha256: b0a3bd7b8d737619ecf3060c3c0420e5608ca56d420c16dcff3470fca4eefb8e
+    role: context
+  - path: data/catalog/ncbi_genbank-0032.jsonl.gz
+    sha256: e2f086237fa93b8f8a696c707b98e130bad83d4744129d5743a938048e362bc1
+    role: context
+  - path: data/catalog/ncbi_genbank-0033.jsonl.gz
+    sha256: fe98183240729cac317960e7121336da1562d6c3742db7022b449f8a5ea75e8a
+    role: context
+  - path: data/catalog/ncbi_genbank-0034.jsonl.gz
+    sha256: 1e1a05cb78e41e6351c0bef175095aaea97424aaa58b7d521394c5a060d051b9
+    role: context
+  - path: data/catalog/ncbi_genbank-0035.jsonl.gz
+    sha256: 9bb70597de12ccf7693a757a2e037ed85714ccb9a7283699652c59aeb913f5af
+    role: context
+  - path: data/catalog/ncbi_genbank-0036.jsonl.gz
+    sha256: 0d1ae12a380e63b3668cdb0aad1b2f2e8ffdb6403502d6087cd3b7528cbdc278
+    role: context
+  - path: data/catalog/ncbi_genbank-0037.jsonl.gz
+    sha256: a805deb41c1b79774d25f8fa2bcd3a362697e6a6c099d974081dc9de8f2371cc
+    role: context
+  - path: data/catalog/ncbi_genbank-0038.jsonl.gz
+    sha256: 4fb74b5bace0a0c9f7b1285fdfba600323d70ec0e463bb651bb28487af4cfa7a
+    role: context
+  - path: data/catalog/ncbi_genbank-0039.jsonl.gz
+    sha256: e84ae88ba419d93ad67157323d87bdb38e683974a9ec2cfde5de82dd3337225f
+    role: context
+  - path: data/catalog/ncbi_genbank-0040.jsonl.gz
+    sha256: 4b5f18231e8901aa20d058470317754b8f6f694a41c461b487ae54bf0d7d3ab5
+    role: context
+  - path: data/catalog/ncbi_genbank-0041.jsonl.gz
+    sha256: 1aa59ca0100eafc71c52dbff7254b814a7446b64d25cd18238e393765d842801
+    role: context
+  - path: data/catalog/ncbi_genbank-0042.jsonl.gz
+    sha256: 05943522e7acc7d26d699abcaea1789047569bd7577f3358b250cb663865d159
+    role: context
+  - path: data/catalog/ncbi_genbank-0043.jsonl.gz
+    sha256: 814c09850d5e9b7ae09701979e333fce91a2f8d68417839d4ac48919d929f875
+    role: context
+  - path: data/catalog/ncbi_genbank-0044.jsonl.gz
+    sha256: 2a302507e7a9e7757589b0df7a708e45400c29c2417719d8446b4405ae5ef7e0
+    role: context
+  - path: data/catalog/ncbi_genbank-0045.jsonl.gz
+    sha256: dbe2d8292d237125a2c614a6be589ca7df814698982f9a42baa0cab27c023798
+    role: context
+  - path: data/catalog/ncbi_genbank-0046.jsonl.gz
+    sha256: aae02918afda531c03c3a0ce09a91544161615aa6991679941f9d98429b1bf3a
+    role: context
+  - path: data/catalog/ncbi_genbank-0047.jsonl.gz
+    sha256: adfd221d87cf34824e331dd2b6ea05c2f5d4b0ee61731d27a0e96a25d3e635c2
+    role: context
+  - path: data/catalog/ncbi_genbank-0048.jsonl.gz
+    sha256: 414ebf1659198f48aad082325acc72bb10f8308008885fad797b75f2d9971ee0
+    role: context
+  - path: data/catalog/ncbi_genbank-0049.jsonl.gz
+    sha256: 467c948218f1ffbd318c3e10fd67169adbf04116b97b85a4503c9283ac58ad74
+    role: context
+  - path: data/catalog/ncbi_genbank-0050.jsonl.gz
+    sha256: 3255e0b4b642bd0052a8868567154f0f56e1e0d3c4f20389f24ca107d3c03664
+    role: context
+  - path: data/catalog/ncbi_genbank-0051.jsonl.gz
+    sha256: f16fcea27063ebcc95b962c6897cdbc9f1c744dc0dcd65f92a6a42c921b2db88
+    role: context
+  - path: data/catalog/ncbi_genbank-0052.jsonl.gz
+    sha256: 09f90de7c34454c61e3cbb8e91780b6011db46309550657b0eaad6bd99670b91
+    role: context
+  - path: data/catalog/ncbi_genbank-0053.jsonl.gz
+    sha256: de3f65f1634101e204dadf5f857bfccbe386a2f6c41f93a5044b8b1e08f4f1a2
+    role: context
+  - path: data/catalog/ncbi_genbank-0054.jsonl.gz
+    sha256: d60db2aae2f5d820154fb2299ff0cbca1034ef057084b816497eab8ad6146643
+    role: context
+  - path: data/catalog/ncbi_genbank-0055.jsonl.gz
+    sha256: 53dcb61e34c587557e8508725122fc6c1b6f3b17b2e193fcf051c32ebe583c4f
+    role: context
+  - path: data/catalog/ncbi_genbank-0056.jsonl.gz
+    sha256: b3ce949155fa51ffb24841db9d308b9a4ab2215919542b4babe6e33dc42a9e66
+    role: context
+  - path: data/catalog/ncbi_genbank-0057.jsonl.gz
+    sha256: 4ec73a547c2c9ccf0b44651e250e0761ead089321762967dd05a0480b3efceaa
+    role: context
+  - path: data/catalog/ncbi_genbank-0058.jsonl.gz
+    sha256: 042ed969a534ff871b1f2a8af346c374ed22958141fb051522a9a628acde00a2
+    role: context
+  - path: data/catalog/ncbi_genbank-0059.jsonl.gz
+    sha256: 41b8b3bc2dd519acfaac5e9fde412031b774b03e6a35a84b342f64292b9bae8b
+    role: context
+  - path: data/catalog/ncbi_genbank-0060.jsonl.gz
+    sha256: 543178fd8e56953dc1148ea86dd4c042aada07c6011e390288fe888dedeebc84
+    role: context
+  - path: data/catalog/ncbi_genbank-0061.jsonl.gz
+    sha256: ce7f731cb4689c3f1dde97fa2625be006bf05caa8730e33a93ce6be9ffcb7e11
+    role: context
+  - path: data/catalog/ncbi_genbank-0062.jsonl.gz
+    sha256: 806652a7d24466aa814d3ff5d744cabbde12f1080d5f3e6482165a29b9d51451
+    role: context
+  - path: data/catalog/ncbi_genbank-0063.jsonl.gz
+    sha256: cd7930d65598b83cad7de491f5f0a5c3e6ea8bdf884ab15b7d68e62a3f1051fb
+    role: context
+  - path: data/catalog/ncbi_genbank-0064.jsonl.gz
+    sha256: c6021a2fb86726043c595711d082c0ecbad948407383a9a84f65052c985cbbcd
+    role: context
+  - path: data/catalog/ncbi_genbank-0065.jsonl.gz
+    sha256: d47bd3c6bc300d7cda873ed20dcd439e4cb0f9ffb6d96fb593e281702a0fe113
+    role: context
+  - path: data/catalog/ncbi_genbank-0066.jsonl.gz
+    sha256: bd87ee943f3c2561e9aa5a46f178f095f9251c6f698acfc07600df92896a443d
+    role: context
+  - path: data/catalog/ncbi_genbank-0067.jsonl.gz
+    sha256: 0ae1684b88136de08e4cb4358929b0886290c120f162ec67d1eac4ef1d0905f3
+    role: context
+  - path: data/catalog/ncbi_refseq-0000.jsonl.gz
+    sha256: 57d1b732198a6443d2df08f26786e669a15fdf1dbb9627bedf58407ae9cd849f
+    role: context
+  - path: data/catalog/ncbi_refseq-0001.jsonl.gz
+    sha256: 06282ae41e57cf37ac73b236eab58ecaa081a04bf54d834b1fb61ac065ad56dc
+    role: context
+  - path: data/catalog/ncbi_refseq-0002.jsonl.gz
+    sha256: f22a85bd89937e6e2a8c7774d699102bcbf26a31af296a6cc77976d5f2a40f72
+    role: context
+  - path: data/catalog/ncbi_refseq-0003.jsonl.gz
+    sha256: b474d886f9ea8191aac95542314c20da96980c39753bdc32f6404fa9fdbe27fc
+    role: context
+  - path: data/catalog/ncbi_refseq-0004.jsonl.gz
+    sha256: 3d589aeabe75cff6ff95df3cbc6b5f24d36aab5a3a42790ac770c2df692c9429
+    role: context
+  - path: data/catalog/ncbi_refseq-0005.jsonl.gz
+    sha256: 01c2478189da678fb45af2d4e9eb2174daf2a15202757af463f68d71773fed79
+    role: context
+  - path: data/catalog/ncbi_refseq-0006.jsonl.gz
+    sha256: fee429f92cc3820d078608de37317f71fe90054b05e4163720cc4543b9e48409
+    role: context
+  - path: data/catalog/ncbi_refseq-0007.jsonl.gz
+    sha256: f1572d8421305b87b836f67f3d382414b166997d8dd29275d638ab906333ee6c
+    role: context
+  - path: data/catalog/ncbi_refseq-0008.jsonl.gz
+    sha256: a47074dcd480b25d2044fcb6ed15725031e355649e7dca9c18b73408000daef9
+    role: context
+  - path: data/catalog/ncbi_refseq-0009.jsonl.gz
+    sha256: e33402526f960a69d7e9d74c8e37e00774659987b29b9b99c6a9c14eec462851
+    role: context
+  - path: data/catalog/ncbi_refseq-0010.jsonl.gz
+    sha256: 50cf8e902a4041cf5078a815c39c9ec44573f3499aa2e4cd9501ad59f94baae8
+    role: context
+  - path: data/gold/SOURCE.json
+    sha256: c7ff51dc6be17c45b18cd031500fde0bd83fb6275e7c021e51bedf68f75ecf2d
+    role: context
+  - path: data/gold/analyses.jsonl.gz
+    sha256: d597f0d5f31fc8b387caaf659f3c6a337959219870529e907a1c0287e3877b7a
+    role: context
+  - path: data/gold/organisms.jsonl.gz
+    sha256: 8c1a055214cb240c58fadda0815efbefcb60848245e8a7474e6b1b41d123235c
+    role: context
+  - path: data/gold/projects.jsonl.gz
+    sha256: 0d852fe0144afd778609fef82b266fd1507a4c0be949efd2f53c7c34526b6c95
+    role: context
+  - path: data/raw/MANIFEST.yaml
+    sha256: ee76711683b1b579d1561dcf40187e10e4f0027ae1b89f108eb18e865e7e7d38
+    role: context
+  - path: data/raw/bacdive_strains.tsv
+    sha256: 029fd6d1f53ef7f90684130bf0d644ed3edd1d8fbeb065a511ae928f160b1eea
+    role: context
+  - path: data/raw/bactotraits_taxa.tsv
+    sha256: 976d109cef832d8bf27cc105f67a42efbe900b6946736298602ef6d11158b197
+    role: context
+  - path: data/raw/culture_collection_strains.tsv
+    sha256: 810fdcb16abd6330fb15bb03d4c74b18db86be36a7c599df7c6b2498d9735c95
+    role: context
+  - path: data/raw/gold_organisms.tsv
+    sha256: 0680971a156eef0b79de46c71a1f2138eaee5212ad8193eec943bd8e6257e473
+    role: context
+  - path: data/raw/gtdb_mappings.tsv
+    sha256: bf62441b1b76abb16dd92e795c020ff30fc24e37e195b862fb9beda567277225
+    role: context
+  - path: data/raw/gtdb_species.tsv
+    sha256: 24eddf08fe8fdd1fed534a1b7fd411561eec612c58c3709a36032998fdab8f21
+    role: context
+  - path: data/raw/lpsn_names.tsv
+    sha256: 097f8f4ba3fd077d02e48f2c298a0af88fe02db79cc862f9af1c05141b0baa57
+    role: context
+  - path: data/raw/madin_taxa.tsv
+    sha256: 7620448834f1b86daa83f2e338160ec3291a2ec3900ea4cec449418b1dc8b148
+    role: context
+  - path: data/raw/mediadive_taxa.tsv
+    sha256: 3f74b78cadfcdb6aeae953e09fdb39e34fd9c5d5ed0be65a04a5d7fb02355905
+    role: context
+  - path: data/raw/ncbitaxon_taxa.tsv
+    sha256: 97ff340e1eebf62ea541a299e5c798cdcc24ef935c636fb059df48ab45d6f2f6
+    role: context
+  - path: data/raw/strain_assemblies.tsv
+    sha256: 71344b934db3081bfcac9562a0bd1fd8fddcfdabb8af60e208ca09035e818315
+    role: context
+  - path: data/raw/strain_genome_records.tsv
+    sha256: 47ed80be55660aad4bd82d37d889ea60f8686cec1aeeccf72e5af22bf43728ab
+    role: context
+  - path: data/raw/strain_related_records.tsv
+    sha256: c33a9bf4c6b94dc6971f1c0d46565092c37ba7c2d462a6bc9c20ccbf58fb9c56
+    role: context
+  - path: data/straininfo/MANIFEST.yaml
+    sha256: 25dd601c8cf6d4d84e5cc756d1e642ebef89f565bd31967152bf0026fa072847
+    role: context
+  - path: data/straininfo/assemblies.tsv
+    sha256: d55ba39ab7cb81076a8edb61226de2bdf0aea699a7fb003cdf3ffb3ddc2f3f52
+    role: context
+  - path: data/straininfo/records.jsonl.gz
+    sha256: 8f8e6093f0617317e0488463e52de153f566effa7a5d43b44d17dabab9692819
+    role: context
+  - path: data/straininfo/related_records.tsv.gz
+    sha256: c7a262df4f970b2b11a2cf7a0a05c631ff84938e6a19cdb1d98680bb4fb35108
+    role: context
+  - path: data/straininfo/strain_links.tsv
+    sha256: 615ac119e61df3a9d296ab16674bca6de3fdbf6478ca21a61312014f0ebbae8f
+    role: context
+  - path: data/taxa/PATHS.tsv
+    sha256: c950844feb0638ce04f7349784749dd1d728fe70bc80f7e2756d956d4ecea254
+    role: context
+  - path: data/taxa/archaea/aciduliprofundum_boonei_t469.yaml
+    sha256: 60ce4f4f4530504c46710432bae0cc3050dda139f7503e52dadeb9ff6d76fadc
+    role: target
+  - path: docs/ALLTHEBACTERIA.md
+    sha256: a1b0c298988782ad4b7dbb80c661c483a67cd0e478366eddbea7d1ba7595e7cd
+    role: context
+  - path: docs/CURATION.md
+    sha256: 9e09c97bcd617f2b3d0090f775b80565fccc9d00e4c398ed58d3a31192a8fa8e
+    role: context
+  - path: docs/HARMONIZATION.md
+    sha256: 9c676a03a226d7fdce82f064acd01807a1a783497ffbbb1aabb8fdd393ac250d
+    role: context
+  - path: docs/SCHEMA.md
+    sha256: 9e767cebb2506f8372c65ceb5f75e5ef2df2b23c2be3727cfd198f447a6a0e30
+    role: context
+  - path: docs/SOURCE_COVERAGE.md
+    sha256: 43f17c3c80815d395136aab53f310be3190a8d614a45fc2f4a3942faeb0bc9e9
+    role: context
+  - path: docs/STRAININFO.md
+    sha256: 65d274e7126fcf7810da746366b0e60c1957f05df9016fb0900600932b278241
+    role: context
+  - path: docs/STRAIN_GENOMES.md
+    sha256: 7cfdbc8a600173d6569f885b409b1543098bb6022e8764324d91879eaed2b597
+    role: context
+  - path: docs/record-review-profile.md
+    sha256: d98d6944810090bf9c344ab218d82f8927d73eaad432322b94a876fe9e891334
+    role: context
+  - path: docs/record-reviews.md
+    sha256: 452a19ab688276747b7c4308523a14d4d99c1c39ef6909ae8a90b85b7a9b3e9b
+    role: context
+  - path: justfile
+    sha256: c46d88186cad450fbd47ce5176bf2afc8289252e287324245ad30090753c750e
+    role: context
+  - path: schema/record_review.yaml
+    sha256: 229baf9b69118a1fe318e4c31085c0820e4e3d1365e7b04d6ace451b7c35f9bb
+    role: context
+  - path: scripts/record_review.py
+    sha256: 95a4ec41e38ec47ba3578e76838c46a0adbf47e49ad3636524735d08cfcb1c4d
+    role: context
+  - path: scripts/run_qc.py
+    sha256: d3a8e398b0484fef1ce4ae13e639a03dd41467c1d597d753132e4dba04df9da3
+    role: context
+  - path: scripts/validate_history.py
+    sha256: aa8fd8528a28cf56a92768c05d57aea7ff48745510796126f144856b8fd7ae8b
+    role: context
+  - path: scripts/validate_id_label_correspondence.py
+    sha256: b5ff41bb52d24f5d7819fb12769e216440f75ec3fb3df3e3cb2c5082fffb40e0
+    role: context
+  - path: scripts/validate_strict.py
+    sha256: d0d75cc805cc746053076b5f75f5e6c817ab15c75a9362f8ce3be53bd4ec7382
+    role: context
+  - path: scripts/verify_corpus.py
+    sha256: 48c4ef707543d1b836052013e8991d530d14559f9b58aa3ff9faf02c4e1ffc2e
+    role: context
+  - path: src/taxonmech/data/cafi_acronyms.json
+    sha256: d51abac898f8796dbc2c7b127bb4e61a8ada7f4350fdce689cf755d926446061
+    role: context
+  - path: src/taxonmech/data/cafi_acronyms.metadata.json
+    sha256: 0f2370de617bddc9d12203f9ba6e35612e61bbaf44554b30203545123bb70958
+    role: context
+  - path: src/taxonmech/extract.py
+    sha256: 7c5b5bf385e0c060f1cb3dbac304d05ddb941e4c83c900017a04133efd6d1822
+    role: context
+  - path: src/taxonmech/genome_sources.py
+    sha256: a8c2e1e54adcea6e223a03851ef9fd38303896bf51997a4d4c83d8512676230e
+    role: context
+  - path: src/taxonmech/ncbi_taxdump.py
+    sha256: 83e3bfd53721a1f85291022511de6504d84caa58e899c0fd8d1797e9f00f67cf
+    role: context
+  - path: src/taxonmech/schema/history.yaml
+    sha256: b01b06f1b9a37db205c26c31ec0fd910690848507c7e1bfb73b424ac0829c52d
+    role: context
+  - path: src/taxonmech/schema/mech_shared.yaml
+    sha256: c2e7054fd32635e380c698282bd886a9105861009b9f0474f02bb1b80865e895
+    role: context
+  - path: src/taxonmech/schema/taxonmech.yaml
+    sha256: aab25fee94c73eb70e5197a4f3ab8ddf0fa6731785974364963906d4f4d87fc3
+    role: context
+  - path: src/taxonmech/seed.py
+    sha256: 6b5b065f4ae7aea022af736a22c0f63dc58a2425c7ee453259e567ab030f8257
+    role: context
+scope:
+  description: Entire single generated record, including all source assertions and
+    imported strains.
+  selection: Original unreviewed path-order position 65; batch-0007 target 5. Excluded
+    112 actual targets from validated main and local batch-0001/0002/0003/0004/0005/0006
+    listings; full corpus enumeration includes ignored files.
+  coverage: full
+  population_size: 1
+  reviewed_target_ids:
+  - NCBITaxon:439481
+targets:
+- target_id: NCBITaxon:439481
+  path: data/taxa/archaea/aciduliprofundum_boonei_t469.yaml
+  label: Aciduliprofundum boonei T469
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Maintained generated-record builder
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/extract.py
+    role: Maintained source inventory extractor
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/ncbi_taxdump.py
+    role: Maintained NCBI primary-taxonomy projection
+  - repository: CultureBotAI/TaxonMech
+    path: data/raw/ncbitaxon_taxa.tsv
+    role: Pinned taxon identity, name classes and carried ancestry
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit species-or-below scope
+checks:
+- check_id: identity-authority
+  name: Exact NCBI taxon, rank and lineage
+  status: passed
+  required: true
+  summary: NCBITaxon:439481 denotes Aciduliprofundum boonei T469, rank STRAIN, parent
+    NCBITaxon:379547, genetic code11. All 8 carried ancestors, literal labels and
+    ranks agree with pinned NCBI and current EFetch.
+  target_ids:
+  - NCBITaxon:439481
+  evidence_ids:
+  - record
+  - taxonomy-inventory
+  - ncbi-live
+  - scope-row
+  - path-row
+- check_id: optional-inventories
+  name: Complete exact identifier and name inventory search
+  status: passed
+  required: true
+  summary: One BacDive strain and one imported deposit are supported. Source units
+    remain NCBI1 NAME, GTDB6 GENOME, BacDive1 STRAIN, MediaDive1 MEDIUM, GOLD1 ORGANISM,
+    Madin7 and BactoTraits1 TRAIT_ASSERTION. Historical aggregate counts are not independently
+    recounted. ATCCBAA1534 in current parent LPSN does not manufacture an imported
+    BacDive deposit.
+  target_ids:
+  - NCBITaxon:439481
+  evidence_ids:
+  - record
+  - taxonomy-inventory
+  - lpsn-inventory
+  - bacdive-inventory
+  - culture-inventory
+  - gold-organisms
+  - mediadive-taxa
+  - madin-taxa
+  - bactotraits-taxa
+  scope_note: Full direct reads of all explicitly named TSV files, including ignored
+    files; exact case-folded whole-field and pipe-token ID/full-label/slug/synonym/source-ID
+    search. All claims of no rows are limited to these complete pinned inputs.
+- check_id: gtdb-primary-counts
+  name: Complete primary GTDB cluster membership
+  status: passed
+  required: true
+  summary: Exact source cluster counts agree with carried mappings where present;
+    LPSN-only species bridges remain distinct from direct GTDB attestations.
+  target_ids:
+  - NCBITaxon:439481
+  evidence_ids:
+  - gtdb-full-scan
+  - gtdb-species
+  - gtdb-mappings
+  - genome-catalog-1
+  - genome-catalog-2
+  - genome-catalog-3
+  scope_note: Full nineteen-shard source search and exact primary identifiers.
+- check_id: strain-genome-evidence
+  name: Complete strain and genome-source assertions
+  status: passed
+  required: true
+  summary: BacDive23434 explicitly associates T469 with strain439481, parent379547
+    and DSM19572. It supplies two distinct unversioned assemblies GCA_000025665/GCA_000151085,
+    IMG646564501 and BV439481.9/.10. Primary NCBI/BV objects support their separate
+    version1 records and sample/project identities; no assembly merger is inferred.
+    StrainInfo401632.2 contains DSM deposit908583 at parent379547 without a sequence
+    list; both native deposit and strain-group links preserve that parent scope. GOLD
+    Go0608798 directly identifies DSM19572/taxon439481, and full organism-field discovery
+    finds no project. Bare T469 fails deposit normalization, explaining the absence
+    of additional NCBI/GTDB/BV deposit joins. The 2 assembly,3 genome,4 related assertions
+    exactly match the imported multiset.
+  target_ids:
+  - NCBITaxon:439481
+  evidence_ids:
+  - record
+  - bacdive-inventory
+  - culture-inventory
+  - lpsn-inventory
+  - strain-table-1
+  - strain-table-2
+  - strain-table-3
+  - strain-table-4
+  - strain-table-5
+  - strain-table-6
+  - strain-table-7
+  - strain-primary-1
+  - strain-primary-2
+  - strain-primary-3
+  - gold-project-discovery
+  - cafi-registry
+  - lpsn-live
+  - genome-catalog-1
+  - genome-catalog-2
+  - genome-catalog-3
+  scope_note: Complete assertion multiset comparison plus inspected primary objects;
+    distinct deposit, genome, project and analysis scopes preserved.
+- check_id: historical-source-counts
+  name: Original manifest-pinned aggregate edges
+  status: unavailable
+  required: true
+  summary: Pinned inventory counts agree; independent historical recounting remains
+    unavailable for gold, mediadive, madin_etal, bactotraits.
+  target_ids:
+  - NCBITaxon:439481
+  evidence_ids:
+  - manifest
+  - gold-organisms
+  - mediadive-taxa
+  - madin-taxa
+  - bactotraits-taxa
+  - historical-edge-1
+  - historical-edge-2
+  - historical-edge-3
+  - historical-edge-4
+- check_id: qc-setup-attempt
+  name: Initial quality-gate setup attempt
+  status: failed
+  required: false
+  summary: 'Actual exit 1: missing ruff; superseded by the separately recorded successful
+    full retry.'
+  target_ids:
+  - NCBITaxon:439481
+  evidence_ids:
+  - qc-setup-receipt
+  command: just qc
+  exit_code: 1
+  expected_exit_code: 0
+  scope_note: Earlier shared-base environment setup attempt; not the final quality-gate
+    result.
+- check_id: strict
+  name: Native strict record validation
+  status: passed
+  required: true
+  summary: Actual terminal exit code 0. This exact generated YAML only; its captured
+    bytes remain unchanged. Actual earlier per-target invocation; the receipt retains
+    its original cwd and times.
+  target_ids:
+  - NCBITaxon:439481
+  evidence_ids:
+  - strict-receipt
+  command: UV_NO_SYNC=1 UV_CACHE_DIR=/private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0007/uv-cache
+    just validate-strict data/taxa/archaea/aciduliprofundum_boonei_t469.yaml --out
+    /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0007/strict-05.tsv
+  exit_code: 0
+  expected_exit_code: 0
+  scope_note: This exact generated YAML only; its captured bytes remain unchanged.
+    Actual earlier per-target invocation; the receipt retains its original cwd and
+    times.
+- check_id: history
+  name: Repository history validation
+  status: passed
+  required: true
+  summary: Actual terminal exit code 0. All 17 standalone history records; the generated
+    seed event was also inspected in this target. Reused actual native validation
+    on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded
+    cwd and timestamps identify the original execution. These native corpus/source
+    inputs are unchanged; only new review files differ. This receipt is not a new
+    run on the batch branch and does not validate subsequently saved review bundles.
+  target_ids:
+  - NCBITaxon:439481
+  evidence_ids:
+  - history-receipt
+  command: UV_NO_SYNC=1 UV_CACHE_DIR=/private/tmp/taxonmech-record-reviews-k0MubV/uv-cache
+    just validate-history
+  exit_code: 0
+  expected_exit_code: 0
+  scope_note: All 17 standalone history records; the generated seed event was also
+    inspected in this target. Reused actual native validation on the unchanged shared
+    base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps
+    identify the original execution. These native corpus/source inputs are unchanged;
+    only new review files differ. This receipt is not a new run on the batch branch
+    and does not validate subsequently saved review bundles.
+- check_id: corpus
+  name: Full-corpus exact reproduction
+  status: passed
+  required: true
+  summary: Actual terminal exit code 0. All 625,960 generated taxon YAMLs, not a focused
+    approximation. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+    the recorded cwd and timestamps identify the original execution. These native
+    corpus/source inputs are unchanged; only new review files differ. This receipt
+    is not a new run on the batch branch and does not validate subsequently saved
+    review bundles.
+  target_ids:
+  - NCBITaxon:439481
+  evidence_ids:
+  - corpus-receipt
+  command: UV_NO_SYNC=1 UV_CACHE_DIR=/private/tmp/taxonmech-record-reviews-k0MubV/uv-cache
+    just verify-corpus
+  exit_code: 0
+  expected_exit_code: 0
+  scope_note: All 625,960 generated taxon YAMLs, not a focused approximation. Reused
+    actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+    the recorded cwd and timestamps identify the original execution. These native
+    corpus/source inputs are unchanged; only new review files differ. This receipt
+    is not a new run on the batch branch and does not validate subsequently saved
+    review bundles.
+- check_id: products
+  name: Native product ID/label gate
+  status: passed
+  required: true
+  summary: Actual terminal exit code 0. Full configured corpus scan for curator-added
+    graph nodes; this target contains no causal graph. Reused actual native validation
+    on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded
+    cwd and timestamps identify the original execution. These native corpus/source
+    inputs are unchanged; only new review files differ. This receipt is not a new
+    run on the batch branch and does not validate subsequently saved review bundles.
+  target_ids:
+  - NCBITaxon:439481
+  evidence_ids:
+  - products-receipt
+  command: UV_NO_SYNC=1 UV_CACHE_DIR=/private/tmp/taxonmech-record-reviews-k0MubV/uv-cache
+    just validate-products
+  exit_code: 0
+  expected_exit_code: 0
+  scope_note: Full configured corpus scan for curator-added graph nodes; this target
+    contains no causal graph. Reused actual native validation on the unchanged shared
+    base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps
+    identify the original execution. These native corpus/source inputs are unchanged;
+    only new review files differ. This receipt is not a new run on the batch branch
+    and does not validate subsequently saved review bundles.
+- check_id: qc
+  name: Authoritative complete quality gate
+  status: passed
+  required: true
+  summary: Actual terminal exit code 0. Repository-wide just qc, including native
+    corpus-wide checks. Reused actual native validation on the unchanged shared base
+    9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify
+    the original execution. These native corpus/source inputs are unchanged; only
+    new review files differ. This receipt is not a new run on the batch branch and
+    does not validate subsequently saved review bundles. Pytest reported 1055 passed,
+    3 skipped and 5 deselected; the native QC recipe completed successfully.
+  target_ids:
+  - NCBITaxon:439481
+  evidence_ids:
+  - qc-receipt
+  command: UV_NO_SYNC=1 UV_CACHE_DIR=/private/tmp/taxonmech-record-reviews-k0MubV/uv-cache
+    just qc
+  exit_code: 0
+  expected_exit_code: 0
+  scope_note: Repository-wide just qc, including native corpus-wide checks. Reused
+    actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+    the recorded cwd and timestamps identify the original execution. These native
+    corpus/source inputs are unchanged; only new review files differ. This receipt
+    is not a new run on the batch branch and does not validate subsequently saved
+    review bundles.
+- check_id: previous-issue-key-search
+  name: Previous exact issue-key occurrences
+  status: passed
+  required: true
+  summary: No exact earlier occurrence in the explicitly searched structured bundles.
+  target_ids:
+  - NCBITaxon:439481
+  evidence_ids:
+  - previous-issue-key-search
+  scope_note: Full direct recursive reads of all review.yaml files under reviews/structured
+    in six owned branches, including ignored files; shared baseline files counted
+    once per branch. Exact issue-key strings only.
+evidence:
+- evidence_id: record
+  kind: record_content
+  reference: data/taxa/archaea/aciduliprofundum_boonei_t469.yaml
+  accessed_at: '2026-10-20T04:09:49Z'
+  support: supports
+  summary: Read the entire generated YAML, including identity, lineage, names, mappings,
+    source attestations, all imported strains and links, and seed history.
+  locator: entire TaxonRecord; identifier=NCBITaxon:439481
+  snapshot_sha256: 60ce4f4f4530504c46710432bae0cc3050dda139f7503e52dadeb9ff6d76fadc
+- evidence_id: taxonomy-inventory
+  kind: database
+  reference: data/raw/ncbitaxon_taxa.tsv
+  accessed_at: '2026-10-20T03:57:42Z'
+  support: supports
+  summary: Inspected the target and each carried ancestor, rank, parent, genetic code
+    and source name classes.
+  locator: 'line 2: {"taxon_id":"NCBITaxon:1","label":"root","rank":"NO_RANK","parent_id":""};
+    line 1698: {"taxon_id":"NCBITaxon:2157","label":"Archaea","rank":"DOMAIN","parent_id":"NCBITaxon:131567"};
+    line 25334: {"taxon_id":"NCBITaxon:131567","label":"cellular organisms","rank":"CELLULAR_ROOT","parent_id":"NCBITaxon:1"};
+    line 79734: {"taxon_id":"NCBITaxon:379546","label":"Candidatus Aciduliprofundum","rank":"GENUS","parent_id":"NCBITaxon:1803510"};
+    line 79735: {"taxon_id":"NCBITaxon:379547","label":"Candidatus Aciduliprofundum
+    boonei","rank":"SPECIES","parent_id":"NCBITaxon:379546"}; line 97574: {"taxon_id":"NCBITaxon:439481","label":"Aciduliprofundum
+    boonei T469","rank":"STRAIN","parent_id":"NCBITaxon:379547","genetic_code":"11","exact_synonyms":"Aciduliprofundum
+    boonei DSM 19572|Aciduliprofundum boonei str. T469|Aciduliprofundum boonei strain
+    T469","related_synonyms":"","broad_synonyms":"","attested_by":"ncbitaxon|gtdb|bacdive|mediadive|gold|madin_etal|bactotraits","retired_into":"","taxonomy_snapshot":"2026-09-13"};
+    line 470875: {"taxon_id":"NCBITaxon:1803510","label":"DHVE2 group","rank":"CLADE","parent_id":"NCBITaxon:2283796"};
+    line 523037: {"taxon_id":"NCBITaxon:2283796","label":"Thermoplasmatota","rank":"PHYLUM","parent_id":"NCBITaxon:3366610"};
+    line 621140: {"taxon_id":"NCBITaxon:3366610","label":"Methanobacteriati","rank":"KINGDOM","parent_id":"NCBITaxon:2157"}'
+  snapshot_sha256: 97ff340e1eebf62ea541a299e5c798cdcc24ef935c636fb059df48ab45d6f2f6
+- evidence_id: scope-row
+  kind: database
+  reference: curation/seed_scope.tsv
+  accessed_at: '2026-10-20T03:57:42Z'
+  support: supports
+  summary: Exact target is included in the declared seed scope.
+  locator: 'line 6465: {"identifier":"NCBITaxon:439481","added":"2026-09-12","reason":"attested
+    rule: Aciduliprofundum boonei T469, 7 sources incl. NCBI"}'
+  snapshot_sha256: 5fdc0f7111b64e02439d95c6f2b51fcff1d2154c34b2d957422dd9b297e94d4b
+- evidence_id: path-row
+  kind: database
+  reference: data/taxa/PATHS.tsv
+  accessed_at: '2026-10-20T03:57:42Z'
+  support: supports
+  summary: Indexed path resolves to this exact NCBI taxon.
+  locator: 'line 505271: {"identifier":"NCBITaxon:439481","slug":"aciduliprofundum_boonei_t469"}'
+  snapshot_sha256: c950844feb0638ce04f7349784749dd1d728fe70bc80f7e2756d956d4ecea254
+- evidence_id: ncbi-live
+  kind: authority
+  reference: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=taxonomy&id=1872114,3402690,1293648,3697131,439481,229980,1198449,56636,272557,1872399
+  accessed_at: '2026-10-20T03:57:36Z'
+  support: supports
+  summary: 'Inspected the official response for this exact taxon: scientific name,
+    rank, parent, source name classes, lineage and genetic code. Current authority
+    and pinned September inventory remain distinct observations.'
+  locator: TaxaSet/Taxon[TaxId='439481']; ten-target captured response
+  snapshot_sha256: acd80e3bf24a6e49824d16abdb5eeaafa698c9de051130f9d27faec7e90b2cd8
+- evidence_id: lpsn-inventory
+  kind: database
+  reference: data/raw/lpsn_names.tsv
+  accessed_at: '2026-10-20T03:57:42Z'
+  support: supports
+  summary: Inspected exact mapped and linked LPSN names; bounded inventory absence
+    does not establish worldwide nomenclatural absence.
+  locator: complete table; exact target/subtree/source-identifier search has no match
+  snapshot_sha256: 097f8f4ba3fd077d02e48f2c298a0af88fe02db79cc862f9af1c05141b0baa57
+  search_scope: Full reads of explicitly named TSV inputs, including any ignored files;
+    exact whole field/token matches. Does not assert worldwide absence.
+- evidence_id: gtdb-mappings
+  kind: database
+  reference: data/raw/gtdb_mappings.tsv
+  accessed_at: '2026-10-20T03:57:42Z'
+  support: supports
+  summary: Inspected direct mappings and selected clusters' reverse mappings, retaining
+    each source predicate and taxon boundary.
+  locator: 'line 284987: {"gtdb_id":"GTDB:s__Aciduliprofundum_boonei","gtdb_label":"s__Aciduliprofundum_boonei","gtdb_parent":"GTDB:g__Aciduliprofundum","ncbitaxon_id":"NCBITaxon:379547","predicate":"skos:closeMatch","genome_count":"6"};
+    line 289513: {"gtdb_id":"GTDB:s__Aciduliprofundum_boonei","gtdb_label":"s__Aciduliprofundum_boonei","gtdb_parent":"GTDB:g__Aciduliprofundum","ncbitaxon_id":"NCBITaxon:439481","predicate":"skos:closeMatch","genome_count":"6"}'
+  snapshot_sha256: bf62441b1b76abb16dd92e795c020ff30fc24e37e195b862fb9beda567277225
+- evidence_id: gtdb-species
+  kind: database
+  reference: data/raw/gtdb_species.tsv
+  accessed_at: '2026-10-20T03:57:42Z'
+  support: supports
+  summary: Inspected source species identifiers, labels, parent clusters and genome
+    counts.
+  locator: 'line 4258: {"gtdb_id":"GTDB:s__Aciduliprofundum_boonei","label":"s__Aciduliprofundum_boonei","parent":"GTDB:g__Aciduliprofundum","genome_count":"6"}'
+  snapshot_sha256: 24eddf08fe8fdd1fed534a1b7fd411561eec612c58c3709a36032998fdab8f21
+- evidence_id: bacdive-inventory
+  kind: database
+  reference: data/raw/bacdive_strains.tsv
+  accessed_at: '2026-10-20T03:57:42Z'
+  support: supports
+  summary: Complete inventory selection covers the exact target and descendants from
+    the complete NCBI parent graph; its imported strain population was compared with
+    the complete YAML.
+  locator: 'line 23237: {"strain_id":"kgmicrobe.strain:bacdive_23434","bacdive_id":"23434","designation":"T469","taxon_ids":"NCBITaxon:439481","lpsn_ids":"","culture_collection_ids":"kgmicrobe.strain:DSM-19572","medium_count":"0"}'
+  snapshot_sha256: 029fd6d1f53ef7f90684130bf0d644ed3edd1d8fbeb065a511ae928f160b1eea
+- evidence_id: culture-inventory
+  kind: database
+  reference: data/raw/culture_collection_strains.tsv
+  accessed_at: '2026-10-20T03:57:42Z'
+  support: supports
+  summary: Inspected exact culture-inventory associations; an isolate name or genome
+    does not create an inferred deposit.
+  locator: 'line 69649: {"strain_id":"kgmicrobe.strain:DSM-19572","taxon_ids":"NCBITaxon:439481"}'
+  snapshot_sha256: 810fdcb16abd6330fb15bb03d4c74b18db86be36a7c599df7c6b2498d9735c95
+- evidence_id: gold-organisms
+  kind: database
+  reference: data/raw/gold_organisms.tsv
+  accessed_at: '2026-10-20T03:57:42Z'
+  support: supports
+  summary: Inspected the exact GOLD organism count row or bounded absence, without
+    converting counts to phenotypes.
+  locator: 'line 35509: {"taxon_id":"NCBITaxon:439481","organism_count":"1"}'
+  snapshot_sha256: 0680971a156eef0b79de46c71a1f2138eaee5212ad8193eec943bd8e6257e473
+- evidence_id: mediadive-taxa
+  kind: database
+  reference: data/raw/mediadive_taxa.tsv
+  accessed_at: '2026-10-20T03:57:42Z'
+  support: supports
+  summary: Inspected the exact MediaDive medium count row or bounded absence, without
+    converting counts to phenotypes.
+  locator: 'line 10236: {"taxon_id":"NCBITaxon:439481","medium_count":"1","media_ids":"mediadive.medium:1083"}'
+  snapshot_sha256: 3f74b78cadfcdb6aeae953e09fdb39e34fd9c5d5ed0be65a04a5d7fb02355905
+- evidence_id: madin-taxa
+  kind: database
+  reference: data/raw/madin_taxa.tsv
+  accessed_at: '2026-10-20T03:57:42Z'
+  support: supports
+  summary: Inspected the exact Madin trait-assertion count row or bounded absence,
+    without converting counts to phenotypes.
+  locator: 'line 24202: {"taxon_id":"NCBITaxon:439481","assertion_count":"7"}'
+  snapshot_sha256: 7620448834f1b86daa83f2e338160ec3291a2ec3900ea4cec449418b1dc8b148
+- evidence_id: bactotraits-taxa
+  kind: database
+  reference: data/raw/bactotraits_taxa.tsv
+  accessed_at: '2026-10-20T03:57:42Z'
+  support: supports
+  summary: Inspected the exact BactoTraits trait-assertion count row or bounded absence,
+    without converting counts to phenotypes.
+  locator: 'line 6659: {"taxon_id":"NCBITaxon:439481","assertion_count":"1"}'
+  snapshot_sha256: 976d109cef832d8bf27cc105f67a42efbe900b6946736298602ef6d11158b197
+- evidence_id: mapping-policy
+  kind: record_content
+  reference: docs/HARMONIZATION.md
+  accessed_at: '2026-10-20T04:09:49Z'
+  support: supports
+  summary: Policy permits one-to-one species closeMatch normalization and LPSN-linked
+    species xrefs/synonyms, retains pooled broadMatch entries and carries NCBI lineage
+    unchanged.
+  locator: Mapping predicates; Which strains belong to a record
+  snapshot_sha256: 9c676a03a226d7fdce82f064acd01807a1a783497ffbbb1aabb8fdd393ac250d
+- evidence_id: equivalence-contract
+  kind: record_content
+  reference: src/taxonmech/schema/taxonmech.yaml
+  accessed_at: '2026-10-20T04:09:49Z'
+  support: supports
+  summary: TaxonRecord.xrefs denotes equivalent identifiers; broader/narrower relations
+    remain qualified taxonomy mappings. TaxonomyMapping.genome_count counts genomes
+    under the source taxon.
+  locator: TaxonRecord.xrefs, lines 180–187; TaxonomyMapping, lines 417–439
+  snapshot_sha256: aab25fee94c73eb70e5197a4f3ab8ddf0fa6731785974364963906d4f4d87fc3
+- evidence_id: seed-owner
+  kind: record_content
+  reference: src/taxonmech/seed.py
+  accessed_at: '2026-10-20T04:09:49Z'
+  support: supports
+  summary: Inspected mapping ranking, qualified predicates, fixed broadMatch wording,
+    synonym/xref construction, primary cluster counts and same-taxon type-strain derivation.
+  locator: GTDB mapping construction lines 440–472; LPSN/type-strain and source-attestation
+    construction
+  snapshot_sha256: 6b5b065f4ae7aea022af736a22c0f63dc58a2425c7ee453259e567ab030f8257
+- evidence_id: manifest
+  kind: record_content
+  reference: data/raw/MANIFEST.yaml
+  accessed_at: '2026-10-20T04:09:49Z'
+  support: supports
+  summary: Manifest pins kg-microbe revision 30405b70ef762aa46c08278b2b3e06bffb0b34cd,
+    upstream input hashes and extraction time 2026-09-13T17:50:44Z.
+  locator: kg_microbe_source, inputs, extracted_at
+  snapshot_sha256: ee76711683b1b579d1561dcf40187e10e4f0027ae1b89f108eb18e865e7e7d38
+- evidence_id: overlay-manifests
+  kind: record_content
+  reference: data/atb/MANIFEST.yaml
+  accessed_at: '2026-10-20T04:09:49Z'
+  support: supports
+  summary: Raw, ATB and StrainInfo extraction times have maximum 2026-09-13T17:54:04Z,
+    matching the sole seed event. StrainInfo manifest is independently captured in
+    source.inputs.
+  locator: extracted_at, together with data/raw/MANIFEST.yaml and data/straininfo/MANIFEST.yaml
+  snapshot_sha256: 1358809b2af7e8d4a6c8bb4c122781f48ae40b2c4f0f1c7ad3f37ad8907d7315
+- evidence_id: lpsn-live
+  kind: authority
+  reference: https://lpsn.dsmz.de/species/aciduliprofundum-boonei
+  accessed_at: '2026-10-20T04:00:04Z'
+  support: supports
+  summary: The three NCBI exact strain names remain distinct from the parent Candidatus
+    species. Current LPSN treats the parent as not validly published, with pro-valid/pro-correct
+    Candidatus status and nomenclatural type T469/DSM19572/ATCCBAA1534. This is parent-name
+    context, not a same-taxon LPSN assertion for strain439481. No missing native type
+    flag is treated as a false non-type claim.
+  locator: Parent Candidatus nomenclatural status and type; not a same-taxon strain
+    nomenclature block
+  snapshot_sha256: 46b0166bdba92b4a533f20971fcbdcc580a8a38d3b9e6118a4d118f108d54a96
+- evidence_id: genome-catalog-1
+  kind: primary_source
+  reference: data/catalog/gtdb_genomes-0017.jsonl.gz
+  accessed_at: '2026-10-20T04:02:05Z'
+  support: supports
+  summary: Inspected primary membership and exact assembly/genome identifiers, retaining
+    NCBI species/strain boundaries, source labels, accession versions, deposit fields
+    and separate project/sample identities. No sequence equivalence or culture identity
+    is inferred from names alone.
+  locator: 'line 29763: {"accession":"GB_GCA_015520595.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__Thermoplasmatales;f__Aciduliprofundaceae;g__Aciduliprofundum;s__Aciduliprofundum
+    boonei","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM1552059v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA546572","ncbi_biosample":"SAMN12837331","ncbi_contig_count":"139","ncbi_contig_n50":"14658","ncbi_country":"Pacific
+    Ocean","ncbi_date":"2020-11-16","ncbi_genbank_assembly_accession":"GCA_015520595.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"S144_65_esom","ncbi_isolation_source":"deep-sea
+    hydrothermal deposit","ncbi_lat_lon":"34.8610792 S 179.057703 E","ncbi_molecule_count":"0","ncbi_ncrna_count":"none","ncbi_organism_name":"Candidatus
+    Aciduliprofundum boonei","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"none","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2020-11-16","ncbi_spanned_gaps":"0","ncbi_species_taxid":"379547","ncbi_ssu_count":"none","ncbi_strain_identifiers":"S144_65_esom","ncbi_submitter":"Portland
+    State University","ncbi_taxid":"379547","ncbi_taxonomy":"d__Archaea;p__Thermoplasmatota;c__;o__;f__;g__Candidatus
+    Aciduliprofundum;s__Candidatus Aciduliprofundum boonei","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Thermoplasmatota;x__DHVE2
+    group;g__Candidatus Aciduliprofundum;s__Candidatus Aciduliprofundum boonei","ncbi_total_gap_length":"0","ncbi_total_length":"1421048","ncbi_translation_table":"none","ncbi_trna_count":"none","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1421048","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"WAPU00000000.1"};
+    line 32655: {"accession":"GB_GCA_015521405.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__Thermoplasmatales;f__Aciduliprofundaceae;g__Aciduliprofundum;s__Aciduliprofundum
+    boonei","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM1552140v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA546572","ncbi_biosample":"SAMN12837290","ncbi_contig_count":"206","ncbi_contig_n50":"6062","ncbi_country":"Pacific
+    Ocean","ncbi_date":"2020-11-16","ncbi_genbank_assembly_accession":"GCA_015521405.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"S142_21","ncbi_isolation_source":"deep-sea
+    hydrothermal deposit","ncbi_lat_lon":"34.86207984 S 179.0572892 E","ncbi_molecule_count":"0","ncbi_ncrna_count":"none","ncbi_organism_name":"Candidatus
+    Aciduliprofundum boonei","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"none","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2020-11-16","ncbi_spanned_gaps":"0","ncbi_species_taxid":"379547","ncbi_ssu_count":"none","ncbi_strain_identifiers":"S142_21","ncbi_submitter":"Portland
+    State University","ncbi_taxid":"379547","ncbi_taxonomy":"d__Archaea;p__Thermoplasmatota;c__;o__;f__;g__Candidatus
+    Aciduliprofundum;s__Candidatus Aciduliprofundum boonei","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Thermoplasmatota;x__DHVE2
+    group;g__Candidatus Aciduliprofundum;s__Candidatus Aciduliprofundum boonei","ncbi_total_gap_length":"0","ncbi_total_length":"1118652","ncbi_translation_table":"none","ncbi_trna_count":"none","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1118652","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"WAOF00000000.1"};
+    line 32903: {"accession":"GB_GCA_013329755.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__Thermoplasmatales;f__Aciduliprofundaceae;g__Aciduliprofundum;s__Aciduliprofundum
+    boonei","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM1332975v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA593905","ncbi_biosample":"SAMN13193044","ncbi_contig_count":"48","ncbi_contig_n50":"35640","ncbi_country":"none","ncbi_date":"2020-06-11","ncbi_genbank_assembly_accession":"GCA_013329755.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"UBA8848","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Candidatus
+    Aciduliprofundum boonei","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"2","ncbi_scaffold_count":"46","ncbi_scaffold_l50":"11","ncbi_scaffold_n50":"37801","ncbi_scaffold_n75":"25936","ncbi_scaffold_n90":"17226","ncbi_seq_rel_date":"2020-06-11","ncbi_spanned_gaps":"2","ncbi_species_taxid":"379547","ncbi_ssu_count":"0","ncbi_strain_identifiers":"UBA8848","ncbi_submitter":"The
+    University of Queensland","ncbi_taxid":"379547","ncbi_taxonomy":"d__Archaea;p__Thermoplasmatota;c__;o__;f__;g__Candidatus
+    Aciduliprofundum;s__Candidatus Aciduliprofundum boonei","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Thermoplasmatota;x__DHVE2
+    group;g__Candidatus Aciduliprofundum;s__Candidatus Aciduliprofundum boonei","ncbi_total_gap_length":"110","ncbi_total_length":"1382115","ncbi_translation_table":"11","ncbi_trna_count":"46","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1382005","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"DUJQ00000000.1"};
+    line 45280: {"accession":"RS_GCF_000025665.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__Thermoplasmatales;f__Aciduliprofundaceae;g__Aciduliprofundum;s__Aciduliprofundum
+    boonei","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Complete Genome","ncbi_assembly_name":"ASM2566v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA224116","ncbi_biosample":"SAMN02598523","ncbi_contig_count":"none","ncbi_contig_n50":"none","ncbi_country":"none","ncbi_date":"2010-02-24","ncbi_genbank_assembly_accession":"GCA_000025665.1","ncbi_genome_category":"none","ncbi_genome_representation":"full","ncbi_isolate":"na","ncbi_isolation_source":"none","ncbi_lat_lon":"22.16889
+    S 176.60028 W","ncbi_molecule_count":"1","ncbi_ncrna_count":"0","ncbi_organism_name":"Aciduliprofundum
+    boonei T469","ncbi_protein_count":"1528","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"1","ncbi_scaffold_l50":"1","ncbi_scaffold_n50":"1486778","ncbi_scaffold_n75":"1486778","ncbi_scaffold_n90":"1486778","ncbi_seq_rel_date":"2010-02-24","ncbi_spanned_gaps":"0","ncbi_species_taxid":"379547","ncbi_ssu_count":"1","ncbi_strain_identifiers":"T469","ncbi_submitter":"US
+    DOE Joint Genome Institute","ncbi_taxid":"439481","ncbi_taxonomy":"d__Archaea;p__Thermoplasmatota;c__;o__;f__;g__Candidatus
+    Aciduliprofundum;s__Candidatus Aciduliprofundum boonei","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Thermoplasmatota;x__DHVE2
+    group;g__Candidatus Aciduliprofundum;s__Candidatus Aciduliprofundum boonei;x__Aciduliprofundum
+    boonei T469","ncbi_total_gap_length":"0","ncbi_total_length":"1486778","ncbi_translation_table":"11","ncbi_trna_count":"46","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1486778","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"na"};
+    line 46162: {"accession":"GB_GCA_015520815.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__Thermoplasmatales;f__Aciduliprofundaceae;g__Aciduliprofundum;s__Aciduliprofundum
+    boonei","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM1552081v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA546572","ncbi_biosample":"SAMN12837321","ncbi_contig_count":"148","ncbi_contig_n50":"13368","ncbi_country":"Pacific
+    Ocean","ncbi_date":"2020-11-16","ncbi_genbank_assembly_accession":"GCA_015520815.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"S143_99","ncbi_isolation_source":"deep-sea
+    hydrothermal deposit","ncbi_lat_lon":"34.86107624 S 179.0576384 E","ncbi_molecule_count":"0","ncbi_ncrna_count":"none","ncbi_organism_name":"Candidatus
+    Aciduliprofundum boonei","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"none","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2020-11-16","ncbi_spanned_gaps":"0","ncbi_species_taxid":"379547","ncbi_ssu_count":"none","ncbi_strain_identifiers":"S143_99","ncbi_submitter":"Portland
+    State University","ncbi_taxid":"379547","ncbi_taxonomy":"d__Archaea;p__Thermoplasmatota;c__;o__;f__;g__Candidatus
+    Aciduliprofundum;s__Candidatus Aciduliprofundum boonei","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Thermoplasmatota;x__DHVE2
+    group;g__Candidatus Aciduliprofundum;s__Candidatus Aciduliprofundum boonei","ncbi_total_gap_length":"0","ncbi_total_length":"1357507","ncbi_translation_table":"none","ncbi_trna_count":"none","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1357507","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"WAPK00000000.1"};
+    line 47865: {"accession":"GB_GCA_015523095.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Thermoplasmatota;c__Thermoplasmata;o__Thermoplasmatales;f__Aciduliprofundaceae;g__Aciduliprofundum;s__Aciduliprofundum
+    boonei","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM1552309v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA546572","ncbi_biosample":"SAMN12837209","ncbi_contig_count":"181","ncbi_contig_n50":"11081","ncbi_country":"Pacific
+    Ocean","ncbi_date":"2020-11-16","ncbi_genbank_assembly_accession":"GCA_015523095.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"S013_40","ncbi_isolation_source":"deep-sea
+    hydrothermal deposit","ncbi_lat_lon":"34.86107892 S 179.0576362 E","ncbi_molecule_count":"0","ncbi_ncrna_count":"none","ncbi_organism_name":"Candidatus
+    Aciduliprofundum boonei","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"none","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2020-11-16","ncbi_spanned_gaps":"0","ncbi_species_taxid":"379547","ncbi_ssu_count":"none","ncbi_strain_identifiers":"S013_40","ncbi_submitter":"Portland
+    State University","ncbi_taxid":"379547","ncbi_taxonomy":"d__Archaea;p__Thermoplasmatota;c__;o__;f__;g__Candidatus
+    Aciduliprofundum;s__Candidatus Aciduliprofundum boonei","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Thermoplasmatota;x__DHVE2
+    group;g__Candidatus Aciduliprofundum;s__Candidatus Aciduliprofundum boonei","ncbi_total_gap_length":"0","ncbi_total_length":"1357697","ncbi_translation_table":"none","ncbi_trna_count":"none","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1357697","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"WALC00000000.1"}'
+  snapshot_sha256: f2a4d2c5b7927184206c6614540746b5e9c298e7a924bd149fc86c0f0c046ff6
+- evidence_id: genome-catalog-2
+  kind: primary_source
+  reference: data/catalog/ncbi_genbank-0000.jsonl.gz
+  accessed_at: '2026-10-20T04:02:05Z'
+  support: supports
+  summary: Inspected primary membership and exact assembly/genome identifiers, retaining
+    NCBI species/strain boundaries, source labels, accession versions, deposit fields
+    and separate project/sample identities. No sequence equivalence or culture identity
+    is inferred from names alone.
+  locator: 'line 891: {"annotation_date":"2014-01-28","annotation_name":"Annotation
+    submitted by US DOE Joint Genome Institute","annotation_provider":"US DOE Joint
+    Genome Institute","asm_name":"ASM2566v1","asm_not_live_date":"na","asm_submitter":"US
+    DOE Joint Genome Institute","assembly_accession":"GCA_000025665.1","assembly_level":"Complete
+    Genome","assembly_type":"haploid","bioproject":"PRJNA38403","biosample":"SAMN02598523","contig_count":"1","excluded_from_refseq":"na","ftp_path":"https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/025/665/GCA_000025665.1_ASM2566v1/","gbrs_paired_asm":"GCF_000025665.1","gc_percent":"39.000000","genome_rep":"Full","genome_size":"1486778","genome_size_ungapped":"1486778","group":"archaea","infraspecific_name":"strain=T469","isolate":"na","non_coding_gene_count":"37","organism_name":"Aciduliprofundum
+    boonei T469","paired_asm_comp":"identical","protein_coding_gene_count":"1544","pubmed_id":"na","refseq_category":"na","relation_to_type_material":"na","release_type":"Major","replicon_count":"1","scaffold_count":"1","seq_rel_date":"2010-02-24","species_taxid":"379547","taxid":"439481","total_gene_count":"1587","version_status":"latest","wgs_master":"na"};
+    line 1319: {"annotation_date":"2016-07-26","annotation_name":"Annotation submitted
+    by The Gordon and Betty Moore Foundation Microbial Genome Sequencing Project","annotation_provider":"The
+    Gordon and Betty Moore Foundation Microbial Genome Sequencing Project","asm_name":"ASM15108v1","asm_not_live_date":"na","asm_submitter":"The
+    Gordon and Betty Moore Foundation Microbial Genome Sequencing Project","assembly_accession":"GCA_000151085.1","assembly_level":"Scaffold","assembly_type":"haploid","bioproject":"PRJNA19277","biosample":"SAMN02436315","contig_count":"63","excluded_from_refseq":"genome
+    length too large","ftp_path":"https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/151/085/GCA_000151085.1_ASM15108v1/","gbrs_paired_asm":"GCF_000151085.1","gc_percent":"39.000000","genome_rep":"Full","genome_size":"2981805","genome_size_ungapped":"2973010","group":"archaea","infraspecific_name":"strain=T469","isolate":"na","non_coding_gene_count":"86","organism_name":"Aciduliprofundum
+    boonei T469","paired_asm_comp":"identical","protein_coding_gene_count":"2949","pubmed_id":"18445019","refseq_category":"na","relation_to_type_material":"na","release_type":"Major","replicon_count":"0","scaffold_count":"41","seq_rel_date":"2008-08-29","species_taxid":"379547","taxid":"439481","total_gene_count":"3037","version_status":"latest","wgs_master":"ABSD00000000.1"}'
+  snapshot_sha256: 2d0f73ddded027424214ecc6c9f0c91ec229278cacf8d0e1d63e5745c8064ea7
+- evidence_id: genome-catalog-3
+  kind: primary_source
+  reference: data/bvbrc/bvbrc-0020.jsonl.gz
+  accessed_at: '2026-10-20T04:02:05Z'
+  support: supports
+  summary: Inspected primary membership and exact assembly/genome identifiers, retaining
+    NCBI species/strain boundaries, source labels, accession versions, deposit fields
+    and separate project/sample identities. No sequence equivalence or culture identity
+    is inferred from names alone.
+  locator: 'line 17091: {"assembly_accession":"GCA_000151085.1","bioproject_accession":"PRJNA19277","biosample_accession":"SAMN02436315","date_modified":"2015-03-16T03:17:09.594Z","genbank_accessions":"ABSD00000000","genome_id":"439481.10","genome_name":"Aciduliprofundum
+    boonei T469","genome_status":"WGS","public":true,"refseq_accessions":"-","strain":"T469","superkingdom":"Archaea","taxon_id":439481,"taxon_lineage_ids":["131567","2157","3366610","2283796","1803510","379546","379547","439481"],"taxon_lineage_names":["cellular
+    organisms","Archaea","Methanobacteriati","Thermoplasmatota","DHVE2 group","Candidatus
+    Aciduliprofundum","Candidatus Aciduliprofundum boonei","Aciduliprofundum boonei
+    T469"]}; line 17092: {"assembly_accession":"GCA_000025665.1","bioproject_accession":"PRJNA38403","biosample_accession":"SAMN02598523","date_modified":"2015-03-16T03:17:09.594Z","genbank_accessions":"CP001941.1","genome_id":"439481.9","genome_name":"Aciduliprofundum
+    boonei T469","genome_status":"Complete","public":true,"refseq_accessions":"NC_013926.1","strain":"T469","superkingdom":"Archaea","taxon_id":439481,"taxon_lineage_ids":["131567","2157","3366610","2283796","1803510","379546","379547","439481"],"taxon_lineage_names":["cellular
+    organisms","Archaea","Methanobacteriati","Thermoplasmatota","DHVE2 group","Candidatus
+    Aciduliprofundum","Candidatus Aciduliprofundum boonei","Aciduliprofundum boonei
+    T469"]}'
+  snapshot_sha256: ce96b1844f603b80f97dd4d814dafe8d4091e976a8b9e3a4e59fafffd28ad553
+- evidence_id: gtdb-full-scan
+  kind: search
+  reference: data/catalog/MANIFEST.json
+  accessed_at: '2026-10-20T04:02:05Z'
+  support: supports
+  summary: All nineteen GTDB shards were hashed and searched with exact terminal species
+    tokens. Source counts and taxon distributions were inspected; a cluster is not
+    equated with an individual strain.
+  locator: '{"paths":["data/catalog/gtdb_genomes-0000.jsonl.gz","data/catalog/gtdb_genomes-0001.jsonl.gz","data/catalog/gtdb_genomes-0002.jsonl.gz","data/catalog/gtdb_genomes-0003.jsonl.gz","data/catalog/gtdb_genomes-0004.jsonl.gz","data/catalog/gtdb_genomes-0005.jsonl.gz","data/catalog/gtdb_genomes-0006.jsonl.gz","data/catalog/gtdb_genomes-0007.jsonl.gz","data/catalog/gtdb_genomes-0008.jsonl.gz","data/catalog/gtdb_genomes-0009.jsonl.gz","data/catalog/gtdb_genomes-0010.jsonl.gz","data/catalog/gtdb_genomes-0011.jsonl.gz","data/catalog/gtdb_genomes-0012.jsonl.gz","data/catalog/gtdb_genomes-0013.jsonl.gz","data/catalog/gtdb_genomes-0014.jsonl.gz","data/catalog/gtdb_genomes-0015.jsonl.gz","data/catalog/gtdb_genomes-0016.jsonl.gz","data/catalog/gtdb_genomes-0017.jsonl.gz","data/catalog/gtdb_genomes-0018.jsonl.gz"],"clusters":[{"id":"GTDB:s__Aciduliprofundum_boonei","count":6,"ncbi_taxids":{"379547":5,"439481":1},"other_taxa_note_supported":true}]}'
+  snapshot_sha256: 15b5cfe42be7919faf2a6feb5ac4f7084009e84b2d6da669f7101aacc3586299
+  search_scope: Full explicit reads of every enumerated GTDB, NCBI GenBank/RefSeq
+    and BV-BRC primary shard including ignored files. Exact terminal GTDB species
+    token; exact assembly accession stem or explicit genome identifier. Versions remain
+    separate.
+- evidence_id: strain-table-1
+  kind: database
+  reference: data/raw/strain_assemblies.tsv
+  accessed_at: '2026-10-20T03:57:42Z'
+  support: supports
+  summary: Compared the complete imported assertion multiset, retaining multiplicity,
+    literal source fields, versions and deposit scope.
+  locator: 'line 109909: {"strain_id":"kgmicrobe.strain:bacdive_23434","assembly_id":"ncbi.assembly:GCA_000025665","source":"BACDIVE","source_id":"bacdive:23434","source_reference_id":"66792","assembly_level":"complete","assembly_name":"ASM2566v1
+    assembly for Aciduliprofundum boonei T469","taxon_id":"NCBITaxon:439481","source_field":"Sequence
+    information.Genome sequences.INSDC accession","matched_strain_id":"","source_strain_identifiers":"","source_strain_field":"","source_organism_id":"","source_project_id":""};
+    line 109910: {"strain_id":"kgmicrobe.strain:bacdive_23434","assembly_id":"ncbi.assembly:GCA_000151085","source":"BACDIVE","source_id":"bacdive:23434","source_reference_id":"66792","assembly_level":"scaffold","assembly_name":"ASM15108v1
+    assembly for Aciduliprofundum boonei T469","taxon_id":"NCBITaxon:439481","source_field":"Sequence
+    information.Genome sequences.INSDC accession","matched_strain_id":"","source_strain_identifiers":"","source_strain_field":"","source_organism_id":"","source_project_id":""}'
+  snapshot_sha256: 71344b934db3081bfcac9562a0bd1fd8fddcfdabb8af60e208ca09035e818315
+- evidence_id: strain-table-2
+  kind: database
+  reference: data/raw/strain_genome_records.tsv
+  accessed_at: '2026-10-20T03:57:42Z'
+  support: supports
+  summary: Compared the complete imported assertion multiset, retaining multiplicity,
+    literal source fields, versions and deposit scope.
+  locator: 'line 88345: {"strain_id":"kgmicrobe.strain:bacdive_23434","genome_id":"img.taxon:646564501","source_database":"img","source":"BACDIVE","source_id":"bacdive:23434","source_reference_id":"66792","assembly_level":"complete","genome_name":"ASM2566v1
+    assembly for Aciduliprofundum boonei T469","taxon_id":"NCBITaxon:439481","source_field":"Sequence
+    information.Genome sequences.IMG accession","matched_strain_id":"","source_strain_identifiers":"","source_strain_field":"","source_organism_id":"","source_project_id":""};
+    line 88346: {"strain_id":"kgmicrobe.strain:bacdive_23434","genome_id":"patric:439481.10","source_database":"patric","source":"BACDIVE","source_id":"bacdive:23434","source_reference_id":"66792","assembly_level":"scaffold","genome_name":"ASM15108v1
+    assembly for Aciduliprofundum boonei T469","taxon_id":"NCBITaxon:439481","source_field":"Sequence
+    information.Genome sequences.BV-BRC accession","matched_strain_id":"","source_strain_identifiers":"","source_strain_field":"","source_organism_id":"","source_project_id":""};
+    line 88347: {"strain_id":"kgmicrobe.strain:bacdive_23434","genome_id":"patric:439481.9","source_database":"patric","source":"BACDIVE","source_id":"bacdive:23434","source_reference_id":"66792","assembly_level":"complete","genome_name":"ASM2566v1
+    assembly for Aciduliprofundum boonei T469","taxon_id":"NCBITaxon:439481","source_field":"Sequence
+    information.Genome sequences.BV-BRC accession","matched_strain_id":"","source_strain_identifiers":"","source_strain_field":"","source_organism_id":"","source_project_id":""}'
+  snapshot_sha256: 47ed80be55660aad4bd82d37d889ea60f8686cec1aeeccf72e5af22bf43728ab
+- evidence_id: strain-table-3
+  kind: database
+  reference: data/raw/strain_related_records.tsv
+  accessed_at: '2026-10-20T03:57:42Z'
+  support: supports
+  summary: Compared the complete imported assertion multiset, retaining multiplicity,
+    literal source fields, versions and deposit scope.
+  locator: 'line 318030: {"strain_id":"kgmicrobe.strain:bacdive_23434","record_id":"gold:Go0608798","record_type":"GOLD_ORGANISM","source":"GOLD","source_id":"gold:Go0608798","source_reference_id":"","taxon_id":"NCBITaxon:439481","record_name":"Aciduliprofundum
+    boonei DSM 19572","source_field":"ORGANISM GOLD ID","matched_strain_id":"kgmicrobe.strain:DSM-19572","source_strain_identifiers":"DSM
+    19572","source_strain_field":"ORGANISM CULTURE COLLECTION ID","source_organism_id":"gold:Go0608798","source_project_id":""};
+    line 318031: {"strain_id":"kgmicrobe.strain:bacdive_23434","record_id":"gold:Go0608798","record_type":"GOLD_ORGANISM","source":"GOLD","source_id":"gold:Go0608798","source_reference_id":"","taxon_id":"NCBITaxon:439481","record_name":"Aciduliprofundum
+    boonei DSM 19572","source_field":"ORGANISM GOLD ID","matched_strain_id":"kgmicrobe.strain:DSM-19572","source_strain_identifiers":"DSM
+    19572","source_strain_field":"ORGANISM STRAIN","source_organism_id":"gold:Go0608798","source_project_id":""}'
+  snapshot_sha256: c33a9bf4c6b94dc6971f1c0d46565092c37ba7c2d462a6bc9c20ccbf58fb9c56
+- evidence_id: strain-table-4
+  kind: database
+  reference: data/straininfo/strain_links.tsv
+  accessed_at: '2026-10-20T03:57:42Z'
+  support: supports
+  summary: Compared the complete imported assertion multiset, retaining multiplicity,
+    literal source fields, versions and deposit scope.
+  locator: 'line 81123: {"strain_id":"kgmicrobe.strain:bacdive_23434","straininfo_strain_id":"straininfo.strain:401632","straininfo_deposit_id":"straininfo.deposit:908583","matched_strain_id":"kgmicrobe.strain:DSM-19572","deposit_designation":"DSM
+    19572","strain_doi":"DOI:10.60712/SI-ID401632.2","strain_status":"published online","deposit_status":"available","source_bacdive_id":"bacdive:23434","taxon_id":"NCBITaxon:379547"}'
+  snapshot_sha256: 615ac119e61df3a9d296ab16674bca6de3fdbf6478ca21a61312014f0ebbae8f
+- evidence_id: strain-table-5
+  kind: database
+  reference: data/straininfo/assemblies.tsv
+  accessed_at: '2026-10-20T03:57:42Z'
+  support: supports
+  summary: Compared the complete imported assertion multiset, retaining multiplicity,
+    literal source fields, versions and deposit scope.
+  locator: complete table; exact target/subtree/source-identifier search has no match
+  snapshot_sha256: d55ba39ab7cb81076a8edb61226de2bdf0aea699a7fb003cdf3ffb3ddc2f3f52
+  search_scope: Full reads of explicitly named TSV inputs, including any ignored files;
+    exact whole field/token matches. Does not assert worldwide absence.
+- evidence_id: strain-table-6
+  kind: database
+  reference: data/straininfo/related_records.tsv.gz
+  accessed_at: '2026-10-20T03:57:42Z'
+  support: supports
+  summary: Compared the complete imported assertion multiset, retaining multiplicity,
+    literal source fields, versions and deposit scope.
+  locator: 'line 194828: {"strain_id":"kgmicrobe.strain:bacdive_23434","record_id":"straininfo.deposit:908583","record_type":"STRAININFO_DEPOSIT","source":"STRAININFO","source_id":"straininfo.strain:401632","source_reference_id":"","taxon_id":"NCBITaxon:379547","record_name":"DSM
+    19572","source_field":"deposits.siDP","matched_strain_id":"kgmicrobe.strain:DSM-19572","source_strain_identifiers":"DSM
+    19572","source_strain_field":"deposits.designation","source_organism_id":"","source_project_id":"","straininfo_evidence_json":"{\"deposit_designation\":\"DSM
+    19572\",\"deposit_id\":\"straininfo.deposit:908583\",\"deposit_status\":\"available\",\"match_method\":\"culture_identifier\",\"source_bacdive_id\":\"bacdive:23434\",\"strain_doi\":\"DOI:10.60712/SI-ID401632.2\",\"strain_id\":\"straininfo.strain:401632\",\"strain_status\":\"published
+    online\"}"}; line 194829: {"strain_id":"kgmicrobe.strain:bacdive_23434","record_id":"straininfo.strain:401632","record_type":"STRAININFO_STRAIN","source":"STRAININFO","source_id":"straininfo.strain:401632","source_reference_id":"","taxon_id":"NCBITaxon:379547","record_name":"DSM
+    19572","source_field":"strain.siID","matched_strain_id":"kgmicrobe.strain:DSM-19572","source_strain_identifiers":"DSM
+    19572","source_strain_field":"deposits.designation","source_organism_id":"","source_project_id":"","straininfo_evidence_json":"{\"deposit_designation\":\"DSM
+    19572\",\"deposit_id\":\"straininfo.deposit:908583\",\"deposit_status\":\"available\",\"match_method\":\"culture_identifier\",\"source_bacdive_id\":\"bacdive:23434\",\"strain_doi\":\"DOI:10.60712/SI-ID401632.2\",\"strain_id\":\"straininfo.strain:401632\",\"strain_status\":\"published
+    online\"}"}'
+  snapshot_sha256: c7a262df4f970b2b11a2cf7a0a05c631ff84938e6a19cdb1d98680bb4fb35108
+- evidence_id: strain-table-7
+  kind: database
+  reference: data/atb/strain_links.tsv
+  accessed_at: '2026-10-20T03:57:42Z'
+  support: supports
+  summary: Compared the complete imported assertion multiset, retaining multiplicity,
+    literal source fields, versions and deposit scope.
+  locator: complete table; exact target/subtree/source-identifier search has no match
+  snapshot_sha256: 50683192c8015badf14a8a2aab73929a21b830117449ce329d1216a698abf1c0
+  search_scope: Full reads of explicitly named TSV inputs, including any ignored files;
+    exact whole field/token matches. Does not assert worldwide absence.
+- evidence_id: strain-primary-1
+  kind: primary_source
+  reference: data/bacdive/records.jsonl.gz
+  accessed_at: '2026-10-20T03:59:21Z'
+  support: supports
+  summary: Inspected complete selected BacDive, StrainInfo and GOLD primary objects.
+    Explicit deposits and project/analysis chains support only their narrow claims.
+    Historical aggregates are not recounted by these newer objects.
+  locator: 'line 23236: {"General":{"@ref":8186,"BacDive-ID":23434,"NCBI tax id":[{"Matching
+    level":"strain","NCBI tax id":439481},{"Matching level":"species","NCBI tax id":379547}],"doi":"10.13145/bacdive23434.20260601.11"},"Literature":{"@ref":8186,"culture
+    collection no.":"DSM 19572","straininfo link":{"@ref":126262,"straininfo":401632}},"Name
+    and taxonomic classification":{"@ref":8186,"LPSN":{"@ref":20215,"class":"Thermoplasmata","description":"domain/archaea","domain":"Archaea","family":"Aciduliprofundaceae","full
+    scientific name":"<I>Candidatus</I> Aciduliprofundum boonei Reysenbach et al.
+    2006","genus":"Aciduliprofundum","keyword":"phylum/methanobacteriota","order":"Aciduliprofundales","phylum":"Methanobacteriota","species":"Aciduliprofundum
+    boonei"},"class":"Euryarchaeota, not assigned to class","domain":"Archaea","family":"Euryarchaeota,
+    not assigned to family","full scientific name":"Aciduliprofundum boonei Schouten
+    et al. 2008","genus":"Aciduliprofundum","order":"Euryarchaeota, not assigned to
+    order","phylum":"Euryarchaeota","species":"Aciduliprofundum boonei","strain designation":"T469","type
+    strain":"yes"},"Sequence information":{"16S sequences":{"@ref":8186,"NCBI tax
+    ID":439481,"accession":"DQ451875","database":"nuccore","description":"Aciduliprofundum
+    boonei strain T469 16S ribosomal RNA gene, partial sequence","length":1409},"Genome
+    sequences":[{"@ref":66792,"BV-BRC accession":"439481.9","IMG accession":"646564501","INSDC
+    accession":"GCA_000025665","NCBI tax ID":439481,"assembly level":"complete","description":"ASM2566v1
+    assembly for Aciduliprofundum boonei T469","score":97.89},{"@ref":66792,"BV-BRC
+    accession":"439481.10","INSDC accession":"GCA_000151085","NCBI tax ID":439481,"assembly
+    level":"scaffold","description":"ASM15108v1 assembly for Aciduliprofundum boonei
+    T469","score":0}]}}'
+  snapshot_sha256: b27d0f50f06aa33615e7cc2aae4acb7c2767df930c85292e76fbb462ac136080
+- evidence_id: strain-primary-2
+  kind: primary_source
+  reference: data/straininfo/records.jsonl.gz
+  accessed_at: '2026-10-20T03:59:21Z'
+  support: supports
+  summary: Inspected complete selected BacDive, StrainInfo and GOLD primary objects.
+    Explicit deposits and project/analysis chains support only their narrow claims.
+    Historical aggregates are not recounted by these newer objects.
+  locator: 'line 299521: {"deposits":[{"cultureCollection":{"ccID":1,"code":"DSMZ","deprecated":false,"name":"DSMZ-German
+    Collection of Microorganisms and Cell Cultures"},"designation":"DSM 19572","lastUpdate":"2024-12-03","siDP":908583,"status":"available","taxon":{"name":"Aciduliprofundum
+    boonei","ncbi":379547},"typeStrain":true}],"strain":{"archive":[{"date":"2024-05-31","doi":"10.60712/SI-ID401632.1","title":"StrainInfo
+    SI-ID 401632.1"},{"date":"2025-02-25","doi":"10.60712/SI-ID401632.2","title":"StrainInfo
+    SI-ID 401632.2"}],"bdID":23434,"doi":"10.60712/SI-ID401632.2","relation":{"deposit":[{"ccID":1,"designation":"DSM
+    19572","erroneous":false,"siDP":908583}],"designation":["T469"]},"siID":401632,"status":"published
+    online","taxon":{"name":"Candidatus Aciduliprofundum boonei","ncbi":379547}}}'
+  snapshot_sha256: 8f8e6093f0617317e0488463e52de153f566effa7a5d43b44d17dabab9692819
+- evidence_id: strain-primary-3
+  kind: primary_source
+  reference: data/gold/organisms.jsonl.gz
+  accessed_at: '2026-10-20T03:59:21Z'
+  support: supports
+  summary: Inspected complete selected BacDive, StrainInfo and GOLD primary objects.
+    Explicit deposits and project/analysis chains support only their narrow claims.
+    Historical aggregates are not recounted by these newer objects.
+  locator: 'line 439766: {"ORGANISM CULTURE COLLECTION ID":"DSM 19572","ORGANISM GOLD
+    ID":"Go0608798","ORGANISM NAME":"Aciduliprofundum boonei DSM 19572","ORGANISM
+    NCBI TAX ID":"439481","ORGANISM STRAIN":"DSM 19572"}'
+  snapshot_sha256: 8c1a055214cb240c58fadda0815efbefcb60848245e8a7474e6b1b41d123235c
+- evidence_id: gold-project-discovery
+  kind: search
+  reference: data/gold/projects.jsonl.gz
+  accessed_at: '2026-10-20T04:02:21Z'
+  support: supports
+  summary: Full exact organism-field search verifies the available project chains
+    and bounded absences for the explicitly selected organism IDs; no project or analysis
+    is inferred from an empty filtered artifact.
+  locator: '[]'
+  snapshot_sha256: 0d852fe0144afd778609fef82b266fd1507a4c0be949efd2f53c7c34526b6c95
+  search_scope: Full explicit project source read including ignored files; exact selected
+    ORGANISM GOLD ID fields. Empty selected artifacts were not treated as full-file
+    absence evidence.
+- evidence_id: cafi-registry
+  kind: authority
+  reference: src/taxonmech/data/cafi_acronyms.json
+  accessed_at: '2026-10-20T04:02:21Z'
+  support: supports
+  summary: Explicit registered deposit keys pass the authority/accession rule. Bare
+    T469, SY1 and K1 do not; genome association alone is not a deposit join.
+  locator: '{"accessed_at":"2026-10-20T04:02:21.239529+00:00","registry_rows":{"1":{"acr":"DSM","acr_synonym":["DSMZ"],"active":true,"catalogue":["https://www.dsmz.de/collection/catalogue/details/culture/{acr}-{id}"],"code":"DSMZ","country":"DE","gbif":"883f3d24-35e9-462d-b7a3-13c2b9b7260e","homepage":"https://www.dsmz.de/","name":"DSMZ-German
+    Collection of Microorganisms and Cell Cultures","regex_ccno":"^DSM\\s*\\d+$","regex_id":{"full":"^\\d+$"},"ror":"02tyer376"},"4":{"acr":"ATCC","active":true,"catalogue":["https://www.atcc.org/products/{id}"],"code":"ATCC","country":"US","gbif":"25160e92-1a80-4226-9afb-b25691622ac6","homepage":"https://www.atcc.org/","name":"American
+    Type Culture Collection","regex_ccno":"^ATCC\\s*((BAA|TSD|MYA|SD|VR|PTA)-)?\\d+$","regex_id":{"core":"\\d+","full":"^((BAA|TSD|MYA|SD|VR|PTA)-)?\\d+$","pre":"(BAA|TSD|MYA|SD|VR|PTA)"},"ror":"03thhhv76"},"14":{"acr":"JCM","active":true,"catalogue":["https://www.jcm.riken.jp/cgi-bin/jcm/jcm_number?{acr}={id}"],"code":"JCM","country":"JP","gbif":"fce1f744-ca76-46bb-9428-d92cfebe39d4","homepage":"https://jcm.brc.riken.jp/en/","name":"Japan
+    Collection of Microorganisms","regex_ccno":"^JCM\\s*\\d+$","regex_id":{"full":"^\\d+$"},"ror":"00s05em53"},"12":{"acr":"NBRC","acr_synonym":["NITE:NBRC"],"active":true,"catalogue":["https://www.nite.go.jp/nbrc/catalogue/NBRCCatalogueDetailServlet?ID=NBRC&CAT={core0:8}"],"code":"NBRC","country":"JP","gbif":"abab42d0-0a95-4166-a0fc-6fe5cd9b66ff","homepage":"https://www.nite.go.jp/en/nbrc/","name":"Biological
+    Resource Center","regex_ccno":"^NBRC\\s*\\d+$","regex_id":{"full":"^\\d+$"}}},"normalization":{"DSM
+    19572":"DSM-19572","ATCC BAA-758":"ATCC-BAA-758","DSM 16960":"DSM-16960","JCM
+    12091":"JCM-12091","ATCC 700893":"ATCC-700893","DSM 11879":"DSM-11879","JCM 9820":"JCM-9820","NBRC
+    100138":"NBRC-100138","T469":"","SY1":"","K1":""}}'
+  snapshot_sha256: d51abac898f8796dbc2c7b127bb4e61a8ada7f4350fdce689cf755d926446061
+- evidence_id: historical-edge-1
+  kind: search
+  reference: data/raw/MANIFEST.yaml
+  accessed_at: '2026-10-19T07:30:21Z'
+  support: partial
+  summary: Earlier actual check found configured source bytes differing from the manifest-pinned
+    historical input; this is not a new or worldwide search.
+  locator: /Users/marcin/Documents/VIMSS/ontology/KG-Hub/KG-Microbe/kg-microbe/data/transformed/mediadive/edges.tsv;
+    expected=78ea275a59d4e2de09a9cf72652ec64454c6a111d2defa1ae0a44bac8a72e523; observed=4e933d1e2412fb1aad74e60719a6a64dfa34862ff0a6b84e93d78da5ce13dd8b
+  snapshot_sha256: ee76711683b1b579d1561dcf40187e10e4f0027ae1b89f108eb18e865e7e7d38
+  search_scope: Exact configured historical input paths including ignored files; bounded
+    retained receipt.
+- evidence_id: historical-edge-2
+  kind: search
+  reference: data/raw/MANIFEST.yaml
+  accessed_at: '2026-10-19T07:30:22Z'
+  support: partial
+  summary: Earlier actual check found configured source bytes differing from the manifest-pinned
+    historical input; this is not a new or worldwide search.
+  locator: /Users/marcin/Documents/VIMSS/ontology/KG-Hub/KG-Microbe/kg-microbe/data/transformed/gold/edges.tsv;
+    expected=b793c4f84278789f5dc7c68173b1f08364fd68c5d52a555c4037793006010a12; observed=6b3375a06d4dabc86fdcb14a48cea55b86a7003634ba1d3ee449bcac32b89f9d
+  snapshot_sha256: ee76711683b1b579d1561dcf40187e10e4f0027ae1b89f108eb18e865e7e7d38
+  search_scope: Exact configured historical input paths including ignored files; bounded
+    retained receipt.
+- evidence_id: historical-edge-3
+  kind: search
+  reference: data/raw/MANIFEST.yaml
+  accessed_at: '2026-10-19T07:30:22Z'
+  support: partial
+  summary: Earlier actual check found configured source bytes differing from the manifest-pinned
+    historical input; this is not a new or worldwide search.
+  locator: /Users/marcin/Documents/VIMSS/ontology/KG-Hub/KG-Microbe/kg-microbe/data/transformed/madin_etal/edges.tsv;
+    expected=3fbe08ab2502458a515f2efc036d4d7004e2ae992521fe25426554126dcdf77f; observed=c19bfc848e1b410548614c54a2b99e2c58452d58aeb61f972c99fcb3039a1d24
+  snapshot_sha256: ee76711683b1b579d1561dcf40187e10e4f0027ae1b89f108eb18e865e7e7d38
+  search_scope: Exact configured historical input paths including ignored files; bounded
+    retained receipt.
+- evidence_id: historical-edge-4
+  kind: search
+  reference: data/raw/MANIFEST.yaml
+  accessed_at: '2026-10-19T07:30:22Z'
+  support: partial
+  summary: Earlier actual check found configured source bytes differing from the manifest-pinned
+    historical input; this is not a new or worldwide search.
+  locator: /Users/marcin/Documents/VIMSS/ontology/KG-Hub/KG-Microbe/kg-microbe/data/transformed/bactotraits/edges.tsv;
+    expected=f99ac3f385b7b94667ed1b59a046c9a0bfa655d0ca0b5757eef753495c901126; observed=7f0c775e18dc75ec2117c52d414af8a9fe35b6d1e01bcd44e42a86c1d0f2614d
+  snapshot_sha256: ee76711683b1b579d1561dcf40187e10e4f0027ae1b89f108eb18e865e7e7d38
+  search_scope: Exact configured historical input paths including ignored files; bounded
+    retained receipt.
+- evidence_id: qc-setup-receipt
+  kind: validation
+  reference: just qc
+  accessed_at: '2026-10-19T07:17:01Z'
+  support: context_only
+  summary: Initial actual invocation from /private/tmp/taxonmech-record-reviews-k0MubV/repo
+    exited 1 because ruff was absent. Locked ruff 0.16.7 was installed only in that
+    isolated environment before the complete retry. Reused actual native validation
+    on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded
+    cwd and timestamps identify the original execution. These native corpus/source
+    inputs are unchanged; only new review files differ. This receipt is not a new
+    run on the batch branch and does not validate subsequently saved review bundles.
+  locator: initial setup attempt, 2026-10-19T07:17:01Z through 2026-10-19T07:17:01Z
+  snapshot_sha256: 1d189beecc64b369096499a7ce4adf71897235e4c1190c69e7d0ed3a77b6a3f9
+- evidence_id: strict-receipt
+  kind: validation
+  reference: just validate-strict data/taxa/archaea/aciduliprofundum_boonei_t469.yaml
+    --out /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0007/strict-05.tsv
+  accessed_at: '2026-10-20T03:57:49Z'
+  support: supports
+  summary: "Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0007/repo;\
+    \ started 2026-10-20T03:57:48Z, finished 2026-10-20T03:57:49Z, exit 0. This exact\
+    \ generated YAML only; its captured bytes remain unchanged. Actual earlier per-target\
+    \ invocation; the receipt retains its original cwd and times.\nValidating 1 files\
+    \ with 4 workers; schema=/private/tmp/taxonmech-record-reviews-k0MubV/repo-batch-0003/src/taxonmech/schema/taxonmech.yaml\n\
+    \n=== validate-strict summary ===\n  files scanned:      1\n  files with ERROR:\
+    \   0\n  total ERROR rows:   0\n  TSV:                /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0007/strict-05.tsv"
+  locator: This exact generated YAML only; its captured bytes remain unchanged. Actual
+    earlier per-target invocation; the receipt retains its original cwd and times.
+  snapshot_sha256: 19f33463d8b3c391971c3a17bd5f0b4f942e78f2ea05727a5b7812f86ac40828
+- evidence_id: history-receipt
+  kind: validation
+  reference: just validate-history
+  accessed_at: '2026-10-19T07:17:03Z'
+  support: supports
+  summary: 'Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo;
+    started 2026-10-19T07:17:01Z, finished 2026-10-19T07:17:03Z, exit 0. All 17 standalone
+    history records; the generated seed event was also inspected in this target. Reused
+    actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+    the recorded cwd and timestamps identify the original execution. These native
+    corpus/source inputs are unchanged; only new review files differ. This receipt
+    is not a new run on the batch branch and does not validate subsequently saved
+    review bundles.
+
+    history links: 17 record(s), 0 invalid
+
+    No issues found
+
+    17 history record(s) valid against src/taxonmech/schema/history.yaml'
+  locator: All 17 standalone history records; the generated seed event was also inspected
+    in this target. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+    the recorded cwd and timestamps identify the original execution. These native
+    corpus/source inputs are unchanged; only new review files differ. This receipt
+    is not a new run on the batch branch and does not validate subsequently saved
+    review bundles.
+  snapshot_sha256: 3fc63ae7bb58034c180e5dcebec02f98c487038ba74793b9f43462ddaacdcbf4
+- evidence_id: corpus-receipt
+  kind: validation
+  reference: just verify-corpus
+  accessed_at: '2026-10-19T07:24:12Z'
+  support: supports
+  summary: "Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo;\
+    \ started 2026-10-19T07:18:23Z, finished 2026-10-19T07:24:12Z, exit 0. All 625,960\
+    \ generated taxon YAMLs, not a focused approximation. Reused actual native validation\
+    \ on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded\
+    \ cwd and timestamps identify the original execution. These native corpus/source\
+    \ inputs are unchanged; only new review files differ. This receipt is not a new\
+    \ run on the batch branch and does not validate subsequently saved review bundles.\n\
+    uv run python scripts/verify_corpus.py \nexpected 625960 records, found 625960\
+    \ on disk\n  missing:   0\n  extra:     0\n  differing: 0\n\ncorpus reproduces\
+    \ exactly from data/raw/ and curation/seed_scope.tsv"
+  locator: All 625,960 generated taxon YAMLs, not a focused approximation. Reused
+    actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+    the recorded cwd and timestamps identify the original execution. These native
+    corpus/source inputs are unchanged; only new review files differ. This receipt
+    is not a new run on the batch branch and does not validate subsequently saved
+    review bundles.
+  snapshot_sha256: 6bcd0e5b423155259cb8f8dbecb3e4af467b5dba232906734156e9a99fb5a459
+- evidence_id: products-receipt
+  kind: validation
+  reference: just validate-products
+  accessed_at: '2026-10-19T07:55:11Z'
+  support: supports
+  summary: 'Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo;
+    started 2026-10-19T07:17:01Z, finished 2026-10-19T07:55:11Z, exit 0. Full configured
+    corpus scan for curator-added graph nodes; this target contains no causal graph.
+    Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+    the recorded cwd and timestamps identify the original execution. These native
+    corpus/source inputs are unchanged; only new review files differ. This receipt
+    is not a new run on the batch branch and does not validate subsequently saved
+    review bundles.
+
+    uv run python scripts/validate_id_label_correspondence.py -c conf/id_label_targets.yaml
+
+
+    id↔label correspondence summary:
+
+
+    ✅ All id↔label pairs correspond.'
+  locator: Full configured corpus scan for curator-added graph nodes; this target
+    contains no causal graph. Reused actual native validation on the unchanged shared
+    base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps
+    identify the original execution. These native corpus/source inputs are unchanged;
+    only new review files differ. This receipt is not a new run on the batch branch
+    and does not validate subsequently saved review bundles.
+  snapshot_sha256: 48dd07515706dc62199fc2205c4b0bfdd5750028037d9b800179f254d2f1eb07
+- evidence_id: qc-receipt
+  kind: validation
+  reference: just qc
+  accessed_at: '2026-10-19T08:07:39Z'
+  support: supports
+  summary: "Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo;\
+    \ started 2026-10-19T07:17:41Z, finished 2026-10-19T08:07:39Z, exit 0. Repository-wide\
+    \ just qc, including native corpus-wide checks. Reused actual native validation\
+    \ on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded\
+    \ cwd and timestamps identify the original execution. These native corpus/source\
+    \ inputs are unchanged; only new review files differ. This receipt is not a new\
+    \ run on the batch branch and does not validate subsequently saved review bundles.\n\
+    1055 passed, 3 skipped, 5 deselected in 1634.00s (0:27:13)\nValidating 625960\
+    \ files with 4 workers; schema=/private/tmp/taxonmech-record-reviews-k0MubV/repo/src/taxonmech/schema/taxonmech.yaml\n\
+    \  files scanned:      625960\nexpected 625960 records, found 625960 on disk\n\
+    pages/ is current\nSite publication: 530,864,122 bytes (budget 950,000,000)\n\
+    625960 taxon records\n  NCBITAXON        625960\nAll TaxonMech quality gates passed.\n\
+    \  Related STRAININFO_STRAIN: 54312 strain-record pairs, 53745 identifiers, 53890\
+    \ strains (not genome counts)\n  Related STRAININFO_DEPOSIT: 107277 strain-record\
+    \ pairs, 106843 identifiers, 53890 strains (not genome counts)\n  Related NUCLEOTIDE_SEQUENCE:\
+    \ 51594 strain-record pairs, 51301 identifiers, 9984 strains (not genome counts)\n\
+    LPSN: 22469 records carry nomenclature, 21254 with a correct name   GTDB: 117809\
+    \ records mapped, 324404579 genomes summed across record attestations (not deduplicated)\n\
+    Causal graphs: 0 records (0 evidence-backed edges)\n\nAll TaxonMech quality gates\
+    \ passed."
+  locator: Repository-wide just qc, including native corpus-wide checks. Reused actual
+    native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+    the recorded cwd and timestamps identify the original execution. These native
+    corpus/source inputs are unchanged; only new review files differ. This receipt
+    is not a new run on the batch branch and does not validate subsequently saved
+    review bundles.
+  snapshot_sha256: b86a9cc6f529c3b822140f60179e9bc4046e2e6abef3ee0e67fa1035ffb1a76d
+- evidence_id: previous-issue-key-search
+  kind: search
+  reference: Previous structured review issue-key search
+  accessed_at: '2026-10-20T04:07:19Z'
+  support: supports
+  summary: No earlier occurrence of this exact issue key was found in the bounded
+    complete six-branch review search.
+  locator: '{"issue_key":"gtdb-closematch-exact-promotion-439481","matches":[],"files_read":288}'
+  snapshot_sha256: eefaa1cd66fa1c28e23a797df0bff5d6202e6c39451002685241cf122a299e00
+  search_scope: Full direct recursive reads of all review.yaml files under reviews/structured
+    in six owned branches, including ignored files; shared baseline files counted
+    once per branch. Exact issue-key strings only.
+assessments:
+- assessment_id: identity
+  area: identity
+  topic: Exact taxon and source lineage
+  outcome: supported
+  summary: NCBITaxon:439481 denotes Aciduliprofundum boonei T469, rank STRAIN, parent
+    NCBITaxon:379547, genetic code11. All 8 carried ancestors, literal labels and
+    ranks agree with pinned NCBI and current EFetch.
+  target_ids:
+  - NCBITaxon:439481
+  evidence_ids:
+  - record
+  - taxonomy-inventory
+  - ncbi-live
+  - scope-row
+  - path-row
+- assessment_id: nomenclature
+  area: nomenclature
+  topic: Name classes and nomenclatural scope
+  outcome: supported
+  summary: The three NCBI exact strain names remain distinct from the parent Candidatus
+    species. Current LPSN treats the parent as not validly published, with pro-valid/pro-correct
+    Candidatus status and nomenclatural type T469/DSM19572/ATCCBAA1534. This is parent-name
+    context, not a same-taxon LPSN assertion for strain439481. No missing native type
+    flag is treated as a false non-type claim.
+  target_ids:
+  - NCBITaxon:439481
+  evidence_ids:
+  - record
+  - taxonomy-inventory
+  - ncbi-live
+  - lpsn-inventory
+  - mapping-policy
+  - lpsn-live
+- assessment_id: completeness
+  area: completeness
+  topic: Imported subtree and source assertion units
+  outcome: supported
+  summary: One BacDive strain and one imported deposit are supported. Source units
+    remain NCBI1 NAME, GTDB6 GENOME, BacDive1 STRAIN, MediaDive1 MEDIUM, GOLD1 ORGANISM,
+    Madin7 and BactoTraits1 TRAIT_ASSERTION. Historical aggregate counts are not independently
+    recounted. ATCCBAA1534 in current parent LPSN does not manufacture an imported
+    BacDive deposit.
+  target_ids:
+  - NCBITaxon:439481
+  evidence_ids:
+  - record
+  - taxonomy-inventory
+  - bacdive-inventory
+  - culture-inventory
+  - gtdb-species
+  - gold-organisms
+  - mediadive-taxa
+  - madin-taxa
+  - bactotraits-taxa
+  - genome-catalog-1
+  - genome-catalog-2
+  - genome-catalog-3
+  - strain-table-1
+  - strain-table-2
+  - strain-table-3
+  - strain-table-4
+  - strain-table-5
+  - strain-table-6
+  - strain-table-7
+  - strain-primary-1
+  - strain-primary-2
+  - strain-primary-3
+  - gold-project-discovery
+  - cafi-registry
+  - lpsn-live
+- assessment_id: taxonomy-mapping
+  area: grounding
+  topic: Qualified species mapping and target scope
+  outcome: concern
+  summary: A qualified classification in GTDB:s__Aciduliprofundum_boonei is supported.
+    Its six primary genomes include one taxon439481 T469 genome and five taxon379547
+    genomes with different isolate labels. Emitting the species name as EXACT_SYNONYM
+    and an equivalent xref on the single STRAIN record exceeds that evidence. The
+    seeder needs a taxonomic-scope guard while retaining the qualified mapping and
+    count6.
+  target_ids:
+  - NCBITaxon:439481
+  evidence_ids:
+  - record
+  - gtdb-mappings
+  - gtdb-species
+  - mapping-policy
+  - equivalence-contract
+  - seed-owner
+  - genome-catalog-1
+  - genome-catalog-2
+  - genome-catalog-3
+  - gtdb-full-scan
+- assessment_id: strain-assertions
+  area: evidence
+  topic: Strain, deposit and genome-source links
+  outcome: supported
+  summary: BacDive23434 explicitly associates T469 with strain439481, parent379547
+    and DSM19572. It supplies two distinct unversioned assemblies GCA_000025665/GCA_000151085,
+    IMG646564501 and BV439481.9/.10. Primary NCBI/BV objects support their separate
+    version1 records and sample/project identities; no assembly merger is inferred.
+    StrainInfo401632.2 contains DSM deposit908583 at parent379547 without a sequence
+    list; both native deposit and strain-group links preserve that parent scope. GOLD
+    Go0608798 directly identifies DSM19572/taxon439481, and full organism-field discovery
+    finds no project. Bare T469 fails deposit normalization, explaining the absence
+    of additional NCBI/GTDB/BV deposit joins. The 2 assembly,3 genome,4 related assertions
+    exactly match the imported multiset.
+  target_ids:
+  - NCBITaxon:439481
+  evidence_ids:
+  - record
+  - strain-table-1
+  - strain-table-2
+  - strain-table-3
+  - strain-table-4
+  - strain-table-5
+  - strain-table-6
+  - strain-table-7
+  - strain-primary-1
+  - strain-primary-2
+  - strain-primary-3
+  - gold-project-discovery
+  - cafi-registry
+  - lpsn-live
+  - genome-catalog-1
+  - genome-catalog-2
+  - genome-catalog-3
+- assessment_id: native-status
+  area: provenance
+  topic: Unchanged native status and history
+  outcome: supported
+  summary: Grounding EXACT, mapping SEEDED and the sole 2026-09-13T17:54:04Z seed
+    event remain unchanged and agree with the latest extraction time. No curation
+    history or native status is promoted.
+  target_ids:
+  - NCBITaxon:439481
+  evidence_ids:
+  - record
+  - manifest
+  - overlay-manifests
+findings:
+- finding_id: gtdb-strain-scope
+  issue_key: gtdb-closematch-exact-promotion-439481
+  category: grounding
+  severity: major
+  status: open
+  certainty: confirmed
+  title: GTDB species identity is promoted onto a named strain
+  description: A qualified classification in GTDB:s__Aciduliprofundum_boonei is supported.
+    Its six primary genomes include one taxon439481 T469 genome and five taxon379547
+    genomes with different isolate labels. Emitting the species name as EXACT_SYNONYM
+    and an equivalent xref on the single STRAIN record exceeds that evidence. The
+    seeder needs a taxonomic-scope guard while retaining the qualified mapping and
+    count6.
+  target_ids:
+  - NCBITaxon:439481
+  field_paths:
+  - synonyms[source=GTDB].synonym_type
+  - xrefs[GTDB:s__Aciduliprofundum_boonei]
+  evidence_ids:
+  - record
+  - taxonomy-inventory
+  - ncbi-live
+  - gtdb-mappings
+  - gtdb-species
+  - gtdb-full-scan
+  - mapping-policy
+  - equivalence-contract
+  - seed-owner
+  - genome-catalog-1
+  - genome-catalog-2
+  - genome-catalog-3
+  rule_id: src/taxonmech/schema/taxonmech.yaml:TaxonRecord.xrefs; docs/HARMONIZATION.md:Mapping
+    predicates
+  native_severity: major
+  normalization_reason: Unsupported species-to-strain exact identity promotion; target
+    identity and qualified source counts remain sound.
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Maintained exact synonym/xref promotion and pooled mapping notes
+actions:
+- action_id: guard-gtdb-strain-equivalence
+  description: Guard maintained exact-name/xref promotion by taxonomic scope. Preserve
+    qualified mappings and source counts; regenerate only through a separately authorized
+    seeder workflow.
+  finding_ids:
+  - gtdb-strain-scope
+  target_ids:
+  - NCBITaxon:439481
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Maintained exact synonym/xref promotion and pooled mapping notes
+  acceptance_checks:
+  - Retain exact NCBI identifier, STRAIN rank, parent, all NCBI strain synonyms, source
+    attestations, imported strains and links.
+  - Retain qualified GTDB:s__Aciduliprofundum_boonei mapping and source count6.
+  - The species name and equivalent xref no longer assert exact identity with the
+    named strain; eligible parent species bridges remain supported.
+  - After separately authorized regeneration run strict, history, product, corpus
+    and QC gates.
+- action_id: recover-pinned-aggregate-inputs
+  finding_ids: []
+  target_ids:
+  - NCBITaxon:439481
+  description: Recover manifest-hash-matching original aggregate inputs and independently
+    recount the exact target assertions through the maintained extractor; do not edit
+    generated YAML.
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: data/raw/MANIFEST.yaml
+    role: Original source hashes
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/extract.py
+    role: Source-specific count semantics
+  acceptance_checks:
+  - Require exact original input SHA-256 before using it as historical evidence.
+  - Recount only the exact target with each source's own assertion unit and compare
+    to its pinned inventory row.
+  - Record any discrepancy in a new review observation.
+limitations:
+- The review is bounded to captured sources and versions. Names alone do not establish
+  deposit identity, genome equivalence, phenotype or mechanism; source taxonomy disagreements
+  are preserved.
+- Original manifest-hash-matching historical aggregate edges were unavailable in the
+  retained configured-path checks; pinned projection counts agree, but independent
+  historical recounting remains unresolved.
+- Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+  the recorded cwd and timestamps identify the original execution. These native corpus/source
+  inputs are unchanged; only new review files differ. This receipt is not a new run
+  on the batch branch and does not validate subsequently saved review bundles.
+notes:
+- No generated record or history was edited; curation actions remain proposed.
+- Fresh-base canonical recapture preserved all previously reviewed input hashes; original
+  captures and actual transition receipts remain retained.
+- Every new bundle still requires its own validate/save/check recipe; baseline native
+  receipts do not claim these later steps have run.
+tags:
+- record-review
+- batch-0007
+- archaea
+- generated
+- source-checked
+```
