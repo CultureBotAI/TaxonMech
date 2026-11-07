@@ -602,13 +602,13 @@ def test_committed_curation_causal_graphs_overlays_load_and_validate():
         for g in graphs[tid]
         for e in g.get("edges") or []
     )
-    assert total_edges >= 290
+    assert total_edges >= 301
     edge_count = sum(
         len(g.get("edges") or [])
         for tid in expected_ids
         for g in graphs[tid]
     )
-    assert edge_count == 290
+    assert edge_count == 301
     protein_nodes = [
         n
         for tid in expected_ids
