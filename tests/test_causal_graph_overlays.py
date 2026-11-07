@@ -2127,7 +2127,7 @@ def test_overlay_readme_documents_current_seed_line_ranges_and_reciprocal_ec_num
     assert "302–347" not in overlay_readme
     assert "555–560" not in overlay_readme
     assert "653–670" not in overlay_readme
-    assert "lines 657–662,\n757–774" in overlay_readme or "lines 657–662, 757–774" in overlay_readme
+    assert "lines 697–702,\n797–814" in overlay_readme or "lines 697–702, 797–814" in overlay_readme
 
     ec_row_lines = [
         line for line in overlay_readme.splitlines() if line.startswith("| `ec_numbers` |")
@@ -2140,4 +2140,264 @@ def test_overlay_readme_documents_current_seed_line_ranges_and_reciprocal_ec_num
     )
     assert expected_ec_phrase in ec_row
     assert "scripts/check_provenance.py" in ec_row
+
+
+def test_cycle8_stage6_uniprot_catalog_node_grounding_and_protein_edge_topology_gates(
+    tmp_path: Path,
+):
+    """Enforce UNIPROT_ENTRY_NAME_PATTERN and entry_name/(organism_taxon_id, locus_tag)
+    uniqueness in load_uniprot_proteins(), per-graph node grounding uniqueness and
+    predicate<->predicate_id consistency in validate_causal_graph_structure(), and
+    required edge predicate_id plus GENE_OR_PROTEIN RO:0002292/outgoing-edge topology
+    in causal_graph_provenance_problems() (#224, #78)."""
+    import importlib.util
+
+    # 1. load_uniprot_proteins rejects invalid entry_name, duplicate entry_name,
+    # and duplicate (organism_taxon_id, locus_tag)
+    raw_lines = UNIPROT_PROTEINS_PATH.read_text(encoding="utf-8").splitlines()
+    header = raw_lines[0]
+    row_p00722 = next(line for line in raw_lines[1:] if line.startswith("UniProtKB:P00722\t"))
+    row_p02920 = next(line for line in raw_lines[1:] if line.startswith("UniProtKB:P02920\t"))
+
+    bad_entry_tsv = tmp_path / "bad_entry_name.tsv"
+    bad_entry_tsv.write_text(
+        header + "\n" + row_p00722.replace("BGAL_ECOLI", "bgal-ecoli", 1) + "\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(SystemExit, match="invalid entry_name 'bgal-ecoli'"):
+        load_uniprot_proteins(bad_entry_tsv)
+
+    dup_entry_tsv = tmp_path / "dup_entry_name.tsv"
+    dup_entry_tsv.write_text(
+        header
+        + "\n"
+        + row_p00722
+        + "\n"
+        + row_p02920.replace("LACY_ECOLI", "BGAL_ECOLI", 1)
+        + "\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(SystemExit, match="duplicate entry_name 'BGAL_ECOLI'"):
+        load_uniprot_proteins(dup_entry_tsv)
+
+    dup_locus_tsv = tmp_path / "dup_locus.tsv"
+    dup_locus_tsv.write_text(
+        header + "\n" + row_p00722 + "\n" + row_p02920.replace("b0343", "b0344", 1) + "\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(
+        SystemExit,
+        match=r"duplicate \(organism_taxon_id, locus_tag\) \('NCBITaxon:83333', 'b0344'\)",
+    ):
+        load_uniprot_proteins(dup_locus_tsv)
+
+    # 2. validate_causal_graph_structure rejects duplicate non-protein grounding
+    # and inconsistent predicate<->predicate_id pairings within a CausalGraph
+    dup_grounding_graph = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "title": "Test",
+                "nodes": [
+                    {
+                        "node_id": "taxon",
+                        "label": "Escherichia coli",
+                        "node_type": "TAXON",
+                        "grounding": "NCBITaxon:562",
+                    },
+                    {
+                        "node_id": "proc_a",
+                        "label": "lactose transport",
+                        "node_type": "BIOLOGICAL_PROCESS",
+                        "grounding": "GO:0015767",
+                    },
+                    {
+                        "node_id": "proc_b",
+                        "label": "lactose transport duplicate",
+                        "node_type": "BIOLOGICAL_PROCESS",
+                        "grounding": "GO:0015767",
+                    },
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "taxon",
+                        "predicate": "causally upstream of or within",
+                        "predicate_id": "RO:0002418",
+                        "object": "proc_a",
+                        "evidence": [{"reference": "PMID:7000781"}],
+                    },
+                    {
+                        "edge_id": "e2",
+                        "subject": "proc_a",
+                        "predicate": "causally upstream of or within",
+                        "predicate_id": "RO:0002418",
+                        "object": "proc_b",
+                        "evidence": [{"reference": "PMID:7000781"}],
+                    },
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="duplicate node grounding 'GO:0015767' in graph 'g1'"):
+        validate_causal_graph_structure(dup_grounding_graph)
+
+    inconsistent_pred_id_graph = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "title": "Test",
+                "nodes": [
+                    {
+                        "node_id": "taxon",
+                        "label": "Escherichia coli",
+                        "node_type": "TAXON",
+                        "grounding": "NCBITaxon:562",
+                    },
+                    {
+                        "node_id": "proc_a",
+                        "label": "lactose transport",
+                        "node_type": "BIOLOGICAL_PROCESS",
+                        "grounding": "GO:0015767",
+                    },
+                    {
+                        "node_id": "proc_b",
+                        "label": "lactose catabolic process",
+                        "node_type": "BIOLOGICAL_PROCESS",
+                        "grounding": "GO:0005990",
+                    },
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "taxon",
+                        "predicate": "causally upstream of or within",
+                        "predicate_id": "RO:0002418",
+                        "object": "proc_a",
+                        "evidence": [{"reference": "PMID:7000781"}],
+                    },
+                    {
+                        "edge_id": "e2",
+                        "subject": "proc_a",
+                        "predicate": "enables",
+                        "predicate_id": "RO:0002418",
+                        "object": "proc_b",
+                        "evidence": [{"reference": "PMID:7000781"}],
+                    },
+                ],
+            }
+        ]
+    }
+    with pytest.raises(
+        SystemExit,
+        match="predicate_id 'RO:0002418' mapped to inconsistent predicate 'enables'",
+    ):
+        validate_causal_graph_structure(inconsistent_pred_id_graph)
+
+    inconsistent_pred_label_graph = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "title": "Test",
+                "nodes": [
+                    {
+                        "node_id": "taxon",
+                        "label": "Escherichia coli",
+                        "node_type": "TAXON",
+                        "grounding": "NCBITaxon:562",
+                    },
+                    {
+                        "node_id": "proc_a",
+                        "label": "lactose transport",
+                        "node_type": "BIOLOGICAL_PROCESS",
+                        "grounding": "GO:0015767",
+                    },
+                    {
+                        "node_id": "proc_b",
+                        "label": "lactose catabolic process",
+                        "node_type": "BIOLOGICAL_PROCESS",
+                        "grounding": "GO:0005990",
+                    },
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "taxon",
+                        "predicate": "enables",
+                        "predicate_id": "RO:0002327",
+                        "object": "proc_a",
+                        "evidence": [{"reference": "PMID:7000781"}],
+                    },
+                    {
+                        "edge_id": "e2",
+                        "subject": "proc_a",
+                        "predicate": "enables",
+                        "predicate_id": "RO:0002418",
+                        "object": "proc_b",
+                        "evidence": [{"reference": "PMID:7000781"}],
+                    },
+                ],
+            }
+        ]
+    }
+    with pytest.raises(
+        SystemExit,
+        match="predicate 'enables' mapped to inconsistent predicate_id 'RO:0002418'",
+    ):
+        validate_causal_graph_structure(inconsistent_pred_label_graph)
+
+    # 3. causal_graph_provenance_problems detects missing edge predicate_id,
+    # missing host-TAXON RO:0002292 (expresses) edge to GENE_OR_PROTEIN,
+    # and GENE_OR_PROTEIN without outgoing functional/regulatory/causal edge
+    script_path = REPO_ROOT / "scripts" / "check_provenance.py"
+    spec = importlib.util.spec_from_file_location("check_provenance", script_path)
+    mod = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(mod)
+
+    synth_root = tmp_path / "synth_repo_c8"
+    curation_dir = synth_root / "curation"
+    overlays_dir = curation_dir / "causal_graphs"
+    overlays_dir.mkdir(parents=True)
+    (curation_dir / "uniprot_proteins.tsv").write_text(
+        UNIPROT_PROTEINS_PATH.read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+    (curation_dir / "seed_scope.tsv").write_text(
+        "identifier\tadded\treason\nNCBITaxon:562\t2026-01-01\ttest\n",
+        encoding="utf-8",
+    )
+    ecoli_data = yaml.safe_load(
+        (REPO_ROOT / "curation" / "causal_graphs" / "NCBITaxon_562.yaml").read_text(
+            encoding="utf-8"
+        )
+    )
+    graph0 = ecoli_data["causal_graphs"][0]
+    # Remove predicate_id from e3 (lactose_transport -> lactose_catabolism),
+    # change e1 (taxon -> lacY) predicate_id so lacY is not expressed via RO:0002292,
+    # and flip e2 (lacY -> lactose_transport) direction so lacY has no outgoing edge
+    for e in graph0["edges"]:
+        if e["edge_id"] == "e1":
+            e["predicate"] = "part of"
+            e["predicate_id"] = "BFO:0000050"
+        elif e["edge_id"] == "e2":
+            e["subject"], e["object"] = e["object"], e["subject"]
+        elif e["edge_id"] == "e3":
+            e.pop("predicate_id", None)
+
+    (overlays_dir / "NCBITaxon_562.yaml").write_text(
+        yaml.safe_dump(ecoli_data, sort_keys=False),
+        encoding="utf-8",
+    )
+    failures = mod.causal_graph_provenance_problems(synth_root)
+    assert any(
+        "node 'lacY': GENE_OR_PROTEIN node is not linked from host TAXON node via RO:0002292 (expresses)"
+        in f
+        for f in failures
+    )
+    assert any(
+        "node 'lacY': GENE_OR_PROTEIN node has no outgoing functional/regulatory/causal edge" in f
+        for f in failures
+    )
+    assert any("edge 'e3': missing 'predicate_id'" in f for f in failures)
 
