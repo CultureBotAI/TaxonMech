@@ -12,9 +12,9 @@
 
 1. **`src/taxonmech/seed.py`**:
    - Added `UNIPROT_ENTRY_NAME_PATTERN = re.compile(r"^[A-Z0-9]{1,11}_[A-Z0-9]{2,5}$")` (line 83) and enforced `entry_name` syntax, catalog-wide `entry_name` uniqueness (`seen_entry_names`), and catalog-wide `(organism_taxon_id, locus_tag)` uniqueness (`seen_org_loci`) in `load_uniprot_proteins()` (lines 338–416).
-   - Enforced per-graph `CausalNode.grounding` uniqueness across all grounded nodes (`seen_node_groundings`) and per-graph `predicate`↔`predicate_id` pairing consistency (`seen_pred_by_id`, `seen_id_by_pred`) in `validate_causal_graph_structure()` (lines 429–614).
+   - Enforced per-graph `CausalNode.grounding` uniqueness across all grounded nodes (`seen_node_groundings`) and per-graph `predicate`↔`predicate_id` pairing consistency (`seen_pred_by_id`, `seen_id_by_pred`) in `validate_causal_graph_structure()` (lines 448–624).
 2. **`scripts/check_provenance.py`**:
-   - Extended `causal_graph_provenance_problems()` (lines 154–235) to require every `CausalEdge` in `curation/causal_graphs/*.yaml` to declare a non-empty `predicate_id` CURIE and every `GENE_OR_PROTEIN` node to be linked from a host `TAXON` node (`grounding == tid`) via `RO:0002292` (`expresses`) and to have at least one outgoing functional/regulatory/causal edge (`edge.subject == node_id`).
+   - Extended `causal_graph_provenance_problems()` (lines 154–233) to require every `CausalEdge` in `curation/causal_graphs/*.yaml` to declare a non-empty `predicate_id` CURIE and every `GENE_OR_PROTEIN` node to be linked from a host `TAXON` node (`grounding == tid`) via `RO:0002292` (`expresses`) and to have at least one outgoing functional/regulatory/causal edge (`edge.subject == node_id`).
 3. **`curation/causal_graphs/README.md`, `docs/SCHEMA.md`, `docs/CURATION.md`, and `INFRA_TASKS.md`**:
    - Documented the new `#224` validation and provenance invariants, updated `src/taxonmech/seed.py` (`lines 338–416`, `lines 697–702, 797–814`) and `scripts/check_provenance.py` (`lines 197–209`) line ranges, and updated `INFRA_TASKS.md` to record Cycle 8 Stage 2 (`PR #219`), Stage 3 (`PR #220`), Stage 5 (`#222`, `PR #223`), and Stage 6 (`#224`) progress while carrying `taxonmech-infra-0001..0004` forward as `deferred` to Cycle 9 under `#78` and `#8`.
 4. **`tests/test_causal_graph_overlays.py`**:

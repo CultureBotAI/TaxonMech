@@ -2401,4 +2401,3 @@ def test_cycle8_stage6_uniprot_catalog_node_grounding_and_protein_edge_topology_
     )
     assert any("edge 'e3': missing 'predicate_id'" in f for f in failures)
 
-
