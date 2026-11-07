@@ -2108,3 +2108,36 @@ def test_cycle7_stage6_closed_keys_curation_events_and_provenance_invariants(tmp
     assert any("missing 'notes' or 'snippet'" in f for f in failures)
 
 
+def test_overlay_readme_documents_current_seed_line_ranges_and_reciprocal_ec_numbers_contract():
+    """curation/causal_graphs/README.md must cite current src/taxonmech/seed.py line ranges
+    for load_uniprot_proteins() and validate_causal_graph_proteins() strain_id validation,
+    and document the reciprocal full 4-part EC: CausalNode.xrefs ordering invariant in the
+    UNIPROT_PROTEIN_FIELDS ec_numbers table row (#222, #216, #78)."""
+    import inspect
+
+    overlay_readme = (REPO_ROOT / "curation" / "causal_graphs" / "README.md").read_text(
+        encoding="utf-8"
+    )
+    src_lines, start_line = inspect.getsourcelines(load_uniprot_proteins)
+    end_line = start_line + len(src_lines) - 1
+    expected_load_range = f"{start_line}–{end_line}"
+    assert expected_load_range in overlay_readme, (
+        f"curation/causal_graphs/README.md missing load_uniprot_proteins() range {expected_load_range!r}"
+    )
+    assert "302–347" not in overlay_readme
+    assert "555–560" not in overlay_readme
+    assert "653–670" not in overlay_readme
+    assert "lines 657–662,\n757–774" in overlay_readme or "lines 657–662, 757–774" in overlay_readme
+
+    ec_row_lines = [
+        line for line in overlay_readme.splitlines() if line.startswith("| `ec_numbers` |")
+    ]
+    assert len(ec_row_lines) == 1
+    ec_row = ec_row_lines[0]
+    expected_ec_phrase = (
+        "all full 4-part (non-wildcard) `EC:` CURIEs in `ec_numbers` "
+        "must appear in `CausalNode.xrefs` in matching order"
+    )
+    assert expected_ec_phrase in ec_row
+    assert "scripts/check_provenance.py" in ec_row
+
