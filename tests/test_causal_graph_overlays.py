@@ -2406,3 +2406,70 @@ def test_cycle8_stage6_uniprot_catalog_node_grounding_and_protein_edge_topology_
     )
     assert any("edge 'e3': missing 'predicate_id'" in f for f in failures)
 
+
+def test_overlay_readme_example_passes_structure_events_proteins_and_provenance_gates(
+    tmp_path: Path,
+):
+    """The Overlay File Contract YAML example in curation/causal_graphs/README.md must include
+    the required host-TAXON RO:0002292 (expresses) edge to its GENE_OR_PROTEIN node and pass
+    validate_causal_graph_structure(), validate_causal_graph_events(),
+    validate_causal_graph_proteins(), and causal_graph_provenance_problems() (#234, #224, #78)."""
+    overlay_readme = (REPO_ROOT / "curation" / "causal_graphs" / "README.md").read_text(
+        encoding="utf-8"
+    )
+    match = re.search(r"```yaml\n(.*?)\n```", overlay_readme, flags=re.DOTALL)
+    assert match is not None, "curation/causal_graphs/README.md missing yaml code block"
+    readme_yaml = match.group(1)
+    readme_doc = yaml.safe_load(readme_yaml)
+    tid = readme_doc["identifier"]
+    assert tid == "NCBITaxon:562"
+    graph0 = readme_doc["causal_graphs"][0]
+    expresses_edges = [
+        e
+        for e in graph0["edges"]
+        if e.get("subject") == "taxon"
+        and e.get("predicate") == "expresses"
+        and e.get("predicate_id") == "RO:0002292"
+        and e.get("object") == "lacZ"
+    ]
+    assert len(expresses_edges) == 1
+
+    validate_causal_graph_structure({tid: readme_doc["causal_graphs"]})
+    validate_causal_graph_events({tid: readme_doc["curation_history"]})
+
+    proteins = load_uniprot_proteins(UNIPROT_PROTEINS_PATH)
+    taxa = {
+        "NCBITaxon:2": {"parent_id": "", "rank": "DOMAIN"},
+        "NCBITaxon:561": {"parent_id": "NCBITaxon:2", "rank": "GENUS"},
+        "NCBITaxon:562": {"parent_id": "NCBITaxon:561", "rank": "SPECIES"},
+        "NCBITaxon:83333": {"parent_id": "NCBITaxon:562", "rank": "STRAIN"},
+    }
+    validate_causal_graph_proteins(
+        {tid: readme_doc["causal_graphs"]},
+        uniprot_proteins=proteins,
+        taxa=taxa,
+    )
+
+    script_path = REPO_ROOT / "scripts" / "check_provenance.py"
+    spec = importlib.util.spec_from_file_location("check_provenance", script_path)
+    mod = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(mod)
+
+    synth_root = tmp_path / "synth_readme_example"
+    curation_dir = synth_root / "curation"
+    overlays_dir = curation_dir / "causal_graphs"
+    overlays_dir.mkdir(parents=True)
+    raw_lines = UNIPROT_PROTEINS_PATH.read_text(encoding="utf-8").splitlines()
+    header = raw_lines[0]
+    row_p00722 = next(line for line in raw_lines[1:] if line.startswith("UniProtKB:P00722\t"))
+    (curation_dir / "uniprot_proteins.tsv").write_text(
+        header + "\n" + row_p00722 + "\n",
+        encoding="utf-8",
+    )
+    (curation_dir / "seed_scope.tsv").write_text(
+        "identifier\tadded\treason\nNCBITaxon:562\t2026-01-01\ttest\n",
+        encoding="utf-8",
+    )
+    (overlays_dir / "NCBITaxon_562.yaml").write_text(readme_yaml + "\n", encoding="utf-8")
+    assert mod.causal_graph_provenance_problems(synth_root) == []
