@@ -1724,14 +1724,16 @@ assessments:
     deterministic seeder reproduction, and offline + live UniProtKB verification across
     15 causal graphs, 108 GENE_OR_PROTEIN nodes (49 unique UniProtKB accessions: 47
     SWISS_PROT and 2 TREMBL in curation/uniprot_proteins.tsv), and 378 evidence-backed
-    edges across 85 PMIDs; however, the ''## Overlay File Contract'' YAML example
-    in curation/causal_graphs/README.md (lines 14-72) omits the required host-TAXON
-    RO:0002292 (expresses) edge to GENE_OR_PROTEIN node lacZ enforced since Cycle
-    8 Stage 6 (#224, PR #225) by causal_graph_provenance_problems() in scripts/check_provenance.py
-    (lines 167-189), and the remaining 626,033 records (99.998%) still have empty
-    causal_graphs pending upstream kg-microbe bulk data/raw/taxon_trait_edges.tsv
-    extraction (taxonmech-infra-0002) and a corpus-wide data/raw/ UniProtKB Reference
-    Proteomes snapshot (taxonmech-infra-0003; #78).'
+    edges across 85 PMIDs, and the ''## Overlay File Contract'' YAML example in
+    curation/causal_graphs/README.md (lines 14-82) now includes the required host-TAXON
+    RO:0002292 (expresses) edge to GENE_OR_PROTEIN node lacZ enforced by
+    causal_graph_provenance_problems() in scripts/check_provenance.py (lines 167-189)
+    and is verified by test_overlay_readme_example_passes_structure_events_proteins_and_provenance_gates()
+    in tests/test_causal_graph_overlays.py (#234, #224, #78); however, the remaining
+    626,033 records (99.998%) still have empty causal_graphs pending upstream kg-microbe
+    bulk data/raw/taxon_trait_edges.tsv extraction (taxonmech-infra-0002) and a
+    corpus-wide data/raw/ UniProtKB Reference Proteomes snapshot (taxonmech-infra-0003;
+    #78).'
   target_ids:
   - NCBITaxon:562
   - NCBITaxon:83333

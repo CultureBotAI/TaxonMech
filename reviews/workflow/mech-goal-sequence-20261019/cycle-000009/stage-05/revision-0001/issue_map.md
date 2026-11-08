@@ -6,7 +6,7 @@
 - **Source Revision**: `a082f0dcc026367300d60618e2ab61ca5c20f45d`
 - **Previous Evidence**: `reviews/workflow/mech-goal-sequence-20261019/cycle-000009/stage-04/revision-0001/evidence.yaml` (`sha256: 4535eb3140cea59cad9fab0ba54be1f0155f9d58f462397053333a5bab7acd15`)
 - **Consumed Review Report**: `reviews/structured/20261108T101500Z-cycle9-stage4-corpus-record-review/review.yaml` (`sha256: 5ee1f2c838c336564f57db9dc11570d42ebbc6bc9f3b9138963256aa2d33e4e9`)
-- **Post-Remediation Review Report**: `reviews/structured/20261108T134500Z-cycle9-stage5-remediation-review/review.yaml` (`sha256: ee10322a65b520be59647b4e28deb57e36cfe15840e238cfb128f9150adafaf4`)
+- **Post-Remediation Review Report**: `reviews/structured/20261108T134500Z-cycle9-stage5-remediation-review/review.yaml` (`sha256: 68ac028eedde0f52081f0f859877c29cc86c2dc1031f1bea35cd6e3af10dce09`)
 
 ## 1. GitHub Issue Deduplication Summary (`CultureBotAI/TaxonMech`)
 
