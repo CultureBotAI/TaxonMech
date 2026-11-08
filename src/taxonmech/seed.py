@@ -81,6 +81,7 @@ UNIPROT_ID_PATTERN = re.compile(
     r"^UniProtKB:(?:[OPQ][0-9][A-Z0-9]{3}[0-9]|[A-NR-Z][0-9](?:[A-Z][A-Z0-9]{2}[0-9]){1,2})$"
 )
 UNIPROT_ENTRY_NAME_PATTERN = re.compile(r"^[A-Z0-9]{1,11}_[A-Z0-9]{2,5}$")
+UNIPROT_RELEASE_PATTERN = re.compile(r"^20[0-9]{2}_(?:0[1-9]|1[0-2])$")
 NCBITAXON_ID_PATTERN = re.compile(r"^NCBITaxon:[1-9][0-9]*$")
 PROTEOME_ID_PATTERN = re.compile(r"^UP:UP[0-9]{9}$")
 CURIE_PATTERN = re.compile(r"^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$")
@@ -346,6 +347,8 @@ def load_uniprot_proteins(
     proteins: dict[str, dict[str, str]] = {}
     seen_entry_names: set[str] = set()
     seen_org_loci: set[tuple[str, str]] = set()
+    seen_org_meta: dict[str, tuple[str, str]] = {}
+    seen_proteome_org: dict[str, str] = {}
     with path.open(newline="", encoding="utf-8") as fh:
         reader = csv.DictReader(fh, delimiter="\t")
         if tuple(reader.fieldnames or ()) != UNIPROT_PROTEIN_FIELDS:
@@ -373,11 +376,39 @@ def load_uniprot_proteins(
                     raise SystemExit(
                         f"{path}:{line_no}: organism_taxon_id {org_tid} must be species-or-below for {uid!r}"
                     )
-            if row.get("proteome_id") and not PROTEOME_ID_PATTERN.match(row["proteome_id"]):
+            proteome_id = (row.get("proteome_id") or "").strip()
+            if proteome_id and not PROTEOME_ID_PATTERN.match(proteome_id):
                 raise SystemExit(f"{path}:{line_no}: invalid proteome_id for {uid!r}")
             for req_col in ("entry_name", "protein_name", "organism_label", "release_version"):
                 if not (row.get(req_col) or "").strip():
                     raise SystemExit(f"{path}:{line_no}: missing {req_col} for {uid!r}")
+            org_label = (row.get("organism_label") or "").strip()
+            if taxa is not None:
+                expected_org_label = (taxa.get(org_tid) or {}).get("label", "").strip()
+                if expected_org_label and org_label != expected_org_label:
+                    raise SystemExit(
+                        f"{path}:{line_no}: organism_label {org_label!r} != "
+                        f"ncbitaxon_taxa.tsv label {expected_org_label!r} for {uid!r}"
+                    )
+            org_meta = (org_label, proteome_id)
+            if org_tid in seen_org_meta and seen_org_meta[org_tid] != org_meta:
+                raise SystemExit(
+                    f"{path}:{line_no}: inconsistent (organism_label, proteome_id) "
+                    f"{org_meta!r} != {seen_org_meta[org_tid]!r} for {org_tid} ({uid!r})"
+                )
+            seen_org_meta[org_tid] = org_meta
+            if proteome_id:
+                if proteome_id in seen_proteome_org and seen_proteome_org[proteome_id] != org_tid:
+                    raise SystemExit(
+                        f"{path}:{line_no}: proteome_id {proteome_id!r} mapped to multiple "
+                        f"organism_taxon_id values ({seen_proteome_org[proteome_id]!r}, {org_tid!r})"
+                    )
+                seen_proteome_org[proteome_id] = org_tid
+            release_ver = (row.get("release_version") or "").strip()
+            if not UNIPROT_RELEASE_PATTERN.match(release_ver):
+                raise SystemExit(
+                    f"{path}:{line_no}: invalid release_version {release_ver!r} for {uid!r}"
+                )
             entry_name = (row.get("entry_name") or "").strip()
             if not UNIPROT_ENTRY_NAME_PATTERN.match(entry_name):
                 raise SystemExit(f"{path}:{line_no}: invalid entry_name {entry_name!r} for {uid!r}")
@@ -467,7 +498,9 @@ def validate_causal_graph_structure(
                 raise SystemExit(f"{g_ctx}: unexpected CausalGraph keys: {unknown_g_keys}")
             nodes = graph.get("nodes")
             seen_node_ids: set[str] = set()
+            seen_node_labels: set[str] = set()
             seen_node_groundings: set[str] = set()
+            node_types_by_id: dict[str, str] = {}
             if nodes is not None:
                 if not isinstance(nodes, list) or not nodes:
                     raise SystemExit(f"{g_ctx}: 'nodes' must be a non-empty list")
@@ -493,6 +526,10 @@ def validate_causal_graph_structure(
                         raise SystemExit(f"{n_ctx}: requires non-empty 'label' and 'node_type'")
                     if ntype not in CAUSAL_NODE_TYPES:
                         raise SystemExit(f"{n_ctx}: invalid node_type {ntype!r}")
+                    if lbl in seen_node_labels:
+                        raise SystemExit(f"{n_ctx}: duplicate node label {lbl!r} in graph {gid!r}")
+                    seen_node_labels.add(lbl)
+                    node_types_by_id[nid] = ntype
                     if ntype != "GENE_OR_PROTEIN":
                         bad_slots = [s for s in PROTEIN_ONLY_NODE_SLOTS if node.get(s) is not None]
                         if bad_slots:
@@ -591,6 +628,15 @@ def validate_causal_graph_structure(
                         if obj not in seen_node_ids:
                             raise SystemExit(
                                 f"{e_ctx}: object {obj!r} does not reference a defined node_id"
+                            )
+                        if node_types_by_id.get(obj) == "TAXON":
+                            raise SystemExit(
+                                f"{e_ctx}: object {obj!r} cannot target a TAXON node"
+                            )
+                        if pred_id == "RO:0002292" and node_types_by_id.get(obj) != "GENE_OR_PROTEIN":
+                            raise SystemExit(
+                                f"{e_ctx}: RO:0002292 (expresses) object {obj!r} "
+                                f"must be a GENE_OR_PROTEIN node"
                             )
                         connected_node_ids.add(subj)
                         connected_node_ids.add(obj)
