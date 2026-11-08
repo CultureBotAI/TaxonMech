@@ -2132,7 +2132,7 @@ def test_overlay_readme_documents_current_seed_line_ranges_and_reciprocal_ec_num
     assert "302–347" not in overlay_readme
     assert "555–560" not in overlay_readme
     assert "653–670" not in overlay_readme
-    assert "lines 697–702,\n797–814" in overlay_readme or "lines 697–702, 797–814" in overlay_readme
+    assert "lines 743–748,\n843–860" in overlay_readme or "lines 743–748, 843–860" in overlay_readme
 
     ec_row_lines = [
         line for line in overlay_readme.splitlines() if line.startswith("| `ec_numbers` |")
@@ -2473,3 +2473,288 @@ def test_overlay_readme_example_passes_structure_events_proteins_and_provenance_
     )
     (overlays_dir / "NCBITaxon_562.yaml").write_text(readme_yaml + "\n", encoding="utf-8")
     assert mod.causal_graph_provenance_problems(synth_root) == []
+
+
+def test_cycle9_stage6_uniprot_release_org_proteome_consistency_and_causal_graph_node_label_edge_typing_gates(
+    tmp_path: Path,
+):
+    """Enforce UNIPROT_RELEASE_PATTERN, organism_taxon_id->(organism_label, proteome_id)
+    and proteome_id->organism_taxon_id consistency, and organism_label correspondence in
+    load_uniprot_proteins(), per-graph CausalNode.label uniqueness and TAXON/RO:0002292
+    edge endpoint typing in validate_causal_graph_structure(), and required CausalNode
+    grounding plus TAXON label correspondence in causal_graph_provenance_problems() (#236, #78)."""
+    raw_lines = UNIPROT_PROTEINS_PATH.read_text(encoding="utf-8").splitlines()
+    header = raw_lines[0]
+    row_p00722 = next(line for line in raw_lines[1:] if line.startswith("UniProtKB:P00722\t"))
+    row_p02920 = next(line for line in raw_lines[1:] if line.startswith("UniProtKB:P02920\t"))
+    row_p06534 = next(line for line in raw_lines[1:] if line.startswith("UniProtKB:P06534\t"))
+
+    # 1a. Invalid release_version rejected
+    bad_rel_tsv = tmp_path / "bad_release.tsv"
+    bad_rel_tsv.write_text(
+        header + "\n" + row_p00722.replace("2026_02", "2026-13", 1) + "\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(SystemExit, match="invalid release_version '2026-13'"):
+        load_uniprot_proteins(bad_rel_tsv)
+
+    # 1b. organism_label mismatch against ncbitaxon_taxa.tsv rejected when taxa provides label
+    good_tsv = tmp_path / "good_single.tsv"
+    good_tsv.write_text(header + "\n" + row_p00722 + "\n", encoding="utf-8")
+    mismatched_taxa = {
+        "NCBITaxon:2": {"parent_id": "", "rank": "DOMAIN", "label": "Bacteria"},
+        "NCBITaxon:561": {"parent_id": "NCBITaxon:2", "rank": "GENUS", "label": "Escherichia"},
+        "NCBITaxon:562": {
+            "parent_id": "NCBITaxon:561",
+            "rank": "SPECIES",
+            "label": "Escherichia coli",
+        },
+        "NCBITaxon:83333": {
+            "parent_id": "NCBITaxon:562",
+            "rank": "STRAIN",
+            "label": "Escherichia coli str. K-12 wrong label",
+        },
+    }
+    with pytest.raises(
+        SystemExit,
+        match="organism_label 'Escherichia coli K-12' != ncbitaxon_taxa.tsv label",
+    ):
+        load_uniprot_proteins(good_tsv, taxa=mismatched_taxa)
+
+    # 1c. Inconsistent (organism_label, proteome_id) for the same organism_taxon_id rejected
+    inconsistent_org_tsv = tmp_path / "inconsistent_org.tsv"
+    inconsistent_org_tsv.write_text(
+        header
+        + "\n"
+        + row_p00722
+        + "\n"
+        + row_p02920.replace("UP:UP000000625", "UP:UP000001570", 1)
+        + "\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(
+        SystemExit,
+        match=r"inconsistent \(organism_label, proteome_id\).*for NCBITaxon:83333",
+    ):
+        load_uniprot_proteins(inconsistent_org_tsv)
+
+    # 1d. Same proteome_id mapped to multiple organism_taxon_id values rejected
+    dup_proteome_tsv = tmp_path / "dup_proteome.tsv"
+    dup_proteome_tsv.write_text(
+        header
+        + "\n"
+        + row_p00722
+        + "\n"
+        + row_p06534.replace("UP:UP000001570", "UP:UP000000625", 1)
+        + "\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(
+        SystemExit,
+        match="proteome_id 'UP:UP000000625' mapped to multiple organism_taxon_id values",
+    ):
+        load_uniprot_proteins(dup_proteome_tsv)
+
+    # 2a. Duplicate CausalNode.label within the same CausalGraph rejected
+    dup_label_graph = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "title": "Test",
+                "nodes": [
+                    {
+                        "node_id": "taxon",
+                        "label": "Escherichia coli",
+                        "node_type": "TAXON",
+                        "grounding": "NCBITaxon:562",
+                    },
+                    {
+                        "node_id": "proc_a",
+                        "label": "lactose transport",
+                        "node_type": "BIOLOGICAL_PROCESS",
+                        "grounding": "GO:0015767",
+                    },
+                    {
+                        "node_id": "proc_b",
+                        "label": "lactose transport",
+                        "node_type": "BIOLOGICAL_PROCESS",
+                        "grounding": "GO:0005990",
+                    },
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "taxon",
+                        "predicate": "causally upstream of or within",
+                        "predicate_id": "RO:0002418",
+                        "object": "proc_a",
+                        "evidence": [{"reference": "PMID:7000781"}],
+                    },
+                    {
+                        "edge_id": "e2",
+                        "subject": "proc_a",
+                        "predicate": "causally upstream of or within",
+                        "predicate_id": "RO:0002418",
+                        "object": "proc_b",
+                        "evidence": [{"reference": "PMID:7000781"}],
+                    },
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="duplicate node label 'lactose transport' in graph 'g1'"):
+        validate_causal_graph_structure(dup_label_graph)
+
+    # 2b. Edge targeting a TAXON node as object rejected
+    edge_to_taxon_graph = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "title": "Test",
+                "nodes": [
+                    {
+                        "node_id": "taxon",
+                        "label": "Escherichia coli",
+                        "node_type": "TAXON",
+                        "grounding": "NCBITaxon:562",
+                    },
+                    {
+                        "node_id": "proc_a",
+                        "label": "lactose transport",
+                        "node_type": "BIOLOGICAL_PROCESS",
+                        "grounding": "GO:0015767",
+                    },
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "proc_a",
+                        "predicate": "causally upstream of or within",
+                        "predicate_id": "RO:0002418",
+                        "object": "taxon",
+                        "evidence": [{"reference": "PMID:7000781"}],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(SystemExit, match="object 'taxon' cannot target a TAXON node"):
+        validate_causal_graph_structure(edge_to_taxon_graph)
+
+    # 2c. RO:0002292 (expresses) edge targeting a non-GENE_OR_PROTEIN object rejected
+    expresses_non_protein_graph = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "title": "Test",
+                "nodes": [
+                    {
+                        "node_id": "taxon",
+                        "label": "Escherichia coli",
+                        "node_type": "TAXON",
+                        "grounding": "NCBITaxon:562",
+                    },
+                    {
+                        "node_id": "proc_a",
+                        "label": "lactose transport",
+                        "node_type": "BIOLOGICAL_PROCESS",
+                        "grounding": "GO:0015767",
+                    },
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "taxon",
+                        "predicate": "expresses",
+                        "predicate_id": "RO:0002292",
+                        "object": "proc_a",
+                        "evidence": [{"reference": "PMID:7000781"}],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(
+        SystemExit,
+        match=r"RO:0002292 \(expresses\) object 'proc_a' must be a GENE_OR_PROTEIN node",
+    ):
+        validate_causal_graph_structure(expresses_non_protein_graph)
+
+    # 3. causal_graph_provenance_problems detects missing CausalNode.grounding,
+    # TAXON label mismatch against ncbitaxon_taxa.tsv, and non-host-TAXON RO:0002292 subject
+    script_path = REPO_ROOT / "scripts" / "check_provenance.py"
+    spec = importlib.util.spec_from_file_location("check_provenance", script_path)
+    mod = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(mod)
+
+    synth_root = tmp_path / "synth_repo_c9"
+    curation_dir = synth_root / "curation"
+    overlays_dir = curation_dir / "causal_graphs"
+    raw_dir = synth_root / "data" / "raw"
+    overlays_dir.mkdir(parents=True)
+    raw_dir.mkdir(parents=True)
+    (curation_dir / "uniprot_proteins.tsv").write_text(
+        UNIPROT_PROTEINS_PATH.read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+    (curation_dir / "seed_scope.tsv").write_text(
+        "identifier\tadded\treason\nNCBITaxon:562\t2026-01-01\ttest\n",
+        encoding="utf-8",
+    )
+    (raw_dir / "ncbitaxon_taxa.tsv").write_text(
+        "taxon_id\tparent_id\trank\tlabel\n"
+        "NCBITaxon:2\t\tDOMAIN\tBacteria\n"
+        "NCBITaxon:561\tNCBITaxon:2\tGENUS\tEscherichia\n"
+        "NCBITaxon:562\tNCBITaxon:561\tSPECIES\tEscherichia coli\n"
+        "NCBITaxon:83333\tNCBITaxon:562\tSTRAIN\tEscherichia coli K-12\n"
+        "NCBITaxon:224308\tNCBITaxon:562\tSTRAIN\tBacillus subtilis subsp. subtilis str. 168\n"
+        "NCBITaxon:208964\tNCBITaxon:562\tSTRAIN\tPseudomonas aeruginosa PAO1\n"
+        "NCBITaxon:243232\tNCBITaxon:562\tSTRAIN\tMethanocaldococcus jannaschii DSM 2661\n"
+        "NCBITaxon:294750\tNCBITaxon:562\tSTRAIN\tCryptococcus deuterogattii R265\n"
+        "NCBITaxon:235443\tNCBITaxon:562\tSTRAIN\tCryptococcus neoformans H99\n"
+        "NCBITaxon:283643\tNCBITaxon:562\tSTRAIN\tCryptococcus deneoformans B-3501A\n",
+        encoding="utf-8",
+    )
+    ecoli_data = yaml.safe_load(
+        (REPO_ROOT / "curation" / "causal_graphs" / "NCBITaxon_562.yaml").read_text(
+            encoding="utf-8"
+        )
+    )
+    graph0 = ecoli_data["causal_graphs"][0]
+    for n in graph0["nodes"]:
+        if n["node_id"] == "taxon":
+            n["label"] = "Escherichia coli wrong label"
+        elif n["node_id"] == "lactose_transport":
+            n.pop("grounding", None)
+    graph0["edges"].append(
+        {
+            "edge_id": "bad_expresses",
+            "subject": "lactose_transport",
+            "predicate": "expresses",
+            "predicate_id": "RO:0002292",
+            "object": "lacZ",
+            "evidence": [
+                {
+                    "reference": "PMID:9278503",
+                    "snippet": "Synthetic non-host-TAXON expresses edge for test.",
+                }
+            ],
+        }
+    )
+    (overlays_dir / "NCBITaxon_562.yaml").write_text(
+        yaml.safe_dump(ecoli_data, sort_keys=False),
+        encoding="utf-8",
+    )
+    failures = mod.causal_graph_provenance_problems(synth_root)
+    assert any(
+        "node 'taxon': TAXON label 'Escherichia coli wrong label' != "
+        "ncbitaxon_taxa.tsv label 'Escherichia coli' for NCBITaxon:562" in f
+        for f in failures
+    )
+    assert any("node 'lactose_transport': missing 'grounding' CURIE" in f for f in failures)
+    assert any(
+        "edge 'bad_expresses': RO:0002292 (expresses) subject 'lactose_transport' "
+        "must be a host TAXON node" in f
+        for f in failures
+    )

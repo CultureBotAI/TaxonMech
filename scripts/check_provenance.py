@@ -177,10 +177,31 @@ def causal_graph_provenance_problems(repo_root: Path = REPO_ROOT) -> list[str]:
                     if isinstance(e, dict)
                 }
                 for node in graph.get("nodes") or []:
-                    if not isinstance(node, dict) or node.get("node_type") != "GENE_OR_PROTEIN":
+                    if not isinstance(node, dict):
                         continue
                     nid = (node.get("node_id") or "").strip()
-                    uid = (node.get("grounding") or "").strip()
+                    n_label = (node.get("label") or "").strip()
+                    n_grounding = (
+                        (node.get("grounding") or "").strip()
+                        if isinstance(node.get("grounding"), str)
+                        else ""
+                    )
+                    if not n_grounding:
+                        failures.append(
+                            f"causal-graph overlay {tid} graph {gid!r} node {nid!r}: "
+                            f"missing 'grounding' CURIE"
+                        )
+                    if node.get("node_type") == "TAXON" and n_grounding and taxa is not None:
+                        expected_t_label = (taxa.get(n_grounding) or {}).get("label", "").strip()
+                        if expected_t_label and n_label != expected_t_label:
+                            failures.append(
+                                f"causal-graph overlay {tid} graph {gid!r} node {nid!r}: "
+                                f"TAXON label {n_label!r} != ncbitaxon_taxa.tsv label "
+                                f"{expected_t_label!r} for {n_grounding}"
+                            )
+                    if node.get("node_type") != "GENE_OR_PROTEIN":
+                        continue
+                    uid = n_grounding
                     if host_taxon_nids and nid not in expressed_nids:
                         failures.append(
                             f"causal-graph overlay {tid} graph {gid!r} node {nid!r}: "
@@ -219,6 +240,16 @@ def causal_graph_provenance_problems(repo_root: Path = REPO_ROOT) -> list[str]:
                     if not pred_id:
                         failures.append(
                             f"causal-graph overlay {tid} graph {gid!r} edge {eid!r}: missing 'predicate_id'"
+                        )
+                    elif (
+                        pred_id == "RO:0002292"
+                        and host_taxon_nids
+                        and (edge.get("subject") or "").strip() not in host_taxon_nids
+                    ):
+                        failures.append(
+                            f"causal-graph overlay {tid} graph {gid!r} edge {eid!r}: "
+                            f"RO:0002292 (expresses) subject {(edge.get('subject') or '').strip()!r} "
+                            f"must be a host TAXON node"
                         )
                     for ev in edge.get("evidence") or []:
                         if isinstance(ev, dict):
