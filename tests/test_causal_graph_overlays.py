@@ -572,7 +572,7 @@ def test_extract_taxon_trait_edges_preserves_granular_assertions(tmp_path):
 
 def test_committed_curation_causal_graphs_overlays_load_and_validate():
     """Verify that all committed curation/causal_graphs/*.yaml overlays load cleanly,
-    cover the 15 species+strain exemplar records (378 evidence-backed edges and
+    cover the 15 species+strain exemplar records (389 evidence-backed edges and
     108 GENE_OR_PROTEIN nodes across 49 live-verified UniProtKB accessions), and
     satisfy schema prefix and id_label_targets rules (#78)."""
     overlays_dir = REPO_ROOT / "curation" / "causal_graphs"
@@ -602,13 +602,13 @@ def test_committed_curation_causal_graphs_overlays_load_and_validate():
         for g in graphs[tid]
         for e in g.get("edges") or []
     )
-    assert total_edges >= 378
+    assert total_edges >= 389
     edge_count = sum(
         len(g.get("edges") or [])
         for tid in expected_ids
         for g in graphs[tid]
     )
-    assert edge_count == 378
+    assert edge_count == 389
     protein_nodes = [
         n
         for tid in expected_ids
