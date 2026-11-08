@@ -176,6 +176,15 @@ curation_history:
     edge (edge e23, rhlI RO:0002213 phzA1, PMID:8522523, PMID:27851827, PMID:35019777)
     linking RhlI (UniProtKB:P54291) to PhzA1 (UniProtKB:Q9HWH1).
   llm_assisted: true
+- timestamp: '2026-11-08T05:30:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: Added live-verified Swiss-Prot entry UniProtKB:P25084 (LASR_PSEAE, lasR
+    / PA1430, 239 aa, CRC64 28B6E06E9187924A, v1) in reference proteome UP:UP000002438
+    with literature-backed expression and hierarchical positive regulatory edges on
+    rhlR and rhlI (PMID:10984043, PMID:1902216, PMID:17363368, PMID:8898383, PMID:8522523,
+    PMID:12076794).
+  llm_assisted: true
 causal_graphs:
 - graph_id: pyocyanin_biosynthesis
   title: PhzM/PhzS-mediated pyocyanin biosynthesis
@@ -293,6 +302,18 @@ causal_graphs:
     sequence_length: 201
     sequence_crc64: 120F95F29D5A2698
     sequence_version: 2
+    entry_status: SWISS_PROT
+  - node_id: lasR
+    label: Transcriptional activator protein LasR (lasR)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:P25084
+    organism_taxon_id: NCBITaxon:208964
+    proteome_id: UP:UP000002438
+    gene_symbol: lasR
+    locus_tag: PA1430
+    sequence_length: 239
+    sequence_crc64: 28B6E06E9187924A
+    sequence_version: 1
     entry_status: SWISS_PROT
   - node_id: phenazine_biosynthesis
     label: phenazine biosynthetic process
@@ -627,3 +648,47 @@ causal_graphs:
     - reference: PMID:35019777
       notes: C4-HSL synthesized by RhlI binds RhlR in complex with PqsE to drive transcriptional
         activation of the phzA1 promoter in Pseudomonas aeruginosa PAO1.
+  - edge_id: e24
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: lasR
+    evidence:
+    - reference: PMID:10984043
+      notes: Complete genome sequence of Pseudomonas aeruginosa PAO1 identifying lasR
+        (PA1430) encoding the LuxR-family quorum-sensing transcriptional activator
+        LasR.
+    - reference: PMID:1902216
+      notes: Cloning and characterization of the Pseudomonas aeruginosa PAO1 lasR
+        (PA1430) gene encoding the 239-amino-acid quorum-sensing transcriptional activator
+        protein LasR.
+    - reference: PMID:17363368
+      notes: Crystal structure of Pseudomonas aeruginosa LasR bound to its cognate
+        autoinducer N-(3-oxododecanoyl)-L-homoserine lactone (3-oxo-C12-HSL).
+  - edge_id: e25
+    subject: lasR
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: rhlR
+    evidence:
+    - reference: PMID:8898383
+      notes: In the hierarchical quorum-sensing cascade of Pseudomonas aeruginosa
+        PAO1, LasR activated by 3-oxo-C12-HSL positively regulates transcription of
+        rhlR (vsmR, PA3477).
+    - reference: PMID:8522523
+      notes: LasR/3-oxo-C12-HSL acts at the top of the Pseudomonas aeruginosa PAO1
+        quorum-sensing hierarchy to activate the rhlR-rhlI system controlling phenazine
+        and pyocyanin production.
+  - edge_id: e26
+    subject: lasR
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: rhlI
+    evidence:
+    - reference: PMID:12076794
+      notes: Promoter mapping and expression analysis establish that the las quorum-sensing
+        regulator LasR is the dominant positive transcriptional regulator of the autoinducer
+        synthase gene rhlI (PA3476) in Pseudomonas aeruginosa PAO1.
+    - reference: PMID:8898383
+      notes: Hierarchical quorum-sensing regulation by LasR drives expression of the
+        rhlR-rhlI quorum-sensing system in Pseudomonas aeruginosa PAO1.

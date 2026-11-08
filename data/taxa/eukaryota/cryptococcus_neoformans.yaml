@@ -216,6 +216,14 @@ curation_history:
     PMID:23251520, PMID:28376087) linking Crz1 (UniProtKB:J9VE33) to hydroquinone:oxygen
     oxidoreductase (laccase) activity (GO:0052716).
   llm_assisted: true
+- timestamp: '2026-11-08T05:30:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: Added live-verified Swiss-Prot entry UniProtKB:J9VMN6 (HOB1_CRYN9, HOB1
+    / CNAG_01431, 591 aa, CRC64 3796CCEF0FF11AD4, v1) in reference proteome UP:UP000010091
+    with literature-backed expression and positive regulatory edges for LAC1 and cell-wall
+    melanin biosynthesis (PMID:24743168, PMID:25849373, PMID:31575776).
+  llm_assisted: true
 causal_graphs:
 - graph_id: melanin_biosynthesis
   title: Lac1-mediated melanin biosynthesis
@@ -302,6 +310,18 @@ causal_graphs:
     locus_tag: CNAG_00156
     sequence_length: 1094
     sequence_crc64: A8104E5A22F9D8F4
+    sequence_version: 1
+    entry_status: SWISS_PROT
+  - node_id: hob1
+    label: Homeobox domain-containing transcription factor HOB1 (HOB1)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:J9VMN6
+    organism_taxon_id: NCBITaxon:235443
+    proteome_id: UP:UP000010091
+    gene_symbol: HOB1
+    locus_tag: CNAG_01431
+    sequence_length: 591
+    sequence_crc64: 3796CCEF0FF11AD4
     sequence_version: 1
     entry_status: SWISS_PROT
   - node_id: laccase_activity
@@ -617,3 +637,46 @@ causal_graphs:
     - reference: PMID:28376087
       notes: Crz1 (CNAG_00156) positively regulates LAC1 expression and downstream
         laccase enzymatic activity in Cryptococcus neoformans.
+  - edge_id: e24
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: hob1
+    evidence:
+    - reference: PMID:24743168
+      notes: Reference genome and transcriptome assembly of Cryptococcus neoformans
+        var. grubii strain H99 identifying HOB1 (CNAG_01431) encoding the homeobox
+        domain-containing transcription factor Hob1.
+    - reference: PMID:25849373
+      notes: Systematic functional profiling of 155 Cryptococcus neoformans transcription
+        factors characterizing the pleiotropic homeobox regulator Hob1 (CNAG_01431).
+    - reference: PMID:31575776
+      notes: Transcriptional and epistatic network analysis identifying Hob1 (CNAG_01431)
+        as one of the four core melanin-regulating transcription factors in Cryptococcus
+        neoformans.
+  - edge_id: e25
+    subject: hob1
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: lac1
+    evidence:
+    - reference: PMID:25849373
+      notes: Deletion of HOB1 (CNAG_01431, UniProtKB:J9VMN6) reduces nutrient starvation-induced
+        LAC1 expression and severely impairs melanin production in Cryptococcus neoformans.
+    - reference: PMID:31575776
+      notes: Homeobox transcription factor Hob1 (CNAG_01431) positively regulates
+        nutrient-starvation induction of BZP4, basal expression of MBS1, and downstream
+        LAC1 transcription in Cryptococcus neoformans.
+  - edge_id: e26
+    subject: hob1
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: melanin_biosynthesis
+    evidence:
+    - reference: PMID:25849373
+      notes: Disruption of HOB1 (CNAG_01431, UniProtKB:J9VMN6) leads to greatly reduced
+        melanin biosynthesis and attenuated virulence in Cryptococcus neoformans.
+    - reference: PMID:31575776
+      notes: Hob1 (CNAG_01431) acts with Bzp4, Usv101, and Mbs1 as a core melanin-regulating
+        transcription factor governing cell-wall melanin biosynthesis in Cryptococcus
+        neoformans.

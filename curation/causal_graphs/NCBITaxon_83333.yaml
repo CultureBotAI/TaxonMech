@@ -129,6 +129,20 @@ causal_graphs:
     sequence_crc64: 4278F0838855E950
     sequence_version: 1
     entry_status: SWISS_PROT
+  - node_id: ptsG
+    label: PTS system glucose-specific EIICB component (ptsG)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:P69786
+    xrefs:
+    - EC:2.7.1.199
+    organism_taxon_id: NCBITaxon:83333
+    proteome_id: UP:UP000000625
+    gene_symbol: ptsG
+    locus_tag: b1101
+    sequence_length: 477
+    sequence_crc64: D97A80FD64B74F73
+    sequence_version: 1
+    entry_status: SWISS_PROT
   - node_id: lactose_transport
     label: lactose transport
     node_type: BIOLOGICAL_PROCESS
@@ -630,6 +644,67 @@ causal_graphs:
         both to stimulate CyaA/cAMP-CRP-induced lacY expression and to relieve
         unphosphorylated Crr-mediated inducer exclusion of LacY lactose
         transport (GO:0015767) in Escherichia coli K-12.
+  - edge_id: e34
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: ptsG
+    evidence:
+    - reference: PMID:9278503
+      notes: >-
+        Complete genome sequence of Escherichia coli K-12 MG1655 annotating
+        ptsG (b1101) encoding the glucose-specific PTS enzyme IICB permease
+        component (EC:2.7.1.199).
+    - reference: PMID:3023349
+      notes: >-
+        Cloning and nucleotide sequence determination of the Escherichia coli
+        K-12 ptsG gene encoding the 477-amino-acid glucose permease enzyme
+        IIGlc.
+    - reference: PMID:16738553
+      notes: >-
+        High-accuracy resequencing of Escherichia coli K-12 strains MG1655 and
+        W3110 confirming the chromosomal ptsG (b1101) locus.
+  - edge_id: e35
+    subject: ptsG
+    predicate: negatively regulates
+    predicate_id: RO:0002212
+    object: lactose_transport
+    evidence:
+    - reference: PMID:9371775
+      notes: >-
+        Expression and glucose transport activity of the major glucose
+        transporter PtsG (b1101, UniProtKB:P69786) drive EIIA-Glc (Crr)-mediated
+        inducer exclusion of LacY lactose transport during glucose-lactose
+        diauxie in Escherichia coli K-12.
+    - reference: PMID:16263707
+      notes: >-
+        Concomitant glucose uptake and phosphorylation by PtsG dephosphorylate
+        EIIA-Glc (Crr), promoting direct allosteric inhibition of LacY lactose
+        permease and negatively regulating lactose transport in Escherichia
+        coli K-12.
+    - reference: PMID:3129430
+      notes: >-
+        Phosphoryl transfer from phospho-EIIA-Glc (Crr) to Cys421 of PtsG
+        couples glucose transport to EIIA-Glc dephosphorylation in Escherichia
+        coli K-12.
+  - edge_id: e36
+    subject: ptsG
+    predicate: negatively regulates
+    predicate_id: RO:0002212
+    object: lactose_catabolism
+    evidence:
+    - reference: PMID:9371775
+      notes: >-
+        PtsG-mediated glucose uptake triggers EIIA-Glc (Crr) dephosphorylation
+        and inducer exclusion of lactose, repressing beta-galactosidase
+        induction and lactose catabolism during glucose-lactose diauxic growth
+        in Escherichia coli K-12.
+    - reference: PMID:16263707
+      notes: >-
+        Quantitative analysis of carbon catabolite repression in Escherichia
+        coli K-12 demonstrates that PtsG glucose transport lowers EIIA-Glc
+        phosphorylation and intracellular cAMP, repressing lacZYA expression and
+        lactose catabolism.
 curation_history:
 - timestamp: '2026-10-22T14:00:00Z'
   curator: curate-causal-graphs
@@ -766,4 +841,15 @@ curation_history:
     Added direct Enzyme-I-to-process causal edge (edge e33, ptsI RO:0002418
     lactose_transport, PMID:2960675, PMID:17158705) linking Enzyme I / PtsI
     (UniProtKB:P08839) to LacY-mediated lactose transport (GO:0015767).
+  llm_assisted: true
+- timestamp: '2026-11-08T05:30:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: >-
+    Added live-verified Swiss-Prot entry UniProtKB:P69786 (PTGCB_ECOLI, ptsG /
+    b1101, EC:2.7.1.199, 477 aa, CRC64 D97A80FD64B74F73, v1) in reference
+    proteome UP:UP000000625 with literature-backed expression and
+    inducer-exclusion / catabolite-repression negative regulatory edges on
+    lactose transport and lactose catabolism (PMID:9278503, PMID:3023349,
+    PMID:16738553, PMID:9371775, PMID:16263707, PMID:3129430).
   llm_assisted: true

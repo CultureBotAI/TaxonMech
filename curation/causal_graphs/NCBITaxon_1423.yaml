@@ -155,6 +155,21 @@ causal_graphs:
     sequence_crc64: 617B29614B483971
     sequence_version: 1
     entry_status: SWISS_PROT
+  - node_id: kinD
+    label: Sporulation kinase D (kinD)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:O31671
+    xrefs:
+    - EC:2.7.13.3
+    organism_taxon_id: NCBITaxon:224308
+    strain_id: kgmicrobe.strain:bacdive_1156
+    proteome_id: UP:UP000001570
+    gene_symbol: kinD
+    locus_tag: BSU13660
+    sequence_length: 506
+    sequence_crc64: 4A93A6A4500C179A
+    sequence_version: 1
+    entry_status: SWISS_PROT
   - node_id: sensor_kinase_activity
     label: phosphorelay sensor kinase activity
     node_type: MOLECULAR_FUNCTION
@@ -773,6 +788,55 @@ causal_graphs:
         Purified Bacillus subtilis RapB directly binds and dephosphorylates
         Spo0F~P, antagonizing Spo0A-mediated phosphorelay response regulator
         activity (GO:0000156).
+  - edge_id: e41
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: kinD
+    evidence:
+    - reference: PMID:9384377
+      notes: >-
+        Complete genome sequence of Bacillus subtilis strain 168 identifying
+        kinD (ykvD, BSU13660) encoding the sporulation sensor histidine kinase
+        KinD (EC:2.7.13.3).
+    - reference: PMID:11069677
+      notes: >-
+        Characterization of the five Bacillus subtilis sporulation sensor
+        histidine kinases (KinA-KinE) confirming expression of kinD (ykvD,
+        BSU13660) during growth and early stationary phase.
+  - edge_id: e42
+    subject: kinD
+    predicate: enables
+    predicate_id: RO:0002327
+    object: sensor_kinase_activity
+    evidence:
+    - reference: PMID:11069677
+      notes: >-
+        Sporulation sensor histidine kinase KinD (BSU13660, UniProtKB:O31671,
+        EC:2.7.13.3) catalyzes reversible phosphoryl transfer with the Spo0F
+        response regulator as a phosphorelay sensor kinase in Bacillus
+        subtilis.
+    - reference: PMID:10411754
+      notes: >-
+        Alanine-scanning mutagenesis of Spo0F defines the recognition surface
+        governing phosphorelay sensor kinase specificity across Bacillus
+        subtilis sporulation histidine kinases including KinD.
+  - edge_id: e43
+    subject: kinD
+    predicate: causally upstream of or within
+    predicate_id: RO:0002418
+    object: endospore_formation
+    evidence:
+    - reference: PMID:11069677
+      notes: >-
+        KinD (BSU13660, UniProtKB:O31671) phosphorylates Spo0F in the
+        Spo0F/Spo0B/Spo0A phosphorelay to drive Spo0A~P accumulation regulating
+        entry into stationary phase and endospore formation in Bacillus
+        subtilis.
+    - reference: PMID:18410285
+      notes: >-
+        KinD acts with KinC to drive Spo0A-dependent phosphorelay signaling in
+        Bacillus subtilis.
 curation_history:
 - timestamp: '2026-10-22T14:00:00Z'
   curator: curate-causal-graphs
@@ -914,4 +978,14 @@ curation_history:
     (edge e40, rapB RO:0002212 phosphorelay_regulator_activity, PMID:8001132,
     PMID:9843420, PMID:11923303) linking RapB (UniProtKB:P70962) to
     phosphorelay response regulator activity (GO:0000156).
+  llm_assisted: true
+- timestamp: '2026-11-08T05:30:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: >-
+    Added live-verified Swiss-Prot entry UniProtKB:O31671 (KIND_BACSU, kinD /
+    BSU13660, EC:2.7.13.3, 506 aa, CRC64 4A93A6A4500C179A, v1) in reference
+    proteome UP:UP000001570 with literature-backed expression, phosphorelay
+    sensor kinase activity, and endospore formation causal edges (PMID:9384377,
+    PMID:11069677, PMID:10411754, PMID:18410285).
   llm_assisted: true
