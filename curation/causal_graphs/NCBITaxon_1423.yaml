@@ -170,6 +170,21 @@ causal_graphs:
     sequence_crc64: 4A93A6A4500C179A
     sequence_version: 1
     entry_status: SWISS_PROT
+  - node_id: kinE
+    label: Sporulation kinase E (kinE)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:O31661
+    xrefs:
+    - EC:2.7.13.3
+    organism_taxon_id: NCBITaxon:224308
+    strain_id: kgmicrobe.strain:bacdive_1156
+    proteome_id: UP:UP000001570
+    gene_symbol: kinE
+    locus_tag: BSU13530
+    sequence_length: 738
+    sequence_crc64: FE27DAB7F08AC64B
+    sequence_version: 1
+    entry_status: SWISS_PROT
   - node_id: sensor_kinase_activity
     label: phosphorelay sensor kinase activity
     node_type: MOLECULAR_FUNCTION
@@ -858,6 +873,54 @@ causal_graphs:
       notes: >-
         KinD supplies ATP-dependent phosphoryl transfer into the Spo0F/Spo0B
         phosphorelay to activate Spo0A in Bacillus subtilis.
+  - edge_id: e45
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: kinE
+    evidence:
+    - reference: PMID:9384377
+      notes: >-
+        Complete genome sequence of Bacillus subtilis strain 168 identifying
+        kinE (ykrQ, BSU13530) encoding the sporulation sensor histidine kinase
+        KinE (EC:2.7.13.3).
+    - reference: PMID:11069677
+      notes: >-
+        Systematic characterization of the five Bacillus subtilis sporulation
+        sensor histidine kinases (KinA-KinE) confirming expression of kinE
+        (ykrQ, BSU13530).
+  - edge_id: e46
+    subject: kinE
+    predicate: enables
+    predicate_id: RO:0002327
+    object: sensor_kinase_activity
+    evidence:
+    - reference: PMID:11069677
+      notes: >-
+        Sporulation sensor histidine kinase KinE (BSU13530, UniProtKB:O31661,
+        EC:2.7.13.3) catalyzes ATP-dependent autophosphorylation and
+        phosphorelay sensor kinase activity (GO:0000155) with Spo0F in
+        Bacillus subtilis.
+    - reference: PMID:11886552
+      notes: >-
+        Biochemical and kinetic analysis of Bacillus subtilis sporulation
+        sensor histidine kinases establishing KinE autophosphorylation and
+        phosphoryl-transfer activity toward Spo0F.
+  - edge_id: e47
+    subject: kinE
+    predicate: directly positively regulates
+    predicate_id: RO:0002629
+    object: spo0F
+    evidence:
+    - reference: PMID:11069677
+      notes: >-
+        Sporulation sensor histidine kinase KinE (BSU13530, UniProtKB:O31661)
+        directly phosphorylates the intermediate response regulator Spo0F
+        (UniProtKB:P06628) in the Bacillus subtilis sporulation phosphorelay.
+    - reference: PMID:11886552
+      notes: >-
+        Purified Bacillus subtilis KinE transfers its phosphoryl group directly
+        to the conserved receiver-domain aspartate of Spo0F.
 curation_history:
 - timestamp: '2026-10-22T14:00:00Z'
   curator: curate-causal-graphs
@@ -1017,4 +1080,14 @@ curation_history:
     Added direct sensor-kinase-to-phosphotransferase positive regulatory edge
     (edge e44, kinD RO:0002629 spo0F, PMID:11069677, PMID:10411754,
     PMID:18410285) linking KinD (UniProtKB:O31671) to Spo0F (UniProtKB:P06628).
+  llm_assisted: true
+- timestamp: '2026-11-09T02:40:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: >-
+    Added live-verified Swiss-Prot entry UniProtKB:O31661 (KINE_BACSU, kinE /
+    BSU13530, EC:2.7.13.3, 738 aa, CRC64 FE27DAB7F08AC64B, v1) in reference
+    proteome UP:UP000001570 with literature-backed expression, phosphorelay
+    sensor kinase activity, and direct Spo0F phosphorylation edges
+    (PMID:9384377, PMID:11069677, PMID:11886552).
   llm_assisted: true

@@ -144,6 +144,18 @@ causal_graphs:
     sequence_crc64: D97A80FD64B74F73
     sequence_version: 1
     entry_status: SWISS_PROT
+  - node_id: mlc
+    label: DNA-binding transcriptional repressor Mlc (mlc)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:P50456
+    organism_taxon_id: NCBITaxon:83333
+    proteome_id: UP:UP000000625
+    gene_symbol: mlc
+    locus_tag: b1594
+    sequence_length: 406
+    sequence_crc64: 423608797FC980CB
+    sequence_version: 2
+    entry_status: SWISS_PROT
   - node_id: lactose_transport
     label: lactose transport
     node_type: BIOLOGICAL_PROCESS
@@ -730,6 +742,69 @@ causal_graphs:
         Transfer of the phosphoryl group from EIIA-Glc~P (Crr) to glucose via
         PtsG depletes phosphorylated EIIA-Glc~P, abrogating allosteric
         stimulation of Escherichia coli K-12 MG1655 CyaA adenylate cyclase.
+  - edge_id: e38
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: mlc
+    evidence:
+    - reference: PMID:9278503
+      notes: >-
+        Complete genome sequence of Escherichia coli K-12 substr. MG1655
+        annotating mlc (dgsA, b1594) encoding the global carbohydrate-sensing
+        DNA-binding transcriptional repressor Mlc.
+    - reference: PMID:7766024
+      notes: >-
+        Molecular cloning and nucleotide sequence determination of the
+        Escherichia coli K-12 mlc (dgsA) gene encoding the 406-amino-acid
+        transcriptional regulator Mlc.
+    - reference: PMID:16738553
+      notes: >-
+        High-accuracy resequencing of Escherichia coli K-12 substr. MG1655
+        confirming the chromosomal mlc (b1594) locus.
+  - edge_id: e39
+    subject: mlc
+    predicate: negatively regulates
+    predicate_id: RO:0002212
+    object: ptsG
+    evidence:
+    - reference: PMID:9781886
+      notes: >-
+        DNA-binding transcriptional repressor Mlc (b1594, UniProtKB:P50456)
+        binds operator sites upstream of the Escherichia coli K-12 MG1655 ptsG
+        P1 and P2 promoters to repress ptsG transcription in the absence of
+        glucose.
+    - reference: PMID:10464268
+      notes: >-
+        DNase I footprinting and in vitro transcription establish that Mlc
+        directly binds two operator sites at ptsG to negatively regulate
+        glucose permease expression in Escherichia coli K-12.
+    - reference: PMID:11032803
+      notes: >-
+        In the absence of glucose transport, cytoplasmic Mlc remains unbound
+        by PtsG and represses ptsG transcription in Escherichia coli K-12
+        MG1655.
+  - edge_id: e40
+    subject: ptsG
+    predicate: negatively regulates
+    predicate_id: RO:0002212
+    object: mlc
+    evidence:
+    - reference: PMID:11032803
+      notes: >-
+        During active glucose transport, unphosphorylated EIICB-Glc (PtsG,
+        b1101, UniProtKB:P69786) physically sequesters Mlc (UniProtKB:P50456)
+        at the inner membrane, relieving Mlc-mediated transcriptional
+        repression in Escherichia coli K-12 MG1655.
+    - reference: PMID:11157755
+      notes: >-
+        Dephosphorylated EIICB-Glc (PtsG) directly binds Mlc at the inner
+        membrane in response to glucose transport, negatively regulating Mlc
+        repressor activity in Escherichia coli K-12.
+    - reference: PMID:10464268
+      notes: >-
+        Glucose-driven dephosphorylation of PtsG antagonizes Mlc repressor
+        activity to derepress ptsG expression in Escherichia coli K-12.
 curation_history:
 - timestamp: '2026-10-22T18:50:00Z'
   curator: add-uniprot-protein-examples
@@ -878,4 +953,15 @@ curation_history:
     Added direct glucose-permease-to-adenylate-cyclase negative regulatory edge
     (edge e37, ptsG RO:0002212 cyaA, PMID:9371775, PMID:16263707, PMID:17158705)
     linking PtsG (UniProtKB:P69786) to CyaA (UniProtKB:P00936).
+  llm_assisted: true
+- timestamp: '2026-11-09T02:40:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: >-
+    Added live-verified Swiss-Prot entry UniProtKB:P50456 (MLC_ECOLI, mlc /
+    b1594, 406 aa, CRC64 423608797FC980CB, v2) in reference proteome
+    UP:UP000000625 with literature-backed expression and reciprocal Mlc-PtsG
+    transcriptional repression and membrane-sequestration regulatory edges
+    (PMID:9278503, PMID:7766024, PMID:16738553, PMID:9781886, PMID:10464268,
+    PMID:11032803, PMID:11157755).
   llm_assisted: true
