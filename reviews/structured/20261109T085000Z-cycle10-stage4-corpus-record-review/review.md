@@ -181,7 +181,7 @@ Disposition: Resolved in Cycle 6 Stage 5 (PR #207) under #206 (#199, #78) and ve
 
 minor / resolved / confirmed; issue key: cycle7-stage4-curation-guide-and-overlay-readme-missing-cycle6-curation-history-and-provenance-contract.
 
-Resolved in Cycle 7 Stage 5 (PR #215) under #214 (#208, #78) and verified in Cycle 10 Stage 4: curation/causal_graphs/README.md (lines 4 and 12-82) documents required non-empty curation_history on every causal-graph overlay and includes curation_history in the '## Overlay File Contract' YAML example, and docs/CURATION.md (lines 74-96) documents scripts/check_provenance.py (causal_graph_provenance_problems()) and its provenance gates, enforced by test_curation_guide_and_overlay_readme_document_cycle6_curation_history_and_provenance_gates() in tests/test_causal_graph_overlays.py.
+Resolved in Cycle 7 Stage 5 (PR #215) under #214 (#208, #78) and verified in Cycle 10 Stage 4: curation/causal_graphs/README.md (lines 4 and 12-82) documents required non-empty curation_history on every causal-graph overlay and includes curation_history in the '## Overlay File Contract' YAML example, and docs/CURATION.md (lines 74-96) documents scripts/check_provenance.py (causal_graph_provenance_problems()) and its provenance gates, enforced by test_curation_guide_and_overlay_readme_document_required_curation_history_and_provenance() in tests/test_causal_graph_overlays.py.
 
 Disposition: Resolved in Cycle 7 Stage 5 (PR #215) under #214 (#208, #78) and verified intact in Cycle 10 Stage 4.
 
@@ -197,7 +197,7 @@ Disposition: Resolved in Cycle 8 Stage 5 (PR #223) under #222 (#216, #78) and ve
 
 minor / resolved / confirmed; issue key: cycle9-stage4-overlay-readme-example-missing-required-taxon-expresses-protein-edge.
 
-Resolved in Cycle 9 Stage 5 (PR #235, commit f99b34604c) under #234 (#224, #78) and verified in Cycle 10 Stage 4: curation/causal_graphs/README.md lines 56-65 include the required taxon-expresses-lacz (taxon -&gt; lacZ, RO:0002292 expresses) edge in the '## Overlay File Contract' YAML example so the example passes causal_graph_provenance_problems() in scripts/check_provenance.py, enforced by test_overlay_readme_example_passes_provenance_and_includes_taxon_expresses_protein_edge() in tests/test_causal_graph_overlays.py.
+Resolved in Cycle 9 Stage 5 (PR #235, commit f99b34604c) under #234 (#224, #78) and verified in Cycle 10 Stage 4: curation/causal_graphs/README.md lines 56-65 include the required taxon-expresses-lacz (taxon -&gt; lacZ, RO:0002292 expresses) edge in the '## Overlay File Contract' YAML example so the example passes causal_graph_provenance_problems() in scripts/check_provenance.py, enforced by test_overlay_readme_example_passes_structure_events_proteins_and_provenance_gates() in tests/test_causal_graph_overlays.py.
 
 Disposition: Resolved in Cycle 9 Stage 5 (PR #235) under #234 (#224, #78) and verified intact in Cycle 10 Stage 4.
 
@@ -205,7 +205,7 @@ Disposition: Resolved in Cycle 9 Stage 5 (PR #235) under #234 (#224, #78) and ve
 
 minor / open / confirmed; issue key: cycle10-stage4-overlay-readme-example-and-test-fixtures-missing-species-strain-id-binding.
 
-In curation/causal_graphs/README.md, lines 123-133 ('### Species vs. Strain strain_id Binding Rule') document that across the 15 maintained overlays (119 GENE_OR_PROTEIN nodes), the 5 overlays whose host TaxonRecord.strains[] contains the BacDive strain record—NCBITaxon_562.yaml (Escherichia coli, kgmicrobe.strain:bacdive_155687), NCBITaxon_1423.yaml (Bacillus subtilis, kgmicrobe.strain:bacdive_1156), NCBITaxon_287.yaml (Pseudomonas aeruginosa, kgmicrobe.strain:bacdive_12795), and NCBITaxon_2190.yaml / NCBITaxon_243232.yaml (Methanocaldococcus jannaschii / DSM 2661, kgmicrobe.strain:bacdive_6981)—populate strain_id on all 53 of their GENE_OR_PROTEIN nodes (including node_id: lacZ at curation/causal_graphs/NCBITaxon_562.yaml line 36, phzM at NCBITaxon_287.yaml line 20, and mcrA at NCBITaxon_2190.yaml line 20). However, the canonical '## Overlay File Contract' YAML example for identifier: NCBITaxon:562 in curation/causal_graphs/README.md (lines 27-40, node_id: lacZ) omits strain_id: kgmicrobe.strain:bacdive_155687, and STAGE2_STAGE3_EXEMPLAR_OVERLAYS in tests/test_causal_graph_overlays.py omits strain_id: kgmicrobe.strain:bacdive_155687 on NCBITaxon:562 lacZ (lines 78-92), strain_id: kgmicrobe.strain:bacdive_12795 on NCBITaxon:287 phzM (lines 198-212), and strain_id: kgmicrobe.strain:bacdive_6981 on NCBITaxon:2190 mcrA (lines 254-268) while populating strain_id on NCBITaxon:1423 spo0A (line 148; tracked under https://github.com/CultureBotAI/TaxonMech/issues/236 and https://github.com/CultureBotAI/TaxonMech/issues/78).
+In curation/causal_graphs/README.md, lines 123-133 ('### Species vs. Strain strain_id Binding Rule') document that across the 15 maintained overlays (119 GENE_OR_PROTEIN nodes), the 5 overlays whose host TaxonRecord.strains[] contains the BacDive strain record—NCBITaxon_562.yaml (Escherichia coli, kgmicrobe.strain:bacdive_155687), NCBITaxon_1423.yaml (Bacillus subtilis, kgmicrobe.strain:bacdive_1156), NCBITaxon_287.yaml (Pseudomonas aeruginosa, kgmicrobe.strain:bacdive_12795), and NCBITaxon_2190.yaml / NCBITaxon_243232.yaml (Methanocaldococcus jannaschii / DSM 2661, kgmicrobe.strain:bacdive_6981)—populate strain_id on all 53 of their GENE_OR_PROTEIN nodes (including node_id: lacZ at curation/causal_graphs/NCBITaxon_562.yaml line 36, phzM at NCBITaxon_287.yaml line 65, and mcrA at NCBITaxon_2190.yaml line 99). However, the canonical '## Overlay File Contract' YAML example for identifier: NCBITaxon:562 in curation/causal_graphs/README.md (lines 27-40, node_id: lacZ) omits strain_id: kgmicrobe.strain:bacdive_155687, and STAGE2_STAGE3_EXEMPLAR_OVERLAYS in tests/test_causal_graph_overlays.py omits strain_id: kgmicrobe.strain:bacdive_155687 on NCBITaxon:562 lacZ (lines 78-92), strain_id: kgmicrobe.strain:bacdive_12795 on NCBITaxon:287 phzM (lines 198-212), and strain_id: kgmicrobe.strain:bacdive_6981 on NCBITaxon:2190 mcrA (lines 254-268) while populating strain_id on NCBITaxon:1423 spo0A (line 148; tracked under https://github.com/CultureBotAI/TaxonMech/issues/236 and https://github.com/CultureBotAI/TaxonMech/issues/78).
 
 ## Recommended Actions And Acceptance Checks
 
@@ -3371,7 +3371,7 @@ findings:
     required non-empty curation_history on every causal-graph overlay and includes
     curation_history in the ''## Overlay File Contract'' YAML example, and docs/CURATION.md
     (lines 74-96) documents scripts/check_provenance.py (causal_graph_provenance_problems())
-    and its provenance gates, enforced by test_curation_guide_and_overlay_readme_document_cycle6_curation_history_and_provenance_gates()
+    and its provenance gates, enforced by test_curation_guide_and_overlay_readme_document_required_curation_history_and_provenance()
     in tests/test_causal_graph_overlays.py.'
   target_ids:
   - NCBITaxon:562
@@ -3527,7 +3527,7 @@ findings:
     lines 56-65 include the required taxon-expresses-lacz (taxon -> lacZ, RO:0002292
     expresses) edge in the ''## Overlay File Contract'' YAML example so the example
     passes causal_graph_provenance_problems() in scripts/check_provenance.py, enforced
-    by test_overlay_readme_example_passes_provenance_and_includes_taxon_expresses_protein_edge()
+    by test_overlay_readme_example_passes_structure_events_proteins_and_provenance_gates()
     in tests/test_causal_graph_overlays.py.'
   target_ids:
   - NCBITaxon:562
@@ -3600,7 +3600,7 @@ findings:
     / NCBITaxon_243232.yaml (Methanocaldococcus jannaschii / DSM 2661, kgmicrobe.strain:bacdive_6981)—populate
     strain_id on all 53 of their GENE_OR_PROTEIN nodes (including node_id: lacZ at
     curation/causal_graphs/NCBITaxon_562.yaml line 36, phzM at NCBITaxon_287.yaml
-    line 20, and mcrA at NCBITaxon_2190.yaml line 20). However, the canonical ''##
+    line 65, and mcrA at NCBITaxon_2190.yaml line 99). However, the canonical ''##
     Overlay File Contract'' YAML example for identifier: NCBITaxon:562 in curation/causal_graphs/README.md
     (lines 27-40, node_id: lacZ) omits strain_id: kgmicrobe.strain:bacdive_155687,
     and STAGE2_STAGE3_EXEMPLAR_OVERLAYS in tests/test_causal_graph_overlays.py omits
