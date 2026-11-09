@@ -101,6 +101,20 @@ causal_graphs:
     sequence_crc64: 3796CCEF0FF11AD4
     sequence_version: 1
     entry_status: SWISS_PROT
+  - node_id: hog1
+    label: Mitogen-activated protein kinase HOG1 (HOG1)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:Q56R42
+    xrefs:
+    - EC:2.7.11.24
+    organism_taxon_id: NCBITaxon:235443
+    proteome_id: UP:UP000010091
+    gene_symbol: HOG1
+    locus_tag: CNAG_01523
+    sequence_length: 365
+    sequence_crc64: F28E2E95B6DAD6B5
+    sequence_version: 1
+    entry_status: SWISS_PROT
   - node_id: laccase_activity
     label: hydroquinone:oxygen oxidoreductase activity
     node_type: MOLECULAR_FUNCTION
@@ -544,6 +558,71 @@ causal_graphs:
         Hob1 (CNAG_01431) drives expression of the melanin regulatory circuit
         (BZP4, MBS1, and LAC1) required for cell-wall laccase enzymatic
         activity (GO:0052716) in Cryptococcus neoformans.
+  - edge_id: e28
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: hog1
+    evidence:
+    - reference: PMID:24743168
+      notes: >-
+        Reference genome and transcriptome assembly of Cryptococcus neoformans
+        var. grubii strain H99 identifying HOG1 (CNAG_01523) encoding the
+        p38/Hog1 mitogen-activated protein kinase (EC:2.7.11.24).
+    - reference: PMID:15728721
+      notes: >-
+        Identification and functional characterization of the Cryptococcus
+        neoformans serotype A (strain H99) HOG1 gene encoding the stress-activated
+        mitogen-activated protein kinase Hog1.
+  - edge_id: e29
+    subject: hog1
+    predicate: negatively regulates
+    predicate_id: RO:0002212
+    object: bzp4
+    evidence:
+    - reference: PMID:31575776
+      notes: >-
+        Epistatic and transcriptional network analysis in Cryptococcus
+        neoformans establishes that the Hog1 MAPK (CNAG_01523,
+        UniProtKB:Q56R42) negatively regulates expression of the core
+        melanin-activating bZIP transcription factor BZP4 (CNAG_03346).
+    - reference: PMID:15728721
+      notes: >-
+        Constitutively phosphorylated Hog1 MAPK represses the downstream
+        melanin regulatory circuit in Cryptococcus neoformans serotype A
+        strain H99.
+  - edge_id: e30
+    subject: hog1
+    predicate: negatively regulates
+    predicate_id: RO:0002212
+    object: lac1
+    evidence:
+    - reference: PMID:15728721
+      notes: >-
+        Disruption of HOG1 (CNAG_01523, UniProtKB:Q56R42) derepresses LAC1
+        transcription in Cryptococcus neoformans strain H99, demonstrating
+        that Hog1 MAPK negatively regulates LAC1 expression under basal
+        conditions.
+    - reference: PMID:31575776
+      notes: >-
+        Hog1 MAPK represses BZP4 and downstream LAC1 induction in the
+        Cryptococcus neoformans melanin regulatory network.
+  - edge_id: e31
+    subject: hog1
+    predicate: negatively regulates
+    predicate_id: RO:0002212
+    object: melanin_biosynthesis
+    evidence:
+    - reference: PMID:15728721
+      notes: >-
+        In Cryptococcus neoformans serotype A strain H99, constitutively
+        phosphorylated Hog1 MAPK (CNAG_01523, UniProtKB:Q56R42, EC:2.7.11.24)
+        negatively regulates L-DOPA melanin synthesis via cross-talk with the
+        cAMP/PKA pathway, and hog1 deletion markedly enhances melanization.
+    - reference: PMID:31575776
+      notes: >-
+        Inhibition of the Hog1 MAPK cascade derepresses BZP4 and LAC1 to
+        increase cell-wall melanin biosynthesis in Cryptococcus neoformans.
 curation_history:
 - timestamp: '2026-10-22T18:50:00Z'
   curator: add-uniprot-protein-examples
@@ -668,4 +747,14 @@ curation_history:
     regulatory edge (edge e27, hob1 RO:0002213 laccase_activity, PMID:25849373,
     PMID:31575776) linking Hob1 (UniProtKB:J9VMN6) to hydroquinone:oxygen
     oxidoreductase (laccase) activity (GO:0052716).
+  llm_assisted: true
+- timestamp: '2026-11-09T02:40:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: >-
+    Added live-verified Swiss-Prot entry UniProtKB:Q56R42 (HOG1_CRYN9, HOG1 /
+    CNAG_01523, EC:2.7.11.24, 365 aa, CRC64 F28E2E95B6DAD6B5, v1) in reference
+    proteome UP:UP000010091 with literature-backed expression and negative
+    regulatory edges on BZP4, LAC1, and melanin biosynthesis (PMID:24743168,
+    PMID:15728721, PMID:31575776).
   llm_assisted: true

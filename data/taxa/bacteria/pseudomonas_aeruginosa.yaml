@@ -63471,6 +63471,15 @@ curation_history:
     PMID:12076794) linking LasR (UniProtKB:P25084) to phenazine biosynthetic process
     (GO:0002047).
   llm_assisted: true
+- timestamp: '2026-11-09T02:40:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: Added live-verified Swiss-Prot entry UniProtKB:P33883 (LASI_PSEAE, lasI
+    / PA1432, EC:2.3.1.184, 201 aa, CRC64 DBE8582AF42B9AA6, v1) in reference proteome
+    UP:UP000002438 with literature-backed expression, 3-oxo-C12-HSL LasR activation,
+    and hierarchical positive regulatory edges for phenazine biosynthesis (PMID:10984043,
+    PMID:8493556, PMID:8278364, PMID:17363368, PMID:8898383, PMID:8522523, PMID:12076794).
+  llm_assisted: true
 causal_graphs:
 - graph_id: pyocyanin_biosynthesis
   title: PhzM/PhzS-mediated pyocyanin biosynthesis
@@ -63609,6 +63618,21 @@ causal_graphs:
     locus_tag: PA1430
     sequence_length: 239
     sequence_crc64: 28B6E06E9187924A
+    sequence_version: 1
+    entry_status: SWISS_PROT
+  - node_id: lasI
+    label: Acyl-homoserine-lactone synthase (lasI)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:P33883
+    xrefs:
+    - EC:2.3.1.184
+    organism_taxon_id: NCBITaxon:208964
+    strain_id: kgmicrobe.strain:bacdive_12795
+    proteome_id: UP:UP000002438
+    gene_symbol: lasI
+    locus_tag: PA1432
+    sequence_length: 201
+    sequence_crc64: DBE8582AF42B9AA6
     sequence_version: 1
     entry_status: SWISS_PROT
   - node_id: phenazine_biosynthesis
@@ -63998,3 +64022,56 @@ causal_graphs:
     - reference: PMID:12076794
       notes: LasR directly drives transcription of rhlI and rhlR required for C4-HSL-dependent
         phenazine biosynthetic operon induction in Pseudomonas aeruginosa.
+  - edge_id: e28
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: lasI
+    evidence:
+    - reference: PMID:10984043
+      notes: Complete genome sequence of Pseudomonas aeruginosa PAO1 identifying lasI
+        (PA1432) adjacent to lasR in the lasRI quorum-sensing locus.
+    - reference: PMID:8493556
+      notes: Identification and nucleotide sequence characterization of the Pseudomonas
+        aeruginosa lasI gene downstream of lasR encoding the LuxI-family autoinducer
+        synthase LasI.
+    - reference: PMID:8278364
+      notes: Purification and structural identification of the Pseudomonas aeruginosa
+        LasI-directed autoinducer N-(3-oxododecanoyl)-L-homoserine lactone (PAI /
+        3-oxo-C12-HSL).
+  - edge_id: e29
+    subject: lasI
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: lasR
+    evidence:
+    - reference: PMID:8493556
+      notes: Acyl-homoserine-lactone synthase LasI (PA1432, UniProtKB:P33883, EC:2.3.1.184)
+        synthesizes the diffusible autoinducer required for LasR-mediated transcriptional
+        activation in Pseudomonas aeruginosa.
+    - reference: PMID:8278364
+      notes: LasI directs synthesis of N-(3-oxododecanoyl)-L-homoserine lactone (3-oxo-C12-HSL),
+        the cognate ligand activating the transcriptional regulator LasR in Pseudomonas
+        aeruginosa.
+    - reference: PMID:17363368
+      notes: Crystal structure of the Pseudomonas aeruginosa LasR ligand-binding domain
+        complexed with LasI-synthesized 3-oxo-C12-HSL defining the ligand-induced
+        active conformation.
+  - edge_id: e30
+    subject: lasI
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: phenazine_biosynthesis
+    evidence:
+    - reference: PMID:8898383
+      notes: LasI-synthesized 3-oxo-C12-HSL activates LasR at the top of the quorum-sensing
+        hierarchy to drive rhlR-rhlI expression and downstream phenazine and pyocyanin
+        biosynthesis in Pseudomonas aeruginosa.
+    - reference: PMID:8522523
+      notes: Hierarchical activation of the rhl quorum-sensing system by the LasI/LasR
+        3-oxo-C12-HSL circuit positively regulates phenazine and pyocyanin production
+        in Pseudomonas aeruginosa.
+    - reference: PMID:12076794
+      notes: LasI-dependent 3-oxo-C12-HSL signaling is required for LasR-driven transcriptional
+        activation of the rhlI autoinducer synthase governing phenazine biosynthesis
+        in Pseudomonas aeruginosa.
