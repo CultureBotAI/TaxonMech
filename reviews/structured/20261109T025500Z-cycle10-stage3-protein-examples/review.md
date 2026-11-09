@@ -54,7 +54,7 @@ Working-tree hashes do not imply those bytes were committed.
 
 grounding: supported. Targets: NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:5207, NCBITaxon:235443.
 
-Expanded curation/uniprot_proteins.tsv from 49 to 54 live-verified UniProtKB accessions (52 SWISS_PROT, 2 TREMBL) and enriched 11 maintained causal-graph overlays across Escherichia coli (NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145; adding DNA-binding transcriptional repressor Mlc UniProtKB:P50456 mlc/b1594 alongside PtsG UniProtKB:P69786, PtsI UniProtKB:P08839, PtsH UniProtKB:P0AA04, Crr UniProtKB:P69783, CyaA UniProtKB:P00936, CRP UniProtKB:P0ACJ8, LacZ UniProtKB:P00722, LacY UniProtKB:P02920, LacI UniProtKB:P03023, and LacA UniProtKB:P07464 on UP:UP000000625, with edges e38, e39, e40 supported by PMID:9278503, PMID:7766024, PMID:16738553, PMID:9781886, PMID:10464268, PMID:11032803, and PMID:11157755), Bacillus subtilis (NCBITaxon:1423, NCBITaxon:224308; adding Sporulation kinase E KinE UniProtKB:O31661 kinE/BSU13530 EC:2.7.13.3 alongside KinD UniProtKB:O31671, RapB UniProtKB:P70962, KinC UniProtKB:P39764, PhrA UniProtKB:Q00829, RapA UniProtKB:Q00828, KinA UniProtKB:P16497, KinB UniProtKB:Q08430, Spo0F UniProtKB:P06628, Spo0B UniProtKB:P06535, Spo0A UniProtKB:P06534, and Spo0E UniProtKB:P05043 on UP:UP000001570, with edges e45, e46, e47, e48 supported by PMID:9384377, PMID:11069677, and PMID:11886552), Pseudomonas aeruginosa (NCBITaxon:287, NCBITaxon:208964; adding Acyl-homoserine-lactone synthase LasI UniProtKB:P33883 lasI/PA1432 EC:2.3.1.184 alongside LasR UniProtKB:P25084, RhlI UniProtKB:P54291, RhlR UniProtKB:P54292, PqsE UniProtKB:P20581, PhzA1 UniProtKB:Q9HWH1, PhzB1 UniProtKB:O69753, PhzD1 UniProtKB:P0DPB9, PhzM UniProtKB:Q9HWH2, and PhzS UniProtKB:Q9HWG9 on UP:UP000002438, with edges e28, e29, e30, e31 supported by PMID:10984043, PMID:8493556, PMID:8278364, PMID:17363368, PMID:8898383, PMID:8522523, and PMID:12076794), Methanocaldococcus jannaschii (NCBITaxon:2190, NCBITaxon:243232; adding Formylmethanofuran--tetrahydromethanopterin formyltransferase Ftr UniProtKB:Q57766 ftr/MJ0318 EC:2.3.1.101 alongside Mch UniProtKB:Q59030, Hmd UniProtKB:Q58194, MtrH UniProtKB:Q58264, MtrA UniProtKB:Q58261, FwdB UniProtKB:P61154, Mer UniProtKB:Q58929, McrA UniProtKB:Q58256, McrB UniProtKB:Q58252, and McrG UniProtKB:Q58255 on UP:UP000000805, with edges e32, e33, e34 supported by PMID:8688087, PMID:9102456, PMID:9676239, PMID:16233244, and PMID:16466742), and Cryptococcus neoformans (NCBITaxon:5207, NCBITaxon:235443; adding Mitogen-activated protein kinase HOG1 UniProtKB:Q56R42 HOG1/CNAG_01523 EC:2.7.11.24 alongside HOB1 UniProtKB:J9VMN6, CRZ1 UniProtKB:J9VE33, MBS1 UniProtKB:J9VG42, CUF1 UniProtKB:J9VT33, BZP4 UniProtKB:J9VQ26, LAC1 UniProtKB:J9VY90, and LAC2 UniProtKB:J9VQZ4 on UP:UP000010091, with edges e28, e29, e30, e31 supported by PMID:24743168, PMID:15728721, and PMID:31575776), bringing all 15 overlays to 119 GENE_OR_PROTEIN nodes and 426 evidence-backed edges.
+Expanded curation/uniprot_proteins.tsv from 49 to 54 live-verified UniProtKB accessions (52 SWISS_PROT, 2 TREMBL) and enriched 11 maintained causal-graph overlays across Escherichia coli (NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145; adding DNA-binding transcriptional repressor Mlc UniProtKB:P50456 mlc/b1594 alongside PtsG UniProtKB:P69786, PtsI UniProtKB:P08839, PtsH UniProtKB:P0AA04, Crr UniProtKB:P69783, CyaA UniProtKB:P00936, CRP UniProtKB:P0ACJ8, LacZ UniProtKB:P00722, LacY UniProtKB:P02920, LacI UniProtKB:P03023, and LacA UniProtKB:P07464 on UP:UP000000625, with edges e38, e39, e40 supported by PMID:9278503, PMID:7766024, PMID:16738553, PMID:9781886, PMID:10464268, PMID:11032803, and PMID:11157755), Bacillus subtilis (NCBITaxon:1423, NCBITaxon:224308; adding Sporulation kinase E KinE UniProtKB:O31661 kinE/BSU13530 EC:2.7.13.3 alongside KinD UniProtKB:O31671, RapB UniProtKB:P70962, KinC UniProtKB:P39764, PhrA UniProtKB:Q00829, RapA UniProtKB:Q00828, KinA UniProtKB:P16497, KinB UniProtKB:Q08430, Spo0F UniProtKB:P06628, Spo0B UniProtKB:P06535, Spo0A UniProtKB:P06534, and Spo0E UniProtKB:P05043 on UP:UP000001570, with edges e45, e46, e47 supported by PMID:9384377, PMID:11069677, and PMID:11886552), Pseudomonas aeruginosa (NCBITaxon:287, NCBITaxon:208964; adding Acyl-homoserine-lactone synthase LasI UniProtKB:P33883 lasI/PA1432 EC:2.3.1.184 alongside LasR UniProtKB:P25084, RhlI UniProtKB:P54291, RhlR UniProtKB:P54292, PqsE UniProtKB:P20581, PhzA1 UniProtKB:Q9HWH1, PhzB1 UniProtKB:O69753, PhzD1 UniProtKB:P0DPB9, PhzM UniProtKB:Q9HWH2, and PhzS UniProtKB:Q9HWG9 on UP:UP000002438, with edges e28, e29, e30 supported by PMID:10984043, PMID:8493556, PMID:8278364, PMID:17363368, PMID:8898383, PMID:8522523, and PMID:12076794), Methanocaldococcus jannaschii (NCBITaxon:2190, NCBITaxon:243232; adding Formylmethanofuran--tetrahydromethanopterin formyltransferase Ftr UniProtKB:Q57766 ftr/MJ0318 EC:2.3.1.101 alongside Mch UniProtKB:Q59030, Hmd UniProtKB:Q58194, MtrH UniProtKB:Q58264, MtrA UniProtKB:Q58261, FwdB UniProtKB:P61154, Mer UniProtKB:Q58929, McrA UniProtKB:Q58256, McrB UniProtKB:Q58252, and McrG UniProtKB:Q58255 on UP:UP000000805, with edges e32, e33, e34, e35 supported by PMID:8688087, PMID:9102456, PMID:9676239, PMID:16233244, and PMID:16466742), and Cryptococcus neoformans (NCBITaxon:5207, NCBITaxon:235443; adding Mitogen-activated protein kinase HOG1 UniProtKB:Q56R42 HOG1/CNAG_01523 EC:2.7.11.24 alongside HOB1 UniProtKB:J9VMN6, CRZ1 UniProtKB:J9VE33, MBS1 UniProtKB:J9VG42, CUF1 UniProtKB:J9VT33, BZP4 UniProtKB:J9VQ26, LAC1 UniProtKB:J9VY90, and LAC2 UniProtKB:J9VQZ4 on UP:UP000010091, with edges e28, e29, e30, e31 supported by PMID:24743168, PMID:15728721, and PMID:31575776), bringing all 15 overlays to 119 GENE_OR_PROTEIN nodes and 426 evidence-backed edges.
 
 ### Inapplicability of UniProtKB protein examples on the remaining 626,033 TaxonRecord files without causal_graphs
 
@@ -187,7 +187,7 @@ source:
     sha256: 464f895ed81d2fee7dff68906bf609c86bf13fc43a5b806ee6f413b4cd02d9ca
     role: context
   - path: curation/causal_graphs/NCBITaxon_1423.yaml
-    sha256: cad18c69fffbb0b8e9abcf077b643b77f52dbb39a3716ea4e2cf80ba34a9ab34
+    sha256: 69e618e3aebd79f20afe496b97bbfd4f1b79eca982fdf70ac675f50df3ae3ae2
     role: context
   - path: curation/causal_graphs/NCBITaxon_1859096.yaml
     sha256: 0f29a0916110b21224537ec5e337a9e8fa5a61c3a9c3f04885f421e7974d8746
@@ -199,7 +199,7 @@ source:
     sha256: d7078748fdea5c4205cfcf608c6f7377ab6bf05202b870ce8ee77969e20476fe
     role: context
   - path: curation/causal_graphs/NCBITaxon_224308.yaml
-    sha256: cf7b5d5401d889f3b667508206b7839546c3ef9e143d55bc2e0022a5e3f4881c
+    sha256: 1ef64f9e1345c3d0c80acd19e341eec438043f94089d4d78b46a872354c3f9a0
     role: context
   - path: curation/causal_graphs/NCBITaxon_235443.yaml
     sha256: 7cba0925df5fde689d7584494be4ab051c03ff6222595d1b6958d8fb369b23e3
@@ -265,10 +265,10 @@ source:
     sha256: bd2d08a3b151b33fc6ac312de848a57b16c8de6f18979100964f79ee163d28de
     role: target
   - path: data/taxa/bacteria/bacillus_subtilis.yaml
-    sha256: d657c4f4250b4b73d22ae6e399655ef33d49c0fecb6e7b04f0d68e5ceec65dad
+    sha256: 9a161b4799db39f016452670e76816ad5178b9a6c99e28dfbb6ddf0721e49da0
     role: target
   - path: data/taxa/bacteria/bacillus_subtilis_subsp_subtilis_str_168.yaml
-    sha256: 9a00438a0038e784884ddb7d198cef6fdb88cb4cd2d02368fe3d32411e2a414a
+    sha256: c2713aa316543315442ecaf851b7433ff3b5de748c869e021be0fe7bf531e5ea
     role: target
   - path: data/taxa/bacteria/escherichia_coli.yaml
     sha256: 29447eb602a4038e82f295c29b7cd32468ae8888a5d847559efe0cbe12574a78
@@ -800,19 +800,19 @@ assessments:
     EC:2.7.13.3 alongside KinD UniProtKB:O31671, RapB UniProtKB:P70962, KinC UniProtKB:P39764,
     PhrA UniProtKB:Q00829, RapA UniProtKB:Q00828, KinA UniProtKB:P16497, KinB UniProtKB:Q08430,
     Spo0F UniProtKB:P06628, Spo0B UniProtKB:P06535, Spo0A UniProtKB:P06534, and Spo0E
-    UniProtKB:P05043 on UP:UP000001570, with edges e45, e46, e47, e48 supported by
-    PMID:9384377, PMID:11069677, and PMID:11886552), Pseudomonas aeruginosa (NCBITaxon:287,
-    NCBITaxon:208964; adding Acyl-homoserine-lactone synthase LasI UniProtKB:P33883
-    lasI/PA1432 EC:2.3.1.184 alongside LasR UniProtKB:P25084, RhlI UniProtKB:P54291,
-    RhlR UniProtKB:P54292, PqsE UniProtKB:P20581, PhzA1 UniProtKB:Q9HWH1, PhzB1 UniProtKB:O69753,
-    PhzD1 UniProtKB:P0DPB9, PhzM UniProtKB:Q9HWH2, and PhzS UniProtKB:Q9HWG9 on UP:UP000002438,
-    with edges e28, e29, e30, e31 supported by PMID:10984043, PMID:8493556, PMID:8278364,
-    PMID:17363368, PMID:8898383, PMID:8522523, and PMID:12076794), Methanocaldococcus
-    jannaschii (NCBITaxon:2190, NCBITaxon:243232; adding Formylmethanofuran--tetrahydromethanopterin
+    UniProtKB:P05043 on UP:UP000001570, with edges e45, e46, e47 supported by PMID:9384377,
+    PMID:11069677, and PMID:11886552), Pseudomonas aeruginosa (NCBITaxon:287, NCBITaxon:208964;
+    adding Acyl-homoserine-lactone synthase LasI UniProtKB:P33883 lasI/PA1432 EC:2.3.1.184
+    alongside LasR UniProtKB:P25084, RhlI UniProtKB:P54291, RhlR UniProtKB:P54292,
+    PqsE UniProtKB:P20581, PhzA1 UniProtKB:Q9HWH1, PhzB1 UniProtKB:O69753, PhzD1 UniProtKB:P0DPB9,
+    PhzM UniProtKB:Q9HWH2, and PhzS UniProtKB:Q9HWG9 on UP:UP000002438, with edges
+    e28, e29, e30 supported by PMID:10984043, PMID:8493556, PMID:8278364, PMID:17363368,
+    PMID:8898383, PMID:8522523, and PMID:12076794), Methanocaldococcus jannaschii
+    (NCBITaxon:2190, NCBITaxon:243232; adding Formylmethanofuran--tetrahydromethanopterin
     formyltransferase Ftr UniProtKB:Q57766 ftr/MJ0318 EC:2.3.1.101 alongside Mch UniProtKB:Q59030,
     Hmd UniProtKB:Q58194, MtrH UniProtKB:Q58264, MtrA UniProtKB:Q58261, FwdB UniProtKB:P61154,
     Mer UniProtKB:Q58929, McrA UniProtKB:Q58256, McrB UniProtKB:Q58252, and McrG UniProtKB:Q58255
-    on UP:UP000000805, with edges e32, e33, e34 supported by PMID:8688087, PMID:9102456,
+    on UP:UP000000805, with edges e32, e33, e34, e35 supported by PMID:8688087, PMID:9102456,
     PMID:9676239, PMID:16233244, and PMID:16466742), and Cryptococcus neoformans (NCBITaxon:5207,
     NCBITaxon:235443; adding Mitogen-activated protein kinase HOG1 UniProtKB:Q56R42
     HOG1/CNAG_01523 EC:2.7.11.24 alongside HOB1 UniProtKB:J9VMN6, CRZ1 UniProtKB:J9VE33,
