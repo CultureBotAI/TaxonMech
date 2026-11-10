@@ -523,6 +523,9 @@ source:
   - path: reviews/structured/20261109T025500Z-cycle10-stage3-protein-examples/review.yaml
     sha256: 3afa6e4f874ab8bf70b6e10c7d04aec983d217823a6edebd6a8e3ba26d363f17
     role: context
+  - path: reviews/structured/20261109T085000Z-cycle10-stage4-corpus-record-review/review.yaml
+    sha256: 3d472752355eb9d81edaf0450fdbe6dce88cc5d9670a0b4fa57dde79e1acc8d2
+    role: context
   - path: reviews/workflow/latest.yaml
     sha256: 5f518a9c6032dda592ed7213b3c8f1cb1388ee1bb85f0319457bf0934562f76c
     role: context
@@ -606,6 +609,9 @@ source:
     role: context
   - path: reviews/workflow/mech-goal-sequence-20261019/cycle-000009/stage-06/revision-0001/evidence.yaml
     sha256: 0eb250289d7e9be72f56814bb0b729456829f583a0c285b5a952c0a415dddfc1
+    role: context
+  - path: reviews/workflow/mech-goal-sequence-20261019/cycle-000010/stage-04/revision-0001/evidence.yaml
+    sha256: 999ec0f299a721ffc1412a9c5b708b31566adc99b284014582cd93a756c5e1d3
     role: context
   - path: schema/record_review.yaml
     sha256: 229baf9b69118a1fe318e4c31085c0820e4e3d1365e7b04d6ace451b7c35f9bb
@@ -2877,7 +2883,7 @@ findings:
     under #197/#78 and verified in Cycle 10 Stage 4: docs/CURATION.md (lines 60-97) documents the live
     curation/causal_graphs/<NCBITaxon_ID>.yaml and curation/uniprot_proteins.tsv overlay pipeline and
     validation gates while distinguishing unimplemented definition/evidence/mapping_status overlays, and
-    curation/causal_graphs/README.md (lines 84-148) documents all 14 columns of UNIPROT_PROTEIN_FIELDS
+    curation/causal_graphs/README.md (lines 85-148) documents all 14 columns of UNIPROT_PROTEIN_FIELDS
     and species-vs-strain strain_id binding rules, enforced by test_curation_guide_and_overlay_readme_document_causal_graphs_and_uniprot_fields()
     in tests/test_causal_graph_overlays.py.'
   target_ids:
@@ -2954,7 +2960,7 @@ findings:
     review_id: 20261109T085000Z-cycle10-stage4-corpus-record-review
     finding_id: curation-guide-and-overlay-readme-stale-causal-graph-overlay-contract
   disposition_reason: 'Resolved in Cycle 5 Stage 5 (PR #198) under #197/#78 and verified intact in Cycle
-    10 Stage 4.'
+    10 Stages 4-5.'
 - finding_id: schema-guide-and-overlay-readme-missing-cycle5-provenance-and-ec-pattern-invariants
   issue_key: cycle6-stage4-schema-guide-and-overlay-readme-missing-cycle5-provenance-and-ec-pattern-invariants
   category: schema
@@ -2967,7 +2973,7 @@ findings:
     Stage 4: docs/SCHEMA.md (line 88) documents scripts/check_provenance.py (causal_graph_provenance_problems()),
     the connected-graph invariant, identifier regex gates (EDGE_ID_PATTERN, NCBITAXON_ID_PATTERN, PROTEOME_ID_PATTERN,
     UNIPROT_ID_PATTERN), species-or-below scope, and curation/seed_scope.tsv membership, and curation/causal_graphs/README.md
-    (line 204) specifies the exact 4-part Enzyme Commission regex (^EC:[1-7]\.(?:[0-9]+|-)\.(?:[0-9]+|-)\.(?:n?[0-9]+|-)$),
+    (line 205) specifies the exact 4-part Enzyme Commission regex (^EC:[1-7]\.(?:[0-9]+|-)\.(?:[0-9]+|-)\.(?:n?[0-9]+|-)$),
     enforced by test_schema_guide_and_overlay_readme_document_cycle5_provenance_and_ec_pattern_invariants()
     in tests/test_causal_graph_overlays.py.'
   target_ids:
@@ -3043,7 +3049,7 @@ findings:
     review_id: 20261109T085000Z-cycle10-stage4-corpus-record-review
     finding_id: schema-guide-and-overlay-readme-missing-cycle5-provenance-and-ec-pattern-invariants
   disposition_reason: 'Resolved in Cycle 6 Stage 5 (PR #207) under #206 (#199, #78) and verified intact
-    in Cycle 10 Stage 4.'
+    in Cycle 10 Stages 4-5.'
 - finding_id: curation-guide-and-overlay-readme-missing-cycle6-curation-history-and-provenance-contract
   issue_key: cycle7-stage4-curation-guide-and-overlay-readme-missing-cycle6-curation-history-and-provenance-contract
   category: provenance
@@ -3053,7 +3059,7 @@ findings:
   title: 'curation/causal_graphs/README.md and docs/CURATION.md document required non-empty curation_history
     on every overlay and scripts/check_provenance.py provenance gates (#214, #208, #78)'
   description: 'Resolved in Cycle 7 Stage 5 (PR #215) under #214 (#208, #78) and verified in Cycle 10
-    Stage 4: curation/causal_graphs/README.md (lines 4 and 12-82) documents required non-empty curation_history
+    Stage 4: curation/causal_graphs/README.md (lines 4 and 12-83) documents required non-empty curation_history
     on every causal-graph overlay and includes curation_history in the ''## Overlay File Contract'' YAML
     example, and docs/CURATION.md (lines 74-96) documents scripts/check_provenance.py (causal_graph_provenance_problems())
     and its provenance gates, enforced by test_curation_guide_and_overlay_readme_document_required_curation_history_and_provenance()
@@ -3122,7 +3128,7 @@ findings:
     review_id: 20261109T085000Z-cycle10-stage4-corpus-record-review
     finding_id: curation-guide-and-overlay-readme-missing-cycle6-curation-history-and-provenance-contract
   disposition_reason: 'Resolved in Cycle 7 Stage 5 (PR #215) under #214 (#208, #78) and verified intact
-    in Cycle 10 Stage 4.'
+    in Cycle 10 Stages 4-5.'
 - finding_id: overlay-readme-stale-seed-line-numbers-and-ec-numbers-table-contract
   issue_key: cycle8-stage4-overlay-readme-stale-seed-line-numbers-and-ec-numbers-table-contract
   category: provenance
@@ -3133,9 +3139,9 @@ findings:
     743-748, 843-860) and documents the reciprocal full 4-part EC: xref completeness rule in the UNIPROT_PROTEIN_FIELDS
     table (#222, #216, #78)'
   description: 'Resolved in Cycle 8 Stage 5 (PR #223) under #222 (#216, #78), updated in Cycle 9 Stage
-    6 (PR #237), and verified in Cycle 10 Stage 4: curation/causal_graphs/README.md lines 88-90 cite load_uniprot_proteins()
-    at src/taxonmech/seed.py lines 339-447, lines 111-113 cite validate_causal_graph_proteins() strain_id
-    validation at lines 743-748, 843-860, and line 103 of the UNIPROT_PROTEIN_FIELDS table documents the
+    6 (PR #237), and verified in Cycle 10 Stage 4: curation/causal_graphs/README.md lines 89-91 cite load_uniprot_proteins()
+    at src/taxonmech/seed.py lines 339-447, lines 112-114 cite validate_causal_graph_proteins() strain_id
+    validation at lines 743-748, 843-860, and line 104 of the UNIPROT_PROTEIN_FIELDS table documents the
     reciprocal full 4-part (non-wildcard) EC: xref completeness invariant enforced by causal_graph_provenance_problems()
     in scripts/check_provenance.py (lines 218-230), enforced by test_overlay_readme_documents_current_seed_line_ranges_and_reciprocal_ec_numbers_contract()
     in tests/test_causal_graph_overlays.py.'
@@ -3197,18 +3203,18 @@ findings:
     review_id: 20261109T085000Z-cycle10-stage4-corpus-record-review
     finding_id: overlay-readme-stale-seed-line-numbers-and-ec-numbers-table-contract
   disposition_reason: 'Resolved in Cycle 8 Stage 5 (PR #223) under #222 (#216, #78) and verified intact
-    in Cycle 10 Stage 4.'
+    in Cycle 10 Stages 4-5.'
 - finding_id: overlay-readme-example-missing-required-taxon-expresses-protein-edge
   issue_key: cycle9-stage4-overlay-readme-example-missing-required-taxon-expresses-protein-edge
   category: provenance
   severity: minor
   status: resolved
   certainty: confirmed
-  title: 'curation/causal_graphs/README.md ''## Overlay File Contract'' YAML example (lines 14-82) includes
+  title: 'curation/causal_graphs/README.md ''## Overlay File Contract'' YAML example (lines 14-83) includes
     the required host-TAXON RO:0002292 (expresses) edge to GENE_OR_PROTEIN node lacZ enforced by scripts/check_provenance.py
     (#234, #224, #78)'
   description: 'Resolved in Cycle 9 Stage 5 (PR #235, commit f99b34604c) under #234 (#224, #78) and verified
-    in Cycle 10 Stage 4: curation/causal_graphs/README.md lines 56-65 include the required taxon-expresses-lacz
+    in Cycle 10 Stage 4: curation/causal_graphs/README.md lines 57-66 include the required taxon-expresses-lacz
     (taxon -> lacZ, RO:0002292 expresses) edge in the ''## Overlay File Contract'' YAML example so the
     example passes causal_graph_provenance_problems() in scripts/check_provenance.py, enforced by test_overlay_readme_example_passes_structure_events_proteins_and_provenance_gates()
     in tests/test_causal_graph_overlays.py.'
@@ -3265,7 +3271,7 @@ findings:
     review_id: 20261109T085000Z-cycle10-stage4-corpus-record-review
     finding_id: overlay-readme-example-missing-required-taxon-expresses-protein-edge
   disposition_reason: 'Resolved in Cycle 9 Stage 5 (PR #235) under #234 (#224, #78) and verified intact
-    in Cycle 10 Stage 4.'
+    in Cycle 10 Stages 4-5.'
 - finding_id: overlay-readme-example-and-test-fixtures-missing-species-strain-id-binding
   issue_key: cycle10-stage4-overlay-readme-example-and-test-fixtures-missing-species-strain-id-binding
   category: provenance
