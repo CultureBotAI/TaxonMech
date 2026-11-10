@@ -82,6 +82,7 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                             "grounding": "UniProtKB:P00722",
                             "xrefs": ["EC:3.2.1.23"],
                             "organism_taxon_id": "NCBITaxon:83333",
+                            "strain_id": "kgmicrobe.strain:bacdive_155687",
                             "proteome_id": "UP:UP000000625",
                             "gene_symbol": "lacZ",
                             "locus_tag": "b0344",
@@ -202,6 +203,7 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                             "grounding": "UniProtKB:Q9HWH2",
                             "xrefs": ["EC:2.1.1.327"],
                             "organism_taxon_id": "NCBITaxon:208964",
+                            "strain_id": "kgmicrobe.strain:bacdive_12795",
                             "proteome_id": "UP:UP000002438",
                             "gene_symbol": "phzM",
                             "locus_tag": "PA4209",
@@ -258,6 +260,7 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                             "grounding": "UniProtKB:Q58256",
                             "xrefs": ["EC:2.8.4.1"],
                             "organism_taxon_id": "NCBITaxon:243232",
+                            "strain_id": "kgmicrobe.strain:bacdive_6981",
                             "proteome_id": "UP:UP000000805",
                             "gene_symbol": "mcrA",
                             "locus_tag": "MJ0846",
@@ -462,6 +465,14 @@ def test_five_exemplar_causal_graph_overlays_roundtrip_and_render(tmp_path):
         for c in build_concepts(inventory, list(STAGE2_STAGE3_EXEMPLAR_OVERLAYS))
     }
 
+    expected_exemplar_strains = {
+        "NCBITaxon:562": "kgmicrobe.strain:bacdive_155687",
+        "NCBITaxon:1423": "kgmicrobe.strain:bacdive_1156",
+        "NCBITaxon:287": "kgmicrobe.strain:bacdive_12795",
+        "NCBITaxon:2190": "kgmicrobe.strain:bacdive_6981",
+        "NCBITaxon:1859096": None,
+    }
+
     for tid, _spec in STAGE2_STAGE3_EXEMPLAR_OVERLAYS.items():
         concept = concepts[tid]
         assert isinstance(concept, Concept)
@@ -473,6 +484,7 @@ def test_five_exemplar_causal_graph_overlays_roundtrip_and_render(tmp_path):
         assert node0["node_type"] == "GENE_OR_PROTEIN"
         assert node0["grounding"].startswith("UniProtKB:")
         assert node0["organism_taxon_id"].startswith("NCBITaxon:")
+        assert node0.get("strain_id") == expected_exemplar_strains[tid]
         assert node0["proteome_id"].startswith("UP:UP")
         assert node0["entry_status"] in ("SWISS_PROT", "TREMBL")
 
@@ -2416,9 +2428,10 @@ def test_overlay_readme_example_passes_structure_events_proteins_and_provenance_
     tmp_path: Path,
 ):
     """The Overlay File Contract YAML example in curation/causal_graphs/README.md must include
-    the required host-TAXON RO:0002292 (expresses) edge to its GENE_OR_PROTEIN node and pass
-    validate_causal_graph_structure(), validate_causal_graph_events(),
-    validate_causal_graph_proteins(), and causal_graph_provenance_problems() (#234, #224, #78)."""
+    strain_id: kgmicrobe.strain:bacdive_155687 on lacZ and the required host-TAXON RO:0002292
+    (expresses) edge to its GENE_OR_PROTEIN node, and pass validate_causal_graph_structure(),
+    validate_causal_graph_events(), validate_causal_graph_proteins(), and
+    causal_graph_provenance_problems() (#246, #234, #224, #78)."""
     overlay_readme = (REPO_ROOT / "curation" / "causal_graphs" / "README.md").read_text(
         encoding="utf-8"
     )
@@ -2429,6 +2442,9 @@ def test_overlay_readme_example_passes_structure_events_proteins_and_provenance_
     tid = readme_doc["identifier"]
     assert tid == "NCBITaxon:562"
     graph0 = readme_doc["causal_graphs"][0]
+    lacz_nodes = [n for n in graph0["nodes"] if n.get("node_id") == "lacZ"]
+    assert len(lacz_nodes) == 1
+    assert lacz_nodes[0].get("strain_id") == "kgmicrobe.strain:bacdive_155687"
     expresses_edges = [
         e
         for e in graph0["edges"]
@@ -2444,15 +2460,32 @@ def test_overlay_readme_example_passes_structure_events_proteins_and_provenance_
 
     proteins = load_uniprot_proteins(UNIPROT_PROTEINS_PATH)
     taxa = {
-        "NCBITaxon:2": {"parent_id": "", "rank": "DOMAIN"},
-        "NCBITaxon:561": {"parent_id": "NCBITaxon:2", "rank": "GENUS"},
-        "NCBITaxon:562": {"parent_id": "NCBITaxon:561", "rank": "SPECIES"},
-        "NCBITaxon:83333": {"parent_id": "NCBITaxon:562", "rank": "STRAIN"},
+        "NCBITaxon:2": {"label": "Bacteria", "parent_id": "", "rank": "DOMAIN"},
+        "NCBITaxon:561": {"label": "Escherichia", "parent_id": "NCBITaxon:2", "rank": "GENUS"},
+        "NCBITaxon:562": {
+            "label": "Escherichia coli",
+            "parent_id": "NCBITaxon:561",
+            "rank": "SPECIES",
+        },
+        "NCBITaxon:83333": {
+            "label": "Escherichia coli K-12",
+            "parent_id": "NCBITaxon:562",
+            "rank": "STRAIN",
+        },
+    }
+    strains = {
+        "NCBITaxon:562": [
+            {
+                "strain_id": "kgmicrobe.strain:bacdive_155687",
+                "taxon_ids": "NCBITaxon:562",
+            }
+        ],
     }
     validate_causal_graph_proteins(
         {tid: readme_doc["causal_graphs"]},
         uniprot_proteins=proteins,
         taxa=taxa,
+        strains=strains,
     )
 
     script_path = REPO_ROOT / "scripts" / "check_provenance.py"
@@ -2464,7 +2497,9 @@ def test_overlay_readme_example_passes_structure_events_proteins_and_provenance_
     synth_root = tmp_path / "synth_readme_example"
     curation_dir = synth_root / "curation"
     overlays_dir = curation_dir / "causal_graphs"
+    raw_dir = synth_root / "data" / "raw"
     overlays_dir.mkdir(parents=True)
+    raw_dir.mkdir(parents=True)
     raw_lines = UNIPROT_PROTEINS_PATH.read_text(encoding="utf-8").splitlines()
     header = raw_lines[0]
     row_p00722 = next(line for line in raw_lines[1:] if line.startswith("UniProtKB:P00722\t"))
@@ -2474,6 +2509,21 @@ def test_overlay_readme_example_passes_structure_events_proteins_and_provenance_
     )
     (curation_dir / "seed_scope.tsv").write_text(
         "identifier\tadded\treason\nNCBITaxon:562\t2026-01-01\ttest\n",
+        encoding="utf-8",
+    )
+    (raw_dir / "ncbitaxon_taxa.tsv").write_text(
+        "taxon_id\tlabel\trank\tparent_id\n"
+        "NCBITaxon:2\tBacteria\tDOMAIN\t\n"
+        "NCBITaxon:561\tEscherichia\tGENUS\tNCBITaxon:2\n"
+        "NCBITaxon:562\tEscherichia coli\tSPECIES\tNCBITaxon:561\n"
+        "NCBITaxon:83333\tEscherichia coli K-12\tSTRAIN\tNCBITaxon:562\n",
+        encoding="utf-8",
+    )
+    (raw_dir / "bacdive_strains.tsv").write_text(
+        "strain_id\tlabel\tdesignations\tculture_collection_ids\ttaxon_ids\t"
+        "is_type_strain\tbacdive_id\tgenome_accessions\tbiosample_accessions\n"
+        "kgmicrobe.strain:bacdive_155687\tEscherichia coli MG1655\tMG1655\t"
+        "DSM:18039\tNCBITaxon:562\tfalse\tbacdive.strain:155687\t\t\n",
         encoding="utf-8",
     )
     (overlays_dir / "NCBITaxon_562.yaml").write_text(readme_yaml + "\n", encoding="utf-8")
