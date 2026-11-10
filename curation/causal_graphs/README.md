@@ -31,6 +31,7 @@ causal_graphs:
         xrefs:
           - EC:3.2.1.23
         organism_taxon_id: NCBITaxon:83333
+        strain_id: kgmicrobe.strain:bacdive_155687
         proteome_id: UP:UP000000625
         gene_symbol: lacZ
         locus_tag: b0344
@@ -188,7 +189,7 @@ offline against a row in `curation/uniprot_proteins.tsv` (registered in
    `(subject, predicate_id or predicate, object)` edges, and non-empty,
    non-duplicate `evidence[].reference` citations matching
    `EVIDENCE_REFERENCE_PATTERN` (`PMID:`, `PMC:PMC`, `DOI:10.`, or `http(s)://`)
-   on every edge (#189, #199, #208, #216, #224, #234, #236).
+   on every edge (#189, #199, #208, #216, #224, #234, #236, #246).
 4. **Offline UniProtKB reference, NCBI Taxonomy lineage, and BacDive strain validation (`curation/uniprot_proteins.tsv`, `conf/sources.yaml`, `src/taxonmech/seed.py`, & `scripts/check_provenance.py`)**:
    `load_uniprot_proteins()`, `load_causal_graphs()`, `load_inventory()`, and
    `scripts/check_provenance.py` (`causal_graph_provenance_problems()`) enforce
@@ -228,7 +229,7 @@ offline against a row in `curation/uniprot_proteins.tsv` (registered in
    `organism_taxon_id` lineage; and verify that every overlay file in
    `curation/causal_graphs/*.yaml` matches its `identifier` filename stem, is
    included in `curation/seed_scope.tsv`, and carries a non-empty, schema-valid
-   `curation_history` list (#189, #199, #208, #216, #224, #234, #236).
+   `curation_history` list (#189, #199, #208, #216, #224, #234, #236, #246).
 5. **Byte-exact corpus reproducibility (`scripts/verify_corpus.py`)**:
    `scripts/verify_corpus.py` loads `curation/causal_graphs/` through
    `build_corpus()` and compares every `data/taxa/<domain>/<slug>.yaml` against
