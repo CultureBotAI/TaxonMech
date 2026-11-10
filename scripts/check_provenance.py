@@ -100,6 +100,8 @@ def causal_graph_provenance_problems(repo_root: Path = REPO_ROOT) -> list[str]:
     from collections import defaultdict
 
     from taxonmech.seed import (
+        _taxa_lineage_compatible,
+        _taxon_lineage,
         load_causal_graphs,
         load_scope,
         load_uniprot_proteins,
@@ -213,6 +215,30 @@ def causal_graph_provenance_problems(repo_root: Path = REPO_ROOT) -> list[str]:
                             f"causal-graph overlay {tid} graph {gid!r} node {nid!r}: "
                             f"GENE_OR_PROTEIN node has no outgoing functional/regulatory/causal edge"
                         )
+                    if strains is not None and taxa is not None:
+                        org_tid = (
+                            (node.get("organism_taxon_id") or "").strip()
+                            if isinstance(node.get("organism_taxon_id"), str)
+                            else ""
+                        )
+                        node_strain_id = (
+                            (node.get("strain_id") or "").strip()
+                            if isinstance(node.get("strain_id"), str)
+                            else ""
+                        )
+                        has_subtree_strain = any(
+                            s_tid in taxa
+                            and (s_tid == tid or tid in _taxon_lineage(taxa, s_tid))
+                            and (not org_tid or _taxa_lineage_compatible(taxa, s_tid, org_tid))
+                            for s_tid, s_rows in strains.items()
+                            if s_rows
+                        )
+                        if has_subtree_strain and not node_strain_id:
+                            failures.append(
+                                f"causal-graph overlay {tid} graph {gid!r} node {nid!r}: "
+                                f"GENE_OR_PROTEIN node missing required 'strain_id' for host taxon "
+                                f"{tid} with subtree BacDive strain"
+                            )
                     ref = uniprot_proteins.get(uid)
                     if ref is not None:
                         full_ref_ecs = [

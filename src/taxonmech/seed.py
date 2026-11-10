@@ -346,8 +346,11 @@ def load_uniprot_proteins(
         return {}
     proteins: dict[str, dict[str, str]] = {}
     seen_entry_names: set[str] = set()
+    seen_org_genes: set[tuple[str, str]] = set()
     seen_org_loci: set[tuple[str, str]] = set()
+    seen_org_crc64: set[tuple[str, str]] = set()
     seen_org_meta: dict[str, tuple[str, str]] = {}
+    seen_org_mnemonic_suffix: dict[str, str] = {}
     seen_proteome_org: dict[str, str] = {}
     with path.open(newline="", encoding="utf-8") as fh:
         reader = csv.DictReader(fh, delimiter="\t")
@@ -415,10 +418,37 @@ def load_uniprot_proteins(
             if entry_name in seen_entry_names:
                 raise SystemExit(f"{path}:{line_no}: duplicate entry_name {entry_name!r} for {uid!r}")
             seen_entry_names.add(entry_name)
+            entry_prefix, org_suffix = entry_name.split("_", 1)
+            bare_acc = uid.split(":", 1)[1]
+            status = row.get("entry_status")
+            if status == "TREMBL" and entry_prefix != bare_acc:
+                raise SystemExit(
+                    f"{path}:{line_no}: TREMBL entry_name prefix {entry_prefix!r} != "
+                    f"accession {bare_acc!r} for {uid!r}"
+                )
+            if status == "SWISS_PROT" and entry_prefix == bare_acc:
+                raise SystemExit(
+                    f"{path}:{line_no}: SWISS_PROT entry_name prefix {entry_prefix!r} "
+                    f"must not equal accession {bare_acc!r} for {uid!r}"
+                )
+            if org_tid in seen_org_mnemonic_suffix and seen_org_mnemonic_suffix[org_tid] != org_suffix:
+                raise SystemExit(
+                    f"{path}:{line_no}: inconsistent entry_name organism suffix "
+                    f"{org_suffix!r} != {seen_org_mnemonic_suffix[org_tid]!r} for {org_tid} ({uid!r})"
+                )
+            seen_org_mnemonic_suffix[org_tid] = org_suffix
             gene_symbol = (row.get("gene_symbol") or "").strip()
             locus_tag = (row.get("locus_tag") or "").strip()
             if not (gene_symbol or locus_tag):
                 raise SystemExit(f"{path}:{line_no}: requires gene_symbol or locus_tag for {uid!r}")
+            if gene_symbol:
+                org_gene = (org_tid, gene_symbol)
+                if org_gene in seen_org_genes:
+                    raise SystemExit(
+                        f"{path}:{line_no}: duplicate (organism_taxon_id, gene_symbol) "
+                        f"{org_gene!r} for {uid!r}"
+                    )
+                seen_org_genes.add(org_gene)
             if locus_tag:
                 org_locus = (org_tid, locus_tag)
                 if org_locus in seen_org_loci:
@@ -443,6 +473,13 @@ def load_uniprot_proteins(
             crc64 = (row.get("sequence_crc64") or "").strip()
             if not CRC64_PATTERN.match(crc64):
                 raise SystemExit(f"{path}:{line_no}: invalid sequence_crc64 {crc64!r} for {uid!r}")
+            org_crc = (org_tid, crc64)
+            if org_crc in seen_org_crc64:
+                raise SystemExit(
+                    f"{path}:{line_no}: duplicate (organism_taxon_id, sequence_crc64) "
+                    f"{org_crc!r} for {uid!r}"
+                )
+            seen_org_crc64.add(org_crc)
             proteins[uid] = dict(row)
     return proteins
 
@@ -552,6 +589,21 @@ def validate_causal_graph_structure(
                             raise SystemExit(f"{n_ctx}: TAXON grounding must start with 'NCBITaxon:'")
                         if not NCBITAXON_ID_PATTERN.match(grounding):
                             raise SystemExit(f"{n_ctx}: invalid TAXON grounding {grounding!r}")
+                    elif grounding.startswith("NCBITaxon:"):
+                        raise SystemExit(
+                            f"{n_ctx}: non-TAXON node ({ntype}) cannot use NCBITaxon: grounding {grounding!r}"
+                        )
+                    if ntype == "GENE_OR_PROTEIN":
+                        if grounding and not UNIPROT_ID_PATTERN.match(grounding):
+                            raise SystemExit(
+                                f"{n_ctx}: GENE_OR_PROTEIN grounding {grounding!r} "
+                                f"must match UNIPROT_ID_PATTERN"
+                            )
+                    elif grounding.startswith("UniProtKB:"):
+                        raise SystemExit(
+                            f"{n_ctx}: non-GENE_OR_PROTEIN node ({ntype}) cannot use "
+                            f"UniProtKB: grounding {grounding!r}"
+                        )
                     raw_xrefs = node.get("xrefs")
                     if raw_xrefs is not None:
                         if not isinstance(raw_xrefs, list):
@@ -573,6 +625,7 @@ def validate_causal_graph_structure(
                 seen_edge_triples: set[tuple[str, str, str]] = set()
                 seen_pred_by_id: dict[str, str] = {}
                 seen_id_by_pred: dict[str, str] = {}
+                seen_expressed_objects: set[str] = set()
                 connected_node_ids: set[str] = set()
                 for edge in edges:
                     if not isinstance(edge, dict):
@@ -633,11 +686,18 @@ def validate_causal_graph_structure(
                             raise SystemExit(
                                 f"{e_ctx}: object {obj!r} cannot target a TAXON node"
                             )
-                        if pred_id == "RO:0002292" and node_types_by_id.get(obj) != "GENE_OR_PROTEIN":
-                            raise SystemExit(
-                                f"{e_ctx}: RO:0002292 (expresses) object {obj!r} "
-                                f"must be a GENE_OR_PROTEIN node"
-                            )
+                        if pred_id == "RO:0002292":
+                            if node_types_by_id.get(obj) != "GENE_OR_PROTEIN":
+                                raise SystemExit(
+                                    f"{e_ctx}: RO:0002292 (expresses) object {obj!r} "
+                                    f"must be a GENE_OR_PROTEIN node"
+                                )
+                            if node_types_by_id.get(subj) == "TAXON":
+                                if obj in seen_expressed_objects:
+                                    raise SystemExit(
+                                        f"{e_ctx}: duplicate RO:0002292 (expresses) edge targeting {obj!r}"
+                                    )
+                                seen_expressed_objects.add(obj)
                         connected_node_ids.add(subj)
                         connected_node_ids.add(obj)
                     ev_list = edge.get("evidence")
