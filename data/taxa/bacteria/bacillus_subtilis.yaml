@@ -38155,6 +38155,14 @@ curation_history:
     endospore_formation, PMID:11069677, PMID:11886552) linking KinE (UniProtKB:O31661)
     to endospore formation (GO:0034301).
   llm_assisted: true
+- timestamp: '2026-11-10T14:25:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: Added live-verified Swiss-Prot entry UniProtKB:Q7WY62 (SDA_BACSU, sda /
+    BSU25690, 52 aa, CRC64 BCBDECF0E0203CAE, v1) in reference proteome UP:UP000001570
+    with literature-backed expression and negative regulatory edges on KinA and KinB
+    (PMID:9384377, PMID:11207367, PMID:15023339).
+  llm_assisted: true
 causal_graphs:
 - graph_id: endospore_formation
   title: KinA/Spo0A-regulated endospore formation
@@ -38338,6 +38346,19 @@ causal_graphs:
     locus_tag: BSU13530
     sequence_length: 738
     sequence_crc64: FE27DAB7F08AC64B
+    sequence_version: 1
+    entry_status: SWISS_PROT
+  - node_id: sda
+    label: Sporulation inhibitor sda (sda)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:Q7WY62
+    organism_taxon_id: NCBITaxon:224308
+    strain_id: kgmicrobe.strain:bacdive_1156
+    proteome_id: UP:UP000001570
+    gene_symbol: sda
+    locus_tag: BSU25690
+    sequence_length: 52
+    sequence_crc64: BCBDECF0E0203CAE
     sequence_version: 1
     entry_status: SWISS_PROT
   - node_id: sensor_kinase_activity
@@ -38984,3 +39005,47 @@ causal_graphs:
       notes: In vivo genetic analysis in Bacillus subtilis demonstrating that KinE
         acts alongside KinC and KinD to supply phosphoryl input into the Spo0F-Spo0B-Spo0A
         phosphorelay governing Spo0A-dependent stationary-phase developmental pathways.
+  - edge_id: e49
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: sda
+    evidence:
+    - reference: PMID:9384377
+      notes: Complete genome sequence of Bacillus subtilis strain 168 covering the
+        chromosomal region encoding the sporulation checkpoint inhibitor sda (BSU25690).
+    - reference: PMID:11207367
+      notes: Identification and characterization of the Bacillus subtilis sda (BSU25690)
+        gene encoding the 52-amino-acid sporulation checkpoint inhibitor Sda.
+    - reference: PMID:15023339
+      notes: Structural and biochemical characterization of Bacillus subtilis Sda
+        (UniProtKB:Q7WY62) in complex with the KinA dimerization/histidine phosphotransfer
+        domain.
+  - edge_id: e50
+    subject: sda
+    predicate: directly negatively regulates
+    predicate_id: RO:0002630
+    object: kinA
+    evidence:
+    - reference: PMID:11207367
+      notes: Sporulation inhibitor Sda (BSU25690, UniProtKB:Q7WY62) directly inhibits
+        KinA (UniProtKB:P16497) autophosphorylation in response to DNA replication
+        initiation defects in Bacillus subtilis.
+    - reference: PMID:15023339
+      notes: Solution structure and biochemical analysis demonstrate that Sda binds
+        directly to the dimerization/histidine-phosphotransfer (DHp) domain of Bacillus
+        subtilis KinA to block autokinase activity.
+  - edge_id: e51
+    subject: sda
+    predicate: negatively regulates
+    predicate_id: RO:0002212
+    object: kinB
+    evidence:
+    - reference: PMID:11207367
+      notes: Genetic and biochemical evidence in Bacillus subtilis establishes that
+        Sda (BSU25690, UniProtKB:Q7WY62) inhibits both KinA and KinB (UniProtKB:Q08430)
+        signaling into the Spo0A sporulation phosphorelay.
+    - reference: PMID:15023339
+      notes: Conserved DHp-domain residues targeted by Sda in KinA are shared by Bacillus
+        subtilis KinB, mediating Sda-dependent negative regulation of KinB sensor
+        kinase activity.
