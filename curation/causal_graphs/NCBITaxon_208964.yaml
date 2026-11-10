@@ -145,6 +145,18 @@ causal_graphs:
     sequence_crc64: DBE8582AF42B9AA6
     sequence_version: 1
     entry_status: SWISS_PROT
+  - node_id: mvfR
+    label: Multiple virulence factor regulator MvfR (mvfR)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:Q9I4X0
+    organism_taxon_id: NCBITaxon:208964
+    proteome_id: UP:UP000002438
+    gene_symbol: mvfR
+    locus_tag: PA1003
+    sequence_length: 332
+    sequence_crc64: 117430C3C1232D97
+    sequence_version: 1
+    entry_status: SWISS_PROT
   - node_id: phenazine_biosynthesis
     label: phenazine biosynthetic process
     node_type: BIOLOGICAL_PROCESS
@@ -709,6 +721,70 @@ causal_graphs:
         Hierarchical quorum-sensing signaling through the LasI/LasR
         3-oxo-C12-HSL system positively regulates expression of the rhlR-rhlI
         regulatory locus in Pseudomonas aeruginosa PAO1.
+  - edge_id: e32
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: mvfR
+    evidence:
+    - reference: PMID:10984043
+      notes: >-
+        Complete genome sequence of Pseudomonas aeruginosa PAO1 identifying
+        mvfR (pqsR, PA1003) adjacent to the pqsABCDE quinolone-signaling
+        operon.
+    - reference: PMID:11724939
+      notes: >-
+        Characterization of Pseudomonas aeruginosa MvfR (PA1003) as a
+        LysR-type transcriptional regulator governing multiple quorum-sensing
+        virulence factors including pyocyanin.
+    - reference: PMID:17083468
+      notes: >-
+        Identification and biochemical characterization of MvfR (PqsR, PA1003)
+        as the 2-alkyl-4(1H)-quinolone-activated transcriptional regulator
+        controlling the pqsABCDE operon in Pseudomonas aeruginosa PAO1.
+  - edge_id: e33
+    subject: mvfR
+    predicate: directly positively regulates
+    predicate_id: RO:0002629
+    object: pqsE
+    evidence:
+    - reference: PMID:11724939
+      notes: >-
+        Multiple virulence factor regulator MvfR (PqsR, PA1003,
+        UniProtKB:Q9I4X0) directly binds the pqsA promoter to activate
+        transcription of the polycistronic pqsABCDE operon encoding PqsE
+        (PA1000, UniProtKB:P20581) in Pseudomonas aeruginosa PAO1.
+    - reference: PMID:17083468
+      notes: >-
+        PQS- and HHQ-activated MvfR (PqsR) binds directly to the pqsA promoter
+        region to drive pqsABCDE operon transcription and PqsE expression in
+        Pseudomonas aeruginosa PAO1.
+    - reference: PMID:27678057
+      notes: >-
+        Genome-wide ChIP-seq and RNA-seq analysis of the Pseudomonas
+        aeruginosa MvfR regulon establishes direct MvfR promoter binding and
+        transcriptional activation of the pqsABCDE operon encoding pqsE.
+  - edge_id: e34
+    subject: mvfR
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: phenazine_biosynthesis
+    evidence:
+    - reference: PMID:11724939
+      notes: >-
+        Disruption of mvfR (PA1003, UniProtKB:Q9I4X0) abolishes pyocyanin and
+        phenazine production in Pseudomonas aeruginosa, establishing MvfR as an
+        essential positive regulator of phenazine biosynthesis (GO:0002047).
+    - reference: PMID:17083468
+      notes: >-
+        Co-inducer-bound MvfR (PqsR) activates pqsABCDE expression and
+        downstream phenazine and pyocyanin biosynthesis in Pseudomonas
+        aeruginosa PAO1.
+    - reference: PMID:27678057
+      notes: >-
+        MvfR directly activates pqsABCDE and positively regulates the phz1 and
+        phz2 phenazine biosynthetic operons to drive pyocyanin production in
+        Pseudomonas aeruginosa.
 curation_history:
 - timestamp: '2026-10-22T14:00:00Z'
   curator: curate-causal-graphs
@@ -851,4 +927,14 @@ curation_history:
     Added direct autoinducer-synthase-to-subordinate-regulator positive
     regulatory edge (edge e31, lasI RO:0002213 rhlR, PMID:8898383, PMID:8278364,
     PMID:8522523) linking LasI (UniProtKB:P33883) to RhlR (UniProtKB:P54292).
+  llm_assisted: true
+- timestamp: '2026-11-10T14:25:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: >-
+    Added live-verified Swiss-Prot entry UniProtKB:Q9I4X0 (MVFR_PSEAE, mvfR /
+    PA1003, 332 aa, CRC64 117430C3C1232D97, v1) in reference proteome
+    UP:UP000002438 with literature-backed expression and positive regulatory
+    edges for pqsE and phenazine biosynthesis (PMID:10984043, PMID:11724939,
+    PMID:17083468, PMID:27678057).
   llm_assisted: true

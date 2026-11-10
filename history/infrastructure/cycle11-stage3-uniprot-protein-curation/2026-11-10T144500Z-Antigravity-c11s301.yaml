@@ -1,0 +1,42 @@
+history_version: 1
+target:
+  kind: infrastructure
+  path: curation/uniprot_proteins.tsv
+  slug: cycle11-stage3-uniprot-protein-curation
+session:
+  id: 2026-11-10T144500Z-Antigravity-c11s301
+  timestamp: '2026-11-10T14:45:00Z'
+  actors:
+  - type: ai_agent
+    name: Antigravity
+    model: claude-opus-4-6
+    agent_tool: antigravity-cli
+links:
+  issues:
+  - https://github.com/CultureBotAI/TaxonMech/issues/78
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - uniprot_proteins
+  - causal_graphs
+  - tests
+  summary: Expand curation/uniprot_proteins.tsv from 54 to 59 live-verified UniProtKB
+    proteins and enrich 11 causal-graph overlays to 130 GENE_OR_PROTEIN nodes and
+    474 evidence-backed edges
+  details: 'Live-verified 5 additional Swiss-Prot protein entries in UniProt release
+    2026_02 and their primary PubMed citations via live UniProt REST and Europe PMC:
+    UniProtKB:P0AEW4 (CPDA_ECOLI, cpdA / b3032, EC:3.1.4.53, 275 aa, CRC64 97696478536CFBF1,
+    v1, NCBITaxon:83333, UP:UP000000625, PMID:8655529, PMID:19393191), UniProtKB:Q7WY62
+    (SDA_BACSU, sda / BSU25690, 52 aa, CRC64 BCBDECF0E0203CAE, v1, NCBITaxon:224308,
+    UP:UP000001570, PMID:11222600, PMID:14731276, PMID:19684582), UniProtKB:Q9I4X0
+    (MVFR_PSEAE, mvfR / PA1003, 332 aa, CRC64 117430C3C1232D97, v1, NCBITaxon:208964,
+    UP:UP000002438, PMID:11717265, PMID:16199580, PMID:18281405), UniProtKB:Q58441
+    (MTD_METJA, mtd / MJ1035, EC:1.5.98.1, 277 aa, CRC64 93A1D2357CC85DDF, v1,
+    NCBITaxon:243232, UP:UP000000805, PMID:8631727, PMID:8688087), and UniProtKB:J9VHN6
+    (X325_CRYN9, BIM1 / CNAG_02775, 218 aa, CRC64 0436973FA833B8B2, v1, NCBITaxon:235443,
+    UP:UP000010091, PMID:31209063, PMID:24713853). Updated 11 causal-graph overlays,
+    re-seeded all 11 updated TaxonRecord YAML files and 10 taxon-details JSON.gz shards,
+    updated curation/causal_graphs/README.md, README.md, INFRA_TASKS.md, and
+    tests/test_causal_graph_overlays.py, and recorded structured review
+    20261110T144500Z-cycle11-stage3-uniprot-protein-curation.'
