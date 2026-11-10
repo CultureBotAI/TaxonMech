@@ -3024,10 +3024,10 @@ findings:
   title: docs/CURATION.md and curation/causal_graphs/README.md document the live curation/causal_graphs/*.yaml
     overlay contract and 14-column curation/uniprot_proteins.tsv schema table
   description: 'Resolved in Cycle 5 Stage 5 (PR #198, commit d4129f3318b980e8f56119eb5956051ca065ff16)
-    under #197/#78 and verified in Cycle 11 Stage 4: docs/CURATION.md (lines 60-97)
+    under #197/#78 and verified in Cycle 11 Stage 4: docs/CURATION.md (lines 60-101)
     documents the live curation/causal_graphs/<NCBITaxon_ID>.yaml and curation/uniprot_proteins.tsv
     overlay pipeline and validation gates while distinguishing unimplemented definition/evidence/mapping_status
-    overlays, and curation/causal_graphs/README.md (lines 84-148) documents all 14
+    overlays, and curation/causal_graphs/README.md (lines 85-150) documents all 14
     columns of UNIPROT_PROTEIN_FIELDS and species-vs-strain strain_id binding rules,
     enforced by test_curation_guide_and_overlay_readme_document_causal_graphs_and_uniprot_fields()
     in tests/test_causal_graph_overlays.py.'
@@ -3124,7 +3124,7 @@ findings:
     (causal_graph_provenance_problems()), the connected-graph invariant, identifier
     regex gates (EDGE_ID_PATTERN, NCBITAXON_ID_PATTERN, PROTEOME_ID_PATTERN, UNIPROT_ID_PATTERN),
     species-or-below scope, and curation/seed_scope.tsv membership, and curation/causal_graphs/README.md
-    (line 204) specifies the exact 4-part Enzyme Commission regex (^EC:[1-7]\.(?:[0-9]+|-)\.(?:[0-9]+|-)\.(?:n?[0-9]+|-)$),
+    (line 210) specifies the exact 4-part Enzyme Commission regex (^EC:[1-7]\.(?:[0-9]+|-)\.(?:[0-9]+|-)\.(?:n?[0-9]+|-)$),
     enforced by test_schema_guide_and_overlay_readme_document_cycle5_provenance_and_ec_pattern_invariants()
     in tests/test_causal_graph_overlays.py.'
   target_ids:
@@ -3216,10 +3216,10 @@ findings:
     non-empty curation_history on every overlay and scripts/check_provenance.py provenance
     gates (#214, #208, #78)'
   description: 'Resolved in Cycle 7 Stage 5 (PR #215) under #214 (#208, #78) and verified
-    in Cycle 11 Stage 4: curation/causal_graphs/README.md (lines 4 and 12-82) documents
+    in Cycle 11 Stage 4: curation/causal_graphs/README.md (lines 4 and 12-83) documents
     required non-empty curation_history on every causal-graph overlay and includes
     curation_history in the ''## Overlay File Contract'' YAML example, and docs/CURATION.md
-    (lines 74-96) documents scripts/check_provenance.py (causal_graph_provenance_problems())
+    (lines 74-98) documents scripts/check_provenance.py (causal_graph_provenance_problems())
     and its provenance gates, enforced by test_curation_guide_and_overlay_readme_document_required_curation_history_and_provenance()
     in tests/test_causal_graph_overlays.py.'
   target_ids:
@@ -3380,12 +3380,12 @@ findings:
   status: resolved
   certainty: confirmed
   title: 'curation/causal_graphs/README.md ''## Overlay File Contract'' YAML example
-    (lines 14-82) includes the required host-TAXON RO:0002292 (expresses) edge to
+    (lines 14-83) includes the required host-TAXON RO:0002292 (expresses) edge to
     GENE_OR_PROTEIN node lacZ enforced by scripts/check_provenance.py (#234, #224,
     #78)'
   description: 'Resolved in Cycle 9 Stage 5 (PR #235, commit f99b34604c) under #234
     (#224, #78) and verified in Cycle 11 Stage 4: curation/causal_graphs/README.md
-    lines 56-65 include the required taxon-expresses-lacz (taxon -> lacZ, RO:0002292
+    lines 57-66 include the required taxon-expresses-lacz (taxon -> lacZ, RO:0002292
     expresses) edge in the ''## Overlay File Contract'' YAML example so the example
     passes causal_graph_provenance_problems() in scripts/check_provenance.py, enforced
     by test_overlay_readme_example_passes_structure_events_proteins_and_provenance_gates()
@@ -3458,13 +3458,14 @@ findings:
     NCBITaxon:562 (lines 27-41) and STAGE2_STAGE3_EXEMPLAR_OVERLAYS for NCBITaxon:562,
     NCBITaxon:1423, NCBITaxon:287, and NCBITaxon:2190 in tests/test_causal_graph_overlays.py
     bind species-level BacDive strain_id (#246, #236, #78)'
-  description: 'Resolved in Cycle 10 Stage 5 (PR #247, commit ac64df038a) under #246
-    (#236, #78) and verified in Cycle 11 Stage 4: curation/causal_graphs/README.md
-    lines 27-41 include strain_id: kgmicrobe.strain:bacdive_155687 on node_id: lacZ
-    in the ''## Overlay File Contract'' YAML example, and STAGE2_STAGE3_EXEMPLAR_OVERLAYS
+  description: 'Resolved in Cycle 10 Stage 5 (PR #247, commit 39556f0093b9a9c35380bc18370cbe29fcb91fe0)
+    under #246 (#236, #78) and verified in Cycle 11 Stage 4: curation/causal_graphs/README.md
+    (lines 27-41, strain_id at line 34, and lines 195, 239) includes strain_id: kgmicrobe.strain:bacdive_155687
+    on node_id: lacZ in the ''## Overlay File Contract'' YAML example, and STAGE2_STAGE3_EXEMPLAR_OVERLAYS
     in tests/test_causal_graph_overlays.py populates strain_id on all 4 prokaryotic
     species exemplars (NCBITaxon:562, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2190),
-    enforced by test_overlay_readme_example_and_exemplar_fixtures_bind_species_strain_id()
+    enforced by test_five_exemplar_causal_graph_overlays_roundtrip_and_render() and
+    test_overlay_readme_example_passes_structure_events_proteins_and_provenance_gates()
     in tests/test_causal_graph_overlays.py.'
   target_ids:
   - NCBITaxon:562

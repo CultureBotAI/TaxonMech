@@ -439,10 +439,12 @@ findings:
     disposition: ready_for_stage5_remediation
     disposition_reason: >-
       New Cycle 11 Stage 4 test-fixture provenance finding: STAGE2_STAGE3_EXEMPLAR_OVERLAYS in
-      tests/test_causal_graph_overlays.py (lines 61-356) omits the required host TAXON node (node_id: taxon,
-      grounding == tid), incoming host-TAXON RO:0002292 (expresses) edge to each GENE_OR_PROTEIN node, and
-      required non-empty curation_history (with boolean llm_assisted) across the 5 exemplar overlays, ready
-      for Cycle 11 Stage 5 remediation (#249, #78).
+      tests/test_causal_graph_overlays.py (lines 61-356: NCBITaxon:562, NCBITaxon:1423, NCBITaxon:287,
+      NCBITaxon:2190, NCBITaxon:1859096) omits the required host TAXON node (node_id: taxon, grounding == tid)
+      and incoming host-TAXON RO:0002292 (expresses) edge to each GENE_OR_PROTEIN node (lacZ, spo0A, phzM,
+      mcrA, CNBG_1207) on all 5 exemplars, omits curation_history on 4 of the 5 exemplars (NCBITaxon:1423,
+      NCBITaxon:287, NCBITaxon:2190, NCBITaxon:1859096), and omits boolean llm_assisted on NCBITaxon:562's
+      curation_history[0] (lines 121-128), ready for Cycle 11 Stage 5 remediation (#249, #78).
   - finding_id: gtdb-closematch-exact-promotion
     issue_key: cycle3-stage4-gtdb-closematch-exact-promotion
     category: grounding
