@@ -620,6 +620,24 @@ causal_graphs:
         Inhibition of the Hog1 MAPK cascade derepresses BZP4 and LAC1 to
         increase cell-wall melanin biosynthesis in Cryptococcus neoformans
         H99.
+  - edge_id: e32
+    subject: hog1
+    predicate: negatively regulates
+    predicate_id: RO:0002212
+    object: laccase_activity
+    evidence:
+    - reference: PMID:15728721
+      notes: >-
+        In Cryptococcus neoformans H99, constitutively phosphorylated Hog1
+        MAPK (CNAG_01523, UniProtKB:Q56R42, EC:2.7.11.24) represses LAC1
+        expression and negatively regulates cell-wall diphenol oxidase
+        (hydroquinone:oxygen oxidoreductase / laccase) activity (GO:0052716)
+        under basal conditions.
+    - reference: PMID:31575776
+      notes: >-
+        Hog1 MAPK negatively regulates BZP4 and downstream LAC1 induction,
+        thereby repressing catecholamine-oxidizing laccase enzymatic activity
+        (GO:0052716) in Cryptococcus neoformans H99.
 curation_history:
 - timestamp: '2026-10-22T18:50:00Z'
   curator: add-uniprot-protein-examples
@@ -754,4 +772,13 @@ curation_history:
     proteome UP:UP000010091 with literature-backed expression and negative
     regulatory edges on BZP4, LAC1, and melanin biosynthesis (PMID:24743168,
     PMID:15728721, PMID:31575776).
+  llm_assisted: true
+- timestamp: '2026-11-10T11:20:00Z'
+  curator: curate-causal-graphs
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: >-
+    Added direct MAPK-to-molecular-function negative regulatory edge (edge e32,
+    hog1 RO:0002212 laccase_activity, PMID:15728721, PMID:31575776) linking
+    Hog1 (UniProtKB:Q56R42) to hydroquinone:oxygen oxidoreductase (laccase)
+    activity (GO:0052716).
   llm_assisted: true
