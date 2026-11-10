@@ -2149,7 +2149,9 @@ def test_overlay_readme_documents_current_seed_line_ranges_and_reciprocal_ec_num
     assert "302–347" not in overlay_readme
     assert "555–560" not in overlay_readme
     assert "653–670" not in overlay_readme
-    assert "lines 743–748,\n843–860" in overlay_readme or "lines 743–748, 843–860" in overlay_readme
+    assert "743–748" not in overlay_readme
+    assert "843–860" not in overlay_readme
+    assert "lines 803–808,\n903–920" in overlay_readme or "lines 803–808, 903–920" in overlay_readme
 
     ec_row_lines = [
         line for line in overlay_readme.splitlines() if line.startswith("| `ec_numbers` |")
@@ -2813,3 +2815,320 @@ def test_cycle9_stage6_uniprot_release_org_proteome_consistency_and_causal_graph
         "must be a host TAXON node" in f
         for f in failures
     )
+
+
+def test_cycle10_stage6_uniprot_gene_crc64_mnemonic_and_causal_graph_prefix_strain_id_gates(
+    tmp_path: Path,
+):
+    """Enforce per-organism (organism_taxon_id, gene_symbol) and (organism_taxon_id,
+    sequence_crc64) uniqueness, entry_name organism suffix consistency, and entry_status
+    prefix alignment in load_uniprot_proteins(), CausalNode.grounding prefix-to-node_type
+    domain isolation and single RO:0002292 (expresses) edge per GENE_OR_PROTEIN object in
+    validate_causal_graph_structure(), and required host-subtree strain_id provenance in
+    causal_graph_provenance_problems() (#249, #246, #78)."""
+    raw_lines = UNIPROT_PROTEINS_PATH.read_text(encoding="utf-8").splitlines()
+    header = raw_lines[0]
+    row_p00722 = next(line for line in raw_lines[1:] if line.startswith("UniProtKB:P00722\t"))
+    row_p02920 = next(line for line in raw_lines[1:] if line.startswith("UniProtKB:P02920\t"))
+    row_trembl = next(line for line in raw_lines[1:] if line.startswith("UniProtKB:A0A095C6P1\t"))
+
+    # 1a. Duplicate (organism_taxon_id, gene_symbol) rejected
+    dup_gene_tsv = tmp_path / "dup_gene.tsv"
+    dup_gene_tsv.write_text(
+        header + "\n" + row_p00722 + "\n" + row_p02920.replace("\tlacY\t", "\tlacZ\t", 1) + "\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(
+        SystemExit,
+        match=r"duplicate \(organism_taxon_id, gene_symbol\) \('NCBITaxon:83333', 'lacZ'\)",
+    ):
+        load_uniprot_proteins(dup_gene_tsv)
+
+    # 1b. Duplicate (organism_taxon_id, sequence_crc64) rejected
+    dup_crc_tsv = tmp_path / "dup_crc.tsv"
+    dup_crc_tsv.write_text(
+        header
+        + "\n"
+        + row_p00722
+        + "\n"
+        + row_p02920.replace("24A8062F628CDA32", "9D295EF4CEF90B08", 1)
+        + "\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(
+        SystemExit,
+        match=r"duplicate \(organism_taxon_id, sequence_crc64\) \('NCBITaxon:83333', '9D295EF4CEF90B08'\)",
+    ):
+        load_uniprot_proteins(dup_crc_tsv)
+
+    # 1c. Inconsistent entry_name organism suffix across the same organism_taxon_id rejected
+    bad_suffix_tsv = tmp_path / "bad_suffix.tsv"
+    bad_suffix_tsv.write_text(
+        header
+        + "\n"
+        + row_p00722
+        + "\n"
+        + row_p02920.replace("LACY_ECOLI", "LACY_BACSU", 1)
+        + "\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(
+        SystemExit,
+        match="inconsistent entry_name organism suffix 'BACSU' != 'ECOLI' for NCBITaxon:83333",
+    ):
+        load_uniprot_proteins(bad_suffix_tsv)
+
+    # 1d. TREMBL entry_name prefix != bare accession rejected
+    bad_trembl_tsv = tmp_path / "bad_trembl.tsv"
+    bad_trembl_tsv.write_text(
+        header + "\n" + row_trembl.replace("A0A095C6P1_9BASI", "CAP59_9BASI", 1) + "\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(
+        SystemExit,
+        match="TREMBL entry_name prefix 'CAP59' != accession 'A0A095C6P1'",
+    ):
+        load_uniprot_proteins(bad_trembl_tsv)
+
+    # 1e. SWISS_PROT entry_name prefix == bare accession rejected
+    bad_sp_tsv = tmp_path / "bad_sp.tsv"
+    bad_sp_tsv.write_text(
+        header + "\n" + row_p00722.replace("BGAL_ECOLI", "P00722_ECOLI", 1) + "\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(
+        SystemExit,
+        match="SWISS_PROT entry_name prefix 'P00722' must not equal accession 'P00722'",
+    ):
+        load_uniprot_proteins(bad_sp_tsv)
+
+    # 2a. Non-TAXON node using NCBITaxon: grounding rejected
+    non_taxon_ncbitaxon_graph = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "title": "Test",
+                "nodes": [
+                    {
+                        "node_id": "taxon",
+                        "label": "Escherichia coli",
+                        "node_type": "TAXON",
+                        "grounding": "NCBITaxon:562",
+                    },
+                    {
+                        "node_id": "proc_a",
+                        "label": "lactose transport",
+                        "node_type": "BIOLOGICAL_PROCESS",
+                        "grounding": "NCBITaxon:83333",
+                    },
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "taxon",
+                        "predicate": "capable of",
+                        "predicate_id": "RO:0002215",
+                        "object": "proc_a",
+                        "evidence": [{"reference": "PMID:7000781"}],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(
+        SystemExit,
+        match=r"non-TAXON node \(BIOLOGICAL_PROCESS\) cannot use NCBITaxon: grounding 'NCBITaxon:83333'",
+    ):
+        validate_causal_graph_structure(non_taxon_ncbitaxon_graph)
+
+    # 2b. Non-GENE_OR_PROTEIN node using UniProtKB: grounding rejected
+    non_protein_uniprot_graph = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "title": "Test",
+                "nodes": [
+                    {
+                        "node_id": "taxon",
+                        "label": "Escherichia coli",
+                        "node_type": "TAXON",
+                        "grounding": "NCBITaxon:562",
+                    },
+                    {
+                        "node_id": "func_a",
+                        "label": "beta-galactosidase activity",
+                        "node_type": "MOLECULAR_FUNCTION",
+                        "grounding": "UniProtKB:P00722",
+                    },
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "taxon",
+                        "predicate": "capable of",
+                        "predicate_id": "RO:0002215",
+                        "object": "func_a",
+                        "evidence": [{"reference": "PMID:7000781"}],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(
+        SystemExit,
+        match=(
+            r"non-GENE_OR_PROTEIN node \(MOLECULAR_FUNCTION\) "
+            r"cannot use UniProtKB: grounding 'UniProtKB:P00722'"
+        ),
+    ):
+        validate_causal_graph_structure(non_protein_uniprot_graph)
+
+    # 2c. GENE_OR_PROTEIN node with non-UNIPROT_ID_PATTERN grounding rejected
+    bad_protein_grounding_graph = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "title": "Test",
+                "nodes": [
+                    {
+                        "node_id": "taxon",
+                        "label": "Escherichia coli",
+                        "node_type": "TAXON",
+                        "grounding": "NCBITaxon:562",
+                    },
+                    {
+                        "node_id": "lacZ",
+                        "label": "Beta-galactosidase LacZ",
+                        "node_type": "GENE_OR_PROTEIN",
+                        "grounding": "GO:0004565",
+                    },
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "taxon",
+                        "predicate": "expresses",
+                        "predicate_id": "RO:0002292",
+                        "object": "lacZ",
+                        "evidence": [{"reference": "PMID:7000781"}],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(
+        SystemExit,
+        match="GENE_OR_PROTEIN grounding 'GO:0004565' must match UNIPROT_ID_PATTERN",
+    ):
+        validate_causal_graph_structure(bad_protein_grounding_graph)
+
+    # 2d. Duplicate RO:0002292 (expresses) edge targeting the same GENE_OR_PROTEIN object rejected
+    dup_expresses_graph = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "title": "Test",
+                "nodes": [
+                    {
+                        "node_id": "taxon",
+                        "label": "Escherichia coli",
+                        "node_type": "TAXON",
+                        "grounding": "NCBITaxon:562",
+                    },
+                    {
+                        "node_id": "sub_taxon",
+                        "label": "Escherichia coli K-12",
+                        "node_type": "TAXON",
+                        "grounding": "NCBITaxon:83333",
+                    },
+                    {
+                        "node_id": "lacZ",
+                        "label": "Beta-galactosidase LacZ",
+                        "node_type": "GENE_OR_PROTEIN",
+                        "grounding": "UniProtKB:P00722",
+                    },
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "taxon",
+                        "predicate": "expresses",
+                        "predicate_id": "RO:0002292",
+                        "object": "lacZ",
+                        "evidence": [{"reference": "PMID:7000781"}],
+                    },
+                    {
+                        "edge_id": "e2",
+                        "subject": "sub_taxon",
+                        "predicate": "expresses",
+                        "predicate_id": "RO:0002292",
+                        "object": "lacZ",
+                        "evidence": [{"reference": "PMID:9278503"}],
+                    },
+                ],
+            }
+        ]
+    }
+    with pytest.raises(
+        SystemExit,
+        match=r"duplicate RO:0002292 \(expresses\) edge targeting 'lacZ'",
+    ):
+        validate_causal_graph_structure(dup_expresses_graph)
+
+    # 3. causal_graph_provenance_problems detects missing strain_id when host taxon has a
+    # lineage-compatible BacDive strain in its subtree
+    script_path = REPO_ROOT / "scripts" / "check_provenance.py"
+    spec = importlib.util.spec_from_file_location("check_provenance", script_path)
+    mod = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(mod)
+
+    synth_root = tmp_path / "synth_repo_c10"
+    curation_dir = synth_root / "curation"
+    overlays_dir = curation_dir / "causal_graphs"
+    raw_dir = synth_root / "data" / "raw"
+    overlays_dir.mkdir(parents=True)
+    raw_dir.mkdir(parents=True)
+    (curation_dir / "uniprot_proteins.tsv").write_text(
+        header + "\n" + row_p00722 + "\n",
+        encoding="utf-8",
+    )
+    (curation_dir / "seed_scope.tsv").write_text(
+        "identifier\tadded\treason\nNCBITaxon:562\t2026-01-01\ttest\n",
+        encoding="utf-8",
+    )
+    (raw_dir / "ncbitaxon_taxa.tsv").write_text(
+        "taxon_id\tlabel\trank\tparent_id\n"
+        "NCBITaxon:2\tBacteria\tDOMAIN\t\n"
+        "NCBITaxon:561\tEscherichia\tGENUS\tNCBITaxon:2\n"
+        "NCBITaxon:562\tEscherichia coli\tSPECIES\tNCBITaxon:561\n"
+        "NCBITaxon:83333\tEscherichia coli K-12\tSTRAIN\tNCBITaxon:562\n",
+        encoding="utf-8",
+    )
+    (raw_dir / "bacdive_strains.tsv").write_text(
+        "strain_id\tlabel\tdesignations\tculture_collection_ids\ttaxon_ids\t"
+        "is_type_strain\tbacdive_id\tgenome_accessions\tbiosample_accessions\n"
+        "kgmicrobe.strain:bacdive_155687\tEscherichia coli MG1655\tMG1655\t"
+        "DSM:18039\tNCBITaxon:562\tfalse\tbacdive.strain:155687\t\t\n",
+        encoding="utf-8",
+    )
+    overlay_readme = (REPO_ROOT / "curation" / "causal_graphs" / "README.md").read_text(
+        encoding="utf-8"
+    )
+    match = re.search(r"```yaml\n(.*?)\n```", overlay_readme, flags=re.DOTALL)
+    assert match is not None
+    readme_doc = yaml.safe_load(match.group(1))
+    for n in readme_doc["causal_graphs"][0]["nodes"]:
+        if n.get("node_id") == "lacZ":
+            n.pop("strain_id", None)
+    (overlays_dir / "NCBITaxon_562.yaml").write_text(
+        yaml.safe_dump(readme_doc, sort_keys=False),
+        encoding="utf-8",
+    )
+    failures = mod.causal_graph_provenance_problems(synth_root)
+    assert any(
+        "node 'lacZ': GENE_OR_PROTEIN node missing required 'strain_id' for host taxon "
+        "NCBITaxon:562 with subtree BacDive strain" in f
+        for f in failures
+    )
+

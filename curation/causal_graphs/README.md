@@ -87,31 +87,32 @@ curation_history:
 Every `GENE_OR_PROTEIN` node in `curation/causal_graphs/*.yaml` must resolve
 offline against a row in `curation/uniprot_proteins.tsv` (registered in
 `conf/sources.yaml`). `load_uniprot_proteins()` (`src/taxonmech/seed.py` lines
-339–447) enforces the exact 14-column header tuple `UNIPROT_PROTEIN_FIELDS`
+339–484) enforces the exact 14-column header tuple `UNIPROT_PROTEIN_FIELDS`
 (`src/taxonmech/seed.py` lines 62–77):
 
 | Column (`UNIPROT_PROTEIN_FIELDS`) | Required? | Format / Validation Contract (`load_uniprot_proteins`, `validate_causal_graph_proteins`, & `causal_graph_provenance_problems`) |
 |---|---|---|
 | `uniprot_id` | Required (PK) | Unique `UniProtKB:<accession>` CURIE matching `UNIPROT_ID_PATTERN` and `CausalNode.grounding` |
-| `entry_name` | Required | Unique UniProtKB entry mnemonic matching `UNIPROT_ENTRY_NAME_PATTERN` (`^[A-Z0-9]{1,11}_[A-Z0-9]{2,5}$`, e.g. `BGAL_ECOLI`) |
+| `entry_name` | Required | Unique UniProtKB entry mnemonic matching `UNIPROT_ENTRY_NAME_PATTERN` (`^[A-Z0-9]{1,11}_[A-Z0-9]{2,5}$`, e.g. `BGAL_ECOLI`), consistent per-organism `_<org_code>` suffix across `organism_taxon_id`, and `entry_status` prefix alignment (`TREMBL` prefix equals bare accession; `SWISS_PROT` prefix differs from bare accession) |
 | `entry_status` | Required | `UniProtEntryStatusEnum` value (`SWISS_PROT` or `TREMBL`); must match `CausalNode.entry_status` |
 | `protein_name` | Required | Non-empty recommended or submitted protein name from UniProtKB |
 | `organism_taxon_id` | Required | Source organism `NCBITaxon:<id>` CURIE matching `NCBITAXON_ID_PATTERN`; must map consistently to `(organism_label, proteome_id)`, match `CausalNode.organism_taxon_id`, resolve to a species-or-below taxon (`_taxon_is_species_or_below`), and be lineage-compatible with the host `TaxonRecord.identifier` in `data/raw/ncbitaxon_taxa.tsv` |
 | `organism_label` | Required | Non-empty source organism scientific name from UniProtKB matching `data/raw/ncbitaxon_taxa.tsv` `label` for `organism_taxon_id` |
 | `proteome_id` | Optional | UniProt Proteome `UP:UP<9 digits>` CURIE matching `PROTEOME_ID_PATTERN` when present; mapped 1:1 to `organism_taxon_id` and must match `CausalNode.proteome_id` |
-| `gene_symbol` | Conditional | Primary gene symbol (at least one of `gene_symbol` or `locus_tag` must be non-empty); must match `CausalNode.gene_symbol` (or allow ORF fallback when `gene_symbol` is empty in TSV) |
+| `gene_symbol` | Conditional | Primary gene symbol (at least one of `gene_symbol` or `locus_tag` must be non-empty); unique per `(organism_taxon_id, gene_symbol)` when present, and must match `CausalNode.gene_symbol` (or allow ORF fallback when `gene_symbol` is empty in TSV) |
 | `locus_tag` | Conditional | Ordered locus / ORF tag (at least one of `gene_symbol` or `locus_tag` must be non-empty); unique per `(organism_taxon_id, locus_tag)` when present, and must match `CausalNode.locus_tag` |
-| `ec_numbers` | Optional | Pipe-delimited (`\|`) unique `EC:` CURIEs matching `EC_NUMBER_PATTERN` (`^EC:[1-7]\.(?:[0-9]+\|-)\.(?:[0-9]+\|-)\.(?:n?[0-9]+\|-)$`); any `EC:` CURIE in `CausalNode.xrefs` must appear here, and all full 4-part (non-wildcard) `EC:` CURIEs in `ec_numbers` must appear in `CausalNode.xrefs` in matching order (`scripts/check_provenance.py` lines 218–230) |
+| `ec_numbers` | Optional | Pipe-delimited (`\|`) unique `EC:` CURIEs matching `EC_NUMBER_PATTERN` (`^EC:[1-7]\.(?:[0-9]+\|-)\.(?:[0-9]+\|-)\.(?:n?[0-9]+\|-)$`); any `EC:` CURIE in `CausalNode.xrefs` must appear here, and all full 4-part (non-wildcard) `EC:` CURIEs in `ec_numbers` must appear in `CausalNode.xrefs` in matching order (`scripts/check_provenance.py` lines 244–256) |
 | `sequence_length` | Required | Positive integer canonical amino-acid length (`> 0`); must equal `CausalNode.sequence_length` |
-| `sequence_crc64` | Required | 16-character uppercase hex digest matching `CRC64_PATTERN` (`^[0-9A-F]{16}$`); must equal `CausalNode.sequence_crc64` |
+| `sequence_crc64` | Required | 16-character uppercase hex digest matching `CRC64_PATTERN` (`^[0-9A-F]{16}$`); unique per `(organism_taxon_id, sequence_crc64)` and must equal `CausalNode.sequence_crc64` |
 | `sequence_version` | Required | Positive integer sequence version (`> 0`); must equal `CausalNode.sequence_version` |
 | `release_version` | Required | Non-empty UniProtKB release pin matching `UNIPROT_RELEASE_PATTERN` (`^20[0-9]{2}_(?:0[1-9]\|1[0-2])$`, e.g. `2026_02`) |
 
 ### Species vs. Strain `strain_id` Binding Rule
 
 `CausalNode.strain_id` is an optional `GENE_OR_PROTEIN`-only slot validated by
-`validate_causal_graph_proteins()` (`src/taxonmech/seed.py` lines 743–748,
-843–860):
+`validate_causal_graph_proteins()` (`src/taxonmech/seed.py` lines 803–808,
+903–920) and `causal_graph_provenance_problems()` (`scripts/check_provenance.py`
+lines 218–241):
 
 - When present, `strain_id` must match `BACDIVE_STRAIN_ID_PATTERN`
   (`^kgmicrobe\.strain:bacdive_[1-9][0-9]*$`), exist in
@@ -179,17 +180,19 @@ offline against a row in `curation/uniprot_proteins.tsv` (registered in
    (`PROTEIN_ONLY_NODE_SLOTS`) exclusively to `GENE_OR_PROTEIN` nodes,
    `CURIE_PATTERN` syntax and non-duplication for `grounding` (across all
    grounded nodes in the same `CausalGraph`), `xrefs`, and `predicate_id`
-   (plus per-graph `predicate`↔`predicate_id` pairing consistency and required
-   `NCBITAXON_ID_PATTERN` `grounding` for `TAXON` nodes), referential integrity
-   of `edge.subject` and `edge.object` against `graph.nodes`, rejection of edges
-   targeting a `TAXON` node as `object` and enforcement that `RO:0002292`
-   (`expresses`) edges target a `GENE_OR_PROTEIN` `object`, full node
-   connectivity (no disconnected `node_id`s left unreferenced by any `edge`),
-   absence of self-loop edges (`subject != object`) and duplicate parallel
+   (plus per-graph `predicate`↔`predicate_id` pairing consistency, required
+   `NCBITAXON_ID_PATTERN` `grounding` exclusively on `TAXON` nodes, and
+   `UNIPROT_ID_PATTERN` `grounding` exclusively on `GENE_OR_PROTEIN` nodes),
+   referential integrity of `edge.subject` and `edge.object` against
+   `graph.nodes`, rejection of edges targeting a `TAXON` node as `object` and
+   enforcement that each `RO:0002292` (`expresses`) edge targets a unique
+   `GENE_OR_PROTEIN` `object`, full node connectivity (no disconnected
+   `node_id`s left unreferenced by any `edge`), absence of self-loop edges
+   (`subject != object`) and duplicate parallel
    `(subject, predicate_id or predicate, object)` edges, and non-empty,
    non-duplicate `evidence[].reference` citations matching
    `EVIDENCE_REFERENCE_PATTERN` (`PMID:`, `PMC:PMC`, `DOI:10.`, or `http(s)://`)
-   on every edge (#189, #199, #208, #216, #224, #234, #236, #246).
+   on every edge (#189, #199, #208, #216, #224, #234, #236, #246, #249).
 4. **Offline UniProtKB reference, NCBI Taxonomy lineage, and BacDive strain validation (`curation/uniprot_proteins.tsv`, `conf/sources.yaml`, `src/taxonmech/seed.py`, & `scripts/check_provenance.py`)**:
    `load_uniprot_proteins()`, `load_causal_graphs()`, `load_inventory()`, and
    `scripts/check_provenance.py` (`causal_graph_provenance_problems()`) enforce
@@ -199,8 +202,10 @@ offline against a row in `curation/uniprot_proteins.tsv` (registered in
    syntax, species-or-below scope (`_taxon_is_species_or_below`), required
    descriptive metadata (`entry_name`, `protein_name`, `organism_label`,
    `release_version`), `organism_label` correspondence with `ncbitaxon_taxa.tsv`,
-   catalog-wide `entry_name`, `(organism_taxon_id, locus_tag)`,
-   `organism_taxon_id`→`(organism_label, proteome_id)`, and
+   catalog-wide `entry_name`, `(organism_taxon_id, gene_symbol)`,
+   `(organism_taxon_id, locus_tag)`, `(organism_taxon_id, sequence_crc64)`,
+   per-organism `entry_name` `_<org_code>` suffix and `entry_status` prefix
+   alignment, `organism_taxon_id`→`(organism_label, proteome_id)`, and
    `proteome_id`→`organism_taxon_id` consistency, `gene_symbol` or `locus_tag`
    presence, and `EC_NUMBER_PATTERN` (`^EC:[1-7]\.(?:[0-9]+|-)\.(?:[0-9]+|-)\.(?:n?[0-9]+|-)$`)
    syntax/uniqueness on `curation/uniprot_proteins.tsv`; verify every
@@ -226,10 +231,12 @@ offline against a row in `curation/uniprot_proteins.tsv` (registered in
    any declared `strain_id` (`kgmicrobe.strain:bacdive_*`) against
    `data/raw/bacdive_strains.tsv`, the host taxon subtree
    (`s_tid == tid or tid in _taxon_lineage(taxa, s_tid)`), and
-   `organism_taxon_id` lineage; and verify that every overlay file in
-   `curation/causal_graphs/*.yaml` matches its `identifier` filename stem, is
-   included in `curation/seed_scope.tsv`, and carries a non-empty, schema-valid
-   `curation_history` list (#189, #199, #208, #216, #224, #234, #236, #246).
+   `organism_taxon_id` lineage (and require `strain_id` whenever the host taxon
+   subtree contains a lineage-compatible BacDive strain); and verify that every
+   overlay file in `curation/causal_graphs/*.yaml` matches its `identifier`
+   filename stem, is included in `curation/seed_scope.tsv`, and carries a
+   non-empty, schema-valid `curation_history` list (#189, #199, #208, #216, #224,
+   #234, #236, #246, #249).
 5. **Byte-exact corpus reproducibility (`scripts/verify_corpus.py`)**:
    `scripts/verify_corpus.py` loads `curation/causal_graphs/` through
    `build_corpus()` and compares every `data/taxa/<domain>/<slug>.yaml` against
