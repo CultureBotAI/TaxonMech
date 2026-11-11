@@ -83,7 +83,7 @@ Disposition: Tracked under open issue #78 and INFRA_TASKS.md task taxonmech-infr
 | Evidence | Reference / locator | Support | Observation |
 | --- | --- | --- | --- |
 | ev_uniprot_api | https://rest.uniprot.org/uniprotkb/{P0A6T3,P08874,Q9I4X3,Q58257,J9VX63}.json; UniProtKB release 2026_02 REST API JSON payloads | supports | Verified canonical accessions, entry names, SWISS_PROT review status, organism_taxon_id, proteome_id (UP:UP000000625, UP:UP000001570, UP:UP000002438, UP:UP000000805, UP:UP000010091), gene_symbol, locus_tag, EC numbers, sequence_length, sequence_crc64, and sequence_version for UniProtKB:P0A6T3 (GAL1_ECOLI), UniProtKB:P08874 (ABRB_BACSU), UniProtKB:Q9I4X3 (PQSA_PSEAE), UniProtKB:Q58257 (MTRE_METJA), and UniProtKB:J9VX63 (US101_CRYN9). |
-| ev_primary_literature | PMID:3158881; PMID:1327124; PMID:16524589; PMID:7966338; PMID:2513264; PMID:3096956; PMID:1901914; PMID:12142479; PMID:15066899; PMID:22325716; PMID:9603883; PMID:27668432; PMID:24743168; Europe PMC / PubMed indexed primary experimental and genome literature | supports | Primary literature supporting E. coli GalK galactokinase expression, CRP gal P1 activation, and Leloir galactose phosphorylation (PMID:9278503, PMID:3158881, PMID:16738553, PMID:1327124, PMID:16524589, PMID:7966338); B. subtilis AbrB transition-state repression by Spo0A~P and repression of spo0E/sigH (PMID:9384377, PMID:2513264, PMID:3096956, PMID:3121588, PMID:1901914, PMID:2113474); P. aeruginosa PqsA anthranilate-CoA ligase activation by MvfR/PqsR and PQS signaling to PhzM pyocyanin biosynthesis (PMID:10984043, PMID:12142479, PMID:15066899, PMID:18331462, PMID:16336047, PMID:22325716); M. jannaschii MtrE tetrahydromethanopterin S-methyltransferase subunit E complex formation with MtrA and coupling to McrA methanogenesis (PMID:8688087, PMID:9603883); and C. neoformans H99 Usv101 (CNAG_05420) C2H2 zinc-finger regulation of Rim101/CAP59 polysaccharide capsule assembly (PMID:24743168, PMID:27668432). |
+| ev_primary_literature | PMID:9278503; PMID:3158881; PMID:16738553; PMID:1327124; PMID:16524589; PMID:7966338; PMID:9384377; PMID:3145384; PMID:2504584; PMID:2554317; PMID:10984043; PMID:12426334; PMID:18083812; PMID:17083468; PMID:27678057; PMID:8688087; PMID:27342374; PMID:38530900; PMID:9367957; PMID:24743168; PMID:25849373; PMID:31575776; Europe PMC / PubMed indexed primary experimental and genome literature | supports | Primary literature supporting E. coli GalK galactokinase expression (RO:0002292), CRP gal P1 direct transcriptional activation (RO:0002629), and Leloir galactose phosphorylation upstream of lactose catabolism (RO:0002418; PMID:9278503, PMID:3158881, PMID:16738553, PMID:1327124, PMID:16524589, PMID:7966338); B. subtilis AbrB transition-state regulator expression (RO:0002292), direct transcriptional repression by Spo0A~P (RO:0002409), and direct transcriptional repression of spo0E (RO:0002409; PMID:9384377, PMID:3145384, PMID:2504584, PMID:2554317); P. aeruginosa PqsA anthranilate-CoA ligase expression (RO:0002292), direct transcriptional activation by MvfR/PqsR (RO:0002407), and positive autoregulatory co-inducer feedback on MvfR/PqsR (RO:0002213; PMID:10984043, PMID:12426334, PMID:18083812, PMID:17083468, PMID:27678057); M. jannaschii MtrE tetrahydromethanopterin S-methyltransferase subunit E expression (RO:0002292), MtrABCDEFGH holoenzyme assembly with MtrA (RO:0002418), and methyl transfer upstream of methanogenesis (RO:0002418; PMID:8688087, PMID:27342374, PMID:38530900, PMID:9367957); and C. neoformans H99 Usv101 (CNAG_05420) C2H2 zinc-finger expression (RO:0002292) and positive regulation of LAC1 and melanin biosynthesis (RO:0002213; PMID:24743168, PMID:25849373, PMID:31575776). |
 | ev_provenance_gate | scripts/check_provenance.py; causal_graph_provenance_problems() | supports | Offline provenance gate verified 0 errors across 64 UniProtKB rows, 141 GENE_OR_PROTEIN nodes, and 518 causal edges. |
 | ev_pytest_overlays | tests/test_causal_graph_overlays.py; 20 test functions in tests/test_causal_graph_overlays.py | supports | 20 passed in tests/test_causal_graph_overlays.py verifying catalog invariants, lineage/strain binding, and HTML rendering. |
 | ev_validate_strict | scripts/validate_strict.py; LinkML closed-schema validation of 15 TaxonRecord YAML files | supports | All 15 causal-graph TaxonRecord YAML files passed LinkML closed-schema validation with 0 failures. |
@@ -607,23 +607,29 @@ evidence:
     (PQSA_PSEAE), UniProtKB:Q58257 (MTRE_METJA), and UniProtKB:J9VX63 (US101_CRYN9).
 - evidence_id: ev_primary_literature
   kind: primary_source
-  reference: PMID:3158881; PMID:1327124; PMID:16524589; PMID:7966338; PMID:2513264;
-    PMID:3096956; PMID:1901914; PMID:12142479; PMID:15066899; PMID:22325716; PMID:9603883;
-    PMID:27668432; PMID:24743168
+  reference: PMID:9278503; PMID:3158881; PMID:16738553; PMID:1327124; PMID:16524589;
+    PMID:7966338; PMID:9384377; PMID:3145384; PMID:2504584; PMID:2554317; PMID:10984043;
+    PMID:12426334; PMID:18083812; PMID:17083468; PMID:27678057; PMID:8688087; PMID:27342374;
+    PMID:38530900; PMID:9367957; PMID:24743168; PMID:25849373; PMID:31575776
   locator: Europe PMC / PubMed indexed primary experimental and genome literature
   accessed_at: '2026-11-11T12:08:00Z'
   support: supports
-  summary: Primary literature supporting E. coli GalK galactokinase expression, CRP
-    gal P1 activation, and Leloir galactose phosphorylation (PMID:9278503, PMID:3158881,
+  summary: Primary literature supporting E. coli GalK galactokinase expression (RO:0002292),
+    CRP gal P1 direct transcriptional activation (RO:0002629), and Leloir galactose
+    phosphorylation upstream of lactose catabolism (RO:0002418; PMID:9278503, PMID:3158881,
     PMID:16738553, PMID:1327124, PMID:16524589, PMID:7966338); B. subtilis AbrB transition-state
-    repression by Spo0A~P and repression of spo0E/sigH (PMID:9384377, PMID:2513264,
-    PMID:3096956, PMID:3121588, PMID:1901914, PMID:2113474); P. aeruginosa PqsA anthranilate-CoA
-    ligase activation by MvfR/PqsR and PQS signaling to PhzM pyocyanin biosynthesis
-    (PMID:10984043, PMID:12142479, PMID:15066899, PMID:18331462, PMID:16336047, PMID:22325716);
-    M. jannaschii MtrE tetrahydromethanopterin S-methyltransferase subunit E complex
-    formation with MtrA and coupling to McrA methanogenesis (PMID:8688087, PMID:9603883);
-    and C. neoformans H99 Usv101 (CNAG_05420) C2H2 zinc-finger regulation of Rim101/CAP59
-    polysaccharide capsule assembly (PMID:24743168, PMID:27668432).
+    regulator expression (RO:0002292), direct transcriptional repression by Spo0A~P
+    (RO:0002409), and direct transcriptional repression of spo0E (RO:0002409; PMID:9384377,
+    PMID:3145384, PMID:2504584, PMID:2554317); P. aeruginosa PqsA anthranilate-CoA
+    ligase expression (RO:0002292), direct transcriptional activation by MvfR/PqsR
+    (RO:0002407), and positive autoregulatory co-inducer feedback on MvfR/PqsR (RO:0002213;
+    PMID:10984043, PMID:12426334, PMID:18083812, PMID:17083468, PMID:27678057); M.
+    jannaschii MtrE tetrahydromethanopterin S-methyltransferase subunit E expression
+    (RO:0002292), MtrABCDEFGH holoenzyme assembly with MtrA (RO:0002418), and methyl
+    transfer upstream of methanogenesis (RO:0002418; PMID:8688087, PMID:27342374,
+    PMID:38530900, PMID:9367957); and C. neoformans H99 Usv101 (CNAG_05420) C2H2 zinc-finger
+    expression (RO:0002292) and positive regulation of LAC1 and melanin biosynthesis
+    (RO:0002213; PMID:24743168, PMID:25849373, PMID:31575776).
 - evidence_id: ev_provenance_gate
   kind: validation
   reference: scripts/check_provenance.py
