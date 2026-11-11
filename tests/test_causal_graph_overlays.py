@@ -18,12 +18,14 @@ from taxonmech.seed import (
     CAUSAL_GRAPH_KEYS,
     CAUSAL_NODE_KEYS,
     CAUSAL_NODE_TYPES,
+    CHEBI_ID_PATTERN,
     CURATION_EVENT_KEYS,
     CURIE_PATTERN,
     EC_NUMBER_PATTERN,
     EDGE_ID_PATTERN,
     EVIDENCE_ITEM_KEYS,
     EVIDENCE_REFERENCE_PATTERN,
+    GO_ID_PATTERN,
     ISO_UTC_TIMESTAMP_PATTERN,
     NCBITAXON_ID_PATTERN,
     PROTEIN_ONLY_NODE_SLOTS,
@@ -2444,7 +2446,9 @@ def test_overlay_readme_documents_current_seed_line_ranges_and_reciprocal_ec_num
     assert "653–670" not in overlay_readme
     assert "743–748" not in overlay_readme
     assert "843–860" not in overlay_readme
-    assert "lines 803–808,\n903–920" in overlay_readme or "lines 803–808, 903–920" in overlay_readme
+    assert "803–808" not in overlay_readme
+    assert "903–920" not in overlay_readme
+    assert "lines 861–866,\n961–978" in overlay_readme or "lines 861–866, 961–978" in overlay_readme
 
     ec_row_lines = [
         line for line in overlay_readme.splitlines() if line.startswith("| `ec_numbers` |")
@@ -3424,4 +3428,340 @@ def test_cycle10_stage6_uniprot_gene_crc64_mnemonic_and_causal_graph_prefix_stra
         "NCBITaxon:562 with subtree BacDive strain" in f
         for f in failures
     )
+
+
+def test_cycle11_stage6_uniprot_sort_release_pin_and_causal_graph_chebi_go_homogeneity_gates(
+    tmp_path: Path,
+):
+    """Enforce strict ascending uniprot_id row ordering and single uniform release_version
+    pin in load_uniprot_proteins(), CHEBI_ID_PATTERN / GO_ID_PATTERN node grounding
+    validation and non-empty optional description/snippet/notes validation in
+    validate_causal_graph_structure(), and host-taxon TAXON node exclusivity plus
+    within-graph GENE_OR_PROTEIN organism_taxon_id/strain_id homogeneity in
+    causal_graph_provenance_problems() (#259, #256, #78)."""
+    assert CHEBI_ID_PATTERN.match("CHEBI:17716")
+    assert not CHEBI_ID_PATTERN.match("CHEBI:0")
+    assert GO_ID_PATTERN.match("GO:0019513")
+    assert not GO_ID_PATTERN.match("GO:19513")
+
+    raw_lines = UNIPROT_PROTEINS_PATH.read_text(encoding="utf-8").splitlines()
+    header = raw_lines[0]
+    row_p00722 = next(line for line in raw_lines[1:] if line.startswith("UniProtKB:P00722\t"))
+    row_p02920 = next(line for line in raw_lines[1:] if line.startswith("UniProtKB:P02920\t"))
+
+    # 1a. Out-of-order uniprot_id row rejected
+    unsorted_tsv = tmp_path / "unsorted.tsv"
+    unsorted_tsv.write_text(
+        header + "\n" + row_p02920 + "\n" + row_p00722 + "\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(
+        SystemExit,
+        match=(
+            r"out-of-order uniprot_id 'UniProtKB:P00722' after "
+            r"'UniProtKB:P02920' \(must be sorted ascending\)"
+        ),
+    ):
+        load_uniprot_proteins(unsorted_tsv)
+
+    # 1b. Mixed release_version catalog pin rejected
+    mixed_rel_tsv = tmp_path / "mixed_rel.tsv"
+    mixed_rel_tsv.write_text(
+        header + "\n" + row_p00722 + "\n" + row_p02920.replace("2026_02", "2026_03", 1) + "\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(
+        SystemExit,
+        match="inconsistent release_version '2026_03' != catalog pin '2026_02' for 'UniProtKB:P02920'",
+    ):
+        load_uniprot_proteins(mixed_rel_tsv)
+
+    # 2a. CHEMICAL node with non-CHEBI_ID_PATTERN grounding rejected
+    bad_chem_grounding = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "title": "Test",
+                "nodes": [
+                    {
+                        "node_id": "taxon",
+                        "label": "Escherichia coli",
+                        "node_type": "TAXON",
+                        "grounding": "NCBITaxon:562",
+                    },
+                    {
+                        "node_id": "chem_a",
+                        "label": "lactose",
+                        "node_type": "CHEMICAL",
+                        "grounding": "GO:0005988",
+                    },
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "taxon",
+                        "predicate": "capable of",
+                        "predicate_id": "RO:0002215",
+                        "object": "chem_a",
+                        "evidence": [{"reference": "PMID:7000781"}],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(
+        SystemExit,
+        match="CHEMICAL grounding 'GO:0005988' must match CHEBI_ID_PATTERN",
+    ):
+        validate_causal_graph_structure(bad_chem_grounding)
+
+    # 2b. Non-CHEMICAL node using CHEBI: grounding rejected
+    non_chem_chebi = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "title": "Test",
+                "nodes": [
+                    {
+                        "node_id": "taxon",
+                        "label": "Escherichia coli",
+                        "node_type": "TAXON",
+                        "grounding": "NCBITaxon:562",
+                    },
+                    {
+                        "node_id": "proc_a",
+                        "label": "lactose transport",
+                        "node_type": "BIOLOGICAL_PROCESS",
+                        "grounding": "CHEBI:17716",
+                    },
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "taxon",
+                        "predicate": "capable of",
+                        "predicate_id": "RO:0002215",
+                        "object": "proc_a",
+                        "evidence": [{"reference": "PMID:7000781"}],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(
+        SystemExit,
+        match=r"non-CHEMICAL node \(BIOLOGICAL_PROCESS\) cannot use CHEBI: grounding 'CHEBI:17716'",
+    ):
+        validate_causal_graph_structure(non_chem_chebi)
+
+    # 2c. BIOLOGICAL_PROCESS / MOLECULAR_FUNCTION node with non-GO_ID_PATTERN grounding rejected
+    bad_go_grounding = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "title": "Test",
+                "nodes": [
+                    {
+                        "node_id": "taxon",
+                        "label": "Escherichia coli",
+                        "node_type": "TAXON",
+                        "grounding": "NCBITaxon:562",
+                    },
+                    {
+                        "node_id": "proc_a",
+                        "label": "lactose transport",
+                        "node_type": "BIOLOGICAL_PROCESS",
+                        "grounding": "GO:15767",
+                    },
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "taxon",
+                        "predicate": "capable of",
+                        "predicate_id": "RO:0002215",
+                        "object": "proc_a",
+                        "evidence": [{"reference": "PMID:7000781"}],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(
+        SystemExit,
+        match="BIOLOGICAL_PROCESS grounding 'GO:15767' must match GO_ID_PATTERN",
+    ):
+        validate_causal_graph_structure(bad_go_grounding)
+
+    # 2d. Empty/whitespace-only CausalGraph.description, CausalNode.description,
+    # or EvidenceItem.snippet rejected
+    empty_gdesc = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "title": "Test",
+                "description": "   ",
+                "nodes": [
+                    {
+                        "node_id": "taxon",
+                        "label": "Escherichia coli",
+                        "node_type": "TAXON",
+                        "grounding": "NCBITaxon:562",
+                    },
+                    {
+                        "node_id": "proc_a",
+                        "label": "lactose transport",
+                        "node_type": "BIOLOGICAL_PROCESS",
+                        "grounding": "GO:0015767",
+                    },
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "taxon",
+                        "predicate": "capable of",
+                        "predicate_id": "RO:0002215",
+                        "object": "proc_a",
+                        "evidence": [{"reference": "PMID:7000781"}],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(
+        SystemExit,
+        match="requires non-empty string 'description' when present",
+    ):
+        validate_causal_graph_structure(empty_gdesc)
+
+    empty_snippet = {
+        "NCBITaxon:562": [
+            {
+                "graph_id": "g1",
+                "title": "Test",
+                "nodes": [
+                    {
+                        "node_id": "taxon",
+                        "label": "Escherichia coli",
+                        "node_type": "TAXON",
+                        "grounding": "NCBITaxon:562",
+                    },
+                    {
+                        "node_id": "proc_a",
+                        "label": "lactose transport",
+                        "node_type": "BIOLOGICAL_PROCESS",
+                        "grounding": "GO:0015767",
+                    },
+                ],
+                "edges": [
+                    {
+                        "edge_id": "e1",
+                        "subject": "taxon",
+                        "predicate": "capable of",
+                        "predicate_id": "RO:0002215",
+                        "object": "proc_a",
+                        "evidence": [{"reference": "PMID:7000781", "snippet": "   "}],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(
+        SystemExit,
+        match="evidence item requires non-empty string 'snippet' when present",
+    ):
+        validate_causal_graph_structure(empty_snippet)
+
+    # 3. causal_graph_provenance_problems detects non-host TAXON grounding and
+    # mixed GENE_OR_PROTEIN strain_id within the same CausalGraph
+    script_path = REPO_ROOT / "scripts" / "check_provenance.py"
+    spec = importlib.util.spec_from_file_location("check_provenance", script_path)
+    mod = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(mod)
+
+    synth_root = tmp_path / "synth_repo_c11"
+    curation_dir = synth_root / "curation"
+    overlays_dir = curation_dir / "causal_graphs"
+    raw_dir = synth_root / "data" / "raw"
+    overlays_dir.mkdir(parents=True)
+    raw_dir.mkdir(parents=True)
+    (curation_dir / "uniprot_proteins.tsv").write_text(
+        UNIPROT_PROTEINS_PATH.read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+    (curation_dir / "seed_scope.tsv").write_text(
+        "identifier\tadded\treason\nNCBITaxon:562\t2026-01-01\ttest\n",
+        encoding="utf-8",
+    )
+    (raw_dir / "ncbitaxon_taxa.tsv").write_text(
+        "taxon_id\tlabel\trank\tparent_id\n"
+        "NCBITaxon:2\tBacteria\tDOMAIN\t\n"
+        "NCBITaxon:561\tEscherichia\tGENUS\tNCBITaxon:2\n"
+        "NCBITaxon:562\tEscherichia coli\tSPECIES\tNCBITaxon:561\n"
+        "NCBITaxon:83333\tEscherichia coli K-12\tSTRAIN\tNCBITaxon:562\n"
+        "NCBITaxon:224308\tBacillus subtilis subsp. subtilis str. 168\tSTRAIN\tNCBITaxon:562\n"
+        "NCBITaxon:208964\tPseudomonas aeruginosa PAO1\tSTRAIN\tNCBITaxon:562\n"
+        "NCBITaxon:243232\tMethanocaldococcus jannaschii DSM 2661\tSTRAIN\tNCBITaxon:562\n"
+        "NCBITaxon:294750\tCryptococcus deuterogattii R265\tSTRAIN\tNCBITaxon:562\n"
+        "NCBITaxon:235443\tCryptococcus neoformans H99\tSTRAIN\tNCBITaxon:562\n"
+        "NCBITaxon:283643\tCryptococcus deneoformans B-3501A\tSTRAIN\tNCBITaxon:562\n",
+        encoding="utf-8",
+    )
+    (raw_dir / "bacdive_strains.tsv").write_text(
+        "strain_id\tlabel\tdesignations\tculture_collection_ids\ttaxon_ids\t"
+        "is_type_strain\tbacdive_id\tgenome_accessions\tbiosample_accessions\n"
+        "kgmicrobe.strain:bacdive_155687\tEscherichia coli MG1655\tMG1655\t"
+        "DSM:18039\tNCBITaxon:562\tfalse\tbacdive.strain:155687\t\t\n"
+        "kgmicrobe.strain:bacdive_155688\tEscherichia coli K-12\tK-12\t"
+        "DSM:498\tNCBITaxon:562\tfalse\tbacdive.strain:155688\t\t\n",
+        encoding="utf-8",
+    )
+    ecoli_data = yaml.safe_load(
+        (REPO_ROOT / "curation" / "causal_graphs" / "NCBITaxon_562.yaml").read_text(
+            encoding="utf-8"
+        )
+    )
+    graph0 = ecoli_data["causal_graphs"][0]
+    graph0["nodes"].append(
+        {
+            "node_id": "extra_taxon",
+            "label": "Escherichia coli K-12",
+            "node_type": "TAXON",
+            "grounding": "NCBITaxon:83333",
+        }
+    )
+    graph0["edges"].append(
+        {
+            "edge_id": "extra_taxon_edge",
+            "subject": "extra_taxon",
+            "predicate": "capable of",
+            "predicate_id": "RO:0002215",
+            "object": "lactose_transport",
+            "evidence": [
+                {
+                    "reference": "PMID:9278503",
+                    "snippet": "Synthetic extra taxon edge for test.",
+                }
+            ],
+        }
+    )
+    for n in graph0["nodes"]:
+        if n.get("node_id") == "lacZ":
+            n["strain_id"] = "kgmicrobe.strain:bacdive_155688"
+    (overlays_dir / "NCBITaxon_562.yaml").write_text(
+        yaml.safe_dump(ecoli_data, sort_keys=False),
+        encoding="utf-8",
+    )
+    failures = mod.causal_graph_provenance_problems(synth_root)
+    assert any(
+        "node 'extra_taxon': TAXON grounding 'NCBITaxon:83333' != host taxon 'NCBITaxon:562'" in f
+        for f in failures
+    )
+    assert any(
+        "node 'lacZ': inconsistent GENE_OR_PROTEIN strain_id "
+        "'kgmicrobe.strain:bacdive_155688' != 'kgmicrobe.strain:bacdive_155687'" in f
+        for f in failures
+    )
+
 

@@ -84,6 +84,8 @@ UNIPROT_ENTRY_NAME_PATTERN = re.compile(r"^[A-Z0-9]{1,11}_[A-Z0-9]{2,5}$")
 UNIPROT_RELEASE_PATTERN = re.compile(r"^20[0-9]{2}_(?:0[1-9]|1[0-2])$")
 NCBITAXON_ID_PATTERN = re.compile(r"^NCBITaxon:[1-9][0-9]*$")
 PROTEOME_ID_PATTERN = re.compile(r"^UP:UP[0-9]{9}$")
+CHEBI_ID_PATTERN = re.compile(r"^CHEBI:[1-9][0-9]*$")
+GO_ID_PATTERN = re.compile(r"^GO:[0-9]{7}$")
 CURIE_PATTERN = re.compile(r"^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$")
 EDGE_ID_PATTERN = re.compile(r"^[A-Za-z][A-Za-z0-9_-]*$")
 EC_NUMBER_PATTERN = re.compile(r"^EC:[1-7]\.(?:[0-9]+|-)\.(?:[0-9]+|-)\.(?:n?[0-9]+|-)$")
@@ -352,6 +354,8 @@ def load_uniprot_proteins(
     seen_org_meta: dict[str, tuple[str, str]] = {}
     seen_org_mnemonic_suffix: dict[str, str] = {}
     seen_proteome_org: dict[str, str] = {}
+    prev_uid: str | None = None
+    pinned_release_version: str | None = None
     with path.open(newline="", encoding="utf-8") as fh:
         reader = csv.DictReader(fh, delimiter="\t")
         if tuple(reader.fieldnames or ()) != UNIPROT_PROTEIN_FIELDS:
@@ -364,6 +368,12 @@ def load_uniprot_proteins(
                 raise SystemExit(f"{path}:{line_no}: invalid uniprot_id {uid!r}")
             if uid in proteins:
                 raise SystemExit(f"{path}:{line_no}: duplicate uniprot_id {uid!r}")
+            if prev_uid is not None and uid < prev_uid:
+                raise SystemExit(
+                    f"{path}:{line_no}: out-of-order uniprot_id {uid!r} after "
+                    f"{prev_uid!r} (must be sorted ascending)"
+                )
+            prev_uid = uid
             if row.get("entry_status") not in ("SWISS_PROT", "TREMBL"):
                 raise SystemExit(f"{path}:{line_no}: invalid entry_status for {uid!r}")
             org_tid = (row.get("organism_taxon_id") or "").strip()
@@ -411,6 +421,13 @@ def load_uniprot_proteins(
             if not UNIPROT_RELEASE_PATTERN.match(release_ver):
                 raise SystemExit(
                     f"{path}:{line_no}: invalid release_version {release_ver!r} for {uid!r}"
+                )
+            if pinned_release_version is None:
+                pinned_release_version = release_ver
+            elif release_ver != pinned_release_version:
+                raise SystemExit(
+                    f"{path}:{line_no}: inconsistent release_version {release_ver!r} != "
+                    f"catalog pin {pinned_release_version!r} for {uid!r}"
                 )
             entry_name = (row.get("entry_name") or "").strip()
             if not UNIPROT_ENTRY_NAME_PATTERN.match(entry_name):
@@ -533,6 +550,9 @@ def validate_causal_graph_structure(
             unknown_g_keys = sorted(set(graph) - CAUSAL_GRAPH_KEYS)
             if unknown_g_keys:
                 raise SystemExit(f"{g_ctx}: unexpected CausalGraph keys: {unknown_g_keys}")
+            raw_gdesc = graph.get("description")
+            if raw_gdesc is not None and (not isinstance(raw_gdesc, str) or not raw_gdesc.strip()):
+                raise SystemExit(f"{g_ctx}: requires non-empty string 'description' when present")
             nodes = graph.get("nodes")
             seen_node_ids: set[str] = set()
             seen_node_labels: set[str] = set()
@@ -603,6 +623,35 @@ def validate_causal_graph_structure(
                         raise SystemExit(
                             f"{n_ctx}: non-GENE_OR_PROTEIN node ({ntype}) cannot use "
                             f"UniProtKB: grounding {grounding!r}"
+                        )
+                    if ntype == "CHEMICAL":
+                        if grounding and not CHEBI_ID_PATTERN.match(grounding):
+                            raise SystemExit(
+                                f"{n_ctx}: CHEMICAL grounding {grounding!r} "
+                                f"must match CHEBI_ID_PATTERN"
+                            )
+                    elif grounding.startswith("CHEBI:"):
+                        raise SystemExit(
+                            f"{n_ctx}: non-CHEMICAL node ({ntype}) cannot use "
+                            f"CHEBI: grounding {grounding!r}"
+                        )
+                    if ntype in ("BIOLOGICAL_PROCESS", "MOLECULAR_FUNCTION", "CELLULAR_COMPONENT"):
+                        if grounding and not GO_ID_PATTERN.match(grounding):
+                            raise SystemExit(
+                                f"{n_ctx}: {ntype} grounding {grounding!r} "
+                                f"must match GO_ID_PATTERN"
+                            )
+                    elif grounding.startswith("GO:") and not GO_ID_PATTERN.match(grounding):
+                        raise SystemExit(
+                            f"{n_ctx}: invalid GO grounding {grounding!r}; "
+                            f"must match GO_ID_PATTERN"
+                        )
+                    raw_ndesc = node.get("description")
+                    if raw_ndesc is not None and (
+                        not isinstance(raw_ndesc, str) or not raw_ndesc.strip()
+                    ):
+                        raise SystemExit(
+                            f"{n_ctx}: requires non-empty string 'description' when present"
                         )
                     raw_xrefs = node.get("xrefs")
                     if raw_xrefs is not None:
@@ -722,6 +771,15 @@ def validate_causal_graph_structure(
                         if ref in seen_ev_refs:
                             raise SystemExit(f"{e_ctx}: duplicate evidence reference {ref!r}")
                         seen_ev_refs.add(ref)
+                        for ev_field in ("snippet", "notes"):
+                            raw_ev_val = ev.get(ev_field)
+                            if raw_ev_val is not None and (
+                                not isinstance(raw_ev_val, str) or not raw_ev_val.strip()
+                            ):
+                                raise SystemExit(
+                                    f"{e_ctx}: evidence item requires non-empty string "
+                                    f"{ev_field!r} when present"
+                                )
                 if nodes is not None:
                     orphan_nodes = sorted(seen_node_ids - connected_node_ids)
                     if orphan_nodes:

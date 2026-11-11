@@ -178,6 +178,8 @@ def causal_graph_provenance_problems(repo_root: Path = REPO_ROOT) -> list[str]:
                     for e in (graph.get("edges") or [])
                     if isinstance(e, dict)
                 }
+                graph_org_tid: str | None = None
+                graph_strain_id: str | None = None
                 for node in graph.get("nodes") or []:
                     if not isinstance(node, dict):
                         continue
@@ -193,17 +195,51 @@ def causal_graph_provenance_problems(repo_root: Path = REPO_ROOT) -> list[str]:
                             f"causal-graph overlay {tid} graph {gid!r} node {nid!r}: "
                             f"missing 'grounding' CURIE"
                         )
-                    if node.get("node_type") == "TAXON" and n_grounding and taxa is not None:
-                        expected_t_label = (taxa.get(n_grounding) or {}).get("label", "").strip()
-                        if expected_t_label and n_label != expected_t_label:
+                    if node.get("node_type") == "TAXON" and n_grounding:
+                        if n_grounding != tid:
                             failures.append(
                                 f"causal-graph overlay {tid} graph {gid!r} node {nid!r}: "
-                                f"TAXON label {n_label!r} != ncbitaxon_taxa.tsv label "
-                                f"{expected_t_label!r} for {n_grounding}"
+                                f"TAXON grounding {n_grounding!r} != host taxon {tid!r}"
                             )
+                        if taxa is not None:
+                            expected_t_label = (taxa.get(n_grounding) or {}).get("label", "").strip()
+                            if expected_t_label and n_label != expected_t_label:
+                                failures.append(
+                                    f"causal-graph overlay {tid} graph {gid!r} node {nid!r}: "
+                                    f"TAXON label {n_label!r} != ncbitaxon_taxa.tsv label "
+                                    f"{expected_t_label!r} for {n_grounding}"
+                                )
                     if node.get("node_type") != "GENE_OR_PROTEIN":
                         continue
                     uid = n_grounding
+                    org_tid = (
+                        (node.get("organism_taxon_id") or "").strip()
+                        if isinstance(node.get("organism_taxon_id"), str)
+                        else ""
+                    )
+                    node_strain_id = (
+                        (node.get("strain_id") or "").strip()
+                        if isinstance(node.get("strain_id"), str)
+                        else ""
+                    )
+                    if org_tid:
+                        if graph_org_tid is None:
+                            graph_org_tid = org_tid
+                        elif org_tid != graph_org_tid:
+                            failures.append(
+                                f"causal-graph overlay {tid} graph {gid!r} node {nid!r}: "
+                                f"inconsistent GENE_OR_PROTEIN organism_taxon_id {org_tid!r} != "
+                                f"{graph_org_tid!r} in graph {gid!r}"
+                            )
+                    if node_strain_id:
+                        if graph_strain_id is None:
+                            graph_strain_id = node_strain_id
+                        elif node_strain_id != graph_strain_id:
+                            failures.append(
+                                f"causal-graph overlay {tid} graph {gid!r} node {nid!r}: "
+                                f"inconsistent GENE_OR_PROTEIN strain_id {node_strain_id!r} != "
+                                f"{graph_strain_id!r} in graph {gid!r}"
+                            )
                     if host_taxon_nids and nid not in expressed_nids:
                         failures.append(
                             f"causal-graph overlay {tid} graph {gid!r} node {nid!r}: "
@@ -216,16 +252,6 @@ def causal_graph_provenance_problems(repo_root: Path = REPO_ROOT) -> list[str]:
                             f"GENE_OR_PROTEIN node has no outgoing functional/regulatory/causal edge"
                         )
                     if strains is not None and taxa is not None:
-                        org_tid = (
-                            (node.get("organism_taxon_id") or "").strip()
-                            if isinstance(node.get("organism_taxon_id"), str)
-                            else ""
-                        )
-                        node_strain_id = (
-                            (node.get("strain_id") or "").strip()
-                            if isinstance(node.get("strain_id"), str)
-                            else ""
-                        )
                         has_subtree_strain = any(
                             s_tid in taxa
                             and (s_tid == tid or tid in _taxon_lineage(taxa, s_tid))
