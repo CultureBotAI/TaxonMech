@@ -76,6 +76,12 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                     ),
                     "nodes": [
                         {
+                            "node_id": "taxon",
+                            "label": "Escherichia coli",
+                            "node_type": "TAXON",
+                            "grounding": "NCBITaxon:562",
+                        },
+                        {
                             "node_id": "lacZ",
                             "label": "Beta-galactosidase LacZ",
                             "node_type": "GENE_OR_PROTEIN",
@@ -100,6 +106,22 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                     ],
                     "edges": [
                         {
+                            "edge_id": "taxon-expresses-lacz",
+                            "subject": "taxon",
+                            "predicate": "expresses",
+                            "predicate_id": "RO:0002292",
+                            "object": "lacZ",
+                            "evidence": [
+                                {
+                                    "reference": "PMID:9278503",
+                                    "snippet": (
+                                        "Complete genome sequence of Escherichia coli K-12 "
+                                        "MG1655 annotates the lacZYA lactose operon."
+                                    ),
+                                }
+                            ],
+                        },
+                        {
                             "edge_id": "lacz-lactose-catabolism",
                             "subject": "lacZ",
                             "predicate": "capable of",
@@ -114,7 +136,7 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                                     ),
                                 }
                             ],
-                        }
+                        },
                     ],
                 }
             ],
@@ -124,6 +146,7 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                     "curator": "stage6-canary",
                     "action": "UPDATED",
                     "changes": "Added verified LacZ causal graph overlay for NCBITaxon:562.",
+                    "llm_assisted": True,
                 }
             ],
         },
@@ -140,6 +163,12 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                     "graph_id": "bsubtilis-sporulation-spo0a",
                     "title": "Bacillus subtilis Spo0A master regulation of endospore formation",
                     "nodes": [
+                        {
+                            "node_id": "taxon",
+                            "label": "Bacillus subtilis",
+                            "node_type": "TAXON",
+                            "grounding": "NCBITaxon:1423",
+                        },
                         {
                             "node_id": "spo0A",
                             "label": "Stage 0 sporulation protein A",
@@ -164,6 +193,22 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                     ],
                     "edges": [
                         {
+                            "edge_id": "taxon-expresses-spo0a",
+                            "subject": "taxon",
+                            "predicate": "expresses",
+                            "predicate_id": "RO:0002292",
+                            "object": "spo0A",
+                            "evidence": [
+                                {
+                                    "reference": "PMID:9384377",
+                                    "snippet": (
+                                        "Bacillus subtilis 168 genome and Spo0A phosphorelay "
+                                        "control initiation of endospore formation."
+                                    ),
+                                }
+                            ],
+                        },
+                        {
                             "edge_id": "spo0a-endospore-formation",
                             "subject": "spo0A",
                             "predicate": "positively regulates",
@@ -178,8 +223,17 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                                     ),
                                 }
                             ],
-                        }
+                        },
                     ],
+                }
+            ],
+            "curation_history": [
+                {
+                    "timestamp": "2026-10-22T06:00:00Z",
+                    "curator": "stage6-canary",
+                    "action": "UPDATED",
+                    "changes": "Added verified Spo0A causal graph overlay for NCBITaxon:1423.",
+                    "llm_assisted": True,
                 }
             ],
         },
@@ -196,6 +250,12 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                     "graph_id": "paeruginosa-pyocyanin-biosynthesis",
                     "title": "Pseudomonas aeruginosa PhzM/PhzS pyocyanin biosynthesis",
                     "nodes": [
+                        {
+                            "node_id": "taxon",
+                            "label": "Pseudomonas aeruginosa",
+                            "node_type": "TAXON",
+                            "grounding": "NCBITaxon:287",
+                        },
                         {
                             "node_id": "phzM",
                             "label": "Phenazine-specific methyltransferase PhzM",
@@ -221,6 +281,22 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                     ],
                     "edges": [
                         {
+                            "edge_id": "taxon-expresses-phzm",
+                            "subject": "taxon",
+                            "predicate": "expresses",
+                            "predicate_id": "RO:0002292",
+                            "object": "phzM",
+                            "evidence": [
+                                {
+                                    "reference": "PMID:11591691",
+                                    "snippet": (
+                                        "PhzM and PhzS convert phenazine-1-carboxylic acid "
+                                        "to pyocyanin in Pseudomonas aeruginosa PAO1."
+                                    ),
+                                }
+                            ],
+                        },
+                        {
                             "edge_id": "phzm-pyocyanin-biosynthesis",
                             "subject": "phzM",
                             "predicate": "capable of",
@@ -235,8 +311,17 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                                     ),
                                 }
                             ],
-                        }
+                        },
                     ],
+                }
+            ],
+            "curation_history": [
+                {
+                    "timestamp": "2026-10-22T06:00:00Z",
+                    "curator": "stage6-canary",
+                    "action": "UPDATED",
+                    "changes": "Added verified PhzM causal graph overlay for NCBITaxon:287.",
+                    "llm_assisted": True,
                 }
             ],
         },
@@ -253,6 +338,12 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                     "graph_id": "mjannaschii-methanogenesis-mcra",
                     "title": "Methanocaldococcus jannaschii methyl-coenzyme M reductase methanogenesis",
                     "nodes": [
+                        {
+                            "node_id": "taxon",
+                            "label": "Methanocaldococcus jannaschii",
+                            "node_type": "TAXON",
+                            "grounding": "NCBITaxon:2190",
+                        },
                         {
                             "node_id": "mcrA",
                             "label": "Methyl-coenzyme M reductase I subunit alpha",
@@ -278,6 +369,22 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                     ],
                     "edges": [
                         {
+                            "edge_id": "taxon-expresses-mcra",
+                            "subject": "taxon",
+                            "predicate": "expresses",
+                            "predicate_id": "RO:0002292",
+                            "object": "mcrA",
+                            "evidence": [
+                                {
+                                    "reference": "PMID:8688087",
+                                    "snippet": (
+                                        "Complete genome sequence of the methanogenic archaeon "
+                                        "Methanococcus jannaschii DSM 2661 encodes McrABG."
+                                    ),
+                                }
+                            ],
+                        },
+                        {
                             "edge_id": "mcra-methanogenesis",
                             "subject": "mcrA",
                             "predicate": "capable of",
@@ -292,8 +399,17 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                                     ),
                                 }
                             ],
-                        }
+                        },
                     ],
+                }
+            ],
+            "curation_history": [
+                {
+                    "timestamp": "2026-10-22T06:00:00Z",
+                    "curator": "stage6-canary",
+                    "action": "UPDATED",
+                    "changes": "Added verified McrA causal graph overlay for NCBITaxon:2190.",
+                    "llm_assisted": True,
                 }
             ],
         },
@@ -311,13 +427,18 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                     "title": "Cryptococcus deuterogattii R265 Cap59 polysaccharide capsule assembly",
                     "nodes": [
                         {
+                            "node_id": "taxon",
+                            "label": "Cryptococcus deuterogattii",
+                            "node_type": "TAXON",
+                            "grounding": "NCBITaxon:1859096",
+                        },
+                        {
                             "node_id": "CNBG_1207",
                             "label": "Alpha-1,3-mannosyltransferase (CAP59 family)",
                             "node_type": "GENE_OR_PROTEIN",
                             "grounding": "UniProtKB:A0A095C6P1",
                             "organism_taxon_id": "NCBITaxon:294750",
                             "proteome_id": "UP:UP000029445",
-                            "gene_symbol": "CNBG_1207",
                             "locus_tag": "CNBG_1207",
                             "sequence_length": 457,
                             "sequence_crc64": "1EE9B113AD99C774",
@@ -333,6 +454,22 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                     ],
                     "edges": [
                         {
+                            "edge_id": "taxon-expresses-cnbg1207",
+                            "subject": "taxon",
+                            "predicate": "expresses",
+                            "predicate_id": "RO:0002292",
+                            "object": "CNBG_1207",
+                            "evidence": [
+                                {
+                                    "reference": "PMID:21304167",
+                                    "snippet": (
+                                        "Comparative genomics of Cryptococcus gattii VGII R265 "
+                                        "identifies conserved capsule biosynthesis determinants."
+                                    ),
+                                }
+                            ],
+                        },
+                        {
                             "edge_id": "cnbg1207-capsule-organization",
                             "subject": "CNBG_1207",
                             "predicate": "capable of",
@@ -347,8 +484,17 @@ STAGE2_STAGE3_EXEMPLAR_OVERLAYS: dict[str, dict] = {
                                     ),
                                 }
                             ],
-                        }
+                        },
                     ],
+                }
+            ],
+            "curation_history": [
+                {
+                    "timestamp": "2026-10-22T06:00:00Z",
+                    "curator": "stage6-canary",
+                    "action": "UPDATED",
+                    "changes": "Added verified Cap59/CNBG_1207 causal graph overlay for NCBITaxon:1859096.",
+                    "llm_assisted": True,
                 }
             ],
         },
@@ -424,8 +570,10 @@ def _make_minimal_inventory(
 
 def test_five_exemplar_causal_graph_overlays_roundtrip_and_render(tmp_path):
     """Exercise all 5 Stage 2 / Stage 3 exemplars through load_causal_graphs,
+    validate_causal_graph_structure, validate_causal_graph_events,
+    validate_causal_graph_proteins, causal_graph_provenance_problems,
     build_document, LinkML write_validated_taxon, emit_taxon_yaml roundtrip,
-    id_label_targets prefix config, and HTML template rendering (#78)."""
+    id_label_targets prefix config, and HTML template rendering (#256, #249, #246, #78)."""
     overlays_dir = tmp_path / "causal_graphs"
     overlays_dir.mkdir()
     for tid, spec in STAGE2_STAGE3_EXEMPLAR_OVERLAYS.items():
@@ -436,7 +584,13 @@ def test_five_exemplar_causal_graph_overlays_roundtrip_and_render(tmp_path):
 
     graphs, events = load_causal_graphs(overlays_dir)
     assert set(graphs) == set(STAGE2_STAGE3_EXEMPLAR_OVERLAYS)
-    assert "NCBITaxon:562" in events and len(events["NCBITaxon:562"]) == 1
+    assert set(events) == set(STAGE2_STAGE3_EXEMPLAR_OVERLAYS)
+    for tid in STAGE2_STAGE3_EXEMPLAR_OVERLAYS:
+        assert len(events[tid]) == 1
+        assert events[tid][0].get("llm_assisted") is True
+
+    validate_causal_graph_structure(graphs)
+    validate_causal_graph_events(events)
 
     inventory = _make_minimal_inventory(graphs, events)
     env = Environment(
@@ -480,13 +634,35 @@ def test_five_exemplar_causal_graph_overlays_roundtrip_and_render(tmp_path):
         assert "causal_graphs" in doc
         assert len(doc["causal_graphs"]) == 1
 
-        node0 = doc["causal_graphs"][0]["nodes"][0]
+        taxon_nodes = [
+            n for n in doc["causal_graphs"][0]["nodes"] if n["node_type"] == "TAXON"
+        ]
+        assert len(taxon_nodes) == 1
+        assert taxon_nodes[0]["node_id"] == "taxon"
+        assert taxon_nodes[0]["grounding"] == tid
+        assert taxon_nodes[0]["label"] == _spec["label"]
+
+        protein_nodes = [
+            n for n in doc["causal_graphs"][0]["nodes"] if n["node_type"] == "GENE_OR_PROTEIN"
+        ]
+        assert len(protein_nodes) == 1
+        node0 = protein_nodes[0]
         assert node0["node_type"] == "GENE_OR_PROTEIN"
         assert node0["grounding"].startswith("UniProtKB:")
         assert node0["organism_taxon_id"].startswith("NCBITaxon:")
         assert node0.get("strain_id") == expected_exemplar_strains[tid]
         assert node0["proteome_id"].startswith("UP:UP")
         assert node0["entry_status"] in ("SWISS_PROT", "TREMBL")
+
+        expresses_edges = [
+            e
+            for e in doc["causal_graphs"][0]["edges"]
+            if e.get("predicate_id") == "RO:0002292"
+        ]
+        assert len(expresses_edges) == 1
+        assert expresses_edges[0]["subject"] == "taxon"
+        assert expresses_edges[0]["predicate"] == "expresses"
+        assert expresses_edges[0]["object"] == node0["node_id"]
 
         # Validate & write via write_validated_taxon (LinkML validation gate)
         out_path = out_taxa_dir / f"{tid.replace(':', '_')}.yaml"
@@ -529,6 +705,118 @@ def test_five_exemplar_causal_graph_overlays_roundtrip_and_render(tmp_path):
         assert doc["causal_graphs"][0]["title"] in html
         assert node0["label"] in html
         assert id_label_mod is not None
+
+    # Verify all 5 STAGE2_STAGE3_EXEMPLAR_OVERLAYS pass validate_causal_graph_proteins()
+    # and causal_graph_provenance_problems() in scripts/check_provenance.py (#256, #249, #78)
+    synth_root = tmp_path / "synth_exemplars"
+    curation_dir = synth_root / "curation"
+    synth_overlays_dir = curation_dir / "causal_graphs"
+    raw_dir = synth_root / "data" / "raw"
+    synth_overlays_dir.mkdir(parents=True)
+    raw_dir.mkdir(parents=True)
+    for tid, spec in STAGE2_STAGE3_EXEMPLAR_OVERLAYS.items():
+        slug = tid.replace(":", "_")
+        (synth_overlays_dir / f"{slug}.yaml").write_text(
+            yaml.safe_dump(spec["overlay"], sort_keys=False), encoding="utf-8"
+        )
+    exemplar_uids = {
+        "UniProtKB:P00722",
+        "UniProtKB:P06534",
+        "UniProtKB:Q9HWH2",
+        "UniProtKB:Q58256",
+        "UniProtKB:A0A095C6P1",
+    }
+    raw_uniprot_lines = UNIPROT_PROTEINS_PATH.read_text(encoding="utf-8").splitlines()
+    uniprot_header = raw_uniprot_lines[0]
+    selected_uniprot_rows = [
+        line
+        for line in raw_uniprot_lines[1:]
+        if line.split("\t", 1)[0] in exemplar_uids
+    ]
+    assert len(selected_uniprot_rows) == 5
+    (curation_dir / "uniprot_proteins.tsv").write_text(
+        uniprot_header + "\n" + "\n".join(selected_uniprot_rows) + "\n",
+        encoding="utf-8",
+    )
+    scope_lines = ["identifier\tadded\treason"] + [
+        f"{tid}\t2026-01-01\texemplar test" for tid in STAGE2_STAGE3_EXEMPLAR_OVERLAYS
+    ]
+    (curation_dir / "seed_scope.tsv").write_text(
+        "\n".join(scope_lines) + "\n",
+        encoding="utf-8",
+    )
+    taxa_rows = dict(inventory.taxa)
+    strain_taxa_meta = {
+        "NCBITaxon:83333": ("Escherichia coli K-12", "STRAIN", "NCBITaxon:562"),
+        "NCBITaxon:224308": (
+            "Bacillus subtilis subsp. subtilis str. 168",
+            "STRAIN",
+            "NCBITaxon:1423",
+        ),
+        "NCBITaxon:208964": ("Pseudomonas aeruginosa PAO1", "STRAIN", "NCBITaxon:287"),
+        "NCBITaxon:243232": (
+            "Methanocaldococcus jannaschii DSM 2661",
+            "STRAIN",
+            "NCBITaxon:2190",
+        ),
+        "NCBITaxon:294750": (
+            "Cryptococcus deuterogattii R265",
+            "STRAIN",
+            "NCBITaxon:1859096",
+        ),
+    }
+    for s_tid, (s_lbl, s_rnk, s_par) in strain_taxa_meta.items():
+        taxa_rows[s_tid] = {
+            "taxon_id": s_tid,
+            "label": s_lbl,
+            "rank": s_rnk,
+            "parent_id": s_par,
+        }
+    taxa_tsv_lines = ["taxon_id\tlabel\trank\tparent_id"] + [
+        f"{t_id}\t{row['label']}\t{row['rank']}\t{row['parent_id']}"
+        for t_id, row in taxa_rows.items()
+    ]
+    (raw_dir / "ncbitaxon_taxa.tsv").write_text(
+        "\n".join(taxa_tsv_lines) + "\n",
+        encoding="utf-8",
+    )
+    bacdive_tsv_lines = [
+        "strain_id\tlabel\tdesignations\tculture_collection_ids\ttaxon_ids\t"
+        "is_type_strain\tbacdive_id\tgenome_accessions\tbiosample_accessions",
+        "kgmicrobe.strain:bacdive_155687\tEscherichia coli MG1655\tMG1655\t"
+        "DSM:18039\tNCBITaxon:562\tfalse\tbacdive.strain:155687\t\t",
+        "kgmicrobe.strain:bacdive_1156\tBacillus subtilis 168\t168\t"
+        "DSM:402\tNCBITaxon:1423\ttrue\tbacdive.strain:1156\t\t",
+        "kgmicrobe.strain:bacdive_12795\tPseudomonas aeruginosa PAO1\tPAO1\t"
+        "DSM:22644\tNCBITaxon:287\tfalse\tbacdive.strain:12795\t\t",
+        "kgmicrobe.strain:bacdive_6981\tMethanocaldococcus jannaschii DSM 2661\tJAL-1\t"
+        "DSM:2661\tNCBITaxon:2190\ttrue\tbacdive.strain:6981\t\t",
+    ]
+    (raw_dir / "bacdive_strains.tsv").write_text(
+        "\n".join(bacdive_tsv_lines) + "\n",
+        encoding="utf-8",
+    )
+    strains_map = {
+        tid: [{"strain_id": sid, "taxon_ids": tid}]
+        for tid, sid in expected_exemplar_strains.items()
+        if sid is not None
+    }
+    uniprot_subset = load_uniprot_proteins(
+        curation_dir / "uniprot_proteins.tsv",
+        taxa=taxa_rows,
+    )
+    validate_causal_graph_proteins(
+        graphs,
+        uniprot_proteins=uniprot_subset,
+        taxa=taxa_rows,
+        strains=strains_map,
+    )
+    prov_script = REPO_ROOT / "scripts" / "check_provenance.py"
+    prov_spec = importlib.util.spec_from_file_location("check_provenance", prov_script)
+    prov_mod = importlib.util.module_from_spec(prov_spec)
+    assert prov_spec.loader is not None
+    prov_spec.loader.exec_module(prov_mod)
+    assert prov_mod.causal_graph_provenance_problems(synth_root) == []
 
 
 def test_load_causal_graphs_rejects_invalid_or_duplicate_overlays(tmp_path):
