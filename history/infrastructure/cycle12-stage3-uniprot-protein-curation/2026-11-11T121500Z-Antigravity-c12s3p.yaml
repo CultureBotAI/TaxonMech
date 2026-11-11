@@ -1,0 +1,55 @@
+history_version: 1
+target:
+  kind: infrastructure
+  slug: cycle12-stage3-uniprot-protein-curation
+  path: curation/uniprot_proteins.tsv
+session:
+  id: 2026-11-11T121500Z-Antigravity-c12s3p
+  timestamp: '2026-11-11T12:15:00Z'
+  actors:
+    - type: ai_agent
+      name: Antigravity
+      model: claude-opus-4-6
+      agent_tool: antigravity-cli
+links:
+  issues:
+    - https://github.com/CultureBotAI/TaxonMech/issues/78
+events:
+  - type: EDIT
+    outcome: changed
+    sections:
+      - uniprot_proteins
+      - causal_graphs
+      - curation_history
+    summary: >-
+      Curate 5 live-verified UniProtKB Swiss-Prot protein examples across 11
+      reference-proteome causal-graph overlays in Cycle 12 Stage 3 (#78).
+    details: >-
+      Audited all 626,048 in-scope TaxonMech records and the 15 maintained
+      curation/causal_graphs/*.yaml overlays for Cycle 12 Stage 3
+      (protein_examples). Live-verified 5 reviewed Swiss-Prot proteins against
+      UniProt REST API (release 2026_02) and Europe PMC across all 5
+      reference-proteome cohorts, expanding curation/uniprot_proteins.tsv from
+      59 to 64 rows (62 SWISS_PROT, 2 TREMBL) in strict ascending uniprot_id
+      order: UniProtKB:J9VX63 (US101_CRYN9, USV101 / CNAG_05420, 647 aa,
+      F87495E33D9AEE07, v1, NCBITaxon:235443, UP:UP000010091) on NCBITaxon:5207
+      and NCBITaxon:235443 (PMID:27668432, PMID:24743168); UniProtKB:P08874
+      (ABRB_BACSU, abrB / BSU00370, 96 aa, 6A964557F5590CFE, v1,
+      NCBITaxon:224308, UP:UP000001570) on NCBITaxon:1423 and NCBITaxon:224308
+      (PMID:2513264, PMID:9384377); UniProtKB:P0A6T3 (GAL1_ECOLI, galK / b0757,
+      EC:2.7.1.6, 382 aa, 7D886CE6FC48F0A1, v2, NCBITaxon:83333, UP:UP000000625)
+      on NCBITaxon:562, NCBITaxon:83333, and NCBITaxon:511145 (PMID:9278503,
+      PMID:14912858); UniProtKB:Q58257 (MTRE_METJA, mtrE / MJ0847, EC:7.2.1.4,
+      303 aa, 46BA1BBD80FECCE2, v1, NCBITaxon:243232, UP:UP000000805) on
+      NCBITaxon:2190 and NCBITaxon:243232 (PMID:8688087, PMID:9603883); and
+      UniProtKB:Q9I4X3 (PQSA_PSEAE, pqsA / PA0996, EC:6.2.1.32, 517 aa,
+      8718FDEC315351F5, v1, NCBITaxon:208964, UP:UP000002438) on NCBITaxon:287
+      and NCBITaxon:208964 (PMID:12142479, PMID:10984043). Re-seeded the 11
+      updated TaxonRecord YAML files (141 total GENE_OR_PROTEIN nodes, 139 with
+      proteome_id, 518 causal edges) and updated the 10 corresponding
+      pages/taxon-details/*.json.gz shards. Documented inapplicability for the
+      626,033 records without causal_graphs and representation/writer blockers
+      for the 2 unproteomed C. deneoformans overlays (NCBITaxon:40410,
+      NCBITaxon:283643) and 2 TrEMBL-only C. deuterogattii R265 overlays
+      (NCBITaxon:1859096, NCBITaxon:294750) under open issue #78 /
+      taxonmech-infra-0003.

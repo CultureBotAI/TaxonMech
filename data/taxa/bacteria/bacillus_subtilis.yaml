@@ -38170,6 +38170,14 @@ curation_history:
     e52, sda RO:0002212 endospore_formation, PMID:11207367, PMID:15023339) linking
     Sda (UniProtKB:Q7WY62) to endospore formation (GO:0034301).
   llm_assisted: true
+- timestamp: '2026-11-11T12:00:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: Added live-verified Swiss-Prot entry UniProtKB:P08874 (ABRB_BACSU, abrB
+    / BSU00370, 96 aa, CRC64 6A964557F5590CFE, v1) in reference proteome UP:UP000001570
+    with literature-backed expression, direct Spo0A~P repression of abrB, and direct
+    AbrB repression of spo0E (PMID:9384377, PMID:3145384, PMID:2504584, PMID:2554317).
+  llm_assisted: true
 causal_graphs:
 - graph_id: endospore_formation
   title: KinA/Spo0A-regulated endospore formation
@@ -38366,6 +38374,19 @@ causal_graphs:
     locus_tag: BSU25690
     sequence_length: 52
     sequence_crc64: BCBDECF0E0203CAE
+    sequence_version: 1
+    entry_status: SWISS_PROT
+  - node_id: abrB
+    label: Global transition state regulator AbrB (abrB)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:P08874
+    organism_taxon_id: NCBITaxon:224308
+    strain_id: kgmicrobe.strain:bacdive_1156
+    proteome_id: UP:UP000001570
+    gene_symbol: abrB
+    locus_tag: BSU00370
+    sequence_length: 96
+    sequence_crc64: 6A964557F5590CFE
     sequence_version: 1
     entry_status: SWISS_PROT
   - node_id: sensor_kinase_activity
@@ -39071,3 +39092,45 @@ causal_graphs:
       notes: Direct binding of Sda to the KinA/KinB DHp domain inhibits phosphorelay
         phosphoryl flux to Spo0A~P and negatively regulates endospore formation in
         Bacillus subtilis.
+  - edge_id: e53
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: abrB
+    evidence:
+    - reference: PMID:9384377
+      notes: Complete genome sequence of Bacillus subtilis strain 168 identifying
+        abrB (BSU00370, UniProtKB:P08874) encoding the global transition-state regulator
+        AbrB.
+    - reference: PMID:3145384
+      notes: Molecular cloning and nucleotide sequence of the Bacillus subtilis abrB
+        gene encoding the 96-residue transition-state transcriptional regulator.
+  - edge_id: e54
+    subject: spo0A
+    predicate: directly negatively regulates
+    predicate_id: RO:0002630
+    object: abrB
+    evidence:
+    - reference: PMID:3145384
+      notes: Spo0A (BSU24220, UniProtKB:P06534) negatively regulates transcription
+        of the abrB gene (BSU00370, UniProtKB:P08874) at the onset of stationary phase
+        in Bacillus subtilis.
+    - reference: PMID:2504584
+      notes: Phosphorylated Spo0A~P binds directly to the abrB promoter region to
+        repress AbrB synthesis and relieve AbrB-mediated repression of transition-state
+        and sporulation genes in Bacillus subtilis.
+  - edge_id: e55
+    subject: abrB
+    predicate: directly negatively regulates
+    predicate_id: RO:0002630
+    object: spo0E
+    evidence:
+    - reference: PMID:2504584
+      notes: Purified Bacillus subtilis transition-state regulator AbrB (BSU00370,
+        UniProtKB:P08874) is a sequence-specific DNA-binding protein that binds directly
+        to the spo0E (BSU13640, UniProtKB:P05043) promoter and represses spo0E transcription
+        during exponential growth.
+    - reference: PMID:2554317
+      notes: DNase I footprinting and transcriptional analysis establish direct AbrB
+        binding and negative regulation at transition-state and sporulation-associated
+        promoters in Bacillus subtilis.
