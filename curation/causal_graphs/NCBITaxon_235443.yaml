@@ -126,6 +126,18 @@ causal_graphs:
     sequence_crc64: 0436973FA833B8B2
     sequence_version: 1
     entry_status: SWISS_PROT
+  - node_id: usv101
+    label: C2H2 finger domain transcription factor USV101 (USV101)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:J9VX63
+    organism_taxon_id: NCBITaxon:235443
+    proteome_id: UP:UP000010091
+    gene_symbol: USV101
+    locus_tag: CNAG_05420
+    sequence_length: 647
+    sequence_crc64: F87495E33D9AEE07
+    sequence_version: 1
+    entry_status: SWISS_PROT
   - node_id: laccase_activity
     label: hydroquinone:oxygen oxidoreductase activity
     node_type: MOLECULAR_FUNCTION
@@ -737,6 +749,55 @@ causal_graphs:
         Bim1-dependent copper uptake supports copper-requiring Laccase-1 (LAC1,
         CNAG_03465) maturation and enzymatic function during Cryptococcus
         neoformans H99 melanization.
+  - edge_id: e38
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: usv101
+    evidence:
+    - reference: PMID:24743168
+      notes: >-
+        Reference genome and transcriptome assembly of Cryptococcus neoformans
+        var. grubii strain H99 annotating USV101 (CNAG_05420, UniProtKB:J9VX63)
+        encoding a C2H2 zinc-finger transcription factor.
+    - reference: PMID:25849373
+      notes: >-
+        Systematic functional profiling of the Cryptococcus neoformans H99
+        transcription factor network characterizes USV101 (CNAG_05420).
+  - edge_id: e39
+    subject: usv101
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: lac1
+    evidence:
+    - reference: PMID:31575776
+      notes: >-
+        C2H2 zinc-finger transcription factor Usv101 (CNAG_05420,
+        UniProtKB:J9VX63) functions as one of the four core melanin-regulating
+        transcription factors (with Bzp4, Hob1, and Mbs1) that positively
+        regulate LAC1 (CNAG_03465, UniProtKB:J9VY90) expression upon nutrient
+        starvation in Cryptococcus neoformans H99.
+    - reference: PMID:25849373
+      notes: >-
+        Deletion of USV101 alters melanin and capsule regulation in
+        Cryptococcus neoformans H99.
+  - edge_id: e40
+    subject: usv101
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: melanin_biosynthesis
+    evidence:
+    - reference: PMID:31575776
+      notes: >-
+        Usv101 (CNAG_05420, UniProtKB:J9VX63) promotes LAC1 induction and
+        cell-wall melanin biosynthesis (GO:0042438) within the core
+        melanin-regulating transcription factor network in Cryptococcus
+        neoformans H99.
+    - reference: PMID:25849373
+      notes: >-
+        Systematic transcription-factor phenome analysis establishes Usv101 as a
+        regulator of melanization and virulence-associated traits in
+        Cryptococcus neoformans H99.
 curation_history:
 - timestamp: '2026-10-22T18:50:00Z'
   curator: add-uniprot-protein-examples
@@ -898,4 +959,14 @@ curation_history:
     Added direct copper-acquisition-factor-to-laccase positive regulatory edge
     (edge e37, bim1 RO:0002213 lac1, PMID:31932719, PMID:35737716) linking Bim1
     (UniProtKB:J9VHN6) to Laccase-1 / Lac1 (UniProtKB:J9VY90).
+  llm_assisted: true
+- timestamp: '2026-11-11T12:00:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: >-
+    Added live-verified Swiss-Prot entry UniProtKB:J9VX63 (US101_CRYN9, USV101 /
+    CNAG_05420, 647 aa, CRC64 F87495E33D9AEE07, v1) in reference proteome
+    UP:UP000010091 with literature-backed expression and positive regulatory
+    edges for LAC1 and cell-wall melanin biosynthesis (PMID:24743168,
+    PMID:25849373, PMID:31575776).
   llm_assisted: true

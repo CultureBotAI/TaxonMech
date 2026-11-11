@@ -169,6 +169,21 @@ causal_graphs:
     sequence_crc64: 117430C3C1232D97
     sequence_version: 1
     entry_status: SWISS_PROT
+  - node_id: pqsA
+    label: Anthranilate--CoA ligase (pqsA)
+    node_type: GENE_OR_PROTEIN
+    grounding: UniProtKB:Q9I4X3
+    xrefs:
+    - EC:6.2.1.32
+    organism_taxon_id: NCBITaxon:208964
+    strain_id: kgmicrobe.strain:bacdive_12795
+    proteome_id: UP:UP000002438
+    gene_symbol: pqsA
+    locus_tag: PA0996
+    sequence_length: 517
+    sequence_crc64: 8718FDEC315351F5
+    sequence_version: 1
+    entry_status: SWISS_PROT
   - node_id: phenazine_biosynthesis
     label: phenazine biosynthetic process
     node_type: BIOLOGICAL_PROCESS
@@ -813,6 +828,66 @@ causal_graphs:
         Genome-wide ChIP-seq and transcriptomic profiling in Pseudomonas
         aeruginosa demonstrates MvfR-dependent positive regulation of the phz1
         (phzA1-G1) phenazine biosynthetic operon.
+  - edge_id: e36
+    subject: taxon
+    predicate: expresses
+    predicate_id: RO:0002292
+    object: pqsA
+    evidence:
+    - reference: PMID:10984043
+      notes: >-
+        Complete genome sequence of Pseudomonas aeruginosa PAO1 identifying
+        pqsA (PA0996, UniProtKB:Q9I4X3, EC:6.2.1.32) as the first gene of the
+        pqsABCDE quinolone signaling operon.
+    - reference: PMID:12426334
+      notes: >-
+        Genetic analysis of the Pseudomonas aeruginosa PAO1 pqsABCDE operon
+        identifies pqsA (PA0996) as essential for 2-heptyl-3-hydroxy-4-quinolone
+        (PQS) synthesis and pyocyanin production.
+    - reference: PMID:18083812
+      notes: >-
+        Biochemical characterization of purified Pseudomonas aeruginosa PqsA
+        (PA0996, UniProtKB:Q9I4X3) demonstrating ATP-dependent anthranilate--CoA
+        ligase (EC:6.2.1.32) activity.
+  - edge_id: e37
+    subject: mvfR
+    predicate: directly positively regulates
+    predicate_id: RO:0002629
+    object: pqsA
+    evidence:
+    - reference: PMID:17083468
+      notes: >-
+        Ligand-activated MvfR (PqsR, PA1003, UniProtKB:Q9I4X0) binds directly
+        to the pqsA promoter region to activate transcription of the pqsABCDE
+        operon encoding PqsA (PA0996, UniProtKB:Q9I4X3) in Pseudomonas
+        aeruginosa.
+    - reference: PMID:27678057
+      notes: >-
+        ChIP-seq and transcriptomic profiling in Pseudomonas aeruginosa
+        confirm direct MvfR binding at the pqsABCDE promoter driving pqsA
+        expression.
+  - edge_id: e38
+    subject: pqsA
+    predicate: positively regulates
+    predicate_id: RO:0002213
+    object: mvfR
+    evidence:
+    - reference: PMID:18083812
+      notes: >-
+        PqsA (PA0996, UniProtKB:Q9I4X3, EC:6.2.1.32) catalyzes conversion of
+        anthranilate to anthraniloyl-CoA, the first committed step in
+        biosynthesis of the 4-hydroxy-2-alkylquinolone signals HHQ and PQS in
+        Pseudomonas aeruginosa.
+    - reference: PMID:17083468
+      notes: >-
+        PqsA-dependent synthesis of HHQ and PQS provides the dual co-inducer
+        ligands that bind and activate MvfR (PqsR, PA1003, UniProtKB:Q9I4X0) in
+        a positive autoregulatory loop in Pseudomonas aeruginosa.
+    - reference: PMID:12426334
+      notes: >-
+        Inactivation of pqsA abolishes PQS signaling and downstream
+        MvfR-dependent phenazine and pyocyanin production in Pseudomonas
+        aeruginosa.
 curation_history:
 - timestamp: '2026-10-22T14:00:00Z'
   curator: curate-causal-graphs
@@ -973,4 +1048,14 @@ curation_history:
     Added direct quorum-sensing-regulator-to-operon-cistron positive regulatory
     edge (edge e35, mvfR RO:0002213 phzA1, PMID:11724939, PMID:17083468,
     PMID:27678057) linking MvfR (UniProtKB:Q9I4X0) to PhzA1 (UniProtKB:Q9HWH1).
+  llm_assisted: true
+- timestamp: '2026-11-11T12:00:00Z'
+  curator: add-uniprot-protein-examples
+  action: UPDATED_CAUSAL_GRAPHS
+  changes: >-
+    Added live-verified Swiss-Prot entry UniProtKB:Q9I4X3 (PQSA_PSEAE, pqsA /
+    PA0996, EC:6.2.1.32, 517 aa, CRC64 8718FDEC315351F5, v1) in reference
+    proteome UP:UP000002438 with literature-backed expression and reciprocal
+    MvfR-PqsA positive autoregulatory edges (PMID:10984043, PMID:12426334,
+    PMID:18083812, PMID:17083468, PMID:27678057).
   llm_assisted: true
