@@ -78,7 +78,11 @@ by `validate_causal_graph_structure()`, `validate_causal_graph_events()`,
 `load_uniprot_proteins()`, and `validate_causal_graph_proteins()` in
 `src/taxonmech/seed.py` and by `causal_graph_provenance_problems()` in
 `scripts/check_provenance.py` (which also enforces closed-key object schemas,
-`UNIPROT_RELEASE_PATTERN` `release_version` syntax, catalog-wide `entry_name`,
+non-empty string values on optional `CausalGraph.description`,
+`CausalNode.description`, and `EvidenceItem.snippet`/`notes` when present,
+strict ascending `uniprot_id` row ordering, `UNIPROT_RELEASE_PATTERN`
+`release_version` syntax and a single uniform `release_version` catalog pin,
+catalog-wide `entry_name`,
 `(organism_taxon_id, gene_symbol)`, `(organism_taxon_id, locus_tag)`,
 `(organism_taxon_id, sequence_crc64)`, per-organism `entry_name` `_<org_code>`
 suffix and `entry_status` prefix alignment,
@@ -86,16 +90,19 @@ suffix and `entry_status` prefix alignment,
 `proteome_id`→`organism_taxon_id` consistency, `organism_label` and `TAXON`
 node `label` correspondence with `ncbitaxon_taxa.tsv`, per-graph
 `CausalNode.label`, `CausalNode.grounding`, and `UniProtKB:` uniqueness,
-required non-empty `CausalNode.grounding` with `NCBITaxon:`/`UniProtKB:`
-prefix-to-`node_type` domain isolation, per-graph `predicate`↔`predicate_id`
-consistency, rejection of edges targeting a `TAXON` node as `object`, host
-`TAXON` node anchoring, `GENE_OR_PROTEIN` single host-taxon `RO:0002292`
+within-graph `GENE_OR_PROTEIN` `organism_taxon_id` and `strain_id` homogeneity,
+required non-empty `CausalNode.grounding` with
+`NCBITaxon:`/`UniProtKB:`/`CHEBI:`/`GO:` prefix-to-`node_type` domain
+isolation (`CHEBI_ID_PATTERN` and `GO_ID_PATTERN`), per-graph
+`predicate`↔`predicate_id` consistency, rejection of edges targeting a `TAXON`
+node as `object`, host `TAXON` node anchoring and exclusivity,
+`GENE_OR_PROTEIN` single host-taxon `RO:0002292`
 (`expresses`) and outgoing-edge topology, required host-subtree `strain_id`
 binding, required edge `predicate_id`, non-empty edge evidence `notes`/`snippet`,
 full 4-part `EC:` xref completeness, `<NCBITaxon_ID>.yaml` filename-stem
 alignment, `curation/seed_scope.tsv` membership, non-empty chronological
 `curation_history`, and zero unreferenced `curation/uniprot_proteins.tsv` rows;
-#199, #208, #214, #216, #224, #234, #236, #246, #249). Separate
+#199, #208, #214, #216, #224, #234, #236, #246, #249, #259). Separate
 curator-owned overlays for `definition`, record-level `evidence` and
 `mapping_status: REVIEWED` remain tracked in the issues; until those exist, a
 change to any other record field is a seeder or scope change with a test.
