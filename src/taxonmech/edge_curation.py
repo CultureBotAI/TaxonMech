@@ -32,7 +32,7 @@ SOURCE = "data/raw/gtdb_mappings.tsv"
 MANIFEST = "data/raw/MANIFEST.yaml"
 SCHEMA = "src/taxonmech/schema/taxonmech.yaml"
 SEMANTICS = "docs/CURATION.md"
-CLAW_COMMIT = "1b5391d083ba85ac94e5279c3cba25ac4fde243c"
+CLAW_COMMIT = "6141da81dc521d776e1ebcff1c4e63824313a9a1"
 PREDICATES = {"skos:exactMatch", "skos:broadMatch", "skos:narrowMatch", "skos:closeMatch"}
 VALIDATION_BATCH_SIZE = 64
 

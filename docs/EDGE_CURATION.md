@@ -9,7 +9,7 @@ occurrence approval is created.
 The complete extracted GTDB-to-NCBI mapping inventory has no exact assertion-level native approval proof in this surface. All exported rows remain unassessed. Strain/deposit identity, genome assembly links and nomenclature need distinct native adapters and evidence, rather than inheritance from a generated record status.
 
 The optional shared contract source is pinned at CLAW commit
-`1b5391d083ba85ac94e5279c3cba25ac4fde243c`. Use an explicit checkout of that
+`6141da81dc521d776e1ebcff1c4e63824313a9a1`. Use an explicit checkout of that
 revision on PYTHONPATH alongside this repository's src directory, and run
 `scripts/adhoc/check_edge_contract_pin_20261107.py --claw-root PATH`.
 The dedicated CI integration tier makes a missing shared dependency an error
