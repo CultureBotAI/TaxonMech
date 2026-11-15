@@ -110,3 +110,21 @@ running the canonical test, which rejects changes or deletions to previously
 saved bundles. Local `just review-check` defaults to HEAD; set
 `RECORD_REVIEW_BASE=<base-commit>` when checking a branch's committed changes.
 There is no automatic CI fallback to an already modified HEAD.
+
+## Publication duplicate checks
+
+When a publication task requires previously unreviewed targets, compare target
+identities against all coverage at the task's exact base: canonical bundle
+targets, per-record structured inventory shards, and the legacy report inventory.
+`scripts/record_review.py list` reports declared bundle scopes; representative
+shard targets are not the full population. A new review ID or changed verdict
+does not make a target previously unreviewed. Keep legacy report coverage
+distinct from structured scientific-review coverage, even when both exclude a
+target under an any-prior-review selection rule.
+
+Use `scripts/review_publication_coverage.py` to reconstruct a publication's
+eligibility from its base and publication revisions. The
+[publication correction ledger](review-publication-corrections/README.md)
+documents PR 169 and the verification command. Correct an already published
+selection through an append-only linked observation and an explicit eligibility
+ledger; never delete or rewrite the retained historical bundles.
