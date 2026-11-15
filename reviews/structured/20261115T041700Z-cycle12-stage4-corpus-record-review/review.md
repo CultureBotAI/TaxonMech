@@ -93,13 +93,13 @@ Verified in Cycle 11 Stage 4 that src/taxonmech/schema/taxonmech.yaml retains th
 
 Disposition: Resolved in Cycle 1 Stage 5 (PR #151) under #76 and verified intact in Cycle 11 Stages 4-5 and Cycle 12 Stage 4.
 
-### validate-history-bare-linkml-validate-path: scripts/validate_history.py resolves linkml-validate beside sys.executable across all 53 history records
+### validate-history-bare-linkml-validate-path: scripts/validate_history.py resolves linkml-validate beside sys.executable for the committed history corpus
 
 minor / resolved / confirmed; issue key: cycle3-stage4-validate-history-bare-linkml-validate-path.
 
 Verified in Cycle 11 Stage 4 that scripts/validate_history.py resolves linkml-validate beside sys.executable and validates all 50 committed history records in history/ against src/taxonmech/schema/history.yaml (#83, resolved in Cycle 1 Stage 5 PR #151).
 
-Disposition: Resolved in Cycle 1 Stage 5 (PR #151) under #83 and verified intact across all 53 history records in Cycle 11 Stages 4-5 and Cycle 12 Stage 4.
+Disposition: Resolved in Cycle 1 Stage 5 (PR #151) under #83 and verified intact across all 50 committed history records in Cycle 11 Stages 4-5 and all 53 history records in Cycle 12 Stage 4.
 
 ### gtdb-closematch-exact-promotion: skos:closeMatch GTDB species-cluster mappings are promoted to EXACT_SYNONYM and equivalent top-level xrefs across 95,766 records
 
@@ -2202,14 +2202,14 @@ findings:
   status: resolved
   certainty: confirmed
   title: scripts/validate_history.py resolves linkml-validate beside sys.executable
-    across all 53 history records
+    for the committed history corpus
   description: 'Verified in Cycle 11 Stage 4 that scripts/validate_history.py resolves
     linkml-validate beside sys.executable and validates all 50 committed history records
     in history/ against src/taxonmech/schema/history.yaml (#83, resolved in Cycle
     1 Stage 5 PR #151).'
   disposition_reason: 'Resolved in Cycle 1 Stage 5 (PR #151) under #83 and verified
-    intact across all 53 history records in Cycle 11 Stages 4-5 and Cycle 12 Stage
-    4.'
+    intact across all 50 committed history records in Cycle 11 Stages 4-5 and all
+    53 history records in Cycle 12 Stage 4.'
   previous_occurrences:
   - repository: CultureBotAI/TaxonMech
     review_id: 20261021T163800Z-stage4-corpus-record-review
