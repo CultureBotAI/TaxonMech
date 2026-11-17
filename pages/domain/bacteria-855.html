@@ -7,30 +7,118 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../theme-toggle.js"></script>
 <script defer src="../vendor/fflate-0.8.2.js"></script>
-<script defer src="../compressed-data.js?v=434e253832135143"></script>
+<script defer src="../compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="../index.html">TaxonMech</a>
   <nav>
     <a href="../browse.html">Browse</a>
     <a href="../type-strains.html">Type strains</a>
+    <a href="../map.html">Text map</a>
     <a href="../sources.html">Sources</a>
+    <a href="../index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../index.html">TaxonMech</a> › <span>Bacteria</span>
+</nav>
 <h1>Bacteria</h1>
 <p class="lede">Species and infraspecific taxa under NCBITaxon:2, including uncultured and environmental taxa.</p>
-<section id="taxon-browser" data-domain="BACTERIA" data-typed="false" data-page="855" data-size="200" data-root="../">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="BACTERIA" data-typed="false" data-page="855" data-size="200" data-root="../">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="../browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA" selected>Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">605695 records · page 855 of 3029.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="../domain/bacteria-854.html">Previous</a><a href="../domain/bacteria-856.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>Bacteria</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2738607"><em>Candidatus Pelagibacter sp. JGI 01_G21_echo</em></a></td><td><code>NCBITaxon:2738607</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2738608"><em>Candidatus Pelagibacter sp. JGI 01_G8_4000m</em></a></td><td><code>NCBITaxon:2738608</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -131,7 +219,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:3693639"><em>Candidatus Pelagibacter sp. PS_43</em></a></td><td><code>NCBITaxon:3693639</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3693640"><em>Candidatus Pelagibacter sp. PS_44</em></a></td><td><code>NCBITaxon:3693640</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1977864"><em>Candidatus Pelagibacter sp. RS39</em></a></td><td><code>NCBITaxon:1977864</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1977865"><em>Candidatus Pelagibacter sp. RS40</em></a></td><td><code>NCBITaxon:1977865</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1977865"><em>Candidatus Pelagibacter sp. RS40</em></a></td><td><code>NCBITaxon:1977865</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1986796"><em>Candidatus Pelagibacter sp. TMED106</em></a></td><td><code>NCBITaxon:1986796</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1986797"><em>Candidatus Pelagibacter sp. TMED118</em></a></td><td><code>NCBITaxon:1986797</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1986799"><em>Candidatus Pelagibacter sp. TMED128</em></a></td><td><code>NCBITaxon:1986799</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
@@ -150,20 +238,20 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1986826"><em>Candidatus Pelagibacter sp. TMED273</em></a></td><td><code>NCBITaxon:1986826</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1986827"><em>Candidatus Pelagibacter sp. TMED275</em></a></td><td><code>NCBITaxon:1986827</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1986828"><em>Candidatus Pelagibacter sp. TMED286</em></a></td><td><code>NCBITaxon:1986828</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1986830"><em>Candidatus Pelagibacter sp. TMED64</em></a></td><td><code>NCBITaxon:1986830</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1986830"><em>Candidatus Pelagibacter sp. TMED64</em></a></td><td><code>NCBITaxon:1986830</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1946225"><em>Candidatus Pelagibacter sp. UBA2154</em></a></td><td><code>NCBITaxon:1946225</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3230993"><em>Candidatus Pelagibacter sp. Uisw_090</em></a></td><td><code>NCBITaxon:3230993</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3230979"><em>Candidatus Pelagibacter sp. Uisw_092</em></a></td><td><code>NCBITaxon:3230979</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3230980"><em>Candidatus Pelagibacter sp. Uisw_094</em></a></td><td><code>NCBITaxon:3230980</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3230981"><em>Candidatus Pelagibacter sp. Uisw_099_02</em></a></td><td><code>NCBITaxon:3230981</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3230982"><em>Candidatus Pelagibacter sp. Uisw_101</em></a></td><td><code>NCBITaxon:3230982</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3230982"><em>Candidatus Pelagibacter sp. Uisw_101</em></a></td><td><code>NCBITaxon:3230982</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3798646"><em>Candidatus Pelagibacter sp. uisw_102</em></a></td><td><code>NCBITaxon:3798646</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3230983"><em>Candidatus Pelagibacter sp. Uisw_104</em></a></td><td><code>NCBITaxon:3230983</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3230983"><em>Candidatus Pelagibacter sp. Uisw_104</em></a></td><td><code>NCBITaxon:3230983</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3230984"><em>Candidatus Pelagibacter sp. Uisw_106</em></a></td><td><code>NCBITaxon:3230984</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3230994"><em>Candidatus Pelagibacter sp. Uisw_113</em></a></td><td><code>NCBITaxon:3230994</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3230985"><em>Candidatus Pelagibacter sp. Uisw_114</em></a></td><td><code>NCBITaxon:3230985</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3230986"><em>Candidatus Pelagibacter sp. Uisw_116</em></a></td><td><code>NCBITaxon:3230986</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3230987"><em>Candidatus Pelagibacter sp. Uisw_121</em></a></td><td><code>NCBITaxon:3230987</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3230986"><em>Candidatus Pelagibacter sp. Uisw_116</em></a></td><td><code>NCBITaxon:3230986</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3230987"><em>Candidatus Pelagibacter sp. Uisw_121</em></a></td><td><code>NCBITaxon:3230987</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3798645"><em>Candidatus Pelagibacter sp. uisw_124</em></a></td><td><code>NCBITaxon:3798645</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3230988"><em>Candidatus Pelagibacter sp. Uisw_127</em></a></td><td><code>NCBITaxon:3230988</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3230989"><em>Candidatus Pelagibacter sp. Uisw_130</em></a></td><td><code>NCBITaxon:3230989</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
@@ -171,75 +259,78 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:3230991"><em>Candidatus Pelagibacter sp. Uisw_136</em></a></td><td><code>NCBITaxon:3230991</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3230992"><em>Candidatus Pelagibacter sp. Uisw_137</em></a></td><td><code>NCBITaxon:3230992</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1144932"><em>Candidatus Pelagibacter ubique HIMB058</em></a></td><td><code>NCBITaxon:1144932</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1096769"><em>Candidatus Pelagibacter ubique HIMB083</em></a></td><td><code>NCBITaxon:1096769</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1096769"><em>Candidatus Pelagibacter ubique HIMB083</em></a></td><td><code>NCBITaxon:1096769</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:687406"><em>Candidatus Pelagibacter ubique HIMB140</em></a></td><td><code>NCBITaxon:687406</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:686879"><em>Candidatus Pelagibacter ubique HIMB4</em></a></td><td><code>NCBITaxon:686879</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:314261"><em>Candidatus Pelagibacter ubique HTCC1002</em></a></td><td><code>NCBITaxon:314261</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>16</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1265757"><em>Candidatus Pelagibacter ubique HTCC1013</em></a></td><td><code>NCBITaxon:1265757</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>16</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:686879"><em>Candidatus Pelagibacter ubique HIMB4</em></a></td><td><code>NCBITaxon:686879</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:314261"><em>Candidatus Pelagibacter ubique HTCC1002</em></a></td><td><code>NCBITaxon:314261</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1265757"><em>Candidatus Pelagibacter ubique HTCC1013</em></a></td><td><code>NCBITaxon:1265757</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1115650"><em>Candidatus Pelagibacter ubique HTCC1016</em></a></td><td><code>NCBITaxon:1115650</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1118158"><em>Candidatus Pelagibacter ubique HTCC1040</em></a></td><td><code>NCBITaxon:1118158</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>16</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:335992"><em>Candidatus Pelagibacter ubique HTCC1062</em></a></td><td><code>NCBITaxon:335992</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>16</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1118158"><em>Candidatus Pelagibacter ubique HTCC1040</em></a></td><td><code>NCBITaxon:1118158</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:335992"><em>Candidatus Pelagibacter ubique HTCC1062</em></a></td><td><code>NCBITaxon:335992</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1400524"><em>Candidatus Pelagibacter ubique HTCC7214</em></a></td><td><code>NCBITaxon:1400524</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1400525"><em>Candidatus Pelagibacter ubique HTCC7217</em></a></td><td><code>NCBITaxon:1400525</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:466038"><em>Candidatus Pelagibacter ubique HTCC8051</em></a></td><td><code>NCBITaxon:466038</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1265756"><em>Candidatus Pelagibacter ubique HTCC9022</em></a></td><td><code>NCBITaxon:1265756</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2026776"><em>Candidatus Pelagibacterales bacterium</em></a></td><td><code>NCBITaxon:2026776</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>64</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2026776"><em>Candidatus Pelagibacterales bacterium</em></a></td><td><code>NCBITaxon:2026776</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>43 (43 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475986"><em>Candidatus Pelagibacterales bacterium LSUCC0261</em></a></td><td><code>NCBITaxon:3475986</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475985"><em>Candidatus Pelagibacterales bacterium LSUCC0664</em></a></td><td><code>NCBITaxon:3475985</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475984"><em>Candidatus Pelagibacterales bacterium LSUCC0723</em></a></td><td><code>NCBITaxon:3475984</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2684113"><em>Candidatus Pelagisphaera phototrophica</em></a></td><td><code>NCBITaxon:2684113</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3101343"><em>Candidatus Pelagisphaera sp.</em></a></td><td><code>NCBITaxon:3101343</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2840900"><em>Candidatus Pelethenecus faecipullorum</em></a></td><td><code>NCBITaxon:2840900</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>6</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3022886"><em>Candidatus Pelethenecus sp.</em></a></td><td><code>NCBITaxon:3022886</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>320</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2684113"><em>Candidatus Pelagisphaera phototrophica</em></a></td><td><code>NCBITaxon:2684113</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3101343"><em>Candidatus Pelagisphaera sp.</em></a></td><td><code>NCBITaxon:3101343</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2840900"><em>Candidatus Pelethenecus faecipullorum</em></a></td><td><code>NCBITaxon:2840900</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3022886"><em>Candidatus Pelethenecus sp.</em></a></td><td><code>NCBITaxon:3022886</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3 (3 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2840901"><em>Candidatus Pelethocola excrementipullorum</em></a></td><td><code>NCBITaxon:2840901</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3101167"><em>Candidatus Pelethocola sp.</em></a></td><td><code>NCBITaxon:3101167</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>7</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2840902"><em>Candidatus Pelethomonas intestinigallinarum</em></a></td><td><code>NCBITaxon:2840902</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>8</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2952953"><em>Candidatus Pelethomonas sp.</em></a></td><td><code>NCBITaxon:2952953</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>83</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2840903"><em>Candidatus Pelethosoma merdigallinarum</em></a></td><td><code>NCBITaxon:2840903</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>7</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3101167"><em>Candidatus Pelethocola sp.</em></a></td><td><code>NCBITaxon:3101167</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2840902"><em>Candidatus Pelethomonas intestinigallinarum</em></a></td><td><code>NCBITaxon:2840902</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2952953"><em>Candidatus Pelethomonas sp.</em></a></td><td><code>NCBITaxon:2952953</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>11 (11 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2840903"><em>Candidatus Pelethosoma merdigallinarum</em></a></td><td><code>NCBITaxon:2840903</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3101185"><em>Candidatus Pelethosoma sp.</em></a></td><td><code>NCBITaxon:3101185</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2840904"><em>Candidatus Pelethousia gallinarum</em></a></td><td><code>NCBITaxon:2840904</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>29</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3101157"><em>Candidatus Pelethousia sp.</em></a></td><td><code>NCBITaxon:3101157</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2840904"><em>Candidatus Pelethousia gallinarum</em></a></td><td><code>NCBITaxon:2840904</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3101157"><em>Candidatus Pelethousia sp.</em></a></td><td><code>NCBITaxon:3101157</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:507001"><em>Candidatus Pelosinus colonicus</em></a></td><td><code>NCBITaxon:507001</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:394284"><em>Candidatus Pelosinus lactatifermentans</em></a></td><td><code>NCBITaxon:394284</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3707032"><em>Candidatus Penulousia baltica</em></a></td><td><code>NCBITaxon:3707032</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:337315"><em>Candidatus Peptoniphilus massiliensis (ex Fenollar et al. 2006)</em></a></td><td><code>NCBITaxon:337315</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:226526"><em>Candidatus Peptostreptococcus massiliensis</em></a></td><td><code>NCBITaxon:226526</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2030811"><em>Candidatus Peregrinibacteria bacterium</em></a></td><td><code>NCBITaxon:2030811</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>8</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2030811"><em>Candidatus Peregrinibacteria bacterium</em></a></td><td><code>NCBITaxon:2030811</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>79 (79 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2552956"><em>Candidatus Peregrinibacteria bacterium AG-128-J15</em></a></td><td><code>NCBITaxon:2552956</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2552954"><em>Candidatus Peregrinibacteria bacterium AG-138-D22</em></a></td><td><code>NCBITaxon:2552954</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1974783"><em>Candidatus Peregrinibacteria bacterium CG08_land_8_20_14_0_20_41_10</em></a></td><td><code>NCBITaxon:1974783</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1974784"><em>Candidatus Peregrinibacteria bacterium CG10_big_fil_rev_8_21_14_0_10_36_19</em></a></td><td><code>NCBITaxon:1974784</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1974785"><em>Candidatus Peregrinibacteria bacterium CG10_big_fil_rev_8_21_14_0_10_42_8</em></a></td><td><code>NCBITaxon:1974785</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1974786"><em>Candidatus Peregrinibacteria bacterium CG10_big_fil_rev_8_21_14_0_10_44_7</em></a></td><td><code>NCBITaxon:1974786</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1974786"><em>Candidatus Peregrinibacteria bacterium CG10_big_fil_rev_8_21_14_0_10_44_7</em></a></td><td><code>NCBITaxon:1974786</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1974787"><em>Candidatus Peregrinibacteria bacterium CG10_big_fil_rev_8_21_14_0_10_49_10</em></a></td><td><code>NCBITaxon:1974787</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1974788"><em>Candidatus Peregrinibacteria bacterium CG10_big_fil_rev_8_21_14_0_10_49_16</em></a></td><td><code>NCBITaxon:1974788</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1974789"><em>Candidatus Peregrinibacteria bacterium CG10_big_fil_rev_8_21_14_0_10_49_24</em></a></td><td><code>NCBITaxon:1974789</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1974788"><em>Candidatus Peregrinibacteria bacterium CG10_big_fil_rev_8_21_14_0_10_49_16</em></a></td><td><code>NCBITaxon:1974788</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1974789"><em>Candidatus Peregrinibacteria bacterium CG10_big_fil_rev_8_21_14_0_10_49_24</em></a></td><td><code>NCBITaxon:1974789</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1974790"><em>Candidatus Peregrinibacteria bacterium CG10_big_fil_rev_8_21_14_0_10_54_7</em></a></td><td><code>NCBITaxon:1974790</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1974791"><em>Candidatus Peregrinibacteria bacterium CG10_big_fil_rev_8_21_14_0_10_55_24</em></a></td><td><code>NCBITaxon:1974791</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1974792"><em>Candidatus Peregrinibacteria bacterium CG11_big_fil_rev_8_21_14_0_20_41_10</em></a></td><td><code>NCBITaxon:1974792</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1974792"><em>Candidatus Peregrinibacteria bacterium CG11_big_fil_rev_8_21_14_0_20_41_10</em></a></td><td><code>NCBITaxon:1974792</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1974793"><em>Candidatus Peregrinibacteria bacterium CG11_big_fil_rev_8_21_14_0_20_46_8</em></a></td><td><code>NCBITaxon:1974793</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1974794"><em>Candidatus Peregrinibacteria bacterium CG11_big_fil_rev_8_21_14_0_20_49_14</em></a></td><td><code>NCBITaxon:1974794</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1974794"><em>Candidatus Peregrinibacteria bacterium CG11_big_fil_rev_8_21_14_0_20_49_14</em></a></td><td><code>NCBITaxon:1974794</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1805322"><em>Candidatus Peregrinibacteria bacterium CG1_02_41_10</em></a></td><td><code>NCBITaxon:1805322</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1805323"><em>Candidatus Peregrinibacteria bacterium CG1_02_54_53</em></a></td><td><code>NCBITaxon:1805323</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1974795"><em>Candidatus Peregrinibacteria bacterium CG22_combo_CG10-13_8_21_14_all_44_10</em></a></td><td><code>NCBITaxon:1974795</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1974796"><em>Candidatus Peregrinibacteria bacterium CG22_combo_CG10-13_8_21_14_all_49_11</em></a></td><td><code>NCBITaxon:1974796</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1805324"><em>Candidatus Peregrinibacteria bacterium CG2_30_44_17</em></a></td><td><code>NCBITaxon:1805324</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1974774"><em>Candidatus Peregrinibacteria bacterium CG_4_10_14_0_2_um_filter_38_24</em></a></td><td><code>NCBITaxon:1974774</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1974775"><em>Candidatus Peregrinibacteria bacterium CG_4_10_14_0_2_um_filter_41_8</em></a></td><td><code>NCBITaxon:1974775</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1805323"><em>Candidatus Peregrinibacteria bacterium CG1_02_54_53</em></a></td><td><code>NCBITaxon:1805323</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1974795"><em>Candidatus Peregrinibacteria bacterium CG22_combo_CG10-13_8_21_14_all_44_10</em></a></td><td><code>NCBITaxon:1974795</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1974796"><em>Candidatus Peregrinibacteria bacterium CG22_combo_CG10-13_8_21_14_all_49_11</em></a></td><td><code>NCBITaxon:1974796</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1805324"><em>Candidatus Peregrinibacteria bacterium CG2_30_44_17</em></a></td><td><code>NCBITaxon:1805324</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1974774"><em>Candidatus Peregrinibacteria bacterium CG_4_10_14_0_2_um_filter_38_24</em></a></td><td><code>NCBITaxon:1974774</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1974775"><em>Candidatus Peregrinibacteria bacterium CG_4_10_14_0_2_um_filter_41_8</em></a></td><td><code>NCBITaxon:1974775</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1974776"><em>Candidatus Peregrinibacteria bacterium CG_4_10_14_0_2_um_filter_43_11</em></a></td><td><code>NCBITaxon:1974776</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1974777"><em>Candidatus Peregrinibacteria bacterium CG_4_10_14_3_um_filter_44_21</em></a></td><td><code>NCBITaxon:1974777</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1974778"><em>Candidatus Peregrinibacteria bacterium CG_4_9_14_0_2_um_filter_38_9</em></a></td><td><code>NCBITaxon:1974778</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1974779"><em>Candidatus Peregrinibacteria bacterium CG_4_9_14_0_2_um_filter_41_14</em></a></td><td><code>NCBITaxon:1974779</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1974777"><em>Candidatus Peregrinibacteria bacterium CG_4_10_14_3_um_filter_44_21</em></a></td><td><code>NCBITaxon:1974777</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1974778"><em>Candidatus Peregrinibacteria bacterium CG_4_9_14_0_2_um_filter_38_9</em></a></td><td><code>NCBITaxon:1974778</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1974779"><em>Candidatus Peregrinibacteria bacterium CG_4_9_14_0_2_um_filter_41_14</em></a></td><td><code>NCBITaxon:1974779</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1974780"><em>Candidatus Peregrinibacteria bacterium CG_4_9_14_0_2_um_filter_53_11</em></a></td><td><code>NCBITaxon:1974780</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1974781"><em>Candidatus Peregrinibacteria bacterium CG_4_9_14_0_8_um_filter_44_15</em></a></td><td><code>NCBITaxon:1974781</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1974781"><em>Candidatus Peregrinibacteria bacterium CG_4_9_14_0_8_um_filter_44_15</em></a></td><td><code>NCBITaxon:1974781</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="../taxon-browser.js?v=434e253832135143"></script>
+<script defer src="../taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="../index.json.gz">Index JSON.gz</a> · <a href="../index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

@@ -7,37 +7,125 @@
 <link rel="stylesheet" href="style.css">
 <script src="theme-toggle.js"></script>
 <script defer src="vendor/fflate-0.8.2.js"></script>
-<script defer src="compressed-data.js?v=434e253832135143"></script>
+<script defer src="compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="index.html">TaxonMech</a>
   <nav>
     <a href="browse.html">Browse</a>
     <a href="type-strains.html">Type strains</a>
+    <a href="map.html">Text map</a>
     <a href="sources.html">Sources</a>
+    <a href="index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="index.html">TaxonMech</a> › <span>All records</span>
+</nav>
 <h1>All records</h1>
-<section id="taxon-browser" data-domain="" data-typed="false" data-page="2261" data-size="200" data-root="">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
-<p id="taxon-status" role="status">625960 records · page 2261 of 3130.</p>
+<section id="taxon-browser" class="browse-layout" data-domain="" data-typed="false" data-page="2261" data-size="200" data-root="">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA">Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
+<p id="taxon-status" role="status">626048 records · page 2261 of 3131.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="browse-2260.html">Previous</a><a href="browse-2262.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>All records</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
-<tr><td><a href="taxon.html?id=NCBITaxon:2717341"><em>Rhabdaerophilum sp.</em></a></td><td><code>NCBITaxon:2717341</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>27</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2717341"><em>Rhabdaerophilum sp.</em></a></td><td><code>NCBITaxon:2717341</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4 (4 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2983548"><em>Rhabdaerophilum sp. SD176</em></a></td><td><code>NCBITaxon:2983548</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2040478"><em>Rhabdanaerobium sp.</em></a></td><td><code>NCBITaxon:2040478</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1715347"><em>Rhabdanaerobium thermarum</em></a></td><td><code>NCBITaxon:1715347</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1655419"><em>Rhabdobacter roseus</em></a></td><td><code>NCBITaxon:1655419</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2003554"><em>Rhabdobacter sp.</em></a></td><td><code>NCBITaxon:2003554</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2047756"><em>Rhabdochlamydiaceae bacterium</em></a></td><td><code>NCBITaxon:2047756</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2047756"><em>Rhabdochlamydiaceae bacterium</em></a></td><td><code>NCBITaxon:2047756</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>17 (17 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:684354"><em>Rhabdochlamydiaceae bacterium cvE55</em></a></td><td><code>NCBITaxon:684354</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:684353"><em>Rhabdochlamydiaceae bacterium cvE58</em></a></td><td><code>NCBITaxon:684353</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1009364"><em>Rhabdochlamydiaceae bacterium cvE99</em></a></td><td><code>NCBITaxon:1009364</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -47,7 +135,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1936158"><em>Rhabdochromatium sp.</em></a></td><td><code>NCBITaxon:1936158</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:262067"><em>Rhabdoderma cf. rubrum kopara-CH</em></a></td><td><code>NCBITaxon:262067</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:262066"><em>Rhabdoderma rubrum</em></a></td><td><code>NCBITaxon:262066</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2743469"><em>Rhabdonatronobacter sediminivivens</em></a></td><td><code>NCBITaxon:2743469</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2743469"><em>Rhabdonatronobacter sediminivivens</em></a></td><td><code>NCBITaxon:2743469</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2903142"><em>Rhabdothermincola salaria</em></a></td><td><code>NCBITaxon:2903142</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2751370"><em>Rhabdothermincola sediminis</em></a></td><td><code>NCBITaxon:2751370</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2820405"><em>Rhabdothermincola sp.</em></a></td><td><code>NCBITaxon:2820405</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
@@ -61,34 +149,34 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1778777"><em>&#39;Rhamnus punctata&#39; phytoplasma</em></a></td><td><code>NCBITaxon:1778777</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1586751"><em>Rheinheimera aestuarii</em></a></td><td><code>NCBITaxon:1586751</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:653745"><em>Rheinheimera aquatica</em></a></td><td><code>NCBITaxon:653745</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:412437"><em>Rheinheimera aquimaris</em></a></td><td><code>NCBITaxon:412437</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>19</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:412437"><em>Rheinheimera aquimaris</em></a></td><td><code>NCBITaxon:412437</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1520894"><em>Rheinheimera arenilitoris</em></a></td><td><code>NCBITaxon:1520894</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:67576"><em>Rheinheimera baltica</em></a></td><td><code>NCBITaxon:67576</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>2</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1123053"><em>Rheinheimera baltica DSM 14885</em></a></td><td><code>NCBITaxon:1123053</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:67576"><em>Rheinheimera baltica</em></a></td><td><code>NCBITaxon:67576</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>2</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1123053"><em>Rheinheimera baltica DSM 14885</em></a></td><td><code>NCBITaxon:1123053</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:358592"><em>Rheinheimera chironomi</em></a></td><td><code>NCBITaxon:358592</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1908522"><em>Rheinheimera coerulea</em></a></td><td><code>NCBITaxon:1908522</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2901141"><em>Rheinheimera faecalis</em></a></td><td><code>NCBITaxon:2901141</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3152295"><em>Rheinheimera fenheensis</em></a></td><td><code>NCBITaxon:3152295</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2901141"><em>Rheinheimera faecalis</em></a></td><td><code>NCBITaxon:2901141</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3152295"><em>Rheinheimera fenheensis</em></a></td><td><code>NCBITaxon:3152295</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1586750"><em>Rheinheimera gaetbuli</em></a></td><td><code>NCBITaxon:1586750</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1193627"><em>Rheinheimera hassiensis</em></a></td><td><code>NCBITaxon:1193627</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1550609"><em>Rheinheimera japonica</em></a></td><td><code>NCBITaxon:1550609</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2740584"><em>Rheinheimera lutimaris</em></a></td><td><code>NCBITaxon:2740584</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2498451"><em>Rheinheimera mangrovi</em></a></td><td><code>NCBITaxon:2498451</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2793282"><em>Rheinheimera maricola</em></a></td><td><code>NCBITaxon:2793282</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1774958"><em>Rheinheimera marina</em></a></td><td><code>NCBITaxon:1774958</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1547515"><em>Rheinheimera mesophila</em></a></td><td><code>NCBITaxon:1547515</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2925781"><em>Rheinheimera metallidurans</em></a></td><td><code>NCBITaxon:2925781</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2793282"><em>Rheinheimera maricola</em></a></td><td><code>NCBITaxon:2793282</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1774958"><em>Rheinheimera marina</em></a></td><td><code>NCBITaxon:1774958</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1547515"><em>Rheinheimera mesophila</em></a></td><td><code>NCBITaxon:1547515</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2925781"><em>Rheinheimera metallidurans</em></a></td><td><code>NCBITaxon:2925781</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1193628"><em>Rheinheimera muenzenbergensis</em></a></td><td><code>NCBITaxon:1193628</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1163621"><em>Rheinheimera nanhaiensis</em></a></td><td><code>NCBITaxon:1163621</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:562729"><em>Rheinheimera nanhaiensis E407-8</em></a></td><td><code>NCBITaxon:562729</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2817449"><em>Rheinheimera oceanensis</em></a></td><td><code>NCBITaxon:2817449</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:173990"><em>Rheinheimera pacifica</em></a></td><td><code>NCBITaxon:173990</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2703963"><em>Rheinheimera pleomorphica</em></a></td><td><code>NCBITaxon:2703963</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1163621"><em>Rheinheimera nanhaiensis</em></a></td><td><code>NCBITaxon:1163621</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:562729"><em>Rheinheimera nanhaiensis E407-8</em></a></td><td><code>NCBITaxon:562729</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2817449"><em>Rheinheimera oceanensis</em></a></td><td><code>NCBITaxon:2817449</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:173990"><em>Rheinheimera pacifica</em></a></td><td><code>NCBITaxon:173990</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>3 (3 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2703963"><em>Rheinheimera pleomorphica</em></a></td><td><code>NCBITaxon:2703963</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1834037"><em>Rheinheimera riviphila</em></a></td><td><code>NCBITaxon:1834037</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1628148"><em>Rheinheimera salexigens</em></a></td><td><code>NCBITaxon:1628148</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1628148"><em>Rheinheimera salexigens</em></a></td><td><code>NCBITaxon:1628148</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2761104"><em>Rheinheimera sediminis</em></a></td><td><code>NCBITaxon:2761104</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:443616"><em>Rheinheimera soli</em></a></td><td><code>NCBITaxon:443616</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1869214"><em>Rheinheimera sp.</em></a></td><td><code>NCBITaxon:1869214</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>9</td><td>13</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:443616"><em>Rheinheimera soli</em></a></td><td><code>NCBITaxon:443616</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1869214"><em>Rheinheimera sp.</em></a></td><td><code>NCBITaxon:1869214</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>9</td><td>22 (22 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:530873"><em>Rheinheimera sp. 01WB03.3-21</em></a></td><td><code>NCBITaxon:530873</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:530877"><em>Rheinheimera sp. 01WB03.3-29</em></a></td><td><code>NCBITaxon:530877</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:531054"><em>Rheinheimera sp. 01WB03.3-53</em></a></td><td><code>NCBITaxon:531054</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -165,7 +253,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:562728"><em>Rheinheimera sp. CF6-12</em></a></td><td><code>NCBITaxon:562728</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:598548"><em>Rheinheimera sp. Chandigarh</em></a></td><td><code>NCBITaxon:598548</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1367622"><em>Rheinheimera sp. CLRI6</em></a></td><td><code>NCBITaxon:1367622</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2545632"><em>Rheinheimera sp. D18</em></a></td><td><code>NCBITaxon:2545632</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2545632"><em>Rheinheimera sp. D18</em></a></td><td><code>NCBITaxon:2545632</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1311338"><em>Rheinheimera sp. D8</em></a></td><td><code>NCBITaxon:1311338</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1447227"><em>Rheinheimera sp. DMV28TSW</em></a></td><td><code>NCBITaxon:1447227</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1447228"><em>Rheinheimera sp. DMV43TSW</em></a></td><td><code>NCBITaxon:1447228</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -229,16 +317,19 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1768663"><em>Rheinheimera sp. K2DN331</em></a></td><td><code>NCBITaxon:1768663</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:208005"><em>Rheinheimera sp. KIN35</em></a></td><td><code>NCBITaxon:208005</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:208006"><em>Rheinheimera sp. KIN89</em></a></td><td><code>NCBITaxon:208006</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1635005"><em>Rheinheimera sp. KL1</em></a></td><td><code>NCBITaxon:1635005</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1635005"><em>Rheinheimera sp. KL1</em></a></td><td><code>NCBITaxon:1635005</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1546085"><em>Rheinheimera sp. KOK32</em></a></td><td><code>NCBITaxon:1546085</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="taxon-browser.js?v=434e253832135143"></script>
+<script defer src="taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="index.json.gz">Index JSON.gz</a> · <a href="index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

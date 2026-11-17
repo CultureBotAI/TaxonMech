@@ -7,53 +7,141 @@
 <link rel="stylesheet" href="style.css">
 <script src="theme-toggle.js"></script>
 <script defer src="vendor/fflate-0.8.2.js"></script>
-<script defer src="compressed-data.js?v=434e253832135143"></script>
+<script defer src="compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="index.html">TaxonMech</a>
   <nav>
     <a href="browse.html">Browse</a>
     <a href="type-strains.html">Type strains</a>
+    <a href="map.html">Text map</a>
     <a href="sources.html">Sources</a>
+    <a href="index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="index.html">TaxonMech</a> › <span>All records</span>
+</nav>
 <h1>All records</h1>
-<section id="taxon-browser" data-domain="" data-typed="false" data-page="1087" data-size="200" data-root="">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
-<p id="taxon-status" role="status">625960 records · page 1087 of 3130.</p>
+<section id="taxon-browser" class="browse-layout" data-domain="" data-typed="false" data-page="1087" data-size="200" data-root="">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA">Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
+<p id="taxon-status" role="status">626048 records · page 1087 of 3131.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="browse-1086.html">Previous</a><a href="browse-1088.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>All records</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="taxon.html?id=NCBITaxon:1246500"><em>Deinococcus-Thermus bacterium JGI 0000112-K18</em></a></td><td><code>NCBITaxon:1246500</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1246501"><em>Deinococcus-Thermus bacterium JGI 0000112-L11</em></a></td><td><code>NCBITaxon:1246501</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:980427"><em>Deinococcus wulumuqiensis</em></a></td><td><code>NCBITaxon:980427</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>21</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1288484"><em>Deinococcus wulumuqiensis R12</em></a></td><td><code>NCBITaxon:1288484</code></td><td>STRAIN</td><td>BACTERIA</td><td>7</td><td>1</td><td>21</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1403343"><em>Deinococcus wulumuqiensis R13</em></a></td><td><code>NCBITaxon:1403343</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>21</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1507289"><em>Deinococcus xianganensis</em></a></td><td><code>NCBITaxon:1507289</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:980427"><em>Deinococcus wulumuqiensis</em></a></td><td><code>NCBITaxon:980427</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1288484"><em>Deinococcus wulumuqiensis R12</em></a></td><td><code>NCBITaxon:1288484</code></td><td>STRAIN</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1403343"><em>Deinococcus wulumuqiensis R13</em></a></td><td><code>NCBITaxon:1403343</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1507289"><em>Deinococcus xianganensis</em></a></td><td><code>NCBITaxon:1507289</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:457454"><em>Deinococcus xinjiangensis</em></a></td><td><code>NCBITaxon:457454</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:309889"><em>Deinococcus yavapaiensis</em></a></td><td><code>NCBITaxon:309889</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:694435"><em>Deinococcus yavapaiensis KR-236</em></a></td><td><code>NCBITaxon:694435</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:367282"><em>Deinococcus yunweiensis</em></a></td><td><code>NCBITaxon:367282</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:29455"><em>Deinonema sp.</em></a></td><td><code>NCBITaxon:29455</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:80866"><em>Delftia acidovorans</em></a></td><td><code>NCBITaxon:80866</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>47</td><td>150</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:883100"><em>Delftia acidovorans CCUG 15835</em></a></td><td><code>NCBITaxon:883100</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>94</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:883101"><em>Delftia acidovorans CCUG 274B</em></a></td><td><code>NCBITaxon:883101</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>94</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1218107"><em>Delftia acidovorans NBRC 14950</em></a></td><td><code>NCBITaxon:1218107</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>150</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:80866"><em>Delftia acidovorans</em></a></td><td><code>NCBITaxon:80866</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>47</td><td>4 (4 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:883100"><em>Delftia acidovorans CCUG 15835</em></a></td><td><code>NCBITaxon:883100</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:883101"><em>Delftia acidovorans CCUG 274B</em></a></td><td><code>NCBITaxon:883101</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1218107"><em>Delftia acidovorans NBRC 14950</em></a></td><td><code>NCBITaxon:1218107</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1255679"><em>Delftia acidovorans PCA12</em></a></td><td><code>NCBITaxon:1255679</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:398578"><em>Delftia acidovorans SPH-1</em></a></td><td><code>NCBITaxon:398578</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>150</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:398578"><em>Delftia acidovorans SPH-1</em></a></td><td><code>NCBITaxon:398578</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:136408"><em>Delftia cf. acidovorans</em></a></td><td><code>NCBITaxon:136408</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1651218"><em>Delftia deserti</em></a></td><td><code>NCBITaxon:1651218</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>150</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:558537"><em>Delftia lacustris</em></a></td><td><code>NCBITaxon:558537</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>94</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1651218"><em>Delftia deserti</em></a></td><td><code>NCBITaxon:1651218</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:558537"><em>Delftia lacustris</em></a></td><td><code>NCBITaxon:558537</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:747302"><em>Delftia litopenaei</em></a></td><td><code>NCBITaxon:747302</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1915059"><em>Delftia rhizosphaerae</em></a></td><td><code>NCBITaxon:1915059</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1886637"><em>Delftia sp.</em></a></td><td><code>NCBITaxon:1886637</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>3</td><td>150</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1886637"><em>Delftia sp.</em></a></td><td><code>NCBITaxon:1886637</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>3</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:756120"><em>Delftia sp. 01xTSA28A_A09</em></a></td><td><code>NCBITaxon:756120</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1825536"><em>Delftia sp. 107</em></a></td><td><code>NCBITaxon:1825536</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1825527"><em>Delftia sp. 108</em></a></td><td><code>NCBITaxon:1825527</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -63,12 +151,12 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:868364"><em>Delftia sp. 11(27-11)</em></a></td><td><code>NCBITaxon:868364</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:868351"><em>Delftia sp. 11(27-11)(10.4.21)</em></a></td><td><code>NCBITaxon:868351</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:868382"><em>Delftia sp. 11(shui)</em></a></td><td><code>NCBITaxon:868382</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3435885"><em>Delftia sp. 11MD</em></a></td><td><code>NCBITaxon:3435885</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>94</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3435885"><em>Delftia sp. 11MD</em></a></td><td><code>NCBITaxon:3435885</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1825533"><em>Delftia sp. 121</em></a></td><td><code>NCBITaxon:1825533</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:868383"><em>Delftia sp. 12(shui)</em></a></td><td><code>NCBITaxon:868383</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1751937"><em>Delftia sp. 132</em></a></td><td><code>NCBITaxon:1751937</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1805105"><em>Delftia sp. 13_1_20CM_4_67_18</em></a></td><td><code>NCBITaxon:1805105</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>150</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1805104"><em>Delftia sp. 13_1_40CM_3_66_6</em></a></td><td><code>NCBITaxon:1805104</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>150</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1805105"><em>Delftia sp. 13_1_20CM_4_67_18</em></a></td><td><code>NCBITaxon:1805105</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1805104"><em>Delftia sp. 13_1_40CM_3_66_6</em></a></td><td><code>NCBITaxon:1805104</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:868353"><em>Delftia sp. 13(27-11)(10.4.21)</em></a></td><td><code>NCBITaxon:868353</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:868343"><em>Delftia sp. 13(31-3)(5.22)</em></a></td><td><code>NCBITaxon:868343</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:868370"><em>Delftia sp. 13(4-10)(10.5.11)</em></a></td><td><code>NCBITaxon:868370</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -113,9 +201,9 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1161325"><em>Delftia sp. 50-3</em></a></td><td><code>NCBITaxon:1161325</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:868359"><em>Delftia sp. 5(27-11)</em></a></td><td><code>NCBITaxon:868359</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:426722"><em>Delftia sp. 5.7</em></a></td><td><code>NCBITaxon:426722</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2035216"><em>Delftia sp. 60</em></a></td><td><code>NCBITaxon:2035216</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>150</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1537702"><em>Delftia sp. 670</em></a></td><td><code>NCBITaxon:1537702</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>94</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1895749"><em>Delftia sp. 67-8</em></a></td><td><code>NCBITaxon:1895749</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>94</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2035216"><em>Delftia sp. 60</em></a></td><td><code>NCBITaxon:2035216</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1537702"><em>Delftia sp. 670</em></a></td><td><code>NCBITaxon:1537702</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1895749"><em>Delftia sp. 67-8</em></a></td><td><code>NCBITaxon:1895749</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:426723"><em>Delftia sp. 6.13</em></a></td><td><code>NCBITaxon:426723</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:868335"><em>Delftia sp. 6(1-1)(5.22)</em></a></td><td><code>NCBITaxon:868335</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:868360"><em>Delftia sp. 6(27-11)</em></a></td><td><code>NCBITaxon:868360</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -152,7 +240,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:489943"><em>Delftia sp. AP1-2</em></a></td><td><code>NCBITaxon:489943</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1406352"><em>Delftia sp. AP5s2-M5a</em></a></td><td><code>NCBITaxon:1406352</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1095872"><em>Delftia sp. AR-341</em></a></td><td><code>NCBITaxon:1095872</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2795113"><em>Delftia sp. ASV31</em></a></td><td><code>NCBITaxon:2795113</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>150</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2795113"><em>Delftia sp. ASV31</em></a></td><td><code>NCBITaxon:2795113</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1213461"><em>Delftia sp. ATHA4</em></a></td><td><code>NCBITaxon:1213461</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1341490"><em>Delftia sp. B0.09-91</em></a></td><td><code>NCBITaxon:1341490</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1367470"><em>Delftia sp. B2</em></a></td><td><code>NCBITaxon:1367470</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -173,7 +261,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:948608"><em>Delftia sp. BN-HKY2</em></a></td><td><code>NCBITaxon:948608</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:948609"><em>Delftia sp. BN-HKY4</em></a></td><td><code>NCBITaxon:948609</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:948610"><em>Delftia sp. BN-SKY3</em></a></td><td><code>NCBITaxon:948610</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2613840"><em>Delftia sp. BR1</em></a></td><td><code>NCBITaxon:2613840</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>94</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2613840"><em>Delftia sp. BR1</em></a></td><td><code>NCBITaxon:2613840</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1161390"><em>Delftia sp. BT 201</em></a></td><td><code>NCBITaxon:1161390</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:321206"><em>Delftia sp. BW3</em></a></td><td><code>NCBITaxon:321206</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1406915"><em>Delftia sp. C11-2</em></a></td><td><code>NCBITaxon:1406915</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -192,10 +280,10 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2007069"><em>Delftia sp. CCM-077</em></a></td><td><code>NCBITaxon:2007069</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2007070"><em>Delftia sp. CCM-078</em></a></td><td><code>NCBITaxon:2007070</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2007071"><em>Delftia sp. CCM-079</em></a></td><td><code>NCBITaxon:2007071</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2692194"><em>Delftia sp. CH05</em></a></td><td><code>NCBITaxon:2692194</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>94</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2692194"><em>Delftia sp. CH05</em></a></td><td><code>NCBITaxon:2692194</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1513366"><em>Delftia sp. CHZG-R4</em></a></td><td><code>NCBITaxon:1513366</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3379307"><em>Delftia sp. CRBC_G1956</em></a></td><td><code>NCBITaxon:3379307</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:742013"><em>Delftia sp. Cs1-4</em></a></td><td><code>NCBITaxon:742013</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>150</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:742013"><em>Delftia sp. Cs1-4</em></a></td><td><code>NCBITaxon:742013</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:986293"><em>Delftia sp. CUL-LABH3L3</em></a></td><td><code>NCBITaxon:986293</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1812014"><em>Delftia sp. D1Ms35</em></a></td><td><code>NCBITaxon:1812014</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1813338"><em>Delftia sp. D1SM169</em></a></td><td><code>NCBITaxon:1813338</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -205,14 +293,14 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1005766"><em>Delftia sp. DJM4E5</em></a></td><td><code>NCBITaxon:1005766</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1005767"><em>Delftia sp. DJM4G3</em></a></td><td><code>NCBITaxon:1005767</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:475945"><em>Delftia sp. DLC-rlim</em></a></td><td><code>NCBITaxon:475945</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2769279"><em>Delftia sp. DLF01</em></a></td><td><code>NCBITaxon:2769279</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>150</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2769279"><em>Delftia sp. DLF01</em></a></td><td><code>NCBITaxon:2769279</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1716095"><em>Delftia sp. DM101</em></a></td><td><code>NCBITaxon:1716095</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3153805"><em>Delftia sp. DS1230</em></a></td><td><code>NCBITaxon:3153805</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>94</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3153805"><em>Delftia sp. DS1230</em></a></td><td><code>NCBITaxon:3153805</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1294659"><em>Delftia sp. DS-7PS-5</em></a></td><td><code>NCBITaxon:1294659</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1675962"><em>Delftia sp. DsA.N049</em></a></td><td><code>NCBITaxon:1675962</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2806556"><em>Delftia sp. DSM 12781</em></a></td><td><code>NCBITaxon:2806556</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3136284"><em>Delftia sp. DT</em></a></td><td><code>NCBITaxon:3136284</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3022772"><em>Delftia sp. DT-2</em></a></td><td><code>NCBITaxon:3022772</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>94</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3022772"><em>Delftia sp. DT-2</em></a></td><td><code>NCBITaxon:3022772</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:310296"><em>Delftia sp. EC-S107</em></a></td><td><code>NCBITaxon:310296</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1248978"><em>Delftia sp. EECC-23</em></a></td><td><code>NCBITaxon:1248978</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:91466"><em>Delftia sp. EK3</em></a></td><td><code>NCBITaxon:91466</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -227,18 +315,21 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:3132831"><em>Delftia sp. f39</em></a></td><td><code>NCBITaxon:3132831</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1134867"><em>Delftia sp. GCNP4_II</em></a></td><td><code>NCBITaxon:1134867</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1162945"><em>Delftia sp. GhF-06</em></a></td><td><code>NCBITaxon:1162945</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1827145"><em>Delftia sp. GW456-R20</em></a></td><td><code>NCBITaxon:1827145</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>150</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1827145"><em>Delftia sp. GW456-R20</em></a></td><td><code>NCBITaxon:1827145</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1825899"><em>Delftia sp. H2</em></a></td><td><code>NCBITaxon:1825899</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:421065"><em>Delftia sp. H208</em></a></td><td><code>NCBITaxon:421065</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:421066"><em>Delftia sp. H209</em></a></td><td><code>NCBITaxon:421066</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="taxon-browser.js?v=434e253832135143"></script>
+<script defer src="taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="index.json.gz">Index JSON.gz</a> · <a href="index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

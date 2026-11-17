@@ -7,30 +7,118 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../theme-toggle.js"></script>
 <script defer src="../vendor/fflate-0.8.2.js"></script>
-<script defer src="../compressed-data.js?v=434e253832135143"></script>
+<script defer src="../compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="../index.html">TaxonMech</a>
   <nav>
     <a href="../browse.html">Browse</a>
     <a href="../type-strains.html">Type strains</a>
+    <a href="../map.html">Text map</a>
     <a href="../sources.html">Sources</a>
+    <a href="../index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../index.html">TaxonMech</a> › <span>Bacteria</span>
+</nav>
 <h1>Bacteria</h1>
 <p class="lede">Species and infraspecific taxa under NCBITaxon:2, including uncultured and environmental taxa.</p>
-<section id="taxon-browser" data-domain="BACTERIA" data-typed="false" data-page="355" data-size="200" data-root="../">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="BACTERIA" data-typed="false" data-page="355" data-size="200" data-root="../">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="../browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA" selected>Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">605695 records · page 355 of 3029.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="../domain/bacteria-354.html">Previous</a><a href="../domain/bacteria-356.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>Bacteria</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="../taxon.html?id=NCBITaxon:395401"><em>Bacillus sp. JG-B58</em></a></td><td><code>NCBITaxon:395401</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:395402"><em>Bacillus sp. JG-B62</em></a></td><td><code>NCBITaxon:395402</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -54,12 +142,12 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:266778"><em>Bacillus sp. JH1</em></a></td><td><code>NCBITaxon:266778</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:352390"><em>Bacillus sp. JH19</em></a></td><td><code>NCBITaxon:352390</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1759555"><em>Bacillus sp. JH3</em></a></td><td><code>NCBITaxon:1759555</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1759556"><em>Bacillus sp. JH7</em></a></td><td><code>NCBITaxon:1759556</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2275</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1759556"><em>Bacillus sp. JH7</em></a></td><td><code>NCBITaxon:1759556</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1122281"><em>Bacillus sp. JH 2-2</em></a></td><td><code>NCBITaxon:1122281</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1036144"><em>Bacillus sp. JH-5-2</em></a></td><td><code>NCBITaxon:1036144</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1036145"><em>Bacillus sp. JH-5-3</em></a></td><td><code>NCBITaxon:1036145</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1036146"><em>Bacillus sp. JH-5-4</em></a></td><td><code>NCBITaxon:1036146</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3109351"><em>Bacillus sp. JHAA</em></a></td><td><code>NCBITaxon:3109351</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1540</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3109351"><em>Bacillus sp. JHAA</em></a></td><td><code>NCBITaxon:3109351</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1167847"><em>Bacillus sp. JHTBS-2</em></a></td><td><code>NCBITaxon:1167847</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1167848"><em>Bacillus sp. JHTBS-21</em></a></td><td><code>NCBITaxon:1167848</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1167849"><em>Bacillus sp. JHTBS-6</em></a></td><td><code>NCBITaxon:1167849</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -69,36 +157,36 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1814236"><em>Bacillus sp. Jilu WO145</em></a></td><td><code>NCBITaxon:1814236</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1579183"><em>Bacillus sp. JJ11</em></a></td><td><code>NCBITaxon:1579183</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3122951"><em>Bacillus sp. JJ1122</em></a></td><td><code>NCBITaxon:3122951</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3122952"><em>Bacillus sp. JJ1127</em></a></td><td><code>NCBITaxon:3122952</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>7</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3122952"><em>Bacillus sp. JJ1127</em></a></td><td><code>NCBITaxon:3122952</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3122953"><em>Bacillus sp. JJ1159</em></a></td><td><code>NCBITaxon:3122953</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3122948"><em>Bacillus sp. JJ1394</em></a></td><td><code>NCBITaxon:3122948</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3122954"><em>Bacillus sp. JJ1426</em></a></td><td><code>NCBITaxon:3122954</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3122955"><em>Bacillus sp. JJ1474</em></a></td><td><code>NCBITaxon:3122955</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3122955"><em>Bacillus sp. JJ1474</em></a></td><td><code>NCBITaxon:3122955</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1579184"><em>Bacillus sp. JJ15</em></a></td><td><code>NCBITaxon:1579184</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3122956"><em>Bacillus sp. JJ1503</em></a></td><td><code>NCBITaxon:3122956</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3122956"><em>Bacillus sp. JJ1503</em></a></td><td><code>NCBITaxon:3122956</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3122957"><em>Bacillus sp. JJ1521</em></a></td><td><code>NCBITaxon:3122957</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3122958"><em>Bacillus sp. JJ1532</em></a></td><td><code>NCBITaxon:3122958</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3122958"><em>Bacillus sp. JJ1532</em></a></td><td><code>NCBITaxon:3122958</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3122959"><em>Bacillus sp. JJ1533</em></a></td><td><code>NCBITaxon:3122959</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3122960"><em>Bacillus sp. JJ1562</em></a></td><td><code>NCBITaxon:3122960</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3122961"><em>Bacillus sp. JJ1566</em></a></td><td><code>NCBITaxon:3122961</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3122977"><em>Bacillus sp. JJ1609</em></a></td><td><code>NCBITaxon:3122977</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3122962"><em>Bacillus sp. JJ1641</em></a></td><td><code>NCBITaxon:3122962</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3122963"><em>Bacillus sp. JJ1707</em></a></td><td><code>NCBITaxon:3122963</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3122964"><em>Bacillus sp. JJ1764</em></a></td><td><code>NCBITaxon:3122964</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3122965"><em>Bacillus sp. JJ1773</em></a></td><td><code>NCBITaxon:3122965</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3122966"><em>Bacillus sp. JJ269</em></a></td><td><code>NCBITaxon:3122966</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>436</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3122964"><em>Bacillus sp. JJ1764</em></a></td><td><code>NCBITaxon:3122964</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3122965"><em>Bacillus sp. JJ1773</em></a></td><td><code>NCBITaxon:3122965</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3122966"><em>Bacillus sp. JJ269</em></a></td><td><code>NCBITaxon:3122966</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1663080"><em>Bacillus sp. JJ3</em></a></td><td><code>NCBITaxon:1663080</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3122967"><em>Bacillus sp. JJ353</em></a></td><td><code>NCBITaxon:3122967</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>25</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3122968"><em>Bacillus sp. JJ63</em></a></td><td><code>NCBITaxon:3122968</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>8</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3122969"><em>Bacillus sp. JJ634</em></a></td><td><code>NCBITaxon:3122969</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>9</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3122967"><em>Bacillus sp. JJ353</em></a></td><td><code>NCBITaxon:3122967</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3122968"><em>Bacillus sp. JJ63</em></a></td><td><code>NCBITaxon:3122968</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3122969"><em>Bacillus sp. JJ634</em></a></td><td><code>NCBITaxon:3122969</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3122970"><em>Bacillus sp. JJ664</em></a></td><td><code>NCBITaxon:3122970</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3122971"><em>Bacillus sp. JJ665</em></a></td><td><code>NCBITaxon:3122971</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3122972"><em>Bacillus sp. JJ675</em></a></td><td><code>NCBITaxon:3122972</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>25</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3122949"><em>Bacillus sp. JJ689</em></a></td><td><code>NCBITaxon:3122949</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>436</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3122972"><em>Bacillus sp. JJ675</em></a></td><td><code>NCBITaxon:3122972</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3122949"><em>Bacillus sp. JJ689</em></a></td><td><code>NCBITaxon:3122949</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3122973"><em>Bacillus sp. JJ722</em></a></td><td><code>NCBITaxon:3122973</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3122974"><em>Bacillus sp. JJ783</em></a></td><td><code>NCBITaxon:3122974</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>56</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3122975"><em>Bacillus sp. JJ864</em></a></td><td><code>NCBITaxon:3122975</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3122976"><em>Bacillus sp. JJ927</em></a></td><td><code>NCBITaxon:3122976</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3122974"><em>Bacillus sp. JJ783</em></a></td><td><code>NCBITaxon:3122974</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3122975"><em>Bacillus sp. JJ864</em></a></td><td><code>NCBITaxon:3122975</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3122976"><em>Bacillus sp. JJ927</em></a></td><td><code>NCBITaxon:3122976</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1647358"><em>Bacillus sp. JJ-D12</em></a></td><td><code>NCBITaxon:1647358</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1647359"><em>Bacillus sp. JJ-D16</em></a></td><td><code>NCBITaxon:1647359</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1647361"><em>Bacillus sp. JJ-D51</em></a></td><td><code>NCBITaxon:1647361</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -122,7 +210,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1227952"><em>Bacillus sp. JKAS-CD1</em></a></td><td><code>NCBITaxon:1227952</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1830311"><em>Bacillus sp. JKJR32</em></a></td><td><code>NCBITaxon:1830311</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1938742"><em>Bacillus sp. JKS000222</em></a></td><td><code>NCBITaxon:1938742</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1938743"><em>Bacillus sp. JKS001846</em></a></td><td><code>NCBITaxon:1938743</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2275</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1938743"><em>Bacillus sp. JKS001846</em></a></td><td><code>NCBITaxon:1938743</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1495634"><em>Bacillus sp. JL1</em></a></td><td><code>NCBITaxon:1495634</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:414435"><em>Bacillus sp. JL1082</em></a></td><td><code>NCBITaxon:414435</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1495635"><em>Bacillus sp. JL47</em></a></td><td><code>NCBITaxon:1495635</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -175,9 +263,9 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1215746"><em>Bacillus sp. JNF-1</em></a></td><td><code>NCBITaxon:1215746</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1271760"><em>Bacillus sp. JNU-SGY013</em></a></td><td><code>NCBITaxon:1271760</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1271761"><em>Bacillus sp. JNU-SGY014</em></a></td><td><code>NCBITaxon:1271761</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3240102"><em>Bacillus sp. JNUCC-21</em></a></td><td><code>NCBITaxon:3240102</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1540</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2842457"><em>Bacillus sp. JNUCC-22</em></a></td><td><code>NCBITaxon:2842457</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1540</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2842458"><em>Bacillus sp. JNUCC-24</em></a></td><td><code>NCBITaxon:2842458</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>412</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3240102"><em>Bacillus sp. JNUCC-21</em></a></td><td><code>NCBITaxon:3240102</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2842457"><em>Bacillus sp. JNUCC-22</em></a></td><td><code>NCBITaxon:2842457</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2842458"><em>Bacillus sp. JNUCC-24</em></a></td><td><code>NCBITaxon:2842458</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1478189"><em>Bacillus sp. JP-1</em></a></td><td><code>NCBITaxon:1478189</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1471276"><em>Bacillus sp. JP-2014-A21</em></a></td><td><code>NCBITaxon:1471276</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:490176"><em>Bacillus sp. JP-A</em></a></td><td><code>NCBITaxon:490176</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -210,13 +298,13 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:3142947"><em>Bacillus sp. JR_15</em></a></td><td><code>NCBITaxon:3142947</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3142946"><em>Bacillus sp. JR_21</em></a></td><td><code>NCBITaxon:3142946</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3142949"><em>Bacillus sp. JR_3</em></a></td><td><code>NCBITaxon:3142949</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2855631"><em>Bacillus sp. JRC01</em></a></td><td><code>NCBITaxon:2855631</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>13</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2855631"><em>Bacillus sp. JRC01</em></a></td><td><code>NCBITaxon:2855631</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:412600"><em>Bacillus sp. JRI06</em></a></td><td><code>NCBITaxon:412600</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1657841"><em>Bacillus sp. JRP12</em></a></td><td><code>NCBITaxon:1657841</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1747815"><em>Bacillus sp. JRP19</em></a></td><td><code>NCBITaxon:1747815</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1657842"><em>Bacillus sp. JRP39</em></a></td><td><code>NCBITaxon:1657842</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1747816"><em>Bacillus sp. JRP5</em></a></td><td><code>NCBITaxon:1747816</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1127744"><em>Bacillus sp. JS</em></a></td><td><code>NCBITaxon:1127744</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>50</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1127744"><em>Bacillus sp. JS</em></a></td><td><code>NCBITaxon:1127744</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:245308"><em>Bacillus sp. JS12</em></a></td><td><code>NCBITaxon:245308</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:245309"><em>Bacillus sp. JS15</em></a></td><td><code>NCBITaxon:245309</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:245310"><em>Bacillus sp. JS17</em></a></td><td><code>NCBITaxon:245310</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -234,12 +322,15 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:660227"><em>Bacillus sp. JS-24</em></a></td><td><code>NCBITaxon:660227</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="../taxon-browser.js?v=434e253832135143"></script>
+<script defer src="../taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="../index.json.gz">Index JSON.gz</a> · <a href="../index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

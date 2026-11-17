@@ -1,0 +1,28 @@
+history_version: 1
+target:
+  kind: other
+  path: curation/seed_scope.tsv
+  slug: expand-attested-scope
+session:
+  id: 2026-10-19T053211Z-Antigravity-034362
+  timestamp: '2026-10-19T05:32:11Z'
+  actors:
+  - type: ai_agent
+    name: Antigravity
+    agent_tool: antigravity-cli
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - scope
+  - identifiers
+  summary: Expand explicit scope to include 88 microbial eukaryote species-or-below taxa with
+    attested descendant strains
+  details: Extended scripts/propose_scope.py (--rule attested) and src/taxonmech/seed.py (Inventory.has_attested_descendant)
+    so species-or-below taxa in data/raw/ncbitaxon_taxa.tsv whose child strain taxa are attested
+    in committed sources (GOLD) are proposed and seeded. Reviewed and appended all 88 remaining
+    candidate microbial eukaryote taxa (76 SPECIES, 6 VARIETAS, 2 FORMA_SPECIALIS, 2 CLADE,
+    1 SUBSPECIES, 1 NO_RANK) to curation/seed_scope.tsv, bringing the explicit scope from
+    625,960 to 626,048 records with zero remaining unscoped candidates. Verified canary NCBITaxon:1859096
+    (Cryptococcus deuterogattii) and all 88 generated records via write_validated_taxon and
+    scripts/validate_strict.py.

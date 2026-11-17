@@ -7,30 +7,118 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../theme-toggle.js"></script>
 <script defer src="../vendor/fflate-0.8.2.js"></script>
-<script defer src="../compressed-data.js?v=434e253832135143"></script>
+<script defer src="../compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="../index.html">TaxonMech</a>
   <nav>
     <a href="../browse.html">Browse</a>
     <a href="../type-strains.html">Type strains</a>
+    <a href="../map.html">Text map</a>
     <a href="../sources.html">Sources</a>
+    <a href="../index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../index.html">TaxonMech</a> › <span>Bacteria</span>
+</nav>
 <h1>Bacteria</h1>
 <p class="lede">Species and infraspecific taxa under NCBITaxon:2, including uncultured and environmental taxa.</p>
-<section id="taxon-browser" data-domain="BACTERIA" data-typed="false" data-page="765" data-size="200" data-root="../">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="BACTERIA" data-typed="false" data-page="765" data-size="200" data-root="../">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="../browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA" selected>Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">605695 records · page 765 of 3029.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="../domain/bacteria-764.html">Previous</a><a href="../domain/bacteria-766.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>Bacteria</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2027474"><em>Buchnera aphidicola (Chaitophorus populialbae yomefuri)</em></a></td><td><code>NCBITaxon:2027474</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2994480"><em>Buchnera aphidicola (Chaitophorus populicola)</em></a></td><td><code>NCBITaxon:2994480</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
@@ -94,13 +182,13 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:655383"><em>Buchnera aphidicola (Cinara ponderosae)</em></a></td><td><code>NCBITaxon:655383</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1660045"><em>Buchnera aphidicola (Cinara pruiniviridis)</em></a></td><td><code>NCBITaxon:1660045</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1878932"><em>Buchnera aphidicola (Cinara pruinosa)</em></a></td><td><code>NCBITaxon:1878932</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:655384"><em>Buchnera aphidicola (Cinara pseudotaxifoliae)</em></a></td><td><code>NCBITaxon:655384</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>3</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:655384"><em>Buchnera aphidicola (Cinara pseudotaxifoliae)</em></a></td><td><code>NCBITaxon:655384</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2518978"><em>Buchnera aphidicola (Cinara pseudotsugae)</em></a></td><td><code>NCBITaxon:2518978</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:506614"><em>Buchnera aphidicola (Cinara schimitscheki)</em></a></td><td><code>NCBITaxon:506614</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:655385"><em>Buchnera aphidicola (Cinara sp.)</em></a></td><td><code>NCBITaxon:655385</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1878936"><em>Buchnera aphidicola (Cinara sp. 14FR)</em></a></td><td><code>NCBITaxon:1878936</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2518979"><em>Buchnera aphidicola (Cinara splendens)</em></a></td><td><code>NCBITaxon:2518979</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1921549"><em>Buchnera aphidicola (Cinara strobi)</em></a></td><td><code>NCBITaxon:1921549</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>3</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1921549"><em>Buchnera aphidicola (Cinara strobi)</em></a></td><td><code>NCBITaxon:1921549</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:655386"><em>Buchnera aphidicola (Cinara terminalis)</em></a></td><td><code>NCBITaxon:655386</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:261317"><em>Buchnera aphidicola (Cinara tujafilina)</em></a></td><td><code>NCBITaxon:261317</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:655387"><em>Buchnera aphidicola (Cinara wahtolca)</em></a></td><td><code>NCBITaxon:655387</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -108,11 +196,11 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1265357"><em>Buchnera aphidicola (Cryptosiphum atriplicivorum)</em></a></td><td><code>NCBITaxon:1265357</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3686240"><em>Buchnera aphidicola (Dermaphis japonensis)</em></a></td><td><code>NCBITaxon:3686240</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:675827"><em>Buchnera aphidicola (Diuraphis mexicana)</em></a></td><td><code>NCBITaxon:675827</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:118101"><em>Buchnera aphidicola (Diuraphis noxia)</em></a></td><td><code>NCBITaxon:118101</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:118101"><em>Buchnera aphidicola (Diuraphis noxia)</em></a></td><td><code>NCBITaxon:118101</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:675826"><em>Buchnera aphidicola (Diuraphis tritici)</em></a></td><td><code>NCBITaxon:675826</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1241843"><em>Buchnera aphidicola (Drepanaphis sp.)</em></a></td><td><code>NCBITaxon:1241843</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1241844"><em>Buchnera aphidicola (Drepanaphis utahensis)</em></a></td><td><code>NCBITaxon:1241844</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2994482"><em>Buchnera aphidicola (Drepanosiphum platanoidis)</em></a></td><td><code>NCBITaxon:2994482</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2994482"><em>Buchnera aphidicola (Drepanosiphum platanoidis)</em></a></td><td><code>NCBITaxon:2994482</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2938915"><em>Buchnera aphidicola (Dysaphis plantaginea)</em></a></td><td><code>NCBITaxon:2938915</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2938917"><em>Buchnera aphidicola (Dysaphis sp.)</em></a></td><td><code>NCBITaxon:2938917</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1511601"><em>Buchnera aphidicola (Epipemphigus imaicus)</em></a></td><td><code>NCBITaxon:1511601</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -151,9 +239,9 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1241849"><em>Buchnera aphidicola (Eulachnus rileyi)</em></a></td><td><code>NCBITaxon:1241849</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2268419"><em>Buchnera aphidicola (Eulachnus sp.)</em></a></td><td><code>NCBITaxon:2268419</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1241850"><em>Buchnera aphidicola (Eutrichosiphum sinense)</em></a></td><td><code>NCBITaxon:1241850</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3093902"><em>Buchnera aphidicola (Floraphis choui)</em></a></td><td><code>NCBITaxon:3093902</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3093903"><em>Buchnera aphidicola (Floraphis meitanensis)</em></a></td><td><code>NCBITaxon:3093903</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3075419"><em>Buchnera aphidicola (Formosaphis micheliae)</em></a></td><td><code>NCBITaxon:3075419</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3093902"><em>Buchnera aphidicola (Floraphis choui)</em></a></td><td><code>NCBITaxon:3093902</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3093903"><em>Buchnera aphidicola (Floraphis meitanensis)</em></a></td><td><code>NCBITaxon:3093903</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3075419"><em>Buchnera aphidicola (Formosaphis micheliae)</em></a></td><td><code>NCBITaxon:3075419</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:98801"><em>Buchnera aphidicola (Geoica urticularia)</em></a></td><td><code>NCBITaxon:98801</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1241851"><em>Buchnera aphidicola (Glyphina longisetosa)</em></a></td><td><code>NCBITaxon:1241851</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1265360"><em>Buchnera aphidicola (Greenidea cayratiae)</em></a></td><td><code>NCBITaxon:1265360</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -182,10 +270,10 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1265363"><em>Buchnera aphidicola (Izaphis sp.)</em></a></td><td><code>NCBITaxon:1265363</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1241862"><em>Buchnera aphidicola (Iziphya flabella)</em></a></td><td><code>NCBITaxon:1241862</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1265364"><em>Buchnera aphidicola (Kaburagia rhusicola)</em></a></td><td><code>NCBITaxon:1265364</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3093904"><em>Buchnera aphidicola (Kaburagia rhusicola ensigallis)</em></a></td><td><code>NCBITaxon:3093904</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3093905"><em>Buchnera aphidicola (Kaburagia rhusicola rhusicola)</em></a></td><td><code>NCBITaxon:3093905</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3093904"><em>Buchnera aphidicola (Kaburagia rhusicola ensigallis)</em></a></td><td><code>NCBITaxon:3093904</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3093905"><em>Buchnera aphidicola (Kaburagia rhusicola rhusicola)</em></a></td><td><code>NCBITaxon:3093905</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1265365"><em>Buchnera aphidicola (Ktenopteryx eosocallis)</em></a></td><td><code>NCBITaxon:1265365</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1265366"><em>Buchnera aphidicola (Kurisakia onigurumii)</em></a></td><td><code>NCBITaxon:1265366</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1265366"><em>Buchnera aphidicola (Kurisakia onigurumii)</em></a></td><td><code>NCBITaxon:1265366</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1241863"><em>Buchnera aphidicola (Kurisakia querciphila)</em></a></td><td><code>NCBITaxon:1241863</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1660053"><em>Buchnera aphidicola (Lachnus longirostris)</em></a></td><td><code>NCBITaxon:1660053</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1449771"><em>Buchnera aphidicola (Lachnus quercihabitans)</em></a></td><td><code>NCBITaxon:1449771</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -203,20 +291,20 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:118105"><em>Buchnera aphidicola (Macrosiphoniella ludovicianae)</em></a></td><td><code>NCBITaxon:118105</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1241865"><em>Buchnera aphidicola (Macrosiphoniella sanborni)</em></a></td><td><code>NCBITaxon:1241865</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1265368"><em>Buchnera aphidicola (Macrosiphoniella yomogifoliae)</em></a></td><td><code>NCBITaxon:1265368</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2994844"><em>Buchnera aphidicola (Macrosiphum albifrons)</em></a></td><td><code>NCBITaxon:2994844</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1507522"><em>Buchnera aphidicola (Macrosiphum euphorbiae)</em></a></td><td><code>NCBITaxon:1507522</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>3</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2994844"><em>Buchnera aphidicola (Macrosiphum albifrons)</em></a></td><td><code>NCBITaxon:2994844</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1507522"><em>Buchnera aphidicola (Macrosiphum euphorbiae)</em></a></td><td><code>NCBITaxon:1507522</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2315801"><em>Buchnera aphidicola (Macrosiphum gaurae)</em></a></td><td><code>NCBITaxon:2315801</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:98791"><em>Buchnera aphidicola (Macrosiphum rosae)</em></a></td><td><code>NCBITaxon:98791</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1241866"><em>Buchnera aphidicola (Maculolachnus sijpkensis)</em></a></td><td><code>NCBITaxon:1241866</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:135844"><em>Buchnera aphidicola (Maculolachnus submacula)</em></a></td><td><code>NCBITaxon:135844</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3093906"><em>Buchnera aphidicola (Meitanaphis elongallis)</em></a></td><td><code>NCBITaxon:3093906</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3093906"><em>Buchnera aphidicola (Meitanaphis elongallis)</em></a></td><td><code>NCBITaxon:3093906</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3093907"><em>Buchnera aphidicola (Meitanaphis flavogallis)</em></a></td><td><code>NCBITaxon:3093907</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3093908"><em>Buchnera aphidicola (Meitanaphis microgallis)</em></a></td><td><code>NCBITaxon:3093908</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3093908"><em>Buchnera aphidicola (Meitanaphis microgallis)</em></a></td><td><code>NCBITaxon:3093908</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3114733"><em>Buchnera aphidicola (Melanaphis donacis)</em></a></td><td><code>NCBITaxon:3114733</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2938916"><em>Buchnera aphidicola (Melanaphis pyraria)</em></a></td><td><code>NCBITaxon:2938916</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2173854"><em>Buchnera aphidicola (Melanaphis sacchari)</em></a></td><td><code>NCBITaxon:2173854</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2093790"><em>Buchnera aphidicola (Melaphis asafitchi)</em></a></td><td><code>NCBITaxon:2093790</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:118103"><em>Buchnera aphidicola (Melaphis rhois)</em></a></td><td><code>NCBITaxon:118103</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>3</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:118103"><em>Buchnera aphidicola (Melaphis rhois)</em></a></td><td><code>NCBITaxon:118103</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2093791"><em>Buchnera aphidicola (Melaphis sp.)</em></a></td><td><code>NCBITaxon:2093791</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3686241"><em>Buchnera aphidicola (Metanipponaphis lithocarpicola)</em></a></td><td><code>NCBITaxon:3686241</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:118102"><em>Buchnera aphidicola (Metopolophium dirhodum)</em></a></td><td><code>NCBITaxon:118102</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -224,7 +312,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:2572813"><em>Buchnera aphidicola (Micromyzus pojanii)</em></a></td><td><code>NCBITaxon:2572813</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1265369"><em>Buchnera aphidicola (Mindarus abietinus)</em></a></td><td><code>NCBITaxon:1265369</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3075417"><em>Buchnera aphidicola (Mindarus japonicus)</em></a></td><td><code>NCBITaxon:3075417</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1265370"><em>Buchnera aphidicola (Mindarus keteleerifoliae)</em></a></td><td><code>NCBITaxon:1265370</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1265370"><em>Buchnera aphidicola (Mindarus keteleerifoliae)</em></a></td><td><code>NCBITaxon:1265370</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:118104"><em>Buchnera aphidicola (Mindarus kinseyi)</em></a></td><td><code>NCBITaxon:118104</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1241867"><em>Buchnera aphidicola (Mindarus obliquus)</em></a></td><td><code>NCBITaxon:1241867</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1265371"><em>Buchnera aphidicola (Mollitrichosiphum luchuanum)</em></a></td><td><code>NCBITaxon:1265371</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -234,12 +322,15 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1265374"><em>Buchnera aphidicola (Mollitrichosiphum nigrum)</em></a></td><td><code>NCBITaxon:1265374</code></td><td>FORMA_SPECIALIS</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="../taxon-browser.js?v=434e253832135143"></script>
+<script defer src="../taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="../index.json.gz">Index JSON.gz</a> · <a href="../index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

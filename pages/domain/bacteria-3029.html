@@ -7,32 +7,120 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../theme-toggle.js"></script>
 <script defer src="../vendor/fflate-0.8.2.js"></script>
-<script defer src="../compressed-data.js?v=434e253832135143"></script>
+<script defer src="../compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="../index.html">TaxonMech</a>
   <nav>
     <a href="../browse.html">Browse</a>
     <a href="../type-strains.html">Type strains</a>
+    <a href="../map.html">Text map</a>
     <a href="../sources.html">Sources</a>
+    <a href="../index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../index.html">TaxonMech</a> › <span>Bacteria</span>
+</nav>
 <h1>Bacteria</h1>
 <p class="lede">Species and infraspecific taxa under NCBITaxon:2, including uncultured and environmental taxa.</p>
-<section id="taxon-browser" data-domain="BACTERIA" data-typed="false" data-page="3029" data-size="200" data-root="../">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="BACTERIA" data-typed="false" data-page="3029" data-size="200" data-root="../">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="../browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA" selected>Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">605695 records · page 3029 of 3029.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="../domain/bacteria-3028.html">Previous</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>Bacteria</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1123509"><em>Zooshikella ganghwensis DSM 15267</em></a></td><td><code>NCBITaxon:1123509</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1123509"><em>Zooshikella ganghwensis DSM 15267</em></a></td><td><code>NCBITaxon:1123509</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2827238"><em>Zooshikella harenae</em></a></td><td><code>NCBITaxon:2827238</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1042379"><em>Zooshikella rubidus</em></a></td><td><code>NCBITaxon:1042379</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:565370"><em>Zooshikella rubidus S1-1</em></a></td><td><code>NCBITaxon:565370</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -48,14 +136,14 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:2894764"><em>Zophobihabitans sp.</em></a></td><td><code>NCBITaxon:2894764</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:152"><em>Zuelzera stenostrepta</em></a></td><td><code>NCBITaxon:152</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1502297"><em>Zunongwangia atlantica</em></a></td><td><code>NCBITaxon:1502297</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1185767"><em>Zunongwangia atlantica 22II14-10F7</em></a></td><td><code>NCBITaxon:1185767</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1185767"><em>Zunongwangia atlantica 22II14-10F7</em></a></td><td><code>NCBITaxon:1185767</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1808945"><em>Zunongwangia endophytica</em></a></td><td><code>NCBITaxon:1808945</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2687240"><em>Zunongwangia flava</em></a></td><td><code>NCBITaxon:2687240</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1334022"><em>Zunongwangia mangrovi</em></a></td><td><code>NCBITaxon:1334022</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1334022"><em>Zunongwangia mangrovi</em></a></td><td><code>NCBITaxon:1334022</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2911062"><em>Zunongwangia pacifica</em></a></td><td><code>NCBITaxon:2911062</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:398743"><em>Zunongwangia profunda</em></a></td><td><code>NCBITaxon:398743</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>18</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:655815"><em>Zunongwangia profunda SM-A87</em></a></td><td><code>NCBITaxon:655815</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>18</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1965325"><em>Zunongwangia sp.</em></a></td><td><code>NCBITaxon:1965325</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>18</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:398743"><em>Zunongwangia profunda</em></a></td><td><code>NCBITaxon:398743</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:655815"><em>Zunongwangia profunda SM-A87</em></a></td><td><code>NCBITaxon:655815</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1965325"><em>Zunongwangia sp.</em></a></td><td><code>NCBITaxon:1965325</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:886086"><em>Zunongwangia sp. 46(2010)</em></a></td><td><code>NCBITaxon:886086</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1397508"><em>Zunongwangia sp. BG-8-R4</em></a></td><td><code>NCBITaxon:1397508</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1808943"><em>Zunongwangia sp. BR-82</em></a></td><td><code>NCBITaxon:1808943</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -65,12 +153,12 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1808947"><em>Zunongwangia sp. CPA-8</em></a></td><td><code>NCBITaxon:1808947</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1178818"><em>Zunongwangia sp. enrichment culture clone 6</em></a></td><td><code>NCBITaxon:1178818</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1808948"><em>Zunongwangia sp. EPA-8</em></a></td><td><code>NCBITaxon:1808948</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2011156"><em>Zunongwangia sp. ESRF-bin46</em></a></td><td><code>NCBITaxon:2011156</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2011156"><em>Zunongwangia sp. ESRF-bin46</em></a></td><td><code>NCBITaxon:2011156</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1855949"><em>Zunongwangia sp. FTI18</em></a></td><td><code>NCBITaxon:1855949</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1697907"><em>Zunongwangia sp. FunM3</em></a></td><td><code>NCBITaxon:1697907</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1621529"><em>Zunongwangia sp. H1-62</em></a></td><td><code>NCBITaxon:1621529</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3015168"><em>Zunongwangia sp. HGR-M22</em></a></td><td><code>NCBITaxon:3015168</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3015170"><em>Zunongwangia sp. HRR-M8</em></a></td><td><code>NCBITaxon:3015170</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3015168"><em>Zunongwangia sp. HGR-M22</em></a></td><td><code>NCBITaxon:3015168</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3015170"><em>Zunongwangia sp. HRR-M8</em></a></td><td><code>NCBITaxon:3015170</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1705342"><em>Zunongwangia sp. India-BSP-10</em></a></td><td><code>NCBITaxon:1705342</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1705343"><em>Zunongwangia sp. India-BSP-19</em></a></td><td><code>NCBITaxon:1705343</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1508510"><em>Zunongwangia sp. IO-125</em></a></td><td><code>NCBITaxon:1508510</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -97,44 +185,47 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1250021"><em>Zunongwangia sp. MAR_2010_67</em></a></td><td><code>NCBITaxon:1250021</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1542705"><em>Zunongwangia sp. MCCC1A09887</em></a></td><td><code>NCBITaxon:1542705</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1486294"><em>Zunongwangia sp. R112</em></a></td><td><code>NCBITaxon:1486294</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2779359"><em>Zunongwangia sp. SCSIO 43204</em></a></td><td><code>NCBITaxon:2779359</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2779359"><em>Zunongwangia sp. SCSIO 43204</em></a></td><td><code>NCBITaxon:2779359</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:324606"><em>Zwartia hollandica</em></a></td><td><code>NCBITaxon:324606</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3852720"><em>Zwartia lucis</em></a></td><td><code>NCBITaxon:3852720</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2683345"><em>Zwartia panacis</em></a></td><td><code>NCBITaxon:2683345</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3844324"><em>Zwartia planktonica (SeqCode)</em></a></td><td><code>NCBITaxon:3844324</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2978004"><em>Zwartia sp.</em></a></td><td><code>NCBITaxon:2978004</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2978004"><em>Zwartia sp.</em></a></td><td><code>NCBITaxon:2978004</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3 (3 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3058168"><em>Zwartia vadi</em></a></td><td><code>NCBITaxon:3058168</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2904292"><em>&#39;Zyginidia sohrab&#39; phytoplasma</em></a></td><td><code>NCBITaxon:2904292</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:33074"><em>Zymobacter palmae</em></a></td><td><code>NCBITaxon:33074</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>4</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1123510"><em>Zymobacter palmae DSM 10491</em></a></td><td><code>NCBITaxon:1123510</code></td><td>STRAIN</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:33074"><em>Zymobacter palmae</em></a></td><td><code>NCBITaxon:33074</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>4</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1123510"><em>Zymobacter palmae DSM 10491</em></a></td><td><code>NCBITaxon:1123510</code></td><td>STRAIN</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3048686"><em>Zymobacter sp.</em></a></td><td><code>NCBITaxon:3048686</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3394854"><em>Zymobacter sp. IVIA_12111.31 C1</em></a></td><td><code>NCBITaxon:3394854</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3394855"><em>Zymobacter sp. IVIA_5232.4 C2</em></a></td><td><code>NCBITaxon:3394855</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:542"><em>Zymomonas mobilis</em></a></td><td><code>NCBITaxon:542</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>11</td><td>46</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3394854"><em>Zymobacter sp. IVIA_12111.31 C1</em></a></td><td><code>NCBITaxon:3394854</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3394855"><em>Zymobacter sp. IVIA_5232.4 C2</em></a></td><td><code>NCBITaxon:3394855</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:542"><em>Zymomonas mobilis</em></a></td><td><code>NCBITaxon:542</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>11</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:325472"><em>Zymomonas mobilis subsp. francensis</em></a></td><td><code>NCBITaxon:325472</code></td><td>SUBSPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:120045"><em>Zymomonas mobilis subsp. mobilis</em></a></td><td><code>NCBITaxon:120045</code></td><td>SUBSPECIES</td><td>BACTERIA</td><td>5</td><td>2</td><td>46</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:555217"><em>Zymomonas mobilis subsp. mobilis ATCC 10988</em></a></td><td><code>NCBITaxon:555217</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>46</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:627344"><em>Zymomonas mobilis subsp. mobilis ATCC 29191</em></a></td><td><code>NCBITaxon:627344</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>46</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1231376"><em>Zymomonas mobilis subsp. mobilis ATCC 31822</em></a></td><td><code>NCBITaxon:1231376</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>46</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:120045"><em>Zymomonas mobilis subsp. mobilis</em></a></td><td><code>NCBITaxon:120045</code></td><td>SUBSPECIES</td><td>BACTERIA</td><td>5</td><td>2</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:555217"><em>Zymomonas mobilis subsp. mobilis ATCC 10988</em></a></td><td><code>NCBITaxon:555217</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:627344"><em>Zymomonas mobilis subsp. mobilis ATCC 29191</em></a></td><td><code>NCBITaxon:627344</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1231376"><em>Zymomonas mobilis subsp. mobilis ATCC 31822</em></a></td><td><code>NCBITaxon:1231376</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1389958"><em>Zymomonas mobilis subsp. mobilis IRMH52</em></a></td><td><code>NCBITaxon:1389958</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:622759"><em>Zymomonas mobilis subsp. mobilis NCIMB 11163</em></a></td><td><code>NCBITaxon:622759</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>46</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1194424"><em>Zymomonas mobilis subsp. mobilis NRRL B-12526</em></a></td><td><code>NCBITaxon:1194424</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>46</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:627343"><em>Zymomonas mobilis subsp. mobilis str. CP4 = NRRL B-14023</em></a></td><td><code>NCBITaxon:627343</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>46</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:264203"><em>Zymomonas mobilis subsp. mobilis ZM4 = ATCC 31821</em></a></td><td><code>NCBITaxon:264203</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>46</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:120044"><em>Zymomonas mobilis subsp. pomaceae</em></a></td><td><code>NCBITaxon:120044</code></td><td>SUBSPECIES</td><td>BACTERIA</td><td>6</td><td>3</td><td>7</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:579138"><em>Zymomonas mobilis subsp. pomaceae ATCC 29192</em></a></td><td><code>NCBITaxon:579138</code></td><td>STRAIN</td><td>BACTERIA</td><td>7</td><td>1</td><td>7</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:622759"><em>Zymomonas mobilis subsp. mobilis NCIMB 11163</em></a></td><td><code>NCBITaxon:622759</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1194424"><em>Zymomonas mobilis subsp. mobilis NRRL B-12526</em></a></td><td><code>NCBITaxon:1194424</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:627343"><em>Zymomonas mobilis subsp. mobilis str. CP4 = NRRL B-14023</em></a></td><td><code>NCBITaxon:627343</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:264203"><em>Zymomonas mobilis subsp. mobilis ZM4 = ATCC 31821</em></a></td><td><code>NCBITaxon:264203</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:120044"><em>Zymomonas mobilis subsp. pomaceae</em></a></td><td><code>NCBITaxon:120044</code></td><td>SUBSPECIES</td><td>BACTERIA</td><td>6</td><td>3</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:579138"><em>Zymomonas mobilis subsp. pomaceae ATCC 29192</em></a></td><td><code>NCBITaxon:579138</code></td><td>STRAIN</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2068624"><em>Zymomonas sp.</em></a></td><td><code>NCBITaxon:2068624</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:95753"><em>Zymomonas sp. S5</em></a></td><td><code>NCBITaxon:95753</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1427501"><em>Zymomonas sp. ZYM10</em></a></td><td><code>NCBITaxon:1427501</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1427502"><em>Zymomonas sp. ZYM6</em></a></td><td><code>NCBITaxon:1427502</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="../taxon-browser.js?v=434e253832135143"></script>
+<script defer src="../taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="../index.json.gz">Index JSON.gz</a> · <a href="../index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

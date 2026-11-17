@@ -7,35 +7,123 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../theme-toggle.js"></script>
 <script defer src="../vendor/fflate-0.8.2.js"></script>
-<script defer src="../compressed-data.js?v=434e253832135143"></script>
+<script defer src="../compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="../index.html">TaxonMech</a>
   <nav>
     <a href="../browse.html">Browse</a>
     <a href="../type-strains.html">Type strains</a>
+    <a href="../map.html">Text map</a>
     <a href="../sources.html">Sources</a>
+    <a href="../index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../index.html">TaxonMech</a> › <span>Bacteria</span>
+</nav>
 <h1>Bacteria</h1>
 <p class="lede">Species and infraspecific taxa under NCBITaxon:2, including uncultured and environmental taxa.</p>
-<section id="taxon-browser" data-domain="BACTERIA" data-typed="false" data-page="799" data-size="200" data-root="../">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="BACTERIA" data-typed="false" data-page="799" data-size="200" data-root="../">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="../browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA" selected>Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">605695 records · page 799 of 3029.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="../domain/bacteria-798.html">Previous</a><a href="../domain/bacteria-800.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>Bacteria</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="../taxon.html?id=NCBITaxon:505296"><em>Burkholderia sp. SE8</em></a></td><td><code>NCBITaxon:505296</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:267744"><em>Burkholderia sp. SE-10</em></a></td><td><code>NCBITaxon:267744</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2703898"><em>Burkholderia sp. Se-20373</em></a></td><td><code>NCBITaxon:2703898</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>25</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2703899"><em>Burkholderia sp. Se-20378</em></a></td><td><code>NCBITaxon:2703899</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>13</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2703898"><em>Burkholderia sp. Se-20373</em></a></td><td><code>NCBITaxon:2703898</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2703899"><em>Burkholderia sp. Se-20378</em></a></td><td><code>NCBITaxon:2703899</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:639038"><em>Burkholderia sp. Sea-8</em></a></td><td><code>NCBITaxon:639038</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:312257"><em>Burkholderia sp. SEMIA 6166</em></a></td><td><code>NCBITaxon:312257</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:312258"><em>Burkholderia sp. SEMIA 6167</em></a></td><td><code>NCBITaxon:312258</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -84,7 +172,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1615959"><em>Burkholderia sp. SF-6</em></a></td><td><code>NCBITaxon:1615959</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1615960"><em>Burkholderia sp. SF-7</em></a></td><td><code>NCBITaxon:1615960</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1611416"><em>Burkholderia sp. SF-A1</em></a></td><td><code>NCBITaxon:1611416</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:341178"><em>Burkholderia sp. SFA1</em></a></td><td><code>NCBITaxon:341178</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>8</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:341178"><em>Burkholderia sp. SFA1</em></a></td><td><code>NCBITaxon:341178</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:341179"><em>Burkholderia sp. SFA2</em></a></td><td><code>NCBITaxon:341179</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:341180"><em>Burkholderia sp. SFA3</em></a></td><td><code>NCBITaxon:341180</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:341181"><em>Burkholderia sp. SFA4</em></a></td><td><code>NCBITaxon:341181</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -104,24 +192,24 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:573752"><em>Burkholderia sp. SIB014</em></a></td><td><code>NCBITaxon:573752</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:256033"><em>Burkholderia sp. SILP5</em></a></td><td><code>NCBITaxon:256033</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3085761"><em>Burkholderia sp. SIMBA_013</em></a></td><td><code>NCBITaxon:3085761</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3085765"><em>Burkholderia sp. SIMBA_019</em></a></td><td><code>NCBITaxon:3085765</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>118</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3085768"><em>Burkholderia sp. SIMBA_024</em></a></td><td><code>NCBITaxon:3085768</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>118</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3085783"><em>Burkholderia sp. SIMBA_042</em></a></td><td><code>NCBITaxon:3085783</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>162</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3085784"><em>Burkholderia sp. SIMBA_043</em></a></td><td><code>NCBITaxon:3085784</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>162</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3085765"><em>Burkholderia sp. SIMBA_019</em></a></td><td><code>NCBITaxon:3085765</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3085768"><em>Burkholderia sp. SIMBA_024</em></a></td><td><code>NCBITaxon:3085768</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3085783"><em>Burkholderia sp. SIMBA_042</em></a></td><td><code>NCBITaxon:3085783</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3085784"><em>Burkholderia sp. SIMBA_043</em></a></td><td><code>NCBITaxon:3085784</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3085786"><em>Burkholderia sp. SIMBA_045</em></a></td><td><code>NCBITaxon:3085786</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3085787"><em>Burkholderia sp. SIMBA_046</em></a></td><td><code>NCBITaxon:3085787</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3085788"><em>Burkholderia sp. SIMBA_047</em></a></td><td><code>NCBITaxon:3085788</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3085789"><em>Burkholderia sp. SIMBA_048</em></a></td><td><code>NCBITaxon:3085789</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>118</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3085792"><em>Burkholderia sp. SIMBA_051</em></a></td><td><code>NCBITaxon:3085792</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>118</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3085793"><em>Burkholderia sp. SIMBA_052</em></a></td><td><code>NCBITaxon:3085793</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>118</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3085789"><em>Burkholderia sp. SIMBA_048</em></a></td><td><code>NCBITaxon:3085789</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3085792"><em>Burkholderia sp. SIMBA_051</em></a></td><td><code>NCBITaxon:3085792</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3085793"><em>Burkholderia sp. SIMBA_052</em></a></td><td><code>NCBITaxon:3085793</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3085798"><em>Burkholderia sp. SIMBA_057</em></a></td><td><code>NCBITaxon:3085798</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3085803"><em>Burkholderia sp. SIMBA_062</em></a></td><td><code>NCBITaxon:3085803</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>118</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3085803"><em>Burkholderia sp. SIMBA_062</em></a></td><td><code>NCBITaxon:3085803</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:221744"><em>Burkholderia sp. &#39;singaporensis&#39;</em></a></td><td><code>NCBITaxon:221744</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3401025"><em>Burkholderia sp. SJ1</em></a></td><td><code>NCBITaxon:3401025</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:406819"><em>Burkholderia sp. SJ98</em></a></td><td><code>NCBITaxon:406819</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>30</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2572919"><em>Burkholderia sp. SJZ089</em></a></td><td><code>NCBITaxon:2572919</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>372</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2572920"><em>Burkholderia sp. SJZ091</em></a></td><td><code>NCBITaxon:2572920</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>372</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2572882"><em>Burkholderia sp. SJZ115</em></a></td><td><code>NCBITaxon:2572882</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>372</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:406819"><em>Burkholderia sp. SJ98</em></a></td><td><code>NCBITaxon:406819</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2572919"><em>Burkholderia sp. SJZ089</em></a></td><td><code>NCBITaxon:2572919</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2572920"><em>Burkholderia sp. SJZ091</em></a></td><td><code>NCBITaxon:2572920</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2572882"><em>Burkholderia sp. SJZ115</em></a></td><td><code>NCBITaxon:2572882</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:506004"><em>Burkholderia sp. SK02</em></a></td><td><code>NCBITaxon:506004</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:584933"><em>Burkholderia sp. SK080331</em></a></td><td><code>NCBITaxon:584933</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:743830"><em>Burkholderia sp. sk100101</em></a></td><td><code>NCBITaxon:743830</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -218,14 +306,14 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:503375"><em>Burkholderia sp. SR-G</em></a></td><td><code>NCBITaxon:503375</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1254198"><em>Burkholderia sp. SR-SRT03</em></a></td><td><code>NCBITaxon:1254198</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2994969"><em>Burkholderia sp. SRS_147</em></a></td><td><code>NCBITaxon:2994969</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2094190"><em>Burkholderia sp. SRS-25</em></a></td><td><code>NCBITaxon:2094190</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>168</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2094191"><em>Burkholderia sp. SRS-46</em></a></td><td><code>NCBITaxon:2094191</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2094190"><em>Burkholderia sp. SRS-25</em></a></td><td><code>NCBITaxon:2094190</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2094191"><em>Burkholderia sp. SRS-46</em></a></td><td><code>NCBITaxon:2094191</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1926878"><em>Burkholderia sp. SRS-W-2-2016</em></a></td><td><code>NCBITaxon:1926878</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3389890"><em>Burkholderia sp. SS03</em></a></td><td><code>NCBITaxon:3389890</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1277025"><em>Burkholderia sp. SS11.12</em></a></td><td><code>NCBITaxon:1277025</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1208891"><em>Burkholderia sp. SS5</em></a></td><td><code>NCBITaxon:1208891</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:279366"><em>Burkholderia sp. SSJH-1</em></a></td><td><code>NCBITaxon:279366</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1682204"><em>Burkholderia sp. ST111</em></a></td><td><code>NCBITaxon:1682204</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>19</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1682204"><em>Burkholderia sp. ST111</em></a></td><td><code>NCBITaxon:1682204</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:290803"><em>Burkholderia sp. stain tpud33.2</em></a></td><td><code>NCBITaxon:290803</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1312675"><em>Burkholderia sp. STJ14</em></a></td><td><code>NCBITaxon:1312675</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:345616"><em>Burkholderia sp. STM 1423</em></a></td><td><code>NCBITaxon:345616</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -234,12 +322,15 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1247932"><em>Burkholderia sp. STM 7292</em></a></td><td><code>NCBITaxon:1247932</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="../taxon-browser.js?v=434e253832135143"></script>
+<script defer src="../taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="../index.json.gz">Index JSON.gz</a> · <a href="../index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

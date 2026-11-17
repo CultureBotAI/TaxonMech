@@ -7,33 +7,121 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../theme-toggle.js"></script>
 <script defer src="../vendor/fflate-0.8.2.js"></script>
-<script defer src="../compressed-data.js?v=434e253832135143"></script>
+<script defer src="../compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="../index.html">TaxonMech</a>
   <nav>
     <a href="../browse.html">Browse</a>
     <a href="../type-strains.html">Type strains</a>
+    <a href="../map.html">Text map</a>
     <a href="../sources.html">Sources</a>
+    <a href="../index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../index.html">TaxonMech</a> › <span>Bacteria</span>
+</nav>
 <h1>Bacteria</h1>
 <p class="lede">Species and infraspecific taxa under NCBITaxon:2, including uncultured and environmental taxa.</p>
-<section id="taxon-browser" data-domain="BACTERIA" data-typed="false" data-page="1730" data-size="200" data-root="../">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="BACTERIA" data-typed="false" data-page="1730" data-size="200" data-root="../">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="../browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA" selected>Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">605695 records · page 1730 of 3029.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="../domain/bacteria-1729.html">Previous</a><a href="../domain/bacteria-1731.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>Bacteria</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3844477"><em>Nocardioides sp. T41_20</em></a></td><td><code>NCBITaxon:3844477</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3400182"><em>Nocardioides sp. T5</em></a></td><td><code>NCBITaxon:3400182</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3400182"><em>Nocardioides sp. T5</em></a></td><td><code>NCBITaxon:3400182</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1471263"><em>Nocardioides sp. TD1-5-2</em></a></td><td><code>NCBITaxon:1471263</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1471264"><em>Nocardioides sp. TD2-3</em></a></td><td><code>NCBITaxon:1471264</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1471265"><em>Nocardioides sp. TD4-3</em></a></td><td><code>NCBITaxon:1471265</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -56,7 +144,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1742833"><em>Nocardioides sp. UAPS0148</em></a></td><td><code>NCBITaxon:1742833</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:947750"><em>Nocardioides sp. Ulugqat23</em></a></td><td><code>NCBITaxon:947750</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:345644"><em>Nocardioides sp. UMB 8</em></a></td><td><code>NCBITaxon:345644</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1449070"><em>Nocardioides sp. UNC345MFTsu5.1</em></a></td><td><code>NCBITaxon:1449070</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1449070"><em>Nocardioides sp. UNC345MFTsu5.1</em></a></td><td><code>NCBITaxon:1449070</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1380392"><em>Nocardioides sp. URHA0020</em></a></td><td><code>NCBITaxon:1380392</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1380388"><em>Nocardioides sp. URHA0032</em></a></td><td><code>NCBITaxon:1380388</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1702962"><em>Nocardioides sp. URHB0012</em></a></td><td><code>NCBITaxon:1702962</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -118,10 +206,10 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:2486272"><em>Nocardioides sp. WS12</em></a></td><td><code>NCBITaxon:2486272</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1471267"><em>Nocardioides sp. WS1-3</em></a></td><td><code>NCBITaxon:1471267</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:412407"><em>Nocardioides sp. WSN05-2</em></a></td><td><code>NCBITaxon:412407</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3151763"><em>Nocardioides sp. WV_118_6</em></a></td><td><code>NCBITaxon:3151763</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3151763"><em>Nocardioides sp. WV_118_6</em></a></td><td><code>NCBITaxon:3151763</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1733985"><em>Nocardioides sp. x4A1</em></a></td><td><code>NCBITaxon:1733985</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1733986"><em>Nocardioides sp. x8A1</em></a></td><td><code>NCBITaxon:1733986</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2003120"><em>Nocardioides sp. XL1</em></a></td><td><code>NCBITaxon:2003120</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2003120"><em>Nocardioides sp. XL1</em></a></td><td><code>NCBITaxon:2003120</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1634432"><em>Nocardioides sp. XSW006</em></a></td><td><code>NCBITaxon:1634432</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1634433"><em>Nocardioides sp. XSW057</em></a></td><td><code>NCBITaxon:1634433</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1634434"><em>Nocardioides sp. XSW060</em></a></td><td><code>NCBITaxon:1634434</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -130,10 +218,10 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:560075"><em>Nocardioides sp. YIM 48812</em></a></td><td><code>NCBITaxon:560075</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:560076"><em>Nocardioides sp. YIM 48824</em></a></td><td><code>NCBITaxon:560076</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1070878"><em>Nocardioides sp. YIM 75417</em></a></td><td><code>NCBITaxon:1070878</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3366294"><em>Nocardioides sp. YIM B13467</em></a></td><td><code>NCBITaxon:3366294</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3366294"><em>Nocardioides sp. YIM B13467</em></a></td><td><code>NCBITaxon:3366294</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3477063"><em>Nocardioides sp. YJ-D4</em></a></td><td><code>NCBITaxon:3477063</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1027625"><em>Nocardioides sp. YMN1</em></a></td><td><code>NCBITaxon:1027625</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1881028"><em>Nocardioides sp. YR527</em></a></td><td><code>NCBITaxon:1881028</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1881028"><em>Nocardioides sp. YR527</em></a></td><td><code>NCBITaxon:1881028</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1027624"><em>Nocardioides sp. YUL1</em></a></td><td><code>NCBITaxon:1027624</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3723540"><em>Nocardioides sp. Z13_37</em></a></td><td><code>NCBITaxon:3723540</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1351120"><em>Nocardioides sp. Z215</em></a></td><td><code>NCBITaxon:1351120</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -146,18 +234,18 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:3713892"><em>Nocardioides sp. Z40_12</em></a></td><td><code>NCBITaxon:3713892</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3738868"><em>Nocardioides sp. Z43_10</em></a></td><td><code>NCBITaxon:3738868</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3713893"><em>Nocardioides sp. Z50_6</em></a></td><td><code>NCBITaxon:3713893</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2763008"><em>Nocardioides sp. zg-1228</em></a></td><td><code>NCBITaxon:2763008</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2763008"><em>Nocardioides sp. zg-1228</em></a></td><td><code>NCBITaxon:2763008</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2736601"><em>Nocardioides sp. zg-1230</em></a></td><td><code>NCBITaxon:2736601</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2736253"><em>Nocardioides sp. zg-1308</em></a></td><td><code>NCBITaxon:2736253</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2736253"><em>Nocardioides sp. zg-1308</em></a></td><td><code>NCBITaxon:2736253</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2736600"><em>Nocardioides sp. zg-DK7169</em></a></td><td><code>NCBITaxon:2736600</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1684860"><em>Nocardioides sp. ZYFD039</em></a></td><td><code>NCBITaxon:1684860</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2670337"><em>Nocardioides speluncae</em></a></td><td><code>NCBITaxon:2670337</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2755356"><em>Nocardioides stalactiti</em></a></td><td><code>NCBITaxon:2755356</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1706825"><em>Nocardioides suum</em></a></td><td><code>NCBITaxon:1706825</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1005944"><em>Nocardioides szechwanensis</em></a></td><td><code>NCBITaxon:1005944</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1005944"><em>Nocardioides szechwanensis</em></a></td><td><code>NCBITaxon:1005944</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1835606"><em>Nocardioides taihuensis</em></a></td><td><code>NCBITaxon:1835606</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:574651"><em>Nocardioides terrae</em></a></td><td><code>NCBITaxon:574651</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:424797"><em>Nocardioides terrigena</em></a></td><td><code>NCBITaxon:424797</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:424797"><em>Nocardioides terrigena</em></a></td><td><code>NCBITaxon:424797</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3388267"><em>Nocardioides terrisoli</em></a></td><td><code>NCBITaxon:3388267</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1914755"><em>Nocardioides thalensis</em></a></td><td><code>NCBITaxon:1914755</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:60449"><em>[Nocardioides] thermolilacinus</em></a></td><td><code>NCBITaxon:60449</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -166,13 +254,13 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:598609"><em>Nocardioides ultimimeridianus</em></a></td><td><code>NCBITaxon:598609</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1643322"><em>Nocardioides ungokensis</em></a></td><td><code>NCBITaxon:1643322</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3416445"><em>Nocardioides ureilyticus</em></a></td><td><code>NCBITaxon:3416445</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2568655"><em>Nocardioides vastitatis</em></a></td><td><code>NCBITaxon:2568655</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2817376"><em>Nocardioides xinjiangensis</em></a></td><td><code>NCBITaxon:2817376</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2500546"><em>Nocardioides yefusunii</em></a></td><td><code>NCBITaxon:2500546</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1457234"><em>Nocardioides zeae</em></a></td><td><code>NCBITaxon:1457234</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1776857"><em>Nocardioides zeicaulis</em></a></td><td><code>NCBITaxon:1776857</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2568655"><em>Nocardioides vastitatis</em></a></td><td><code>NCBITaxon:2568655</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2817376"><em>Nocardioides xinjiangensis</em></a></td><td><code>NCBITaxon:2817376</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2500546"><em>Nocardioides yefusunii</em></a></td><td><code>NCBITaxon:2500546</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1457234"><em>Nocardioides zeae</em></a></td><td><code>NCBITaxon:1457234</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1776857"><em>Nocardioides zeicaulis</em></a></td><td><code>NCBITaxon:1776857</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1168729"><em>Nocardioides zhouii</em></a></td><td><code>NCBITaxon:1168729</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2100131"><em>Nocardiopsaceae bacterium</em></a></td><td><code>NCBITaxon:2100131</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2100131"><em>Nocardiopsaceae bacterium</em></a></td><td><code>NCBITaxon:2100131</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3 (3 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1240132"><em>Nocardiopsaceae bacterium 41535</em></a></td><td><code>NCBITaxon:1240132</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:536654"><em>Nocardiopsaceae bacterium ACTS112</em></a></td><td><code>NCBITaxon:536654</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:536662"><em>Nocardiopsaceae bacterium ACTS124</em></a></td><td><code>NCBITaxon:536662</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -196,50 +284,53 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:536725"><em>Nocardiopsaceae bacterium ACTS58</em></a></td><td><code>NCBITaxon:536725</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:305301"><em>Nocardiopsaceae bacterium Ellin7090</em></a></td><td><code>NCBITaxon:305301</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1476611"><em>Nocardiopsaceae bacterium GXUN10</em></a></td><td><code>NCBITaxon:1476611</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:220378"><em>Nocardiopsis aegyptia</em></a></td><td><code>NCBITaxon:220378</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2831968"><em>Nocardiopsis akebiae</em></a></td><td><code>NCBITaxon:2831968</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>30</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:220378"><em>Nocardiopsis aegyptia</em></a></td><td><code>NCBITaxon:220378</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2831968"><em>Nocardiopsis akebiae</em></a></td><td><code>NCBITaxon:2831968</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1236269"><em>Nocardiopsis akesuensis</em></a></td><td><code>NCBITaxon:1236269</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:53437"><em>Nocardiopsis alba</em></a></td><td><code>NCBITaxon:53437</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>7</td><td>31</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1205910"><em>Nocardiopsis alba ATCC BAA-2165</em></a></td><td><code>NCBITaxon:1205910</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>31</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1245473"><em>Nocardiopsis alba DSM 43377</em></a></td><td><code>NCBITaxon:1245473</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>31</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:146802"><em>Nocardiopsis alborubida</em></a></td><td><code>NCBITaxon:146802</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1223496"><em>Nocardiopsis alborubida NBRC 13392</em></a></td><td><code>NCBITaxon:1223496</code></td><td>STRAIN</td><td>BACTERIA</td><td>7</td><td>1</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1478215"><em>Nocardiopsis algeriensis</em></a></td><td><code>NCBITaxon:1478215</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:53437"><em>Nocardiopsis alba</em></a></td><td><code>NCBITaxon:53437</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>7</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1205910"><em>Nocardiopsis alba ATCC BAA-2165</em></a></td><td><code>NCBITaxon:1205910</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1245473"><em>Nocardiopsis alba DSM 43377</em></a></td><td><code>NCBITaxon:1245473</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:146802"><em>Nocardiopsis alborubida</em></a></td><td><code>NCBITaxon:146802</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1223496"><em>Nocardiopsis alborubida NBRC 13392</em></a></td><td><code>NCBITaxon:1223496</code></td><td>STRAIN</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1478215"><em>Nocardiopsis algeriensis</em></a></td><td><code>NCBITaxon:1478215</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:225762"><em>Nocardiopsis alkaliphila</em></a></td><td><code>NCBITaxon:225762</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1246461"><em>Nocardiopsis alkaliphila YIM 80379</em></a></td><td><code>NCBITaxon:1246461</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1670832"><em>Nocardiopsis ansamitocini</em></a></td><td><code>NCBITaxon:1670832</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:280240"><em>Nocardiopsis baichengensis</em></a></td><td><code>NCBITaxon:280240</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1236902"><em>Nocardiopsis baichengensis YIM 90130</em></a></td><td><code>NCBITaxon:1236902</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1236902"><em>Nocardiopsis baichengensis YIM 90130</em></a></td><td><code>NCBITaxon:1236902</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:238879"><em>Nocardiopsis benisuefensis</em></a></td><td><code>NCBITaxon:238879</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3479080"><em>Nocardiopsis bonnevillensis</em></a></td><td><code>NCBITaxon:3479080</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3061629"><em>Nocardiopsis camelliae</em></a></td><td><code>NCBITaxon:3061629</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>30</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2831969"><em>Nocardiopsis changdeensis</em></a></td><td><code>NCBITaxon:2831969</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3061629"><em>Nocardiopsis camelliae</em></a></td><td><code>NCBITaxon:3061629</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2831969"><em>Nocardiopsis changdeensis</em></a></td><td><code>NCBITaxon:2831969</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:280239"><em>Nocardiopsis chromatogenes</em></a></td><td><code>NCBITaxon:280239</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1246475"><em>Nocardiopsis chromatogenes YIM 90109</em></a></td><td><code>NCBITaxon:1246475</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3065942"><em>Nocardiopsis codii</em></a></td><td><code>NCBITaxon:3065942</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:157465"><em>Nocardiopsis composta</em></a></td><td><code>NCBITaxon:157465</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>3</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:157465"><em>Nocardiopsis composta</em></a></td><td><code>NCBITaxon:157465</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>3</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2772213"><em>Nocardiopsis coralli</em></a></td><td><code>NCBITaxon:2772213</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1048357"><em>Nocardiopsis coralliicola</em></a></td><td><code>NCBITaxon:1048357</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2014"><em>Nocardiopsis dassonvillei</em></a></td><td><code>NCBITaxon:2014</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>17</td><td>30</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2580523"><em>Nocardiopsis dassonvillei subsp. crassaminis</em></a></td><td><code>NCBITaxon:2580523</code></td><td>SUBSPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>30</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2014"><em>Nocardiopsis dassonvillei</em></a></td><td><code>NCBITaxon:2014</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>17</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2580523"><em>Nocardiopsis dassonvillei subsp. crassaminis</em></a></td><td><code>NCBITaxon:2580523</code></td><td>SUBSPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:568208"><em>Nocardiopsis dassonvillei subsp. dassonvillei</em></a></td><td><code>NCBITaxon:568208</code></td><td>SUBSPECIES</td><td>BACTERIA</td><td>4</td><td>3</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:446468"><em>Nocardiopsis dassonvillei subsp. dassonvillei DSM 43111</em></a></td><td><code>NCBITaxon:446468</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>30</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2605988"><em>Nocardiopsis deserti</em></a></td><td><code>NCBITaxon:2605988</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:446468"><em>Nocardiopsis dassonvillei subsp. dassonvillei DSM 43111</em></a></td><td><code>NCBITaxon:446468</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2605988"><em>Nocardiopsis deserti</em></a></td><td><code>NCBITaxon:2605988</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3018445"><em>Nocardiopsis endophytica</em></a></td><td><code>NCBITaxon:3018445</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2831970"><em>Nocardiopsis eucommiae</em></a></td><td><code>NCBITaxon:2831970</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:163604"><em>Nocardiopsis exhalans</em></a></td><td><code>NCBITaxon:163604</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>4</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2831970"><em>Nocardiopsis eucommiae</em></a></td><td><code>NCBITaxon:2831970</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:163604"><em>Nocardiopsis exhalans</em></a></td><td><code>NCBITaxon:163604</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>4</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:639240"><em>Nocardiopsis fildesensis</em></a></td><td><code>NCBITaxon:639240</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:758803"><em>Nocardiopsis flavescens</em></a></td><td><code>NCBITaxon:758803</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:758803"><em>Nocardiopsis flavescens</em></a></td><td><code>NCBITaxon:758803</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:239984"><em>Nocardiopsis ganjiahuensis</em></a></td><td><code>NCBITaxon:239984</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>2</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1237500"><em>Nocardiopsis ganjiahuensis DSM 45031</em></a></td><td><code>NCBITaxon:1237500</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="../taxon-browser.js?v=434e253832135143"></script>
+<script defer src="../taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="../index.json.gz">Index JSON.gz</a> · <a href="../index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

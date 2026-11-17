@@ -25,7 +25,7 @@ import sys
 import tempfile
 from collections import defaultdict
 from pathlib import Path
-from urllib.parse import unquote, urlsplit
+from urllib.parse import quote, unquote, urlsplit
 
 import yaml
 from corpus import REPO_ROOT, TAXA_DIR, load_records
@@ -62,8 +62,8 @@ DOMAIN_BLURB = {
 
 PREFIX_URL = {
     "NCBITaxon": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=",
-    "GTDB": "https://gtdb.ecogenomic.org/taxon?name=",
-    "lpsn": "https://lpsn.dsmz.de/",
+    "GTDB": "https://gtdb.ecogenomic.org/tree?r=",
+    "lpsn": "https://lpsn.dsmz.de/taxon/",
     "bacdive": "https://bacdive.dsmz.de/strain/",
     "mediadive.medium": "https://mediadive.dsmz.de/medium/",
     "ncbi.assembly": "https://www.ncbi.nlm.nih.gov/datasets/genome/",
@@ -93,6 +93,13 @@ def curie_url(curie: str, root: str = "") -> str | None:
         return None
     prefix, local = curie.split(":", 1)
     base = PREFIX_URL.get(prefix)
+    if prefix == "GTDB":
+        # Inventory CURIEs encode the genus/epithet space as an underscore.
+        # GTDB's tree expects that space, but uppercase disambiguation suffixes
+        # such as Escherichia_A and coli_A must retain their underscores.
+        if local.startswith("s__") and " " not in local[3:]:
+            local = "s__" + re.sub(r"_(?=[a-z])", " ", local[3:], count=1)
+        local = quote(local, safe="")
     if prefix == "gtdb.genome" and local.startswith(("RS_", "GB_")):
         local = local[3:]
     if prefix == "gold":
@@ -102,8 +109,8 @@ def curie_url(curie: str, root: str = "") -> str | None:
             base = "https://gold.jgi.doe.gov/project?id="
         elif local.startswith("Ga"):
             base = "https://gold.jgi.doe.gov/analysis_project?id="
-    if prefix == "lpsn":
-        # LPSN name ids resolve through the search page; the record's own url is preferred.
+    if prefix == "lpsn" and not re.fullmatch(r"[1-9][0-9]*", local):
+        # Public LPSN record numbers are stable; placeholders are not resolvable names.
         return None
     return f"{base}{local}" if base else None
 
@@ -175,8 +182,10 @@ def render(out_dir: Path) -> None:
     records = load_records()
     by_domain: dict[str, list[dict]] = defaultdict(list)
     index = []
+    parents = {}
     for _path, doc in records:
         sources = sorted({a["source"] for a in doc.get("source_attestations") or []})
+        gtdb_mappings = [m for m in doc.get("taxonomy_mappings") or [] if m.get("source") == "GTDB"]
         entry = {
             "identifier": doc["identifier"],
             "label": doc["label"],
@@ -187,11 +196,27 @@ def render(out_dir: Path) -> None:
             "sources": sources,
             "strain_count": doc.get("strain_count") or 0,
             "has_type_strain": any(s.get("is_type_strain") for s in doc.get("strains") or []),
-            "genomes": sum(a.get("assertion_count") or 0 for a in doc.get("source_attestations") or []
-                           if a.get("source") == "GTDB"),
+            # Source mappings are not a taxon-level inventory of distinct genomes.
+            # In particular, a broadMatch may pool unrelated GTDB species.
+            "gtdb_mapping_count": len(gtdb_mappings),
+            "gtdb_pooled_mapping_count": sum(
+                m.get("mapping_predicate") == "skos:broadMatch" for m in gtdb_mappings),
         }
+        parents[entry["identifier"]] = doc.get("parent_taxon")
         by_domain[entry["domain"]].append(entry)
         index.append(entry)
+
+    env.globals["taxon_pages"] = {entry["identifier"]: entry["page"] for entry in index}
+    env.globals["corpus_records"] = len(index)
+    env.globals["corpus_digest"] = hashlib.sha256(
+        json.dumps(index, separators=(",", ":"), ensure_ascii=False, sort_keys=True).encode("utf-8")
+    ).hexdigest()[:12]
+    children = defaultdict(list)
+    for entry in index:
+        parent = parents[entry["identifier"]]
+        if parent in env.globals["taxon_pages"] and parent != entry["identifier"]:
+            children[parent].append(entry)
+    env.globals["taxon_children"] = children
 
     out_dir.mkdir(parents=True, exist_ok=True)
     from taxonmech.source_catalog import load_manifest
@@ -233,6 +258,9 @@ def render(out_dir: Path) -> None:
     write_taxon_data(env, out_dir, records)
     (out_dir / "taxon.html").write_text(
         env.get_template("taxon-viewer.html").render(root=""), encoding="utf-8")
+    (out_dir / "map.html").write_text(
+        env.get_template("map.html").render(root=""), encoding="utf-8")
+    write_corpus_map(out_dir, index)
     # Preserve every previously published taxon URL, including its strain anchor.
     active = {entry["identifier"]: entry["domain"] for entry in index}
     for row in _tsv(REPO_ROOT / "curation/legacy_page_paths.tsv"):
@@ -245,13 +273,44 @@ def render(out_dir: Path) -> None:
         source = f"data/taxa/{active[row['identifier']].lower()}/{relative.stem}.yaml"
         path = out_dir / relative
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text('<!doctype html><meta charset="utf-8"><title>TaxonMech</title>'
+        path.write_text('<!doctype html><html lang="en"><head><meta charset="utf-8">'
+                        '<meta name="viewport" content="width=device-width, initial-scale=1">'
+                        '<title>TaxonMech</title></head><body><main>'
                         f'<a href="{target}">Open the taxon record</a>'
                         '<p><a href="https://github.com/CultureBotAI/TaxonMech/blob/main/'
-                        f'{source}">Read the source YAML</a></p>'
-                        f'<script>location.replace({json.dumps(target)}+location.hash)</script>\n')
+                        f'{source}">Read the source YAML</a></p></main>'
+                        f'<script>location.replace({json.dumps(target)}+location.hash)</script>'
+                        '</body></html>\n')
     if hasattr(records, "close"):
         records.close()
+
+
+def write_corpus_map(out_dir: Path, index: list[dict]) -> None:
+    """Publish the 2D text embedding map (corpus_map.json.gz) for map.html."""
+    corpus_map_path = REPO_ROOT / "data" / "embeddings" / "corpus_map.json"
+    if len(index) > 1000 and corpus_map_path.exists():
+        raw = corpus_map_path.read_bytes()
+    else:
+        n = max(1, len(index))
+        points = [
+            {
+                "id": e["identifier"],
+                "label": e["label"],
+                "domain": e["domain"],
+                "rank": e["rank"],
+                "sources": e.get("sources") or [],
+                "source_count": len(e.get("sources") or []),
+                "strain_count": e.get("strain_count", 0),
+                "has_type_strain": bool(e.get("has_type_strain")),
+                "page": e["page"],
+                "x": round((idx + 0.5) / n, 4),
+                "y": round(((idx * 7) % n + 0.5) / n, 4),
+            }
+            for idx, e in enumerate(index)
+        ]
+        raw_str = json.dumps({"points": points}, separators=(",", ":"), ensure_ascii=False) + "\n"
+        raw = raw_str.encode("utf-8")
+    (out_dir / "corpus_map.json.gz").write_bytes(gzip_bytes(raw))
 
 
 def write_search_index(out_dir: Path, index: list[dict]) -> None:
@@ -286,11 +345,13 @@ def write_taxon_data(env: Environment, out_dir: Path, records) -> None:
     ordered = records.by_identifier() if hasattr(records, "by_identifier") else sorted(
         records, key=lambda item: int(item[1]["identifier"].split(":")[1]))
     bucket, payload = None, {}
+    buckets = []
 
     def flush():
         if payload:
             raw = (json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + "\n").encode("utf-8")
             (directory / f"{bucket:04}.json.gz").write_bytes(gzip_bytes(raw))
+            buckets.append(f"{bucket:04}")
 
     for path, doc in ordered:
         identifier = doc["identifier"]
@@ -304,6 +365,8 @@ def write_taxon_data(env: Environment, out_dir: Path, records) -> None:
             raise ValueError("duplicate taxon in publication shard")
         payload[identifier] = taxon_payload(env, path, doc)
     flush()
+    (directory / "index.json").write_text(
+        json.dumps({"buckets": buckets}, separators=(",", ":")) + "\n", encoding="utf-8")
 
 
 def write_browse_pages(env: Environment, out_dir: Path, stem: str, entries: list[dict],

@@ -7,29 +7,117 @@
 <link rel="stylesheet" href="style.css">
 <script src="theme-toggle.js"></script>
 <script defer src="vendor/fflate-0.8.2.js"></script>
-<script defer src="compressed-data.js?v=434e253832135143"></script>
+<script defer src="compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="index.html">TaxonMech</a>
   <nav>
     <a href="browse.html">Browse</a>
     <a href="type-strains.html">Type strains</a>
+    <a href="map.html">Text map</a>
     <a href="sources.html">Sources</a>
+    <a href="index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="index.html">TaxonMech</a> › <span>All records</span>
+</nav>
 <h1>All records</h1>
-<section id="taxon-browser" data-domain="" data-typed="false" data-page="983" data-size="200" data-root="">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
-<p id="taxon-status" role="status">625960 records · page 983 of 3130.</p>
+<section id="taxon-browser" class="browse-layout" data-domain="" data-typed="false" data-page="983" data-size="200" data-root="">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA">Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
+<p id="taxon-status" role="status">626048 records · page 983 of 3131.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="browse-982.html">Previous</a><a href="browse-984.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>All records</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="taxon.html?id=NCBITaxon:563227"><em>Chryseobacterium sp. M143</em></a></td><td><code>NCBITaxon:563227</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:670262"><em>Chryseobacterium sp. M15</em></a></td><td><code>NCBITaxon:670262</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -39,7 +127,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:683013"><em>Chryseobacterium sp. M2T8B9</em></a></td><td><code>NCBITaxon:683013</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:563230"><em>Chryseobacterium sp. M443</em></a></td><td><code>NCBITaxon:563230</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:563231"><em>Chryseobacterium sp. M450</em></a></td><td><code>NCBITaxon:563231</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3379128"><em>Chryseobacterium sp. M5</em></a></td><td><code>NCBITaxon:3379128</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>6</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3379128"><em>Chryseobacterium sp. M5</em></a></td><td><code>NCBITaxon:3379128</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:563232"><em>Chryseobacterium sp. M544</em></a></td><td><code>NCBITaxon:563232</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:563233"><em>Chryseobacterium sp. M547</em></a></td><td><code>NCBITaxon:563233</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3388785"><em>Chryseobacterium sp. M5A1_1a</em></a></td><td><code>NCBITaxon:3388785</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -50,8 +138,8 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2966625"><em>Chryseobacterium sp. MA9</em></a></td><td><code>NCBITaxon:2966625</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1079220"><em>Chryseobacterium sp. MaI11-1</em></a></td><td><code>NCBITaxon:1079220</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1231581"><em>Chryseobacterium sp. MaJR-2012-c70</em></a></td><td><code>NCBITaxon:1231581</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2758092"><em>Chryseobacterium sp. Marseille-Q3244</em></a></td><td><code>NCBITaxon:2758092</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2972771"><em>Chryseobacterium sp. Marseille-Q4393</em></a></td><td><code>NCBITaxon:2972771</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2758092"><em>Chryseobacterium sp. Marseille-Q3244</em></a></td><td><code>NCBITaxon:2758092</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2972771"><em>Chryseobacterium sp. Marseille-Q4393</em></a></td><td><code>NCBITaxon:2972771</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2972770"><em>Chryseobacterium sp. Marseille-Q5410</em></a></td><td><code>NCBITaxon:2972770</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3369442"><em>Chryseobacterium sp. Marseille-Q8038</em></a></td><td><code>NCBITaxon:3369442</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:862085"><em>Chryseobacterium sp. MC10-6</em></a></td><td><code>NCBITaxon:862085</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -61,11 +149,11 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1354072"><em>Chryseobacterium sp. MCA2.23</em></a></td><td><code>NCBITaxon:1354072</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1354073"><em>Chryseobacterium sp. MCA2.27</em></a></td><td><code>NCBITaxon:1354073</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3097132"><em>Chryseobacterium sp. MDA071</em></a></td><td><code>NCBITaxon:3097132</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1259136"><em>Chryseobacterium sp. MDT2-18</em></a></td><td><code>NCBITaxon:1259136</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2879938"><em>Chryseobacterium sp. MEBOG06</em></a></td><td><code>NCBITaxon:2879938</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2879939"><em>Chryseobacterium sp. MEBOG07</em></a></td><td><code>NCBITaxon:2879939</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1259136"><em>Chryseobacterium sp. MDT2-18</em></a></td><td><code>NCBITaxon:1259136</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2879938"><em>Chryseobacterium sp. MEBOG06</em></a></td><td><code>NCBITaxon:2879938</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2879939"><em>Chryseobacterium sp. MEBOG07</em></a></td><td><code>NCBITaxon:2879939</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1290606"><em>Chryseobacterium sp. MF10_Lo</em></a></td><td><code>NCBITaxon:1290606</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2886689"><em>Chryseobacterium sp. MFBS3-17</em></a></td><td><code>NCBITaxon:2886689</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2886689"><em>Chryseobacterium sp. MFBS3-17</em></a></td><td><code>NCBITaxon:2886689</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:280935"><em>Chryseobacterium sp. MG84</em></a></td><td><code>NCBITaxon:280935</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1041739"><em>Chryseobacterium sp. MG-2011-139-ER</em></a></td><td><code>NCBITaxon:1041739</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1041736"><em>Chryseobacterium sp. MG-2011-75-EP</em></a></td><td><code>NCBITaxon:1041736</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -77,20 +165,20 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:477734"><em>Chryseobacterium sp. MH19</em></a></td><td><code>NCBITaxon:477734</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:477735"><em>Chryseobacterium sp. MH28</em></a></td><td><code>NCBITaxon:477735</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:477736"><em>Chryseobacterium sp. MH48</em></a></td><td><code>NCBITaxon:477736</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3109433"><em>Chryseobacterium sp. MHB01</em></a></td><td><code>NCBITaxon:3109433</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>7</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3109433"><em>Chryseobacterium sp. MHB01</em></a></td><td><code>NCBITaxon:3109433</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:673302"><em>Chryseobacterium sp. MI 1.2 V46</em></a></td><td><code>NCBITaxon:673302</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3422310"><em>Chryseobacterium sp. MIQD13</em></a></td><td><code>NCBITaxon:3422310</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3735967"><em>Chryseobacterium sp. MIQDR-13</em></a></td><td><code>NCBITaxon:3735967</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:754966"><em>Chryseobacterium sp. MJ427</em></a></td><td><code>NCBITaxon:754966</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1491915"><em>Chryseobacterium sp. MM78Nov</em></a></td><td><code>NCBITaxon:1491915</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1491916"><em>Chryseobacterium sp. MM85Nov</em></a></td><td><code>NCBITaxon:1491916</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3081251"><em>Chryseobacterium sp. MMO-127</em></a></td><td><code>NCBITaxon:3081251</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>14</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3081252"><em>Chryseobacterium sp. MMO-55</em></a></td><td><code>NCBITaxon:3081252</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>14</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3081253"><em>Chryseobacterium sp. MMO-72</em></a></td><td><code>NCBITaxon:3081253</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>14</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3081251"><em>Chryseobacterium sp. MMO-127</em></a></td><td><code>NCBITaxon:3081251</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3081252"><em>Chryseobacterium sp. MMO-55</em></a></td><td><code>NCBITaxon:3081252</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3081253"><em>Chryseobacterium sp. MMO-72</em></a></td><td><code>NCBITaxon:3081253</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3386644"><em>Chryseobacterium sp. MMS23-Vi53</em></a></td><td><code>NCBITaxon:3386644</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:358889"><em>Chryseobacterium sp. MN13.3d</em></a></td><td><code>NCBITaxon:358889</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3395263"><em>Chryseobacterium sp. Mn2064</em></a></td><td><code>NCBITaxon:3395263</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1664318"><em>Chryseobacterium sp. MOF25P</em></a></td><td><code>NCBITaxon:1664318</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1664318"><em>Chryseobacterium sp. MOF25P</em></a></td><td><code>NCBITaxon:1664318</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1380027"><em>Chryseobacterium sp. MOSEL-n5</em></a></td><td><code>NCBITaxon:1380027</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1380028"><em>Chryseobacterium sp. MOSEL-p22</em></a></td><td><code>NCBITaxon:1380028</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1380029"><em>Chryseobacterium sp. MOSEL-w4</em></a></td><td><code>NCBITaxon:1380029</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -125,7 +213,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2745220"><em>Chryseobacterium sp. MYb317</em></a></td><td><code>NCBITaxon:2745220</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2745223"><em>Chryseobacterium sp. MYb320</em></a></td><td><code>NCBITaxon:2745223</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2745228"><em>Chryseobacterium sp. MYb325</em></a></td><td><code>NCBITaxon:2745228</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2745231"><em>Chryseobacterium sp. MYb328</em></a></td><td><code>NCBITaxon:2745231</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2745231"><em>Chryseobacterium sp. MYb328</em></a></td><td><code>NCBITaxon:2745231</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2745236"><em>Chryseobacterium sp. MYb333</em></a></td><td><code>NCBITaxon:2745236</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2745248"><em>Chryseobacterium sp. MYb350</em></a></td><td><code>NCBITaxon:2745248</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2745262"><em>Chryseobacterium sp. MYb365</em></a></td><td><code>NCBITaxon:2745262</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -180,7 +268,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1185329"><em>Chryseobacterium sp. NCCP-549</em></a></td><td><code>NCBITaxon:1185329</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:763837"><em>Chryseobacterium sp. NCS10</em></a></td><td><code>NCBITaxon:763837</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:479786"><em>Chryseobacterium sp. NCY</em></a></td><td><code>NCBITaxon:479786</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2724619"><em>Chryseobacterium sp. NEB161</em></a></td><td><code>NCBITaxon:2724619</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2724619"><em>Chryseobacterium sp. NEB161</em></a></td><td><code>NCBITaxon:2724619</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:520604"><em>Chryseobacterium sp. NF 450</em></a></td><td><code>NCBITaxon:520604</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2819618"><em>Chryseobacterium sp. NFX27</em></a></td><td><code>NCBITaxon:2819618</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3683936"><em>Chryseobacterium sp. NG-CE01</em></a></td><td><code>NCBITaxon:3683936</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -188,13 +276,13 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1806033"><em>Chryseobacterium sp. NIHHS051</em></a></td><td><code>NCBITaxon:1806033</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1806034"><em>Chryseobacterium sp. NIHHS125</em></a></td><td><code>NCBITaxon:1806034</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1571479"><em>Chryseobacterium sp. NK 6Y-4-4</em></a></td><td><code>NCBITaxon:1571479</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2842125"><em>Chryseobacterium sp. NKUCC03_KSP</em></a></td><td><code>NCBITaxon:2842125</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2842125"><em>Chryseobacterium sp. NKUCC03_KSP</em></a></td><td><code>NCBITaxon:2842125</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:161487"><em>Chryseobacterium sp. No. 9670</em></a></td><td><code>NCBITaxon:161487</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2912199"><em>Chryseobacterium sp. NPKM11</em></a></td><td><code>NCBITaxon:2912199</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2912200"><em>Chryseobacterium sp. NPKS4</em></a></td><td><code>NCBITaxon:2912200</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:748869"><em>Chryseobacterium sp. NR7</em></a></td><td><code>NCBITaxon:748869</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3162880"><em>Chryseobacterium sp. NRRL B-14798</em></a></td><td><code>NCBITaxon:3162880</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>11</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1562763"><em>Chryseobacterium sp. NRRL B-14859</em></a></td><td><code>NCBITaxon:1562763</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3162880"><em>Chryseobacterium sp. NRRL B-14798</em></a></td><td><code>NCBITaxon:3162880</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1562763"><em>Chryseobacterium sp. NRRL B-14859</em></a></td><td><code>NCBITaxon:1562763</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1332261"><em>Chryseobacterium sp. NSG16</em></a></td><td><code>NCBITaxon:1332261</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1332262"><em>Chryseobacterium sp. NSG18</em></a></td><td><code>NCBITaxon:1332262</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:722869"><em>Chryseobacterium sp. NT1D</em></a></td><td><code>NCBITaxon:722869</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -208,7 +296,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1323276"><em>Chryseobacterium sp. October_NA5B8</em></a></td><td><code>NCBITaxon:1323276</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1323277"><em>Chryseobacterium sp. October_TSA4B1</em></a></td><td><code>NCBITaxon:1323277</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1323278"><em>Chryseobacterium sp. October_TSA5A5</em></a></td><td><code>NCBITaxon:1323278</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2583211"><em>Chryseobacterium sp. ON_d1</em></a></td><td><code>NCBITaxon:2583211</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2583211"><em>Chryseobacterium sp. ON_d1</em></a></td><td><code>NCBITaxon:2583211</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:639822"><em>Chryseobacterium sp. OR1</em></a></td><td><code>NCBITaxon:639822</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:639831"><em>Chryseobacterium sp. OR10</em></a></td><td><code>NCBITaxon:639831</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:639824"><em>Chryseobacterium sp. OR3</em></a></td><td><code>NCBITaxon:639824</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -221,7 +309,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1776055"><em>Chryseobacterium sp. OTU14_C</em></a></td><td><code>NCBITaxon:1776055</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1776057"><em>Chryseobacterium sp. OTU15_C</em></a></td><td><code>NCBITaxon:1776057</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1500286"><em>Chryseobacterium sp. OV259</em></a></td><td><code>NCBITaxon:1500286</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1500285"><em>Chryseobacterium sp. OV279</em></a></td><td><code>NCBITaxon:1500285</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1500285"><em>Chryseobacterium sp. OV279</em></a></td><td><code>NCBITaxon:1500285</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1500289"><em>Chryseobacterium sp. OV705</em></a></td><td><code>NCBITaxon:1500289</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1500287"><em>Chryseobacterium sp. OV715</em></a></td><td><code>NCBITaxon:1500287</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1172277"><em>Chryseobacterium sp. OVC12</em></a></td><td><code>NCBITaxon:1172277</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -233,12 +321,15 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1265403"><em>Chryseobacterium sp. P14</em></a></td><td><code>NCBITaxon:1265403</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="taxon-browser.js?v=434e253832135143"></script>
+<script defer src="taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="index.json.gz">Index JSON.gz</a> · <a href="index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

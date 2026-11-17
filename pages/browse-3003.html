@@ -7,36 +7,124 @@
 <link rel="stylesheet" href="style.css">
 <script src="theme-toggle.js"></script>
 <script defer src="vendor/fflate-0.8.2.js"></script>
-<script defer src="compressed-data.js?v=434e253832135143"></script>
+<script defer src="compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="index.html">TaxonMech</a>
   <nav>
     <a href="browse.html">Browse</a>
     <a href="type-strains.html">Type strains</a>
+    <a href="map.html">Text map</a>
     <a href="sources.html">Sources</a>
+    <a href="index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="index.html">TaxonMech</a> › <span>All records</span>
+</nav>
 <h1>All records</h1>
-<section id="taxon-browser" data-domain="" data-typed="false" data-page="3003" data-size="200" data-root="">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
-<p id="taxon-status" role="status">625960 records · page 3003 of 3130.</p>
+<section id="taxon-browser" class="browse-layout" data-domain="" data-typed="false" data-page="3003" data-size="200" data-root="">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA">Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
+<p id="taxon-status" role="status">626048 records · page 3003 of 3131.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="browse-3002.html">Previous</a><a href="browse-3004.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>All records</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="taxon.html?id=NCBITaxon:663003"><em>Vibrio sp. a168</em></a></td><td><code>NCBITaxon:663003</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:663004"><em>Vibrio sp. a174</em></a></td><td><code>NCBITaxon:663004</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:285875"><em>Vibrio sp. A1-01</em></a></td><td><code>NCBITaxon:285875</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:285874"><em>Vibrio sp. A1-03</em></a></td><td><code>NCBITaxon:285874</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2912250"><em>Vibrio sp. A1-1</em></a></td><td><code>NCBITaxon:2912250</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>232</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2912248"><em>Vibrio sp. A1-b2</em></a></td><td><code>NCBITaxon:2912248</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>14</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2912250"><em>Vibrio sp. A1-1</em></a></td><td><code>NCBITaxon:2912250</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2912248"><em>Vibrio sp. A1-b2</em></a></td><td><code>NCBITaxon:2912248</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2572200"><em>Vibrio sp. A1-S55</em></a></td><td><code>NCBITaxon:2572200</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1340557"><em>Vibrio sp. a1p1</em></a></td><td><code>NCBITaxon:1340557</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1340558"><em>Vibrio sp. a1p10</em></a></td><td><code>NCBITaxon:1340558</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -77,7 +165,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:662975"><em>Vibrio sp. a273</em></a></td><td><code>NCBITaxon:662975</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:663036"><em>Vibrio sp. a286</em></a></td><td><code>NCBITaxon:663036</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:662977"><em>Vibrio sp. a29</em></a></td><td><code>NCBITaxon:662977</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2912252"><em>Vibrio sp. A2-1</em></a></td><td><code>NCBITaxon:2912252</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>19</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2912252"><em>Vibrio sp. A2-1</em></a></td><td><code>NCBITaxon:2912252</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:934217"><em>Vibrio sp. A2B2</em></a></td><td><code>NCBITaxon:934217</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:934220"><em>Vibrio sp. A2B5</em></a></td><td><code>NCBITaxon:934220</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:327512"><em>Vibrio sp. A31</em></a></td><td><code>NCBITaxon:327512</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -178,7 +266,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:663016"><em>Vibrio sp. a81</em></a></td><td><code>NCBITaxon:663016</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:662996"><em>Vibrio sp. a82</em></a></td><td><code>NCBITaxon:662996</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:662986"><em>Vibrio sp. a85</em></a></td><td><code>NCBITaxon:662986</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2591023"><em>Vibrio sp. A8-1</em></a></td><td><code>NCBITaxon:2591023</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>108</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2591023"><em>Vibrio sp. A8-1</em></a></td><td><code>NCBITaxon:2591023</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:662969"><em>Vibrio sp. a90</em></a></td><td><code>NCBITaxon:662969</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:662987"><em>Vibrio sp. a92</em></a></td><td><code>NCBITaxon:662987</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:662991"><em>Vibrio sp. a97</em></a></td><td><code>NCBITaxon:662991</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -227,18 +315,21 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:983850"><em>Vibrio sp. AB344f</em></a></td><td><code>NCBITaxon:983850</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:983854"><em>Vibrio sp. AB367f</em></a></td><td><code>NCBITaxon:983854</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:983853"><em>Vibrio sp. AB394f</em></a></td><td><code>NCBITaxon:983853</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2817385"><em>Vibrio sp. ABG19</em></a></td><td><code>NCBITaxon:2817385</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2817385"><em>Vibrio sp. ABG19</em></a></td><td><code>NCBITaxon:2817385</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3477735"><em>Vibrio sp. ABH4_348</em></a></td><td><code>NCBITaxon:3477735</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1144679"><em>Vibrio sp. ABR10</em></a></td><td><code>NCBITaxon:1144679</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:512664"><em>Vibrio sp. ABR2-3</em></a></td><td><code>NCBITaxon:512664</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="taxon-browser.js?v=434e253832135143"></script>
+<script defer src="taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="index.json.gz">Index JSON.gz</a> · <a href="index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

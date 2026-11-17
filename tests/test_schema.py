@@ -60,6 +60,10 @@ def test_corpus_uses_only_declared_enum_values(schema_path, records):
          lambda d: [s.get("synonym_type") for s in d.get("synonyms") or []]),
         ("node_type", "CausalNodeTypeEnum",
          lambda d: [n.get("node_type") for g in d.get("causal_graphs") or [] for n in g.get("nodes") or []]),
+        ("entry_status", "UniProtEntryStatusEnum",
+         lambda d: [
+             n.get("entry_status") for g in d.get("causal_graphs") or [] for n in g.get("nodes") or []
+         ]),
     ]
     for field, enum_name, extract in checks:
         allowed = _permissible(view, enum_name)
@@ -123,7 +127,114 @@ def test_schema_prefixes_cover_every_curie_in_the_corpus(schema_path, records):
         for g in doc.get("causal_graphs") or []:
             for n in g.get("nodes") or []:
                 add(n.get("grounding"))
+                add(n.get("organism_taxon_id"))
+                add(n.get("strain_id"))
+                add(n.get("proteome_id"))
+                for c in n.get("xrefs") or []:
+                    add(c)
             for e in g.get("edges") or []:
                 add(e.get("predicate_id"))
     missing = used - declared
     assert not missing, f"prefixes used in the corpus but undeclared in the schema: {sorted(missing)}"
+
+
+def test_causal_node_type_enum_is_superset_of_traitmech_and_habitatmech(schema_path):
+    """CausalNodeTypeEnum claims to be a superset of TraitMech's and HabitatMech's
+    enums so causal graphs remain comparable across the Mech repositories (#76)."""
+    view = _schema(schema_path)
+    allowed = _permissible(view, "CausalNodeTypeEnum")
+    traitmech_values = {
+        "TRAIT",
+        "PATHWAY",
+        "ENVIRONMENTAL_FACTOR",
+        "EXPERIMENTAL_FACTOR",
+        "GENE_OR_PROTEIN",
+        "RNA",
+        "GENETIC_ELEMENT",
+        "CHEMICAL",
+        "ORGANELLE",
+        "CELLULAR_LOCALIZATION",
+        "MOLECULAR_FUNCTION",
+        "BIOLOGICAL_PROCESS",
+        "STATE",
+        "QUALITY",
+        "CAPACITY",
+    }
+    habitatmech_values = {
+        "TAXON",
+        "TRAIT",
+        "HABITAT",
+        "ENVIRONMENTAL_PARAMETER",
+        "PATHWAY",
+        "ENVIRONMENTAL_FACTOR",
+        "EXPERIMENTAL_FACTOR",
+        "GENE_OR_PROTEIN",
+        "CHEMICAL",
+        "CELLULAR_LOCALIZATION",
+        "MOLECULAR_FUNCTION",
+        "BIOLOGICAL_PROCESS",
+        "STATE",
+        "QUALITY",
+        "CAPACITY",
+        "COMMUNITY_PROCESS",
+    }
+    assert traitmech_values <= allowed, (
+        f"missing TraitMech values: {sorted(traitmech_values - allowed)}"
+    )
+    assert habitatmech_values <= allowed, (
+        f"missing HabitatMech values: {sorted(habitatmech_values - allowed)}"
+    )
+
+
+def test_causal_node_protein_scope_slots_and_prefixes(schema_path):
+    """CausalNode supports structured GENE_OR_PROTEIN organism/strain/proteome/sequence
+    scope slots and the schema declares UniProtKB, EC, OMP, and UP prefixes (#78)."""
+    view = _schema(schema_path)
+    slots = {s.name for s in view.class_induced_slots("CausalNode")}
+    expected_slots = {
+        "node_id",
+        "label",
+        "node_type",
+        "grounding",
+        "xrefs",
+        "description",
+        "organism_taxon_id",
+        "strain_id",
+        "proteome_id",
+        "gene_symbol",
+        "locus_tag",
+        "sequence_length",
+        "sequence_crc64",
+        "sequence_version",
+        "entry_status",
+    }
+    assert expected_slots <= slots
+    assert _permissible(view, "UniProtEntryStatusEnum") == {"SWISS_PROT", "TREMBL"}
+    declared_prefixes = set(yaml.safe_load(schema_path.read_text(encoding="utf-8"))["prefixes"])
+    assert {"UniProtKB", "EC", "OMP", "UP", "METPO"} <= declared_prefixes
+
+
+def test_schema_guide_documents_causal_node_protein_slots(repo_root):
+    """docs/SCHEMA.md documents all 9 CausalNode GENE_OR_PROTEIN protein-grounding
+    slots, UniProtEntryStatusEnum (SWISS_PROT, TREMBL), and curation/uniprot_proteins.tsv (#187)."""
+    schema_doc = (repo_root / "docs" / "SCHEMA.md").read_text(encoding="utf-8")
+    expected_tokens = (
+        "organism_taxon_id",
+        "strain_id",
+        "proteome_id",
+        "gene_symbol",
+        "locus_tag",
+        "sequence_length",
+        "sequence_crc64",
+        "sequence_version",
+        "entry_status",
+        "UniProtEntryStatusEnum",
+        "SWISS_PROT",
+        "TREMBL",
+        "curation/uniprot_proteins.tsv",
+    )
+    missing = [token for token in expected_tokens if token not in schema_doc]
+    assert not missing, f"docs/SCHEMA.md missing protein-grounding tokens: {missing}"
+
+
+

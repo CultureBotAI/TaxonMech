@@ -15,7 +15,11 @@ venv/
 htmlcov/
 
 # Generated reports — regenerate with `just report` / `just validate-all`
-reports/
+reports/*
+!reports/yaml_record_review/
+!reports/yaml_record_review/*.md
+!reports/yaml_category_review/
+!reports/yaml_category_review/*.md
 
 # Downloaded primary snapshots; committed inventories retain their provenance.
 data/source_snapshots/
@@ -43,3 +47,9 @@ local/
 .DS_Store
 .idea/
 .vscode/
+
+# Embedding vectors (large, rebuildable); corpus_map.json is committed
+data/embeddings/*.npz
+data/embeddings/*.npy
+.temp/
+

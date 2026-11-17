@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify that data/taxa/ is exactly what data/raw/ and curation/seed_scope.tsv produce.
+"""Verify that data/taxa/ matches data/raw/, curation/seed_scope.tsv, and curation/causal_graphs/.
 
 The corpus is derived data and its inputs are committed, so it is reproducible
 from the repo alone — but nothing else checks that it actually reproduces.
@@ -18,11 +18,6 @@ Usage:
     python3 scripts/verify_corpus.py --max-diffs 3
 
 Exits non-zero on any missing, extra, or differing record.
-
-NOTE for when curation starts: today every record is 100% seeder-generated, so
-an exact comparison is right. Once curators add causal_graphs or flip records to
-REVIEWED, records will legitimately diverge and this will need to compare only
-the seeder-owned fields.
 """
 
 from __future__ import annotations
@@ -90,11 +85,12 @@ def main(argv: list[str] | None = None) -> int:
         print(f"\n  ... and {len(differing) - args.max_diffs} more differing record(s)", file=sys.stderr)
 
     if missing or extra or differing:
-        print("\ncorpus does not match data/raw/ + curation/seed_scope.tsv. Either re-seed "
-              "(`just seed-apply --force --prune`) or, if the change was intended, "
-              "make it in the seeder so it survives the next re-seed.", file=sys.stderr)
+        print("\ncorpus does not match data/raw/ + curation/seed_scope.tsv + curation/causal_graphs/. "
+              "Either re-seed (`just seed-apply --force --prune`) or, if the change was intended, "
+              "make it in the seeder or curation/causal_graphs/ so it survives the next re-seed.",
+              file=sys.stderr)
         return 1
-    print("\ncorpus reproduces exactly from data/raw/ and curation/seed_scope.tsv")
+    print("\ncorpus reproduces exactly from data/raw/, curation/seed_scope.tsv, and curation/causal_graphs/")
     return 0
 
 

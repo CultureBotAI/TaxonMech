@@ -7,63 +7,151 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../theme-toggle.js"></script>
 <script defer src="../vendor/fflate-0.8.2.js"></script>
-<script defer src="../compressed-data.js?v=434e253832135143"></script>
+<script defer src="../compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="../index.html">TaxonMech</a>
   <nav>
     <a href="../browse.html">Browse</a>
     <a href="../type-strains.html">Type strains</a>
+    <a href="../map.html">Text map</a>
     <a href="../sources.html">Sources</a>
+    <a href="../index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../index.html">TaxonMech</a> › <span>Bacteria</span>
+</nav>
 <h1>Bacteria</h1>
 <p class="lede">Species and infraspecific taxa under NCBITaxon:2, including uncultured and environmental taxa.</p>
-<section id="taxon-browser" data-domain="BACTERIA" data-typed="false" data-page="919" data-size="200" data-root="../">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="BACTERIA" data-typed="false" data-page="919" data-size="200" data-root="../">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="../browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA" selected>Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">605695 records · page 919 of 3029.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="../domain/bacteria-918.html">Previous</a><a href="../domain/bacteria-920.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>Bacteria</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2080672"><em>Citrobacter freundii complex sp. CFNIH8</em></a></td><td><code>NCBITaxon:2080672</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1691</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2077149"><em>Citrobacter freundii complex sp. CFNIH9</em></a></td><td><code>NCBITaxon:2077149</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>493</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1288347"><em>Citrobacter freundii GTC 09479</em></a></td><td><code>NCBITaxon:1288347</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1691</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1297584"><em>Citrobacter freundii GTC 09629</em></a></td><td><code>NCBITaxon:1297584</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1691</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2080672"><em>Citrobacter freundii complex sp. CFNIH8</em></a></td><td><code>NCBITaxon:2080672</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2077149"><em>Citrobacter freundii complex sp. CFNIH9</em></a></td><td><code>NCBITaxon:2077149</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1288347"><em>Citrobacter freundii GTC 09479</em></a></td><td><code>NCBITaxon:1288347</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1297584"><em>Citrobacter freundii GTC 09629</em></a></td><td><code>NCBITaxon:1297584</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1267543"><em>Citrobacter freundii IFO 13545</em></a></td><td><code>NCBITaxon:1267543</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1439318"><em>Citrobacter freundii MGH 56</em></a></td><td><code>NCBITaxon:1439318</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>49</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1439318"><em>Citrobacter freundii MGH 56</em></a></td><td><code>NCBITaxon:1439318</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1255692"><em>Citrobacter freundii Pi_15</em></a></td><td><code>NCBITaxon:1255692</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1454056"><em>Citrobacter freundii RLS1</em></a></td><td><code>NCBITaxon:1454056</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1691</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1454056"><em>Citrobacter freundii RLS1</em></a></td><td><code>NCBITaxon:1454056</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1424338"><em>Citrobacter freundii SBS 197</em></a></td><td><code>NCBITaxon:1424338</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:670484"><em>Citrobacter freundii str. ballerup 7851/39</em></a></td><td><code>NCBITaxon:670484</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>385</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:670484"><em>Citrobacter freundii str. ballerup 7851/39</em></a></td><td><code>NCBITaxon:670484</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1278245"><em>Citrobacter freundii str. harit D11</em></a></td><td><code>NCBITaxon:1278245</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1400136"><em>Citrobacter freundii UCI 31</em></a></td><td><code>NCBITaxon:1400136</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1691</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1400136"><em>Citrobacter freundii UCI 31</em></a></td><td><code>NCBITaxon:1400136</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1400137"><em>Citrobacter freundii UCI 32</em></a></td><td><code>NCBITaxon:1400137</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:67828"><em>Citrobacter gillenii</em></a></td><td><code>NCBITaxon:67828</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>4</td><td>52</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:67828"><em>Citrobacter gillenii</em></a></td><td><code>NCBITaxon:67828</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>4</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:66695"><em>Citrobacter intermedius</em></a></td><td><code>NCBITaxon:66695</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:545"><em>Citrobacter koseri</em></a></td><td><code>NCBITaxon:545</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>34</td><td>28487</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:545"><em>Citrobacter koseri</em></a></td><td><code>NCBITaxon:545</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>34</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1308729"><em>Citrobacter koseri ADL-326</em></a></td><td><code>NCBITaxon:1308729</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1308730"><em>Citrobacter koseri ADL-328</em></a></td><td><code>NCBITaxon:1308730</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:290338"><em>Citrobacter koseri ATCC BAA-895</em></a></td><td><code>NCBITaxon:290338</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>273</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2894201"><em>Citrobacter meridianamericanus</em></a></td><td><code>NCBITaxon:2894201</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>20</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:67829"><em>Citrobacter murliniae</em></a></td><td><code>NCBITaxon:67829</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>9</td><td>15</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1563222"><em>Citrobacter pasteurii</em></a></td><td><code>NCBITaxon:1563222</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>13</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1639133"><em>Citrobacter portucalensis</em></a></td><td><code>NCBITaxon:1639133</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>5</td><td>493</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:67825"><em>Citrobacter rodentium</em></a></td><td><code>NCBITaxon:67825</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>3</td><td>8</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:290338"><em>Citrobacter koseri ATCC BAA-895</em></a></td><td><code>NCBITaxon:290338</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2894201"><em>Citrobacter meridianamericanus</em></a></td><td><code>NCBITaxon:2894201</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:67829"><em>Citrobacter murliniae</em></a></td><td><code>NCBITaxon:67829</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>9</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1563222"><em>Citrobacter pasteurii</em></a></td><td><code>NCBITaxon:1563222</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1639133"><em>Citrobacter portucalensis</em></a></td><td><code>NCBITaxon:1639133</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>5</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:67825"><em>Citrobacter rodentium</em></a></td><td><code>NCBITaxon:67825</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>3</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:889377"><em>Citrobacter rodentium EX-33</em></a></td><td><code>NCBITaxon:889377</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:637910"><em>Citrobacter rodentium ICC168</em></a></td><td><code>NCBITaxon:637910</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>8</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:637910"><em>Citrobacter rodentium ICC168</em></a></td><td><code>NCBITaxon:637910</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:889376"><em>Citrobacter rodentium ICC169-407</em></a></td><td><code>NCBITaxon:889376</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:889375"><em>Citrobacter rodentium ICC169-496</em></a></td><td><code>NCBITaxon:889375</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1218085"><em>Citrobacter rodentium NBRC 105723 = DSM 16636</em></a></td><td><code>NCBITaxon:1218085</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>8</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:67826"><em>Citrobacter sedlakii</em></a></td><td><code>NCBITaxon:67826</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>9</td><td>37</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1218086"><em>Citrobacter sedlakii NBRC 105722</em></a></td><td><code>NCBITaxon:1218086</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>37</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1896336"><em>Citrobacter sp.</em></a></td><td><code>NCBITaxon:1896336</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>17</td><td>1691</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1218085"><em>Citrobacter rodentium NBRC 105723 = DSM 16636</em></a></td><td><code>NCBITaxon:1218085</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:67826"><em>Citrobacter sedlakii</em></a></td><td><code>NCBITaxon:67826</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>9</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1218086"><em>Citrobacter sedlakii NBRC 105722</em></a></td><td><code>NCBITaxon:1218086</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1896336"><em>Citrobacter sp.</em></a></td><td><code>NCBITaxon:1896336</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>17</td><td>9 (9 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1777864"><em>Citrobacter sp. 0000-0054-3051</em></a></td><td><code>NCBITaxon:1777864</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1220632"><em>Citrobacter sp. 003.13</em></a></td><td><code>NCBITaxon:1220632</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1220633"><em>Citrobacter sp. 003.8</em></a></td><td><code>NCBITaxon:1220633</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -98,10 +186,10 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1249329"><em>Citrobacter sp. 156R</em></a></td><td><code>NCBITaxon:1249329</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1249330"><em>Citrobacter sp. 16R</em></a></td><td><code>NCBITaxon:1249330</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1249331"><em>Citrobacter sp. 170R</em></a></td><td><code>NCBITaxon:1249331</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2683822"><em>Citrobacter sp. 172116965</em></a></td><td><code>NCBITaxon:2683822</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>385</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2683822"><em>Citrobacter sp. 172116965</em></a></td><td><code>NCBITaxon:2683822</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1070071"><em>Citrobacter sp. 17.1 KSS</em></a></td><td><code>NCBITaxon:1070071</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1070075"><em>Citrobacter sp. 17.6 KSS</em></a></td><td><code>NCBITaxon:1070075</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2681404"><em>Citrobacter sp. 18056</em></a></td><td><code>NCBITaxon:2681404</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2681404"><em>Citrobacter sp. 18056</em></a></td><td><code>NCBITaxon:2681404</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2918667"><em>Citrobacter sp. 1950193_15</em></a></td><td><code>NCBITaxon:2918667</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1870982"><em>Citrobacter sp. 1-19</em></a></td><td><code>NCBITaxon:1870982</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2918666"><em>Citrobacter sp. 2003040_21</em></a></td><td><code>NCBITaxon:2918666</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -124,10 +212,10 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:3135639"><em>Citrobacter sp. 2023QW-00185</em></a></td><td><code>NCBITaxon:3135639</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3814399"><em>Citrobacter sp. 2026HL-01503</em></a></td><td><code>NCBITaxon:3814399</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2851737"><em>Citrobacter sp. 20-17-333-018659</em></a></td><td><code>NCBITaxon:2851737</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2883266"><em>Citrobacter sp. 210820-DFI.7.7</em></a></td><td><code>NCBITaxon:2883266</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>49</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2883267"><em>Citrobacter sp. 210820-DFI.7.8</em></a></td><td><code>NCBITaxon:2883267</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>49</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2883266"><em>Citrobacter sp. 210820-DFI.7.7</em></a></td><td><code>NCBITaxon:2883266</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2883267"><em>Citrobacter sp. 210820-DFI.7.8</em></a></td><td><code>NCBITaxon:2883267</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:365038"><em>Citrobacter sp. 2144</em></a></td><td><code>NCBITaxon:365038</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3015952"><em>Citrobacter sp. 21OH12SH02A-Citro</em></a></td><td><code>NCBITaxon:3015952</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>385</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3015952"><em>Citrobacter sp. 21OH12SH02A-Citro</em></a></td><td><code>NCBITaxon:3015952</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1332265"><em>Citrobacter sp. 22.1k</em></a></td><td><code>NCBITaxon:1332265</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1535664"><em>Citrobacter sp. 248B4_12EESBL</em></a></td><td><code>NCBITaxon:1535664</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2964968"><em>Citrobacter sp. 24A19CPO004</em></a></td><td><code>NCBITaxon:2964968</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -166,8 +254,8 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:998194"><em>Citrobacter sp. 40</em></a></td><td><code>NCBITaxon:998194</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1229465"><em>Citrobacter sp. 4(2012)</em></a></td><td><code>NCBITaxon:1229465</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3733096"><em>Citrobacter sp. 4F3</em></a></td><td><code>NCBITaxon:3733096</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3156447"><em>Citrobacter sp. 506</em></a></td><td><code>NCBITaxon:3156447</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>385</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1736699"><em>Citrobacter sp. 50677481</em></a></td><td><code>NCBITaxon:1736699</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>37</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3156447"><em>Citrobacter sp. 506</em></a></td><td><code>NCBITaxon:3156447</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1736699"><em>Citrobacter sp. 50677481</em></a></td><td><code>NCBITaxon:1736699</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1165410"><em>Citrobacter sp. 50(2012)</em></a></td><td><code>NCBITaxon:1165410</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1777338"><em>Citrobacter sp. 50A.1</em></a></td><td><code>NCBITaxon:1777338</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1777339"><em>Citrobacter sp. 50A.2</em></a></td><td><code>NCBITaxon:1777339</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -199,7 +287,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:2164144"><em>Citrobacter sp. 68UC12</em></a></td><td><code>NCBITaxon:2164144</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1794475"><em>Citrobacter sp. 697B5_12ESS</em></a></td><td><code>NCBITaxon:1794475</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1661214"><em>Citrobacter sp. 6x</em></a></td><td><code>NCBITaxon:1661214</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3118148"><em>Citrobacter sp. 70972423</em></a></td><td><code>NCBITaxon:3118148</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>117</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3118148"><em>Citrobacter sp. 70972423</em></a></td><td><code>NCBITaxon:3118148</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1777350"><em>Citrobacter sp. 70.2</em></a></td><td><code>NCBITaxon:1777350</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1777351"><em>Citrobacter sp. 70.3</em></a></td><td><code>NCBITaxon:1777351</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1777352"><em>Citrobacter sp. 70.6</em></a></td><td><code>NCBITaxon:1777352</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -216,7 +304,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1794476"><em>Citrobacter sp. 965B12_12AMac</em></a></td><td><code>NCBITaxon:1794476</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2699737"><em>Citrobacter sp. 966a</em></a></td><td><code>NCBITaxon:2699737</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1707632"><em>Citrobacter sp. A07</em></a></td><td><code>NCBITaxon:1707632</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1173691"><em>Citrobacter sp. A1</em></a></td><td><code>NCBITaxon:1173691</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1691</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1173691"><em>Citrobacter sp. A1</em></a></td><td><code>NCBITaxon:1173691</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1639127"><em>Citrobacter sp. A121</em></a></td><td><code>NCBITaxon:1639127</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1545773"><em>Citrobacter sp. A14</em></a></td><td><code>NCBITaxon:1545773</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1639128"><em>Citrobacter sp. A154</em></a></td><td><code>NCBITaxon:1639128</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -228,18 +316,21 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1639130"><em>Citrobacter sp. A293</em></a></td><td><code>NCBITaxon:1639130</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1173493"><em>Citrobacter sp. A3</em></a></td><td><code>NCBITaxon:1173493</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1639131"><em>Citrobacter sp. A304</em></a></td><td><code>NCBITaxon:1639131</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1639132"><em>Citrobacter sp. A316</em></a></td><td><code>NCBITaxon:1639132</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>493</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1639132"><em>Citrobacter sp. A316</em></a></td><td><code>NCBITaxon:1639132</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:758834"><em>Citrobacter sp. A324</em></a></td><td><code>NCBITaxon:758834</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:758835"><em>Citrobacter sp. A325</em></a></td><td><code>NCBITaxon:758835</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1472085"><em>Citrobacter sp. A3_CLW</em></a></td><td><code>NCBITaxon:1472085</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="../taxon-browser.js?v=434e253832135143"></script>
+<script defer src="../taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="../index.json.gz">Index JSON.gz</a> · <a href="../index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

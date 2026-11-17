@@ -7,29 +7,117 @@
 <link rel="stylesheet" href="style.css">
 <script src="theme-toggle.js"></script>
 <script defer src="vendor/fflate-0.8.2.js"></script>
-<script defer src="compressed-data.js?v=434e253832135143"></script>
+<script defer src="compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="index.html">TaxonMech</a>
   <nav>
     <a href="browse.html">Browse</a>
     <a href="type-strains.html">Type strains</a>
+    <a href="map.html">Text map</a>
     <a href="sources.html">Sources</a>
+    <a href="index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="index.html">TaxonMech</a> › <span>All records</span>
+</nav>
 <h1>All records</h1>
-<section id="taxon-browser" data-domain="" data-typed="false" data-page="2759" data-size="200" data-root="">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
-<p id="taxon-status" role="status">625960 records · page 2759 of 3130.</p>
+<section id="taxon-browser" class="browse-layout" data-domain="" data-typed="false" data-page="2759" data-size="200" data-root="">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA">Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
+<p id="taxon-status" role="status">626048 records · page 2759 of 3131.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="browse-2758.html">Previous</a><a href="browse-2760.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>All records</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="taxon.html?id=NCBITaxon:684090"><em>[Streptomyces] sp. SDAP101</em></a></td><td><code>NCBITaxon:684090</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:408081"><em>Streptomyces sp. SDB</em></a></td><td><code>NCBITaxon:408081</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -39,13 +127,13 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:409190"><em>Streptomyces sp. SDd</em></a></td><td><code>NCBITaxon:409190</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:409191"><em>Streptomyces sp. SDi</em></a></td><td><code>NCBITaxon:409191</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:409192"><em>Streptomyces sp. SDk</em></a></td><td><code>NCBITaxon:409192</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2267702"><em>Streptomyces sp. SDr-06</em></a></td><td><code>NCBITaxon:2267702</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2267702"><em>Streptomyces sp. SDr-06</em></a></td><td><code>NCBITaxon:2267702</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:697199"><em>Streptomyces sp. SDS</em></a></td><td><code>NCBITaxon:697199</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1780127"><em>Streptomyces sp. SDSLU14</em></a></td><td><code>NCBITaxon:1780127</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1161980"><em>Streptomyces sp. Sdst3k1</em></a></td><td><code>NCBITaxon:1161980</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1476965"><em>Streptomyces sp. SDT101</em></a></td><td><code>NCBITaxon:1476965</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1476966"><em>Streptomyces sp. SDT102</em></a></td><td><code>NCBITaxon:1476966</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3406418"><em>Streptomyces sp. SDT5-1</em></a></td><td><code>NCBITaxon:3406418</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3406418"><em>Streptomyces sp. SDT5-1</em></a></td><td><code>NCBITaxon:3406418</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1476967"><em>Streptomyces sp. SDT81</em></a></td><td><code>NCBITaxon:1476967</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1476968"><em>Streptomyces sp. SDT85</em></a></td><td><code>NCBITaxon:1476968</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1476969"><em>Streptomyces sp. SDT88</em></a></td><td><code>NCBITaxon:1476969</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -100,13 +188,13 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1472575"><em>Streptomyces sp. SG 44</em></a></td><td><code>NCBITaxon:1472575</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1472581"><em>Streptomyces sp. SG 46</em></a></td><td><code>NCBITaxon:1472581</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1472585"><em>Streptomyces sp. SG 55</em></a></td><td><code>NCBITaxon:1472585</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2109593"><em>Streptomyces sp. SGAir0924</em></a></td><td><code>NCBITaxon:2109593</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>152</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2109593"><em>Streptomyces sp. SGAir0924</em></a></td><td><code>NCBITaxon:2109593</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2109592"><em>Streptomyces sp. SGAir0957</em></a></td><td><code>NCBITaxon:2109592</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1972846"><em>Streptomyces sp. Sge12</em></a></td><td><code>NCBITaxon:1972846</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>17</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1972846"><em>Streptomyces sp. Sge12</em></a></td><td><code>NCBITaxon:1972846</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:713590"><em>Streptomyces sp. SGVF01</em></a></td><td><code>NCBITaxon:713590</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1084480"><em>Streptomyces sp. SH05-01</em></a></td><td><code>NCBITaxon:1084480</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1830117"><em>Streptomyces sp. SH11</em></a></td><td><code>NCBITaxon:1830117</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3041765"><em>Streptomyces sp. SH5</em></a></td><td><code>NCBITaxon:3041765</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>11</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3041765"><em>Streptomyces sp. SH5</em></a></td><td><code>NCBITaxon:3041765</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:992908"><em>Streptomyces sp. SH8(2011)</em></a></td><td><code>NCBITaxon:992908</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1629707"><em>Streptomyces sp. SH-62</em></a></td><td><code>NCBITaxon:1629707</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:947813"><em>Streptomyces sp. Shache11</em></a></td><td><code>NCBITaxon:947813</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -122,8 +210,8 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:664246"><em>Streptomyces sp. SHLJ2</em></a></td><td><code>NCBITaxon:664246</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:664247"><em>Streptomyces sp. SHLJ5</em></a></td><td><code>NCBITaxon:664247</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:664248"><em>Streptomyces sp. SHN26</em></a></td><td><code>NCBITaxon:664248</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2315235"><em>Streptomyces sp. SHP22-7</em></a></td><td><code>NCBITaxon:2315235</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>152</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2769489"><em>Streptomyces sp. SHP 1-2</em></a></td><td><code>NCBITaxon:2769489</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2315235"><em>Streptomyces sp. SHP22-7</em></a></td><td><code>NCBITaxon:2315235</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2769489"><em>Streptomyces sp. SHP 1-2</em></a></td><td><code>NCBITaxon:2769489</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:476129"><em>Streptomyces sp. SHX-100</em></a></td><td><code>NCBITaxon:476129</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:476130"><em>Streptomyces sp. SHX-101</em></a></td><td><code>NCBITaxon:476130</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:476131"><em>Streptomyces sp. SHX-102</em></a></td><td><code>NCBITaxon:476131</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -134,22 +222,22 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1847838"><em>Streptomyces sp. SIA_Pb_R5</em></a></td><td><code>NCBITaxon:1847838</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1847839"><em>Streptomyces sp. SIA_Zn_R4</em></a></td><td><code>NCBITaxon:1847839</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1847883"><em>Streptomyces sp. SIB_Zn_R1</em></a></td><td><code>NCBITaxon:1847883</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690252"><em>Streptomyces sp. SID1</em></a></td><td><code>NCBITaxon:2690252</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>29</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2706016"><em>Streptomyces sp. SID10115</em></a></td><td><code>NCBITaxon:2706016</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>10</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690252"><em>Streptomyces sp. SID1</em></a></td><td><code>NCBITaxon:2690252</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2706016"><em>Streptomyces sp. SID10115</em></a></td><td><code>NCBITaxon:2706016</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706017"><em>Streptomyces sp. SID10116</em></a></td><td><code>NCBITaxon:2706017</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706018"><em>Streptomyces sp. SID10244</em></a></td><td><code>NCBITaxon:2706018</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706019"><em>Streptomyces sp. SID10262</em></a></td><td><code>NCBITaxon:2706019</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706020"><em>Streptomyces sp. SID10328</em></a></td><td><code>NCBITaxon:2706020</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690248"><em>Streptomyces sp. SID1034</em></a></td><td><code>NCBITaxon:2690248</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>16</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2706021"><em>Streptomyces sp. SID10362</em></a></td><td><code>NCBITaxon:2706021</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>55</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690248"><em>Streptomyces sp. SID1034</em></a></td><td><code>NCBITaxon:2690248</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2706021"><em>Streptomyces sp. SID10362</em></a></td><td><code>NCBITaxon:2706021</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706022"><em>Streptomyces sp. SID10430</em></a></td><td><code>NCBITaxon:2706022</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690249"><em>Streptomyces sp. SID1046</em></a></td><td><code>NCBITaxon:2690249</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>49</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690249"><em>Streptomyces sp. SID1046</em></a></td><td><code>NCBITaxon:2690249</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706023"><em>Streptomyces sp. SID10536</em></a></td><td><code>NCBITaxon:2706023</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706024"><em>Streptomyces sp. SID10586</em></a></td><td><code>NCBITaxon:2706024</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706025"><em>Streptomyces sp. SID10600</em></a></td><td><code>NCBITaxon:2706025</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2706026"><em>Streptomyces sp. SID10692</em></a></td><td><code>NCBITaxon:2706026</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>109</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2706027"><em>Streptomyces sp. SID10815</em></a></td><td><code>NCBITaxon:2706027</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2706028"><em>Streptomyces sp. SID10853</em></a></td><td><code>NCBITaxon:2706028</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2706026"><em>Streptomyces sp. SID10692</em></a></td><td><code>NCBITaxon:2706026</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2706027"><em>Streptomyces sp. SID10815</em></a></td><td><code>NCBITaxon:2706027</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2706028"><em>Streptomyces sp. SID10853</em></a></td><td><code>NCBITaxon:2706028</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3425888"><em>Streptomyces sp. SID1121</em></a></td><td><code>NCBITaxon:3425888</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706029"><em>Streptomyces sp. SID11233</em></a></td><td><code>NCBITaxon:2706029</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706030"><em>Streptomyces sp. SID11342</em></a></td><td><code>NCBITaxon:2706030</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -157,7 +245,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2706032"><em>Streptomyces sp. SID11423</em></a></td><td><code>NCBITaxon:2706032</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3425889"><em>Streptomyces sp. SID1143</em></a></td><td><code>NCBITaxon:3425889</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706033"><em>Streptomyces sp. SID11719</em></a></td><td><code>NCBITaxon:2706033</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2706034"><em>Streptomyces sp. SID11726</em></a></td><td><code>NCBITaxon:2706034</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2706034"><em>Streptomyces sp. SID11726</em></a></td><td><code>NCBITaxon:2706034</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706035"><em>Streptomyces sp. SID11744</em></a></td><td><code>NCBITaxon:2706035</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706036"><em>Streptomyces sp. SID12208</em></a></td><td><code>NCBITaxon:2706036</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706037"><em>Streptomyces sp. SID12407</em></a></td><td><code>NCBITaxon:2706037</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -174,11 +262,11 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2706048"><em>Streptomyces sp. SID13099</em></a></td><td><code>NCBITaxon:2706048</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706049"><em>Streptomyces sp. SID13106</em></a></td><td><code>NCBITaxon:2706049</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706050"><em>Streptomyces sp. SID13116</em></a></td><td><code>NCBITaxon:2706050</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690250"><em>Streptomyces sp. SID1328</em></a></td><td><code>NCBITaxon:2690250</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>33</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2706051"><em>Streptomyces sp. SID13588</em></a></td><td><code>NCBITaxon:2706051</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>7</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690250"><em>Streptomyces sp. SID1328</em></a></td><td><code>NCBITaxon:2690250</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2706051"><em>Streptomyces sp. SID13588</em></a></td><td><code>NCBITaxon:2706051</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706052"><em>Streptomyces sp. SID13603</em></a></td><td><code>NCBITaxon:2706052</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706053"><em>Streptomyces sp. SID13616</em></a></td><td><code>NCBITaxon:2706053</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2706054"><em>Streptomyces sp. SID13666</em></a></td><td><code>NCBITaxon:2706054</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>7</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2706054"><em>Streptomyces sp. SID13666</em></a></td><td><code>NCBITaxon:2706054</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706055"><em>Streptomyces sp. SID13667</em></a></td><td><code>NCBITaxon:2706055</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706056"><em>Streptomyces sp. SID13713</em></a></td><td><code>NCBITaxon:2706056</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706057"><em>Streptomyces sp. SID13723</em></a></td><td><code>NCBITaxon:2706057</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -194,51 +282,54 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2706067"><em>Streptomyces sp. SID14190</em></a></td><td><code>NCBITaxon:2706067</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706068"><em>Streptomyces sp. SID14390</em></a></td><td><code>NCBITaxon:2706068</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706069"><em>Streptomyces sp. SID14431</em></a></td><td><code>NCBITaxon:2706069</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2706070"><em>Streptomyces sp. SID14436</em></a></td><td><code>NCBITaxon:2706070</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>15</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2706070"><em>Streptomyces sp. SID14436</em></a></td><td><code>NCBITaxon:2706070</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706071"><em>Streptomyces sp. SID14438</em></a></td><td><code>NCBITaxon:2706071</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2706072"><em>Streptomyces sp. SID14446</em></a></td><td><code>NCBITaxon:2706072</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>46</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2706072"><em>Streptomyces sp. SID14446</em></a></td><td><code>NCBITaxon:2706072</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706073"><em>Streptomyces sp. SID14478</em></a></td><td><code>NCBITaxon:2706073</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2706074"><em>Streptomyces sp. SID14515</em></a></td><td><code>NCBITaxon:2706074</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>59</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2706074"><em>Streptomyces sp. SID14515</em></a></td><td><code>NCBITaxon:2706074</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706075"><em>Streptomyces sp. SID14674</em></a></td><td><code>NCBITaxon:2706075</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706076"><em>Streptomyces sp. SID14683</em></a></td><td><code>NCBITaxon:2706076</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706077"><em>Streptomyces sp. SID14684</em></a></td><td><code>NCBITaxon:2706077</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706078"><em>Streptomyces sp. SID14701</em></a></td><td><code>NCBITaxon:2706078</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690251"><em>Streptomyces sp. SID161</em></a></td><td><code>NCBITaxon:2690251</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690251"><em>Streptomyces sp. SID161</em></a></td><td><code>NCBITaxon:2690251</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2706079"><em>Streptomyces sp. SID164</em></a></td><td><code>NCBITaxon:2706079</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690253"><em>Streptomyces sp. SID2119</em></a></td><td><code>NCBITaxon:2690253</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>104</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690253"><em>Streptomyces sp. SID2119</em></a></td><td><code>NCBITaxon:2690253</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2690254"><em>Streptomyces sp. SID2131</em></a></td><td><code>NCBITaxon:2690254</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690255"><em>Streptomyces sp. SID2563</em></a></td><td><code>NCBITaxon:2690255</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>17</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690256"><em>Streptomyces sp. SID2888</em></a></td><td><code>NCBITaxon:2690256</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>10</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690255"><em>Streptomyces sp. SID2563</em></a></td><td><code>NCBITaxon:2690255</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690256"><em>Streptomyces sp. SID2888</em></a></td><td><code>NCBITaxon:2690256</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2690257"><em>Streptomyces sp. SID2955</em></a></td><td><code>NCBITaxon:2690257</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690258"><em>Streptomyces sp. SID2999</em></a></td><td><code>NCBITaxon:2690258</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>23</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690259"><em>Streptomyces sp. SID3212</em></a></td><td><code>NCBITaxon:2690259</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690258"><em>Streptomyces sp. SID2999</em></a></td><td><code>NCBITaxon:2690258</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690259"><em>Streptomyces sp. SID3212</em></a></td><td><code>NCBITaxon:2690259</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2690260"><em>Streptomyces sp. SID3343</em></a></td><td><code>NCBITaxon:2690260</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690261"><em>Streptomyces sp. SID335</em></a></td><td><code>NCBITaxon:2690261</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>10</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690262"><em>Streptomyces sp. SID337</em></a></td><td><code>NCBITaxon:2690262</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>10</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2706080"><em>Streptomyces sp. SID339</em></a></td><td><code>NCBITaxon:2706080</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>10</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690263"><em>Streptomyces sp. SID3915</em></a></td><td><code>NCBITaxon:2690263</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>29</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690264"><em>Streptomyces sp. SID486</em></a></td><td><code>NCBITaxon:2690264</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690265"><em>Streptomyces sp. SID4912</em></a></td><td><code>NCBITaxon:2690265</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>53</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690266"><em>Streptomyces sp. SID4913</em></a></td><td><code>NCBITaxon:2690266</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690261"><em>Streptomyces sp. SID335</em></a></td><td><code>NCBITaxon:2690261</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690262"><em>Streptomyces sp. SID337</em></a></td><td><code>NCBITaxon:2690262</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2706080"><em>Streptomyces sp. SID339</em></a></td><td><code>NCBITaxon:2706080</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690263"><em>Streptomyces sp. SID3915</em></a></td><td><code>NCBITaxon:2690263</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690264"><em>Streptomyces sp. SID486</em></a></td><td><code>NCBITaxon:2690264</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690265"><em>Streptomyces sp. SID4912</em></a></td><td><code>NCBITaxon:2690265</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690266"><em>Streptomyces sp. SID4913</em></a></td><td><code>NCBITaxon:2690266</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2690267"><em>Streptomyces sp. SID4914</em></a></td><td><code>NCBITaxon:2690267</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690268"><em>Streptomyces sp. SID4915</em></a></td><td><code>NCBITaxon:2690268</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>287</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690269"><em>Streptomyces sp. SID4917</em></a></td><td><code>NCBITaxon:2690269</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690270"><em>Streptomyces sp. SID4919</em></a></td><td><code>NCBITaxon:2690270</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>14</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690271"><em>Streptomyces sp. SID4920</em></a></td><td><code>NCBITaxon:2690271</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>19</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690272"><em>Streptomyces sp. SID4921</em></a></td><td><code>NCBITaxon:2690272</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>43</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690273"><em>Streptomyces sp. SID4923</em></a></td><td><code>NCBITaxon:2690273</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>17</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690274"><em>Streptomyces sp. SID4925</em></a></td><td><code>NCBITaxon:2690274</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>53</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690275"><em>Streptomyces sp. SID4926</em></a></td><td><code>NCBITaxon:2690275</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>25</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2690276"><em>Streptomyces sp. SID4928</em></a></td><td><code>NCBITaxon:2690276</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>79</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690268"><em>Streptomyces sp. SID4915</em></a></td><td><code>NCBITaxon:2690268</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690269"><em>Streptomyces sp. SID4917</em></a></td><td><code>NCBITaxon:2690269</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690270"><em>Streptomyces sp. SID4919</em></a></td><td><code>NCBITaxon:2690270</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690271"><em>Streptomyces sp. SID4920</em></a></td><td><code>NCBITaxon:2690271</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690272"><em>Streptomyces sp. SID4921</em></a></td><td><code>NCBITaxon:2690272</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690273"><em>Streptomyces sp. SID4923</em></a></td><td><code>NCBITaxon:2690273</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690274"><em>Streptomyces sp. SID4925</em></a></td><td><code>NCBITaxon:2690274</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690275"><em>Streptomyces sp. SID4926</em></a></td><td><code>NCBITaxon:2690275</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2690276"><em>Streptomyces sp. SID4928</em></a></td><td><code>NCBITaxon:2690276</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2690277"><em>Streptomyces sp. SID4931</em></a></td><td><code>NCBITaxon:2690277</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="taxon-browser.js?v=434e253832135143"></script>
+<script defer src="taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="index.json.gz">Index JSON.gz</a> · <a href="index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

@@ -1,0 +1,48 @@
+history_version: 1
+target:
+  kind: infrastructure
+  slug: cycle6-stage3-protein-examples
+  path: curation/uniprot_proteins.tsv
+session:
+  id: 20261104T225000Z-Antigravity-c6s3p1
+  timestamp: '2026-11-04T22:50:00Z'
+  actors:
+    - type: ai_agent
+      name: Antigravity
+      model: claude-opus-4-6
+      agent_tool: antigravity
+links:
+  issues:
+    - https://github.com/CultureBotAI/TaxonMech/issues/78
+events:
+  - type: EDIT
+    outcome: changed
+    sections:
+      - uniprot_proteins
+      - causal_graphs
+    summary: >-
+      Expand curation/uniprot_proteins.tsv from 29 to 34 live-verified UniProtKB
+      proteins and wire 11 GENE_OR_PROTEIN nodes and 33 literature-backed causal
+      edges across 11 maintained causal-graph overlays (Cycle 6 Stage 3).
+    details: >-
+      Verified 5 additional reviewed Swiss-Prot (SWISS_PROT) UniProtKB entries against
+      live UniProtKB REST API metadata (release 2026_02) and added them to
+      curation/uniprot_proteins.tsv: UniProtKB:P69783 (PTGA_ECOLI, crr / b2417, 169 aa,
+      CRC64 EA18020745531215, v2, UP:UP000000625, NCBITaxon:83333), UniProtKB:Q00829
+      (PHRA_BACSU, phrA / BSU12440, 44 aa, CRC64 95AA9E07F08D2DCB, v1, UP:UP000001570,
+      NCBITaxon:224308), UniProtKB:P20581 (PQSE_PSEAE, pqsE / PA1000, EC:3.1.2.32,
+      301 aa, CRC64 CB78E9103D8F221C, v1, UP:UP000002438, NCBITaxon:208964),
+      UniProtKB:Q58261 (MTRA_METJA, mtrA / MJ0851, EC:7.2.1.4, 241 aa, CRC64
+      155EAE6418E09B8D, v2, UP:UP000000805, NCBITaxon:243232), and UniProtKB:J9VT33
+      (CUF1_CRYN9, CUF1 / CNAG_07724, 1048 aa, CRC64 66941210664729AD, v1,
+      UP:UP000010091, NCBITaxon:235443). Wired these 5 proteins into 11 maintained
+      overlays in curation/causal_graphs/*.yaml (NCBITaxon:562, NCBITaxon:83333,
+      NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287,
+      NCBITaxon:208964, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:5207, and
+      NCBITaxon:235443), preserving the species vs. strain strain_id binding rule
+      (strain_id populated on NCBITaxon:562, NCBITaxon:1423, NCBITaxon:287,
+      NCBITaxon:2190, and NCBITaxon:243232; omitted on the 6 strain/eukaryotic
+      overlays whose TaxonRecord.strains is empty). Total maintained causal-graph
+      coverage now spans 15 overlays, 34 unique UniProtKB proteins (32 SWISS_PROT,
+      2 TREMBL), 75 GENE_OR_PROTEIN nodes (73 with reference proteome_id), and 246
+      literature-backed causal edges.

@@ -7,33 +7,121 @@
 <link rel="stylesheet" href="style.css">
 <script src="theme-toggle.js"></script>
 <script defer src="vendor/fflate-0.8.2.js"></script>
-<script defer src="compressed-data.js?v=434e253832135143"></script>
+<script defer src="compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="index.html">TaxonMech</a>
   <nav>
     <a href="browse.html">Browse</a>
     <a href="type-strains.html">Type strains</a>
+    <a href="map.html">Text map</a>
     <a href="sources.html">Sources</a>
+    <a href="index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="index.html">TaxonMech</a> › <span>All records</span>
+</nav>
 <h1>All records</h1>
-<section id="taxon-browser" data-domain="" data-typed="false" data-page="2951" data-size="200" data-root="">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
-<p id="taxon-status" role="status">625960 records · page 2951 of 3130.</p>
+<section id="taxon-browser" class="browse-layout" data-domain="" data-typed="false" data-page="2951" data-size="200" data-root="">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA">Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
+<p id="taxon-status" role="status">626048 records · page 2951 of 3131.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="browse-2950.html">Previous</a><a href="browse-2952.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>All records</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="taxon.html?id=NCBITaxon:1866956"><em>uncultured Varunaivibrio sp.</em></a></td><td><code>NCBITaxon:1866956</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:159268"><em>uncultured Veillonella sp.</em></a></td><td><code>NCBITaxon:159268</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>124</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:194923"><em>uncultured Veillonellaceae bacterium</em></a></td><td><code>NCBITaxon:194923</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>62</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:159268"><em>uncultured Veillonella sp.</em></a></td><td><code>NCBITaxon:159268</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>77 (77 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:194923"><em>uncultured Veillonellaceae bacterium</em></a></td><td><code>NCBITaxon:194923</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>50 (50 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2968039"><em>uncultured Velocimicrobium sp.</em></a></td><td><code>NCBITaxon:2968039</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2893040"><em>uncultured Venatoribacter sp.</em></a></td><td><code>NCBITaxon:2893040</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1936173"><em>uncultured Venenivibrio sp.</em></a></td><td><code>NCBITaxon:1936173</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -73,9 +161,9 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:132671"><em>uncultured vent bacterium ML-8</em></a></td><td><code>NCBITaxon:132671</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:132672"><em>uncultured vent bacterium ML-9a</em></a></td><td><code>NCBITaxon:132672</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:132673"><em>uncultured vent bacterium ML-9b</em></a></td><td><code>NCBITaxon:132673</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1827309"><em>uncultured Ventosimonas sp.</em></a></td><td><code>NCBITaxon:1827309</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3032827"><em>uncultured Vermiculatibacterium sp.</em></a></td><td><code>NCBITaxon:3032827</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>38</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:565225"><em>uncultured Verminephrobacter sp.</em></a></td><td><code>NCBITaxon:565225</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1827309"><em>uncultured Ventosimonas sp.</em></a></td><td><code>NCBITaxon:1827309</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3032827"><em>uncultured Vermiculatibacterium sp.</em></a></td><td><code>NCBITaxon:3032827</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:565225"><em>uncultured Verminephrobacter sp.</em></a></td><td><code>NCBITaxon:565225</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2886890"><em>uncultured Veronia sp.</em></a></td><td><code>NCBITaxon:2886890</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3855368"><em>uncultured Verrucolacustridaceae bacterium (SeqCode)</em></a></td><td><code>NCBITaxon:3855368</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3853912"><em>uncultured Verrucolacustris sp. (SeqCode)</em></a></td><td><code>NCBITaxon:3853912</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -106,10 +194,10 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:111703"><em>uncultured Verrucomicrobia MT29</em></a></td><td><code>NCBITaxon:111703</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:111702"><em>uncultured Verrucomicrobia MT56</em></a></td><td><code>NCBITaxon:111702</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:87827"><em>uncultured Verrucomicrobia SA14</em></a></td><td><code>NCBITaxon:87827</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:257465"><em>uncultured Verrucomicrobia subdivision 3 bacterium</em></a></td><td><code>NCBITaxon:257465</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>47</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:257470"><em>uncultured Verrucomicrobiaceae bacterium</em></a></td><td><code>NCBITaxon:257470</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>8</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:412056"><em>uncultured Verrucomicrobiae bacterium</em></a></td><td><code>NCBITaxon:412056</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>65</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:100234"><em>uncultured Verrucomicrobiales bacterium</em></a></td><td><code>NCBITaxon:100234</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>65</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:257465"><em>uncultured Verrucomicrobia subdivision 3 bacterium</em></a></td><td><code>NCBITaxon:257465</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>28 (28 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:257470"><em>uncultured Verrucomicrobiaceae bacterium</em></a></td><td><code>NCBITaxon:257470</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>18 (18 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:412056"><em>uncultured Verrucomicrobiae bacterium</em></a></td><td><code>NCBITaxon:412056</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>247 (247 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:100234"><em>uncultured Verrucomicrobiales bacterium</em></a></td><td><code>NCBITaxon:100234</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>125 (125 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:710995"><em>uncultured Verrucomicrobiales bacterium HF0010_05E02</em></a></td><td><code>NCBITaxon:710995</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:710996"><em>uncultured Verrucomicrobiales bacterium HF0070_30L02</em></a></td><td><code>NCBITaxon:710996</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:723606"><em>uncultured Verrucomicrobiales bacterium HF0130_14P10</em></a></td><td><code>NCBITaxon:723606</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -125,7 +213,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:132515"><em>uncultured Verrucomicrobiales Sva0585</em></a></td><td><code>NCBITaxon:132515</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:132514"><em>uncultured Verrucomicrobiales Sva0700</em></a></td><td><code>NCBITaxon:132514</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:132513"><em>uncultured Verrucomicrobiales Sva0821</em></a></td><td><code>NCBITaxon:132513</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:156588"><em>uncultured Verrucomicrobiota bacterium</em></a></td><td><code>NCBITaxon:156588</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>31</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:156588"><em>uncultured Verrucomicrobiota bacterium</em></a></td><td><code>NCBITaxon:156588</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>361 (361 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:117314"><em>uncultured verrucomicrobium 140ev</em></a></td><td><code>NCBITaxon:117314</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:117306"><em>uncultured verrucomicrobium 159ev</em></a></td><td><code>NCBITaxon:117306</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:117310"><em>uncultured verrucomicrobium 15ev</em></a></td><td><code>NCBITaxon:117310</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -181,7 +269,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2892406"><em>uncultured Vescimonas sp.</em></a></td><td><code>NCBITaxon:2892406</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1766631"><em>uncultured Vespertiliibacter sp.</em></a></td><td><code>NCBITaxon:1766631</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:127962"><em>uncultured Vibrio kps60rc</em></a></td><td><code>NCBITaxon:127962</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:114054"><em>uncultured Vibrio sp.</em></a></td><td><code>NCBITaxon:114054</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>6</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:114054"><em>uncultured Vibrio sp.</em></a></td><td><code>NCBITaxon:114054</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>10 (10 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:89371"><em>uncultured Vibrio sp. &#39;Artemia&#39;</em></a></td><td><code>NCBITaxon:89371</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:141882"><em>uncultured Vibrio sp. HD-2000/12</em></a></td><td><code>NCBITaxon:141882</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:87807"><em>uncultured Vibrio sp. SA16</em></a></td><td><code>NCBITaxon:87807</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -195,15 +283,15 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:710999"><em>uncultured Vibrionales bacterium HF0010_22E23</em></a></td><td><code>NCBITaxon:710999</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1748248"><em>uncultured Vibrionimonas sp.</em></a></td><td><code>NCBITaxon:1748248</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2790950"><em>uncultured Vicinamibacter sp.</em></a></td><td><code>NCBITaxon:2790950</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2790688"><em>uncultured Vicinamibacteraceae bacterium</em></a></td><td><code>NCBITaxon:2790688</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3036250"><em>uncultured Vicinamibacterales bacterium</em></a></td><td><code>NCBITaxon:3036250</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2058172"><em>uncultured Vicingus sp.</em></a></td><td><code>NCBITaxon:2058172</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:385249"><em>uncultured Victivallaceae bacterium</em></a></td><td><code>NCBITaxon:385249</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>9</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:278093"><em>uncultured Victivallales bacterium</em></a></td><td><code>NCBITaxon:278093</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>30</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:354118"><em>uncultured Victivallis sp.</em></a></td><td><code>NCBITaxon:354118</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>30</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2790688"><em>uncultured Vicinamibacteraceae bacterium</em></a></td><td><code>NCBITaxon:2790688</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>24 (24 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3036250"><em>uncultured Vicinamibacterales bacterium</em></a></td><td><code>NCBITaxon:3036250</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>11 (11 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2058172"><em>uncultured Vicingus sp.</em></a></td><td><code>NCBITaxon:2058172</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5 (5 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:385249"><em>uncultured Victivallaceae bacterium</em></a></td><td><code>NCBITaxon:385249</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>14 (14 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:278093"><em>uncultured Victivallales bacterium</em></a></td><td><code>NCBITaxon:278093</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>56 (56 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:354118"><em>uncultured Victivallis sp.</em></a></td><td><code>NCBITaxon:354118</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>15 (15 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2903060"><em>uncultured Vineibacter sp.</em></a></td><td><code>NCBITaxon:2903060</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:131535"><em>uncultured Virgibacillus SIC.42381</em></a></td><td><code>NCBITaxon:131535</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:417355"><em>uncultured Virgibacillus sp.</em></a></td><td><code>NCBITaxon:417355</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>12</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:417355"><em>uncultured Virgibacillus sp.</em></a></td><td><code>NCBITaxon:417355</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:487346"><em>uncultured Virgisporangium sp.</em></a></td><td><code>NCBITaxon:487346</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2687239"><em>uncultured Viridibacterium sp.</em></a></td><td><code>NCBITaxon:2687239</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1945899"><em>uncultured Vitiosangium sp.</em></a></td><td><code>NCBITaxon:1945899</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -219,13 +307,13 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1331727"><em>uncultured Wandonia sp.</em></a></td><td><code>NCBITaxon:1331727</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:455073"><em>uncultured Wautersiella sp.</em></a></td><td><code>NCBITaxon:455073</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:278062"><em>uncultured WCHB1 bacterium</em></a></td><td><code>NCBITaxon:278062</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1161389"><em>uncultured Weeksella sp.</em></a></td><td><code>NCBITaxon:1161389</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>8</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2837631"><em>uncultured Weeksellaceae bacterium</em></a></td><td><code>NCBITaxon:2837631</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>10</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:253243"><em>uncultured Weissella sp.</em></a></td><td><code>NCBITaxon:253243</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>147</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1161389"><em>uncultured Weeksella sp.</em></a></td><td><code>NCBITaxon:1161389</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2837631"><em>uncultured Weeksellaceae bacterium</em></a></td><td><code>NCBITaxon:2837631</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>19 (19 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:253243"><em>uncultured Weissella sp.</em></a></td><td><code>NCBITaxon:253243</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4 (4 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:904957"><em>uncultured Wenxinia sp.</em></a></td><td><code>NCBITaxon:904957</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1703918"><em>uncultured Wenyingzhuangia sp.</em></a></td><td><code>NCBITaxon:1703918</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1676145"><em>uncultured Wenzhouxiangella sp.</em></a></td><td><code>NCBITaxon:1676145</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1983303"><em>uncultured Wenzhouxiangellaceae bacterium</em></a></td><td><code>NCBITaxon:1983303</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1676145"><em>uncultured Wenzhouxiangella sp.</em></a></td><td><code>NCBITaxon:1676145</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>13 (13 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1983303"><em>uncultured Wenzhouxiangellaceae bacterium</em></a></td><td><code>NCBITaxon:1983303</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>10 (10 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:645656"><em>uncultured Westiellopsis sp.</em></a></td><td><code>NCBITaxon:645656</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:904505"><em>uncultured Wigglesworthia sp.</em></a></td><td><code>NCBITaxon:904505</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:259311"><em>uncultured Williamsia sp.</em></a></td><td><code>NCBITaxon:259311</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
@@ -233,12 +321,15 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:3373569"><em>uncultured Williamwhitmaniaceae bacterium</em></a></td><td><code>NCBITaxon:3373569</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="taxon-browser.js?v=434e253832135143"></script>
+<script defer src="taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="index.json.gz">Index JSON.gz</a> · <a href="index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

@@ -7,37 +7,125 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../theme-toggle.js"></script>
 <script defer src="../vendor/fflate-0.8.2.js"></script>
-<script defer src="../compressed-data.js?v=434e253832135143"></script>
+<script defer src="../compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="../index.html">TaxonMech</a>
   <nav>
     <a href="../browse.html">Browse</a>
     <a href="../type-strains.html">Type strains</a>
+    <a href="../map.html">Text map</a>
     <a href="../sources.html">Sources</a>
+    <a href="../index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../index.html">TaxonMech</a> › <span>Bacteria</span>
+</nav>
 <h1>Bacteria</h1>
 <p class="lede">Species and infraspecific taxa under NCBITaxon:2, including uncultured and environmental taxa.</p>
-<section id="taxon-browser" data-domain="BACTERIA" data-typed="false" data-page="1354" data-size="200" data-root="../">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="BACTERIA" data-typed="false" data-page="1354" data-size="200" data-root="../">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="../browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA" selected>Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">605695 records · page 1354 of 3029.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="../domain/bacteria-1353.html">Previous</a><a href="../domain/bacteria-1355.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>Bacteria</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="../taxon.html?id=NCBITaxon:220709"><em>Ketogulonicigenium sp. DY1</em></a></td><td><code>NCBITaxon:220709</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1356478"><em>Ketogulonicigenium sp. DYW5</em></a></td><td><code>NCBITaxon:1356478</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:207339"><em>Ketogulonicigenium sp. V.6</em></a></td><td><code>NCBITaxon:207339</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:92945"><em>Ketogulonicigenium vulgare</em></a></td><td><code>NCBITaxon:92945</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>6</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:759362"><em>Ketogulonicigenium vulgare WSH-001</em></a></td><td><code>NCBITaxon:759362</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>6</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:880591"><em>Ketogulonicigenium vulgare Y25</em></a></td><td><code>NCBITaxon:880591</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>6</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:92945"><em>Ketogulonicigenium vulgare</em></a></td><td><code>NCBITaxon:92945</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:759362"><em>Ketogulonicigenium vulgare WSH-001</em></a></td><td><code>NCBITaxon:759362</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:880591"><em>Ketogulonicigenium vulgare Y25</em></a></td><td><code>NCBITaxon:880591</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:349550"><em>Khafr(Iran) Almond witches&#39;-broom phytoplasma</em></a></td><td><code>NCBITaxon:349550</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3028066"><em>Khargia indica</em></a></td><td><code>NCBITaxon:3028066</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1842052"><em>Khargia indica LBK</em></a></td><td><code>NCBITaxon:1842052</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -51,19 +139,19 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:3143087"><em>Khargia sp. DLS3W</em></a></td><td><code>NCBITaxon:3143087</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3143088"><em>Khargia sp. DLS6W</em></a></td><td><code>NCBITaxon:3143088</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3143086"><em>Khargia sp. DLS7W</em></a></td><td><code>NCBITaxon:3143086</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1871001"><em>Khoudiadiopia massiliensis</em></a></td><td><code>NCBITaxon:1871001</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1871001"><em>Khoudiadiopia massiliensis</em></a></td><td><code>NCBITaxon:1871001</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2033615"><em>Khoudiadiopia sp.</em></a></td><td><code>NCBITaxon:2033615</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:381614"><em>Khuzistan(Iran) sugarcane white leaf phytoplasma</em></a></td><td><code>NCBITaxon:381614</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2030"><em>Kibdelosporangium aridum</em></a></td><td><code>NCBITaxon:2030</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2030"><em>Kibdelosporangium aridum</em></a></td><td><code>NCBITaxon:2030</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:145995"><em>Kibdelosporangium aridum subsp. aridum</em></a></td><td><code>NCBITaxon:145995</code></td><td>SUBSPECIES</td><td>BACTERIA</td><td>2</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:145996"><em>Kibdelosporangium aridum subsp. largum</em></a></td><td><code>NCBITaxon:145996</code></td><td>SUBSPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:145996"><em>Kibdelosporangium aridum subsp. largum</em></a></td><td><code>NCBITaxon:145996</code></td><td>SUBSPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1365924"><em>Kibdelosporangium banguiense</em></a></td><td><code>NCBITaxon:1365924</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1882231"><em>Kibdelosporangium kanagawaense</em></a></td><td><code>NCBITaxon:1882231</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1497396"><em>Kibdelosporangium lantanae</em></a></td><td><code>NCBITaxon:1497396</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1873421"><em>Kibdelosporangium metalli</em></a></td><td><code>NCBITaxon:1873421</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2698649"><em>Kibdelosporangium persicum</em></a></td><td><code>NCBITaxon:2698649</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:211113"><em>Kibdelosporangium philippinense</em></a></td><td><code>NCBITaxon:211113</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:860235"><em>Kibdelosporangium phytohabitans</em></a></td><td><code>NCBITaxon:860235</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2698649"><em>Kibdelosporangium persicum</em></a></td><td><code>NCBITaxon:2698649</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:211113"><em>Kibdelosporangium philippinense</em></a></td><td><code>NCBITaxon:211113</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:860235"><em>Kibdelosporangium phytohabitans</em></a></td><td><code>NCBITaxon:860235</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1882232"><em>Kibdelosporangium rhizosphaerae</em></a></td><td><code>NCBITaxon:1882232</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1882233"><em>Kibdelosporangium rhizovicinum</em></a></td><td><code>NCBITaxon:1882233</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1871182"><em>Kibdelosporangium sp.</em></a></td><td><code>NCBITaxon:1871182</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -86,9 +174,9 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1550907"><em>Kiloniella antarctica</em></a></td><td><code>NCBITaxon:1550907</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:454162"><em>Kiloniella laminariae</em></a></td><td><code>NCBITaxon:454162</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1122135"><em>Kiloniella laminariae DSM 19542</em></a></td><td><code>NCBITaxon:1122135</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1549748"><em>Kiloniella litopenaei</em></a></td><td><code>NCBITaxon:1549748</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1938558"><em>Kiloniella majae</em></a></td><td><code>NCBITaxon:1938558</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1938587"><em>Kiloniella sp.</em></a></td><td><code>NCBITaxon:1938587</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1549748"><em>Kiloniella litopenaei</em></a></td><td><code>NCBITaxon:1549748</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1938558"><em>Kiloniella majae</em></a></td><td><code>NCBITaxon:1938558</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1938587"><em>Kiloniella sp.</em></a></td><td><code>NCBITaxon:1938587</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>4 (4 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1713283"><em>Kiloniella sp. AU527</em></a></td><td><code>NCBITaxon:1713283</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3136724"><em>Kiloniella sp. b19</em></a></td><td><code>NCBITaxon:3136724</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1673312"><em>Kiloniella sp. B701</em></a></td><td><code>NCBITaxon:1673312</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -97,26 +185,26 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1859400"><em>Kiloniella sp. KC76</em></a></td><td><code>NCBITaxon:1859400</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2829594"><em>Kiloniella sp. SCSIO 12461</em></a></td><td><code>NCBITaxon:2829594</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1489064"><em>Kiloniella spongiae</em></a></td><td><code>NCBITaxon:1489064</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2480820"><em>Kiloniellaceae bacterium</em></a></td><td><code>NCBITaxon:2480820</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>21</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2480820"><em>Kiloniellaceae bacterium</em></a></td><td><code>NCBITaxon:2480820</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>22 (22 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1324675"><em>Kiloniellaceae bacterium EF3B-B119</em></a></td><td><code>NCBITaxon:1324675</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2478489"><em>Kiloniellales bacterium</em></a></td><td><code>NCBITaxon:2478489</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2478489"><em>Kiloniellales bacterium</em></a></td><td><code>NCBITaxon:2478489</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>17 (17 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1866916"><em>Kiloniellales bacterium JGI SC39-B19</em></a></td><td><code>NCBITaxon:1866916</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2708301"><em>Kineobactrum salinum</em></a></td><td><code>NCBITaxon:2708301</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1905677"><em>Kineobactrum sediminis</em></a></td><td><code>NCBITaxon:1905677</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2678531"><em>Kineobactrum sp.</em></a></td><td><code>NCBITaxon:2678531</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3458383"><em>Kineococcus anabasis</em></a></td><td><code>NCBITaxon:3458383</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3591790"><em>Kineococcus arenarius</em></a></td><td><code>NCBITaxon:3591790</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3383128"><em>Kineococcus arenarius subsp. arenarius</em></a></td><td><code>NCBITaxon:3383128</code></td><td>SUBSPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3383140"><em>Kineococcus arenarius subsp. brunneus</em></a></td><td><code>NCBITaxon:3383140</code></td><td>SUBSPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3383128"><em>Kineococcus arenarius subsp. arenarius</em></a></td><td><code>NCBITaxon:3383128</code></td><td>SUBSPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3383140"><em>Kineococcus arenarius subsp. brunneus</em></a></td><td><code>NCBITaxon:3383140</code></td><td>SUBSPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3383127"><em>Kineococcus aridisoli</em></a></td><td><code>NCBITaxon:3383127</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:37633"><em>Kineococcus aurantiacus</em></a></td><td><code>NCBITaxon:37633</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3383145"><em>Kineococcus auxinigenes</em></a></td><td><code>NCBITaxon:3383145</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>8</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:37633"><em>Kineococcus aurantiacus</em></a></td><td><code>NCBITaxon:37633</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3383145"><em>Kineococcus auxinigenes</em></a></td><td><code>NCBITaxon:3383145</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3383124"><em>Kineococcus deserti</em></a></td><td><code>NCBITaxon:3383124</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1181883"><em>Kineococcus endophyticus</em></a></td><td><code>NCBITaxon:1181883</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3383139"><em>Kineococcus esterisolvens</em></a></td><td><code>NCBITaxon:3383139</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>15</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3383139"><em>Kineococcus esterisolvens</em></a></td><td><code>NCBITaxon:3383139</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1070872"><em>Kineococcus glutinatus</em></a></td><td><code>NCBITaxon:1070872</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3383126"><em>Kineococcus gurbantunggutensis</em></a></td><td><code>NCBITaxon:3383126</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:452979"><em>Kineococcus gynurae</em></a></td><td><code>NCBITaxon:452979</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:452979"><em>Kineococcus gynurae</em></a></td><td><code>NCBITaxon:452979</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1637102"><em>Kineococcus gypseus</em></a></td><td><code>NCBITaxon:1637102</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3383125"><em>Kineococcus haloalkalitolerans</em></a></td><td><code>NCBITaxon:3383125</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3234027"><em>Kineococcus halophytocola</em></a></td><td><code>NCBITaxon:3234027</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
@@ -149,9 +237,9 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:83782"><em>Kineococcus-like str. AS3642</em></a></td><td><code>NCBITaxon:83782</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:83783"><em>Kineococcus-like str. AS3650</em></a></td><td><code>NCBITaxon:83783</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3383122"><em>Kineococcus lubricus</em></a></td><td><code>NCBITaxon:3383122</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1660183"><em>Kineococcus mangrovi</em></a></td><td><code>NCBITaxon:1660183</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:131568"><em>Kineococcus radiotolerans</em></a></td><td><code>NCBITaxon:131568</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:266940"><em>Kineococcus radiotolerans SRS30216 = ATCC BAA-149</em></a></td><td><code>NCBITaxon:266940</code></td><td>STRAIN</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1660183"><em>Kineococcus mangrovi</em></a></td><td><code>NCBITaxon:1660183</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:131568"><em>Kineococcus radiotolerans</em></a></td><td><code>NCBITaxon:131568</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:266940"><em>Kineococcus radiotolerans SRS30216 = ATCC BAA-149</em></a></td><td><code>NCBITaxon:266940</code></td><td>STRAIN</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:559628"><em>Kineococcus rhizosphaerae</em></a></td><td><code>NCBITaxon:559628</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2609562"><em>Kineococcus rubinsiae</em></a></td><td><code>NCBITaxon:2609562</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3383123"><em>Kineococcus rugosus</em></a></td><td><code>NCBITaxon:3383123</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
@@ -178,19 +266,19 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:2765869"><em>Kineococcus sp. FJII-L1-CM-PAB2</em></a></td><td><code>NCBITaxon:2765869</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3127484"><em>Kineococcus sp. G2</em></a></td><td><code>NCBITaxon:3127484</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1636660"><em>Kineococcus sp. gb</em></a></td><td><code>NCBITaxon:1636660</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3273394"><em>Kineococcus sp. GCM10028916</em></a></td><td><code>NCBITaxon:3273394</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3273394"><em>Kineococcus sp. GCM10028916</em></a></td><td><code>NCBITaxon:3273394</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1288551"><em>Kineococcus sp. I12A-00884</em></a></td><td><code>NCBITaxon:1288551</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1730384"><em>Kineococcus sp. I15A-00297</em></a></td><td><code>NCBITaxon:1730384</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1759541"><em>Kineococcus sp. J6901</em></a></td><td><code>NCBITaxon:1759541</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1560950"><em>Kineococcus sp. L2B54</em></a></td><td><code>NCBITaxon:1560950</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1147651"><em>Kineococcus sp. LPPA 973</em></a></td><td><code>NCBITaxon:1147651</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2903564"><em>Kineococcus sp. NBC_00420</em></a></td><td><code>NCBITaxon:2903564</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2903564"><em>Kineococcus sp. NBC_00420</em></a></td><td><code>NCBITaxon:2903564</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3155538"><em>Kineococcus sp. NPDC059986</em></a></td><td><code>NCBITaxon:3155538</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1170065"><em>Kineococcus sp. P3717</em></a></td><td><code>NCBITaxon:1170065</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1480890"><em>Kineococcus sp. Pao49</em></a></td><td><code>NCBITaxon:1480890</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:947732"><em>Kineococcus sp. Qarqan6</em></a></td><td><code>NCBITaxon:947732</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:867117"><em>Kineococcus sp. qm6</em></a></td><td><code>NCBITaxon:867117</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3093851"><em>Kineococcus sp. R86509</em></a></td><td><code>NCBITaxon:3093851</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3093851"><em>Kineococcus sp. R86509</em></a></td><td><code>NCBITaxon:3093851</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1360131"><em>Kineococcus sp. Ri2Ps_5081</em></a></td><td><code>NCBITaxon:1360131</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1360231"><em>Kineococcus sp. Ri2Pt_3899</em></a></td><td><code>NCBITaxon:1360231</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1672711"><em>Kineococcus sp. RY30</em></a></td><td><code>NCBITaxon:1672711</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -202,26 +290,26 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:869697"><em>Kineococcus sp. YC-X7</em></a></td><td><code>NCBITaxon:869697</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:566011"><em>Kineococcus sp. YIM 65377</em></a></td><td><code>NCBITaxon:566011</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:451018"><em>Kineococcus tegulae</em></a></td><td><code>NCBITaxon:451018</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2044856"><em>Kineococcus terrestris</em></a></td><td><code>NCBITaxon:2044856</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>2</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2044856"><em>Kineococcus terrestris</em></a></td><td><code>NCBITaxon:2044856</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>2</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2696565"><em>Kineococcus vitellinus</em></a></td><td><code>NCBITaxon:2696565</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:512762"><em>Kineococcus xinjiangensis</em></a></td><td><code>NCBITaxon:512762</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:111564"><em>Kineosphaera limosa</em></a></td><td><code>NCBITaxon:111564</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1184609"><em>Kineosphaera limosa NBRC 100340</em></a></td><td><code>NCBITaxon:1184609</code></td><td>STRAIN</td><td>BACTERIA</td><td>7</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:111564"><em>Kineosphaera limosa</em></a></td><td><code>NCBITaxon:111564</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1184609"><em>Kineosphaera limosa NBRC 100340</em></a></td><td><code>NCBITaxon:1184609</code></td><td>STRAIN</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1214492"><em>Kineosphaera nakaumiensis</em></a></td><td><code>NCBITaxon:1214492</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3100351"><em>Kineosphaera sp.</em></a></td><td><code>NCBITaxon:3100351</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:749753"><em>Kineosphaera sp. 20/05</em></a></td><td><code>NCBITaxon:749753</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:49185"><em>Kineosporia aurantiaca</em></a></td><td><code>NCBITaxon:49185</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>3</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1306174"><em>Kineosporia aurantiaca JCM 3230</em></a></td><td><code>NCBITaxon:1306174</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:49185"><em>Kineosporia aurantiaca</em></a></td><td><code>NCBITaxon:49185</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>3</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1306174"><em>Kineosporia aurantiaca JCM 3230</em></a></td><td><code>NCBITaxon:1306174</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:499548"><em>Kineosporia babensis</em></a></td><td><code>NCBITaxon:499548</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2835133"><em>Kineosporia corallincola</em></a></td><td><code>NCBITaxon:2835133</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:566012"><em>Kineosporia mesophila</em></a></td><td><code>NCBITaxon:566012</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:566012"><em>Kineosporia mesophila</em></a></td><td><code>NCBITaxon:566012</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:499547"><em>Kineosporia mikuniensis</em></a></td><td><code>NCBITaxon:499547</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1307457"><em>Kineosporia mikuniensis JCM 9961</em></a></td><td><code>NCBITaxon:1307457</code></td><td>STRAIN</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:84634"><em>Kineosporia rhamnosa</em></a></td><td><code>NCBITaxon:84634</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>2</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1307454"><em>Kineosporia rhamnosa JCM 9954</em></a></td><td><code>NCBITaxon:1307454</code></td><td>STRAIN</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:84633"><em>Kineosporia rhizophila</em></a></td><td><code>NCBITaxon:84633</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>2</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:84633"><em>Kineosporia rhizophila</em></a></td><td><code>NCBITaxon:84633</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>2</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1307456"><em>Kineosporia rhizophila JCM 9960</em></a></td><td><code>NCBITaxon:1307456</code></td><td>STRAIN</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1871185"><em>Kineosporia sp.</em></a></td><td><code>NCBITaxon:1871185</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>3</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1871185"><em>Kineosporia sp.</em></a></td><td><code>NCBITaxon:1871185</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>3</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:504802"><em>Kineosporia sp. 06-3147</em></a></td><td><code>NCBITaxon:504802</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:554110"><em>Kineosporia sp. 1P06MB</em></a></td><td><code>NCBITaxon:554110</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:877049"><em>Kineosporia sp. 4UM2,2 33</em></a></td><td><code>NCBITaxon:877049</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -234,12 +322,15 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1730387"><em>Kineosporia sp. I13A-01658</em></a></td><td><code>NCBITaxon:1730387</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="../taxon-browser.js?v=434e253832135143"></script>
+<script defer src="../taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="../index.json.gz">Index JSON.gz</a> · <a href="../index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

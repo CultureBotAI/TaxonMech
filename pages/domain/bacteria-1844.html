@@ -7,30 +7,118 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../theme-toggle.js"></script>
 <script defer src="../vendor/fflate-0.8.2.js"></script>
-<script defer src="../compressed-data.js?v=434e253832135143"></script>
+<script defer src="../compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="../index.html">TaxonMech</a>
   <nav>
     <a href="../browse.html">Browse</a>
     <a href="../type-strains.html">Type strains</a>
+    <a href="../map.html">Text map</a>
     <a href="../sources.html">Sources</a>
+    <a href="../index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../index.html">TaxonMech</a> › <span>Bacteria</span>
+</nav>
 <h1>Bacteria</h1>
 <p class="lede">Species and infraspecific taxa under NCBITaxon:2, including uncultured and environmental taxa.</p>
-<section id="taxon-browser" data-domain="BACTERIA" data-typed="false" data-page="1844" data-size="200" data-root="../">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="BACTERIA" data-typed="false" data-page="1844" data-size="200" data-root="../">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="../browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA" selected>Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">605695 records · page 1844 of 3029.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="../domain/bacteria-1843.html">Previous</a><a href="../domain/bacteria-1845.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>Bacteria</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1508948"><em>Pantoea sp. EA_L_69</em></a></td><td><code>NCBITaxon:1508948</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1508949"><em>Pantoea sp. EA_L_73</em></a></td><td><code>NCBITaxon:1508949</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -38,14 +126,14 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1508951"><em>Pantoea sp. EA_L_91</em></a></td><td><code>NCBITaxon:1508951</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1508952"><em>Pantoea sp. EA_L_97</em></a></td><td><code>NCBITaxon:1508952</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1508953"><em>Pantoea sp. EA_L_98</em></a></td><td><code>NCBITaxon:1508953</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3043302"><em>Pantoea sp. EABMAA-21</em></a></td><td><code>NCBITaxon:3043302</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>16</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3043302"><em>Pantoea sp. EABMAA-21</em></a></td><td><code>NCBITaxon:3043302</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1837022"><em>Pantoea sp. EAMC2</em></a></td><td><code>NCBITaxon:1837022</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:648002"><em>Pantoea sp. EB-1</em></a></td><td><code>NCBITaxon:648002</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:595523"><em>Pantoea sp. EC080527_02</em></a></td><td><code>NCBITaxon:595523</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:595524"><em>Pantoea sp. EC080625_04</em></a></td><td><code>NCBITaxon:595524</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2038404"><em>Pantoea sp. EC-SD406</em></a></td><td><code>NCBITaxon:2038404</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1635342"><em>Pantoea sp. EcB2</em></a></td><td><code>NCBITaxon:1635342</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2601251"><em>Pantoea sp. Edef</em></a></td><td><code>NCBITaxon:2601251</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2601251"><em>Pantoea sp. Edef</em></a></td><td><code>NCBITaxon:2601251</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1254716"><em>Pantoea sp. EECC-115</em></a></td><td><code>NCBITaxon:1254716</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1254717"><em>Pantoea sp. EECC-235</em></a></td><td><code>NCBITaxon:1254717</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1254718"><em>Pantoea sp. EECC-265</em></a></td><td><code>NCBITaxon:1254718</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -55,14 +143,14 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1254722"><em>Pantoea sp. EECC-602</em></a></td><td><code>NCBITaxon:1254722</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1254723"><em>Pantoea sp. EECC-90</em></a></td><td><code>NCBITaxon:1254723</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1254724"><em>Pantoea sp. EECC-93</em></a></td><td><code>NCBITaxon:1254724</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3416806"><em>Pantoea sp. EEL5</em></a></td><td><code>NCBITaxon:3416806</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>324</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3416806"><em>Pantoea sp. EEL5</em></a></td><td><code>NCBITaxon:3416806</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1560490"><em>Pantoea sp. EF.B2</em></a></td><td><code>NCBITaxon:1560490</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1683695"><em>Pantoea sp. EKM101V</em></a></td><td><code>NCBITaxon:1683695</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>35</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1683696"><em>Pantoea sp. EKM103V</em></a></td><td><code>NCBITaxon:1683696</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>35</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2708058"><em>Pantoea sp. EKM10T</em></a></td><td><code>NCBITaxon:2708058</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>402</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2708059"><em>Pantoea sp. EKM20T</em></a></td><td><code>NCBITaxon:2708059</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>402</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2708060"><em>Pantoea sp. EKM21T</em></a></td><td><code>NCBITaxon:2708060</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>402</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2708061"><em>Pantoea sp. EKM22T</em></a></td><td><code>NCBITaxon:2708061</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>402</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1683695"><em>Pantoea sp. EKM101V</em></a></td><td><code>NCBITaxon:1683695</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1683696"><em>Pantoea sp. EKM103V</em></a></td><td><code>NCBITaxon:1683696</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2708058"><em>Pantoea sp. EKM10T</em></a></td><td><code>NCBITaxon:2708058</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2708059"><em>Pantoea sp. EKM20T</em></a></td><td><code>NCBITaxon:2708059</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2708060"><em>Pantoea sp. EKM21T</em></a></td><td><code>NCBITaxon:2708060</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2708061"><em>Pantoea sp. EKM22T</em></a></td><td><code>NCBITaxon:2708061</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1716104"><em>Pantoea sp. EM011</em></a></td><td><code>NCBITaxon:1716104</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:593075"><em>Pantoea sp. EM13cb</em></a></td><td><code>NCBITaxon:593075</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:593076"><em>Pantoea sp. EM15cb</em></a></td><td><code>NCBITaxon:593076</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -107,7 +195,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1185816"><em>Pantoea sp. enrichment culture clone WW1_9</em></a></td><td><code>NCBITaxon:1185816</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1185817"><em>Pantoea sp. enrichment culture clone WW3_2-52</em></a></td><td><code>NCBITaxon:1185817</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:660096"><em>Pantoea sp. enrichment culture clone YFZ27</em></a></td><td><code>NCBITaxon:660096</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3141459"><em>Pantoea sp. Ep11b</em></a></td><td><code>NCBITaxon:3141459</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>7</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3141459"><em>Pantoea sp. Ep11b</em></a></td><td><code>NCBITaxon:3141459</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:648003"><em>Pantoea sp. EP-1</em></a></td><td><code>NCBITaxon:648003</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:324137"><em>Pantoea sp. EPE8</em></a></td><td><code>NCBITaxon:324137</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:324072"><em>Pantoea sp. ER</em></a></td><td><code>NCBITaxon:324072</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -140,15 +228,15 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1721020"><em>Pantoea sp. F4</em></a></td><td><code>NCBITaxon:1721020</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1716150"><em>Pantoea sp. F4-12</em></a></td><td><code>NCBITaxon:1716150</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1116751"><em>Pantoea sp. F6-PCAi-T3P21</em></a></td><td><code>NCBITaxon:1116751</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2608025"><em>Pantoea sp. F_11</em></a></td><td><code>NCBITaxon:2608025</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>34</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2608026"><em>Pantoea sp. F_12</em></a></td><td><code>NCBITaxon:2608026</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>34</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2608027"><em>Pantoea sp. F_14</em></a></td><td><code>NCBITaxon:2608027</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>34</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2608028"><em>Pantoea sp. F_15</em></a></td><td><code>NCBITaxon:2608028</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>34</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2608029"><em>Pantoea sp. F_16</em></a></td><td><code>NCBITaxon:2608029</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>34</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2608030"><em>Pantoea sp. F_17</em></a></td><td><code>NCBITaxon:2608030</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>34</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2608031"><em>Pantoea sp. F_18</em></a></td><td><code>NCBITaxon:2608031</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>34</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2608032"><em>Pantoea sp. F_5</em></a></td><td><code>NCBITaxon:2608032</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>34</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2608033"><em>Pantoea sp. F_7</em></a></td><td><code>NCBITaxon:2608033</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>34</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2608025"><em>Pantoea sp. F_11</em></a></td><td><code>NCBITaxon:2608025</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2608026"><em>Pantoea sp. F_12</em></a></td><td><code>NCBITaxon:2608026</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2608027"><em>Pantoea sp. F_14</em></a></td><td><code>NCBITaxon:2608027</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2608028"><em>Pantoea sp. F_15</em></a></td><td><code>NCBITaxon:2608028</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2608029"><em>Pantoea sp. F_16</em></a></td><td><code>NCBITaxon:2608029</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2608030"><em>Pantoea sp. F_17</em></a></td><td><code>NCBITaxon:2608030</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2608031"><em>Pantoea sp. F_18</em></a></td><td><code>NCBITaxon:2608031</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2608032"><em>Pantoea sp. F_5</em></a></td><td><code>NCBITaxon:2608032</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2608033"><em>Pantoea sp. F_7</em></a></td><td><code>NCBITaxon:2608033</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1855427"><em>Pantoea sp. F-92-1</em></a></td><td><code>NCBITaxon:1855427</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1264711"><em>Pantoea sp. FB2011</em></a></td><td><code>NCBITaxon:1264711</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1264712"><em>Pantoea sp. FB22012</em></a></td><td><code>NCBITaxon:1264712</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -161,7 +249,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:2202819"><em>Pantoea sp. FDA00013157</em></a></td><td><code>NCBITaxon:2202819</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2202816"><em>Pantoea sp. FDA00013158</em></a></td><td><code>NCBITaxon:2202816</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2202817"><em>Pantoea sp. FDA00013159</em></a></td><td><code>NCBITaxon:2202817</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1975707"><em>Pantoea sp. FDAARGOS_194</em></a></td><td><code>NCBITaxon:1975707</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>48</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1975707"><em>Pantoea sp. FDAARGOS_194</em></a></td><td><code>NCBITaxon:1975707</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3156621"><em>Pantoea sp. fE0D238</em></a></td><td><code>NCBITaxon:3156621</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3156624"><em>Pantoea sp. fE0H238</em></a></td><td><code>NCBITaxon:3156624</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3156627"><em>Pantoea sp. fE1D238</em></a></td><td><code>NCBITaxon:3156627</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -199,11 +287,11 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:3156635"><em>Pantoea sp. fM3H238</em></a></td><td><code>NCBITaxon:3156635</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3156638"><em>Pantoea sp. fM5D238</em></a></td><td><code>NCBITaxon:3156638</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3156641"><em>Pantoea sp. fM5H238</em></a></td><td><code>NCBITaxon:3156641</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3418558"><em>Pantoea sp. FN0302</em></a></td><td><code>NCBITaxon:3418558</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3418559"><em>Pantoea sp. FN0305</em></a></td><td><code>NCBITaxon:3418559</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3418560"><em>Pantoea sp. FN0307</em></a></td><td><code>NCBITaxon:3418560</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3418558"><em>Pantoea sp. FN0302</em></a></td><td><code>NCBITaxon:3418558</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3418559"><em>Pantoea sp. FN0305</em></a></td><td><code>NCBITaxon:3418559</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3418560"><em>Pantoea sp. FN0307</em></a></td><td><code>NCBITaxon:3418560</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3420380"><em>Pantoea sp. FN060301</em></a></td><td><code>NCBITaxon:3420380</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2608024"><em>Pantoea sp. FN_2b</em></a></td><td><code>NCBITaxon:2608024</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>34</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2608024"><em>Pantoea sp. FN_2b</em></a></td><td><code>NCBITaxon:2608024</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1416788"><em>Pantoea sp. FP4</em></a></td><td><code>NCBITaxon:1416788</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:648007"><em>Pantoea sp. FP-1</em></a></td><td><code>NCBITaxon:648007</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1792887"><em>Pantoea sp. FPBBIH4</em></a></td><td><code>NCBITaxon:1792887</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -212,8 +300,8 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1792890"><em>Pantoea sp. FPBSKH2C</em></a></td><td><code>NCBITaxon:1792890</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:648008"><em>Pantoea sp. FPs-1</em></a></td><td><code>NCBITaxon:648008</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1792891"><em>Pantoea sp. FPSH2</em></a></td><td><code>NCBITaxon:1792891</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2929506"><em>Pantoea sp. Fr+CA_20</em></a></td><td><code>NCBITaxon:2929506</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>43</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2929505"><em>Pantoea sp. Fr-CA_6</em></a></td><td><code>NCBITaxon:2929505</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>402</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2929506"><em>Pantoea sp. Fr+CA_20</em></a></td><td><code>NCBITaxon:2929506</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2929505"><em>Pantoea sp. Fr-CA_6</em></a></td><td><code>NCBITaxon:2929505</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2897651"><em>Pantoea sp. FrLE_24</em></a></td><td><code>NCBITaxon:2897651</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2897650"><em>Pantoea sp. FrLE_4</em></a></td><td><code>NCBITaxon:2897650</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1517666"><em>Pantoea sp. Fse18</em></a></td><td><code>NCBITaxon:1517666</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -230,16 +318,19 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1486782"><em>Pantoea sp. FSGSD2</em></a></td><td><code>NCBITaxon:1486782</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1486783"><em>Pantoea sp. FSGSD4</em></a></td><td><code>NCBITaxon:1486783</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1486784"><em>Pantoea sp. FSGSY13</em></a></td><td><code>NCBITaxon:1486784</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2929507"><em>Pantoea sp. Ft-CA_14</em></a></td><td><code>NCBITaxon:2929507</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>402</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2929508"><em>Pantoea sp. Ft+CA_17</em></a></td><td><code>NCBITaxon:2929508</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>402</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2929507"><em>Pantoea sp. Ft-CA_14</em></a></td><td><code>NCBITaxon:2929507</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2929508"><em>Pantoea sp. Ft+CA_17</em></a></td><td><code>NCBITaxon:2929508</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="../taxon-browser.js?v=434e253832135143"></script>
+<script defer src="../taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="../index.json.gz">Index JSON.gz</a> · <a href="../index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

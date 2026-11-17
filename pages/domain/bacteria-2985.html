@@ -7,30 +7,118 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../theme-toggle.js"></script>
 <script defer src="../vendor/fflate-0.8.2.js"></script>
-<script defer src="../compressed-data.js?v=434e253832135143"></script>
+<script defer src="../compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="../index.html">TaxonMech</a>
   <nav>
     <a href="../browse.html">Browse</a>
     <a href="../type-strains.html">Type strains</a>
+    <a href="../map.html">Text map</a>
     <a href="../sources.html">Sources</a>
+    <a href="../index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../index.html">TaxonMech</a> › <span>Bacteria</span>
+</nav>
 <h1>Bacteria</h1>
 <p class="lede">Species and infraspecific taxa under NCBITaxon:2, including uncultured and environmental taxa.</p>
-<section id="taxon-browser" data-domain="BACTERIA" data-typed="false" data-page="2985" data-size="200" data-root="../">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="BACTERIA" data-typed="false" data-page="2985" data-size="200" data-root="../">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="../browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA" selected>Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">605695 records · page 2985 of 3029.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="../domain/bacteria-2984.html">Previous</a><a href="../domain/bacteria-2986.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>Bacteria</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2607546"><em>Violetonostoc minutum CHAB 5840</em></a></td><td><code>NCBITaxon:2607546</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2607547"><em>Violetonostoc minutum CHAB 5841</em></a></td><td><code>NCBITaxon:2607547</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -39,54 +127,54 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:3020517"><em>Violetonostoc minutum VMNMP1</em></a></td><td><code>NCBITaxon:3020517</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3133715"><em>Violetonostoc sp. 31B-PS</em></a></td><td><code>NCBITaxon:3133715</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3406354"><em>Violetonostoc sp. LEGE 181508</em></a></td><td><code>NCBITaxon:3406354</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2663533"><em>Virgibacillus aidingensis</em></a></td><td><code>NCBITaxon:2663533</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2663533"><em>Virgibacillus aidingensis</em></a></td><td><code>NCBITaxon:2663533</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1337860"><em>Virgibacillus ainsalahensis</em></a></td><td><code>NCBITaxon:1337860</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:698769"><em>Virgibacillus alimentarius</em></a></td><td><code>NCBITaxon:698769</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:698769"><em>Virgibacillus alimentarius</em></a></td><td><code>NCBITaxon:698769</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:469869"><em>Virgibacillus arcticus</em></a></td><td><code>NCBITaxon:469869</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:570945"><em>Virgibacillus byunsanensis</em></a></td><td><code>NCBITaxon:570945</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:171692"><em>Virgibacillus carmonensis</em></a></td><td><code>NCBITaxon:171692</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:411959"><em>Virgibacillus chiguensis</em></a></td><td><code>NCBITaxon:411959</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1917889"><em>Virgibacillus dakarensis</em></a></td><td><code>NCBITaxon:1917889</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:302167"><em>Virgibacillus dokdonensis</em></a></td><td><code>NCBITaxon:302167</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:411959"><em>Virgibacillus chiguensis</em></a></td><td><code>NCBITaxon:411959</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1917889"><em>Virgibacillus dakarensis</em></a></td><td><code>NCBITaxon:1917889</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:302167"><em>Virgibacillus dokdonensis</em></a></td><td><code>NCBITaxon:302167</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2697503"><em>Virgibacillus doumboii</em></a></td><td><code>NCBITaxon:2697503</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1611422"><em>Virgibacillus flavescens</em></a></td><td><code>NCBITaxon:1611422</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1482"><em>Virgibacillus halodenitrificans</em></a></td><td><code>NCBITaxon:1482</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>12</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1196028"><em>Virgibacillus halodenitrificans 1806</em></a></td><td><code>NCBITaxon:1196028</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>12</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1236975"><em>Virgibacillus halodenitrificans JCM 12304</em></a></td><td><code>NCBITaxon:1236975</code></td><td>STRAIN</td><td>BACTERIA</td><td>5</td><td>1</td><td>12</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1482"><em>Virgibacillus halodenitrificans</em></a></td><td><code>NCBITaxon:1482</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1196028"><em>Virgibacillus halodenitrificans 1806</em></a></td><td><code>NCBITaxon:1196028</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1236975"><em>Virgibacillus halodenitrificans JCM 12304</em></a></td><td><code>NCBITaxon:1236975</code></td><td>STRAIN</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1071053"><em>Virgibacillus halotolerans</em></a></td><td><code>NCBITaxon:1071053</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2686091"><em>Virgibacillus ihumii</em></a></td><td><code>NCBITaxon:2686091</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2024554"><em>Virgibacillus indicus</em></a></td><td><code>NCBITaxon:2024554</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:679900"><em>Virgibacillus jeotgali</em></a></td><td><code>NCBITaxon:679900</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:202261"><em>Virgibacillus kekensis</em></a></td><td><code>NCBITaxon:202261</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2685937"><em>Virgibacillus kimchii</em></a></td><td><code>NCBITaxon:2685937</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:578221"><em>Virgibacillus litoralis</em></a></td><td><code>NCBITaxon:578221</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:578221"><em>Virgibacillus litoralis</em></a></td><td><code>NCBITaxon:578221</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:79660"><em>Virgibacillus marismortui</em></a></td><td><code>NCBITaxon:79660</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1936061"><em>Virgibacillus marseillensis</em></a></td><td><code>NCBITaxon:1936061</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1216297"><em>Virgibacillus natechei</em></a></td><td><code>NCBITaxon:1216297</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1216297"><em>Virgibacillus natechei</em></a></td><td><code>NCBITaxon:1216297</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2004408"><em>Virgibacillus ndiopensis</em></a></td><td><code>NCBITaxon:2004408</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:163877"><em>Virgibacillus necropolis</em></a></td><td><code>NCBITaxon:163877</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>18</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1479511"><em>Virgibacillus oceani</em></a></td><td><code>NCBITaxon:1479511</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:163877"><em>Virgibacillus necropolis</em></a></td><td><code>NCBITaxon:163877</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>3 (3 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1479511"><em>Virgibacillus oceani</em></a></td><td><code>NCBITaxon:1479511</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:340172"><em>Virgibacillus olivae</em></a></td><td><code>NCBITaxon:340172</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1473"><em>Virgibacillus pantothenticus</em></a></td><td><code>NCBITaxon:1473</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>8</td><td>31</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1473"><em>Virgibacillus pantothenticus</em></a></td><td><code>NCBITaxon:1473</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>8</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:447201"><em>Virgibacillus permianicus</em></a></td><td><code>NCBITaxon:447201</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2017483"><em>Virgibacillus phasianinus</em></a></td><td><code>NCBITaxon:2017483</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2024555"><em>Virgibacillus profundi</em></a></td><td><code>NCBITaxon:2024555</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:84407"><em>Virgibacillus proomii</em></a></td><td><code>NCBITaxon:84407</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>3</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:447199"><em>Virgibacillus salarius</em></a></td><td><code>NCBITaxon:447199</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>12</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:61016"><em>Virgibacillus salexigens</em></a></td><td><code>NCBITaxon:61016</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>3</td><td>9</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2024555"><em>Virgibacillus profundi</em></a></td><td><code>NCBITaxon:2024555</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:84407"><em>Virgibacillus proomii</em></a></td><td><code>NCBITaxon:84407</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>3</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:447199"><em>Virgibacillus salarius</em></a></td><td><code>NCBITaxon:447199</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:61016"><em>Virgibacillus salexigens</em></a></td><td><code>NCBITaxon:61016</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>3</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2831673"><em>Virgibacillus salidurans</em></a></td><td><code>NCBITaxon:2831673</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:553311"><em>Virgibacillus salinus</em></a></td><td><code>NCBITaxon:553311</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:553311"><em>Virgibacillus salinus</em></a></td><td><code>NCBITaxon:553311</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2831674"><em>Virgibacillus saliphilus</em></a></td><td><code>NCBITaxon:2831674</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:202260"><em>Virgibacillus sediminis</em></a></td><td><code>NCBITaxon:202260</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1499679"><em>Virgibacillus senegalensis</em></a></td><td><code>NCBITaxon:1499679</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:480071"><em>Virgibacillus siamensis</em></a></td><td><code>NCBITaxon:480071</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1872700"><em>Virgibacillus sp.</em></a></td><td><code>NCBITaxon:1872700</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>20</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:480071"><em>Virgibacillus siamensis</em></a></td><td><code>NCBITaxon:480071</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1872700"><em>Virgibacillus sp.</em></a></td><td><code>NCBITaxon:1872700</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>20</td><td>4 (4 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1171906"><em>Virgibacillus sp. 08WSM9-3</em></a></td><td><code>NCBITaxon:1171906</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:511747"><em>Virgibacillus sp. 14B</em></a></td><td><code>NCBITaxon:511747</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:412322"><em>Virgibacillus sp. 171-4.2-CV-H26(h)-06</em></a></td><td><code>NCBITaxon:412322</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3041510"><em>Virgibacillus sp. 179-BFC.A</em></a></td><td><code>NCBITaxon:3041510</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:163878"><em>Virgibacillus sp. 19492</em></a></td><td><code>NCBITaxon:163878</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2834410"><em>Virgibacillus sp. 19R1-5</em></a></td><td><code>NCBITaxon:2834410</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>31</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2834410"><em>Virgibacillus sp. 19R1-5</em></a></td><td><code>NCBITaxon:2834410</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1231841"><em>Virgibacillus sp. 1R-9</em></a></td><td><code>NCBITaxon:1231841</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:412323"><em>Virgibacillus sp. 216-4.1-LH-Heh(s)-11</em></a></td><td><code>NCBITaxon:412323</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:889670"><em>Virgibacillus sp. 21F07-MB1-5</em></a></td><td><code>NCBITaxon:889670</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -98,9 +186,9 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:458227"><em>Virgibacillus sp. 30-8</em></a></td><td><code>NCBITaxon:458227</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1784881"><em>Virgibacillus sp. 37T3E-C</em></a></td><td><code>NCBITaxon:1784881</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1655053"><em>Virgibacillus sp. 434</em></a></td><td><code>NCBITaxon:1655053</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1911587"><em>Virgibacillus sp. 6R</em></a></td><td><code>NCBITaxon:1911587</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>31</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1911587"><em>Virgibacillus sp. 6R</em></a></td><td><code>NCBITaxon:1911587</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1604348"><em>Virgibacillus sp. 6SSA3</em></a></td><td><code>NCBITaxon:1604348</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2022548"><em>Virgibacillus sp. 7505</em></a></td><td><code>NCBITaxon:2022548</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2022548"><em>Virgibacillus sp. 7505</em></a></td><td><code>NCBITaxon:2022548</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1479509"><em>Virgibacillus sp. 76B</em></a></td><td><code>NCBITaxon:1479509</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1479510"><em>Virgibacillus sp. 76S</em></a></td><td><code>NCBITaxon:1479510</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1002187"><em>Virgibacillus sp. 7(2011)</em></a></td><td><code>NCBITaxon:1002187</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -116,7 +204,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1834674"><em>Virgibacillus sp. ADB_BD138</em></a></td><td><code>NCBITaxon:1834674</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1813456"><em>Virgibacillus sp. ADMK15</em></a></td><td><code>NCBITaxon:1813456</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1813457"><em>Virgibacillus sp. ADMK55</em></a></td><td><code>NCBITaxon:1813457</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2812055"><em>Virgibacillus sp. AGTR</em></a></td><td><code>NCBITaxon:2812055</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>12</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2812055"><em>Virgibacillus sp. AGTR</em></a></td><td><code>NCBITaxon:2812055</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3097264"><em>Virgibacillus sp. AK217</em></a></td><td><code>NCBITaxon:3097264</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3097265"><em>Virgibacillus sp. AK219</em></a></td><td><code>NCBITaxon:3097265</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1985294"><em>Virgibacillus sp. AK90</em></a></td><td><code>NCBITaxon:1985294</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -152,9 +240,9 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1617208"><em>Virgibacillus sp. Bac318R</em></a></td><td><code>NCBITaxon:1617208</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1617209"><em>Virgibacillus sp. Bac324R</em></a></td><td><code>NCBITaxon:1617209</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1617210"><em>Virgibacillus sp. Bac327R</em></a></td><td><code>NCBITaxon:1617210</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2419841"><em>Virgibacillus sp. Bac330</em></a></td><td><code>NCBITaxon:2419841</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2419841"><em>Virgibacillus sp. Bac330</em></a></td><td><code>NCBITaxon:2419841</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1617211"><em>Virgibacillus sp. Bac330R</em></a></td><td><code>NCBITaxon:1617211</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2419842"><em>Virgibacillus sp. Bac332</em></a></td><td><code>NCBITaxon:2419842</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>12</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2419842"><em>Virgibacillus sp. Bac332</em></a></td><td><code>NCBITaxon:2419842</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1617212"><em>Virgibacillus sp. Bac332R</em></a></td><td><code>NCBITaxon:1617212</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1617213"><em>Virgibacillus sp. Bac333R</em></a></td><td><code>NCBITaxon:1617213</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1617214"><em>Virgibacillus sp. Bac376R</em></a></td><td><code>NCBITaxon:1617214</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -175,7 +263,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:588245"><em>Virgibacillus sp. cc9</em></a></td><td><code>NCBITaxon:588245</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1040850"><em>Virgibacillus sp. CJPL-12</em></a></td><td><code>NCBITaxon:1040850</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1156368"><em>Virgibacillus sp. CM1</em></a></td><td><code>NCBITaxon:1156368</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1354277"><em>Virgibacillus sp. CM-4</em></a></td><td><code>NCBITaxon:1354277</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>9</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1354277"><em>Virgibacillus sp. CM-4</em></a></td><td><code>NCBITaxon:1354277</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:391401"><em>Virgibacillus sp. CO40</em></a></td><td><code>NCBITaxon:391401</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1097409"><em>Virgibacillus sp. CP7B3</em></a></td><td><code>NCBITaxon:1097409</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1635004"><em>Virgibacillus sp. CT-5</em></a></td><td><code>NCBITaxon:1635004</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -234,12 +322,15 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:656196"><em>Virgibacillus sp. Ez223</em></a></td><td><code>NCBITaxon:656196</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="../taxon-browser.js?v=434e253832135143"></script>
+<script defer src="../taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="../index.json.gz">Index JSON.gz</a> · <a href="../index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

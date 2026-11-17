@@ -7,67 +7,155 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../theme-toggle.js"></script>
 <script defer src="../vendor/fflate-0.8.2.js"></script>
-<script defer src="../compressed-data.js?v=434e253832135143"></script>
+<script defer src="../compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="../index.html">TaxonMech</a>
   <nav>
     <a href="../browse.html">Browse</a>
     <a href="../type-strains.html">Type strains</a>
+    <a href="../map.html">Text map</a>
     <a href="../sources.html">Sources</a>
+    <a href="../index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../index.html">TaxonMech</a> › <span>Bacteria</span>
+</nav>
 <h1>Bacteria</h1>
 <p class="lede">Species and infraspecific taxa under NCBITaxon:2, including uncultured and environmental taxa.</p>
-<section id="taxon-browser" data-domain="BACTERIA" data-typed="false" data-page="1881" data-size="200" data-root="../">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="BACTERIA" data-typed="false" data-page="1881" data-size="200" data-root="../">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="../browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA" selected>Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">605695 records · page 1881 of 3029.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="../domain/bacteria-1880.html">Previous</a><a href="../domain/bacteria-1882.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>Bacteria</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3232566"><em>Peribacillus sp. P4_C12</em></a></td><td><code>NCBITaxon:3232566</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3232578"><em>Peribacillus sp. P4_D6</em></a></td><td><code>NCBITaxon:3232578</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3243042"><em>Peribacillus sp. Perisp51</em></a></td><td><code>NCBITaxon:3243042</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3569834"><em>Peribacillus sp. QJM3NY_7</em></a></td><td><code>NCBITaxon:3569834</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3073271"><em>Peribacillus sp. R9-11</em></a></td><td><code>NCBITaxon:3073271</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3242679"><em>Peribacillus sp. RS7</em></a></td><td><code>NCBITaxon:3242679</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>7</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3384451"><em>Peribacillus sp. S4</em></a></td><td><code>NCBITaxon:3384451</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>160</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3073271"><em>Peribacillus sp. R9-11</em></a></td><td><code>NCBITaxon:3073271</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3242679"><em>Peribacillus sp. RS7</em></a></td><td><code>NCBITaxon:3242679</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3384451"><em>Peribacillus sp. S4</em></a></td><td><code>NCBITaxon:3384451</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3085813"><em>Peribacillus sp. SIMBA_075</em></a></td><td><code>NCBITaxon:3085813</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3704085"><em>Peribacillus sp. SRI_006</em></a></td><td><code>NCBITaxon:3704085</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3688100"><em>Peribacillus sp. TE19612</em></a></td><td><code>NCBITaxon:3688100</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2798481"><em>Peribacillus sp. TH14</em></a></td><td><code>NCBITaxon:2798481</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2798482"><em>Peribacillus sp. TH16</em></a></td><td><code>NCBITaxon:2798482</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2798483"><em>Peribacillus sp. TH24</em></a></td><td><code>NCBITaxon:2798483</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2798484"><em>Peribacillus sp. TH27</em></a></td><td><code>NCBITaxon:2798484</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2798481"><em>Peribacillus sp. TH14</em></a></td><td><code>NCBITaxon:2798481</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2798482"><em>Peribacillus sp. TH16</em></a></td><td><code>NCBITaxon:2798482</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2798483"><em>Peribacillus sp. TH24</em></a></td><td><code>NCBITaxon:2798483</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2798484"><em>Peribacillus sp. TH27</em></a></td><td><code>NCBITaxon:2798484</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3710110"><em>Peribacillus sp. UHC1362</em></a></td><td><code>NCBITaxon:3710110</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3710111"><em>Peribacillus sp. UHC1475</em></a></td><td><code>NCBITaxon:3710111</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3042277"><em>Peribacillus sp. V2I11</em></a></td><td><code>NCBITaxon:3042277</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>16</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3366297"><em>Peribacillus sp. YIM B13472</em></a></td><td><code>NCBITaxon:3366297</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>19</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3366300"><em>Peribacillus sp. YIM B13477</em></a></td><td><code>NCBITaxon:3366300</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>160</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3366299"><em>Peribacillus sp. YIM B13481</em></a></td><td><code>NCBITaxon:3366299</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>14</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3366298"><em>Peribacillus sp. YIM B13482</em></a></td><td><code>NCBITaxon:3366298</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>14</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3366296"><em>Peribacillus sp. YIM B13540</em></a></td><td><code>NCBITaxon:3366296</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>14</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3042277"><em>Peribacillus sp. V2I11</em></a></td><td><code>NCBITaxon:3042277</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3366297"><em>Peribacillus sp. YIM B13472</em></a></td><td><code>NCBITaxon:3366297</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3366300"><em>Peribacillus sp. YIM B13477</em></a></td><td><code>NCBITaxon:3366300</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3366299"><em>Peribacillus sp. YIM B13481</em></a></td><td><code>NCBITaxon:3366299</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3366298"><em>Peribacillus sp. YIM B13482</em></a></td><td><code>NCBITaxon:3366298</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3366296"><em>Peribacillus sp. YIM B13540</em></a></td><td><code>NCBITaxon:3366296</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3144759"><em>Peribacillus sp. Z2-18</em></a></td><td><code>NCBITaxon:3144759</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3459282"><em>Peribacillus suis</em></a></td><td><code>NCBITaxon:3459282</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2652445"><em>Peribacillus tepidiphilus</em></a></td><td><code>NCBITaxon:2652445</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2652445"><em>Peribacillus tepidiphilus</em></a></td><td><code>NCBITaxon:2652445</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2762011"><em>&#39;Pericampylus glaucus&#39; witches&#39;-broom phytoplasma</em></a></td><td><code>NCBITaxon:2762011</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2793217"><em>&#39;Perilla frutescens&#39; witches&#39;-broom phytoplasma</em></a></td><td><code>NCBITaxon:2793217</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:268404"><em>Peristeroidobacter agariperforans</em></a></td><td><code>NCBITaxon:268404</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2497877"><em>Peristeroidobacter soli</em></a></td><td><code>NCBITaxon:2497877</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:504936"><em>Periweissella beninensis</em></a></td><td><code>NCBITaxon:504936</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:504936"><em>Periweissella beninensis</em></a></td><td><code>NCBITaxon:504936</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2506420"><em>Periweissella cryptocerci</em></a></td><td><code>NCBITaxon:2506420</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1070421"><em>Periweissella fabalis</em></a></td><td><code>NCBITaxon:1070421</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:546157"><em>Periweissella fabaria</em></a></td><td><code>NCBITaxon:546157</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:467997"><em>Periweissella ghanensis</em></a></td><td><code>NCBITaxon:467997</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1070421"><em>Periweissella fabalis</em></a></td><td><code>NCBITaxon:1070421</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:546157"><em>Periweissella fabaria</em></a></td><td><code>NCBITaxon:546157</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:467997"><em>Periweissella ghanensis</em></a></td><td><code>NCBITaxon:467997</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1387289"><em>Periwinkle (India) phytoplasma</em></a></td><td><code>NCBITaxon:1387289</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:619518"><em>Periwinkle leaf yellowing phytoplasma</em></a></td><td><code>NCBITaxon:619518</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>21</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:619518"><em>Periwinkle leaf yellowing phytoplasma</em></a></td><td><code>NCBITaxon:619518</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:137854"><em>Periwinkle little leaf phytoplasma</em></a></td><td><code>NCBITaxon:137854</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:996654"><em>Periwinkle phyllody phytoplasma</em></a></td><td><code>NCBITaxon:996654</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:563692"><em>Periwinkle phytoplasma</em></a></td><td><code>NCBITaxon:563692</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -76,12 +164,12 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:230660"><em>Periwinkle witches&#39;-broom phytoplasma</em></a></td><td><code>NCBITaxon:230660</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:498269"><em>Periwinkle yellows phytoplasma</em></a></td><td><code>NCBITaxon:498269</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:426454"><em>Perkinsiella saccharicida phytoplasma</em></a></td><td><code>NCBITaxon:426454</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2715279"><em>Perlabentimonas gracilis</em></a></td><td><code>NCBITaxon:2715279</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2866218"><em>Perlabentimonas sp.</em></a></td><td><code>NCBITaxon:2866218</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2715279"><em>Perlabentimonas gracilis</em></a></td><td><code>NCBITaxon:2715279</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2866218"><em>Perlabentimonas sp.</em></a></td><td><code>NCBITaxon:2866218</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1852776"><em>Perlucidibaca aquatica</em></a></td><td><code>NCBITaxon:1852776</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:392589"><em>Perlucidibaca piscinae</em></a></td><td><code>NCBITaxon:392589</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1122951"><em>Perlucidibaca piscinae DSM 21586</em></a></td><td><code>NCBITaxon:1122951</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2020467"><em>Perlucidibaca sp.</em></a></td><td><code>NCBITaxon:2020467</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>9</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2020467"><em>Perlucidibaca sp.</em></a></td><td><code>NCBITaxon:2020467</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3 (3 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1678443"><em>Perlucidibaca sp. 2D33</em></a></td><td><code>NCBITaxon:1678443</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1084625"><em>Perlucidibaca sp. enrichment culture clone Y228</em></a></td><td><code>NCBITaxon:1084625</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1793930"><em>Perlucidibaca sp. K153</em></a></td><td><code>NCBITaxon:1793930</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -123,9 +211,9 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:247265"><em>permafrost bacterium DT-IV28</em></a></td><td><code>NCBITaxon:247265</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:247266"><em>permafrost bacterium DT-IV29</em></a></td><td><code>NCBITaxon:247266</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:247254"><em>permafrost bacterium DT-IX13</em></a></td><td><code>NCBITaxon:247254</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1510150"><em>Permianibacter aggregans</em></a></td><td><code>NCBITaxon:1510150</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1510150"><em>Permianibacter aggregans</em></a></td><td><code>NCBITaxon:1510150</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2738515"><em>Permianibacter fluminis</em></a></td><td><code>NCBITaxon:2738515</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1971231"><em>Permianibacter sp.</em></a></td><td><code>NCBITaxon:1971231</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1971231"><em>Permianibacter sp.</em></a></td><td><code>NCBITaxon:1971231</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4 (4 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3853885"><em>Pernthalerella aquatica (SeqCode)</em></a></td><td><code>NCBITaxon:3853885</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3853887"><em>Pernthalerella communis (SeqCode)</em></a></td><td><code>NCBITaxon:3853887</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3853886"><em>Pernthalerella lacunae (SeqCode)</em></a></td><td><code>NCBITaxon:3853886</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -134,8 +222,8 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:182900"><em>Persephonella guaymasensis</em></a></td><td><code>NCBITaxon:182900</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:198703"><em>Persephonella hydrogeniphila</em></a></td><td><code>NCBITaxon:198703</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:309805"><em>Persephonella marina</em></a></td><td><code>NCBITaxon:309805</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:123214"><em>Persephonella marina EX-H1</em></a></td><td><code>NCBITaxon:123214</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2060922"><em>Persephonella sp.</em></a></td><td><code>NCBITaxon:2060922</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>6</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:123214"><em>Persephonella marina EX-H1</em></a></td><td><code>NCBITaxon:123214</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2060922"><em>Persephonella sp.</em></a></td><td><code>NCBITaxon:2060922</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>13 (13 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:445536"><em>Persephonella sp. 0H55-7C-I</em></a></td><td><code>NCBITaxon:445536</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:445537"><em>Persephonella sp. 0H55-7C-S</em></a></td><td><code>NCBITaxon:445537</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:397225"><em>Persephonella sp. 0H55-CRC-S</em></a></td><td><code>NCBITaxon:397225</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -181,7 +269,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1158335"><em>Persephonella sp. IF05-L5</em></a></td><td><code>NCBITaxon:1158335</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1158336"><em>Persephonella sp. IF05-L6</em></a></td><td><code>NCBITaxon:1158336</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1158337"><em>Persephonella sp. IF05-L7</em></a></td><td><code>NCBITaxon:1158337</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1158338"><em>Persephonella sp. IF05-L8</em></a></td><td><code>NCBITaxon:1158338</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1158338"><em>Persephonella sp. IF05-L8</em></a></td><td><code>NCBITaxon:1158338</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1158339"><em>Persephonella sp. KM09-Lau-2</em></a></td><td><code>NCBITaxon:1158339</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1158340"><em>Persephonella sp. KM09-Lau-3</em></a></td><td><code>NCBITaxon:1158340</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1158341"><em>Persephonella sp. KM09-Lau-4</em></a></td><td><code>NCBITaxon:1158341</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -234,12 +322,15 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1274990"><em>Persephonella sp. OT-2</em></a></td><td><code>NCBITaxon:1274990</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="../taxon-browser.js?v=434e253832135143"></script>
+<script defer src="../taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="../index.json.gz">Index JSON.gz</a> · <a href="../index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

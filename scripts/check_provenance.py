@@ -96,6 +96,250 @@ def problems() -> list[str]:
     return failures
 
 
+def causal_graph_provenance_problems(repo_root: Path = REPO_ROOT) -> list[str]:
+    from collections import defaultdict
+
+    from taxonmech.seed import (
+        _taxa_lineage_compatible,
+        _taxon_lineage,
+        load_causal_graphs,
+        load_scope,
+        load_uniprot_proteins,
+        split,
+    )
+
+    failures: list[str] = []
+    raw_dir = repo_root / "data" / "raw"
+    curation_dir = repo_root / "curation"
+    overlays_dir = curation_dir / "causal_graphs"
+    uniprot_path = curation_dir / "uniprot_proteins.tsv"
+    scope_path = curation_dir / "seed_scope.tsv"
+    taxa_path = raw_dir / "ncbitaxon_taxa.tsv"
+    strains_path = raw_dir / "bacdive_strains.tsv"
+
+    try:
+        taxa: dict[str, dict[str, str]] | None = None
+        if taxa_path.exists():
+            with taxa_path.open(newline="", encoding="utf-8") as fh:
+                taxa = {row["taxon_id"]: row for row in csv.DictReader(fh, delimiter="\t")}
+        strains: dict[str, list[dict[str, str]]] | None = None
+        if strains_path.exists():
+            strains = defaultdict(list)
+            with strains_path.open(newline="", encoding="utf-8") as fh:
+                for row in csv.DictReader(fh, delimiter="\t"):
+                    for tid in split(row.get("taxon_ids", "")):
+                        strains[tid].append(row)
+        uniprot_proteins = load_uniprot_proteins(uniprot_path, taxa=taxa)
+        graphs_by_taxon, events_by_taxon = load_causal_graphs(
+            overlays_dir,
+            uniprot_path=uniprot_path,
+            taxa=taxa,
+            strains=strains,
+        )
+        referenced_uniprot = {
+            (node.get("grounding") or "").strip()
+            for graphs in graphs_by_taxon.values()
+            for graph in graphs
+            for node in (graph.get("nodes") or [])
+            if isinstance(node, dict) and node.get("node_type") == "GENE_OR_PROTEIN"
+        }
+        for uid in sorted(set(uniprot_proteins) - referenced_uniprot):
+            failures.append(
+                f"{uniprot_path.relative_to(repo_root)}: {uid} is not referenced by any "
+                f"GENE_OR_PROTEIN node in curation/causal_graphs/*.yaml"
+            )
+        for tid in sorted(graphs_by_taxon):
+            if not events_by_taxon.get(tid):
+                failures.append(
+                    f"causal-graph overlay {tid}: missing or empty 'curation_history'"
+                )
+            for graph in graphs_by_taxon[tid]:
+                gid = (graph.get("graph_id") or "").strip() if isinstance(graph.get("graph_id"), str) else ""
+                host_taxon_nids = {
+                    (n.get("node_id") or "").strip()
+                    for n in (graph.get("nodes") or [])
+                    if isinstance(n, dict)
+                    and n.get("node_type") == "TAXON"
+                    and (n.get("grounding") or "").strip() == tid
+                }
+                if not host_taxon_nids:
+                    failures.append(
+                        f"causal-graph overlay {tid} graph {gid!r}: missing TAXON node grounded to {tid}"
+                    )
+                expressed_nids = {
+                    (e.get("object") or "").strip()
+                    for e in (graph.get("edges") or [])
+                    if isinstance(e, dict)
+                    and (e.get("subject") or "").strip() in host_taxon_nids
+                    and (e.get("predicate_id") or "").strip() == "RO:0002292"
+                }
+                outgoing_subjects = {
+                    (e.get("subject") or "").strip()
+                    for e in (graph.get("edges") or [])
+                    if isinstance(e, dict)
+                }
+                graph_org_tid: str | None = None
+                graph_strain_id: str | None = None
+                for node in graph.get("nodes") or []:
+                    if not isinstance(node, dict):
+                        continue
+                    nid = (node.get("node_id") or "").strip()
+                    n_label = (node.get("label") or "").strip()
+                    n_grounding = (
+                        (node.get("grounding") or "").strip()
+                        if isinstance(node.get("grounding"), str)
+                        else ""
+                    )
+                    if not n_grounding:
+                        failures.append(
+                            f"causal-graph overlay {tid} graph {gid!r} node {nid!r}: "
+                            f"missing 'grounding' CURIE"
+                        )
+                    if node.get("node_type") == "TAXON" and n_grounding:
+                        if n_grounding != tid:
+                            failures.append(
+                                f"causal-graph overlay {tid} graph {gid!r} node {nid!r}: "
+                                f"TAXON grounding {n_grounding!r} != host taxon {tid!r}"
+                            )
+                        if taxa is not None:
+                            expected_t_label = (taxa.get(n_grounding) or {}).get("label", "").strip()
+                            if expected_t_label and n_label != expected_t_label:
+                                failures.append(
+                                    f"causal-graph overlay {tid} graph {gid!r} node {nid!r}: "
+                                    f"TAXON label {n_label!r} != ncbitaxon_taxa.tsv label "
+                                    f"{expected_t_label!r} for {n_grounding}"
+                                )
+                    if node.get("node_type") != "GENE_OR_PROTEIN":
+                        continue
+                    uid = n_grounding
+                    org_tid = (
+                        (node.get("organism_taxon_id") or "").strip()
+                        if isinstance(node.get("organism_taxon_id"), str)
+                        else ""
+                    )
+                    node_strain_id = (
+                        (node.get("strain_id") or "").strip()
+                        if isinstance(node.get("strain_id"), str)
+                        else ""
+                    )
+                    if org_tid:
+                        if graph_org_tid is None:
+                            graph_org_tid = org_tid
+                        elif org_tid != graph_org_tid:
+                            failures.append(
+                                f"causal-graph overlay {tid} graph {gid!r} node {nid!r}: "
+                                f"inconsistent GENE_OR_PROTEIN organism_taxon_id {org_tid!r} != "
+                                f"{graph_org_tid!r} in graph {gid!r}"
+                            )
+                    if node_strain_id:
+                        if graph_strain_id is None:
+                            graph_strain_id = node_strain_id
+                        elif node_strain_id != graph_strain_id:
+                            failures.append(
+                                f"causal-graph overlay {tid} graph {gid!r} node {nid!r}: "
+                                f"inconsistent GENE_OR_PROTEIN strain_id {node_strain_id!r} != "
+                                f"{graph_strain_id!r} in graph {gid!r}"
+                            )
+                    if host_taxon_nids and nid not in expressed_nids:
+                        failures.append(
+                            f"causal-graph overlay {tid} graph {gid!r} node {nid!r}: "
+                            f"GENE_OR_PROTEIN node is not linked from host TAXON node "
+                            f"via RO:0002292 (expresses)"
+                        )
+                    if nid not in outgoing_subjects:
+                        failures.append(
+                            f"causal-graph overlay {tid} graph {gid!r} node {nid!r}: "
+                            f"GENE_OR_PROTEIN node has no outgoing functional/regulatory/causal edge"
+                        )
+                    if strains is not None and taxa is not None:
+                        has_subtree_strain = any(
+                            s_tid in taxa
+                            and (s_tid == tid or tid in _taxon_lineage(taxa, s_tid))
+                            and (not org_tid or _taxa_lineage_compatible(taxa, s_tid, org_tid))
+                            for s_tid, s_rows in strains.items()
+                            if s_rows
+                        )
+                        if has_subtree_strain and not node_strain_id:
+                            failures.append(
+                                f"causal-graph overlay {tid} graph {gid!r} node {nid!r}: "
+                                f"GENE_OR_PROTEIN node missing required 'strain_id' for host taxon "
+                                f"{tid} with subtree BacDive strain"
+                            )
+                    ref = uniprot_proteins.get(uid)
+                    if ref is not None:
+                        full_ref_ecs = [
+                            ec for ec in split(ref.get("ec_numbers", "")) if "-" not in ec
+                        ]
+                        node_ecs = [
+                            x
+                            for x in (node.get("xrefs") or [])
+                            if isinstance(x, str) and x.startswith("EC:") and "-" not in x
+                        ]
+                        if node_ecs != full_ref_ecs:
+                            failures.append(
+                                f"causal-graph overlay {tid} graph {gid!r} node {nid!r}: "
+                                f"full 4-part EC xrefs {node_ecs} != reference {full_ref_ecs} for {uid}"
+                            )
+                for edge in graph.get("edges") or []:
+                    if not isinstance(edge, dict):
+                        continue
+                    eid = (edge.get("edge_id") or "").strip()
+                    pred_id = (
+                        (edge.get("predicate_id") or "").strip()
+                        if isinstance(edge.get("predicate_id"), str)
+                        else ""
+                    )
+                    if not pred_id:
+                        failures.append(
+                            f"causal-graph overlay {tid} graph {gid!r} edge {eid!r}: missing 'predicate_id'"
+                        )
+                    elif (
+                        pred_id == "RO:0002292"
+                        and host_taxon_nids
+                        and (edge.get("subject") or "").strip() not in host_taxon_nids
+                    ):
+                        failures.append(
+                            f"causal-graph overlay {tid} graph {gid!r} edge {eid!r}: "
+                            f"RO:0002292 (expresses) subject {(edge.get('subject') or '').strip()!r} "
+                            f"must be a host TAXON node"
+                        )
+                    for ev in edge.get("evidence") or []:
+                        if isinstance(ev, dict):
+                            has_text = bool(
+                                (ev.get("notes") or "").strip()
+                                or (ev.get("snippet") or "").strip()
+                            )
+                            if not has_text:
+                                failures.append(
+                                    f"causal-graph overlay {tid} graph {gid!r} edge {eid!r}: "
+                                    f"evidence {ev.get('reference')!r} missing 'notes' or 'snippet'"
+                                )
+        if scope_path.exists():
+            scope = load_scope(scope_path)
+            for tid in sorted(graphs_by_taxon):
+                if tid not in scope:
+                    failures.append(
+                        f"causal-graph overlay {tid}: not present in {scope_path.relative_to(repo_root)}"
+                    )
+        if overlays_dir.exists():
+            for overlay_file in sorted(overlays_dir.glob("*.yaml")):
+                data = yaml.safe_load(overlay_file.read_text(encoding="utf-8"))
+                identifier = (
+                    (data.get("identifier") or "").strip()
+                    if isinstance(data, dict) and isinstance(data.get("identifier"), str)
+                    else ""
+                )
+                expected_stem = identifier.replace(":", "_")
+                if identifier and overlay_file.stem != expected_stem:
+                    failures.append(
+                        f"{overlay_file.relative_to(repo_root)}: filename stem {overlay_file.stem!r} "
+                        f"does not match identifier {identifier!r} (expected '{expected_stem}.yaml')"
+                    )
+    except SystemExit as exc:
+        failures.append(str(exc))
+    return failures
+
+
 def main() -> int:
     failures = problems()
     from taxonmech.atb import provenance_problems
@@ -108,6 +352,7 @@ def main() -> int:
     failures.extend(provenance_problems(REPO_ROOT))
     failures.extend(straininfo_problems(REPO_ROOT))
     failures.extend(catalog_problems(REPO_ROOT))
+    failures.extend(causal_graph_provenance_problems(REPO_ROOT))
     # Verify full source projections independently of the smaller biological
     # crosswalks; matching only the overlap must never pass as a source census.
     sum(1 for _ in bacdive_records(REPO_ROOT / "data/bacdive"))

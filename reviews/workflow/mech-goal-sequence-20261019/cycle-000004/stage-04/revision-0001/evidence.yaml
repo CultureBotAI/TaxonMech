@@ -1,0 +1,164 @@
+schema_version: 1.0.0
+repository_key: taxonmech
+github_repository: CultureBotAI/TaxonMech
+run_id: mech-goal-sequence-20261019
+cycle: 4
+stage: 4
+revision: 1
+outcome: completed
+source_revision: 830eb576c1381e73aba1ed284c1ae005c7a5337e
+summary: "Reviewed all 626,048 eligible TaxonRecord YAML files across Bacteria (605,695), Archaea (14,013),\
+  \ Eukaryota (6,331), and other (9) against pinned raw inventories (23,883 legacy in docs/legacy-review-inventory.tsv\
+  \ + 602,165 structured in docs/structured-review-inventory/part-00.tsv..part-13.tsv; 0 unreviewed; 0\
+  \ overlap; 0 unreconciled target_sha256 mismatches) and all 15 records enriched with causal_graphs (161\
+  \ edges across 33 PMIDs) and UniProtKB GENE_OR_PROTEIN nodes (51 nodes across 23 unique accessions\u2014\
+  21 SWISS_PROT and 2 TREMBL\u2014in curation/uniprot_proteins.tsv) across Cycles 2-4 (#155, #156, #162,\
+  \ #163, #181, #183), saved native structured review bundle reviews/structured/20261031T075300Z-cycle4-stage4-corpus-record-review/review.yaml\
+  \ (binding 27 cross-domain and causal-graph exemplar records), verified 4 resolved findings (#76, #83,\
+  \ and both #158 code and documentation/test findings), carried forward 6 unresolved corpus-wide findings\
+  \ (#124/#63, #65, #118/#119, #69, #8, #78), and recorded 1 new schema-documentation finding (schema-guide-missing-causal-node-uniprot-protein-slots\
+  \ under #78) for Cycle 4 Stage 5 grouped remediation."
+previous_evidence:
+  path: reviews/workflow/mech-goal-sequence-20261019/cycle-000003/stage-05/revision-0001/evidence.yaml
+  sha256: 120eb31292da8f565ec0a049c53ec40ddb27e49e92c2d07cb746c9cae1dffbcc
+artifacts:
+- path: reviews/workflow/mech-goal-sequence-20261019/cycle-000004/stage-04/revision-0001/review_report.md
+  kind: review_report
+  sha256: 9e67a3e9c0a24fd6ee71e3a4836f455d7179f6ed3ee2afc1f1d9dc2f79316915
+- path: reviews/workflow/mech-goal-sequence-20261019/cycle-000004/stage-04/revision-0001/review_findings.yaml
+  kind: review_findings
+  sha256: eff23705984f1f859469fe75818ca45ac892d37c5c0bcfbac27a650d055550e4
+- path: reviews/workflow/mech-goal-sequence-20261019/cycle-000004/stage-04/revision-0001/corpus_coverage_summary.json
+  kind: supporting
+  sha256: 2a7590adb55462d8ba1d7c483821359965be8ff149ae1b51c8ac74651160cf53
+findings:
+- finding_id: causal-node-type-enum-and-mech-family-nav-drift
+  status: resolved
+  issue_url: https://github.com/CultureBotAI/TaxonMech/issues/76
+  carried_from: causal-node-type-enum-and-mech-family-nav-drift
+  summary: 'Verified in Cycle 4 Stage 4 that CausalNodeTypeEnum in src/taxonmech/schema/taxonmech.yaml
+    retains the 18-value superset (including RNA, GENETIC_ELEMENT, and ORGANELLE) and that README.md,
+    AGENTS.md (and CLAUDE.md symlink), src/taxonmech/templates/{base,index}.html, and rendered pages include
+    NaturalProductMech (#76, resolved in Cycle 1 Stage 5 PR #151).'
+  disposition: 'Resolved in Cycle 1 Stage 5 (PR #151) under #76 and verified intact in Cycle 4 Stage 4.'
+- finding_id: validate-history-bare-linkml-validate-path
+  status: resolved
+  issue_url: https://github.com/CultureBotAI/TaxonMech/issues/83
+  carried_from: validate-history-bare-linkml-validate-path
+  summary: 'Verified in Cycle 4 Stage 4 that scripts/validate_history.py resolves Path(sys.executable).with_name(''linkml-validate'')
+    before falling back to PATH and passes across all 29 committed history records (#83, resolved in Cycle
+    1 Stage 5 PR #151).'
+  disposition: 'Resolved in Cycle 1 Stage 5 (PR #151) under #83 and verified across all 29 history records
+    in Cycle 4 Stage 4.'
+- finding_id: structured-inventory-verify-target-sha256-post-curation-drift
+  status: resolved
+  issue_url: https://github.com/CultureBotAI/TaxonMech/issues/158
+  carried_from: structured-inventory-verify-target-sha256-post-curation-drift
+  summary: 'Verified in Cycle 4 Stage 4 that scripts/corpus_review_inventory.py and pytest tests/test_corpus_review_inventory.py
+    (9 passed) reconcile post-curation target_sha256 digests across all 602,165 structured-inventory records
+    (including the 10 structured-shard records curated through Cycle 4 Stages 2-3 in PRs #181 and #183)
+    against the latest scientific review bundles in reviews/structured/ without mutating historical append-only
+    review bundles (#158, resolved in Cycle 2 Stage 5 PR #159).'
+  disposition: 'Resolved in Cycle 2 Stage 5 (PR #159) under #158 and verified intact across Cycle 4 Stages
+    2-3 curation updates in Cycle 4 Stage 4.'
+- finding_id: corpus-review-coverage-doc-stale-bundle-inventory-counts
+  status: resolved
+  issue_url: https://github.com/CultureBotAI/TaxonMech/issues/158
+  carried_from: corpus-review-coverage-doc-stale-bundle-inventory-counts
+  summary: 'Verified in Cycle 4 Stage 4 that docs/corpus-review-coverage.md (Sections ''Shard Architecture
+    And Canonical Bundles'' and ''Verification'') documents multi-stage workflow scientific review bundles
+    in reviews/structured/ and the load_latest_target_reviews() post-curation target_sha256 reconciliation
+    contract, and that test_corpus_review_coverage_doc_describes_reconciliation_contract() in tests/test_corpus_review_inventory.py
+    passes (#158, resolved in Cycle 3 Stage 5 PR #165).'
+  disposition: 'Resolved in Cycle 3 Stage 5 (PR #165) under #158 and verified intact in Cycle 4 Stage
+    4.'
+- finding_id: gtdb-closematch-exact-promotion
+  status: open
+  issue_url: https://github.com/CultureBotAI/TaxonMech/issues/124
+  carried_from: gtdb-closematch-exact-promotion
+  summary: 'Across docs/structured-review-inventory/part-00.tsv..part-13.tsv, 95,766 records (74,325 from
+    fan-out clusters; e.g., NCBITaxon:2940590, NCBITaxon:206, and legacy-reviewed NCBITaxon:33952) carry
+    needs_curation because src/taxonmech/seed.py (lines 508-535) promotes skos:closeMatch GTDB species-cluster
+    mappings to EXACT_SYNONYM and top-level xrefs without a 1:1 taxon-identity bridge (#124, #63).'
+  disposition: 'Carry forward to Cycle 4 Stage 5 (resolve_review_findings); requires gating closeMatch
+    promotion in src/taxonmech/seed.py and regenerating 95,766 generated TaxonRecord YAML files and rendered
+    pages (#124, #63).'
+- finding_id: gtdb-polyphyly-suffix-synonym-mangling
+  status: open
+  issue_url: https://github.com/CultureBotAI/TaxonMech/issues/65
+  carried_from: gtdb-polyphyly-suffix-synonym-mangling
+  summary: src/taxonmech/seed.py line 529 replaces all underscores in GTDB labels with spaces via m['gtdb_label'].split('__',
+    1)[-1].replace('_', ' '), mangling 15,704 polyphyly-suffixed GTDB cluster names (e.g., s__Campylobacter_F_sputorum
+    -> 'Campylobacter F sputorum' on NCBITaxon:206 and s__Acetobacterium_woodii_A -> 'Acetobacterium woodii
+    A' on NCBITaxon:33952) into fake trinomials published as EXACT_SYNONYM (#65).
+  disposition: Carry forward to Cycle 4 Stage 5 (resolve_review_findings); requires updating GTDB synonym
+    formatting in src/taxonmech/seed.py and regenerating affected TaxonRecord YAML files (#65).
+- finding_id: gtdb-pooled-broadmatch-attestation-and-note
+  status: open
+  issue_url: https://github.com/CultureBotAI/TaxonMech/issues/118
+  carried_from: gtdb-pooled-broadmatch-attestation-and-note
+  summary: On 6,335 pooled-only GTDB records (e.g., NCBITaxon:3121604 data/taxa/bacteria/acidaminobacteraceae_bacterium.yaml),
+    src/taxonmech/seed.py (lines 636-650) emits the largest pooled species cluster's genome total as the
+    taxon's GTDB GENOME attestation (#118), and across 8,587 pooled GTDB records (209,540 rows, including
+    NCBITaxon:562 and NCBITaxon:3121604) lines 522-524 emit a note stating the reverse of kg-microbe's
+    broadMatch direction (#119).
+  disposition: 'Carry forward to Cycle 4 Stage 5 (resolve_review_findings); requires updating pooled GTDB
+    broadMatch handling in src/taxonmech/seed.py and regenerating 8,587 TaxonRecord YAML files (#118,
+    #119).'
+- finding_id: curation-history-stale-scope-strain-count
+  status: open
+  issue_url: https://github.com/CultureBotAI/TaxonMech/issues/69
+  carried_from: curation-history-stale-scope-strain-count
+  summary: 'SEEDED_FROM_SOURCES curation_history in src/taxonmech/seed.py (lines 691-702) embeds the static
+    strain count from curation/seed_scope.tsv''s reason column (''1861 BacDive strains'' on NCBITaxon:562)
+    instead of the subtree-aggregated strain_count (1975; #69).'
+  disposition: Carry forward to Cycle 4 Stage 5 (resolve_review_findings); requires reconciling curation/seed_scope.tsv
+    reason strings and SEEDED_FROM_SOURCES note generation in src/taxonmech/seed.py (#69).
+- finding_id: upstream-edge-multiplicity-and-subtree-count-scope
+  status: open
+  issue_url: https://github.com/CultureBotAI/TaxonMech/issues/8
+  carried_from: upstream-edge-multiplicity-and-subtree-count-scope
+  summary: Across docs/structured-review-inventory/part-00.tsv..part-13.tsv, 27,118 pass_with_limitations
+    (e.g., NCBITaxon:1435036, NCBITaxon:562, NCBITaxon:1423, NCBITaxon:287) and 30 blocked (e.g., NCBITaxon:209650)
+    records reflect uncommitted upstream kg-microbe raw edge tables for GOLD/MEDIADIVE/MADIN/BACTOTRAITS
+    and direct-only count aggregation for non-BacDive sources (#8; INFRA_TASKS.md taxonmech-infra-0004).
+  disposition: 'Carry forward to Cycle 4 Stage 5 (resolve_review_findings) and Stage 6 (infrastructure)
+    via INFRA_TASKS.md taxonmech-infra-0004 and #8 for upstream edge-table provenance and subtree rollup
+    alignment.'
+- finding_id: mechanism-and-protein-representation-prerequisites
+  status: open
+  issue_url: https://github.com/CultureBotAI/TaxonMech/issues/78
+  carried_from: mechanism-and-protein-representation-prerequisites
+  summary: "Following Cycle 1 Stage 6 (#152), Cycle 2 Stages 2-3 and 6 (#155, #156, #160), Cycle 3 Stages\
+    \ 2-3 and 6 (#162, #163, #168), and Cycle 4 Stages 2-3 (#181, #183), 15 TaxonRecord files (7 Bacteria,\
+    \ 2 Archaea, 6 Eukaryota) carry structurally and provenance-validated causal_graphs (161 edges across\
+    \ 33 PMIDs, 51 GENE_OR_PROTEIN nodes across 23 unique live-verified UniProtKB accessions\u201421 SWISS_PROT\
+    \ and 2 TREMBL\u2014in curation/uniprot_proteins.tsv registered in conf/sources.yaml and validated\
+    \ offline by validate_causal_graph_structure() and validate_causal_graph_proteins()), while the remaining\
+    \ 626,033 of 626,048 records remain without causal_graphs pending bulk kg-microbe data/raw/taxon_trait_edges.tsv\
+    \ extraction (taxonmech-infra-0002) and a corpus-wide data/raw/ UniProtKB Reference Proteomes snapshot\
+    \ (taxonmech-infra-0003; INFRA_TASKS.md; #78)."
+  disposition: 'Carry forward to Cycle 4 Stage 5 (resolve_review_findings) and Stage 6 (infrastructure)
+    via INFRA_TASKS.md (taxonmech-infra-0002, taxonmech-infra-0003) and #78.'
+- finding_id: schema-guide-missing-causal-node-uniprot-protein-slots
+  status: open
+  issue_url: https://github.com/CultureBotAI/TaxonMech/issues/78
+  summary: In docs/SCHEMA.md (line 20), the Mechanism section table row still states only '| Mechanism
+    | CausalGraph / CausalNode / CausalEdge | Same shape as HabitatMech and TraitMech; every edge requires
+    evidence |' and omits the 9 GENE_OR_PROTEIN UniProtKB protein-grounding slots (organism_taxon_id,
+    strain_id, proteome_id, gene_symbol, locus_tag, sequence_length, sequence_crc64, sequence_version,
+    entry_status) and UniProtEntryStatusEnum (SWISS_PROT, TREMBL) added to src/taxonmech/schema/taxonmech.yaml
+    (lines 1222-1271, 1529-1536) and populated across 51 GENE_OR_PROTEIN nodes in 15 TaxonRecord files
+    via curation/causal_graphs/*.yaml and curation/uniprot_proteins.tsv (#78).
+  disposition: Carry forward to Cycle 4 Stage 5 (resolve_review_findings) for direct remediation in docs/SCHEMA.md
+    (#78).
+carry_forward_ids:
+- gtdb-closematch-exact-promotion
+- gtdb-polyphyly-suffix-synonym-mangling
+- gtdb-pooled-broadmatch-attestation-and-note
+- curation-history-stale-scope-strain-count
+- upstream-edge-multiplicity-and-subtree-count-scope
+- mechanism-and-protein-representation-prerequisites
+- schema-guide-missing-causal-node-uniprot-protein-slots
+groups: []
+infra_tasks: []

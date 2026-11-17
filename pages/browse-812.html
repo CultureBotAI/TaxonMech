@@ -7,29 +7,117 @@
 <link rel="stylesheet" href="style.css">
 <script src="theme-toggle.js"></script>
 <script defer src="vendor/fflate-0.8.2.js"></script>
-<script defer src="compressed-data.js?v=434e253832135143"></script>
+<script defer src="compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="index.html">TaxonMech</a>
   <nav>
     <a href="browse.html">Browse</a>
     <a href="type-strains.html">Type strains</a>
+    <a href="map.html">Text map</a>
     <a href="sources.html">Sources</a>
+    <a href="index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="index.html">TaxonMech</a> › <span>All records</span>
+</nav>
 <h1>All records</h1>
-<section id="taxon-browser" data-domain="" data-typed="false" data-page="812" data-size="200" data-root="">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
-<p id="taxon-status" role="status">625960 records · page 812 of 3130.</p>
+<section id="taxon-browser" class="browse-layout" data-domain="" data-typed="false" data-page="812" data-size="200" data-root="">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA">Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
+<p id="taxon-status" role="status">626048 records · page 812 of 3131.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="browse-811.html">Previous</a><a href="browse-813.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>All records</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="taxon.html?id=NCBITaxon:3691817"><em>Bradyrhizobium sp. WSM4873</em></a></td><td><code>NCBITaxon:3691817</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3691818"><em>Bradyrhizobium sp. WSM4874</em></a></td><td><code>NCBITaxon:3691818</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -37,15 +125,15 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1346872"><em>Bradyrhizobium sp. WSR3</em></a></td><td><code>NCBITaxon:1346872</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1165921"><em>Bradyrhizobium sp. wssl4</em></a></td><td><code>NCBITaxon:1165921</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:319023"><em>Bradyrhizobium sp. WU140</em></a></td><td><code>NCBITaxon:319023</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:187029"><em>Bradyrhizobium sp. WU425</em></a></td><td><code>NCBITaxon:187029</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>63</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:187029"><em>Bradyrhizobium sp. WU425</em></a></td><td><code>NCBITaxon:187029</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:319024"><em>Bradyrhizobium sp. WU8</em></a></td><td><code>NCBITaxon:319024</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1387387"><em>Bradyrhizobium sp. WY17</em></a></td><td><code>NCBITaxon:1387387</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3694268"><em>Bradyrhizobium sp. WYCCWR15512</em></a></td><td><code>NCBITaxon:3694268</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3694269"><em>Bradyrhizobium sp. WYCCWR15519</em></a></td><td><code>NCBITaxon:3694269</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3694270"><em>Bradyrhizobium sp. WYCCWR15520</em></a></td><td><code>NCBITaxon:3694270</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3058853"><em>Bradyrhizobium sp. WYCCWR 12677</em></a></td><td><code>NCBITaxon:3058853</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3064203"><em>Bradyrhizobium sp. WYCCWR 12699</em></a></td><td><code>NCBITaxon:3064203</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>8</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3058854"><em>Bradyrhizobium sp. WYCCWR 13022</em></a></td><td><code>NCBITaxon:3058854</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3058853"><em>Bradyrhizobium sp. WYCCWR 12677</em></a></td><td><code>NCBITaxon:3058853</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3064203"><em>Bradyrhizobium sp. WYCCWR 12699</em></a></td><td><code>NCBITaxon:3064203</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3058854"><em>Bradyrhizobium sp. WYCCWR 13022</em></a></td><td><code>NCBITaxon:3058854</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3694918"><em>Bradyrhizobium sp. WYCCWR 15512</em></a></td><td><code>NCBITaxon:3694918</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1809169"><em>Bradyrhizobium sp. X894C</em></a></td><td><code>NCBITaxon:1809169</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1313417"><em>Bradyrhizobium sp. XBV7</em></a></td><td><code>NCBITaxon:1313417</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -60,13 +148,13 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1610270"><em>Bradyrhizobium sp. Y2_3_nodule</em></a></td><td><code>NCBITaxon:1610270</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1610271"><em>Bradyrhizobium sp. Y2_4_nodule</em></a></td><td><code>NCBITaxon:1610271</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2035447"><em>Bradyrhizobium sp. Y36</em></a></td><td><code>NCBITaxon:2035447</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2485167"><em>Bradyrhizobium sp. Y-H1</em></a></td><td><code>NCBITaxon:2485167</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>6</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2485167"><em>Bradyrhizobium sp. Y-H1</em></a></td><td><code>NCBITaxon:2485167</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1638708"><em>Bradyrhizobium sp. Yac1a/Yakouta1S4/INERA84/STM10222</em></a></td><td><code>NCBITaxon:1638708</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1638709"><em>Bradyrhizobium sp. Yac1b1/Yakouta1S5/INERA85/STM10223</em></a></td><td><code>NCBITaxon:1638709</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1638710"><em>Bradyrhizobium sp. Yac1c/Yakouta1S6/INERA86/STM10224</em></a></td><td><code>NCBITaxon:1638710</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1638711"><em>Bradyrhizobium sp. Yac1d/Yakouta1S7/INERA87/STM10225</em></a></td><td><code>NCBITaxon:1638711</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:168167"><em>Bradyrhizobium sp.YB2</em></a></td><td><code>NCBITaxon:168167</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3351346"><em>Bradyrhizobium sp. YCK136</em></a></td><td><code>NCBITaxon:3351346</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>94</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3351346"><em>Bradyrhizobium sp. YCK136</em></a></td><td><code>NCBITaxon:3351346</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1854722"><em>Bradyrhizobium sp. YIC60756</em></a></td><td><code>NCBITaxon:1854722</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1854723"><em>Bradyrhizobium sp. YIC60767</em></a></td><td><code>NCBITaxon:1854723</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1854724"><em>Bradyrhizobium sp. YIC60838</em></a></td><td><code>NCBITaxon:1854724</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -143,30 +231,30 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1445808"><em>Bradyrhizobium sp. zs7</em></a></td><td><code>NCBITaxon:1445808</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1179074"><em>Bradyrhizobium sp. ztm3</em></a></td><td><code>NCBITaxon:1179074</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1179075"><em>Bradyrhizobium sp. zto4</em></a></td><td><code>NCBITaxon:1179075</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1803665"><em>Bradyrhizobium stylosanthis</em></a></td><td><code>NCBITaxon:1803665</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1803665"><em>Bradyrhizobium stylosanthis</em></a></td><td><code>NCBITaxon:1803665</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1549945"><em>Bradyrhizobium subterraneum</em></a></td><td><code>NCBITaxon:1549945</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1404367"><em>Bradyrhizobium symbiodeficiens</em></a></td><td><code>NCBITaxon:1404367</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>7</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:312253"><em>Bradyrhizobium tropiciagri</em></a></td><td><code>NCBITaxon:312253</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3278709"><em>Bradyrhizobium tunisiense</em></a></td><td><code>NCBITaxon:3278709</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1404367"><em>Bradyrhizobium symbiodeficiens</em></a></td><td><code>NCBITaxon:1404367</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:312253"><em>Bradyrhizobium tropiciagri</em></a></td><td><code>NCBITaxon:312253</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>3 (3 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3278709"><em>Bradyrhizobium tunisiense</em></a></td><td><code>NCBITaxon:3278709</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2594946"><em>Bradyrhizobium uaiense</em></a></td><td><code>NCBITaxon:2594946</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1518501"><em>Bradyrhizobium valentinum</em></a></td><td><code>NCBITaxon:1518501</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1518501"><em>Bradyrhizobium valentinum</em></a></td><td><code>NCBITaxon:1518501</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2184019"><em>Bradyrhizobium valentinum bv. lupini</em></a></td><td><code>NCBITaxon:2184019</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1549949"><em>Bradyrhizobium vignae</em></a></td><td><code>NCBITaxon:1549949</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1654716"><em>Bradyrhizobium viridifuturi</em></a></td><td><code>NCBITaxon:1654716</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1549949"><em>Bradyrhizobium vignae</em></a></td><td><code>NCBITaxon:1549949</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1654716"><em>Bradyrhizobium viridifuturi</em></a></td><td><code>NCBITaxon:1654716</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>3 (3 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2736875"><em>Bradyrhizobium xenonodulans</em></a></td><td><code>NCBITaxon:2736875</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:108015"><em>Bradyrhizobium yuanmingense</em></a></td><td><code>NCBITaxon:108015</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>42</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1128326"><em>Bradyrhizobium yuanmingense CCBAU 05623</em></a></td><td><code>NCBITaxon:1128326</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>42</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1128327"><em>Bradyrhizobium yuanmingense CCBAU 25021</em></a></td><td><code>NCBITaxon:1128327</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>42</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1128328"><em>Bradyrhizobium yuanmingense CCBAU 35157</em></a></td><td><code>NCBITaxon:1128328</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>42</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3239388"><em>Bradyrhizobium zaerense</em></a></td><td><code>NCBITaxon:3239388</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1325107"><em>Bradyrhizobium zhanjiangense</em></a></td><td><code>NCBITaxon:1325107</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>8</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2911009"><em>Bradyrhizobium zhengyangense</em></a></td><td><code>NCBITaxon:2911009</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>7</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:108015"><em>Bradyrhizobium yuanmingense</em></a></td><td><code>NCBITaxon:108015</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>3 (3 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1128326"><em>Bradyrhizobium yuanmingense CCBAU 05623</em></a></td><td><code>NCBITaxon:1128326</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1128327"><em>Bradyrhizobium yuanmingense CCBAU 25021</em></a></td><td><code>NCBITaxon:1128327</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1128328"><em>Bradyrhizobium yuanmingense CCBAU 35157</em></a></td><td><code>NCBITaxon:1128328</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3239388"><em>Bradyrhizobium zaerense</em></a></td><td><code>NCBITaxon:3239388</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1325107"><em>Bradyrhizobium zhanjiangense</em></a></td><td><code>NCBITaxon:1325107</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2911009"><em>Bradyrhizobium zhengyangense</em></a></td><td><code>NCBITaxon:2911009</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3454459"><em>Brakhagea aquatica</em></a></td><td><code>NCBITaxon:3454459</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3454458"><em>Brakhagea baltica</em></a></td><td><code>NCBITaxon:3454458</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3454460"><em>Brakhagea lacunae</em></a></td><td><code>NCBITaxon:3454460</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3454461"><em>Brakhagea slesvicensis</em></a></td><td><code>NCBITaxon:3454461</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:908252"><em>Branchiibius cervicis</em></a></td><td><code>NCBITaxon:908252</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:672460"><em>Branchiibius hedensis</em></a></td><td><code>NCBITaxon:672460</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:672460"><em>Branchiibius hedensis</em></a></td><td><code>NCBITaxon:672460</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3100452"><em>Branchiibius sp.</em></a></td><td><code>NCBITaxon:3100452</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1807500"><em>Branchiibius sp. NY16-3462-2</em></a></td><td><code>NCBITaxon:1807500</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1386798"><em>Branchiibius sp. PSY066</em></a></td><td><code>NCBITaxon:1386798</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -188,7 +276,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:3057911"><em>Brasilonema bromeliae P117A</em></a></td><td><code>NCBITaxon:3057911</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3057910"><em>Brasilonema bromeliae RKST 321</em></a></td><td><code>NCBITaxon:3057910</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3057906"><em>Brasilonema bromeliae SAG 39.90</em></a></td><td><code>NCBITaxon:3057906</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:385972"><em>Brasilonema bromeliae SPC951</em></a></td><td><code>NCBITaxon:385972</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:385972"><em>Brasilonema bromeliae SPC951</em></a></td><td><code>NCBITaxon:385972</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1874525"><em>Brasilonema burkei</em></a></td><td><code>NCBITaxon:1874525</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1874566"><em>Brasilonema burkei HA4348-LM4</em></a></td><td><code>NCBITaxon:1874566</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3398311"><em>Brasilonema calcareum</em></a></td><td><code>NCBITaxon:3398311</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -233,12 +321,15 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1521507"><em>Brasilonema hortense SAG 67.81</em></a></td><td><code>NCBITaxon:1521507</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="taxon-browser.js?v=434e253832135143"></script>
+<script defer src="taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="index.json.gz">Index JSON.gz</a> · <a href="index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

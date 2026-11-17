@@ -1,0 +1,60 @@
+# YAML Record Review: Enterobacter sp. A11E
+
+- Repository: CultureBotAI/TaxonMech
+- Record: data/taxa/bacteria/enterobacter_sp_a11e.yaml
+- Started UTC: 2026-09-23T12:39:07Z
+- Finished UTC: 2026-09-23T12:40:33Z
+- Verdict: pass
+
+## Target
+
+- Path: `data/taxa/bacteria/enterobacter_sp_a11e.yaml`
+- Class: `TaxonRecord`
+- Identifier: `NCBITaxon:1008426`
+- Label: `Enterobacter sp. A11E`
+- Rank/domain: `SPECIES` in `BACTERIA`
+- Parent: `NCBITaxon:2608935` (`unclassified Enterobacter`)
+- Grounding/mapping: `EXACT` / `SEEDED`
+- Generated status: generated from committed source inventories under `data/raw/`, `data/atb/`, and `data/straininfo/`; future fixes belong in those maintained inputs or in the seeder, not in `data/taxa/`.
+
+## Validation
+
+- `just validate-strict data/taxa/bacteria/vibrio_sp_jz08sw6.yaml data/taxa/bacteria/enterobacter_sp_a7b.yaml data/taxa/bacteria/enterobacter_sp_a11e.yaml data/taxa/bacteria/enterobacter_sp_aap4.yaml` passed: 4 files scanned, 0 files with errors, 0 total error rows.
+- `just validate data/taxa/bacteria/enterobacter_sp_a11e.yaml` passed with `No issues found`.
+- `just validate-history` was skipped because this read-only review did not add or modify any `history/` decisions.
+- `just validate-products` was skipped because this record has no `causal_graphs` or curator-added graph nodes to check through the product label gate.
+- `just verify-corpus` was skipped for this focused review; earlier full-corpus reproduction over 625,960 records was clean.
+
+## Identity and Grounding
+
+- `data/raw/ncbitaxon_taxa.tsv` has `NCBITaxon:1008426` with label `Enterobacter sp. A11E`, rank `SPECIES`, parent `NCBITaxon:2608935`, genetic code `11`, only `ncbitaxon` in the source list, and snapshot date `2026-09-13`.
+- The YAML preserves the source identity exactly: same ID, same label including the `A11E` isolate text, same parent, same genetic code, and a single NCBI Taxonomy source attestation.
+- The lineage stays under Bacteria, Pseudomonadota, Gammaproteobacteria, Enterobacterales, Enterobacteriaceae, and `Enterobacter`, then ends at NCBI's `unclassified Enterobacter` parent for an unresolved `Enterobacter sp.` placeholder.
+
+## Evidence
+
+- The only material source row found for this exact taxon was `data/raw/ncbitaxon_taxa.tsv` for `NCBITaxon:1008426`, and every populated assertion in the record comes from that row.
+- No LPSN, GTDB, BacDive, GOLD, ATB, or StrainInfo rows were found for the exact NCBI ID or full label, so the absence of `nomenclature`, `taxonomy_mappings`, `xrefs`, `strains`, `genome_records`, and `related_records` is source-supported.
+
+## Completeness
+
+- `strain_count: 0` is correct for a taxon with no BacDive, ATB, or StrainInfo strain rows in the exact ignored-file-aware source search.
+- No optional causal graph or curated overlay is expected for this generated NCBI-only placeholder.
+- The exact ignored-file-aware `find reports/yaml_record_review -maxdepth 1 -type f -name '*-enterobacter_sp_a11e.md'` check found no prior report before this one was written.
+- Ignored-file-aware exact `rg` checks over `data/raw`, `data/atb`, `data/straininfo`, `data/bacdive`, and `data/gold` for `NCBITaxon:1008426` and `Enterobacter sp. A11E` found only the expected NCBI Taxonomy row.
+
+## Findings
+
+None found.
+
+## Recommended Edits
+
+None.
+
+## Follow-up Checks
+
+None beyond the routine next `just verify-corpus` or `just qc` run after future source or seeder edits.
+
+## Additional Notes
+
+- Live NCBI lookup was not run during this batch; the pinned `data/raw/ncbitaxon_taxa.tsv` row is the reproducible local source of truth for the seeded placeholder.

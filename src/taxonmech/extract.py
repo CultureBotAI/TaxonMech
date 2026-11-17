@@ -417,6 +417,50 @@ def count_taxon_subjects(path: Path) -> Counter:
     return counts
 
 
+TRAIT_EDGE_FIELDS = [
+    "taxon_id", "predicate", "object_id", "relation", "source",
+    "publications", "primary_knowledge_source", "aggregator_knowledge_source",
+]
+
+
+def extract_taxon_trait_edges(path: Path, source: str) -> list[dict[str, str]]:
+    """Extract granular per-taxon trait, substrate, habitat, or medium assertions from a KGX edges.tsv.
+
+    Preserves each NCBI taxon's predicate, object CURIE (e.g. ``METPO:*``,
+    ``ENVO:*``, ``CHEBI:*``, ``GO:*``, ``mediadive.medium:*``), relation, and
+    literature/knowledge-source provenance without collapsing multiple edges per
+    taxon into a single count (#78, ``taxonmech-infra-0002``).
+    """
+    seen: dict[tuple[str, ...], dict[str, str]] = {}
+    for row in read_tsv(path):
+        subject = (row.get("subject") or "").strip()
+        if not subject.startswith("NCBITaxon:"):
+            continue
+        predicate = (row.get("predicate") or "").strip()
+        obj = (row.get("object") or "").strip()
+        if not predicate or not obj:
+            continue
+        entry = {
+            "taxon_id": subject,
+            "predicate": predicate,
+            "object_id": obj,
+            "relation": (row.get("relation") or "").strip(),
+            "source": source,
+            "publications": joined((row.get("publications") or "").split("|")),
+            "primary_knowledge_source": (row.get("primary_knowledge_source") or "").strip(),
+            "aggregator_knowledge_source": (row.get("aggregator_knowledge_source") or "").strip(),
+        }
+        key = tuple(entry[f] for f in TRAIT_EDGE_FIELDS)
+        seen[key] = entry
+    return [
+        seen[k]
+        for k in sorted(
+            seen,
+            key=lambda k: (int(k[0].split(":")[1]) if k[0].split(":")[1].isdigit() else 0, k),
+        )
+    ]
+
+
 def extract_lpsn(kgm: Path) -> dict[str, dict[str, Any]]:
     names: dict[str, dict[str, Any]] = {}
     for row in read_tsv(kgm / "data/transformed/lpsn/nodes.tsv"):

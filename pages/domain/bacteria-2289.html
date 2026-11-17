@@ -7,30 +7,118 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../theme-toggle.js"></script>
 <script defer src="../vendor/fflate-0.8.2.js"></script>
-<script defer src="../compressed-data.js?v=434e253832135143"></script>
+<script defer src="../compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="../index.html">TaxonMech</a>
   <nav>
     <a href="../browse.html">Browse</a>
     <a href="../type-strains.html">Type strains</a>
+    <a href="../map.html">Text map</a>
     <a href="../sources.html">Sources</a>
+    <a href="../index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../index.html">TaxonMech</a> › <span>Bacteria</span>
+</nav>
 <h1>Bacteria</h1>
 <p class="lede">Species and infraspecific taxa under NCBITaxon:2, including uncultured and environmental taxa.</p>
-<section id="taxon-browser" data-domain="BACTERIA" data-typed="false" data-page="2289" data-size="200" data-root="../">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="BACTERIA" data-typed="false" data-page="2289" data-size="200" data-root="../">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="../browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA" selected>Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">605695 records · page 2289 of 3029.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="../domain/bacteria-2288.html">Previous</a><a href="../domain/bacteria-2290.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>Bacteria</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="../taxon.html?id=NCBITaxon:105459"><em>Saccharomonospora sp. 42-147</em></a></td><td><code>NCBITaxon:105459</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:105472"><em>Saccharomonospora sp. 42-15</em></a></td><td><code>NCBITaxon:105472</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -181,13 +269,13 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1155538"><em>Saccharomonospora sp. YIM M112370</em></a></td><td><code>NCBITaxon:1155538</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1289189"><em>Saccharomonospora sp. ZZY-2013</em></a></td><td><code>NCBITaxon:1289189</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:89366"><em>Saccharomonospora thermoviridis</em></a></td><td><code>NCBITaxon:89366</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1852"><em>Saccharomonospora viridis</em></a></td><td><code>NCBITaxon:1852</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>13</td><td>9</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:471857"><em>Saccharomonospora viridis DSM 43017</em></a></td><td><code>NCBITaxon:471857</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>9</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1852"><em>Saccharomonospora viridis</em></a></td><td><code>NCBITaxon:1852</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>13</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:471857"><em>Saccharomonospora viridis DSM 43017</em></a></td><td><code>NCBITaxon:471857</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1778871"><em>Saccharomonospora xiaoerkulensis</em></a></td><td><code>NCBITaxon:1778871</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:75294"><em>Saccharomonospora xinjiangensis</em></a></td><td><code>NCBITaxon:75294</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:882086"><em>Saccharomonospora xinjiangensis XJ-54</em></a></td><td><code>NCBITaxon:882086</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:86304"><em>Saccharophagus degradans</em></a></td><td><code>NCBITaxon:86304</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>10</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:203122"><em>Saccharophagus degradans 2-40</em></a></td><td><code>NCBITaxon:203122</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>10</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:75294"><em>Saccharomonospora xinjiangensis</em></a></td><td><code>NCBITaxon:75294</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:882086"><em>Saccharomonospora xinjiangensis XJ-54</em></a></td><td><code>NCBITaxon:882086</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:86304"><em>Saccharophagus degradans</em></a></td><td><code>NCBITaxon:86304</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:203122"><em>Saccharophagus degradans 2-40</em></a></td><td><code>NCBITaxon:203122</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2053364"><em>Saccharophagus sp.</em></a></td><td><code>NCBITaxon:2053364</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:877071"><em>Saccharophagus sp. 1S5&#39; 6</em></a></td><td><code>NCBITaxon:877071</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1232486"><em>Saccharophagus sp. AG21</em></a></td><td><code>NCBITaxon:1232486</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -202,44 +290,47 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:980588"><em>Saccharophagus sp. SH5</em></a></td><td><code>NCBITaxon:980588</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1390356"><em>Saccharophagus sp. SK1</em></a></td><td><code>NCBITaxon:1390356</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3385973"><em>Saccharopolyspora antibiotica</em></a></td><td><code>NCBITaxon:3385973</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:455193"><em>Saccharopolyspora antimicrobica</em></a></td><td><code>NCBITaxon:455193</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:455193"><em>Saccharopolyspora antimicrobica</em></a></td><td><code>NCBITaxon:455193</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3457424"><em>Saccharopolyspora antiqui</em></a></td><td><code>NCBITaxon:3457424</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2530385"><em>Saccharopolyspora aridisoli</em></a></td><td><code>NCBITaxon:2530385</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1387985"><em>Saccharopolyspora cavernae</em></a></td><td><code>NCBITaxon:1387985</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:418759"><em>Saccharopolyspora cebuensis</em></a></td><td><code>NCBITaxon:418759</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:418759"><em>Saccharopolyspora cebuensis</em></a></td><td><code>NCBITaxon:418759</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1181886"><em>Saccharopolyspora dendranthemae</em></a></td><td><code>NCBITaxon:1181886</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>3</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2081980"><em>Saccharopolyspora deserti</em></a></td><td><code>NCBITaxon:2081980</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2530387"><em>Saccharopolyspora elongata</em></a></td><td><code>NCBITaxon:2530387</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2530387"><em>Saccharopolyspora elongata</em></a></td><td><code>NCBITaxon:2530387</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:454002"><em>Saccharopolyspora emeiensis</em></a></td><td><code>NCBITaxon:454002</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:543886"><em>Saccharopolyspora endophytica</em></a></td><td><code>NCBITaxon:543886</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1836"><em>Saccharopolyspora erythraea</em></a></td><td><code>NCBITaxon:1836</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>7</td><td>8</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1382595"><em>Saccharopolyspora erythraea D</em></a></td><td><code>NCBITaxon:1382595</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>8</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:405948"><em>Saccharopolyspora erythraea NRRL 2338</em></a></td><td><code>NCBITaxon:405948</code></td><td>STRAIN</td><td>BACTERIA</td><td>7</td><td>1</td><td>8</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:543886"><em>Saccharopolyspora endophytica</em></a></td><td><code>NCBITaxon:543886</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1836"><em>Saccharopolyspora erythraea</em></a></td><td><code>NCBITaxon:1836</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>7</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1382595"><em>Saccharopolyspora erythraea D</em></a></td><td><code>NCBITaxon:1382595</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:405948"><em>Saccharopolyspora erythraea NRRL 2338</em></a></td><td><code>NCBITaxon:405948</code></td><td>STRAIN</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:95161"><em>Saccharopolyspora flava</em></a></td><td><code>NCBITaxon:95161</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2781241"><em>Saccharopolyspora galaxeae</em></a></td><td><code>NCBITaxon:2781241</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:455344"><em>Saccharopolyspora gloriosae</em></a></td><td><code>NCBITaxon:455344</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:33914"><em>Saccharopolyspora gregorii</em></a></td><td><code>NCBITaxon:33914</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2781241"><em>Saccharopolyspora galaxeae</em></a></td><td><code>NCBITaxon:2781241</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:455344"><em>Saccharopolyspora gloriosae</em></a></td><td><code>NCBITaxon:455344</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:33914"><em>Saccharopolyspora gregorii</em></a></td><td><code>NCBITaxon:33914</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1431848"><em>Saccharopolyspora griseoalba</em></a></td><td><code>NCBITaxon:1431848</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:405551"><em>Saccharopolyspora halophila</em></a></td><td><code>NCBITaxon:405551</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1285924"><em>Saccharopolyspora halotolerans</em></a></td><td><code>NCBITaxon:1285924</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1128679"><em>Saccharopolyspora hattusasensis</em></a></td><td><code>NCBITaxon:1128679</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1837"><em>Saccharopolyspora hirsuta</em></a></td><td><code>NCBITaxon:1837</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>7</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1128679"><em>Saccharopolyspora hattusasensis</em></a></td><td><code>NCBITaxon:1128679</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1837"><em>Saccharopolyspora hirsuta</em></a></td><td><code>NCBITaxon:1837</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>7</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:146034"><em>Saccharopolyspora hirsuta subsp. hirsuta</em></a></td><td><code>NCBITaxon:146034</code></td><td>SUBSPECIES</td><td>BACTERIA</td><td>2</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1838"><em>Saccharopolyspora hordei</em></a></td><td><code>NCBITaxon:1838</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>4</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1229659"><em>Saccharopolyspora indica</em></a></td><td><code>NCBITaxon:1229659</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3042027"><em>Saccharopolyspora ipomoeae</em></a></td><td><code>NCBITaxon:3042027</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2530386"><em>Saccharopolyspora karakumensis</em></a></td><td><code>NCBITaxon:2530386</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:146035"><em>Saccharopolyspora kobensis</em></a></td><td><code>NCBITaxon:146035</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>2</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1838"><em>Saccharopolyspora hordei</em></a></td><td><code>NCBITaxon:1838</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>4</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1229659"><em>Saccharopolyspora indica</em></a></td><td><code>NCBITaxon:1229659</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3042027"><em>Saccharopolyspora ipomoeae</em></a></td><td><code>NCBITaxon:3042027</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2530386"><em>Saccharopolyspora karakumensis</em></a></td><td><code>NCBITaxon:2530386</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:146035"><em>Saccharopolyspora kobensis</em></a></td><td><code>NCBITaxon:146035</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>2</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3082379"><em>Saccharopolyspora mangrovi</em></a></td><td><code>NCBITaxon:3082379</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1937167"><em>Saccharopolyspora maritima</em></a></td><td><code>NCBITaxon:1937167</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="../taxon-browser.js?v=434e253832135143"></script>
+<script defer src="../taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="../index.json.gz">Index JSON.gz</a> · <a href="../index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

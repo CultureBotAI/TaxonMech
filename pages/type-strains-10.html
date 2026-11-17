@@ -7,144 +7,232 @@
 <link rel="stylesheet" href="style.css">
 <script src="theme-toggle.js"></script>
 <script defer src="vendor/fflate-0.8.2.js"></script>
-<script defer src="compressed-data.js?v=434e253832135143"></script>
+<script defer src="compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="index.html">TaxonMech</a>
   <nav>
     <a href="browse.html">Browse</a>
     <a href="type-strains.html">Type strains</a>
+    <a href="map.html">Text map</a>
     <a href="sources.html">Sources</a>
+    <a href="index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="index.html">TaxonMech</a> › <span>Taxa with a type strain</span>
+</nav>
 <h1>Taxa with a type strain</h1>
 <p class="lede">20648 records list a BacDive strain whose deposit LPSN names as the type strain.</p>
-<section id="taxon-browser" data-domain="" data-typed="true" data-page="10" data-size="200" data-root="">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="" data-typed="true" data-page="10" data-size="200" data-root="">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA">Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed" selected>With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">20648 records · page 10 of 104.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="type-strains-9.html">Previous</a><a href="type-strains-11.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>Taxa with a type strain</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="taxon.html?id=NCBITaxon:1607954"><em>Aliiglaciecola aliphaticivorans</em></a></td><td><code>NCBITaxon:1607954</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:477689"><em>Aliiglaciecola lipolytica</em></a></td><td><code>NCBITaxon:477689</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>2</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:477689"><em>Aliiglaciecola lipolytica</em></a></td><td><code>NCBITaxon:477689</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>2</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:582857"><em>Aliiglaciecola litoralis</em></a></td><td><code>NCBITaxon:582857</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:453840"><em>Aliihoeflea aestuarii</em></a></td><td><code>NCBITaxon:453840</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2592383"><em>Aliikangiella coralliicola</em></a></td><td><code>NCBITaxon:2592383</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1712262"><em>Aliikangiella marina</em></a></td><td><code>NCBITaxon:1712262</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:393664"><em>Aliirhizobium cellulosilyticum</em></a></td><td><code>NCBITaxon:393664</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>9</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:393664"><em>Aliirhizobium cellulosilyticum</em></a></td><td><code>NCBITaxon:393664</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1395944"><em>Aliirhizobium smilacinae</em></a></td><td><code>NCBITaxon:1395944</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1737357"><em>Aliirhizobium wenxiniae</em></a></td><td><code>NCBITaxon:1737357</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>7</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1737357"><em>Aliirhizobium wenxiniae</em></a></td><td><code>NCBITaxon:1737357</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1905846"><em>Aliirhizobium zeae</em></a></td><td><code>NCBITaxon:1905846</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3121637"><em>Aliiroseovarius conchicola</em></a></td><td><code>NCBITaxon:3121637</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:154981"><em>Aliiroseovarius crassostreae</em></a></td><td><code>NCBITaxon:154981</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>26</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:985055"><em>Aliiroseovarius halocynthiae</em></a></td><td><code>NCBITaxon:985055</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:154981"><em>Aliiroseovarius crassostreae</em></a></td><td><code>NCBITaxon:154981</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:985055"><em>Aliiroseovarius halocynthiae</em></a></td><td><code>NCBITaxon:985055</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1924933"><em>Aliiroseovarius lamellibrachiae</em></a></td><td><code>NCBITaxon:1924933</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2500159"><em>Aliiroseovarius marinus</em></a></td><td><code>NCBITaxon:2500159</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2500159"><em>Aliiroseovarius marinus</em></a></td><td><code>NCBITaxon:2500159</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1639690"><em>Aliiroseovarius pelagivivens</em></a></td><td><code>NCBITaxon:1639690</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3009082"><em>Aliiroseovarius salicola</em></a></td><td><code>NCBITaxon:3009082</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1173584"><em>Aliiroseovarius sediminilitoris</em></a></td><td><code>NCBITaxon:1173584</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2925839"><em>Aliiroseovarius sediminis</em></a></td><td><code>NCBITaxon:2925839</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2925840"><em>Aliiroseovarius subalbicans</em></a></td><td><code>NCBITaxon:2925840</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1632025"><em>Aliiroseovarius zhejiangensis</em></a></td><td><code>NCBITaxon:1632025</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2925839"><em>Aliiroseovarius sediminis</em></a></td><td><code>NCBITaxon:2925839</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2925840"><em>Aliiroseovarius subalbicans</em></a></td><td><code>NCBITaxon:2925840</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1632025"><em>Aliiroseovarius zhejiangensis</em></a></td><td><code>NCBITaxon:1632025</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1280846"><em>Aliiruegeria haliotis</em></a></td><td><code>NCBITaxon:1280846</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:571298"><em>Aliiruegeria lutimaris</em></a></td><td><code>NCBITaxon:571298</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1510458"><em>Aliiruegeria sabulilitoris</em></a></td><td><code>NCBITaxon:1510458</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:511998"><em>Aliivibrio finisterrensis</em></a></td><td><code>NCBITaxon:511998</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:668"><em>Aliivibrio fischeri</em></a></td><td><code>NCBITaxon:668</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>7</td><td>28</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:688"><em>Aliivibrio logei</em></a></td><td><code>NCBITaxon:688</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>14</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:40269"><em>Aliivibrio salmonicida</em></a></td><td><code>NCBITaxon:40269</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>14</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:566293"><em>Aliivibrio sifiae</em></a></td><td><code>NCBITaxon:566293</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>10</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1510458"><em>Aliiruegeria sabulilitoris</em></a></td><td><code>NCBITaxon:1510458</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:511998"><em>Aliivibrio finisterrensis</em></a></td><td><code>NCBITaxon:511998</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:668"><em>Aliivibrio fischeri</em></a></td><td><code>NCBITaxon:668</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>7</td><td>3 (3 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:688"><em>Aliivibrio logei</em></a></td><td><code>NCBITaxon:688</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:40269"><em>Aliivibrio salmonicida</em></a></td><td><code>NCBITaxon:40269</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:566293"><em>Aliivibrio sifiae</em></a></td><td><code>NCBITaxon:566293</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:80852"><em>Aliivibrio wodanis</em></a></td><td><code>NCBITaxon:80852</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:453835"><em>Alishewanella aestuarii</em></a></td><td><code>NCBITaxon:453835</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>6</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:553384"><em>Alishewanella agri</em></a></td><td><code>NCBITaxon:553384</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>6</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:453835"><em>Alishewanella aestuarii</em></a></td><td><code>NCBITaxon:453835</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:553384"><em>Alishewanella agri</em></a></td><td><code>NCBITaxon:553384</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2071989"><em>Alishewanella alkalitolerans</em></a></td><td><code>NCBITaxon:2071989</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:111143"><em>Alishewanella fetalis</em></a></td><td><code>NCBITaxon:111143</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:545533"><em>Alishewanella jeotgali</em></a></td><td><code>NCBITaxon:545533</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2795740"><em>Alishewanella maricola</em></a></td><td><code>NCBITaxon:2795740</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>7</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2795740"><em>Alishewanella maricola</em></a></td><td><code>NCBITaxon:2795740</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:671278"><em>Alishewanella tabrizica</em></a></td><td><code>NCBITaxon:671278</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2585118"><em>Alistipes communis</em></a></td><td><code>NCBITaxon:2585118</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>3</td><td>135</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2585119"><em>Alistipes dispar</em></a></td><td><code>NCBITaxon:2585119</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>41</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:214856"><em>Alistipes finegoldii</em></a></td><td><code>NCBITaxon:214856</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>4</td><td>265</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2763015"><em>Alistipes hominis</em></a></td><td><code>NCBITaxon:2763015</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>52</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1470347"><em>Alistipes ihumii</em></a></td><td><code>NCBITaxon:1470347</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>91</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:626932"><em>Alistipes indistinctus</em></a></td><td><code>NCBITaxon:626932</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>3</td><td>91</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1501391"><em>Alistipes inops</em></a></td><td><code>NCBITaxon:1501391</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>139</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2941326"><em>Alistipes muris</em></a></td><td><code>NCBITaxon:2941326</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>984</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:328813"><em>Alistipes onderdonkii</em></a></td><td><code>NCBITaxon:328813</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>16</td><td>495</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1816676"><em>Alistipes provencensis</em></a></td><td><code>NCBITaxon:1816676</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:28117"><em>Alistipes putredinis</em></a></td><td><code>NCBITaxon:28117</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>815</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1288121"><em>Alistipes senegalensis</em></a></td><td><code>NCBITaxon:1288121</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>40</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:328814"><em>Alistipes shahii</em></a></td><td><code>NCBITaxon:328814</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>2</td><td>290</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1465754"><em>Alistipes timonensis</em></a></td><td><code>NCBITaxon:1465754</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>15</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2585118"><em>Alistipes communis</em></a></td><td><code>NCBITaxon:2585118</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>3</td><td>9 (9 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2585119"><em>Alistipes dispar</em></a></td><td><code>NCBITaxon:2585119</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:214856"><em>Alistipes finegoldii</em></a></td><td><code>NCBITaxon:214856</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>4</td><td>8 (8 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2763015"><em>Alistipes hominis</em></a></td><td><code>NCBITaxon:2763015</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1470347"><em>Alistipes ihumii</em></a></td><td><code>NCBITaxon:1470347</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>4 (4 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:626932"><em>Alistipes indistinctus</em></a></td><td><code>NCBITaxon:626932</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>3</td><td>5 (5 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1501391"><em>Alistipes inops</em></a></td><td><code>NCBITaxon:1501391</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2941326"><em>Alistipes muris</em></a></td><td><code>NCBITaxon:2941326</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:328813"><em>Alistipes onderdonkii</em></a></td><td><code>NCBITaxon:328813</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>16</td><td>17 (17 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1816676"><em>Alistipes provencensis</em></a></td><td><code>NCBITaxon:1816676</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:28117"><em>Alistipes putredinis</em></a></td><td><code>NCBITaxon:28117</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>18 (18 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1288121"><em>Alistipes senegalensis</em></a></td><td><code>NCBITaxon:1288121</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>7 (7 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:328814"><em>Alistipes shahii</em></a></td><td><code>NCBITaxon:328814</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>2</td><td>12 (12 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1465754"><em>Alistipes timonensis</em></a></td><td><code>NCBITaxon:1465754</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:756"><em>Alitibacter langaaensis</em></a></td><td><code>NCBITaxon:756</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>2</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2981724"><em>Alitiscatomonas aceti</em></a></td><td><code>NCBITaxon:2981724</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>54</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2981724"><em>Alitiscatomonas aceti</em></a></td><td><code>NCBITaxon:2981724</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2747607"><em>Alkalibacillus aidingensis</em></a></td><td><code>NCBITaxon:2747607</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1379154"><em>Alkalibacillus almallahensis</em></a></td><td><code>NCBITaxon:1379154</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1379154"><em>Alkalibacillus almallahensis</em></a></td><td><code>NCBITaxon:1379154</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:200990"><em>Alkalibacillus filiformis</em></a></td><td><code>NCBITaxon:200990</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:546021"><em>Alkalibacillus flavidus</em></a></td><td><code>NCBITaxon:546021</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:94136"><em>Alkalibacillus haloalkaliphilus</em></a></td><td><code>NCBITaxon:94136</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>10</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:546021"><em>Alkalibacillus flavidus</em></a></td><td><code>NCBITaxon:546021</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:94136"><em>Alkalibacillus haloalkaliphilus</em></a></td><td><code>NCBITaxon:94136</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>10</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:368977"><em>Alkalibacillus halophilus</em></a></td><td><code>NCBITaxon:368977</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:284582"><em>Alkalibacillus salilacus</em></a></td><td><code>NCBITaxon:284582</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:392823"><em>Alkalibacillus silvisoli</em></a></td><td><code>NCBITaxon:392823</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2787712"><em>Alkalibacter mobilis</em></a></td><td><code>NCBITaxon:2787712</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2815577"><em>Alkalibacter rhizosphaerae</em></a></td><td><code>NCBITaxon:2815577</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:235931"><em>Alkalibacter saccharofermentans</em></a></td><td><code>NCBITaxon:235931</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1130080"><em>Alkalibacterium gilvum</em></a></td><td><code>NCBITaxon:1130080</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>9</td><td>12</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1130080"><em>Alkalibacterium gilvum</em></a></td><td><code>NCBITaxon:1130080</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>9</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:290589"><em>Alkalibacterium iburiense</em></a></td><td><code>NCBITaxon:290589</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:398758"><em>Alkalibacterium indicireducens</em></a></td><td><code>NCBITaxon:398758</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:398758"><em>Alkalibacterium indicireducens</em></a></td><td><code>NCBITaxon:398758</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:426704"><em>Alkalibacterium kapii</em></a></td><td><code>NCBITaxon:426704</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:99907"><em>Alkalibacterium olivapovliticus</em></a></td><td><code>NCBITaxon:99907</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>3</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:426702"><em>Alkalibacterium pelagium</em></a></td><td><code>NCBITaxon:426702</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:426702"><em>Alkalibacterium pelagium</em></a></td><td><code>NCBITaxon:426702</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:254784"><em>Alkalibacterium psychrotolerans</em></a></td><td><code>NCBITaxon:254784</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:426703"><em>Alkalibacterium putridalgicola</em></a></td><td><code>NCBITaxon:426703</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:426703"><em>Alkalibacterium putridalgicola</em></a></td><td><code>NCBITaxon:426703</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:753702"><em>Alkalibacterium subtropicum</em></a></td><td><code>NCBITaxon:753702</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:426701"><em>Alkalibacterium thalassium</em></a></td><td><code>NCBITaxon:426701</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:645887"><em>Alkalibaculum bacchi</em></a></td><td><code>NCBITaxon:645887</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>3</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:426701"><em>Alkalibacterium thalassium</em></a></td><td><code>NCBITaxon:426701</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:645887"><em>Alkalibaculum bacchi</em></a></td><td><code>NCBITaxon:645887</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>3</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2655001"><em>Alkalibaculum sporogenes</em></a></td><td><code>NCBITaxon:2655001</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2609175"><em>Alkalicaulis satelles</em></a></td><td><code>NCBITaxon:2609175</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2731377"><em>Alkalicella caledoniensis</em></a></td><td><code>NCBITaxon:2731377</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:79881"><em>Alkalicoccobacillus gibsonii</em></a></td><td><code>NCBITaxon:79881</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>7</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:171685"><em>Alkalicoccobacillus murimartini</em></a></td><td><code>NCBITaxon:171685</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:444060"><em>Alkalicoccobacillus plakortidis</em></a></td><td><code>NCBITaxon:444060</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:79881"><em>Alkalicoccobacillus gibsonii</em></a></td><td><code>NCBITaxon:79881</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>7</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:171685"><em>Alkalicoccobacillus murimartini</em></a></td><td><code>NCBITaxon:171685</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:444060"><em>Alkalicoccobacillus plakortidis</em></a></td><td><code>NCBITaxon:444060</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2597270"><em>Alkalicoccobacillus porphyridii</em></a></td><td><code>NCBITaxon:2597270</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:427072"><em>Alkalicoccus chagannorensis</em></a></td><td><code>NCBITaxon:427072</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:427072"><em>Alkalicoccus chagannorensis</em></a></td><td><code>NCBITaxon:427072</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:745820"><em>Alkalicoccus daliensis</em></a></td><td><code>NCBITaxon:745820</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1667239"><em>Alkalicoccus halolimnae</em></a></td><td><code>NCBITaxon:1667239</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>2</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1237094"><em>Alkalicoccus luteus</em></a></td><td><code>NCBITaxon:1237094</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1237094"><em>Alkalicoccus luteus</em></a></td><td><code>NCBITaxon:1237094</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:200989"><em>Alkalicoccus saliphilus</em></a></td><td><code>NCBITaxon:200989</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1548213"><em>Alkalicoccus urumqiensis</em></a></td><td><code>NCBITaxon:1548213</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:293256"><em>Alkalidesulfovibrio alkalitolerans</em></a></td><td><code>NCBITaxon:293256</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:293256"><em>Alkalidesulfovibrio alkalitolerans</em></a></td><td><code>NCBITaxon:293256</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:286730"><em>Alkaliflexus imshenetskii</em></a></td><td><code>NCBITaxon:286730</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>5</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1445"><em>Alkalihalobacillus alcalophilus</em></a></td><td><code>NCBITaxon:1445</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>5</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1445"><em>Alkalihalobacillus alcalophilus</em></a></td><td><code>NCBITaxon:1445</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>5</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1983720"><em>Alkalihalobacillus alkalilacus</em></a></td><td><code>NCBITaxon:1983720</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:79884"><em>Alkalihalobacillus pseudalcaliphilus</em></a></td><td><code>NCBITaxon:79884</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>5</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:519424"><em>Alkalihalobacillus trypoxylicola</em></a></td><td><code>NCBITaxon:519424</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:79884"><em>Alkalihalobacillus pseudalcaliphilus</em></a></td><td><code>NCBITaxon:79884</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>5</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:519424"><em>Alkalihalobacillus trypoxylicola</em></a></td><td><code>NCBITaxon:519424</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1912214"><em>Alkalihalobacterium alkalicellulosilyticum</em></a></td><td><code>NCBITaxon:1912214</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:427920"><em>Alkalihalobacterium alkalinitrilicum</em></a></td><td><code>NCBITaxon:427920</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:427920"><em>Alkalihalobacterium alkalinitrilicum</em></a></td><td><code>NCBITaxon:427920</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:246272"><em>Alkalihalobacterium bogoriense</em></a></td><td><code>NCBITaxon:246272</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2675466"><em>Alkalihalobacterium elongatum</em></a></td><td><code>NCBITaxon:2675466</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1630542"><em>Alkalihalophilus lindianensis</em></a></td><td><code>NCBITaxon:1630542</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:521377"><em>Alkalihalophilus marmarensis</em></a></td><td><code>NCBITaxon:521377</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:79885"><em>Alkalihalophilus pseudofirmus</em></a></td><td><code>NCBITaxon:79885</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>18</td><td>7</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1630542"><em>Alkalihalophilus lindianensis</em></a></td><td><code>NCBITaxon:1630542</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:521377"><em>Alkalihalophilus marmarensis</em></a></td><td><code>NCBITaxon:521377</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:79885"><em>Alkalihalophilus pseudofirmus</em></a></td><td><code>NCBITaxon:79885</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>18</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:486507"><em>Alkalilactibacillus ikkensis</em></a></td><td><code>NCBITaxon:486507</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2026338"><em>Alkalilacustris brevis</em></a></td><td><code>NCBITaxon:2026338</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:351052"><em>Alkalilimnicola ehrlichii</em></a></td><td><code>NCBITaxon:351052</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:351052"><em>Alkalilimnicola ehrlichii</em></a></td><td><code>NCBITaxon:351052</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>3 (3 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:133194"><em>Alkalilimnicola halodurans</em></a></td><td><code>NCBITaxon:133194</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2961619"><em>Alkalimarinus alittae</em></a></td><td><code>NCBITaxon:2961619</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2935863"><em>Alkalimarinus coralli</em></a></td><td><code>NCBITaxon:2935863</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1632866"><em>Alkalimarinus sediminis</em></a></td><td><code>NCBITaxon:1632866</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2935863"><em>Alkalimarinus coralli</em></a></td><td><code>NCBITaxon:2935863</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1632866"><em>Alkalimarinus sediminis</em></a></td><td><code>NCBITaxon:1632866</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:152573"><em>Alkalimonas amylolytica</em></a></td><td><code>NCBITaxon:152573</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:400390"><em>Alkalimonas collagenimarina</em></a></td><td><code>NCBITaxon:400390</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:265981"><em>Alkalimonas delamerensis</em></a></td><td><code>NCBITaxon:265981</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:265981"><em>Alkalimonas delamerensis</em></a></td><td><code>NCBITaxon:265981</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:185693"><em>Alkaliphilus crotonatoxidans</em></a></td><td><code>NCBITaxon:185693</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2841507"><em>Alkaliphilus flagellatus</em></a></td><td><code>NCBITaxon:2841507</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2841507"><em>Alkaliphilus flagellatus</em></a></td><td><code>NCBITaxon:2841507</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:522397"><em>Alkaliphilus halophilus</em></a></td><td><code>NCBITaxon:522397</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1482730"><em>Alkaliphilus hydrothermalis</em></a></td><td><code>NCBITaxon:1482730</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1454184"><em>Alkaliphilus namsaraevii</em></a></td><td><code>NCBITaxon:1454184</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>0</td><td>SEEDED</td></tr>
@@ -154,92 +242,95 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1482731"><em>Alkaliphilus serpentinus</em></a></td><td><code>NCBITaxon:1482731</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:114628"><em>Alkaliphilus transvaalensis</em></a></td><td><code>NCBITaxon:114628</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>2</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2699169"><em>Alkalisalibacterium limincola</em></a></td><td><code>NCBITaxon:2699169</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:85925"><em>Alkalispirillum mobile</em></a></td><td><code>NCBITaxon:85925</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:85925"><em>Alkalispirillum mobile</em></a></td><td><code>NCBITaxon:85925</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:159291"><em>Alkalispirochaeta americana</em></a></td><td><code>NCBITaxon:159291</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1410329"><em>Alkalispirochaeta cellulosivorans</em></a></td><td><code>NCBITaxon:1410329</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1329640"><em>Alkalispirochaeta odontotermitis</em></a></td><td><code>NCBITaxon:1329640</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:889453"><em>Alkalitalea saponilacus</em></a></td><td><code>NCBITaxon:889453</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:889453"><em>Alkalitalea saponilacus</em></a></td><td><code>NCBITaxon:889453</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:29349"><em>Alkalithermobacter paradoxus</em></a></td><td><code>NCBITaxon:29349</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:29346"><em>Alkalithermobacter thermoalcaliphilus</em></a></td><td><code>NCBITaxon:29346</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:159478"><em>Alkanibacter difficilis</em></a></td><td><code>NCBITaxon:159478</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:208968"><em>Alkanindiges hongkongensis</em></a></td><td><code>NCBITaxon:208968</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:197183"><em>Alkanindiges illinoisensis</em></a></td><td><code>NCBITaxon:197183</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:765699"><em>Allgaiera indica</em></a></td><td><code>NCBITaxon:765699</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:765699"><em>Allgaiera indica</em></a></td><td><code>NCBITaxon:765699</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2763107"><em>Alloacidobacterium dinghuense</em></a></td><td><code>NCBITaxon:2763107</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:413232"><em>Alloalcanivorax balearicus</em></a></td><td><code>NCBITaxon:413232</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:285091"><em>Alloalcanivorax dieselolei</em></a></td><td><code>NCBITaxon:285091</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>3</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1194167"><em>Alloalcanivorax gelatiniphagus</em></a></td><td><code>NCBITaxon:1194167</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1177169"><em>Alloalcanivorax marinus</em></a></td><td><code>NCBITaxon:1177169</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2019569"><em>Alloalcanivorax mobilis</em></a></td><td><code>NCBITaxon:2019569</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2735259"><em>Alloalcanivorax profundimaris</em></a></td><td><code>NCBITaxon:2735259</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>17</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:172371"><em>Alloalcanivorax venustensis</em></a></td><td><code>NCBITaxon:172371</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>90</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1094342"><em>Alloalcanivorax xenomutans</em></a></td><td><code>NCBITaxon:1094342</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>30</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:570278"><em>Allobacillus halotolerans</em></a></td><td><code>NCBITaxon:570278</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>6</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1955272"><em>Allobacillus salarius</em></a></td><td><code>NCBITaxon:1955272</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2912308"><em>Allobacillus saliphilus</em></a></td><td><code>NCBITaxon:2912308</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2834460"><em>Allobaculum fili</em></a></td><td><code>NCBITaxon:2834460</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>25</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2834459"><em>Allobaculum mucilyticum</em></a></td><td><code>NCBITaxon:2834459</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:174709"><em>Allobaculum stercoricanis</em></a></td><td><code>NCBITaxon:174709</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2606709"><em>Allobaileyella intestinalis</em></a></td><td><code>NCBITaxon:2606709</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>18</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:285091"><em>Alloalcanivorax dieselolei</em></a></td><td><code>NCBITaxon:285091</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>3</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1194167"><em>Alloalcanivorax gelatiniphagus</em></a></td><td><code>NCBITaxon:1194167</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1177169"><em>Alloalcanivorax marinus</em></a></td><td><code>NCBITaxon:1177169</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>3 (3 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2019569"><em>Alloalcanivorax mobilis</em></a></td><td><code>NCBITaxon:2019569</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2735259"><em>Alloalcanivorax profundimaris</em></a></td><td><code>NCBITaxon:2735259</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:172371"><em>Alloalcanivorax venustensis</em></a></td><td><code>NCBITaxon:172371</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>7 (7 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1094342"><em>Alloalcanivorax xenomutans</em></a></td><td><code>NCBITaxon:1094342</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:570278"><em>Allobacillus halotolerans</em></a></td><td><code>NCBITaxon:570278</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1955272"><em>Allobacillus salarius</em></a></td><td><code>NCBITaxon:1955272</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2912308"><em>Allobacillus saliphilus</em></a></td><td><code>NCBITaxon:2912308</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2834460"><em>Allobaculum fili</em></a></td><td><code>NCBITaxon:2834460</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2834459"><em>Allobaculum mucilyticum</em></a></td><td><code>NCBITaxon:2834459</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:174709"><em>Allobaculum stercoricanis</em></a></td><td><code>NCBITaxon:174709</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2606709"><em>Allobaileyella intestinalis</em></a></td><td><code>NCBITaxon:2606709</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:56055"><em>Allobogoriella caseilytica</em></a></td><td><code>NCBITaxon:56055</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3068632"><em>Allobosea beijingensis</em></a></td><td><code>NCBITaxon:3068632</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2763117"><em>Allobosea caraganae</em></a></td><td><code>NCBITaxon:2763117</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2763117"><em>Allobosea caraganae</em></a></td><td><code>NCBITaxon:2763117</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:151454"><em>Allobosea eneae</em></a></td><td><code>NCBITaxon:151454</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>3</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1036778"><em>Allobosea lathyri</em></a></td><td><code>NCBITaxon:1036778</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1036779"><em>Allobosea lupini</em></a></td><td><code>NCBITaxon:1036779</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>6</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:151419"><em>Allobosea massiliensis</em></a></td><td><code>NCBITaxon:151419</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>12</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:128782"><em>Allobosea minatitlanensis</em></a></td><td><code>NCBITaxon:128782</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>11</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1036779"><em>Allobosea lupini</em></a></td><td><code>NCBITaxon:1036779</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:151419"><em>Allobosea massiliensis</em></a></td><td><code>NCBITaxon:151419</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:128782"><em>Allobosea minatitlanensis</em></a></td><td><code>NCBITaxon:128782</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1871628"><em>Allobosea psychrotolerans</em></a></td><td><code>NCBITaxon:1871628</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1036780"><em>Allobosea robiniae</em></a></td><td><code>NCBITaxon:1036780</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3075434"><em>Allobosea rubneri</em></a></td><td><code>NCBITaxon:3075434</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2773451"><em>Allobosea spartocytisi</em></a></td><td><code>NCBITaxon:2773451</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>8</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:53254"><em>Allobosea thiooxidans</em></a></td><td><code>NCBITaxon:53254</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>3</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1526658"><em>Allobosea vaviloviae</em></a></td><td><code>NCBITaxon:1526658</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:151416"><em>Allobosea vestrisii</em></a></td><td><code>NCBITaxon:151416</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>3</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1036780"><em>Allobosea robiniae</em></a></td><td><code>NCBITaxon:1036780</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3075434"><em>Allobosea rubneri</em></a></td><td><code>NCBITaxon:3075434</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2773451"><em>Allobosea spartocytisi</em></a></td><td><code>NCBITaxon:2773451</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:53254"><em>Allobosea thiooxidans</em></a></td><td><code>NCBITaxon:53254</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>3</td><td>12 (12 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1526658"><em>Allobosea vaviloviae</em></a></td><td><code>NCBITaxon:1526658</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:151416"><em>Allobosea vestrisii</em></a></td><td><code>NCBITaxon:151416</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>3</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:491919"><em>Allobrachymonas chironomi</em></a></td><td><code>NCBITaxon:491919</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:28220"><em>Allobrachymonas denitrificans</em></a></td><td><code>NCBITaxon:28220</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>9</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1874116"><em>Allobranchiibius huperziae</em></a></td><td><code>NCBITaxon:1874116</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:28220"><em>Allobrachymonas denitrificans</em></a></td><td><code>NCBITaxon:28220</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>9</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1874116"><em>Allobranchiibius huperziae</em></a></td><td><code>NCBITaxon:1874116</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:643052"><em>Allocatelliglobosispora scoriae</em></a></td><td><code>NCBITaxon:643052</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:94140"><em>Allocatenococcus thiocycli</em></a></td><td><code>NCBITaxon:94140</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>33</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:94140"><em>Allocatenococcus thiocycli</em></a></td><td><code>NCBITaxon:94140</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:504901"><em>Allochromatium humboldtianum</em></a></td><td><code>NCBITaxon:504901</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:61596"><em>Allochromatium minutissimum</em></a></td><td><code>NCBITaxon:61596</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:430676"><em>Allochromatium phaeobacterium</em></a></td><td><code>NCBITaxon:430676</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:402883"><em>Allochromatium renukae</em></a></td><td><code>NCBITaxon:402883</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:553982"><em>Allochromatium tepidum</em></a></td><td><code>NCBITaxon:553982</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1049"><em>Allochromatium vinosum</em></a></td><td><code>NCBITaxon:1049</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>8</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1049"><em>Allochromatium vinosum</em></a></td><td><code>NCBITaxon:1049</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>8</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:61595"><em>Allochromatium warmingii</em></a></td><td><code>NCBITaxon:61595</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:78329"><em>Allocoenonia anatina</em></a></td><td><code>NCBITaxon:78329</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>2</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2944914"><em>Allocoprobacillus halotolerans</em></a></td><td><code>NCBITaxon:2944914</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:410072"><em>Allocoprococcus comes</em></a></td><td><code>NCBITaxon:410072</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>2</td><td>184</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1650663"><em>Allofournierella massiliensis</em></a></td><td><code>NCBITaxon:1650663</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>15</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1085644"><em>Allofrancisella frigidaquae</em></a></td><td><code>NCBITaxon:1085644</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:594679"><em>Allofrancisella guangzhouensis</em></a></td><td><code>NCBITaxon:594679</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1085647"><em>Allofrancisella inopinata</em></a></td><td><code>NCBITaxon:1085647</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1076744"><em>Allofranklinella schreckenbergeri</em></a></td><td><code>NCBITaxon:1076744</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:410072"><em>Allocoprococcus comes</em></a></td><td><code>NCBITaxon:410072</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>2</td><td>5 (5 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1650663"><em>Allofournierella massiliensis</em></a></td><td><code>NCBITaxon:1650663</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>3 (3 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1085644"><em>Allofrancisella frigidaquae</em></a></td><td><code>NCBITaxon:1085644</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:594679"><em>Allofrancisella guangzhouensis</em></a></td><td><code>NCBITaxon:594679</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1085647"><em>Allofrancisella inopinata</em></a></td><td><code>NCBITaxon:1085647</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1076744"><em>Allofranklinella schreckenbergeri</em></a></td><td><code>NCBITaxon:1076744</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:166939"><em>Allofustis seminis</em></a></td><td><code>NCBITaxon:166939</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3109564"><em>Allogeochorda subterranea</em></a></td><td><code>NCBITaxon:3109564</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:437503"><em>Allohahella antarctica</em></a></td><td><code>NCBITaxon:437503</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1054972"><em>Allohahella marinimesophila</em></a></td><td><code>NCBITaxon:1054972</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2993659"><em>Allohoeflea poritis</em></a></td><td><code>NCBITaxon:2993659</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1172610"><em>Allohumibacter endophyticus</em></a></td><td><code>NCBITaxon:1172610</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1652"><em>Alloiococcus otitis</em></a></td><td><code>NCBITaxon:1652</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>4</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:211114"><em>Allokutzneria albata</em></a></td><td><code>NCBITaxon:211114</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1652"><em>Alloiococcus otitis</em></a></td><td><code>NCBITaxon:1652</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>4</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:211114"><em>Allokutzneria albata</em></a></td><td><code>NCBITaxon:211114</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1142134"><em>Allokutzneria multivorans</em></a></td><td><code>NCBITaxon:1142134</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1378989"><em>Allokutzneria oryzae</em></a></td><td><code>NCBITaxon:1378989</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1351585"><em>Allolucifera butyrica</em></a></td><td><code>NCBITaxon:1351585</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:52022"><em>Allomeiothermus silvanus</em></a></td><td><code>NCBITaxon:52022</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:52022"><em>Allomeiothermus silvanus</em></a></td><td><code>NCBITaxon:52022</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:475069"><em>Allomesorhizobium camelthorni</em></a></td><td><code>NCBITaxon:475069</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2600177"><em>Allomicrovenator marinus</em></a></td><td><code>NCBITaxon:2600177</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2600177"><em>Allomicrovenator marinus</em></a></td><td><code>NCBITaxon:2600177</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:225323"><em>Allomonas enterica</em></a></td><td><code>NCBITaxon:225323</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1144618"><em>Allonocardiopsis opalescens</em></a></td><td><code>NCBITaxon:1144618</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="taxon-browser.js?v=434e253832135143"></script>
+<script defer src="taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="index.json.gz">Index JSON.gz</a> · <a href="index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

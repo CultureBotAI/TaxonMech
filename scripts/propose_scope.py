@@ -55,12 +55,20 @@ def main(argv: list[str] | None = None) -> int:
     existing = set(load_scope()) if args.append else set()
     candidates = []
     for tid, row in inv.taxa.items():
-        sources = set(split(row.get("attested_by", "")))
-        if not sources or tid in existing:
+        if tid in existing:
             continue
         if not inv.is_species_or_below(tid):
             continue
         if args.rank and row.get("rank") != args.rank:
+            continue
+        descendants = inv.descendants(tid)
+        sources = set(split(row.get("attested_by", "")))
+        desc_sources = (
+            sorted({s for d in descendants for s in split(inv.taxa[d].get("attested_by", ""))})
+            if not sources
+            else []
+        )
+        if not sources and not desc_sources:
             continue
         names = [inv.lpsn[lid] for lid in inv.lpsn_by_taxon.get(tid, [])]
         correct_typed = [n for n in names if n.get("is_correct_name") == "1" and n.get("type_strain_ids")]
@@ -69,23 +77,38 @@ def main(argv: list[str] | None = None) -> int:
         lpsn_gtdb = {g for n in names for g in split(n.get("gtdb_ids", ""))}
         has_gtdb = any(m["gtdb_id"] in lpsn_gtdb or m["predicate"] == "skos:closeMatch"
                        for m in inv.gtdb.get(tid, []))
-        strain_count = len(inv.strains.get(tid, []))
-        if args.rule == "core" and not (strain_count and correct_typed and has_gtdb):
+        strain_count = len({
+            s["strain_id"]
+            for t in (tid, *descendants)
+            for s in inv.strains.get(t, [])
+        })
+        if args.rule == "core" and not (
+            (sources or desc_sources) and strain_count and correct_typed and has_gtdb
+        ):
             continue
         # NCBI itself, the attesting sources, and GTDB when it maps (#5).
         n_sources = len(sources | {"ncbitaxon"} | ({"gtdb"} if has_gtdb else set()))
         candidates.append((-n_sources, -strain_count, int(tid.split(":")[1]), tid, row["label"], n_sources,
-                           strain_count))
+                           strain_count, desc_sources))
     candidates.sort()
     # A headerless append onto a missing or empty scope file would make the
     # first data row the header (#10).
     if not args.append or not SCOPE_PATH.exists() or SCOPE_PATH.stat().st_size == 0:
         print("identifier\tadded\treason")
     selected = candidates if args.all else candidates[:args.top]
-    for _a, _b, _c, tid, label, n_sources, strain_count in selected:
-        reason = (f"{args.rule} rule: {label}, {n_sources} sources incl. NCBI, "
-                  f"{strain_count} BacDive strains, LPSN correct name with type strain, GTDB mapping"
-                  if args.rule == "core" else f"{args.rule} rule: {label}, {n_sources} sources incl. NCBI")
+    for _a, _b, _c, tid, label, n_sources, strain_count, desc_sources in selected:
+        if args.rule == "core":
+            reason = (
+                f"{args.rule} rule: {label}, {n_sources} sources incl. NCBI, "
+                f"{strain_count} BacDive strains, LPSN correct name with type strain, GTDB mapping"
+            )
+        elif desc_sources:
+            reason = (
+                f"{args.rule} rule: {label}, {n_sources} sources incl. NCBI "
+                f"(descendant strains attested by {', '.join(desc_sources)})"
+            )
+        else:
+            reason = f"{args.rule} rule: {label}, {n_sources} sources incl. NCBI"
         print(f"{tid}\t{args.date}\t{reason}")
     print(f"{len(selected)} of {len(candidates)} candidates proposed", file=sys.stderr)
     return 0

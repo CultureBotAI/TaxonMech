@@ -7,48 +7,136 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../theme-toggle.js"></script>
 <script defer src="../vendor/fflate-0.8.2.js"></script>
-<script defer src="../compressed-data.js?v=434e253832135143"></script>
+<script defer src="../compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="../index.html">TaxonMech</a>
   <nav>
     <a href="../browse.html">Browse</a>
     <a href="../type-strains.html">Type strains</a>
+    <a href="../map.html">Text map</a>
     <a href="../sources.html">Sources</a>
+    <a href="../index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../index.html">TaxonMech</a> › <span>Bacteria</span>
+</nav>
 <h1>Bacteria</h1>
 <p class="lede">Species and infraspecific taxa under NCBITaxon:2, including uncultured and environmental taxa.</p>
-<section id="taxon-browser" data-domain="BACTERIA" data-typed="false" data-page="1923" data-size="200" data-root="../">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="BACTERIA" data-typed="false" data-page="1923" data-size="200" data-root="../">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="../browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA" selected>Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">605695 records · page 1923 of 3029.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="../domain/bacteria-1922.html">Previous</a><a href="../domain/bacteria-1924.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>Bacteria</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
-<tr><td><a href="../taxon.html?id=NCBITaxon:890055"><em>Pontibacter populi</em></a></td><td><code>NCBITaxon:890055</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:890055"><em>Pontibacter populi</em></a></td><td><code>NCBITaxon:890055</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2694930"><em>Pontibacter pudoricolor</em></a></td><td><code>NCBITaxon:2694930</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2603253"><em>Pontibacter qinzhouensis</em></a></td><td><code>NCBITaxon:2603253</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1179743"><em>Pontibacter ramchanderi</em></a></td><td><code>NCBITaxon:1179743</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:932085"><em>Pontibacter rhizosphera</em></a></td><td><code>NCBITaxon:932085</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:336989"><em>Pontibacter roseus</em></a></td><td><code>NCBITaxon:336989</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1122967"><em>Pontibacter roseus DSM 17521</em></a></td><td><code>NCBITaxon:1122967</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1343895"><em>Pontibacter ruber</em></a></td><td><code>NCBITaxon:1343895</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1343895"><em>Pontibacter ruber</em></a></td><td><code>NCBITaxon:1343895</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2791028"><em>Pontibacter rufus</em></a></td><td><code>NCBITaxon:2791028</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1745966"><em>Pontibacter rugosus</em></a></td><td><code>NCBITaxon:1745966</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2694929"><em>Pontibacter russatus</em></a></td><td><code>NCBITaxon:2694929</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1084525"><em>Pontibacter saemangeumensis</em></a></td><td><code>NCBITaxon:1084525</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:641242"><em>Pontibacter salisaro</em></a></td><td><code>NCBITaxon:641242</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2305183"><em>Pontibacter silvestris</em></a></td><td><code>NCBITaxon:2305183</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2305183"><em>Pontibacter silvestris</em></a></td><td><code>NCBITaxon:2305183</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:890056"><em>Pontibacter soli</em></a></td><td><code>NCBITaxon:890056</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1895908"><em>Pontibacter sp.</em></a></td><td><code>NCBITaxon:1895908</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>3</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3127458"><em>Pontibacter sp. 13R65</em></a></td><td><code>NCBITaxon:3127458</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3127458"><em>Pontibacter sp. 13R65</em></a></td><td><code>NCBITaxon:3127458</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:867132"><em>Pontibacter sp. 15-10</em></a></td><td><code>NCBITaxon:867132</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1169588"><em>Pontibacter sp. A23</em></a></td><td><code>NCBITaxon:1169588</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1648052"><em>Pontibacter sp. AK67</em></a></td><td><code>NCBITaxon:1648052</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -57,7 +145,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1571904"><em>Pontibacter sp. AT03-03</em></a></td><td><code>NCBITaxon:1571904</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1571905"><em>Pontibacter sp. AT03-04</em></a></td><td><code>NCBITaxon:1571905</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1571906"><em>Pontibacter sp. AT04-04</em></a></td><td><code>NCBITaxon:1571906</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1144253"><em>Pontibacter sp. BAB1700</em></a></td><td><code>NCBITaxon:1144253</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1144253"><em>Pontibacter sp. BAB1700</em></a></td><td><code>NCBITaxon:1144253</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1864797"><em>Pontibacter sp. BAB-5374</em></a></td><td><code>NCBITaxon:1864797</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1639559"><em>Pontibacter sp. Bac128</em></a></td><td><code>NCBITaxon:1639559</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1639560"><em>Pontibacter sp. Bac129</em></a></td><td><code>NCBITaxon:1639560</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -85,7 +173,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1313054"><em>Pontibacter sp. D9</em></a></td><td><code>NCBITaxon:1313054</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:947768"><em>Pontibacter sp. Desert8</em></a></td><td><code>NCBITaxon:947768</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2919918"><em>Pontibacter sp. E15-1</em></a></td><td><code>NCBITaxon:2919918</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2789860"><em>Pontibacter sp. FD36</em></a></td><td><code>NCBITaxon:2789860</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2789860"><em>Pontibacter sp. FD36</em></a></td><td><code>NCBITaxon:2789860</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3074898"><em>Pontibacter sp. G13</em></a></td><td><code>NCBITaxon:3074898</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3712182"><em>Pontibacter sp. GD13</em></a></td><td><code>NCBITaxon:3712182</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3712180"><em>Pontibacter sp. GD7</em></a></td><td><code>NCBITaxon:3712180</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -150,22 +238,22 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1104778"><em>Pontibacter sp. YJ19</em></a></td><td><code>NCBITaxon:1104778</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2304246"><em>Pontibacter terrae</em></a></td><td><code>NCBITaxon:2304246</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1332631"><em>Pontibacter toksunensis</em></a></td><td><code>NCBITaxon:1332631</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1610492"><em>Pontibacter ummariensis</em></a></td><td><code>NCBITaxon:1610492</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1610492"><em>Pontibacter ummariensis</em></a></td><td><code>NCBITaxon:1610492</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1765052"><em>Pontibacter virosus</em></a></td><td><code>NCBITaxon:1765052</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2905679"><em>Pontibacter vulgaris</em></a></td><td><code>NCBITaxon:2905679</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:557332"><em>Pontibacter xinjiangensis</em></a></td><td><code>NCBITaxon:557332</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1400980"><em>Pontibacter yuliensis</em></a></td><td><code>NCBITaxon:1400980</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2036029"><em>Pontibacterium granulatum</em></a></td><td><code>NCBITaxon:2036029</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2781979"><em>Pontibacterium sinense</em></a></td><td><code>NCBITaxon:2781979</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2036026"><em>Pontibacterium sp.</em></a></td><td><code>NCBITaxon:2036026</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>110</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2781979"><em>Pontibacterium sinense</em></a></td><td><code>NCBITaxon:2781979</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2036026"><em>Pontibacterium sp.</em></a></td><td><code>NCBITaxon:2036026</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>7 (7 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3343269"><em>Pontibacterium sp. JAM-7</em></a></td><td><code>NCBITaxon:3343269</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1123045"><em>Ponticaulis koreensis</em></a></td><td><code>NCBITaxon:1123045</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:551789"><em>Ponticaulis koreensis DSM 19734</em></a></td><td><code>NCBITaxon:551789</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2665222"><em>Ponticaulis profundi</em></a></td><td><code>NCBITaxon:2665222</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2020902"><em>Ponticaulis sp.</em></a></td><td><code>NCBITaxon:2020902</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>6</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2020902"><em>Ponticaulis sp.</em></a></td><td><code>NCBITaxon:2020902</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>6 (6 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2614923"><em>Ponticaulis sp. ZB4141</em></a></td><td><code>NCBITaxon:2614923</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1943633"><em>Ponticoccus alexandrii</em></a></td><td><code>NCBITaxon:1943633</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:422297"><em>Ponticoccus litoralis</em></a></td><td><code>NCBITaxon:422297</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1943633"><em>Ponticoccus alexandrii</em></a></td><td><code>NCBITaxon:1943633</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:422297"><em>Ponticoccus litoralis</em></a></td><td><code>NCBITaxon:422297</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1122969"><em>Ponticoccus litoralis DSM 18986</em></a></td><td><code>NCBITaxon:1122969</code></td><td>STRAIN</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1294389"><em>Ponticoccus sp. CC-AMSY-47</em></a></td><td><code>NCBITaxon:1294389</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:646533"><em>Ponticoccus sp. IMCC5002</em></a></td><td><code>NCBITaxon:646533</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -179,52 +267,52 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1833766"><em>Ponticoccus sp. NN-18</em></a></td><td><code>NCBITaxon:1833766</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2983268"><em>Ponticoccus sp. OP508452</em></a></td><td><code>NCBITaxon:2983268</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1183253"><em>Ponticoccus sp. P4</em></a></td><td><code>NCBITaxon:1183253</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807565"><em>Ponticoccus sp. SC2-20</em></a></td><td><code>NCBITaxon:2807565</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807564"><em>Ponticoccus sp. SC2-22</em></a></td><td><code>NCBITaxon:2807564</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807563"><em>Ponticoccus sp. SC2-23</em></a></td><td><code>NCBITaxon:2807563</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807562"><em>Ponticoccus sp. SC2-24</em></a></td><td><code>NCBITaxon:2807562</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807561"><em>Ponticoccus sp. SC2-30</em></a></td><td><code>NCBITaxon:2807561</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807560"><em>Ponticoccus sp. SC2-35</em></a></td><td><code>NCBITaxon:2807560</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807559"><em>Ponticoccus sp. SC2-36</em></a></td><td><code>NCBITaxon:2807559</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807558"><em>Ponticoccus sp. SC2-37</em></a></td><td><code>NCBITaxon:2807558</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807557"><em>Ponticoccus sp. SC2-56</em></a></td><td><code>NCBITaxon:2807557</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807556"><em>Ponticoccus sp. SC2-58</em></a></td><td><code>NCBITaxon:2807556</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807555"><em>Ponticoccus sp. SC2-60</em></a></td><td><code>NCBITaxon:2807555</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807554"><em>Ponticoccus sp. SC2-64</em></a></td><td><code>NCBITaxon:2807554</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807553"><em>Ponticoccus sp. SC2-67</em></a></td><td><code>NCBITaxon:2807553</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807552"><em>Ponticoccus sp. SC2-95</em></a></td><td><code>NCBITaxon:2807552</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807551"><em>Ponticoccus sp. SC2-98</em></a></td><td><code>NCBITaxon:2807551</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807550"><em>Ponticoccus sp. SC6-11</em></a></td><td><code>NCBITaxon:2807550</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807549"><em>Ponticoccus sp. SC6-15</em></a></td><td><code>NCBITaxon:2807549</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807548"><em>Ponticoccus sp. SC6-18</em></a></td><td><code>NCBITaxon:2807548</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807547"><em>Ponticoccus sp. SC6-31</em></a></td><td><code>NCBITaxon:2807547</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807546"><em>Ponticoccus sp. SC6-32</em></a></td><td><code>NCBITaxon:2807546</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807545"><em>Ponticoccus sp. SC6-33</em></a></td><td><code>NCBITaxon:2807545</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807544"><em>Ponticoccus sp. SC6-36</em></a></td><td><code>NCBITaxon:2807544</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807543"><em>Ponticoccus sp. SC6-38</em></a></td><td><code>NCBITaxon:2807543</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807542"><em>Ponticoccus sp. SC6-42</em></a></td><td><code>NCBITaxon:2807542</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807541"><em>Ponticoccus sp. SC6-45</em></a></td><td><code>NCBITaxon:2807541</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807540"><em>Ponticoccus sp. SC6-49</em></a></td><td><code>NCBITaxon:2807540</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807539"><em>Ponticoccus sp. SC6-56</em></a></td><td><code>NCBITaxon:2807539</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807538"><em>Ponticoccus sp. SC6-60</em></a></td><td><code>NCBITaxon:2807538</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807537"><em>Ponticoccus sp. SC6-64</em></a></td><td><code>NCBITaxon:2807537</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807536"><em>Ponticoccus sp. SC6-65</em></a></td><td><code>NCBITaxon:2807536</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807535"><em>Ponticoccus sp. SC6-66</em></a></td><td><code>NCBITaxon:2807535</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807534"><em>Ponticoccus sp. SC6-69</em></a></td><td><code>NCBITaxon:2807534</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807533"><em>Ponticoccus sp. SC6-7</em></a></td><td><code>NCBITaxon:2807533</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807532"><em>Ponticoccus sp. SC6-8</em></a></td><td><code>NCBITaxon:2807532</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2807531"><em>Ponticoccus sp. SC6-9</em></a></td><td><code>NCBITaxon:2807531</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807565"><em>Ponticoccus sp. SC2-20</em></a></td><td><code>NCBITaxon:2807565</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807564"><em>Ponticoccus sp. SC2-22</em></a></td><td><code>NCBITaxon:2807564</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807563"><em>Ponticoccus sp. SC2-23</em></a></td><td><code>NCBITaxon:2807563</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807562"><em>Ponticoccus sp. SC2-24</em></a></td><td><code>NCBITaxon:2807562</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807561"><em>Ponticoccus sp. SC2-30</em></a></td><td><code>NCBITaxon:2807561</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807560"><em>Ponticoccus sp. SC2-35</em></a></td><td><code>NCBITaxon:2807560</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807559"><em>Ponticoccus sp. SC2-36</em></a></td><td><code>NCBITaxon:2807559</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807558"><em>Ponticoccus sp. SC2-37</em></a></td><td><code>NCBITaxon:2807558</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807557"><em>Ponticoccus sp. SC2-56</em></a></td><td><code>NCBITaxon:2807557</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807556"><em>Ponticoccus sp. SC2-58</em></a></td><td><code>NCBITaxon:2807556</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807555"><em>Ponticoccus sp. SC2-60</em></a></td><td><code>NCBITaxon:2807555</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807554"><em>Ponticoccus sp. SC2-64</em></a></td><td><code>NCBITaxon:2807554</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807553"><em>Ponticoccus sp. SC2-67</em></a></td><td><code>NCBITaxon:2807553</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807552"><em>Ponticoccus sp. SC2-95</em></a></td><td><code>NCBITaxon:2807552</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807551"><em>Ponticoccus sp. SC2-98</em></a></td><td><code>NCBITaxon:2807551</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807550"><em>Ponticoccus sp. SC6-11</em></a></td><td><code>NCBITaxon:2807550</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807549"><em>Ponticoccus sp. SC6-15</em></a></td><td><code>NCBITaxon:2807549</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807548"><em>Ponticoccus sp. SC6-18</em></a></td><td><code>NCBITaxon:2807548</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807547"><em>Ponticoccus sp. SC6-31</em></a></td><td><code>NCBITaxon:2807547</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807546"><em>Ponticoccus sp. SC6-32</em></a></td><td><code>NCBITaxon:2807546</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807545"><em>Ponticoccus sp. SC6-33</em></a></td><td><code>NCBITaxon:2807545</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807544"><em>Ponticoccus sp. SC6-36</em></a></td><td><code>NCBITaxon:2807544</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807543"><em>Ponticoccus sp. SC6-38</em></a></td><td><code>NCBITaxon:2807543</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807542"><em>Ponticoccus sp. SC6-42</em></a></td><td><code>NCBITaxon:2807542</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807541"><em>Ponticoccus sp. SC6-45</em></a></td><td><code>NCBITaxon:2807541</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807540"><em>Ponticoccus sp. SC6-49</em></a></td><td><code>NCBITaxon:2807540</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807539"><em>Ponticoccus sp. SC6-56</em></a></td><td><code>NCBITaxon:2807539</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807538"><em>Ponticoccus sp. SC6-60</em></a></td><td><code>NCBITaxon:2807538</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807537"><em>Ponticoccus sp. SC6-64</em></a></td><td><code>NCBITaxon:2807537</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807536"><em>Ponticoccus sp. SC6-65</em></a></td><td><code>NCBITaxon:2807536</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807535"><em>Ponticoccus sp. SC6-66</em></a></td><td><code>NCBITaxon:2807535</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807534"><em>Ponticoccus sp. SC6-69</em></a></td><td><code>NCBITaxon:2807534</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807533"><em>Ponticoccus sp. SC6-7</em></a></td><td><code>NCBITaxon:2807533</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807532"><em>Ponticoccus sp. SC6-8</em></a></td><td><code>NCBITaxon:2807532</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2807531"><em>Ponticoccus sp. SC6-9</em></a></td><td><code>NCBITaxon:2807531</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2070217"><em>Ponticoccus sp. SJ5B</em></a></td><td><code>NCBITaxon:2070217</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1961370"><em>Ponticoccus sp. UBA5052</em></a></td><td><code>NCBITaxon:1961370</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1961370"><em>Ponticoccus sp. UBA5052</em></a></td><td><code>NCBITaxon:1961370</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1515331"><em>Ponticoccus sp. UMTAL04</em></a></td><td><code>NCBITaxon:1515331</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1515332"><em>Ponticoccus sp. UMTAT04</em></a></td><td><code>NCBITaxon:1515332</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1515333"><em>Ponticoccus sp. UMTAT06</em></a></td><td><code>NCBITaxon:1515333</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1515335"><em>Ponticoccus sp.UMTAT10</em></a></td><td><code>NCBITaxon:1515335</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3038953"><em>Pontiella agarivorans</em></a></td><td><code>NCBITaxon:3038953</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2750659"><em>Pontiella desulfatans</em></a></td><td><code>NCBITaxon:2750659</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2837462"><em>Pontiella sp.</em></a></td><td><code>NCBITaxon:2837462</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>8</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2750659"><em>Pontiella desulfatans</em></a></td><td><code>NCBITaxon:2750659</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2837462"><em>Pontiella sp.</em></a></td><td><code>NCBITaxon:2837462</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>17 (17 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2750658"><em>Pontiella sulfatireligans</em></a></td><td><code>NCBITaxon:2750658</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2813032"><em>Pontiellaceae bacterium</em></a></td><td><code>NCBITaxon:2813032</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2813032"><em>Pontiellaceae bacterium</em></a></td><td><code>NCBITaxon:2813032</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>11 (11 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3035705"><em>Pontiellaceae bacterium B12219</em></a></td><td><code>NCBITaxon:3035705</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3035703"><em>Pontiellaceae bacterium B12227</em></a></td><td><code>NCBITaxon:3035703</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3035704"><em>Pontiellaceae bacterium B1224</em></a></td><td><code>NCBITaxon:3035704</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
@@ -234,12 +322,15 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:3035613"><em>Pontimicrobium sp. A30-9</em></a></td><td><code>NCBITaxon:3035613</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="../taxon-browser.js?v=434e253832135143"></script>
+<script defer src="../taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="../index.json.gz">Index JSON.gz</a> · <a href="../index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

@@ -1,0 +1,57 @@
+# YAML Record Review: Exiguobacterium sp. AFB-18
+- Repository: TaxonMech
+- Record: data/taxa/bacteria/exiguobacterium_sp_afb_18.yaml
+- Started UTC: 2026-09-23T01:26:23Z
+- Finished UTC: 2026-09-23T01:26:23Z
+- Verdict: pass
+
+## Target
+
+- YAML record: `data/taxa/bacteria/exiguobacterium_sp_afb_18.yaml`
+- Identifier: `NCBITaxon:1005636`
+- Label: `Exiguobacterium sp. AFB-18`
+- Rank: `SPECIES`
+- Parent: `NCBITaxon:2644629`
+- Registry row: `data/taxa/PATHS.tsv:1812`
+- Scope row: `curation/seed_scope.tsv:311200`
+- A pre-write `find reports/yaml_record_review ... -name '*-exiguobacterium_sp_afb_18.md'` check found no existing report for this stem; `find` includes ignored reports.
+
+## Validation
+
+- `just validate-strict data/taxa/bacteria/bacillus_sp_afb_16.yaml data/taxa/bacteria/bacillus_sp_afb_6.yaml data/taxa/bacteria/exiguobacterium_sp_afb_11.yaml data/taxa/bacteria/exiguobacterium_sp_afb_18.yaml` passed for this four-record batch.
+- `just validate data/taxa/bacteria/exiguobacterium_sp_afb_18.yaml` passed.
+
+## Identity and Grounding
+
+- The YAML identifier, label, rank, parent, and genetic code agree with `data/raw/ncbitaxon_taxa.tsv:210474`.
+- The stored lineage terminates at the asserted parent `NCBITaxon:2644629` / `unclassified Exiguobacterium`.
+- `grounding_status: EXACT` is appropriate for the NCBI species taxon.
+
+## Evidence
+
+- `data/raw/ncbitaxon_taxa.tsv:210474` attests `NCBITaxon:1005636` as `Exiguobacterium sp. AFB-18`, rank `SPECIES`, parent `NCBITaxon:2644629`, genetic code `11`, and NCBI snapshot `2026-09-13`.
+- Exact, gitignore-independent scans of `data/raw/madin_taxa.tsv` and `data/raw/gtdb_mappings.tsv` found no same-taxon rows for `NCBITaxon:1005636`.
+- An exact, gitignore-independent scan of `data/atb` and `data/straininfo` found no same-taxon rows for `NCBITaxon:1005636`, `Exiguobacterium sp. AFB-18`, or `exiguobacterium_sp_afb_18`.
+
+## Completeness
+
+- The generated NCBI identity, lineage, source attestation, and seed history are complete for the local source row.
+- The record has no GTDB mapping, synonym, xref, Madin, ATB, or StrainInfo material, matching the pinned local rows.
+
+## Findings
+
+- No findings.
+
+## Recommended Edits
+
+- None.
+
+## Follow-up Checks
+
+- Re-run `just validate data/taxa/bacteria/exiguobacterium_sp_afb_18.yaml` if the record is regenerated from updated sources.
+
+## Additional Notes
+
+- This review used pinned local sources under `data/raw/`, `data/atb/`, and `data/straininfo/`; live upstream lookup was not used.
+- `just validate-history` was not run because this review added no `history/` curation decision.
+- `just validate-products` was not applicable because the record has no `causal_graphs`.

@@ -7,29 +7,117 @@
 <link rel="stylesheet" href="style.css">
 <script src="theme-toggle.js"></script>
 <script defer src="vendor/fflate-0.8.2.js"></script>
-<script defer src="compressed-data.js?v=434e253832135143"></script>
+<script defer src="compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="index.html">TaxonMech</a>
   <nav>
     <a href="browse.html">Browse</a>
     <a href="type-strains.html">Type strains</a>
+    <a href="map.html">Text map</a>
     <a href="sources.html">Sources</a>
+    <a href="index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="index.html">TaxonMech</a> › <span>All records</span>
+</nav>
 <h1>All records</h1>
-<section id="taxon-browser" data-domain="" data-typed="false" data-page="1055" data-size="200" data-root="">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
-<p id="taxon-status" role="status">625960 records · page 1055 of 3130.</p>
+<section id="taxon-browser" class="browse-layout" data-domain="" data-typed="false" data-page="1055" data-size="200" data-root="">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA">Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
+<p id="taxon-status" role="status">626048 records · page 1055 of 3131.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="browse-1054.html">Previous</a><a href="browse-1056.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>All records</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="taxon.html?id=NCBITaxon:3369173"><em>Cupriavidus sp. S25</em></a></td><td><code>NCBITaxon:3369173</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3419730"><em>Cupriavidus sp. S30</em></a></td><td><code>NCBITaxon:3419730</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -55,13 +143,13 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1181203"><em>Cupriavidus sp. SaZS1</em></a></td><td><code>NCBITaxon:1181203</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1181204"><em>Cupriavidus sp. SaZS4</em></a></td><td><code>NCBITaxon:1181204</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1082924"><em>Cupriavidus sp. SD1(2011)</em></a></td><td><code>NCBITaxon:1082924</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1539143"><em>Cupriavidus sp. SHE</em></a></td><td><code>NCBITaxon:1539143</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>32</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3085766"><em>Cupriavidus sp. SIMBA_020</em></a></td><td><code>NCBITaxon:3085766</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>10</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1539143"><em>Cupriavidus sp. SHE</em></a></td><td><code>NCBITaxon:1539143</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3085766"><em>Cupriavidus sp. SIMBA_020</em></a></td><td><code>NCBITaxon:3085766</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:608509"><em>Cupriavidus sp. sk0929</em></a></td><td><code>NCBITaxon:608509</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:574749"><em>Cupriavidus sp. SK3</em></a></td><td><code>NCBITaxon:574749</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1549742"><em>Cupriavidus sp. sk43</em></a></td><td><code>NCBITaxon:1549742</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1470558"><em>Cupriavidus sp. SK-3</em></a></td><td><code>NCBITaxon:1470558</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>6</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:574750"><em>Cupriavidus sp. SK-4</em></a></td><td><code>NCBITaxon:574750</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>10</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1470558"><em>Cupriavidus sp. SK-3</em></a></td><td><code>NCBITaxon:1470558</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:574750"><em>Cupriavidus sp. SK-4</em></a></td><td><code>NCBITaxon:574750</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1036801"><em>Cupriavidus sp. SK PF14</em></a></td><td><code>NCBITaxon:1036801</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1036799"><em>Cupriavidus sp. SK PF8</em></a></td><td><code>NCBITaxon:1036799</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1487340"><em>Cupriavidus sp. SL-1</em></a></td><td><code>NCBITaxon:1487340</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -80,7 +168,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1628798"><em>Cupriavidus sp. SP37C</em></a></td><td><code>NCBITaxon:1628798</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:942875"><em>Cupriavidus sp. SrBRr-232</em></a></td><td><code>NCBITaxon:942875</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3704092"><em>Cupriavidus sp. SRI_010</em></a></td><td><code>NCBITaxon:3704092</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3109596"><em>Cupriavidus sp. SS-3</em></a></td><td><code>NCBITaxon:3109596</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>10</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3109596"><em>Cupriavidus sp. SS-3</em></a></td><td><code>NCBITaxon:3109596</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1662009"><em>Cupriavidus sp. ST-14</em></a></td><td><code>NCBITaxon:1662009</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3458442"><em>Cupriavidus sp. STE10</em></a></td><td><code>NCBITaxon:3458442</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1586700"><em>Cupriavidus sp. STM 8555</em></a></td><td><code>NCBITaxon:1586700</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -90,7 +178,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1699181"><em>Cupriavidus sp. STW8-1</em></a></td><td><code>NCBITaxon:1699181</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1503046"><em>Cupriavidus sp. STW8_7</em></a></td><td><code>NCBITaxon:1503046</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1699182"><em>Cupriavidus sp. STW8-7</em></a></td><td><code>NCBITaxon:1699182</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2653854"><em>Cupriavidus sp. SW-Y-13</em></a></td><td><code>NCBITaxon:2653854</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2653854"><em>Cupriavidus sp. SW-Y-13</em></a></td><td><code>NCBITaxon:2653854</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1174683"><em>Cupriavidus sp. SWC1</em></a></td><td><code>NCBITaxon:1174683</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:681654"><em>Cupriavidus sp. SWF65028</em></a></td><td><code>NCBITaxon:681654</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1002873"><em>Cupriavidus sp. SWF65033</em></a></td><td><code>NCBITaxon:1002873</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -114,7 +202,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1191497"><em>Cupriavidus sp. SWF67289</em></a></td><td><code>NCBITaxon:1191497</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:647952"><em>Cupriavidus sp. SWF67296</em></a></td><td><code>NCBITaxon:647952</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2036954"><em>Cupriavidus sp. SX2016</em></a></td><td><code>NCBITaxon:2036954</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3055037"><em>Cupriavidus sp. SZY C1</em></a></td><td><code>NCBITaxon:3055037</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3055037"><em>Cupriavidus sp. SZY C1</em></a></td><td><code>NCBITaxon:3055037</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:638266"><em>Cupriavidus sp. T10</em></a></td><td><code>NCBITaxon:638266</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:674647"><em>Cupriavidus sp. T3-YC6798</em></a></td><td><code>NCBITaxon:674647</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:638267"><em>Cupriavidus sp. T4</em></a></td><td><code>NCBITaxon:638267</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -137,7 +225,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1699186"><em>Cupriavidus sp. TGCL-3</em></a></td><td><code>NCBITaxon:1699186</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1536712"><em>Cupriavidus sp. THG-S20</em></a></td><td><code>NCBITaxon:1536712</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1758451"><em>Cupriavidus sp. THI447</em></a></td><td><code>NCBITaxon:1758451</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2880159"><em>Cupriavidus sp. TKC</em></a></td><td><code>NCBITaxon:2880159</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>32</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2880159"><em>Cupriavidus sp. TKC</em></a></td><td><code>NCBITaxon:2880159</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3434465"><em>Cupriavidus sp. TMH.W2</em></a></td><td><code>NCBITaxon:3434465</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:290301"><em>Cupriavidus sp. TOHOCD5-8</em></a></td><td><code>NCBITaxon:290301</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1891923"><em>Cupriavidus sp. TOS1</em></a></td><td><code>NCBITaxon:1891923</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -169,29 +257,29 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1891922"><em>Cupriavidus sp. TW1</em></a></td><td><code>NCBITaxon:1891922</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1461692"><em>Cupriavidus sp. TW2</em></a></td><td><code>NCBITaxon:1461692</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:545541"><em>Cupriavidus sp. U124</em></a></td><td><code>NCBITaxon:545541</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2920269"><em>Cupriavidus sp. U2</em></a></td><td><code>NCBITaxon:2920269</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2920269"><em>Cupriavidus sp. U2</em></a></td><td><code>NCBITaxon:2920269</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1749021"><em>Cupriavidus sp. U9</em></a></td><td><code>NCBITaxon:1749021</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1946396"><em>Cupriavidus sp. UBA2010</em></a></td><td><code>NCBITaxon:1946396</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>32</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1946397"><em>Cupriavidus sp. UBA2027</em></a></td><td><code>NCBITaxon:1946397</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>32</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1946398"><em>Cupriavidus sp. UBA2526</em></a></td><td><code>NCBITaxon:1946398</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>32</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1946399"><em>Cupriavidus sp. UBA2534</em></a></td><td><code>NCBITaxon:1946399</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>32</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1946396"><em>Cupriavidus sp. UBA2010</em></a></td><td><code>NCBITaxon:1946396</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1946397"><em>Cupriavidus sp. UBA2027</em></a></td><td><code>NCBITaxon:1946397</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1946398"><em>Cupriavidus sp. UBA2526</em></a></td><td><code>NCBITaxon:1946398</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1946399"><em>Cupriavidus sp. UBA2534</em></a></td><td><code>NCBITaxon:1946399</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:658133"><em>Cupriavidus sp. UFLA01-657</em></a></td><td><code>NCBITaxon:658133</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:658134"><em>Cupriavidus sp. UFLA01-658</em></a></td><td><code>NCBITaxon:658134</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:658135"><em>Cupriavidus sp. UFLA01-659</em></a></td><td><code>NCBITaxon:658135</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:658136"><em>Cupriavidus sp. UFLA02-128</em></a></td><td><code>NCBITaxon:658136</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:658137"><em>Cupriavidus sp. UFLA02-129</em></a></td><td><code>NCBITaxon:658137</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:658138"><em>Cupriavidus sp. UFLA04-121</em></a></td><td><code>NCBITaxon:658138</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2899826"><em>Cupriavidus sp. UGS-1</em></a></td><td><code>NCBITaxon:2899826</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2899826"><em>Cupriavidus sp. UGS-1</em></a></td><td><code>NCBITaxon:2899826</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1644387"><em>Cupriavidus sp. UIWRF0009</em></a></td><td><code>NCBITaxon:1644387</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1644388"><em>Cupriavidus sp. UIWRF0137</em></a></td><td><code>NCBITaxon:1644388</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1644389"><em>Cupriavidus sp. UIWRF0138</em></a></td><td><code>NCBITaxon:1644389</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1644390"><em>Cupriavidus sp. UIWRF0148</em></a></td><td><code>NCBITaxon:1644390</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1862321"><em>Cupriavidus sp. UME77</em></a></td><td><code>NCBITaxon:1862321</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>7</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1862321"><em>Cupriavidus sp. UME77</em></a></td><td><code>NCBITaxon:1862321</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1534003"><em>Cupriavidus sp. UR 7-04</em></a></td><td><code>NCBITaxon:1534003</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3153577"><em>Cupriavidus sp. USM2A2</em></a></td><td><code>NCBITaxon:3153577</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:367826"><em>Cupriavidus sp. USMAA24</em></a></td><td><code>NCBITaxon:367826</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:876364"><em>Cupriavidus sp. USMAA2-4</em></a></td><td><code>NCBITaxon:876364</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1389192"><em>Cupriavidus sp. USMAHM13</em></a></td><td><code>NCBITaxon:1389192</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:876364"><em>Cupriavidus sp. USMAA2-4</em></a></td><td><code>NCBITaxon:876364</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1389192"><em>Cupriavidus sp. USMAHM13</em></a></td><td><code>NCBITaxon:1389192</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1649586"><em>Cupriavidus sp. UYMAM01A</em></a></td><td><code>NCBITaxon:1649586</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1649587"><em>Cupriavidus sp. UYMAM01B</em></a></td><td><code>NCBITaxon:1649587</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1825479"><em>Cupriavidus sp. UYMCuPT04</em></a></td><td><code>NCBITaxon:1825479</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -226,19 +314,22 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1647638"><em>Cupriavidus sp. UYMS13B</em></a></td><td><code>NCBITaxon:1647638</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1774746"><em>Cupriavidus sp. UYMSc13B</em></a></td><td><code>NCBITaxon:1774746</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1774744"><em>Cupriavidus sp. UYMU48A</em></a></td><td><code>NCBITaxon:1774744</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1080187"><em>Cupriavidus sp. UYPR2.512</em></a></td><td><code>NCBITaxon:1080187</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1080187"><em>Cupriavidus sp. UYPR2.512</em></a></td><td><code>NCBITaxon:1080187</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1080188"><em>Cupriavidus sp. UYPR2.54</em></a></td><td><code>NCBITaxon:1080188</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1080189"><em>Cupriavidus sp. UYPR2.55</em></a></td><td><code>NCBITaxon:1080189</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1080190"><em>Cupriavidus sp. UYPR2.56</em></a></td><td><code>NCBITaxon:1080190</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1029656"><em>Cupriavidus sp. VK-15</em></a></td><td><code>NCBITaxon:1029656</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="taxon-browser.js?v=434e253832135143"></script>
+<script defer src="taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="index.json.gz">Index JSON.gz</a> · <a href="index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

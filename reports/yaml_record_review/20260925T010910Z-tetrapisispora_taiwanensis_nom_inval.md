@@ -1,0 +1,51 @@
+# YAML Record Review: Tetrapisispora taiwanensis (nom. inval.)
+
+- Verdict: pass
+- Target: `data/taxa/eukaryota/tetrapisispora_taiwanensis_nom_inval.yaml`
+- Identifier: `NCBITaxon:1321243`
+
+## Target
+
+Reviewed the complete 84-line YAML record for Tetrapisispora taiwanensis (nom. inval.). The final ignored-file-inclusive preflight of reports/yaml_record_review found no existing or parallel report for tetrapisispora_taiwanensis_nom_inval.
+
+## Validation
+
+- `just validate data/taxa/eukaryota/tetrapisispora_taiwanensis_nom_inval.yaml` reported `No issues found`.
+- `just validate-strict data/taxa/eukaryota/tetrapisispora_taiwanensis_nom_inval.yaml data/taxa/eukaryota/tetrapyrgos_nigripes.yaml data/taxa/eukaryota/teunia_tronadorensis.yaml data/taxa/eukaryota/teunomyces_aglyptinius.yaml` scanned all four files and reported 0 files with ERROR and 0 total ERROR rows.
+
+## Identity and Grounding
+
+- The retained NCBI taxonomy row at `data/raw/ncbitaxon_taxa.tsv:314802` is `NCBITaxon:1321243`, label `Tetrapisispora taiwanensis (nom. inval.)`, rank `SPECIES`, parent `NCBITaxon:2633500`, genetic code `1`, taxonomy snapshot `2026-09-13`, with 1 exact synonym, 0 broad synonyms, and 3 related synonyms.
+- The seed-scope table has exactly one row for `NCBITaxon:1321243` at line 59452.
+- All 14 lineage links in the YAML were present in the retained NCBI taxonomy table with no missing IDs and no parent or label mismatches.
+- The NCBI merged-ID table maps obsolete `NCBITaxon:435796` to current `NCBITaxon:1321243`; the YAML retained no obsolete IDs.
+
+## Evidence
+
+- The GOLD aggregate table has exactly one row for `NCBITaxon:1321243` at line 7807 with `organism_count` 1, matching the YAML GOLD source assertion count of 1.
+- Native GOLD source tables include 1 organism row, 1 project row, and 0 analysis rows for this taxon.
+- `data/raw/ncbi_type_material.tsv` has no exact `NCBITaxon:1321243` rows.
+- The local BacDive exact table has no row for `NCBITaxon:1321243`.
+- The local StrainInfo exact scan found 1 direct row carrying 2 exact deposit rows for `NCBITaxon:1321243`.
+
+## Completeness
+
+- The generated raw strain tables `data/raw/bacdive_strains.tsv`, `data/raw/culture_collection_strains.tsv`, `data/raw/strain_assemblies.tsv`, `data/raw/strain_genome_records.tsv`, and `data/raw/strain_related_records.tsv` all have 0 rows for `NCBITaxon:1321243`, matching `strain_count: 0`.
+- Auxiliary local source tables for BacTobase/BactoTraits, GTDB mappings, GTDB species, LPSN, Madin traits, and MediaDive all have 0 exact rows for `NCBITaxon:1321243`.
+- Generated StrainInfo overlay tables `data/straininfo/assemblies.tsv`, `data/straininfo/exclusions.tsv`, and `data/straininfo/related_records.tsv.gz` all have 0 rows for `NCBITaxon:1321243`.
+
+## Findings
+
+No findings.
+
+## Recommended Edits
+
+No edits are recommended.
+
+## Follow-up Checks
+
+No follow-up checks are required.
+
+## Additional Notes
+
+The bounded review found the record's NCBI identity, NCBI lineage, GOLD assertion count, StrainInfo exact matches, and zero generated-strain coverage internally consistent with the local generated evidence.

@@ -135,7 +135,7 @@ strain-overlap table.
 
 ## Source terms and primary documentation
 
-Project content remains CC0; imported data retain their source terms and
+Project-authored data are CC-BY-4.0 and code is BSD-3-Clause; imported data retain their source terms and
 citations. BacDive, StrainInfo, SeqCode and AllTheBacteria attribution accompanies
 their source metadata. SeqCode's public data are [CC BY 4.0](https://registry.seqco.de/help/open_data).
 NCBI/ENA/DDBJ identifiers follow [INSDC data-sharing policy](https://www.ebi.ac.uk/ena/browser/about/policies).

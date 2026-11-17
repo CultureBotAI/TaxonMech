@@ -7,29 +7,117 @@
 <link rel="stylesheet" href="style.css">
 <script src="theme-toggle.js"></script>
 <script defer src="vendor/fflate-0.8.2.js"></script>
-<script defer src="compressed-data.js?v=434e253832135143"></script>
+<script defer src="compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="index.html">TaxonMech</a>
   <nav>
     <a href="browse.html">Browse</a>
     <a href="type-strains.html">Type strains</a>
+    <a href="map.html">Text map</a>
     <a href="sources.html">Sources</a>
+    <a href="index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="index.html">TaxonMech</a> › <span>All records</span>
+</nav>
 <h1>All records</h1>
-<section id="taxon-browser" data-domain="" data-typed="false" data-page="2370" data-size="200" data-root="">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
-<p id="taxon-status" role="status">625960 records · page 2370 of 3130.</p>
+<section id="taxon-browser" class="browse-layout" data-domain="" data-typed="false" data-page="2370" data-size="200" data-root="">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA">Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
+<p id="taxon-status" role="status">626048 records · page 2370 of 3131.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="browse-2369.html">Previous</a><a href="browse-2371.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>All records</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577156"><em>Salmonella enterica subsp. arizonae serovar 41:z4,z32:-</em></a></td><td><code>NCBITaxon:2577156</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577157"><em>Salmonella enterica subsp. arizonae serovar 42:g,z51:-</em></a></td><td><code>NCBITaxon:2577157</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -52,26 +140,26 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2577174"><em>Salmonella enterica subsp. arizonae serovar 45:z4,z32:-</em></a></td><td><code>NCBITaxon:2577174</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577175"><em>Salmonella enterica subsp. arizonae serovar 47:g,z51:-</em></a></td><td><code>NCBITaxon:2577175</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577176"><em>Salmonella enterica subsp. arizonae serovar 47:z29:-</em></a></td><td><code>NCBITaxon:2577176</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2034674"><em>Salmonella enterica subsp. arizonae serovar 47:z4,z23:-</em></a></td><td><code>NCBITaxon:2034674</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>21527</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2034674"><em>Salmonella enterica subsp. arizonae serovar 47:z4,z23:-</em></a></td><td><code>NCBITaxon:2034674</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577177"><em>Salmonella enterica subsp. arizonae serovar 48:z36:-</em></a></td><td><code>NCBITaxon:2577177</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1151167"><em>Salmonella enterica subsp. arizonae serovar 48:z4,z23:-</em></a></td><td><code>NCBITaxon:1151167</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1967583"><em>Salmonella enterica subsp. arizonae serovar 48:z4,z23,z32:-</em></a></td><td><code>NCBITaxon:1967583</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>71</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1967583"><em>Salmonella enterica subsp. arizonae serovar 48:z4,z23,z32:-</em></a></td><td><code>NCBITaxon:1967583</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1967584"><em>Salmonella enterica subsp. arizonae serovar 48:z4,z24:-</em></a></td><td><code>NCBITaxon:1967584</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577178"><em>Salmonella enterica subsp. arizonae serovar 48:z4,z32:-</em></a></td><td><code>NCBITaxon:2577178</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1974320"><em>Salmonella enterica subsp. arizonae serovar 50:r:z</em></a></td><td><code>NCBITaxon:1974320</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>149</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1974320"><em>Salmonella enterica subsp. arizonae serovar 50:r:z</em></a></td><td><code>NCBITaxon:1974320</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577179"><em>Salmonella enterica subsp. arizonae serovar 50:z29:-</em></a></td><td><code>NCBITaxon:2577179</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577180"><em>Salmonella enterica subsp. arizonae serovar 50:z36:-</em></a></td><td><code>NCBITaxon:2577180</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577182"><em>Salmonella enterica subsp. arizonae serovar 50:z4,z23:-</em></a></td><td><code>NCBITaxon:2577182</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577181"><em>Salmonella enterica subsp. arizonae serovar 50:z4,z23,z32:-</em></a></td><td><code>NCBITaxon:2577181</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577183"><em>Salmonella enterica subsp. arizonae serovar 50:z4,z24:-</em></a></td><td><code>NCBITaxon:2577183</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577184"><em>Salmonella enterica subsp. arizonae serovar 50:z4,z32:-</em></a></td><td><code>NCBITaxon:2577184</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2172529"><em>Salmonella enterica subsp. arizonae serovar 51:g,z51:-</em></a></td><td><code>NCBITaxon:2172529</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>71</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2172529"><em>Salmonella enterica subsp. arizonae serovar 51:g,z51:-</em></a></td><td><code>NCBITaxon:2172529</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:59243"><em>Salmonella enterica subsp. arizonae serovar 51:z4,z23:-</em></a></td><td><code>NCBITaxon:59243</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577185"><em>Salmonella enterica subsp. arizonae serovar 51:z4,z24:-</em></a></td><td><code>NCBITaxon:2577185</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577186"><em>Salmonella enterica subsp. arizonae serovar 51:z4,z32:-</em></a></td><td><code>NCBITaxon:2577186</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1243605"><em>Salmonella enterica subsp. arizonae serovar 53:-:-</em></a></td><td><code>NCBITaxon:1243605</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1160726"><em>Salmonella enterica subsp. arizonae serovar 53:g,z51:-</em></a></td><td><code>NCBITaxon:1160726</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1243606"><em>Salmonella enterica subsp. arizonae serovar 53:-:- str. SA20100345</em></a></td><td><code>NCBITaxon:1243606</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>71</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1243606"><em>Salmonella enterica subsp. arizonae serovar 53:-:- str. SA20100345</em></a></td><td><code>NCBITaxon:1243606</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577187"><em>Salmonella enterica subsp. arizonae serovar 53:z29:-</em></a></td><td><code>NCBITaxon:2577187</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577189"><em>Salmonella enterica subsp. arizonae serovar 53:z4,z23:-</em></a></td><td><code>NCBITaxon:2577189</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577188"><em>Salmonella enterica subsp. arizonae serovar 53:z4,z23,z32:-</em></a></td><td><code>NCBITaxon:2577188</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -80,7 +168,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2978381"><em>Salmonella enterica subsp. arizonae serovar 56:z36:-</em></a></td><td><code>NCBITaxon:2978381</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2729102"><em>Salmonella enterica subsp. arizonae serovar 56:z4</em></a></td><td><code>NCBITaxon:2729102</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1160727"><em>Salmonella enterica subsp. arizonae serovar 56:z4,z23:-</em></a></td><td><code>NCBITaxon:1160727</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1967630"><em>Salmonella enterica subsp. arizonae serovar 56:z4,z23,(z32):-</em></a></td><td><code>NCBITaxon:1967630</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>71</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1967630"><em>Salmonella enterica subsp. arizonae serovar 56:z4,z23,(z32):-</em></a></td><td><code>NCBITaxon:1967630</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577192"><em>Salmonella enterica subsp. arizonae serovar 56:z4,z23,z32:-</em></a></td><td><code>NCBITaxon:2577192</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577193"><em>Salmonella enterica subsp. arizonae serovar 59:z29:-</em></a></td><td><code>NCBITaxon:2577193</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577194"><em>Salmonella enterica subsp. arizonae serovar 59:z36:-</em></a></td><td><code>NCBITaxon:2577194</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -88,13 +176,13 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2577196"><em>Salmonella enterica subsp. arizonae serovar 62:g,z51:-</em></a></td><td><code>NCBITaxon:2577196</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577197"><em>Salmonella enterica subsp. arizonae serovar 62:z29:-</em></a></td><td><code>NCBITaxon:2577197</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:41515"><em>Salmonella enterica subsp. arizonae serovar 62:z36:-</em></a></td><td><code>NCBITaxon:41515</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1245396"><em>Salmonella enterica subsp. arizonae serovar 62:z36:- str. 5335/86</em></a></td><td><code>NCBITaxon:1245396</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>71</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1386967"><em>Salmonella enterica subsp. arizonae serovar 62:z36:- str. RKS2983</em></a></td><td><code>NCBITaxon:1386967</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>71</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:41514"><em>Salmonella enterica subsp. arizonae serovar 62:z4,z23:-</em></a></td><td><code>NCBITaxon:41514</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>71</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1245396"><em>Salmonella enterica subsp. arizonae serovar 62:z36:- str. 5335/86</em></a></td><td><code>NCBITaxon:1245396</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1386967"><em>Salmonella enterica subsp. arizonae serovar 62:z36:- str. RKS2983</em></a></td><td><code>NCBITaxon:1386967</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:41514"><em>Salmonella enterica subsp. arizonae serovar 62:z4,z23:-</em></a></td><td><code>NCBITaxon:41514</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:882884"><em>Salmonella enterica subsp. arizonae serovar 62:z4,z23:- str. RSK2980</em></a></td><td><code>NCBITaxon:882884</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577198"><em>Salmonella enterica subsp. arizonae serovar 62:z4,z32:-</em></a></td><td><code>NCBITaxon:2577198</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1243607"><em>Salmonella enterica subsp. arizonae serovar 63:g,z51:-</em></a></td><td><code>NCBITaxon:1243607</code></td><td>NO_RANK</td><td>BACTERIA</td><td>2</td><td>0</td><td>71</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1243608"><em>Salmonella enterica subsp. arizonae serovar 63:g,z51:- str. So 20/20</em></a></td><td><code>NCBITaxon:1243608</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>71</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1243607"><em>Salmonella enterica subsp. arizonae serovar 63:g,z51:-</em></a></td><td><code>NCBITaxon:1243607</code></td><td>NO_RANK</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1243608"><em>Salmonella enterica subsp. arizonae serovar 63:g,z51:- str. So 20/20</em></a></td><td><code>NCBITaxon:1243608</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577199"><em>Salmonella enterica subsp. arizonae serovar 63:z36:-</em></a></td><td><code>NCBITaxon:2577199</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577200"><em>Salmonella enterica subsp. arizonae serovar 63:z4,z23:-</em></a></td><td><code>NCBITaxon:2577200</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577201"><em>Salmonella enterica subsp. arizonae serovar 63:z4,z32:-</em></a></td><td><code>NCBITaxon:2577201</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -106,7 +194,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1299294"><em>Salmonella enterica subsp. arizonae str. CFSAN000560</em></a></td><td><code>NCBITaxon:1299294</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1299295"><em>Salmonella enterica subsp. arizonae str. CFSAN000561</em></a></td><td><code>NCBITaxon:1299295</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1114956"><em>Salmonella enterica subsp. arizonae str. SARC 5</em></a></td><td><code>NCBITaxon:1114956</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:59204"><em>Salmonella enterica subsp. diarizonae</em></a></td><td><code>NCBITaxon:59204</code></td><td>SUBSPECIES</td><td>BACTERIA</td><td>6</td><td>7</td><td>149</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:59204"><em>Salmonella enterica subsp. diarizonae</em></a></td><td><code>NCBITaxon:59204</code></td><td>SUBSPECIES</td><td>BACTERIA</td><td>6</td><td>7</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577215"><em>Salmonella enterica subsp. diarizonae serovar 11:k:z53</em></a></td><td><code>NCBITaxon:2577215</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577216"><em>Salmonella enterica subsp. diarizonae serovar 11:l,v:z</em></a></td><td><code>NCBITaxon:2577216</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577217"><em>Salmonella enterica subsp. diarizonae serovar 11:l,v:z53</em></a></td><td><code>NCBITaxon:2577217</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -123,7 +211,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2577228"><em>Salmonella enterica subsp. diarizonae serovar 16:l,v:z35</em></a></td><td><code>NCBITaxon:2577228</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577229"><em>Salmonella enterica subsp. diarizonae serovar 16:l,v:z53</em></a></td><td><code>NCBITaxon:2577229</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577230"><em>Salmonella enterica subsp. diarizonae serovar 16:z10:1,5,7</em></a></td><td><code>NCBITaxon:2577230</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1911135"><em>Salmonella enterica subsp. diarizonae serovar 16:z10:e,n,x,z15</em></a></td><td><code>NCBITaxon:1911135</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>21527</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1911135"><em>Salmonella enterica subsp. diarizonae serovar 16:z10:e,n,x,z15</em></a></td><td><code>NCBITaxon:1911135</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577231"><em>Salmonella enterica subsp. diarizonae serovar 16:z52:z35</em></a></td><td><code>NCBITaxon:2577231</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577232"><em>Salmonella enterica subsp. diarizonae serovar 17:i:z35</em></a></td><td><code>NCBITaxon:2577232</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577233"><em>Salmonella enterica subsp. diarizonae serovar 17:k:z</em></a></td><td><code>NCBITaxon:2577233</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -179,7 +267,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2577278"><em>Salmonella enterica subsp. diarizonae serovar 35:z52:z35</em></a></td><td><code>NCBITaxon:2577278</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577283"><em>Salmonella enterica subsp. diarizonae serovar 38:i:z</em></a></td><td><code>NCBITaxon:2577283</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577284"><em>Salmonella enterica subsp. diarizonae serovar 38:i:z53</em></a></td><td><code>NCBITaxon:2577284</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1911136"><em>Salmonella enterica subsp. diarizonae serovar 38:[k]:-</em></a></td><td><code>NCBITaxon:1911136</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>21527</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1911136"><em>Salmonella enterica subsp. diarizonae serovar 38:[k]:-</em></a></td><td><code>NCBITaxon:1911136</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577280"><em>Salmonella enterica subsp. diarizonae serovar 38:(k):1,5,7</em></a></td><td><code>NCBITaxon:2577280</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577279"><em>Salmonella enterica subsp. diarizonae serovar 38:(k):-</em></a></td><td><code>NCBITaxon:2577279</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577285"><em>Salmonella enterica subsp. diarizonae serovar 38:k:e,n,x,z15</em></a></td><td><code>NCBITaxon:2577285</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -198,7 +286,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2577293"><em>Salmonella enterica subsp. diarizonae serovar 38:r:z</em></a></td><td><code>NCBITaxon:2577293</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577294"><em>Salmonella enterica subsp. diarizonae serovar 38:r:z35</em></a></td><td><code>NCBITaxon:2577294</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577295"><em>Salmonella enterica subsp. diarizonae serovar 38:z10:z</em></a></td><td><code>NCBITaxon:2577295</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1160728"><em>Salmonella enterica subsp. diarizonae serovar 38:z10:z53</em></a></td><td><code>NCBITaxon:1160728</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>149</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1160728"><em>Salmonella enterica subsp. diarizonae serovar 38:z10:z53</em></a></td><td><code>NCBITaxon:1160728</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:41513"><em>Salmonella enterica subsp. diarizonae serovar 38:z35:--</em></a></td><td><code>NCBITaxon:41513</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577296"><em>Salmonella enterica subsp. diarizonae serovar 38:z52:z35</em></a></td><td><code>NCBITaxon:2577296</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2577297"><em>Salmonella enterica subsp. diarizonae serovar 38:z52:z53</em></a></td><td><code>NCBITaxon:2577297</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -233,12 +321,15 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2577324"><em>Salmonella enterica subsp. diarizonae serovar 43:k:z</em></a></td><td><code>NCBITaxon:2577324</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="taxon-browser.js?v=434e253832135143"></script>
+<script defer src="taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="index.json.gz">Index JSON.gz</a> · <a href="index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

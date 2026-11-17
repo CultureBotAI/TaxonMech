@@ -12,7 +12,11 @@
   }
   async function loadJSON(path) {
     const response = await fetch(path, {cache: "no-cache"});
-    if (!response.ok) throw new Error("Data request failed: " + response.status);
+    if (!response.ok) {
+      const error = new Error("Data request failed: " + response.status);
+      error.status = response.status;
+      throw error;
+    }
     if (!path.endsWith(".gz")) return response.json();
     return JSON.parse(await decodeGzip(new Uint8Array(await response.arrayBuffer())));
   }

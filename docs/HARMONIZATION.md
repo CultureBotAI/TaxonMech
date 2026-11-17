@@ -160,10 +160,28 @@ descendants.
 This gathering is deliberately asymmetric: the `GOLD`, `MEDIADIVE`, `MADIN`
 and `BACTOTRAITS` counts remain what each source files *directly* under the
 record's taxon, and say so in their `notes`. A species record therefore counts
-strains from its whole subtree but only the GOLD organisms filed under its own
-taxon id. Strains are gathered because a species record without its type strain
-is wrong; whether the other counts should be summed over the subtree is a
+strains from its whole subtree but only the GOLD organisms, MediaDive media,
+Madin trait assertions, or BactoTraits trait assertions filed under its own
+taxon id (#8). Strains are gathered because a species record without its type
+strain is wrong; whether the other counts should be summed over the subtree is a
 modelling decision tracked in the issues, not something to do silently.
+
+The pre-aggregated count tables `data/raw/gold_taxa.tsv`,
+`data/raw/mediadive_taxa.tsv`, `data/raw/madin_taxa.tsv`, and
+`data/raw/bactotraits_taxa.tsv` are reproducible from the upstream
+`kg-microbe@30405b70ef762aa46c08278b2b3e06bffb0b34cd` KGX transforms whose exact
+byte sizes and SHA-256 digests are pinned in `data/raw/MANIFEST.yaml`:
+
+- `data/transformed/gold/edges.tsv` (`sha256: 778151f5a7de29c3a50ab3e717c83be51c0827efba774e956bdccbbafddfc3da`)
+- `data/transformed/mediadive/edges.tsv` (`sha256: be37010f6792a35cf187d0462aa363d941c78fcbbbd2f8c73f5b1566033b4ca9`)
+- `data/transformed/madin_etal/edges.tsv` (`sha256: d5eb180d3ffaa0e1dc4a80ab00090963f6239dfca929fa29445b79c183c92b07`)
+- `data/transformed/bactotraits/edges.tsv` (`sha256: a75007da72b0f6b9704b3abdfcb0b0612d39543cbeb40044b986588479893d7a`)
+
+For downstream causal-graph extraction, `taxonmech.extract.extract_taxon_trait_edges`
+extracts the granular per-taxon `(taxon_id, predicate, object_id, relation,
+source, publications, primary_knowledge_source, aggregator_knowledge_source)`
+assertions from those edge tables without collapsing multiple assertions per
+taxon into a single count (#78).
 
 Read the live numbers off a record (`strain_count`, and the `notes` on the
 `BACDIVE` attestation) or off `just report`. This paragraph deliberately quotes
@@ -224,6 +242,22 @@ The seed timestamp on every record is the manifest's `extracted_at`, not the
 wall clock, and the extractor carries the previous `extracted_at` forward when
 every input hashes the same, so neither a re-seed nor a re-extraction of
 unchanged data produces a diff.
+
+## Causal-graph overlays and protein scope slots
+
+Curated mechanism representations live in `curation/causal_graphs/*.yaml` and
+are merged into `TaxonRecord.causal_graphs` by `src/taxonmech/seed.py`
+(`load_causal_graphs` / `build_document`) during `just seed-apply` and checked
+by `scripts/verify_corpus.py` (#78). Each overlay file is keyed by `identifier`,
+carries `causal_graphs` conforming to `CausalGraph`, `CausalNode`, and
+`CausalEdge` in `src/taxonmech/schema/taxonmech.yaml`, and may record optional
+`curation_history` events appended to the target record's audit log.
+
+When a `CausalNode` has `node_type: GENE_OR_PROTEIN`, optional structured scope
+slots (`organism_taxon_id`, `strain_id`, `proteome_id`, `gene_symbol`,
+`locus_tag`, `sequence_length`, `sequence_crc64`, `sequence_version`, and
+`entry_status` from `UniProtEntryStatusEnum`) distinguish strain-exact
+reference proteome bindings from species-level exemplar projections (#78).
 
 ## Strain listings
 

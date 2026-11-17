@@ -7,29 +7,117 @@
 <link rel="stylesheet" href="style.css">
 <script src="theme-toggle.js"></script>
 <script defer src="vendor/fflate-0.8.2.js"></script>
-<script defer src="compressed-data.js?v=434e253832135143"></script>
+<script defer src="compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="index.html">TaxonMech</a>
   <nav>
     <a href="browse.html">Browse</a>
     <a href="type-strains.html">Type strains</a>
+    <a href="map.html">Text map</a>
     <a href="sources.html">Sources</a>
+    <a href="index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="index.html">TaxonMech</a> › <span>All records</span>
+</nav>
 <h1>All records</h1>
-<section id="taxon-browser" data-domain="" data-typed="false" data-page="2328" data-size="200" data-root="">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
-<p id="taxon-status" role="status">625960 records · page 2328 of 3130.</p>
+<section id="taxon-browser" class="browse-layout" data-domain="" data-typed="false" data-page="2328" data-size="200" data-root="">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA">Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
+<p id="taxon-status" role="status">626048 records · page 2328 of 3131.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="browse-2327.html">Previous</a><a href="browse-2329.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>All records</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="taxon.html?id=NCBITaxon:2736834"><em>Rickettsia endosymbiont of Diplopoda sp.</em></a></td><td><code>NCBITaxon:2736834</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2736835"><em>Rickettsia endosymbiont of Diptera sp.</em></a></td><td><code>NCBITaxon:2736835</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -48,7 +136,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2736837"><em>Rickettsia endosymbiont of Dytiscidae sp.</em></a></td><td><code>NCBITaxon:2736837</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2711137"><em>Rickettsia endosymbiont of Echidnophaga gallinacea</em></a></td><td><code>NCBITaxon:2711137</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1983773"><em>Rickettsia endosymbiont of Echidnophaga oschanini</em></a></td><td><code>NCBITaxon:1983773</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2866303"><em>Rickettsia endosymbiont of Ecitomorpha arachnoides</em></a></td><td><code>NCBITaxon:2866303</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>8</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2866303"><em>Rickettsia endosymbiont of Ecitomorpha arachnoides</em></a></td><td><code>NCBITaxon:2866303</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:619642"><em>Rickettsia endosymbiont of Elaterid beetle species</em></a></td><td><code>NCBITaxon:619642</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2736838"><em>Rickettsia endosymbiont of Elateridae sp.</em></a></td><td><code>NCBITaxon:2736838</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2736839"><em>Rickettsia endosymbiont of Empididae sp.</em></a></td><td><code>NCBITaxon:2736839</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -59,7 +147,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2485901"><em>Rickettsia endosymbiont of Eretmocerus mundus</em></a></td><td><code>NCBITaxon:2485901</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2485902"><em>Rickettsia endosymbiont of Eretmocerus sp.</em></a></td><td><code>NCBITaxon:2485902</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:358150"><em>Rickettsia endosymbiont of Erigone dentipalpis</em></a></td><td><code>NCBITaxon:358150</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2866304"><em>Rickettsia endosymbiont of Eriopis connexa</em></a></td><td><code>NCBITaxon:2866304</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2866304"><em>Rickettsia endosymbiont of Eriopis connexa</em></a></td><td><code>NCBITaxon:2866304</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2817468"><em>Rickettsia endosymbiont of Eucallipterus tiliae</em></a></td><td><code>NCBITaxon:2817468</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1779615"><em>Rickettsia endosymbiont of Eucampsipoda madagascarensis</em></a></td><td><code>NCBITaxon:1779615</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3025882"><em>Rickettsia endosymbiont of Eucometis penicillata</em></a></td><td><code>NCBITaxon:3025882</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -71,12 +159,12 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2738880"><em>Rickettsia endosymbiont of Galba truncatula</em></a></td><td><code>NCBITaxon:2738880</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2590217"><em>Rickettsia endosymbiont of Gargara genistae</em></a></td><td><code>NCBITaxon:2590217</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2866305"><em>Rickettsia endosymbiont of Glossina morsitans submorsitans</em></a></td><td><code>NCBITaxon:2866305</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2878925"><em>Rickettsia endosymbiont of Glossina mortisans submortisans</em></a></td><td><code>NCBITaxon:2878925</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>8</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2878925"><em>Rickettsia endosymbiont of Glossina mortisans submortisans</em></a></td><td><code>NCBITaxon:2878925</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2738868"><em>Rickettsia endosymbiont of Glyptotendipes sp.</em></a></td><td><code>NCBITaxon:2738868</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:358143"><em>Rickettsia endosymbiont of Gnathonarium dentatum</em></a></td><td><code>NCBITaxon:358143</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2878920"><em>Rickettsia endosymbiont of Gnoriste bilineata</em></a></td><td><code>NCBITaxon:2878920</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>6</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2878920"><em>Rickettsia endosymbiont of Gnoriste bilineata</em></a></td><td><code>NCBITaxon:2878920</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3066266"><em>Rickettsia endosymbiont of Gonocerus acuteangulatus</em></a></td><td><code>NCBITaxon:3066266</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2866306"><em>Rickettsia endosymbiont of Graphium doson</em></a></td><td><code>NCBITaxon:2866306</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>11</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2866306"><em>Rickettsia endosymbiont of Graphium doson</em></a></td><td><code>NCBITaxon:2866306</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1209272"><em>Rickettsia endosymbiont of Gymnopternus brevicornis</em></a></td><td><code>NCBITaxon:1209272</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1209273"><em>Rickettsia endosymbiont of Gymnopternus celer</em></a></td><td><code>NCBITaxon:1209273</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1209274"><em>Rickettsia endosymbiont of Gymnopternus metallicus</em></a></td><td><code>NCBITaxon:1209274</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -84,7 +172,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:3065883"><em>Rickettsia endosymbiont of Haemaphysalis elliptica</em></a></td><td><code>NCBITaxon:3065883</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2053070"><em>Rickettsia endosymbiont of Haemaphysalis flava</em></a></td><td><code>NCBITaxon:2053070</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2905928"><em>Rickettsia endosymbiont of Haemaphysalis formosensis</em></a></td><td><code>NCBITaxon:2905928</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2126687"><em>Rickettsia endosymbiont of Haemaphysalis japonica</em></a></td><td><code>NCBITaxon:2126687</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>221</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2126687"><em>Rickettsia endosymbiont of Haemaphysalis japonica</em></a></td><td><code>NCBITaxon:2126687</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2705079"><em>Rickettsia endosymbiont of Haemaphysalis juxtakochi</em></a></td><td><code>NCBITaxon:2705079</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3019183"><em>Rickettsia endosymbiont of Haemaphysalis kashmirensis</em></a></td><td><code>NCBITaxon:3019183</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1157102"><em>Rickettsia endosymbiont of Haemaphysalis leporispalustris</em></a></td><td><code>NCBITaxon:1157102</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -100,7 +188,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2996754"><em>Rickettsia endosymbiont of Halotydeus destructor</em></a></td><td><code>NCBITaxon:2996754</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:619643"><em>Rickettsia endosymbiont of Halyzia 16-guttata orange ladybird</em></a></td><td><code>NCBITaxon:619643</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1648058"><em>Rickettsia endosymbiont of Harmonia axyridis</em></a></td><td><code>NCBITaxon:1648058</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3077927"><em>Rickettsia endosymbiont of Hedychridium roseum</em></a></td><td><code>NCBITaxon:3077927</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>8</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3077927"><em>Rickettsia endosymbiont of Hedychridium roseum</em></a></td><td><code>NCBITaxon:3077927</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:167465"><em>Rickettsia endosymbiont of Hemiclepsis marginata</em></a></td><td><code>NCBITaxon:167465</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2736843"><em>Rickettsia endosymbiont of Hemiptera sp.</em></a></td><td><code>NCBITaxon:2736843</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1209275"><em>Rickettsia endosymbiont of Hercostomus praeceps</em></a></td><td><code>NCBITaxon:1209275</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -138,24 +226,24 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2911736"><em>Rickettsia endosymbiont of Ixodes kazakstani</em></a></td><td><code>NCBITaxon:2911736</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1968578"><em>Rickettsia endosymbiont of Ixodes lividus</em></a></td><td><code>NCBITaxon:1968578</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3138009"><em>Rickettsia endosymbiont of Ixodes nipponensis</em></a></td><td><code>NCBITaxon:3138009</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1133329"><em>Rickettsia endosymbiont of Ixodes pacificus</em></a></td><td><code>NCBITaxon:1133329</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>7</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1133329"><em>Rickettsia endosymbiont of Ixodes pacificus</em></a></td><td><code>NCBITaxon:1133329</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1898094"><em>Rickettsia endosymbiont of Ixodes pararicinus</em></a></td><td><code>NCBITaxon:1898094</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2005673"><em>Rickettsia endosymbiont of Ixodes persulcatus</em></a></td><td><code>NCBITaxon:2005673</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2005673"><em>Rickettsia endosymbiont of Ixodes persulcatus</em></a></td><td><code>NCBITaxon:2005673</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1824614"><em>Rickettsia endosymbiont of Ixodes redikorzevi</em></a></td><td><code>NCBITaxon:1824614</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2570522"><em>Rickettsia endosymbiont of Ixodes ricinus</em></a></td><td><code>NCBITaxon:2570522</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>14</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:444612"><em>Rickettsia endosymbiont of Ixodes scapularis</em></a></td><td><code>NCBITaxon:444612</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>7</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2570522"><em>Rickettsia endosymbiont of Ixodes ricinus</em></a></td><td><code>NCBITaxon:2570522</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:444612"><em>Rickettsia endosymbiont of Ixodes scapularis</em></a></td><td><code>NCBITaxon:444612</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1968579"><em>Rickettsia endosymbiont of Ixodes sp.</em></a></td><td><code>NCBITaxon:1968579</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2818399"><em>Rickettsia endosymbiont of Ixodes tapirus</em></a></td><td><code>NCBITaxon:2818399</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1968580"><em>Rickettsia endosymbiont of Ixodes uriae</em></a></td><td><code>NCBITaxon:1968580</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2854249"><em>Rickettsia endosymbiont of Karenia caelatata</em></a></td><td><code>NCBITaxon:2854249</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3015946"><em>Rickettsia endosymbiont of Kelisia ribauti</em></a></td><td><code>NCBITaxon:3015946</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1175555"><em>Rickettsia endosymbiont of Kleidocerys resedae</em></a></td><td><code>NCBITaxon:1175555</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2878921"><em>Rickettsia endosymbiont of Labidopullus appendiculatus</em></a></td><td><code>NCBITaxon:2878921</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>8</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2878921"><em>Rickettsia endosymbiont of Labidopullus appendiculatus</em></a></td><td><code>NCBITaxon:2878921</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1209282"><em>Rickettsia endosymbiont of Lamprochromus strobli</em></a></td><td><code>NCBITaxon:1209282</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1631921"><em>Rickettsia endosymbiont of Lasioglossum laticeps</em></a></td><td><code>NCBITaxon:1631921</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1631922"><em>Rickettsia endosymbiont of Lasioglossum pauxillum</em></a></td><td><code>NCBITaxon:1631922</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1631923"><em>Rickettsia endosymbiont of Lasioglossum semilucens</em></a></td><td><code>NCBITaxon:1631923</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3066269"><em>Rickettsia endosymbiont of Lasioglossum villosulum</em></a></td><td><code>NCBITaxon:3066269</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>11</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3066269"><em>Rickettsia endosymbiont of Lasioglossum villosulum</em></a></td><td><code>NCBITaxon:3066269</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1631924"><em>Rickettsia endosymbiont of Lasioglossum zonulum</em></a></td><td><code>NCBITaxon:1631924</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2711139"><em>Rickettsia endosymbiont of Lemurpediculus verruculosus</em></a></td><td><code>NCBITaxon:2711139</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2736847"><em>Rickettsia endosymbiont of Lepidostoma hoodi</em></a></td><td><code>NCBITaxon:2736847</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -206,7 +294,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2736852"><em>Rickettsia endosymbiont of Mymaridae sp.</em></a></td><td><code>NCBITaxon:2736852</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2736853"><em>Rickettsia endosymbiont of Myopsocidae sp.</em></a></td><td><code>NCBITaxon:2736853</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2817466"><em>Rickettsia endosymbiont of Myzus cerasi</em></a></td><td><code>NCBITaxon:2817466</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3066268"><em>Rickettsia endosymbiont of Nabis limbatus</em></a></td><td><code>NCBITaxon:3066268</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3066268"><em>Rickettsia endosymbiont of Nabis limbatus</em></a></td><td><code>NCBITaxon:3066268</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:339991"><em>Rickettsia endosymbiont of Neochrysocharis formosa</em></a></td><td><code>NCBITaxon:339991</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2733380"><em>Rickettsia endosymbiont of Neophilaenus campestris</em></a></td><td><code>NCBITaxon:2733380</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1273415"><em>Rickettsia endosymbiont of Neophilaenus lineatus</em></a></td><td><code>NCBITaxon:1273415</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -223,22 +311,25 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1175557"><em>Rickettsia endosymbiont of Nysius sp. 1</em></a></td><td><code>NCBITaxon:1175557</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1175558"><em>Rickettsia endosymbiont of Nysius sp. 2</em></a></td><td><code>NCBITaxon:1175558</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2490476"><em>Rickettsia endosymbiont of Obrium brunneum</em></a></td><td><code>NCBITaxon:2490476</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:931099"><em>Rickettsia endosymbiont of Oedothorax gibbosus</em></a></td><td><code>NCBITaxon:931099</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>6</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:931099"><em>Rickettsia endosymbiont of Oedothorax gibbosus</em></a></td><td><code>NCBITaxon:931099</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1104771"><em>Rickettsia endosymbiont of Oedothorax retusus</em></a></td><td><code>NCBITaxon:1104771</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2866307"><em>Rickettsia endosymbiont of Omalisus fontisbellaquei</em></a></td><td><code>NCBITaxon:2866307</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2866307"><em>Rickettsia endosymbiont of Omalisus fontisbellaquei</em></a></td><td><code>NCBITaxon:2866307</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1209295"><em>Rickettsia endosymbiont of Oncopygius distans</em></a></td><td><code>NCBITaxon:1209295</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2758728"><em>Rickettsia endosymbiont of Onthophagus babirussa</em></a></td><td><code>NCBITaxon:2758728</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:304326"><em>Rickettsia endosymbiont of Onychiurus sinensis</em></a></td><td><code>NCBITaxon:304326</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3066250"><em>Rickettsia endosymbiont of Orchestes rusci</em></a></td><td><code>NCBITaxon:3066250</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3066250"><em>Rickettsia endosymbiont of Orchestes rusci</em></a></td><td><code>NCBITaxon:3066250</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1968581"><em>Rickettsia endosymbiont of Ornithodoros amblus</em></a></td><td><code>NCBITaxon:1968581</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="taxon-browser.js?v=434e253832135143"></script>
+<script defer src="taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="index.json.gz">Index JSON.gz</a> · <a href="index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

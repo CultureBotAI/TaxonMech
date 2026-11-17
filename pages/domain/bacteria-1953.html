@@ -7,42 +7,130 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../theme-toggle.js"></script>
 <script defer src="../vendor/fflate-0.8.2.js"></script>
-<script defer src="../compressed-data.js?v=434e253832135143"></script>
+<script defer src="../compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="../index.html">TaxonMech</a>
   <nav>
     <a href="../browse.html">Browse</a>
     <a href="../type-strains.html">Type strains</a>
+    <a href="../map.html">Text map</a>
     <a href="../sources.html">Sources</a>
+    <a href="../index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../index.html">TaxonMech</a> › <span>Bacteria</span>
+</nav>
 <h1>Bacteria</h1>
 <p class="lede">Species and infraspecific taxa under NCBITaxon:2, including uncultured and environmental taxa.</p>
-<section id="taxon-browser" data-domain="BACTERIA" data-typed="false" data-page="1953" data-size="200" data-root="../">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="BACTERIA" data-typed="false" data-page="1953" data-size="200" data-root="../">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="../browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA" selected>Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">605695 records · page 1953 of 3029.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="../domain/bacteria-1952.html">Previous</a><a href="../domain/bacteria-1954.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>Bacteria</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1324702"><em>Providencia sp. PS4B-B595</em></a></td><td><code>NCBITaxon:1324702</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1536937"><em>Providencia sp. PSB14</em></a></td><td><code>NCBITaxon:1536937</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3369657"><em>Providencia sp. PSNUG</em></a></td><td><code>NCBITaxon:3369657</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1515116"><em>Providencia sp. PSTB4</em></a></td><td><code>NCBITaxon:1515116</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:562827"><em>Providencia sp. qy9</em></a></td><td><code>NCBITaxon:562827</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3382151"><em>Providencia sp. R1</em></a></td><td><code>NCBITaxon:3382151</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>296</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1719671"><em>Providencia sp. R2</em></a></td><td><code>NCBITaxon:1719671</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>296</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3382151"><em>Providencia sp. R1</em></a></td><td><code>NCBITaxon:3382151</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1719671"><em>Providencia sp. R2</em></a></td><td><code>NCBITaxon:1719671</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1719672"><em>Providencia sp. R22</em></a></td><td><code>NCBITaxon:1719672</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1719673"><em>Providencia sp. R28</em></a></td><td><code>NCBITaxon:1719673</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3382153"><em>Providencia sp. R3</em></a></td><td><code>NCBITaxon:3382153</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>296</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2828763"><em>Providencia sp. R33</em></a></td><td><code>NCBITaxon:2828763</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>9</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3382153"><em>Providencia sp. R3</em></a></td><td><code>NCBITaxon:3382153</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2828763"><em>Providencia sp. R33</em></a></td><td><code>NCBITaxon:2828763</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:889290"><em>Providencia sp. R4-2A</em></a></td><td><code>NCBITaxon:889290</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:889291"><em>Providencia sp. R8-1A</em></a></td><td><code>NCBITaxon:889291</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1719674"><em>Providencia sp. R9</em></a></td><td><code>NCBITaxon:1719674</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -66,7 +154,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1856579"><em>Providencia sp. SN6B</em></a></td><td><code>NCBITaxon:1856579</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1856580"><em>Providencia sp. SN6C</em></a></td><td><code>NCBITaxon:1856580</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:673464"><em>Providencia sp. SP09</em></a></td><td><code>NCBITaxon:673464</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3136277"><em>Providencia sp. SP181</em></a></td><td><code>NCBITaxon:3136277</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>24</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3136277"><em>Providencia sp. SP181</em></a></td><td><code>NCBITaxon:3136277</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3479812"><em>Providencia sp. SRMPRO-001</em></a></td><td><code>NCBITaxon:3479812</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1076139"><em>Providencia sp. SRS82</em></a></td><td><code>NCBITaxon:1076139</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1123815"><em>Providencia sp. SS44</em></a></td><td><code>NCBITaxon:1123815</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -78,12 +166,12 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1198371"><em>Providencia sp. SY-1</em></a></td><td><code>NCBITaxon:1198371</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1003338"><em>Providencia sp. SY-14</em></a></td><td><code>NCBITaxon:1003338</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1003339"><em>Providencia sp. SY-23</em></a></td><td><code>NCBITaxon:1003339</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3395376"><em>Providencia sp. T47</em></a></td><td><code>NCBITaxon:3395376</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>164</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3395376"><em>Providencia sp. T47</em></a></td><td><code>NCBITaxon:3395376</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1535281"><em>Providencia sp. TE01</em></a></td><td><code>NCBITaxon:1535281</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:322745"><em>Providencia sp. TR 58</em></a></td><td><code>NCBITaxon:322745</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:732279"><em>Providencia sp. TT14</em></a></td><td><code>NCBITaxon:732279</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3367190"><em>Providencia sp. TYF_10</em></a></td><td><code>NCBITaxon:3367190</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>154</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3151124"><em>Providencia sp. TYF-12</em></a></td><td><code>NCBITaxon:3151124</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>154</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3367190"><em>Providencia sp. TYF_10</em></a></td><td><code>NCBITaxon:3367190</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3151124"><em>Providencia sp. TYF-12</em></a></td><td><code>NCBITaxon:3151124</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3470415"><em>Providencia sp. UF-183</em></a></td><td><code>NCBITaxon:3470415</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3470414"><em>Providencia sp. UF-224</em></a></td><td><code>NCBITaxon:3470414</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:518638"><em>Providencia sp. UICT/T5</em></a></td><td><code>NCBITaxon:518638</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -111,18 +199,18 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1442428"><em>Providencia sp. VibC-Oc-103</em></a></td><td><code>NCBITaxon:1442428</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1009033"><em>Providencia sp. VIGAT3</em></a></td><td><code>NCBITaxon:1009033</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:427346"><em>Providencia sp. VKPM23</em></a></td><td><code>NCBITaxon:427346</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3391806"><em>Providencia sp. VP23HZSY-1</em></a></td><td><code>NCBITaxon:3391806</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>154</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3391806"><em>Providencia sp. VP23HZSY-1</em></a></td><td><code>NCBITaxon:3391806</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3386944"><em>Providencia sp. W_P_2A-1</em></a></td><td><code>NCBITaxon:3386944</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2675156"><em>Providencia sp. wls1914</em></a></td><td><code>NCBITaxon:2675156</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>8</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2675155"><em>Providencia sp. wls1916</em></a></td><td><code>NCBITaxon:2675155</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>24</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2675156"><em>Providencia sp. wls1914</em></a></td><td><code>NCBITaxon:2675156</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2675155"><em>Providencia sp. wls1916</em></a></td><td><code>NCBITaxon:2675155</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2675154"><em>Providencia sp. wls1919</em></a></td><td><code>NCBITaxon:2675154</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2675153"><em>Providencia sp. wls1921</em></a></td><td><code>NCBITaxon:2675153</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>24</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2675152"><em>Providencia sp. wls1922</em></a></td><td><code>NCBITaxon:2675152</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>24</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2675151"><em>Providencia sp. wls1938</em></a></td><td><code>NCBITaxon:2675151</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>24</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2675150"><em>Providencia sp. wls1943</em></a></td><td><code>NCBITaxon:2675150</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>8</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2675149"><em>Providencia sp. wls1948</em></a></td><td><code>NCBITaxon:2675149</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>83</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2675148"><em>Providencia sp. wls1949</em></a></td><td><code>NCBITaxon:2675148</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>83</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2675147"><em>Providencia sp. wls1950</em></a></td><td><code>NCBITaxon:2675147</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>24</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2675153"><em>Providencia sp. wls1921</em></a></td><td><code>NCBITaxon:2675153</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2675152"><em>Providencia sp. wls1922</em></a></td><td><code>NCBITaxon:2675152</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2675151"><em>Providencia sp. wls1938</em></a></td><td><code>NCBITaxon:2675151</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2675150"><em>Providencia sp. wls1943</em></a></td><td><code>NCBITaxon:2675150</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2675149"><em>Providencia sp. wls1948</em></a></td><td><code>NCBITaxon:2675149</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2675148"><em>Providencia sp. wls1949</em></a></td><td><code>NCBITaxon:2675148</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2675147"><em>Providencia sp. wls1950</em></a></td><td><code>NCBITaxon:2675147</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1841475"><em>Providencia sp. WR-14</em></a></td><td><code>NCBITaxon:1841475</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:757269"><em>Providencia sp. WRB4</em></a></td><td><code>NCBITaxon:757269</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:262666"><em>Providencia sp. WW2</em></a></td><td><code>NCBITaxon:262666</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -137,15 +225,15 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1653662"><em>Providencia sp. Z10_25</em></a></td><td><code>NCBITaxon:1653662</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1653663"><em>Providencia sp. Z10_29</em></a></td><td><code>NCBITaxon:1653663</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:867878"><em>Providencia sp. ZH1</em></a></td><td><code>NCBITaxon:867878</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:588"><em>Providencia stuartii</em></a></td><td><code>NCBITaxon:588</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>20</td><td>214</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:471874"><em>Providencia stuartii ATCC 25827</em></a></td><td><code>NCBITaxon:471874</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>214</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1157951"><em>Providencia stuartii MRSN 2154</em></a></td><td><code>NCBITaxon:1157951</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>214</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:588"><em>Providencia stuartii</em></a></td><td><code>NCBITaxon:588</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>20</td><td>5 (5 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:471874"><em>Providencia stuartii ATCC 25827</em></a></td><td><code>NCBITaxon:471874</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1157951"><em>Providencia stuartii MRSN 2154</em></a></td><td><code>NCBITaxon:1157951</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:537647"><em>Providencia symbiont of Ceratitis capitata</em></a></td><td><code>NCBITaxon:537647</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:537646"><em>Providencia symbiont of Delia radicum</em></a></td><td><code>NCBITaxon:537646</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:333965"><em>Providencia vermicola</em></a></td><td><code>NCBITaxon:333965</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>3</td><td>24</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3342830"><em>Providencia xihuensis</em></a></td><td><code>NCBITaxon:3342830</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>24</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3342829"><em>Providencia zhejiangensis</em></a></td><td><code>NCBITaxon:3342829</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>83</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3053982"><em>Providencia zhijiangensis</em></a></td><td><code>NCBITaxon:3053982</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>8</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:333965"><em>Providencia vermicola</em></a></td><td><code>NCBITaxon:333965</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>3</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3342830"><em>Providencia xihuensis</em></a></td><td><code>NCBITaxon:3342830</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3342829"><em>Providencia zhejiangensis</em></a></td><td><code>NCBITaxon:3342829</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3053982"><em>Providencia zhijiangensis</em></a></td><td><code>NCBITaxon:3053982</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2060719"><em>&#39;Prunus armeniaca&#39; apple proliferation phytoplasma</em></a></td><td><code>NCBITaxon:2060719</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2509374"><em>&#39;Prunus armeniaca&#39; aster yellows phytoplasma</em></a></td><td><code>NCBITaxon:2509374</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1841650"><em>&#39;Prunus armeniaca&#39; leaf roll phytoplasma</em></a></td><td><code>NCBITaxon:1841650</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -160,7 +248,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:2682766"><em>&#39;Prunus avium&#39; phytoplasma PCHE1</em></a></td><td><code>NCBITaxon:2682766</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2920516"><em>&#39;Prunus avium&#39; shoot elogation, flat branch and witches&#39;-broom phytoplasma</em></a></td><td><code>NCBITaxon:2920516</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2920518"><em>&#39;Prunus avium&#39; shoot proliferation and rosette phytoplasma</em></a></td><td><code>NCBITaxon:2920518</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2056121"><em>&#39;Prunus avium&#39; virescence phytoplasma</em></a></td><td><code>NCBITaxon:2056121</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2056121"><em>&#39;Prunus avium&#39; virescence phytoplasma</em></a></td><td><code>NCBITaxon:2056121</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1847748"><em>&#39;Prunus cerasus&#39; phytoplasma</em></a></td><td><code>NCBITaxon:1847748</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2922247"><em>&#39;Prunus domestica&#39; decline phytoplasma</em></a></td><td><code>NCBITaxon:2922247</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:298825"><em>&#39;Prunus domestica&#39; phytoplasma</em></a></td><td><code>NCBITaxon:298825</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -221,25 +309,28 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1566695"><em>&#39;Prunus scoparia&#39; witches&#39;-broom phytoplasma</em></a></td><td><code>NCBITaxon:1566695</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1042542"><em>&#39;Prunus sp.&#39; phytoplasma</em></a></td><td><code>NCBITaxon:1042542</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2691927"><em>&#39;Prunus sp.&#39; witches&#39;-broom phytoplasma</em></a></td><td><code>NCBITaxon:2691927</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2175152"><em>PS1 clade bacterium</em></a></td><td><code>NCBITaxon:2175152</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>14</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2175152"><em>PS1 clade bacterium</em></a></td><td><code>NCBITaxon:2175152</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>7 (7 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1325571"><em>&#39;Psammotettix alienus&#39; phytoplasma</em></a></td><td><code>NCBITaxon:1325571</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:936340"><em>&#39;Psammotettix cephalotes&#39; flower stunt phytoplasma</em></a></td><td><code>NCBITaxon:936340</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1488208"><em>&#39;Psammotettix sp.&#39; phytoplasma</em></a></td><td><code>NCBITaxon:1488208</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:359299"><em>&#39;Psammotettix striatus&#39; phytoplasma</em></a></td><td><code>NCBITaxon:359299</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2904296"><em>&#39;Psammotettix striatus&#39; phytoplasma SUF5-4</em></a></td><td><code>NCBITaxon:2904296</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1382359"><em>Pseudacidobacterium ailaaui</em></a></td><td><code>NCBITaxon:1382359</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2952004"><em>Pseudacidobacterium sp.</em></a></td><td><code>NCBITaxon:2952004</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:433924"><em>Pseudacidovorax intermedius</em></a></td><td><code>NCBITaxon:433924</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1257078"><em>Pseudacidovorax intermedius NH-1</em></a></td><td><code>NCBITaxon:1257078</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1934311"><em>Pseudacidovorax sp.</em></a></td><td><code>NCBITaxon:1934311</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1382359"><em>Pseudacidobacterium ailaaui</em></a></td><td><code>NCBITaxon:1382359</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2952004"><em>Pseudacidobacterium sp.</em></a></td><td><code>NCBITaxon:2952004</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:433924"><em>Pseudacidovorax intermedius</em></a></td><td><code>NCBITaxon:433924</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>3 (3 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1257078"><em>Pseudacidovorax intermedius NH-1</em></a></td><td><code>NCBITaxon:1257078</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1934311"><em>Pseudacidovorax sp.</em></a></td><td><code>NCBITaxon:1934311</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="../taxon-browser.js?v=434e253832135143"></script>
+<script defer src="../taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="../index.json.gz">Index JSON.gz</a> · <a href="../index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

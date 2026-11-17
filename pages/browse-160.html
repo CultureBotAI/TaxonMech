@@ -7,34 +7,122 @@
 <link rel="stylesheet" href="style.css">
 <script src="theme-toggle.js"></script>
 <script defer src="vendor/fflate-0.8.2.js"></script>
-<script defer src="compressed-data.js?v=434e253832135143"></script>
+<script defer src="compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="index.html">TaxonMech</a>
   <nav>
     <a href="browse.html">Browse</a>
     <a href="type-strains.html">Type strains</a>
+    <a href="map.html">Text map</a>
     <a href="sources.html">Sources</a>
+    <a href="index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="index.html">TaxonMech</a> › <span>All records</span>
+</nav>
 <h1>All records</h1>
-<section id="taxon-browser" data-domain="" data-typed="false" data-page="160" data-size="200" data-root="">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
-<p id="taxon-status" role="status">625960 records · page 160 of 3130.</p>
+<section id="taxon-browser" class="browse-layout" data-domain="" data-typed="false" data-page="160" data-size="200" data-root="">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA">Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
+<p id="taxon-status" role="status">626048 records · page 160 of 3131.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="browse-159.html">Previous</a><a href="browse-161.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>All records</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
-<tr><td><a href="taxon.html?id=NCBITaxon:755172"><em>Aedoeadaptatus coxii</em></a></td><td><code>NCBITaxon:755172</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>6</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:54006"><em>Aedoeadaptatus ivorii</em></a></td><td><code>NCBITaxon:54006</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:755172"><em>Aedoeadaptatus coxii</em></a></td><td><code>NCBITaxon:755172</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:54006"><em>Aedoeadaptatus ivorii</em></a></td><td><code>NCBITaxon:54006</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2582829"><em>Aedoeadaptatus nemausensis</em></a></td><td><code>NCBITaxon:2582829</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1871017"><em>Aedoeadaptatus urinae</em></a></td><td><code>NCBITaxon:1871017</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1871017"><em>Aedoeadaptatus urinae</em></a></td><td><code>NCBITaxon:1871017</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2799739"><em>Aegeococcus anagnostidisi</em></a></td><td><code>NCBITaxon:2799739</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1967446"><em>Aegeococcus anagnostidisi TAU-MAC 0715</em></a></td><td><code>NCBITaxon:1967446</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1967447"><em>Aegeococcus anagnostidisi TAU-MAC 0815</em></a></td><td><code>NCBITaxon:1967447</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>1</td><td>0</td><td>SEEDED</td></tr>
@@ -50,31 +138,31 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2527972"><em>Aeoliella mucimassa</em></a></td><td><code>NCBITaxon:2527972</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2795800"><em>Aeoliella sp.</em></a></td><td><code>NCBITaxon:2795800</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2954799"><em>Aeoliella straminimaris</em></a></td><td><code>NCBITaxon:2954799</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2949332"><em>Aequitasia blattaphilus</em></a></td><td><code>NCBITaxon:2949332</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>6</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2518989"><em>Aequoribacter fuscus</em></a></td><td><code>NCBITaxon:2518989</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2847771"><em>Aequoribacter sp.</em></a></td><td><code>NCBITaxon:2847771</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2949332"><em>Aequitasia blattaphilus</em></a></td><td><code>NCBITaxon:2949332</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2518989"><em>Aequoribacter fuscus</em></a></td><td><code>NCBITaxon:2518989</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2847771"><em>Aequoribacter sp.</em></a></td><td><code>NCBITaxon:2847771</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:524290"><em>Aequorivita aestuarii</em></a></td><td><code>NCBITaxon:524290</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:153266"><em>Aequorivita antarctica</em></a></td><td><code>NCBITaxon:153266</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1548749"><em>Aequorivita aquimaris</em></a></td><td><code>NCBITaxon:1548749</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:153266"><em>Aequorivita antarctica</em></a></td><td><code>NCBITaxon:153266</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1548749"><em>Aequorivita aquimaris</em></a></td><td><code>NCBITaxon:1548749</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3053356"><em>Aequorivita aurantiaca</em></a></td><td><code>NCBITaxon:3053356</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:487317"><em>Aequorivita capsosiphonis</em></a></td><td><code>NCBITaxon:487317</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1120951"><em>Aequorivita capsosiphonis DSM 23843</em></a></td><td><code>NCBITaxon:1120951</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2494375"><em>Aequorivita ciconiae</em></a></td><td><code>NCBITaxon:2494375</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:153268"><em>Aequorivita crocea</em></a></td><td><code>NCBITaxon:153268</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1549647"><em>Aequorivita echinoideorum</em></a></td><td><code>NCBITaxon:1549647</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3114371"><em>Aequorivita flava</em></a></td><td><code>NCBITaxon:3114371</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2803865"><em>Aequorivita iocasae</em></a></td><td><code>NCBITaxon:2803865</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:153267"><em>Aequorivita lipolytica</em></a></td><td><code>NCBITaxon:153267</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3114371"><em>Aequorivita flava</em></a></td><td><code>NCBITaxon:3114371</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2803865"><em>Aequorivita iocasae</em></a></td><td><code>NCBITaxon:2803865</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:153267"><em>Aequorivita lipolytica</em></a></td><td><code>NCBITaxon:153267</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2610884"><em>Aequorivita lutea</em></a></td><td><code>NCBITaxon:2610884</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3073654"><em>Aequorivita marina</em></a></td><td><code>NCBITaxon:3073654</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3040348"><em>Aequorivita marisscotiae</em></a></td><td><code>NCBITaxon:3040348</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1287690"><em>Aequorivita nionensis</em></a></td><td><code>NCBITaxon:1287690</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3040348"><em>Aequorivita marisscotiae</em></a></td><td><code>NCBITaxon:3040348</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1287690"><em>Aequorivita nionensis</em></a></td><td><code>NCBITaxon:1287690</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3073653"><em>Aequorivita sediminis</em></a></td><td><code>NCBITaxon:3073653</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1382458"><em>Aequorivita sinensis</em></a></td><td><code>NCBITaxon:1382458</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>6</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1385699"><em>Aequorivita soesokkakensis</em></a></td><td><code>NCBITaxon:1385699</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1872390"><em>Aequorivita sp.</em></a></td><td><code>NCBITaxon:1872390</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>16</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1382458"><em>Aequorivita sinensis</em></a></td><td><code>NCBITaxon:1382458</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1385699"><em>Aequorivita soesokkakensis</em></a></td><td><code>NCBITaxon:1385699</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1872390"><em>Aequorivita sp.</em></a></td><td><code>NCBITaxon:1872390</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>23 (23 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1148233"><em>Aequorivita sp. 2-4</em></a></td><td><code>NCBITaxon:1148233</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2760087"><em>Aequorivita sp. 609</em></a></td><td><code>NCBITaxon:2760087</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>6</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2760087"><em>Aequorivita sp. 609</em></a></td><td><code>NCBITaxon:2760087</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:236255"><em>Aequorivita sp. &#39;BSD S2 02&#39;</em></a></td><td><code>NCBITaxon:236255</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1822167"><em>Aequorivita sp. C1W-3A</em></a></td><td><code>NCBITaxon:1822167</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1822168"><em>Aequorivita sp. C2S-1</em></a></td><td><code>NCBITaxon:1822168</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -86,17 +174,17 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:404858"><em>Aequorivita sp. D7-13</em></a></td><td><code>NCBITaxon:404858</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:746863"><em>Aequorivita sp. enrichment culture clone B3-5</em></a></td><td><code>NCBITaxon:746863</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:610344"><em>Aequorivita sp. ERDBT O</em></a></td><td><code>NCBITaxon:610344</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2879117"><em>Aequorivita sp. F7</em></a></td><td><code>NCBITaxon:2879117</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2879117"><em>Aequorivita sp. F7</em></a></td><td><code>NCBITaxon:2879117</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1289021"><em>Aequorivita sp. G01-155_VO</em></a></td><td><code>NCBITaxon:1289021</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1156267"><em>Aequorivita sp. HC6-5</em></a></td><td><code>NCBITaxon:1156267</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>18</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1156267"><em>Aequorivita sp. HC6-5</em></a></td><td><code>NCBITaxon:1156267</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3459379"><em>Aequorivita sp. HM-1221</em></a></td><td><code>NCBITaxon:3459379</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3713081"><em>Aequorivita sp. IT1183</em></a></td><td><code>NCBITaxon:3713081</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3713080"><em>Aequorivita sp. IT1282</em></a></td><td><code>NCBITaxon:3713080</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2663998"><em>Aequorivita sp. JGI_SA12_F02_006</em></a></td><td><code>NCBITaxon:2663998</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1265691"><em>Aequorivita sp. KMM 6693</em></a></td><td><code>NCBITaxon:1265691</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1265692"><em>Aequorivita sp. KMM 6696</em></a></td><td><code>NCBITaxon:1265692</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2707173"><em>Aequorivita sp. KMM 9714</em></a></td><td><code>NCBITaxon:2707173</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>6</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3153300"><em>Aequorivita sp. Q41</em></a></td><td><code>NCBITaxon:3153300</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2707173"><em>Aequorivita sp. KMM 9714</em></a></td><td><code>NCBITaxon:2707173</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3153300"><em>Aequorivita sp. Q41</em></a></td><td><code>NCBITaxon:3153300</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2615032"><em>Aequorivita sp. R2A112619</em></a></td><td><code>NCBITaxon:2615032</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:885462"><em>Aequorivita sp. R-36724</em></a></td><td><code>NCBITaxon:885462</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:944872"><em>Aequorivita sp. R-41536</em></a></td><td><code>NCBITaxon:944872</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -109,21 +197,21 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2964009"><em>Aequorivita sp. SCM38</em></a></td><td><code>NCBITaxon:2964009</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1276938"><em>Aequorivita sp. SS14.16</em></a></td><td><code>NCBITaxon:1276938</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2615054"><em>Aequorivita sp. SW2161</em></a></td><td><code>NCBITaxon:2615054</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1947770"><em>Aequorivita sp. UBA1846</em></a></td><td><code>NCBITaxon:1947770</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>16</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1947771"><em>Aequorivita sp. UBA1901</em></a></td><td><code>NCBITaxon:1947771</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>16</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1947772"><em>Aequorivita sp. UBA3101</em></a></td><td><code>NCBITaxon:1947772</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>16</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1947773"><em>Aequorivita sp. UBA3180</em></a></td><td><code>NCBITaxon:1947773</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>16</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1947774"><em>Aequorivita sp. UBA3185</em></a></td><td><code>NCBITaxon:1947774</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>13</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1947775"><em>Aequorivita sp. UBA3599</em></a></td><td><code>NCBITaxon:1947775</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>16</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1947776"><em>Aequorivita sp. UBA3995</em></a></td><td><code>NCBITaxon:1947776</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>16</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1947777"><em>Aequorivita sp. UBA3997</em></a></td><td><code>NCBITaxon:1947777</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>13</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1947778"><em>Aequorivita sp. UBA5053</em></a></td><td><code>NCBITaxon:1947778</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>16</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1947779"><em>Aequorivita sp. UBA5087</em></a></td><td><code>NCBITaxon:1947779</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>16</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1947780"><em>Aequorivita sp. UBA5094</em></a></td><td><code>NCBITaxon:1947780</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>16</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1947781"><em>Aequorivita sp. UBA5096</em></a></td><td><code>NCBITaxon:1947781</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>13</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1947782"><em>Aequorivita sp. UBA5106</em></a></td><td><code>NCBITaxon:1947782</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>16</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1947783"><em>Aequorivita sp. UBA5531</em></a></td><td><code>NCBITaxon:1947783</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1947784"><em>Aequorivita sp. UBA6784</em></a></td><td><code>NCBITaxon:1947784</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1947770"><em>Aequorivita sp. UBA1846</em></a></td><td><code>NCBITaxon:1947770</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1947771"><em>Aequorivita sp. UBA1901</em></a></td><td><code>NCBITaxon:1947771</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1947772"><em>Aequorivita sp. UBA3101</em></a></td><td><code>NCBITaxon:1947772</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1947773"><em>Aequorivita sp. UBA3180</em></a></td><td><code>NCBITaxon:1947773</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1947774"><em>Aequorivita sp. UBA3185</em></a></td><td><code>NCBITaxon:1947774</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1947775"><em>Aequorivita sp. UBA3599</em></a></td><td><code>NCBITaxon:1947775</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1947776"><em>Aequorivita sp. UBA3995</em></a></td><td><code>NCBITaxon:1947776</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1947777"><em>Aequorivita sp. UBA3997</em></a></td><td><code>NCBITaxon:1947777</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1947778"><em>Aequorivita sp. UBA5053</em></a></td><td><code>NCBITaxon:1947778</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1947779"><em>Aequorivita sp. UBA5087</em></a></td><td><code>NCBITaxon:1947779</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1947780"><em>Aequorivita sp. UBA5094</em></a></td><td><code>NCBITaxon:1947780</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1947781"><em>Aequorivita sp. UBA5096</em></a></td><td><code>NCBITaxon:1947781</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1947782"><em>Aequorivita sp. UBA5106</em></a></td><td><code>NCBITaxon:1947782</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1947783"><em>Aequorivita sp. UBA5531</em></a></td><td><code>NCBITaxon:1947783</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1947784"><em>Aequorivita sp. UBA6784</em></a></td><td><code>NCBITaxon:1947784</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1287691"><em>Aequorivita sp. VBW095</em></a></td><td><code>NCBITaxon:1287691</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1287732"><em>Aequorivita sp. VBW240</em></a></td><td><code>NCBITaxon:1287732</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:641644"><em>Aequorivita sp. ZS1-6</em></a></td><td><code>NCBITaxon:641644</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -131,14 +219,14 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:101385"><em>Aequorivita sublithincola</em></a></td><td><code>NCBITaxon:101385</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:746697"><em>Aequorivita sublithincola DSM 14238</em></a></td><td><code>NCBITaxon:746697</code></td><td>STRAIN</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2036821"><em>Aequorivita todarodis</em></a></td><td><code>NCBITaxon:2036821</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:797419"><em>Aequorivita viscosa</em></a></td><td><code>NCBITaxon:797419</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>6</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2874475"><em>Aequorivita vitellina</em></a></td><td><code>NCBITaxon:2874475</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:171194"><em>Aequorivita vladivostokensis</em></a></td><td><code>NCBITaxon:171194</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>13</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:797419"><em>Aequorivita viscosa</em></a></td><td><code>NCBITaxon:797419</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2874475"><em>Aequorivita vitellina</em></a></td><td><code>NCBITaxon:2874475</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:171194"><em>Aequorivita vladivostokensis</em></a></td><td><code>NCBITaxon:171194</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2874476"><em>Aequorivita xiaoshiensis</em></a></td><td><code>NCBITaxon:2874476</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:279215"><em>Aeribacillus alveayuensis</em></a></td><td><code>NCBITaxon:279215</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1868734"><em>Aeribacillus composti</em></a></td><td><code>NCBITaxon:1868734</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>36</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1868734"><em>Aeribacillus composti</em></a></td><td><code>NCBITaxon:1868734</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2078952"><em>Aeribacillus kexueae</em></a></td><td><code>NCBITaxon:2078952</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:33936"><em>Aeribacillus pallidus</em></a></td><td><code>NCBITaxon:33936</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>5</td><td>36</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:33936"><em>Aeribacillus pallidus</em></a></td><td><code>NCBITaxon:33936</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>5</td><td>3 (3 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1196032"><em>Aeribacillus pallidus CIC9</em></a></td><td><code>NCBITaxon:1196032</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1872391"><em>Aeribacillus sp.</em></a></td><td><code>NCBITaxon:1872391</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1960099"><em>Aeribacillus sp. 3TH1</em></a></td><td><code>NCBITaxon:1960099</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -233,12 +321,15 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1465910"><em>Aeribacillus sp. F01M008</em></a></td><td><code>NCBITaxon:1465910</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="taxon-browser.js?v=434e253832135143"></script>
+<script defer src="taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="index.json.gz">Index JSON.gz</a> · <a href="index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

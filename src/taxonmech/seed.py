@@ -27,6 +27,7 @@ Usage
 from __future__ import annotations
 
 import argparse
+import copy
 import csv
 import datetime
 import hashlib
@@ -54,7 +55,105 @@ ATB_DIR = REPO_ROOT / "data" / "atb"
 STRAININFO_DIR = REPO_ROOT / "data" / "straininfo"
 TAXA_DIR = REPO_ROOT / "data" / "taxa"
 SCOPE_PATH = REPO_ROOT / "curation" / "seed_scope.tsv"
+CAUSAL_GRAPHS_DIR = REPO_ROOT / "curation" / "causal_graphs"
+UNIPROT_PROTEINS_PATH = REPO_ROOT / "curation" / "uniprot_proteins.tsv"
 PATHS_LOCKFILE = TAXA_DIR / "PATHS.tsv"
+
+UNIPROT_PROTEIN_FIELDS = (
+    "uniprot_id",
+    "entry_name",
+    "entry_status",
+    "protein_name",
+    "organism_taxon_id",
+    "organism_label",
+    "proteome_id",
+    "gene_symbol",
+    "locus_tag",
+    "ec_numbers",
+    "sequence_length",
+    "sequence_crc64",
+    "sequence_version",
+    "release_version",
+)
+CRC64_PATTERN = re.compile(r"^[0-9A-F]{16}$")
+BACDIVE_STRAIN_ID_PATTERN = re.compile(r"^kgmicrobe\.strain:bacdive_[1-9][0-9]*$")
+UNIPROT_ID_PATTERN = re.compile(
+    r"^UniProtKB:(?:[OPQ][0-9][A-Z0-9]{3}[0-9]|[A-NR-Z][0-9](?:[A-Z][A-Z0-9]{2}[0-9]){1,2})$"
+)
+UNIPROT_ENTRY_NAME_PATTERN = re.compile(r"^[A-Z0-9]{1,11}_[A-Z0-9]{2,5}$")
+UNIPROT_RELEASE_PATTERN = re.compile(r"^20[0-9]{2}_(?:0[1-9]|1[0-2])$")
+NCBITAXON_ID_PATTERN = re.compile(r"^NCBITaxon:[1-9][0-9]*$")
+PROTEOME_ID_PATTERN = re.compile(r"^UP:UP[0-9]{9}$")
+CHEBI_ID_PATTERN = re.compile(r"^CHEBI:[1-9][0-9]*$")
+GO_ID_PATTERN = re.compile(r"^GO:[0-9]{7}$")
+CURIE_PATTERN = re.compile(r"^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$")
+EDGE_ID_PATTERN = re.compile(r"^[A-Za-z][A-Za-z0-9_-]*$")
+EC_NUMBER_PATTERN = re.compile(r"^EC:[1-7]\.(?:[0-9]+|-)\.(?:[0-9]+|-)\.(?:n?[0-9]+|-)$")
+EVIDENCE_REFERENCE_PATTERN = re.compile(
+    r"^(?:PMID:[1-9][0-9]*|PMC:PMC[1-9][0-9]*|DOI:10\.[0-9]{4,9}/\S+|https?://\S+)$"
+)
+CAUSAL_NODE_TYPES = frozenset({
+    "TAXON",
+    "TRAIT",
+    "HABITAT",
+    "ENVIRONMENTAL_PARAMETER",
+    "PATHWAY",
+    "ENVIRONMENTAL_FACTOR",
+    "EXPERIMENTAL_FACTOR",
+    "GENE_OR_PROTEIN",
+    "RNA",
+    "GENETIC_ELEMENT",
+    "CHEMICAL",
+    "ORGANELLE",
+    "CELLULAR_LOCALIZATION",
+    "MOLECULAR_FUNCTION",
+    "BIOLOGICAL_PROCESS",
+    "STATE",
+    "QUALITY",
+    "CAPACITY",
+    "COMMUNITY_PROCESS",
+})
+PROTEIN_ONLY_NODE_SLOTS = (
+    "organism_taxon_id",
+    "strain_id",
+    "proteome_id",
+    "gene_symbol",
+    "locus_tag",
+    "sequence_length",
+    "sequence_crc64",
+    "sequence_version",
+    "entry_status",
+)
+CAUSAL_GRAPH_KEYS = frozenset({"graph_id", "title", "description", "nodes", "edges"})
+CAUSAL_NODE_KEYS = frozenset({
+    "node_id",
+    "label",
+    "node_type",
+    "grounding",
+    "xrefs",
+    "description",
+    *PROTEIN_ONLY_NODE_SLOTS,
+})
+CAUSAL_EDGE_KEYS = frozenset({
+    "edge_id",
+    "subject",
+    "predicate",
+    "predicate_id",
+    "object",
+    "description",
+    "evidence",
+})
+EVIDENCE_ITEM_KEYS = frozenset({"reference", "snippet", "notes"})
+CURATION_EVENT_KEYS = frozenset({
+    "timestamp",
+    "curator",
+    "action",
+    "changes",
+    "llm_assisted",
+})
+ISO_UTC_TIMESTAMP_PATTERN = re.compile(
+    r"^20[0-9]{2}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+)
 
 SEED_CURATOR = "seed_from_sources"
 
@@ -178,6 +277,8 @@ class Inventory:
     strain_assemblies: dict[str, list[dict[str, Any]]] = field(default_factory=dict)
     strain_genome_records: dict[str, list[dict[str, Any]]] = field(default_factory=dict)
     strain_related_records: dict[str, list[dict[str, Any]]] = field(default_factory=dict)
+    causal_graphs: dict[str, list[dict[str, Any]]] = field(default_factory=dict)
+    causal_graph_events: dict[str, list[dict[str, Any]]] = field(default_factory=dict)
 
     def parent(self, tid: str) -> str:
         return (self.taxa.get(tid) or {}).get("parent_id", "")
@@ -226,11 +327,767 @@ class Inventory:
             return False
         return any((self.taxa.get(a) or {}).get("rank") == "SPECIES" for a in self.lineage(tid))
 
+    def has_attested_descendant(self, tid: str) -> bool:
+        """True when at least one descendant taxon in the inventory is directly attested."""
+        return any((self.taxa.get(d) or {}).get("attested_by") for d in self.descendants(tid))
+
     def domain(self, tid: str) -> str:
         for ancestor in [tid, *self.lineage(tid)]:
             if ancestor in DOMAIN_ROOTS:
                 return DOMAIN_ROOTS[ancestor]
         return "OTHER"
+
+
+def load_uniprot_proteins(
+    path: Path = UNIPROT_PROTEINS_PATH,
+    *,
+    taxa: dict[str, dict[str, str]] | None = None,
+) -> dict[str, dict[str, str]]:
+    """Read the pinned UniProtKB protein reference catalog from ``curation/uniprot_proteins.tsv``."""
+    if not path.exists():
+        return {}
+    proteins: dict[str, dict[str, str]] = {}
+    seen_entry_names: set[str] = set()
+    seen_org_genes: set[tuple[str, str]] = set()
+    seen_org_loci: set[tuple[str, str]] = set()
+    seen_org_crc64: set[tuple[str, str]] = set()
+    seen_org_meta: dict[str, tuple[str, str]] = {}
+    seen_org_mnemonic_suffix: dict[str, str] = {}
+    seen_proteome_org: dict[str, str] = {}
+    prev_uid: str | None = None
+    pinned_release_version: str | None = None
+    with path.open(newline="", encoding="utf-8") as fh:
+        reader = csv.DictReader(fh, delimiter="\t")
+        if tuple(reader.fieldnames or ()) != UNIPROT_PROTEIN_FIELDS:
+            raise SystemExit(
+                f"{path}: expected columns {list(UNIPROT_PROTEIN_FIELDS)}, got {reader.fieldnames}"
+            )
+        for line_no, row in enumerate(reader, start=2):
+            uid = (row.get("uniprot_id") or "").strip()
+            if not UNIPROT_ID_PATTERN.match(uid):
+                raise SystemExit(f"{path}:{line_no}: invalid uniprot_id {uid!r}")
+            if uid in proteins:
+                raise SystemExit(f"{path}:{line_no}: duplicate uniprot_id {uid!r}")
+            if prev_uid is not None and uid < prev_uid:
+                raise SystemExit(
+                    f"{path}:{line_no}: out-of-order uniprot_id {uid!r} after "
+                    f"{prev_uid!r} (must be sorted ascending)"
+                )
+            prev_uid = uid
+            if row.get("entry_status") not in ("SWISS_PROT", "TREMBL"):
+                raise SystemExit(f"{path}:{line_no}: invalid entry_status for {uid!r}")
+            org_tid = (row.get("organism_taxon_id") or "").strip()
+            if not NCBITAXON_ID_PATTERN.match(org_tid):
+                raise SystemExit(f"{path}:{line_no}: invalid organism_taxon_id for {uid!r}")
+            if taxa is not None:
+                if org_tid not in taxa:
+                    raise SystemExit(
+                        f"{path}:{line_no}: organism_taxon_id {org_tid} is absent "
+                        f"from ncbitaxon_taxa.tsv for {uid!r}"
+                    )
+                if not _taxon_is_species_or_below(taxa, org_tid):
+                    raise SystemExit(
+                        f"{path}:{line_no}: organism_taxon_id {org_tid} must be species-or-below for {uid!r}"
+                    )
+            proteome_id = (row.get("proteome_id") or "").strip()
+            if proteome_id and not PROTEOME_ID_PATTERN.match(proteome_id):
+                raise SystemExit(f"{path}:{line_no}: invalid proteome_id for {uid!r}")
+            for req_col in ("entry_name", "protein_name", "organism_label", "release_version"):
+                if not (row.get(req_col) or "").strip():
+                    raise SystemExit(f"{path}:{line_no}: missing {req_col} for {uid!r}")
+            org_label = (row.get("organism_label") or "").strip()
+            if taxa is not None:
+                expected_org_label = (taxa.get(org_tid) or {}).get("label", "").strip()
+                if expected_org_label and org_label != expected_org_label:
+                    raise SystemExit(
+                        f"{path}:{line_no}: organism_label {org_label!r} != "
+                        f"ncbitaxon_taxa.tsv label {expected_org_label!r} for {uid!r}"
+                    )
+            org_meta = (org_label, proteome_id)
+            if org_tid in seen_org_meta and seen_org_meta[org_tid] != org_meta:
+                raise SystemExit(
+                    f"{path}:{line_no}: inconsistent (organism_label, proteome_id) "
+                    f"{org_meta!r} != {seen_org_meta[org_tid]!r} for {org_tid} ({uid!r})"
+                )
+            seen_org_meta[org_tid] = org_meta
+            if proteome_id:
+                if proteome_id in seen_proteome_org and seen_proteome_org[proteome_id] != org_tid:
+                    raise SystemExit(
+                        f"{path}:{line_no}: proteome_id {proteome_id!r} mapped to multiple "
+                        f"organism_taxon_id values ({seen_proteome_org[proteome_id]!r}, {org_tid!r})"
+                    )
+                seen_proteome_org[proteome_id] = org_tid
+            release_ver = (row.get("release_version") or "").strip()
+            if not UNIPROT_RELEASE_PATTERN.match(release_ver):
+                raise SystemExit(
+                    f"{path}:{line_no}: invalid release_version {release_ver!r} for {uid!r}"
+                )
+            if pinned_release_version is None:
+                pinned_release_version = release_ver
+            elif release_ver != pinned_release_version:
+                raise SystemExit(
+                    f"{path}:{line_no}: inconsistent release_version {release_ver!r} != "
+                    f"catalog pin {pinned_release_version!r} for {uid!r}"
+                )
+            entry_name = (row.get("entry_name") or "").strip()
+            if not UNIPROT_ENTRY_NAME_PATTERN.match(entry_name):
+                raise SystemExit(f"{path}:{line_no}: invalid entry_name {entry_name!r} for {uid!r}")
+            if entry_name in seen_entry_names:
+                raise SystemExit(f"{path}:{line_no}: duplicate entry_name {entry_name!r} for {uid!r}")
+            seen_entry_names.add(entry_name)
+            entry_prefix, org_suffix = entry_name.split("_", 1)
+            bare_acc = uid.split(":", 1)[1]
+            status = row.get("entry_status")
+            if status == "TREMBL" and entry_prefix != bare_acc:
+                raise SystemExit(
+                    f"{path}:{line_no}: TREMBL entry_name prefix {entry_prefix!r} != "
+                    f"accession {bare_acc!r} for {uid!r}"
+                )
+            if status == "SWISS_PROT" and entry_prefix == bare_acc:
+                raise SystemExit(
+                    f"{path}:{line_no}: SWISS_PROT entry_name prefix {entry_prefix!r} "
+                    f"must not equal accession {bare_acc!r} for {uid!r}"
+                )
+            if org_tid in seen_org_mnemonic_suffix and seen_org_mnemonic_suffix[org_tid] != org_suffix:
+                raise SystemExit(
+                    f"{path}:{line_no}: inconsistent entry_name organism suffix "
+                    f"{org_suffix!r} != {seen_org_mnemonic_suffix[org_tid]!r} for {org_tid} ({uid!r})"
+                )
+            seen_org_mnemonic_suffix[org_tid] = org_suffix
+            gene_symbol = (row.get("gene_symbol") or "").strip()
+            locus_tag = (row.get("locus_tag") or "").strip()
+            if not (gene_symbol or locus_tag):
+                raise SystemExit(f"{path}:{line_no}: requires gene_symbol or locus_tag for {uid!r}")
+            if gene_symbol:
+                org_gene = (org_tid, gene_symbol)
+                if org_gene in seen_org_genes:
+                    raise SystemExit(
+                        f"{path}:{line_no}: duplicate (organism_taxon_id, gene_symbol) "
+                        f"{org_gene!r} for {uid!r}"
+                    )
+                seen_org_genes.add(org_gene)
+            if locus_tag:
+                org_locus = (org_tid, locus_tag)
+                if org_locus in seen_org_loci:
+                    raise SystemExit(
+                        f"{path}:{line_no}: duplicate (organism_taxon_id, locus_tag) "
+                        f"{org_locus!r} for {uid!r}"
+                    )
+                seen_org_loci.add(org_locus)
+            ec_vals = split(row.get("ec_numbers") or "")
+            if len(ec_vals) != len(set(ec_vals)):
+                raise SystemExit(f"{path}:{line_no}: duplicate ec_numbers {ec_vals} for {uid!r}")
+            for ec_val in ec_vals:
+                if not EC_NUMBER_PATTERN.match(ec_val):
+                    raise SystemExit(f"{path}:{line_no}: invalid EC number {ec_val!r} for {uid!r}")
+            try:
+                seq_len = int(row.get("sequence_length") or "0")
+                seq_ver = int(row.get("sequence_version") or "0")
+            except ValueError as exc:
+                raise SystemExit(f"{path}:{line_no}: non-integer sequence metadata for {uid!r}") from exc
+            if seq_len <= 0 or seq_ver <= 0:
+                raise SystemExit(f"{path}:{line_no}: non-positive sequence length/version for {uid!r}")
+            crc64 = (row.get("sequence_crc64") or "").strip()
+            if not CRC64_PATTERN.match(crc64):
+                raise SystemExit(f"{path}:{line_no}: invalid sequence_crc64 {crc64!r} for {uid!r}")
+            org_crc = (org_tid, crc64)
+            if org_crc in seen_org_crc64:
+                raise SystemExit(
+                    f"{path}:{line_no}: duplicate (organism_taxon_id, sequence_crc64) "
+                    f"{org_crc!r} for {uid!r}"
+                )
+            seen_org_crc64.add(org_crc)
+            proteins[uid] = dict(row)
+    return proteins
+
+
+def _taxon_lineage(taxa: dict[str, dict[str, str]], tid: str) -> list[str]:
+    chain: list[str] = []
+    cur = (taxa.get(tid) or {}).get("parent_id", "")
+    seen = {tid}
+    while cur and cur in taxa and cur not in seen:
+        chain.append(cur)
+        seen.add(cur)
+        cur = (taxa.get(cur) or {}).get("parent_id", "")
+    return list(reversed(chain))
+
+
+def _taxon_is_species_or_below(taxa: dict[str, dict[str, str]], tid: str) -> bool:
+    rank = (taxa.get(tid) or {}).get("rank", "")
+    if rank in RECORD_RANKS:
+        return True
+    if rank not in ANCESTRY_DEPENDENT_RANKS:
+        return False
+    return any((taxa.get(a) or {}).get("rank") == "SPECIES" for a in _taxon_lineage(taxa, tid))
+
+
+def _taxa_lineage_compatible(taxa: dict[str, dict[str, str]], tid_a: str, tid_b: str) -> bool:
+    """Return True when ``tid_a`` and ``tid_b`` are identical or on the same ancestor/descendant chain."""
+    return (
+        tid_a == tid_b
+        or tid_a in _taxon_lineage(taxa, tid_b)
+        or tid_b in _taxon_lineage(taxa, tid_a)
+    )
+
+
+def validate_causal_graph_structure(
+    graphs_by_taxon: dict[str, list[dict[str, Any]]],
+) -> None:
+    """Validate internal referential integrity and required slots of causal-graph overlays."""
+    for tid, graphs in sorted(graphs_by_taxon.items()):
+        if not NCBITAXON_ID_PATTERN.match(tid):
+            raise SystemExit(f"invalid causal-graph taxon identifier {tid!r}")
+        seen_graph_ids: set[str] = set()
+        for graph in graphs:
+            raw_gid = graph.get("graph_id")
+            gid = (raw_gid or "").strip() if isinstance(raw_gid, str) else ""
+            if not gid or not EDGE_ID_PATTERN.match(gid):
+                raise SystemExit(f"{tid}: invalid graph_id {raw_gid!r}")
+            if gid in seen_graph_ids:
+                raise SystemExit(f"{tid}: duplicate graph_id {gid!r}")
+            seen_graph_ids.add(gid)
+            g_ctx = f"{tid} graph {gid!r}"
+            unknown_g_keys = sorted(set(graph) - CAUSAL_GRAPH_KEYS)
+            if unknown_g_keys:
+                raise SystemExit(f"{g_ctx}: unexpected CausalGraph keys: {unknown_g_keys}")
+            raw_gdesc = graph.get("description")
+            if raw_gdesc is not None and (not isinstance(raw_gdesc, str) or not raw_gdesc.strip()):
+                raise SystemExit(f"{g_ctx}: requires non-empty string 'description' when present")
+            nodes = graph.get("nodes")
+            seen_node_ids: set[str] = set()
+            seen_node_labels: set[str] = set()
+            seen_node_groundings: set[str] = set()
+            node_types_by_id: dict[str, str] = {}
+            if nodes is not None:
+                if not isinstance(nodes, list) or not nodes:
+                    raise SystemExit(f"{g_ctx}: 'nodes' must be a non-empty list")
+                for node in nodes:
+                    if not isinstance(node, dict):
+                        raise SystemExit(f"{g_ctx}: each node must be a mapping")
+                    nid = (node.get("node_id") or "").strip() if isinstance(node.get("node_id"), str) else ""
+                    if not nid:
+                        raise SystemExit(f"{g_ctx}: node missing 'node_id'")
+                    if not EDGE_ID_PATTERN.match(nid):
+                        raise SystemExit(f"{g_ctx}: invalid node_id {nid!r}")
+                    if nid in seen_node_ids:
+                        raise SystemExit(f"{g_ctx}: duplicate node_id {nid!r}")
+                    seen_node_ids.add(nid)
+                    n_ctx = f"{g_ctx} node {nid!r}"
+                    unknown_n_keys = sorted(set(node) - CAUSAL_NODE_KEYS)
+                    if unknown_n_keys:
+                        raise SystemExit(f"{n_ctx}: unexpected CausalNode keys: {unknown_n_keys}")
+                    lbl = (node.get("label") or "").strip() if isinstance(node.get("label"), str) else ""
+                    raw_ntype = node.get("node_type")
+                    ntype = (raw_ntype or "").strip() if isinstance(raw_ntype, str) else ""
+                    if not lbl or not ntype:
+                        raise SystemExit(f"{n_ctx}: requires non-empty 'label' and 'node_type'")
+                    if ntype not in CAUSAL_NODE_TYPES:
+                        raise SystemExit(f"{n_ctx}: invalid node_type {ntype!r}")
+                    if lbl in seen_node_labels:
+                        raise SystemExit(f"{n_ctx}: duplicate node label {lbl!r} in graph {gid!r}")
+                    seen_node_labels.add(lbl)
+                    node_types_by_id[nid] = ntype
+                    if ntype != "GENE_OR_PROTEIN":
+                        bad_slots = [s for s in PROTEIN_ONLY_NODE_SLOTS if node.get(s) is not None]
+                        if bad_slots:
+                            raise SystemExit(
+                                f"{n_ctx}: non-GENE_OR_PROTEIN node ({ntype}) cannot declare {bad_slots}"
+                            )
+                    raw_grounding = node.get("grounding")
+                    grounding = ""
+                    if raw_grounding is not None:
+                        grounding = raw_grounding.strip() if isinstance(raw_grounding, str) else ""
+                        if not CURIE_PATTERN.match(grounding):
+                            raise SystemExit(f"{n_ctx}: invalid 'grounding' CURIE {raw_grounding!r}")
+                        if grounding in seen_node_groundings:
+                            raise SystemExit(
+                                f"{n_ctx}: duplicate node grounding {grounding!r} in graph {gid!r}"
+                            )
+                        seen_node_groundings.add(grounding)
+                    if ntype == "TAXON":
+                        if not grounding or not grounding.startswith("NCBITaxon:"):
+                            raise SystemExit(f"{n_ctx}: TAXON grounding must start with 'NCBITaxon:'")
+                        if not NCBITAXON_ID_PATTERN.match(grounding):
+                            raise SystemExit(f"{n_ctx}: invalid TAXON grounding {grounding!r}")
+                    elif grounding.startswith("NCBITaxon:"):
+                        raise SystemExit(
+                            f"{n_ctx}: non-TAXON node ({ntype}) cannot use NCBITaxon: grounding {grounding!r}"
+                        )
+                    if ntype == "GENE_OR_PROTEIN":
+                        if grounding and not UNIPROT_ID_PATTERN.match(grounding):
+                            raise SystemExit(
+                                f"{n_ctx}: GENE_OR_PROTEIN grounding {grounding!r} "
+                                f"must match UNIPROT_ID_PATTERN"
+                            )
+                    elif grounding.startswith("UniProtKB:"):
+                        raise SystemExit(
+                            f"{n_ctx}: non-GENE_OR_PROTEIN node ({ntype}) cannot use "
+                            f"UniProtKB: grounding {grounding!r}"
+                        )
+                    if ntype == "CHEMICAL":
+                        if grounding and not CHEBI_ID_PATTERN.match(grounding):
+                            raise SystemExit(
+                                f"{n_ctx}: CHEMICAL grounding {grounding!r} "
+                                f"must match CHEBI_ID_PATTERN"
+                            )
+                    elif grounding.startswith("CHEBI:"):
+                        raise SystemExit(
+                            f"{n_ctx}: non-CHEMICAL node ({ntype}) cannot use "
+                            f"CHEBI: grounding {grounding!r}"
+                        )
+                    if ntype in ("BIOLOGICAL_PROCESS", "MOLECULAR_FUNCTION", "CELLULAR_COMPONENT"):
+                        if grounding and not GO_ID_PATTERN.match(grounding):
+                            raise SystemExit(
+                                f"{n_ctx}: {ntype} grounding {grounding!r} "
+                                f"must match GO_ID_PATTERN"
+                            )
+                    elif grounding.startswith("GO:") and not GO_ID_PATTERN.match(grounding):
+                        raise SystemExit(
+                            f"{n_ctx}: invalid GO grounding {grounding!r}; "
+                            f"must match GO_ID_PATTERN"
+                        )
+                    raw_ndesc = node.get("description")
+                    if raw_ndesc is not None and (
+                        not isinstance(raw_ndesc, str) or not raw_ndesc.strip()
+                    ):
+                        raise SystemExit(
+                            f"{n_ctx}: requires non-empty string 'description' when present"
+                        )
+                    raw_xrefs = node.get("xrefs")
+                    if raw_xrefs is not None:
+                        if not isinstance(raw_xrefs, list):
+                            raise SystemExit(f"{n_ctx}: 'xrefs' must be a list")
+                        seen_xrefs: set[str] = set()
+                        for xr in raw_xrefs:
+                            xr_str = xr.strip() if isinstance(xr, str) else ""
+                            if not CURIE_PATTERN.match(xr_str):
+                                raise SystemExit(f"{n_ctx}: invalid xref CURIE {xr!r}")
+                            if xr_str in seen_xrefs or (grounding and xr_str == grounding):
+                                raise SystemExit(f"{n_ctx}: duplicate xref {xr_str!r}")
+                            seen_xrefs.add(xr_str)
+
+            edges = graph.get("edges")
+            if edges is not None:
+                if not isinstance(edges, list) or not edges:
+                    raise SystemExit(f"{g_ctx}: 'edges' must be a non-empty list")
+                seen_edge_ids: set[str] = set()
+                seen_edge_triples: set[tuple[str, str, str]] = set()
+                seen_pred_by_id: dict[str, str] = {}
+                seen_id_by_pred: dict[str, str] = {}
+                seen_expressed_objects: set[str] = set()
+                connected_node_ids: set[str] = set()
+                for edge in edges:
+                    if not isinstance(edge, dict):
+                        raise SystemExit(f"{g_ctx}: each edge must be a mapping")
+                    eid = (edge.get("edge_id") or "").strip() if isinstance(edge.get("edge_id"), str) else ""
+                    if not eid:
+                        raise SystemExit(f"{g_ctx}: edge missing 'edge_id'")
+                    if not EDGE_ID_PATTERN.match(eid):
+                        raise SystemExit(f"{g_ctx}: invalid edge_id {eid!r}")
+                    if eid in seen_edge_ids:
+                        raise SystemExit(f"{g_ctx}: duplicate edge_id {eid!r}")
+                    seen_edge_ids.add(eid)
+                    e_ctx = f"{g_ctx} edge {eid!r}"
+                    unknown_e_keys = sorted(set(edge) - CAUSAL_EDGE_KEYS)
+                    if unknown_e_keys:
+                        raise SystemExit(f"{e_ctx}: unexpected CausalEdge keys: {unknown_e_keys}")
+                    subj = (edge.get("subject") or "").strip() if isinstance(edge.get("subject"), str) else ""
+                    raw_pred = edge.get("predicate")
+                    pred = (raw_pred or "").strip() if isinstance(raw_pred, str) else ""
+                    obj = (edge.get("object") or "").strip() if isinstance(edge.get("object"), str) else ""
+                    if not subj or not pred or not obj:
+                        raise SystemExit(f"{e_ctx}: requires non-empty 'subject', 'predicate', and 'object'")
+                    if subj == obj:
+                        raise SystemExit(f"{e_ctx}: self-loop subject == object {subj!r} is not allowed")
+                    raw_pred_id = edge.get("predicate_id")
+                    pred_id = ""
+                    if raw_pred_id is not None:
+                        pred_id = raw_pred_id.strip() if isinstance(raw_pred_id, str) else ""
+                        if not CURIE_PATTERN.match(pred_id):
+                            raise SystemExit(f"{e_ctx}: invalid 'predicate_id' CURIE {raw_pred_id!r}")
+                    triple_key = (subj, pred_id or pred, obj)
+                    if triple_key in seen_edge_triples:
+                        raise SystemExit(f"{e_ctx}: duplicate parallel edge {triple_key!r}")
+                    seen_edge_triples.add(triple_key)
+                    if pred_id:
+                        if pred_id in seen_pred_by_id and seen_pred_by_id[pred_id] != pred:
+                            raise SystemExit(
+                                f"{e_ctx}: predicate_id {pred_id!r} mapped to inconsistent "
+                                f"predicate {pred!r} != {seen_pred_by_id[pred_id]!r}"
+                            )
+                        if pred in seen_id_by_pred and seen_id_by_pred[pred] != pred_id:
+                            raise SystemExit(
+                                f"{e_ctx}: predicate {pred!r} mapped to inconsistent "
+                                f"predicate_id {pred_id!r} != {seen_id_by_pred[pred]!r}"
+                            )
+                        seen_pred_by_id[pred_id] = pred
+                        seen_id_by_pred[pred] = pred_id
+                    if nodes is not None:
+                        if subj not in seen_node_ids:
+                            raise SystemExit(
+                                f"{e_ctx}: subject {subj!r} does not reference a defined node_id"
+                            )
+                        if obj not in seen_node_ids:
+                            raise SystemExit(
+                                f"{e_ctx}: object {obj!r} does not reference a defined node_id"
+                            )
+                        if node_types_by_id.get(obj) == "TAXON":
+                            raise SystemExit(
+                                f"{e_ctx}: object {obj!r} cannot target a TAXON node"
+                            )
+                        if pred_id == "RO:0002292":
+                            if node_types_by_id.get(obj) != "GENE_OR_PROTEIN":
+                                raise SystemExit(
+                                    f"{e_ctx}: RO:0002292 (expresses) object {obj!r} "
+                                    f"must be a GENE_OR_PROTEIN node"
+                                )
+                            if node_types_by_id.get(subj) == "TAXON":
+                                if obj in seen_expressed_objects:
+                                    raise SystemExit(
+                                        f"{e_ctx}: duplicate RO:0002292 (expresses) edge targeting {obj!r}"
+                                    )
+                                seen_expressed_objects.add(obj)
+                        connected_node_ids.add(subj)
+                        connected_node_ids.add(obj)
+                    ev_list = edge.get("evidence")
+                    if not isinstance(ev_list, list) or not ev_list:
+                        raise SystemExit(f"{e_ctx}: requires non-empty 'evidence' list")
+                    seen_ev_refs: set[str] = set()
+                    for ev in ev_list:
+                        if not isinstance(ev, dict):
+                            raise SystemExit(f"{e_ctx}: each evidence item must be a mapping")
+                        unknown_ev_keys = sorted(set(ev) - EVIDENCE_ITEM_KEYS)
+                        if unknown_ev_keys:
+                            raise SystemExit(f"{e_ctx}: unexpected EvidenceItem keys: {unknown_ev_keys}")
+                        ref = (
+                            (ev.get("reference") or "").strip()
+                            if isinstance(ev.get("reference"), str)
+                            else ""
+                        )
+                        if not ref:
+                            raise SystemExit(f"{e_ctx}: each evidence item requires non-empty 'reference'")
+                        if not EVIDENCE_REFERENCE_PATTERN.match(ref):
+                            raise SystemExit(f"{e_ctx}: invalid evidence reference {ref!r}")
+                        if ref in seen_ev_refs:
+                            raise SystemExit(f"{e_ctx}: duplicate evidence reference {ref!r}")
+                        seen_ev_refs.add(ref)
+                        for ev_field in ("snippet", "notes"):
+                            raw_ev_val = ev.get(ev_field)
+                            if raw_ev_val is not None and (
+                                not isinstance(raw_ev_val, str) or not raw_ev_val.strip()
+                            ):
+                                raise SystemExit(
+                                    f"{e_ctx}: evidence item requires non-empty string "
+                                    f"{ev_field!r} when present"
+                                )
+                if nodes is not None:
+                    orphan_nodes = sorted(seen_node_ids - connected_node_ids)
+                    if orphan_nodes:
+                        raise SystemExit(
+                            f"{g_ctx}: disconnected node_id(s) not referenced by any edge: {orphan_nodes}"
+                        )
+
+
+def validate_causal_graph_proteins(
+    graphs_by_taxon: dict[str, list[dict[str, Any]]],
+    *,
+    uniprot_proteins: dict[str, dict[str, str]] | None = None,
+    taxa: dict[str, dict[str, str]] | None = None,
+    strains: dict[str, list[dict[str, str]]] | None = None,
+) -> None:
+    """Validate GENE_OR_PROTEIN nodes against pinned UniProtKB metadata, NCBI Taxonomy lineage,
+    and BacDive strain inventory."""
+    strain_taxa: dict[str, set[str]] | None = None
+    if strains is not None:
+        strain_taxa = defaultdict(set)
+        for s_tid, s_rows in strains.items():
+            for s_row in s_rows:
+                sid = (s_row.get("strain_id") or "").strip()
+                if sid:
+                    strain_taxa[sid].add(s_tid)
+    for tid, graphs in sorted(graphs_by_taxon.items()):
+        if not NCBITAXON_ID_PATTERN.match(tid):
+            raise SystemExit(f"invalid causal-graph taxon identifier {tid!r}")
+        if taxa is not None:
+            if tid not in taxa:
+                raise SystemExit(f"{tid}: record taxon {tid} is absent from ncbitaxon_taxa.tsv")
+            if not _taxon_is_species_or_below(taxa, tid):
+                raise SystemExit(f"{tid}: record taxon {tid} must be species-or-below")
+        for graph in graphs:
+            gid = graph.get("graph_id", "<unnamed>")
+            seen_protein_groundings: set[str] = set()
+            for node in graph.get("nodes") or []:
+                if not isinstance(node, dict):
+                    continue
+                if node.get("node_type") == "TAXON":
+                    t_grounding = (
+                        (node.get("grounding") or "").strip()
+                        if isinstance(node.get("grounding"), str)
+                        else ""
+                    )
+                    if t_grounding and taxa is not None:
+                        t_ctx = f"{tid} graph {gid!r} node {node.get('node_id', '<unnamed>')!r}"
+                        if t_grounding not in taxa:
+                            raise SystemExit(
+                                f"{t_ctx}: TAXON grounding {t_grounding} is absent from ncbitaxon_taxa.tsv"
+                            )
+                        if not _taxa_lineage_compatible(taxa, t_grounding, tid):
+                            raise SystemExit(
+                                f"{t_ctx}: TAXON grounding {t_grounding} is not lineage-consistent with {tid}"
+                            )
+                    continue
+                if node.get("node_type") != "GENE_OR_PROTEIN":
+                    continue
+                nid = node.get("node_id", "<unnamed>")
+                ctx = f"{tid} graph {gid!r} node {nid!r}"
+                raw_grounding = node.get("grounding")
+                grounding = (raw_grounding or "").strip() if isinstance(raw_grounding, str) else ""
+                if not grounding.startswith("UniProtKB:"):
+                    raise SystemExit(f"{ctx}: GENE_OR_PROTEIN grounding must start with 'UniProtKB:'")
+                if not UNIPROT_ID_PATTERN.match(grounding):
+                    raise SystemExit(f"{ctx}: GENE_OR_PROTEIN invalid 'grounding' {raw_grounding!r}")
+                if grounding in seen_protein_groundings:
+                    raise SystemExit(
+                        f"{ctx}: duplicate GENE_OR_PROTEIN grounding {grounding!r} in graph {gid!r}"
+                    )
+                seen_protein_groundings.add(grounding)
+                org_tid = (
+                    (node.get("organism_taxon_id") or "").strip()
+                    if isinstance(node.get("organism_taxon_id"), str)
+                    else ""
+                )
+                if not NCBITAXON_ID_PATTERN.match(org_tid):
+                    raise SystemExit(f"{ctx}: GENE_OR_PROTEIN missing valid 'organism_taxon_id'")
+                raw_strain_id = node.get("strain_id")
+                strain_id = ""
+                if raw_strain_id is not None:
+                    strain_id = raw_strain_id.strip() if isinstance(raw_strain_id, str) else ""
+                    if not BACDIVE_STRAIN_ID_PATTERN.match(strain_id):
+                        raise SystemExit(f"{ctx}: GENE_OR_PROTEIN invalid 'strain_id' {raw_strain_id!r}")
+                status = node.get("entry_status")
+                if status not in ("SWISS_PROT", "TREMBL"):
+                    raise SystemExit(f"{ctx}: GENE_OR_PROTEIN invalid 'entry_status' {status!r}")
+                gene_symbol = (node.get("gene_symbol") or "").strip() if node.get("gene_symbol") else ""
+                locus_tag = (node.get("locus_tag") or "").strip() if node.get("locus_tag") else ""
+                if not (gene_symbol or locus_tag):
+                    raise SystemExit(f"{ctx}: GENE_OR_PROTEIN requires 'gene_symbol' or 'locus_tag'")
+                proteome_id = (node.get("proteome_id") or "").strip() if node.get("proteome_id") else ""
+                if proteome_id and not PROTEOME_ID_PATTERN.match(proteome_id):
+                    raise SystemExit(f"{ctx}: GENE_OR_PROTEIN invalid 'proteome_id' {proteome_id!r}")
+                seq_len = node.get("sequence_length")
+                if not isinstance(seq_len, int) or isinstance(seq_len, bool) or seq_len <= 0:
+                    raise SystemExit(f"{ctx}: GENE_OR_PROTEIN requires positive integer 'sequence_length'")
+                crc64 = node.get("sequence_crc64")
+                if not isinstance(crc64, str) or not CRC64_PATTERN.match(crc64):
+                    raise SystemExit(f"{ctx}: GENE_OR_PROTEIN requires 16-hex 'sequence_crc64'")
+                seq_ver = node.get("sequence_version")
+                if not isinstance(seq_ver, int) or isinstance(seq_ver, bool) or seq_ver <= 0:
+                    raise SystemExit(f"{ctx}: GENE_OR_PROTEIN requires positive integer 'sequence_version'")
+                node_ecs = [
+                    x for x in (node.get("xrefs") or []) if isinstance(x, str) and x.startswith("EC:")
+                ]
+                for ec in node_ecs:
+                    if not EC_NUMBER_PATTERN.match(ec):
+                        raise SystemExit(f"{ctx}: invalid EC xref {ec!r}")
+
+                if uniprot_proteins is not None:
+                    ref = uniprot_proteins.get(grounding)
+                    if ref is None:
+                        raise SystemExit(
+                            f"{ctx}: {grounding} is not registered in curation/uniprot_proteins.tsv"
+                        )
+                    if status != ref["entry_status"]:
+                        raise SystemExit(
+                            f"{ctx}: entry_status {status!r} != {ref['entry_status']!r} for {grounding}"
+                        )
+                    if org_tid != ref["organism_taxon_id"]:
+                        expected_org = ref["organism_taxon_id"]
+                        raise SystemExit(
+                            f"{ctx}: organism_taxon_id {org_tid!r} != {expected_org!r} for {grounding}"
+                        )
+                    if proteome_id != ref["proteome_id"]:
+                        raise SystemExit(
+                            f"{ctx}: proteome_id {proteome_id!r} != {ref['proteome_id']!r} for {grounding}"
+                        )
+                    if locus_tag != ref["locus_tag"]:
+                        raise SystemExit(
+                            f"{ctx}: locus_tag {locus_tag!r} != {ref['locus_tag']!r} for {grounding}"
+                        )
+                    ref_gene = ref["gene_symbol"]
+                    allowed_genes = {ref_gene} if ref_gene else {"", ref["locus_tag"]}
+                    if gene_symbol not in allowed_genes:
+                        raise SystemExit(
+                            f"{ctx}: gene_symbol {gene_symbol!r} != {ref_gene!r} for {grounding}"
+                        )
+                    if seq_len != int(ref["sequence_length"]):
+                        raise SystemExit(
+                            f"{ctx}: sequence_length {seq_len} != {ref['sequence_length']} for {grounding}"
+                        )
+                    if crc64 != ref["sequence_crc64"]:
+                        raise SystemExit(
+                            f"{ctx}: sequence_crc64 {crc64!r} != {ref['sequence_crc64']!r} for {grounding}"
+                        )
+                    if seq_ver != int(ref["sequence_version"]):
+                        raise SystemExit(
+                            f"{ctx}: sequence_version {seq_ver} != {ref['sequence_version']} for {grounding}"
+                        )
+                    ref_ecs = split(ref["ec_numbers"])
+                    if any(ec not in ref_ecs for ec in node_ecs):
+                        raise SystemExit(
+                            f"{ctx}: EC xrefs {node_ecs} do not match reference {ref_ecs} for {grounding}"
+                        )
+
+                if taxa is not None:
+                    if org_tid not in taxa:
+                        raise SystemExit(
+                            f"{ctx}: organism_taxon_id {org_tid} is absent from ncbitaxon_taxa.tsv"
+                        )
+                    if not _taxon_is_species_or_below(taxa, org_tid):
+                        raise SystemExit(
+                            f"{ctx}: organism_taxon_id {org_tid} must be species-or-below"
+                        )
+                    org_lineage = _taxon_lineage(taxa, org_tid)
+                    tid_lineage = _taxon_lineage(taxa, tid)
+                    lineage_ok = (
+                        org_tid == tid
+                        or tid in org_lineage
+                        or (org_tid in tid_lineage and _taxon_is_species_or_below(taxa, org_tid))
+                    )
+                    if not lineage_ok:
+                        raise SystemExit(
+                            f"{ctx}: organism_taxon_id {org_tid} is not lineage-consistent with {tid}"
+                        )
+
+                if strain_id and strain_taxa is not None:
+                    linked_tids = strain_taxa.get(strain_id)
+                    if not linked_tids:
+                        raise SystemExit(
+                            f"{ctx}: strain_id {strain_id!r} is absent from bacdive_strains.tsv"
+                        )
+                    if taxa is not None:
+                        strain_lineage_ok = any(
+                            s_tid in taxa
+                            and (s_tid == tid or tid in _taxon_lineage(taxa, s_tid))
+                            and _taxa_lineage_compatible(taxa, s_tid, org_tid)
+                            for s_tid in linked_tids
+                        )
+                        if not strain_lineage_ok:
+                            raise SystemExit(
+                                f"{ctx}: strain_id {strain_id!r} (taxa {sorted(linked_tids)}) "
+                                f"is not lineage-consistent with {tid} and {org_tid}"
+                            )
+
+
+def validate_causal_graph_events(
+    events_by_taxon: dict[str, list[dict[str, Any]]],
+) -> None:
+    """Validate CurationEvent mappings in causal-graph overlay curation_history."""
+    for tid, events in sorted(events_by_taxon.items()):
+        prev_ts = ""
+        for idx, event in enumerate(events):
+            ctx = f"{tid} curation_history[{idx}]"
+            if not isinstance(event, dict):
+                raise SystemExit(f"{ctx}: event must be a mapping")
+            unknown_keys = sorted(set(event) - CURATION_EVENT_KEYS)
+            if unknown_keys:
+                raise SystemExit(f"{ctx}: unexpected CurationEvent keys: {unknown_keys}")
+            raw_ts = event.get("timestamp")
+            ts = (raw_ts or "").strip() if isinstance(raw_ts, str) else ""
+            if not ts or not ISO_UTC_TIMESTAMP_PATTERN.match(ts):
+                raise SystemExit(f"{ctx}: invalid ISO-8601 UTC timestamp {raw_ts!r}")
+            if ts < prev_ts:
+                raise SystemExit(
+                    f"{ctx}: timestamp {ts!r} precedes previous event {prev_ts!r}"
+                )
+            prev_ts = ts
+            for req_field in ("curator", "action", "changes"):
+                raw_val = event.get(req_field)
+                val = (raw_val or "").strip() if isinstance(raw_val, str) else ""
+                if not val:
+                    raise SystemExit(f"{ctx}: requires non-empty {req_field!r}")
+            if "llm_assisted" in event and not isinstance(event["llm_assisted"], bool):
+                raise SystemExit(f"{ctx}: 'llm_assisted' must be a boolean")
+
+
+def load_causal_graphs(
+    path: Path = CAUSAL_GRAPHS_DIR,
+    *,
+    uniprot_path: Path | None = None,
+    taxa: dict[str, dict[str, str]] | None = None,
+    strains: dict[str, list[dict[str, str]]] | None = None,
+) -> tuple[dict[str, list[dict[str, Any]]], dict[str, list[dict[str, Any]]]]:
+    """Read maintained causal-graph overlays from ``curation/causal_graphs/*.yaml``.
+
+    Returns ``(graphs_by_taxon, events_by_taxon)`` keyed by ``TaxonRecord.identifier``.
+    Overlays survive ``just seed-apply --force`` and ``just verify-corpus`` because
+    ``build_document()`` merges them deterministically into ``doc["causal_graphs"]``
+    and appends any declared ``curation_history`` events.
+    """
+    if not path.exists():
+        return {}, {}
+    graphs_by_taxon: dict[str, list[dict[str, Any]]] = {}
+    events_by_taxon: dict[str, list[dict[str, Any]]] = {}
+    allowed_top_keys = {"identifier", "causal_graphs", "curation_history"}
+    for overlay_file in sorted(path.glob("*.yaml")):
+        data = yaml.safe_load(overlay_file.read_text(encoding="utf-8"))
+        if not isinstance(data, dict):
+            raise SystemExit(f"{overlay_file}: causal-graph overlay must be a YAML mapping")
+        unknown = set(data) - allowed_top_keys
+        if unknown:
+            raise SystemExit(
+                f"{overlay_file}: unexpected top-level keys in causal-graph overlay: {sorted(unknown)}"
+            )
+        identifier = (data.get("identifier") or "").strip() if isinstance(data.get("identifier"), str) else ""
+        if not identifier:
+            raise SystemExit(f"{overlay_file}: missing or invalid 'identifier'")
+        if identifier in graphs_by_taxon:
+            raise SystemExit(f"{overlay_file}: duplicate causal-graph overlay for {identifier}")
+        graphs = data.get("causal_graphs")
+        if not isinstance(graphs, list) or not graphs:
+            raise SystemExit(f"{overlay_file}: 'causal_graphs' must be a non-empty list")
+        seen_graph_ids: set[str] = set()
+        for graph in graphs:
+            if not isinstance(graph, dict):
+                raise SystemExit(f"{overlay_file}: each causal_graphs entry must be a mapping")
+            gid = (graph.get("graph_id") or "").strip() if isinstance(graph.get("graph_id"), str) else ""
+            if not gid:
+                raise SystemExit(f"{overlay_file}: causal_graphs entry missing 'graph_id'")
+            if gid in seen_graph_ids:
+                raise SystemExit(f"{overlay_file}: duplicate graph_id {gid!r} for {identifier}")
+            seen_graph_ids.add(gid)
+        graphs_by_taxon[identifier] = graphs
+        events = data.get("curation_history")
+        if events is not None:
+            if not isinstance(events, list) or any(not isinstance(e, dict) for e in events):
+                raise SystemExit(f"{overlay_file}: 'curation_history' must be a list of event mappings")
+            events_by_taxon[identifier] = events
+    for tid, graphs in sorted(graphs_by_taxon.items()):
+        for graph in graphs:
+            gid = (graph.get("graph_id") or "").strip() if isinstance(graph.get("graph_id"), str) else ""
+            title = (graph.get("title") or "").strip() if isinstance(graph.get("title"), str) else ""
+            if not title:
+                raise SystemExit(f"{tid} graph {gid!r}: requires non-empty 'title'")
+            nodes = graph.get("nodes")
+            if not isinstance(nodes, list) or not nodes:
+                raise SystemExit(f"{tid} graph {gid!r}: 'nodes' must be a non-empty list")
+            edges = graph.get("edges")
+            if not isinstance(edges, list) or not edges:
+                raise SystemExit(f"{tid} graph {gid!r}: 'edges' must be a non-empty list")
+    validate_causal_graph_structure(graphs_by_taxon)
+    validate_causal_graph_events(events_by_taxon)
+    resolved_uniprot_path = uniprot_path
+    if resolved_uniprot_path is None and UNIPROT_PROTEINS_PATH.exists():
+        resolved_uniprot_path = UNIPROT_PROTEINS_PATH
+    uniprot_proteins = (
+        load_uniprot_proteins(resolved_uniprot_path, taxa=taxa) if resolved_uniprot_path else None
+    )
+    validate_causal_graph_proteins(
+        graphs_by_taxon,
+        uniprot_proteins=uniprot_proteins,
+        taxa=taxa,
+        strains=strains,
+    )
+    return graphs_by_taxon, events_by_taxon
 
 
 def load_inventory() -> Inventory:
@@ -273,8 +1130,15 @@ def load_inventory() -> Inventory:
         strain_assemblies[strain_id].extend(records)
     for strain_id, records in si_related.items():
         strain_related_records[strain_id].extend(records)
+    causal_graphs, causal_graph_events = load_causal_graphs(CAUSAL_GRAPHS_DIR)
+    validate_causal_graph_proteins(
+        {tid: graphs for tid, graphs in causal_graphs.items() if tid in taxa},
+        taxa=taxa,
+        strains=strains if set(causal_graphs) <= set(taxa) else None,
+    )
     return Inventory(taxa, gtdb, lpsn, lpsn_by_taxon, strains, cc_strains, media, gold, madin, bacto,
-                     strain_assemblies, strain_genome_records, strain_related_records)
+                     strain_assemblies, strain_genome_records, strain_related_records,
+                     causal_graphs, causal_graph_events)
 
 
 # ---------------------------------------------------------------------------
@@ -639,6 +1503,18 @@ def build_document(concept: Concept, inv: Inventory) -> dict[str, Any]:
         ),
         timestamp=SEED_TIMESTAMP,
     )
+    overlay_graphs = inv.causal_graphs.get(tid)
+    if overlay_graphs:
+        doc["causal_graphs"] = [copy.deepcopy(g) for g in overlay_graphs]
+        for event in inv.causal_graph_events.get(tid, []):
+            record_curation_event(
+                doc,
+                curator=event.get("curator") or "curate-causal-graphs",
+                action=event.get("action") or "ADDED_CAUSAL_GRAPHS",
+                changes=event.get("changes"),
+                llm_assisted=bool(event.get("llm_assisted", False)),
+                timestamp=event.get("timestamp") or SEED_TIMESTAMP,
+            )
     return doc
 
 
@@ -748,8 +1624,15 @@ def build_corpus(*, everything: bool = False) -> Corpus:
     inv = load_inventory()
     scope = load_scope()
     if everything:
-        identifiers = sorted((t for t, r in inv.taxa.items()
-                              if r.get("attested_by") and inv.is_species_or_below(t)), key=id_key)
+        identifiers = sorted(
+            (
+                t
+                for t, r in inv.taxa.items()
+                if inv.is_species_or_below(t)
+                and (r.get("attested_by") or inv.has_attested_descendant(t))
+            ),
+            key=id_key,
+        )
     else:
         identifiers = sorted(scope, key=id_key)
     concepts = build_concepts(inv, identifiers)

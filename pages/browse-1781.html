@@ -7,29 +7,117 @@
 <link rel="stylesheet" href="style.css">
 <script src="theme-toggle.js"></script>
 <script defer src="vendor/fflate-0.8.2.js"></script>
-<script defer src="compressed-data.js?v=434e253832135143"></script>
+<script defer src="compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="index.html">TaxonMech</a>
   <nav>
     <a href="browse.html">Browse</a>
     <a href="type-strains.html">Type strains</a>
+    <a href="map.html">Text map</a>
     <a href="sources.html">Sources</a>
+    <a href="index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="index.html">TaxonMech</a> › <span>All records</span>
+</nav>
 <h1>All records</h1>
-<section id="taxon-browser" data-domain="" data-typed="false" data-page="1781" data-size="200" data-root="">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
-<p id="taxon-status" role="status">625960 records · page 1781 of 3130.</p>
+<section id="taxon-browser" class="browse-layout" data-domain="" data-typed="false" data-page="1781" data-size="200" data-root="">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA">Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
+<p id="taxon-status" role="status">626048 records · page 1781 of 3131.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="browse-1780.html">Previous</a><a href="browse-1782.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>All records</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="taxon.html?id=NCBITaxon:1268813"><em>Nitratireductor sp. RCC14</em></a></td><td><code>NCBITaxon:1268813</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1268814"><em>Nitratireductor sp. RCC15</em></a></td><td><code>NCBITaxon:1268814</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -48,7 +136,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1683074"><em>Nitratireductor sp. SLG510B6-1</em></a></td><td><code>NCBITaxon:1683074</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1683075"><em>Nitratireductor sp. SLG510B6-18</em></a></td><td><code>NCBITaxon:1683075</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1683076"><em>Nitratireductor sp. SLG520A5-13-2</em></a></td><td><code>NCBITaxon:1683076</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2126741"><em>Nitratireductor sp. StC3</em></a></td><td><code>NCBITaxon:2126741</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2126741"><em>Nitratireductor sp. StC3</em></a></td><td><code>NCBITaxon:2126741</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1280283"><em>Nitratireductor sp. TRM46799-86</em></a></td><td><code>NCBITaxon:1280283</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:984890"><em>Nitratireductor sp. W11-4</em></a></td><td><code>NCBITaxon:984890</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3725119"><em>Nitratireductor sp. WH36-1</em></a></td><td><code>NCBITaxon:3725119</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -60,33 +148,33 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:3072792"><em>Nitratireductor sp. Z-1</em></a></td><td><code>NCBITaxon:3072792</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2966359"><em>Nitratireductor sp. ZSWI3</em></a></td><td><code>NCBITaxon:2966359</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2267699"><em>Nitratireductor thuwali</em></a></td><td><code>NCBITaxon:2267699</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2081525"><em>Nitratiruptor sp.</em></a></td><td><code>NCBITaxon:2081525</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2081525"><em>Nitratiruptor sp.</em></a></td><td><code>NCBITaxon:2081525</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>9 (9 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:307558"><em>Nitratiruptor sp. 50cm55-A</em></a></td><td><code>NCBITaxon:307558</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:345595"><em>Nitratiruptor sp. 55-12-1</em></a></td><td><code>NCBITaxon:345595</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:387092"><em>Nitratiruptor sp. SB155-2</em></a></td><td><code>NCBITaxon:387092</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2724897"><em>Nitratiruptor sp. YY08-10</em></a></td><td><code>NCBITaxon:2724897</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2724898"><em>Nitratiruptor sp. YY08-13</em></a></td><td><code>NCBITaxon:2724898</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2724899"><em>Nitratiruptor sp. YY08-14</em></a></td><td><code>NCBITaxon:2724899</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2724900"><em>Nitratiruptor sp. YY08-26</em></a></td><td><code>NCBITaxon:2724900</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2724897"><em>Nitratiruptor sp. YY08-10</em></a></td><td><code>NCBITaxon:2724897</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2724898"><em>Nitratiruptor sp. YY08-13</em></a></td><td><code>NCBITaxon:2724898</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2724899"><em>Nitratiruptor sp. YY08-14</em></a></td><td><code>NCBITaxon:2724899</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2724900"><em>Nitratiruptor sp. YY08-26</em></a></td><td><code>NCBITaxon:2724900</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2724901"><em>Nitratiruptor sp. YY09-18</em></a></td><td><code>NCBITaxon:2724901</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:269259"><em>Nitratiruptor tergarcus</em></a></td><td><code>NCBITaxon:269259</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1069081"><em>Nitratiruptor tergarcus DSM 16512</em></a></td><td><code>NCBITaxon:1069081</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1069081"><em>Nitratiruptor tergarcus DSM 16512</em></a></td><td><code>NCBITaxon:1069081</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3107514"><em>Nitratiruptoraceae bacterium</em></a></td><td><code>NCBITaxon:3107514</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1648056"><em>nitrifying bacterium enrichment culture</em></a></td><td><code>NCBITaxon:1648056</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:427918"><em>Nitriliruptor alkaliphilus</em></a></td><td><code>NCBITaxon:427918</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1069448"><em>Nitriliruptor alkaliphilus DSM 45188</em></a></td><td><code>NCBITaxon:1069448</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2448056"><em>Nitriliruptor sp.</em></a></td><td><code>NCBITaxon:2448056</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>8</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2093808"><em>Nitriliruptoraceae bacterium</em></a></td><td><code>NCBITaxon:2093808</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>8</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2497630"><em>Nitriliruptorales bacterium</em></a></td><td><code>NCBITaxon:2497630</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>6</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2093810"><em>Nitriliruptoria bacterium</em></a></td><td><code>NCBITaxon:2093810</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2448056"><em>Nitriliruptor sp.</em></a></td><td><code>NCBITaxon:2448056</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4 (4 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2093808"><em>Nitriliruptoraceae bacterium</em></a></td><td><code>NCBITaxon:2093808</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>47 (47 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2497630"><em>Nitriliruptorales bacterium</em></a></td><td><code>NCBITaxon:2497630</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>19 (19 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2093810"><em>Nitriliruptoria bacterium</em></a></td><td><code>NCBITaxon:2093810</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4 (4 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1571224"><em>Nitrincola alkalilacustris</em></a></td><td><code>NCBITaxon:1571224</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1366656"><em>Nitrincola alkalisediminis</em></a></td><td><code>NCBITaxon:1366656</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>2</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1366656"><em>Nitrincola alkalisediminis</em></a></td><td><code>NCBITaxon:1366656</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>2</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2614693"><em>Nitrincola iocasae</em></a></td><td><code>NCBITaxon:2614693</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:267850"><em>Nitrincola lacisaponensis</em></a></td><td><code>NCBITaxon:267850</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1229521"><em>Nitrincola nitratireducens</em></a></td><td><code>NCBITaxon:1229521</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:267850"><em>Nitrincola lacisaponensis</em></a></td><td><code>NCBITaxon:267850</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1229521"><em>Nitrincola nitratireducens</em></a></td><td><code>NCBITaxon:1229521</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3400273"><em>Nitrincola salilacus</em></a></td><td><code>NCBITaxon:3400273</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1730894"><em>Nitrincola schmidtii</em></a></td><td><code>NCBITaxon:1730894</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1926584"><em>Nitrincola sp.</em></a></td><td><code>NCBITaxon:1926584</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>2</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1926584"><em>Nitrincola sp.</em></a></td><td><code>NCBITaxon:1926584</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>2</td><td>3 (3 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:927657"><em>Nitrincola sp. 1001N</em></a></td><td><code>NCBITaxon:927657</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1387560"><em>Nitrincola sp. 10CB_GOM-1509m</em></a></td><td><code>NCBITaxon:1387560</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1907352"><em>Nitrincola sp. 19B_GOM-1509m</em></a></td><td><code>NCBITaxon:1907352</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -128,14 +216,14 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:93980"><em>Nitrobacter alkalicus</em></a></td><td><code>NCBITaxon:93980</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:912"><em>Nitrobacter hamburgensis</em></a></td><td><code>NCBITaxon:912</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:323097"><em>Nitrobacter hamburgensis X14</em></a></td><td><code>NCBITaxon:323097</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:29420"><em>Nitrobacter sp.</em></a></td><td><code>NCBITaxon:29420</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:29420"><em>Nitrobacter sp.</em></a></td><td><code>NCBITaxon:29420</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>10 (10 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:393252"><em>Nitrobacter sp. 219</em></a></td><td><code>NCBITaxon:393252</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:393255"><em>Nitrobacter sp. 263</em></a></td><td><code>NCBITaxon:393255</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:393265"><em>Nitrobacter sp. 311</em></a></td><td><code>NCBITaxon:393265</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:393258"><em>Nitrobacter sp. 4111/1</em></a></td><td><code>NCBITaxon:393258</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:393256"><em>Nitrobacter sp. 5F/3</em></a></td><td><code>NCBITaxon:393256</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1895797"><em>Nitrobacter sp. 62-13</em></a></td><td><code>NCBITaxon:1895797</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1895798"><em>Nitrobacter sp. 62-23</em></a></td><td><code>NCBITaxon:1895798</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1895797"><em>Nitrobacter sp. 62-13</em></a></td><td><code>NCBITaxon:1895797</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1895798"><em>Nitrobacter sp. 62-23</em></a></td><td><code>NCBITaxon:1895798</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2929050"><em>Nitrobacter sp. A67</em></a></td><td><code>NCBITaxon:2929050</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:393260"><em>Nitrobacter sp. AB3</em></a></td><td><code>NCBITaxon:393260</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:393259"><em>Nitrobacter sp. BS5/19</em></a></td><td><code>NCBITaxon:393259</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -161,7 +249,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:3077783"><em>Nitrobacter sp. NB1</em></a></td><td><code>NCBITaxon:3077783</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3077784"><em>Nitrobacter sp. NB2</em></a></td><td><code>NCBITaxon:3077784</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:83539"><em>Nitrobacter sp. Nb4</em></a></td><td><code>NCBITaxon:83539</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:314253"><em>Nitrobacter sp. Nb-311A</em></a></td><td><code>NCBITaxon:314253</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:314253"><em>Nitrobacter sp. Nb-311A</em></a></td><td><code>NCBITaxon:314253</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1943570"><em>Nitrobacter sp. NbAS1</em></a></td><td><code>NCBITaxon:1943570</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1417688"><em>Nitrobacter sp. NBW1</em></a></td><td><code>NCBITaxon:1417688</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1417689"><em>Nitrobacter sp. NBW2</em></a></td><td><code>NCBITaxon:1417689</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -175,17 +263,17 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:454003"><em>Nitrobacter sp. SC</em></a></td><td><code>NCBITaxon:454003</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:393261"><em>Nitrobacter sp. Termite2</em></a></td><td><code>NCBITaxon:393261</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:79934"><em>Nitrobacter sp. TH21</em></a></td><td><code>NCBITaxon:79934</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3398703"><em>Nitrobacter sp. TKz-YC01</em></a></td><td><code>NCBITaxon:3398703</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3398704"><em>Nitrobacter sp. TKz-YC02</em></a></td><td><code>NCBITaxon:3398704</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3398703"><em>Nitrobacter sp. TKz-YC01</em></a></td><td><code>NCBITaxon:3398703</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3398704"><em>Nitrobacter sp. TKz-YC02</em></a></td><td><code>NCBITaxon:3398704</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:393262"><em>Nitrobacter sp. Yukatan</em></a></td><td><code>NCBITaxon:393262</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:29421"><em>Nitrobacter vulgaris</em></a></td><td><code>NCBITaxon:29421</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:913"><em>Nitrobacter winogradskyi</em></a></td><td><code>NCBITaxon:913</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>2</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:29421"><em>Nitrobacter vulgaris</em></a></td><td><code>NCBITaxon:29421</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:913"><em>Nitrobacter winogradskyi</em></a></td><td><code>NCBITaxon:913</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>2</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:323098"><em>Nitrobacter winogradskyi Nb-255</em></a></td><td><code>NCBITaxon:323098</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3014065"><em>Nitrobacteraceae bacterium</em></a></td><td><code>NCBITaxon:3014065</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>6</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3014065"><em>Nitrobacteraceae bacterium</em></a></td><td><code>NCBITaxon:3014065</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3119825"><em>Nitrobacteraceae bacterium AZCC 1564</em></a></td><td><code>NCBITaxon:3119825</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3119823"><em>Nitrobacteraceae bacterium AZCC 2146</em></a></td><td><code>NCBITaxon:3119823</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3119822"><em>Nitrobacteraceae bacterium AZCC 2161</em></a></td><td><code>NCBITaxon:3119822</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3119824"><em>Nitrobacteraceae bacterium AZCC 2299</em></a></td><td><code>NCBITaxon:3119824</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3119823"><em>Nitrobacteraceae bacterium AZCC 2146</em></a></td><td><code>NCBITaxon:3119823</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3119822"><em>Nitrobacteraceae bacterium AZCC 2161</em></a></td><td><code>NCBITaxon:3119822</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3119824"><em>Nitrobacteraceae bacterium AZCC 2299</em></a></td><td><code>NCBITaxon:3119824</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3467042"><em>Nitrobacteraceae bacterium UC4446_H13</em></a></td><td><code>NCBITaxon:3467042</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3467041"><em>Nitrobacteraceae bacterium UC4449_H16</em></a></td><td><code>NCBITaxon:3467041</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:267930"><em>Nitrobacteria hamadaniensis</em></a></td><td><code>NCBITaxon:267930</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -196,7 +284,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:3121883"><em>Nitrococcales bacterium</em></a></td><td><code>NCBITaxon:3121883</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:35797"><em>Nitrococcus mobilis</em></a></td><td><code>NCBITaxon:35797</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:314278"><em>Nitrococcus mobilis Nb-231</em></a></td><td><code>NCBITaxon:314278</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2894366"><em>Nitrococcus sp.</em></a></td><td><code>NCBITaxon:2894366</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2894366"><em>Nitrococcus sp.</em></a></td><td><code>NCBITaxon:2894366</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3695741"><em>Nitrococcus sp. A_bin9</em></a></td><td><code>NCBITaxon:3695741</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1385639"><em>Nitrococcus sp. enrichment culture isolate DGGE gel band 1</em></a></td><td><code>NCBITaxon:1385639</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1385640"><em>Nitrococcus sp. enrichment culture isolate DGGE gel band EN2</em></a></td><td><code>NCBITaxon:1385640</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -233,12 +321,15 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:273270"><em>nitrogen-fixing bacterium MU13</em></a></td><td><code>NCBITaxon:273270</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="taxon-browser.js?v=434e253832135143"></script>
+<script defer src="taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="index.json.gz">Index JSON.gz</a> · <a href="index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

@@ -1,0 +1,55 @@
+# YAML Record Review: Liangdongia quercuum
+
+- Repository: TaxonMech
+- Record: data/taxa/eukaryota/liangdongia_quercuum.yaml
+- Started UTC: 2026-09-23T12:23:01Z
+- Finished UTC: 2026-09-23T12:23:01Z
+- Verdict: pass
+
+## Target
+
+Generated eukaryote species record `data/taxa/eukaryota/liangdongia_quercuum.yaml` denotes the exact NCBI species `Liangdongia quercuum` as `NCBITaxon:53646`, rank `SPECIES`, under genus `NCBITaxon:3712556` (`Liangdongia`). It is an exactly grounded, seeded record attested by NCBI Taxonomy and GOLD.
+
+## Validation
+
+- `just validate data/taxa/eukaryota/liangdongia_quercuum.yaml` exited successfully.
+- `just validate-strict data/taxa/eukaryota/liangdongia_dendrica.yaml data/taxa/eukaryota/liangdongia_dryadoides.yaml data/taxa/eukaryota/liangdongia_quercuum.yaml data/taxa/eukaryota/libkindia_masarykiana.yaml` scanned 4 files with 0 ERROR rows.
+- Full `just validate-history` and `just verify-corpus` had already passed for this checkout; they were not rerun for this generated record.
+- `just validate-products` is not applicable because this generated record has no `causal_graphs`.
+
+## Identity and Grounding
+
+- `data/raw/ncbitaxon_taxa.tsv:6787` carries `NCBITaxon:53646`, label `Liangdongia quercuum`, rank `SPECIES`, parent `NCBITaxon:3712556`, genetic code `1`, exact synonyms `Pichia quercuum` and `Starmera quercuum`, three related synonyms, and snapshot `2026-09-13`.
+- The 13 ancestor rows in `lineage` matched the local NCBI inventory with no missing or mismatched labels or ranks, terminating in the expected `Liangdongia` genus.
+- `curation/seed_scope.tsv:52883` contains this identifier with reason `attested rule: Liangdongia quercuum, 2 sources incl. NCBI`.
+
+## Evidence
+
+- The NCBI source attestation is supported by the exact target row in `data/raw/ncbitaxon_taxa.tsv`, including snapshot `2026-09-13`.
+- The GOLD source attestation is supported by `data/raw/gold_organisms.tsv:38205`, whose aggregate count is `12` for `NCBITaxon:53646`.
+- The current native GOLD expansion found 12 exact organism rows, exact projects `Gp0441224` and `Gp0780301`, and two native analysis rows linked through `AP PROJECT GOLD IDS` to those projects.
+- Exact StrainInfo scans found 3 direct strains and 22 deposit rows for this NCBI ID, but exact BacDive scans found no rows and the generated StrainInfo overlay tables have no rows for this taxon.
+
+## Completeness
+
+- Exact scans of the generated raw strain tables found 0 rows in `data/raw/bacdive_strains.tsv`, `data/raw/culture_collection_strains.tsv`, `data/raw/strain_assemblies.tsv`, `data/raw/strain_genome_records.tsv`, and `data/raw/strain_related_records.tsv`.
+- Exact scans of the generated StrainInfo overlays found 0 rows in `data/straininfo/assemblies.tsv`, `data/straininfo/exclusions.tsv`, and `data/straininfo/related_records.tsv.gz`.
+- Exact scans of the auxiliary taxon tables found no LPSN, GTDB, Madin, MediaDive, or BactoTraits rows for this NCBI ID, matching the absence of `nomenclature` and `taxonomy_mappings`.
+- `data/raw/ncbi_type_material.tsv:230578` through `230584` contain seven holotype or culture-from-holotype spellings for `Pichia quercuum`; the current generated `TaxonRecord` does not embed NCBI type material directly.
+
+## Findings
+
+None found.
+
+## Recommended Edits
+
+None.
+
+## Follow-up Checks
+
+None required. If the GOLD, NCBI, or StrainInfo inventories are refreshed, rerun `just seed-canary NCBITaxon:53646`, `just validate data/taxa/eukaryota/liangdongia_quercuum.yaml`, and `just validate-strict data/taxa/eukaryota/liangdongia_quercuum.yaml` on the regenerated record.
+
+## Additional Notes
+
+- No prior exact report for `liangdongia_quercuum` was present under `reports/yaml_record_review/`; the check used `find`, so ignored `reports/` files were included.
+- Review source reads, validators, and bounded scans were run in `/private/tmp/taxonmech-codex-review` to avoid interfering with the primary checkout.

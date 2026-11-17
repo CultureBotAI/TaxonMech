@@ -7,35 +7,123 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../theme-toggle.js"></script>
 <script defer src="../vendor/fflate-0.8.2.js"></script>
-<script defer src="../compressed-data.js?v=434e253832135143"></script>
+<script defer src="../compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="../index.html">TaxonMech</a>
   <nav>
     <a href="../browse.html">Browse</a>
     <a href="../type-strains.html">Type strains</a>
+    <a href="../map.html">Text map</a>
     <a href="../sources.html">Sources</a>
+    <a href="../index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../index.html">TaxonMech</a> › <span>Bacteria</span>
+</nav>
 <h1>Bacteria</h1>
 <p class="lede">Species and infraspecific taxa under NCBITaxon:2, including uncultured and environmental taxa.</p>
-<section id="taxon-browser" data-domain="BACTERIA" data-typed="false" data-page="2184" data-size="200" data-root="../">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="BACTERIA" data-typed="false" data-page="2184" data-size="200" data-root="../">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="../browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA" selected>Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">605695 records · page 2184 of 3029.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="../domain/bacteria-2183.html">Previous</a><a href="../domain/bacteria-2185.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>Bacteria</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
-<tr><td><a href="../taxon.html?id=NCBITaxon:342110"><em>Ralstonia solanacearum UW551</em></a></td><td><code>NCBITaxon:342110</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>333</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1072575"><em>Ralstonia solanacearum Y45</em></a></td><td><code>NCBITaxon:1072575</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>502</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:342110"><em>Ralstonia solanacearum UW551</em></a></td><td><code>NCBITaxon:342110</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1072575"><em>Ralstonia solanacearum Y45</em></a></td><td><code>NCBITaxon:1072575</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2953896"><em>Ralstonia soli</em></a></td><td><code>NCBITaxon:2953896</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:54061"><em>Ralstonia sp.</em></a></td><td><code>NCBITaxon:54061</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>21</td><td>75</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:54061"><em>Ralstonia sp.</em></a></td><td><code>NCBITaxon:54061</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>21</td><td>8 (8 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:362702"><em>Ralstonia sp. 009RG</em></a></td><td><code>NCBITaxon:362702</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1170463"><em>Ralstonia sp. 03SU2-P</em></a></td><td><code>NCBITaxon:1170463</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3471674"><em>Ralstonia sp. 092160068-1</em></a></td><td><code>NCBITaxon:3471674</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -52,10 +140,10 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:151655"><em>Ralstonia sp. 1101</em></a></td><td><code>NCBITaxon:151655</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3471672"><em>Ralstonia sp. 110700041-2</em></a></td><td><code>NCBITaxon:3471672</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3471673"><em>Ralstonia sp. 110760020-1</em></a></td><td><code>NCBITaxon:3471673</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3156423"><em>Ralstonia sp. 1138</em></a></td><td><code>NCBITaxon:3156423</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>8</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3156423"><em>Ralstonia sp. 1138</em></a></td><td><code>NCBITaxon:3156423</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1463399"><em>Ralstonia sp. 11709005</em></a></td><td><code>NCBITaxon:1463399</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:151652"><em>Ralstonia sp. 1183</em></a></td><td><code>NCBITaxon:151652</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3063544"><em>Ralstonia sp. 11b</em></a></td><td><code>NCBITaxon:3063544</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>53</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3063544"><em>Ralstonia sp. 11b</em></a></td><td><code>NCBITaxon:3063544</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475254"><em>Ralstonia sp. 121560039-2</em></a></td><td><code>NCBITaxon:3475254</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475252"><em>Ralstonia sp. 123250053-1</em></a></td><td><code>NCBITaxon:3475252</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:248030"><em>Ralstonia sp. 1259</em></a></td><td><code>NCBITaxon:248030</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -97,12 +185,12 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:254360"><em>Ralstonia sp. 2003</em></a></td><td><code>NCBITaxon:254360</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:254359"><em>Ralstonia sp. 2003DFC</em></a></td><td><code>NCBITaxon:254359</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:488753"><em>Ralstonia sp. 22</em></a></td><td><code>NCBITaxon:488753</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3453870"><em>Ralstonia sp. 22086</em></a></td><td><code>NCBITaxon:3453870</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>14</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3453878"><em>Ralstonia sp. 22111</em></a></td><td><code>NCBITaxon:3453878</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>14</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3453870"><em>Ralstonia sp. 22086</em></a></td><td><code>NCBITaxon:3453870</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3453878"><em>Ralstonia sp. 22111</em></a></td><td><code>NCBITaxon:3453878</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3447364"><em>Ralstonia sp. 24A2</em></a></td><td><code>NCBITaxon:3447364</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:341760"><em>Ralstonia sp. 25</em></a></td><td><code>NCBITaxon:341760</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3447363"><em>Ralstonia sp. 25C</em></a></td><td><code>NCBITaxon:3447363</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1761899"><em>Ralstonia sp. 25mfcol4.1</em></a></td><td><code>NCBITaxon:1761899</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1761899"><em>Ralstonia sp. 25mfcol4.1</em></a></td><td><code>NCBITaxon:1761899</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:420526"><em>Ralstonia sp. 26B</em></a></td><td><code>NCBITaxon:420526</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:755109"><em>Ralstonia sp. 28(2010)</em></a></td><td><code>NCBITaxon:755109</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:314594"><em>Ralstonia sp. 2-3/A1</em></a></td><td><code>NCBITaxon:314594</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -117,8 +205,8 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:229322"><em>Ralstonia sp. 3CB3E2</em></a></td><td><code>NCBITaxon:229322</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:229323"><em>Ralstonia sp. 3CB3L</em></a></td><td><code>NCBITaxon:229323</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:261368"><em>Ralstonia sp. 3F2</em></a></td><td><code>NCBITaxon:261368</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2675750"><em>Ralstonia sp. 3N</em></a></td><td><code>NCBITaxon:2675750</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>75</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2502217"><em>Ralstonia sp. 3PA37C10</em></a></td><td><code>NCBITaxon:2502217</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>53</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2675750"><em>Ralstonia sp. 3N</em></a></td><td><code>NCBITaxon:2675750</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2502217"><em>Ralstonia sp. 3PA37C10</em></a></td><td><code>NCBITaxon:2502217</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:506432"><em>Ralstonia sp. 44A3</em></a></td><td><code>NCBITaxon:506432</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:506433"><em>Ralstonia sp. 44D2</em></a></td><td><code>NCBITaxon:506433</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1094341"><em>Ralstonia sp. 4506</em></a></td><td><code>NCBITaxon:1094341</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -130,12 +218,12 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:300862"><em>Ralstonia sp. 4BR1</em></a></td><td><code>NCBITaxon:300862</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:229326"><em>Ralstonia sp. 4CBBB</em></a></td><td><code>NCBITaxon:229326</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:261367"><em>Ralstonia sp. 4F2</em></a></td><td><code>NCBITaxon:261367</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2502228"><em>Ralstonia sp. 4NA327D5</em></a></td><td><code>NCBITaxon:2502228</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>21</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2502228"><em>Ralstonia sp. 4NA327D5</em></a></td><td><code>NCBITaxon:2502228</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:218171"><em>Ralstonia sp. 50</em></a></td><td><code>NCBITaxon:218171</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2716689"><em>Ralstonia sp. 535637</em></a></td><td><code>NCBITaxon:2716689</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1736018"><em>Ralstonia sp. 58_RSOL</em></a></td><td><code>NCBITaxon:1736018</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1546970"><em>Ralstonia sp. 58C</em></a></td><td><code>NCBITaxon:1546970</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:658080"><em>Ralstonia sp. 5_2_56FAA</em></a></td><td><code>NCBITaxon:658080</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>75</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:658080"><em>Ralstonia sp. 5_2_56FAA</em></a></td><td><code>NCBITaxon:658080</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:341767"><em>Ralstonia sp. 67</em></a></td><td><code>NCBITaxon:341767</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1158410"><em>Ralstonia sp. 6HR-9</em></a></td><td><code>NCBITaxon:1158410</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1353944"><em>Ralstonia sp. 6R</em></a></td><td><code>NCBITaxon:1353944</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -164,12 +252,12 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1435908"><em>Ralstonia sp. A7</em></a></td><td><code>NCBITaxon:1435908</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:293016"><em>Ralstonia sp. A-39-25-4</em></a></td><td><code>NCBITaxon:293016</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:200912"><em>Ralstonia sp. A-471</em></a></td><td><code>NCBITaxon:200912</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3035138"><em>Ralstonia sp. AB22-23</em></a></td><td><code>NCBITaxon:3035138</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>53</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3035138"><em>Ralstonia sp. AB22-23</em></a></td><td><code>NCBITaxon:3035138</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3035139"><em>Ralstonia sp. AB24-4</em></a></td><td><code>NCBITaxon:3035139</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3035140"><em>Ralstonia sp. AB28-3</em></a></td><td><code>NCBITaxon:3035140</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>53</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3035140"><em>Ralstonia sp. AB28-3</em></a></td><td><code>NCBITaxon:3035140</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3035141"><em>Ralstonia sp. AB28-4</em></a></td><td><code>NCBITaxon:3035141</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3035143"><em>Ralstonia sp. AB364</em></a></td><td><code>NCBITaxon:3035143</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3035142"><em>Ralstonia sp. AB36-13C</em></a></td><td><code>NCBITaxon:3035142</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>53</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3035142"><em>Ralstonia sp. AB36-13C</em></a></td><td><code>NCBITaxon:3035142</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3035144"><em>Ralstonia sp. AB5-6</em></a></td><td><code>NCBITaxon:3035144</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3035145"><em>Ralstonia sp. AB8-16</em></a></td><td><code>NCBITaxon:3035145</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1661199"><em>Ralstonia sp. AET-6-14</em></a></td><td><code>NCBITaxon:1661199</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -192,8 +280,8 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1164477"><em>Ralstonia sp. &#39;ARUP UnID 565&#39;</em></a></td><td><code>NCBITaxon:1164477</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1077678"><em>Ralstonia sp. AS1</em></a></td><td><code>NCBITaxon:1077678</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:443623"><em>Ralstonia sp. ASLS14</em></a></td><td><code>NCBITaxon:443623</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2795124"><em>Ralstonia sp. ASV6</em></a></td><td><code>NCBITaxon:2795124</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1235457"><em>Ralstonia sp. AU12-08</em></a></td><td><code>NCBITaxon:1235457</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>13</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2795124"><em>Ralstonia sp. ASV6</em></a></td><td><code>NCBITaxon:2795124</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1235457"><em>Ralstonia sp. AU12-08</em></a></td><td><code>NCBITaxon:1235457</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:171669"><em>Ralstonia sp. AU378</em></a></td><td><code>NCBITaxon:171669</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:310446"><em>Ralstonia sp. AU5957</em></a></td><td><code>NCBITaxon:310446</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:310447"><em>Ralstonia sp. AU5980</em></a></td><td><code>NCBITaxon:310447</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -202,7 +290,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:263572"><em>Ralstonia sp. B0665</em></a></td><td><code>NCBITaxon:263572</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:221708"><em>Ralstonia sp. B11</em></a></td><td><code>NCBITaxon:221708</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:102627"><em>Ralstonia sp. B15</em></a></td><td><code>NCBITaxon:102627</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2836825"><em>Ralstonia sp. B265</em></a></td><td><code>NCBITaxon:2836825</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>75</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2836825"><em>Ralstonia sp. B265</em></a></td><td><code>NCBITaxon:2836825</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1211933"><em>Ralstonia sp. B65</em></a></td><td><code>NCBITaxon:1211933</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:723885"><em>Ralstonia sp. B8</em></a></td><td><code>NCBITaxon:723885</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3722768"><em>Ralstonia sp. B8621-1</em></a></td><td><code>NCBITaxon:3722768</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -234,12 +322,15 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1653034"><em>Ralstonia sp. Bp7290</em></a></td><td><code>NCBITaxon:1653034</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="../taxon-browser.js?v=434e253832135143"></script>
+<script defer src="../taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="../index.json.gz">Index JSON.gz</a> · <a href="../index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

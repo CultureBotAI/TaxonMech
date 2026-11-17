@@ -6,7 +6,7 @@ metadata:
   category: curation
   requires_database: false
   requires_internet: true
-  version: 1.0.0
+  version: 2.0.0
 ---
 
 # Curate one TaxonMech YAML record
@@ -15,6 +15,55 @@ Produce a defensible account of one `TaxonRecord`: what is supported, what is
 wrong, what is unresolved, and where the fix belongs. Search results are
 leads; only inspected sources can support a claim.
 
+## The contract
+
+<!-- canonical:begin the-contract -->
+Produce a defensible record and an explicit account of four things: what is
+**supported**, what was **corrected**, what is **still unresolved**, and what is
+**genuinely unknown**. The last two are different — a gap you searched for and
+could not close is a finding; a gap you did not look at is not.
+
+**One target.** Resolve exactly one record before touching anything. If a label
+matches several, or a request names a family rather than a member, stop and
+disambiguate. Silently substituting a similar record is the error that no later
+check catches, because everything downstream is then correct about the wrong
+thing.
+
+**Audit preserves scientific inputs. Curation authorises edits to the named
+record only.** A review or audit request changes no scientific record, status,
+or curation history. It does save a new timestamped structured review through
+`docs/record-reviews.md` and the native rubric in `docs/record-review-profile.md`.
+A curate, improve, complete, correct or add-evidence request authorises local edits to that record and the smallest
+maintained path its provenance requires — not to neighbours, not to whatever
+else looked wrong on the way.
+
+**Search results are leads. Only an inspected source supports a claim.** A
+search hit, a deep-research report, a rendered page, and a generated artifact are
+each somewhere to look, and none is evidence. Evidence is text you read in the
+source, attached to the narrowest assertion it actually supports.
+<!-- canonical:end the-contract -->
+
+## Structured audit output
+
+For a review, audit, or assessment request, apply the scientific checklist below
+without taking the curation write steps. Follow [docs/record-reviews.md](../../../docs/record-reviews.md)
+and [the local profile](../../../docs/record-review-profile.md): capture target
+and maintained-input hashes before judging, then save the assessed result with
+`uv run python scripts/record_review.py validate <completed-review.yaml>` and
+`uv run python scripts/record_review.py save --content <completed-review.yaml>`.
+The output is `reviews/structured/<YYYYMMDDTHHMMSSZ>-<slug>/review.yaml` plus its
+derived `review.md`; link both in the final response. Preserve actual check
+results, evidence, scope, unresolved findings, and unavailable checks. Use a
+partial/blocked review when required checks are unavailable after assessment.
+Do not append curation/history events or promote native status from an audit.
+
+Worklists, sampling output, source searches, and raw provider drafts are inputs
+to review, not completed scientific reviews. Keep their selection rules and
+population denominators when assessing a sample; deterministic-only inspection
+uses `scientific_review: false`. A queue checkpoint never substitutes for the
+validated saved bundle. Existing curation write and scientific sign-off gates
+below still apply when curation is explicitly requested.
+
 ## Boundaries
 
 - Resolve one target under `data/taxa/<domain>/`. Stop and disambiguate when a
@@ -22,8 +71,8 @@ leads; only inspected sources can support a claim.
 - **Every seeded field is generated.** `just verify-corpus` fails on a hand
   edit. A correction to identity, lineage, nomenclature, mappings, strains or
   attestations is a change to the seeder (with a test), to
-  `curation/seed_scope.tsv`, or to kg-microbe — say which, and open the
-  issue there.
+  `curation/seed_scope.tsv`, or to kg-microbe: identify that owner in the
+  saved finding and proposed action; issue creation needs separate authorization.
 - Never edit generated `pages/`; edit templates and regenerate.
 - Never launch paid research, contact anyone, or create/edit a GitHub item or
   outbound message without explicit authorization.
@@ -78,6 +127,7 @@ LPSN would place elsewhere.
 
 Report corrections and their evidence, retained claims checked, unresolved
 gaps, and for each finding **where the fix belongs**: seeder, scope,
-kg-microbe, or a curator overlay that does not exist yet. Scaffold a history
-record with `just new-history --event REVIEW` naming what was checked. Do not
-edit the record YAML.
+kg-microbe, or a curator overlay whose availability must first be checked
+with an ignored/hidden-inclusive search. Save the structured review using the
+contract above; do not append a history event or edit the generated record.
+History events remain part of separately authorized curation changes.

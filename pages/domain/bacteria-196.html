@@ -7,30 +7,118 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../theme-toggle.js"></script>
 <script defer src="../vendor/fflate-0.8.2.js"></script>
-<script defer src="../compressed-data.js?v=434e253832135143"></script>
+<script defer src="../compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="../index.html">TaxonMech</a>
   <nav>
     <a href="../browse.html">Browse</a>
     <a href="../type-strains.html">Type strains</a>
+    <a href="../map.html">Text map</a>
     <a href="../sources.html">Sources</a>
+    <a href="../index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../index.html">TaxonMech</a> › <span>Bacteria</span>
+</nav>
 <h1>Bacteria</h1>
 <p class="lede">Species and infraspecific taxa under NCBITaxon:2, including uncultured and environmental taxa.</p>
-<section id="taxon-browser" data-domain="BACTERIA" data-typed="false" data-page="196" data-size="200" data-root="../">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="BACTERIA" data-typed="false" data-page="196" data-size="200" data-root="../">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="../browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA" selected>Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">605695 records · page 196 of 3029.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="../domain/bacteria-195.html">Previous</a><a href="../domain/bacteria-197.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>Bacteria</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1125775"><em>anammox bacterium enrichment culture clone cc4A_87d</em></a></td><td><code>NCBITaxon:1125775</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1125776"><em>anammox bacterium enrichment culture clone cc5B_87d</em></a></td><td><code>NCBITaxon:1125776</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -93,57 +181,57 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:984571"><em>anammox bacterium enrichment culture clone Udec-4</em></a></td><td><code>NCBITaxon:984571</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2490586"><em>&#39;Ananas comosus&#39; shoot proliferation phytoplasma</em></a></td><td><code>NCBITaxon:2490586</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:186733"><em>Anaplasma bovis</em></a></td><td><code>NCBITaxon:186733</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1562740"><em>Anaplasma capra</em></a></td><td><code>NCBITaxon:1562740</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1562740"><em>Anaplasma capra</em></a></td><td><code>NCBITaxon:1562740</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2823527"><em>Anaplasma caudatum</em></a></td><td><code>NCBITaxon:2823527</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:769"><em>Anaplasma centrale</em></a></td><td><code>NCBITaxon:769</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:574556"><em>Anaplasma centrale str. Israel</em></a></td><td><code>NCBITaxon:574556</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2016046"><em>Anaplasma cf. marginale</em></a></td><td><code>NCBITaxon:2016046</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2016048"><em>Anaplasma cf. ovis</em></a></td><td><code>NCBITaxon:2016048</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2052602"><em>Anaplasma cf. platys</em></a></td><td><code>NCBITaxon:2052602</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:770"><em>Anaplasma marginale</em></a></td><td><code>NCBITaxon:770</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>0</td><td>23</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1412841"><em>Anaplasma marginale str. Dawn</em></a></td><td><code>NCBITaxon:1412841</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>23</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:320483"><em>Anaplasma marginale str. Florida</em></a></td><td><code>NCBITaxon:320483</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>23</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1000935"><em>Anaplasma marginale str. Florida Relapse</em></a></td><td><code>NCBITaxon:1000935</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>23</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1412840"><em>Anaplasma marginale str. Gypsy Plains</em></a></td><td><code>NCBITaxon:1412840</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>23</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:770"><em>Anaplasma marginale</em></a></td><td><code>NCBITaxon:770</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1412841"><em>Anaplasma marginale str. Dawn</em></a></td><td><code>NCBITaxon:1412841</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:320483"><em>Anaplasma marginale str. Florida</em></a></td><td><code>NCBITaxon:320483</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1000935"><em>Anaplasma marginale str. Florida Relapse</em></a></td><td><code>NCBITaxon:1000935</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1412840"><em>Anaplasma marginale str. Gypsy Plains</em></a></td><td><code>NCBITaxon:1412840</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:403778"><em>Anaplasma marginale str. Illinois</em></a></td><td><code>NCBITaxon:403778</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1334626"><em>Anaplasma marginale str. Mercedes</em></a></td><td><code>NCBITaxon:1334626</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:517436"><em>Anaplasma marginale str. Mississippi</em></a></td><td><code>NCBITaxon:517436</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>23</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1000936"><em>Anaplasma marginale str. Okeechobee</em></a></td><td><code>NCBITaxon:1000936</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>23</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1000938"><em>Anaplasma marginale str. Oklahoma</em></a></td><td><code>NCBITaxon:1000938</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>23</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:517437"><em>Anaplasma marginale str. Puerto Rico</em></a></td><td><code>NCBITaxon:517437</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>23</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:517436"><em>Anaplasma marginale str. Mississippi</em></a></td><td><code>NCBITaxon:517436</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1000936"><em>Anaplasma marginale str. Okeechobee</em></a></td><td><code>NCBITaxon:1000936</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1000938"><em>Anaplasma marginale str. Oklahoma</em></a></td><td><code>NCBITaxon:1000938</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:517437"><em>Anaplasma marginale str. Puerto Rico</em></a></td><td><code>NCBITaxon:517437</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1334625"><em>Anaplasma marginale str. Salta</em></a></td><td><code>NCBITaxon:1334625</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1000939"><em>Anaplasma marginale str. South Idaho</em></a></td><td><code>NCBITaxon:1000939</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:234826"><em>Anaplasma marginale str. St. Maries</em></a></td><td><code>NCBITaxon:234826</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>23</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:403779"><em>Anaplasma marginale str. Virginia</em></a></td><td><code>NCBITaxon:403779</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>23</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:234826"><em>Anaplasma marginale str. St. Maries</em></a></td><td><code>NCBITaxon:234826</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:403779"><em>Anaplasma marginale str. Virginia</em></a></td><td><code>NCBITaxon:403779</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1000937"><em>Anaplasma marginale str. Washington Okanogan</em></a></td><td><code>NCBITaxon:1000937</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:331269"><em>Anaplasma odocoilei</em></a></td><td><code>NCBITaxon:331269</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:142058"><em>Anaplasma ovis</em></a></td><td><code>NCBITaxon:142058</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>0</td><td>7</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1248439"><em>Anaplasma ovis str. Haibei</em></a></td><td><code>NCBITaxon:1248439</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>7</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:948"><em>Anaplasma phagocytophilum</em></a></td><td><code>NCBITaxon:948</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>0</td><td>29</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1359151"><em>Anaplasma phagocytophilum str. Annie</em></a></td><td><code>NCBITaxon:1359151</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>29</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1359152"><em>Anaplasma phagocytophilum str. ApMUC09</em></a></td><td><code>NCBITaxon:1359152</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>29</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1359153"><em>Anaplasma phagocytophilum str. ApNP</em></a></td><td><code>NCBITaxon:1359153</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>29</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1359154"><em>Anaplasma phagocytophilum str. ApNYW</em></a></td><td><code>NCBITaxon:1359154</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>29</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1359155"><em>Anaplasma phagocytophilum str. ApWI1</em></a></td><td><code>NCBITaxon:1359155</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>29</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1359156"><em>Anaplasma phagocytophilum str. CR1007</em></a></td><td><code>NCBITaxon:1359156</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>29</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1392508"><em>Anaplasma phagocytophilum str. CRT35</em></a></td><td><code>NCBITaxon:1392508</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>29</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1269275"><em>Anaplasma phagocytophilum str. CRT38</em></a></td><td><code>NCBITaxon:1269275</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>29</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:142058"><em>Anaplasma ovis</em></a></td><td><code>NCBITaxon:142058</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>0</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1248439"><em>Anaplasma ovis str. Haibei</em></a></td><td><code>NCBITaxon:1248439</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:948"><em>Anaplasma phagocytophilum</em></a></td><td><code>NCBITaxon:948</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>0</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1359151"><em>Anaplasma phagocytophilum str. Annie</em></a></td><td><code>NCBITaxon:1359151</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1359152"><em>Anaplasma phagocytophilum str. ApMUC09</em></a></td><td><code>NCBITaxon:1359152</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1359153"><em>Anaplasma phagocytophilum str. ApNP</em></a></td><td><code>NCBITaxon:1359153</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1359154"><em>Anaplasma phagocytophilum str. ApNYW</em></a></td><td><code>NCBITaxon:1359154</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1359155"><em>Anaplasma phagocytophilum str. ApWI1</em></a></td><td><code>NCBITaxon:1359155</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1359156"><em>Anaplasma phagocytophilum str. CR1007</em></a></td><td><code>NCBITaxon:1359156</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1392508"><em>Anaplasma phagocytophilum str. CRT35</em></a></td><td><code>NCBITaxon:1392508</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1269275"><em>Anaplasma phagocytophilum str. CRT38</em></a></td><td><code>NCBITaxon:1269275</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1359157"><em>Anaplasma phagocytophilum str. CRT53-1</em></a></td><td><code>NCBITaxon:1359157</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1184254"><em>Anaplasma phagocytophilum str. Dog2</em></a></td><td><code>NCBITaxon:1184254</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>29</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1184254"><em>Anaplasma phagocytophilum str. Dog2</em></a></td><td><code>NCBITaxon:1184254</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1359158"><em>Anaplasma phagocytophilum str. DU1</em></a></td><td><code>NCBITaxon:1359158</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1217107"><em>Anaplasma phagocytophilum str. HGE1</em></a></td><td><code>NCBITaxon:1217107</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>29</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1359159"><em>Anaplasma phagocytophilum str. HGE2</em></a></td><td><code>NCBITaxon:1359159</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>29</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:212042"><em>Anaplasma phagocytophilum str. HZ</em></a></td><td><code>NCBITaxon:212042</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>29</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1184253"><em>Anaplasma phagocytophilum str. HZ2</em></a></td><td><code>NCBITaxon:1184253</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>29</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1173064"><em>Anaplasma phagocytophilum str. JM</em></a></td><td><code>NCBITaxon:1173064</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>29</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1217107"><em>Anaplasma phagocytophilum str. HGE1</em></a></td><td><code>NCBITaxon:1217107</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1359159"><em>Anaplasma phagocytophilum str. HGE2</em></a></td><td><code>NCBITaxon:1359159</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:212042"><em>Anaplasma phagocytophilum str. HZ</em></a></td><td><code>NCBITaxon:212042</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1184253"><em>Anaplasma phagocytophilum str. HZ2</em></a></td><td><code>NCBITaxon:1184253</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1173064"><em>Anaplasma phagocytophilum str. JM</em></a></td><td><code>NCBITaxon:1173064</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1359160"><em>Anaplasma phagocytophilum str. Martin</em></a></td><td><code>NCBITaxon:1359160</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1392505"><em>Anaplasma phagocytophilum str. MRK</em></a></td><td><code>NCBITaxon:1392505</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>29</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1359161"><em>Anaplasma phagocytophilum str. NCH-1</em></a></td><td><code>NCBITaxon:1359161</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>29</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1392506"><em>Anaplasma phagocytophilum str. Norway variant1</em></a></td><td><code>NCBITaxon:1392506</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>29</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1392507"><em>Anaplasma phagocytophilum str. Norway variant2</em></a></td><td><code>NCBITaxon:1392507</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>29</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1359162"><em>Anaplasma phagocytophilum str. Webster</em></a></td><td><code>NCBITaxon:1359162</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>29</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1392505"><em>Anaplasma phagocytophilum str. MRK</em></a></td><td><code>NCBITaxon:1392505</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1359161"><em>Anaplasma phagocytophilum str. NCH-1</em></a></td><td><code>NCBITaxon:1359161</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1392506"><em>Anaplasma phagocytophilum str. Norway variant1</em></a></td><td><code>NCBITaxon:1392506</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1392507"><em>Anaplasma phagocytophilum str. Norway variant2</em></a></td><td><code>NCBITaxon:1392507</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1359162"><em>Anaplasma phagocytophilum str. Webster</em></a></td><td><code>NCBITaxon:1359162</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:949"><em>Anaplasma platys</em></a></td><td><code>NCBITaxon:949</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1872535"><em>Anaplasma sp.</em></a></td><td><code>NCBITaxon:1872535</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1872535"><em>Anaplasma sp.</em></a></td><td><code>NCBITaxon:1872535</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:464015"><em>Anaplasma sp. 1</em></a></td><td><code>NCBITaxon:464015</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:415957"><em>Anaplasma sp. 17889Aa</em></a></td><td><code>NCBITaxon:415957</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:415958"><em>Anaplasma sp. 17901Aa</em></a></td><td><code>NCBITaxon:415958</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -234,12 +322,15 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1977016"><em>Anaplasma sp. F306-AP2017</em></a></td><td><code>NCBITaxon:1977016</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="../taxon-browser.js?v=434e253832135143"></script>
+<script defer src="../taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="../index.json.gz">Index JSON.gz</a> · <a href="../index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

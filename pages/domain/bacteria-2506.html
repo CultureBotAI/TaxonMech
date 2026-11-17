@@ -7,32 +7,120 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../theme-toggle.js"></script>
 <script defer src="../vendor/fflate-0.8.2.js"></script>
-<script defer src="../compressed-data.js?v=434e253832135143"></script>
+<script defer src="../compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="../index.html">TaxonMech</a>
   <nav>
     <a href="../browse.html">Browse</a>
     <a href="../type-strains.html">Type strains</a>
+    <a href="../map.html">Text map</a>
     <a href="../sources.html">Sources</a>
+    <a href="../index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../index.html">TaxonMech</a> › <span>Bacteria</span>
+</nav>
 <h1>Bacteria</h1>
 <p class="lede">Species and infraspecific taxa under NCBITaxon:2, including uncultured and environmental taxa.</p>
-<section id="taxon-browser" data-domain="BACTERIA" data-typed="false" data-page="2506" data-size="200" data-root="../">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="BACTERIA" data-typed="false" data-page="2506" data-size="200" data-root="../">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="../browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA" selected>Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">605695 records · page 2506 of 3029.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="../domain/bacteria-2505.html">Previous</a><a href="../domain/bacteria-2507.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>Bacteria</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3399571"><em>Staphylococcus sp. Ze7</em></a></td><td><code>NCBITaxon:3399571</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>199</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3399571"><em>Staphylococcus sp. Ze7</em></a></td><td><code>NCBITaxon:3399571</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:354168"><em>Staphylococcus sp. zf-IRht16</em></a></td><td><code>NCBITaxon:354168</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1416872"><em>Staphylococcus sp. ZJHD3-34</em></a></td><td><code>NCBITaxon:1416872</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:551341"><em>Staphylococcus sp. zjs</em></a></td><td><code>NCBITaxon:551341</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -49,7 +137,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1572840"><em>Staphylococcus sp. ZQW-70</em></a></td><td><code>NCBITaxon:1572840</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1775129"><em>Staphylococcus sp. ZW-3</em></a></td><td><code>NCBITaxon:1775129</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1548504"><em>Staphylococcus sp. ZWS13</em></a></td><td><code>NCBITaxon:1548504</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1339238"><em>Staphylococcus sp. ZWU0021</em></a></td><td><code>NCBITaxon:1339238</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>319</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1339238"><em>Staphylococcus sp. ZWU0021</em></a></td><td><code>NCBITaxon:1339238</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:576119"><em>Staphylococcus sp. ZXM017</em></a></td><td><code>NCBITaxon:576119</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:576120"><em>Staphylococcus sp. ZXM056</em></a></td><td><code>NCBITaxon:576120</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:593413"><em>Staphylococcus sp. ZXM126</em></a></td><td><code>NCBITaxon:593413</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -58,40 +146,40 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1652024"><em>Staphylococcus sp. ZYY172</em></a></td><td><code>NCBITaxon:1652024</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:336940"><em>Staphylococcus sp. ZZ1</em></a></td><td><code>NCBITaxon:336940</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1201217"><em>Staphylococcus sp. zzqcp-4</em></a></td><td><code>NCBITaxon:1201217</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:61015"><em>Staphylococcus succinus</em></a></td><td><code>NCBITaxon:61015</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>39</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:224030"><em>Staphylococcus succinus subsp. succinus</em></a></td><td><code>NCBITaxon:224030</code></td><td>SUBSPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>39</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:61015"><em>Staphylococcus succinus</em></a></td><td><code>NCBITaxon:61015</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:224030"><em>Staphylococcus succinus subsp. succinus</em></a></td><td><code>NCBITaxon:224030</code></td><td>SUBSPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2750012"><em>Staphylococcus taiwanensis</em></a></td><td><code>NCBITaxon:2750012</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:94138"><em>Staphylococcus ureilyticus</em></a></td><td><code>NCBITaxon:94138</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>5</td><td>160</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:94138"><em>Staphylococcus ureilyticus</em></a></td><td><code>NCBITaxon:94138</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>5</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1912064"><em>Staphylococcus ursi</em></a></td><td><code>NCBITaxon:1912064</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1292"><em>Staphylococcus warneri</em></a></td><td><code>NCBITaxon:1292</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>70</td><td>231</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1292"><em>Staphylococcus warneri</em></a></td><td><code>NCBITaxon:1292</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>70</td><td>4 (4 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1255582"><em>Staphylococcus warneri 1445</em></a></td><td><code>NCBITaxon:1255582</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:904143"><em>Staphylococcus warneri A487</em></a></td><td><code>NCBITaxon:904143</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>231</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:596319"><em>Staphylococcus warneri L37603</em></a></td><td><code>NCBITaxon:596319</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1448849"><em>Staphylococcus warneri Lyso 1 2011</em></a></td><td><code>NCBITaxon:1448849</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>231</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1448850"><em>Staphylococcus warneri Lyso 2 2011</em></a></td><td><code>NCBITaxon:1448850</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>231</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:904143"><em>Staphylococcus warneri A487</em></a></td><td><code>NCBITaxon:904143</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:596319"><em>Staphylococcus warneri L37603</em></a></td><td><code>NCBITaxon:596319</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1448849"><em>Staphylococcus warneri Lyso 1 2011</em></a></td><td><code>NCBITaxon:1448849</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1448850"><em>Staphylococcus warneri Lyso 2 2011</em></a></td><td><code>NCBITaxon:1448850</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:955688"><em>Staphylococcus warneri RN833</em></a></td><td><code>NCBITaxon:955688</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1194526"><em>Staphylococcus warneri SG1</em></a></td><td><code>NCBITaxon:1194526</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>231</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:904338"><em>Staphylococcus warneri VCU121</em></a></td><td><code>NCBITaxon:904338</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>231</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1194526"><em>Staphylococcus warneri SG1</em></a></td><td><code>NCBITaxon:1194526</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:904338"><em>Staphylococcus warneri VCU121</em></a></td><td><code>NCBITaxon:904338</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2583989"><em>Staphylococcus xeri</em></a></td><td><code>NCBITaxon:2583989</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1288"><em>Staphylococcus xylosus</em></a></td><td><code>NCBITaxon:1288</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>10</td><td>199</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1353979"><em>Staphylococcus xylosus DMB3-Bh1</em></a></td><td><code>NCBITaxon:1353979</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>199</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1262650"><em>Staphylococcus xylosus NJ</em></a></td><td><code>NCBITaxon:1262650</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>17</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1288"><em>Staphylococcus xylosus</em></a></td><td><code>NCBITaxon:1288</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>10</td><td>4 (4 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1353979"><em>Staphylococcus xylosus DMB3-Bh1</em></a></td><td><code>NCBITaxon:1353979</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1262650"><em>Staphylococcus xylosus NJ</em></a></td><td><code>NCBITaxon:1262650</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2490858"><em>Staphylospora marina</em></a></td><td><code>NCBITaxon:2490858</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2689597"><em>Staphylospora sp.</em></a></td><td><code>NCBITaxon:2689597</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2758565"><em>Stappia albiluteola</em></a></td><td><code>NCBITaxon:2758565</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:235372"><em>Stappia carboxidovorans</em></a></td><td><code>NCBITaxon:235372</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:413193"><em>Stappia conradae</em></a></td><td><code>NCBITaxon:413193</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:538381"><em>Stappia indica</em></a></td><td><code>NCBITaxon:538381</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>2</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:538381"><em>Stappia indica</em></a></td><td><code>NCBITaxon:538381</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>2</td><td>3 (3 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:413194"><em>Stappia kahanamokuae</em></a></td><td><code>NCBITaxon:413194</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:413195"><em>Stappia meyerae</em></a></td><td><code>NCBITaxon:413195</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2762596"><em>Stappia quadratibracata</em></a></td><td><code>NCBITaxon:2762596</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2692190"><em>Stappia sediminis</em></a></td><td><code>NCBITaxon:2692190</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1870903"><em>Stappia sp.</em></a></td><td><code>NCBITaxon:1870903</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1870903"><em>Stappia sp.</em></a></td><td><code>NCBITaxon:1870903</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>6 (6 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:566516"><em>Stappia sp. 06-028670</em></a></td><td><code>NCBITaxon:566516</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:488825"><em>Stappia sp. 16-23</em></a></td><td><code>NCBITaxon:488825</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:287518"><em>Stappia sp. 18III/A01/075</em></a></td><td><code>NCBITaxon:287518</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:929149"><em>Stappia sp. 1A.6</em></a></td><td><code>NCBITaxon:929149</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1317123"><em>Stappia sp. 22II-S9-Z10</em></a></td><td><code>NCBITaxon:1317123</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1317123"><em>Stappia sp. 22II-S9-Z10</em></a></td><td><code>NCBITaxon:1317123</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:488826"><em>Stappia sp. 23-11</em></a></td><td><code>NCBITaxon:488826</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:488827"><em>Stappia sp. 23-13</em></a></td><td><code>NCBITaxon:488827</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:488828"><em>Stappia sp. 23-28</em></a></td><td><code>NCBITaxon:488828</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -157,7 +245,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:467644"><em>Stappia sp. N1mML6</em></a></td><td><code>NCBITaxon:467644</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:467633"><em>Stappia sp. N3mIS7</em></a></td><td><code>NCBITaxon:467633</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:585276"><em>Stappia sp. NH89-62</em></a></td><td><code>NCBITaxon:585276</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2003586"><em>Stappia sp. P2PMeth1</em></a></td><td><code>NCBITaxon:2003586</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2003586"><em>Stappia sp. P2PMeth1</em></a></td><td><code>NCBITaxon:2003586</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:761646"><em>Stappia sp. pr1st1</em></a></td><td><code>NCBITaxon:761646</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:501820"><em>Stappia sp. PR56-8</em></a></td><td><code>NCBITaxon:501820</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:761647"><em>Stappia sp. prst2</em></a></td><td><code>NCBITaxon:761647</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -175,20 +263,20 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1683152"><em>Stappia sp. SLG510B10-22</em></a></td><td><code>NCBITaxon:1683152</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:399961"><em>Stappia sp. SMB21</em></a></td><td><code>NCBITaxon:399961</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:708635"><em>Stappia sp. SPIO-19</em></a></td><td><code>NCBITaxon:708635</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2003584"><em>Stappia sp. TSB10GB4</em></a></td><td><code>NCBITaxon:2003584</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2003585"><em>Stappia sp. TSB10P1A</em></a></td><td><code>NCBITaxon:2003585</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2003584"><em>Stappia sp. TSB10GB4</em></a></td><td><code>NCBITaxon:2003584</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2003585"><em>Stappia sp. TSB10P1A</em></a></td><td><code>NCBITaxon:2003585</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:379887"><em>Stappia sp. UCC</em></a></td><td><code>NCBITaxon:379887</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:930081"><em>Stappia sp. USC176</em></a></td><td><code>NCBITaxon:930081</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:930082"><em>Stappia sp. USC5</em></a></td><td><code>NCBITaxon:930082</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:930813"><em>Stappia sp. USC97.1</em></a></td><td><code>NCBITaxon:930813</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2925220"><em>Stappia sp. WLB 29</em></a></td><td><code>NCBITaxon:2925220</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:71235"><em>Stappia stellulata</em></a></td><td><code>NCBITaxon:71235</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:71235"><em>Stappia stellulata</em></a></td><td><code>NCBITaxon:71235</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1123294"><em>Stappia stellulata DSM 5886</em></a></td><td><code>NCBITaxon:1123294</code></td><td>STRAIN</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:992267"><em>Stappia taiwanensis</em></a></td><td><code>NCBITaxon:992267</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2952973"><em>Stappiaceae bacterium</em></a></td><td><code>NCBITaxon:2952973</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>43</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:992267"><em>Stappia taiwanensis</em></a></td><td><code>NCBITaxon:992267</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2952973"><em>Stappiaceae bacterium</em></a></td><td><code>NCBITaxon:2952973</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5 (5 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:752562"><em>Star grass white leaf phytoplasma</em></a></td><td><code>NCBITaxon:752562</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:74696"><em>star-like microcolonies</em></a></td><td><code>NCBITaxon:74696</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2666134"><em>Starkeya nomas</em></a></td><td><code>NCBITaxon:2666134</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2666134"><em>Starkeya nomas</em></a></td><td><code>NCBITaxon:2666134</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1873494"><em>Starkeya sp.</em></a></td><td><code>NCBITaxon:1873494</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>2</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1327885"><em>Starkeya sp. 8_17</em></a></td><td><code>NCBITaxon:1327885</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1256747"><em>Starkeya sp. Bg40a</em></a></td><td><code>NCBITaxon:1256747</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -234,12 +322,15 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:241431"><em>Starria zimbabweensis SAG 74.90</em></a></td><td><code>NCBITaxon:241431</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="../taxon-browser.js?v=434e253832135143"></script>
+<script defer src="../taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="../index.json.gz">Index JSON.gz</a> · <a href="../index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

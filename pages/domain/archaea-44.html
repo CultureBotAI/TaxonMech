@@ -7,62 +7,150 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../theme-toggle.js"></script>
 <script defer src="../vendor/fflate-0.8.2.js"></script>
-<script defer src="../compressed-data.js?v=434e253832135143"></script>
+<script defer src="../compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="../index.html">TaxonMech</a>
   <nav>
     <a href="../browse.html">Browse</a>
     <a href="../type-strains.html">Type strains</a>
+    <a href="../map.html">Text map</a>
     <a href="../sources.html">Sources</a>
+    <a href="../index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../index.html">TaxonMech</a> › <span>Archaea</span>
+</nav>
 <h1>Archaea</h1>
 <p class="lede">Taxa under NCBITaxon:2157.</p>
-<section id="taxon-browser" data-domain="ARCHAEA" data-typed="false" data-page="44" data-size="200" data-root="../">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="ARCHAEA" data-typed="false" data-page="44" data-size="200" data-root="../">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="../browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA">Bacteria</option>
+        <option value="ARCHAEA" selected>Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">14013 records · page 44 of 71.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="../domain/archaea-43.html">Previous</a><a href="../domain/archaea-45.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>Archaea</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="../taxon.html?id=NCBITaxon:38027"><em>Methanosarcina siciliae</em></a></td><td><code>NCBITaxon:38027</code></td><td>SPECIES</td><td>ARCHAEA</td><td>6</td><td>3</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1434118"><em>Methanosarcina siciliae C2J</em></a></td><td><code>NCBITaxon:1434118</code></td><td>STRAIN</td><td>ARCHAEA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1434119"><em>Methanosarcina siciliae HI350</em></a></td><td><code>NCBITaxon:1434119</code></td><td>STRAIN</td><td>ARCHAEA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1434120"><em>Methanosarcina siciliae T4/M</em></a></td><td><code>NCBITaxon:1434120</code></td><td>STRAIN</td><td>ARCHAEA</td><td>3</td><td>0</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1036677"><em>Methanosarcina soligelidi</em></a></td><td><code>NCBITaxon:1036677</code></td><td>SPECIES</td><td>ARCHAEA</td><td>7</td><td>1</td><td>89</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2213"><em>Methanosarcina sp.</em></a></td><td><code>NCBITaxon:2213</code></td><td>SPECIES</td><td>ARCHAEA</td><td>4</td><td>19</td><td>89</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1434118"><em>Methanosarcina siciliae C2J</em></a></td><td><code>NCBITaxon:1434118</code></td><td>STRAIN</td><td>ARCHAEA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1434119"><em>Methanosarcina siciliae HI350</em></a></td><td><code>NCBITaxon:1434119</code></td><td>STRAIN</td><td>ARCHAEA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1434120"><em>Methanosarcina siciliae T4/M</em></a></td><td><code>NCBITaxon:1434120</code></td><td>STRAIN</td><td>ARCHAEA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1036677"><em>Methanosarcina soligelidi</em></a></td><td><code>NCBITaxon:1036677</code></td><td>SPECIES</td><td>ARCHAEA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2213"><em>Methanosarcina sp.</em></a></td><td><code>NCBITaxon:2213</code></td><td>SPECIES</td><td>ARCHAEA</td><td>4</td><td>19</td><td>22 (22 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1898329"><em>Methanosarcina sp. 13XMc1</em></a></td><td><code>NCBITaxon:1898329</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1483601"><em>Methanosarcina sp. 1.H.A.2.2</em></a></td><td><code>NCBITaxon:1483601</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>7</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1483602"><em>Methanosarcina sp. 1.H.T.1A.1</em></a></td><td><code>NCBITaxon:1483602</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>7</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1483601"><em>Methanosarcina sp. 1.H.A.2.2</em></a></td><td><code>NCBITaxon:1483601</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1483602"><em>Methanosarcina sp. 1.H.T.1A.1</em></a></td><td><code>NCBITaxon:1483602</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1882224"><em>Methanosarcina sp. 1H1</em></a></td><td><code>NCBITaxon:1882224</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:435878"><em>Methanosarcina sp. 2214B</em></a></td><td><code>NCBITaxon:435878</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1483600"><em>Methanosarcina sp. 2.H.A.1B.4</em></a></td><td><code>NCBITaxon:1483600</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>7</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1483596"><em>Methanosarcina sp. 2.H.T.1A.15</em></a></td><td><code>NCBITaxon:1483596</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>7</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1483597"><em>Methanosarcina sp. 2.H.T.1A.3</em></a></td><td><code>NCBITaxon:1483597</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>7</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1483599"><em>Methanosarcina sp. 2.H.T.1A.6</em></a></td><td><code>NCBITaxon:1483599</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>7</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1483598"><em>Methanosarcina sp. 2.H.T.1A.8</em></a></td><td><code>NCBITaxon:1483598</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>7</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1483600"><em>Methanosarcina sp. 2.H.A.1B.4</em></a></td><td><code>NCBITaxon:1483600</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1483596"><em>Methanosarcina sp. 2.H.T.1A.15</em></a></td><td><code>NCBITaxon:1483596</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1483597"><em>Methanosarcina sp. 2.H.T.1A.3</em></a></td><td><code>NCBITaxon:1483597</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1483599"><em>Methanosarcina sp. 2.H.T.1A.6</em></a></td><td><code>NCBITaxon:1483599</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1483598"><em>Methanosarcina sp. 2.H.T.1A.8</em></a></td><td><code>NCBITaxon:1483598</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:430621"><em>Methanosarcina sp. 48</em></a></td><td><code>NCBITaxon:430621</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1653396"><em>Methanosarcina sp. 795</em></a></td><td><code>NCBITaxon:1653396</code></td><td>SPECIES</td><td>ARCHAEA</td><td>3</td><td>0</td><td>21</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1860098"><em>Methanosarcina sp. A14</em></a></td><td><code>NCBITaxon:1860098</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1653396"><em>Methanosarcina sp. 795</em></a></td><td><code>NCBITaxon:1653396</code></td><td>SPECIES</td><td>ARCHAEA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1860098"><em>Methanosarcina sp. A14</em></a></td><td><code>NCBITaxon:1860098</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1452346"><em>Methanosarcina sp. AbM25</em></a></td><td><code>NCBITaxon:1452346</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3412567"><em>Methanosarcina sp. AD1</em></a></td><td><code>NCBITaxon:3412567</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3412568"><em>Methanosarcina sp. AD2</em></a></td><td><code>NCBITaxon:3412568</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:357353"><em>Methanosarcina sp. AK-6</em></a></td><td><code>NCBITaxon:357353</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1882735"><em>Methanosarcina sp. Ant1</em></a></td><td><code>NCBITaxon:1882735</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1882735"><em>Methanosarcina sp. Ant1</em></a></td><td><code>NCBITaxon:1882735</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1452352"><em>Methanosarcina sp. CM2</em></a></td><td><code>NCBITaxon:1452352</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3683827"><em>Methanosarcina sp. CPs</em></a></td><td><code>NCBITaxon:3683827</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3031300"><em>Methanosarcina sp. CZDD1</em></a></td><td><code>NCBITaxon:3031300</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2605695"><em>Methanosarcina sp. DH1</em></a></td><td><code>NCBITaxon:2605695</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2605639"><em>Methanosarcina sp. DH2</em></a></td><td><code>NCBITaxon:2605639</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2605695"><em>Methanosarcina sp. DH1</em></a></td><td><code>NCBITaxon:2605695</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2605639"><em>Methanosarcina sp. DH2</em></a></td><td><code>NCBITaxon:2605639</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1520800"><em>Methanosarcina sp. DSM 11855</em></a></td><td><code>NCBITaxon:1520800</code></td><td>SPECIES</td><td>ARCHAEA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1671627"><em>Methanosarcina sp. DTU009</em></a></td><td><code>NCBITaxon:1671627</code></td><td>SPECIES</td><td>ARCHAEA</td><td>3</td><td>0</td><td>21</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1671627"><em>Methanosarcina sp. DTU009</em></a></td><td><code>NCBITaxon:1671627</code></td><td>SPECIES</td><td>ARCHAEA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1743152"><em>Methanosarcina sp. enrichment culture</em></a></td><td><code>NCBITaxon:1743152</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1564991"><em>Methanosarcina sp. enrichment culture clone 01-27</em></a></td><td><code>NCBITaxon:1564991</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1163358"><em>Methanosarcina sp. enrichment culture clone 4</em></a></td><td><code>NCBITaxon:1163358</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -209,11 +297,11 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1167024"><em>Methanosarcina sp. enrichment culture DGGE gel band Met3</em></a></td><td><code>NCBITaxon:1167024</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1167025"><em>Methanosarcina sp. enrichment culture DGGE gel band Met4</em></a></td><td><code>NCBITaxon:1167025</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1167026"><em>Methanosarcina sp. enrichment culture DGGE gel band Met5</em></a></td><td><code>NCBITaxon:1167026</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2992839"><em>Methanosarcina sp. ERenArc_MAG2</em></a></td><td><code>NCBITaxon:2992839</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2992839"><em>Methanosarcina sp. ERenArc_MAG2</em></a></td><td><code>NCBITaxon:2992839</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:65820"><em>Methanosarcina sp. FR</em></a></td><td><code>NCBITaxon:65820</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1053546"><em>Methanosarcina sp. GRAU-10</em></a></td><td><code>NCBITaxon:1053546</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1465595"><em>Methanosarcina sp. JM-1</em></a></td><td><code>NCBITaxon:1465595</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1434099"><em>Methanosarcina sp. Kolksee</em></a></td><td><code>NCBITaxon:1434099</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1434099"><em>Methanosarcina sp. Kolksee</em></a></td><td><code>NCBITaxon:1434099</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2602068"><em>Methanosarcina sp. KYL-1</em></a></td><td><code>NCBITaxon:2602068</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1727205"><em>Methanosarcina sp. M15</em></a></td><td><code>NCBITaxon:1727205</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1383852"><em>Methanosarcina sp. M37</em></a></td><td><code>NCBITaxon:1383852</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -222,7 +310,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:913104"><em>Methanosarcina sp. MO-MS1</em></a></td><td><code>NCBITaxon:913104</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2507075"><em>Methanosarcina sp. MSH10X1</em></a></td><td><code>NCBITaxon:2507075</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1898330"><em>Methanosarcina sp. MSS35</em></a></td><td><code>NCBITaxon:1898330</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1434100"><em>Methanosarcina sp. MTP4</em></a></td><td><code>NCBITaxon:1434100</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1434100"><em>Methanosarcina sp. MTP4</em></a></td><td><code>NCBITaxon:1434100</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1434101"><em>Methanosarcina sp. Naples 100</em></a></td><td><code>NCBITaxon:1434101</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1411151"><em>Methanosarcina sp. Pr1</em></a></td><td><code>NCBITaxon:1411151</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1411149"><em>Methanosarcina sp. Pr2</em></a></td><td><code>NCBITaxon:1411149</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -230,16 +318,19 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1495337"><em>Methanosarcina sp. SMA-17</em></a></td><td><code>NCBITaxon:1495337</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:418024"><em>Methanosarcina sp. T36</em></a></td><td><code>NCBITaxon:418024</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1328908"><em>Methanosarcina sp. TMA3RMK</em></a></td><td><code>NCBITaxon:1328908</code></td><td>SPECIES</td><td>ARCHAEA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1915573"><em>Methanosarcina sp. UBA135</em></a></td><td><code>NCBITaxon:1915573</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>21</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1915574"><em>Methanosarcina sp. UBA289</em></a></td><td><code>NCBITaxon:1915574</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>6</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1915573"><em>Methanosarcina sp. UBA135</em></a></td><td><code>NCBITaxon:1915573</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1915574"><em>Methanosarcina sp. UBA289</em></a></td><td><code>NCBITaxon:1915574</code></td><td>SPECIES</td><td>ARCHAEA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="../taxon-browser.js?v=434e253832135143"></script>
+<script defer src="../taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="../index.json.gz">Index JSON.gz</a> · <a href="../index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

@@ -7,32 +7,120 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../theme-toggle.js"></script>
 <script defer src="../vendor/fflate-0.8.2.js"></script>
-<script defer src="../compressed-data.js?v=434e253832135143"></script>
+<script defer src="../compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="../index.html">TaxonMech</a>
   <nav>
     <a href="../browse.html">Browse</a>
     <a href="../type-strains.html">Type strains</a>
+    <a href="../map.html">Text map</a>
     <a href="../sources.html">Sources</a>
+    <a href="../index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../index.html">TaxonMech</a> › <span>Bacteria</span>
+</nav>
 <h1>Bacteria</h1>
 <p class="lede">Species and infraspecific taxa under NCBITaxon:2, including uncultured and environmental taxa.</p>
-<section id="taxon-browser" data-domain="BACTERIA" data-typed="false" data-page="2338" data-size="200" data-root="../">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="BACTERIA" data-typed="false" data-page="2338" data-size="200" data-root="../">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="../browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA" selected>Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">605695 records · page 2338 of 3029.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="../domain/bacteria-2337.html">Previous</a><a href="../domain/bacteria-2339.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>Bacteria</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3417731"><em>Salmonella sp. CQ24WZ0646SAL</em></a></td><td><code>NCBITaxon:3417731</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>21527</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3417731"><em>Salmonella sp. CQ24WZ0646SAL</em></a></td><td><code>NCBITaxon:3417731</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3137564"><em>Salmonella sp. CRIN449615-2</em></a></td><td><code>NCBITaxon:3137564</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3137565"><em>Salmonella sp. CRIN471546-2</em></a></td><td><code>NCBITaxon:3137565</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3137566"><em>Salmonella sp. CRIN471547-2</em></a></td><td><code>NCBITaxon:3137566</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -111,11 +199,11 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1392214"><em>Salmonella sp. CRTB1</em></a></td><td><code>NCBITaxon:1392214</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1392215"><em>Salmonella sp. CRTB29</em></a></td><td><code>NCBITaxon:1392215</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1392216"><em>Salmonella sp. CRTB7</em></a></td><td><code>NCBITaxon:1392216</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3029388"><em>Salmonella sp. CVCC 1806</em></a></td><td><code>NCBITaxon:3029388</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>21527</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3029388"><em>Salmonella sp. CVCC 1806</em></a></td><td><code>NCBITaxon:3029388</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:574813"><em>Salmonella sp. D187-2</em></a></td><td><code>NCBITaxon:574813</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:574814"><em>Salmonella sp. D194-1</em></a></td><td><code>NCBITaxon:574814</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:574815"><em>Salmonella sp. D194-2</em></a></td><td><code>NCBITaxon:574815</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2780085"><em>Salmonella sp. D5-9891</em></a></td><td><code>NCBITaxon:2780085</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>21527</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2780085"><em>Salmonella sp. D5-9891</em></a></td><td><code>NCBITaxon:2780085</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:557808"><em>Salmonella sp. D76</em></a></td><td><code>NCBITaxon:557808</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:490227"><em>Salmonella sp. DAP8</em></a></td><td><code>NCBITaxon:490227</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1145103"><em>Salmonella sp. DSPV 002PSA</em></a></td><td><code>NCBITaxon:1145103</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -124,12 +212,12 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:3152820"><em>Salmonella sp. E1S-003</em></a></td><td><code>NCBITaxon:3152820</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3152821"><em>Salmonella sp. E1S-004</em></a></td><td><code>NCBITaxon:3152821</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3375147"><em>Salmonella sp. E388-1</em></a></td><td><code>NCBITaxon:3375147</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3240321"><em>Salmonella sp. E388-2</em></a></td><td><code>NCBITaxon:3240321</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>21527</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3240322"><em>Salmonella sp. E392-1</em></a></td><td><code>NCBITaxon:3240322</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>21527</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3240321"><em>Salmonella sp. E388-2</em></a></td><td><code>NCBITaxon:3240321</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3240322"><em>Salmonella sp. E392-1</em></a></td><td><code>NCBITaxon:3240322</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3375148"><em>Salmonella sp. E392-2</em></a></td><td><code>NCBITaxon:3375148</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3240323"><em>Salmonella sp. E393-1</em></a></td><td><code>NCBITaxon:3240323</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>21527</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3240324"><em>Salmonella sp. E393-2</em></a></td><td><code>NCBITaxon:3240324</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>21527</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3240325"><em>Salmonella sp. E404</em></a></td><td><code>NCBITaxon:3240325</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>21527</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3240323"><em>Salmonella sp. E393-1</em></a></td><td><code>NCBITaxon:3240323</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3240324"><em>Salmonella sp. E393-2</em></a></td><td><code>NCBITaxon:3240324</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3240325"><em>Salmonella sp. E404</em></a></td><td><code>NCBITaxon:3240325</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1871085"><em>Salmonella sp. enrichment culture</em></a></td><td><code>NCBITaxon:1871085</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:946044"><em>Salmonella sp. enrichment culture clone CL107</em></a></td><td><code>NCBITaxon:946044</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:696546"><em>Salmonella sp. enrichment culture clone NEP50</em></a></td><td><code>NCBITaxon:696546</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -172,7 +260,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1356288"><em>Salmonella sp. FES34</em></a></td><td><code>NCBITaxon:1356288</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1356289"><em>Salmonella sp. FES58</em></a></td><td><code>NCBITaxon:1356289</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2976706"><em>Salmonella sp. FJ2064</em></a></td><td><code>NCBITaxon:2976706</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2582603"><em>Salmonella sp. fj-h1</em></a></td><td><code>NCBITaxon:2582603</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>21527</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2582603"><em>Salmonella sp. fj-h1</em></a></td><td><code>NCBITaxon:2582603</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475584"><em>Salmonella sp. fjx10s1</em></a></td><td><code>NCBITaxon:3475584</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475579"><em>Salmonella sp. fjx10s11</em></a></td><td><code>NCBITaxon:3475579</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475585"><em>Salmonella sp. fjx10s13</em></a></td><td><code>NCBITaxon:3475585</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -193,13 +281,13 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475565"><em>Salmonella sp. fjx11s5</em></a></td><td><code>NCBITaxon:3475565</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475567"><em>Salmonella sp. fjx11s7</em></a></td><td><code>NCBITaxon:3475567</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475566"><em>Salmonella sp. fjx11s8</em></a></td><td><code>NCBITaxon:3475566</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3454489"><em>Salmonella sp. fjx14s1</em></a></td><td><code>NCBITaxon:3454489</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>21527</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3454489"><em>Salmonella sp. fjx14s1</em></a></td><td><code>NCBITaxon:3454489</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475592"><em>Salmonella sp. fjx14s10</em></a></td><td><code>NCBITaxon:3475592</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475591"><em>Salmonella sp. fjx14s11</em></a></td><td><code>NCBITaxon:3475591</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475593"><em>Salmonella sp. fjx14s12</em></a></td><td><code>NCBITaxon:3475593</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3454490"><em>Salmonella sp. fjx14s14</em></a></td><td><code>NCBITaxon:3454490</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>21527</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3454490"><em>Salmonella sp. fjx14s14</em></a></td><td><code>NCBITaxon:3454490</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475599"><em>Salmonella sp. fjx14s16</em></a></td><td><code>NCBITaxon:3475599</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3454491"><em>Salmonella sp. fjx14s17</em></a></td><td><code>NCBITaxon:3454491</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>21527</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3454491"><em>Salmonella sp. fjx14s17</em></a></td><td><code>NCBITaxon:3454491</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475590"><em>Salmonella sp. fjx14s18</em></a></td><td><code>NCBITaxon:3475590</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475571"><em>Salmonella sp. fjx14s19</em></a></td><td><code>NCBITaxon:3475571</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475594"><em>Salmonella sp. fjx14s2</em></a></td><td><code>NCBITaxon:3475594</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -208,7 +296,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475600"><em>Salmonella sp. fjx14s24</em></a></td><td><code>NCBITaxon:3475600</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475589"><em>Salmonella sp. fjx14s25</em></a></td><td><code>NCBITaxon:3475589</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475595"><em>Salmonella sp. fjx14s6</em></a></td><td><code>NCBITaxon:3475595</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3454488"><em>Salmonella sp. fjx14s7</em></a></td><td><code>NCBITaxon:3454488</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>21527</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3454488"><em>Salmonella sp. fjx14s7</em></a></td><td><code>NCBITaxon:3454488</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475601"><em>Salmonella sp. fjx16s13</em></a></td><td><code>NCBITaxon:3475601</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475602"><em>Salmonella sp. fjx16s15</em></a></td><td><code>NCBITaxon:3475602</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475603"><em>Salmonella sp. fjx16s17</em></a></td><td><code>NCBITaxon:3475603</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -222,24 +310,27 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475569"><em>Salmonella sp. fjx17s4</em></a></td><td><code>NCBITaxon:3475569</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475577"><em>Salmonella sp. fjx20s176</em></a></td><td><code>NCBITaxon:3475577</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3475576"><em>Salmonella sp. fjx20s178</em></a></td><td><code>NCBITaxon:3475576</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2204208"><em>Salmonella sp. FORC89</em></a></td><td><code>NCBITaxon:2204208</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>21527</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2204208"><em>Salmonella sp. FORC89</em></a></td><td><code>NCBITaxon:2204208</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1814967"><em>Salmonella sp. FORC_030</em></a></td><td><code>NCBITaxon:1814967</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1868168"><em>Salmonella sp. FP5</em></a></td><td><code>NCBITaxon:1868168</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2738352"><em>Salmonella sp. FSL R8-5224</em></a></td><td><code>NCBITaxon:2738352</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2862947"><em>Salmonella sp. FSL S5-580</em></a></td><td><code>NCBITaxon:2862947</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1392981"><em>Salmonella sp. G2K</em></a></td><td><code>NCBITaxon:1392981</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3423917"><em>Salmonella sp. GDC200615</em></a></td><td><code>NCBITaxon:3423917</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>21527</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3423917"><em>Salmonella sp. GDC200615</em></a></td><td><code>NCBITaxon:3423917</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:72590"><em>Salmonella sp. &#39;group B&#39;</em></a></td><td><code>NCBITaxon:72590</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2582604"><em>Salmonella sp. gx-f4</em></a></td><td><code>NCBITaxon:2582604</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>21527</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2582605"><em>Salmonella sp. gx-f5</em></a></td><td><code>NCBITaxon:2582605</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>21527</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2582604"><em>Salmonella sp. gx-f4</em></a></td><td><code>NCBITaxon:2582604</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2582605"><em>Salmonella sp. gx-f5</em></a></td><td><code>NCBITaxon:2582605</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="../taxon-browser.js?v=434e253832135143"></script>
+<script defer src="../taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="../index.json.gz">Index JSON.gz</a> · <a href="../index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

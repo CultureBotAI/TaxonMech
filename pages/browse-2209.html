@@ -7,32 +7,120 @@
 <link rel="stylesheet" href="style.css">
 <script src="theme-toggle.js"></script>
 <script defer src="vendor/fflate-0.8.2.js"></script>
-<script defer src="compressed-data.js?v=434e253832135143"></script>
+<script defer src="compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="index.html">TaxonMech</a>
   <nav>
     <a href="browse.html">Browse</a>
     <a href="type-strains.html">Type strains</a>
+    <a href="map.html">Text map</a>
     <a href="sources.html">Sources</a>
+    <a href="index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="index.html">TaxonMech</a> › <span>All records</span>
+</nav>
 <h1>All records</h1>
-<section id="taxon-browser" data-domain="" data-typed="false" data-page="2209" data-size="200" data-root="">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
-<p id="taxon-status" role="status">625960 records · page 2209 of 3130.</p>
+<section id="taxon-browser" class="browse-layout" data-domain="" data-typed="false" data-page="2209" data-size="200" data-root="">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA">Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
+<p id="taxon-status" role="status">626048 records · page 2209 of 3131.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="browse-2208.html">Previous</a><a href="browse-2210.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>All records</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
-<tr><td><a href="taxon.html?id=NCBITaxon:2914981"><em>Pseudomonas sp. TREG-RG-20F-10-E-6-01</em></a></td><td><code>NCBITaxon:2914981</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>22</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2823875"><em>Pseudomonas sp. Tri1</em></a></td><td><code>NCBITaxon:2823875</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2914981"><em>Pseudomonas sp. TREG-RG-20F-10-E-6-01</em></a></td><td><code>NCBITaxon:2914981</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2823875"><em>Pseudomonas sp. Tri1</em></a></td><td><code>NCBITaxon:2823875</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:485902"><em>Pseudomonas sp. TRM24</em></a></td><td><code>NCBITaxon:485902</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1797105"><em>Pseudomonas sp. TRMK1</em></a></td><td><code>NCBITaxon:1797105</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1072156"><em>Pseudomonas sp. TS1</em></a></td><td><code>NCBITaxon:1072156</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -72,11 +160,11 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:652746"><em>Pseudomonas sp. TSH82</em></a></td><td><code>NCBITaxon:652746</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:652748"><em>Pseudomonas sp. TSH89</em></a></td><td><code>NCBITaxon:652748</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3388314"><em>Pseudomonas sp. TSO6</em></a></td><td><code>NCBITaxon:3388314</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2804663"><em>Pseudomonas sp. TSPC2-1</em></a></td><td><code>NCBITaxon:2804663</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>6</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2804663"><em>Pseudomonas sp. TSPC2-1</em></a></td><td><code>NCBITaxon:2804663</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1052532"><em>Pseudomonas sp. TSR26</em></a></td><td><code>NCBITaxon:1052532</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1038932"><em>Pseudomonas sp. TSR33</em></a></td><td><code>NCBITaxon:1038932</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1052533"><em>Pseudomonas sp. TSR49</em></a></td><td><code>NCBITaxon:1052533</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2804571"><em>Pseudomonas sp. TSRC2-2</em></a></td><td><code>NCBITaxon:2804571</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>6</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2804571"><em>Pseudomonas sp. TSRC2-2</em></a></td><td><code>NCBITaxon:2804571</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:659811"><em>Pseudomonas sp. TSSAS2-17</em></a></td><td><code>NCBITaxon:659811</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:659812"><em>Pseudomonas sp. TSSAS2-20</em></a></td><td><code>NCBITaxon:659812</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:659813"><em>Pseudomonas sp. TSSAS2-6</em></a></td><td><code>NCBITaxon:659813</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -95,16 +183,16 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2838840"><em>Pseudomonas sp. TTT6</em></a></td><td><code>NCBITaxon:2838840</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2838841"><em>Pseudomonas sp. TTT7</em></a></td><td><code>NCBITaxon:2838841</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2838842"><em>Pseudomonas sp. TTT8</em></a></td><td><code>NCBITaxon:2838842</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1729723"><em>Pseudomonas sp. TTU2014-066ASC</em></a></td><td><code>NCBITaxon:1729723</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>172</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1729723"><em>Pseudomonas sp. TTU2014-066ASC</em></a></td><td><code>NCBITaxon:1729723</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1729724"><em>Pseudomonas sp. TTU2014-080ASC</em></a></td><td><code>NCBITaxon:1729724</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1729725"><em>Pseudomonas sp. TTU2014-096BSC</em></a></td><td><code>NCBITaxon:1729725</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>172</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1729726"><em>Pseudomonas sp. TTU2014-105ASC</em></a></td><td><code>NCBITaxon:1729726</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>35</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1729725"><em>Pseudomonas sp. TTU2014-096BSC</em></a></td><td><code>NCBITaxon:1729725</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1729726"><em>Pseudomonas sp. TTU2014-105ASC</em></a></td><td><code>NCBITaxon:1729726</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1117376"><em>Pseudomonas sp. TUB7</em></a></td><td><code>NCBITaxon:1117376</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1042536"><em>Pseudomonas sp. TUB8</em></a></td><td><code>NCBITaxon:1042536</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1775533"><em>Pseudomonas sp. TUES-140322-c</em></a></td><td><code>NCBITaxon:1775533</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3413491"><em>Pseudomonas sp. Tul1A2</em></a></td><td><code>NCBITaxon:3413491</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3413490"><em>Pseudomonas sp. Tul2A7</em></a></td><td><code>NCBITaxon:3413490</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3019098"><em>Pseudomonas sp. TUM22785</em></a></td><td><code>NCBITaxon:3019098</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>16</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3019098"><em>Pseudomonas sp. TUM22785</em></a></td><td><code>NCBITaxon:3019098</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3474436"><em>Pseudomonas sp. TUM25319</em></a></td><td><code>NCBITaxon:3474436</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3317319"><em>Pseudomonas sp. Tun-23181</em></a></td><td><code>NCBITaxon:3317319</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1087971"><em>Pseudomonas sp. Turb25</em></a></td><td><code>NCBITaxon:1087971</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -138,26 +226,26 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1515304"><em>Pseudomonas sp. TW79A</em></a></td><td><code>NCBITaxon:1515304</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1229288"><em>Pseudomonas sp. TW_R2A_DR1</em></a></td><td><code>NCBITaxon:1229288</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1229289"><em>Pseudomonas sp. TW_R2A_DR8</em></a></td><td><code>NCBITaxon:1229289</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3136781"><em>Pseudomonas sp. TWI549</em></a></td><td><code>NCBITaxon:3136781</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>15</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3136787"><em>Pseudomonas sp. TWI622</em></a></td><td><code>NCBITaxon:3136787</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>15</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3136788"><em>Pseudomonas sp. TWI628</em></a></td><td><code>NCBITaxon:3136788</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3136790"><em>Pseudomonas sp. TWI672</em></a></td><td><code>NCBITaxon:3136790</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>24</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3136791"><em>Pseudomonas sp. TWI698</em></a></td><td><code>NCBITaxon:3136791</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>24</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3136794"><em>Pseudomonas sp. TWI923</em></a></td><td><code>NCBITaxon:3136794</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>20</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3136781"><em>Pseudomonas sp. TWI549</em></a></td><td><code>NCBITaxon:3136781</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3136787"><em>Pseudomonas sp. TWI622</em></a></td><td><code>NCBITaxon:3136787</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3136788"><em>Pseudomonas sp. TWI628</em></a></td><td><code>NCBITaxon:3136788</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3136790"><em>Pseudomonas sp. TWI672</em></a></td><td><code>NCBITaxon:3136790</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3136791"><em>Pseudomonas sp. TWI698</em></a></td><td><code>NCBITaxon:3136791</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3136794"><em>Pseudomonas sp. TWI923</em></a></td><td><code>NCBITaxon:3136794</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3136795"><em>Pseudomonas sp. TWI929</em></a></td><td><code>NCBITaxon:3136795</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2804631"><em>Pseudomonas sp. TWP3-1</em></a></td><td><code>NCBITaxon:2804631</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2804574"><em>Pseudomonas sp. TWP3-2</em></a></td><td><code>NCBITaxon:2804574</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2804624"><em>Pseudomonas sp. TWR1-1-3</em></a></td><td><code>NCBITaxon:2804624</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>43</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2804604"><em>Pseudomonas sp. TWR1-1-4</em></a></td><td><code>NCBITaxon:2804604</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>26</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2804610"><em>Pseudomonas sp. TWR2-1-1</em></a></td><td><code>NCBITaxon:2804610</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2804633"><em>Pseudomonas sp. TWR3-1-1</em></a></td><td><code>NCBITaxon:2804633</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>8</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2804628"><em>Pseudomonas sp. TWRC1-2</em></a></td><td><code>NCBITaxon:2804628</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>22</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2804631"><em>Pseudomonas sp. TWP3-1</em></a></td><td><code>NCBITaxon:2804631</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2804574"><em>Pseudomonas sp. TWP3-2</em></a></td><td><code>NCBITaxon:2804574</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2804624"><em>Pseudomonas sp. TWR1-1-3</em></a></td><td><code>NCBITaxon:2804624</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2804604"><em>Pseudomonas sp. TWR1-1-4</em></a></td><td><code>NCBITaxon:2804604</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2804610"><em>Pseudomonas sp. TWR2-1-1</em></a></td><td><code>NCBITaxon:2804610</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2804633"><em>Pseudomonas sp. TWR3-1-1</em></a></td><td><code>NCBITaxon:2804633</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2804628"><em>Pseudomonas sp. TWRC1-2</em></a></td><td><code>NCBITaxon:2804628</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:869280"><em>Pseudomonas sp. TxG6-1</em></a></td><td><code>NCBITaxon:869280</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1547270"><em>Pseudomonas sp. TY1205</em></a></td><td><code>NCBITaxon:1547270</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1547271"><em>Pseudomonas sp. TY1210</em></a></td><td><code>NCBITaxon:1547271</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3367191"><em>Pseudomonas sp. TYF_11</em></a></td><td><code>NCBITaxon:3367191</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3367193"><em>Pseudomonas sp. TYF_14</em></a></td><td><code>NCBITaxon:3367193</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>247</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3367194"><em>Pseudomonas sp. TYF_15</em></a></td><td><code>NCBITaxon:3367194</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>66</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3367193"><em>Pseudomonas sp. TYF_14</em></a></td><td><code>NCBITaxon:3367193</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3367194"><em>Pseudomonas sp. TYF_15</em></a></td><td><code>NCBITaxon:3367194</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3591910"><em>Pseudomonas sp. TZ252</em></a></td><td><code>NCBITaxon:3591910</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1346682"><em>Pseudomonas sp. U1</em></a></td><td><code>NCBITaxon:1346682</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1856982"><em>Pseudomonas sp. U102</em></a></td><td><code>NCBITaxon:1856982</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -233,12 +321,15 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1269138"><em>Pseudomonas sp. UA-JF3302</em></a></td><td><code>NCBITaxon:1269138</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="taxon-browser.js?v=434e253832135143"></script>
+<script defer src="taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="index.json.gz">Index JSON.gz</a> · <a href="index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

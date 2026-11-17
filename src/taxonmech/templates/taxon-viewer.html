@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% block title %}Taxon · TaxonMech{% endblock %}
 {% block content %}
+<div class="record-topbar">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="{{ root }}index.html">TaxonMech</a> › <a href="{{ root }}browse.html">Browse</a> › <span>Taxon record</span>
+  </nav>
+  <form class="page-search" action="{{ root }}browse.html" method="get" role="search">
+    <input type="search" name="q" placeholder="Search taxa, NCBI IDs, ranks, or sources…" aria-label="Search TaxonMech records">
+    <button type="submit">Search</button>
+  </form>
+</div>
 <div id="taxon-record"><p role="status">Loading the taxon record…</p></div>
 <noscript><p>Enable JavaScript to view the record here, or read the <a href="https://github.com/CultureBotAI/TaxonMech/tree/main/data/taxa">source YAML records</a>.</p></noscript>
 <script defer src="{{ root }}taxon-viewer.js?v={{ script_version }}"></script>

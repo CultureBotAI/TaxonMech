@@ -1,0 +1,98 @@
+# YAML Record Review: Haemophilus pittmaniae HK 85
+
+- Repository: CultureBotAI/TaxonMech
+- Record: `data/taxa/bacteria/haemophilus_pittmaniae_hk_85.yaml`
+- Started UTC: 2026-10-06T13:53:37Z
+- Finished UTC: 2026-10-06T14:00:48Z
+- Verdict: needs curation
+
+## Target
+
+One generated `TaxonRecord`, `NCBITaxon:1035188`, label `Haemophilus pittmaniae HK 85`, rank STRAIN, domain BACTERIA. The entire YAML was read before findings and checked byte-for-byte unchanged before reporting. Baseline HEAD: `b6a6508faca1388b88feb5740b1095e9f64cfdb8`.
+
+The record is EXACT / SEEDED with one GTDB mapping, five synonyms, one equivalent xref, genetic code 11, one BacDive strain and four culture deposits. Its nested evidence comprises seven assembly assertions with three exact accession strings, eight genome-record assertions with four identifiers, and 30 related-record assertions with 18 identifiers. These are assertion/identifier counts, not numbers of distinct biological genomes. Six source attestations and one inline seed event are present; there is no definition, phenotype assertion, nomenclature entry or causal graph. Only this new report is written.
+
+## Validation
+
+- PASS: `UV_CACHE_DIR=/private/tmp/taxonmech-review-uv-cache uv run --offline linkml-validate -s src/taxonmech/schema/taxonmech.yaml --target-class TaxonRecord data/taxa/bacteria/haemophilus_pittmaniae_hk_85.yaml`: no issues.
+- PASS: `UV_CACHE_DIR=/private/tmp/taxonmech-review-uv-cache uv run --offline python scripts/validate_strict.py data/taxa/bacteria/haemophilus_pittmaniae_hk_85.yaml --out /private/tmp/hphk85-strict.tsv`: one file, zero ERROR rows. The actual TSV was read and contains only its header.
+- PASS, bounded manual comparison: backbone identity, all ten root-first lineage entries, four NCBI synonyms, genetic code, source attestations, scope and seed provenance match pinned inputs. Every nested assembly, genome-record and related-record assertion matches the complete corresponding inventory row as a multiset, including source fields and StrainInfo evidence. All matched culture identifiers belong to the listed deposits and pass the existing normalizer. This is not a focused corpus-reproduction validator.
+- Not run: full-corpus `just verify-corpus`, `just validate-products`, `just provenance-check`, `just render-check`, `just docs-check`, `just qc`, and the test suite. No full-corpus success is claimed.
+- Ontology-node checking is not applicable: there are no curator-added grounded graph nodes. The documented product checker excludes taxonomy fields and delegates those to corpus reproduction.
+- No separate target history artifact was found by the ignored-independent history filename search. Inline history passed schema validation and agrees with scope provenance. No external history validator was run against an invented artifact.
+- The StrainInfo version DOI was checked against the inspected live API and resolved by HTTP HEAD to the authority page with status 200. The record's partial nucleotide accession was checked against complete NCBI sequence metadata. No quoted evidence or publication PMID occurs in the YAML; no additional record-specific citation validator is documented in the inspected commands.
+
+## Identity and Grounding
+
+The pinned backbone at `data/raw/ncbitaxon_taxa.tsv:221912` agrees with the inspected live [NCBI Taxonomy XML](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=taxonomy&id=1035188&retmode=xml) on label, strain rank, parent `NCBITaxon:249188`, genetic code 11 and the four retained synonyms. The [taxonomy dataset response](https://api.ncbi.nlm.nih.gov/datasets/v2/taxonomy/taxon/1035188) supplies the same root-inclusive ancestor IDs and rank STRAIN. Live XML contains two additional misspellings; not importing those as exact synonyms is appropriate.
+
+The complete pinned lineage matches, including Pseudomonadati, Pseudomonadota, Gammaproteobacteria, Pasteurellales, Pasteurellaceae and Haemophilus. There are no children in the pinned backbone. `data/raw/ncbi_merged_ids.tsv:10773` redirects old taxid 128398 into this current target; it does not retire taxid 1035188. No exact target entry occurs in the dropped or type-material tables. Parent-species type-material rows are separate context.
+
+The [LPSN species entry](https://lpsn.dsmz.de/species/haemophilus-pittmaniae) treats H. pittmaniae as the validly published correct name and the proposed Parahaemophilus combination as a homotypic synonym without valid publication. The raw LPSN name at `data/raw/lpsn_names.tsv:17276` maps to parent 249188, not this strain taxon. Preserve NCBI lineage independently of GTDB or proposed genus changes.
+
+GTDB places the associated assemblies in `s__Haemophilus_D pittmaniae`. This species-cluster classification does not establish exact equivalence between that cluster and one strain; see the major finding.
+
+## Evidence
+
+- NCBI: native names at `data/catalog/ncbi_names-0005.jsonl.gz:31359` through `31363` and the backbone support the label and four NCBI synonyms. Its attestation is one NAME.
+- GTDB: full native rows at `data/catalog/gtdb_genomes-0006.jsonl.gz:4400` and `data/catalog/gtdb_genomes-0015.jsonl.gz:4214` associate HK 85 / RS_GCF_000223275.1 and NCTC13334 / RS_GCF_900186995.1 with the same cluster. The latter is the representative. `data/raw/gtdb_species.tsv:72295` supplies nine cluster genomes. `data/raw/gtdb_mappings.tsv:1416` copies that count to this target; mappings at lines 184315 and 193809 also carry it for taxa 237779 and 249188. Nine is a source cluster total, not nine HK 85 genomes. `src/taxonmech/extract.py:501` counts genome-to-species edges.
+- BacDive: the full native row at `data/bacdive/records.jsonl.gz:11554`, transformed row `data/raw/bacdive_strains.tsv:11555`, and [BacDive 11709](https://bacdive.dsmz.de/strain/11709) agree on HK 85 and CCUG 48703, CIP 108658, DSM 17240 and NCTC 13334. Native reference 66792 supplies two assembly records and their IMG/BV-BRC identifiers. Their unversioned INSDC strings are preserved, not silently upgraded to current versions.
+- GOLD: inspected complete chains are `Go0009740 -> Gp0009740 -> Ga0009499` and `Go0248689 -> Gp0262743 -> Ga0225914`. Native rows are `data/gold/organisms.jsonl.gz:8588`, `186780`, `186781`, `186782`; `data/gold/projects.jsonl.gz:8450`, `174528`; and `data/gold/analyses.jsonl.gz:4280`, `136694`. Explicit organism culture identifiers support the CCUG and NCTC links. Separate culture-collection and strain-field assertions remain separate provenance, not extra genomes. Go0248687 and Go0248688 explicitly identify CIP 108658 and DSM 17240 and are related organism records, not additional assembly evidence.
+- The GOLD chains support PRJNA67189 / SAMN00621708 / IMG 2512047060 and PRJEB6403 / SAMEA4384241 / IMG 2773857811. The latter BioProject is the NCTC_3000 umbrella project, not a strain-specific identifier. The native BV-BRC record at `data/bvbrc/bvbrc-0014.jsonl.gz:31579` explicitly supplies `NCTC:13334`, supporting PATRIC 249188.3, GCA_900186995.1 and its sample/project context. `data/bvbrc/bvbrc-0000.jsonl.gz:3311` identifies PATRIC 1035188.3 and HK 85 but offers no eligible whole deposit join key.
+- StrainInfo: native `data/straininfo/records.jsonl.gz:92066` and the inspected full [live API record](https://api.straininfo.dsmz.de/v2/data/strain/max/135111) agree on SI-ID 135111 and DOI 10.60712/SI-ID135111.3. Deposits 382692, 382694, 532469 and 691296 respectively denote CCUG 48703, NCTC 13334, CIP 108658 and DSM 17240. The sequence-deposit ownership is explicit: DQ267822 belongs to CCUG deposit 382692, whereas unversioned GCA_900186995 belongs to NCTC deposit 382694. No sequence is transferred merely because another deposit shares a strain group.
+- The [NCBI nucleotide metadata](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=DQ267822&rettype=gb&retmode=xml) identify DQ267822.1 as a 455-nt partial sodA CDS from CCUG 48703, taxid 1035188, with type-material context. This supports the related nucleotide record, not a complete genome or experimentally demonstrated stress phenotype. The source's unversioned DQ267822 is preserved. Sequence bases and translated residues were not analyzed.
+- MediaDive's row `data/raw/mediadive_taxa.tsv:120` supports one MEDIUM, medium 804; [DSM 17240](https://www.dsmz.de/collection/catalogue/details/culture/DSM-17240) independently lists that medium. The zero BacDive strain-level medium count and taxon-level MediaDive count are distinct source fields, not a failed arithmetic reconciliation. MADIN row 665 and BactoTraits row 91 each support one TRAIT_ASSERTION count, without asserting a particular trait value in this YAML.
+- `data/taxa/PATHS.tsv:14403` and `curation/seed_scope.tsv:10798` resolve the target and six-source scope reason. The six attestation sources match the seed event of 2026-09-13T17:54:04Z; scope was added on 2026-09-12.
+
+The assembly evidence is qualified by inspected live authority responses:
+
+- [GCA_000223275.2](https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession/GCA_000223275.2/dataset_report) is current GenBank, 26 contigs and 2,182,608 bp. Its paired RefSeq GCF_000223275.1 is suppressed and the assembly carries a many-frameshifted-proteins warning. BioSample SAMN00621708 explicitly names source material CCUG 48703 and DSM 17240. The pinned current GenBank row is `data/catalog/ncbi_genbank-0000.jsonl.gz:3885`; historical GenBank .1 and RefSeq .1 rows occur at `data/catalog/ncbi_genbank_historical-0000.jsonl.gz:1194` and `data/catalog/ncbi_refseq_historical-0000.jsonl.gz:1108`.
+- [GCA_900186995.1](https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession/GCA_900186995.1/dataset_report) and paired GCF_900186995.1 are current; the assembly is one chromosome, 2,181,355 bp, with NCTC13334 / NCTC:13334 and type-material context. Pinned GenBank and RefSeq rows are `data/catalog/ncbi_genbank-0056.jsonl.gz:45735` and `data/catalog/ncbi_refseq-0009.jsonl.gz:32978`. Its BioSample SAMEA4384241 reports blood, Brazil and 1986. In contrast, [CCUG 48703](https://www.ccug.se/strain?id=48703), DSM 17240 and [CIP 108658](https://catalogue-crbip.pasteur.fr/fiche_catalogue.xhtml?crbip=CIP+108658) describe the HK 85 deposit lineage as saliva from Denmark; DSM dates isolation before 1976 and CIP gives 1975. This is an unresolved source metadata conflict. Explicit deposit links support retaining the accession assertions; they do not resolve the isolation history or prove the two assemblies are interchangeable. The YAML itself makes no isolation claim.
+
+## Completeness
+
+All seven assembly, eight genome-record and 30 related-record assertions were reconciled to `data/raw/strain_assemblies.tsv:7622` through `7627`, `data/straininfo/assemblies.tsv:733`, `data/raw/strain_genome_records.tsv:5796` through `5803`, `data/raw/strain_related_records.tsv:22602` through `22622`, and `data/straininfo/related_records.tsv.gz:14069` through `14077`. The four StrainInfo deposit matches also occur at `data/straininfo/strain_links.tsv:5491` through `5494`. No supplied eligible assertion in those target inventories is missing from the record.
+
+Type-strain biology is supported by the inspected [original description abstract](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=15653917&retmode=xml), PMID 15653917 / DOI 10.1099/ijs.0.63325-0, which identifies HK 85, CCUG 48703 and NCTC 13334 as the species type. The optional `is_type_strain` field is specifically LPSN-relative to a name of this record's taxon (`src/taxonmech/schema/taxonmech.yaml:477`), and no LPSN name is filed under strain taxid 1035188. Its omission is not a failure of the current contract. StrainInfo's NCTC deposit has an old false type flag while its global strain and the other three deposits say true; retain that source distinction rather than manufacturing agreement.
+
+BacDive 11710 / DSM 21203 also uses HK 85 but is filed at parent 249188, with no native sequence evidence. BacDive describes 11709 as its isotype. That parent-filed entry is not automatically a second strain for this child taxon: the documented collection rule takes the target and descendants, not its parent's full contents (`src/taxonmech/seed.py:488`). KCTC 15418 is an alias in the inspected StrainInfo record, not one of its four eligible deposit objects. Neither observation justifies an alias-only genome join.
+
+The current culture identifier normalizer rejects HK 85 and separator-free NCTC13334 while accepting NCTC 13334, NCTC:13334 and the other three whole deposits. This explains the absence of direct NCBI/GTDB assembly assertions despite catalogued assemblies. The direct NCBI importer uses assembly-summary strain tags (`src/taxonmech/ncbi_assemblies.py:90`), not BioSample source-material fields. A later BioSample enrichment would need maintained inputs and tests; no invented direct link is required here.
+
+Both exact ATB samples, SAMN00621708 and SAMEA4384241, are NOT_PROCESSED with no available FASTA or assembly accession. Complete native rows at `data/catalog/allthebacteria.tsv.xz:1004105` and `617783`, derived rows at `data/atb/assemblies.tsv:2167` and `1383`, and exclusions at `data/atb/exclusions.tsv:1432` and `867` agree. They do not justify ATB genome links. The initial ATB numeric hit was unrelated.
+
+Before open-ended literature follow-up, `UV_CACHE_DIR=/private/tmp/taxonmech-review-uv-cache uv run --offline --no-sync --project /Users/marcin/Documents/VIMSS/ontology/KG-Hub/KG-Microbe/culturebotai-claw kg-microbe-sources imodulondb datasets` completed. None of its 28 datasets covers Haemophilus; iModulonDB is not applicable, not negative evidence. The inspected [sodA paper abstract](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=17049306&retmode=xml), PMID 17049306 / DOI 10.1016/j.ijmm.2006.06.005, supports its phylogenetic-identification context, not a strain-specific causal phenotype. Optional phenotype/graph slots can remain empty.
+
+## Findings
+
+Counts: 0 blocker, 1 major, 0 minor.
+
+1. **Major: a GTDB species cluster is promoted to exact strain identity.** `GTDB:s__Haemophilus_D_pittmaniae` becomes an equivalent xref and EXACT_SYNONYM `Haemophilus D pittmaniae` on strain taxid 1035188. Native GTDB metadata support cluster membership of the associated assemblies, not identity between HK 85 and the entire nine-genome species cluster. This breaches the true-equivalence boundary in `src/taxonmech/schema/taxonmech.yaml:180`. The maintained local owner is rank-insensitive identity promotion at `src/taxonmech/seed.py:449`; regression coverage belongs in `tests/test_seed.py`. The upstream kg-microbe closeMatch producer also needs a rank- and direction-aware review. These mapping/synonym/xref manifestations are one scope-inflation finding, not three.
+
+Blockers: None found. Minor findings: None found. NCBI identity and explicit deposit links are supported. The isolation conflict, source type-flag disagreement and suppressed RefSeq counterpart remain qualifications; no unsupported resolution is imposed on this record.
+
+## Recommended Edits
+
+1. Make GTDB identity promotion in `src/taxonmech/seed.py` rank-aware: retain supported cluster classification with source/release context, but do not create an exact synonym or equivalent species-cluster xref for a strain taxon. Preserve source cluster counts as cluster counts.
+2. Have the upstream kg-microbe mapping owner assess relationship direction and rank rather than mechanically replacing closeMatch with a guessed broad/narrow predicate. Preserve the actual GTDB genus suffix `Haemophilus_D` in source-facing explanations.
+3. Add a strain-versus-species regression case in `tests/test_seed.py`, retaining supported species-level behavior. After an authorized fix, regenerate through maintained extraction/seeding inputs, not by hand-editing YAML or raw inventories.
+4. Preserve each source's accession version, organism/project chain and deposit evidence. Any later direct NCBI enrichment belongs in `src/taxonmech/ncbi_assemblies.py` and its configured inputs, with pinned BioSample culture/source-material evidence; do not relax bare-name joins or append versions to unversioned BacDive/GOLD/StrainInfo assertions.
+5. Before adding isolation or phenotype claims, resolve the NCTC-associated BioSample metadata conflict with authoritative deposit/project evidence. Do not copy either geographic/clinical history across assemblies merely because they share an authenticated culture designation. Treat a future source-conflict representation as a separate maintained-model change, not an invented claim in this review.
+
+## Follow-up Checks
+
+- After the rank-aware change, run `uv run pytest tests/test_seed.py`, then this target's documented schema and strict commands.
+- Confirm the unsupported GTDB exact synonym/equivalent xref is gone while preserving NCBI identity, all ten ancestors, four NCBI synonyms, four deposit identities, exact source assertion multisets and source-scoped cluster membership/count.
+- Run actual full-corpus `just verify-corpus`, `just provenance-check`, `just render-check` and `just qc` after regeneration. The manual inventory comparisons here do not replace those gates.
+- Retrieve the live GTDB taxon page and record its release before a taxonomic update. It was unavailable to the browser; pinned native metadata support this review's classification finding.
+- Recheck current versus historical assembly states before enrichment, including the suppressed HK 85 RefSeq counterpart and GenBank frameshift warning. Distinguish two assembly lineages from seven assertion rows and three exact accession strings.
+- Reconcile NCTC deposit/sample isolation metadata and its stale StrainInfo deposit type flag before adding derived assertions. The direct NCTC catalogue URL was unavailable during this review. Do not discard otherwise explicit deposit links without further evidence.
+- Recheck ATB availability before any later ATB addition; keep projects, samples, GOLD contexts, partial nucleotide sequences and StrainInfo records separate from genome counts.
+
+## Additional Notes
+
+Ignored-independent candidate searches used `rg --no-ignore --hidden -n -z -i` across `data/raw`, `data/catalog`, `data/bacdive`, `data/bvbrc`, `data/gold`, `data/seqcode`, `data/straininfo`, `data/atb`, `curation` and `history`. Initial taxid, label/slug, designation/separator and deposit searches produced 129 candidate rows. Expansion with observed assembly, sample, WGS, partial-sequence, GOLD, project and IMG identifiers produced 58 rows, six new. All 135 distinct candidate rows were read fully using lossless structured decoding; unrelated HK 85 strains, longer designations and numeric collisions were rejected. Five SOURCE.json files were searched structurally and history filenames checked separately. Absence claims are limited to these named roots and authority responses, including ignored and compressed files.
+
+The two PubMed bibliographies and abstracts were read through the public EUtils XML endpoint after browser pages returned no useful text. The sodA publisher page returned HTTP 403; no full-text or table inspection is claimed. The original description was checked at abstract level. No access-control bypass was attempted. Live StrainInfo, NCBI taxonomy/assemblies/sequence metadata, and accessible primary culture-collection records were inspected. The BacDive DOI PDF was not downloaded or visually inspected.
+
+No source/YAML/generated-page edits, history events, status promotions, paid research, outbound contacts or Git/GitHub mutations were performed. Eukaryota reviews were not reopened.

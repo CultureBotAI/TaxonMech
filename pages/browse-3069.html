@@ -7,29 +7,117 @@
 <link rel="stylesheet" href="style.css">
 <script src="theme-toggle.js"></script>
 <script defer src="vendor/fflate-0.8.2.js"></script>
-<script defer src="compressed-data.js?v=434e253832135143"></script>
+<script defer src="compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="index.html">TaxonMech</a>
   <nav>
     <a href="browse.html">Browse</a>
     <a href="type-strains.html">Type strains</a>
+    <a href="map.html">Text map</a>
     <a href="sources.html">Sources</a>
+    <a href="index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="index.html">TaxonMech</a> › <span>All records</span>
+</nav>
 <h1>All records</h1>
-<section id="taxon-browser" data-domain="" data-typed="false" data-page="3069" data-size="200" data-root="">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
-<p id="taxon-status" role="status">625960 records · page 3069 of 3130.</p>
+<section id="taxon-browser" class="browse-layout" data-domain="" data-typed="false" data-page="3069" data-size="200" data-root="">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA">Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
+<p id="taxon-status" role="status">626048 records · page 3069 of 3131.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="browse-3068.html">Previous</a><a href="browse-3070.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>All records</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="taxon.html?id=NCBITaxon:1812111"><em>Wolbachia endosymbiont of Cruorifilaria tuberocauda</em></a></td><td><code>NCBITaxon:1812111</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1079422"><em>Wolbachia endosymbiont of Cryptinae MAS BIN518</em></a></td><td><code>NCBITaxon:1079422</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -64,7 +152,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:3037973"><em>Wolbachia endosymbiont of Culex perexiguus</em></a></td><td><code>NCBITaxon:3037973</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:363538"><em>Wolbachia endosymbiont of Culex pipiens</em></a></td><td><code>NCBITaxon:363538</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3402232"><em>Wolbachia endosymbiont of Culex pipiens complex</em></a></td><td><code>NCBITaxon:3402232</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:263438"><em>Wolbachia endosymbiont of Culex pipiens molestus</em></a></td><td><code>NCBITaxon:263438</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>77</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:263438"><em>Wolbachia endosymbiont of Culex pipiens molestus</em></a></td><td><code>NCBITaxon:263438</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:886893"><em>Wolbachia endosymbiont of Culex pipiens molestus str. wPip Mol</em></a></td><td><code>NCBITaxon:886893</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1215605"><em>Wolbachia endosymbiont of Culex pipiens pallens</em></a></td><td><code>NCBITaxon:1215605</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:368809"><em>Wolbachia endosymbiont of Culex pipiens pipiens</em></a></td><td><code>NCBITaxon:368809</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -72,10 +160,10 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:3162597"><em>Wolbachia endosymbiont of Culex portesi</em></a></td><td><code>NCBITaxon:3162597</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2692581"><em>Wolbachia endosymbiont of Culex pseudovishnui</em></a></td><td><code>NCBITaxon:2692581</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:263437"><em>Wolbachia endosymbiont of Culex quinquefasciatus</em></a></td><td><code>NCBITaxon:263437</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:569881"><em>Wolbachia endosymbiont of Culex quinquefasciatus JHB</em></a></td><td><code>NCBITaxon:569881</code></td><td>ISOLATE</td><td>BACTERIA</td><td>3</td><td>0</td><td>77</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:569881"><em>Wolbachia endosymbiont of Culex quinquefasciatus JHB</em></a></td><td><code>NCBITaxon:569881</code></td><td>ISOLATE</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:167958"><em>Wolbachia endosymbiont of Culex quinquefasciatus NCCS</em></a></td><td><code>NCBITaxon:167958</code></td><td>ISOLATE</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:167959"><em>Wolbachia endosymbiont of Culex quinquefasciatus NIV</em></a></td><td><code>NCBITaxon:167959</code></td><td>ISOLATE</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:570417"><em>Wolbachia endosymbiont of Culex quinquefasciatus Pel</em></a></td><td><code>NCBITaxon:570417</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>77</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:570417"><em>Wolbachia endosymbiont of Culex quinquefasciatus Pel</em></a></td><td><code>NCBITaxon:570417</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3162598"><em>Wolbachia endosymbiont of Culex rabanicolus</em></a></td><td><code>NCBITaxon:3162598</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2692582"><em>Wolbachia endosymbiont of Culex sinensis</em></a></td><td><code>NCBITaxon:2692582</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:753889"><em>Wolbachia endosymbiont of Culex sitiens</em></a></td><td><code>NCBITaxon:753889</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -125,7 +213,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1615684"><em>Wolbachia endosymbiont of Cyphomyrmex cornutus</em></a></td><td><code>NCBITaxon:1615684</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:357139"><em>Wolbachia endosymbiont of Cyrtorhinus lividipennis</em></a></td><td><code>NCBITaxon:357139</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2488911"><em>Wolbachia endosymbiont of Dacne rufifrons</em></a></td><td><code>NCBITaxon:2488911</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1605993"><em>Wolbachia endosymbiont of Dactylopius coccus</em></a></td><td><code>NCBITaxon:1605993</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>6</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1605993"><em>Wolbachia endosymbiont of Dactylopius coccus</em></a></td><td><code>NCBITaxon:1605993</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2987720"><em>Wolbachia endosymbiont of Dactylopius confusus</em></a></td><td><code>NCBITaxon:2987720</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:363625"><em>Wolbachia endosymbiont of Dactylopius sp.</em></a></td><td><code>NCBITaxon:363625</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:701522"><em>Wolbachia endosymbiont of Dactylopius tomentosus</em></a></td><td><code>NCBITaxon:701522</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -137,7 +225,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2562658"><em>Wolbachia endosymbiont of Dastychius improvisus</em></a></td><td><code>NCBITaxon:2562658</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:229928"><em>Wolbachia endosymbiont of Dasynus coccocinctus</em></a></td><td><code>NCBITaxon:229928</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:344375"><em>Wolbachia endosymbiont of Decevania sp. DERV005</em></a></td><td><code>NCBITaxon:344375</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:502352"><em>Wolbachia endosymbiont of Delia radicum</em></a></td><td><code>NCBITaxon:502352</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1159</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:502352"><em>Wolbachia endosymbiont of Delia radicum</em></a></td><td><code>NCBITaxon:502352</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2984961"><em>Wolbachia endosymbiont of Delias agostina</em></a></td><td><code>NCBITaxon:2984961</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:644944"><em>Wolbachia endosymbiont of Delias eucharis</em></a></td><td><code>NCBITaxon:644944</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2772307"><em>Wolbachia endosymbiont of Delphacidae sp.</em></a></td><td><code>NCBITaxon:2772307</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -167,7 +255,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2956814"><em>Wolbachia endosymbiont of Dianemobius sp.</em></a></td><td><code>NCBITaxon:2956814</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:459280"><em>Wolbachia endosymbiont of Diaphorencyrtus aligarhensis</em></a></td><td><code>NCBITaxon:459280</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2661882"><em>Wolbachia endosymbiont of Diaphorina cf. continua</em></a></td><td><code>NCBITaxon:2661882</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:116598"><em>Wolbachia endosymbiont of Diaphorina citri</em></a></td><td><code>NCBITaxon:116598</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>21</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:116598"><em>Wolbachia endosymbiont of Diaphorina citri</em></a></td><td><code>NCBITaxon:116598</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2654480"><em>Wolbachia endosymbiont of Diaphorina lycii</em></a></td><td><code>NCBITaxon:2654480</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2654481"><em>Wolbachia endosymbiont of Diaphorina sp.</em></a></td><td><code>NCBITaxon:2654481</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1209120"><em>Wolbachia endosymbiont of Diaphorus oculatus</em></a></td><td><code>NCBITaxon:1209120</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -228,17 +316,20 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1079424"><em>Wolbachia endosymbiont of Drino piceiventrisDHJ06</em></a></td><td><code>NCBITaxon:1079424</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2488912"><em>Wolbachia endosymbiont of Dromius agilis</em></a></td><td><code>NCBITaxon:2488912</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:626953"><em>Wolbachia endosymbiont of Drosicha pinicola</em></a></td><td><code>NCBITaxon:626953</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3080329"><em>Wolbachia endosymbiont of Drosophila aff. chauvacae BK-2020</em></a></td><td><code>NCBITaxon:3080329</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1159</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3080329"><em>Wolbachia endosymbiont of Drosophila aff. chauvacae BK-2020</em></a></td><td><code>NCBITaxon:3080329</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:267695"><em>Wolbachia endosymbiont of Drosophila ambigua</em></a></td><td><code>NCBITaxon:267695</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:307502"><em>Wolbachia endosymbiont of Drosophila ananassae</em></a></td><td><code>NCBITaxon:307502</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1159</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:307502"><em>Wolbachia endosymbiont of Drosophila ananassae</em></a></td><td><code>NCBITaxon:307502</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="taxon-browser.js?v=434e253832135143"></script>
+<script defer src="taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="index.json.gz">Index JSON.gz</a> · <a href="index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

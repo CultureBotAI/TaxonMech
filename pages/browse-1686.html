@@ -7,29 +7,117 @@
 <link rel="stylesheet" href="style.css">
 <script src="theme-toggle.js"></script>
 <script defer src="vendor/fflate-0.8.2.js"></script>
-<script defer src="compressed-data.js?v=434e253832135143"></script>
+<script defer src="compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="index.html">TaxonMech</a>
   <nav>
     <a href="browse.html">Browse</a>
     <a href="type-strains.html">Type strains</a>
+    <a href="map.html">Text map</a>
     <a href="sources.html">Sources</a>
+    <a href="index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="index.html">TaxonMech</a> › <span>All records</span>
+</nav>
 <h1>All records</h1>
-<section id="taxon-browser" data-domain="" data-typed="false" data-page="1686" data-size="200" data-root="">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
-<p id="taxon-status" role="status">625960 records · page 1686 of 3130.</p>
+<section id="taxon-browser" class="browse-layout" data-domain="" data-typed="false" data-page="1686" data-size="200" data-root="">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA">Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
+<p id="taxon-status" role="status">626048 records · page 1686 of 3131.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="browse-1685.html">Previous</a><a href="browse-1687.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>All records</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="taxon.html?id=NCBITaxon:2528653"><em>Microcystis flos-aquae NRERC-207</em></a></td><td><code>NCBITaxon:2528653</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2528654"><em>Microcystis flos-aquae NRERC-211</em></a></td><td><code>NCBITaxon:2528654</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -43,7 +131,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2588977"><em>Microcystis flos-aquae TAU-MAC 1410</em></a></td><td><code>NCBITaxon:2588977</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2588801"><em>Microcystis flos-aquae TAU-MAC 1510</em></a></td><td><code>NCBITaxon:2588801</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2588802"><em>Microcystis flos-aquae TAU-MAC 1610</em></a></td><td><code>NCBITaxon:2588802</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2060473"><em>Microcystis flos-aquae TF09</em></a></td><td><code>NCBITaxon:2060473</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>82</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2060473"><em>Microcystis flos-aquae TF09</em></a></td><td><code>NCBITaxon:2060473</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:931268"><em>Microcystis flos-aquae TX016</em></a></td><td><code>NCBITaxon:931268</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:502491"><em>Microcystis flos-aquae UAM1302</em></a></td><td><code>NCBITaxon:502491</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:502492"><em>Microcystis flos-aquae UAM2206</em></a></td><td><code>NCBITaxon:502492</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -78,7 +166,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1620876"><em>Microcystis ichthyoblabe CHAB4362</em></a></td><td><code>NCBITaxon:1620876</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1620877"><em>Microcystis ichthyoblabe CHAB4374</em></a></td><td><code>NCBITaxon:1620877</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1289127"><em>Microcystis ichthyoblabe EH15</em></a></td><td><code>NCBITaxon:1289127</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3422495"><em>Microcystis ichthyoblabe FBCC-A1114</em></a></td><td><code>NCBITaxon:3422495</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>82</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3422495"><em>Microcystis ichthyoblabe FBCC-A1114</em></a></td><td><code>NCBITaxon:3422495</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2975504"><em>Microcystis ichthyoblabe M64187e-6855</em></a></td><td><code>NCBITaxon:2975504</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:765166"><em>Microcystis ichthyoblabe NIER 10112</em></a></td><td><code>NCBITaxon:765166</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:443070"><em>Microcystis ichthyoblabe NIES-1182</em></a></td><td><code>NCBITaxon:443070</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -116,8 +204,8 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:3398368"><em>Microcystis novacekii KES3_1</em></a></td><td><code>NCBITaxon:3398368</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2903135"><em>Microcystis novacekii LVE1205-3</em></a></td><td><code>NCBITaxon:2903135</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:513222"><em>Microcystis novacekii MCYS-CH01</em></a></td><td><code>NCBITaxon:513222</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2486265"><em>Microcystis novacekii Mn_MB_F_20050700_S1</em></a></td><td><code>NCBITaxon:2486265</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2486266"><em>Microcystis novacekii Mn_MB_F_20050700_S1D</em></a></td><td><code>NCBITaxon:2486266</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2486265"><em>Microcystis novacekii Mn_MB_F_20050700_S1</em></a></td><td><code>NCBITaxon:2486265</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2486266"><em>Microcystis novacekii Mn_MB_F_20050700_S1D</em></a></td><td><code>NCBITaxon:2486266</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:765167"><em>Microcystis novacekii NIER 10022</em></a></td><td><code>NCBITaxon:765167</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:449504"><em>Microcystis novacekii T20-3</em></a></td><td><code>NCBITaxon:449504</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:449573"><em>Microcystis novacekii TAC20</em></a></td><td><code>NCBITaxon:449573</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -137,7 +225,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:415424"><em>Microcystis novacekii XW02</em></a></td><td><code>NCBITaxon:415424</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1610759"><em>Microcystis orissica</em></a></td><td><code>NCBITaxon:1610759</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1610766"><em>Microcystis orissica SERB 10</em></a></td><td><code>NCBITaxon:1610766</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:513223"><em>Microcystis panniformis</em></a></td><td><code>NCBITaxon:513223</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>82</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:513223"><em>Microcystis panniformis</em></a></td><td><code>NCBITaxon:513223</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2100082"><em>Microcystis panniformis 2B3</em></a></td><td><code>NCBITaxon:2100082</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2100083"><em>Microcystis panniformis 2B5</em></a></td><td><code>NCBITaxon:2100083</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:999527"><em>Microcystis panniformis BCCUSP 100</em></a></td><td><code>NCBITaxon:999527</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -149,7 +237,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1131540"><em>Microcystis panniformis BCCUSP 28</em></a></td><td><code>NCBITaxon:1131540</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1131541"><em>Microcystis panniformis BCCUSP 29</em></a></td><td><code>NCBITaxon:1131541</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1697040"><em>Microcystis panniformis CENA121</em></a></td><td><code>NCBITaxon:1697040</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1638788"><em>Microcystis panniformis FACHB-1757</em></a></td><td><code>NCBITaxon:1638788</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>75</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1638788"><em>Microcystis panniformis FACHB-1757</em></a></td><td><code>NCBITaxon:1638788</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2100084"><em>Microcystis panniformis G11</em></a></td><td><code>NCBITaxon:2100084</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1538314"><em>Microcystis panniformis H106</em></a></td><td><code>NCBITaxon:1538314</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1538315"><em>Microcystis panniformis H19</em></a></td><td><code>NCBITaxon:1538315</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -157,14 +245,14 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1538317"><em>Microcystis panniformis H44</em></a></td><td><code>NCBITaxon:1538317</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1538318"><em>Microcystis panniformis H95</em></a></td><td><code>NCBITaxon:1538318</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:513224"><em>Microcystis panniformis MCYS-OB06</em></a></td><td><code>NCBITaxon:513224</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2486225"><em>Microcystis panniformis Mp_GB_SS_20050300_S99</em></a></td><td><code>NCBITaxon:2486225</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>82</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2486226"><em>Microcystis panniformis Mp_GB_SS_20050300_S99D</em></a></td><td><code>NCBITaxon:2486226</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>82</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2486221"><em>Microcystis panniformis Mp_MB_F_20051200_S6</em></a></td><td><code>NCBITaxon:2486221</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>82</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2486222"><em>Microcystis panniformis Mp_MB_F_20051200_S6D</em></a></td><td><code>NCBITaxon:2486222</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>82</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2486223"><em>Microcystis panniformis Mp_MB_F_20051200_S9</em></a></td><td><code>NCBITaxon:2486223</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>82</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2486224"><em>Microcystis panniformis Mp_MB_F_20051200_S9D</em></a></td><td><code>NCBITaxon:2486224</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>82</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2486227"><em>Microcystis panniformis Mp_MB_F_20080800_S26</em></a></td><td><code>NCBITaxon:2486227</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>82</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2486228"><em>Microcystis panniformis Mp_MB_F_20080800_S26D</em></a></td><td><code>NCBITaxon:2486228</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>82</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2486225"><em>Microcystis panniformis Mp_GB_SS_20050300_S99</em></a></td><td><code>NCBITaxon:2486225</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2486226"><em>Microcystis panniformis Mp_GB_SS_20050300_S99D</em></a></td><td><code>NCBITaxon:2486226</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2486221"><em>Microcystis panniformis Mp_MB_F_20051200_S6</em></a></td><td><code>NCBITaxon:2486221</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2486222"><em>Microcystis panniformis Mp_MB_F_20051200_S6D</em></a></td><td><code>NCBITaxon:2486222</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2486223"><em>Microcystis panniformis Mp_MB_F_20051200_S9</em></a></td><td><code>NCBITaxon:2486223</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2486224"><em>Microcystis panniformis Mp_MB_F_20051200_S9D</em></a></td><td><code>NCBITaxon:2486224</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2486227"><em>Microcystis panniformis Mp_MB_F_20080800_S26</em></a></td><td><code>NCBITaxon:2486227</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2486228"><em>Microcystis panniformis Mp_MB_F_20080800_S26D</em></a></td><td><code>NCBITaxon:2486228</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2933606"><em>Microcystis panniformis NKJ.11</em></a></td><td><code>NCBITaxon:2933606</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1610728"><em>Microcystis panniformis SERB 3</em></a></td><td><code>NCBITaxon:1610728</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:629746"><em>Microcystis panniformis SPC 702</em></a></td><td><code>NCBITaxon:629746</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -175,9 +263,9 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1227727"><em>Microcystis panniformis VN426</em></a></td><td><code>NCBITaxon:1227727</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1227728"><em>Microcystis panniformis VN462</em></a></td><td><code>NCBITaxon:1227728</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1227729"><em>Microcystis panniformis VN516</em></a></td><td><code>NCBITaxon:1227729</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3076242"><em>Microcystis panniformis WG22</em></a></td><td><code>NCBITaxon:3076242</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>8</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3076242"><em>Microcystis panniformis WG22</em></a></td><td><code>NCBITaxon:3076242</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:629747"><em>Microcystis protocystis</em></a></td><td><code>NCBITaxon:629747</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3422496"><em>Microcystis protocystis FBCC-A270</em></a></td><td><code>NCBITaxon:3422496</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>82</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3422496"><em>Microcystis protocystis FBCC-A270</em></a></td><td><code>NCBITaxon:3422496</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2613750"><em>Microcystis protocystis FBCC-A403</em></a></td><td><code>NCBITaxon:2613750</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2613751"><em>Microcystis protocystis FBCC-A404</em></a></td><td><code>NCBITaxon:2613751</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2613752"><em>Microcystis protocystis FBCC-A405</em></a></td><td><code>NCBITaxon:2613752</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -197,11 +285,11 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:675507"><em>Microcystis smithii CHAB2177</em></a></td><td><code>NCBITaxon:675507</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:675508"><em>Microcystis smithii CHAB2183</em></a></td><td><code>NCBITaxon:675508</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1289128"><em>Microcystis smithii EH3</em></a></td><td><code>NCBITaxon:1289128</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1127"><em>Microcystis sp.</em></a></td><td><code>NCBITaxon:1127</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>82</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1127"><em>Microcystis sp.</em></a></td><td><code>NCBITaxon:1127</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5 (5 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:325419"><em>Microcystis sp. 003</em></a></td><td><code>NCBITaxon:325419</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:325420"><em>Microcystis sp. 004</em></a></td><td><code>NCBITaxon:325420</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:325421"><em>Microcystis sp. 008</em></a></td><td><code>NCBITaxon:325421</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1502726"><em>Microcystis sp. 0824</em></a></td><td><code>NCBITaxon:1502726</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>42</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1502726"><em>Microcystis sp. 0824</em></a></td><td><code>NCBITaxon:1502726</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1502728"><em>Microcystis sp. 0830-M</em></a></td><td><code>NCBITaxon:1502728</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1502730"><em>Microcystis sp. 0901-3A</em></a></td><td><code>NCBITaxon:1502730</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1502732"><em>Microcystis sp. 0901-4C</em></a></td><td><code>NCBITaxon:1502732</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -230,15 +318,18 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:283944"><em>Microcystis sp. 269</em></a></td><td><code>NCBITaxon:283944</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:469627"><em>Microcystis sp. 26-6</em></a></td><td><code>NCBITaxon:469627</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:469626"><em>Microcystis sp. 34-5</em></a></td><td><code>NCBITaxon:469626</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2904986"><em>Microcystis sp. 49638_E5</em></a></td><td><code>NCBITaxon:2904986</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>42</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2904986"><em>Microcystis sp. 49638_E5</em></a></td><td><code>NCBITaxon:2904986</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="taxon-browser.js?v=434e253832135143"></script>
+<script defer src="taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="index.json.gz">Index JSON.gz</a> · <a href="index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

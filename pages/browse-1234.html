@@ -7,32 +7,120 @@
 <link rel="stylesheet" href="style.css">
 <script src="theme-toggle.js"></script>
 <script defer src="vendor/fflate-0.8.2.js"></script>
-<script defer src="compressed-data.js?v=434e253832135143"></script>
+<script defer src="compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="index.html">TaxonMech</a>
   <nav>
     <a href="browse.html">Browse</a>
     <a href="type-strains.html">Type strains</a>
+    <a href="map.html">Text map</a>
     <a href="sources.html">Sources</a>
+    <a href="index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="index.html">TaxonMech</a> › <span>All records</span>
+</nav>
 <h1>All records</h1>
-<section id="taxon-browser" data-domain="" data-typed="false" data-page="1234" data-size="200" data-root="">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
-<p id="taxon-status" role="status">625960 records · page 1234 of 3130.</p>
+<section id="taxon-browser" class="browse-layout" data-domain="" data-typed="false" data-page="1234" data-size="200" data-root="">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA">Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
+<p id="taxon-status" role="status">626048 records · page 1234 of 3131.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="browse-1233.html">Previous</a><a href="browse-1235.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>All records</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="taxon.html?id=NCBITaxon:1446738"><em>Escherichia coli O39:NM</em></a></td><td><code>NCBITaxon:1446738</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1446739"><em>Escherichia coli O39:NM str. F8704-2</em></a></td><td><code>NCBITaxon:1446739</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>13724</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1446739"><em>Escherichia coli O39:NM str. F8704-2</em></a></td><td><code>NCBITaxon:1446739</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3397637"><em>Escherichia coli O3:H2</em></a></td><td><code>NCBITaxon:3397637</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3132911"><em>Escherichia coli O3:H7</em></a></td><td><code>NCBITaxon:3132911</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3438211"><em>Escherichia coli O3:H9</em></a></td><td><code>NCBITaxon:3438211</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -47,19 +135,19 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2233553"><em>Escherichia coli O43</em></a></td><td><code>NCBITaxon:2233553</code></td><td>SEROGROUP</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2100516"><em>Escherichia coli O43:H14</em></a></td><td><code>NCBITaxon:2100516</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2491683"><em>Escherichia coli O43:H2</em></a></td><td><code>NCBITaxon:2491683</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1055541"><em>Escherichia coli O43 str. RM10042</em></a></td><td><code>NCBITaxon:1055541</code></td><td>NO_RANK</td><td>BACTERIA</td><td>4</td><td>0</td><td>13724</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1055541"><em>Escherichia coli O43 str. RM10042</em></a></td><td><code>NCBITaxon:1055541</code></td><td>NO_RANK</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:861906"><em>Escherichia coli O44:H18</em></a></td><td><code>NCBITaxon:861906</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2364650"><em>Escherichia coli O45</em></a></td><td><code>NCBITaxon:2364650</code></td><td>SEROGROUP</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2491876"><em>Escherichia coli O45:H11</em></a></td><td><code>NCBITaxon:2491876</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3132884"><em>Escherichia coli O45:H12</em></a></td><td><code>NCBITaxon:3132884</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3060891"><em>Escherichia coli O45:H16</em></a></td><td><code>NCBITaxon:3060891</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1078032"><em>Escherichia coli O45:H2</em></a></td><td><code>NCBITaxon:1078032</code></td><td>NO_RANK</td><td>BACTERIA</td><td>4</td><td>0</td><td>13724</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1446740"><em>Escherichia coli O45:H2 str. 01-3147</em></a></td><td><code>NCBITaxon:1446740</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>13724</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1078033"><em>Escherichia coli O45:H2 str. 03-EN-705</em></a></td><td><code>NCBITaxon:1078033</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>13724</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1446741"><em>Escherichia coli O45:H2 str. 2009C-3686</em></a></td><td><code>NCBITaxon:1446741</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>13724</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1446742"><em>Escherichia coli O45:H2 str. 2009C-4780</em></a></td><td><code>NCBITaxon:1446742</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>13724</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1446743"><em>Escherichia coli O45:H2 str. 2010C-3876</em></a></td><td><code>NCBITaxon:1446743</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1446744"><em>Escherichia coli O45:H2 str. 2010C-4211</em></a></td><td><code>NCBITaxon:1446744</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>13724</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1078032"><em>Escherichia coli O45:H2</em></a></td><td><code>NCBITaxon:1078032</code></td><td>NO_RANK</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1446740"><em>Escherichia coli O45:H2 str. 01-3147</em></a></td><td><code>NCBITaxon:1446740</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1078033"><em>Escherichia coli O45:H2 str. 03-EN-705</em></a></td><td><code>NCBITaxon:1078033</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1446741"><em>Escherichia coli O45:H2 str. 2009C-3686</em></a></td><td><code>NCBITaxon:1446741</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1446742"><em>Escherichia coli O45:H2 str. 2009C-4780</em></a></td><td><code>NCBITaxon:1446742</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1446743"><em>Escherichia coli O45:H2 str. 2010C-3876</em></a></td><td><code>NCBITaxon:1446743</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1446744"><em>Escherichia coli O45:H2 str. 2010C-4211</em></a></td><td><code>NCBITaxon:1446744</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3424064"><em>Escherichia coli O45:H30</em></a></td><td><code>NCBITaxon:3424064</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3366387"><em>Escherichia coli O45:H4</em></a></td><td><code>NCBITaxon:3366387</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3413173"><em>Escherichia coli O45:H45</em></a></td><td><code>NCBITaxon:3413173</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -75,7 +163,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:3141427"><em>Escherichia coli O4:H1</em></a></td><td><code>NCBITaxon:3141427</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3060874"><em>Escherichia coli O4:H2</em></a></td><td><code>NCBITaxon:3060874</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3230391"><em>Escherichia coli O4:H45</em></a></td><td><code>NCBITaxon:3230391</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2491878"><em>Escherichia coli O4:H5</em></a></td><td><code>NCBITaxon:2491878</code></td><td>NO_RANK</td><td>BACTERIA</td><td>2</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2491878"><em>Escherichia coli O4:H5</em></a></td><td><code>NCBITaxon:2491878</code></td><td>NO_RANK</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1010795"><em>Escherichia coli O5</em></a></td><td><code>NCBITaxon:1010795</code></td><td>SEROGROUP</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1963785"><em>Escherichia coli O50</em></a></td><td><code>NCBITaxon:1963785</code></td><td>SEROGROUP</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2079160"><em>Escherichia coli O51</em></a></td><td><code>NCBITaxon:2079160</code></td><td>SEROGROUP</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -97,20 +185,20 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:482458"><em>Escherichia coli O55:H2</em></a></td><td><code>NCBITaxon:482458</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:244315"><em>Escherichia coli O55:H51</em></a></td><td><code>NCBITaxon:244315</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:366837"><em>Escherichia coli O55:H6</em></a></td><td><code>NCBITaxon:366837</code></td><td>NO_RANK</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:244320"><em>Escherichia coli O55:H7</em></a></td><td><code>NCBITaxon:244320</code></td><td>NO_RANK</td><td>BACTERIA</td><td>2</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1446745"><em>Escherichia coli O55:H7 str. 06-3555</em></a></td><td><code>NCBITaxon:1446745</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:926029"><em>Escherichia coli O55:H7 str. 3256-97</em></a></td><td><code>NCBITaxon:926029</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:701177"><em>Escherichia coli O55:H7 str. CB9615</em></a></td><td><code>NCBITaxon:701177</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1048689"><em>Escherichia coli O55:H7 str. RM12579</em></a></td><td><code>NCBITaxon:1048689</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1243649"><em>Escherichia coli O55:H7 str. TB182A</em></a></td><td><code>NCBITaxon:1243649</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:926030"><em>Escherichia coli O55:H7 str. USDA 5905</em></a></td><td><code>NCBITaxon:926030</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:244320"><em>Escherichia coli O55:H7</em></a></td><td><code>NCBITaxon:244320</code></td><td>NO_RANK</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1446745"><em>Escherichia coli O55:H7 str. 06-3555</em></a></td><td><code>NCBITaxon:1446745</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:926029"><em>Escherichia coli O55:H7 str. 3256-97</em></a></td><td><code>NCBITaxon:926029</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:701177"><em>Escherichia coli O55:H7 str. CB9615</em></a></td><td><code>NCBITaxon:701177</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1048689"><em>Escherichia coli O55:H7 str. RM12579</em></a></td><td><code>NCBITaxon:1048689</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1243649"><em>Escherichia coli O55:H7 str. TB182A</em></a></td><td><code>NCBITaxon:1243649</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:926030"><em>Escherichia coli O55:H7 str. USDA 5905</em></a></td><td><code>NCBITaxon:926030</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2072461"><em>Escherichia coli O57:H16</em></a></td><td><code>NCBITaxon:2072461</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3366382"><em>Escherichia coli O59:H20</em></a></td><td><code>NCBITaxon:3366382</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:577672"><em>Escherichia coli O5:H-</em></a></td><td><code>NCBITaxon:577672</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3438224"><em>Escherichia coli O5:H11</em></a></td><td><code>NCBITaxon:3438224</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3413170"><em>Escherichia coli O5:H32</em></a></td><td><code>NCBITaxon:3413170</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3416712"><em>Escherichia coli O5:H9</em></a></td><td><code>NCBITaxon:3416712</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1268238"><em>Escherichia coli O5:K4(L):H4 str. ATCC 23502</em></a></td><td><code>NCBITaxon:1268238</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1268238"><em>Escherichia coli O5:K4(L):H4 str. ATCC 23502</em></a></td><td><code>NCBITaxon:1268238</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1010804"><em>Escherichia coli O5 str. U1-41</em></a></td><td><code>NCBITaxon:1010804</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:217992"><em>Escherichia coli O6</em></a></td><td><code>NCBITaxon:217992</code></td><td>SEROGROUP</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3149201"><em>Escherichia coli O62/O68:H12</em></a></td><td><code>NCBITaxon:3149201</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -124,29 +212,29 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:3060893"><em>Escherichia coli O66:H5</em></a></td><td><code>NCBITaxon:3060893</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2293846"><em>Escherichia coli O68</em></a></td><td><code>NCBITaxon:2293846</code></td><td>SEROGROUP</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3438213"><em>Escherichia coli O68,9,9a:H17,30</em></a></td><td><code>NCBITaxon:3438213</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2773706"><em>Escherichia coli O68:H12</em></a></td><td><code>NCBITaxon:2773706</code></td><td>NO_RANK</td><td>BACTERIA</td><td>2</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2773706"><em>Escherichia coli O68:H12</em></a></td><td><code>NCBITaxon:2773706</code></td><td>NO_RANK</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1446749"><em>Escherichia coli O69:H11</em></a></td><td><code>NCBITaxon:1446749</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1446750"><em>Escherichia coli O69:H11 str. 06-3325</em></a></td><td><code>NCBITaxon:1446750</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>13724</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1446751"><em>Escherichia coli O69:H11 str. 07-3763</em></a></td><td><code>NCBITaxon:1446751</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1446752"><em>Escherichia coli O69:H11 str. 07-4281</em></a></td><td><code>NCBITaxon:1446752</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>13724</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1446753"><em>Escherichia coli O69:H11 str. 08-4661</em></a></td><td><code>NCBITaxon:1446753</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>13724</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1446754"><em>Escherichia coli O69:H11 str. 2009C-3601</em></a></td><td><code>NCBITaxon:1446754</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1446750"><em>Escherichia coli O69:H11 str. 06-3325</em></a></td><td><code>NCBITaxon:1446750</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1446751"><em>Escherichia coli O69:H11 str. 07-3763</em></a></td><td><code>NCBITaxon:1446751</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1446752"><em>Escherichia coli O69:H11 str. 07-4281</em></a></td><td><code>NCBITaxon:1446752</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1446753"><em>Escherichia coli O69:H11 str. 08-4661</em></a></td><td><code>NCBITaxon:1446753</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1446754"><em>Escherichia coli O69:H11 str. 2009C-3601</em></a></td><td><code>NCBITaxon:1446754</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2802038"><em>Escherichia coli O69:H5</em></a></td><td><code>NCBITaxon:2802038</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3424057"><em>Escherichia coli O6,162:H7,49</em></a></td><td><code>NCBITaxon:3424057</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3060875"><em>Escherichia coli O6:H1</em></a></td><td><code>NCBITaxon:3060875</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3060876"><em>Escherichia coli O6:H10</em></a></td><td><code>NCBITaxon:3060876</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1446746"><em>Escherichia coli O6:H16</em></a></td><td><code>NCBITaxon:1446746</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1446746"><em>Escherichia coli O6:H16</em></a></td><td><code>NCBITaxon:1446746</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1370106"><em>Escherichia coli O6:H16:CFA/II</em></a></td><td><code>NCBITaxon:1370106</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1370107"><em>Escherichia coli O6:H16:CFA/II str. B2C</em></a></td><td><code>NCBITaxon:1370107</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1446747"><em>Escherichia coli O6:H16 str. 99-3165</em></a></td><td><code>NCBITaxon:1446747</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1446748"><em>Escherichia coli O6:H16 str. F5656C1</em></a></td><td><code>NCBITaxon:1446748</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1370107"><em>Escherichia coli O6:H16:CFA/II str. B2C</em></a></td><td><code>NCBITaxon:1370107</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1446747"><em>Escherichia coli O6:H16 str. 99-3165</em></a></td><td><code>NCBITaxon:1446747</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1446748"><em>Escherichia coli O6:H16 str. F5656C1</em></a></td><td><code>NCBITaxon:1446748</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3436589"><em>Escherichia coli O6:H21</em></a></td><td><code>NCBITaxon:3436589</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2491872"><em>Escherichia coli O6:H31</em></a></td><td><code>NCBITaxon:2491872</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2603286"><em>Escherichia coli O6:H34</em></a></td><td><code>NCBITaxon:2603286</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3060877"><em>Escherichia coli O6:H49</em></a></td><td><code>NCBITaxon:3060877</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1481455"><em>Escherichia coli O6:HN</em></a></td><td><code>NCBITaxon:1481455</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:861911"><em>Escherichia coli O6:HNM</em></a></td><td><code>NCBITaxon:861911</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2990471"><em>Escherichia coli O6:K2:H1</em></a></td><td><code>NCBITaxon:2990471</code></td><td>NO_RANK</td><td>BACTERIA</td><td>2</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2990471"><em>Escherichia coli O6:K2:H1</em></a></td><td><code>NCBITaxon:2990471</code></td><td>NO_RANK</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1010805"><em>Escherichia coli O6 str. Bi7458-41</em></a></td><td><code>NCBITaxon:1010805</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2162916"><em>Escherichia coli O7</em></a></td><td><code>NCBITaxon:2162916</code></td><td>SEROGROUP</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3413155"><em>Escherichia coli O70:H10</em></a></td><td><code>NCBITaxon:3413155</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -169,12 +257,12 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2983820"><em>Escherichia coli O76</em></a></td><td><code>NCBITaxon:2983820</code></td><td>SEROGROUP</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3413183"><em>Escherichia coli O76:H32</em></a></td><td><code>NCBITaxon:3413183</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2916716"><em>Escherichia coli O76:H7</em></a></td><td><code>NCBITaxon:2916716</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2072463"><em>Escherichia coli O78</em></a></td><td><code>NCBITaxon:2072463</code></td><td>SEROGROUP</td><td>BACTERIA</td><td>2</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2072463"><em>Escherichia coli O78</em></a></td><td><code>NCBITaxon:2072463</code></td><td>SEROGROUP</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1446755"><em>Escherichia coli O78:H12</em></a></td><td><code>NCBITaxon:1446755</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1446756"><em>Escherichia coli O78:H12 str. 00-3279</em></a></td><td><code>NCBITaxon:1446756</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>13724</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2854732"><em>Escherichia coli O78:H4</em></a></td><td><code>NCBITaxon:2854732</code></td><td>NO_RANK</td><td>BACTERIA</td><td>2</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1446756"><em>Escherichia coli O78:H12 str. 00-3279</em></a></td><td><code>NCBITaxon:1446756</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2854732"><em>Escherichia coli O78:H4</em></a></td><td><code>NCBITaxon:2854732</code></td><td>NO_RANK</td><td>BACTERIA</td><td>2</td><td>0</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2100497"><em>Escherichia coli O78:H42</em></a></td><td><code>NCBITaxon:2100497</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3050630"><em>Escherichia coli O78:H51</em></a></td><td><code>NCBITaxon:3050630</code></td><td>NO_RANK</td><td>BACTERIA</td><td>2</td><td>0</td><td>13724</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3050630"><em>Escherichia coli O78:H51</em></a></td><td><code>NCBITaxon:3050630</code></td><td>NO_RANK</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1204723"><em>Escherichia coli O78:H9</em></a></td><td><code>NCBITaxon:1204723</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2067431"><em>Escherichia coli O79</em></a></td><td><code>NCBITaxon:2067431</code></td><td>SEROGROUP</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3132895"><em>Escherichia coli O79:H21</em></a></td><td><code>NCBITaxon:3132895</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -183,30 +271,30 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2100512"><em>Escherichia coli O79:H40</em></a></td><td><code>NCBITaxon:2100512</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3413179"><em>Escherichia coli O79:H51</em></a></td><td><code>NCBITaxon:3413179</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1446757"><em>Escherichia coli O79:H7</em></a></td><td><code>NCBITaxon:1446757</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1446760"><em>Escherichia coli O79:H7 str. 06-3501</em></a></td><td><code>NCBITaxon:1446760</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>13724</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1446760"><em>Escherichia coli O79:H7 str. 06-3501</em></a></td><td><code>NCBITaxon:1446760</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3397649"><em>Escherichia coli O7:H10</em></a></td><td><code>NCBITaxon:3397649</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2969654"><em>Escherichia coli O7:H15</em></a></td><td><code>NCBITaxon:2969654</code></td><td>NO_RANK</td><td>BACTERIA</td><td>2</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2969654"><em>Escherichia coli O7:H15</em></a></td><td><code>NCBITaxon:2969654</code></td><td>NO_RANK</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2100485"><em>Escherichia coli O7:H18</em></a></td><td><code>NCBITaxon:2100485</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2810404"><em>Escherichia coli O7:H4</em></a></td><td><code>NCBITaxon:2810404</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2810404"><em>Escherichia coli O7:H4</em></a></td><td><code>NCBITaxon:2810404</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3060878"><em>Escherichia coli O7:H6</em></a></td><td><code>NCBITaxon:3060878</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2491682"><em>Escherichia coli O7:H7</em></a></td><td><code>NCBITaxon:2491682</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1072458"><em>Escherichia coli O7:K1</em></a></td><td><code>NCBITaxon:1072458</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1072459"><em>Escherichia coli O7:K1 str. CE10</em></a></td><td><code>NCBITaxon:1072459</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1072459"><em>Escherichia coli O7:K1 str. CE10</em></a></td><td><code>NCBITaxon:1072459</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1010796"><em>Escherichia coli O8</em></a></td><td><code>NCBITaxon:1010796</code></td><td>SEROGROUP</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3438226"><em>Escherichia coli O80:H19</em></a></td><td><code>NCBITaxon:3438226</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2605620"><em>Escherichia coli O80:H26</em></a></td><td><code>NCBITaxon:2605620</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2605620"><em>Escherichia coli O80:H26</em></a></td><td><code>NCBITaxon:2605620</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2100514"><em>Escherichia coli O80:H45</em></a></td><td><code>NCBITaxon:2100514</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3060898"><em>Escherichia coli O81:H27</em></a></td><td><code>NCBITaxon:3060898</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3132906"><em>Escherichia coli O81:H39</em></a></td><td><code>NCBITaxon:3132906</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1446758"><em>Escherichia coli O81:NM</em></a></td><td><code>NCBITaxon:1446758</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1446761"><em>Escherichia coli O81:NM str. 02-3012</em></a></td><td><code>NCBITaxon:1446761</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1446761"><em>Escherichia coli O81:NM str. 02-3012</em></a></td><td><code>NCBITaxon:1446761</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3053913"><em>Escherichia coli O82</em></a></td><td><code>NCBITaxon:3053913</code></td><td>SEROGROUP</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3438212"><em>Escherichia coli O82,121:H8</em></a></td><td><code>NCBITaxon:3438212</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3344537"><em>Escherichia coli O82:H8</em></a></td><td><code>NCBITaxon:3344537</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2079164"><em>Escherichia coli O83</em></a></td><td><code>NCBITaxon:2079164</code></td><td>SEROGROUP</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:685037"><em>Escherichia coli O83:H1</em></a></td><td><code>NCBITaxon:685037</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2491685"><em>Escherichia coli O83:H15</em></a></td><td><code>NCBITaxon:2491685</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:685038"><em>Escherichia coli O83:H1 str. NRG 857C</em></a></td><td><code>NCBITaxon:685038</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:685038"><em>Escherichia coli O83:H1 str. NRG 857C</em></a></td><td><code>NCBITaxon:685038</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2100501"><em>Escherichia coli O83:H28</em></a></td><td><code>NCBITaxon:2100501</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2100482"><em>Escherichia coli O83:H31</em></a></td><td><code>NCBITaxon:2100482</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3060900"><em>Escherichia coli O83:H32</em></a></td><td><code>NCBITaxon:3060900</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -218,27 +306,30 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:3697885"><em>Escherichia coli O84:H2</em></a></td><td><code>NCBITaxon:3697885</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3134941"><em>Escherichia coli O84:H25</em></a></td><td><code>NCBITaxon:3134941</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3413177"><em>Escherichia coli O84:H51</em></a></td><td><code>NCBITaxon:3413177</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2697517"><em>Escherichia coli O84:H7</em></a></td><td><code>NCBITaxon:2697517</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2697517"><em>Escherichia coli O84:H7</em></a></td><td><code>NCBITaxon:2697517</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1450176"><em>Escherichia coli O854</em></a></td><td><code>NCBITaxon:1450176</code></td><td>SEROGROUP</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2848143"><em>Escherichia coli O85:H1</em></a></td><td><code>NCBITaxon:2848143</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2848143"><em>Escherichia coli O85:H1</em></a></td><td><code>NCBITaxon:2848143</code></td><td>NO_RANK</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3413201"><em>Escherichia coli O85:H18</em></a></td><td><code>NCBITaxon:3413201</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2100515"><em>Escherichia coli O85:H32</em></a></td><td><code>NCBITaxon:2100515</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2162909"><em>Escherichia coli O86</em></a></td><td><code>NCBITaxon:2162909</code></td><td>SEROGROUP</td><td>BACTERIA</td><td>3</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2162909"><em>Escherichia coli O86</em></a></td><td><code>NCBITaxon:2162909</code></td><td>SEROGROUP</td><td>BACTERIA</td><td>3</td><td>0</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3132916"><em>Escherichia coli O86:H12</em></a></td><td><code>NCBITaxon:3132916</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2170736"><em>Escherichia coli O86:H18</em></a></td><td><code>NCBITaxon:2170736</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1446759"><em>Escherichia coli O86:H34</em></a></td><td><code>NCBITaxon:1446759</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1446762"><em>Escherichia coli O86:H34 str. 99-3124</em></a></td><td><code>NCBITaxon:1446762</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1446762"><em>Escherichia coli O86:H34 str. 99-3124</em></a></td><td><code>NCBITaxon:1446762</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3424056"><em>Escherichia coli O86:H51</em></a></td><td><code>NCBITaxon:3424056</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2100518"><em>Escherichia coli O86:H8</em></a></td><td><code>NCBITaxon:2100518</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:397452"><em>Escherichia coli O86a:H34</em></a></td><td><code>NCBITaxon:397452</code></td><td>NO_RANK</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="taxon-browser.js?v=434e253832135143"></script>
+<script defer src="taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="index.json.gz">Index JSON.gz</a> · <a href="index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

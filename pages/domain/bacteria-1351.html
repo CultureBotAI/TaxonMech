@@ -7,32 +7,120 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../theme-toggle.js"></script>
 <script defer src="../vendor/fflate-0.8.2.js"></script>
-<script defer src="../compressed-data.js?v=434e253832135143"></script>
+<script defer src="../compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="../index.html">TaxonMech</a>
   <nav>
     <a href="../browse.html">Browse</a>
     <a href="../type-strains.html">Type strains</a>
+    <a href="../map.html">Text map</a>
     <a href="../sources.html">Sources</a>
+    <a href="../index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../index.html">TaxonMech</a> › <span>Bacteria</span>
+</nav>
 <h1>Bacteria</h1>
 <p class="lede">Species and infraspecific taxa under NCBITaxon:2, including uncultured and environmental taxa.</p>
-<section id="taxon-browser" data-domain="BACTERIA" data-typed="false" data-page="1351" data-size="200" data-root="../">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="BACTERIA" data-typed="false" data-page="1351" data-size="200" data-root="../">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="../browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA" selected>Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">605695 records · page 1351 of 3029.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="../domain/bacteria-1350.html">Previous</a><a href="../domain/bacteria-1352.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>Bacteria</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2708346"><em>Jeotgalicoccus sp. WY2</em></a></td><td><code>NCBITaxon:2708346</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2708346"><em>Jeotgalicoccus sp. WY2</em></a></td><td><code>NCBITaxon:2708346</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:586417"><em>Jeotgalicoccus sp. YD2-57</em></a></td><td><code>NCBITaxon:586417</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:368815"><em>Jeotgalicoccus sp. YIM KMY9-1</em></a></td><td><code>NCBITaxon:368815</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1761985"><em>Jeotgalicoccus sp. YNUTCM YJ231</em></a></td><td><code>NCBITaxon:1761985</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -40,12 +128,12 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1761987"><em>Jeotgalicoccus sp. YNUTCM YJ237</em></a></td><td><code>NCBITaxon:1761987</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1761988"><em>Jeotgalicoccus sp. YNUTCM YJ245</em></a></td><td><code>NCBITaxon:1761988</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1761989"><em>Jeotgalicoccus sp. YNUTCM YJ246</em></a></td><td><code>NCBITaxon:1761989</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:323426"><em>Jezberella montanilacus</em></a></td><td><code>NCBITaxon:323426</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>10</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:323426"><em>Jezberella montanilacus</em></a></td><td><code>NCBITaxon:323426</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2978008"><em>Jezberella sp.</em></a></td><td><code>NCBITaxon:2978008</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3050476"><em>Jhaorihella sp.</em></a></td><td><code>NCBITaxon:3050476</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:488547"><em>Jhaorihella thermophila</em></a></td><td><code>NCBITaxon:488547</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:561176"><em>Jiangella alba</em></a></td><td><code>NCBITaxon:561176</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:419479"><em>Jiangella alkaliphila</em></a></td><td><code>NCBITaxon:419479</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:488547"><em>Jhaorihella thermophila</em></a></td><td><code>NCBITaxon:488547</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:561176"><em>Jiangella alba</em></a></td><td><code>NCBITaxon:561176</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:419479"><em>Jiangella alkaliphila</em></a></td><td><code>NCBITaxon:419479</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2670374"><em>Jiangella anatolica</em></a></td><td><code>NCBITaxon:2670374</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2530372"><em>Jiangella asiatica</em></a></td><td><code>NCBITaxon:2530372</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2530373"><em>Jiangella aurantiaca</em></a></td><td><code>NCBITaxon:2530373</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
@@ -85,15 +173,15 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1203406"><em>Jiangella sp. YIM 100708</em></a></td><td><code>NCBITaxon:1203406</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:673517"><em>Jiangella sp. YIM 93390</em></a></td><td><code>NCBITaxon:673517</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2530374"><em>Jiangella ureilytica</em></a></td><td><code>NCBITaxon:2530374</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2768363"><em>Jiangellaceae bacterium</em></a></td><td><code>NCBITaxon:2768363</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2768363"><em>Jiangellaceae bacterium</em></a></td><td><code>NCBITaxon:2768363</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>16 (16 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3683844"><em>Jiangellaceae bacterium VKM Ac-2616</em></a></td><td><code>NCBITaxon:3683844</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3050264"><em>Jiangellales bacterium</em></a></td><td><code>NCBITaxon:3050264</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3050264"><em>Jiangellales bacterium</em></a></td><td><code>NCBITaxon:3050264</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>7 (7 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2878561"><em>Jidongwangia harbinensis</em></a></td><td><code>NCBITaxon:2878561</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2021245"><em>Jidongwangia sp.</em></a></td><td><code>NCBITaxon:2021245</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1508388"><em>Jiella aquimaris</em></a></td><td><code>NCBITaxon:1508388</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2907202"><em>Jiella avicenniae</em></a></td><td><code>NCBITaxon:2907202</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2558362"><em>Jiella endophytica</em></a></td><td><code>NCBITaxon:2558362</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2816857"><em>Jiella flava</em></a></td><td><code>NCBITaxon:2816857</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2816857"><em>Jiella flava</em></a></td><td><code>NCBITaxon:2816857</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2821407"><em>Jiella mangrovi</em></a></td><td><code>NCBITaxon:2821407</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2917712"><em>Jiella marina</em></a></td><td><code>NCBITaxon:2917712</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2696469"><em>Jiella pacifica</em></a></td><td><code>NCBITaxon:2696469</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>1</td><td>SEEDED</td></tr>
@@ -104,13 +192,13 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:3234247"><em>Jiella sp. M17.18</em></a></td><td><code>NCBITaxon:3234247</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1872706"><em>Jiella sp. NBAIM H2</em></a></td><td><code>NCBITaxon:1872706</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:945840"><em>Jilinibacillus soli</em></a></td><td><code>NCBITaxon:945840</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2763675"><em>Jilunia laotingensis</em></a></td><td><code>NCBITaxon:2763675</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>6</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2763675"><em>Jilunia laotingensis</em></a></td><td><code>NCBITaxon:2763675</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1920899"><em>Jindonia aestuariivivens</em></a></td><td><code>NCBITaxon:1920899</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2925242"><em>Jindonia sp.</em></a></td><td><code>NCBITaxon:2925242</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2763671"><em>Jingyaoa shaoxingensis</em></a></td><td><code>NCBITaxon:2763671</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>6</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2763671"><em>Jingyaoa shaoxingensis</em></a></td><td><code>NCBITaxon:2763671</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:381615"><em>Jiroft(Iran) periwinkle phyllody phytoplasma</em></a></td><td><code>NCBITaxon:381615</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1605367"><em>Jiulongibacter sediminis</em></a></td><td><code>NCBITaxon:1605367</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2031120"><em>Jiulongibacter sp.</em></a></td><td><code>NCBITaxon:2031120</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1605367"><em>Jiulongibacter sediminis</em></a></td><td><code>NCBITaxon:1605367</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2031120"><em>Jiulongibacter sp.</em></a></td><td><code>NCBITaxon:2031120</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3463854"><em>Jiulongibacter sp. NS-SX5</em></a></td><td><code>NCBITaxon:3463854</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2774051"><em>Johannesbaptistia floridana</em></a></td><td><code>NCBITaxon:2774051</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2725938"><em>Johannesbaptistia floridana BLCC-M67</em></a></td><td><code>NCBITaxon:2725938</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -125,12 +213,12 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:2046809"><em>Johanseninema sp.</em></a></td><td><code>NCBITaxon:2046809</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3836664"><em>Johnevansiaceae bacterium (SeqCode)</em></a></td><td><code>NCBITaxon:3836664</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3835501"><em>Johnevansiales bacterium (SeqCode)</em></a></td><td><code>NCBITaxon:3835501</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:43995"><em>Johnsonella ignava</em></a></td><td><code>NCBITaxon:43995</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:679200"><em>Johnsonella ignava ATCC 51276</em></a></td><td><code>NCBITaxon:679200</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:43995"><em>Johnsonella ignava</em></a></td><td><code>NCBITaxon:43995</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:679200"><em>Johnsonella ignava ATCC 51276</em></a></td><td><code>NCBITaxon:679200</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3059423"><em>Johnsonella sp.</em></a></td><td><code>NCBITaxon:3059423</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:712318"><em>Johnsonella sp. oral taxon 166</em></a></td><td><code>NCBITaxon:712318</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:43674"><em>Jonesia denitrificans</em></a></td><td><code>NCBITaxon:43674</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:471856"><em>Jonesia denitrificans DSM 20603</em></a></td><td><code>NCBITaxon:471856</code></td><td>STRAIN</td><td>BACTERIA</td><td>7</td><td>1</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:43674"><em>Jonesia denitrificans</em></a></td><td><code>NCBITaxon:43674</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:471856"><em>Jonesia denitrificans DSM 20603</em></a></td><td><code>NCBITaxon:471856</code></td><td>STRAIN</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1553906"><em>Jonesia luteola</em></a></td><td><code>NCBITaxon:1553906</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:262806"><em>Jonesia quinghaiensis</em></a></td><td><code>NCBITaxon:262806</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1122130"><em>Jonesia quinghaiensis DSM 15701</em></a></td><td><code>NCBITaxon:1122130</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
@@ -150,22 +238,22 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1447063"><em>Jonesia sp. Z4</em></a></td><td><code>NCBITaxon:1447063</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1447064"><em>Jonesia sp. Z5</em></a></td><td><code>NCBITaxon:1447064</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3107440"><em>Jonesiaceae bacterium</em></a></td><td><code>NCBITaxon:3107440</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1463405"><em>Jonesiaceae bacterium iMX7</em></a></td><td><code>NCBITaxon:1463405</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>8</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1463405"><em>Jonesiaceae bacterium iMX7</em></a></td><td><code>NCBITaxon:1463405</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:433332"><em>Jonesiaceae bacterium SH031</em></a></td><td><code>NCBITaxon:433332</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1951958"><em>Jonesiaceae bacterium UBA3243</em></a></td><td><code>NCBITaxon:1951958</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>8</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1951959"><em>Jonesiaceae bacterium UBA3247</em></a></td><td><code>NCBITaxon:1951959</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>8</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1951958"><em>Jonesiaceae bacterium UBA3243</em></a></td><td><code>NCBITaxon:1951958</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1951959"><em>Jonesiaceae bacterium UBA3247</em></a></td><td><code>NCBITaxon:1951959</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1951960"><em>Jonesiaceae bacterium UBA3555</em></a></td><td><code>NCBITaxon:1951960</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1951961"><em>Jonesiaceae bacterium UBA5723</em></a></td><td><code>NCBITaxon:1951961</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>8</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1121721"><em>Jongsikchunia kroppenstedtii</em></a></td><td><code>NCBITaxon:1121721</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:468556"><em>Jongsikchunia kroppenstedtii DSM 45133</em></a></td><td><code>NCBITaxon:468556</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1951961"><em>Jonesiaceae bacterium UBA5723</em></a></td><td><code>NCBITaxon:1951961</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1121721"><em>Jongsikchunia kroppenstedtii</em></a></td><td><code>NCBITaxon:1121721</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:468556"><em>Jongsikchunia kroppenstedtii DSM 45133</em></a></td><td><code>NCBITaxon:468556</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3101067"><em>Jongsikchunia sp.</em></a></td><td><code>NCBITaxon:3101067</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:428712"><em>Jonquetella anthropi</em></a></td><td><code>NCBITaxon:428712</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>8</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:885272"><em>Jonquetella anthropi DSM 22815</em></a></td><td><code>NCBITaxon:885272</code></td><td>STRAIN</td><td>BACTERIA</td><td>7</td><td>1</td><td>8</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:645512"><em>Jonquetella anthropi E3_33 E1</em></a></td><td><code>NCBITaxon:645512</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>8</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1111126"><em>Jonquetella sp. BV3C21</em></a></td><td><code>NCBITaxon:1111126</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>8</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:428712"><em>Jonquetella anthropi</em></a></td><td><code>NCBITaxon:428712</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:885272"><em>Jonquetella anthropi DSM 22815</em></a></td><td><code>NCBITaxon:885272</code></td><td>STRAIN</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:645512"><em>Jonquetella anthropi E3_33 E1</em></a></td><td><code>NCBITaxon:645512</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1111126"><em>Jonquetella sp. BV3C21</em></a></td><td><code>NCBITaxon:1111126</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1111127"><em>Jonquetella sp. BV3C4</em></a></td><td><code>NCBITaxon:1111127</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:679257"><em>Joostella atrarenae</em></a></td><td><code>NCBITaxon:679257</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2231138"><em>Joostella sp.</em></a></td><td><code>NCBITaxon:2231138</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:679257"><em>Joostella atrarenae</em></a></td><td><code>NCBITaxon:679257</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2231138"><em>Joostella sp.</em></a></td><td><code>NCBITaxon:2231138</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1328011"><em>Joostella sp. A11</em></a></td><td><code>NCBITaxon:1328011</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1328012"><em>Joostella sp. A15</em></a></td><td><code>NCBITaxon:1328012</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1328013"><em>Joostella sp. A17</em></a></td><td><code>NCBITaxon:1328013</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -199,47 +287,50 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:2219647"><em>&#39;Juniperus procumbens&#39; witches&#39;-broom phytoplasma</em></a></td><td><code>NCBITaxon:2219647</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:907585"><em>&#39;Juniperus sp.&#39; aster yellows phytoplasma</em></a></td><td><code>NCBITaxon:907585</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1707806"><em>&#39;Justicia gendarussa&#39; phytoplasma</em></a></td><td><code>NCBITaxon:1707806</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2763664"><em>Jutongia hominis</em></a></td><td><code>NCBITaxon:2763664</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>112</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2763668"><em>Jutongia huaianensis</em></a></td><td><code>NCBITaxon:2763668</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>26</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2944204"><em>Jutongia sp.</em></a></td><td><code>NCBITaxon:2944204</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>26</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2763664"><em>Jutongia hominis</em></a></td><td><code>NCBITaxon:2763664</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2763668"><em>Jutongia huaianensis</em></a></td><td><code>NCBITaxon:2763668</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2944204"><em>Jutongia sp.</em></a></td><td><code>NCBITaxon:2944204</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3445972"><em>Jutongia sp. SJQ-6</em></a></td><td><code>NCBITaxon:3445972</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:435593"><em>Juyom (Iran) Bermuda grass white leaf phytoplasma</em></a></td><td><code>NCBITaxon:435593</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1343193"><em>Juyom(Iran)periwinkle phyllody phytoplasma</em></a></td><td><code>NCBITaxon:1343193</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:349557"><em>Juyom(Iran) white leaf phytoplasma</em></a></td><td><code>NCBITaxon:349557</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2315472"><em>K189A clade bacterium</em></a></td><td><code>NCBITaxon:2315472</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>40</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2315472"><em>K189A clade bacterium</em></a></td><td><code>NCBITaxon:2315472</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>15 (15 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3399526"><em>Kaarinaea lacus</em></a></td><td><code>NCBITaxon:3399526</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3158555"><em>Kaarinaea lacus PCC 9237</em></a></td><td><code>NCBITaxon:3158555</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2303525"><em>Kaiparowitsia implicata</em></a></td><td><code>NCBITaxon:2303525</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2057771"><em>Kaiparowitsia implicata GSE-PSE-MK54-09C</em></a></td><td><code>NCBITaxon:2057771</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2138094"><em>Kaiparowitsia implicata GSE-TBC-09CA</em></a></td><td><code>NCBITaxon:2138094</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2138096"><em>Kaiparowitsia implicata GSE-TBC-09CA2</em></a></td><td><code>NCBITaxon:2138096</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:266748"><em>Kaistella antarctica</em></a></td><td><code>NCBITaxon:266748</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:520603"><em>Kaistella anthropi</em></a></td><td><code>NCBITaxon:520603</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>8</td><td>6</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1241979"><em>Kaistella carnis</em></a></td><td><code>NCBITaxon:1241979</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>8</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:713588"><em>Kaistella chaponensis</em></a></td><td><code>NCBITaxon:713588</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>3</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2487074"><em>Kaistella daneshvariae</em></a></td><td><code>NCBITaxon:2487074</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2852098"><em>Kaistella faecalis</em></a></td><td><code>NCBITaxon:2852098</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:266748"><em>Kaistella antarctica</em></a></td><td><code>NCBITaxon:266748</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:520603"><em>Kaistella anthropi</em></a></td><td><code>NCBITaxon:520603</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>8</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1241979"><em>Kaistella carnis</em></a></td><td><code>NCBITaxon:1241979</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:713588"><em>Kaistella chaponensis</em></a></td><td><code>NCBITaxon:713588</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>3</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2487074"><em>Kaistella daneshvariae</em></a></td><td><code>NCBITaxon:2487074</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2852098"><em>Kaistella faecalis</em></a></td><td><code>NCBITaxon:2852098</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:417621"><em>Kaistella flava (ex Gargiulo et al. 2008)</em></a></td><td><code>NCBITaxon:417621</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2038776"><em>Kaistella flava (ex Peng et al. 2021)</em></a></td><td><code>NCBITaxon:2038776</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>2</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2787636"><em>Kaistella gelatinilytica</em></a></td><td><code>NCBITaxon:2787636</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:421525"><em>Kaistella haifensis</em></a></td><td><code>NCBITaxon:421525</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>6</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1450526"><em>Kaistella haifensis DSM 19056</em></a></td><td><code>NCBITaxon:1450526</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>6</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:266749"><em>Kaistella jeonii</em></a></td><td><code>NCBITaxon:266749</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1849733"><em>Kaistella montana</em></a></td><td><code>NCBITaxon:1849733</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:421525"><em>Kaistella haifensis</em></a></td><td><code>NCBITaxon:421525</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1450526"><em>Kaistella haifensis DSM 19056</em></a></td><td><code>NCBITaxon:1450526</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:266749"><em>Kaistella jeonii</em></a></td><td><code>NCBITaxon:266749</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1849733"><em>Kaistella montana</em></a></td><td><code>NCBITaxon:1849733</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:493376"><em>Kaistella palustris</em></a></td><td><code>NCBITaxon:493376</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1121288"><em>Kaistella palustris DSM 21579</em></a></td><td><code>NCBITaxon:1121288</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2878534"><em>Kaistella polysaccharea</em></a></td><td><code>NCBITaxon:2878534</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2763074"><em>Kaistella pullorum</em></a></td><td><code>NCBITaxon:2763074</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3026437"><em>Kaistella rhinocerotis</em></a></td><td><code>NCBITaxon:3026437</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2849654"><em>Kaistella soli</em></a></td><td><code>NCBITaxon:2849654</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2763074"><em>Kaistella pullorum</em></a></td><td><code>NCBITaxon:2763074</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3026437"><em>Kaistella rhinocerotis</em></a></td><td><code>NCBITaxon:3026437</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2849654"><em>Kaistella soli</em></a></td><td><code>NCBITaxon:2849654</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="../taxon-browser.js?v=434e253832135143"></script>
+<script defer src="../taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="../index.json.gz">Index JSON.gz</a> · <a href="../index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

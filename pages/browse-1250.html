@@ -7,38 +7,126 @@
 <link rel="stylesheet" href="style.css">
 <script src="theme-toggle.js"></script>
 <script defer src="vendor/fflate-0.8.2.js"></script>
-<script defer src="compressed-data.js?v=434e253832135143"></script>
+<script defer src="compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="index.html">TaxonMech</a>
   <nav>
     <a href="browse.html">Browse</a>
     <a href="type-strains.html">Type strains</a>
+    <a href="map.html">Text map</a>
     <a href="sources.html">Sources</a>
+    <a href="index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="index.html">TaxonMech</a> › <span>All records</span>
+</nav>
 <h1>All records</h1>
-<section id="taxon-browser" data-domain="" data-typed="false" data-page="1250" data-size="200" data-root="">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
-<p id="taxon-status" role="status">625960 records · page 1250 of 3130.</p>
+<section id="taxon-browser" class="browse-layout" data-domain="" data-typed="false" data-page="1250" data-size="200" data-root="">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA">Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
+<p id="taxon-status" role="status">626048 records · page 1250 of 3131.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="browse-1249.html">Previous</a><a href="browse-1251.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>All records</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
-<tr><td><a href="taxon.html?id=NCBITaxon:2773933"><em>Evtepia sp.</em></a></td><td><code>NCBITaxon:2773933</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>85</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2773933"><em>Evtepia sp.</em></a></td><td><code>NCBITaxon:2773933</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>18 (18 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1955496"><em>Ewamiania thermalis</em></a></td><td><code>NCBITaxon:1955496</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1955497"><em>Ewamiania thermalis TS0513</em></a></td><td><code>NCBITaxon:1955497</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3092550"><em>Ewingella allii</em></a></td><td><code>NCBITaxon:3092550</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:41202"><em>Ewingella americana</em></a></td><td><code>NCBITaxon:41202</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>15</td><td>11</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:910964"><em>Ewingella americana ATCC 33852</em></a></td><td><code>NCBITaxon:910964</code></td><td>STRAIN</td><td>BACTERIA</td><td>7</td><td>1</td><td>11</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3118588"><em>Ewingella docleensis</em></a></td><td><code>NCBITaxon:3118588</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1897459"><em>Ewingella sp.</em></a></td><td><code>NCBITaxon:1897459</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3092550"><em>Ewingella allii</em></a></td><td><code>NCBITaxon:3092550</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:41202"><em>Ewingella americana</em></a></td><td><code>NCBITaxon:41202</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>15</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:910964"><em>Ewingella americana ATCC 33852</em></a></td><td><code>NCBITaxon:910964</code></td><td>STRAIN</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3118588"><em>Ewingella docleensis</em></a></td><td><code>NCBITaxon:3118588</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1897459"><em>Ewingella sp.</em></a></td><td><code>NCBITaxon:1897459</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1586754"><em>Ewingella sp. 10 JD-2014</em></a></td><td><code>NCBITaxon:1586754</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1586753"><em>Ewingella sp. 1 JD-2014</em></a></td><td><code>NCBITaxon:1586753</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:796566"><em>Ewingella sp. 278-FB</em></a></td><td><code>NCBITaxon:796566</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -50,8 +138,8 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1586760"><em>Ewingella sp. 7 JD-2014</em></a></td><td><code>NCBITaxon:1586760</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1586761"><em>Ewingella sp. 8 JD-2014</em></a></td><td><code>NCBITaxon:1586761</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1586762"><em>Ewingella sp. 9 JD-2014</em></a></td><td><code>NCBITaxon:1586762</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3457633"><em>Ewingella sp. AOP8-B2-18</em></a></td><td><code>NCBITaxon:3457633</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3457632"><em>Ewingella sp. AOP9-I1-14</em></a></td><td><code>NCBITaxon:3457632</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3457633"><em>Ewingella sp. AOP8-B2-18</em></a></td><td><code>NCBITaxon:3457633</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3457632"><em>Ewingella sp. AOP9-I1-14</em></a></td><td><code>NCBITaxon:3457632</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1356532"><em>Ewingella sp. Arv-13-1.1</em></a></td><td><code>NCBITaxon:1356532</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1356533"><em>Ewingella sp. Arv-20-4.1</em></a></td><td><code>NCBITaxon:1356533</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3684189"><em>Ewingella sp. C233</em></a></td><td><code>NCBITaxon:3684189</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -81,43 +169,43 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:3372941"><em>Ewingella sp. SX535</em></a></td><td><code>NCBITaxon:3372941</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1821833"><em>Ewingella sp. ZYQ-2015-9</em></a></td><td><code>NCBITaxon:1821833</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:188701"><em>Excellospora japonica</em></a></td><td><code>NCBITaxon:188701</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:67857"><em>Exercitatus varius</em></a></td><td><code>NCBITaxon:67857</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>16</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:67857"><em>Exercitatus varius</em></a></td><td><code>NCBITaxon:67857</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3121780"><em>Exiguobacteriaceae bacterium</em></a></td><td><code>NCBITaxon:3121780</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2785532"><em>Exiguobacterium abrahamii</em></a></td><td><code>NCBITaxon:2785532</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>21</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:41170"><em>Exiguobacterium acetylicum</em></a></td><td><code>NCBITaxon:41170</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>12</td><td>39</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2785532"><em>Exiguobacterium abrahamii</em></a></td><td><code>NCBITaxon:2785532</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:41170"><em>Exiguobacterium acetylicum</em></a></td><td><code>NCBITaxon:41170</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>12</td><td>4 (4 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1255571"><em>Exiguobacterium acetylicum 180</em></a></td><td><code>NCBITaxon:1255571</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1397697"><em>Exiguobacterium acetylicum DSM 20416</em></a></td><td><code>NCBITaxon:1397697</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>14</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:273527"><em>Exiguobacterium aestuarii</em></a></td><td><code>NCBITaxon:273527</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>3</td><td>10</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1397697"><em>Exiguobacterium acetylicum DSM 20416</em></a></td><td><code>NCBITaxon:1397697</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:273527"><em>Exiguobacterium aestuarii</em></a></td><td><code>NCBITaxon:273527</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>3</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2751250"><em>Exiguobacterium algae</em></a></td><td><code>NCBITaxon:2751250</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1428684"><em>Exiguobacterium alkaliphilum</em></a></td><td><code>NCBITaxon:1428684</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>9</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:506480"><em>Exiguobacterium alkaliphilum 12/1</em></a></td><td><code>NCBITaxon:506480</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>9</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:132920"><em>Exiguobacterium antarcticum</em></a></td><td><code>NCBITaxon:132920</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>6</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1087448"><em>Exiguobacterium antarcticum B7</em></a></td><td><code>NCBITaxon:1087448</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>6</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1397700"><em>Exiguobacterium antarcticum DSM 14480</em></a></td><td><code>NCBITaxon:1397700</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>6</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1428684"><em>Exiguobacterium alkaliphilum</em></a></td><td><code>NCBITaxon:1428684</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:506480"><em>Exiguobacterium alkaliphilum 12/1</em></a></td><td><code>NCBITaxon:506480</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:132920"><em>Exiguobacterium antarcticum</em></a></td><td><code>NCBITaxon:132920</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1087448"><em>Exiguobacterium antarcticum B7</em></a></td><td><code>NCBITaxon:1087448</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1397700"><em>Exiguobacterium antarcticum DSM 14480</em></a></td><td><code>NCBITaxon:1397700</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:518693"><em>Exiguobacterium arabatum</em></a></td><td><code>NCBITaxon:518693</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:340145"><em>Exiguobacterium artemiae</em></a></td><td><code>NCBITaxon:340145</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>3</td><td>8</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:262543"><em>Exiguobacterium artemiae 255-15</em></a></td><td><code>NCBITaxon:262543</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>8</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1397698"><em>Exiguobacterium artemiae 7-3</em></a></td><td><code>NCBITaxon:1397698</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:340145"><em>Exiguobacterium artemiae</em></a></td><td><code>NCBITaxon:340145</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>3</td><td>3 (3 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:262543"><em>Exiguobacterium artemiae 255-15</em></a></td><td><code>NCBITaxon:262543</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1397698"><em>Exiguobacterium artemiae 7-3</em></a></td><td><code>NCBITaxon:1397698</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1255677"><em>Exiguobacterium artemiae NL255</em></a></td><td><code>NCBITaxon:1255677</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:33987"><em>Exiguobacterium aurantiacum</em></a></td><td><code>NCBITaxon:33987</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>6</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1397694"><em>Exiguobacterium aurantiacum DSM 6208</em></a></td><td><code>NCBITaxon:1397694</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:33987"><em>Exiguobacterium aurantiacum</em></a></td><td><code>NCBITaxon:33987</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>6</td><td>5 (5 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1397694"><em>Exiguobacterium aurantiacum DSM 6208</em></a></td><td><code>NCBITaxon:1397694</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:171633"><em>Exiguobacterium aurantiacum var. Colo. Road</em></a></td><td><code>NCBITaxon:171633</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1385984"><em>Exiguobacterium chiriqhucha</em></a></td><td><code>NCBITaxon:1385984</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>28</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1345023"><em>Exiguobacterium chiriqhucha RW-2</em></a></td><td><code>NCBITaxon:1345023</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>28</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1385984"><em>Exiguobacterium chiriqhucha</em></a></td><td><code>NCBITaxon:1385984</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1345023"><em>Exiguobacterium chiriqhucha RW-2</em></a></td><td><code>NCBITaxon:1345023</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2184695"><em>Exiguobacterium flavidum</em></a></td><td><code>NCBITaxon:2184695</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:384621"><em>Exiguobacterium himgiriensis</em></a></td><td><code>NCBITaxon:384621</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:384621"><em>Exiguobacterium himgiriensis</em></a></td><td><code>NCBITaxon:384621</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:367741"><em>Exiguobacterium homiense</em></a></td><td><code>NCBITaxon:367741</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:296995"><em>Exiguobacterium indicum</em></a></td><td><code>NCBITaxon:296995</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>2</td><td>21</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1358421"><em>Exiguobacterium indicum HHS 31</em></a></td><td><code>NCBITaxon:1358421</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>1</td><td>21</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:273528"><em>Exiguobacterium marinum</em></a></td><td><code>NCBITaxon:273528</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>12</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1397696"><em>Exiguobacterium marinum DSM 16307</em></a></td><td><code>NCBITaxon:1397696</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>12</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:340146"><em>Exiguobacterium mexicanum</em></a></td><td><code>NCBITaxon:340146</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>4</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:223958"><em>Exiguobacterium oxidotolerans</em></a></td><td><code>NCBITaxon:223958</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>2</td><td>19</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1397699"><em>Exiguobacterium oxidotolerans JCM 12280</em></a></td><td><code>NCBITaxon:1397699</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>19</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:296995"><em>Exiguobacterium indicum</em></a></td><td><code>NCBITaxon:296995</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>2</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1358421"><em>Exiguobacterium indicum HHS 31</em></a></td><td><code>NCBITaxon:1358421</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:273528"><em>Exiguobacterium marinum</em></a></td><td><code>NCBITaxon:273528</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1397696"><em>Exiguobacterium marinum DSM 16307</em></a></td><td><code>NCBITaxon:1397696</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:340146"><em>Exiguobacterium mexicanum</em></a></td><td><code>NCBITaxon:340146</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>4</td><td>4 (4 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:223958"><em>Exiguobacterium oxidotolerans</em></a></td><td><code>NCBITaxon:223958</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>2</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1397699"><em>Exiguobacterium oxidotolerans JCM 12280</em></a></td><td><code>NCBITaxon:1397699</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:438508"><em>Exiguobacterium panipatensis</em></a></td><td><code>NCBITaxon:438508</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:307643"><em>Exiguobacterium profundum</em></a></td><td><code>NCBITaxon:307643</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>24</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:307643"><em>Exiguobacterium profundum</em></a></td><td><code>NCBITaxon:307643</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>3 (3 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2751251"><em>Exiguobacterium qingdaonense</em></a></td><td><code>NCBITaxon:2751251</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:44751"><em>Exiguobacterium sp.</em></a></td><td><code>NCBITaxon:44751</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>28</td><td>39</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:44751"><em>Exiguobacterium sp.</em></a></td><td><code>NCBITaxon:44751</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>28</td><td>7 (7 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:509769"><em>Exiguobacterium sp. 01082-1</em></a></td><td><code>NCBITaxon:509769</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1188464"><em>Exiguobacterium sp. 09MSM4-10</em></a></td><td><code>NCBITaxon:1188464</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1188468"><em>Exiguobacterium sp. 09MSM4-15</em></a></td><td><code>NCBITaxon:1188468</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -160,7 +248,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1867098"><em>Exiguobacterium sp. 16F3I</em></a></td><td><code>NCBITaxon:1867098</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1867099"><em>Exiguobacterium sp. 16F5B</em></a></td><td><code>NCBITaxon:1867099</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1867100"><em>Exiguobacterium sp. 16F5C</em></a></td><td><code>NCBITaxon:1867100</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2931981"><em>Exiguobacterium sp. 17-1</em></a></td><td><code>NCBITaxon:2931981</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2931981"><em>Exiguobacterium sp. 17-1</em></a></td><td><code>NCBITaxon:2931981</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1009108"><em>Exiguobacterium sp. 17GEPV</em></a></td><td><code>NCBITaxon:1009108</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1072117"><em>Exiguobacterium sp. 19R-11</em></a></td><td><code>NCBITaxon:1072117</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1009109"><em>Exiguobacterium sp. 1EPE</em></a></td><td><code>NCBITaxon:1009109</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -168,7 +256,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1009111"><em>Exiguobacterium sp. 1GEPV</em></a></td><td><code>NCBITaxon:1009111</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:707200"><em>Exiguobacterium sp. 2009I11</em></a></td><td><code>NCBITaxon:707200</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:934639"><em>Exiguobacterium sp. 20B(2010)</em></a></td><td><code>NCBITaxon:934639</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3453907"><em>Exiguobacterium sp. 22311</em></a></td><td><code>NCBITaxon:3453907</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>14</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3453907"><em>Exiguobacterium sp. 22311</em></a></td><td><code>NCBITaxon:3453907</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1009112"><em>Exiguobacterium sp. 22GEPA</em></a></td><td><code>NCBITaxon:1009112</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1602694"><em>Exiguobacterium sp. 23Mb</em></a></td><td><code>NCBITaxon:1602694</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1009113"><em>Exiguobacterium sp. 264a03</em></a></td><td><code>NCBITaxon:1009113</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -233,12 +321,15 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1175957"><em>Exiguobacterium sp. 52m2</em></a></td><td><code>NCBITaxon:1175957</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="taxon-browser.js?v=434e253832135143"></script>
+<script defer src="taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="index.json.gz">Index JSON.gz</a> · <a href="index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

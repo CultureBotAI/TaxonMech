@@ -7,36 +7,124 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../theme-toggle.js"></script>
 <script defer src="../vendor/fflate-0.8.2.js"></script>
-<script defer src="../compressed-data.js?v=434e253832135143"></script>
+<script defer src="../compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="../index.html">TaxonMech</a>
   <nav>
     <a href="../browse.html">Browse</a>
     <a href="../type-strains.html">Type strains</a>
+    <a href="../map.html">Text map</a>
     <a href="../sources.html">Sources</a>
+    <a href="../index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../index.html">TaxonMech</a> › <span>Bacteria</span>
+</nav>
 <h1>Bacteria</h1>
 <p class="lede">Species and infraspecific taxa under NCBITaxon:2, including uncultured and environmental taxa.</p>
-<section id="taxon-browser" data-domain="BACTERIA" data-typed="false" data-page="2271" data-size="200" data-root="../">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="BACTERIA" data-typed="false" data-page="2271" data-size="200" data-root="../">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="../browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA" selected>Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">605695 records · page 2271 of 3029.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="../domain/bacteria-2270.html">Previous</a><a href="../domain/bacteria-2272.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>Bacteria</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1759264"><em>Roseococcus sp. TH172</em></a></td><td><code>NCBITaxon:1759264</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1759265"><em>Roseococcus sp. TH173</em></a></td><td><code>NCBITaxon:1759265</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1759266"><em>Roseococcus sp. TH174</em></a></td><td><code>NCBITaxon:1759266</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3133973"><em>Roseococcus sp. YIM B11640</em></a></td><td><code>NCBITaxon:3133973</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:455361"><em>Roseococcus suduntuyensis</em></a></td><td><code>NCBITaxon:455361</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:455361"><em>Roseococcus suduntuyensis</em></a></td><td><code>NCBITaxon:455361</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:35813"><em>Roseococcus thiosulfatophilus</em></a></td><td><code>NCBITaxon:35813</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3082945"><em>Roseofilum acuticapitatum</em></a></td><td><code>NCBITaxon:3082945</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3022443"><em>Roseofilum acuticapitatum BLCC-M150</em></a></td><td><code>NCBITaxon:3022443</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -78,24 +166,24 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1792170"><em>Roseofilum reptotaenium AO1-7</em></a></td><td><code>NCBITaxon:1792170</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1792171"><em>Roseofilum reptotaenium AO1-8</em></a></td><td><code>NCBITaxon:1792171</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1792172"><em>Roseofilum reptotaenium AO1-9</em></a></td><td><code>NCBITaxon:1792172</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1925591"><em>Roseofilum reptotaenium AO1-A</em></a></td><td><code>NCBITaxon:1925591</code></td><td>ISOLATE</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1925591"><em>Roseofilum reptotaenium AO1-A</em></a></td><td><code>NCBITaxon:1925591</code></td><td>ISOLATE</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2086567"><em>Roseofilum reptotaenium CDM1</em></a></td><td><code>NCBITaxon:2086567</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2086568"><em>Roseofilum reptotaenium CDM2</em></a></td><td><code>NCBITaxon:2086568</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2086569"><em>Roseofilum reptotaenium CDS</em></a></td><td><code>NCBITaxon:2086569</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3021782"><em>Roseofilum reptotaenium CS-1145</em></a></td><td><code>NCBITaxon:3021782</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1985728"><em>Roseofilum reptotaenium RR100-1</em></a></td><td><code>NCBITaxon:1985728</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>11</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3021782"><em>Roseofilum reptotaenium CS-1145</em></a></td><td><code>NCBITaxon:3021782</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1985728"><em>Roseofilum reptotaenium RR100-1</em></a></td><td><code>NCBITaxon:1985728</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3100238"><em>Roseofilum sp.</em></a></td><td><code>NCBITaxon:3100238</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2821500"><em>Roseofilum sp. Belize BBD 4</em></a></td><td><code>NCBITaxon:2821500</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>11</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2821501"><em>Roseofilum sp. Belize Diploria</em></a></td><td><code>NCBITaxon:2821501</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>11</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2821500"><em>Roseofilum sp. Belize BBD 4</em></a></td><td><code>NCBITaxon:2821500</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2821501"><em>Roseofilum sp. Belize Diploria</em></a></td><td><code>NCBITaxon:2821501</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1664693"><em>Roseofilum sp. enrichment culture clone</em></a></td><td><code>NCBITaxon:1664693</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2821502"><em>Roseofilum sp. Guam</em></a></td><td><code>NCBITaxon:2821502</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2821502"><em>Roseofilum sp. Guam</em></a></td><td><code>NCBITaxon:2821502</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1578081"><em>Roseofilum sp. KlnPHch12</em></a></td><td><code>NCBITaxon:1578081</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3712868"><em>Roseofilum sp. KMC-1</em></a></td><td><code>NCBITaxon:3712868</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2800656"><em>Roseofilum sp. PMC 1058.18</em></a></td><td><code>NCBITaxon:2800656</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2821496"><em>Roseofilum sp. SBFL</em></a></td><td><code>NCBITaxon:2821496</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>11</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2821497"><em>Roseofilum sp. SID1</em></a></td><td><code>NCBITaxon:2821497</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>11</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2821498"><em>Roseofilum sp. SID2</em></a></td><td><code>NCBITaxon:2821498</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>11</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2821499"><em>Roseofilum sp. SID3</em></a></td><td><code>NCBITaxon:2821499</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>11</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2821496"><em>Roseofilum sp. SBFL</em></a></td><td><code>NCBITaxon:2821496</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2821497"><em>Roseofilum sp. SID1</em></a></td><td><code>NCBITaxon:2821497</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2821498"><em>Roseofilum sp. SID2</em></a></td><td><code>NCBITaxon:2821498</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2821499"><em>Roseofilum sp. SID3</em></a></td><td><code>NCBITaxon:2821499</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1225642"><em>Roseomonas aceris</em></a></td><td><code>NCBITaxon:1225642</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2937791"><em>Roseomonas acroporae</em></a></td><td><code>NCBITaxon:2937791</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1123060"><em>Roseomonas aerilata DSM 19363</em></a></td><td><code>NCBITaxon:1123060</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
@@ -108,21 +196,21 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:204528"><em>Roseomonas genomospecies 4</em></a></td><td><code>NCBITaxon:204528</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:204934"><em>Roseomonas genomospecies 5</em></a></td><td><code>NCBITaxon:204934</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:214106"><em>Roseomonas genomospecies 6</em></a></td><td><code>NCBITaxon:214106</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:257708"><em>Roseomonas gilardii</em></a></td><td><code>NCBITaxon:257708</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>3</td><td>7</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:257708"><em>Roseomonas gilardii</em></a></td><td><code>NCBITaxon:257708</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>3</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:204527"><em>Roseomonas gilardii subsp. gilardii</em></a></td><td><code>NCBITaxon:204527</code></td><td>SUBSPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1449094"><em>Roseomonas gilardii subsp. gilardii ATCC 49956</em></a></td><td><code>NCBITaxon:1449094</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:243956"><em>Roseomonas gilardii subsp. rosea</em></a></td><td><code>NCBITaxon:243956</code></td><td>SUBSPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>7</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1336208"><em>Roseomonas gilardii subsp. rosea ATCC BAA-691</em></a></td><td><code>NCBITaxon:1336208</code></td><td>STRAIN</td><td>BACTERIA</td><td>5</td><td>1</td><td>7</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2768162"><em>Roseomonas haemaphysalidis</em></a></td><td><code>NCBITaxon:2768162</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:243956"><em>Roseomonas gilardii subsp. rosea</em></a></td><td><code>NCBITaxon:243956</code></td><td>SUBSPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1336208"><em>Roseomonas gilardii subsp. rosea ATCC BAA-691</em></a></td><td><code>NCBITaxon:1336208</code></td><td>STRAIN</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2768162"><em>Roseomonas haemaphysalidis</em></a></td><td><code>NCBITaxon:2768162</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2820811"><em>Roseomonas indoligenes</em></a></td><td><code>NCBITaxon:2820811</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2768161"><em>Roseomonas marmotae</em></a></td><td><code>NCBITaxon:2768161</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2768161"><em>Roseomonas marmotae</em></a></td><td><code>NCBITaxon:2768161</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:439029"><em>Roseomonas massiliensis</em></a></td><td><code>NCBITaxon:439029</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>2</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:207340"><em>Roseomonas mucosa</em></a></td><td><code>NCBITaxon:207340</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>32</td><td>29</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1448136"><em>Roseomonas mucosa ATCC BAA-692</em></a></td><td><code>NCBITaxon:1448136</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>1</td><td>29</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:207340"><em>Roseomonas mucosa</em></a></td><td><code>NCBITaxon:207340</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>32</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1448136"><em>Roseomonas mucosa ATCC BAA-692</em></a></td><td><code>NCBITaxon:1448136</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2820810"><em>Roseomonas nitratireducens</em></a></td><td><code>NCBITaxon:2820810</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3121582"><em>Roseomonas populi</em></a></td><td><code>NCBITaxon:3121582</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2748667"><em>Roseomonas rosulenta</em></a></td><td><code>NCBITaxon:2748667</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1869190"><em>Roseomonas sp.</em></a></td><td><code>NCBITaxon:1869190</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>20</td><td>16</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1869190"><em>Roseomonas sp.</em></a></td><td><code>NCBITaxon:1869190</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>20</td><td>37 (37 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:242833"><em>Roseomonas sp. 040703/248107A</em></a></td><td><code>NCBITaxon:242833</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:878906"><em>Roseomonas sp. 15-10-1</em></a></td><td><code>NCBITaxon:878906</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1502091"><em>Roseomonas sp. 16-25G</em></a></td><td><code>NCBITaxon:1502091</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -142,7 +230,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:908562"><em>Roseomonas sp. 6A9N4</em></a></td><td><code>NCBITaxon:908562</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1689602"><em>Roseomonas sp. A2</em></a></td><td><code>NCBITaxon:1689602</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1331672"><em>Roseomonas sp. Ac16</em></a></td><td><code>NCBITaxon:1331672</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2918212"><em>Roseomonas sp. ACRSG</em></a></td><td><code>NCBITaxon:2918212</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2918212"><em>Roseomonas sp. ACRSG</em></a></td><td><code>NCBITaxon:2918212</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2562311"><em>Roseomonas sp. AR75</em></a></td><td><code>NCBITaxon:2562311</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1616829"><em>Roseomonas sp. AR-1</em></a></td><td><code>NCBITaxon:1616829</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1316085"><em>Roseomonas sp. Arctic</em></a></td><td><code>NCBITaxon:1316085</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -152,7 +240,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1960115"><em>Roseomonas sp. AS6</em></a></td><td><code>NCBITaxon:1960115</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1960116"><em>Roseomonas sp. AS7</em></a></td><td><code>NCBITaxon:1960116</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1327611"><em>Roseomonas sp. Atb2</em></a></td><td><code>NCBITaxon:1327611</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1217720"><em>Roseomonas sp. B5</em></a></td><td><code>NCBITaxon:1217720</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>29</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1217720"><em>Roseomonas sp. B5</em></a></td><td><code>NCBITaxon:1217720</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1415460"><em>Roseomonas sp. B-134-1-4</em></a></td><td><code>NCBITaxon:1415460</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1415461"><em>Roseomonas sp. B-231-1-4</em></a></td><td><code>NCBITaxon:1415461</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1256703"><em>Roseomonas sp. BA-157</em></a></td><td><code>NCBITaxon:1256703</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -171,7 +259,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:3342640"><em>Roseomonas sp. CCTCC AB2023176</em></a></td><td><code>NCBITaxon:3342640</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2845823"><em>Roseomonas sp. CECT 9278</em></a></td><td><code>NCBITaxon:2845823</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1882785"><em>Roseomonas sp. CF484</em></a></td><td><code>NCBITaxon:1882785</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:3317349"><em>Roseomonas sp. CGMCC 1.13459</em></a></td><td><code>NCBITaxon:3317349</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:3317349"><em>Roseomonas sp. CGMCC 1.13459</em></a></td><td><code>NCBITaxon:3317349</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1543885"><em>Roseomonas sp. CMC-CF140</em></a></td><td><code>NCBITaxon:1543885</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1446826"><em>Roseomonas sp. CMS4Y-2-2</em></a></td><td><code>NCBITaxon:1446826</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:308131"><em>Roseomonas sp. CP4B2</em></a></td><td><code>NCBITaxon:308131</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -189,7 +277,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1581956"><em>Roseomonas sp. F162</em></a></td><td><code>NCBITaxon:1581956</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2184017"><em>Roseomonas sp. F3212</em></a></td><td><code>NCBITaxon:2184017</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3467479"><em>Roseomonas sp. F4</em></a></td><td><code>NCBITaxon:3467479</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2018065"><em>Roseomonas sp. FDAARGOS_362</em></a></td><td><code>NCBITaxon:2018065</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>29</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2018065"><em>Roseomonas sp. FDAARGOS_362</em></a></td><td><code>NCBITaxon:2018065</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:400632"><em>Roseomonas sp. FH4</em></a></td><td><code>NCBITaxon:400632</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1751275"><em>Roseomonas sp. G11</em></a></td><td><code>NCBITaxon:1751275</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2950546"><em>Roseomonas sp. GC11</em></a></td><td><code>NCBITaxon:2950546</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
@@ -216,7 +304,7 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1818785"><em>Roseomonas sp. JCM 28681</em></a></td><td><code>NCBITaxon:1818785</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1818787"><em>Roseomonas sp. JCM 28683</em></a></td><td><code>NCBITaxon:1818787</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:327094"><em>Roseomonas sp. JS018</em></a></td><td><code>NCBITaxon:327094</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2479201"><em>Roseomonas sp. KE0001</em></a></td><td><code>NCBITaxon:2479201</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2479201"><em>Roseomonas sp. KE0001</em></a></td><td><code>NCBITaxon:2479201</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2479202"><em>Roseomonas sp. KE2513</em></a></td><td><code>NCBITaxon:2479202</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2576381"><em>Roseomonas sp. &#39;Ksar Ghilane&#39;</em></a></td><td><code>NCBITaxon:2576381</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3732597"><em>Roseomonas sp. KZH-56</em></a></td><td><code>NCBITaxon:3732597</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -234,12 +322,15 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1972070"><em>Roseomonas sp. M4</em></a></td><td><code>NCBITaxon:1972070</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="../taxon-browser.js?v=434e253832135143"></script>
+<script defer src="../taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="../index.json.gz">Index JSON.gz</a> · <a href="../index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

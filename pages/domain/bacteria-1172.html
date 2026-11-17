@@ -7,30 +7,118 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../theme-toggle.js"></script>
 <script defer src="../vendor/fflate-0.8.2.js"></script>
-<script defer src="../compressed-data.js?v=434e253832135143"></script>
+<script defer src="../compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="../index.html">TaxonMech</a>
   <nav>
     <a href="../browse.html">Browse</a>
     <a href="../type-strains.html">Type strains</a>
+    <a href="../map.html">Text map</a>
     <a href="../sources.html">Sources</a>
+    <a href="../index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../index.html">TaxonMech</a> › <span>Bacteria</span>
+</nav>
 <h1>Bacteria</h1>
 <p class="lede">Species and infraspecific taxa under NCBITaxon:2, including uncultured and environmental taxa.</p>
-<section id="taxon-browser" data-domain="BACTERIA" data-typed="false" data-page="1172" data-size="200" data-root="../">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
+<section id="taxon-browser" class="browse-layout" data-domain="BACTERIA" data-typed="false" data-page="1172" data-size="200" data-root="../">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="../browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA" selected>Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
 <p id="taxon-status" role="status">605695 records · page 1172 of 3029.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="../domain/bacteria-1171.html">Previous</a><a href="../domain/bacteria-1173.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>Bacteria</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1808312"><em>Escherichia sp. MCX14</em></a></td><td><code>NCBITaxon:1808312</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3095073"><em>Escherichia sp. MEGA10</em></a></td><td><code>NCBITaxon:3095073</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -43,53 +131,53 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:340725"><em>Escherichia sp. ML2-46</em></a></td><td><code>NCBITaxon:340725</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1163453"><em>Escherichia sp. ML-11</em></a></td><td><code>NCBITaxon:1163453</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1497755"><em>Escherichia sp. MLS</em></a></td><td><code>NCBITaxon:1497755</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093858"><em>Escherichia sp. MOD1-EC1915</em></a></td><td><code>NCBITaxon:2093858</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>154</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093859"><em>Escherichia sp. MOD1-EC2449</em></a></td><td><code>NCBITaxon:2093859</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>154</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093860"><em>Escherichia sp. MOD1-EC4516</em></a></td><td><code>NCBITaxon:2093860</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>154</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093861"><em>Escherichia sp. MOD1-EC4550</em></a></td><td><code>NCBITaxon:2093861</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>154</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093862"><em>Escherichia sp. MOD1-EC4560</em></a></td><td><code>NCBITaxon:2093862</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>154</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093863"><em>Escherichia sp. MOD1-EC5110</em></a></td><td><code>NCBITaxon:2093863</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093864"><em>Escherichia sp. MOD1-EC5189</em></a></td><td><code>NCBITaxon:2093864</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>154</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093865"><em>Escherichia sp. MOD1-EC5287</em></a></td><td><code>NCBITaxon:2093865</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>154</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093866"><em>Escherichia sp. MOD1-EC5350</em></a></td><td><code>NCBITaxon:2093866</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>8</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093867"><em>Escherichia sp. MOD1-EC5426</em></a></td><td><code>NCBITaxon:2093867</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093868"><em>Escherichia sp. MOD1-EC5427</em></a></td><td><code>NCBITaxon:2093868</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093869"><em>Escherichia sp. MOD1-EC5433</em></a></td><td><code>NCBITaxon:2093869</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>75</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093870"><em>Escherichia sp. MOD1-EC5434</em></a></td><td><code>NCBITaxon:2093870</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>75</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093871"><em>Escherichia sp. MOD1-EC5438</em></a></td><td><code>NCBITaxon:2093871</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093872"><em>Escherichia sp. MOD1-EC5449</em></a></td><td><code>NCBITaxon:2093872</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093873"><em>Escherichia sp. MOD1-EC5451</em></a></td><td><code>NCBITaxon:2093873</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093874"><em>Escherichia sp. MOD1-EC5457</em></a></td><td><code>NCBITaxon:2093874</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>75</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093875"><em>Escherichia sp. MOD1-EC5462</em></a></td><td><code>NCBITaxon:2093875</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093876"><em>Escherichia sp. MOD1-EC5495</em></a></td><td><code>NCBITaxon:2093876</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>75</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093877"><em>Escherichia sp. MOD1-EC5948</em></a></td><td><code>NCBITaxon:2093877</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093878"><em>Escherichia sp. MOD1-EC5949</em></a></td><td><code>NCBITaxon:2093878</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093879"><em>Escherichia sp. MOD1-EC5950</em></a></td><td><code>NCBITaxon:2093879</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093880"><em>Escherichia sp. MOD1-EC5990</em></a></td><td><code>NCBITaxon:2093880</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>154</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093881"><em>Escherichia sp. MOD1-EC6021</em></a></td><td><code>NCBITaxon:2093881</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>154</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093882"><em>Escherichia sp. MOD1-EC6096</em></a></td><td><code>NCBITaxon:2093882</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093883"><em>Escherichia sp. MOD1-EC6097</em></a></td><td><code>NCBITaxon:2093883</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093884"><em>Escherichia sp. MOD1-EC6098</em></a></td><td><code>NCBITaxon:2093884</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093885"><em>Escherichia sp. MOD1-EC6099</em></a></td><td><code>NCBITaxon:2093885</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093886"><em>Escherichia sp. MOD1-EC6100</em></a></td><td><code>NCBITaxon:2093886</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093887"><em>Escherichia sp. MOD1-EC6144</em></a></td><td><code>NCBITaxon:2093887</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093888"><em>Escherichia sp. MOD1-EC6147</em></a></td><td><code>NCBITaxon:2093888</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093889"><em>Escherichia sp. MOD1-EC6149</em></a></td><td><code>NCBITaxon:2093889</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093890"><em>Escherichia sp. MOD1-EC6150</em></a></td><td><code>NCBITaxon:2093890</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093891"><em>Escherichia sp. MOD1-EC6153</em></a></td><td><code>NCBITaxon:2093891</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093892"><em>Escherichia sp. MOD1-EC6154</em></a></td><td><code>NCBITaxon:2093892</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093893"><em>Escherichia sp. MOD1-EC6157</em></a></td><td><code>NCBITaxon:2093893</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093894"><em>Escherichia sp. MOD1-EC6158</em></a></td><td><code>NCBITaxon:2093894</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093895"><em>Escherichia sp. MOD1-EC6162</em></a></td><td><code>NCBITaxon:2093895</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093896"><em>Escherichia sp. MOD1-EC6163</em></a></td><td><code>NCBITaxon:2093896</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>188</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093897"><em>Escherichia sp. MOD1-EC6300</em></a></td><td><code>NCBITaxon:2093897</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>154</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2162662"><em>Escherichia sp. MOD1-EC6475</em></a></td><td><code>NCBITaxon:2162662</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>75</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093898"><em>Escherichia sp. MOD1-EC6819</em></a></td><td><code>NCBITaxon:2093898</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>75</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093899"><em>Escherichia sp. MOD1-EC6842</em></a></td><td><code>NCBITaxon:2093899</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>75</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093900"><em>Escherichia sp. MOD1-EC7003</em></a></td><td><code>NCBITaxon:2093900</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2093901"><em>Escherichia sp. MOD1-EC7011</em></a></td><td><code>NCBITaxon:2093901</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>75</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093858"><em>Escherichia sp. MOD1-EC1915</em></a></td><td><code>NCBITaxon:2093858</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093859"><em>Escherichia sp. MOD1-EC2449</em></a></td><td><code>NCBITaxon:2093859</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093860"><em>Escherichia sp. MOD1-EC4516</em></a></td><td><code>NCBITaxon:2093860</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093861"><em>Escherichia sp. MOD1-EC4550</em></a></td><td><code>NCBITaxon:2093861</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093862"><em>Escherichia sp. MOD1-EC4560</em></a></td><td><code>NCBITaxon:2093862</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093863"><em>Escherichia sp. MOD1-EC5110</em></a></td><td><code>NCBITaxon:2093863</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093864"><em>Escherichia sp. MOD1-EC5189</em></a></td><td><code>NCBITaxon:2093864</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093865"><em>Escherichia sp. MOD1-EC5287</em></a></td><td><code>NCBITaxon:2093865</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093866"><em>Escherichia sp. MOD1-EC5350</em></a></td><td><code>NCBITaxon:2093866</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093867"><em>Escherichia sp. MOD1-EC5426</em></a></td><td><code>NCBITaxon:2093867</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093868"><em>Escherichia sp. MOD1-EC5427</em></a></td><td><code>NCBITaxon:2093868</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093869"><em>Escherichia sp. MOD1-EC5433</em></a></td><td><code>NCBITaxon:2093869</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093870"><em>Escherichia sp. MOD1-EC5434</em></a></td><td><code>NCBITaxon:2093870</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093871"><em>Escherichia sp. MOD1-EC5438</em></a></td><td><code>NCBITaxon:2093871</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093872"><em>Escherichia sp. MOD1-EC5449</em></a></td><td><code>NCBITaxon:2093872</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093873"><em>Escherichia sp. MOD1-EC5451</em></a></td><td><code>NCBITaxon:2093873</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093874"><em>Escherichia sp. MOD1-EC5457</em></a></td><td><code>NCBITaxon:2093874</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093875"><em>Escherichia sp. MOD1-EC5462</em></a></td><td><code>NCBITaxon:2093875</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093876"><em>Escherichia sp. MOD1-EC5495</em></a></td><td><code>NCBITaxon:2093876</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093877"><em>Escherichia sp. MOD1-EC5948</em></a></td><td><code>NCBITaxon:2093877</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093878"><em>Escherichia sp. MOD1-EC5949</em></a></td><td><code>NCBITaxon:2093878</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093879"><em>Escherichia sp. MOD1-EC5950</em></a></td><td><code>NCBITaxon:2093879</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093880"><em>Escherichia sp. MOD1-EC5990</em></a></td><td><code>NCBITaxon:2093880</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093881"><em>Escherichia sp. MOD1-EC6021</em></a></td><td><code>NCBITaxon:2093881</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093882"><em>Escherichia sp. MOD1-EC6096</em></a></td><td><code>NCBITaxon:2093882</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093883"><em>Escherichia sp. MOD1-EC6097</em></a></td><td><code>NCBITaxon:2093883</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093884"><em>Escherichia sp. MOD1-EC6098</em></a></td><td><code>NCBITaxon:2093884</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093885"><em>Escherichia sp. MOD1-EC6099</em></a></td><td><code>NCBITaxon:2093885</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093886"><em>Escherichia sp. MOD1-EC6100</em></a></td><td><code>NCBITaxon:2093886</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093887"><em>Escherichia sp. MOD1-EC6144</em></a></td><td><code>NCBITaxon:2093887</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093888"><em>Escherichia sp. MOD1-EC6147</em></a></td><td><code>NCBITaxon:2093888</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093889"><em>Escherichia sp. MOD1-EC6149</em></a></td><td><code>NCBITaxon:2093889</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093890"><em>Escherichia sp. MOD1-EC6150</em></a></td><td><code>NCBITaxon:2093890</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093891"><em>Escherichia sp. MOD1-EC6153</em></a></td><td><code>NCBITaxon:2093891</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093892"><em>Escherichia sp. MOD1-EC6154</em></a></td><td><code>NCBITaxon:2093892</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093893"><em>Escherichia sp. MOD1-EC6157</em></a></td><td><code>NCBITaxon:2093893</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093894"><em>Escherichia sp. MOD1-EC6158</em></a></td><td><code>NCBITaxon:2093894</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093895"><em>Escherichia sp. MOD1-EC6162</em></a></td><td><code>NCBITaxon:2093895</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093896"><em>Escherichia sp. MOD1-EC6163</em></a></td><td><code>NCBITaxon:2093896</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093897"><em>Escherichia sp. MOD1-EC6300</em></a></td><td><code>NCBITaxon:2093897</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2162662"><em>Escherichia sp. MOD1-EC6475</em></a></td><td><code>NCBITaxon:2162662</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093898"><em>Escherichia sp. MOD1-EC6819</em></a></td><td><code>NCBITaxon:2093898</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093899"><em>Escherichia sp. MOD1-EC6842</em></a></td><td><code>NCBITaxon:2093899</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093900"><em>Escherichia sp. MOD1-EC7003</em></a></td><td><code>NCBITaxon:2093900</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2093901"><em>Escherichia sp. MOD1-EC7011</em></a></td><td><code>NCBITaxon:2093901</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3069110"><em>Escherichia sp. MQCSZ4GFP</em></a></td><td><code>NCBITaxon:3069110</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2575922"><em>Escherichia sp. MR</em></a></td><td><code>NCBITaxon:2575922</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>75</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2575922"><em>Escherichia sp. MR</em></a></td><td><code>NCBITaxon:2575922</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1848499"><em>Escherichia sp. MRL5B</em></a></td><td><code>NCBITaxon:1848499</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:416238"><em>Escherichia sp. MSCB-10</em></a></td><td><code>NCBITaxon:416238</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2991699"><em>Escherichia sp. muskdeer13-4</em></a></td><td><code>NCBITaxon:2991699</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -115,24 +203,24 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:1862377"><em>Escherichia sp. ND47</em></a></td><td><code>NCBITaxon:1862377</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2851753"><em>Escherichia sp. NewBuildingStools-35-ST4-Org1</em></a></td><td><code>NCBITaxon:2851753</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1754007"><em>Escherichia sp. NG188</em></a></td><td><code>NCBITaxon:1754007</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2870768"><em>Escherichia sp. NIC10</em></a></td><td><code>NCBITaxon:2870768</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2870769"><em>Escherichia sp. NIC12-1</em></a></td><td><code>NCBITaxon:2870769</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2870770"><em>Escherichia sp. NIC18-1</em></a></td><td><code>NCBITaxon:2870770</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2870771"><em>Escherichia sp. NIC20</em></a></td><td><code>NCBITaxon:2870771</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2870773"><em>Escherichia sp. NIC24-2-1</em></a></td><td><code>NCBITaxon:2870773</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2870774"><em>Escherichia sp. NIC26-1</em></a></td><td><code>NCBITaxon:2870774</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2870775"><em>Escherichia sp. NIC32-2</em></a></td><td><code>NCBITaxon:2870775</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2870776"><em>Escherichia sp. NIC33</em></a></td><td><code>NCBITaxon:2870776</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2870765"><em>Escherichia sp. NIC3-2</em></a></td><td><code>NCBITaxon:2870765</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2870766"><em>Escherichia sp. NIC4-1</em></a></td><td><code>NCBITaxon:2870766</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2870767"><em>Escherichia sp. NIC5-1</em></a></td><td><code>NCBITaxon:2870767</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2870768"><em>Escherichia sp. NIC10</em></a></td><td><code>NCBITaxon:2870768</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2870769"><em>Escherichia sp. NIC12-1</em></a></td><td><code>NCBITaxon:2870769</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2870770"><em>Escherichia sp. NIC18-1</em></a></td><td><code>NCBITaxon:2870770</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2870771"><em>Escherichia sp. NIC20</em></a></td><td><code>NCBITaxon:2870771</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2870773"><em>Escherichia sp. NIC24-2-1</em></a></td><td><code>NCBITaxon:2870773</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2870774"><em>Escherichia sp. NIC26-1</em></a></td><td><code>NCBITaxon:2870774</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2870775"><em>Escherichia sp. NIC32-2</em></a></td><td><code>NCBITaxon:2870775</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2870776"><em>Escherichia sp. NIC33</em></a></td><td><code>NCBITaxon:2870776</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2870765"><em>Escherichia sp. NIC3-2</em></a></td><td><code>NCBITaxon:2870765</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2870766"><em>Escherichia sp. NIC4-1</em></a></td><td><code>NCBITaxon:2870766</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2870767"><em>Escherichia sp. NIC5-1</em></a></td><td><code>NCBITaxon:2870767</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1348501"><em>Escherichia sp. NII</em></a></td><td><code>NCBITaxon:1348501</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:295453"><em>Escherichia sp. Nj-91</em></a></td><td><code>NCBITaxon:295453</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:706598"><em>Escherichia sp. NMU-ST2</em></a></td><td><code>NCBITaxon:706598</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1697943"><em>Escherichia sp. NSESC01</em></a></td><td><code>NCBITaxon:1697943</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:2857664"><em>Escherichia sp. NSt_1</em></a></td><td><code>NCBITaxon:2857664</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2870763"><em>Escherichia sp. NT35</em></a></td><td><code>NCBITaxon:2870763</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2870764"><em>Escherichia sp. NT45</em></a></td><td><code>NCBITaxon:2870764</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>36408</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2870763"><em>Escherichia sp. NT35</em></a></td><td><code>NCBITaxon:2870763</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2870764"><em>Escherichia sp. NT45</em></a></td><td><code>NCBITaxon:2870764</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:3070705"><em>Escherichia sp. OC11</em></a></td><td><code>NCBITaxon:3070705</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1123787"><em>Escherichia sp. OES18</em></a></td><td><code>NCBITaxon:1123787</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:447540"><em>Escherichia sp. oral clone 3RH-30</em></a></td><td><code>NCBITaxon:447540</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -234,12 +322,15 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:3422947"><em>Escherichia sp. P118</em></a></td><td><code>NCBITaxon:3422947</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="../taxon-browser.js?v=434e253832135143"></script>
+<script defer src="../taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="../index.json.gz">Index JSON.gz</a> · <a href="../index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

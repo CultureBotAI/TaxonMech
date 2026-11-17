@@ -7,31 +7,166 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../theme-toggle.js"></script>
 <script defer src="../vendor/fflate-0.8.2.js"></script>
-<script defer src="../compressed-data.js?v=434e253832135143"></script>
+<script defer src="../compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="../index.html">TaxonMech</a>
   <nav>
     <a href="../browse.html">Browse</a>
     <a href="../type-strains.html">Type strains</a>
+    <a href="../map.html">Text map</a>
     <a href="../sources.html">Sources</a>
+    <a href="../index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../index.html">TaxonMech</a> › <span>Eukaryota</span>
+</nav>
 <h1>Eukaryota</h1>
 <p class="lede">Eukaryotic taxa attested by the sources, including taxa without BacDive strains.</p>
-<section id="taxon-browser" data-domain="EUKARYOTA" data-typed="false" data-page="18" data-size="200" data-root="../">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
-<p id="taxon-status" role="status">6243 records · page 18 of 32.</p>
+<section id="taxon-browser" class="browse-layout" data-domain="EUKARYOTA" data-typed="false" data-page="18" data-size="200" data-root="../">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="../browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA">Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA" selected>Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
+<p id="taxon-status" role="status">6331 records · page 18 of 32.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="../domain/eukaryota-17.html">Previous</a><a href="../domain/eukaryota-19.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>Eukaryota</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
+<tr><td><a href="../taxon.html?id=NCBITaxon:225353"><em>Monascus aurantiacus</em></a></td><td><code>NCBITaxon:225353</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:5098"><em>Monascus purpureus</em></a></td><td><code>NCBITaxon:5098</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:89489"><em>Monascus ruber</em></a></td><td><code>NCBITaxon:89489</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:5936"><em>Moneuplotes crassus</em></a></td><td><code>NCBITaxon:5936</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1117156"><em>Moniliella acetoabutans</em></a></td><td><code>NCBITaxon:1117156</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:64620"><em>Moniliella spathulata</em></a></td><td><code>NCBITaxon:64620</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:64615"><em>Moniliella suaveolens</em></a></td><td><code>NCBITaxon:64615</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:61194"><em>Monilinia aucupariae</em></a></td><td><code>NCBITaxon:61194</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:38448"><em>Monilinia fructicola</em></a></td><td><code>NCBITaxon:38448</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:38457"><em>Monilinia fructigena</em></a></td><td><code>NCBITaxon:38457</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:61186"><em>Monilinia laxa</em></a></td><td><code>NCBITaxon:61186</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:61207"><em>Monilinia vaccinii-corymbosi</em></a></td><td><code>NCBITaxon:61207</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:153609"><em>Moniliophthora perniciosa</em></a></td><td><code>NCBITaxon:153609</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:221103"><em>Moniliophthora roreri</em></a></td><td><code>NCBITaxon:221103</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2049356"><em>Monocercomonoides exilis</em></a></td><td><code>NCBITaxon:2049356</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:81526"><em>Monosiga ovata</em></a></td><td><code>NCBITaxon:81526</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:155416"><em>Monosporascus cannonballus</em></a></td><td><code>NCBITaxon:155416</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:155417"><em>Monosporascus ibericus</em></a></td><td><code>NCBITaxon:155417</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:271218"><em>Monosporozyma aerobia</em></a></td><td><code>NCBITaxon:271218</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:311204"><em>Monosporozyma aquatica</em></a></td><td><code>NCBITaxon:311204</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:27293"><em>Monosporozyma servazzii</em></a></td><td><code>NCBITaxon:27293</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:382647"><em>Monosporozyma siamensis</em></a></td><td><code>NCBITaxon:382647</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1089532"><em>Monosporozyma solicola</em></a></td><td><code>NCBITaxon:1089532</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:27294"><em>Monosporozyma unispora</em></a></td><td><code>NCBITaxon:27294</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1468137"><em>Monosporozyma yasuniensis</em></a></td><td><code>NCBITaxon:1468137</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1508191"><em>Monticola elongata</em></a></td><td><code>NCBITaxon:1508191</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1582323"><em>Morchella americana</em></a></td><td><code>NCBITaxon:1582323</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1582322"><em>Morchella anatolica</em></a></td><td><code>NCBITaxon:1582322</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:60347"><em>Morchella angusticeps</em></a></td><td><code>NCBITaxon:60347</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1810715"><em>Morchella arbutiphila</em></a></td><td><code>NCBITaxon:1810715</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1174671"><em>Morchella brunnea</em></a></td><td><code>NCBITaxon:1174671</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2548439"><em>Morchella conifericola</em></a></td><td><code>NCBITaxon:2548439</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1579548"><em>Morchella deliciosa</em></a></td><td><code>NCBITaxon:1579548</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1174667"><em>Morchella diminutiva</em></a></td><td><code>NCBITaxon:1174667</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1810716"><em>Morchella disparilis</em></a></td><td><code>NCBITaxon:1810716</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1582327"><em>Morchella dunalii</em></a></td><td><code>NCBITaxon:1582327</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1810709"><em>Morchella dunensis</em></a></td><td><code>NCBITaxon:1810709</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:39407"><em>Morchella esculenta</em></a></td><td><code>NCBITaxon:39407</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1582338"><em>Morchella eximia</em></a></td><td><code>NCBITaxon:1582338</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1611433"><em>Morchella fluvialis</em></a></td><td><code>NCBITaxon:1611433</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2382056"><em>Morchella hispaniolensis</em></a></td><td><code>NCBITaxon:2382056</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1174673"><em>Morchella importuna</em></a></td><td><code>NCBITaxon:1174673</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2715921"><em>Morchella kakiicolor</em></a></td><td><code>NCBITaxon:2715921</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1582341"><em>Morchella norvegiensis</em></a></td><td><code>NCBITaxon:1582341</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:2382058"><em>Morchella peruviana</em></a></td><td><code>NCBITaxon:2382058</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1174669"><em>Morchella populiphila</em></a></td><td><code>NCBITaxon:1174669</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
+<tr><td><a href="../taxon.html?id=NCBITaxon:1174674"><em>Morchella prava</em></a></td><td><code>NCBITaxon:1174674</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1579549"><em>Morchella pulchella</em></a></td><td><code>NCBITaxon:1579549</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:743780"><em>Morchella punctipes</em></a></td><td><code>NCBITaxon:743780</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:368404"><em>Morchella rufobrunnea</em></a></td><td><code>NCBITaxon:368404</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -185,61 +320,17 @@
 <tr><td><a href="../taxon.html?id=NCBITaxon:5270"><em>Mycosarcoma maydis</em></a></td><td><code>NCBITaxon:5270</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:143450"><em>Mycosphaerella arachidis</em></a></td><td><code>NCBITaxon:143450</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="../taxon.html?id=NCBITaxon:1933429"><em>Mycosphaerellaceae sp.</em></a></td><td><code>NCBITaxon:1933429</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1873265"><em>Mycosphaerelloides madeirae</em></a></td><td><code>NCBITaxon:1873265</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:85995"><em>Mycothermus thermophilus</em></a></td><td><code>NCBITaxon:85995</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:686564"><em>Mycothermus thermophilus ATCC 16453</em></a></td><td><code>NCBITaxon:686564</code></td><td>STRAIN</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:64632"><em>Mycotypha africana</em></a></td><td><code>NCBITaxon:64632</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2053761"><em>Mycotypha indica</em></a></td><td><code>NCBITaxon:2053761</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:64633"><em>Mycotypha microspora</em></a></td><td><code>NCBITaxon:64633</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:147570"><em>Myriangium duriaei</em></a></td><td><code>NCBITaxon:147570</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:87228"><em>Myriosclerotinia curreyana</em></a></td><td><code>NCBITaxon:87228</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:108355"><em>Myriosclerotinia duriaeana</em></a></td><td><code>NCBITaxon:108355</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:38443"><em>Myriosclerotinia scirpicola</em></a></td><td><code>NCBITaxon:38443</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:110576"><em>Myrothecium inundatum</em></a></td><td><code>NCBITaxon:110576</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1756106"><em>Myrothecium sp.</em></a></td><td><code>NCBITaxon:1756106</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:574789"><em>Mytilinidion resinicola</em></a></td><td><code>NCBITaxon:574789</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:54098"><em>Myxozyma geophila</em></a></td><td><code>NCBITaxon:54098</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:54099"><em>Myxozyma kluyveri</em></a></td><td><code>NCBITaxon:54099</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:54097"><em>Myxozyma lipomycoides</em></a></td><td><code>NCBITaxon:54097</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:54550"><em>Myxozyma melibiosi</em></a></td><td><code>NCBITaxon:54550</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:54102"><em>Myxozyma monticola</em></a></td><td><code>NCBITaxon:54102</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:58630"><em>Myxozyma mucilagina</em></a></td><td><code>NCBITaxon:58630</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:383838"><em>Myxozyma neglecta</em></a></td><td><code>NCBITaxon:383838</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:54103"><em>Myxozyma neotropica</em></a></td><td><code>NCBITaxon:54103</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:383839"><em>Myxozyma nipponensis</em></a></td><td><code>NCBITaxon:383839</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:383840"><em>Myxozyma sirexii</em></a></td><td><code>NCBITaxon:383840</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:54100"><em>Myxozyma udenii</em></a></td><td><code>NCBITaxon:54100</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:54101"><em>Myxozyma vanderwaltii</em></a></td><td><code>NCBITaxon:54101</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:53686"><em>Nadsonia commutata</em></a></td><td><code>NCBITaxon:53686</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:45786"><em>Nadsonia fulvescens</em></a></td><td><code>NCBITaxon:45786</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:857566"><em>Nadsonia fulvescens var. elongata DSM 6958</em></a></td><td><code>NCBITaxon:857566</code></td><td>STRAIN</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:43970"><em>Nadsonia starkeyi-henricii</em></a></td><td><code>NCBITaxon:43970</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:5763"><em>Naegleria fowleri</em></a></td><td><code>NCBITaxon:5763</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:5762"><em>Naegleria gruberi</em></a></td><td><code>NCBITaxon:5762</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:51637"><em>Naegleria lovaniensis</em></a></td><td><code>NCBITaxon:51637</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:71784"><em>Naematelia encephala</em></a></td><td><code>NCBITaxon:71784</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:100951"><em>Naganishia albida</em></a></td><td><code>NCBITaxon:100951</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:89922"><em>Naganishia friedmannii</em></a></td><td><code>NCBITaxon:89922</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:104408"><em>Naganishia liquefaciens</em></a></td><td><code>NCBITaxon:104408</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2939529"><em>Naganishia sp. PG3902-1</em></a></td><td><code>NCBITaxon:2939529</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2939530"><em>Naganishia sp. PT2105A</em></a></td><td><code>NCBITaxon:2939530</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:2939528"><em>Naganishia sp. PT2105A-2</em></a></td><td><code>NCBITaxon:2939528</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:89929"><em>Naganishia vishniacii</em></a></td><td><code>NCBITaxon:89929</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1314774"><em>Naganishia vishniacii ANT03-052</em></a></td><td><code>NCBITaxon:1314774</code></td><td>STRAIN</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:273131"><em>Nakaseomyces bracarensis</em></a></td><td><code>NCBITaxon:273131</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1279114"><em>Nakaseomyces bracarensis CBS 10154</em></a></td><td><code>NCBITaxon:1279114</code></td><td>STRAIN</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:51657"><em>Nakaseomyces delphensis</em></a></td><td><code>NCBITaxon:51657</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:5478"><em>Nakaseomyces glabratus</em></a></td><td><code>NCBITaxon:5478</code></td><td>SPECIES</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1231519"><em>Nakaseomyces glabratus CAB52-4041</em></a></td><td><code>NCBITaxon:1231519</code></td><td>STRAIN</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="../taxon.html?id=NCBITaxon:1406948"><em>Nakaseomyces glabratus CCTCC M202019</em></a></td><td><code>NCBITaxon:1406948</code></td><td>STRAIN</td><td>EUKARYOTA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="../taxon-browser.js?v=434e253832135143"></script>
+<script defer src="../taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="../index.json.gz">Index JSON.gz</a> · <a href="../index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

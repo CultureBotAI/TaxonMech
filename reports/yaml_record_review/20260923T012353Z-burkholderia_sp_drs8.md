@@ -1,0 +1,57 @@
+# YAML Record Review: Burkholderia sp. DRS8
+- Repository: TaxonMech
+- Record: data/taxa/bacteria/burkholderia_sp_drs8.yaml
+- Started UTC: 2026-09-23T01:23:53Z
+- Finished UTC: 2026-09-23T01:23:53Z
+- Verdict: pass
+
+## Target
+
+- YAML record: `data/taxa/bacteria/burkholderia_sp_drs8.yaml`
+- Identifier: `NCBITaxon:1005629`
+- Label: `Burkholderia sp. DRS8`
+- Rank: `SPECIES`
+- Parent: `NCBITaxon:2613784`
+- Registry row: `data/taxa/PATHS.tsv:1805`
+- Scope row: `curation/seed_scope.tsv:311193`
+- A pre-write `find reports/yaml_record_review ... -name '*-burkholderia_sp_drs8.md'` check found no existing report for this stem; `find` includes ignored reports.
+
+## Validation
+
+- `just validate-strict data/taxa/bacteria/burkholderia_sp_drs8.yaml data/taxa/bacteria/burkholderia_sp_drs9a.yaml data/taxa/bacteria/enterobacter_sp_drsbii_10.yaml data/taxa/bacteria/enterobacter_sp_drsbii_7.yaml` passed for this four-record batch.
+- `just validate data/taxa/bacteria/burkholderia_sp_drs8.yaml` passed.
+
+## Identity and Grounding
+
+- The YAML identifier, label, rank, parent, and genetic code agree with `data/raw/ncbitaxon_taxa.tsv:210467`.
+- The stored lineage terminates at the asserted parent `NCBITaxon:2613784` / `unclassified Burkholderia`.
+- `grounding_status: EXACT` is appropriate for the NCBI species taxon.
+
+## Evidence
+
+- `data/raw/ncbitaxon_taxa.tsv:210467` attests `NCBITaxon:1005629` as `Burkholderia sp. DRS8`, rank `SPECIES`, parent `NCBITaxon:2613784`, genetic code `11`, and NCBI snapshot `2026-09-13`.
+- Exact, gitignore-independent scans of `data/raw/madin_taxa.tsv` and `data/raw/gtdb_mappings.tsv` found no same-taxon rows for `NCBITaxon:1005629`.
+- An exact, gitignore-independent scan of `data/atb` and `data/straininfo` found no same-taxon rows for `NCBITaxon:1005629`, `Burkholderia sp. DRS8`, or `burkholderia_sp_drs8`.
+
+## Completeness
+
+- The generated NCBI identity, lineage, source attestation, and seed history are complete for the local source row.
+- The record has no GTDB mapping, synonym, xref, Madin, ATB, or StrainInfo material, matching the pinned local rows.
+
+## Findings
+
+- No findings.
+
+## Recommended Edits
+
+- None.
+
+## Follow-up Checks
+
+- Re-run `just validate data/taxa/bacteria/burkholderia_sp_drs8.yaml` if the record is regenerated from updated sources.
+
+## Additional Notes
+
+- This review used pinned local sources under `data/raw/`, `data/atb/`, and `data/straininfo/`; live upstream lookup was not used.
+- `just validate-history` was not run because this review added no `history/` curation decision.
+- `just validate-products` was not applicable because the record has no `causal_graphs`.

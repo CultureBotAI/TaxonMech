@@ -7,37 +7,125 @@
 <link rel="stylesheet" href="style.css">
 <script src="theme-toggle.js"></script>
 <script defer src="vendor/fflate-0.8.2.js"></script>
-<script defer src="compressed-data.js?v=434e253832135143"></script>
+<script defer src="compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="index.html">TaxonMech</a>
   <nav>
     <a href="browse.html">Browse</a>
     <a href="type-strains.html">Type strains</a>
+    <a href="map.html">Text map</a>
     <a href="sources.html">Sources</a>
+    <a href="index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="index.html">TaxonMech</a> › <span>All records</span>
+</nav>
 <h1>All records</h1>
-<section id="taxon-browser" data-domain="" data-typed="false" data-page="1397" data-size="200" data-root="">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
-<p id="taxon-status" role="status">625960 records · page 1397 of 3130.</p>
+<section id="taxon-browser" class="browse-layout" data-domain="" data-typed="false" data-page="1397" data-size="200" data-root="">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA">Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
+<p id="taxon-status" role="status">626048 records · page 1397 of 3131.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="browse-1396.html">Previous</a><a href="browse-1398.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>All records</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="taxon.html?id=NCBITaxon:2983594"><em>&#39;Hishimonus phycitis&#39; witches&#39;-broom phytoplasma</em></a></td><td><code>NCBITaxon:2983594</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2613962"><em>Histidinibacterium aquaticum</em></a></td><td><code>NCBITaxon:2613962</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2480588"><em>Histidinibacterium lentulum</em></a></td><td><code>NCBITaxon:2480588</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2590587"><em>Histidinibacterium sp.</em></a></td><td><code>NCBITaxon:2590587</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:731"><em>Histophilus somni</em></a></td><td><code>NCBITaxon:731</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>37</td><td>69</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:731"><em>Histophilus somni</em></a></td><td><code>NCBITaxon:731</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>37</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:205914"><em>Histophilus somni 129PT</em></a></td><td><code>NCBITaxon:205914</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:228400"><em>Histophilus somni 2336</em></a></td><td><code>NCBITaxon:228400</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>69</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:228400"><em>Histophilus somni 2336</em></a></td><td><code>NCBITaxon:228400</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:424250"><em>HMWdDNA-degrading marine bacterium 10</em></a></td><td><code>NCBITaxon:424250</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:424251"><em>HMWdDNA-degrading marine bacterium 11</em></a></td><td><code>NCBITaxon:424251</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:424252"><em>HMWdDNA-degrading marine bacterium 12</em></a></td><td><code>NCBITaxon:424252</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -107,17 +195,17 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2983763"><em>Hoeflea algicola</em></a></td><td><code>NCBITaxon:2983763</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:369795"><em>Hoeflea anabaenae</em></a></td><td><code>NCBITaxon:369795</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:274592"><em>Hoeflea marina</em></a></td><td><code>NCBITaxon:274592</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:411684"><em>Hoeflea phototrophica DFL-43</em></a></td><td><code>NCBITaxon:411684</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1922333"><em>Hoeflea prorocentri</em></a></td><td><code>NCBITaxon:1922333</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:411684"><em>Hoeflea phototrophica DFL-43</em></a></td><td><code>NCBITaxon:411684</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1922333"><em>Hoeflea prorocentri</em></a></td><td><code>NCBITaxon:1922333</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:527312"><em>Hoeflea siderophila</em></a></td><td><code>NCBITaxon:527312</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1940281"><em>Hoeflea sp.</em></a></td><td><code>NCBITaxon:1940281</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>6</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1116369"><em>Hoeflea sp. 108</em></a></td><td><code>NCBITaxon:1116369</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1940281"><em>Hoeflea sp.</em></a></td><td><code>NCBITaxon:1940281</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>22 (22 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1116369"><em>Hoeflea sp. 108</em></a></td><td><code>NCBITaxon:1116369</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1634893"><em>Hoeflea sp. A2</em></a></td><td><code>NCBITaxon:1634893</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:983792"><em>Hoeflea sp. AB205d</em></a></td><td><code>NCBITaxon:983792</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1247582"><em>Hoeflea sp. Ar-105</em></a></td><td><code>NCBITaxon:1247582</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1247583"><em>Hoeflea sp. Ar-128</em></a></td><td><code>NCBITaxon:1247583</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1247584"><em>Hoeflea sp. Ar-136</em></a></td><td><code>NCBITaxon:1247584</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3135779"><em>Hoeflea sp. AS16</em></a></td><td><code>NCBITaxon:3135779</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3135779"><em>Hoeflea sp. AS16</em></a></td><td><code>NCBITaxon:3135779</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3135780"><em>Hoeflea sp. AS60</em></a></td><td><code>NCBITaxon:3135780</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:663927"><em>Hoeflea sp. AY-2</em></a></td><td><code>NCBITaxon:663927</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1547437"><em>Hoeflea sp. BAL378</em></a></td><td><code>NCBITaxon:1547437</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
@@ -132,13 +220,13 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:3140357"><em>Hoeflea sp. CAU 1731</em></a></td><td><code>NCBITaxon:3140357</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1133630"><em>Hoeflea sp. CH14</em></a></td><td><code>NCBITaxon:1133630</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1572953"><em>Hoeflea sp. CPCC100568</em></a></td><td><code>NCBITaxon:1572953</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3066027"><em>Hoeflea sp. D1-CHI-28</em></a></td><td><code>NCBITaxon:3066027</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3066027"><em>Hoeflea sp. D1-CHI-28</em></a></td><td><code>NCBITaxon:3066027</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2986075"><em>Hoeflea sp. D3-62</em></a></td><td><code>NCBITaxon:2986075</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1337767"><em>Hoeflea sp. DG1408</em></a></td><td><code>NCBITaxon:1337767</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1337768"><em>Hoeflea sp. DG1452</em></a></td><td><code>NCBITaxon:1337768</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1337769"><em>Hoeflea sp. DG1468</em></a></td><td><code>NCBITaxon:1337769</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1337770"><em>Hoeflea sp. DG1486</em></a></td><td><code>NCBITaxon:1337770</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2038388"><em>Hoeflea sp. EC-HK425</em></a></td><td><code>NCBITaxon:2038388</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>6</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2038388"><em>Hoeflea sp. EC-HK425</em></a></td><td><code>NCBITaxon:2038388</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1648544"><em>Hoeflea sp. EK8A</em></a></td><td><code>NCBITaxon:1648544</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1282300"><em>Hoeflea sp. EM170</em></a></td><td><code>NCBITaxon:1282300</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1282301"><em>Hoeflea sp. EM181</em></a></td><td><code>NCBITaxon:1282301</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -155,7 +243,7 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:381420"><em>Hoeflea sp. KF7</em></a></td><td><code>NCBITaxon:381420</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:934164"><em>Hoeflea sp. MAR866</em></a></td><td><code>NCBITaxon:934164</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:483581"><em>Hoeflea sp. MH129</em></a></td><td><code>NCBITaxon:483581</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3388653"><em>Hoeflea sp. Naph1</em></a></td><td><code>NCBITaxon:3388653</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3388653"><em>Hoeflea sp. Naph1</em></a></td><td><code>NCBITaxon:3388653</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2962885"><em>Hoeflea sp. PM5-8</em></a></td><td><code>NCBITaxon:2962885</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1740640"><em>Hoeflea sp. S1.5</em></a></td><td><code>NCBITaxon:1740640</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1325672"><em>Hoeflea sp. SH-101</em></a></td><td><code>NCBITaxon:1325672</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -167,78 +255,81 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2983764"><em>Hoeflea ulvae</em></a></td><td><code>NCBITaxon:2983764</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3133970"><em>Hohaiivirga grylli</em></a></td><td><code>NCBITaxon:3133970</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2820480"><em>&#39;Holarrhena pubescens&#39; phytoplasma</em></a></td><td><code>NCBITaxon:2820480</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1735"><em>Holdemanella biformis</em></a></td><td><code>NCBITaxon:1735</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>75</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:518637"><em>Holdemanella biformis DSM 3989</em></a></td><td><code>NCBITaxon:518637</code></td><td>STRAIN</td><td>BACTERIA</td><td>7</td><td>1</td><td>75</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1735"><em>Holdemanella biformis</em></a></td><td><code>NCBITaxon:1735</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>6 (6 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:518637"><em>Holdemanella biformis DSM 3989</em></a></td><td><code>NCBITaxon:518637</code></td><td>STRAIN</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1339517"><em>Holdemanella biformis TSDC10.1-1.1</em></a></td><td><code>NCBITaxon:1339517</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1339518"><em>Holdemanella biformis TSDC10.1-1.2</em></a></td><td><code>NCBITaxon:1339518</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1339519"><em>Holdemanella biformis TSDC10.1-2.1</em></a></td><td><code>NCBITaxon:1339519</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1339520"><em>Holdemanella biformis TSDC10.1-3.1</em></a></td><td><code>NCBITaxon:1339520</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2764327"><em>Holdemanella hominis</em></a></td><td><code>NCBITaxon:2764327</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>49</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2652276"><em>Holdemanella porci</em></a></td><td><code>NCBITaxon:2652276</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>36</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1971762"><em>Holdemanella sp.</em></a></td><td><code>NCBITaxon:1971762</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>347</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2916964"><em>Holdemanella sp. DFI.5.21</em></a></td><td><code>NCBITaxon:2916964</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>49</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2885263"><em>Holdemanella sp. DFI.5.55</em></a></td><td><code>NCBITaxon:2885263</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>49</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2965273"><em>Holdemanella sp. MSK.7.32</em></a></td><td><code>NCBITaxon:2965273</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>85</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2764327"><em>Holdemanella hominis</em></a></td><td><code>NCBITaxon:2764327</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2652276"><em>Holdemanella porci</em></a></td><td><code>NCBITaxon:2652276</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>12 (12 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1971762"><em>Holdemanella sp.</em></a></td><td><code>NCBITaxon:1971762</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>10 (10 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2916964"><em>Holdemanella sp. DFI.5.21</em></a></td><td><code>NCBITaxon:2916964</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2885263"><em>Holdemanella sp. DFI.5.55</em></a></td><td><code>NCBITaxon:2885263</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2965273"><em>Holdemanella sp. MSK.7.32</em></a></td><td><code>NCBITaxon:2965273</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2911883"><em>Holdemanella sp. SCCA2</em></a></td><td><code>NCBITaxon:2911883</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:61171"><em>Holdemania filiformis</em></a></td><td><code>NCBITaxon:61171</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>15</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:545696"><em>Holdemania filiformis DSM 12042</em></a></td><td><code>NCBITaxon:545696</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>15</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1468449"><em>Holdemania massiliensis</em></a></td><td><code>NCBITaxon:1468449</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>13</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1211819"><em>Holdemania massiliensis AP2</em></a></td><td><code>NCBITaxon:1211819</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>13</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:61171"><em>Holdemania filiformis</em></a></td><td><code>NCBITaxon:61171</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:545696"><em>Holdemania filiformis DSM 12042</em></a></td><td><code>NCBITaxon:545696</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1468449"><em>Holdemania massiliensis</em></a></td><td><code>NCBITaxon:1468449</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1211819"><em>Holdemania massiliensis AP2</em></a></td><td><code>NCBITaxon:1211819</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2049029"><em>Holdemania sp.</em></a></td><td><code>NCBITaxon:2049029</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2787149"><em>Holdemania sp. 1001095H_141210_F2</em></a></td><td><code>NCBITaxon:2787149</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>9</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2787120"><em>Holdemania sp. 1001302B_160321_E10</em></a></td><td><code>NCBITaxon:2787120</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>9</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2787149"><em>Holdemania sp. 1001095H_141210_F2</em></a></td><td><code>NCBITaxon:2787149</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2787120"><em>Holdemania sp. 1001302B_160321_E10</em></a></td><td><code>NCBITaxon:2787120</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:305955"><em>Holdemania sp. cp07.24</em></a></td><td><code>NCBITaxon:305955</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3839272"><em>Holdemania sp. HF3_288</em></a></td><td><code>NCBITaxon:3839272</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1852366"><em>Holdemania sp. Marseille-P2844</em></a></td><td><code>NCBITaxon:1852366</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>9</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1852366"><em>Holdemania sp. Marseille-P2844</em></a></td><td><code>NCBITaxon:1852366</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2859878"><em>Holdemania sp. P15wH7</em></a></td><td><code>NCBITaxon:2859878</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2859879"><em>Holdemania sp. P23wH1</em></a></td><td><code>NCBITaxon:2859879</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3454831"><em>Hollandina grandis (SeqCode)</em></a></td><td><code>NCBITaxon:3454831</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3681393"><em>Hollandinoides gharagozlouae (SeqCode)</em></a></td><td><code>NCBITaxon:3681393</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:35839"><em>Holophaga foetida</em></a></td><td><code>NCBITaxon:35839</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:903818"><em>Holophaga foetida DSM 6591</em></a></td><td><code>NCBITaxon:903818</code></td><td>STRAIN</td><td>BACTERIA</td><td>7</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2582906"><em>Holophaga sp.</em></a></td><td><code>NCBITaxon:2582906</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>6</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2582906"><em>Holophaga sp.</em></a></td><td><code>NCBITaxon:2582906</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>8 (8 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:163522"><em>Holophaga sp. oral clone CA002</em></a></td><td><code>NCBITaxon:163522</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1391502"><em>Holophaga sp. WY42</em></a></td><td><code>NCBITaxon:1391502</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2052165"><em>Holophagaceae bacterium</em></a></td><td><code>NCBITaxon:2052165</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>45</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2052165"><em>Holophagaceae bacterium</em></a></td><td><code>NCBITaxon:2052165</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>45 (45 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1951929"><em>Holophagaceae bacterium UBA1801</em></a></td><td><code>NCBITaxon:1951929</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1951930"><em>Holophagaceae bacterium UBA692</em></a></td><td><code>NCBITaxon:1951930</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1951931"><em>Holophagaceae bacterium UBA706</em></a></td><td><code>NCBITaxon:1951931</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2073116"><em>Holophagae bacterium</em></a></td><td><code>NCBITaxon:2073116</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2478486"><em>Holophagales bacterium</em></a></td><td><code>NCBITaxon:2478486</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>45</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2073116"><em>Holophagae bacterium</em></a></td><td><code>NCBITaxon:2073116</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>10 (10 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2478486"><em>Holophagales bacterium</em></a></td><td><code>NCBITaxon:2478486</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>21 (21 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1775602"><em>Holophagales bacterium DG1868</em></a></td><td><code>NCBITaxon:1775602</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1951135"><em>Holophagales bacterium UBA2201</em></a></td><td><code>NCBITaxon:1951135</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1951136"><em>Holophagales bacterium UBA4812</em></a></td><td><code>NCBITaxon:1951136</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1951135"><em>Holophagales bacterium UBA2201</em></a></td><td><code>NCBITaxon:1951135</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1951136"><em>Holophagales bacterium UBA4812</em></a></td><td><code>NCBITaxon:1951136</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1951137"><em>Holophagales bacterium UBA5066</em></a></td><td><code>NCBITaxon:1951137</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1951138"><em>Holophagales bacterium UBA5607</em></a></td><td><code>NCBITaxon:1951138</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1951139"><em>Holophagales bacterium UBA5704</em></a></td><td><code>NCBITaxon:1951139</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1951138"><em>Holophagales bacterium UBA5607</em></a></td><td><code>NCBITaxon:1951138</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1951139"><em>Holophagales bacterium UBA5704</em></a></td><td><code>NCBITaxon:1951139</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1276921"><em>Holospora acuminata</em></a></td><td><code>NCBITaxon:1276921</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1904031"><em>Holospora caryophila</em></a></td><td><code>NCBITaxon:1904031</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1082868"><em>Holospora curviuscula</em></a></td><td><code>NCBITaxon:1082868</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:431043"><em>Holospora elegans</em></a></td><td><code>NCBITaxon:431043</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1427503"><em>Holospora elegans E1</em></a></td><td><code>NCBITaxon:1427503</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1427503"><em>Holospora elegans E1</em></a></td><td><code>NCBITaxon:1427503</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:49893"><em>Holospora obtusa</em></a></td><td><code>NCBITaxon:49893</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1399147"><em>Holospora obtusa F1</em></a></td><td><code>NCBITaxon:1399147</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2989698"><em>Holospora recta</em></a></td><td><code>NCBITaxon:2989698</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3100600"><em>Holospora sp.</em></a></td><td><code>NCBITaxon:3100600</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1169117"><em>Holospora undulata</em></a></td><td><code>NCBITaxon:1169117</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1321371"><em>Holospora undulata HU1</em></a></td><td><code>NCBITaxon:1321371</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2760808"><em>Holosporaceae bacterium</em></a></td><td><code>NCBITaxon:2760808</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>6</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1321371"><em>Holospora undulata HU1</em></a></td><td><code>NCBITaxon:1321371</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2760808"><em>Holosporaceae bacterium</em></a></td><td><code>NCBITaxon:2760808</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>28 (28 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:863267"><em>Holosporaceae bacterium enrichment culture clone Lt2-D7</em></a></td><td><code>NCBITaxon:863267</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2759495"><em>Holosporaceae bacterium &#39;Namur&#39;</em></a></td><td><code>NCBITaxon:2759495</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1137454"><em>Holosporaceae bacterium SA051285MRS</em></a></td><td><code>NCBITaxon:1137454</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:857733"><em>Holosporaceae bacterium Serialkilleuse_9403403</em></a></td><td><code>NCBITaxon:857733</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1951932"><em>Holosporaceae bacterium UBA3830</em></a></td><td><code>NCBITaxon:1951932</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1951932"><em>Holosporaceae bacterium UBA3830</em></a></td><td><code>NCBITaxon:1951932</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1951933"><em>Holosporaceae bacterium UBA5542</em></a></td><td><code>NCBITaxon:1951933</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1951934"><em>Holosporaceae bacterium UBA7879</em></a></td><td><code>NCBITaxon:1951934</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2053559"><em>Holosporales bacterium</em></a></td><td><code>NCBITaxon:2053559</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>15</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1951934"><em>Holosporaceae bacterium UBA7879</em></a></td><td><code>NCBITaxon:1951934</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2053559"><em>Holosporales bacterium</em></a></td><td><code>NCBITaxon:2053559</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>53 (53 pooled)</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="taxon-browser.js?v=434e253832135143"></script>
+<script defer src="taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="index.json.gz">Index JSON.gz</a> · <a href="index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

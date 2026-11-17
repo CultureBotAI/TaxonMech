@@ -7,90 +7,178 @@
 <link rel="stylesheet" href="style.css">
 <script src="theme-toggle.js"></script>
 <script defer src="vendor/fflate-0.8.2.js"></script>
-<script defer src="compressed-data.js?v=434e253832135143"></script>
+<script defer src="compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="index.html">TaxonMech</a>
   <nav>
     <a href="browse.html">Browse</a>
     <a href="type-strains.html">Type strains</a>
+    <a href="map.html">Text map</a>
     <a href="sources.html">Sources</a>
+    <a href="index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="index.html">TaxonMech</a> › <span>All records</span>
+</nav>
 <h1>All records</h1>
-<section id="taxon-browser" data-domain="" data-typed="false" data-page="2578" data-size="200" data-root="">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
-<p id="taxon-status" role="status">625960 records · page 2578 of 3130.</p>
+<section id="taxon-browser" class="browse-layout" data-domain="" data-typed="false" data-page="2578" data-size="200" data-root="">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA">Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
+<p id="taxon-status" role="status">626048 records · page 2578 of 3131.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="browse-2577.html">Previous</a><a href="browse-2579.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>All records</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
-<tr><td><a href="taxon.html?id=NCBITaxon:3111513"><em>Stenotrophomonas maltophilia group sp. CASM10</em></a></td><td><code>NCBITaxon:3111513</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>184</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3111514"><em>Stenotrophomonas maltophilia group sp. CASM26</em></a></td><td><code>NCBITaxon:3111514</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>184</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3111515"><em>Stenotrophomonas maltophilia group sp. CASM55</em></a></td><td><code>NCBITaxon:3111515</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>184</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3111516"><em>Stenotrophomonas maltophilia group sp. CASM56</em></a></td><td><code>NCBITaxon:3111516</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>184</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3111517"><em>Stenotrophomonas maltophilia group sp. CASM7</em></a></td><td><code>NCBITaxon:3111517</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>184</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3111513"><em>Stenotrophomonas maltophilia group sp. CASM10</em></a></td><td><code>NCBITaxon:3111513</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3111514"><em>Stenotrophomonas maltophilia group sp. CASM26</em></a></td><td><code>NCBITaxon:3111514</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3111515"><em>Stenotrophomonas maltophilia group sp. CASM55</em></a></td><td><code>NCBITaxon:3111515</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3111516"><em>Stenotrophomonas maltophilia group sp. CASM56</em></a></td><td><code>NCBITaxon:3111516</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3111517"><em>Stenotrophomonas maltophilia group sp. CASM7</em></a></td><td><code>NCBITaxon:3111517</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3458630"><em>Stenotrophomonas maltophilia group sp. LNF247</em></a></td><td><code>NCBITaxon:3458630</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3469383"><em>Stenotrophomonas maltophilia group sp. LNF259</em></a></td><td><code>NCBITaxon:3469383</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3458629"><em>Stenotrophomonas maltophilia group sp. LNF336</em></a></td><td><code>NCBITaxon:3458629</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3061099"><em>Stenotrophomonas maltophilia group sp. msm1</em></a></td><td><code>NCBITaxon:3061099</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>58</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3061100"><em>Stenotrophomonas maltophilia group sp. msm4</em></a></td><td><code>NCBITaxon:3061100</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>184</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3061099"><em>Stenotrophomonas maltophilia group sp. msm1</em></a></td><td><code>NCBITaxon:3061099</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3061100"><em>Stenotrophomonas maltophilia group sp. msm4</em></a></td><td><code>NCBITaxon:3061100</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3456024"><em>Stenotrophomonas maltophilia group sp. P373</em></a></td><td><code>NCBITaxon:3456024</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3071467"><em>Stenotrophomonas maltophilia group sp. RNC7</em></a></td><td><code>NCBITaxon:3071467</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>184</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3454438"><em>Stenotrophomonas maltophilia group sp. RY12688</em></a></td><td><code>NCBITaxon:3454438</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>184</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3071467"><em>Stenotrophomonas maltophilia group sp. RNC7</em></a></td><td><code>NCBITaxon:3071467</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3454438"><em>Stenotrophomonas maltophilia group sp. RY12688</em></a></td><td><code>NCBITaxon:3454438</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3706131"><em>Stenotrophomonas maltophilia group sp. SKK55</em></a></td><td><code>NCBITaxon:3706131</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3377165"><em>Stenotrophomonas maltophilia group sp. Smal11</em></a></td><td><code>NCBITaxon:3377165</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>39</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3050414"><em>Stenotrophomonas maltophilia group sp. Smal12</em></a></td><td><code>NCBITaxon:3050414</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>184</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3377166"><em>Stenotrophomonas maltophilia group sp. Smal13</em></a></td><td><code>NCBITaxon:3377166</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>90</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3377167"><em>Stenotrophomonas maltophilia group sp. Smal17</em></a></td><td><code>NCBITaxon:3377167</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>33</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3377164"><em>Stenotrophomonas maltophilia group sp. Smal32</em></a></td><td><code>NCBITaxon:3377164</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>33</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3377163"><em>Stenotrophomonas maltophilia group sp. Smal35</em></a></td><td><code>NCBITaxon:3377163</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>33</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3377168"><em>Stenotrophomonas maltophilia group sp. Smal41</em></a></td><td><code>NCBITaxon:3377168</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>33</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3377165"><em>Stenotrophomonas maltophilia group sp. Smal11</em></a></td><td><code>NCBITaxon:3377165</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3050414"><em>Stenotrophomonas maltophilia group sp. Smal12</em></a></td><td><code>NCBITaxon:3050414</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3377166"><em>Stenotrophomonas maltophilia group sp. Smal13</em></a></td><td><code>NCBITaxon:3377166</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3377167"><em>Stenotrophomonas maltophilia group sp. Smal17</em></a></td><td><code>NCBITaxon:3377167</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3377164"><em>Stenotrophomonas maltophilia group sp. Smal32</em></a></td><td><code>NCBITaxon:3377164</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3377163"><em>Stenotrophomonas maltophilia group sp. Smal35</em></a></td><td><code>NCBITaxon:3377163</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3377168"><em>Stenotrophomonas maltophilia group sp. Smal41</em></a></td><td><code>NCBITaxon:3377168</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3459469"><em>Stenotrophomonas maltophilia group sp. vghtpe118</em></a></td><td><code>NCBITaxon:3459469</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:868597"><em>Stenotrophomonas maltophilia JV3</em></a></td><td><code>NCBITaxon:868597</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>13</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:522373"><em>Stenotrophomonas maltophilia K279a</em></a></td><td><code>NCBITaxon:522373</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>588</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1451188"><em>Stenotrophomonas maltophilia M30</em></a></td><td><code>NCBITaxon:1451188</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>144</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1333853"><em>Stenotrophomonas maltophilia MF89</em></a></td><td><code>NCBITaxon:1333853</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>58</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1449982"><em>Stenotrophomonas maltophilia MTCC 434</em></a></td><td><code>NCBITaxon:1449982</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>588</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1220593"><em>Stenotrophomonas maltophilia NBRC 14161</em></a></td><td><code>NCBITaxon:1220593</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>588</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:868597"><em>Stenotrophomonas maltophilia JV3</em></a></td><td><code>NCBITaxon:868597</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:522373"><em>Stenotrophomonas maltophilia K279a</em></a></td><td><code>NCBITaxon:522373</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1451188"><em>Stenotrophomonas maltophilia M30</em></a></td><td><code>NCBITaxon:1451188</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1333853"><em>Stenotrophomonas maltophilia MF89</em></a></td><td><code>NCBITaxon:1333853</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1449982"><em>Stenotrophomonas maltophilia MTCC 434</em></a></td><td><code>NCBITaxon:1449982</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1220593"><em>Stenotrophomonas maltophilia NBRC 14161</em></a></td><td><code>NCBITaxon:1220593</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1255695"><em>Stenotrophomonas maltophilia Pi1</em></a></td><td><code>NCBITaxon:1255695</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1118235"><em>Stenotrophomonas maltophilia PML168</em></a></td><td><code>NCBITaxon:1118235</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>38</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:391008"><em>Stenotrophomonas maltophilia R551-3</em></a></td><td><code>NCBITaxon:391008</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>9</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1118157"><em>Stenotrophomonas maltophilia RA8</em></a></td><td><code>NCBITaxon:1118157</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>9</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1118235"><em>Stenotrophomonas maltophilia PML168</em></a></td><td><code>NCBITaxon:1118235</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:391008"><em>Stenotrophomonas maltophilia R551-3</em></a></td><td><code>NCBITaxon:391008</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1118157"><em>Stenotrophomonas maltophilia RA8</em></a></td><td><code>NCBITaxon:1118157</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1095923"><em>Stenotrophomonas maltophilia RR-10</em></a></td><td><code>NCBITaxon:1095923</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1210005"><em>Stenotrophomonas maltophilia S028</em></a></td><td><code>NCBITaxon:1210005</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>16</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1210005"><em>Stenotrophomonas maltophilia S028</em></a></td><td><code>NCBITaxon:1210005</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1407502"><em>Stenotrophomonas maltophilia SeITE02</em></a></td><td><code>NCBITaxon:1407502</code></td><td>STRAIN</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1118156"><em>Stenotrophomonas maltophilia SKK35</em></a></td><td><code>NCBITaxon:1118156</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1148759"><em>Stenotrophomonas maltophilia SM28</em></a></td><td><code>NCBITaxon:1148759</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1347912"><em>Stenotrophomonas maltophilia stmalt0377</em></a></td><td><code>NCBITaxon:1347912</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>588</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1347913"><em>Stenotrophomonas maltophilia stmalt0435</em></a></td><td><code>NCBITaxon:1347913</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>588</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1427375"><em>Stenotrophomonas maltophilia WJ66</em></a></td><td><code>NCBITaxon:1427375</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>588</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1347912"><em>Stenotrophomonas maltophilia stmalt0377</em></a></td><td><code>NCBITaxon:1347912</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1347913"><em>Stenotrophomonas maltophilia stmalt0435</em></a></td><td><code>NCBITaxon:1347913</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1427375"><em>Stenotrophomonas maltophilia WJ66</em></a></td><td><code>NCBITaxon:1427375</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:128777"><em>Stenotrophomonas mexicana</em></a></td><td><code>NCBITaxon:128777</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3077847"><em>Stenotrophomonas mexicanensis</em></a></td><td><code>NCBITaxon:3077847</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>90</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3077847"><em>Stenotrophomonas mexicanensis</em></a></td><td><code>NCBITaxon:3077847</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3475972"><em>Stenotrophomonas mexicanensis subsp. fluminensis</em></a></td><td><code>NCBITaxon:3475972</code></td><td>SUBSPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2871096"><em>Stenotrophomonas mori</em></a></td><td><code>NCBITaxon:2871096</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2963283"><em>Stenotrophomonas muris</em></a></td><td><code>NCBITaxon:2963283</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>144</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2656746"><em>Stenotrophomonas nematodicola</em></a></td><td><code>NCBITaxon:2656746</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>16</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:83617"><em>Stenotrophomonas nitritireducens</em></a></td><td><code>NCBITaxon:83617</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2963283"><em>Stenotrophomonas muris</em></a></td><td><code>NCBITaxon:2963283</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2656746"><em>Stenotrophomonas nematodicola</em></a></td><td><code>NCBITaxon:2656746</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:83617"><em>Stenotrophomonas nitritireducens</em></a></td><td><code>NCBITaxon:83617</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>2</td><td>3 (3 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3003271"><em>Stenotrophomonas oahuensis</em></a></td><td><code>NCBITaxon:3003271</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2282124"><em>Stenotrophomonas oleivorans</em></a></td><td><code>NCBITaxon:2282124</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>90</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:676599"><em>Stenotrophomonas panacihumi</em></a></td><td><code>NCBITaxon:676599</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:487698"><em>Stenotrophomonas pavanii</em></a></td><td><code>NCBITaxon:487698</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>97</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2282124"><em>Stenotrophomonas oleivorans</em></a></td><td><code>NCBITaxon:2282124</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:676599"><em>Stenotrophomonas panacihumi</em></a></td><td><code>NCBITaxon:676599</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:487698"><em>Stenotrophomonas pavanii</em></a></td><td><code>NCBITaxon:487698</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:86184"><em>Stenotrophomonas pictorum</em></a></td><td><code>NCBITaxon:86184</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1236960"><em>Stenotrophomonas pictorum JCM 9942</em></a></td><td><code>NCBITaxon:1236960</code></td><td>STRAIN</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3055080"><em>Stenotrophomonas pigmentata</em></a></td><td><code>NCBITaxon:3055080</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1236960"><em>Stenotrophomonas pictorum JCM 9942</em></a></td><td><code>NCBITaxon:1236960</code></td><td>STRAIN</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3055080"><em>Stenotrophomonas pigmentata</em></a></td><td><code>NCBITaxon:3055080</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3064902"><em>Stenotrophomonas raiganjensis (SeqCode)</em></a></td><td><code>NCBITaxon:3064902</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:216778"><em>Stenotrophomonas rhizophila</em></a></td><td><code>NCBITaxon:216778</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>8</td><td>9</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:216778"><em>Stenotrophomonas rhizophila</em></a></td><td><code>NCBITaxon:216778</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>8</td><td>12 (12 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1255680"><em>Stenotrophomonas rhizophila PCA13</em></a></td><td><code>NCBITaxon:1255680</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2859893"><em>Stenotrophomonas riyadhensis</em></a></td><td><code>NCBITaxon:2859893</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>20</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2860290"><em>Stenotrophomonas sepilia</em></a></td><td><code>NCBITaxon:2860290</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>184</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:69392"><em>Stenotrophomonas sp.</em></a></td><td><code>NCBITaxon:69392</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>47</td><td>588</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2859893"><em>Stenotrophomonas riyadhensis</em></a></td><td><code>NCBITaxon:2859893</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2860290"><em>Stenotrophomonas sepilia</em></a></td><td><code>NCBITaxon:2860290</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:69392"><em>Stenotrophomonas sp.</em></a></td><td><code>NCBITaxon:69392</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>47</td><td>66 (66 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3712602"><em>Stenotrophomonas sp. 002192255</em></a></td><td><code>NCBITaxon:3712602</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3879611"><em>Stenotrophomonas sp. 003028475</em></a></td><td><code>NCBITaxon:3879611</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3232680"><em>Stenotrophomonas sp. 01L37</em></a></td><td><code>NCBITaxon:3232680</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -233,12 +321,15 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1273860"><em>Stenotrophomonas sp. 110602_136_C_C7</em></a></td><td><code>NCBITaxon:1273860</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="taxon-browser.js?v=434e253832135143"></script>
+<script defer src="taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="index.json.gz">Index JSON.gz</a> · <a href="index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

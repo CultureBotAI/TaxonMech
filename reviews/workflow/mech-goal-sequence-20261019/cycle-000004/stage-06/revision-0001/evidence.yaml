@@ -1,0 +1,94 @@
+schema_version: '1.0.0'
+repository_key: taxonmech
+github_repository: CultureBotAI/TaxonMech
+run_id: mech-goal-sequence-20261019
+cycle: 4
+stage: 6
+revision: 1
+outcome: completed
+source_revision: 11bf38c5f683ad2b21039b41771e64f35930c81c
+scope_frozen_at: '2026-10-31T14:45:23Z'
+summary: "Frozen INFRA_TASKS.md at supervisor-pinned cutoff 2026-10-31T14:45:23Z (sha256 8521a0f783afd2fc432ed972b2399c72acef2187a9cf615e303f28b9f0a12714), grouped repository-local causal-graph and UniProtKB validation requirements into GitHub Issue #189 (under umbrella issue #78), extended validate_causal_graph_structure() and validate_causal_graph_proteins() in src/taxonmech/seed.py to enforce CausalNodeTypeEnum membership (CAUSAL_NODE_TYPES), isolation of all 9 protein-only slots (PROTEIN_ONLY_NODE_SLOTS) exclusively to GENE_OR_PROTEIN nodes, CURIE_PATTERN and EDGE_ID_PATTERN syntax, NCBITaxon: grounding and ncbitaxon_taxa.tsv vertical lineage consistency on TAXON nodes, duplicate xrefs/parallel-edge/evidence-reference rejection, and EVIDENCE_REFERENCE_PATTERN on edge evidence across all 15 maintained overlays (161 edges, 51 GENE_OR_PROTEIN nodes), extended load_uniprot_proteins() to enforce required descriptive metadata (entry_name, protein_name, organism_label, release_version), gene_symbol or locus_tag presence, and EC_NUMBER_PATTERN syntax/uniqueness across all 23 pinned UniProtKB rows in curation/uniprot_proteins.tsv, updated curation/causal_graphs/README.md and tests/test_causal_graph_overlays.py, updated INFRA_TASKS.md dispositions, and carried forward all four tasks (taxonmech-infra-0001..0004) as deferred to Cycle 5 matching open GitHub umbrella issue #78 and open issue #8 pending corpus-wide raw trait extraction and bulk re-seeding."
+previous_evidence:
+  path: reviews/workflow/mech-goal-sequence-20261019/cycle-000004/stage-05/revision-0001/evidence.yaml
+  sha256: 152b44b038340f5b98f2bc9f7648e7d90ab9877fcd586fe65d9f3663ab3d8654
+artifacts:
+- path: reviews/workflow/mech-goal-sequence-20261019/cycle-000004/stage-06/revision-0001/infra_snapshot.md
+  kind: infra_snapshot
+  sha256: 8521a0f783afd2fc432ed972b2399c72acef2187a9cf615e303f28b9f0a12714
+- path: reviews/workflow/mech-goal-sequence-20261019/cycle-000004/stage-06/revision-0001/implementation_plan.md
+  kind: implementation_plan
+  sha256: 3274de7d9252778e646fc7ef53f77b59bb573947e382cfecb0d0ce5adeccba1b
+- path: reviews/workflow/mech-goal-sequence-20261019/cycle-000004/stage-06/revision-0001/validation.md
+  kind: validation
+  sha256: 37fb4511f77b483f2e74eb7836da227b9251d0cfccb8459d1a460ab936c7a7d3
+findings:
+- finding_id: gtdb-closematch-exact-promotion
+  status: deferred
+  issue_url: https://github.com/CultureBotAI/TaxonMech/issues/124
+  carried_from: gtdb-closematch-exact-promotion
+  summary: "Across docs/structured-review-inventory/part-00.tsv..part-13.tsv, 95,766 records carry needs_curation because src/taxonmech/seed.py promotes skos:closeMatch GTDB species-cluster mappings to EXACT_SYNONYM and top-level xrefs without a 1:1 taxon-identity bridge (#124, #63)."
+  disposition: "Carried forward to Cycle 5 under #124 and #63 pending a dedicated full-corpus 626,048-record YAML and pages/taxon-details/*.json.gz regeneration pass."
+- finding_id: gtdb-polyphyly-suffix-synonym-mangling
+  status: deferred
+  issue_url: https://github.com/CultureBotAI/TaxonMech/issues/65
+  carried_from: gtdb-polyphyly-suffix-synonym-mangling
+  summary: "src/taxonmech/seed.py replaces all underscores in GTDB labels with spaces, mangling 15,704 polyphyly-suffixed GTDB cluster names into fake trinomials published as EXACT_SYNONYM (#65)."
+  disposition: "Carried forward to Cycle 5 under #65 pending a dedicated full-corpus YAML and page-shard regeneration pass."
+- finding_id: gtdb-pooled-broadmatch-attestation-and-note
+  status: deferred
+  issue_url: https://github.com/CultureBotAI/TaxonMech/issues/118
+  carried_from: gtdb-pooled-broadmatch-attestation-and-note
+  summary: "On 6,335 pooled-only GTDB records, src/taxonmech/seed.py emits the largest pooled species cluster's genome total as the taxon's GTDB GENOME attestation (#118), and across 8,587 pooled GTDB records (209,540 rows) emits a note stating the reverse of kg-microbe's broadMatch direction (#119)."
+  disposition: "Carried forward to Cycle 5 under #118 and #119 pending a dedicated corpus-regeneration batch."
+- finding_id: curation-history-stale-scope-strain-count
+  status: deferred
+  issue_url: https://github.com/CultureBotAI/TaxonMech/issues/69
+  carried_from: curation-history-stale-scope-strain-count
+  summary: "SEEDED_FROM_SOURCES curation_history in src/taxonmech/seed.py embeds the static strain count from curation/seed_scope.tsv's reason column instead of the subtree-aggregated strain_count (#69)."
+  disposition: "Carried forward to Cycle 5 under #69 pending a dedicated full-corpus YAML and page-shard regeneration pass."
+- finding_id: upstream-edge-multiplicity-and-subtree-count-scope
+  status: deferred
+  issue_url: https://github.com/CultureBotAI/TaxonMech/issues/8
+  carried_from: upstream-edge-multiplicity-and-subtree-count-scope
+  summary: "Documented pinned kg-microbe@30405b70ef762aa46c08278b2b3e06bffb0b34cd edge-table SHA-256 digests and direct-taxid vs BacDive-subtree attestation contract in docs/HARMONIZATION.md; 27,118 pass_with_limitations and 30 blocked records await corpus-wide source_attestations[].notes regeneration (#8; INFRA_TASKS.md taxonmech-infra-0004)."
+  disposition: "Carried forward to Cycle 5 via INFRA_TASKS.md taxonmech-infra-0004 and #8 pending a dedicated 626,048-record YAML and pages/ regeneration pass."
+- finding_id: mechanism-and-protein-representation-prerequisites
+  status: deferred
+  issue_url: https://github.com/CultureBotAI/TaxonMech/issues/78
+  carried_from: mechanism-and-protein-representation-prerequisites
+  summary: "Enforced CausalNodeTypeEnum membership, protein-only slot isolation, CURIE/edge_id/evidence-reference syntax, duplicate xref/evidence/parallel-edge rejection, TAXON node lineage consistency, and UniProtKB descriptive metadata + EC_NUMBER_PATTERN validation in src/taxonmech/seed.py (#189) across all 15 maintained overlays (161 edges, 51 GENE_OR_PROTEIN nodes, 23 pinned UniProtKB accessions in curation/uniprot_proteins.tsv); full corpus causal-graph population across the remaining 626,033 records awaits upstream kg-microbe trait-edge extraction (taxonmech-infra-0002) and bulk data/raw/ UniProt Reference Proteomes capture (taxonmech-infra-0003; #78)."
+  disposition: "Carried forward to Cycle 5 via INFRA_TASKS.md (taxonmech-infra-0001, taxonmech-infra-0002, taxonmech-infra-0003) and #78."
+carry_forward_ids:
+- gtdb-closematch-exact-promotion
+- gtdb-polyphyly-suffix-synonym-mangling
+- gtdb-pooled-broadmatch-attestation-and-note
+- curation-history-stale-scope-strain-count
+- upstream-edge-multiplicity-and-subtree-count-scope
+- mechanism-and-protein-representation-prerequisites
+groups: []
+infra_tasks:
+- task_id: taxonmech-infra-0001
+  summary: "Implement maintained curation/causal_graphs/ overlay input, validated seeder merge in src/taxonmech/seed.py, seeder-owned verification in scripts/verify_corpus.py, and CausalNode.grounding prefix coverage (UniProtKB, EC, METPO/OMP) in conf/id_label_targets.yaml"
+  status: deferred
+  issue_url: https://github.com/CultureBotAI/TaxonMech/issues/78
+  disposition: "Deferred to Cycle 5 under open umbrella issue #78 after landing repository-local pipeline in Cycle 1 Stage 6 (PR #152), seeding 10 maintained overlays in Cycle 2 Stage 2 (PR #155), expanding to 15 maintained overlays in Cycle 2 Stage 3 (PR #156), wiring load_uniprot_proteins() and validate_causal_graph_proteins() into load_causal_graphs() and load_inventory() in Cycle 2 Stage 6 (PR #160), expanding the 15 overlays from 83 to 88 evidence-backed edges in Cycle 3 Stage 2 (PR #162), to 110 evidence-backed edges and 38 GENE_OR_PROTEIN nodes across 17 live-verified UniProtKB accessions in Cycle 3 Stage 3 (PR #163), adding validate_causal_graph_structure() (node_id/edge_id uniqueness, edge endpoint referential integrity, non-self-loop edges, and required evidence references) plus scripts/check_provenance.py integration in Cycle 3 Stage 6 (PR #168), enriching the 15 overlays from 110 to 127 evidence-backed edges with direct enzyme/sensor-kinase-to-process RO:0002418 causal edges in Cycle 4 Stage 2 (PR #181), expanding the 15 overlays to 161 evidence-backed edges and 51 GENE_OR_PROTEIN nodes across 23 live-verified UniProtKB accessions in Cycle 4 Stage 3 (PR #185), and enforcing CausalNodeTypeEnum membership, protein-only slot isolation, CURIE/edge_id/evidence-reference syntax, duplicate xref/evidence/parallel-edge rejection, and TAXON node lineage consistency in Cycle 4 Stage 6 (#189); umbrella issue #78 remains open pending companion task taxonmech-infra-0002 for corpus-wide raw trait extraction and bulk overlay expansion"
+  resolution_evidence: []
+- task_id: taxonmech-infra-0002
+  summary: "Extend src/taxonmech/extract.py to preserve granular per-taxon trait, substrate, habitat, and growth-medium assertions (madin_etal, bactotraits, mediadive) with predicate, ontology object CURIE, and literature/source provenance"
+  status: deferred
+  issue_url: https://github.com/CultureBotAI/TaxonMech/issues/78
+  disposition: "Deferred to Cycle 5 under open umbrella issue #78 after partial implementation in Cycle 1 Stage 6 (PR #152): implemented and unit-tested extract_taxon_trait_edges() and TRAIT_EDGE_FIELDS in src/taxonmech/extract.py; full data/raw/taxon_trait_edges.tsv extraction across 38,357 trait/medium-attested records requires an upstream local kg-microbe checkout re-extraction"
+  resolution_evidence: []
+- task_id: taxonmech-infra-0003
+  summary: "Add a release-pinned UniProtKB / UniProt Reference Proteomes raw source snapshot in data/raw/, declare UniProtKB and EC prefixes in src/taxonmech/schema/taxonmech.yaml and conf/id_label_targets.yaml, and add structured GENE_OR_PROTEIN organism/strain/proteome/locus/checksum scope slots and accession-to-taxon validation"
+  status: deferred
+  issue_url: https://github.com/CultureBotAI/TaxonMech/issues/78
+  disposition: "Deferred to Cycle 5 under open umbrella issue #78 after schema/prefix implementation in Cycle 1 Stage 6 (PR #152), live-verified UniProtKB curation in Cycle 2 Stage 3 (PR #156), offline catalog + lineage validator implementation in Cycle 2 Stage 6 (PR #160), Cycle 3 Stage 3 expansion of release-pinned curation/uniprot_proteins.tsv (UniProt release 2026_02) from 13 to 17 live-verified UniProtKB accessions across 38 GENE_OR_PROTEIN nodes in 15 maintained overlays (PR #163), Cycle 3 Stage 6 registration of uniprot_proteins in conf/sources.yaml plus GENE_OR_PROTEIN strain_id format, BacDive strain inventory membership, and record/organism lineage-consistency validation in validate_causal_graph_proteins() (PR #168), Cycle 4 Stage 3 expansion of curation/uniprot_proteins.tsv from 17 to 23 live-verified UniProtKB accessions (21 Swiss-Prot, 2 TrEMBL) across 51 GENE_OR_PROTEIN nodes (49 with reference proteome_id, 2 without on C. deneoformans B-3501A) in 15 maintained overlays (PR #185), and Cycle 4 Stage 6 enforcement of required descriptive metadata (entry_name, protein_name, organism_label, release_version), gene_symbol/locus_tag presence, and EC_NUMBER_PATTERN syntax/uniqueness on curation/uniprot_proteins.tsv and GENE_OR_PROTEIN xrefs (#189); full corpus-wide data/raw/ UniProt Reference Proteomes bulk snapshot remains deferred under #78"
+  resolution_evidence: []
+- task_id: taxonmech-infra-0004
+  summary: "Pin reproducible upstream kg-microbe edge-multiplicity provenance and document or align direct-only vs subtree-rolled-up source attestation counts for GOLD, MEDIADIVE, MADIN, and BACTOTRAITS across the 27,118 pass_with_limitations and 30 blocked corpus review records"
+  status: deferred
+  issue_url: https://github.com/CultureBotAI/TaxonMech/issues/8
+  disposition: "Deferred to Cycle 5 under open issue #8 after documentation alignment in Cycle 1 Stage 6 (PR #152): documented pinned kg-microbe@30405b70ef762aa46c08278b2b3e06bffb0b34cd edge-table SHA-256 digests and asymmetric direct-taxid vs BacDive-subtree attestation contract in docs/HARMONIZATION.md; corpus-wide re-seeding of source_attestations[].notes across 27,118 records deferred pending a dedicated 626,048-record YAML and pages/ regeneration pass"
+  resolution_evidence: []

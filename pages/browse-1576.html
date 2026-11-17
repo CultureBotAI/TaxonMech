@@ -7,29 +7,117 @@
 <link rel="stylesheet" href="style.css">
 <script src="theme-toggle.js"></script>
 <script defer src="vendor/fflate-0.8.2.js"></script>
-<script defer src="compressed-data.js?v=434e253832135143"></script>
+<script defer src="compressed-data.js?v=ecc71880d23e361d"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <a class="brand" href="index.html">TaxonMech</a>
   <nav>
     <a href="browse.html">Browse</a>
     <a href="type-strains.html">Type strains</a>
+    <a href="map.html">Text map</a>
     <a href="sources.html">Sources</a>
+    <a href="index.json.gz">Index JSON.gz</a>
+    <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">Schema</a>
+    <a href="https://culturebotai.github.io/mechs/">All Mech projects</a>
     <a href="https://github.com/CultureBotAI/TaxonMech">GitHub</a>
   </nav>
 </header>
 <main>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="index.html">TaxonMech</a> › <span>All records</span>
+</nav>
 <h1>All records</h1>
-<section id="taxon-browser" data-domain="" data-typed="false" data-page="1576" data-size="200" data-root="">
-<form id="taxon-search" hidden><label for="taxon-query">Search taxon name, identifier, rank or source</label>
-<input id="taxon-query" type="search"><button type="submit">Search</button></form>
-<p id="taxon-status" role="status">625960 records · page 1576 of 3130.</p>
+<section id="taxon-browser" class="browse-layout" data-domain="" data-typed="false" data-page="1576" data-size="200" data-root="">
+<aside class="facet-sidebar" aria-label="Search and filter taxa">
+  <form id="taxon-search" class="facet-form" action="browse.html" method="get" role="search">
+    <div class="facet-group">
+      <label for="taxon-query">Search taxon name, ID, rank or source</label>
+      <div class="search-input-row">
+        <input id="taxon-query" name="q" type="search" placeholder="e.g. Escherichia coli, NCBITaxon:562…">
+        <button type="submit">Search</button>
+      </div>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-domain-filter">Domain</label>
+      <select id="taxon-domain-filter">
+        <option value="">All domains</option>
+        <option value="BACTERIA">Bacteria</option>
+        <option value="ARCHAEA">Archaea</option>
+        <option value="EUKARYOTA">Eukaryota</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-rank-filter">Taxonomic rank</label>
+      <select id="taxon-rank-filter">
+        <option value="">All ranks</option>
+        <option value="SPECIES">Species</option>
+        <option value="STRAIN">Strain</option>
+        <option value="SUBSPECIES">Subspecies</option>
+        <option value="FORMA_SPECIALIS">Forma specialis</option>
+        <option value="ISOLATE">Isolate</option>
+        <option value="SEROGROUP">Serogroup</option>
+        <option value="SEROTYPE">Serotype</option>
+        <option value="NO_RANK">No rank</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-source-filter">Attesting source</label>
+      <select id="taxon-source-filter">
+        <option value="">All sources</option>
+        <option value="NCBITAXON">NCBI Taxonomy</option>
+        <option value="GTDB">GTDB</option>
+        <option value="LPSN">LPSN</option>
+        <option value="BACDIVE">BacDive</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-type-filter">Strains &amp; mappings</label>
+      <select id="taxon-type-filter">
+        <option value="">All records</option>
+        <option value="typed">With type strain</option>
+        <option value="strains">With BacDive strains (&gt; 0)</option>
+        <option value="gtdb">With GTDB mappings (&gt; 0)</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-status-filter">Status</label>
+      <select id="taxon-status-filter" name="status">
+        <option value="">All statuses</option>
+        <option value="SEEDED">Seeded</option>
+        <option value="DEPRECATED">Deprecated</option>
+      </select>
+    </div>
+    <div class="facet-group">
+      <label for="taxon-sort">Sort by</label>
+      <select id="taxon-sort" name="sort">
+        <option value="">Default (corpus order)</option>
+        <option value="label_asc">Taxon name (A–Z)</option>
+        <option value="label_desc">Taxon name (Z–A)</option>
+        <option value="id_asc">NCBI ID (numeric)</option>
+        <option value="rank_asc">Taxonomic rank</option>
+        <option value="strains_desc">BacDive strains (high–low)</option>
+        <option value="gtdb_desc">GTDB mappings (high–low)</option>
+        <option value="sources_desc">Attesting sources (high–low)</option>
+      </select>
+    </div>
+    <div class="facet-actions">
+      <button type="button" id="taxon-reset" class="btn-secondary">Reset filters</button>
+    </div>
+  </form>
+</aside>
+<div class="browse-main">
+<p id="taxon-status" role="status">626048 records · page 1576 of 3131.</p>
+<p class="meta">GTDB mappings count source species assertions, not genomes of this NCBI taxon.
+Pooled mappings retain their qualifications and source-specific genome counts on the record.</p>
 <nav id="taxon-static-pages" aria-label="Record pages">
 <a href="browse-1575.html">Previous</a><a href="browse-1577.html">Next</a></nav>
-<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev">Previous</button> <button id="taxon-next">Next</button></nav>
+<nav id="taxon-dynamic-pages" aria-label="Search result pages" hidden><button id="taxon-prev" type="button">Previous</button> <button id="taxon-next" type="button">Next</button></nav>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Taxon records">
 <table id="taxon-results">
-<thead><tr><th>Taxon</th><th>Identifier</th><th>Rank</th><th>Domain</th><th>Sources</th><th>Strains</th><th>GTDB genomes</th><th>Status</th></tr></thead>
+<caption>All records</caption>
+<thead><tr><th scope="col">Taxon</th><th scope="col">Identifier</th><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col">Sources</th><th scope="col">Strains</th><th scope="col">GTDB mappings</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td><a href="taxon.html?id=NCBITaxon:1379941"><em>Marinomonas sp. SP036</em></a></td><td><code>NCBITaxon:1379941</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1277134"><em>Marinomonas sp. SS11.3</em></a></td><td><code>NCBITaxon:1277134</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -51,11 +139,11 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:172730"><em>Marinomonas sp. TG16-05</em></a></td><td><code>NCBITaxon:172730</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:172731"><em>Marinomonas sp. TG7-01</em></a></td><td><code>NCBITaxon:172731</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3149048"><em>Marinomonas sp. THO17</em></a></td><td><code>NCBITaxon:3149048</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3121296"><em>Marinomonas sp. TI.3.20</em></a></td><td><code>NCBITaxon:3121296</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3121296"><em>Marinomonas sp. TI.3.20</em></a></td><td><code>NCBITaxon:3121296</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1316758"><em>Marinomonas sp. TS4</em></a></td><td><code>NCBITaxon:1316758</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1349703"><em>Marinomonas sp. TVS37</em></a></td><td><code>NCBITaxon:1349703</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1561203"><em>Marinomonas sp. TW1</em></a></td><td><code>NCBITaxon:1561203</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1972585"><em>Marinomonas sp. UCMA 3892</em></a></td><td><code>NCBITaxon:1972585</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1972585"><em>Marinomonas sp. UCMA 3892</em></a></td><td><code>NCBITaxon:1972585</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:623976"><em>Marinomonas sp. UST050418-002</em></a></td><td><code>NCBITaxon:623976</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:623977"><em>Marinomonas sp. UST050418-003</em></a></td><td><code>NCBITaxon:623977</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:624094"><em>Marinomonas sp. UST050418-016</em></a></td><td><code>NCBITaxon:624094</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -71,18 +159,18 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2615071"><em>Marinomonas sp. ZB861</em></a></td><td><code>NCBITaxon:2615071</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:641701"><em>Marinomonas sp. ZS5-4</em></a></td><td><code>NCBITaxon:641701</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1767038"><em>Marinomonas sp. ZXY12VA15</em></a></td><td><code>NCBITaxon:1767038</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1792290"><em>Marinomonas spartinae</em></a></td><td><code>NCBITaxon:1792290</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1792290"><em>Marinomonas spartinae</em></a></td><td><code>NCBITaxon:1792290</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2795388"><em>Marinomonas transparens</em></a></td><td><code>NCBITaxon:2795388</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:263818"><em>Marinomonas ushuaiensis</em></a></td><td><code>NCBITaxon:263818</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1122207"><em>Marinomonas ushuaiensis DSM 15871</em></a></td><td><code>NCBITaxon:1122207</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:28255"><em>Marinomonas vaga</em></a></td><td><code>NCBITaxon:28255</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2823372"><em>Marinomonas vulgaris</em></a></td><td><code>NCBITaxon:2823372</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1026"><em>Marinoscillum furvescens</em></a></td><td><code>NCBITaxon:1026</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1026"><em>Marinoscillum furvescens</em></a></td><td><code>NCBITaxon:1026</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1122208"><em>Marinoscillum furvescens DSM 4134</em></a></td><td><code>NCBITaxon:1122208</code></td><td>STRAIN</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:861051"><em>Marinoscillum luteum</em></a></td><td><code>NCBITaxon:861051</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:861051"><em>Marinoscillum luteum</em></a></td><td><code>NCBITaxon:861051</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:392723"><em>Marinoscillum pacificum</em></a></td><td><code>NCBITaxon:392723</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2024838"><em>Marinoscillum sp.</em></a></td><td><code>NCBITaxon:2024838</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>5</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2653151"><em>Marinoscillum sp. 108</em></a></td><td><code>NCBITaxon:2653151</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2024838"><em>Marinoscillum sp.</em></a></td><td><code>NCBITaxon:2024838</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>10 (10 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2653151"><em>Marinoscillum sp. 108</em></a></td><td><code>NCBITaxon:2653151</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1337779"><em>Marinoscillum sp. DG1413</em></a></td><td><code>NCBITaxon:1337779</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2038370"><em>Marinoscillum sp. EC-HK380</em></a></td><td><code>NCBITaxon:2038370</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3712625"><em>Marinoscillum sp. HNIBRBA16962</em></a></td><td><code>NCBITaxon:3712625</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -94,13 +182,13 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:3123374"><em>Marinospirillum alkalitolerans</em></a></td><td><code>NCBITaxon:3123374</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1122252"><em>Marinospirillum celere</em></a></td><td><code>NCBITaxon:1122252</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:497722"><em>Marinospirillum celere DSM 18438</em></a></td><td><code>NCBITaxon:497722</code></td><td>STRAIN</td><td>BACTERIA</td><td>4</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:217169"><em>Marinospirillum insulare</em></a></td><td><code>NCBITaxon:217169</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1122211"><em>Marinospirillum insulare DSM 21763</em></a></td><td><code>NCBITaxon:1122211</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:217169"><em>Marinospirillum insulare</em></a></td><td><code>NCBITaxon:217169</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1122211"><em>Marinospirillum insulare DSM 21763</em></a></td><td><code>NCBITaxon:1122211</code></td><td>STRAIN</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:64975"><em>Marinospirillum megaterium</em></a></td><td><code>NCBITaxon:64975</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:64974"><em>Marinospirillum minutulum</em></a></td><td><code>NCBITaxon:64974</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1122212"><em>Marinospirillum minutulum DSM 6287</em></a></td><td><code>NCBITaxon:1122212</code></td><td>STRAIN</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1982602"><em>Marinospirillum perlucidum</em></a></td><td><code>NCBITaxon:1982602</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2183934"><em>Marinospirillum sp.</em></a></td><td><code>NCBITaxon:2183934</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>5</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2183934"><em>Marinospirillum sp.</em></a></td><td><code>NCBITaxon:2183934</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>5</td><td>4 (4 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:427919"><em>Marinospirillum sp. ANL-isoa</em></a></td><td><code>NCBITaxon:427919</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:654687"><em>Marinospirillum sp. BW86-31</em></a></td><td><code>NCBITaxon:654687</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1808754"><em>Marinospirillum sp. CPA-128</em></a></td><td><code>NCBITaxon:1808754</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -119,34 +207,34 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1510898"><em>Marinospirillum sp. NB6</em></a></td><td><code>NCBITaxon:1510898</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:509168"><em>Marinospirillum sp. Spir-10</em></a></td><td><code>NCBITaxon:509168</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:50058"><em>Marinosulfonomonas methylotropha</em></a></td><td><code>NCBITaxon:50058</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2030815"><em>Marinosulfonomonas sp.</em></a></td><td><code>NCBITaxon:2030815</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2030815"><em>Marinosulfonomonas sp.</em></a></td><td><code>NCBITaxon:2030815</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>12 (12 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1527300"><em>Marinosulfonomonas sp. PRT-SC04</em></a></td><td><code>NCBITaxon:1527300</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:42444"><em>Marinovum algicola</em></a></td><td><code>NCBITaxon:42444</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>4</td><td>30</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:988812"><em>Marinovum algicola DG 898</em></a></td><td><code>NCBITaxon:988812</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>30</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:42444"><em>Marinovum algicola</em></a></td><td><code>NCBITaxon:42444</code></td><td>SPECIES</td><td>BACTERIA</td><td>7</td><td>4</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:988812"><em>Marinovum algicola DG 898</em></a></td><td><code>NCBITaxon:988812</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1894968"><em>Marinovum faecis</em></a></td><td><code>NCBITaxon:1894968</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3470136"><em>Marinovum sedimenti</em></a></td><td><code>NCBITaxon:3470136</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2024839"><em>Marinovum sp.</em></a></td><td><code>NCBITaxon:2024839</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>59</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3062633"><em>Marinovum sp. 1_MG-2023</em></a></td><td><code>NCBITaxon:3062633</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3062637"><em>Marinovum sp. 2_MG-2023</em></a></td><td><code>NCBITaxon:3062637</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3449224"><em>Marinovum sp. B10</em></a></td><td><code>NCBITaxon:3449224</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>30</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2024839"><em>Marinovum sp.</em></a></td><td><code>NCBITaxon:2024839</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>12 (12 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3062633"><em>Marinovum sp. 1_MG-2023</em></a></td><td><code>NCBITaxon:3062633</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3062637"><em>Marinovum sp. 2_MG-2023</em></a></td><td><code>NCBITaxon:3062637</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3449224"><em>Marinovum sp. B10</em></a></td><td><code>NCBITaxon:3449224</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2654338"><em>Marinovum sp. DP09</em></a></td><td><code>NCBITaxon:2654338</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3449225"><em>Marinovum sp. E06</em></a></td><td><code>NCBITaxon:3449225</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>30</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3449225"><em>Marinovum sp. E06</em></a></td><td><code>NCBITaxon:3449225</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3468710"><em>Marinovum sp. E3</em></a></td><td><code>NCBITaxon:3468710</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3449226"><em>Marinovum sp. F03</em></a></td><td><code>NCBITaxon:3449226</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>30</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3449226"><em>Marinovum sp. F03</em></a></td><td><code>NCBITaxon:3449226</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:3466940"><em>Marinovum sp. J2-8</em></a></td><td><code>NCBITaxon:3466940</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3028382"><em>Marinovum sp. PR37</em></a></td><td><code>NCBITaxon:3028382</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>30</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3028379"><em>Marinovum sp. SP66</em></a></td><td><code>NCBITaxon:3028379</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>30</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3028382"><em>Marinovum sp. PR37</em></a></td><td><code>NCBITaxon:3028382</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3028379"><em>Marinovum sp. SP66</em></a></td><td><code>NCBITaxon:3028379</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:657388"><em>Marinovum sp. YCSA81</em></a></td><td><code>NCBITaxon:657388</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2306050"><em>Mariprofundaceae bacterium</em></a></td><td><code>NCBITaxon:2306050</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2614254"><em>Mariprofundales bacterium</em></a></td><td><code>NCBITaxon:2614254</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2306050"><em>Mariprofundaceae bacterium</em></a></td><td><code>NCBITaxon:2306050</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>34 (34 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2614254"><em>Mariprofundales bacterium</em></a></td><td><code>NCBITaxon:2614254</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2 (2 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1921086"><em>Mariprofundus aestuarium</em></a></td><td><code>NCBITaxon:1921086</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2528639"><em>Mariprofundus erugo</em></a></td><td><code>NCBITaxon:2528639</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2528639"><em>Mariprofundus erugo</em></a></td><td><code>NCBITaxon:2528639</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1921087"><em>Mariprofundus ferrinatatus</em></a></td><td><code>NCBITaxon:1921087</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:314344"><em>Mariprofundus ferrooxydans</em></a></td><td><code>NCBITaxon:314344</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1188231"><em>Mariprofundus ferrooxydans M34</em></a></td><td><code>NCBITaxon:1188231</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:314345"><em>Mariprofundus ferrooxydans PV-1</em></a></td><td><code>NCBITaxon:314345</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>4</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:314344"><em>Mariprofundus ferrooxydans</em></a></td><td><code>NCBITaxon:314344</code></td><td>SPECIES</td><td>BACTERIA</td><td>6</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1188231"><em>Mariprofundus ferrooxydans M34</em></a></td><td><code>NCBITaxon:1188231</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:314345"><em>Mariprofundus ferrooxydans PV-1</em></a></td><td><code>NCBITaxon:314345</code></td><td>STRAIN</td><td>BACTERIA</td><td>3</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1921010"><em>Mariprofundus micogutta</em></a></td><td><code>NCBITaxon:1921010</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1871319"><em>Mariprofundus sp.</em></a></td><td><code>NCBITaxon:1871319</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1871319"><em>Mariprofundus sp.</em></a></td><td><code>NCBITaxon:1871319</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>12 (12 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1353261"><em>Mariprofundus sp. DIS-1</em></a></td><td><code>NCBITaxon:1353261</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2650971"><em>Mariprofundus sp. EBB-1</em></a></td><td><code>NCBITaxon:2650971</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:933853"><em>Mariprofundus sp. GSB2</em></a></td><td><code>NCBITaxon:933853</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -178,22 +266,22 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:2608715"><em>Mariprofundus sp. KV</em></a></td><td><code>NCBITaxon:2608715</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:999537"><em>Mariprofundus sp. M34</em></a></td><td><code>NCBITaxon:999537</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2608716"><em>Mariprofundus sp. NF</em></a></td><td><code>NCBITaxon:2608716</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1946828"><em>Mariprofundus sp. UBA1536</em></a></td><td><code>NCBITaxon:1946828</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1946829"><em>Mariprofundus sp. UBA1538</em></a></td><td><code>NCBITaxon:1946829</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>9</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1946830"><em>Mariprofundus sp. UBA1543</em></a></td><td><code>NCBITaxon:1946830</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>7</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1946831"><em>Mariprofundus sp. UBA1571</em></a></td><td><code>NCBITaxon:1946831</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>6</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1946832"><em>Mariprofundus sp. UBA3091</em></a></td><td><code>NCBITaxon:1946832</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1946828"><em>Mariprofundus sp. UBA1536</em></a></td><td><code>NCBITaxon:1946828</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1946829"><em>Mariprofundus sp. UBA1538</em></a></td><td><code>NCBITaxon:1946829</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1946830"><em>Mariprofundus sp. UBA1543</em></a></td><td><code>NCBITaxon:1946830</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1946831"><em>Mariprofundus sp. UBA1571</em></a></td><td><code>NCBITaxon:1946831</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1946832"><em>Mariprofundus sp. UBA3091</em></a></td><td><code>NCBITaxon:1946832</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1914031"><em>Maripseudobacter sp.</em></a></td><td><code>NCBITaxon:1914031</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:674079"><em>Marisediminicola antarctica</em></a></td><td><code>NCBITaxon:674079</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2711233"><em>Marisediminicola senii</em></a></td><td><code>NCBITaxon:2711233</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2558449"><em>Marisediminicola sp.</em></a></td><td><code>NCBITaxon:2558449</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2558449"><em>Marisediminicola sp.</em></a></td><td><code>NCBITaxon:2558449</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1294041"><em>Marisediminicola sp. 8-9</em></a></td><td><code>NCBITaxon:1294041</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1259387"><em>Marisediminicola sp. HLT1-22</em></a></td><td><code>NCBITaxon:1259387</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1259388"><em>Marisediminicola sp. HLT2-31</em></a></td><td><code>NCBITaxon:1259388</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1259389"><em>Marisediminicola sp. HLT2-32</em></a></td><td><code>NCBITaxon:1259389</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1656102"><em>Marisediminicola sp. L18g</em></a></td><td><code>NCBITaxon:1656102</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3391061"><em>Marisediminicola sp. LYQ134</em></a></td><td><code>NCBITaxon:3391061</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:3391062"><em>Marisediminicola sp. LYQ85</em></a></td><td><code>NCBITaxon:3391062</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3391061"><em>Marisediminicola sp. LYQ134</em></a></td><td><code>NCBITaxon:3391061</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:3391062"><em>Marisediminicola sp. LYQ85</em></a></td><td><code>NCBITaxon:3391062</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1747408"><em>Marisediminicola sp. N26</em></a></td><td><code>NCBITaxon:1747408</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1259390"><em>Marisediminicola sp. RHLT2-18</em></a></td><td><code>NCBITaxon:1259390</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1259391"><em>Marisediminicola sp. Sr30</em></a></td><td><code>NCBITaxon:1259391</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
@@ -218,27 +306,30 @@
 <tr><td><a href="taxon.html?id=NCBITaxon:1259412"><em>Marisediminicola sp. TmT3-31</em></a></td><td><code>NCBITaxon:1259412</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1259410"><em>Marisediminicola sp. TMT3-48</em></a></td><td><code>NCBITaxon:1259410</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1259411"><em>Marisediminicola sp. TMT4-33-3</em></a></td><td><code>NCBITaxon:1259411</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1756384"><em>Marisediminicola sp. UYEF4</em></a></td><td><code>NCBITaxon:1756384</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>2</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:634436"><em>Marisediminitalea aggregata</em></a></td><td><code>NCBITaxon:634436</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>41</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1756384"><em>Marisediminicola sp. UYEF4</em></a></td><td><code>NCBITaxon:1756384</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:634436"><em>Marisediminitalea aggregata</em></a></td><td><code>NCBITaxon:634436</code></td><td>SPECIES</td><td>BACTERIA</td><td>8</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2079529"><em>Marisediminitalea alba</em></a></td><td><code>NCBITaxon:2079529</code></td><td>SPECIES</td><td>BACTERIA</td><td>4</td><td>0</td><td>1</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1856405"><em>Marisediminitalea lipolytica</em></a></td><td><code>NCBITaxon:1856405</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>2</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1856405"><em>Marisediminitalea lipolytica</em></a></td><td><code>NCBITaxon:1856405</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2662266"><em>Marisediminitalea mangrovi</em></a></td><td><code>NCBITaxon:2662266</code></td><td>SPECIES</td><td>BACTERIA</td><td>3</td><td>1</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2071609"><em>Marisediminitalea oceani</em></a></td><td><code>NCBITaxon:2071609</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>63</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2662268"><em>Marisediminitalea sp.</em></a></td><td><code>NCBITaxon:2662268</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>41</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2071609"><em>Marisediminitalea oceani</em></a></td><td><code>NCBITaxon:2071609</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>5 (5 pooled)</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2662268"><em>Marisediminitalea sp.</em></a></td><td><code>NCBITaxon:2662268</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:523786"><em>Marispirillum indicum</em></a></td><td><code>NCBITaxon:523786</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:1208322"><em>Marispirillum indicum B142</em></a></td><td><code>NCBITaxon:1208322</code></td><td>STRAIN</td><td>BACTERIA</td><td>2</td><td>0</td><td>0</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2052464"><em>Marispirillum sp.</em></a></td><td><code>NCBITaxon:2052464</code></td><td>SPECIES</td><td>BACTERIA</td><td>1</td><td>0</td><td>0</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:1963862"><em>Marispirochaeta aestuarii</em></a></td><td><code>NCBITaxon:1963862</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>4</td><td>SEEDED</td></tr>
-<tr><td><a href="taxon.html?id=NCBITaxon:2038653"><em>Marispirochaeta sp.</em></a></td><td><code>NCBITaxon:2038653</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:1963862"><em>Marispirochaeta aestuarii</em></a></td><td><code>NCBITaxon:1963862</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
+<tr><td><a href="taxon.html?id=NCBITaxon:2038653"><em>Marispirochaeta sp.</em></a></td><td><code>NCBITaxon:2038653</code></td><td>SPECIES</td><td>BACTERIA</td><td>2</td><td>0</td><td>3 (3 pooled)</td><td>SEEDED</td></tr>
 <tr><td><a href="taxon.html?id=NCBITaxon:2909667"><em>Maritalea mediterranea</em></a></td><td><code>NCBITaxon:2909667</code></td><td>SPECIES</td><td>BACTERIA</td><td>5</td><td>1</td><td>1</td><td>SEEDED</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 </section>
-<script defer src="taxon-browser.js?v=434e253832135143"></script>
+<script defer src="taxon-browser.js?v=ecc71880d23e361d"></script>
 </main>
 <footer>
-  <p><strong>TaxonMech</strong> · project content CC0-1.0; upstream data retain their source terms · generated by <code>scripts/render_pages.py</code></p>
-  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <span class="self">TaxonMech</span></p>
+  <p><strong>TaxonMech</strong> · project-authored data <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-DATA">CC BY 4.0</a>; code <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/LICENSE-CODE">BSD-3-Clause</a>; upstream data retain their source terms · <a href="index.json.gz">Index JSON.gz</a> · <a href="index.json">Manifest</a> · <a href="https://github.com/CultureBotAI/TaxonMech/blob/main/src/taxonmech/schema/taxonmech.yaml">LinkML schema</a> · generated by <code>scripts/render_pages.py</code> (corpus digest <code>959c8dfd8771</code>, 626,048 records)</p>
+  <p><a href="https://culturebotai.github.io/mechs/">All Mech projects</a></p>
+  <p class="fam"><a href="https://culturebotai.github.io/CultureMech/">CultureMech</a> · <a href="https://culturebotai.github.io/MediaIngredientMech/">MediaIngredientMech</a> · <a href="https://culturebotai.github.io/CommunityMech/">CommunityMech</a> · <a href="https://culturebotai.github.io/TraitMech/">TraitMech</a> · <a href="https://culturebotai.github.io/proteintraitsmech/">ProteinTraitsMech</a> · <a href="https://culturebotai.github.io/AntibioticMech/">AntibioticMech</a> · <a href="https://culturebotai.github.io/CellStructureMech/">CellStructureMech</a> · <a href="https://culturebotai.github.io/HabitatMech/">HabitatMech</a> · <a href="https://culturebotai.github.io/NaturalProductMech/">NaturalProductMech</a> · <span class="self">TaxonMech</span></p>
   <p class="fam">
     <a href="https://github.com/Knowledge-Graph-Hub/kg-microbe">kg-microbe</a> ·
     <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> ·

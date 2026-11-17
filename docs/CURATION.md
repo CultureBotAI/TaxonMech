@@ -58,17 +58,54 @@ a seeded field is therefore not curation; it is drift that the next re-seed
 reverts. Curation goes in:
 
 - **the scope** (`curation/seed_scope.tsv`) — which taxa are records;
+- **causal-graph overlays** (`curation/causal_graphs/*.yaml`) and the pinned
+  **UniProtKB protein reference catalog** (`curation/uniprot_proteins.tsv`,
+  registered in `conf/sources.yaml`) — curator-owned `causal_graphs` (and
+  overlay `curation_history` events) merged deterministically by
+  `load_causal_graphs()` and `build_document()` in `src/taxonmech/seed.py`
+  so they survive `just seed-apply` and pass `just verify-corpus` (see
+  [`curation/causal_graphs/README.md`](../curation/causal_graphs/README.md));
 - **the seeder** — when a harmonization rule is wrong for a class of records;
 - **kg-microbe** — when a mapping is wrong upstream (an LPSN name mapped to
   the wrong NCBI taxon, a GTDB predicate that should be `closeMatch`). Fix it
   there, re-extract, re-seed; this repository does not carry mapping
   overrides yet.
 
-Curator-owned overlays for `causal_graphs`, `definition`, `evidence` and
-`mapping_status: REVIEWED` — merged by the seeder so they survive a re-seed,
-as HabitatMech does under `curation/causal_graphs/` — are the next step and
-are tracked in the issues. Until they exist, a curated change is a seeder
-change with a test.
+Curator-owned overlays for `causal_graphs` (and required `curation_history`
+events) are maintained in `curation/causal_graphs/*.yaml` with
+`GENE_OR_PROTEIN` nodes validated offline against `curation/uniprot_proteins.tsv`
+by `validate_causal_graph_structure()`, `validate_causal_graph_events()`,
+`load_uniprot_proteins()`, and `validate_causal_graph_proteins()` in
+`src/taxonmech/seed.py` and by `causal_graph_provenance_problems()` in
+`scripts/check_provenance.py` (which also enforces closed-key object schemas,
+non-empty string values on optional `CausalGraph.description`,
+`CausalNode.description`, and `EvidenceItem.snippet`/`notes` when present,
+strict ascending `uniprot_id` row ordering, `UNIPROT_RELEASE_PATTERN`
+`release_version` syntax and a single uniform `release_version` catalog pin,
+catalog-wide `entry_name`,
+`(organism_taxon_id, gene_symbol)`, `(organism_taxon_id, locus_tag)`,
+`(organism_taxon_id, sequence_crc64)`, per-organism `entry_name` `_<org_code>`
+suffix and `entry_status` prefix alignment,
+`organism_taxon_id`→`(organism_label, proteome_id)`, and
+`proteome_id`→`organism_taxon_id` consistency, `organism_label` and `TAXON`
+node `label` correspondence with `ncbitaxon_taxa.tsv`, per-graph
+`CausalNode.label`, `CausalNode.grounding`, and `UniProtKB:` uniqueness,
+within-graph `GENE_OR_PROTEIN` `organism_taxon_id` and `strain_id` homogeneity,
+required non-empty `CausalNode.grounding` with
+`NCBITaxon:`/`UniProtKB:`/`CHEBI:`/`GO:` prefix-to-`node_type` domain
+isolation (`CHEBI_ID_PATTERN` and `GO_ID_PATTERN`), per-graph
+`predicate`↔`predicate_id` consistency, rejection of edges targeting a `TAXON`
+node as `object`, host `TAXON` node anchoring and exclusivity,
+`GENE_OR_PROTEIN` single host-taxon `RO:0002292`
+(`expresses`) and outgoing-edge topology, required host-subtree `strain_id`
+binding, required edge `predicate_id`, non-empty edge evidence `notes`/`snippet`,
+full 4-part `EC:` xref completeness, `<NCBITaxon_ID>.yaml` filename-stem
+alignment, `curation/seed_scope.tsv` membership, non-empty chronological
+`curation_history`, and zero unreferenced `curation/uniprot_proteins.tsv` rows;
+#199, #208, #214, #216, #224, #234, #236, #246, #249, #259). Separate
+curator-owned overlays for `definition`, record-level `evidence` and
+`mapping_status: REVIEWED` remain tracked in the issues; until those exist, a
+change to any other record field is a seeder or scope change with a test.
 
 ## Evidence
 

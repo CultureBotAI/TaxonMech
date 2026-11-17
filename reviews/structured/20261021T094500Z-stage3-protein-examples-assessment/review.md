@@ -1,0 +1,1314 @@
+# Stage 3 UniProt protein examples and native mechanism gene/protein representation assessment (626,048 records; 15 species- and strain-level exemplars)
+
+- Review: 20261021T094500Z-stage3-protein-examples-assessment
+- Repository: CultureBotAI/TaxonMech
+- Started UTC: 2026-10-21T09:22:12Z
+- Finished UTC: 2026-10-21T09:45:00Z
+- Reviewer: Antigravity (independent)
+- Completion: partial
+- Verdict: blocked
+- Scientific review: true
+
+## Summary
+
+Assessed all 626,048 in-scope TaxonRecord files across Bacteria (605,695), Archaea (14,013), Eukaryota (6,331), and other (9) against the Stage 3 UniProt protein-examples curation contract (.claude/skills/add-uniprot-protein-examples/SKILL.md). Exactly 0 of 626,048 records currently carry causal_graphs, GENE_OR_PROTEIN nodes, or UniProtKB: CURIEs. Across the corpus, 21,787 records carry 21,825 LPSN 16S rRNA INSDC sequence accessions, 20,868 carry 227,539 NCBI genome assemblies, 20,570 carry 173,174 genome records (GTDB/PATRIC/GOLD/IMG/ATB), and 9,241 carry 78,785 StrainInfo NUCLEOTIDE_SEQUENCE links derived from 52,737 sequence assertions across 51,467 unique INSDC accessions (28,160 gene/CDS, 22,703 rRNA operon, 604 patent). Direct population of verified UniProtKB protein references is blocked by five native representation, writer, and validator prerequisites: (1) TaxonRecord has no dedicated protein_examples slot (its only protein surface is TaxonRecord.causal_graphs[].nodes[] with node_type: GENE_OR_PROTEIN, and strains[].related_records[] GenomeRelatedRecordLink NUCLEOTIDE_SEQUENCE at lines 953-1102 is regex-restricted at lines 1023-1035 and 1081 to INSDC:... from STRAININFO), while src/taxonmech/seed.py has no maintained overlay input and data/raw/ has no pinned UniProtKB snapshot; (2) scripts/verify_corpus.py rejects any manual YAML edit; (3) src/taxonmech/schema/taxonmech.yaml and conf/id_label_targets.yaml omit UniProtKB and EC prefixes; (4) TaxonMech seeds both species-level and strain-level TaxonRecord files while UniProtKB reference proteomes bind strain-level NCBI Taxon IDs, yet CausalNode lacks structured organism/strain/proteome/locus/checksum slots; and (5) scripts/render_pages.py --check requires zero drift against committed data/taxa/ records. Live UniProt REST API verification across 15 species- and strain-level exemplars verified 15 UniProtKB protein bindings (with exact organism Taxon ID, proteome ID, gene symbol, locus tag, EC number, amino-acid length, CRC64 checksum, and sequence version) and caught 6 accession/gene/species/fragment errors across committed Stage 2 review.yaml lines 514-665 (Q9I4X3 pqsA at line 583 vs Q9HWH2 phzM, and Q58254 mcrC at line 613 vs Q58256 mcrA) and expanded unpinned Stage 2/Stage 3 candidate screening (P0A858 tpiA vs P0A853 tnaA; Q9I4X2 pqsB vs Q9HWG9 phzS; Q58255 mcrG mis-assigned to mcrB vs Q58252 mcrB; Q55P57 in sibling species Cryptococcus deneoformans B-3501A NCBITaxon:283643 vs C. deuterogattii R265 TrEMBL A0A095CIC4; and 87-aa partial fragment A0A1S6LQA8).
+
+## Scope And Provenance
+
+Full-corpus Stage 3 UniProt protein-example and mechanism gene/protein representation audit across all 626,048 TaxonRecord files in data/taxa/, paired with live UniProtKB REST API verification across 15 species- and strain-level exemplar TaxonRecord files spanning Bacteria, Archaea, and Eukaryota.
+
+Selection: All 626,048 in-scope taxa in curation/seed_scope.tsv and data/taxa/PATHS.tsv classified by sequence, genome-assembly, genome-record, StrainInfo gene/CDS sequence, and phenotype/trait anchors, with 15 species- and strain-level exemplar TaxonRecord files bound directly.
+Coverage: sampled; 15 reviewed / 626048 in the declared population.
+Source: git_commit at Git base 662d24d9c1fd077eedc76fe87237e6822050638b.
+Working-tree hashes do not imply those bytes were committed.
+
+| Target | Path / selector | Kind | Label |
+| --- | --- | --- | --- |
+| NCBITaxon:562 | data/taxa/bacteria/escherichia_coli.yaml | generated | Escherichia coli |
+| NCBITaxon:83333 | data/taxa/bacteria/escherichia_coli_k_12.yaml | generated | Escherichia coli K-12 |
+| NCBITaxon:511145 | data/taxa/bacteria/escherichia_coli_str_k_12_substr_mg1655.yaml | generated | Escherichia coli str. K-12 substr. MG1655 |
+| NCBITaxon:1423 | data/taxa/bacteria/bacillus_subtilis.yaml | generated | Bacillus subtilis |
+| NCBITaxon:224308 | data/taxa/bacteria/bacillus_subtilis_subsp_subtilis_str_168.yaml | generated | Bacillus subtilis subsp. subtilis str. 168 |
+| NCBITaxon:287 | data/taxa/bacteria/pseudomonas_aeruginosa.yaml | generated | Pseudomonas aeruginosa |
+| NCBITaxon:208964 | data/taxa/bacteria/pseudomonas_aeruginosa_pao1.yaml | generated | Pseudomonas aeruginosa PAO1 |
+| NCBITaxon:2190 | data/taxa/archaea/methanocaldococcus_jannaschii.yaml | generated | Methanocaldococcus jannaschii |
+| NCBITaxon:243232 | data/taxa/archaea/methanocaldococcus_jannaschii_dsm_2661.yaml | generated | Methanocaldococcus jannaschii DSM 2661 |
+| NCBITaxon:1859096 | data/taxa/eukaryota/cryptococcus_deuterogattii.yaml | generated | Cryptococcus deuterogattii |
+| NCBITaxon:294750 | data/taxa/eukaryota/cryptococcus_deuterogattii_r265.yaml | generated | Cryptococcus deuterogattii R265 |
+| NCBITaxon:40410 | data/taxa/eukaryota/cryptococcus_deneoformans.yaml | generated | Cryptococcus deneoformans |
+| NCBITaxon:283643 | data/taxa/eukaryota/cryptococcus_deneoformans_b_3501a.yaml | generated | Cryptococcus deneoformans B-3501A |
+| NCBITaxon:5207 | data/taxa/eukaryota/cryptococcus_neoformans.yaml | generated | Cryptococcus neoformans |
+| NCBITaxon:235443 | data/taxa/eukaryota/cryptococcus_neoformans_h99.yaml | generated | Cryptococcus neoformans H99 |
+
+## Validation
+
+| Check | Status | Required | Targets | Result |
+| --- | --- | --- | --- | --- |
+| Strict schema and reference validation on 15 Stage 3 species and strain exemplar records | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:5207, NCBITaxon:235443 | All 15 species- and strain-level exemplar TaxonRecord files pass scripts/validate_strict.py with 0 errors. |
+| Prerequisite Gate 1: Maintained protein/causal_graphs curation input and pinned UniProtKB raw source | unavailable | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:5207, NCBITaxon:235443 | TaxonRecord has no dedicated protein_examples slot (only TaxonRecord.causal_graphs[].nodes[] with node_type: GENE_OR_PROTEIN), src/taxonmech/seed.py has no maintained overlay input, and conf/sources.yaml + data/raw/MANIFEST.yaml contain no pinned UniProtKB or UniProt Reference Proteomes snapshot. |
+| Prerequisite Gate 2: Corpus byte-for-byte reproduction check against seeder output | passed | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:5207, NCBITaxon:235443 | scripts/verify_corpus.py passes on the current unedited 626,048-record corpus and blocks manual edits to data/taxa/&lt;domain&gt;/*.yaml until a maintained overlay input is merged by src/taxonmech/seed.py. |
+| Prerequisite Gate 3: Schema and OAK ID-label prefix coverage for UniProtKB and EC | unavailable | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:5207, NCBITaxon:235443 | src/taxonmech/schema/taxonmech.yaml (prefixes, lines 43-88) and conf/id_label_targets.yaml (adapters lines 18-25, ignored_prefixes lines 27-47) omit UniProtKB and EC, causing scripts/validate_id_label_correspondence.py to fail with UNKNOWN_PREFIX on grounded GENE_OR_PROTEIN nodes. |
+| Prerequisite Gate 4: Structured organism, strain, proteome, locus, and sequence checksum scope representation | unavailable | True | NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:5207, NCBITaxon:235443 | CausalNode (src/taxonmech/schema/taxonmech.yaml lines 1190-1216) provides only node_id, label, node_type, grounding, xrefs, and free-text description, lacking structured slots (organism_taxon_id, proteome_id, gene_symbol, locus_tag, sequence_length, sequence_crc64, sequence_version, entry_status) to distinguish strain-exact reference proteome bindings from species-level exemplar projections. |
+
+## Scientific And Domain Assessments
+
+### Corpus-wide sequence, genome, and protein anchor census across all 626,048 TaxonRecord files
+
+completeness: concern. Targets: NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:5207, NCBITaxon:235443.
+
+Across all 626,048 in-scope TaxonRecord files (605,695 Bacteria, 14,013 Archaea, 6,331 Eukaryota, 9 other), 0 records currently carry causal_graphs, GENE_OR_PROTEIN nodes, or UniProtKB references. However, 21,787 records carry 21,825 LPSN 16S rRNA INSDC accessions, 20,868 carry 227,539 NCBI genome assemblies, 20,570 carry 173,174 genome records, and 9,241 carry 78,785 StrainInfo NUCLEOTIDE_SEQUENCE links spanning 51,467 unique INSDC accessions (including 28,160 unique gene/CDS accessions).
+
+### Live UniProtKB verification of organism, strain, proteome, sequence, and claim scope for mechanism GENE_OR_PROTEIN nodes
+
+grounding: concern. Targets: NCBITaxon:562, NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:1423, NCBITaxon:224308, NCBITaxon:287, NCBITaxon:208964, NCBITaxon:2190, NCBITaxon:243232, NCBITaxon:1859096, NCBITaxon:294750, NCBITaxon:40410, NCBITaxon:283643, NCBITaxon:5207, NCBITaxon:235443.
+
+Verified 15 UniProtKB protein anchors via live UniProt REST API queries across 15 species- and strain-level exemplar records, preserving exact organism NCBI Taxon ID, UniProt Proteome ID, entry review status (Swiss-Prot vs TrEMBL), gene symbol, ordered locus tag, EC number, amino-acid length, CRC64 checksum, and sequence version, while identifying and correcting 2 accession/gene errors in committed Stage 2 review.yaml (Q9I4X3 at line 583 and Q58254 at line 613) and 4 additional accession/gene/species/fragment errors from expanded unpinned candidate screening (P0A858, Q9I4X2, Q58255 for mcrB, Q55P57, and A0A1S6LQA8).
+
+Live-verified UniProtKB GENE_OR_PROTEIN specifications and organism/strain/sequence scope audit:
+
+1. Escherichia coli K-12 (strain record NCBITaxon:83333 data/taxa/bacteria/escherichia_coli_k_12.yaml; substrain MG1655 record NCBITaxon:511145 data/taxa/bacteria/escherichia_coli_str_k_12_substr_mg1655.yaml; parent species record NCBITaxon:562 data/taxa/bacteria/escherichia_coli.yaml; UniProt reference proteome UP000000625):
+   - VERIFIED (matches committed Stage 2 review.yaml line 515): UniProtKB:P00722 (BGAL_ECOLI, reviewed Swiss-Prot, PE=1) &#124; label: Beta-galactosidase &#124; gene: lacZ (b0344 / JW0335) &#124; xrefs: [EC:3.2.1.23] &#124; organism: NCBITaxon:83333 &#124; proteome: UP000000625 &#124; sequence: 1,024 aa, CRC64 9D295EF4CEF90B08, version 2 &#124; graph: ecoli_lactose_utilization (node_id: n_protein_lacz).
+   - VERIFIED: UniProtKB:P02920 (LACY_ECOLI, reviewed Swiss-Prot, PE=1) &#124; label: Lactose permease &#124; gene: lacY (b0343 / JW0334) &#124; organism: NCBITaxon:83333 &#124; proteome: UP000000625 &#124; sequence: 417 aa, CRC64 24A8062F628CDA32, version 1 &#124; graph: ecoli_lactose_utilization (node_id: n_protein_lacy).
+   - VERIFIED (replaces unpinned candidate P0A858): UniProtKB:P0A853 (TNAA_ECOLI, reviewed Swiss-Prot, PE=1) &#124; label: Tryptophanase &#124; gene: tnaA (b3708 / JW3686) &#124; xrefs: [EC:4.1.99.1] &#124; organism: NCBITaxon:83333 &#124; proteome: UP000000625 &#124; sequence: 471 aa, CRC64 5AFC1F41BD9D0034, version 1 &#124; graph: ecoli_indole_production (node_id: n_protein_tnaa).
+   - VERIFIED: UniProtKB:P23173 (TNAB_ECOLI, reviewed Swiss-Prot, PE=1) &#124; label: Low affinity tryptophan permease &#124; gene: tnaB (b3709 / JW3687) &#124; organism: NCBITaxon:83333 &#124; proteome: UP000000625 &#124; sequence: 415 aa, CRC64 1E34C7DE3DF6E9D9, version 1 &#124; graph: ecoli_indole_production (node_id: n_protein_tnab).
+   - REJECTED: UniProtKB:P0A858 (TPIS_ECOLI, tpiA / b3919, Triosephosphate isomerase, EC:5.3.1.1, 255 aa) was erroneously proposed as TnaA during unpinned candidate screening (not present in committed Stage 2 review.yaml).
+
+2. Bacillus subtilis subsp. subtilis str. 168 (strain record NCBITaxon:224308 data/taxa/bacteria/bacillus_subtilis_subsp_subtilis_str_168.yaml; parent species record NCBITaxon:1423 data/taxa/bacteria/bacillus_subtilis.yaml; UniProt reference proteome UP000001570):
+   - VERIFIED (matches committed Stage 2 review.yaml line 550): UniProtKB:P06534 (SP0A_BACSU, reviewed Swiss-Prot, PE=1) &#124; label: Stage 0 sporulation protein A &#124; gene: spo0A (BSU24220) &#124; organism: NCBITaxon:224308 &#124; proteome: UP000001570 &#124; sequence: 267 aa, CRC64 2F4943A5A5061DD9, version 1 &#124; graph: bsubtilis_spo0a_sporulation (node_id: n_protein_spo0a).
+   - VERIFIED: UniProtKB:P16497 (KINA_BACSU, reviewed Swiss-Prot, PE=1) &#124; label: Sporulation kinase A &#124; gene: kinA (BSU13990) &#124; xrefs: [EC:2.7.13.3] &#124; organism: NCBITaxon:224308 &#124; proteome: UP000001570 &#124; sequence: 606 aa, CRC64 A8BB97FE844B32EE, version 2 &#124; graph: bsubtilis_spo0a_sporulation (node_id: n_protein_kina).
+   - VERIFIED: UniProtKB:P00691 (AMY_BACSU, reviewed Swiss-Prot, PE=1) &#124; label: Alpha-amylase &#124; gene: amyE (BSU03040) &#124; xrefs: [EC:3.2.1.1] &#124; organism: NCBITaxon:224308 &#124; proteome: UP000001570 &#124; sequence: 659 aa, CRC64 16BD6CB1E7C67BD6, version 2 &#124; graph: bsubtilis_starch_hydrolysis (node_id: n_protein_amye).
+
+3. Pseudomonas aeruginosa PAO1 (strain record NCBITaxon:208964 data/taxa/bacteria/pseudomonas_aeruginosa_pao1.yaml; parent species record NCBITaxon:287 data/taxa/bacteria/pseudomonas_aeruginosa.yaml; UniProt reference proteome UP000002438):
+   - VERIFIED (replaces erroneous Q9I4X3 in committed Stage 2 review.yaml line 583): UniProtKB:Q9HWH2 (PHZM_PSEAE, reviewed Swiss-Prot, PE=1) &#124; label: Phenazine-1-carboxylate N-methyltransferase &#124; gene: phzM (PA4209) &#124; xrefs: [EC:2.1.1.327] &#124; organism: NCBITaxon:208964 &#124; proteome: UP000002438 &#124; sequence: 334 aa, CRC64 27D9717ECA12A1B5, version 1 &#124; graph: paeruginosa_pyocyanin_biosynthesis (node_id: n_protein_phzm).
+   - VERIFIED (replaces unpinned candidate Q9I4X2): UniProtKB:Q9HWG9 (PHZS_PSEAE, reviewed Swiss-Prot, PE=1) &#124; label: 5-methylphenazine-1-carboxylate 1-monooxygenase &#124; gene: phzS (PA4217) &#124; xrefs: [EC:1.14.13.218] &#124; organism: NCBITaxon:208964 &#124; proteome: UP000002438 &#124; sequence: 402 aa, CRC64 F2BB36662ABAC790, version 1 &#124; graph: paeruginosa_pyocyanin_biosynthesis (node_id: n_protein_phzs).
+   - REJECTED: UniProtKB:Q9I4X3 (PQSA_PSEAE, pqsA / PA0996, Anthranilate--CoA ligase, EC:6.2.1.32, 517 aa) was erroneously assigned to PhzM in committed Stage 2 review.yaml line 583, and UniProtKB:Q9I4X2 (PQSB_PSEAE, pqsB / PA0997, 283 aa) was erroneously proposed as PhzS during expanded unpinned candidate screening.
+
+4. Methanocaldococcus jannaschii DSM 2661 (strain record NCBITaxon:243232 data/taxa/archaea/methanocaldococcus_jannaschii_dsm_2661.yaml; parent species record NCBITaxon:2190 data/taxa/archaea/methanocaldococcus_jannaschii.yaml; assembly GCA_000091665.1; UniProt reference proteome UP000000805):
+   - VERIFIED (replaces erroneous Q58254 in committed Stage 2 review.yaml line 613): UniProtKB:Q58256 (MCRA_METJA, reviewed Swiss-Prot, PE=1) &#124; label: Methyl-coenzyme M reductase I subunit alpha &#124; gene: mcrA (MJ0846) &#124; xrefs: [EC:2.8.4.1] &#124; organism: NCBITaxon:243232 &#124; proteome: UP000000805 &#124; sequence: 553 aa, CRC64 CC3AB9AC4F745A24, version 2 &#124; graph: mjannaschii_hydrogenotrophic_methanogenesis (node_id: n_protein_mcra).
+   - VERIFIED (replaces unpinned candidate Q58255 for mcrB): UniProtKB:Q58252 (MCRB_METJA, reviewed Swiss-Prot, PE=3) &#124; label: Methyl-coenzyme M reductase I subunit beta &#124; gene: mcrB (MJ0842) &#124; xrefs: [EC:2.8.4.1] &#124; organism: NCBITaxon:243232 &#124; proteome: UP000000805 &#124; sequence: 447 aa, CRC64 52C76BB2C4C425E7, version 2 &#124; graph: mjannaschii_hydrogenotrophic_methanogenesis (node_id: n_protein_mcrb).
+   - VERIFIED: UniProtKB:Q58255 (MCRG_METJA, reviewed Swiss-Prot, PE=3) &#124; label: Methyl-coenzyme M reductase I subunit gamma &#124; gene: mcrG (MJ0845) &#124; xrefs: [EC:2.8.4.1] &#124; organism: NCBITaxon:243232 &#124; proteome: UP000000805 &#124; sequence: 260 aa, CRC64 34413840D8EADACE, version 1 &#124; graph: mjannaschii_hydrogenotrophic_methanogenesis (node_id: n_protein_mcrg).
+   - REJECTED FOR MCRA: UniProtKB:Q58254 (MCRC_METJA, mcrC / MJ0844, Methyl-coenzyme M reductase I operon protein C, 200 aa, CRC64 8126ECACFA8BD158), assigned to McrA in committed Stage 2 review.yaml line 613, is an accessory operon protein rather than catalytic subunit alpha (McrA, MJ0846, Q58256).
+
+5. Cryptococcus species complex (C. deuterogattii NCBITaxon:1859096 / strain R265 NCBITaxon:294750; C. deneoformans NCBITaxon:40410 / strain B-3501A NCBITaxon:283643; C. neoformans NCBITaxon:5207 / strain H99 NCBITaxon:235443):
+   - VERIFIED WITH TREMBL LIMITATION FOR C. DEUTEROGATTII R265: UniProtKB:A0A095CIC4 (A0A095CIC4_CRYD2, unreviewed TrEMBL, PE=3) &#124; label: Acidic laccase &#124; locus: CNBG_4942 &#124; organism: NCBITaxon:294750 (parent species NCBITaxon:1859096) &#124; proteome: UP000029445 &#124; sequence: 640 aa, CRC64 0D78281EB329FEB4, version 1. No reviewed Swiss-Prot entry exists in UniProtKB for NCBITaxon:1859096 or NCBITaxon:294750.
+   - REJECTED FOR C. DEUTEROGATTII (FRAGMENT): UniProtKB:A0A1S6LQA8 (A0A1S6LQA8_CRYDE, LAC1, NCBITaxon:1859096) is an 87-aa partial PCR fragment (TrEMBL PE=4).
+   - REJECTED FOR C. DEUTEROGATTII &amp; REASSIGNED TO C. DENEOFORMANS: UniProtKB:Q55P57 (LAC1_CRYD3, reviewed Swiss-Prot, PE=3) &#124; label: Laccase-1 &#124; gene: LAC1 (CNBG3550) &#124; xrefs: [EC:1.10.3.2] &#124; organism: NCBITaxon:283643 (Cryptococcus deneoformans B-3501A; parent species NCBITaxon:40410) &#124; sequence: 624 aa, CRC64 A675C03F8940224B, version 1.
+   - VERIFIED FOR C. NEOFORMANS H99: UniProtKB:J9VY90 (LAC1_CRYN9, reviewed Swiss-Prot, PE=1) &#124; label: Laccase-1 &#124; gene: LAC1 (CNAG_03465) &#124; xrefs: [EC:1.10.3.2] &#124; organism: NCBITaxon:235443 (Cryptococcus neoformans H99; parent species NCBITaxon:5207) &#124; proteome: UP000010091 &#124; sequence: 624 aa, CRC64 CACD3577C439C6C2, version 1.
+
+## Findings
+
+### finding-001: No release-pinned UniProtKB / Reference Proteomes raw source snapshot or accession-to-taxon/gene validator exists in TaxonMech
+
+blocker / open / confirmed; issue key: taxonmech-uniprot-pinned-source-and-accession-validator-missing.
+
+Neither conf/sources.yaml nor data/raw/MANIFEST.yaml includes a pinned UniProtKB or UniProt Reference Proteomes inventory, and scripts/validate_strict.py has no check verifying that a UniProtKB: accession resolves to the claimed protein name, gene symbol, locus tag, sequence length/CRC64, and organism NCBI Taxon ID. Live UniProt REST API verification during Stage 3 exposed 2 accession/gene mismatches in committed Stage 2 review.yaml (reviews/structured/20261021T043201Z-stage2-causal-graphs-assessment/review.yaml lines 583 and 613: UniProtKB:Q9I4X3 is pqsA rather than phzM UniProtKB:Q9HWH2, and UniProtKB:Q58254 is mcrC rather than mcrA UniProtKB:Q58256) and 4 additional accession/gene or sibling-species/fragment mismatches in expanded unpinned candidate screening (UniProtKB:P0A858 is tpiA rather than tnaA UniProtKB:P0A853; UniProtKB:Q9I4X2 is pqsB rather than phzS UniProtKB:Q9HWG9; UniProtKB:Q58255 is mcrG rather than mcrB UniProtKB:Q58252; UniProtKB:Q55P57 belongs to Cryptococcus deneoformans B-3501A NCBITaxon:283643 rather than C. deuterogattii NCBITaxon:1859096; and UniProtKB:A0A1S6LQA8 is an 87-aa partial fragment).
+
+### finding-002: TaxonRecord and CausalNode lack structured slots to distinguish strain-level UniProt reference proteome bindings from species-level exemplar projections
+
+major / open / confirmed; issue key: taxonmech-species-vs-strain-proteome-scope-slots-missing-on-causal-node.
+
+TaxonMech seeds both species-level TaxonRecord files (e.g., NCBITaxon:562, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2190, NCBITaxon:1859096, NCBITaxon:40410, NCBITaxon:5207) and strain-level TaxonRecord files (e.g., NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:224308, NCBITaxon:208964, NCBITaxon:243232, NCBITaxon:294750, NCBITaxon:283643, NCBITaxon:235443). UniProtKB reference proteomes (UP000000625, UP000001570, UP000002438, UP000000805, UP000029445, UP000010091) are annotated at the strain-level NCBI Taxon ID, yet CausalNode (src/taxonmech/schema/taxonmech.yaml lines 1190-1216) provides only node_id, label, node_type, grounding, xrefs, and free-text description, with no structured slots for organism_taxon_id, proteome_id, gene_symbol, locus_tag, sequence_length, sequence_crc64, sequence_version, or entry_status (SWISS_PROT vs TREMBL).
+
+### finding-003: src/taxonmech/schema/taxonmech.yaml and conf/id_label_targets.yaml omit UniProtKB and EC prefix declarations, and no maintained overlay writer exists in src/taxonmech/seed.py
+
+blocker / open / confirmed; issue key: taxonmech-causal-node-grounding-prefix-coverage-missing-in-oak.
+
+src/taxonmech/schema/taxonmech.yaml (prefixes, lines 43-88) and conf/id_label_targets.yaml (adapters lines 18-25, ignored_prefixes lines 27-47) omit UniProtKB and EC, causing scripts/validate_id_label_correspondence.py to fail with UNKNOWN_PREFIX on grounded GENE_OR_PROTEIN nodes. Furthermore, src/taxonmech/seed.py (build_document, lines 344-646) has no maintained overlay input for causal_graphs or protein examples, and scripts/verify_corpus.py (lines 22-25, 67-73) rejects any manual YAML edit to data/taxa/&lt;domain&gt;/*.yaml.
+
+## Recommended Actions And Acceptance Checks
+
+### action-001
+
+Add a release-pinned UniProtKB / UniProt Reference Proteomes raw source inventory in data/raw/ (registered in conf/sources.yaml and data/raw/MANIFEST.yaml), declare UniProtKB and EC prefixes in src/taxonmech/schema/taxonmech.yaml and conf/id_label_targets.yaml, and implement accession-to-taxon/gene/sequence validation in scripts/validate_strict.py.
+
+- Pinned UniProtKB inventory in data/raw/ verifies accession, recommended protein name, gene symbol, locus tag, NCBI Taxon ID, proteome ID, amino-acid length, and CRC64 checksum
+- scripts/validate_id_label_correspondence.py and scripts/validate_strict.py validate UniProtKB: and EC: CURIEs and reject gene/locus/taxon mismatches such as P0A858, Q9I4X3, Q9I4X2, Q58254, and cross-species Q55P57
+
+### action-002
+
+Extend CausalNode (or a dedicated protein annotation subobject) in src/taxonmech/schema/taxonmech.yaml with optional structured slots (organism_taxon_id, proteome_id, gene_symbol, locus_tag, sequence_length, sequence_crc64, sequence_version, entry_status) and wire the maintained overlay merge in src/taxonmech/seed.py and scripts/verify_corpus.py.
+
+- CausalNode GENE_OR_PROTEIN entries distinguish strain-exact reference proteome bindings (e.g., NCBITaxon:83333, NCBITaxon:224308, NCBITaxon:208964, NCBITaxon:243232, NCBITaxon:294750, NCBITaxon:283643, NCBITaxon:235443) from species-level exemplar projections
+- All 15 Stage 3 exemplar records round-trip cleanly through src/taxonmech/seed.py, scripts/verify_corpus.py, scripts/validate_strict.py, scripts/validate_id_label_correspondence.py, and scripts/render_pages.py --check
+
+## Category Boundaries
+
+
+## Evidence
+
+| Evidence | Reference / locator | Support | Observation |
+| --- | --- | --- | --- |
+| corpus-sequence-and-genome-anchors | data/taxa/PATHS.tsv; data/raw/lpsn_names.tsv; data/straininfo/related_records.tsv.gz; data/atb/MANIFEST.yaml; data/straininfo/MANIFEST.yaml; data/taxa/PATHS.tsv:1-626049 (626,048 records); data/raw/lpsn_names.tsv (21,787 records with 21,825 16S rRNA INSDC accessions); data/straininfo/related_records.tsv.gz (52,737 NUCLEOTIDE_SEQUENCE assertions across 51,467 unique INSDC accessions: 28,160 gene/CDS, 22,703 rrnaop, 604 patent, linked onto 9,241 TaxonRecord files via 78,785 links) | supports | Full 626,048-record census confirms 0 existing causal_graphs or UniProtKB references, 21,787 records with LPSN 16S rRNA INSDC accessions, 20,868 records with 227,539 NCBI genome assemblies, 20,570 records with 173,174 genome records, and 9,241 records with 78,785 StrainInfo NUCLEOTIDE_SEQUENCE links (including 28,160 unique gene/CDS INSDC accessions). |
+| exemplar-species-and-strain-records | data/taxa/bacteria/escherichia_coli.yaml; data/taxa/bacteria/escherichia_coli_k_12.yaml; data/taxa/bacteria/escherichia_coli_str_k_12_substr_mg1655.yaml; data/taxa/bacteria/bacillus_subtilis.yaml; data/taxa/bacteria/bacillus_subtilis_subsp_subtilis_str_168.yaml; data/taxa/bacteria/pseudomonas_aeruginosa.yaml; data/taxa/bacteria/pseudomonas_aeruginosa_pao1.yaml; data/taxa/archaea/methanocaldococcus_jannaschii.yaml; data/taxa/archaea/methanocaldococcus_jannaschii_dsm_2661.yaml; data/taxa/eukaryota/cryptococcus_deuterogattii.yaml; data/taxa/eukaryota/cryptococcus_deuterogattii_r265.yaml; data/taxa/eukaryota/cryptococcus_deneoformans.yaml; data/taxa/eukaryota/cryptococcus_deneoformans_b_3501a.yaml; data/taxa/eukaryota/cryptococcus_neoformans.yaml; data/taxa/eukaryota/cryptococcus_neoformans_h99.yaml; escherichia_coli.yaml:1-147693; escherichia_coli_k_12.yaml:1-99; escherichia_coli_str_k_12_substr_mg1655.yaml:1-123; bacillus_subtilis.yaml:1-38005; bacillus_subtilis_subsp_subtilis_str_168.yaml:1-100; pseudomonas_aeruginosa.yaml:1-63369; pseudomonas_aeruginosa_pao1.yaml:1-91; methanocaldococcus_jannaschii.yaml:1-1008; methanocaldococcus_jannaschii_dsm_2661.yaml:1-973; cryptococcus_deuterogattii.yaml:1-70; cryptococcus_deuterogattii_r265.yaml:1-78; cryptococcus_deneoformans.yaml:1-94; cryptococcus_deneoformans_b_3501a.yaml:1-71; cryptococcus_neoformans.yaml:1-130; cryptococcus_neoformans_h99.yaml:1-75 | supports | TaxonMech seeds both species-level records (NCBITaxon:562, NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2190, NCBITaxon:1859096, NCBITaxon:40410, NCBITaxon:5207) and separate strain-level records corresponding to the exact UniProt reference proteome organism IDs (NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:224308, NCBITaxon:208964, NCBITaxon:243232, NCBITaxon:294750, NCBITaxon:283643, NCBITaxon:235443). |
+| live-uniprot-rest-verification | https://rest.uniprot.org/uniprotkb/; reviews/structured/20261021T043201Z-stage2-causal-graphs-assessment/review.yaml; UniProtKB REST API entries P00722 (BGAL_ECOLI), P02920 (LACY_ECOLI), P0A853 (TNAA_ECOLI), P23173 (TNAB_ECOLI), P0A858 (TPIS_ECOLI), P06534 (SP0A_BACSU), P16497 (KINA_BACSU), P00691 (AMY_BACSU), Q9HWH2 (PHZM_PSEAE), Q9HWG9 (PHZS_PSEAE), Q9I4X3 (PQSA_PSEAE), Q9I4X2 (PQSB_PSEAE), Q58256 (MCRA_METJA), Q58252 (MCRB_METJA), Q58255 (MCRG_METJA), Q58254 (MCRC_METJA), A0A095CIC4 (A0A095CIC4_CRYD2), A0A1S6LQA8 (A0A1S6LQA8_CRYDE), Q55P57 (LAC1_CRYD3), J9VY90 (LAC1_CRYN9); Stage 2 review.yaml lines 515, 550, 583, 613 | refutes | Live UniProtKB REST API queries verified 15 exact organism/proteome/locus/sequence protein anchors and exposed 2 erroneous accessions in committed Stage 2 review.yaml (Q9I4X3 pqsA at line 583 instead of Q9HWH2 phzM; Q58254 mcrC at line 613 instead of Q58256 mcrA) plus 4 additional erroneous or mis-scoped candidate accessions in expanded unpinned candidate screening: P0A858 is tpiA (not tnaA P0A853); Q9I4X2 is pqsB (not phzS Q9HWG9); Q58255 is mcrG (not mcrB Q58252); Q55P57 belongs to Cryptococcus deneoformans B-3501A NCBITaxon:283643 (not C. deuterogattii NCBITaxon:1859096/NCBITaxon:294750, where only TrEMBL A0A095CIC4 is full-length); and A0A1S6LQA8 is an 87-aa partial fragment. |
+| schema-and-validator-code | src/taxonmech/schema/taxonmech.yaml; conf/id_label_targets.yaml; scripts/validate_id_label_correspondence.py; scripts/validate_strict.py; src/taxonmech/schema/taxonmech.yaml:43-88 (prefixes), 105-313 (TaxonRecord), 953-1102 (GenomeRelatedRecordLink, with NUCLEOTIDE_SEQUENCE rule and record_id pattern at lines 1023-1035 and 1081), 1190-1216 (CausalNode), 1487-1488 (GENE_OR_PROTEIN); conf/id_label_targets.yaml:18-47,52-60 | supports | TaxonRecord has no dedicated protein_examples slot; GenomeRelatedRecordLink NUCLEOTIDE_SEQUENCE (lines 953-1102, rule/pattern at lines 1023-1035 and 1081) is restricted by regex to INSDC:... from STRAININFO; CausalNode lacks structured organism, proteome, gene, locus, and sequence checksum slots; and both taxonmech.yaml prefixes and conf/id_label_targets.yaml omit UniProtKB and EC. |
+| seeder-and-verify-corpus-code | src/taxonmech/seed.py; scripts/verify_corpus.py; conf/sources.yaml; data/raw/MANIFEST.yaml; src/taxonmech/seed.py:344-646 (build_document), 713-780 (seed); scripts/verify_corpus.py:22-25,67-73; conf/sources.yaml:1-80; data/raw/MANIFEST.yaml:1-343 | supports | src/taxonmech/seed.py has no maintained overlay input for causal_graphs or protein examples, conf/sources.yaml and data/raw/MANIFEST.yaml have no pinned UniProtKB source, and scripts/verify_corpus.py enforces 100% byte-for-byte identity against seeder-only output. |
+
+## Limits And Additional Notes
+
+- Direct edits to data/taxa/&lt;domain&gt;/*.yaml are prohibited by CLAUDE.md and .claude/skills/add-uniprot-protein-examples/SKILL.md while the native maintained overlay input, seeder merge, and pinned UniProtKB validator prerequisites are absent.
+- For Cryptococcus deuterogattii (NCBITaxon:1859096 / strain R265 NCBITaxon:294750, reference proteome UP000029445), no reviewed Swiss-Prot laccase entry exists in UniProtKB; only the full-length unreviewed TrEMBL entry UniProtKB:A0A095CIC4 (CNBG_4942, 640 aa, PE=3) is available, whereas reviewed Swiss-Prot Lac1 entries belong to sibling species C. deneoformans B-3501A (UniProtKB:Q55P57, NCBITaxon:283643) and C. neoformans H99 (UniProtKB:J9VY90, NCBITaxon:235443).
+- Full-corpus Stage 3 sequence/genome/protein anchor census: 626,048 total records; 0 existing causal_graphs or UniProtKB references; 21,787 records with 21,825 LPSN 16S rRNA INSDC accessions; 20,868 records with 227,539 NCBI genome assemblies; 20,570 records with 173,174 genome records; 9,241 records with 78,785 StrainInfo NUCLEOTIDE_SEQUENCE links across 51,467 unique INSDC accessions (28,160 gene/CDS, 22,703 rRNA operon, 604 patent).
+- Infrastructure task recorded in INFRA_TASKS.md: taxonmech-infra-0003 (pinned UniProtKB / Reference Proteomes raw source snapshot, UniProtKB/EC schema prefix declarations, and structured GENE_OR_PROTEIN organism/strain/proteome/locus/checksum scope validation).
+
+## Complete Structured Record
+
+The sibling review.yaml is authoritative.
+
+```yaml
+schema_version: 1.0.0
+review_id: 20261021T094500Z-stage3-protein-examples-assessment
+kind: batch
+repository: CultureBotAI/TaxonMech
+title: Stage 3 UniProt protein examples and native mechanism gene/protein representation
+  assessment (626,048 records; 15 species- and strain-level exemplars)
+started_at: '2026-10-21T09:22:12Z'
+finished_at: '2026-10-21T09:45:00Z'
+reviewer:
+  identity: Antigravity
+  kind: agent
+  independence: independent
+  independence_basis: Stage 3 UniProt protein-reference and mechanism gene/protein
+    audit worker; inspected all 626,048 seed_scope/PATHS records, all sequence/assembly/genome/strain
+    inventories (data/raw/, data/atb/, data/straininfo/related_records.tsv.gz), 15
+    species- and strain-level exemplar TaxonRecord YAML files, live UniProtKB REST
+    API metadata, and the seeder/validator/renderer implementation prior to judgment.
+skill: .claude/skills/add-uniprot-protein-examples/SKILL.md
+completion: partial
+verdict: blocked
+scientific_review: true
+summary: 'Assessed all 626,048 in-scope TaxonRecord files across Bacteria (605,695),
+  Archaea (14,013), Eukaryota (6,331), and other (9) against the Stage 3 UniProt protein-examples
+  curation contract (.claude/skills/add-uniprot-protein-examples/SKILL.md). Exactly
+  0 of 626,048 records currently carry causal_graphs, GENE_OR_PROTEIN nodes, or UniProtKB:
+  CURIEs. Across the corpus, 21,787 records carry 21,825 LPSN 16S rRNA INSDC sequence
+  accessions, 20,868 carry 227,539 NCBI genome assemblies, 20,570 carry 173,174 genome
+  records (GTDB/PATRIC/GOLD/IMG/ATB), and 9,241 carry 78,785 StrainInfo NUCLEOTIDE_SEQUENCE
+  links derived from 52,737 sequence assertions across 51,467 unique INSDC accessions
+  (28,160 gene/CDS, 22,703 rRNA operon, 604 patent). Direct population of verified
+  UniProtKB protein references is blocked by five native representation, writer, and
+  validator prerequisites: (1) TaxonRecord has no dedicated protein_examples slot
+  (its only protein surface is TaxonRecord.causal_graphs[].nodes[] with node_type:
+  GENE_OR_PROTEIN, and strains[].related_records[] GenomeRelatedRecordLink NUCLEOTIDE_SEQUENCE
+  at lines 953-1102 is regex-restricted at lines 1023-1035 and 1081 to INSDC:... from
+  STRAININFO), while src/taxonmech/seed.py has no maintained overlay input and data/raw/
+  has no pinned UniProtKB snapshot; (2) scripts/verify_corpus.py rejects any manual
+  YAML edit; (3) src/taxonmech/schema/taxonmech.yaml and conf/id_label_targets.yaml
+  omit UniProtKB and EC prefixes; (4) TaxonMech seeds both species-level and strain-level
+  TaxonRecord files while UniProtKB reference proteomes bind strain-level NCBI Taxon
+  IDs, yet CausalNode lacks structured organism/strain/proteome/locus/checksum slots;
+  and (5) scripts/render_pages.py --check requires zero drift against committed data/taxa/
+  records. Live UniProt REST API verification across 15 species- and strain-level
+  exemplars verified 15 UniProtKB protein bindings (with exact organism Taxon ID,
+  proteome ID, gene symbol, locus tag, EC number, amino-acid length, CRC64 checksum,
+  and sequence version) and caught 6 accession/gene/species/fragment errors across
+  committed Stage 2 review.yaml lines 514-665 (Q9I4X3 pqsA at line 583 vs Q9HWH2 phzM,
+  and Q58254 mcrC at line 613 vs Q58256 mcrA) and expanded unpinned Stage 2/Stage
+  3 candidate screening (P0A858 tpiA vs P0A853 tnaA; Q9I4X2 pqsB vs Q9HWG9 phzS; Q58255
+  mcrG mis-assigned to mcrB vs Q58252 mcrB; Q55P57 in sibling species Cryptococcus
+  deneoformans B-3501A NCBITaxon:283643 vs C. deuterogattii R265 TrEMBL A0A095CIC4;
+  and 87-aa partial fragment A0A1S6LQA8).'
+source:
+  git_revision: 662d24d9c1fd077eedc76fe87237e6822050638b
+  state: git_commit
+  inputs:
+  - path: .claude/skills/add-uniprot-protein-examples/SKILL.md
+    sha256: 7c9d6d5270e4f7568e4df2efec4169d70af499fa33db5e529e9879e14fb82764
+    role: context
+  - path: .claude/skills/curate-causal-graphs/SKILL.md
+    sha256: 2fa7e2978ba4af89df44c366b29bf445805ab1a891645774d3d58a6a2524664d
+    role: context
+  - path: .claude/skills/curate-yaml-record/SKILL.md
+    sha256: 21b59314460383702d1f850d3747f9dbaec5b7fe67c77391b19c9c490c289cca
+    role: context
+  - path: CLAUDE.md
+    sha256: 7ffd88ac6de931cabf76781935be14d465472038e3bb654208b837c3e2df8258
+    role: context
+  - path: conf/id_label_targets.yaml
+    sha256: bfd1b248f7b189cd054e15b7ad0171042a30980d2ebdbdd8e7d85cea68dde9c8
+    role: context
+  - path: conf/record_review.yaml
+    sha256: 366312506b771fc18fc5bfc30d5ec942b2c96212e1f4f95c463cfa1707fbebaa
+    role: context
+  - path: conf/sources.yaml
+    sha256: 759ef444b1890559846fd4ab7818c8dbca74ab6bee2f6b9466a1aff6b5f4d8c8
+    role: context
+  - path: curation/seed_scope.tsv
+    sha256: 95589ac7f548dcd27951c6afe432895c7409717df5f6e789a93dcb9229535963
+    role: context
+  - path: data/atb/MANIFEST.yaml
+    sha256: 1358809b2af7e8d4a6c8bb4c122781f48ae40b2c4f0f1c7ad3f37ad8907d7315
+    role: context
+  - path: data/raw/MANIFEST.yaml
+    sha256: ee76711683b1b579d1561dcf40187e10e4f0027ae1b89f108eb18e865e7e7d38
+    role: context
+  - path: data/raw/bacdive_strains.tsv
+    sha256: 029fd6d1f53ef7f90684130bf0d644ed3edd1d8fbeb065a511ae928f160b1eea
+    role: context
+  - path: data/raw/bactotraits_taxa.tsv
+    sha256: 976d109cef832d8bf27cc105f67a42efbe900b6946736298602ef6d11158b197
+    role: context
+  - path: data/raw/gold_organisms.tsv
+    sha256: 0680971a156eef0b79de46c71a1f2138eaee5212ad8193eec943bd8e6257e473
+    role: context
+  - path: data/raw/lpsn_names.tsv
+    sha256: 097f8f4ba3fd077d02e48f2c298a0af88fe02db79cc862f9af1c05141b0baa57
+    role: context
+  - path: data/raw/madin_taxa.tsv
+    sha256: 7620448834f1b86daa83f2e338160ec3291a2ec3900ea4cec449418b1dc8b148
+    role: context
+  - path: data/raw/mediadive_taxa.tsv
+    sha256: 3f74b78cadfcdb6aeae953e09fdb39e34fd9c5d5ed0be65a04a5d7fb02355905
+    role: context
+  - path: data/raw/ncbitaxon_taxa.tsv
+    sha256: 97ff340e1eebf62ea541a299e5c798cdcc24ef935c636fb059df48ab45d6f2f6
+    role: context
+  - path: data/straininfo/MANIFEST.yaml
+    sha256: 25dd601c8cf6d4d84e5cc756d1e642ebef89f565bd31967152bf0026fa072847
+    role: context
+  - path: data/straininfo/related_records.tsv.gz
+    sha256: c7a262df4f970b2b11a2cf7a0a05c631ff84938e6a19cdb1d98680bb4fb35108
+    role: context
+  - path: data/taxa/PATHS.tsv
+    sha256: f8f2e0721cb6839b30530b44be0d3004b9f0e6e2d4be8736f235b10117a8bd99
+    role: context
+  - path: data/taxa/archaea/methanocaldococcus_jannaschii.yaml
+    sha256: 39d9441864565158e65948cd0ad7dd7ce79fc872fdac550ce411dcf30c663595
+    role: target
+  - path: data/taxa/archaea/methanocaldococcus_jannaschii_dsm_2661.yaml
+    sha256: 5e50479780e050f263cddbe5634e8b602c3c46b217b0069a62384f6b474dd4b4
+    role: target
+  - path: data/taxa/bacteria/bacillus_subtilis.yaml
+    sha256: dcf2b6af885121fd3165a0a8e1c738ab3ad7c5a27c63a95d2e816379ccb2d05c
+    role: target
+  - path: data/taxa/bacteria/bacillus_subtilis_subsp_subtilis_str_168.yaml
+    sha256: 0e862815b0ead2c6c3dfd3e663564faff43b53af7926af7f6d0fa582a66d9ed6
+    role: target
+  - path: data/taxa/bacteria/escherichia_coli.yaml
+    sha256: c656a8e47ba5dc7606507095912a35ed9bd919188dd944cb35d8693694be2acd
+    role: target
+  - path: data/taxa/bacteria/escherichia_coli_k_12.yaml
+    sha256: b46fc7cfa796b192339be22ce127941b252db3b381b47d35e6191b012fd556da
+    role: target
+  - path: data/taxa/bacteria/escherichia_coli_str_k_12_substr_mg1655.yaml
+    sha256: 3b09251686f9611b2b67d8b43fc49c7a5ce5aee1deb99e2ce3c43dd85363f551
+    role: target
+  - path: data/taxa/bacteria/pseudomonas_aeruginosa.yaml
+    sha256: 5d94e066b274fb31533477c16b41c2345660cdd38f4dc62b53bdf075ea43de6d
+    role: target
+  - path: data/taxa/bacteria/pseudomonas_aeruginosa_pao1.yaml
+    sha256: 86cee4d2a91ed73b8510a2afbd192cad06d260150a5c26ca7c5030f361f25c40
+    role: target
+  - path: data/taxa/eukaryota/cryptococcus_deneoformans.yaml
+    sha256: 726d7a39b599e2bf8c9176035dc96c0c354cbe020f9ea35978ce5e7548e527cd
+    role: target
+  - path: data/taxa/eukaryota/cryptococcus_deneoformans_b_3501a.yaml
+    sha256: b4aa7589db2f53a4514944015bdc24c30c6c3393de612e2562f968bc5e9ed206
+    role: target
+  - path: data/taxa/eukaryota/cryptococcus_deuterogattii.yaml
+    sha256: 4523647eb17ceaf28168d0328284b0553b2e530541497dc81abce15e16dc04ac
+    role: target
+  - path: data/taxa/eukaryota/cryptococcus_deuterogattii_r265.yaml
+    sha256: 4409b0e1dc476420f9d5272c0b99e0d0ce3a02e073b51ff3f8dfff81dddc3266
+    role: target
+  - path: data/taxa/eukaryota/cryptococcus_neoformans.yaml
+    sha256: 321562b0e9aa2a104c4763f8b5c1c9c4b4871204cf92ecc76b0b1229e2482d03
+    role: target
+  - path: data/taxa/eukaryota/cryptococcus_neoformans_h99.yaml
+    sha256: c9720b28e51e8a2b608413052df6634b1120f5378fb8c06848c366d6461fb321
+    role: target
+  - path: docs/CURATION.md
+    sha256: 9e09c97bcd617f2b3d0090f775b80565fccc9d00e4c398ed58d3a31192a8fa8e
+    role: context
+  - path: docs/SCHEMA.md
+    sha256: 9e767cebb2506f8372c65ceb5f75e5ef2df2b23c2be3727cfd198f447a6a0e30
+    role: context
+  - path: docs/SOURCE_COVERAGE.md
+    sha256: 43f17c3c80815d395136aab53f310be3190a8d614a45fc2f4a3942faeb0bc9e9
+    role: context
+  - path: docs/STRAININFO.md
+    sha256: 65d274e7126fcf7810da746366b0e60c1957f05df9016fb0900600932b278241
+    role: context
+  - path: docs/STRAIN_GENOMES.md
+    sha256: 7cfdbc8a600173d6569f885b409b1543098bb6022e8764324d91879eaed2b597
+    role: context
+  - path: docs/record-review-profile.md
+    sha256: bc2074242edcf09f510aae8d9cf40961ea0c1155ca497808765bdabfb35ee721
+    role: context
+  - path: docs/record-reviews.md
+    sha256: 452a19ab688276747b7c4308523a14d4d99c1c39ef6909ae8a90b85b7a9b3e9b
+    role: context
+  - path: reviews/structured/20261021T043201Z-stage2-causal-graphs-assessment/review.yaml
+    sha256: e64b410aa540af8c73bba692ef466f86da130efb697789382da6a88756b9d2d1
+    role: context
+  - path: schema/record_review.yaml
+    sha256: 229baf9b69118a1fe318e4c31085c0820e4e3d1365e7b04d6ace451b7c35f9bb
+    role: context
+  - path: scripts/record_review.py
+    sha256: 95a4ec41e38ec47ba3578e76838c46a0adbf47e49ad3636524735d08cfcb1c4d
+    role: context
+  - path: scripts/render_pages.py
+    sha256: de2984d4c5479778e83f9d1a6fb9ba67f8fbd27d42537fbe2b5151f60f1c0342
+    role: context
+  - path: scripts/run_qc.py
+    sha256: d3a8e398b0484fef1ce4ae13e639a03dd41467c1d597d753132e4dba04df9da3
+    role: context
+  - path: scripts/validate_history.py
+    sha256: aa8fd8528a28cf56a92768c05d57aea7ff48745510796126f144856b8fd7ae8b
+    role: context
+  - path: scripts/validate_id_label_correspondence.py
+    sha256: b5ff41bb52d24f5d7819fb12769e216440f75ec3fb3df3e3cb2c5082fffb40e0
+    role: context
+  - path: scripts/validate_strict.py
+    sha256: d0d75cc805cc746053076b5f75f5e6c817ab15c75a9362f8ce3be53bd4ec7382
+    role: context
+  - path: scripts/verify_corpus.py
+    sha256: 48c4ef707543d1b836052013e8991d530d14559f9b58aa3ff9faf02c4e1ffc2e
+    role: context
+  - path: src/taxonmech/extract.py
+    sha256: 7c5b5bf385e0c060f1cb3dbac304d05ddb941e4c83c900017a04133efd6d1822
+    role: context
+  - path: src/taxonmech/report.py
+    sha256: 18475a2415154589e79fa9153bd5f97801d300a2abe77f0186d41c058f9979ee
+    role: context
+  - path: src/taxonmech/schema/history.yaml
+    sha256: b01b06f1b9a37db205c26c31ec0fd910690848507c7e1bfb73b424ac0829c52d
+    role: context
+  - path: src/taxonmech/schema/mech_shared.yaml
+    sha256: c2e7054fd32635e380c698282bd886a9105861009b9f0474f02bb1b80865e895
+    role: context
+  - path: src/taxonmech/schema/taxonmech.yaml
+    sha256: aab25fee94c73eb70e5197a4f3ab8ddf0fa6731785974364963906d4f4d87fc3
+    role: context
+  - path: src/taxonmech/seed.py
+    sha256: 3cc30f6413a293165385dfc1860505fe389e5adfe9aa3d168f76aa4cb2ac36bd
+    role: context
+  - path: src/taxonmech/straininfo.py
+    sha256: 8e620555b464909ecb2453b3a6cf0a71dc15985dfe48fbf0e0d6cef780ff983f
+    role: context
+  - path: src/taxonmech/straininfo_links.py
+    sha256: b753f48edb804d588107206faeadcb2b627c5225f43fdb1a484bbf78a9d06297
+    role: context
+  - path: src/taxonmech/templates/taxon-content.html
+    sha256: 9562204e103755b648b32234cf001253e855a64bb46f5de1eb372b5fcf7ad3a2
+    role: context
+scope:
+  description: Full-corpus Stage 3 UniProt protein-example and mechanism gene/protein
+    representation audit across all 626,048 TaxonRecord files in data/taxa/, paired
+    with live UniProtKB REST API verification across 15 species- and strain-level
+    exemplar TaxonRecord files spanning Bacteria, Archaea, and Eukaryota.
+  selection: All 626,048 in-scope taxa in curation/seed_scope.tsv and data/taxa/PATHS.tsv
+    classified by sequence, genome-assembly, genome-record, StrainInfo gene/CDS sequence,
+    and phenotype/trait anchors, with 15 species- and strain-level exemplar TaxonRecord
+    files bound directly.
+  coverage: sampled
+  population_size: 626048
+  sampling_method: Exhaustive deterministic census of all 626,048 YAML records in
+    data/taxa/ and data/straininfo/related_records.tsv.gz plus live UniProtKB REST
+    API verification of 15 species- and strain-level exemplar records across Bacteria,
+    Archaea, and Eukaryota.
+  reviewed_target_ids:
+  - NCBITaxon:562
+  - NCBITaxon:83333
+  - NCBITaxon:511145
+  - NCBITaxon:1423
+  - NCBITaxon:224308
+  - NCBITaxon:287
+  - NCBITaxon:208964
+  - NCBITaxon:2190
+  - NCBITaxon:243232
+  - NCBITaxon:1859096
+  - NCBITaxon:294750
+  - NCBITaxon:40410
+  - NCBITaxon:283643
+  - NCBITaxon:5207
+  - NCBITaxon:235443
+targets:
+- target_id: NCBITaxon:562
+  path: data/taxa/bacteria/escherichia_coli.yaml
+  label: Escherichia coli
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:83333
+  path: data/taxa/bacteria/escherichia_coli_k_12.yaml
+  label: Escherichia coli K-12
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:511145
+  path: data/taxa/bacteria/escherichia_coli_str_k_12_substr_mg1655.yaml
+  label: Escherichia coli str. K-12 substr. MG1655
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:1423
+  path: data/taxa/bacteria/bacillus_subtilis.yaml
+  label: Bacillus subtilis
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:224308
+  path: data/taxa/bacteria/bacillus_subtilis_subsp_subtilis_str_168.yaml
+  label: Bacillus subtilis subsp. subtilis str. 168
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:287
+  path: data/taxa/bacteria/pseudomonas_aeruginosa.yaml
+  label: Pseudomonas aeruginosa
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:208964
+  path: data/taxa/bacteria/pseudomonas_aeruginosa_pao1.yaml
+  label: Pseudomonas aeruginosa PAO1
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:2190
+  path: data/taxa/archaea/methanocaldococcus_jannaschii.yaml
+  label: Methanocaldococcus jannaschii
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:243232
+  path: data/taxa/archaea/methanocaldococcus_jannaschii_dsm_2661.yaml
+  label: Methanocaldococcus jannaschii DSM 2661
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:1859096
+  path: data/taxa/eukaryota/cryptococcus_deuterogattii.yaml
+  label: Cryptococcus deuterogattii
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:294750
+  path: data/taxa/eukaryota/cryptococcus_deuterogattii_r265.yaml
+  label: Cryptococcus deuterogattii R265
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:40410
+  path: data/taxa/eukaryota/cryptococcus_deneoformans.yaml
+  label: Cryptococcus deneoformans
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:283643
+  path: data/taxa/eukaryota/cryptococcus_deneoformans_b_3501a.yaml
+  label: Cryptococcus deneoformans B-3501A
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:5207
+  path: data/taxa/eukaryota/cryptococcus_neoformans.yaml
+  label: Cryptococcus neoformans
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+- target_id: NCBITaxon:235443
+  path: data/taxa/eukaryota/cryptococcus_neoformans_h99.yaml
+  label: Cryptococcus neoformans H99
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Generated record builder
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit taxon seed scope
+checks:
+- check_id: validate-strict-stage3-exemplars
+  name: Strict schema and reference validation on 15 Stage 3 species and strain exemplar
+    records
+  status: passed
+  required: true
+  summary: All 15 species- and strain-level exemplar TaxonRecord files pass scripts/validate_strict.py
+    with 0 errors.
+  target_ids:
+  - NCBITaxon:562
+  - NCBITaxon:83333
+  - NCBITaxon:511145
+  - NCBITaxon:1423
+  - NCBITaxon:224308
+  - NCBITaxon:287
+  - NCBITaxon:208964
+  - NCBITaxon:2190
+  - NCBITaxon:243232
+  - NCBITaxon:1859096
+  - NCBITaxon:294750
+  - NCBITaxon:40410
+  - NCBITaxon:283643
+  - NCBITaxon:5207
+  - NCBITaxon:235443
+  command: .venv/bin/python scripts/validate_strict.py --out /tmp/stage3_instance_validation_failures.tsv
+    data/taxa/bacteria/escherichia_coli.yaml data/taxa/bacteria/escherichia_coli_k_12.yaml
+    data/taxa/bacteria/escherichia_coli_str_k_12_substr_mg1655.yaml data/taxa/bacteria/bacillus_subtilis.yaml
+    data/taxa/bacteria/bacillus_subtilis_subsp_subtilis_str_168.yaml data/taxa/bacteria/pseudomonas_aeruginosa.yaml
+    data/taxa/bacteria/pseudomonas_aeruginosa_pao1.yaml data/taxa/archaea/methanocaldococcus_jannaschii.yaml
+    data/taxa/archaea/methanocaldococcus_jannaschii_dsm_2661.yaml data/taxa/eukaryota/cryptococcus_deuterogattii.yaml
+    data/taxa/eukaryota/cryptococcus_deuterogattii_r265.yaml data/taxa/eukaryota/cryptococcus_deneoformans.yaml
+    data/taxa/eukaryota/cryptococcus_deneoformans_b_3501a.yaml data/taxa/eukaryota/cryptococcus_neoformans.yaml
+    data/taxa/eukaryota/cryptococcus_neoformans_h99.yaml
+  exit_code: 0
+  expected_exit_code: 0
+  evidence_ids:
+  - exemplar-species-and-strain-records
+  - schema-and-validator-code
+- check_id: gate-1-native-protein-representation-and-seeder-input
+  name: 'Prerequisite Gate 1: Maintained protein/causal_graphs curation input and
+    pinned UniProtKB raw source'
+  status: unavailable
+  required: true
+  summary: 'TaxonRecord has no dedicated protein_examples slot (only TaxonRecord.causal_graphs[].nodes[]
+    with node_type: GENE_OR_PROTEIN), src/taxonmech/seed.py has no maintained overlay
+    input, and conf/sources.yaml + data/raw/MANIFEST.yaml contain no pinned UniProtKB
+    or UniProt Reference Proteomes snapshot.'
+  target_ids:
+  - NCBITaxon:562
+  - NCBITaxon:83333
+  - NCBITaxon:511145
+  - NCBITaxon:1423
+  - NCBITaxon:224308
+  - NCBITaxon:287
+  - NCBITaxon:208964
+  - NCBITaxon:2190
+  - NCBITaxon:243232
+  - NCBITaxon:1859096
+  - NCBITaxon:294750
+  - NCBITaxon:40410
+  - NCBITaxon:283643
+  - NCBITaxon:5207
+  - NCBITaxon:235443
+  evidence_ids:
+  - schema-and-validator-code
+  - seeder-and-verify-corpus-code
+- check_id: gate-2-verify-corpus-reproduction
+  name: 'Prerequisite Gate 2: Corpus byte-for-byte reproduction check against seeder
+    output'
+  status: passed
+  required: true
+  summary: scripts/verify_corpus.py passes on the current unedited 626,048-record
+    corpus and blocks manual edits to data/taxa/<domain>/*.yaml until a maintained
+    overlay input is merged by src/taxonmech/seed.py.
+  target_ids:
+  - NCBITaxon:562
+  - NCBITaxon:83333
+  - NCBITaxon:511145
+  - NCBITaxon:1423
+  - NCBITaxon:224308
+  - NCBITaxon:287
+  - NCBITaxon:208964
+  - NCBITaxon:2190
+  - NCBITaxon:243232
+  - NCBITaxon:1859096
+  - NCBITaxon:294750
+  - NCBITaxon:40410
+  - NCBITaxon:283643
+  - NCBITaxon:5207
+  - NCBITaxon:235443
+  command: .venv/bin/python scripts/verify_corpus.py --workers 4
+  exit_code: 0
+  expected_exit_code: 0
+  evidence_ids:
+  - seeder-and-verify-corpus-code
+- check_id: gate-3-uniprotkb-and-ec-prefix-validation
+  name: 'Prerequisite Gate 3: Schema and OAK ID-label prefix coverage for UniProtKB
+    and EC'
+  status: unavailable
+  required: true
+  summary: src/taxonmech/schema/taxonmech.yaml (prefixes, lines 43-88) and conf/id_label_targets.yaml
+    (adapters lines 18-25, ignored_prefixes lines 27-47) omit UniProtKB and EC, causing
+    scripts/validate_id_label_correspondence.py to fail with UNKNOWN_PREFIX on grounded
+    GENE_OR_PROTEIN nodes.
+  target_ids:
+  - NCBITaxon:562
+  - NCBITaxon:83333
+  - NCBITaxon:511145
+  - NCBITaxon:1423
+  - NCBITaxon:224308
+  - NCBITaxon:287
+  - NCBITaxon:208964
+  - NCBITaxon:2190
+  - NCBITaxon:243232
+  - NCBITaxon:1859096
+  - NCBITaxon:294750
+  - NCBITaxon:40410
+  - NCBITaxon:283643
+  - NCBITaxon:5207
+  - NCBITaxon:235443
+  evidence_ids:
+  - schema-and-validator-code
+- check_id: gate-4-species-vs-strain-proteome-scope-slots
+  name: 'Prerequisite Gate 4: Structured organism, strain, proteome, locus, and sequence
+    checksum scope representation'
+  status: unavailable
+  required: true
+  summary: CausalNode (src/taxonmech/schema/taxonmech.yaml lines 1190-1216) provides
+    only node_id, label, node_type, grounding, xrefs, and free-text description, lacking
+    structured slots (organism_taxon_id, proteome_id, gene_symbol, locus_tag, sequence_length,
+    sequence_crc64, sequence_version, entry_status) to distinguish strain-exact reference
+    proteome bindings from species-level exemplar projections.
+  target_ids:
+  - NCBITaxon:562
+  - NCBITaxon:83333
+  - NCBITaxon:511145
+  - NCBITaxon:1423
+  - NCBITaxon:224308
+  - NCBITaxon:287
+  - NCBITaxon:208964
+  - NCBITaxon:2190
+  - NCBITaxon:243232
+  - NCBITaxon:1859096
+  - NCBITaxon:294750
+  - NCBITaxon:40410
+  - NCBITaxon:283643
+  - NCBITaxon:5207
+  - NCBITaxon:235443
+  evidence_ids:
+  - schema-and-validator-code
+  - live-uniprot-rest-verification
+evidence:
+- evidence_id: corpus-sequence-and-genome-anchors
+  kind: database
+  reference: data/taxa/PATHS.tsv; data/raw/lpsn_names.tsv; data/straininfo/related_records.tsv.gz;
+    data/atb/MANIFEST.yaml; data/straininfo/MANIFEST.yaml
+  locator: 'data/taxa/PATHS.tsv:1-626049 (626,048 records); data/raw/lpsn_names.tsv
+    (21,787 records with 21,825 16S rRNA INSDC accessions); data/straininfo/related_records.tsv.gz
+    (52,737 NUCLEOTIDE_SEQUENCE assertions across 51,467 unique INSDC accessions:
+    28,160 gene/CDS, 22,703 rrnaop, 604 patent, linked onto 9,241 TaxonRecord files
+    via 78,785 links)'
+  accessed_at: '2026-10-21T09:30:00Z'
+  support: supports
+  summary: Full 626,048-record census confirms 0 existing causal_graphs or UniProtKB
+    references, 21,787 records with LPSN 16S rRNA INSDC accessions, 20,868 records
+    with 227,539 NCBI genome assemblies, 20,570 records with 173,174 genome records,
+    and 9,241 records with 78,785 StrainInfo NUCLEOTIDE_SEQUENCE links (including
+    28,160 unique gene/CDS INSDC accessions).
+  snapshot_sha256: c7a262df4f970b2b11a2cf7a0a05c631ff84938e6a19cdb1d98680bb4fb35108
+- evidence_id: exemplar-species-and-strain-records
+  kind: record_content
+  reference: data/taxa/bacteria/escherichia_coli.yaml; data/taxa/bacteria/escherichia_coli_k_12.yaml;
+    data/taxa/bacteria/escherichia_coli_str_k_12_substr_mg1655.yaml; data/taxa/bacteria/bacillus_subtilis.yaml;
+    data/taxa/bacteria/bacillus_subtilis_subsp_subtilis_str_168.yaml; data/taxa/bacteria/pseudomonas_aeruginosa.yaml;
+    data/taxa/bacteria/pseudomonas_aeruginosa_pao1.yaml; data/taxa/archaea/methanocaldococcus_jannaschii.yaml;
+    data/taxa/archaea/methanocaldococcus_jannaschii_dsm_2661.yaml; data/taxa/eukaryota/cryptococcus_deuterogattii.yaml;
+    data/taxa/eukaryota/cryptococcus_deuterogattii_r265.yaml; data/taxa/eukaryota/cryptococcus_deneoformans.yaml;
+    data/taxa/eukaryota/cryptococcus_deneoformans_b_3501a.yaml; data/taxa/eukaryota/cryptococcus_neoformans.yaml;
+    data/taxa/eukaryota/cryptococcus_neoformans_h99.yaml
+  locator: escherichia_coli.yaml:1-147693; escherichia_coli_k_12.yaml:1-99; escherichia_coli_str_k_12_substr_mg1655.yaml:1-123;
+    bacillus_subtilis.yaml:1-38005; bacillus_subtilis_subsp_subtilis_str_168.yaml:1-100;
+    pseudomonas_aeruginosa.yaml:1-63369; pseudomonas_aeruginosa_pao1.yaml:1-91; methanocaldococcus_jannaschii.yaml:1-1008;
+    methanocaldococcus_jannaschii_dsm_2661.yaml:1-973; cryptococcus_deuterogattii.yaml:1-70;
+    cryptococcus_deuterogattii_r265.yaml:1-78; cryptococcus_deneoformans.yaml:1-94;
+    cryptococcus_deneoformans_b_3501a.yaml:1-71; cryptococcus_neoformans.yaml:1-130;
+    cryptococcus_neoformans_h99.yaml:1-75
+  accessed_at: '2026-10-21T09:40:00Z'
+  support: supports
+  summary: TaxonMech seeds both species-level records (NCBITaxon:562, NCBITaxon:1423,
+    NCBITaxon:287, NCBITaxon:2190, NCBITaxon:1859096, NCBITaxon:40410, NCBITaxon:5207)
+    and separate strain-level records corresponding to the exact UniProt reference
+    proteome organism IDs (NCBITaxon:83333, NCBITaxon:511145, NCBITaxon:224308, NCBITaxon:208964,
+    NCBITaxon:243232, NCBITaxon:294750, NCBITaxon:283643, NCBITaxon:235443).
+  snapshot_sha256: c656a8e47ba5dc7606507095912a35ed9bd919188dd944cb35d8693694be2acd
+- evidence_id: live-uniprot-rest-verification
+  kind: authority
+  reference: https://rest.uniprot.org/uniprotkb/; reviews/structured/20261021T043201Z-stage2-causal-graphs-assessment/review.yaml
+  locator: UniProtKB REST API entries P00722 (BGAL_ECOLI), P02920 (LACY_ECOLI), P0A853
+    (TNAA_ECOLI), P23173 (TNAB_ECOLI), P0A858 (TPIS_ECOLI), P06534 (SP0A_BACSU), P16497
+    (KINA_BACSU), P00691 (AMY_BACSU), Q9HWH2 (PHZM_PSEAE), Q9HWG9 (PHZS_PSEAE), Q9I4X3
+    (PQSA_PSEAE), Q9I4X2 (PQSB_PSEAE), Q58256 (MCRA_METJA), Q58252 (MCRB_METJA), Q58255
+    (MCRG_METJA), Q58254 (MCRC_METJA), A0A095CIC4 (A0A095CIC4_CRYD2), A0A1S6LQA8 (A0A1S6LQA8_CRYDE),
+    Q55P57 (LAC1_CRYD3), J9VY90 (LAC1_CRYN9); Stage 2 review.yaml lines 515, 550,
+    583, 613
+  accessed_at: '2026-10-21T09:34:00Z'
+  support: refutes
+  summary: 'Live UniProtKB REST API queries verified 15 exact organism/proteome/locus/sequence
+    protein anchors and exposed 2 erroneous accessions in committed Stage 2 review.yaml
+    (Q9I4X3 pqsA at line 583 instead of Q9HWH2 phzM; Q58254 mcrC at line 613 instead
+    of Q58256 mcrA) plus 4 additional erroneous or mis-scoped candidate accessions
+    in expanded unpinned candidate screening: P0A858 is tpiA (not tnaA P0A853); Q9I4X2
+    is pqsB (not phzS Q9HWG9); Q58255 is mcrG (not mcrB Q58252); Q55P57 belongs to
+    Cryptococcus deneoformans B-3501A NCBITaxon:283643 (not C. deuterogattii NCBITaxon:1859096/NCBITaxon:294750,
+    where only TrEMBL A0A095CIC4 is full-length); and A0A1S6LQA8 is an 87-aa partial
+    fragment.'
+  snapshot_sha256: e64b410aa540af8c73bba692ef466f86da130efb697789382da6a88756b9d2d1
+- evidence_id: schema-and-validator-code
+  kind: validation
+  reference: src/taxonmech/schema/taxonmech.yaml; conf/id_label_targets.yaml; scripts/validate_id_label_correspondence.py;
+    scripts/validate_strict.py
+  locator: src/taxonmech/schema/taxonmech.yaml:43-88 (prefixes), 105-313 (TaxonRecord),
+    953-1102 (GenomeRelatedRecordLink, with NUCLEOTIDE_SEQUENCE rule and record_id
+    pattern at lines 1023-1035 and 1081), 1190-1216 (CausalNode), 1487-1488 (GENE_OR_PROTEIN);
+    conf/id_label_targets.yaml:18-47,52-60
+  accessed_at: '2026-10-21T09:30:00Z'
+  support: supports
+  summary: TaxonRecord has no dedicated protein_examples slot; GenomeRelatedRecordLink
+    NUCLEOTIDE_SEQUENCE (lines 953-1102, rule/pattern at lines 1023-1035 and 1081)
+    is restricted by regex to INSDC:... from STRAININFO; CausalNode lacks structured
+    organism, proteome, gene, locus, and sequence checksum slots; and both taxonmech.yaml
+    prefixes and conf/id_label_targets.yaml omit UniProtKB and EC.
+  snapshot_sha256: aab25fee94c73eb70e5197a4f3ab8ddf0fa6731785974364963906d4f4d87fc3
+- evidence_id: seeder-and-verify-corpus-code
+  kind: validation
+  reference: src/taxonmech/seed.py; scripts/verify_corpus.py; conf/sources.yaml; data/raw/MANIFEST.yaml
+  locator: src/taxonmech/seed.py:344-646 (build_document), 713-780 (seed); scripts/verify_corpus.py:22-25,67-73;
+    conf/sources.yaml:1-80; data/raw/MANIFEST.yaml:1-343
+  accessed_at: '2026-10-21T09:30:00Z'
+  support: supports
+  summary: src/taxonmech/seed.py has no maintained overlay input for causal_graphs
+    or protein examples, conf/sources.yaml and data/raw/MANIFEST.yaml have no pinned
+    UniProtKB source, and scripts/verify_corpus.py enforces 100% byte-for-byte identity
+    against seeder-only output.
+  snapshot_sha256: 3cc30f6413a293165385dfc1860505fe389e5adfe9aa3d168f76aa4cb2ac36bd
+assessments:
+- assessment_id: corpus-protein-and-sequence-anchor-census
+  area: completeness
+  topic: Corpus-wide sequence, genome, and protein anchor census across all 626,048
+    TaxonRecord files
+  outcome: concern
+  summary: Across all 626,048 in-scope TaxonRecord files (605,695 Bacteria, 14,013
+    Archaea, 6,331 Eukaryota, 9 other), 0 records currently carry causal_graphs, GENE_OR_PROTEIN
+    nodes, or UniProtKB references. However, 21,787 records carry 21,825 LPSN 16S
+    rRNA INSDC accessions, 20,868 carry 227,539 NCBI genome assemblies, 20,570 carry
+    173,174 genome records, and 9,241 carry 78,785 StrainInfo NUCLEOTIDE_SEQUENCE
+    links spanning 51,467 unique INSDC accessions (including 28,160 unique gene/CDS
+    accessions).
+  target_ids:
+  - NCBITaxon:562
+  - NCBITaxon:83333
+  - NCBITaxon:511145
+  - NCBITaxon:1423
+  - NCBITaxon:224308
+  - NCBITaxon:287
+  - NCBITaxon:208964
+  - NCBITaxon:2190
+  - NCBITaxon:243232
+  - NCBITaxon:1859096
+  - NCBITaxon:294750
+  - NCBITaxon:40410
+  - NCBITaxon:283643
+  - NCBITaxon:5207
+  - NCBITaxon:235443
+  evidence_ids:
+  - corpus-sequence-and-genome-anchors
+  - exemplar-species-and-strain-records
+  metrics:
+  - name: total_in_scope_records
+    value: 626048.0
+    unit: records
+    definition: Total species-or-below TaxonRecord files in curation/seed_scope.tsv
+      and data/taxa/PATHS.tsv.
+    denominator: 626048
+    minimum: 0.0
+    maximum: 626048.0
+  - name: records_with_strain_genome_assemblies
+    value: 20868.0
+    unit: records
+    definition: In-scope TaxonRecord files carrying one or more ncbi.assembly:GCA_/GCF_
+      links on strains[].genome_assemblies.
+    denominator: 626048
+    minimum: 0.0
+    maximum: 626048.0
+  - name: records_with_straininfo_nucleotide_sequences
+    value: 9241.0
+    unit: records
+    definition: In-scope TaxonRecord files carrying one or more INSDC:... NUCLEOTIDE_SEQUENCE
+      links in strains[].related_records.
+    denominator: 626048
+    minimum: 0.0
+    maximum: 626048.0
+  - name: records_with_populated_uniprotkb_references
+    value: 0.0
+    unit: records
+    definition: 'In-scope TaxonRecord files currently carrying a UniProtKB: CURIE
+      in causal_graphs or any other slot.'
+    denominator: 626048
+    minimum: 0.0
+    maximum: 626048.0
+- assessment_id: live-verified-uniprot-protein-audit
+  area: grounding
+  topic: Live UniProtKB verification of organism, strain, proteome, sequence, and
+    claim scope for mechanism GENE_OR_PROTEIN nodes
+  outcome: concern
+  summary: Verified 15 UniProtKB protein anchors via live UniProt REST API queries
+    across 15 species- and strain-level exemplar records, preserving exact organism
+    NCBI Taxon ID, UniProt Proteome ID, entry review status (Swiss-Prot vs TrEMBL),
+    gene symbol, ordered locus tag, EC number, amino-acid length, CRC64 checksum,
+    and sequence version, while identifying and correcting 2 accession/gene errors
+    in committed Stage 2 review.yaml (Q9I4X3 at line 583 and Q58254 at line 613) and
+    4 additional accession/gene/species/fragment errors from expanded unpinned candidate
+    screening (P0A858, Q9I4X2, Q58255 for mcrB, Q55P57, and A0A1S6LQA8).
+  target_ids:
+  - NCBITaxon:562
+  - NCBITaxon:83333
+  - NCBITaxon:511145
+  - NCBITaxon:1423
+  - NCBITaxon:224308
+  - NCBITaxon:287
+  - NCBITaxon:208964
+  - NCBITaxon:2190
+  - NCBITaxon:243232
+  - NCBITaxon:1859096
+  - NCBITaxon:294750
+  - NCBITaxon:40410
+  - NCBITaxon:283643
+  - NCBITaxon:5207
+  - NCBITaxon:235443
+  evidence_ids:
+  - live-uniprot-rest-verification
+  - exemplar-species-and-strain-records
+  - schema-and-validator-code
+  details: "Live-verified UniProtKB GENE_OR_PROTEIN specifications and organism/strain/sequence\
+    \ scope audit:\n\n1. Escherichia coli K-12 (strain record NCBITaxon:83333 data/taxa/bacteria/escherichia_coli_k_12.yaml;\
+    \ substrain MG1655 record NCBITaxon:511145 data/taxa/bacteria/escherichia_coli_str_k_12_substr_mg1655.yaml;\
+    \ parent species record NCBITaxon:562 data/taxa/bacteria/escherichia_coli.yaml;\
+    \ UniProt reference proteome UP000000625):\n   - VERIFIED (matches committed Stage\
+    \ 2 review.yaml line 515): UniProtKB:P00722 (BGAL_ECOLI, reviewed Swiss-Prot,\
+    \ PE=1) | label: Beta-galactosidase | gene: lacZ (b0344 / JW0335) | xrefs: [EC:3.2.1.23]\
+    \ | organism: NCBITaxon:83333 | proteome: UP000000625 | sequence: 1,024 aa, CRC64\
+    \ 9D295EF4CEF90B08, version 2 | graph: ecoli_lactose_utilization (node_id: n_protein_lacz).\n\
+    \   - VERIFIED: UniProtKB:P02920 (LACY_ECOLI, reviewed Swiss-Prot, PE=1) | label:\
+    \ Lactose permease | gene: lacY (b0343 / JW0334) | organism: NCBITaxon:83333 |\
+    \ proteome: UP000000625 | sequence: 417 aa, CRC64 24A8062F628CDA32, version 1\
+    \ | graph: ecoli_lactose_utilization (node_id: n_protein_lacy).\n   - VERIFIED\
+    \ (replaces unpinned candidate P0A858): UniProtKB:P0A853 (TNAA_ECOLI, reviewed\
+    \ Swiss-Prot, PE=1) | label: Tryptophanase | gene: tnaA (b3708 / JW3686) | xrefs:\
+    \ [EC:4.1.99.1] | organism: NCBITaxon:83333 | proteome: UP000000625 | sequence:\
+    \ 471 aa, CRC64 5AFC1F41BD9D0034, version 1 | graph: ecoli_indole_production (node_id:\
+    \ n_protein_tnaa).\n   - VERIFIED: UniProtKB:P23173 (TNAB_ECOLI, reviewed Swiss-Prot,\
+    \ PE=1) | label: Low affinity tryptophan permease | gene: tnaB (b3709 / JW3687)\
+    \ | organism: NCBITaxon:83333 | proteome: UP000000625 | sequence: 415 aa, CRC64\
+    \ 1E34C7DE3DF6E9D9, version 1 | graph: ecoli_indole_production (node_id: n_protein_tnab).\n\
+    \   - REJECTED: UniProtKB:P0A858 (TPIS_ECOLI, tpiA / b3919, Triosephosphate isomerase,\
+    \ EC:5.3.1.1, 255 aa) was erroneously proposed as TnaA during unpinned candidate\
+    \ screening (not present in committed Stage 2 review.yaml).\n\n2. Bacillus subtilis\
+    \ subsp. subtilis str. 168 (strain record NCBITaxon:224308 data/taxa/bacteria/bacillus_subtilis_subsp_subtilis_str_168.yaml;\
+    \ parent species record NCBITaxon:1423 data/taxa/bacteria/bacillus_subtilis.yaml;\
+    \ UniProt reference proteome UP000001570):\n   - VERIFIED (matches committed Stage\
+    \ 2 review.yaml line 550): UniProtKB:P06534 (SP0A_BACSU, reviewed Swiss-Prot,\
+    \ PE=1) | label: Stage 0 sporulation protein A | gene: spo0A (BSU24220) | organism:\
+    \ NCBITaxon:224308 | proteome: UP000001570 | sequence: 267 aa, CRC64 2F4943A5A5061DD9,\
+    \ version 1 | graph: bsubtilis_spo0a_sporulation (node_id: n_protein_spo0a).\n\
+    \   - VERIFIED: UniProtKB:P16497 (KINA_BACSU, reviewed Swiss-Prot, PE=1) | label:\
+    \ Sporulation kinase A | gene: kinA (BSU13990) | xrefs: [EC:2.7.13.3] | organism:\
+    \ NCBITaxon:224308 | proteome: UP000001570 | sequence: 606 aa, CRC64 A8BB97FE844B32EE,\
+    \ version 2 | graph: bsubtilis_spo0a_sporulation (node_id: n_protein_kina).\n\
+    \   - VERIFIED: UniProtKB:P00691 (AMY_BACSU, reviewed Swiss-Prot, PE=1) | label:\
+    \ Alpha-amylase | gene: amyE (BSU03040) | xrefs: [EC:3.2.1.1] | organism: NCBITaxon:224308\
+    \ | proteome: UP000001570 | sequence: 659 aa, CRC64 16BD6CB1E7C67BD6, version\
+    \ 2 | graph: bsubtilis_starch_hydrolysis (node_id: n_protein_amye).\n\n3. Pseudomonas\
+    \ aeruginosa PAO1 (strain record NCBITaxon:208964 data/taxa/bacteria/pseudomonas_aeruginosa_pao1.yaml;\
+    \ parent species record NCBITaxon:287 data/taxa/bacteria/pseudomonas_aeruginosa.yaml;\
+    \ UniProt reference proteome UP000002438):\n   - VERIFIED (replaces erroneous\
+    \ Q9I4X3 in committed Stage 2 review.yaml line 583): UniProtKB:Q9HWH2 (PHZM_PSEAE,\
+    \ reviewed Swiss-Prot, PE=1) | label: Phenazine-1-carboxylate N-methyltransferase\
+    \ | gene: phzM (PA4209) | xrefs: [EC:2.1.1.327] | organism: NCBITaxon:208964 |\
+    \ proteome: UP000002438 | sequence: 334 aa, CRC64 27D9717ECA12A1B5, version 1\
+    \ | graph: paeruginosa_pyocyanin_biosynthesis (node_id: n_protein_phzm).\n   -\
+    \ VERIFIED (replaces unpinned candidate Q9I4X2): UniProtKB:Q9HWG9 (PHZS_PSEAE,\
+    \ reviewed Swiss-Prot, PE=1) | label: 5-methylphenazine-1-carboxylate 1-monooxygenase\
+    \ | gene: phzS (PA4217) | xrefs: [EC:1.14.13.218] | organism: NCBITaxon:208964\
+    \ | proteome: UP000002438 | sequence: 402 aa, CRC64 F2BB36662ABAC790, version\
+    \ 1 | graph: paeruginosa_pyocyanin_biosynthesis (node_id: n_protein_phzs).\n \
+    \  - REJECTED: UniProtKB:Q9I4X3 (PQSA_PSEAE, pqsA / PA0996, Anthranilate--CoA\
+    \ ligase, EC:6.2.1.32, 517 aa) was erroneously assigned to PhzM in committed Stage\
+    \ 2 review.yaml line 583, and UniProtKB:Q9I4X2 (PQSB_PSEAE, pqsB / PA0997, 283\
+    \ aa) was erroneously proposed as PhzS during expanded unpinned candidate screening.\n\
+    \n4. Methanocaldococcus jannaschii DSM 2661 (strain record NCBITaxon:243232 data/taxa/archaea/methanocaldococcus_jannaschii_dsm_2661.yaml;\
+    \ parent species record NCBITaxon:2190 data/taxa/archaea/methanocaldococcus_jannaschii.yaml;\
+    \ assembly GCA_000091665.1; UniProt reference proteome UP000000805):\n   - VERIFIED\
+    \ (replaces erroneous Q58254 in committed Stage 2 review.yaml line 613): UniProtKB:Q58256\
+    \ (MCRA_METJA, reviewed Swiss-Prot, PE=1) | label: Methyl-coenzyme M reductase\
+    \ I subunit alpha | gene: mcrA (MJ0846) | xrefs: [EC:2.8.4.1] | organism: NCBITaxon:243232\
+    \ | proteome: UP000000805 | sequence: 553 aa, CRC64 CC3AB9AC4F745A24, version\
+    \ 2 | graph: mjannaschii_hydrogenotrophic_methanogenesis (node_id: n_protein_mcra).\n\
+    \   - VERIFIED (replaces unpinned candidate Q58255 for mcrB): UniProtKB:Q58252\
+    \ (MCRB_METJA, reviewed Swiss-Prot, PE=3) | label: Methyl-coenzyme M reductase\
+    \ I subunit beta | gene: mcrB (MJ0842) | xrefs: [EC:2.8.4.1] | organism: NCBITaxon:243232\
+    \ | proteome: UP000000805 | sequence: 447 aa, CRC64 52C76BB2C4C425E7, version\
+    \ 2 | graph: mjannaschii_hydrogenotrophic_methanogenesis (node_id: n_protein_mcrb).\n\
+    \   - VERIFIED: UniProtKB:Q58255 (MCRG_METJA, reviewed Swiss-Prot, PE=3) | label:\
+    \ Methyl-coenzyme M reductase I subunit gamma | gene: mcrG (MJ0845) | xrefs: [EC:2.8.4.1]\
+    \ | organism: NCBITaxon:243232 | proteome: UP000000805 | sequence: 260 aa, CRC64\
+    \ 34413840D8EADACE, version 1 | graph: mjannaschii_hydrogenotrophic_methanogenesis\
+    \ (node_id: n_protein_mcrg).\n   - REJECTED FOR MCRA: UniProtKB:Q58254 (MCRC_METJA,\
+    \ mcrC / MJ0844, Methyl-coenzyme M reductase I operon protein C, 200 aa, CRC64\
+    \ 8126ECACFA8BD158), assigned to McrA in committed Stage 2 review.yaml line 613,\
+    \ is an accessory operon protein rather than catalytic subunit alpha (McrA, MJ0846,\
+    \ Q58256).\n\n5. Cryptococcus species complex (C. deuterogattii NCBITaxon:1859096\
+    \ / strain R265 NCBITaxon:294750; C. deneoformans NCBITaxon:40410 / strain B-3501A\
+    \ NCBITaxon:283643; C. neoformans NCBITaxon:5207 / strain H99 NCBITaxon:235443):\n\
+    \   - VERIFIED WITH TREMBL LIMITATION FOR C. DEUTEROGATTII R265: UniProtKB:A0A095CIC4\
+    \ (A0A095CIC4_CRYD2, unreviewed TrEMBL, PE=3) | label: Acidic laccase | locus:\
+    \ CNBG_4942 | organism: NCBITaxon:294750 (parent species NCBITaxon:1859096) |\
+    \ proteome: UP000029445 | sequence: 640 aa, CRC64 0D78281EB329FEB4, version 1.\
+    \ No reviewed Swiss-Prot entry exists in UniProtKB for NCBITaxon:1859096 or NCBITaxon:294750.\n\
+    \   - REJECTED FOR C. DEUTEROGATTII (FRAGMENT): UniProtKB:A0A1S6LQA8 (A0A1S6LQA8_CRYDE,\
+    \ LAC1, NCBITaxon:1859096) is an 87-aa partial PCR fragment (TrEMBL PE=4).\n \
+    \  - REJECTED FOR C. DEUTEROGATTII & REASSIGNED TO C. DENEOFORMANS: UniProtKB:Q55P57\
+    \ (LAC1_CRYD3, reviewed Swiss-Prot, PE=3) | label: Laccase-1 | gene: LAC1 (CNBG3550)\
+    \ | xrefs: [EC:1.10.3.2] | organism: NCBITaxon:283643 (Cryptococcus deneoformans\
+    \ B-3501A; parent species NCBITaxon:40410) | sequence: 624 aa, CRC64 A675C03F8940224B,\
+    \ version 1.\n   - VERIFIED FOR C. NEOFORMANS H99: UniProtKB:J9VY90 (LAC1_CRYN9,\
+    \ reviewed Swiss-Prot, PE=1) | label: Laccase-1 | gene: LAC1 (CNAG_03465) | xrefs:\
+    \ [EC:1.10.3.2] | organism: NCBITaxon:235443 (Cryptococcus neoformans H99; parent\
+    \ species NCBITaxon:5207) | proteome: UP000010091 | sequence: 624 aa, CRC64 CACD3577C439C6C2,\
+    \ version 1."
+findings:
+- finding_id: finding-001
+  issue_key: taxonmech-uniprot-pinned-source-and-accession-validator-missing
+  category: provenance
+  severity: blocker
+  status: open
+  certainty: confirmed
+  title: No release-pinned UniProtKB / Reference Proteomes raw source snapshot or
+    accession-to-taxon/gene validator exists in TaxonMech
+  description: 'Neither conf/sources.yaml nor data/raw/MANIFEST.yaml includes a pinned
+    UniProtKB or UniProt Reference Proteomes inventory, and scripts/validate_strict.py
+    has no check verifying that a UniProtKB: accession resolves to the claimed protein
+    name, gene symbol, locus tag, sequence length/CRC64, and organism NCBI Taxon ID.
+    Live UniProt REST API verification during Stage 3 exposed 2 accession/gene mismatches
+    in committed Stage 2 review.yaml (reviews/structured/20261021T043201Z-stage2-causal-graphs-assessment/review.yaml
+    lines 583 and 613: UniProtKB:Q9I4X3 is pqsA rather than phzM UniProtKB:Q9HWH2,
+    and UniProtKB:Q58254 is mcrC rather than mcrA UniProtKB:Q58256) and 4 additional
+    accession/gene or sibling-species/fragment mismatches in expanded unpinned candidate
+    screening (UniProtKB:P0A858 is tpiA rather than tnaA UniProtKB:P0A853; UniProtKB:Q9I4X2
+    is pqsB rather than phzS UniProtKB:Q9HWG9; UniProtKB:Q58255 is mcrG rather than
+    mcrB UniProtKB:Q58252; UniProtKB:Q55P57 belongs to Cryptococcus deneoformans B-3501A
+    NCBITaxon:283643 rather than C. deuterogattii NCBITaxon:1859096; and UniProtKB:A0A1S6LQA8
+    is an 87-aa partial fragment).'
+  target_ids:
+  - NCBITaxon:562
+  - NCBITaxon:83333
+  - NCBITaxon:511145
+  - NCBITaxon:1423
+  - NCBITaxon:224308
+  - NCBITaxon:287
+  - NCBITaxon:208964
+  - NCBITaxon:2190
+  - NCBITaxon:243232
+  - NCBITaxon:1859096
+  - NCBITaxon:294750
+  - NCBITaxon:40410
+  - NCBITaxon:283643
+  - NCBITaxon:5207
+  - NCBITaxon:235443
+  field_paths:
+  - causal_graphs[].nodes[].grounding
+  - causal_graphs[].nodes[].label
+  - causal_graphs[].nodes[].xrefs
+  evidence_ids:
+  - live-uniprot-rest-verification
+  - seeder-and-verify-corpus-code
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: conf/sources.yaml
+    role: Upstream source registry
+  - repository: CultureBotAI/TaxonMech
+    path: data/raw/MANIFEST.yaml
+    role: Pinned raw inventory manifest
+  - repository: CultureBotAI/TaxonMech
+    path: scripts/validate_strict.py
+    role: Strict corpus validator
+- finding_id: finding-002
+  issue_key: taxonmech-species-vs-strain-proteome-scope-slots-missing-on-causal-node
+  category: schema
+  severity: major
+  status: open
+  certainty: confirmed
+  title: TaxonRecord and CausalNode lack structured slots to distinguish strain-level
+    UniProt reference proteome bindings from species-level exemplar projections
+  description: TaxonMech seeds both species-level TaxonRecord files (e.g., NCBITaxon:562,
+    NCBITaxon:1423, NCBITaxon:287, NCBITaxon:2190, NCBITaxon:1859096, NCBITaxon:40410,
+    NCBITaxon:5207) and strain-level TaxonRecord files (e.g., NCBITaxon:83333, NCBITaxon:511145,
+    NCBITaxon:224308, NCBITaxon:208964, NCBITaxon:243232, NCBITaxon:294750, NCBITaxon:283643,
+    NCBITaxon:235443). UniProtKB reference proteomes (UP000000625, UP000001570, UP000002438,
+    UP000000805, UP000029445, UP000010091) are annotated at the strain-level NCBI
+    Taxon ID, yet CausalNode (src/taxonmech/schema/taxonmech.yaml lines 1190-1216)
+    provides only node_id, label, node_type, grounding, xrefs, and free-text description,
+    with no structured slots for organism_taxon_id, proteome_id, gene_symbol, locus_tag,
+    sequence_length, sequence_crc64, sequence_version, or entry_status (SWISS_PROT
+    vs TREMBL).
+  target_ids:
+  - NCBITaxon:562
+  - NCBITaxon:83333
+  - NCBITaxon:511145
+  - NCBITaxon:1423
+  - NCBITaxon:224308
+  - NCBITaxon:287
+  - NCBITaxon:208964
+  - NCBITaxon:2190
+  - NCBITaxon:243232
+  - NCBITaxon:1859096
+  - NCBITaxon:294750
+  - NCBITaxon:40410
+  - NCBITaxon:283643
+  - NCBITaxon:5207
+  - NCBITaxon:235443
+  field_paths:
+  - causal_graphs[].nodes[]
+  evidence_ids:
+  - schema-and-validator-code
+  - exemplar-species-and-strain-records
+  - live-uniprot-rest-verification
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/schema/taxonmech.yaml
+    role: LinkML schema definition
+- finding_id: finding-003
+  issue_key: taxonmech-causal-node-grounding-prefix-coverage-missing-in-oak
+  category: schema
+  severity: blocker
+  status: open
+  certainty: confirmed
+  title: src/taxonmech/schema/taxonmech.yaml and conf/id_label_targets.yaml omit UniProtKB
+    and EC prefix declarations, and no maintained overlay writer exists in src/taxonmech/seed.py
+  description: src/taxonmech/schema/taxonmech.yaml (prefixes, lines 43-88) and conf/id_label_targets.yaml
+    (adapters lines 18-25, ignored_prefixes lines 27-47) omit UniProtKB and EC, causing
+    scripts/validate_id_label_correspondence.py to fail with UNKNOWN_PREFIX on grounded
+    GENE_OR_PROTEIN nodes. Furthermore, src/taxonmech/seed.py (build_document, lines
+    344-646) has no maintained overlay input for causal_graphs or protein examples,
+    and scripts/verify_corpus.py (lines 22-25, 67-73) rejects any manual YAML edit
+    to data/taxa/<domain>/*.yaml.
+  target_ids:
+  - NCBITaxon:562
+  - NCBITaxon:83333
+  - NCBITaxon:511145
+  - NCBITaxon:1423
+  - NCBITaxon:224308
+  - NCBITaxon:287
+  - NCBITaxon:208964
+  - NCBITaxon:2190
+  - NCBITaxon:243232
+  - NCBITaxon:1859096
+  - NCBITaxon:294750
+  - NCBITaxon:40410
+  - NCBITaxon:283643
+  - NCBITaxon:5207
+  - NCBITaxon:235443
+  field_paths:
+  - causal_graphs
+  - causal_graphs[].nodes[].grounding
+  - causal_graphs[].nodes[].xrefs
+  evidence_ids:
+  - schema-and-validator-code
+  - seeder-and-verify-corpus-code
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/schema/taxonmech.yaml
+    role: LinkML schema definition
+  - repository: CultureBotAI/TaxonMech
+    path: conf/id_label_targets.yaml
+    role: OAK ID-label target configuration
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Seeder record builder
+  - repository: CultureBotAI/TaxonMech
+    path: scripts/verify_corpus.py
+    role: Corpus reproduction gate
+actions:
+- action_id: action-001
+  description: Add a release-pinned UniProtKB / UniProt Reference Proteomes raw source
+    inventory in data/raw/ (registered in conf/sources.yaml and data/raw/MANIFEST.yaml),
+    declare UniProtKB and EC prefixes in src/taxonmech/schema/taxonmech.yaml and conf/id_label_targets.yaml,
+    and implement accession-to-taxon/gene/sequence validation in scripts/validate_strict.py.
+  finding_ids:
+  - finding-001
+  - finding-003
+  target_ids:
+  - NCBITaxon:562
+  - NCBITaxon:83333
+  - NCBITaxon:511145
+  - NCBITaxon:1423
+  - NCBITaxon:224308
+  - NCBITaxon:287
+  - NCBITaxon:208964
+  - NCBITaxon:2190
+  - NCBITaxon:243232
+  - NCBITaxon:1859096
+  - NCBITaxon:294750
+  - NCBITaxon:40410
+  - NCBITaxon:283643
+  - NCBITaxon:5207
+  - NCBITaxon:235443
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: conf/sources.yaml
+    role: Upstream source registry
+  - repository: CultureBotAI/TaxonMech
+    path: data/raw/MANIFEST.yaml
+    role: Pinned raw inventory manifest
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/schema/taxonmech.yaml
+    role: LinkML schema definition
+  - repository: CultureBotAI/TaxonMech
+    path: conf/id_label_targets.yaml
+    role: OAK ID-label target configuration
+  - repository: CultureBotAI/TaxonMech
+    path: scripts/validate_strict.py
+    role: Strict corpus validator
+  acceptance_checks:
+  - Pinned UniProtKB inventory in data/raw/ verifies accession, recommended protein
+    name, gene symbol, locus tag, NCBI Taxon ID, proteome ID, amino-acid length, and
+    CRC64 checksum
+  - 'scripts/validate_id_label_correspondence.py and scripts/validate_strict.py validate
+    UniProtKB: and EC: CURIEs and reject gene/locus/taxon mismatches such as P0A858,
+    Q9I4X3, Q9I4X2, Q58254, and cross-species Q55P57'
+- action_id: action-002
+  description: Extend CausalNode (or a dedicated protein annotation subobject) in
+    src/taxonmech/schema/taxonmech.yaml with optional structured slots (organism_taxon_id,
+    proteome_id, gene_symbol, locus_tag, sequence_length, sequence_crc64, sequence_version,
+    entry_status) and wire the maintained overlay merge in src/taxonmech/seed.py and
+    scripts/verify_corpus.py.
+  finding_ids:
+  - finding-002
+  - finding-003
+  target_ids:
+  - NCBITaxon:562
+  - NCBITaxon:83333
+  - NCBITaxon:511145
+  - NCBITaxon:1423
+  - NCBITaxon:224308
+  - NCBITaxon:287
+  - NCBITaxon:208964
+  - NCBITaxon:2190
+  - NCBITaxon:243232
+  - NCBITaxon:1859096
+  - NCBITaxon:294750
+  - NCBITaxon:40410
+  - NCBITaxon:283643
+  - NCBITaxon:5207
+  - NCBITaxon:235443
+  depends_on:
+  - action-001
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/schema/taxonmech.yaml
+    role: LinkML schema definition
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Seeder record builder
+  - repository: CultureBotAI/TaxonMech
+    path: scripts/verify_corpus.py
+    role: Corpus reproduction gate
+  acceptance_checks:
+  - CausalNode GENE_OR_PROTEIN entries distinguish strain-exact reference proteome
+    bindings (e.g., NCBITaxon:83333, NCBITaxon:224308, NCBITaxon:208964, NCBITaxon:243232,
+    NCBITaxon:294750, NCBITaxon:283643, NCBITaxon:235443) from species-level exemplar
+    projections
+  - All 15 Stage 3 exemplar records round-trip cleanly through src/taxonmech/seed.py,
+    scripts/verify_corpus.py, scripts/validate_strict.py, scripts/validate_id_label_correspondence.py,
+    and scripts/render_pages.py --check
+limitations:
+- Direct edits to data/taxa/<domain>/*.yaml are prohibited by CLAUDE.md and .claude/skills/add-uniprot-protein-examples/SKILL.md
+  while the native maintained overlay input, seeder merge, and pinned UniProtKB validator
+  prerequisites are absent.
+- For Cryptococcus deuterogattii (NCBITaxon:1859096 / strain R265 NCBITaxon:294750,
+  reference proteome UP000029445), no reviewed Swiss-Prot laccase entry exists in
+  UniProtKB; only the full-length unreviewed TrEMBL entry UniProtKB:A0A095CIC4 (CNBG_4942,
+  640 aa, PE=3) is available, whereas reviewed Swiss-Prot Lac1 entries belong to sibling
+  species C. deneoformans B-3501A (UniProtKB:Q55P57, NCBITaxon:283643) and C. neoformans
+  H99 (UniProtKB:J9VY90, NCBITaxon:235443).
+notes:
+- 'Full-corpus Stage 3 sequence/genome/protein anchor census: 626,048 total records;
+  0 existing causal_graphs or UniProtKB references; 21,787 records with 21,825 LPSN
+  16S rRNA INSDC accessions; 20,868 records with 227,539 NCBI genome assemblies; 20,570
+  records with 173,174 genome records; 9,241 records with 78,785 StrainInfo NUCLEOTIDE_SEQUENCE
+  links across 51,467 unique INSDC accessions (28,160 gene/CDS, 22,703 rRNA operon,
+  604 patent).'
+- 'Infrastructure task recorded in INFRA_TASKS.md: taxonmech-infra-0003 (pinned UniProtKB
+  / Reference Proteomes raw source snapshot, UniProtKB/EC schema prefix declarations,
+  and structured GENE_OR_PROTEIN organism/strain/proteome/locus/checksum scope validation).'
+tags:
+- stage3-protein-examples
+- uniprotkb-verification
+- prerequisite-assessment
+```

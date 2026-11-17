@@ -38,7 +38,7 @@ description: |
   Unlike the seeded descriptive fields, every causal edge must carry a
   citation.
 
-license: https://creativecommons.org/publicdomain/zero/1.0/
+license: BSD-3-Clause
 
 prefixes:
   linkml: https://w3id.org/linkml/
@@ -70,12 +70,17 @@ prefixes:
   GC_ID: https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi#SG
   # Sibling Mech vocabularies and ontologies used by mechanism graphs
   METPO: https://w3id.org/metpo/
+  OMP: http://purl.obolibrary.org/obo/OMP_
+  UniProtKB: https://www.uniprot.org/uniprotkb/
+  EC: https://enzyme.expasy.org/EC/
+  UP: https://www.uniprot.org/proteomes/
   ENVO: http://purl.obolibrary.org/obo/ENVO_
   UBERON: http://purl.obolibrary.org/obo/UBERON_
   CHEBI: http://purl.obolibrary.org/obo/CHEBI_
   GO: http://purl.obolibrary.org/obo/GO_
   PATO: http://purl.obolibrary.org/obo/PATO_
   RO: http://purl.obolibrary.org/obo/RO_
+  BFO: http://purl.obolibrary.org/obo/BFO_
   UO: http://purl.obolibrary.org/obo/UO_
   traitmech: https://w3id.org/traitmech/
   habitatmech: https://w3id.org/habitatmech/
@@ -1225,6 +1230,56 @@ classes:
         pattern: "^[A-Za-z][A-Za-z0-9._-]*:[A-Za-z0-9._-]+$"
       description:
         range: string
+      organism_taxon_id:
+        description: >-
+          Exact organism NCBI Taxonomy CURIE for a GENE_OR_PROTEIN node (for
+          example NCBITaxon:83333 when a species-level TaxonRecord cites a
+          strain-scoped reference proteome protein).
+        range: string
+        pattern: "^NCBITaxon:[0-9]+$"
+      strain_id:
+        description: >-
+          Optional TaxonMech strain or culture-deposit CURIE linking a
+          GENE_OR_PROTEIN node to a strain entry on the record.
+        range: string
+        pattern: "^kgmicrobe\\.strain:\\S+$"
+      proteome_id:
+        description: >-
+          Optional UniProt Proteome identifier (UP:UP000...) for a
+          GENE_OR_PROTEIN node.
+        range: string
+        pattern: "^UP:UP[0-9]{9}$"
+      gene_symbol:
+        description: >-
+          Primary gene symbol (for example lacZ, spo0A, lasI) for a
+          GENE_OR_PROTEIN node.
+        range: string
+      locus_tag:
+        description: >-
+          Ordered locus tag or ORF identifier (for example b0344, BSU_24220,
+          PA1432, MJ_0536) for a GENE_OR_PROTEIN node.
+        range: string
+      sequence_length:
+        description: >-
+          Canonical amino-acid sequence length of a UniProtKB protein entry.
+        range: integer
+        minimum_value: 1
+      sequence_crc64:
+        description: >-
+          16-character uppercase hexadecimal CRC64 digest of the canonical
+          protein sequence.
+        range: string
+        pattern: "^[0-9A-F]{16}$"
+      sequence_version:
+        description: >-
+          UniProtKB sequence version integer for the cited protein entry.
+        range: integer
+        minimum_value: 1
+      entry_status:
+        description: >-
+          UniProtKB review status (SWISS_PROT reviewed vs TREMBL unreviewed)
+          for a GENE_OR_PROTEIN node.
+        range: UniProtEntryStatusEnum
 
   CausalEdge:
     description: An evidence-backed directed relationship in a taxon mechanism graph.
@@ -1530,8 +1585,14 @@ enums:
         description: An assay, perturbation, or experimental condition.
       GENE_OR_PROTEIN:
         description: A gene, protein, gene product, or protein complex.
+      RNA:
+        description: A functional RNA molecule or RNA-containing causal entity.
+      GENETIC_ELEMENT:
+        description: A non-protein mobile or chromosomal genetic element such as a plasmid or prophage.
       CHEMICAL:
         description: A chemical entity.
+      ORGANELLE:
+        description: A cellular organelle or microbial subcellular structure.
       CELLULAR_LOCALIZATION:
         description: A cellular component or localization.
       MOLECULAR_FUNCTION:
@@ -1546,3 +1607,11 @@ enums:
         description: A metabolic or functional capacity.
       COMMUNITY_PROCESS:
         description: A process at the community rather than the cell level.
+
+  UniProtEntryStatusEnum:
+    description: UniProtKB review status for GENE_OR_PROTEIN causal nodes.
+    permissible_values:
+      SWISS_PROT:
+        description: Manually annotated and reviewed UniProtKB/Swiss-Prot entry.
+      TREMBL:
+        description: Computationally analyzed unreviewed UniProtKB/TrEMBL entry.
