@@ -1,0 +1,1379 @@
+# Record review: ANME-2 cluster archaeon
+
+- Review: 20261020T073013Z-anme_2_cluster_archaeon
+- Repository: CultureBotAI/TaxonMech
+- Started UTC: 2026-10-20T07:21:31Z
+- Finished UTC: 2026-10-20T07:30:13Z
+- Reviewer: Codex (independent)
+- Completion: partial
+- Verdict: pass_with_limitations
+- Scientific review: true
+
+## Summary
+
+ANME-2 cluster archaeon has supported NCBI identity and bounded source completeness. Pooled mapping notes overstate other-taxon membership. Original GOLD recount remains unresolved.
+
+## Scope And Provenance
+
+Entire single generated record, including all source assertions and imported strains.
+
+Selection: Original unreviewed path-order position 121; batch-0013 target 1. Excluded 172 actual targets from validated main and local batch-0001/0002/0003/0004/0005/0006/0007/0008/0009/0010/0011/0012 listings; full corpus enumeration includes ignored files.
+Coverage: full; 1 reviewed / 1 in the declared population.
+Source: working_tree at Git base 9b5a8fff5185b38dc5c77bb35235152c81ea7765.
+Working-tree hashes do not imply those bytes were committed.
+
+| Target | Path / selector | Kind | Label |
+| --- | --- | --- | --- |
+| NCBITaxon:2056317 | data/taxa/archaea/anme_2_cluster_archaeon.yaml | generated | ANME-2 cluster archaeon |
+
+## Validation
+
+| Check | Status | Required | Targets | Result |
+| --- | --- | --- | --- | --- |
+| Exact NCBI taxon, rank and lineage | passed | True | NCBITaxon:2056317 | NCBITaxon:2056317 denotes ANME-2 cluster archaeon at SPECIES rank beneath NCBITaxon:1968519, genetic code 11. All 10 carried ancestors agree with pinned NCBI and current EFetch in identifiers, literal labels and ranks. This is the exact placeholder taxon, not an inferred culture or a higher-rank family/order. |
+| Complete exact identifier and name inventory search | passed | True | NCBITaxon:2056317 | Complete direct reads of twelve pinned tables, including ignored files, verify one NCBI NAME assertion and zero imported strains; the pinned parent graph has no descendants. GTDB carries 6 qualified broad mappings, with primary cluster count 6 and 5 further clusters. The attestation count is the primary cluster size, not the sum of all source clusters or only target-labelled members. No LPSN or culture/strain inventory match is present. GOLD1 ORGANISM agrees with the pinned projection, but original historical aggregate edges were not independently recounted. |
+| Imported strain links | not_applicable | False | NCBITaxon:2056317 | No imported BacDive strain or strain-level link is asserted; no physical deposit is inferred from the isolate designation. |
+| Complete primary GTDB cluster membership | passed | True | NCBITaxon:2056317 | All source cluster counts and qualified mappings supported; the distinct fixed-note defect is recorded as a minor finding. |
+| Original manifest-pinned GOLD aggregate | unavailable | True | NCBITaxon:2056317 | Pinned GOLD count 1 ORGANISM agrees, but the original historical input was unavailable in the retained hash check. |
+| Initial quality-gate setup attempt | failed | False | NCBITaxon:2056317 | Actual exit 1: missing ruff; superseded by the separately recorded successful full retry. |
+| Native strict record validation | passed | True | NCBITaxon:2056317 | Actual terminal exit code 0. This exact generated YAML only; its captured bytes remain unchanged. Actual earlier per-target invocation; the receipt retains its original cwd and times. |
+| Repository history validation | passed | True | NCBITaxon:2056317 | Actual terminal exit code 0. All 17 standalone history records; the generated seed event was also inspected in this target. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. |
+| Full-corpus exact reproduction | passed | True | NCBITaxon:2056317 | Actual terminal exit code 0. All 625,960 generated taxon YAMLs, not a focused approximation. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. |
+| Native product ID/label gate | passed | True | NCBITaxon:2056317 | Actual terminal exit code 0. Full configured corpus scan for curator-added graph nodes; this target contains no causal graph. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. |
+| Authoritative complete quality gate | passed | True | NCBITaxon:2056317 | Actual terminal exit code 0. Repository-wide just qc, including native corpus-wide checks. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. Pytest reported 1055 passed, 3 skipped and 5 deselected; the native QC recipe completed successfully. |
+
+## Scientific And Domain Assessments
+
+### Exact taxon and source lineage
+
+identity: supported. Targets: NCBITaxon:2056317.
+
+NCBITaxon:2056317 denotes ANME-2 cluster archaeon at SPECIES rank beneath NCBITaxon:1968519, genetic code 11. All 10 carried ancestors agree with pinned NCBI and current EFetch in identifiers, literal labels and ranks. This is the exact placeholder taxon, not an inferred culture or a higher-rank family/order.
+
+### Name classes and nomenclatural scope
+
+nomenclature: supported. Targets: NCBITaxon:2056317.
+
+The literal NCBI designation ANME-2 cluster archaeon is preserved. Pinned and current NCBI supply no synonyms. No nomenclatural validity, registered deposit, type material or measured phenotype is inferred from the designation.
+
+### Imported subtree and source assertion units
+
+completeness: supported. Targets: NCBITaxon:2056317.
+
+Complete direct reads of twelve pinned tables, including ignored files, verify one NCBI NAME assertion and zero imported strains; the pinned parent graph has no descendants. GTDB carries 6 qualified broad mappings, with primary cluster count 6 and 5 further clusters. The attestation count is the primary cluster size, not the sum of all source clusters or only target-labelled members. No LPSN or culture/strain inventory match is present. GOLD1 ORGANISM agrees with the pinned projection, but original historical aggregate edges were not independently recounted.
+
+### Qualified species mapping and target scope
+
+grounding: supported. Targets: NCBITaxon:2056317.
+
+All nineteen pinned GTDB shards were searched using exact terminal species tokens, preserving internal genus suffix underscores. All 6 cluster counts agree with native mappings (17 total selected source members). 4 clusters have only NCBITaxon:2056317 in both primary taxids/species-taxids and the complete reverse mapping inventory, contradicting the fixed other-NCBI-taxa clause. Other clusters contain genuinely mixed taxids. Pooling multiple GTDB species onto the NCBI placeholder still supports broadMatch; native NCBI lineage remains distinct from GTDB classification.
+
+### Unchanged native status and history
+
+provenance: supported. Targets: NCBITaxon:2056317.
+
+EXACT grounding and SEEDED mapping agree with exact NCBI identity. The sole seed event at 2026-09-13T17:54:04Z agrees with the latest raw/ATB/StrainInfo extraction time. Native status and history remain unchanged.
+
+## Findings
+
+### pooled-note-other-taxa: 4 pooled-mapping notes incorrectly assert other NCBI taxa
+
+minor / open / confirmed; issue key: gtdb-broadmatch-note-other-taxa-2056317.
+
+All nineteen pinned GTDB shards were searched using exact terminal species tokens, preserving internal genus suffix underscores. All 6 cluster counts agree with native mappings (17 total selected source members). 4 clusters have only NCBITaxon:2056317 in both primary taxids/species-taxids and the complete reverse mapping inventory, contradicting the fixed other-NCBI-taxa clause. Other clusters contain genuinely mixed taxids. Pooling multiple GTDB species onto the NCBI placeholder still supports broadMatch; native NCBI lineage remains distinct from GTDB classification. Unsupported clauses: GTDB:s__Methanocomedens_A_sp014237145, GTDB:s__Methanocomedens_B_sp023544605, GTDB:s__Methanocomedens_B_sp022353185, GTDB:s__Methanocomedens_B_sp023544495.
+
+## Recommended Actions And Acceptance Checks
+
+### correct-pooled-mapping-note
+
+Revise the maintained broadMatch note to describe pooling without asserting another NCBI taxon for every individual source cluster. Preserve all source mappings, counts and carried NCBI lineage.
+
+- All 4 listed single-taxid clusters retain their source counts and broadMatch without an unsupported other-taxa clause.
+- Retain all 6 mappings, primary count6 and 5 further-cluster attestation; preserve actual mixed-taxid membership and native NCBI lineage.
+- Change the maintained seeder and use separately authorized guarded regeneration; then run strict, history, product, corpus and QC gates.
+
+### recover-pinned-aggregate-inputs
+
+Recover manifest-hash-matching original aggregate inputs and independently recount the exact target assertions through the maintained extractor; do not edit generated YAML.
+
+- Require exact original input SHA-256 before using it as historical evidence.
+- Recount only the exact target with each source's own assertion unit and compare to its pinned inventory row.
+- Record any discrepancy in a new review observation.
+
+## Category Boundaries
+
+
+## Evidence
+
+| Evidence | Reference / locator | Support | Observation |
+| --- | --- | --- | --- |
+| record | data/taxa/archaea/anme_2_cluster_archaeon.yaml; entire TaxonRecord; identifier=NCBITaxon:2056317 | supports | Read the entire generated YAML, including identity, lineage, names, mappings, source attestations, all imported strains and links, and seed history. |
+| taxonomy-inventory | data/raw/ncbitaxon_taxa.tsv; line 2: {"taxon_id":"NCBITaxon:1","label":"root","rank":"NO_RANK","parent_id":""}; line 1698: {"taxon_id":"NCBITaxon:2157","label":"Archaea","rank":"DOMAIN","parent_id":"NCBITaxon:131567"}; line 2981: {"taxon_id":"NCBITaxon:28890","label":"Methanobacteriota","rank":"PHYLUM","parent_id":"NCBITaxon:3366610"}; line 15684: {"taxon_id":"NCBITaxon:94695","label":"Methanosarcinales","rank":"ORDER","parent_id":"NCBITaxon:224756"}; line 25334: {"taxon_id":"NCBITaxon:131567","label":"cellular organisms","rank":"CELLULAR_ROOT","parent_id":"NCBITaxon:1"}; line 44048: {"taxon_id":"NCBITaxon:224756","label":"Methanomicrobia","rank":"CLASS","parent_id":"NCBITaxon:2290931"}; line 139303: {"taxon_id":"NCBITaxon:588816","label":"ANME-2 cluster","rank":"CLADE","parent_id":"NCBITaxon:94695"}; line 505519: {"taxon_id":"NCBITaxon:1968519","label":"unclassified ANME-2 cluster","rank":"NO_RANK","parent_id":"NCBITaxon:588816"}; line 514507: {"taxon_id":"NCBITaxon:2056317","label":"ANME-2 cluster archaeon","rank":"SPECIES","parent_id":"NCBITaxon:1968519","genetic_code":"11","exact_synonyms":"","related_synonyms":"","broad_synonyms":"","attested_by":"ncbitaxon&#124;gtdb&#124;gold","retired_into":"","taxonomy_snapshot":"2026-09-13"}; line 523053: {"taxon_id":"NCBITaxon:2290931","label":"Stenosarchaea group","rank":"CLADE","parent_id":"NCBITaxon:28890"}; line 621140: {"taxon_id":"NCBITaxon:3366610","label":"Methanobacteriati","rank":"KINGDOM","parent_id":"NCBITaxon:2157"} | supports | Inspected the target and each carried ancestor, rank, parent, genetic code and source name classes. |
+| scope-row | curation/seed_scope.tsv; line 62233: {"identifier":"NCBITaxon:2056317","added":"2026-09-12","reason":"attested rule: ANME-2 cluster archaeon, 2 sources incl. NCBI"} | supports | Exact target is included in the declared seed scope. |
+| path-row | data/taxa/PATHS.tsv; line 324035: {"identifier":"NCBITaxon:2056317","slug":"anme_2_cluster_archaeon"} | supports | Indexed path resolves to this exact NCBI taxon. |
+| ncbi-live | https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=taxonomy&amp;id=2056317,114585,114587,89612,2511821,3694343,1748309,3693671,2250258,1111783; TaxaSet/Taxon[TaxId='2056317']; ten-target captured response | supports | Inspected the official response for this exact taxon: scientific name, rank, parent, source name classes, lineage and genetic code. Current authority and pinned September inventory remain distinct observations. |
+| lpsn-inventory | data/raw/lpsn_names.tsv; complete table; exact target/subtree/source-identifier search has no match | supports | Inspected exact mapped and linked LPSN names; bounded inventory absence does not establish worldwide nomenclatural absence. |
+| gtdb-mappings | data/raw/gtdb_mappings.tsv; line 162566: {"gtdb_id":"GTDB:s__Methanocomedens_A_sp014237145","gtdb_label":"s__Methanocomedens_A_sp014237145","gtdb_parent":"GTDB:g__Methanocomedens_A","ncbitaxon_id":"NCBITaxon:2056317","predicate":"skos:broadMatch","genome_count":"6"}; line 162567: {"gtdb_id":"GTDB:s__Methanocomedens_B_sp019429385","gtdb_label":"s__Methanocomedens_B_sp019429385","gtdb_parent":"GTDB:g__Methanocomedens_B","ncbitaxon_id":"NCBITaxon:2056317","predicate":"skos:broadMatch","genome_count":"4"}; line 162568: {"gtdb_id":"GTDB:s__Methanocomedens_B_sp022353185","gtdb_label":"s__Methanocomedens_B_sp022353185","gtdb_parent":"GTDB:g__Methanocomedens_B","ncbitaxon_id":"NCBITaxon:2056317","predicate":"skos:broadMatch","genome_count":"1"}; line 162569: {"gtdb_id":"GTDB:s__Methanocomedens_B_sp023544495","gtdb_label":"s__Methanocomedens_B_sp023544495","gtdb_parent":"GTDB:g__Methanocomedens_B","ncbitaxon_id":"NCBITaxon:2056317","predicate":"skos:broadMatch","genome_count":"1"}; line 162570: {"gtdb_id":"GTDB:s__Methanocomedens_B_sp023544605","gtdb_label":"s__Methanocomedens_B_sp023544605","gtdb_parent":"GTDB:g__Methanocomedens_B","ncbitaxon_id":"NCBITaxon:2056317","predicate":"skos:broadMatch","genome_count":"2"}; line 162571: {"gtdb_id":"GTDB:s__Methanogaster_B_sp003601535","gtdb_label":"s__Methanogaster_B_sp003601535","gtdb_parent":"GTDB:g__Methanogaster_B","ncbitaxon_id":"NCBITaxon:2056317","predicate":"skos:broadMatch","genome_count":"3"}; line 178103: {"gtdb_id":"GTDB:s__Methanocomedens_B_sp019429385","gtdb_label":"s__Methanocomedens_B_sp019429385","gtdb_parent":"GTDB:g__Methanocomedens_B","ncbitaxon_id":"NCBITaxon:2250255","predicate":"skos:broadMatch","genome_count":"4"}; line 178112: {"gtdb_id":"GTDB:s__Methanogaster_B_sp003601535","gtdb_label":"s__Methanogaster_B_sp003601535","gtdb_parent":"GTDB:g__Methanogaster_B","ncbitaxon_id":"NCBITaxon:2250255","predicate":"skos:broadMatch","genome_count":"3"} | supports | Inspected direct mappings and selected clusters' reverse mappings, retaining each source predicate and taxon boundary. |
+| gtdb-species | data/raw/gtdb_species.tsv; line 118325: {"gtdb_id":"GTDB:s__Methanocomedens_A_sp014237145","label":"s__Methanocomedens_A_sp014237145","parent":"GTDB:g__Methanocomedens_A","genome_count":"6"}; line 118333: {"gtdb_id":"GTDB:s__Methanocomedens_B_sp019429385","label":"s__Methanocomedens_B_sp019429385","parent":"GTDB:g__Methanocomedens_B","genome_count":"4"}; line 118334: {"gtdb_id":"GTDB:s__Methanocomedens_B_sp022353185","label":"s__Methanocomedens_B_sp022353185","parent":"GTDB:g__Methanocomedens_B","genome_count":"1"}; line 118336: {"gtdb_id":"GTDB:s__Methanocomedens_B_sp023544495","label":"s__Methanocomedens_B_sp023544495","parent":"GTDB:g__Methanocomedens_B","genome_count":"1"}; line 118337: {"gtdb_id":"GTDB:s__Methanocomedens_B_sp023544605","label":"s__Methanocomedens_B_sp023544605","parent":"GTDB:g__Methanocomedens_B","genome_count":"2"}; line 118534: {"gtdb_id":"GTDB:s__Methanogaster_B_sp003601535","label":"s__Methanogaster_B_sp003601535","parent":"GTDB:g__Methanogaster_B","genome_count":"3"} | supports | Inspected source species identifiers, labels, parent clusters and genome counts. |
+| bacdive-inventory | data/raw/bacdive_strains.tsv; complete table; exact target/subtree/source-identifier search has no match | supports | Complete inventory selection covers the exact target and descendants from the complete NCBI parent graph; its imported strain population was compared with the complete YAML. |
+| culture-inventory | data/raw/culture_collection_strains.tsv; complete table; exact target/subtree/source-identifier search has no match | supports | Inspected exact culture-inventory associations; an isolate name or genome does not create an inferred deposit. |
+| gold-organisms | data/raw/gold_organisms.tsv; line 19637: {"taxon_id":"NCBITaxon:2056317","organism_count":"1"} | supports | Inspected the exact GOLD organism count row or bounded absence, without converting counts to phenotypes. |
+| mediadive-taxa | data/raw/mediadive_taxa.tsv; complete table; exact target/subtree/source-identifier search has no match | supports | Inspected the exact MediaDive medium count row or bounded absence, without converting counts to phenotypes. |
+| madin-taxa | data/raw/madin_taxa.tsv; complete table; exact target/subtree/source-identifier search has no match | supports | Inspected the exact Madin trait-assertion count row or bounded absence, without converting counts to phenotypes. |
+| bactotraits-taxa | data/raw/bactotraits_taxa.tsv; complete table; exact target/subtree/source-identifier search has no match | supports | Inspected the exact BactoTraits trait-assertion count row or bounded absence, without converting counts to phenotypes. |
+| mapping-policy | docs/HARMONIZATION.md; Mapping predicates; Which strains belong to a record | supports | Policy permits one-to-one species closeMatch normalization and LPSN-linked species xrefs/synonyms, retains pooled broadMatch entries and carries NCBI lineage unchanged. |
+| equivalence-contract | src/taxonmech/schema/taxonmech.yaml; TaxonRecord.xrefs, lines 180–187; TaxonomyMapping, lines 417–439 | supports | TaxonRecord.xrefs denotes equivalent identifiers; broader/narrower relations remain qualified taxonomy mappings. TaxonomyMapping.genome_count counts genomes under the source taxon. |
+| seed-owner | src/taxonmech/seed.py; GTDB mapping construction lines 440–472; LPSN/type-strain and source-attestation construction | supports | Inspected mapping ranking, qualified predicates, fixed broadMatch wording, synonym/xref construction, primary cluster counts and same-taxon type-strain derivation. |
+| manifest | data/raw/MANIFEST.yaml; kg_microbe_source, inputs, extracted_at | supports | Manifest pins kg-microbe revision 30405b70ef762aa46c08278b2b3e06bffb0b34cd, upstream input hashes and extraction time 2026-09-13T17:50:44Z. |
+| overlay-manifests | data/atb/MANIFEST.yaml; extracted_at, together with data/raw/MANIFEST.yaml and data/straininfo/MANIFEST.yaml | supports | Raw, ATB and StrainInfo extraction times have maximum 2026-09-13T17:54:04Z, matching the sole seed event. StrainInfo manifest is independently captured in source.inputs. |
+| genome-catalog-1 | data/catalog/gtdb_genomes-0017.jsonl.gz; line 29381: {"accession":"GB_GCA_014237135.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_A;s__Methanocomedens_A sp014237145","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM1423713v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA593687","ncbi_biosample":"SAMN13483408","ncbi_contig_count":"124","ncbi_contig_n50":"40799","ncbi_country":"Atlantic Ocean: Gulf of Cadiz","ncbi_date":"2020-08-18","ncbi_genbank_assembly_accession":"GCA_014237135.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"15MPa","ncbi_isolation_source":"cold seep sediment sample 15 Mpa","ncbi_lat_lon":"35.65 N 7.33 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2 cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"0","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2020-08-18","ncbi_spanned_gaps":"0","ncbi_species_taxid":"2056317","ncbi_ssu_count":"0","ncbi_strain_identifiers":"15MPa","ncbi_submitter":"Shanghai Jiao Tong University","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"0","ncbi_total_length":"2988518","ncbi_translation_table":"11","ncbi_trna_count":"46","ncbi_type_material_designation":"na","ncbi_ungapped_length":"2988518","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAAXOE000000000.1"}; line 32186: {"accession":"GB_GCA_003601535.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanogasteraceae;g__Methanogaster_B;s__Methanogaster_B sp003601535","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM360153v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA418890","ncbi_biosample":"SAMN08103063","ncbi_contig_count":"263","ncbi_contig_n50":"6958","ncbi_country":"Mexico: Guaymas Basin; Gulf of California","ncbi_date":"2018-10-01","ncbi_genbank_assembly_accession":"GCA_003601535.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"WYZ-LMO14","ncbi_isolation_source":"marine sediment sample collected at a deep sea vent site during cruise AT15-25 on Alvin dive 4460; sediment was oily and the sediment surface was covered with a white microbial mat","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2 cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2018-10-01","ncbi_spanned_gaps":"0","ncbi_species_taxid":"2056317","ncbi_ssu_count":"1","ncbi_strain_identifiers":"WYZ-LMO14","ncbi_submitter":"Shanghai Jiao Tong University","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"0","ncbi_total_length":"1670603","ncbi_translation_table":"11","ncbi_trna_count":"38","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1670603","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"PIXW00000000.1"}; line 37843: {"accession":"GB_GCA_023544605.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_B;s__Methanocomedens_B sp023544605","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM2354460v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA833668","ncbi_biosample":"SAMN28014430","ncbi_contig_count":"153","ncbi_contig_n50":"17065","ncbi_country":"Russia: Taman Peninsula","ncbi_date":"2022-05-24","ncbi_genbank_assembly_accession":"GCA_023544605.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"B4-03","ncbi_isolation_source":"anaerobic methane-oxidizing enrichment culture from terrestrial mud volcano","ncbi_lat_lon":"45.202 N 36.783 E","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2 cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"1","ncbi_scaffold_count":"129","ncbi_scaffold_l50":"31","ncbi_scaffold_n50":"19026","ncbi_scaffold_n75":"10670","ncbi_scaffold_n90":"6168","ncbi_seq_rel_date":"2022-05-24","ncbi_spanned_gaps":"24","ncbi_species_taxid":"2056317","ncbi_ssu_count":"0","ncbi_strain_identifiers":"B4-03","ncbi_submitter":"Research Center of Biotechnology RAS","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"2400","ncbi_total_length":"1628927","ncbi_translation_table":"11","ncbi_trna_count":"37","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1626527","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAMJFQ000000000.1"}; line 38047: {"accession":"GB_GCA_028286225.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_A;s__Methanocomedens_A sp014237145","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM2828622v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA511383","ncbi_biosample":"SAMN10688319","ncbi_contig_count":"126","ncbi_contig_n50":"47672","ncbi_country":"Atlantic Ocean: Gulf of Cadiz","ncbi_date":"2023-01-30","ncbi_genbank_assembly_accession":"GCA_028286225.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"LMO1","ncbi_isolation_source":"marine sediment from deep sea","ncbi_lat_lon":"35.58 N 7.12 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"none","ncbi_organism_name":"ANME-2 cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"none","ncbi_scaffold_count":"124","ncbi_scaffold_l50":"23","ncbi_scaffold_n50":"48079","ncbi_scaffold_n75":"27939","ncbi_scaffold_n90":"12084","ncbi_seq_rel_date":"2023-01-30","ncbi_spanned_gaps":"2","ncbi_species_taxid":"2056317","ncbi_ssu_count":"none","ncbi_strain_identifiers":"LMO1","ncbi_submitter":"Shanghai Jiaotong UNI","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"192","ncbi_total_length":"3259324","ncbi_translation_table":"none","ncbi_trna_count":"none","ncbi_type_material_designation":"na","ncbi_ungapped_length":"3259132","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"SADF00000000.1"}; line 38622: {"accession":"GB_GCA_014237115.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_A;s__Methanocomedens_A sp014237145","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM1423711v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA593687","ncbi_biosample":"SAMN13483410","ncbi_contig_count":"136","ncbi_contig_n50":"44618","ncbi_country":"Atlantic Ocean: Gulf of Cadiz","ncbi_date":"2020-08-18","ncbi_genbank_assembly_accession":"GCA_014237115.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"8MPaII","ncbi_isolation_source":"cold seep sediment sample 8 MPa II","ncbi_lat_lon":"35.65 N 7.33 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2 cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"133","ncbi_scaffold_l50":"26","ncbi_scaffold_n50":"44618","ncbi_scaffold_n75":"24297","ncbi_scaffold_n90":"10701","ncbi_seq_rel_date":"2020-08-18","ncbi_spanned_gaps":"3","ncbi_species_taxid":"2056317","ncbi_ssu_count":"1","ncbi_strain_identifiers":"8MPaII","ncbi_submitter":"Shanghai Jiao Tong University","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"296","ncbi_total_length":"3248671","ncbi_translation_table":"11","ncbi_trna_count":"48","ncbi_type_material_designation":"na","ncbi_ungapped_length":"3248375","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAAXOG000000000.1"}; line 39977: {"accession":"GB_GCA_029211005.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_B;s__Methanocomedens_B sp019429385","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM2921100v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA940400","ncbi_biosample":"SAMN33565508","ncbi_contig_count":"136","ncbi_contig_n50":"48131","ncbi_country":"Russia: Krasnodar Krai; Gladkovsky mud volcano","ncbi_date":"2023-03-14","ncbi_genbank_assembly_accession":"GCA_029211005.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"C14-17","ncbi_isolation_source":"pool on the surface of a mud volcano","ncbi_lat_lon":"45.00543464 N 37.72355954 E","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2 cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"131","ncbi_scaffold_l50":"15","ncbi_scaffold_n50":"52478","ncbi_scaffold_n75":"29768","ncbi_scaffold_n90":"13301","ncbi_seq_rel_date":"2023-03-14","ncbi_spanned_gaps":"5","ncbi_species_taxid":"2056317","ncbi_ssu_count":"1","ncbi_strain_identifiers":"C14-17","ncbi_submitter":"Research Center of Biotechnology RAS","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"310","ncbi_total_length":"2057990","ncbi_translation_table":"11","ncbi_trna_count":"44","ncbi_type_material_designation":"na","ncbi_ungapped_length":"2057680","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JARGFX000000000.1"}; line 40118: {"accession":"GB_GCA_014237125.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_A;s__Methanocomedens_A sp014237145","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM1423712v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA593687","ncbi_biosample":"SAMN13483409","ncbi_contig_count":"288","ncbi_contig_n50":"11332","ncbi_country":"Atlantic Ocean: Gulf of Cadiz","ncbi_date":"2020-08-18","ncbi_genbank_assembly_accession":"GCA_014237125.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"30MPa","ncbi_isolation_source":"cold seep sediment sample 30 Mpa","ncbi_lat_lon":"35.65 N 7.33 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2 cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"0","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2020-08-18","ncbi_spanned_gaps":"0","ncbi_species_taxid":"2056317","ncbi_ssu_count":"0","ncbi_strain_identifiers":"30MPa","ncbi_submitter":"Shanghai Jiao Tong University","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"0","ncbi_total_length":"2584744","ncbi_translation_table":"11","ncbi_trna_count":"43","ncbi_type_material_designation":"na","ncbi_ungapped_length":"2584744","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAAXOF000000000.1"}; line 41207: {"accession":"GB_GCA_029210685.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_B;s__Methanocomedens_B sp023544605","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM2921068v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA940400","ncbi_biosample":"SAMN33565499","ncbi_contig_count":"79","ncbi_contig_n50":"46160","ncbi_country":"Russia: Krasnodar Krai; Gladkovsky mud volcano","ncbi_date":"2023-03-14","ncbi_genbank_assembly_accession":"GCA_029210685.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"C14-08","ncbi_isolation_source":"pool on the surface of a mud volcano","ncbi_lat_lon":"45.00543464 N 37.72355954 E","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2 cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"74","ncbi_scaffold_l50":"9","ncbi_scaffold_n50":"46965","ncbi_scaffold_n75":"26309","ncbi_scaffold_n90":"15630","ncbi_seq_rel_date":"2023-03-14","ncbi_spanned_gaps":"5","ncbi_species_taxid":"2056317","ncbi_ssu_count":"1","ncbi_strain_identifiers":"C14-08","ncbi_submitter":"Research Center of Biotechnology RAS","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"310","ncbi_total_length":"1815984","ncbi_translation_table":"11","ncbi_trna_count":"45","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1815674","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JARGFO000000000.1"}; line 41571: {"accession":"GB_GCA_014237495.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_A;s__Methanocomedens_A sp014237145","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM1423749v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA593687","ncbi_biosample":"SAMN13483407","ncbi_contig_count":"126","ncbi_contig_n50":"47672","ncbi_country":"Atlantic Ocean: Gulf of Cadiz","ncbi_date":"2020-08-18","ncbi_genbank_assembly_accession":"GCA_014237495.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"8MPa","ncbi_isolation_source":"cold seep sediment sample 8 MPa","ncbi_lat_lon":"35.65 N 7.33 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2 cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"0","ncbi_scaffold_count":"124","ncbi_scaffold_l50":"23","ncbi_scaffold_n50":"48079","ncbi_scaffold_n75":"27939","ncbi_scaffold_n90":"12084","ncbi_seq_rel_date":"2020-08-18","ncbi_spanned_gaps":"2","ncbi_species_taxid":"2056317","ncbi_ssu_count":"0","ncbi_strain_identifiers":"8MPa","ncbi_submitter":"Shanghai Jiao Tong University","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"192","ncbi_total_length":"3259324","ncbi_translation_table":"11","ncbi_trna_count":"46","ncbi_type_material_designation":"na","ncbi_ungapped_length":"3259132","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAAXOD000000000.1"}; line 41575: {"accession":"GB_GCA_033549145.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_B;s__Methanocomedens_B sp019429385","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM3354914v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA1034605","ncbi_biosample":"SAMN38061659","ncbi_contig_count":"118","ncbi_contig_n50":"72805","ncbi_country":"none","ncbi_date":"2023-11-12","ncbi_genbank_assembly_accession":"GCA_033549145.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"B4G8CH4-02","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Methanosarcinales archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"108","ncbi_scaffold_l50":"12","ncbi_scaffold_n50":"75423","ncbi_scaffold_n75":"37803","ncbi_scaffold_n90":"19436","ncbi_seq_rel_date":"2023-11-12","ncbi_spanned_gaps":"10","ncbi_species_taxid":"2250255","ncbi_ssu_count":"1","ncbi_strain_identifiers":"B4G8CH4-02","ncbi_submitter":"Research Center of Biotechnology RAS","ncbi_taxid":"2250255","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea group;c__Methanomicrobia;o__Methanosarcinales;x__unclassified Methanosarcinales;s__Methanosarcinales archaeon","ncbi_total_gap_length":"1251","ncbi_total_length":"2582596","ncbi_translation_table":"11","ncbi_trna_count":"45","ncbi_type_material_designation":"na","ncbi_ungapped_length":"2581345","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAWSUD000000000.1"}; line 41676: {"accession":"GB_GCA_023544575.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_B;s__Methanocomedens_B sp019429385","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM2354457v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA833668","ncbi_biosample":"SAMN28014431","ncbi_contig_count":"142","ncbi_contig_n50":"30849","ncbi_country":"Russia: Taman Peninsula","ncbi_date":"2022-05-24","ncbi_genbank_assembly_accession":"GCA_023544575.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"B4-04","ncbi_isolation_source":"anaerobic methane-oxidizing enrichment culture from terrestrial mud volcano","ncbi_lat_lon":"45.202 N 36.783 E","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2 cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"2","ncbi_scaffold_count":"127","ncbi_scaffold_l50":"21","ncbi_scaffold_n50":"33683","ncbi_scaffold_n75":"20550","ncbi_scaffold_n90":"10832","ncbi_seq_rel_date":"2022-05-24","ncbi_spanned_gaps":"15","ncbi_species_taxid":"2056317","ncbi_ssu_count":"0","ncbi_strain_identifiers":"B4-04","ncbi_submitter":"Research Center of Biotechnology RAS","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"496","ncbi_total_length":"1977695","ncbi_translation_table":"11","ncbi_trna_count":"38","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1977199","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAMJFR000000000.1"}; line 43473: {"accession":"GB_GCA_029934375.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanogasteraceae;g__Methanogaster_B;s__Methanogaster_B sp003601535","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM2993437v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA879229","ncbi_biosample":"SAMN30800773","ncbi_contig_count":"512","ncbi_contig_n50":"6255","ncbi_country":"Mexico: Gulf of California; Guaymas Basin","ncbi_date":"2023-05-03","ncbi_genbank_assembly_accession":"GCA_029934375.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"GMC3.concoct.16","ncbi_isolation_source":"microbial mat from hydrothermal sediment","ncbi_lat_lon":"27.006471 N 111.409348 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"none","ncbi_organism_name":"Methanosarcinales archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"none","ncbi_scaffold_count":"450","ncbi_scaffold_l50":"82","ncbi_scaffold_n50":"7527","ncbi_scaffold_n75":"3587","ncbi_scaffold_n90":"2100","ncbi_seq_rel_date":"2023-05-03","ncbi_spanned_gaps":"62","ncbi_species_taxid":"2250255","ncbi_ssu_count":"none","ncbi_strain_identifiers":"GMC3.concoct.16","ncbi_submitter":"Harvard University","ncbi_taxid":"2250255","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea group;c__Methanomicrobia;o__Methanosarcinales;x__unclassified Methanosarcinales;s__Methanosarcinales archaeon","ncbi_total_gap_length":"5390","ncbi_total_length":"2197681","ncbi_translation_table":"none","ncbi_trna_count":"none","ncbi_type_material_designation":"na","ncbi_ungapped_length":"2192291","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAOZMI000000000.1"}; line 44182: {"accession":"GB_GCA_022353185.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_B;s__Methanocomedens_B sp022353185","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM2235318v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA805085","ncbi_biosample":"SAMN25987490","ncbi_contig_count":"761","ncbi_contig_n50":"5977","ncbi_country":"Sweden: Stockholm Archipelago","ncbi_date":"2022-02-21","ncbi_genbank_assembly_accession":"GCA_022353185.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"MAG_011","ncbi_isolation_source":"coastal sediments","ncbi_lat_lon":"59.368889 N 18.093056 E","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2 cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"2","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2022-02-21","ncbi_spanned_gaps":"0","ncbi_species_taxid":"2056317","ncbi_ssu_count":"1","ncbi_strain_identifiers":"MAG_011","ncbi_submitter":"Radboud University Nijmegen","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"0","ncbi_total_length":"2989559","ncbi_translation_table":"11","ncbi_trna_count":"35","ncbi_type_material_designation":"na","ncbi_ungapped_length":"2989559","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAKRWB000000000.1"}; line 45970: {"accession":"GB_GCA_014237145.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_A;s__Methanocomedens_A sp014237145","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM1423714v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA593687","ncbi_biosample":"SAMN13483406","ncbi_contig_count":"118","ncbi_contig_n50":"50462","ncbi_country":"Atlantic Ocean: Gulf of Cadiz","ncbi_date":"2020-08-18","ncbi_genbank_assembly_accession":"GCA_014237145.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"B-8MPa1","ncbi_isolation_source":"cold seep sediment sample 8 MPaI","ncbi_lat_lon":"35.65 N 7.33 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2 cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2020-08-18","ncbi_spanned_gaps":"0","ncbi_species_taxid":"2056317","ncbi_ssu_count":"1","ncbi_strain_identifiers":"B-8MPa1","ncbi_submitter":"Shanghai Jiao Tong University","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"0","ncbi_total_length":"2972237","ncbi_translation_table":"11","ncbi_trna_count":"47","ncbi_type_material_designation":"na","ncbi_ungapped_length":"2972237","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAAXOC000000000.1"}; line 47050: {"accession":"GB_GCA_021158925.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanogasteraceae;g__Methanogaster_B;s__Methanogaster_B sp003601535","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM2115892v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA713414","ncbi_biosample":"SAMN18353526","ncbi_contig_count":"172","ncbi_contig_n50":"14245","ncbi_country":"Pacific Ocean: Mexico; Pescadero Basin","ncbi_date":"2021-12-10","ncbi_genbank_assembly_accession":"GCA_021158925.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"AUK030","ncbi_isolation_source":"marine hydrothermal sediment","ncbi_lat_lon":"23.957043 N 108.862273 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Methanosarcinales archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"4","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2021-12-10","ncbi_spanned_gaps":"0","ncbi_species_taxid":"2250255","ncbi_ssu_count":"0","ncbi_strain_identifiers":"AUK030","ncbi_submitter":"California Institute of Technology","ncbi_taxid":"2250255","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea group;c__Methanomicrobia;o__Methanosarcinales;x__unclassified Methanosarcinales;s__Methanosarcinales archaeon","ncbi_total_gap_length":"0","ncbi_total_length":"1484019","ncbi_translation_table":"11","ncbi_trna_count":"41","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1484019","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAGGSU000000000.1"}; line 49487: {"accession":"GB_GCA_023544495.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_B;s__Methanocomedens_B sp023544495","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM2354449v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA833668","ncbi_biosample":"SAMN28014435","ncbi_contig_count":"488","ncbi_contig_n50":"8470","ncbi_country":"Russia: Taman Peninsula","ncbi_date":"2022-05-24","ncbi_genbank_assembly_accession":"GCA_023544495.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"B4-08","ncbi_isolation_source":"anaerobic methane-oxidizing enrichment culture from terrestrial mud volcano","ncbi_lat_lon":"45.202 N 36.783 E","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2 cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"5","ncbi_scaffold_count":"439","ncbi_scaffold_l50":"67","ncbi_scaffold_n50":"9542","ncbi_scaffold_n75":"4754","ncbi_scaffold_n90":"2353","ncbi_seq_rel_date":"2022-05-24","ncbi_spanned_gaps":"49","ncbi_species_taxid":"2056317","ncbi_ssu_count":"2","ncbi_strain_identifiers":"B4-08","ncbi_submitter":"Research Center of Biotechnology RAS","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"2421","ncbi_total_length":"2344381","ncbi_translation_table":"11","ncbi_trna_count":"31","ncbi_type_material_designation":"na","ncbi_ungapped_length":"2341960","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAMJFV000000000.1"} | supports | Inspected all selected primary cluster members, exact NCBI taxids/species-taxids and assembly versions. No deposit or phenotype is inferred from metadata names. |
+| genome-catalog-2 | data/catalog/gtdb_genomes-0018.jsonl.gz; line 901: {"accession":"GB_GCA_019429385.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_B;s__Methanocomedens_B sp019429385","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM1942938v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA748847","ncbi_biosample":"SAMN20345953","ncbi_contig_count":"70","ncbi_contig_n50":"50896","ncbi_country":"Russia: Karabetova Gora near the city of Taman","ncbi_date":"2021-07-31","ncbi_genbank_assembly_accession":"GCA_019429385.1","ncbi_genome_category":"derived from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"KA02","ncbi_isolation_source":"sediment and water from a salsa lake of a terrestrial mud volcano","ncbi_lat_lon":"45.204444 N 36.785000 E","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2 cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2021-07-31","ncbi_spanned_gaps":"0","ncbi_species_taxid":"2056317","ncbi_ssu_count":"1","ncbi_strain_identifiers":"KA02","ncbi_submitter":"Research Center of Biotechnology RAS","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"0","ncbi_total_length":"2400975","ncbi_translation_table":"11","ncbi_trna_count":"46","ncbi_type_material_designation":"na","ncbi_ungapped_length":"2400975","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAHYIS000000000.1"} | supports | Inspected all selected primary cluster members, exact NCBI taxids/species-taxids and assembly versions. No deposit or phenotype is inferred from metadata names. |
+| gtdb-full-scan | data/catalog/MANIFEST.json; [{"source_id":"GTDB:s__Methanocomedens_A_sp014237145","genome_count":6,"ncbi_taxids":{"2056317":6},"ncbi_species_taxids":{"2056317":6},"other_taxa_note_supported":false,"accessions":["GB_GCA_014237135.1","GB_GCA_028286225.1","GB_GCA_014237115.1","GB_GCA_014237125.1","GB_GCA_014237495.1","GB_GCA_014237145.1"]},{"source_id":"GTDB:s__Methanocomedens_B_sp019429385","genome_count":4,"ncbi_taxids":{"2056317":3,"2250255":1},"ncbi_species_taxids":{"2056317":3,"2250255":1},"other_taxa_note_supported":true,"accessions":["GB_GCA_029211005.1","GB_GCA_033549145.1","GB_GCA_023544575.1","GB_GCA_019429385.1"]},{"source_id":"GTDB:s__Methanogaster_B_sp003601535","genome_count":3,"ncbi_taxids":{"2056317":1,"2250255":2},"ncbi_species_taxids":{"2056317":1,"2250255":2},"other_taxa_note_supported":true,"accessions":["GB_GCA_003601535.1","GB_GCA_029934375.1","GB_GCA_021158925.1"]},{"source_id":"GTDB:s__Methanocomedens_B_sp023544605","genome_count":2,"ncbi_taxids":{"2056317":2},"ncbi_species_taxids":{"2056317":2},"other_taxa_note_supported":false,"accessions":["GB_GCA_023544605.1","GB_GCA_029210685.1"]},{"source_id":"GTDB:s__Methanocomedens_B_sp022353185","genome_count":1,"ncbi_taxids":{"2056317":1},"ncbi_species_taxids":{"2056317":1},"other_taxa_note_supported":false,"accessions":["GB_GCA_022353185.1"]},{"source_id":"GTDB:s__Methanocomedens_B_sp023544495","genome_count":1,"ncbi_taxids":{"2056317":1},"ncbi_species_taxids":{"2056317":1},"other_taxa_note_supported":false,"accessions":["GB_GCA_023544495.1"]}] | supports | All nineteen pinned GTDB shards searched with exact terminal species tokens retaining genus suffix underscores; every source count agrees. The other-taxa note is contradicted for the explicitly listed single-taxid clusters. |
+| finding-deduplication | Owned review worktree structured bundles; {"issue_key":"gtdb-broadmatch-note-other-taxa-2056317","matches":[],"files_read":576} | supports | Exact stable issue-key search found no existing target-specific finding in the searched local bundle files. |
+| historical-gold-edge | data/raw/MANIFEST.yaml; /Users/marcin/Documents/VIMSS/ontology/KG-Hub/KG-Microbe/kg-microbe/data/transformed/gold/edges.tsv; expected=b793c4f84278789f5dc7c68173b1f08364fd68c5d52a555c4037793006010a12; observed=6b3375a06d4dabc86fdcb14a48cea55b86a7003634ba1d3ee449bcac32b89f9d | partial | Earlier actual configured-path check found source bytes differing from the manifest-pinned GOLD input. This retained observation does not establish worldwide absence. |
+| qc-setup-receipt | just qc; initial setup attempt, 2026-10-19T07:17:01Z through 2026-10-19T07:17:01Z | context_only | Initial actual invocation from /private/tmp/taxonmech-record-reviews-k0MubV/repo exited 1 because ruff was absent. Locked ruff 0.16.7 was installed only in that isolated environment before the complete retry. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. |
+| strict-receipt | just validate-strict data/taxa/archaea/anme_2_cluster_archaeon.yaml --out /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0013/strict-01.tsv; This exact generated YAML only; its captured bytes remain unchanged. Actual earlier per-target invocation; the receipt retains its original cwd and times. | supports | Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0013/repo; started 2026-10-20T07:21:38Z, finished 2026-10-20T07:21:39Z, exit 0. This exact generated YAML only; its captured bytes remain unchanged. Actual earlier per-target invocation; the receipt retains its original cwd and times.<br>Validating 1 files with 4 workers; schema=/private/tmp/taxonmech-record-reviews-k0MubV/repo-batch-0011/src/taxonmech/schema/taxonmech.yaml<br><br>=== validate-strict summary ===<br>  files scanned:      1<br>  files with ERROR:   0<br>  total ERROR rows:   0<br>  TSV:                /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0013/strict-01.tsv |
+| history-receipt | just validate-history; All 17 standalone history records; the generated seed event was also inspected in this target. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. | supports | Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo; started 2026-10-19T07:17:01Z, finished 2026-10-19T07:17:03Z, exit 0. All 17 standalone history records; the generated seed event was also inspected in this target. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles.<br>history links: 17 record(s), 0 invalid<br>No issues found<br>17 history record(s) valid against src/taxonmech/schema/history.yaml |
+| corpus-receipt | just verify-corpus; All 625,960 generated taxon YAMLs, not a focused approximation. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. | supports | Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo; started 2026-10-19T07:18:23Z, finished 2026-10-19T07:24:12Z, exit 0. All 625,960 generated taxon YAMLs, not a focused approximation. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles.<br>uv run python scripts/verify_corpus.py <br>expected 625960 records, found 625960 on disk<br>  missing:   0<br>  extra:     0<br>  differing: 0<br><br>corpus reproduces exactly from data/raw/ and curation/seed_scope.tsv |
+| products-receipt | just validate-products; Full configured corpus scan for curator-added graph nodes; this target contains no causal graph. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. | supports | Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo; started 2026-10-19T07:17:01Z, finished 2026-10-19T07:55:11Z, exit 0. Full configured corpus scan for curator-added graph nodes; this target contains no causal graph. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles.<br>uv run python scripts/validate_id_label_correspondence.py -c conf/id_label_targets.yaml<br><br>id↔label correspondence summary:<br><br>✅ All id↔label pairs correspond. |
+| qc-receipt | just qc; Repository-wide just qc, including native corpus-wide checks. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles. | supports | Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo; started 2026-10-19T07:17:41Z, finished 2026-10-19T08:07:39Z, exit 0. Repository-wide just qc, including native corpus-wide checks. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles.<br>1055 passed, 3 skipped, 5 deselected in 1634.00s (0:27:13)<br>Validating 625960 files with 4 workers; schema=/private/tmp/taxonmech-record-reviews-k0MubV/repo/src/taxonmech/schema/taxonmech.yaml<br>  files scanned:      625960<br>expected 625960 records, found 625960 on disk<br>pages/ is current<br>Site publication: 530,864,122 bytes (budget 950,000,000)<br>625960 taxon records<br>  NCBITAXON        625960<br>All TaxonMech quality gates passed.<br>  Related STRAININFO_STRAIN: 54312 strain-record pairs, 53745 identifiers, 53890 strains (not genome counts)<br>  Related STRAININFO_DEPOSIT: 107277 strain-record pairs, 106843 identifiers, 53890 strains (not genome counts)<br>  Related NUCLEOTIDE_SEQUENCE: 51594 strain-record pairs, 51301 identifiers, 9984 strains (not genome counts)<br>LPSN: 22469 records carry nomenclature, 21254 with a correct name   GTDB: 117809 records mapped, 324404579 genomes summed across record attestations (not deduplicated)<br>Causal graphs: 0 records (0 evidence-backed edges)<br><br>All TaxonMech quality gates passed. |
+
+## Limits And Additional Notes
+
+- Assessment bounded to captured source versions and exact target/query terms. Source-name wording and isolate designations do not establish culture deposits, phenotypes or mechanisms.
+- The retained configured-path GOLD input hash differs from the manifest hash. This establishes a version mismatch at that path, not global absence; independent historical recount remains unavailable.
+- Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify the original execution. These native corpus/source inputs are unchanged; only new review files differ. This receipt is not a new run on the batch branch and does not validate subsequently saved review bundles.
+- No generated record or history was edited; curation actions remain proposed.
+- Fresh-base canonical recapture preserved all previously reviewed input hashes; original captures and actual transition receipts remain retained.
+- Every new bundle still requires its own validate/save/check recipe; baseline native receipts do not claim these later steps have run.
+
+## Complete Structured Record
+
+The sibling review.yaml is authoritative.
+
+```yaml
+schema_version: 1.0.0
+review_id: 20261020T073013Z-anme_2_cluster_archaeon
+kind: record
+repository: CultureBotAI/TaxonMech
+title: 'Record review: ANME-2 cluster archaeon'
+started_at: '2026-10-20T07:21:31Z'
+finished_at: '2026-10-20T07:30:13Z'
+reviewer:
+  identity: Codex
+  kind: agent
+  independence: independent
+  independence_basis: The reviewer did not author the existing generated target; this
+    review changes only new review artifacts in an isolated checkout.
+skill: .claude/skills/review-yaml-record/SKILL.md
+completion: partial
+verdict: pass_with_limitations
+scientific_review: true
+summary: ANME-2 cluster archaeon has supported NCBI identity and bounded source completeness.
+  Pooled mapping notes overstate other-taxon membership. Original GOLD recount remains
+  unresolved.
+source:
+  git_revision: 9b5a8fff5185b38dc5c77bb35235152c81ea7765
+  state: working_tree
+  inputs:
+  - path: .claude/skills/curate-yaml-record/references/review-checklist.md
+    sha256: 8e8fd97c64fbff27e023c7a768b4c806c98f56cd6571e7102217a2c833284df6
+    role: context
+  - path: .claude/skills/review-yaml-record/SKILL.md
+    sha256: 4c7090b9d7fd0c6f7f2b4e47b48cbf64835e8d27b44944649e1ccd9038ce462d
+    role: context
+  - path: AGENTS.md
+    sha256: bde64bd1943c4fc64b332cdbc76b89c1460294d9b1042beeedbfa91160a70331
+    role: context
+  - path: CLAUDE.md
+    sha256: 8ae749dbc22700080dcf5e1a0b7ed75710dee6a27f5c7f9e7c6790c26176e5c8
+    role: context
+  - path: conf/id_label_targets.yaml
+    sha256: bfd1b248f7b189cd054e15b7ad0171042a30980d2ebdbdd8e7d85cea68dde9c8
+    role: context
+  - path: conf/ncbi_taxdump.yaml
+    sha256: 1d734bbb3ebf9d36e304d8030c5852fa4f0f306fca2849be5dec8f3dff86f887
+    role: context
+  - path: conf/record_review.yaml
+    sha256: 366312506b771fc18fc5bfc30d5ec942b2c96212e1f4f95c463cfa1707fbebaa
+    role: context
+  - path: curation/seed_scope.tsv
+    sha256: 5fdc0f7111b64e02439d95c6f2b51fcff1d2154c34b2d957422dd9b297e94d4b
+    role: context
+  - path: data/atb/MANIFEST.yaml
+    sha256: 1358809b2af7e8d4a6c8bb4c122781f48ae40b2c4f0f1c7ad3f37ad8907d7315
+    role: context
+  - path: data/catalog/MANIFEST.json
+    sha256: 15b5cfe42be7919faf2a6feb5ac4f7084009e84b2d6da669f7101aacc3586299
+    role: context
+  - path: data/catalog/gtdb_genomes-0000.jsonl.gz
+    sha256: 2392b3f07a712e9198bb9a5088cc1389ccc7d426f7bd2f5462dedb88b1f69ccf
+    role: context
+  - path: data/catalog/gtdb_genomes-0001.jsonl.gz
+    sha256: 806fe9de52b466a3bf143e780aa8a047bf9b91272f1a3025200e81a19c39db11
+    role: context
+  - path: data/catalog/gtdb_genomes-0002.jsonl.gz
+    sha256: a80402c55fc62af4e29455b3ff541a9898c547941bb6979ae32768130b457878
+    role: context
+  - path: data/catalog/gtdb_genomes-0003.jsonl.gz
+    sha256: 27952cd83f56e084919e6bc31778365b9e7495d80a9fe6bbc97055a586ce8344
+    role: context
+  - path: data/catalog/gtdb_genomes-0004.jsonl.gz
+    sha256: f600f5d831d44c43e2d0872bd4d3d497d5e3550309650a2061b5f277f8c00e32
+    role: context
+  - path: data/catalog/gtdb_genomes-0005.jsonl.gz
+    sha256: 43bdf17b0d30e3faa3ca880d89b5204fd9e79939bd82f32e5c1109b9d8674dfc
+    role: context
+  - path: data/catalog/gtdb_genomes-0006.jsonl.gz
+    sha256: 70cf49ec754904337e0beb7fddb86bb57cf1affde8d326aef821b4b0628f8199
+    role: context
+  - path: data/catalog/gtdb_genomes-0007.jsonl.gz
+    sha256: 0ba5c74cb32e97a3b85e26e1f43501dc2aac915bd8b26d71beab56e4b30bfd2d
+    role: context
+  - path: data/catalog/gtdb_genomes-0008.jsonl.gz
+    sha256: f085fdc8d521b2edc10d58092170e5bc8364a3ab9d9aff5faca718f54939c7b8
+    role: context
+  - path: data/catalog/gtdb_genomes-0009.jsonl.gz
+    sha256: 455c03d8df2b955d3a8e9cb2e502b36e62114996ed114c8c34f273854c48b4ef
+    role: context
+  - path: data/catalog/gtdb_genomes-0010.jsonl.gz
+    sha256: aeb33045242e4c215fad2acb25ea21402e11a07164e93c54ce19a1d6408e60b3
+    role: context
+  - path: data/catalog/gtdb_genomes-0011.jsonl.gz
+    sha256: 36fe03c7caf806752d9005fc1855616dd722a65e0b123bebbd8fea37068e3fb5
+    role: context
+  - path: data/catalog/gtdb_genomes-0012.jsonl.gz
+    sha256: 415d91c43886d172cff6cee466abce5fccac75dfcea5d587d6290f693ba2b7e6
+    role: context
+  - path: data/catalog/gtdb_genomes-0013.jsonl.gz
+    sha256: 1a64663893af28bb7f2a99832c81c9f2bc4203b4e5e3b318431d179c0e0ebd3b
+    role: context
+  - path: data/catalog/gtdb_genomes-0014.jsonl.gz
+    sha256: 18d06a6dc475b9f9a7b03c57a44ad0ce3c099e2c5878a85d8385cdb48189582e
+    role: context
+  - path: data/catalog/gtdb_genomes-0015.jsonl.gz
+    sha256: 294a24c5f36f7a2fcd8543962ca061494f3f705d65b53e525f680dd362f15d42
+    role: context
+  - path: data/catalog/gtdb_genomes-0016.jsonl.gz
+    sha256: d97a816a4d84c4af63bbdc904ba5d8a399436da32c38a9463fa1b8497d3373d6
+    role: context
+  - path: data/catalog/gtdb_genomes-0017.jsonl.gz
+    sha256: f2a4d2c5b7927184206c6614540746b5e9c298e7a924bd149fc86c0f0c046ff6
+    role: context
+  - path: data/catalog/gtdb_genomes-0018.jsonl.gz
+    sha256: 8baa314877815777abcdf600079c6ee42f2ea5340398df9f2e18de9c18fd4347
+    role: context
+  - path: data/raw/MANIFEST.yaml
+    sha256: ee76711683b1b579d1561dcf40187e10e4f0027ae1b89f108eb18e865e7e7d38
+    role: context
+  - path: data/raw/bacdive_strains.tsv
+    sha256: 029fd6d1f53ef7f90684130bf0d644ed3edd1d8fbeb065a511ae928f160b1eea
+    role: context
+  - path: data/raw/bactotraits_taxa.tsv
+    sha256: 976d109cef832d8bf27cc105f67a42efbe900b6946736298602ef6d11158b197
+    role: context
+  - path: data/raw/culture_collection_strains.tsv
+    sha256: 810fdcb16abd6330fb15bb03d4c74b18db86be36a7c599df7c6b2498d9735c95
+    role: context
+  - path: data/raw/gold_organisms.tsv
+    sha256: 0680971a156eef0b79de46c71a1f2138eaee5212ad8193eec943bd8e6257e473
+    role: context
+  - path: data/raw/gtdb_mappings.tsv
+    sha256: bf62441b1b76abb16dd92e795c020ff30fc24e37e195b862fb9beda567277225
+    role: context
+  - path: data/raw/gtdb_species.tsv
+    sha256: 24eddf08fe8fdd1fed534a1b7fd411561eec612c58c3709a36032998fdab8f21
+    role: context
+  - path: data/raw/lpsn_names.tsv
+    sha256: 097f8f4ba3fd077d02e48f2c298a0af88fe02db79cc862f9af1c05141b0baa57
+    role: context
+  - path: data/raw/madin_taxa.tsv
+    sha256: 7620448834f1b86daa83f2e338160ec3291a2ec3900ea4cec449418b1dc8b148
+    role: context
+  - path: data/raw/mediadive_taxa.tsv
+    sha256: 3f74b78cadfcdb6aeae953e09fdb39e34fd9c5d5ed0be65a04a5d7fb02355905
+    role: context
+  - path: data/raw/ncbitaxon_taxa.tsv
+    sha256: 97ff340e1eebf62ea541a299e5c798cdcc24ef935c636fb059df48ab45d6f2f6
+    role: context
+  - path: data/straininfo/MANIFEST.yaml
+    sha256: 25dd601c8cf6d4d84e5cc756d1e642ebef89f565bd31967152bf0026fa072847
+    role: context
+  - path: data/taxa/PATHS.tsv
+    sha256: c950844feb0638ce04f7349784749dd1d728fe70bc80f7e2756d956d4ecea254
+    role: context
+  - path: data/taxa/archaea/anme_2_cluster_archaeon.yaml
+    sha256: 3df9a9b6b3f7a5f336ae6a10f1d5bd9467fb2ce02caec25a410ce8d6f871fb86
+    role: target
+  - path: docs/ALLTHEBACTERIA.md
+    sha256: a1b0c298988782ad4b7dbb80c661c483a67cd0e478366eddbea7d1ba7595e7cd
+    role: context
+  - path: docs/CURATION.md
+    sha256: 9e09c97bcd617f2b3d0090f775b80565fccc9d00e4c398ed58d3a31192a8fa8e
+    role: context
+  - path: docs/HARMONIZATION.md
+    sha256: 9c676a03a226d7fdce82f064acd01807a1a783497ffbbb1aabb8fdd393ac250d
+    role: context
+  - path: docs/SCHEMA.md
+    sha256: 9e767cebb2506f8372c65ceb5f75e5ef2df2b23c2be3727cfd198f447a6a0e30
+    role: context
+  - path: docs/SOURCE_COVERAGE.md
+    sha256: 43f17c3c80815d395136aab53f310be3190a8d614a45fc2f4a3942faeb0bc9e9
+    role: context
+  - path: docs/STRAININFO.md
+    sha256: 65d274e7126fcf7810da746366b0e60c1957f05df9016fb0900600932b278241
+    role: context
+  - path: docs/STRAIN_GENOMES.md
+    sha256: 7cfdbc8a600173d6569f885b409b1543098bb6022e8764324d91879eaed2b597
+    role: context
+  - path: docs/record-review-profile.md
+    sha256: d98d6944810090bf9c344ab218d82f8927d73eaad432322b94a876fe9e891334
+    role: context
+  - path: docs/record-reviews.md
+    sha256: 452a19ab688276747b7c4308523a14d4d99c1c39ef6909ae8a90b85b7a9b3e9b
+    role: context
+  - path: justfile
+    sha256: c46d88186cad450fbd47ce5176bf2afc8289252e287324245ad30090753c750e
+    role: context
+  - path: schema/record_review.yaml
+    sha256: 229baf9b69118a1fe318e4c31085c0820e4e3d1365e7b04d6ace451b7c35f9bb
+    role: context
+  - path: scripts/record_review.py
+    sha256: 95a4ec41e38ec47ba3578e76838c46a0adbf47e49ad3636524735d08cfcb1c4d
+    role: context
+  - path: scripts/run_qc.py
+    sha256: d3a8e398b0484fef1ce4ae13e639a03dd41467c1d597d753132e4dba04df9da3
+    role: context
+  - path: scripts/validate_history.py
+    sha256: aa8fd8528a28cf56a92768c05d57aea7ff48745510796126f144856b8fd7ae8b
+    role: context
+  - path: scripts/validate_id_label_correspondence.py
+    sha256: b5ff41bb52d24f5d7819fb12769e216440f75ec3fb3df3e3cb2c5082fffb40e0
+    role: context
+  - path: scripts/validate_strict.py
+    sha256: d0d75cc805cc746053076b5f75f5e6c817ab15c75a9362f8ce3be53bd4ec7382
+    role: context
+  - path: scripts/verify_corpus.py
+    sha256: 48c4ef707543d1b836052013e8991d530d14559f9b58aa3ff9faf02c4e1ffc2e
+    role: context
+  - path: src/taxonmech/extract.py
+    sha256: 7c5b5bf385e0c060f1cb3dbac304d05ddb941e4c83c900017a04133efd6d1822
+    role: context
+  - path: src/taxonmech/ncbi_taxdump.py
+    sha256: 83e3bfd53721a1f85291022511de6504d84caa58e899c0fd8d1797e9f00f67cf
+    role: context
+  - path: src/taxonmech/schema/history.yaml
+    sha256: b01b06f1b9a37db205c26c31ec0fd910690848507c7e1bfb73b424ac0829c52d
+    role: context
+  - path: src/taxonmech/schema/mech_shared.yaml
+    sha256: c2e7054fd32635e380c698282bd886a9105861009b9f0474f02bb1b80865e895
+    role: context
+  - path: src/taxonmech/schema/taxonmech.yaml
+    sha256: aab25fee94c73eb70e5197a4f3ab8ddf0fa6731785974364963906d4f4d87fc3
+    role: context
+  - path: src/taxonmech/seed.py
+    sha256: 6b5b065f4ae7aea022af736a22c0f63dc58a2425c7ee453259e567ab030f8257
+    role: context
+scope:
+  description: Entire single generated record, including all source assertions and
+    imported strains.
+  selection: Original unreviewed path-order position 121; batch-0013 target 1. Excluded
+    172 actual targets from validated main and local batch-0001/0002/0003/0004/0005/0006/0007/0008/0009/0010/0011/0012
+    listings; full corpus enumeration includes ignored files.
+  coverage: full
+  population_size: 1
+  reviewed_target_ids:
+  - NCBITaxon:2056317
+targets:
+- target_id: NCBITaxon:2056317
+  path: data/taxa/archaea/anme_2_cluster_archaeon.yaml
+  label: ANME-2 cluster archaeon
+  record_class: TaxonRecord
+  kind: generated
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Maintained generated-record builder
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/extract.py
+    role: Maintained source inventory extractor
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/ncbi_taxdump.py
+    role: Maintained NCBI primary-taxonomy projection
+  - repository: CultureBotAI/TaxonMech
+    path: data/raw/ncbitaxon_taxa.tsv
+    role: Pinned taxon identity, name classes and carried ancestry
+  - repository: CultureBotAI/TaxonMech
+    path: curation/seed_scope.tsv
+    role: Explicit species-or-below scope
+checks:
+- check_id: identity-authority
+  name: Exact NCBI taxon, rank and lineage
+  status: passed
+  required: true
+  summary: NCBITaxon:2056317 denotes ANME-2 cluster archaeon at SPECIES rank beneath
+    NCBITaxon:1968519, genetic code 11. All 10 carried ancestors agree with pinned
+    NCBI and current EFetch in identifiers, literal labels and ranks. This is the
+    exact placeholder taxon, not an inferred culture or a higher-rank family/order.
+  target_ids:
+  - NCBITaxon:2056317
+  evidence_ids:
+  - record
+  - taxonomy-inventory
+  - ncbi-live
+  - scope-row
+  - path-row
+- check_id: optional-inventories
+  name: Complete exact identifier and name inventory search
+  status: passed
+  required: true
+  summary: Complete direct reads of twelve pinned tables, including ignored files,
+    verify one NCBI NAME assertion and zero imported strains; the pinned parent graph
+    has no descendants. GTDB carries 6 qualified broad mappings, with primary cluster
+    count 6 and 5 further clusters. The attestation count is the primary cluster size,
+    not the sum of all source clusters or only target-labelled members. No LPSN or
+    culture/strain inventory match is present. GOLD1 ORGANISM agrees with the pinned
+    projection, but original historical aggregate edges were not independently recounted.
+  target_ids:
+  - NCBITaxon:2056317
+  evidence_ids:
+  - record
+  - taxonomy-inventory
+  - lpsn-inventory
+  - bacdive-inventory
+  - culture-inventory
+  - gold-organisms
+  - mediadive-taxa
+  - madin-taxa
+  - bactotraits-taxa
+  scope_note: Full direct reads of all explicitly named TSV files, including ignored
+    files; exact case-folded whole-field and pipe-token ID/full-label/slug/synonym/source-ID
+    search. All claims of no rows are limited to these complete pinned inputs.
+- check_id: strain-genome-evidence
+  name: Imported strain links
+  status: not_applicable
+  required: false
+  summary: No imported BacDive strain or strain-level link is asserted; no physical
+    deposit is inferred from the isolate designation.
+  target_ids:
+  - NCBITaxon:2056317
+  evidence_ids:
+  - record
+  - bacdive-inventory
+  - culture-inventory
+- check_id: gtdb-primary-counts
+  name: Complete primary GTDB cluster membership
+  status: passed
+  required: true
+  summary: All source cluster counts and qualified mappings supported; the distinct
+    fixed-note defect is recorded as a minor finding.
+  target_ids:
+  - NCBITaxon:2056317
+  evidence_ids:
+  - gtdb-full-scan
+  - gtdb-species
+  - gtdb-mappings
+  - genome-catalog-1
+  - genome-catalog-2
+  scope_note: All nineteen shards, complete selected cluster membership and reverse
+    mapping inventory.
+- check_id: historical-source-counts
+  name: Original manifest-pinned GOLD aggregate
+  status: unavailable
+  required: true
+  summary: Pinned GOLD count 1 ORGANISM agrees, but the original historical input
+    was unavailable in the retained hash check.
+  target_ids:
+  - NCBITaxon:2056317
+  evidence_ids:
+  - manifest
+  - gold-organisms
+  - historical-gold-edge
+- check_id: qc-setup-attempt
+  name: Initial quality-gate setup attempt
+  status: failed
+  required: false
+  summary: 'Actual exit 1: missing ruff; superseded by the separately recorded successful
+    full retry.'
+  target_ids:
+  - NCBITaxon:2056317
+  evidence_ids:
+  - qc-setup-receipt
+  command: just qc
+  exit_code: 1
+  expected_exit_code: 0
+  scope_note: Earlier shared-base environment setup attempt; not the final quality-gate
+    result.
+- check_id: strict
+  name: Native strict record validation
+  status: passed
+  required: true
+  summary: Actual terminal exit code 0. This exact generated YAML only; its captured
+    bytes remain unchanged. Actual earlier per-target invocation; the receipt retains
+    its original cwd and times.
+  target_ids:
+  - NCBITaxon:2056317
+  evidence_ids:
+  - strict-receipt
+  command: UV_NO_SYNC=1 UV_CACHE_DIR=/private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0013/uv-cache
+    just validate-strict data/taxa/archaea/anme_2_cluster_archaeon.yaml --out /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0013/strict-01.tsv
+  exit_code: 0
+  expected_exit_code: 0
+  scope_note: This exact generated YAML only; its captured bytes remain unchanged.
+    Actual earlier per-target invocation; the receipt retains its original cwd and
+    times.
+- check_id: history
+  name: Repository history validation
+  status: passed
+  required: true
+  summary: Actual terminal exit code 0. All 17 standalone history records; the generated
+    seed event was also inspected in this target. Reused actual native validation
+    on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded
+    cwd and timestamps identify the original execution. These native corpus/source
+    inputs are unchanged; only new review files differ. This receipt is not a new
+    run on the batch branch and does not validate subsequently saved review bundles.
+  target_ids:
+  - NCBITaxon:2056317
+  evidence_ids:
+  - history-receipt
+  command: UV_NO_SYNC=1 UV_CACHE_DIR=/private/tmp/taxonmech-record-reviews-k0MubV/uv-cache
+    just validate-history
+  exit_code: 0
+  expected_exit_code: 0
+  scope_note: All 17 standalone history records; the generated seed event was also
+    inspected in this target. Reused actual native validation on the unchanged shared
+    base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps
+    identify the original execution. These native corpus/source inputs are unchanged;
+    only new review files differ. This receipt is not a new run on the batch branch
+    and does not validate subsequently saved review bundles.
+- check_id: corpus
+  name: Full-corpus exact reproduction
+  status: passed
+  required: true
+  summary: Actual terminal exit code 0. All 625,960 generated taxon YAMLs, not a focused
+    approximation. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+    the recorded cwd and timestamps identify the original execution. These native
+    corpus/source inputs are unchanged; only new review files differ. This receipt
+    is not a new run on the batch branch and does not validate subsequently saved
+    review bundles.
+  target_ids:
+  - NCBITaxon:2056317
+  evidence_ids:
+  - corpus-receipt
+  command: UV_NO_SYNC=1 UV_CACHE_DIR=/private/tmp/taxonmech-record-reviews-k0MubV/uv-cache
+    just verify-corpus
+  exit_code: 0
+  expected_exit_code: 0
+  scope_note: All 625,960 generated taxon YAMLs, not a focused approximation. Reused
+    actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+    the recorded cwd and timestamps identify the original execution. These native
+    corpus/source inputs are unchanged; only new review files differ. This receipt
+    is not a new run on the batch branch and does not validate subsequently saved
+    review bundles.
+- check_id: products
+  name: Native product ID/label gate
+  status: passed
+  required: true
+  summary: Actual terminal exit code 0. Full configured corpus scan for curator-added
+    graph nodes; this target contains no causal graph. Reused actual native validation
+    on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded
+    cwd and timestamps identify the original execution. These native corpus/source
+    inputs are unchanged; only new review files differ. This receipt is not a new
+    run on the batch branch and does not validate subsequently saved review bundles.
+  target_ids:
+  - NCBITaxon:2056317
+  evidence_ids:
+  - products-receipt
+  command: UV_NO_SYNC=1 UV_CACHE_DIR=/private/tmp/taxonmech-record-reviews-k0MubV/uv-cache
+    just validate-products
+  exit_code: 0
+  expected_exit_code: 0
+  scope_note: Full configured corpus scan for curator-added graph nodes; this target
+    contains no causal graph. Reused actual native validation on the unchanged shared
+    base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps
+    identify the original execution. These native corpus/source inputs are unchanged;
+    only new review files differ. This receipt is not a new run on the batch branch
+    and does not validate subsequently saved review bundles.
+- check_id: qc
+  name: Authoritative complete quality gate
+  status: passed
+  required: true
+  summary: Actual terminal exit code 0. Repository-wide just qc, including native
+    corpus-wide checks. Reused actual native validation on the unchanged shared base
+    9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps identify
+    the original execution. These native corpus/source inputs are unchanged; only
+    new review files differ. This receipt is not a new run on the batch branch and
+    does not validate subsequently saved review bundles. Pytest reported 1055 passed,
+    3 skipped and 5 deselected; the native QC recipe completed successfully.
+  target_ids:
+  - NCBITaxon:2056317
+  evidence_ids:
+  - qc-receipt
+  command: UV_NO_SYNC=1 UV_CACHE_DIR=/private/tmp/taxonmech-record-reviews-k0MubV/uv-cache
+    just qc
+  exit_code: 0
+  expected_exit_code: 0
+  scope_note: Repository-wide just qc, including native corpus-wide checks. Reused
+    actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+    the recorded cwd and timestamps identify the original execution. These native
+    corpus/source inputs are unchanged; only new review files differ. This receipt
+    is not a new run on the batch branch and does not validate subsequently saved
+    review bundles.
+evidence:
+- evidence_id: record
+  kind: record_content
+  reference: data/taxa/archaea/anme_2_cluster_archaeon.yaml
+  accessed_at: '2026-10-20T07:30:13Z'
+  support: supports
+  summary: Read the entire generated YAML, including identity, lineage, names, mappings,
+    source attestations, all imported strains and links, and seed history.
+  locator: entire TaxonRecord; identifier=NCBITaxon:2056317
+  snapshot_sha256: 3df9a9b6b3f7a5f336ae6a10f1d5bd9467fb2ce02caec25a410ce8d6f871fb86
+- evidence_id: taxonomy-inventory
+  kind: database
+  reference: data/raw/ncbitaxon_taxa.tsv
+  accessed_at: '2026-10-20T07:21:32Z'
+  support: supports
+  summary: Inspected the target and each carried ancestor, rank, parent, genetic code
+    and source name classes.
+  locator: 'line 2: {"taxon_id":"NCBITaxon:1","label":"root","rank":"NO_RANK","parent_id":""};
+    line 1698: {"taxon_id":"NCBITaxon:2157","label":"Archaea","rank":"DOMAIN","parent_id":"NCBITaxon:131567"};
+    line 2981: {"taxon_id":"NCBITaxon:28890","label":"Methanobacteriota","rank":"PHYLUM","parent_id":"NCBITaxon:3366610"};
+    line 15684: {"taxon_id":"NCBITaxon:94695","label":"Methanosarcinales","rank":"ORDER","parent_id":"NCBITaxon:224756"};
+    line 25334: {"taxon_id":"NCBITaxon:131567","label":"cellular organisms","rank":"CELLULAR_ROOT","parent_id":"NCBITaxon:1"};
+    line 44048: {"taxon_id":"NCBITaxon:224756","label":"Methanomicrobia","rank":"CLASS","parent_id":"NCBITaxon:2290931"};
+    line 139303: {"taxon_id":"NCBITaxon:588816","label":"ANME-2 cluster","rank":"CLADE","parent_id":"NCBITaxon:94695"};
+    line 505519: {"taxon_id":"NCBITaxon:1968519","label":"unclassified ANME-2 cluster","rank":"NO_RANK","parent_id":"NCBITaxon:588816"};
+    line 514507: {"taxon_id":"NCBITaxon:2056317","label":"ANME-2 cluster archaeon","rank":"SPECIES","parent_id":"NCBITaxon:1968519","genetic_code":"11","exact_synonyms":"","related_synonyms":"","broad_synonyms":"","attested_by":"ncbitaxon|gtdb|gold","retired_into":"","taxonomy_snapshot":"2026-09-13"};
+    line 523053: {"taxon_id":"NCBITaxon:2290931","label":"Stenosarchaea group","rank":"CLADE","parent_id":"NCBITaxon:28890"};
+    line 621140: {"taxon_id":"NCBITaxon:3366610","label":"Methanobacteriati","rank":"KINGDOM","parent_id":"NCBITaxon:2157"}'
+  snapshot_sha256: 97ff340e1eebf62ea541a299e5c798cdcc24ef935c636fb059df48ab45d6f2f6
+- evidence_id: scope-row
+  kind: database
+  reference: curation/seed_scope.tsv
+  accessed_at: '2026-10-20T07:21:32Z'
+  support: supports
+  summary: Exact target is included in the declared seed scope.
+  locator: 'line 62233: {"identifier":"NCBITaxon:2056317","added":"2026-09-12","reason":"attested
+    rule: ANME-2 cluster archaeon, 2 sources incl. NCBI"}'
+  snapshot_sha256: 5fdc0f7111b64e02439d95c6f2b51fcff1d2154c34b2d957422dd9b297e94d4b
+- evidence_id: path-row
+  kind: database
+  reference: data/taxa/PATHS.tsv
+  accessed_at: '2026-10-20T07:21:32Z'
+  support: supports
+  summary: Indexed path resolves to this exact NCBI taxon.
+  locator: 'line 324035: {"identifier":"NCBITaxon:2056317","slug":"anme_2_cluster_archaeon"}'
+  snapshot_sha256: c950844feb0638ce04f7349784749dd1d728fe70bc80f7e2756d956d4ecea254
+- evidence_id: ncbi-live
+  kind: authority
+  reference: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=taxonomy&id=2056317,114585,114587,89612,2511821,3694343,1748309,3693671,2250258,1111783
+  accessed_at: '2026-10-20T07:21:43Z'
+  support: supports
+  summary: 'Inspected the official response for this exact taxon: scientific name,
+    rank, parent, source name classes, lineage and genetic code. Current authority
+    and pinned September inventory remain distinct observations.'
+  locator: TaxaSet/Taxon[TaxId='2056317']; ten-target captured response
+  snapshot_sha256: 15775a383914c1d85f1618eb5ca1a3ded35e6cd8098f9fa0679b4816c4dc3558
+- evidence_id: lpsn-inventory
+  kind: database
+  reference: data/raw/lpsn_names.tsv
+  accessed_at: '2026-10-20T07:21:32Z'
+  support: supports
+  summary: Inspected exact mapped and linked LPSN names; bounded inventory absence
+    does not establish worldwide nomenclatural absence.
+  locator: complete table; exact target/subtree/source-identifier search has no match
+  snapshot_sha256: 097f8f4ba3fd077d02e48f2c298a0af88fe02db79cc862f9af1c05141b0baa57
+  search_scope: Full reads of explicitly named TSV inputs, including any ignored files;
+    exact whole field/token matches. Does not assert worldwide absence.
+- evidence_id: gtdb-mappings
+  kind: database
+  reference: data/raw/gtdb_mappings.tsv
+  accessed_at: '2026-10-20T07:21:32Z'
+  support: supports
+  summary: Inspected direct mappings and selected clusters' reverse mappings, retaining
+    each source predicate and taxon boundary.
+  locator: 'line 162566: {"gtdb_id":"GTDB:s__Methanocomedens_A_sp014237145","gtdb_label":"s__Methanocomedens_A_sp014237145","gtdb_parent":"GTDB:g__Methanocomedens_A","ncbitaxon_id":"NCBITaxon:2056317","predicate":"skos:broadMatch","genome_count":"6"};
+    line 162567: {"gtdb_id":"GTDB:s__Methanocomedens_B_sp019429385","gtdb_label":"s__Methanocomedens_B_sp019429385","gtdb_parent":"GTDB:g__Methanocomedens_B","ncbitaxon_id":"NCBITaxon:2056317","predicate":"skos:broadMatch","genome_count":"4"};
+    line 162568: {"gtdb_id":"GTDB:s__Methanocomedens_B_sp022353185","gtdb_label":"s__Methanocomedens_B_sp022353185","gtdb_parent":"GTDB:g__Methanocomedens_B","ncbitaxon_id":"NCBITaxon:2056317","predicate":"skos:broadMatch","genome_count":"1"};
+    line 162569: {"gtdb_id":"GTDB:s__Methanocomedens_B_sp023544495","gtdb_label":"s__Methanocomedens_B_sp023544495","gtdb_parent":"GTDB:g__Methanocomedens_B","ncbitaxon_id":"NCBITaxon:2056317","predicate":"skos:broadMatch","genome_count":"1"};
+    line 162570: {"gtdb_id":"GTDB:s__Methanocomedens_B_sp023544605","gtdb_label":"s__Methanocomedens_B_sp023544605","gtdb_parent":"GTDB:g__Methanocomedens_B","ncbitaxon_id":"NCBITaxon:2056317","predicate":"skos:broadMatch","genome_count":"2"};
+    line 162571: {"gtdb_id":"GTDB:s__Methanogaster_B_sp003601535","gtdb_label":"s__Methanogaster_B_sp003601535","gtdb_parent":"GTDB:g__Methanogaster_B","ncbitaxon_id":"NCBITaxon:2056317","predicate":"skos:broadMatch","genome_count":"3"};
+    line 178103: {"gtdb_id":"GTDB:s__Methanocomedens_B_sp019429385","gtdb_label":"s__Methanocomedens_B_sp019429385","gtdb_parent":"GTDB:g__Methanocomedens_B","ncbitaxon_id":"NCBITaxon:2250255","predicate":"skos:broadMatch","genome_count":"4"};
+    line 178112: {"gtdb_id":"GTDB:s__Methanogaster_B_sp003601535","gtdb_label":"s__Methanogaster_B_sp003601535","gtdb_parent":"GTDB:g__Methanogaster_B","ncbitaxon_id":"NCBITaxon:2250255","predicate":"skos:broadMatch","genome_count":"3"}'
+  snapshot_sha256: bf62441b1b76abb16dd92e795c020ff30fc24e37e195b862fb9beda567277225
+- evidence_id: gtdb-species
+  kind: database
+  reference: data/raw/gtdb_species.tsv
+  accessed_at: '2026-10-20T07:21:32Z'
+  support: supports
+  summary: Inspected source species identifiers, labels, parent clusters and genome
+    counts.
+  locator: 'line 118325: {"gtdb_id":"GTDB:s__Methanocomedens_A_sp014237145","label":"s__Methanocomedens_A_sp014237145","parent":"GTDB:g__Methanocomedens_A","genome_count":"6"};
+    line 118333: {"gtdb_id":"GTDB:s__Methanocomedens_B_sp019429385","label":"s__Methanocomedens_B_sp019429385","parent":"GTDB:g__Methanocomedens_B","genome_count":"4"};
+    line 118334: {"gtdb_id":"GTDB:s__Methanocomedens_B_sp022353185","label":"s__Methanocomedens_B_sp022353185","parent":"GTDB:g__Methanocomedens_B","genome_count":"1"};
+    line 118336: {"gtdb_id":"GTDB:s__Methanocomedens_B_sp023544495","label":"s__Methanocomedens_B_sp023544495","parent":"GTDB:g__Methanocomedens_B","genome_count":"1"};
+    line 118337: {"gtdb_id":"GTDB:s__Methanocomedens_B_sp023544605","label":"s__Methanocomedens_B_sp023544605","parent":"GTDB:g__Methanocomedens_B","genome_count":"2"};
+    line 118534: {"gtdb_id":"GTDB:s__Methanogaster_B_sp003601535","label":"s__Methanogaster_B_sp003601535","parent":"GTDB:g__Methanogaster_B","genome_count":"3"}'
+  snapshot_sha256: 24eddf08fe8fdd1fed534a1b7fd411561eec612c58c3709a36032998fdab8f21
+- evidence_id: bacdive-inventory
+  kind: database
+  reference: data/raw/bacdive_strains.tsv
+  accessed_at: '2026-10-20T07:21:32Z'
+  support: supports
+  summary: Complete inventory selection covers the exact target and descendants from
+    the complete NCBI parent graph; its imported strain population was compared with
+    the complete YAML.
+  locator: complete table; exact target/subtree/source-identifier search has no match
+  snapshot_sha256: 029fd6d1f53ef7f90684130bf0d644ed3edd1d8fbeb065a511ae928f160b1eea
+  search_scope: Full reads of explicitly named TSV inputs, including any ignored files;
+    exact whole field/token matches. Does not assert worldwide absence.
+- evidence_id: culture-inventory
+  kind: database
+  reference: data/raw/culture_collection_strains.tsv
+  accessed_at: '2026-10-20T07:21:32Z'
+  support: supports
+  summary: Inspected exact culture-inventory associations; an isolate name or genome
+    does not create an inferred deposit.
+  locator: complete table; exact target/subtree/source-identifier search has no match
+  snapshot_sha256: 810fdcb16abd6330fb15bb03d4c74b18db86be36a7c599df7c6b2498d9735c95
+  search_scope: Full reads of explicitly named TSV inputs, including any ignored files;
+    exact whole field/token matches. Does not assert worldwide absence.
+- evidence_id: gold-organisms
+  kind: database
+  reference: data/raw/gold_organisms.tsv
+  accessed_at: '2026-10-20T07:21:32Z'
+  support: supports
+  summary: Inspected the exact GOLD organism count row or bounded absence, without
+    converting counts to phenotypes.
+  locator: 'line 19637: {"taxon_id":"NCBITaxon:2056317","organism_count":"1"}'
+  snapshot_sha256: 0680971a156eef0b79de46c71a1f2138eaee5212ad8193eec943bd8e6257e473
+- evidence_id: mediadive-taxa
+  kind: database
+  reference: data/raw/mediadive_taxa.tsv
+  accessed_at: '2026-10-20T07:21:32Z'
+  support: supports
+  summary: Inspected the exact MediaDive medium count row or bounded absence, without
+    converting counts to phenotypes.
+  locator: complete table; exact target/subtree/source-identifier search has no match
+  snapshot_sha256: 3f74b78cadfcdb6aeae953e09fdb39e34fd9c5d5ed0be65a04a5d7fb02355905
+  search_scope: Full reads of explicitly named TSV inputs, including any ignored files;
+    exact whole field/token matches. Does not assert worldwide absence.
+- evidence_id: madin-taxa
+  kind: database
+  reference: data/raw/madin_taxa.tsv
+  accessed_at: '2026-10-20T07:21:32Z'
+  support: supports
+  summary: Inspected the exact Madin trait-assertion count row or bounded absence,
+    without converting counts to phenotypes.
+  locator: complete table; exact target/subtree/source-identifier search has no match
+  snapshot_sha256: 7620448834f1b86daa83f2e338160ec3291a2ec3900ea4cec449418b1dc8b148
+  search_scope: Full reads of explicitly named TSV inputs, including any ignored files;
+    exact whole field/token matches. Does not assert worldwide absence.
+- evidence_id: bactotraits-taxa
+  kind: database
+  reference: data/raw/bactotraits_taxa.tsv
+  accessed_at: '2026-10-20T07:21:32Z'
+  support: supports
+  summary: Inspected the exact BactoTraits trait-assertion count row or bounded absence,
+    without converting counts to phenotypes.
+  locator: complete table; exact target/subtree/source-identifier search has no match
+  snapshot_sha256: 976d109cef832d8bf27cc105f67a42efbe900b6946736298602ef6d11158b197
+  search_scope: Full reads of explicitly named TSV inputs, including any ignored files;
+    exact whole field/token matches. Does not assert worldwide absence.
+- evidence_id: mapping-policy
+  kind: record_content
+  reference: docs/HARMONIZATION.md
+  accessed_at: '2026-10-20T07:30:13Z'
+  support: supports
+  summary: Policy permits one-to-one species closeMatch normalization and LPSN-linked
+    species xrefs/synonyms, retains pooled broadMatch entries and carries NCBI lineage
+    unchanged.
+  locator: Mapping predicates; Which strains belong to a record
+  snapshot_sha256: 9c676a03a226d7fdce82f064acd01807a1a783497ffbbb1aabb8fdd393ac250d
+- evidence_id: equivalence-contract
+  kind: record_content
+  reference: src/taxonmech/schema/taxonmech.yaml
+  accessed_at: '2026-10-20T07:30:13Z'
+  support: supports
+  summary: TaxonRecord.xrefs denotes equivalent identifiers; broader/narrower relations
+    remain qualified taxonomy mappings. TaxonomyMapping.genome_count counts genomes
+    under the source taxon.
+  locator: TaxonRecord.xrefs, lines 180–187; TaxonomyMapping, lines 417–439
+  snapshot_sha256: aab25fee94c73eb70e5197a4f3ab8ddf0fa6731785974364963906d4f4d87fc3
+- evidence_id: seed-owner
+  kind: record_content
+  reference: src/taxonmech/seed.py
+  accessed_at: '2026-10-20T07:30:13Z'
+  support: supports
+  summary: Inspected mapping ranking, qualified predicates, fixed broadMatch wording,
+    synonym/xref construction, primary cluster counts and same-taxon type-strain derivation.
+  locator: GTDB mapping construction lines 440–472; LPSN/type-strain and source-attestation
+    construction
+  snapshot_sha256: 6b5b065f4ae7aea022af736a22c0f63dc58a2425c7ee453259e567ab030f8257
+- evidence_id: manifest
+  kind: record_content
+  reference: data/raw/MANIFEST.yaml
+  accessed_at: '2026-10-20T07:30:13Z'
+  support: supports
+  summary: Manifest pins kg-microbe revision 30405b70ef762aa46c08278b2b3e06bffb0b34cd,
+    upstream input hashes and extraction time 2026-09-13T17:50:44Z.
+  locator: kg_microbe_source, inputs, extracted_at
+  snapshot_sha256: ee76711683b1b579d1561dcf40187e10e4f0027ae1b89f108eb18e865e7e7d38
+- evidence_id: overlay-manifests
+  kind: record_content
+  reference: data/atb/MANIFEST.yaml
+  accessed_at: '2026-10-20T07:30:13Z'
+  support: supports
+  summary: Raw, ATB and StrainInfo extraction times have maximum 2026-09-13T17:54:04Z,
+    matching the sole seed event. StrainInfo manifest is independently captured in
+    source.inputs.
+  locator: extracted_at, together with data/raw/MANIFEST.yaml and data/straininfo/MANIFEST.yaml
+  snapshot_sha256: 1358809b2af7e8d4a6c8bb4c122781f48ae40b2c4f0f1c7ad3f37ad8907d7315
+- evidence_id: genome-catalog-1
+  kind: primary_source
+  reference: data/catalog/gtdb_genomes-0017.jsonl.gz
+  accessed_at: '2026-10-20T07:24:51Z'
+  support: supports
+  summary: Inspected all selected primary cluster members, exact NCBI taxids/species-taxids
+    and assembly versions. No deposit or phenotype is inferred from metadata names.
+  locator: 'line 29381: {"accession":"GB_GCA_014237135.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_A;s__Methanocomedens_A
+    sp014237145","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM1423713v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA593687","ncbi_biosample":"SAMN13483408","ncbi_contig_count":"124","ncbi_contig_n50":"40799","ncbi_country":"Atlantic
+    Ocean: Gulf of Cadiz","ncbi_date":"2020-08-18","ncbi_genbank_assembly_accession":"GCA_014237135.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"15MPa","ncbi_isolation_source":"cold
+    seep sediment sample 15 Mpa","ncbi_lat_lon":"35.65 N 7.33 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2
+    cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"0","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2020-08-18","ncbi_spanned_gaps":"0","ncbi_species_taxid":"2056317","ncbi_ssu_count":"0","ncbi_strain_identifiers":"15MPa","ncbi_submitter":"Shanghai
+    Jiao Tong University","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea
+    group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified
+    ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"0","ncbi_total_length":"2988518","ncbi_translation_table":"11","ncbi_trna_count":"46","ncbi_type_material_designation":"na","ncbi_ungapped_length":"2988518","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAAXOE000000000.1"};
+    line 32186: {"accession":"GB_GCA_003601535.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanogasteraceae;g__Methanogaster_B;s__Methanogaster_B
+    sp003601535","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM360153v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA418890","ncbi_biosample":"SAMN08103063","ncbi_contig_count":"263","ncbi_contig_n50":"6958","ncbi_country":"Mexico:
+    Guaymas Basin; Gulf of California","ncbi_date":"2018-10-01","ncbi_genbank_assembly_accession":"GCA_003601535.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"WYZ-LMO14","ncbi_isolation_source":"marine
+    sediment sample collected at a deep sea vent site during cruise AT15-25 on Alvin
+    dive 4460; sediment was oily and the sediment surface was covered with a white
+    microbial mat","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2
+    cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2018-10-01","ncbi_spanned_gaps":"0","ncbi_species_taxid":"2056317","ncbi_ssu_count":"1","ncbi_strain_identifiers":"WYZ-LMO14","ncbi_submitter":"Shanghai
+    Jiao Tong University","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea
+    group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified
+    ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"0","ncbi_total_length":"1670603","ncbi_translation_table":"11","ncbi_trna_count":"38","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1670603","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"PIXW00000000.1"};
+    line 37843: {"accession":"GB_GCA_023544605.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_B;s__Methanocomedens_B
+    sp023544605","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM2354460v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA833668","ncbi_biosample":"SAMN28014430","ncbi_contig_count":"153","ncbi_contig_n50":"17065","ncbi_country":"Russia:
+    Taman Peninsula","ncbi_date":"2022-05-24","ncbi_genbank_assembly_accession":"GCA_023544605.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"B4-03","ncbi_isolation_source":"anaerobic
+    methane-oxidizing enrichment culture from terrestrial mud volcano","ncbi_lat_lon":"45.202
+    N 36.783 E","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2
+    cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"1","ncbi_scaffold_count":"129","ncbi_scaffold_l50":"31","ncbi_scaffold_n50":"19026","ncbi_scaffold_n75":"10670","ncbi_scaffold_n90":"6168","ncbi_seq_rel_date":"2022-05-24","ncbi_spanned_gaps":"24","ncbi_species_taxid":"2056317","ncbi_ssu_count":"0","ncbi_strain_identifiers":"B4-03","ncbi_submitter":"Research
+    Center of Biotechnology RAS","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea
+    group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified
+    ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"2400","ncbi_total_length":"1628927","ncbi_translation_table":"11","ncbi_trna_count":"37","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1626527","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAMJFQ000000000.1"};
+    line 38047: {"accession":"GB_GCA_028286225.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_A;s__Methanocomedens_A
+    sp014237145","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM2828622v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA511383","ncbi_biosample":"SAMN10688319","ncbi_contig_count":"126","ncbi_contig_n50":"47672","ncbi_country":"Atlantic
+    Ocean: Gulf of Cadiz","ncbi_date":"2023-01-30","ncbi_genbank_assembly_accession":"GCA_028286225.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"LMO1","ncbi_isolation_source":"marine
+    sediment from deep sea","ncbi_lat_lon":"35.58 N 7.12 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"none","ncbi_organism_name":"ANME-2
+    cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"none","ncbi_scaffold_count":"124","ncbi_scaffold_l50":"23","ncbi_scaffold_n50":"48079","ncbi_scaffold_n75":"27939","ncbi_scaffold_n90":"12084","ncbi_seq_rel_date":"2023-01-30","ncbi_spanned_gaps":"2","ncbi_species_taxid":"2056317","ncbi_ssu_count":"none","ncbi_strain_identifiers":"LMO1","ncbi_submitter":"Shanghai
+    Jiaotong UNI","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea
+    group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified
+    ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"192","ncbi_total_length":"3259324","ncbi_translation_table":"none","ncbi_trna_count":"none","ncbi_type_material_designation":"na","ncbi_ungapped_length":"3259132","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"SADF00000000.1"};
+    line 38622: {"accession":"GB_GCA_014237115.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_A;s__Methanocomedens_A
+    sp014237145","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM1423711v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA593687","ncbi_biosample":"SAMN13483410","ncbi_contig_count":"136","ncbi_contig_n50":"44618","ncbi_country":"Atlantic
+    Ocean: Gulf of Cadiz","ncbi_date":"2020-08-18","ncbi_genbank_assembly_accession":"GCA_014237115.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"8MPaII","ncbi_isolation_source":"cold
+    seep sediment sample 8 MPa II","ncbi_lat_lon":"35.65 N 7.33 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2
+    cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"133","ncbi_scaffold_l50":"26","ncbi_scaffold_n50":"44618","ncbi_scaffold_n75":"24297","ncbi_scaffold_n90":"10701","ncbi_seq_rel_date":"2020-08-18","ncbi_spanned_gaps":"3","ncbi_species_taxid":"2056317","ncbi_ssu_count":"1","ncbi_strain_identifiers":"8MPaII","ncbi_submitter":"Shanghai
+    Jiao Tong University","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea
+    group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified
+    ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"296","ncbi_total_length":"3248671","ncbi_translation_table":"11","ncbi_trna_count":"48","ncbi_type_material_designation":"na","ncbi_ungapped_length":"3248375","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAAXOG000000000.1"};
+    line 39977: {"accession":"GB_GCA_029211005.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_B;s__Methanocomedens_B
+    sp019429385","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM2921100v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA940400","ncbi_biosample":"SAMN33565508","ncbi_contig_count":"136","ncbi_contig_n50":"48131","ncbi_country":"Russia:
+    Krasnodar Krai; Gladkovsky mud volcano","ncbi_date":"2023-03-14","ncbi_genbank_assembly_accession":"GCA_029211005.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"C14-17","ncbi_isolation_source":"pool
+    on the surface of a mud volcano","ncbi_lat_lon":"45.00543464 N 37.72355954 E","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2
+    cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"131","ncbi_scaffold_l50":"15","ncbi_scaffold_n50":"52478","ncbi_scaffold_n75":"29768","ncbi_scaffold_n90":"13301","ncbi_seq_rel_date":"2023-03-14","ncbi_spanned_gaps":"5","ncbi_species_taxid":"2056317","ncbi_ssu_count":"1","ncbi_strain_identifiers":"C14-17","ncbi_submitter":"Research
+    Center of Biotechnology RAS","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea
+    group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified
+    ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"310","ncbi_total_length":"2057990","ncbi_translation_table":"11","ncbi_trna_count":"44","ncbi_type_material_designation":"na","ncbi_ungapped_length":"2057680","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JARGFX000000000.1"};
+    line 40118: {"accession":"GB_GCA_014237125.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_A;s__Methanocomedens_A
+    sp014237145","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM1423712v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA593687","ncbi_biosample":"SAMN13483409","ncbi_contig_count":"288","ncbi_contig_n50":"11332","ncbi_country":"Atlantic
+    Ocean: Gulf of Cadiz","ncbi_date":"2020-08-18","ncbi_genbank_assembly_accession":"GCA_014237125.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"30MPa","ncbi_isolation_source":"cold
+    seep sediment sample 30 Mpa","ncbi_lat_lon":"35.65 N 7.33 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2
+    cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"0","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2020-08-18","ncbi_spanned_gaps":"0","ncbi_species_taxid":"2056317","ncbi_ssu_count":"0","ncbi_strain_identifiers":"30MPa","ncbi_submitter":"Shanghai
+    Jiao Tong University","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea
+    group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified
+    ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"0","ncbi_total_length":"2584744","ncbi_translation_table":"11","ncbi_trna_count":"43","ncbi_type_material_designation":"na","ncbi_ungapped_length":"2584744","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAAXOF000000000.1"};
+    line 41207: {"accession":"GB_GCA_029210685.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_B;s__Methanocomedens_B
+    sp023544605","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM2921068v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA940400","ncbi_biosample":"SAMN33565499","ncbi_contig_count":"79","ncbi_contig_n50":"46160","ncbi_country":"Russia:
+    Krasnodar Krai; Gladkovsky mud volcano","ncbi_date":"2023-03-14","ncbi_genbank_assembly_accession":"GCA_029210685.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"C14-08","ncbi_isolation_source":"pool
+    on the surface of a mud volcano","ncbi_lat_lon":"45.00543464 N 37.72355954 E","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2
+    cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"74","ncbi_scaffold_l50":"9","ncbi_scaffold_n50":"46965","ncbi_scaffold_n75":"26309","ncbi_scaffold_n90":"15630","ncbi_seq_rel_date":"2023-03-14","ncbi_spanned_gaps":"5","ncbi_species_taxid":"2056317","ncbi_ssu_count":"1","ncbi_strain_identifiers":"C14-08","ncbi_submitter":"Research
+    Center of Biotechnology RAS","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea
+    group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified
+    ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"310","ncbi_total_length":"1815984","ncbi_translation_table":"11","ncbi_trna_count":"45","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1815674","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JARGFO000000000.1"};
+    line 41571: {"accession":"GB_GCA_014237495.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_A;s__Methanocomedens_A
+    sp014237145","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM1423749v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA593687","ncbi_biosample":"SAMN13483407","ncbi_contig_count":"126","ncbi_contig_n50":"47672","ncbi_country":"Atlantic
+    Ocean: Gulf of Cadiz","ncbi_date":"2020-08-18","ncbi_genbank_assembly_accession":"GCA_014237495.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"8MPa","ncbi_isolation_source":"cold
+    seep sediment sample 8 MPa","ncbi_lat_lon":"35.65 N 7.33 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2
+    cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"0","ncbi_scaffold_count":"124","ncbi_scaffold_l50":"23","ncbi_scaffold_n50":"48079","ncbi_scaffold_n75":"27939","ncbi_scaffold_n90":"12084","ncbi_seq_rel_date":"2020-08-18","ncbi_spanned_gaps":"2","ncbi_species_taxid":"2056317","ncbi_ssu_count":"0","ncbi_strain_identifiers":"8MPa","ncbi_submitter":"Shanghai
+    Jiao Tong University","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea
+    group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified
+    ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"192","ncbi_total_length":"3259324","ncbi_translation_table":"11","ncbi_trna_count":"46","ncbi_type_material_designation":"na","ncbi_ungapped_length":"3259132","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAAXOD000000000.1"};
+    line 41575: {"accession":"GB_GCA_033549145.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_B;s__Methanocomedens_B
+    sp019429385","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM3354914v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA1034605","ncbi_biosample":"SAMN38061659","ncbi_contig_count":"118","ncbi_contig_n50":"72805","ncbi_country":"none","ncbi_date":"2023-11-12","ncbi_genbank_assembly_accession":"GCA_033549145.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"B4G8CH4-02","ncbi_isolation_source":"none","ncbi_lat_lon":"none","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Methanosarcinales
+    archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"108","ncbi_scaffold_l50":"12","ncbi_scaffold_n50":"75423","ncbi_scaffold_n75":"37803","ncbi_scaffold_n90":"19436","ncbi_seq_rel_date":"2023-11-12","ncbi_spanned_gaps":"10","ncbi_species_taxid":"2250255","ncbi_ssu_count":"1","ncbi_strain_identifiers":"B4G8CH4-02","ncbi_submitter":"Research
+    Center of Biotechnology RAS","ncbi_taxid":"2250255","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea
+    group;c__Methanomicrobia;o__Methanosarcinales;x__unclassified Methanosarcinales;s__Methanosarcinales
+    archaeon","ncbi_total_gap_length":"1251","ncbi_total_length":"2582596","ncbi_translation_table":"11","ncbi_trna_count":"45","ncbi_type_material_designation":"na","ncbi_ungapped_length":"2581345","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAWSUD000000000.1"};
+    line 41676: {"accession":"GB_GCA_023544575.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_B;s__Methanocomedens_B
+    sp019429385","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM2354457v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA833668","ncbi_biosample":"SAMN28014431","ncbi_contig_count":"142","ncbi_contig_n50":"30849","ncbi_country":"Russia:
+    Taman Peninsula","ncbi_date":"2022-05-24","ncbi_genbank_assembly_accession":"GCA_023544575.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"B4-04","ncbi_isolation_source":"anaerobic
+    methane-oxidizing enrichment culture from terrestrial mud volcano","ncbi_lat_lon":"45.202
+    N 36.783 E","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2
+    cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"2","ncbi_scaffold_count":"127","ncbi_scaffold_l50":"21","ncbi_scaffold_n50":"33683","ncbi_scaffold_n75":"20550","ncbi_scaffold_n90":"10832","ncbi_seq_rel_date":"2022-05-24","ncbi_spanned_gaps":"15","ncbi_species_taxid":"2056317","ncbi_ssu_count":"0","ncbi_strain_identifiers":"B4-04","ncbi_submitter":"Research
+    Center of Biotechnology RAS","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea
+    group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified
+    ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"496","ncbi_total_length":"1977695","ncbi_translation_table":"11","ncbi_trna_count":"38","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1977199","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAMJFR000000000.1"};
+    line 43473: {"accession":"GB_GCA_029934375.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanogasteraceae;g__Methanogaster_B;s__Methanogaster_B
+    sp003601535","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM2993437v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA879229","ncbi_biosample":"SAMN30800773","ncbi_contig_count":"512","ncbi_contig_n50":"6255","ncbi_country":"Mexico:
+    Gulf of California; Guaymas Basin","ncbi_date":"2023-05-03","ncbi_genbank_assembly_accession":"GCA_029934375.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"GMC3.concoct.16","ncbi_isolation_source":"microbial
+    mat from hydrothermal sediment","ncbi_lat_lon":"27.006471 N 111.409348 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"none","ncbi_organism_name":"Methanosarcinales
+    archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"none","ncbi_scaffold_count":"450","ncbi_scaffold_l50":"82","ncbi_scaffold_n50":"7527","ncbi_scaffold_n75":"3587","ncbi_scaffold_n90":"2100","ncbi_seq_rel_date":"2023-05-03","ncbi_spanned_gaps":"62","ncbi_species_taxid":"2250255","ncbi_ssu_count":"none","ncbi_strain_identifiers":"GMC3.concoct.16","ncbi_submitter":"Harvard
+    University","ncbi_taxid":"2250255","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea
+    group;c__Methanomicrobia;o__Methanosarcinales;x__unclassified Methanosarcinales;s__Methanosarcinales
+    archaeon","ncbi_total_gap_length":"5390","ncbi_total_length":"2197681","ncbi_translation_table":"none","ncbi_trna_count":"none","ncbi_type_material_designation":"na","ncbi_ungapped_length":"2192291","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAOZMI000000000.1"};
+    line 44182: {"accession":"GB_GCA_022353185.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_B;s__Methanocomedens_B
+    sp022353185","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM2235318v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA805085","ncbi_biosample":"SAMN25987490","ncbi_contig_count":"761","ncbi_contig_n50":"5977","ncbi_country":"Sweden:
+    Stockholm Archipelago","ncbi_date":"2022-02-21","ncbi_genbank_assembly_accession":"GCA_022353185.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"MAG_011","ncbi_isolation_source":"coastal
+    sediments","ncbi_lat_lon":"59.368889 N 18.093056 E","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2
+    cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"2","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2022-02-21","ncbi_spanned_gaps":"0","ncbi_species_taxid":"2056317","ncbi_ssu_count":"1","ncbi_strain_identifiers":"MAG_011","ncbi_submitter":"Radboud
+    University Nijmegen","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea
+    group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified
+    ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"0","ncbi_total_length":"2989559","ncbi_translation_table":"11","ncbi_trna_count":"35","ncbi_type_material_designation":"na","ncbi_ungapped_length":"2989559","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAKRWB000000000.1"};
+    line 45970: {"accession":"GB_GCA_014237145.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_A;s__Methanocomedens_A
+    sp014237145","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM1423714v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA593687","ncbi_biosample":"SAMN13483406","ncbi_contig_count":"118","ncbi_contig_n50":"50462","ncbi_country":"Atlantic
+    Ocean: Gulf of Cadiz","ncbi_date":"2020-08-18","ncbi_genbank_assembly_accession":"GCA_014237145.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"B-8MPa1","ncbi_isolation_source":"cold
+    seep sediment sample 8 MPaI","ncbi_lat_lon":"35.65 N 7.33 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2
+    cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2020-08-18","ncbi_spanned_gaps":"0","ncbi_species_taxid":"2056317","ncbi_ssu_count":"1","ncbi_strain_identifiers":"B-8MPa1","ncbi_submitter":"Shanghai
+    Jiao Tong University","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea
+    group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified
+    ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"0","ncbi_total_length":"2972237","ncbi_translation_table":"11","ncbi_trna_count":"47","ncbi_type_material_designation":"na","ncbi_ungapped_length":"2972237","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAAXOC000000000.1"};
+    line 47050: {"accession":"GB_GCA_021158925.1","gtdb_representative":"f","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanogasteraceae;g__Methanogaster_B;s__Methanogaster_B
+    sp003601535","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM2115892v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA713414","ncbi_biosample":"SAMN18353526","ncbi_contig_count":"172","ncbi_contig_n50":"14245","ncbi_country":"Pacific
+    Ocean: Mexico; Pescadero Basin","ncbi_date":"2021-12-10","ncbi_genbank_assembly_accession":"GCA_021158925.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"AUK030","ncbi_isolation_source":"marine
+    hydrothermal sediment","ncbi_lat_lon":"23.957043 N 108.862273 W","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"Methanosarcinales
+    archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"4","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2021-12-10","ncbi_spanned_gaps":"0","ncbi_species_taxid":"2250255","ncbi_ssu_count":"0","ncbi_strain_identifiers":"AUK030","ncbi_submitter":"California
+    Institute of Technology","ncbi_taxid":"2250255","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea
+    group;c__Methanomicrobia;o__Methanosarcinales;x__unclassified Methanosarcinales;s__Methanosarcinales
+    archaeon","ncbi_total_gap_length":"0","ncbi_total_length":"1484019","ncbi_translation_table":"11","ncbi_trna_count":"41","ncbi_type_material_designation":"na","ncbi_ungapped_length":"1484019","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAGGSU000000000.1"};
+    line 49487: {"accession":"GB_GCA_023544495.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_B;s__Methanocomedens_B
+    sp023544495","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Scaffold","ncbi_assembly_name":"ASM2354449v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA833668","ncbi_biosample":"SAMN28014435","ncbi_contig_count":"488","ncbi_contig_n50":"8470","ncbi_country":"Russia:
+    Taman Peninsula","ncbi_date":"2022-05-24","ncbi_genbank_assembly_accession":"GCA_023544495.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"B4-08","ncbi_isolation_source":"anaerobic
+    methane-oxidizing enrichment culture from terrestrial mud volcano","ncbi_lat_lon":"45.202
+    N 36.783 E","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2
+    cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"5","ncbi_scaffold_count":"439","ncbi_scaffold_l50":"67","ncbi_scaffold_n50":"9542","ncbi_scaffold_n75":"4754","ncbi_scaffold_n90":"2353","ncbi_seq_rel_date":"2022-05-24","ncbi_spanned_gaps":"49","ncbi_species_taxid":"2056317","ncbi_ssu_count":"2","ncbi_strain_identifiers":"B4-08","ncbi_submitter":"Research
+    Center of Biotechnology RAS","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea
+    group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified
+    ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"2421","ncbi_total_length":"2344381","ncbi_translation_table":"11","ncbi_trna_count":"31","ncbi_type_material_designation":"na","ncbi_ungapped_length":"2341960","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAMJFV000000000.1"}'
+  snapshot_sha256: f2a4d2c5b7927184206c6614540746b5e9c298e7a924bd149fc86c0f0c046ff6
+- evidence_id: genome-catalog-2
+  kind: primary_source
+  reference: data/catalog/gtdb_genomes-0018.jsonl.gz
+  accessed_at: '2026-10-20T07:24:51Z'
+  support: supports
+  summary: Inspected all selected primary cluster members, exact NCBI taxids/species-taxids
+    and assembly versions. No deposit or phenotype is inferred from metadata names.
+  locator: 'line 901: {"accession":"GB_GCA_019429385.1","gtdb_representative":"t","gtdb_taxonomy":"d__Archaea;p__Halobacteriota;c__Methanosarcinia;o__Methanosarcinales;f__Methanocomedenaceae;g__Methanocomedens_B;s__Methanocomedens_B
+    sp019429385","gtdb_type_species_of_genus":"f","ncbi_assembly_level":"Contig","ncbi_assembly_name":"ASM1942938v1","ncbi_assembly_type":"na","ncbi_bioproject":"PRJNA748847","ncbi_biosample":"SAMN20345953","ncbi_contig_count":"70","ncbi_contig_n50":"50896","ncbi_country":"Russia:
+    Karabetova Gora near the city of Taman","ncbi_date":"2021-07-31","ncbi_genbank_assembly_accession":"GCA_019429385.1","ncbi_genome_category":"derived
+    from metagenome","ncbi_genome_representation":"full","ncbi_isolate":"KA02","ncbi_isolation_source":"sediment
+    and water from a salsa lake of a terrestrial mud volcano","ncbi_lat_lon":"45.204444
+    N 36.785000 E","ncbi_molecule_count":"0","ncbi_ncrna_count":"0","ncbi_organism_name":"ANME-2
+    cluster archaeon","ncbi_protein_count":"none","ncbi_refseq_category":"na","ncbi_rrna_count":"3","ncbi_scaffold_count":"none","ncbi_scaffold_l50":"none","ncbi_scaffold_n50":"none","ncbi_scaffold_n75":"none","ncbi_scaffold_n90":"none","ncbi_seq_rel_date":"2021-07-31","ncbi_spanned_gaps":"0","ncbi_species_taxid":"2056317","ncbi_ssu_count":"1","ncbi_strain_identifiers":"KA02","ncbi_submitter":"Research
+    Center of Biotechnology RAS","ncbi_taxid":"2056317","ncbi_taxonomy":"d__Archaea;p__Methanobacteriota;c__Methanomicrobia;o__Methanosarcinales;f__;g__;s__","ncbi_taxonomy_unfiltered":"d__Archaea;x__Methanobacteriati;p__Methanobacteriota;x__Stenosarchaea
+    group;c__Methanomicrobia;o__Methanosarcinales;x__ANME-2 cluster;x__unclassified
+    ANME-2 cluster;s__ANME-2 cluster archaeon","ncbi_total_gap_length":"0","ncbi_total_length":"2400975","ncbi_translation_table":"11","ncbi_trna_count":"46","ncbi_type_material_designation":"na","ncbi_ungapped_length":"2400975","ncbi_unspanned_gaps":"0","ncbi_wgs_master":"JAHYIS000000000.1"}'
+  snapshot_sha256: 8baa314877815777abcdf600079c6ee42f2ea5340398df9f2e18de9c18fd4347
+- evidence_id: gtdb-full-scan
+  kind: search
+  reference: data/catalog/MANIFEST.json
+  accessed_at: '2026-10-20T07:24:51Z'
+  support: supports
+  summary: All nineteen pinned GTDB shards searched with exact terminal species tokens
+    retaining genus suffix underscores; every source count agrees. The other-taxa
+    note is contradicted for the explicitly listed single-taxid clusters.
+  locator: '[{"source_id":"GTDB:s__Methanocomedens_A_sp014237145","genome_count":6,"ncbi_taxids":{"2056317":6},"ncbi_species_taxids":{"2056317":6},"other_taxa_note_supported":false,"accessions":["GB_GCA_014237135.1","GB_GCA_028286225.1","GB_GCA_014237115.1","GB_GCA_014237125.1","GB_GCA_014237495.1","GB_GCA_014237145.1"]},{"source_id":"GTDB:s__Methanocomedens_B_sp019429385","genome_count":4,"ncbi_taxids":{"2056317":3,"2250255":1},"ncbi_species_taxids":{"2056317":3,"2250255":1},"other_taxa_note_supported":true,"accessions":["GB_GCA_029211005.1","GB_GCA_033549145.1","GB_GCA_023544575.1","GB_GCA_019429385.1"]},{"source_id":"GTDB:s__Methanogaster_B_sp003601535","genome_count":3,"ncbi_taxids":{"2056317":1,"2250255":2},"ncbi_species_taxids":{"2056317":1,"2250255":2},"other_taxa_note_supported":true,"accessions":["GB_GCA_003601535.1","GB_GCA_029934375.1","GB_GCA_021158925.1"]},{"source_id":"GTDB:s__Methanocomedens_B_sp023544605","genome_count":2,"ncbi_taxids":{"2056317":2},"ncbi_species_taxids":{"2056317":2},"other_taxa_note_supported":false,"accessions":["GB_GCA_023544605.1","GB_GCA_029210685.1"]},{"source_id":"GTDB:s__Methanocomedens_B_sp022353185","genome_count":1,"ncbi_taxids":{"2056317":1},"ncbi_species_taxids":{"2056317":1},"other_taxa_note_supported":false,"accessions":["GB_GCA_022353185.1"]},{"source_id":"GTDB:s__Methanocomedens_B_sp023544495","genome_count":1,"ncbi_taxids":{"2056317":1},"ncbi_species_taxids":{"2056317":1},"other_taxa_note_supported":false,"accessions":["GB_GCA_023544495.1"]}]'
+  snapshot_sha256: 15b5cfe42be7919faf2a6feb5ac4f7084009e84b2d6da669f7101aacc3586299
+  search_scope: Full explicit reads of every enumerated GTDB primary shard including
+    ignored files. Exact terminal GTDB species token; exact assembly accession stem
+    or explicit genome identifier. Versions remain separate.
+- evidence_id: finding-deduplication
+  kind: search
+  reference: Owned review worktree structured bundles
+  accessed_at: '2026-10-20T07:27:15Z'
+  support: supports
+  summary: Exact stable issue-key search found no existing target-specific finding
+    in the searched local bundle files.
+  locator: '{"issue_key":"gtdb-broadmatch-note-other-taxa-2056317","matches":[],"files_read":576}'
+  snapshot_sha256: 184ee36e736f474424700ed344e36bb8606c270648341d96b2aeaed8a3fc6a8e
+  search_scope: Direct full reads of review.yaml under all owned review worktrees,
+    including ignored and hidden files; exact issue-key text. No GitHub mutation.
+- evidence_id: historical-gold-edge
+  kind: search
+  reference: data/raw/MANIFEST.yaml
+  accessed_at: '2026-10-19T07:30:22Z'
+  support: partial
+  summary: Earlier actual configured-path check found source bytes differing from
+    the manifest-pinned GOLD input. This retained observation does not establish worldwide
+    absence.
+  locator: /Users/marcin/Documents/VIMSS/ontology/KG-Hub/KG-Microbe/kg-microbe/data/transformed/gold/edges.tsv;
+    expected=b793c4f84278789f5dc7c68173b1f08364fd68c5d52a555c4037793006010a12; observed=6b3375a06d4dabc86fdcb14a48cea55b86a7003634ba1d3ee449bcac32b89f9d
+  snapshot_sha256: ee76711683b1b579d1561dcf40187e10e4f0027ae1b89f108eb18e865e7e7d38
+  search_scope: Exact configured historical input path, including ignored files; retained
+    receipt, not a new search.
+- evidence_id: qc-setup-receipt
+  kind: validation
+  reference: just qc
+  accessed_at: '2026-10-19T07:17:01Z'
+  support: context_only
+  summary: Initial actual invocation from /private/tmp/taxonmech-record-reviews-k0MubV/repo
+    exited 1 because ruff was absent. Locked ruff 0.16.7 was installed only in that
+    isolated environment before the complete retry. Reused actual native validation
+    on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded
+    cwd and timestamps identify the original execution. These native corpus/source
+    inputs are unchanged; only new review files differ. This receipt is not a new
+    run on the batch branch and does not validate subsequently saved review bundles.
+  locator: initial setup attempt, 2026-10-19T07:17:01Z through 2026-10-19T07:17:01Z
+  snapshot_sha256: 1d189beecc64b369096499a7ce4adf71897235e4c1190c69e7d0ed3a77b6a3f9
+- evidence_id: strict-receipt
+  kind: validation
+  reference: just validate-strict data/taxa/archaea/anme_2_cluster_archaeon.yaml --out
+    /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0013/strict-01.tsv
+  accessed_at: '2026-10-20T07:21:39Z'
+  support: supports
+  summary: "Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0013/repo;\
+    \ started 2026-10-20T07:21:38Z, finished 2026-10-20T07:21:39Z, exit 0. This exact\
+    \ generated YAML only; its captured bytes remain unchanged. Actual earlier per-target\
+    \ invocation; the receipt retains its original cwd and times.\nValidating 1 files\
+    \ with 4 workers; schema=/private/tmp/taxonmech-record-reviews-k0MubV/repo-batch-0011/src/taxonmech/schema/taxonmech.yaml\n\
+    \n=== validate-strict summary ===\n  files scanned:      1\n  files with ERROR:\
+    \   0\n  total ERROR rows:   0\n  TSV:                /private/tmp/taxonmech-record-reviews-k0MubV/prefetch-batch-0013/strict-01.tsv"
+  locator: This exact generated YAML only; its captured bytes remain unchanged. Actual
+    earlier per-target invocation; the receipt retains its original cwd and times.
+  snapshot_sha256: da70c7f5a95803ac44745169df849a164e9ad7cbb9f31473f4c411e1e12f65dd
+- evidence_id: history-receipt
+  kind: validation
+  reference: just validate-history
+  accessed_at: '2026-10-19T07:17:03Z'
+  support: supports
+  summary: 'Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo;
+    started 2026-10-19T07:17:01Z, finished 2026-10-19T07:17:03Z, exit 0. All 17 standalone
+    history records; the generated seed event was also inspected in this target. Reused
+    actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+    the recorded cwd and timestamps identify the original execution. These native
+    corpus/source inputs are unchanged; only new review files differ. This receipt
+    is not a new run on the batch branch and does not validate subsequently saved
+    review bundles.
+
+    history links: 17 record(s), 0 invalid
+
+    No issues found
+
+    17 history record(s) valid against src/taxonmech/schema/history.yaml'
+  locator: All 17 standalone history records; the generated seed event was also inspected
+    in this target. Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+    the recorded cwd and timestamps identify the original execution. These native
+    corpus/source inputs are unchanged; only new review files differ. This receipt
+    is not a new run on the batch branch and does not validate subsequently saved
+    review bundles.
+  snapshot_sha256: 3fc63ae7bb58034c180e5dcebec02f98c487038ba74793b9f43462ddaacdcbf4
+- evidence_id: corpus-receipt
+  kind: validation
+  reference: just verify-corpus
+  accessed_at: '2026-10-19T07:24:12Z'
+  support: supports
+  summary: "Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo;\
+    \ started 2026-10-19T07:18:23Z, finished 2026-10-19T07:24:12Z, exit 0. All 625,960\
+    \ generated taxon YAMLs, not a focused approximation. Reused actual native validation\
+    \ on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded\
+    \ cwd and timestamps identify the original execution. These native corpus/source\
+    \ inputs are unchanged; only new review files differ. This receipt is not a new\
+    \ run on the batch branch and does not validate subsequently saved review bundles.\n\
+    uv run python scripts/verify_corpus.py \nexpected 625960 records, found 625960\
+    \ on disk\n  missing:   0\n  extra:     0\n  differing: 0\n\ncorpus reproduces\
+    \ exactly from data/raw/ and curation/seed_scope.tsv"
+  locator: All 625,960 generated taxon YAMLs, not a focused approximation. Reused
+    actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+    the recorded cwd and timestamps identify the original execution. These native
+    corpus/source inputs are unchanged; only new review files differ. This receipt
+    is not a new run on the batch branch and does not validate subsequently saved
+    review bundles.
+  snapshot_sha256: 6bcd0e5b423155259cb8f8dbecb3e4af467b5dba232906734156e9a99fb5a459
+- evidence_id: products-receipt
+  kind: validation
+  reference: just validate-products
+  accessed_at: '2026-10-19T07:55:11Z'
+  support: supports
+  summary: 'Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo;
+    started 2026-10-19T07:17:01Z, finished 2026-10-19T07:55:11Z, exit 0. Full configured
+    corpus scan for curator-added graph nodes; this target contains no causal graph.
+    Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+    the recorded cwd and timestamps identify the original execution. These native
+    corpus/source inputs are unchanged; only new review files differ. This receipt
+    is not a new run on the batch branch and does not validate subsequently saved
+    review bundles.
+
+    uv run python scripts/validate_id_label_correspondence.py -c conf/id_label_targets.yaml
+
+
+    id↔label correspondence summary:
+
+
+    ✅ All id↔label pairs correspond.'
+  locator: Full configured corpus scan for curator-added graph nodes; this target
+    contains no causal graph. Reused actual native validation on the unchanged shared
+    base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded cwd and timestamps
+    identify the original execution. These native corpus/source inputs are unchanged;
+    only new review files differ. This receipt is not a new run on the batch branch
+    and does not validate subsequently saved review bundles.
+  snapshot_sha256: 48dd07515706dc62199fc2205c4b0bfdd5750028037d9b800179f254d2f1eb07
+- evidence_id: qc-receipt
+  kind: validation
+  reference: just qc
+  accessed_at: '2026-10-19T08:07:39Z'
+  support: supports
+  summary: "Actual command ran from /private/tmp/taxonmech-record-reviews-k0MubV/repo;\
+    \ started 2026-10-19T07:17:41Z, finished 2026-10-19T08:07:39Z, exit 0. Repository-wide\
+    \ just qc, including native corpus-wide checks. Reused actual native validation\
+    \ on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765; the recorded\
+    \ cwd and timestamps identify the original execution. These native corpus/source\
+    \ inputs are unchanged; only new review files differ. This receipt is not a new\
+    \ run on the batch branch and does not validate subsequently saved review bundles.\n\
+    1055 passed, 3 skipped, 5 deselected in 1634.00s (0:27:13)\nValidating 625960\
+    \ files with 4 workers; schema=/private/tmp/taxonmech-record-reviews-k0MubV/repo/src/taxonmech/schema/taxonmech.yaml\n\
+    \  files scanned:      625960\nexpected 625960 records, found 625960 on disk\n\
+    pages/ is current\nSite publication: 530,864,122 bytes (budget 950,000,000)\n\
+    625960 taxon records\n  NCBITAXON        625960\nAll TaxonMech quality gates passed.\n\
+    \  Related STRAININFO_STRAIN: 54312 strain-record pairs, 53745 identifiers, 53890\
+    \ strains (not genome counts)\n  Related STRAININFO_DEPOSIT: 107277 strain-record\
+    \ pairs, 106843 identifiers, 53890 strains (not genome counts)\n  Related NUCLEOTIDE_SEQUENCE:\
+    \ 51594 strain-record pairs, 51301 identifiers, 9984 strains (not genome counts)\n\
+    LPSN: 22469 records carry nomenclature, 21254 with a correct name   GTDB: 117809\
+    \ records mapped, 324404579 genomes summed across record attestations (not deduplicated)\n\
+    Causal graphs: 0 records (0 evidence-backed edges)\n\nAll TaxonMech quality gates\
+    \ passed."
+  locator: Repository-wide just qc, including native corpus-wide checks. Reused actual
+    native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+    the recorded cwd and timestamps identify the original execution. These native
+    corpus/source inputs are unchanged; only new review files differ. This receipt
+    is not a new run on the batch branch and does not validate subsequently saved
+    review bundles.
+  snapshot_sha256: b86a9cc6f529c3b822140f60179e9bc4046e2e6abef3ee0e67fa1035ffb1a76d
+assessments:
+- assessment_id: identity
+  area: identity
+  topic: Exact taxon and source lineage
+  outcome: supported
+  summary: NCBITaxon:2056317 denotes ANME-2 cluster archaeon at SPECIES rank beneath
+    NCBITaxon:1968519, genetic code 11. All 10 carried ancestors agree with pinned
+    NCBI and current EFetch in identifiers, literal labels and ranks. This is the
+    exact placeholder taxon, not an inferred culture or a higher-rank family/order.
+  target_ids:
+  - NCBITaxon:2056317
+  evidence_ids:
+  - record
+  - taxonomy-inventory
+  - ncbi-live
+  - scope-row
+  - path-row
+- assessment_id: nomenclature
+  area: nomenclature
+  topic: Name classes and nomenclatural scope
+  outcome: supported
+  summary: The literal NCBI designation ANME-2 cluster archaeon is preserved. Pinned
+    and current NCBI supply no synonyms. No nomenclatural validity, registered deposit,
+    type material or measured phenotype is inferred from the designation.
+  target_ids:
+  - NCBITaxon:2056317
+  evidence_ids:
+  - record
+  - taxonomy-inventory
+  - ncbi-live
+  - lpsn-inventory
+  - mapping-policy
+- assessment_id: completeness
+  area: completeness
+  topic: Imported subtree and source assertion units
+  outcome: supported
+  summary: Complete direct reads of twelve pinned tables, including ignored files,
+    verify one NCBI NAME assertion and zero imported strains; the pinned parent graph
+    has no descendants. GTDB carries 6 qualified broad mappings, with primary cluster
+    count 6 and 5 further clusters. The attestation count is the primary cluster size,
+    not the sum of all source clusters or only target-labelled members. No LPSN or
+    culture/strain inventory match is present. GOLD1 ORGANISM agrees with the pinned
+    projection, but original historical aggregate edges were not independently recounted.
+  target_ids:
+  - NCBITaxon:2056317
+  evidence_ids:
+  - record
+  - taxonomy-inventory
+  - bacdive-inventory
+  - culture-inventory
+  - gtdb-species
+  - gold-organisms
+  - mediadive-taxa
+  - madin-taxa
+  - bactotraits-taxa
+  - genome-catalog-1
+  - genome-catalog-2
+- assessment_id: taxonomy-mapping
+  area: grounding
+  topic: Qualified species mapping and target scope
+  outcome: supported
+  summary: All nineteen pinned GTDB shards were searched using exact terminal species
+    tokens, preserving internal genus suffix underscores. All 6 cluster counts agree
+    with native mappings (17 total selected source members). 4 clusters have only
+    NCBITaxon:2056317 in both primary taxids/species-taxids and the complete reverse
+    mapping inventory, contradicting the fixed other-NCBI-taxa clause. Other clusters
+    contain genuinely mixed taxids. Pooling multiple GTDB species onto the NCBI placeholder
+    still supports broadMatch; native NCBI lineage remains distinct from GTDB classification.
+  target_ids:
+  - NCBITaxon:2056317
+  evidence_ids:
+  - record
+  - gtdb-mappings
+  - gtdb-species
+  - mapping-policy
+  - equivalence-contract
+  - seed-owner
+  - genome-catalog-1
+  - genome-catalog-2
+  - gtdb-full-scan
+- assessment_id: native-status
+  area: provenance
+  topic: Unchanged native status and history
+  outcome: supported
+  summary: EXACT grounding and SEEDED mapping agree with exact NCBI identity. The
+    sole seed event at 2026-09-13T17:54:04Z agrees with the latest raw/ATB/StrainInfo
+    extraction time. Native status and history remain unchanged.
+  target_ids:
+  - NCBITaxon:2056317
+  evidence_ids:
+  - record
+  - manifest
+  - overlay-manifests
+findings:
+- finding_id: pooled-note-other-taxa
+  issue_key: gtdb-broadmatch-note-other-taxa-2056317
+  category: consistency
+  severity: minor
+  status: open
+  certainty: confirmed
+  title: 4 pooled-mapping notes incorrectly assert other NCBI taxa
+  description: 'All nineteen pinned GTDB shards were searched using exact terminal
+    species tokens, preserving internal genus suffix underscores. All 6 cluster counts
+    agree with native mappings (17 total selected source members). 4 clusters have
+    only NCBITaxon:2056317 in both primary taxids/species-taxids and the complete
+    reverse mapping inventory, contradicting the fixed other-NCBI-taxa clause. Other
+    clusters contain genuinely mixed taxids. Pooling multiple GTDB species onto the
+    NCBI placeholder still supports broadMatch; native NCBI lineage remains distinct
+    from GTDB classification. Unsupported clauses: GTDB:s__Methanocomedens_A_sp014237145,
+    GTDB:s__Methanocomedens_B_sp023544605, GTDB:s__Methanocomedens_B_sp022353185,
+    GTDB:s__Methanocomedens_B_sp023544495.'
+  target_ids:
+  - NCBITaxon:2056317
+  field_paths:
+  - taxonomy_mappings[source_id=GTDB:s__Methanocomedens_A_sp014237145].notes
+  - taxonomy_mappings[source_id=GTDB:s__Methanocomedens_B_sp023544605].notes
+  - taxonomy_mappings[source_id=GTDB:s__Methanocomedens_B_sp022353185].notes
+  - taxonomy_mappings[source_id=GTDB:s__Methanocomedens_B_sp023544495].notes
+  evidence_ids:
+  - record
+  - gtdb-mappings
+  - gtdb-species
+  - gtdb-full-scan
+  - mapping-policy
+  - seed-owner
+  - genome-catalog-1
+  - genome-catalog-2
+  rule_id: docs/HARMONIZATION.md:Mapping predicates; .claude/skills/review-yaml-record/SKILL.md:preserve
+    claim scope
+  native_severity: minor
+  normalization_reason: Misleading fixed explanatory clause; target identity, qualified
+    mappings and source counts remain correct.
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Maintained GTDB mapping notes and exact synonym/xref promotion
+actions:
+- action_id: correct-pooled-mapping-note
+  description: Revise the maintained broadMatch note to describe pooling without asserting
+    another NCBI taxon for every individual source cluster. Preserve all source mappings,
+    counts and carried NCBI lineage.
+  finding_ids:
+  - pooled-note-other-taxa
+  target_ids:
+  - NCBITaxon:2056317
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/seed.py
+    role: Maintained GTDB mapping notes and exact synonym/xref promotion
+  acceptance_checks:
+  - All 4 listed single-taxid clusters retain their source counts and broadMatch without
+    an unsupported other-taxa clause.
+  - Retain all 6 mappings, primary count6 and 5 further-cluster attestation; preserve
+    actual mixed-taxid membership and native NCBI lineage.
+  - Change the maintained seeder and use separately authorized guarded regeneration;
+    then run strict, history, product, corpus and QC gates.
+- action_id: recover-pinned-aggregate-inputs
+  finding_ids: []
+  target_ids:
+  - NCBITaxon:2056317
+  description: Recover manifest-hash-matching original aggregate inputs and independently
+    recount the exact target assertions through the maintained extractor; do not edit
+    generated YAML.
+  owner_paths:
+  - repository: CultureBotAI/TaxonMech
+    path: data/raw/MANIFEST.yaml
+    role: Original source hashes
+  - repository: CultureBotAI/TaxonMech
+    path: src/taxonmech/extract.py
+    role: Source-specific count semantics
+  acceptance_checks:
+  - Require exact original input SHA-256 before using it as historical evidence.
+  - Recount only the exact target with each source's own assertion unit and compare
+    to its pinned inventory row.
+  - Record any discrepancy in a new review observation.
+limitations:
+- Assessment bounded to captured source versions and exact target/query terms. Source-name
+  wording and isolate designations do not establish culture deposits, phenotypes or
+  mechanisms.
+- The retained configured-path GOLD input hash differs from the manifest hash. This
+  establishes a version mismatch at that path, not global absence; independent historical
+  recount remains unavailable.
+- Reused actual native validation on the unchanged shared base 9b5a8fff5185b38dc5c77bb35235152c81ea7765;
+  the recorded cwd and timestamps identify the original execution. These native corpus/source
+  inputs are unchanged; only new review files differ. This receipt is not a new run
+  on the batch branch and does not validate subsequently saved review bundles.
+notes:
+- No generated record or history was edited; curation actions remain proposed.
+- Fresh-base canonical recapture preserved all previously reviewed input hashes; original
+  captures and actual transition receipts remain retained.
+- Every new bundle still requires its own validate/save/check recipe; baseline native
+  receipts do not claim these later steps have run.
+tags:
+- record-review
+- batch-0013
+- archaea
+- generated
+- source-checked
+```
