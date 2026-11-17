@@ -143,7 +143,35 @@ CAUSAL_EDGE_KEYS = frozenset({
     "description",
     "evidence",
 })
-EVIDENCE_ITEM_KEYS = frozenset({"reference", "snippet", "notes"})
+EVIDENCE_ITEM_KEYS = frozenset({
+    "reference",
+    "snippet",
+    "notes",
+    "supports",
+    "evidence_source",
+})
+EVIDENCE_SUPPORT_LEVELS = frozenset({
+    "SUPPORT",
+    "REFUTE",
+    "PARTIAL",
+    "NO_EVIDENCE",
+    "WRONG_STATEMENT",
+})
+EVIDENCE_SOURCE_VALUES = frozenset({
+    "FIELD_STUDY",
+    "MESOCOSM",
+    "LABORATORY",
+    "IN_VITRO",
+    "IN_VIVO",
+    "COMPUTATIONAL",
+    "META_ANALYSIS",
+    "REVIEW",
+    "REMOTE_SENSING",
+    "LONG_TERM_MONITORING",
+    "EXPERT_OPINION",
+    "DATABASE",
+    "OTHER",
+})
 CURATION_EVENT_KEYS = frozenset({
     "timestamp",
     "curator",
@@ -780,6 +808,23 @@ def validate_causal_graph_structure(
                                     f"{e_ctx}: evidence item requires non-empty string "
                                     f"{ev_field!r} when present"
                                 )
+                        raw_supports = ev.get("supports")
+                        if "supports" in ev and (
+                            not isinstance(raw_supports, str)
+                            or raw_supports not in EVIDENCE_SUPPORT_LEVELS
+                        ):
+                            raise SystemExit(
+                                f"{e_ctx}: invalid EvidenceItem 'supports' value {raw_supports!r}"
+                            )
+                        raw_ev_src = ev.get("evidence_source")
+                        if "evidence_source" in ev and (
+                            not isinstance(raw_ev_src, str)
+                            or raw_ev_src not in EVIDENCE_SOURCE_VALUES
+                        ):
+                            raise SystemExit(
+                                f"{e_ctx}: invalid EvidenceItem 'evidence_source' value "
+                                f"{raw_ev_src!r}"
+                            )
                 if nodes is not None:
                     orphan_nodes = sorted(seen_node_ids - connected_node_ids)
                     if orphan_nodes:
