@@ -2260,6 +2260,87 @@ def test_cycle7_stage6_closed_keys_curation_events_and_provenance_invariants(tmp
     with pytest.raises(SystemExit, match="unexpected EvidenceItem keys"):
         validate_causal_graph_structure(bad_ev_key)
 
+    valid_assessed_ev = {
+        "NCBITaxon:562": [
+            {
+                **base_graph,
+                "edges": [
+                    {
+                        **base_graph["edges"][0],
+                        "evidence": [
+                            {
+                                "reference": "PMID:9278503",
+                                "supports": "SUPPORT",
+                                "evidence_source": "IN_VITRO",
+                                "snippet": "Complete genome sequence of E. coli K-12.",
+                            }
+                        ],
+                    }
+                ],
+            }
+        ]
+    }
+    validate_causal_graph_structure(valid_assessed_ev)
+
+    for bad_field, bad_value in (
+        ("supports", "HIGH_CONFIDENCE"),
+        ("supports", ""),
+        ("evidence_source", "abstract"),
+        ("evidence_source", ""),
+    ):
+        bad_assessed = {
+            "NCBITaxon:562": [
+                {
+                    **base_graph,
+                    "edges": [
+                        {
+                            **base_graph["edges"][0],
+                            "evidence": [
+                                {
+                                    "reference": "PMID:9278503",
+                                    "snippet": "Complete genome sequence of E. coli K-12.",
+                                    bad_field: bad_value,
+                                }
+                            ],
+                        }
+                    ],
+                }
+            ]
+        }
+        with pytest.raises(SystemExit, match=f"invalid EvidenceItem '{bad_field}' value"):
+            validate_causal_graph_structure(bad_assessed)
+
+    from jinja2 import Environment, FileSystemLoader
+
+    env = Environment(
+        loader=FileSystemLoader(str(REPO_ROOT / "src" / "taxonmech" / "templates")),
+        autoescape=True,
+    )
+    env.filters["curie_url"] = lambda c, root="": f"https://pubmed.ncbi.nlm.nih.gov/{c.split(':')[1]}"
+    tmpl = env.from_string(
+        '{% from "taxon-macros.html" import evid %}{{ evid(items, root="") if false else evid(items) }}'
+    )
+    # Provide root context variable expected by curie()
+    tmpl = env.from_string('{% set root = "" %}{% from "taxon-macros.html" import evid %}{{ evid(items) }}')
+    plain_html = tmpl.render(items=[{"reference": "PMID:9278503", "snippet": "Quote"}])
+    assert (
+        plain_html
+        == '<ul class="evidence"><li><a href="https://pubmed.ncbi.nlm.nih.gov/9278503">'
+        "<code>PMID:9278503</code></a> — <q>Quote</q></li></ul>"
+    )
+    assessed_html = tmpl.render(
+        items=[
+            {
+                "reference": "PMID:9278503",
+                "supports": "SUPPORT",
+                "evidence_source": "IN_VITRO",
+                "snippet": "Quote",
+            }
+        ]
+    )
+    assert "<small>[SUPPORT]</small>" in assessed_html
+    assert "<small>[IN_VITRO]</small>" in assessed_html
+
     # 2. CurationEvent validation: unknown keys, bad timestamp, out-of-order timestamps, non-bool llm_assisted
     with pytest.raises(SystemExit, match="unexpected CurationEvent keys"):
         validate_causal_graph_events(
@@ -2453,7 +2534,7 @@ def test_overlay_readme_documents_current_seed_line_ranges_and_reciprocal_ec_num
     assert "843–860" not in overlay_readme
     assert "803–808" not in overlay_readme
     assert "903–920" not in overlay_readme
-    assert "lines 861–866,\n961–978" in overlay_readme or "lines 861–866, 961–978" in overlay_readme
+    assert "lines 906–911,\n1006–1023" in overlay_readme or "lines 906–911, 1006–1023" in overlay_readme
 
     ec_row_lines = [
         line for line in overlay_readme.splitlines() if line.startswith("| `ec_numbers` |")
@@ -3768,5 +3849,83 @@ def test_cycle11_stage6_uniprot_sort_release_pin_and_causal_graph_chebi_go_homog
         "'kgmicrobe.strain:bacdive_155688' != 'kgmicrobe.strain:bacdive_155687'" in f
         for f in failures
     )
+
+
+def test_evidence_item_assessment_slots_and_macro_rendering() -> None:
+    """validate_causal_graph_structure() and taxon-macros.html support optional
+    EvidenceItem.supports and EvidenceItem.evidence_source assessment slots (#270, #73)."""
+    import copy
+
+    from jinja2 import Environment, FileSystemLoader, select_autoescape
+
+    from taxonmech.seed import (
+        EVIDENCE_SOURCE_VALUES,
+        EVIDENCE_SUPPORT_LEVELS,
+        validate_causal_graph_structure,
+    )
+
+    ecoli_data = yaml.safe_load(
+        (REPO_ROOT / "curation" / "causal_graphs" / "NCBITaxon_562.yaml").read_text(
+            encoding="utf-8"
+        )
+    )
+    base_graphs = {"NCBITaxon:562": ecoli_data["causal_graphs"]}
+
+    # Plain EvidenceItem (without supports/evidence_source) continues to pass.
+    validate_causal_graph_structure(copy.deepcopy(base_graphs))
+
+    # Assessed EvidenceItem with valid permissible values passes.
+    valid_graphs = copy.deepcopy(base_graphs)
+    valid_graphs["NCBITaxon:562"][0]["edges"][0]["evidence"][0].update(
+        {"supports": "SUPPORT", "evidence_source": "IN_VITRO"}
+    )
+    validate_causal_graph_structure(valid_graphs)
+    assert "SUPPORT" in EVIDENCE_SUPPORT_LEVELS
+    assert "IN_VITRO" in EVIDENCE_SOURCE_VALUES
+
+    # Invalid or null supports / evidence_source values are rejected.
+    for bad_field, bad_val in [
+        ("supports", "HIGH_CONFIDENCE"),
+        ("supports", None),
+        ("evidence_source", "LLM_ASSISTED"),
+        ("evidence_source", None),
+    ]:
+        bad_graphs = copy.deepcopy(base_graphs)
+        bad_graphs["NCBITaxon:562"][0]["edges"][0]["evidence"][0][bad_field] = bad_val
+        with pytest.raises(SystemExit, match=f"invalid EvidenceItem {bad_field!r} value"):
+            validate_causal_graph_structure(bad_graphs)
+
+    # taxon-macros.html renders [supports] and [evidence_source] when present and omits when absent.
+    env = Environment(
+        loader=FileSystemLoader(str(REPO_ROOT / "src" / "taxonmech" / "templates")),
+        autoescape=select_autoescape(["html"]),
+        trim_blocks=True,
+        lstrip_blocks=True,
+    )
+    env.filters["curie_url"] = lambda c, root="": f"https://pubmed.ncbi.nlm.nih.gov/{c.split(':')[1]}/"
+    env.filters["external_url"] = lambda u: u
+    tmpl = env.from_string('{% from "taxon-macros.html" import evid with context %}{{ evid(items) }}')
+
+    plain_html = tmpl.render(
+        items=[{"reference": "PMID:12345678", "snippet": "Plain passage."}],
+        root="",
+    )
+    assert 'href="https://pubmed.ncbi.nlm.nih.gov/12345678/"' in plain_html
+    assert "[" not in plain_html
+
+    assessed_html = tmpl.render(
+        items=[
+            {
+                "reference": "PMID:12345678",
+                "supports": "SUPPORT",
+                "evidence_source": "IN_VITRO",
+                "snippet": "Assessed passage.",
+            }
+        ],
+        root="",
+    )
+    assert "<small>[SUPPORT]</small>" in assessed_html
+    assert "<small>[IN_VITRO]</small>" in assessed_html
+
 
 

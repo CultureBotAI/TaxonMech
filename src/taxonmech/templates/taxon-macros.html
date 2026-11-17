@@ -1,5 +1,5 @@
 {% macro curie(c) %}{% set u = c | curie_url(root) %}{% if u %}<a href="{{ u }}"><code>{{ c }}</code></a>{% else %}<code>{{ c }}</code>{% endif %}{% endmacro %}
-{% macro evid(items) %}{% if items %}<ul class="evidence">{% for e in items %}<li>{{ curie(e.reference) }}{% if e.snippet %} — <q>{{ e.snippet }}</q>{% endif %}{% if e.notes %} <small>{{ e.notes }}</small>{% endif %}</li>{% endfor %}</ul>{% endif %}{% endmacro %}
+{% macro evid(items) %}{% if items %}<ul class="evidence">{% for e in items %}<li>{{ curie(e.reference) }}{% if e.supports %} <small>[{{ e.supports }}]</small>{% endif %}{% if e.evidence_source %} <small>[{{ e.evidence_source }}]</small>{% endif %}{% if e.snippet %} — <q>{{ e.snippet }}</q>{% endif %}{% if e.notes %} <small>{{ e.notes }}</small>{% endif %}</li>{% endfor %}</ul>{% endif %}{% endmacro %}
 {% macro straininfo_evidence(a) %}
 <div class="straininfo-evidence"><small>StrainInfo strain record {{ curie(a.strain_id) }} · deposit <a href="{{ a.strain_id | curie_url }}?SI-DP{{ a.deposit_id.split(':')[1] }}">{{ a.deposit_id }}</a> ({{ a.deposit_designation }}). Source statuses: {{ a.strain_status }} / {{ a.deposit_status }}.
 {% if a.strain_doi %}<br>Strain record-version DOI: {{ curie(a.strain_doi) }}.{% endif %}

@@ -87,7 +87,7 @@ curation_history:
 Every `GENE_OR_PROTEIN` node in `curation/causal_graphs/*.yaml` must resolve
 offline against a row in `curation/uniprot_proteins.tsv` (registered in
 `conf/sources.yaml`). `load_uniprot_proteins()` (`src/taxonmech/seed.py` lines
-341–501) enforces the exact 14-column header tuple `UNIPROT_PROTEIN_FIELDS`
+369–529) enforces the exact 14-column header tuple `UNIPROT_PROTEIN_FIELDS`
 (`src/taxonmech/seed.py` lines 62–77):
 
 | Column (`UNIPROT_PROTEIN_FIELDS`) | Required? | Format / Validation Contract (`load_uniprot_proteins`, `validate_causal_graph_proteins`, & `causal_graph_provenance_problems`) |
@@ -110,8 +110,8 @@ offline against a row in `curation/uniprot_proteins.tsv` (registered in
 ### Species vs. Strain `strain_id` Binding Rule
 
 `CausalNode.strain_id` is an optional `GENE_OR_PROTEIN`-only slot validated by
-`validate_causal_graph_proteins()` (`src/taxonmech/seed.py` lines 861–866,
-961–978) and `causal_graph_provenance_problems()` (`scripts/check_provenance.py`
+`validate_causal_graph_proteins()` (`src/taxonmech/seed.py` lines 906–911,
+1006–1023) and `causal_graph_provenance_problems()` (`scripts/check_provenance.py`
 lines 234–242, 254–267):
 
 - When present, `strain_id` must match `BACDIVE_STRAIN_ID_PATTERN`
@@ -174,7 +174,8 @@ lines 234–242, 254–267):
    (`CAUSAL_GRAPH_KEYS`, `CAUSAL_NODE_KEYS`, `CAUSAL_EDGE_KEYS`, and
    `EVIDENCE_ITEM_KEYS`), non-empty string values on optional
    `CausalGraph.description`, `CausalNode.description`, and
-   `EvidenceItem.snippet`/`notes` when present, `NCBITAXON_ID_PATTERN` syntax
+   `EvidenceItem.snippet`/`notes` when present (plus optional enum-validated
+   `EvidenceItem.supports` and `EvidenceItem.evidence_source` when present), `NCBITAXON_ID_PATTERN` syntax
    on the host `identifier`, `graph_id`, `node_id`, and `edge_id` syntax
    (`EDGE_ID_PATTERN`) and uniqueness within every taxon/graph (plus per-graph
    `CausalNode.label` uniqueness), `CausalNodeTypeEnum` membership
